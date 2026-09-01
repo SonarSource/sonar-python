@@ -1,90 +1,49 @@
 
-pyspark.sql.pandas.group_opsê
-PandasGroupedOpsMixin2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin"builtins.object*Ü
-apply8pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin.apply"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*r
-selfh
-2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin"2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin*ä
-udfÄ
->pyspark.sql.pandas._typing.GroupedMapPandasUserDefinedFunction">pyspark.sql.pandas._typing.GroupedMapPandasUserDefinedFunction*®
-applyInPandas@pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin.applyInPandas"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*r
-selfh
-2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin"2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin*¸
-funcÒ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"3pyspark.sql.pandas._typing.PandasGroupedMapFunction*ù
-schemaê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*í
-applyInPandasWithStateIpyspark.sql.pandas.group_ops.PandasGroupedOpsMixin.applyInPandasWithState"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*r
-selfh
-2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin"2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin*ƒ
-funcπ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"<pyspark.sql.pandas._typing.PandasGroupedMapFunctionWithState*ß
-outputStructTypeê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*¶
-stateStructTypeê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*,
+pyspark.sql.pandas.group_ops≤
+PandasGroupedOpsMixin"builtins.object* 
+apply*
 
-outputMode
-builtins.str"builtins.str*-
-timeoutConf
-builtins.str"builtins.str*Ë
-cogroup:pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin.cogroup"b
-/pyspark.sql.pandas.group_ops.PandasCogroupedOps"/pyspark.sql.pandas.group_ops.PandasCogroupedOps*r
-selfh
-2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin"2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin*I
-other>
-pyspark.sql.group.GroupedData"pyspark.sql.group.GroupedDataÓ
-PandasCogroupedOps/pyspark.sql.pandas.group_ops.PandasCogroupedOps"builtins.object*Œ
-__init__8pyspark.sql.pandas.group_ops.PandasCogroupedOps.__init__"
-None*l
-selfb
-/pyspark.sql.pandas.group_ops.PandasCogroupedOps"/pyspark.sql.pandas.group_ops.PandasCogroupedOps*G
-gd1>
-pyspark.sql.group.GroupedData"pyspark.sql.group.GroupedData*G
-gd2>
-pyspark.sql.group.GroupedData"pyspark.sql.group.GroupedData*°
-applyInPandas=pyspark.sql.pandas.group_ops.PandasCogroupedOps.applyInPandas"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*l
-selfb
-/pyspark.sql.pandas.group_ops.PandasCogroupedOps"/pyspark.sql.pandas.group_ops.PandasCogroupedOps*˛
-funcÛ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"5pyspark.sql.pandas._typing.PandasCogroupedMapFunction*ù
-schemaê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*§
-_extract_cols=pyspark.sql.pandas.group_ops.PandasCogroupedOps._extract_cols"q
-(builtins.list[pyspark.sql.column.Column]6
-pyspark.sql.column.Column"pyspark.sql.column.Column"builtins.list*F
-gd>
-pyspark.sql.group.GroupedData"pyspark.sql.group.GroupedData0:builtins.staticmethodhr|
-_gd14pyspark.sql.pandas.group_ops.PandasCogroupedOps._gd1>
-pyspark.sql.group.GroupedData"pyspark.sql.group.GroupedDatar|
-_gd24pyspark.sql.pandas.group_ops.PandasCogroupedOps._gd2>
-pyspark.sql.group.GroupedData"pyspark.sql.group.GroupedData5
-_test"pyspark.sql.pandas.group_ops._test"
-None*ò
-__annotations__,pyspark.sql.pandas.group_ops.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*	
+udf(*7
+applyInPandas*
+
+self(*
+
+func(*
+schema(
+*Ü
+applyInPandasWithState*
+
+self(*
+
+func(*
+outputStructType(
+*
+stateStructType(
+*
+
+outputMode(	*
+timeoutConf(	*$
+cogroup*
+
+self(*
+other(⁄
+PandasCogroupedOps"builtins.object*.
+__init__*
+
+self(*	
+gd1(*	
+gd2(*7
+applyInPandas*
+
+self(*
+
+func(*
+schema(
+*6
+_extract_cols*
+gd(0:builtins.staticmethodhr
+_gd10r
+_gd20	
+_test*
+__annotations__02!"pyspark.sql.dataframe.DataFrame24"2pyspark.sql.pandas.group_ops.PandasGroupedOpsMixin2@">pyspark.sql.pandas._typing.GroupedMapPandasUserDefinedFunction2"builtins.function22222:"3pyspark.sql.pandas._typing.PandasGroupedMapFunction22"pyspark.sql.types.StructType2"builtins.str22	2C"<pyspark.sql.pandas._typing.PandasGroupedMapFunctionWithState221"/pyspark.sql.pandas.group_ops.PandasCogroupedOps2"pyspark.sql.group.GroupedData22<"5pyspark.sql.pandas._typing.PandasCogroupedMapFunction22"pyspark.sql.column.Column2"builtins.list222"builtins.dict2	

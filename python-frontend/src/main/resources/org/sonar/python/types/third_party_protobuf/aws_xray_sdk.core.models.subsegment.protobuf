@@ -1,293 +1,164 @@
 
-#aws_xray_sdk.core.models.subsegment‰
-SegmentNotFoundException@aws_xray_sdk.core.exceptions.exceptions.SegmentNotFoundException"builtins.Exceptionj310j311j312j313j314ú*
-Entity&aws_xray_sdk.core.models.entity.Entity"builtins.object*»
-__init__/aws_xray_sdk.core.models.entity.Entity.__init__"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-name
-Any*l
-	entity_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*¡
-close,aws_xray_sdk.core.models.entity.Entity.close"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*k
-end_time[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ß
-add_subsegment5aws_xray_sdk.core.models.entity.Entity.add_subsegment"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
+#aws_xray_sdk.core.models.subsegmentp
+SegmentNotFoundException@aws_xray_sdk.core.exceptions.exceptions.SegmentNotFoundException"builtins.Exception¯
+Entity&aws_xray_sdk.core.models.entity.Entity"builtins.object*7
+__init__*
 
-subsegment
-Anyz310z311z312z313z314*å
-remove_subsegment8aws_xray_sdk.core.models.entity.Entity.remove_subsegment"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
+self(*
 
-subsegment
-Anyz310z311z312z313z314*ê
-put_http_meta4aws_xray_sdk.core.models.entity.Entity.put_http_meta"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-key
-Any*
-value
-Anyz310z311z312z313z314*ì
-put_annotation5aws_xray_sdk.core.models.entity.Entity.put_annotation"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-key
-Any*
-value
-Anyz310z311z312z313z314*—
-put_metadata3aws_xray_sdk.core.models.entity.Entity.put_metadata"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-key
-Any*
-value
-Any*-
-	namespace
-builtins.str"builtins.str z310z311z312z313z314*Ï
-set_aws.aws_xray_sdk.core.models.entity.Entity.set_aws"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-aws_meta
-Anyz310z311z312z313z314*Ì
-add_throttle_flag8aws_xray_sdk.core.models.entity.Entity.add_throttle_flag"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entityz310z311z312z313z314*Æ
-add_fault_flag5aws_xray_sdk.core.models.entity.Entity.add_fault_flag"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entityz310z311z312z313z314*Æ
-add_error_flag5aws_xray_sdk.core.models.entity.Entity.add_error_flag"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entityz310z311z312z313z314*æ
-apply_status_code8aws_xray_sdk.core.models.entity.Entity.apply_status_code"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-status_code
-Anyz310z311z312z313z314*è
-add_exception4aws_xray_sdk.core.models.entity.Entity.add_exception"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*7
-	exception(
-builtins.Exception"builtins.Exception*;
-stack0
-traceback.StackSummary"traceback.StackSummary*,
-remote
-builtins.bool"builtins.bool z310z311z312z313z314*õ
-save_origin_trace_header?aws_xray_sdk.core.models.entity.Entity.save_origin_trace_header"
-None*Z
-selfP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entity*
-trace_header
-Anyz310z311z312z313z314*|
-get_origin_trace_header>aws_xray_sdk.core.models.entity.Entity.get_origin_trace_header*
-selfz310z311z312z313z314*`
-	serialize0aws_xray_sdk.core.models.entity.Entity.serialize*
-selfz310z311z312z313z314*\
-to_dict.aws_xray_sdk.core.models.entity.Entity.to_dict*
-selfz310z311z312z313z314j310j311j312j313j314rQ
-id)aws_xray_sdk.core.models.entity.Entity.id
-Any*310*311*312*313*314rU
-name+aws_xray_sdk.core.models.entity.Entity.name
-Any*310*311*312*313*314ra
+name(*
+	entity_id (*'
+close*
 
-start_time1aws_xray_sdk.core.models.entity.Entity.start_time
-Any*310*311*312*313*314r_
-	parent_id0aws_xray_sdk.core.models.entity.Entity.parent_id
-Any*310*311*312*313*314rr
-sampled.aws_xray_sdk.core.models.entity.Entity.sampled
-builtins.bool"builtins.bool*310*311*312*313*314rz
-in_progress2aws_xray_sdk.core.models.entity.Entity.in_progress
-builtins.bool"builtins.bool*310*311*312*313*314rU
-http+aws_xray_sdk.core.models.entity.Entity.http
-Any*310*311*312*313*314rc
-annotations2aws_xray_sdk.core.models.entity.Entity.annotations
-Any*310*311*312*313*314r]
-metadata/aws_xray_sdk.core.models.entity.Entity.metadata
-Any*310*311*312*313*314rS
-aws*aws_xray_sdk.core.models.entity.Entity.aws
-Any*310*311*312*313*314rW
-cause,aws_xray_sdk.core.models.entity.Entity.cause
-Any*310*311*312*313*314rc
-subsegments2aws_xray_sdk.core.models.entity.Entity.subsegments
-Any*310*311*312*313*314r]
-end_time/aws_xray_sdk.core.models.entity.Entity.end_time
-Any*310*311*312*313*314rt
-throttle/aws_xray_sdk.core.models.entity.Entity.throttle
-builtins.bool"builtins.bool*310*311*312*313*314rn
-fault,aws_xray_sdk.core.models.entity.Entity.fault
-builtins.bool"builtins.bool*310*311*312*313*314rn
-error,aws_xray_sdk.core.models.entity.Entity.error
-builtins.bool"builtins.bool*310*311*312*313*314¶
-SubsegmentContextManager<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"builtins.object*î
-__init__Eaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.__init__"
-None*†
-self|
-<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager*f
-recorderX
-*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-subsegment_kwargs
-Anyz310z311z312z313z314*Æ
-__call__Eaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.__call__"
-Any*†
-self|
-<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager*
-wrapped
-Any*
-instance
-Any*6
-args,
-builtins.list[Any]
-Any"builtins.list*c
-kwargsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictz310z311z312z313z314*Î
-	__enter__Faws_xray_sdk.core.models.subsegment.SubsegmentContextManager.__enter__"`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*~|
-<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManagerz310z311z312z313z314*Í
-__exit__Eaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.__exit__"
-None*~|
-<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager*“
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314j310j311j312j313j314r¨
-nameAaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r‘
-subsegment_kwargsNaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.subsegment_kwargs’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*310*311*312*313*314rÄ
-recorderEaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.recorderX
-*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*310*311*312*313*314rÐ
+self(*
+end_time (*0
+add_subsegment*
 
-subsegmentGaws_xray_sdk.core.models.subsegment.SubsegmentContextManager.subsegment`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*310*311*312*313*314ž
+self(*
 
-Subsegment.aws_xray_sdk.core.models.subsegment.Subsegment"&aws_xray_sdk.core.models.entity.Entity*Š
-__init__7aws_xray_sdk.core.models.subsegment.Subsegment.__init__"
-None*j
-self`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*&
-name
-builtins.str"builtins.str*+
-	namespace
-builtins.str"builtins.str*a
-segmentT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz310z311z312z313z314*Ð
-add_subsegment=aws_xray_sdk.core.models.subsegment.Subsegment.add_subsegment"
-None*j
-self`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*p
+subsegment(*3
+remove_subsegment*
 
-subsegment`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz310z311z312z313z314*Ö
-remove_subsegment@aws_xray_sdk.core.models.subsegment.Subsegment.remove_subsegment"
-None*j
-self`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*p
+self(*
 
-subsegment`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz310z311z312z313z314*±
-close4aws_xray_sdk.core.models.subsegment.Subsegment.close"
-None*j
-self`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*â
-end_timeÑ
-’Union[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]­
-†TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]
-{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int"time.struct_time
-None z310z311z312z313z314*²
-set_sql6aws_xray_sdk.core.models.subsegment.Subsegment.set_sql"
-None*j
-self`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*`
-sqlW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictz310z311z312z313z314*Ÿ
-to_dict6aws_xray_sdk.core.models.subsegment.Subsegment.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*j
-self`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz310z311z312z313z314j310j311j312j313j314r¾
-parent_segment=aws_xray_sdk.core.models.subsegment.Subsegment.parent_segmentT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*310*311*312*313*314rz
-trace_id7aws_xray_sdk.core.models.subsegment.Subsegment.trace_id
-builtins.str"builtins.str*310*311*312*313*314rr
-type3aws_xray_sdk.core.models.subsegment.Subsegment.type
-builtins.str"builtins.str*310*311*312*313*314r|
-	namespace8aws_xray_sdk.core.models.subsegment.Subsegment.namespace
-builtins.str"builtins.str*310*311*312*313*314r«
-sql2aws_xray_sdk.core.models.subsegment.Subsegment.sqlW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314ž
-set_as_recording4aws_xray_sdk.core.models.subsegment.set_as_recording"
-None*
-decorated_func
-Any*
-wrapped
-Anyz310z311z312z313z314s
-is_already_recording8aws_xray_sdk.core.models.subsegment.is_already_recording*
-funcz310z311z312z313z314š
-subsegment_decorator8aws_xray_sdk.core.models.subsegment.subsegment_decorator*
+subsegment(*5
+put_http_meta*
+
+self(*	
+key(*
+value(*6
+put_annotation*
+
+self(*	
+key(*
+value(*G
+put_metadata*
+
+self(*	
+key(*
+value(*
+	namespace (*'
+set_aws*
+
+self(*
+aws_meta(*!
+add_throttle_flag*
+
+self(*
+add_fault_flag*
+
+self(*
+add_error_flag*
+
+self(*4
+apply_status_code*
+
+self(*
+status_code(*K
+add_exception*
+
+self(*
+	exception(*
+stack(*
+remote (	*<
+save_origin_trace_header*
+
+self(*
+trace_header(*#
+get_origin_trace_header*
+self*
+	serialize*
+self*
+to_dict*
+selfr
+id0r
+name0r
+
+start_time0r
+	parent_id0r
+sampled0	r
+in_progress0	r
+http0r
+annotations0r
+metadata0r
+aws0r	
+cause0r
+subsegments0r
+end_time0r
+throttle0	r	
+fault0	r	
+error0	¿
+SubsegmentContextManager"builtins.object*O
+__init__*
+
+self(
+*
+recorder(*
+name (*
+subsegment_kwargs(*Q
+__call__*
+
+self(
+*
+wrapped(*
+instance(*
+
+args(*
+kwargs(*
+	__enter__*(
+*
+__exit__*(
+*(*(*(r
+name0r
+subsegment_kwargs0r
+recorder0r
+
+subsegment0‹
+
+Subsegment"&aws_xray_sdk.core.models.entity.Entity*D
+__init__*
+
+self(*
+
+name(*
+	namespace(*
+segment(*0
+add_subsegment*
+
+self(*
+
+subsegment(*3
+remove_subsegment*
+
+self(*
+
+subsegment(*'
+close*
+
+self(*
+end_time (*"
+set_sql*
+
+self(*	
+sql(*
+to_dict*
+
+self(r
+parent_segment0r
+trace_id0r
+type0r
+	namespace0r
+sql09
+set_as_recording*
+decorated_func(*
+wrapped( 
+is_already_recording*
+funcG
+subsegment_decorator*
 wrapped*
 instance*
 args*
 
-kwargsz310z311z312z313z314*¸
-__annotations__3aws_xray_sdk.core.models.subsegment.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*›
-SUBSEGMENT_RECORDING_ATTRIBUTEBaws_xray_sdk.core.models.subsegment.SUBSEGMENT_RECORDING_ATTRIBUTE
-builtins.str"builtins.str*310*311*312*313*314
+kwargs*
+__annotations__0*"
+SUBSEGMENT_RECORDING_ATTRIBUTE022("&aws_xray_sdk.core.models.entity.Entity22"_typeshed.Incomplete2222"builtins.str2"builtins.Exception2"traceback.StackSummary2"builtins.bool2>"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager2,"*aws_xray_sdk.core.recorder.AWSXRayRecorder2"builtins.list22"builtins.dict220".aws_xray_sdk.core.models.subsegment.Subsegment2"builtins.BaseException2"type222222"types.TracebackType2222222*"(aws_xray_sdk.core.models.segment.Segment2"builtins.int22	2"time.struct_time222

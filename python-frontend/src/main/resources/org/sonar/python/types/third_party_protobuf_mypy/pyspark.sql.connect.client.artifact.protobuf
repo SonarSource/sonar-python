@@ -1,270 +1,178 @@
 
-#pyspark.sql.connect.client.artifactÿ
-	LocalData-pyspark.sql.connect.client.artifact.LocalData"builtins.object*Å
-stream4pyspark.sql.connect.client.artifact.LocalData.stream""
-typing.BinaryIO"typing.BinaryIO*h
-self^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData0:functools.cached_property:abc.abstractmethod@`*˜
-size2pyspark.sql.connect.client.artifact.LocalData.size"
-builtins.int"builtins.int*h
-self^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData0:functools.cached_property:abc.abstractmethod@`@babc.ABCMeta≤
-	LocalFile-pyspark.sql.connect.client.artifact.LocalFile"-pyspark.sql.connect.client.artifact.LocalData*ﬁ
-__init__6pyspark.sql.connect.client.artifact.LocalFile.__init__"
-None*h
-self^
--pyspark.sql.connect.client.artifact.LocalFile"-pyspark.sql.connect.client.artifact.LocalFile*&
-path
-builtins.str"builtins.str*·
-size2pyspark.sql.connect.client.artifact.LocalFile.size"
-builtins.int"builtins.int*h
-self^
--pyspark.sql.connect.client.artifact.LocalFile"-pyspark.sql.connect.client.artifact.LocalFile0:functools.cached_property`*Î
-stream4pyspark.sql.connect.client.artifact.LocalFile.stream""
-typing.BinaryIO"typing.BinaryIO*h
-self^
--pyspark.sql.connect.client.artifact.LocalFile"-pyspark.sql.connect.client.artifact.LocalFile0:functools.cached_property`rX
-path2pyspark.sql.connect.client.artifact.LocalFile.path
-builtins.str"builtins.strrZ
-_size3pyspark.sql.connect.client.artifact.LocalFile._size
-builtins.int"builtins.intr^
-_stream5pyspark.sql.connect.client.artifact.LocalFile._stream
-builtins.int"builtins.int¨
-InMemory,pyspark.sql.connect.client.artifact.InMemory"-pyspark.sql.connect.client.artifact.LocalData*ﬂ
-__init__5pyspark.sql.connect.client.artifact.InMemory.__init__"
-None*f
-self\
-,pyspark.sql.connect.client.artifact.InMemory",pyspark.sql.connect.client.artifact.InMemory**
-blob 
-builtins.bytes"builtins.bytes*ﬁ
-size1pyspark.sql.connect.client.artifact.InMemory.size"
-builtins.int"builtins.int*f
-self\
-,pyspark.sql.connect.client.artifact.InMemory",pyspark.sql.connect.client.artifact.InMemory0:functools.cached_property`*Ë
-stream3pyspark.sql.connect.client.artifact.InMemory.stream""
-typing.BinaryIO"typing.BinaryIO*f
-self\
-,pyspark.sql.connect.client.artifact.InMemory",pyspark.sql.connect.client.artifact.InMemory0:functools.cached_property`r[
-blob1pyspark.sql.connect.client.artifact.InMemory.blob 
-builtins.bytes"builtins.bytesrY
-_size2pyspark.sql.connect.client.artifact.InMemory._size
-builtins.int"builtins.intr]
-_stream4pyspark.sql.connect.client.artifact.InMemory._stream
-builtins.int"builtins.int
-Artifact,pyspark.sql.connect.client.artifact.Artifact"builtins.object*»
-__init__5pyspark.sql.connect.client.artifact.Artifact.__init__"
-None*f
-self\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*&
-path
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData*ﬁ
-size1pyspark.sql.connect.client.artifact.Artifact.size"
-builtins.int"builtins.int*f
-self\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact0:functools.cached_property`rW
-path1pyspark.sql.connect.client.artifact.Artifact.path
-builtins.str"builtins.strrü
-storage4pyspark.sql.connect.client.artifact.Artifact.storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalDataÇ8
-ArtifactManager3pyspark.sql.connect.client.artifact.ArtifactManager"builtins.object*ó
-__init__<pyspark.sql.connect.client.artifact.ArtifactManager.__init__"
-None*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*Q
-user_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*,
+#pyspark.sql.connect.client.artifact√
+	LocalData"builtins.object*K
+stream*
 
-session_id
-builtins.str"builtins.str*
-channel
-Any*µ
-metadata¶
-1typing.Iterable[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Iterable*≠
-_parse_artifactsDpyspark.sql.connect.client.artifact.ArtifactManager._parse_artifacts"™
-;builtins.list[pyspark.sql.connect.client.artifact.Artifact]\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact"builtins.list*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*-
-path_or_uri
-builtins.str"builtins.str**
-pyfile
-builtins.bool"builtins.bool*+
-archive
-builtins.bool"builtins.bool*(
-file
-builtins.bool"builtins.bool*Ú
-_parse_forward_to_fs_artifactsRpyspark.sql.connect.client.artifact.ArtifactManager._parse_forward_to_fs_artifacts"™
-;builtins.list[pyspark.sql.connect.client.artifact.Artifact]\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact"builtins.list*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*,
+self(0:functools.cached_property:abc.abstractmethod@`*I
+size*
 
-local_path
-builtins.str"builtins.str*+
-	dest_path
-builtins.str"builtins.str*»
-_create_requestsDpyspark.sql.connect.client.artifact.ArtifactManager._create_requests"Ã
-Gtyping.Iterator[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest]p
-6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"typing.Iterator*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*&
-path
-builtins.str"builtins.str**
-pyfile
-builtins.bool"builtins.bool*+
-archive
-builtins.bool"builtins.bool*(
-file
-builtins.bool"builtins.bool*¶
-_retrieve_responsesGpyspark.sql.connect.client.artifact.ArtifactManager._retrieve_responses"r
-7pyspark.sql.connect.proto.base_pb2.AddArtifactsResponse"7pyspark.sql.connect.proto.base_pb2.AddArtifactsResponse*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*€
-requestsÃ
-Gtyping.Iterator[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest]p
-6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"typing.Iterator*¬
-_request_add_artifactsJpyspark.sql.connect.client.artifact.ArtifactManager._request_add_artifacts"
-None*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*€
-requestsÃ
-Gtyping.Iterator[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest]p
-6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"typing.Iterator*˝
-add_artifactsApyspark.sql.connect.client.artifact.ArtifactManager.add_artifacts"
-None*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*&
-path
-builtins.str"builtins.str**
-pyfile
-builtins.bool"builtins.bool*+
-archive
-builtins.bool"builtins.bool*(
-file
-builtins.bool"builtins.bool*À
-_add_forward_to_fs_artifactsPpyspark.sql.connect.client.artifact.ArtifactManager._add_forward_to_fs_artifacts"
-None*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*,
+self(0:functools.cached_property:abc.abstractmethod@`@babc.ABCMetaÓ
+	LocalFile"-pyspark.sql.connect.client.artifact.LocalData*$
+__init__*
 
-local_path
-builtins.str"builtins.str*+
-	dest_path
-builtins.str"builtins.str*⁄
-_add_artifactsBpyspark.sql.connect.client.artifact.ArtifactManager._add_artifacts"Ã
-Gtyping.Iterator[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest]p
-6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"typing.Iterator*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*æ
-	artifactsÆ
-=typing.Iterable[pyspark.sql.connect.client.artifact.Artifact]\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact"typing.Iterable*Í
-_add_batched_artifactsJpyspark.sql.connect.client.artifact.ArtifactManager._add_batched_artifacts"Ã
-Gtyping.Iterator[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest]p
-6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"typing.Iterator*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*æ
-	artifactsÆ
-=typing.Iterable[pyspark.sql.connect.client.artifact.Artifact]\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact"typing.Iterable*ì
-_add_chunked_artifactIpyspark.sql.connect.client.artifact.ArtifactManager._add_chunked_artifact"Ã
-Gtyping.Iterator[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest]p
-6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"typing.Iterator*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*j
-artifact\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*ö
-is_cached_artifactFpyspark.sql.connect.client.artifact.ArtifactManager.is_cached_artifact"
-builtins.bool"builtins.bool*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager*&
-hash
-builtins.str"builtins.str*î
-cache_artifactBpyspark.sql.connect.client.artifact.ArtifactManager.cache_artifact"
-builtins.str"builtins.str*t
-selfj
-3pyspark.sql.connect.client.artifact.ArtifactManager"3pyspark.sql.connect.client.artifact.ArtifactManager**
-blob 
-builtins.bytes"builtins.bytesrj
+self(*
 
-CHUNK_SIZE>pyspark.sql.connect.client.artifact.ArtifactManager.CHUNK_SIZE
-builtins.int"builtins.intr¥
-_user_contextApyspark.sql.connect.client.artifact.ArtifactManager._user_context`
-.pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContextr«
-_stub9pyspark.sql.connect.client.artifact.ArtifactManager._stubÇ
-?pyspark.sql.connect.proto.base_pb2_grpc.SparkConnectServiceStub"?pyspark.sql.connect.proto.base_pb2_grpc.SparkConnectServiceStubrl
-_session_id?pyspark.sql.connect.client.artifact.ArtifactManager._session_id
-builtins.str"builtins.strrÛ
-	_metadata=pyspark.sql.connect.client.artifact.ArtifactManager._metadata¶
-1typing.Iterable[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Iterable¿
-new_jar_artifact4pyspark.sql.connect.client.artifact.new_jar_artifact"\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*+
-	file_name
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData∆
-new_pyfile_artifact7pyspark.sql.connect.client.artifact.new_pyfile_artifact"\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*+
-	file_name
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData»
-new_archive_artifact8pyspark.sql.connect.client.artifact.new_archive_artifact"\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*+
-	file_name
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData¬
-new_file_artifact5pyspark.sql.connect.client.artifact.new_file_artifact"\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*+
-	file_name
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalDataΩ
-new_cache_artifact6pyspark.sql.connect.client.artifact.new_cache_artifact"\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*$
-id
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalDataó
-_new_artifact1pyspark.sql.connect.client.artifact._new_artifact"\
-,pyspark.sql.connect.client.artifact.Artifact",pyspark.sql.connect.client.artifact.Artifact*(
-prefix
-builtins.str"builtins.str*1
-required_suffix
-builtins.str"builtins.str*+
-	file_name
-builtins.str"builtins.str*k
-storage^
--pyspark.sql.connect.client.artifact.LocalData"-pyspark.sql.connect.client.artifact.LocalData*ü
-__annotations__3pyspark.sql.connect.client.artifact.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*9
-grpc(pyspark.sql.connect.client.artifact.grpc
-Any*$
+path(*3
+size*
+
+self(0:functools.cached_property`*5
+stream*
+
+self(0:functools.cached_property`r
+path0r	
+_size0r
+_stream0Ì
+InMemory"-pyspark.sql.connect.client.artifact.LocalData*$
+__init__*
+
+self(*
+
+blob(*3
+size*
+
+self(0:functools.cached_property`*5
+stream*
+
+self(0:functools.cached_property`r
+blob0r	
+_size0r
+_stream0ú
+Artifact"builtins.object*3
+__init__*
+
+self(	*
+
+path(*
+storage(*3
+size*
+
+self(	0:functools.cached_property`r
+path0r
+storage0·
+ArtifactManager"builtins.object*X
+__init__*
+
+self(
+*
+user_id(*
+
+session_id(*
+channel(*
+metadata(*\
+_parse_artifacts*
+
+self(
+*
+path_or_uri(*
+pyfile(*
+archive(*
+
+file(*Q
+_parse_forward_to_fs_artifacts*
+
+self(
+*
+
+local_path(*
+	dest_path(*U
+_create_requests*
+
+self(
+*
+
+path(*
+pyfile(*
+archive(*
+
+file(*3
+_retrieve_responses*
+
+self(
+*
+requests(*6
+_request_add_artifacts*
+
+self(
+*
+requests(*R
+add_artifacts*
+
+self(
+*
+
+path(*
+pyfile(*
+archive(*
+
+file(*O
+_add_forward_to_fs_artifacts*
+
+self(
+*
+
+local_path(*
+	dest_path(*/
+_add_artifacts*
+
+self(
+*
+	artifacts(*7
+_add_batched_artifacts*
+
+self(
+*
+	artifacts(*5
+_add_chunked_artifact*
+
+self(
+*
+artifact(	*.
+is_cached_artifact*
+
+self(
+*
+
+hash(**
+cache_artifact*
+
+self(
+*
+
+blob(r
+
+CHUNK_SIZE0r
+_user_context0r	
+_stub0r
+_session_id0r
+	_metadata04
+new_jar_artifact	*
+	file_name(*
+storage(7
+new_pyfile_artifact	*
+	file_name(*
+storage(8
+new_archive_artifact	*
+	file_name(*
+storage(5
+new_file_artifact	*
+	file_name(*
+storage(/
+new_cache_artifact	*
+id(*
+storage(V
+_new_artifact	*
+prefix(*
+required_suffix(*
+	file_name(*
+storage(*
+__annotations__0*
+grpc0*$
 protopyspark.sql.connect.proto *5
-grpc_lib'pyspark.sql.connect.proto.base_pb2_grpc *Z
+grpc_lib'pyspark.sql.connect.proto.base_pb2_grpc *
 
-JAR_PREFIX.pyspark.sql.connect.client.artifact.JAR_PREFIX
-builtins.str"builtins.str*`
-PYFILE_PREFIX1pyspark.sql.connect.client.artifact.PYFILE_PREFIX
-builtins.str"builtins.str*b
-ARCHIVE_PREFIX2pyspark.sql.connect.client.artifact.ARCHIVE_PREFIX
-builtins.str"builtins.str*\
-FILE_PREFIX/pyspark.sql.connect.client.artifact.FILE_PREFIX
-builtins.str"builtins.str*n
-FORWARD_TO_FS_PREFIX8pyspark.sql.connect.client.artifact.FORWARD_TO_FS_PREFIX
-builtins.str"builtins.str*^
-CACHE_PREFIX0pyspark.sql.connect.client.artifact.CACHE_PREFIX
-builtins.str"builtins.str
+JAR_PREFIX0*
+PYFILE_PREFIX0*
+ARCHIVE_PREFIX0*
+FILE_PREFIX0*
+FORWARD_TO_FS_PREFIX0*
+CACHE_PREFIX02"typing.BinaryIO2/"-pyspark.sql.connect.client.artifact.LocalData2"builtins.int22/"-pyspark.sql.connect.client.artifact.LocalFile2"builtins.str2.",pyspark.sql.connect.client.artifact.InMemory2"builtins.bytes2.",pyspark.sql.connect.client.artifact.Artifact25"3pyspark.sql.connect.client.artifact.ArtifactManager222222"typing.Iterable22"builtins.list2	2"builtins.bool28"6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest2"typing.Iterator229"7pyspark.sql.connect.proto.base_pb2.AddArtifactsResponse2"typing.Iterable2	20".pyspark.sql.connect.proto.base_pb2.UserContext2A"?pyspark.sql.connect.proto.base_pb2_grpc.SparkConnectServiceStub2"builtins.dict2

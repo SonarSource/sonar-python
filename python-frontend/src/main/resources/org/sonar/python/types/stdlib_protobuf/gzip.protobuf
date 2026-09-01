@@ -1,519 +1,213 @@
 
-gzipË
-_ReadableFileobjgzip._ReadableFileobj"builtins.object*·
-readgzip._ReadableFileobj.read" 
-builtins.bytes"builtins.bytes*8
-self.
-gzip._ReadableFileobj"gzip._ReadableFileobj*
-builtins.int"builtins.intz310z311z312z313z314*¹
-seekgzip._ReadableFileobj.seek""
-builtins.object"builtins.object*8
-self.
-gzip._ReadableFileobj"gzip._ReadableFileobj*
-builtins.int"builtins.intz310z311z312z313z314Xj310j311j312j313j314µ
-_WritableFileobjgzip._WritableFileobj"builtins.object*¿
-writegzip._WritableFileobj.write""
-builtins.object"builtins.object*8
-self.
-gzip._WritableFileobj"gzip._WritableFileobj*" 
-builtins.bytes"builtins.bytesz310z311z312z313z314*›
-flushgzip._WritableFileobj.flush""
-builtins.object"builtins.object*8
-self.
-gzip._WritableFileobj"gzip._WritableFileobjz310z311z312z313z314Xj310j311j312j313j314°
-_PaddedFilegzip._PaddedFile"builtins.object*à
-__init__gzip._PaddedFile.__init__"
-None*.
-self$
-gzip._PaddedFile"gzip._PaddedFile*5
-f.
-gzip._ReadableFileobj"gzip._ReadableFileobj*/
-prepend 
-builtins.bytes"builtins.bytes z310z311z312z313z314*°
-readgzip._PaddedFile.read" 
-builtins.bytes"builtins.bytes*.
-self$
-gzip._PaddedFile"gzip._PaddedFile*&
-size
-builtins.int"builtins.intz310z311z312z313z314*§
-prependgzip._PaddedFile.prepend"
-None*.
-self$
-gzip._PaddedFile"gzip._PaddedFile*/
-prepend 
-builtins.bytes"builtins.bytes z310z311z312z313z314*«
-seekgzip._PaddedFile.seek"
-builtins.int"builtins.int*.
-self$
-gzip._PaddedFile"gzip._PaddedFile*%
-off
-builtins.int"builtins.intz310z311z312z313z314*Ž
-seekablegzip._PaddedFile.seekable"
-builtins.bool"builtins.bool*.
-self$
-gzip._PaddedFile"gzip._PaddedFilez310z311z312z313z314j310j311j312j313j314rf
-filegzip._PaddedFile.file.
-gzip._ReadableFileobj"gzip._ReadableFileobj*310*311*312*313*314J
-BadGzipFilegzip.BadGzipFile"builtins.OSErrorj310j311j312j313j314ÅI
-GzipFilegzip.GzipFile"_compression.BaseStream*š
-filenamegzip.GzipFile.filename"
-builtins.str"builtins.str*(
-self
-gzip.GzipFile"gzip.GzipFile0:builtins.property`z310z311z312z313z314*¼
-mtimegzip.GzipFile.mtime"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*(
-self
-gzip.GzipFile"gzip.GzipFile0:builtins.property`z310z311z312z313z314*ç
-writegzip.GzipFile.write"
-builtins.int"builtins.int*(
-self
-gzip.GzipFile"gzip.GzipFile*ç
-dataÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz310z311z312z313z314*Ñ
-readgzip.GzipFile.read" 
-builtins.bytes"builtins.bytes*(
-self
-gzip.GzipFile"gzip.GzipFile*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*«
-read1gzip.GzipFile.read1" 
-builtins.bytes"builtins.bytes*(
-self
-gzip.GzipFile"gzip.GzipFile*(
-size
-builtins.int"builtins.int z310z311z312z313z314*¤
-peekgzip.GzipFile.peek" 
-builtins.bytes"builtins.bytes*(
-self
-gzip.GzipFile"gzip.GzipFile*#
-n
-builtins.int"builtins.intz310z311z312z313z314*i
-closegzip.GzipFile.close"
-None*(
-self
-gzip.GzipFile"gzip.GzipFilez310z311z312z313z314*˜
-flushgzip.GzipFile.flush"
-None*(
-self
-gzip.GzipFile"gzip.GzipFile*-
-	zlib_mode
-builtins.int"builtins.int z310z311z312z313z314*
-filenogzip.GzipFile.fileno"
-builtins.int"builtins.int*(
-self
-gzip.GzipFile"gzip.GzipFilez310z311z312z313z314*k
-rewindgzip.GzipFile.rewind"
-None*(
-self
-gzip.GzipFile"gzip.GzipFilez310z311z312z313z314*Ñ
-seekgzip.GzipFile.seek"
-builtins.int"builtins.int*(
-self
-gzip.GzipFile"gzip.GzipFile*(
-offset
-builtins.int"builtins.int**
-whence
-builtins.int"builtins.int z310z311z312z313z314*Ù
-readlinegzip.GzipFile.readline" 
-builtins.bytes"builtins.bytes*(
-self
-gzip.GzipFile"gzip.GzipFile*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z3142¯,
-__init__gzip.GzipFile.__init__¿	
-__init__gzip.GzipFile.__init__"
-None*(
-self
-gzip.GzipFile"gzip.GzipFile*Å
-filename¶
-oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
-None*
-mode‚
-=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._ReadBinaryMode*1
-compresslevel
-builtins.int"builtins.int *n
-fileobj_
-!Union[gzip._ReadableFileobj,None].
-gzip._ReadableFileobj"gzip._ReadableFileobj
-None *W
-mtimeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadX÷
-__init__gzip.GzipFile.__init__"
-None*(
-self
-gzip.GzipFile"gzip.GzipFile*
-mode‚
-=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._ReadBinaryMode*1
-compresslevel
-builtins.int"builtins.int *n
-fileobj_
-!Union[gzip._ReadableFileobj,None].
-gzip._ReadableFileobj"gzip._ReadableFileobj
-None *W
-mtimeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadXÖ
-__init__gzip.GzipFile.__init__"
-None*(
-self
-gzip.GzipFile"gzip.GzipFile*Å
-filename¶
-oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
-None*¤
-mode™
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._WriteBinaryMode*1
-compresslevel
-builtins.int"builtins.int *n
-fileobj_
-!Union[gzip._WritableFileobj,None].
-gzip._WritableFileobj"gzip._WritableFileobj
-None *W
-mtimeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadXŽ
-__init__gzip.GzipFile.__init__"
-None*(
-self
-gzip.GzipFile"gzip.GzipFile*¤
-mode™
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._WriteBinaryMode*1
-compresslevel
-builtins.int"builtins.int *n
-fileobj_
-!Union[gzip._WritableFileobj,None].
-gzip._WritableFileobj"gzip._WritableFileobj
-None *W
-mtimeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadXË
-__init__gzip.GzipFile.__init__"
-None*(
-self
-gzip.GzipFile"gzip.GzipFile*Ç
-filename¶
-oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
-None *P
-modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *1
-compresslevel
-builtins.int"builtins.int *µ
-fileobj¥
-7Union[gzip._ReadableFileobj,gzip._WritableFileobj,None].
-gzip._ReadableFileobj"gzip._ReadableFileobj.
-gzip._WritableFileobj"gzip._WritableFileobj
-None *W
-mtimeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadX"310"311"312"313"314j310j311j312j313j314rz
-	myfileobjgzip.GzipFile.myfileobj;
-Union[io.FileIO,None]
-	io.FileIO"	io.FileIO
-None*310*311*312*313*314rÞ
-modegzip.GzipFile.mode¨
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314rQ
-namegzip.GzipFile.name
-builtins.str"builtins.str*310*311*312*313*314r]
-compressgzip.GzipFile.compress 
-zlib._Compress"zlib._Compress*310*311*312*313*314rÒ
-fileobjgzip.GzipFile.fileobj–
-2Union[gzip._ReadableFileobj,gzip._WritableFileobj].
-gzip._ReadableFileobj"gzip._ReadableFileobj.
-gzip._WritableFileobj"gzip._WritableFileobj*310*311*312*313*314rO
-crcgzip.GzipFile.crc
-builtins.int"builtins.int*310*311*312*313*314Š
-_GzipReadergzip._GzipReader"_compression.DecompressReader*°
-__init__gzip._GzipReader.__init__"
-None*.
-self$
-gzip._GzipReader"gzip._GzipReader*6
-fp.
-gzip._ReadableFileobj"gzip._ReadableFileobjz310z311z312z313z314j310j311j312j313j314Ž
+gzipY
+_ReadableFileobj"builtins.object*
+read*
 
-compressgzip.compress" 
-builtins.bytes"builtins.bytes*«
-data 
-¢TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]Ü
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_typeshed._BufferWithLen*1
-compresslevel
-builtins.int"builtins.int *W
-mtimeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314Â
+self(*(*
+seek*
 
-decompressgzip.decompress" 
-builtins.bytes"builtins.bytes*ç
-dataÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz310z311z312z313z314"½(
-open	gzip.openÖ
-open	gzip.open"
-gzip.GzipFile"gzip.GzipFile*ý
-filenameî
-€Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],gzip._ReadableFileobj]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath.
-gzip._ReadableFileobj"gzip._ReadableFileobj*
-mode‚
-=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._ReadBinaryMode *1
-compresslevel
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overloadXë
-open	gzip.open"
-gzip.GzipFile"gzip.GzipFile*ý
-filenameî
-€Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],gzip._WritableFileobj]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath.
-gzip._WritableFileobj"gzip._WritableFileobj*¤
-mode™
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._WriteBinaryMode*1
-compresslevel
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overloadX˜
+self(*(XW
+_WritableFileobj"builtins.object*
+write*
 
-open	gzip.open"
-typing.TextIO"typing.TextIO*Å
-filename¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*Õ
-modeÊ
-iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Æ
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"gzip._OpenTextMode*1
-compresslevel
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX®	
-open	gzip.open"f
-"Union[gzip.GzipFile,typing.TextIO]
-gzip.GzipFile"gzip.GzipFile
-typing.TextIO"typing.TextIO*Ã
-filename´
-–Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],gzip._ReadableFileobj,gzip._WritableFileobj]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath.
-gzip._ReadableFileobj"gzip._ReadableFileobj.
-gzip._WritableFileobj"gzip._WritableFileobj*&
-mode
-builtins.str"builtins.str*1
-compresslevel
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX"310"311"312"313"314*™
-__annotations__gzip.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*|
-__all__gzip.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*c
-READ	gzip.READ7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*e
-WRITE
-gzip.WRITE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*J
-FTEXT
-gzip.FTEXT
-builtins.int"builtins.int*310*311*312*313*314*J
-FHCRC
-gzip.FHCRC
-builtins.int"builtins.int*310*311*312*313*314*L
-FEXTRAgzip.FEXTRA
-builtins.int"builtins.int*310*311*312*313*314*J
-FNAME
-gzip.FNAME
-builtins.int"builtins.int*310*311*312*313*314*P
-FCOMMENTgzip.FCOMMENT
-builtins.int"builtins.int*310*311*312*313*314
+self(*(*
+flush*
+
+self(Xã
+_PaddedFile"builtins.object*2
+__init__*
+
+self(*
+f(*
+prepend (* 
+read*
+
+self(*
+
+size(*(
+prepend*
+
+self(*
+prepend (*
+seek*
+
+self(*	
+off(*
+seekable*
+
+self(r
+file0
+BadGzipFile"builtins.OSErrorŸ	
+GzipFile"_compression.BaseStream*/
+filename	*
+
+self(
+0:builtins.property`*,
+mtime*
+
+self(
+0:builtins.property`*!
+write*
+
+self(
+*
+
+data(*"
+read*
+
+self(
+*
+size (*#
+read1*
+
+self(
+*
+size (*
+peek*
+
+self(
+*
+n(*
+close*
+
+self(
+*(
+flush*
+
+self(
+*
+	zlib_mode (*
+fileno*
+
+self(
+*
+rewind*
+
+self(
+*2
+seek*
+
+self(
+*
+offset(*
+whence (*&
+readline*
+
+self(
+*
+size (2û
+__init__€
+__init__*
+
+self(
+*
+filename(*
+
+mode(*
+compresslevel (*
+fileobj (*
+mtime (!0:typing.overloadXp
+__init__*
+
+self(
+*
+
+mode(*
+compresslevel (*
+fileobj (*
+mtime (!0:typing.overloadX€
+__init__*
+
+self(
+*
+filename(*
+
+mode(#*
+compresslevel (*
+fileobj ($*
+mtime (!0:typing.overloadXp
+__init__*
+
+self(
+*
+
+mode(#*
+compresslevel (*
+fileobj ($*
+mtime (!0:typing.overloadX„
+__init__*
+
+self(
+*
+filename (*
+mode (%*
+compresslevel (*
+fileobj (&*
+mtime (!0:typing.overloadXr
+	myfileobj0(r
+mode0*r
+name0	r
+compress0+r
+fileobj0,r
+crc0P
+_GzipReader"_compression.DecompressReader*"
+__init__*
+
+self(-*
+fp(>
+compress*
+
+data(.*
+compresslevel (*
+mtime (!
+
+decompress*
+
+data(" 
+open…
+open
+*
+filename(/*
+mode (*
+compresslevel (*
+encoding (*
+errors (*
+newline (0:typing.overloadXƒ
+open
+*
+filename(0*
+
+mode(#*
+compresslevel (*
+encoding (*
+errors (*
+newline (0:typing.overloadXƒ
+open1*
+filename(*
+
+mode(3*
+compresslevel (*
+encoding (%*
+errors (%*
+newline (%0:typing.overloadXƒ
+open4*
+filename(5*
+
+mode(	*
+compresslevel (*
+encoding (%*
+errors (%*
+newline (%0:typing.overloadX*
+__annotations__06*
+__all__07*
+READ0)*	
+WRITE0)*	
+FTEXT0*	
+FHCRC0*
+
+FEXTRA0*	
+FNAME0*
+FCOMMENT02"builtins.bytes2"gzip._ReadableFileobj2"builtins.int2"builtins.object2"gzip._WritableFileobj22"gzip._PaddedFile2"builtins.bool2"builtins.str2"gzip.GzipFile222"builtins.bytearray2"builtins.memoryview22"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"os.PathLike2	2"os.PathLike222	2"_typeshed.StrOrBytesPath2222	2	222"gzip._ReadBinaryMode2222"builtins.float22 2
+22"gzip._WriteBinaryMode2"2222	222"	io.FileIO22'2	222))2"zlib._Compress222"gzip._GzipReader2"_typeshed._BufferWithLen222222"typing.TextIO222"gzip._OpenTextMode2222
+1222"builtins.dict2	2"builtins.list2	

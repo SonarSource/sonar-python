@@ -1,88 +1,49 @@
 
-Xlib.ext.damage\
-BadDamageErrorXlib.ext.damage.BadDamageError"Xlib.error.XErrorj310j311j312j313j314d
-QueryVersionXlib.ext.damage.QueryVersion"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314_
-DamageCreateXlib.ext.damage.DamageCreate"Xlib.protocol.rq.Requestj310j311j312j313j314a
-DamageDestroyXlib.ext.damage.DamageDestroy"Xlib.protocol.rq.Requestj310j311j312j313j314c
-DamageSubtractXlib.ext.damage.DamageSubtract"Xlib.protocol.rq.Requestj310j311j312j313j314Y
-	DamageAddXlib.ext.damage.DamageAdd"Xlib.protocol.rq.Requestj310j311j312j313j314]
-DamageNotifyXlib.ext.damage.DamageNotify"Xlib.protocol.rq.Eventj310j311j312j313j314ë
-query_versionXlib.ext.damage.query_version"<
-Xlib.ext.damage.QueryVersion"Xlib.ext.damage.QueryVersion*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314ô
-damage_createXlib.ext.damage.damage_create"
-builtins.int"builtins.int*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*'
-level
-builtins.int"builtins.intz310z311z312z313z314ã
-damage_destroyXlib.ext.damage.damage_destroy"
-None*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-damage
-builtins.int"builtins.intz310z311z312z313z314¼
-damage_subtractXlib.ext.damage.damage_subtract"
-None*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-damage
-builtins.int"builtins.int**
-repair
-builtins.int"builtins.int *)
-parts
-builtins.int"builtins.int z310z311z312z313z314„
+Xlib.ext.damage#
+BadDamageError"Xlib.error.XError-
+QueryVersion"Xlib.protocol.rq.ReplyRequest(
+DamageCreate"Xlib.protocol.rq.Request)
+DamageDestroy"Xlib.protocol.rq.Request*
+DamageSubtract"Xlib.protocol.rq.Request%
+	DamageAdd"Xlib.protocol.rq.Request&
+DamageNotify"Xlib.protocol.rq.Event
+query_version*
 
-damage_addXlib.ext.damage.damage_add"
-None*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-repair
-builtins.int"builtins.int*'
-parts
-builtins.int"builtins.intz310z311z312z313z314Ï
-initXlib.ext.damage.init"
-None*6
-disp,
-Xlib.display.Display"Xlib.display.Display*V
-infoL
-$Xlib.protocol.request.QueryExtension"$Xlib.protocol.request.QueryExtensionz310z311z312z313z314*¤
-__annotations__Xlib.ext.damage.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Y
-extnameXlib.ext.damage.extname
-builtins.str"builtins.str*310*311*312*313*314*k
-DamageNotifyCode Xlib.ext.damage.DamageNotifyCode
-builtins.int"builtins.int*310*311*312*313*314*e
-BadDamageCodeXlib.ext.damage.BadDamageCode
-builtins.int"builtins.int*310*311*312*313*314*}
-DamageReportRawRectangles)Xlib.ext.damage.DamageReportRawRectangles
-builtins.int"builtins.int*310*311*312*313*314*
-DamageReportDeltaRectangles+Xlib.ext.damage.DamageReportDeltaRectangles
-builtins.int"builtins.int*310*311*312*313*314*y
-DamageReportBoundingBox'Xlib.ext.damage.DamageReportBoundingBox
-builtins.int"builtins.int*310*311*312*313*314*s
-DamageReportNonEmpty$Xlib.ext.damage.DamageReportNonEmpty
-builtins.int"builtins.int*310*311*312*313*314*˜
-DamageReportLevel!Xlib.ext.damage.DamageReportLevelÆ
-^Tuple[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314
+self(*
+damage_create*
+
+self(*
+level(,
+damage_destroy*
+
+self(*
+damage(L
+damage_subtract*
+
+self(*
+damage(*
+repair (*
+parts (5
+
+damage_add*
+
+self(*
+repair(*
+parts( 
+init*
+
+disp(*
+
+info(*
+__annotations__0	*
+extname0*
+DamageNotifyCode0*
+BadDamageCode0*
+DamageReportRawRectangles0*
+DamageReportDeltaRectangles0*
+DamageReportBoundingBox0*
+DamageReportNonEmpty0*
+DamageReportLevel02"Xlib.ext.damage.QueryVersion2"Xlib.display.Display2222"builtins.int22&"$Xlib.protocol.request.QueryExtension2"builtins.str2"builtins.dict22	222
+
+
+

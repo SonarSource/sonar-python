@@ -1,213 +1,137 @@
 
-bs4.builderû
-TreeBuilderRegistrybs4.builder.TreeBuilderRegistry"builtins.object*¥
-__init__(bs4.builder.TreeBuilderRegistry.__init__"
-None*L
-selfB
-bs4.builder.TreeBuilderRegistry"bs4.builder.TreeBuilderRegistryz310z311z312z313z314*Å
-register(bs4.builder.TreeBuilderRegistry.register"
-None*L
-selfB
-bs4.builder.TreeBuilderRegistry"bs4.builder.TreeBuilderRegistry*
-treebuilder_class
-Anyz310z311z312z313z314*a
-lookup&bs4.builder.TreeBuilderRegistry.lookup*
-self*
-featuresz310z311z312z313z314j310j311j312j313j314rn
-builders_for_feature4bs4.builder.TreeBuilderRegistry.builders_for_feature
-Any*310*311*312*313*314rV
-builders(bs4.builder.TreeBuilderRegistry.builders
-Any*310*311*312*313*314¼
-TreeBuilderbs4.builder.TreeBuilder"builtins.object*£
-__init__ bs4.builder.TreeBuilder.__init__"
-None*<
-self2
-bs4.builder.TreeBuilder"bs4.builder.TreeBuilder*&
-multi_valued_attributes
-Any *'
-preserve_whitespace_tags
-Any *!
-store_line_numbers
-Any * 
-string_containers
-Any z310z311z312z313z314*®
-initialize_soup'bs4.builder.TreeBuilder.initialize_soup"
-None*<
-self2
-bs4.builder.TreeBuilder"bs4.builder.TreeBuilder*
-soup
-Anyz310z311z312z313z314*‡
-resetbs4.builder.TreeBuilder.reset"
-None*<
-self2
-bs4.builder.TreeBuilder"bs4.builder.TreeBuilderz310z311z312z313z314*u
-can_be_empty_element,bs4.builder.TreeBuilder.can_be_empty_element*
-self*
-tag_namez310z311z312z313z314*š
-feedbs4.builder.TreeBuilder.feed"
-None*<
-self2
-bs4.builder.TreeBuilder"bs4.builder.TreeBuilder*
-markup
-Anyz310z311z312z313z314*Ÿ
-prepare_markup&bs4.builder.TreeBuilder.prepare_markup"
-None*<
-self2
-bs4.builder.TreeBuilder"bs4.builder.TreeBuilder*
-markup
-Any*z
-user_specified_encoding[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *}
-document_declared_encoding[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *t
-exclude_encodings[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*
-test_fragment_to_document1bs4.builder.TreeBuilder.test_fragment_to_document*
-self*
-fragmentz310z311z312z313z314*p
-set_up_substitutions,bs4.builder.TreeBuilder.set_up_substitutions*
-self*
-tagz310z311z312z313z314j310j311j312j313j314r[
-NAMEbs4.builder.TreeBuilder.NAME
-builtins.str"builtins.str*310*311*312*313*314r\
-ALTERNATE_NAMES'bs4.builder.TreeBuilder.ALTERNATE_NAMES
-Any*310*311*312*313*314rN
-features bs4.builder.TreeBuilder.features
-Any*310*311*312*313*314ra
-is_xmlbs4.builder.TreeBuilder.is_xml
-builtins.bool"builtins.bool*310*311*312*313*314rg
-	picklable!bs4.builder.TreeBuilder.picklable
-builtins.bool"builtins.bool*310*311*312*313*314rb
-empty_element_tags*bs4.builder.TreeBuilder.empty_element_tags
-Any*310*311*312*313*314rx
-DEFAULT_CDATA_LIST_ATTRIBUTES5bs4.builder.TreeBuilder.DEFAULT_CDATA_LIST_ATTRIBUTES
-Any*310*311*312*313*314r~
- DEFAULT_PRESERVE_WHITESPACE_TAGS8bs4.builder.TreeBuilder.DEFAULT_PRESERVE_WHITESPACE_TAGS
-Any*310*311*312*313*314rp
-DEFAULT_STRING_CONTAINERS1bs4.builder.TreeBuilder.DEFAULT_STRING_CONTAINERS
-Any*310*311*312*313*314rT
-USE_DEFAULT#bs4.builder.TreeBuilder.USE_DEFAULT
-Any*310*311*312*313*314r{
-TRACKS_LINE_NUMBERS+bs4.builder.TreeBuilder.TRACKS_LINE_NUMBERS
-builtins.bool"builtins.bool*310*311*312*313*314rF
-soupbs4.builder.TreeBuilder.soup
-Any*310*311*312*313*314rh
-cdata_list_attributes-bs4.builder.TreeBuilder.cdata_list_attributes
-Any*310*311*312*313*314rn
-preserve_whitespace_tags0bs4.builder.TreeBuilder.preserve_whitespace_tags
-Any*310*311*312*313*314rb
-store_line_numbers*bs4.builder.TreeBuilder.store_line_numbers
-Any*310*311*312*313*314r`
-string_containers)bs4.builder.TreeBuilder.string_containers
-Any*310*311*312*313*314Ð
-SAXTreeBuilderbs4.builder.SAXTreeBuilder"bs4.builder.TreeBuilder*£
-feedbs4.builder.SAXTreeBuilder.feed"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-markup
-Anyz310z311z312z313z314*
-close bs4.builder.SAXTreeBuilder.close"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilderz310z311z312z313z314*Å
-startElement'bs4.builder.SAXTreeBuilder.startElement"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-name
-Any*
-attrs
-Anyz310z311z312z313z314*­
+bs4.builder½
+TreeBuilderRegistry"builtins.object*
+__init__*
 
-endElement%bs4.builder.SAXTreeBuilder.endElement"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-name
-Anyz310z311z312z313z314*ã
-startElementNS)bs4.builder.SAXTreeBuilder.startElementNS"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-nsTuple
-Any*
-nodeName
-Any*
-attrs
-Anyz310z311z312z313z314*Ë
-endElementNS'bs4.builder.SAXTreeBuilder.endElementNS"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-nsTuple
-Any*
-nodeName
-Anyz310z311z312z313z314*×
-startPrefixMapping-bs4.builder.SAXTreeBuilder.startPrefixMapping"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-prefix
-Any*
-	nodeValue
-Anyz310z311z312z313z314*»
-endPrefixMapping+bs4.builder.SAXTreeBuilder.endPrefixMapping"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-prefix
-Anyz310z311z312z313z314*°
+self(*1
+register*
 
-characters%bs4.builder.SAXTreeBuilder.characters"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilder*
-content
-Anyz310z311z312z313z314* 
-startDocument(bs4.builder.SAXTreeBuilder.startDocument"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilderz310z311z312z313z314*œ
-endDocument&bs4.builder.SAXTreeBuilder.endDocument"
-None*B
-self8
-bs4.builder.SAXTreeBuilder"bs4.builder.SAXTreeBuilderz310z311z312z313z314j310j311j312j313j314—
-HTMLTreeBuilderbs4.builder.HTMLTreeBuilder"bs4.builder.TreeBuilder*t
-set_up_substitutions0bs4.builder.HTMLTreeBuilder.set_up_substitutions*
+self(*
+treebuilder_class(* 
+lookup*
+self*
+featuresr
+builders_for_feature0r
+builders0ž
+TreeBuilder"builtins.object*’
+__init__*
+
+self(*
+multi_valued_attributes (* 
+preserve_whitespace_tags (*
+store_line_numbers (*
+string_containers (*+
+initialize_soup*
+
+self(*
+
+soup(*
+reset*
+
+self(*.
+can_be_empty_element*
+self*
+tag_name*"
+feed*
+
+self(*
+markup(*Œ
+prepare_markup*
+
+self(*
+markup(*
+user_specified_encoding (*"
+document_declared_encoding (*
+exclude_encodings (*3
+test_fragment_to_document*
+self*
+fragment*)
+set_up_substitutions*
 self*
-tagz310z311z312z313z314j310j311j312j313j314rf
-empty_element_tags.bs4.builder.HTMLTreeBuilder.empty_element_tags
-Any*310*311*312*313*314r^
-block_elements*bs4.builder.HTMLTreeBuilder.block_elements
-Any*310*311*312*313*314rt
-DEFAULT_STRING_CONTAINERS5bs4.builder.HTMLTreeBuilder.DEFAULT_STRING_CONTAINERS
-Any*310*311*312*313*314r|
-DEFAULT_CDATA_LIST_ATTRIBUTES9bs4.builder.HTMLTreeBuilder.DEFAULT_CDATA_LIST_ATTRIBUTES
-Any*310*311*312*313*314r‚
- DEFAULT_PRESERVE_WHITESPACE_TAGS<bs4.builder.HTMLTreeBuilder.DEFAULT_PRESERVE_WHITESPACE_TAGS
-Any*310*311*312*313*314³
-ParserRejectedMarkup bs4.builder.ParserRejectedMarkup"builtins.Exception*Ë
-__init__)bs4.builder.ParserRejectedMarkup.__init__"
-None*N
-selfD
- bs4.builder.ParserRejectedMarkup" bs4.builder.ParserRejectedMarkup*!
-message_or_exception
-Anyz310z311z312z313z314j310j311j312j313j314k
-XMLParsedAsHTMLWarning"bs4.builder.XMLParsedAsHTMLWarning"builtins.UserWarningj310j311j312j313j314*…
-__path__bs4.builder.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314* 
-__annotations__bs4.builder.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+tagr
+NAME0r
+ALTERNATE_NAMES0r
+features0r
+
+is_xml0r
+	picklable0r
+empty_element_tags0r!
+DEFAULT_CDATA_LIST_ATTRIBUTES0r$
+ DEFAULT_PRESERVE_WHITESPACE_TAGS0r
+DEFAULT_STRING_CONTAINERS0r
+USE_DEFAULT0r
+TRACKS_LINE_NUMBERS0r
+soup0r
+cdata_list_attributes0r
+preserve_whitespace_tags0r
+store_line_numbers0r
+string_containers0¦
+SAXTreeBuilder"bs4.builder.TreeBuilder*"
+feed*
+
+self(	*
+markup(*
+close*
+
+self(	*5
+startElement*
+
+self(	*
+
+name(*
+attrs(*&
+
+endElement*
+
+self(	*
+
+name(*J
+startElementNS*
+
+self(	*
+nsTuple(*
+nodeName(*
+attrs(*;
+endElementNS*
+
+self(	*
+nsTuple(*
+nodeName(*A
+startPrefixMapping*
+
+self(	*
+prefix(*
+	nodeValue(*.
+endPrefixMapping*
+
+self(	*
+prefix(*)
+
+characters*
+
+self(	*
+content(*
+startDocument*
+
+self(	*
+endDocument*
+
+self(	é
+HTMLTreeBuilder"bs4.builder.TreeBuilder*)
+set_up_substitutions*
+self*
+tagr
+empty_element_tags0r
+block_elements0r
+DEFAULT_STRING_CONTAINERS0r!
+DEFAULT_CDATA_LIST_ATTRIBUTES0r$
+ DEFAULT_PRESERVE_WHITESPACE_TAGS0`
+ParserRejectedMarkup"builtins.Exception*4
+__init__*
+
+self(
+*
+message_or_exception(.
+XMLParsedAsHTMLWarning"builtins.UserWarning*
+__path__0*
+__annotations__022!"bs4.builder.TreeBuilderRegistry22"bs4.builder.TreeBuilder2"_typeshed.Incomplete2222"builtins.str2"builtins.bool2"bs4.builder.SAXTreeBuilder2"" bs4.builder.ParserRejectedMarkup2"builtins.list22"builtins.dict2

@@ -1,321 +1,148 @@
 
-asyncio.streams§
-FlowControlMixin asyncio.streams.FlowControlMixin"asyncio.protocols.Protocol*∏
-__init__)asyncio.streams.FlowControlMixin.__init__"
-None*N
-selfD
- asyncio.streams.FlowControlMixin" asyncio.streams.FlowControlMixin*ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None z310z311z312z313z314j310j311j312j313j314∂
-StreamReaderProtocol$asyncio.streams.StreamReaderProtocol" asyncio.streams.FlowControlMixin"asyncio.protocols.Protocol*†
-__init__-asyncio.streams.StreamReaderProtocol.__init__"
-None*V
-selfL
-$asyncio.streams.StreamReaderProtocol"$asyncio.streams.StreamReaderProtocol*O
-stream_reader<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*à
-client_connected_cbÏ
-6Union[TypeAlias[CallableType[builtins.function]],None]•
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"(asyncio.streams._ClientConnectedCallback
-None *ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None z310z311z312z313z314j310j311j312j313j314÷
-StreamWriterasyncio.streams.StreamWriter"builtins.object*ñ
-__init__%asyncio.streams.StreamWriter.__init__"
-None*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*U
-	transportF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*N
-protocol@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*Ä
-readert
-(Union[asyncio.streams.StreamReader,None]<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader
-None*N
-loopD
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoopz310z311z312z313z314*Û
-	transport&asyncio.streams.StreamWriter.transport"F
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter0:builtins.property`z310z311z312z313z314*‹
-write"asyncio.streams.StreamWriter.write"
-None*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*√
-data∏
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryviewz310z311z312z313z314*…
+asyncio.streamsV
+FlowControlMixin"asyncio.protocols.Protocol*&
+__init__*
 
-writelines'asyncio.streams.StreamWriter.writelines"
-None*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*¶
-dataõ
-Mtyping.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview]]∏
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview"typing.Iterablez310z311z312z313z314*û
-	write_eof&asyncio.streams.StreamWriter.write_eof"
-None*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterz310z311z312z313z314*º
-can_write_eof*asyncio.streams.StreamWriter.can_write_eof"
-builtins.bool"builtins.bool*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterz310z311z312z313z314*ñ
-close"asyncio.streams.StreamWriter.close"
-None*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterz310z311z312z313z314*∂
+self(*
+loop (Æ
+StreamReaderProtocol" asyncio.streams.FlowControlMixin"asyncio.protocols.Protocol*X
+__init__*
 
-is_closing'asyncio.streams.StreamWriter.is_closing"
-builtins.bool"builtins.bool*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterz310z311z312z313z314*Í
-wait_closed(asyncio.streams.StreamWriter.wait_closed"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterHz310z311z312z313z314*Á
-get_extra_info+asyncio.streams.StreamWriter.get_extra_info"
-Any*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*&
-name
-builtins.str"builtins.str*
-default
-Any z310z311z312z313z314*ﬁ
-drain"asyncio.streams.StreamWriter.drain"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterHz310z311z312z313z314*Ÿ
-	start_tls&asyncio.streams.StreamWriter.start_tls"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*F
-self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*0
+self(*
+stream_reader(*
+client_connected_cb (
+*
+loop (Œ
+StreamWriter"builtins.object*S
+__init__*
 
-sslcontext 
-ssl.SSLContext"ssl.SSLContext*[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None Hz311z312z313z314j310j311j312j313j314Ñ
-StreamReaderasyncio.streams.StreamReader"typing.AsyncIterator*◊
-__init__%asyncio.streams.StreamReader.__init__"
-None*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*)
-limit
-builtins.int"builtins.int *ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None z310z311z312z313z314*æ
-	exception&asyncio.streams.StreamReader.exception"(
-builtins.Exception"builtins.Exception*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderz310z311z312z313z314*Ÿ
-set_exception*asyncio.streams.StreamReader.set_exception"
-None*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*1
-exc(
-builtins.Exception"builtins.Exceptionz310z311z312z313z314*˚
-set_transport*asyncio.streams.StreamReader.set_transport"
-None*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*S
-	transportD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransportz310z311z312z313z314*ú
-feed_eof%asyncio.streams.StreamReader.feed_eof"
-None*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderz310z311z312z313z314*Æ
-at_eof#asyncio.streams.StreamReader.at_eof"
-builtins.bool"builtins.bool*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderz310z311z312z313z314*≥
-	feed_data&asyncio.streams.StreamReader.feed_data"
-None*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*í
-dataá
-0typing.Iterable[typing_extensions.SupportsIndex]B
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"typing.Iterablez310z311z312z313z314*Ü
-readline%asyncio.streams.StreamReader.readline"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderHz310z311z312z313z314*’
-	readuntil&asyncio.streams.StreamReader.readuntil"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader* 
-	separator∏
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview Hz310z311z312z313z314*•
-read!asyncio.streams.StreamReader.read"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*%
-n
-builtins.int"builtins.int Hz310z311z312z313z314*±
-readexactly(asyncio.streams.StreamReader.readexactly"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*#
-n
-builtins.int"builtins.intHz310z311z312z313z314*„
-	__aiter__&asyncio.streams.StreamReader.__aiter__"É
-!asyncio.streams.StreamReader.Self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader"asyncio.streams.StreamReader(*é
-selfÉ
-!asyncio.streams.StreamReader.Self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader"asyncio.streams.StreamReader(z310z311z312z313z314*à
-	__anext__&asyncio.streams.StreamReader.__anext__"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*F
-self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderHz310z311z312z313z314j310j311j312j313j314â
-open_connectionasyncio.streams.open_connection"√
-Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]
-Any
-Any¿
-@Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter"typing.Coroutine*P
-hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *{
-porto
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *)
-limit
-builtins.int"builtins.int *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *
-kwds
-AnyHz310z311z312z313z314Ü
-start_serverasyncio.streams.start_server"î
-4typing.Coroutine[Any,Any,asyncio.base_events.Server]
-Any
-Any8
-asyncio.base_events.Server"asyncio.base_events.Server"typing.Coroutine*ø
-client_connected_cb•
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"(asyncio.streams._ClientConnectedCallback*ø
-host≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *{
-porto
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *)
-limit
-builtins.int"builtins.int *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *
-kwds
-AnyHz310z311z312z313z314©
-open_unix_connection$asyncio.streams.open_unix_connection"√
-Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]
-Any
-Any¿
-@Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter"typing.Coroutine*À
-pathæ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *)
-limit
-builtins.int"builtins.int *
-kwds
-AnyHz310z311z312z313z314∂
-start_unix_server!asyncio.streams.start_unix_server"î
-4typing.Coroutine[Any,Any,asyncio.base_events.Server]
-Any
-Any8
-asyncio.base_events.Server"asyncio.base_events.Server"typing.Coroutine*ø
-client_connected_cb•
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"(asyncio.streams._ClientConnectedCallback*À
-pathæ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *)
-limit
-builtins.int"builtins.int *
-kwds
-AnyHz310z311z312z313z314*§
-__annotations__asyncio.streams.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ı
-__all__asyncio.streams.__all__∑
-aTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str*310*311*312*313*314
+self(*
+	transport(*
+protocol(*
+reader(*
+
+loop(*0
+	transport*
+
+self(0:builtins.property`*!
+write*
+
+self(*
+
+data(*&
+
+writelines*
+
+self(*
+
+data(*
+	write_eof*
+
+self(*
+can_write_eof*
+
+self(*
+close*
+
+self(*
+
+is_closing*
+
+self(*
+wait_closed*
+
+self(H*;
+get_extra_info*
+
+self(*
+
+name(*
+default (*
+drain*
+
+self(H*y
+	start_tls*
+
+self(*
+
+sslcontext(*
+server_hostname (*
+ssl_handshake_timeout (Hz311z312z313z314¯
+StreamReader"typing.AsyncIterator*5
+__init__*
+
+self(*
+limit (*
+loop (*
+	exception*
+
+self(*(
+set_exception*
+
+self(*	
+exc(*.
+set_transport*
+
+self(*
+	transport(*
+feed_eof*
+
+self(*
+at_eof*
+
+self(*%
+	feed_data*
+
+self(*
+
+data( *
+readline!*
+
+self(H*.
+	readuntil!*
+
+self(*
+	separator (H*!
+read!*
+
+self(*	
+n (H*&
+readexactly!*
+
+self(*
+n(H*
+	__aiter__"*
+
+self("*
+	__anext__!*
+
+self(Hk
+open_connection$*
+host (*
+port (%*
+limit (*
+ssl_handshake_timeout (*
+
+kwds(HÉ
+start_server'*
+client_connected_cb(	*
+host ()*
+port (%*
+limit (*
+ssl_handshake_timeout (*
+
+kwds(HC
+open_unix_connection$*
+path (-*
+limit (*
+
+kwds(H[
+start_unix_server'*
+client_connected_cb(	*
+path (-*
+limit (*
+
+kwds(H*
+__annotations__0.*
+__all__0/22"" asyncio.streams.FlowControlMixin2"" asyncio.events.AbstractEventLoop222&"$asyncio.streams.StreamReaderProtocol2"asyncio.streams.StreamReader2"builtins.function222/"(asyncio.streams._ClientConnectedCallback222	2"asyncio.streams.StreamWriter2#"!asyncio.transports.WriteTransport2 "asyncio.protocols.BaseProtocol222"builtins.bytes2"builtins.bytearray2"builtins.memoryview222"typing.Iterable22"builtins.bool22"typing.Coroutine22"builtins.str2"ssl.SSLContext222"builtins.float222"builtins.int2"builtins.Exception2"" asyncio.transports.BaseTransport2!"typing_extensions.SupportsIndex2"typing.Iterable22"typing.Coroutine22H
+!asyncio.streams.StreamReader.Self"asyncio.streams.StreamReader(2222"typing.Coroutine2#222"asyncio.base_events.Server2"typing.Coroutine2&2"typing.Sequence222(2"os.PathLike222*2"_typeshed.StrPath2+22,2"builtins.dict222

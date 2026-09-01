@@ -1,473 +1,245 @@
 
-sqlalchemy.dialects.mysql.types
-_NumericType,sqlalchemy.dialects.mysql.types._NumericType"builtins.object*Ω
-__init__5sqlalchemy.dialects.mysql.types._NumericType.__init__"
-None*f
-self\
-,sqlalchemy.dialects.mysql.types._NumericType",sqlalchemy.dialects.mysql.types._NumericType*.
-unsigned
-builtins.bool"builtins.bool *.
-zerofill
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rc
-unsigned5sqlalchemy.dialects.mysql.types._NumericType.unsigned
-Any*310*311*312*313*314rc
-zerofill5sqlalchemy.dialects.mysql.types._NumericType.zerofill
-Any*310*311*312*313*314ﬁ
+sqlalchemy.dialects.mysql.typesÉ
+_NumericType"builtins.object*F
+__init__*
 
-_FloatType*sqlalchemy.dialects.mysql.types._FloatType",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.Float*‡
-__init__3sqlalchemy.dialects.mysql.types._FloatType.__init__"
-None*b
-selfX
-*sqlalchemy.dialects.mysql.types._FloatType"*sqlalchemy.dialects.mysql.types._FloatType*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r[
-scale0sqlalchemy.dialects.mysql.types._FloatType.scale
-Any*310*311*312*313*314Â
-_IntegerType,sqlalchemy.dialects.mysql.types._IntegerType",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.Integer*œ
-__init__5sqlalchemy.dialects.mysql.types._IntegerType.__init__"
-None*f
-self\
-,sqlalchemy.dialects.mysql.types._IntegerType",sqlalchemy.dialects.mysql.types._IntegerType*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rm
-display_width:sqlalchemy.dialects.mysql.types._IntegerType.display_width
-Any*310*311*312*313*314 	
-_StringType+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.String*Ó
-__init__4sqlalchemy.dialects.mysql.types._StringType.__init__"
-None*d
-selfZ
-+sqlalchemy.dialects.mysql.types._StringType"+sqlalchemy.dialects.mysql.types._StringType*j
-charset[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	collation[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *+
-ascii
-builtins.bool"builtins.bool *,
-binary
-builtins.bool"builtins.bool *-
-unicode
-builtins.bool"builtins.bool *.
-national
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r`
-charset3sqlalchemy.dialects.mysql.types._StringType.charset
-Any*310*311*312*313*314r\
-ascii1sqlalchemy.dialects.mysql.types._StringType.ascii
-Any*310*311*312*313*314r`
-unicode3sqlalchemy.dialects.mysql.types._StringType.unicode
-Any*310*311*312*313*314r^
-binary2sqlalchemy.dialects.mysql.types._StringType.binary
-Any*310*311*312*313*314rb
-national4sqlalchemy.dialects.mysql.types._StringType.national
-Any*310*311*312*313*314Ì
+self(*
+unsigned (*
+zerofill (*
+kw(r
+unsigned0r
+zerofill0Ω
 
-_MatchType*sqlalchemy.dialects.mysql.types._MatchType"sqlalchemy.sql.sqltypes.Float"!sqlalchemy.sql.sqltypes.MatchType*◊
-__init__3sqlalchemy.dialects.mysql.types._MatchType.__init__"
-None*b
-selfX
-*sqlalchemy.dialects.mysql.types._MatchType"*sqlalchemy.dialects.mysql.types._MatchType*
-kw
-Anyz310z311z312z313z314j310j311j312j313j314ı
-NUMERIC'sqlalchemy.dialects.mysql.types.NUMERIC",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.NUMERIC*◊
-__init__0sqlalchemy.dialects.mysql.types.NUMERIC.__init__"
-None*\
-selfR
-'sqlalchemy.dialects.mysql.types.NUMERIC"'sqlalchemy.dialects.mysql.types.NUMERIC*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r
-__visit_name__6sqlalchemy.dialects.mysql.types.NUMERIC.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ı
-DECIMAL'sqlalchemy.dialects.mysql.types.DECIMAL",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.DECIMAL*◊
-__init__0sqlalchemy.dialects.mysql.types.DECIMAL.__init__"
-None*\
-selfR
-'sqlalchemy.dialects.mysql.types.DECIMAL"'sqlalchemy.dialects.mysql.types.DECIMAL*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r
-__visit_name__6sqlalchemy.dialects.mysql.types.DECIMAL.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ã
-DOUBLE&sqlalchemy.dialects.mysql.types.DOUBLE"*sqlalchemy.dialects.mysql.types._FloatType*‘
-__init__/sqlalchemy.dialects.mysql.types.DOUBLE.__init__"
-None*Z
-selfP
-&sqlalchemy.dialects.mysql.types.DOUBLE"&sqlalchemy.dialects.mysql.types.DOUBLE*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r~
-__visit_name__5sqlalchemy.dialects.mysql.types.DOUBLE.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ﬁ
-REAL$sqlalchemy.dialects.mysql.types.REAL"*sqlalchemy.dialects.mysql.types._FloatType"sqlalchemy.sql.sqltypes.REAL*Œ
-__init__-sqlalchemy.dialects.mysql.types.REAL.__init__"
-None*V
-selfL
-$sqlalchemy.dialects.mysql.types.REAL"$sqlalchemy.dialects.mysql.types.REAL*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r|
-__visit_name__3sqlalchemy.dialects.mysql.types.REAL.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314¡
-FLOAT%sqlalchemy.dialects.mysql.types.FLOAT"*sqlalchemy.dialects.mysql.types._FloatType"sqlalchemy.sql.sqltypes.FLOAT*—
-__init__.sqlalchemy.dialects.mysql.types.FLOAT.__init__"
-None*X
-selfN
-%sqlalchemy.dialects.mysql.types.FLOAT"%sqlalchemy.dialects.mysql.types.FLOAT*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314*Ÿ
-bind_processor4sqlalchemy.dialects.mysql.types.FLOAT.bind_processor"
-None*X
-selfN
-%sqlalchemy.dialects.mysql.types.FLOAT"%sqlalchemy.dialects.mysql.types.FLOAT*
-dialect
-Anyz310z311z312z313z314j310j311j312j313j314r}
-__visit_name__4sqlalchemy.dialects.mysql.types.FLOAT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ﬁ
-INTEGER'sqlalchemy.dialects.mysql.types.INTEGER",sqlalchemy.dialects.mysql.types._IntegerType"sqlalchemy.sql.sqltypes.INTEGER*¿
-__init__0sqlalchemy.dialects.mysql.types.INTEGER.__init__"
-None*\
-selfR
-'sqlalchemy.dialects.mysql.types.INTEGER"'sqlalchemy.dialects.mysql.types.INTEGER*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r
-__visit_name__6sqlalchemy.dialects.mysql.types.INTEGER.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314◊
-BIGINT&sqlalchemy.dialects.mysql.types.BIGINT",sqlalchemy.dialects.mysql.types._IntegerType"sqlalchemy.sql.sqltypes.BIGINT*Ω
-__init__/sqlalchemy.dialects.mysql.types.BIGINT.__init__"
-None*Z
-selfP
-&sqlalchemy.dialects.mysql.types.BIGINT"&sqlalchemy.dialects.mysql.types.BIGINT*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r~
-__visit_name__5sqlalchemy.dialects.mysql.types.BIGINT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314 
-	MEDIUMINT)sqlalchemy.dialects.mysql.types.MEDIUMINT",sqlalchemy.dialects.mysql.types._IntegerType*∆
-__init__2sqlalchemy.dialects.mysql.types.MEDIUMINT.__init__"
-None*`
-selfV
-)sqlalchemy.dialects.mysql.types.MEDIUMINT")sqlalchemy.dialects.mysql.types.MEDIUMINT*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rÅ
-__visit_name__8sqlalchemy.dialects.mysql.types.MEDIUMINT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ω
-TINYINT'sqlalchemy.dialects.mysql.types.TINYINT",sqlalchemy.dialects.mysql.types._IntegerType*¿
-__init__0sqlalchemy.dialects.mysql.types.TINYINT.__init__"
-None*\
-selfR
-'sqlalchemy.dialects.mysql.types.TINYINT"'sqlalchemy.dialects.mysql.types.TINYINT*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r
-__visit_name__6sqlalchemy.dialects.mysql.types.TINYINT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ê
-SMALLINT(sqlalchemy.dialects.mysql.types.SMALLINT",sqlalchemy.dialects.mysql.types._IntegerType" sqlalchemy.sql.sqltypes.SMALLINT*√
-__init__1sqlalchemy.dialects.mysql.types.SMALLINT.__init__"
-None*^
-selfT
-(sqlalchemy.dialects.mysql.types.SMALLINT"(sqlalchemy.dialects.mysql.types.SMALLINT*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.SMALLINT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314„
-BIT#sqlalchemy.dialects.mysql.types.BIT""sqlalchemy.sql.type_api.TypeEngine*ú
-__init__,sqlalchemy.dialects.mysql.types.BIT.__init__"
-None*T
-selfJ
-#sqlalchemy.dialects.mysql.types.BIT"#sqlalchemy.dialects.mysql.types.BIT*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ö
-result_processor4sqlalchemy.dialects.mysql.types.BIT.result_processor*
+_FloatType",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.Float*W
+__init__*
+
+self(*
+	precision (*
+scale (*
+	asdecimal (*
+kw(r	
+scale0´
+_IntegerType",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.Integer*9
+__init__*
+
+self(*
+display_width (*
+kw(r
+display_width0˜
+_StringType"sqlalchemy.sql.sqltypes.String*à
+__init__*
+
+self(	*
+charset (*
+	collation (*
+ascii (*
+binary (*
+unicode (*
+national (*
+kw(r
+charset0r	
+ascii0r
+unicode0r
+
+binary0r
+national0r
+
+_MatchType"sqlalchemy.sql.sqltypes.Float"!sqlalchemy.sql.sqltypes.MatchType*"
+__init__*
+
+self(
+*
+kw(≈
+NUMERIC",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.NUMERIC*W
+__init__*
+
+self(*
+	precision (*
+scale (*
+	asdecimal (*
+kw(r
+__visit_name__0≈
+DECIMAL",sqlalchemy.dialects.mysql.types._NumericType"sqlalchemy.sql.sqltypes.DECIMAL*W
+__init__*
+
+self(*
+	precision (*
+scale (*
+	asdecimal (*
+kw(r
+__visit_name__0°
+DOUBLE"*sqlalchemy.dialects.mysql.types._FloatType*W
+__init__*
+
+self(*
+	precision (*
+scale (*
+	asdecimal (*
+kw(r
+__visit_name__0Ω
+REAL"*sqlalchemy.dialects.mysql.types._FloatType"sqlalchemy.sql.sqltypes.REAL*W
+__init__*
+
+self(*
+	precision (*
+scale (*
+	asdecimal (*
+kw(r
+__visit_name__0Ó
+FLOAT"*sqlalchemy.dialects.mysql.types._FloatType"sqlalchemy.sql.sqltypes.FLOAT*W
+__init__*
+
+self(*
+	precision (*
+scale (*
+	asdecimal (*
+kw(*-
+bind_processor*
+
+self(*
+dialect(r
+__visit_name__0ß
+INTEGER",sqlalchemy.dialects.mysql.types._IntegerType"sqlalchemy.sql.sqltypes.INTEGER*9
+__init__*
+
+self(*
+display_width (*
+kw(r
+__visit_name__0•
+BIGINT",sqlalchemy.dialects.mysql.types._IntegerType"sqlalchemy.sql.sqltypes.BIGINT*9
+__init__*
+
+self(*
+display_width (*
+kw(r
+__visit_name__0à
+	MEDIUMINT",sqlalchemy.dialects.mysql.types._IntegerType*9
+__init__*
+
+self(*
+display_width (*
+kw(r
+__visit_name__0Ü
+TINYINT",sqlalchemy.dialects.mysql.types._IntegerType*9
+__init__*
+
+self(*
+display_width (*
+kw(r
+__visit_name__0©
+SMALLINT",sqlalchemy.dialects.mysql.types._IntegerType" sqlalchemy.sql.sqltypes.SMALLINT*9
+__init__*
+
+self(*
+display_width (*
+kw(r
+__visit_name__0´
+BIT""sqlalchemy.sql.type_api.TypeEngine*(
+__init__*
+
+self(*
+length (*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314j310j311j312j313j314r{
-__visit_name__2sqlalchemy.dialects.mysql.types.BIT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rV
-length*sqlalchemy.dialects.mysql.types.BIT.length
-Any*310*311*312*313*314å
-TIME$sqlalchemy.dialects.mysql.types.TIME"sqlalchemy.sql.sqltypes.TIME*Ã
-__init__-sqlalchemy.dialects.mysql.types.TIME.__init__"
-None*V
-selfL
-$sqlalchemy.dialects.mysql.types.TIME"$sqlalchemy.dialects.mysql.types.TIME*.
-timezone
-builtins.bool"builtins.bool *f
-fsp[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ü
-result_processor5sqlalchemy.dialects.mysql.types.TIME.result_processor*
+coltyper
+__visit_name__0r
+
+length0≤
+TIME"sqlalchemy.sql.sqltypes.TIME*7
+__init__*
+
+self(*
+timezone (*
+fsp (*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314j310j311j312j313j314r|
-__visit_name__3sqlalchemy.dialects.mysql.types.TIME.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rQ
-fsp(sqlalchemy.dialects.mysql.types.TIME.fsp
-Any*310*311*312*313*314¨
-	TIMESTAMP)sqlalchemy.dialects.mysql.types.TIMESTAMP"!sqlalchemy.sql.sqltypes.TIMESTAMP*€
-__init__2sqlalchemy.dialects.mysql.types.TIMESTAMP.__init__"
-None*`
-selfV
-)sqlalchemy.dialects.mysql.types.TIMESTAMP")sqlalchemy.dialects.mysql.types.TIMESTAMP*.
-timezone
-builtins.bool"builtins.bool *f
-fsp[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rÅ
-__visit_name__8sqlalchemy.dialects.mysql.types.TIMESTAMP.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rV
-fsp-sqlalchemy.dialects.mysql.types.TIMESTAMP.fsp
-Any*310*311*312*313*314§
-DATETIME(sqlalchemy.dialects.mysql.types.DATETIME" sqlalchemy.sql.sqltypes.DATETIME*ÿ
-__init__1sqlalchemy.dialects.mysql.types.DATETIME.__init__"
-None*^
-selfT
-(sqlalchemy.dialects.mysql.types.DATETIME"(sqlalchemy.dialects.mysql.types.DATETIME*.
-timezone
-builtins.bool"builtins.bool *f
-fsp[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.DATETIME.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rU
-fsp,sqlalchemy.dialects.mysql.types.DATETIME.fsp
-Any*310*311*312*313*314˜
-YEAR$sqlalchemy.dialects.mysql.types.YEAR""sqlalchemy.sql.type_api.TypeEngine*¶
-__init__-sqlalchemy.dialects.mysql.types.YEAR.__init__"
-None*V
-selfL
-$sqlalchemy.dialects.mysql.types.YEAR"$sqlalchemy.dialects.mysql.types.YEAR*p
-display_width[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314r|
-__visit_name__3sqlalchemy.dialects.mysql.types.YEAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314re
-display_width2sqlalchemy.dialects.mysql.types.YEAR.display_width
-Any*310*311*312*313*314¡
-TEXT$sqlalchemy.dialects.mysql.types.TEXT"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.TEXT*∞
-__init__-sqlalchemy.dialects.mysql.types.TEXT.__init__"
-None*V
-selfL
-$sqlalchemy.dialects.mysql.types.TEXT"$sqlalchemy.dialects.mysql.types.TEXT*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r|
-__visit_name__3sqlalchemy.dialects.mysql.types.TEXT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314’
-TINYTEXT(sqlalchemy.dialects.mysql.types.TINYTEXT"+sqlalchemy.dialects.mysql.types._StringType*’
-__init__1sqlalchemy.dialects.mysql.types.TINYTEXT.__init__"
-None*^
-selfT
-(sqlalchemy.dialects.mysql.types.TINYTEXT"(sqlalchemy.dialects.mysql.types.TINYTEXT*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.TINYTEXT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314·
+coltyper
+__visit_name__0r
+fsp0Ñ
+	TIMESTAMP"!sqlalchemy.sql.sqltypes.TIMESTAMP*7
+__init__*
 
-MEDIUMTEXT*sqlalchemy.dialects.mysql.types.MEDIUMTEXT"+sqlalchemy.dialects.mysql.types._StringType*€
-__init__3sqlalchemy.dialects.mysql.types.MEDIUMTEXT.__init__"
-None*b
-selfX
-*sqlalchemy.dialects.mysql.types.MEDIUMTEXT"*sqlalchemy.dialects.mysql.types.MEDIUMTEXT*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rÇ
-__visit_name__9sqlalchemy.dialects.mysql.types.MEDIUMTEXT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314’
-LONGTEXT(sqlalchemy.dialects.mysql.types.LONGTEXT"+sqlalchemy.dialects.mysql.types._StringType*’
-__init__1sqlalchemy.dialects.mysql.types.LONGTEXT.__init__"
-None*^
-selfT
-(sqlalchemy.dialects.mysql.types.LONGTEXT"(sqlalchemy.dialects.mysql.types.LONGTEXT*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.LONGTEXT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314⁄
-VARCHAR'sqlalchemy.dialects.mysql.types.VARCHAR"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.VARCHAR*Ω
-__init__0sqlalchemy.dialects.mysql.types.VARCHAR.__init__"
-None*\
-selfR
-'sqlalchemy.dialects.mysql.types.VARCHAR"'sqlalchemy.dialects.mysql.types.VARCHAR*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314r
-__visit_name__6sqlalchemy.dialects.mysql.types.VARCHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314≈
-CHAR$sqlalchemy.dialects.mysql.types.CHAR"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.CHAR*¥
-__init__-sqlalchemy.dialects.mysql.types.CHAR.__init__"
-None*V
-selfL
-$sqlalchemy.dialects.mysql.types.CHAR"$sqlalchemy.dialects.mysql.types.CHAR*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314r|
-__visit_name__3sqlalchemy.dialects.mysql.types.CHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314‚
-NVARCHAR(sqlalchemy.dialects.mysql.types.NVARCHAR"+sqlalchemy.dialects.mysql.types._StringType" sqlalchemy.sql.sqltypes.NVARCHAR*¿
-__init__1sqlalchemy.dialects.mysql.types.NVARCHAR.__init__"
-None*^
-selfT
-(sqlalchemy.dialects.mysql.types.NVARCHAR"(sqlalchemy.dialects.mysql.types.NVARCHAR*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.NVARCHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ã
-NCHAR%sqlalchemy.dialects.mysql.types.NCHAR"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.NCHAR*∑
-__init__.sqlalchemy.dialects.mysql.types.NCHAR.__init__"
-None*X
-selfN
-%sqlalchemy.dialects.mysql.types.NCHAR"%sqlalchemy.dialects.mysql.types.NCHAR*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314r}
-__visit_name__4sqlalchemy.dialects.mysql.types.NCHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ò
-TINYBLOB(sqlalchemy.dialects.mysql.types.TINYBLOB"sqlalchemy.sql.sqltypes._Binaryj310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.TINYBLOB.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314˜
+self(*
+timezone (*
+fsp (r
+__visit_name__0r
+fsp0Ç
+DATETIME" sqlalchemy.sql.sqltypes.DATETIME*7
+__init__*
 
-MEDIUMBLOB*sqlalchemy.dialects.mysql.types.MEDIUMBLOB"sqlalchemy.sql.sqltypes._Binaryj310j311j312j313j314rÇ
-__visit_name__9sqlalchemy.dialects.mysql.types.MEDIUMBLOB.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ò
-LONGBLOB(sqlalchemy.dialects.mysql.types.LONGBLOB"sqlalchemy.sql.sqltypes._Binaryj310j311j312j313j314rÄ
-__visit_name__7sqlalchemy.dialects.mysql.types.LONGBLOB.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314*¥
-__annotations__/sqlalchemy.dialects.mysql.types.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+timezone (*
+fsp (r
+__visit_name__0r
+fsp0Ç
+YEAR""sqlalchemy.sql.type_api.TypeEngine*/
+__init__*
+
+self(*
+display_width (r
+__visit_name__0r
+display_width0ô
+TEXT"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.TEXT*2
+__init__*
+
+self(*
+length (*
+kw(r
+__visit_name__0s
+TINYTEXT"+sqlalchemy.dialects.mysql.types._StringType*&
+__init__*
+
+self(*
+kwargs(r
+__visit_name__0u
+
+MEDIUMTEXT"+sqlalchemy.dialects.mysql.types._StringType*&
+__init__*
+
+self(*
+kwargs(r
+__visit_name__0s
+LONGTEXT"+sqlalchemy.dialects.mysql.types._StringType*&
+__init__*
+
+self(*
+kwargs(r
+__visit_name__0£
+VARCHAR"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.VARCHAR*6
+__init__*
+
+self(*
+length (*
+kwargs(r
+__visit_name__0ù
+CHAR"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.CHAR*6
+__init__*
+
+self( *
+length (*
+kwargs(r
+__visit_name__0•
+NVARCHAR"+sqlalchemy.dialects.mysql.types._StringType" sqlalchemy.sql.sqltypes.NVARCHAR*6
+__init__*
+
+self(!*
+length (*
+kwargs(r
+__visit_name__0ü
+NCHAR"+sqlalchemy.dialects.mysql.types._StringType"sqlalchemy.sql.sqltypes.NCHAR*6
+__init__*
+
+self("*
+length (*
+kwargs(r
+__visit_name__0?
+TINYBLOB"sqlalchemy.sql.sqltypes._Binaryr
+__visit_name__0A
+
+MEDIUMBLOB"sqlalchemy.sql.sqltypes._Binaryr
+__visit_name__0?
+LONGBLOB"sqlalchemy.sql.sqltypes._Binaryr
+__visit_name__0*
+__annotations__0#22.",sqlalchemy.dialects.mysql.types._NumericType2"builtins.bool22,"*sqlalchemy.dialects.mysql.types._FloatType2"_typeshed.Incomplete2222.",sqlalchemy.dialects.mysql.types._IntegerType2-"+sqlalchemy.dialects.mysql.types._StringType2,"*sqlalchemy.dialects.mysql.types._MatchType2)"'sqlalchemy.dialects.mysql.types.NUMERIC2"builtins.str2)"'sqlalchemy.dialects.mysql.types.DECIMAL2("&sqlalchemy.dialects.mysql.types.DOUBLE2&"$sqlalchemy.dialects.mysql.types.REAL2'"%sqlalchemy.dialects.mysql.types.FLOAT2)"'sqlalchemy.dialects.mysql.types.INTEGER2("&sqlalchemy.dialects.mysql.types.BIGINT2+")sqlalchemy.dialects.mysql.types.MEDIUMINT2)"'sqlalchemy.dialects.mysql.types.TINYINT2*"(sqlalchemy.dialects.mysql.types.SMALLINT2%"#sqlalchemy.dialects.mysql.types.BIT2&"$sqlalchemy.dialects.mysql.types.TIME2+")sqlalchemy.dialects.mysql.types.TIMESTAMP2*"(sqlalchemy.dialects.mysql.types.DATETIME2&"$sqlalchemy.dialects.mysql.types.YEAR2&"$sqlalchemy.dialects.mysql.types.TEXT2*"(sqlalchemy.dialects.mysql.types.TINYTEXT2,"*sqlalchemy.dialects.mysql.types.MEDIUMTEXT2*"(sqlalchemy.dialects.mysql.types.LONGTEXT2)"'sqlalchemy.dialects.mysql.types.VARCHAR2&"$sqlalchemy.dialects.mysql.types.CHAR2*"(sqlalchemy.dialects.mysql.types.NVARCHAR2'"%sqlalchemy.dialects.mysql.types.NCHAR2"builtins.dict2

@@ -1,966 +1,439 @@
 
-distutils.coreΩB
-Commanddistutils.cmd.Command"builtins.object*Õ
-__init__distutils.cmd.Command.__init__"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*D
-dist:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≥
-initialize_options(distutils.cmd.Command.initialize_options"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command0:abc.abstractmethod@z310z311z312z313z314*Ø
-finalize_options&distutils.cmd.Command.finalize_options"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command0:abc.abstractmethod@z310z311z312z313z314*ï
-rundistutils.cmd.Command.run"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command0:abc.abstractmethod@z310z311z312z313z314*Ÿ
-announcedistutils.cmd.Command.announce"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*%
-msg
-builtins.str"builtins.str*)
-level
-builtins.int"builtins.int z310z311z312z313z314*¥
-debug_print!distutils.cmd.Command.debug_print"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*%
-msg
-builtins.str"builtins.strz310z311z312z313z314*ê
-ensure_string#distutils.cmd.Command.ensure_string"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*(
-option
-builtins.str"builtins.str*S
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*»
-ensure_string_list(distutils.cmd.Command.ensure_string_list"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*™
-optionù
-/Union[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*ø
-ensure_filename%distutils.cmd.Command.ensure_filename"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*(
-option
-builtins.str"builtins.strz310z311z312z313z314*Ω
-ensure_dirname$distutils.cmd.Command.ensure_dirname"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*(
-option
-builtins.str"builtins.strz310z311z312z313z314*´
-get_command_name&distutils.cmd.Command.get_command_name"
-builtins.str"builtins.str*8
-self.
-distutils.cmd.Command"distutils.cmd.Commandz310z311z312z313z314*¿
-set_undefined_options+distutils.cmd.Command.set_undefined_options"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*)
-src_cmd
-builtins.str"builtins.str*r
-option_pairs`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strz310z311z312z313z314*û
-get_finalized_command+distutils.cmd.Command.get_finalized_command".
-distutils.cmd.Command"distutils.cmd.Command*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*)
-command
-builtins.str"builtins.str**
-create
-builtins.int"builtins.int z310z311z312z313z314*à
-reinitialize_command*distutils.cmd.Command.reinitialize_command".
-distutils.cmd.Command"distutils.cmd.Command*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*à
-command{
-)Union[distutils.cmd.Command,builtins.str].
-distutils.cmd.Command"distutils.cmd.Command
-builtins.str"builtins.str*6
-reinit_subcommands
-builtins.int"builtins.int z310z311z312z313z314*∏
-run_command!distutils.cmd.Command.run_command"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*)
-command
-builtins.str"builtins.strz310z311z312z313z314*Ÿ
-get_sub_commands&distutils.cmd.Command.get_sub_commands"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*8
-self.
-distutils.cmd.Command"distutils.cmd.Commandz310z311z312z313z314*¶
-warndistutils.cmd.Command.warn"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*%
-msg
-builtins.str"builtins.strz310z311z312z313z314*î
-executedistutils.cmd.Command.execute"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*:
-args0
-typing.Iterable[Any]
-Any"typing.Iterable*O
-msgD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *)
-level
-builtins.int"builtins.int z310z311z312z313z314*’
-mkpathdistutils.cmd.Command.mkpath"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*&
-name
-builtins.str"builtins.str*(
-mode
-builtins.int"builtins.int z310z311z312z313z314*à
-	copy_filedistutils.cmd.Command.copy_file"c
-!Tuple[builtins.str,builtins.bool]
-builtins.str"builtins.str
-builtins.bool"builtins.bool*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*(
-infile
-builtins.str"builtins.str*)
-outfile
-builtins.str"builtins.str*1
-preserve_mode
-builtins.int"builtins.int *2
-preserve_times
-builtins.int"builtins.int *P
-linkD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-level
-Any z310z311z312z313z314*‘
-	copy_treedistutils.cmd.Command.copy_tree"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*(
-infile
-builtins.str"builtins.str*)
-outfile
-builtins.str"builtins.str*1
-preserve_mode
-builtins.int"builtins.int *2
-preserve_times
-builtins.int"builtins.int *5
-preserve_symlinks
-builtins.int"builtins.int *
-level
-Any z310z311z312z313z314*Å
-	move_filedistutils.cmd.Command.move_file"
-builtins.str"builtins.str*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*%
-src
-builtins.str"builtins.str*%
-dst
-builtins.str"builtins.str*
-level
-Any z310z311z312z313z314*°
-spawndistutils.cmd.Command.spawn"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*W
-cmdN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*/
-search_path
-builtins.int"builtins.int *
-level
-Any z310z311z312z313z314*Ã
-make_archive"distutils.cmd.Command.make_archive"
-builtins.str"builtins.str*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*+
-	base_name
-builtins.str"builtins.str*(
-format
-builtins.str"builtins.str*T
-root_dirD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-base_dirD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Q
-ownerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Q
-groupD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*û
-	make_filedistutils.cmd.Command.make_file"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*ñ
-infilesà
-LUnion[builtins.str,builtins.list[builtins.str],builtins.tuple[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*)
-outfile
-builtins.str"builtins.str*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*6
-args,
-builtins.list[Any]
-Any"builtins.list*T
-exec_msgD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-skip_msgD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-level
-Any z310z311z312z313z314*ó
-ensure_finalized&distutils.cmd.Command.ensure_finalized"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Commandz310z311z312z313z314*¶
-dump_options"distutils.cmd.Command.dump_options"
-None*8
-self.
-distutils.cmd.Command"distutils.cmd.Command*i
-header[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-indent
-builtins.str"builtins.str z310z311z312z313z314j310j311j312j313j314rá
-distribution"distutils.cmd.Command.distribution:
-distutils.dist.Distribution"distutils.dist.Distribution*310*311*312*313*314rö
-sub_commands"distutils.cmd.Command.sub_commandsÃ
-Nbuiltins.list[Tuple[builtins.str,Union[CallableType[builtins.function],None]]]Í
-?Tuple[builtins.str,Union[CallableType[builtins.function],None]]
-builtins.str"builtins.strÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None"builtins.list*310*311*312*313*314Îâ
-Distributiondistutils.dist.Distribution"builtins.object*ø
-__init__$distutils.dist.Distribution.__init__"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*£
-attrsï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None z310z311z312z313z314*ò
-get_option_dict+distutils.dist.Distribution.get_option_dict"Õ
-<builtins.dict[builtins.str,Tuple[builtins.str,builtins.str]]
-builtins.str"builtins.str`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*)
-command
-builtins.str"builtins.strz310z311z312z313z314*…
-parse_config_files.distutils.dist.Distribution.parse_config_files"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*ô
-	filenamesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None z310z311z312z313z314*◊
-get_command_obj+distutils.dist.Distribution.get_command_obj"_
-!Union[distutils.cmd.Command,None].
-distutils.cmd.Command"distutils.cmd.Command
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*)
-command
-builtins.str"builtins.str*,
-create
-builtins.bool"builtins.bool z310z311z312z313z314*Ø
-dump_option_dicts-distutils.dist.Distribution.dump_option_dicts"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*i
-header[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-commands[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-indent
-builtins.str"builtins.str z310z311z312z313z314*e
-find_config_files-distutils.dist.Distribution.find_config_files*
-selfz310z311z312z313z314*g
-parse_command_line.distutils.dist.Distribution.parse_command_line*
-selfz310z311z312z313z314*©
-finalize_options,distutils.dist.Distribution.finalize_options"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Å
-handle_display_options2distutils.dist.Distribution.handle_display_options*
+distutils.coreπ
+Commanddistutils.cmd.Command"builtins.object*$
+__init__*
+
+self(*
+
+dist(*:
+initialize_options*
+
+self(0:abc.abstractmethod@*8
+finalize_options*
+
+self(0:abc.abstractmethod@*+
+run*
+
+self(0:abc.abstractmethod@*2
+announce*
+
+self(*	
+msg(*
+level (*&
+debug_print*
+
+self(*	
+msg(*<
+ensure_string*
+
+self(*
+option(*
+default (*0
+ensure_string_list*
+
+self(*
+option(*-
+ensure_filename*
+
+self(*
+option(*,
+ensure_dirname*
+
+self(*
+option(* 
+get_command_name*
+
+self(*H
+set_undefined_options*
+
+self(*
+src_cmd(*
+option_pairs(	*D
+get_finalized_command*
+
+self(*
+command(*
+create (*O
+reinitialize_command*
+
+self(*
+command(
+*
+reinit_subcommands (**
+run_command*
+
+self(*
+command(* 
+get_sub_commands*
+
+self(*
+warn*
+
+self(*	
+msg(*K
+execute*
+
+self(*
+
+func(*
+
+args(*
+msg (*
+level (*0
+mkpath*
+
+self(*
+
+name(*
+mode (*Ç
+	copy_file*
+
+self(*
+infile(*
+outfile(*
+preserve_mode (*
+preserve_times (*
+link (*
+level (*è
+	copy_tree*
+
+self(*
+infile(*
+outfile(*
+preserve_mode (*
+preserve_times (*
+preserve_symlinks (*
+level (*>
+	move_file*
+
+self(*	
+src(*	
+dst(*
+level (*D
+spawn*
+
+self(*	
+cmd(*
+search_path (*
+level (*}
+make_archive*
+
+self(*
+	base_name(*
+format(*
+root_dir (*
+base_dir (*
+owner (*
+group (*Ç
+	make_file*
+
+self(*
+infiles(*
+outfile(*
+
+func(*
+
+args(*
+exec_msg (*
+skip_msg (*
+level (* 
+ensure_finalized*
+
+self(*<
+dump_options*
+
+self(*
+header (*
+indent (r
+distribution0r
+sub_commands0”
+Distributiondistutils.dist.Distribution"builtins.object*'
+__init__*
+
+self(*
+attrs (*.
+get_option_dict*
+
+self(*
+command(*5
+parse_config_files*
+
+self(*
+	filenames (*>
+get_command_obj*
+
+self(*
+command(*
+create (*S
+dump_option_dicts*
+
+self(*
+header (*
+commands (*
+indent (*
+find_config_files*
+self*
+parse_command_line*
+self* 
+finalize_options*
+
+self(*4
+handle_display_options*
 self*
-option_orderz310z311z312z313z314*Ú
-print_command_list.distutils.dist.Distribution.print_command_list"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*
-commands
-Any*
-header
-Any*
+option_order*R
+print_command_list*
 
-max_length
-Anyz310z311z312z313z314*•
-print_commands*distutils.dist.Distribution.print_commands"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*c
-get_command_list,distutils.dist.Distribution.get_command_list*
-selfz310z311z312z313z314*k
-get_command_packages0distutils.dist.Distribution.get_command_packages*
-selfz310z311z312z313z314*£
-get_command_class-distutils.dist.Distribution.get_command_class"U
-Type[distutils.cmd.Command].
-distutils.cmd.Command"distutils.cmd.Command"type*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*)
-command
-builtins.str"builtins.strz310z311z312z313z314*÷
-announce$distutils.dist.Distribution.announce"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*
-msg
-Any*)
-level
-builtins.int"builtins.int z310z311z312z313z314*°
-run_commands(distutils.dist.Distribution.run_commands"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314* 
-run_command'distutils.dist.Distribution.run_command"
-None*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*)
-command
-builtins.str"builtins.strz310z311z312z313z314*ø
-has_pure_modules,distutils.dist.Distribution.has_pure_modules"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Ω
-has_ext_modules+distutils.dist.Distribution.has_ext_modules"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Ω
-has_c_libraries+distutils.dist.Distribution.has_c_libraries"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*µ
-has_modules'distutils.dist.Distribution.has_modules"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*µ
-has_headers'distutils.dist.Distribution.has_headers"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*µ
-has_scripts'distutils.dist.Distribution.has_scripts"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*ª
-has_data_files*distutils.dist.Distribution.has_data_files"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≠
-is_pure#distutils.dist.Distribution.is_pure"
-builtins.bool"builtins.bool*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≠
-get_name$distutils.dist.Distribution.get_name"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≥
-get_version'distutils.dist.Distribution.get_version"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*µ
-get_fullname(distutils.dist.Distribution.get_fullname"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*±
+self(*
+commands(*
+header(*
 
-get_author&distutils.dist.Distribution.get_author"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Ω
-get_author_email,distutils.dist.Distribution.get_author_email"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*π
-get_maintainer*distutils.dist.Distribution.get_maintainer"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≈
-get_maintainer_email0distutils.dist.Distribution.get_maintainer_email"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≥
-get_contact'distutils.dist.Distribution.get_contact"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*ø
-get_contact_email-distutils.dist.Distribution.get_contact_email"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*´
-get_url#distutils.dist.Distribution.get_url"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≥
-get_license'distutils.dist.Distribution.get_license"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≥
-get_licence'distutils.dist.Distribution.get_licence"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*ª
-get_description+distutils.dist.Distribution.get_description"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*≈
-get_long_description0distutils.dist.Distribution.get_long_description"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*∑
-get_keywords(distutils.dist.Distribution.get_keywords"ù
-/Union[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*π
-get_platforms)distutils.dist.Distribution.get_platforms"ù
-/Union[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Ω
-get_classifiers+distutils.dist.Distribution.get_classifiers"ù
-/Union[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Ω
-get_download_url,distutils.dist.Distribution.get_download_url"
-builtins.str"builtins.str*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*„
-get_requires(distutils.dist.Distribution.get_requires"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*„
-get_provides(distutils.dist.Distribution.get_provides"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z314*Â
-get_obsoletes)distutils.dist.Distribution.get_obsoletes"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*D
-self:
-distutils.dist.Distribution"distutils.dist.Distributionz310z311z312z313z3142”
-reinitialize_command0distutils.dist.Distribution.reinitialize_command∏
-reinitialize_command0distutils.dist.Distribution.reinitialize_command".
-distutils.cmd.Command"distutils.cmd.Command*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*)
-command
-builtins.str"builtins.str*8
-reinit_subcommands
-builtins.bool"builtins.bool 0:typing.overloadX¥
-reinitialize_command0distutils.dist.Distribution.reinitialize_command"c
-distutils.dist._CommandT.
-distutils.cmd.Command"distutils.cmd.Command"distutils.cmd.Command*D
-self:
-distutils.dist.Distribution"distutils.dist.Distribution*p
-commandc
-distutils.dist._CommandT.
-distutils.cmd.Command"distutils.cmd.Command"distutils.cmd.Command*8
-reinit_subcommands
-builtins.bool"builtins.bool 0:typing.overloadX"310"311"312"313"314j310j311j312j313j314râ
-cmdclass$distutils.dist.Distribution.cmdclassΩ
-7builtins.dict[builtins.str,Type[distutils.cmd.Command]]
-builtins.str"builtins.strU
-Type[distutils.cmd.Command].
-distutils.cmd.Command"distutils.cmd.Command"type"builtins.dict*310*311*312*313*314rï
-metadata$distutils.dist.Distribution.metadataJ
-#distutils.dist.DistributionMetadata"#distutils.dist.DistributionMetadata*310*311*312*313*314rÑ
-global_options*distutils.dist.Distribution.global_options¨
-°TypeAlias[builtins.list[Union[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int],Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]]Ê
-ñbuiltins.list[Union[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int],Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]ª
-áUnion[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int],Tuple[builtins.str,Union[builtins.str,None],builtins.str]]Í
-FTuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str
-builtins.int"builtins.intø
-9Tuple[builtins.str,Union[builtins.str,None],builtins.str]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str"builtins.list"distutils.dist._OptionsList*310*311*312*313*314ro
-common_usage(distutils.dist.Distribution.common_usage
-builtins.str"builtins.str*310*311*312*313*314rÜ
-display_options+distutils.dist.Distribution.display_options¨
-°TypeAlias[builtins.list[Union[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int],Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]]Ê
-ñbuiltins.list[Union[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int],Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]ª
-áUnion[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int],Tuple[builtins.str,Union[builtins.str,None],builtins.str]]Í
-FTuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.int]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str
-builtins.int"builtins.intø
-9Tuple[builtins.str,Union[builtins.str,None],builtins.str]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str"builtins.list"distutils.dist._OptionsList*310*311*312*313*314r≠
-display_option_names0distutils.dist.Distribution.display_option_namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r»
-negative_opt(distutils.dist.Distribution.negative_optu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*310*311*312*313*314re
-verbose#distutils.dist.Distribution.verbose
-builtins.int"builtins.int*310*311*312*313*314re
-dry_run#distutils.dist.Distribution.dry_run
-builtins.int"builtins.int*310*311*312*313*314r_
-help distutils.dist.Distribution.help
-builtins.int"builtins.int*310*311*312*313*314r›
-command_packages,distutils.dist.Distribution.command_packagesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*310*311*312*313*314rï
-script_name'distutils.dist.Distribution.script_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r”
-script_args'distutils.dist.Distribution.script_argsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*310*311*312*313*314r±
-command_options+distutils.dist.Distribution.command_options◊
-Xbuiltins.dict[builtins.str,builtins.dict[builtins.str,Tuple[builtins.str,builtins.str]]]
-builtins.str"builtins.strÕ
-<builtins.dict[builtins.str,Tuple[builtins.str,builtins.str]]
-builtins.str"builtins.str`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict"builtins.dict*310*311*312*313*314r´
+max_length(*
+print_commands*
 
-dist_files&distutils.dist.Distribution.dist_files€
-<builtins.list[Tuple[builtins.str,builtins.str,builtins.str]]ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r|
-packages$distutils.dist.Distribution.packages1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÜ
-package_data(distutils.dist.Distribution.package_data≤
-7builtins.dict[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.dict*310*311*312*313*314rÇ
-package_dir'distutils.dist.Distribution.package_dir1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÄ
+self(*
+get_command_list*
+self* 
+get_command_packages*
+self*0
+get_command_class*
 
-py_modules&distutils.dist.Distribution.py_modules1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r~
-	libraries%distutils.dist.Distribution.libraries1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rz
-headers#distutils.dist.Distribution.headers1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÇ
-ext_modules'distutils.dist.Distribution.ext_modules1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÇ
-ext_package'distutils.dist.Distribution.ext_package1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÑ
-include_dirs(distutils.dist.Distribution.include_dirs1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÄ
+self(*
+command(*2
+announce*
 
-extra_path&distutils.dist.Distribution.extra_path1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rz
-scripts#distutils.dist.Distribution.scripts1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÄ
+self(*	
+msg(*
+level (*
+run_commands*
 
-data_files&distutils.dist.Distribution.data_files1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rg
-password$distutils.dist.Distribution.password
-builtins.str"builtins.str*310*311*312*313*314rÇ
-command_obj'distutils.dist.Distribution.command_obj1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r|
-have_run$distutils.dist.Distribution.have_run1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rs
-want_user_cfg)distutils.dist.Distribution.want_user_cfg
-builtins.bool"builtins.bool*310*311*312*313*314r|
-commands$distutils.dist.Distribution.commands1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314Ç)
-	Extensiondistutils.extension.Extension"builtins.object*ø
-__init__&distutils.extension.Extension.__init__"
-None*H
-self>
-distutils.extension.Extension"distutils.extension.Extension*&
-name
-builtins.str"builtins.str*W
-sourcesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*ñ
-include_dirsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *—
-define_macrosª
-GUnion[builtins.list[Tuple[builtins.str,Union[builtins.str,None]]],None]„
-;builtins.list[Tuple[builtins.str,Union[builtins.str,None]]]î
-,Tuple[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"builtins.list
-None *ñ
-undef_macrosÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ñ
-library_dirsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ì
-	librariesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *û
-runtime_library_dirsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ó
-extra_objectsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ú
-extra_compile_argsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ô
-extra_link_argsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ò
-export_symbolsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ì
-	swig_optsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ë
-dependsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *T
-languageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-optionalG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z310z311z312z313z314j310j311j312j313j314ra
-name"distutils.extension.Extension.name
-builtins.str"builtins.str*310*311*312*313*314rï
-sources%distutils.extension.Extension.sourcesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rü
-include_dirs*distutils.extension.Extension.include_dirsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rª
-define_macros+distutils.extension.Extension.define_macros„
-;builtins.list[Tuple[builtins.str,Union[builtins.str,None]]]î
-,Tuple[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"builtins.list*310*311*312*313*314rü
-undef_macros*distutils.extension.Extension.undef_macrosJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rü
-library_dirs*distutils.extension.Extension.library_dirsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rô
-	libraries'distutils.extension.Extension.librariesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rØ
-runtime_library_dirs2distutils.extension.Extension.runtime_library_dirsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r°
-extra_objects+distutils.extension.Extension.extra_objectsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r´
-extra_compile_args0distutils.extension.Extension.extra_compile_argsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r•
-extra_link_args-distutils.extension.Extension.extra_link_argsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r£
-export_symbols,distutils.extension.Extension.export_symbolsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rô
-	swig_opts'distutils.extension.Extension.swig_optsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rï
-depends%distutils.extension.Extension.dependsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rë
-language&distutils.extension.Extension.languageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rî
-optional&distutils.extension.Extension.optionalG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*310*311*312*313*314ß
-	gen_usagedistutils.core.gen_usage"
-builtins.str"builtins.str*»
-script_name∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathz310z311z312z313z314ﬁ
-setupdistutils.core.setup"
-None*(
-name
-builtins.str"builtins.str *+
-version
-builtins.str"builtins.str */
-description
-builtins.str"builtins.str *4
-long_description
-builtins.str"builtins.str **
-author
-builtins.str"builtins.str *0
-author_email
-builtins.str"builtins.str *.
+self(**
+run_command*
 
-maintainer
-builtins.str"builtins.str *4
-maintainer_email
-builtins.str"builtins.str *'
-url
-builtins.str"builtins.str *0
-download_url
-builtins.str"builtins.str *Z
-packagesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *\
+self(*
+command(* 
+has_pure_modules*
 
-py_modulesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *Y
-scriptsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *ê
-ext_modules}
-,builtins.list[distutils.extension.Extension]>
-distutils.extension.Extension"distutils.extension.Extension"builtins.list *]
-classifiersJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *x
-	distclassg
-!Type[distutils.dist.Distribution]:
-distutils.dist.Distribution"distutils.dist.Distribution"type */
-script_name
-builtins.str"builtins.str *]
-script_argsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *h
-optionsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping *+
-license
-builtins.str"builtins.str *Æ
-keywordsù
-/Union[builtins.list[builtins.str],builtins.str]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-builtins.str"builtins.str *Ø
-	platformsù
-/Union[builtins.list[builtins.str],builtins.str]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-builtins.str"builtins.str *–
-cmdclassø
-8typing.Mapping[builtins.str,Type[distutils.cmd.Command]]
-builtins.str"builtins.strU
-Type[distutils.cmd.Command].
-distutils.cmd.Command"distutils.cmd.Command"type"typing.Mapping *Ç
+self(*
+has_ext_modules*
 
-data_filesÔ
->builtins.list[Tuple[builtins.str,builtins.list[builtins.str]]]ù
-/Tuple[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.list *ä
-package_dirw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping *[
-	obsoletesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *Z
-providesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *Z
-requiresJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *b
-command_packagesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *î
-command_options¸
-Htyping.Mapping[builtins.str,typing.Mapping[builtins.str,Tuple[Any,Any]]]
-builtins.str"builtins.strÅ
-+typing.Mapping[builtins.str,Tuple[Any,Any]]
-builtins.str"builtins.str$
-Tuple[Any,Any]
-Any
-Any"typing.Mapping"typing.Mapping *…
-package_data¥
-8typing.Mapping[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"typing.Mapping *:
-include_package_data
-builtins.bool"builtins.bool *[
-	librariesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *Y
-headersJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list */
-ext_package
-builtins.str"builtins.str *^
-include_dirsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list *,
-password
-builtins.str"builtins.str *,
-fullname
-builtins.str"builtins.str *
-attrs
-Anyz310z311z312z313z314Ò
-	run_setupdistutils.core.run_setup":
-distutils.dist.Distribution"distutils.dist.Distribution*-
-script_name
-builtins.str"builtins.str*ï
-script_argsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *.
+self(*
+has_c_libraries*
 
-stop_after
-builtins.str"builtins.str z310z311z312z313z314*£
-__annotations__distutils.core.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*T
-USAGEdistutils.core.USAGE
-builtins.str"builtins.str*310*311*312*313*314*ñ
-setup_keywordsdistutils.core.setup_keywordsL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*310*311*312*313*314*û
-extension_keywords!distutils.core.extension_keywordsL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*310*311*312*313*314
+self(*
+has_modules*
+
+self(*
+has_headers*
+
+self(*
+has_scripts*
+
+self(*
+has_data_files*
+
+self(*
+is_pure*
+
+self(*
+get_name*
+
+self(*
+get_version*
+
+self(*
+get_fullname*
+
+self(*
+
+get_author*
+
+self(* 
+get_author_email*
+
+self(*
+get_maintainer*
+
+self(*$
+get_maintainer_email*
+
+self(*
+get_contact*
+
+self(*!
+get_contact_email*
+
+self(*
+get_url*
+
+self(*
+get_license*
+
+self(*
+get_licence*
+
+self(*
+get_description*
+
+self(*$
+get_long_description*
+
+self(*
+get_keywords*
+
+self(*
+get_platforms*
+
+self(*
+get_classifiers*
+
+self(* 
+get_download_url*
+
+self(*
+get_requires*
+
+self(*
+get_provides*
+
+self(*
+get_obsoletes*
+
+self(2‚
+reinitialize_commandd
+reinitialize_command*
+
+self(*
+command(*
+reinit_subcommands (0:typing.overloadXd
+reinitialize_command *
+
+self(*
+command( *
+reinit_subcommands (0:typing.overloadXr
+cmdclass0!r
+metadata0"r
+global_options0'r
+common_usage0r
+display_options0'r
+display_option_names0r
+negative_opt0(r
+verbose0r
+dry_run0r
+help0r
+command_packages0)r
+script_name0r
+script_args0)r
+command_options0*r
+
+dist_files0,r
+packages0r
+package_data0-r
+package_dir0r
+
+py_modules0r
+	libraries0r
+headers0r
+ext_modules0r
+ext_package0r
+include_dirs0r
+
+extra_path0r
+scripts0r
+
+data_files0r
+password0r
+command_obj0r
+have_run0r
+want_user_cfg0r
+commands0º
+	Extensiondistutils.extension.Extension"builtins.object*È
+__init__*
+
+self(.*
+
+name(*
+sources(*
+include_dirs ()*
+define_macros (1*
+undef_macros ()*
+library_dirs ()*
+	libraries ()*
+runtime_library_dirs ()*
+extra_objects ()*
+extra_compile_args ()*
+extra_link_args ()*
+export_symbols ()*
+	swig_opts ()*
+depends ()*
+language (*
+optional (2r
+name0r
+sources0r
+include_dirs0r
+define_macros00r
+undef_macros0r
+library_dirs0r
+	libraries0r
+runtime_library_dirs0r
+extra_objects0r
+extra_compile_args0r
+extra_link_args0r
+export_symbols0r
+	swig_opts0r
+depends0r
+language0r
+optional02 
+	gen_usage*
+script_name(7å
+setup*
+name (*
+version (*
+description (*
+long_description (*
+author (*
+author_email (*
+
+maintainer (*
+maintainer_email (*
+url (*
+download_url (*
+packages (*
+
+py_modules (*
+scripts (*
+ext_modules (8*
+classifiers (*
+	distclass (9*
+script_name (*
+script_args (*
+options (*
+license (*
+keywords (:*
+	platforms (:*
+cmdclass (;*
+
+data_files (=*
+package_dir (>*
+	obsoletes (*
+provides (*
+requires (*
+command_packages (*
+command_options (A*
+package_data (B*
+include_package_data (*
+	libraries (*
+headers (*
+ext_package (*
+include_dirs (*
+password (*
+fullname (*
+attrs(I
+	run_setup*
+script_name(*
+script_args ()*
+
+stop_after (*
+__annotations__0C*	
+USAGE0*
+setup_keywords0*
+extension_keywords022"distutils.cmd.Command2"distutils.dist.Distribution2"builtins.str2"builtins.int222"builtins.list22222222"builtins.function2222"typing.Iterable22"builtins.bool222"typing.Iterable22"builtins.tuple2222"builtins.list22"_typeshed.Incomplete22222222"builtins.list22"typing.Mapping2222"builtins.dict2	22222"type22"distutils.cmd.Command22"builtins.dict22%"#distutils.dist.DistributionMetadata222222#$2"builtins.list2%2""distutils.dist._OptionsList2&2"builtins.dict2222"builtins.dict2222"builtins.list2+2"builtins.dict22"distutils.extension.Extension222"builtins.list2/220222"builtins.bytes2"os.PathLike22"os.PathLike23223452"_typeshed.StrOrBytesPath262"builtins.list2.2"type2222"typing.Mapping2222"builtins.list2<2"typing.Mapping2222"typing.Mapping2?2"typing.Mapping2@2"typing.Mapping22"builtins.dict2

@@ -1,393 +1,229 @@
 
-braintree.transaction_searchﬁ
+braintree.transaction_searchÛ
 
-CreditCard braintree.credit_card.CreditCard"braintree.resource.Resource*Ÿ
-create'braintree.credit_card.CreditCard.create"
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*˘
-update'braintree.credit_card.CreditCard.update"
-Any*
-credit_card_token
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*|
-delete'braintree.credit_card.CreditCard.delete*
-credit_card_token0:builtins.staticmethodhz310z311z312z313z314*g
-expired(braintree.credit_card.CreditCard.expired0:builtins.staticmethodhz310z311z312z313z314*ó
-expiring_between1braintree.credit_card.CreditCard.expiring_between*
+CreditCard braintree.credit_card.CreditCard"braintree.resource.Resource*5
+create*
+params (0:builtins.staticmethodh*N
+update*
+credit_card_token(*
+params (0:builtins.staticmethodh*:
+delete*
+credit_card_token0:builtins.staticmethodh*$
+expired0:builtins.staticmethodh*K
+expiring_between*
 
 start_date*
-end_date0:builtins.staticmethodhz310z311z312z313z314*x
-find%braintree.credit_card.CreditCard.find*
-credit_card_token0:builtins.staticmethodhz310z311z312z313z314*x
+end_date0:builtins.staticmethodh*8
+find*
+credit_card_token0:builtins.staticmethodh*2
 
-from_nonce+braintree.credit_card.CreditCard.from_nonce*	
-nonce0:builtins.staticmethodhz310z311z312z313z314*y
-create_signature1braintree.credit_card.CreditCard.create_signature0:builtins.staticmethodhz310z311z312z313z314*y
-update_signature1braintree.credit_card.CreditCard.update_signature0:builtins.staticmethodhz310z311z312z313z314*u
-	signature*braintree.credit_card.CreditCard.signature*
-type0:builtins.staticmethodhz310z311z312z313z314*u
-__init__)braintree.credit_card.CreditCard.__init__*
+from_nonce*	
+nonce0:builtins.staticmethodh*-
+create_signature0:builtins.staticmethodh*-
+update_signature0:builtins.staticmethodh*0
+	signature*
+type0:builtins.staticmethodh*1
+__init__*
 self*
 gateway*
 
-attributesz310z311z312z313z314*}
-expiration_date0braintree.credit_card.CreditCard.expiration_date*
-self0:builtins.property`z310z311z312z313z314*y
-masked_number.braintree.credit_card.CreditCard.masked_number*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314r[
+attributes*2
+expiration_date*
+self0:builtins.property`*0
+masked_number*
+self0:builtins.property`r
 
-Commercial+braintree.credit_card.CreditCard.Commercial
-Any*310*311*312*313*314re
-DurbinRegulated0braintree.credit_card.CreditCard.DurbinRegulated
-Any*310*311*312*313*314rQ
-Debit&braintree.credit_card.CreditCard.Debit
-Any*310*311*312*313*314r[
+Commercial0r
+DurbinRegulated0r	
+Debit0r
 
-Healthcare+braintree.credit_card.CreditCard.Healthcare
-Any*310*311*312*313*314ri
-CountryOfIssuance2braintree.credit_card.CreditCard.CountryOfIssuance
-Any*310*311*312*313*314r]
-IssuingBank,braintree.credit_card.CreditCard.IssuingBank
-Any*310*311*312*313*314rU
-Payroll(braintree.credit_card.CreditCard.Payroll
-Any*310*311*312*313*314rU
-Prepaid(braintree.credit_card.CreditCard.Prepaid
-Any*310*311*312*313*314rY
-	ProductId*braintree.credit_card.CreditCard.ProductId
-Any*310*311*312*313*314r[
+Healthcare0r
+CountryOfIssuance0r
+IssuingBank0r
+Payroll0r
+Prepaid0r
+	ProductId0r
 
-is_expired+braintree.credit_card.CreditCard.is_expired
-Any*310*311*312*313*314re
-billing_address0braintree.credit_card.CreditCard.billing_address
-Any*310*311*312*313*314ra
-subscriptions.braintree.credit_card.CreditCard.subscriptions
-Any*310*311*312*313*314r_
-verification-braintree.credit_card.CreditCard.verification
-Any*310*311*312*313*314K
-Searchbraintree.search.Search"builtins.objectj310j311j312j313j314≠A
-Transaction!braintree.transaction.Transaction"braintree.resource.Resource*¢
-adjust_authorization6braintree.transaction.Transaction.adjust_authorization*
+is_expired0r
+billing_address0r
+subscriptions0r
+verification02
+Searchbraintree.search.Search"builtins.objectˇ
+Transaction!braintree.transaction.Transaction"braintree.resource.Resource*Q
+adjust_authorization*
 transaction_id*
 
-amount0:builtins.staticmethodhz310z311z312z313z314*ú
-clone_transaction3braintree.transaction.Transaction.clone_transaction*
+amount0:builtins.staticmethodh*N
+clone_transaction*
 transaction_id*
 
-params0:builtins.staticmethodhz310z311z312z313z314*ä
-cancel_release0braintree.transaction.Transaction.cancel_release*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*⁄
-credit(braintree.transaction.Transaction.credit"
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*v
-find&braintree.transaction.Transaction.find*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*ä
-hold_in_escrow0braintree.transaction.Transaction.hold_in_escrow*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*Ç
-refund(braintree.transaction.Transaction.refund"
-Any*
-transaction_id
-Any*t
-amount_or_options[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*÷
-sale&braintree.transaction.Transaction.sale"
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*q
-search(braintree.transaction.Transaction.search*	
-query0:builtins.staticmethodhz310z311z312z313z314*î
-release_from_escrow5braintree.transaction.Transaction.release_from_escrow*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*Ä
-submit_for_settlement7braintree.transaction.Transaction.submit_for_settlement"
-Any*
-transaction_id
-Any*i
-amount[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*á
-update_details0braintree.transaction.Transaction.update_details"
-Any*
-transaction_id
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*v
-void&braintree.transaction.Transaction.void*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*r
-create(braintree.transaction.Transaction.create*
+params0:builtins.staticmethodh*?
+cancel_release*
+transaction_id0:builtins.staticmethodh*5
+credit*
+params (0:builtins.staticmethodh*5
+find*
+transaction_id0:builtins.staticmethodh*?
+hold_in_escrow*
+transaction_id0:builtins.staticmethodh*V
+refund*
+transaction_id(*
+amount_or_options (0:builtins.staticmethodh*3
+sale*
+params (0:builtins.staticmethodh*.
+search*	
+query0:builtins.staticmethodh*D
+release_from_escrow*
+transaction_id0:builtins.staticmethodh*j
+submit_for_settlement*
+transaction_id(*
+amount (*
+params (0:builtins.staticmethodh*S
+update_details*
+transaction_id(*
+params (0:builtins.staticmethodh*5
+void*
+transaction_id0:builtins.staticmethodh*/
+create*
 
-params0:builtins.staticmethodhz310z311z312z313z314*x
-clone_signature1braintree.transaction.Transaction.clone_signature0:builtins.staticmethodhz310z311z312z313z314*z
-create_signature2braintree.transaction.Transaction.create_signature0:builtins.staticmethodhz310z311z312z313z314*ò
-submit_for_settlement_signatureAbraintree.transaction.Transaction.submit_for_settlement_signature0:builtins.staticmethodhz310z311z312z313z314*ä
-update_details_signature:braintree.transaction.Transaction.update_details_signature0:builtins.staticmethodhz310z311z312z313z314*z
-refund_signature2braintree.transaction.Transaction.refund_signature0:builtins.staticmethodhz310z311z312z313z314*∫
-submit_for_partial_settlement?braintree.transaction.Transaction.submit_for_partial_settlement"
-Any*
-transaction_id
-Any*
-amount
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*⁄
-__init__*braintree.transaction.Transaction.__init__"
-None*P
-selfF
-!braintree.transaction.Transaction"!braintree.transaction.Transaction*
-gateway
-Any*
+params0:builtins.staticmethodh*,
+clone_signature0:builtins.staticmethodh*-
+create_signature0:builtins.staticmethodh*<
+submit_for_settlement_signature0:builtins.staticmethodh*5
+update_details_signature0:builtins.staticmethodh*-
+refund_signature0:builtins.staticmethodh*p
+submit_for_partial_settlement*
+transaction_id(*
+amount(*
+params (0:builtins.staticmethodh*9
+__init__*
 
-attributes
-Anyz310z311z312z313z314*ä
-vault_billing_address7braintree.transaction.Transaction.vault_billing_address*
-self0:builtins.property`z310z311z312z313z314*Ç
-vault_credit_card3braintree.transaction.Transaction.vault_credit_card*
-self0:builtins.property`z310z311z312z313z314*|
-vault_customer0braintree.transaction.Transaction.vault_customer*
-self0:builtins.property`z310z311z312z313z314*x
-is_disbursed.braintree.transaction.Transaction.is_disbursed*
-self0:builtins.property`z310z311z312z313z314*t
+self(*
+gateway(*
 
-line_items,braintree.transaction.Transaction.line_items*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rT
-amount(braintree.transaction.Transaction.amount
-Any*310*311*312*313*314r\
+attributes(*8
+vault_billing_address*
+self0:builtins.property`*4
+vault_credit_card*
+self0:builtins.property`*1
+vault_customer*
+self0:builtins.property`*/
+is_disbursed*
+self0:builtins.property`*-
 
-tax_amount,braintree.transaction.Transaction.tax_amount
-Any*310*311*312*313*314rf
-discount_amount1braintree.transaction.Transaction.discount_amount
-Any*310*311*312*313*314rf
-shipping_amount1braintree.transaction.Transaction.shipping_amount
-Any*310*311*312*313*314rf
-billing_details1braintree.transaction.Transaction.billing_details
-Any*310*311*312*313*314rn
-credit_card_details5braintree.transaction.Transaction.credit_card_details
-Any*310*311*312*313*314rd
-paypal_details0braintree.transaction.Transaction.paypal_details
-Any*310*311*312*313*314rn
-paypal_here_details5braintree.transaction.Transaction.paypal_here_details
-Any*310*311*312*313*314rr
-local_payment_details7braintree.transaction.Transaction.local_payment_details
-Any*310*311*312*313*314r~
-europe_bank_account_details=braintree.transaction.Transaction.europe_bank_account_details
-Any*310*311*312*313*314rf
-us_bank_account1braintree.transaction.Transaction.us_bank_account
-Any*310*311*312*313*314rj
-apple_pay_details3braintree.transaction.Transaction.apple_pay_details
-Any*310*311*312*313*314rx
-android_pay_card_details:braintree.transaction.Transaction.android_pay_card_details
-Any*310*311*312*313*314rå
-"amex_express_checkout_card_detailsDbraintree.transaction.Transaction.amex_express_checkout_card_details
-Any*310*311*312*313*314rr
-venmo_account_details7braintree.transaction.Transaction.venmo_account_details
-Any*310*311*312*313*314r|
-visa_checkout_card_details<braintree.transaction.Transaction.visa_checkout_card_details
-Any*310*311*312*313*314rv
-masterpass_card_details9braintree.transaction.Transaction.masterpass_card_details
-Any*310*311*312*313*314rx
-samsung_pay_card_details:braintree.transaction.Transaction.samsung_pay_card_details
-Any*310*311*312*313*314rv
-sca_exemption_requested9braintree.transaction.Transaction.sca_exemption_requested
-Any*310*311*312*313*314rh
-customer_details2braintree.transaction.Transaction.customer_details
-Any*310*311*312*313*314rh
-shipping_details2braintree.transaction.Transaction.shipping_details
-Any*310*311*312*313*314rV
-add_ons)braintree.transaction.Transaction.add_ons
-Any*310*311*312*313*314rZ
-	discounts+braintree.transaction.Transaction.discounts
-Any*310*311*312*313*314rd
-status_history0braintree.transaction.Transaction.status_history
-Any*310*311*312*313*314rp
-subscription_details6braintree.transaction.Transaction.subscription_details
-Any*310*311*312*313*314r\
+line_items*
+self0:builtins.property`r
 
-descriptor,braintree.transaction.Transaction.descriptor
-Any*310*311*312*313*314rp
-disbursement_details6braintree.transaction.Transaction.disbursement_details
-Any*310*311*312*313*314rX
-disputes*braintree.transaction.Transaction.disputes
-Any*310*311*312*313*314rz
-authorization_adjustments;braintree.transaction.Transaction.authorization_adjustments
-Any*310*311*312*313*314rv
-payment_instrument_type9braintree.transaction.Transaction.payment_instrument_type
-Any*310*311*312*313*314rZ
-	risk_data+braintree.transaction.Transaction.risk_data
-Any*310*311*312*313*314rn
-three_d_secure_info5braintree.transaction.Transaction.three_d_secure_info
-Any*310*311*312*313*314rn
-facilitated_details5braintree.transaction.Transaction.facilitated_details
-Any*310*311*312*313*314rn
-facilitator_details5braintree.transaction.Transaction.facilitator_details
-Any*310*311*312*313*314rt
-network_transaction_id8braintree.transaction.Transaction.network_transaction_id
-Any*310*311*312*313*314Ü
-	Constants"braintree.util.constants.Constants"builtins.object*™
-"get_all_constant_values_from_classEbraintree.util.constants.Constants.get_all_constant_values_from_class*	
-klass0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314–=
-TransactionSearch.braintree.transaction_search.TransactionSearch"builtins.objectj310j311j312j313j314ry
-billing_first_nameAbraintree.transaction_search.TransactionSearch.billing_first_name
-Any*310*311*312*313*314rs
-billing_company>braintree.transaction_search.TransactionSearch.billing_company
-Any*310*311*312*313*314r}
-billing_country_nameCbraintree.transaction_search.TransactionSearch.billing_country_name
-Any*310*311*312*313*314rÖ
-billing_extended_addressGbraintree.transaction_search.TransactionSearch.billing_extended_address
-Any*310*311*312*313*314rw
-billing_last_name@braintree.transaction_search.TransactionSearch.billing_last_name
-Any*310*311*312*313*314ru
-billing_locality?braintree.transaction_search.TransactionSearch.billing_locality
-Any*310*311*312*313*314r{
-billing_postal_codeBbraintree.transaction_search.TransactionSearch.billing_postal_code
-Any*310*311*312*313*314rq
-billing_region=braintree.transaction_search.TransactionSearch.billing_region
-Any*310*311*312*313*314rÅ
-billing_street_addressEbraintree.transaction_search.TransactionSearch.billing_street_address
-Any*310*311*312*313*314rã
-credit_card_cardholder_nameJbraintree.transaction_search.TransactionSearch.credit_card_cardholder_name
-Any*310*311*312*313*314re
-currency7braintree.transaction_search.TransactionSearch.currency
-Any*310*311*312*313*314ru
-customer_company?braintree.transaction_search.TransactionSearch.customer_company
-Any*310*311*312*313*314rq
-customer_email=braintree.transaction_search.TransactionSearch.customer_email
-Any*310*311*312*313*314rm
-customer_fax;braintree.transaction_search.TransactionSearch.customer_fax
-Any*310*311*312*313*314r{
-customer_first_nameBbraintree.transaction_search.TransactionSearch.customer_first_name
-Any*310*311*312*313*314rk
-customer_id:braintree.transaction_search.TransactionSearch.customer_id
-Any*310*311*312*313*314ry
-customer_last_nameAbraintree.transaction_search.TransactionSearch.customer_last_name
-Any*310*311*312*313*314rq
-customer_phone=braintree.transaction_search.TransactionSearch.customer_phone
-Any*310*311*312*313*314ru
-customer_website?braintree.transaction_search.TransactionSearch.customer_website
-Any*310*311*312*313*314rY
-id1braintree.transaction_search.TransactionSearch.id
-Any*310*311*312*313*314re
-order_id7braintree.transaction_search.TransactionSearch.order_id
-Any*310*311*312*313*314r}
-payment_method_tokenCbraintree.transaction_search.TransactionSearch.payment_method_token
-Any*310*311*312*313*314rç
-processor_authorization_codeKbraintree.transaction_search.TransactionSearch.processor_authorization_code
-Any*310*311*312*313*314rÖ
-europe_bank_account_ibanGbraintree.transaction_search.TransactionSearch.europe_bank_account_iban
-Any*310*311*312*313*314r{
-settlement_batch_idBbraintree.transaction_search.TransactionSearch.settlement_batch_id
-Any*310*311*312*313*314ru
-shipping_company?braintree.transaction_search.TransactionSearch.shipping_company
-Any*310*311*312*313*314r
-shipping_country_nameDbraintree.transaction_search.TransactionSearch.shipping_country_name
-Any*310*311*312*313*314rá
-shipping_extended_addressHbraintree.transaction_search.TransactionSearch.shipping_extended_address
-Any*310*311*312*313*314r{
-shipping_first_nameBbraintree.transaction_search.TransactionSearch.shipping_first_name
-Any*310*311*312*313*314ry
-shipping_last_nameAbraintree.transaction_search.TransactionSearch.shipping_last_name
-Any*310*311*312*313*314rw
-shipping_locality@braintree.transaction_search.TransactionSearch.shipping_locality
-Any*310*311*312*313*314r}
-shipping_postal_codeCbraintree.transaction_search.TransactionSearch.shipping_postal_code
-Any*310*311*312*313*314rs
-shipping_region>braintree.transaction_search.TransactionSearch.shipping_region
-Any*310*311*312*313*314rÉ
-shipping_street_addressFbraintree.transaction_search.TransactionSearch.shipping_street_address
-Any*310*311*312*313*314ry
-paypal_payer_emailAbraintree.transaction_search.TransactionSearch.paypal_payer_email
-Any*310*311*312*313*314rw
-paypal_payment_id@braintree.transaction_search.TransactionSearch.paypal_payment_id
-Any*310*311*312*313*314rÉ
-paypal_authorization_idFbraintree.transaction_search.TransactionSearch.paypal_authorization_id
-Any*310*311*312*313*314rè
-credit_card_unique_identifierLbraintree.transaction_search.TransactionSearch.credit_card_unique_identifier
-Any*310*311*312*313*314re
-store_id7braintree.transaction_search.TransactionSearch.store_id
-Any*310*311*312*313*314rã
-credit_card_expiration_dateJbraintree.transaction_search.TransactionSearch.credit_card_expiration_date
-Any*310*311*312*313*314ry
-credit_card_numberAbraintree.transaction_search.TransactionSearch.credit_card_number
-Any*310*311*312*313*314r]
-user3braintree.transaction_search.TransactionSearch.user
-Any*310*311*312*313*314r[
-ids2braintree.transaction_search.TransactionSearch.ids
-Any*310*311*312*313*314r{
-merchant_account_idBbraintree.transaction_search.TransactionSearch.merchant_account_id
-Any*310*311*312*313*314rÉ
-payment_instrument_typeFbraintree.transaction_search.TransactionSearch.payment_instrument_type
-Any*310*311*312*313*314rg
-	store_ids8braintree.transaction_search.TransactionSearch.store_ids
-Any*310*311*312*313*314ro
-created_using<braintree.transaction_search.TransactionSearch.created_using
-Any*310*311*312*313*314r
-credit_card_card_typeDbraintree.transaction_search.TransactionSearch.credit_card_card_type
-Any*310*311*312*313*314rè
-credit_card_customer_locationLbraintree.transaction_search.TransactionSearch.credit_card_customer_location
-Any*310*311*312*313*314ra
-source5braintree.transaction_search.TransactionSearch.source
-Any*310*311*312*313*314ra
-status5braintree.transaction_search.TransactionSearch.status
-Any*310*311*312*313*314r]
-type3braintree.transaction_search.TransactionSearch.type
-Any*310*311*312*313*314ra
-refund5braintree.transaction_search.TransactionSearch.refund
-Any*310*311*312*313*314ra
-amount5braintree.transaction_search.TransactionSearch.amount
-Any*310*311*312*313*314rÖ
-authorization_expired_atGbraintree.transaction_search.TransactionSearch.authorization_expired_at
-Any*310*311*312*313*314ro
-authorized_at<braintree.transaction_search.TransactionSearch.authorized_at
-Any*310*311*312*313*314ri
+amount0r
 
-created_at9braintree.transaction_search.TransactionSearch.created_at
-Any*310*311*312*313*314rw
-disbursement_date@braintree.transaction_search.TransactionSearch.disbursement_date
-Any*310*311*312*313*314rm
-dispute_date;braintree.transaction_search.TransactionSearch.dispute_date
-Any*310*311*312*313*314rg
-	failed_at8braintree.transaction_search.TransactionSearch.failed_at
-Any*310*311*312*313*314r{
-gateway_rejected_atBbraintree.transaction_search.TransactionSearch.gateway_rejected_at
-Any*310*311*312*313*314r
-processor_declined_atDbraintree.transaction_search.TransactionSearch.processor_declined_at
-Any*310*311*312*313*314ri
+tax_amount0r
+discount_amount0r
+shipping_amount0r
+billing_details0r
+credit_card_details0r
+paypal_details0r
+paypal_here_details0r
+local_payment_details0r
+europe_bank_account_details0r
+us_bank_account0r
+apple_pay_details0r
+android_pay_card_details0r&
+"amex_express_checkout_card_details0r
+venmo_account_details0r
+visa_checkout_card_details0r
+masterpass_card_details0r
+samsung_pay_card_details0r
+sca_exemption_requested0r
+customer_details0r
+shipping_details0r
+add_ons0r
+	discounts0r
+status_history0r
+subscription_details0r
 
-settled_at9braintree.transaction_search.TransactionSearch.settled_at
-Any*310*311*312*313*314rã
-submitted_for_settlement_atJbraintree.transaction_search.TransactionSearch.submitted_for_settlement_at
-Any*310*311*312*313*314rg
-	voided_at8braintree.transaction_search.TransactionSearch.voided_at
-Any*310*311*312*313*314*±
-__annotations__,braintree.transaction_search.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+descriptor0r
+disbursement_details0r
+disputes0r
+authorization_adjustments0r
+payment_instrument_type0r
+	risk_data0r
+three_d_secure_info0r
+facilitated_details0r
+facilitator_details0r
+network_transaction_id0å
+	Constants"braintree.util.constants.Constants"builtins.object*J
+"get_all_constant_values_from_class*	
+klass0:builtins.staticmethodh…
+TransactionSearch"builtins.objectr
+billing_first_name0r
+billing_company0r
+billing_country_name0r
+billing_extended_address0r
+billing_last_name0r
+billing_locality0r
+billing_postal_code0r
+billing_region0r
+billing_street_address0r
+credit_card_cardholder_name0r
+currency0r
+customer_company0r
+customer_email0r
+customer_fax0r
+customer_first_name0r
+customer_id0r
+customer_last_name0r
+customer_phone0r
+customer_website0r
+id0r
+order_id0r
+payment_method_token0r 
+processor_authorization_code0r
+europe_bank_account_iban0r
+settlement_batch_id0r
+shipping_company0r
+shipping_country_name0r
+shipping_extended_address0r
+shipping_first_name0r
+shipping_last_name0r
+shipping_locality0r
+shipping_postal_code0r
+shipping_region0r
+shipping_street_address0r
+paypal_payer_email0r
+paypal_payment_id0r
+paypal_authorization_id0r!
+credit_card_unique_identifier0r
+store_id0r
+credit_card_expiration_date0r
+credit_card_number0r
+user0r
+ids0r
+merchant_account_id0r
+payment_instrument_type0r
+	store_ids0r
+created_using0r
+credit_card_card_type0r!
+credit_card_customer_location0r
+
+source0r
+
+status0r
+type0r
+
+refund0r
+
+amount0r
+authorization_expired_at0r
+authorized_at0r
+
+created_at0r
+disbursement_date0r
+dispute_date0r
+	failed_at0r
+gateway_rejected_at0r
+processor_declined_at0r
+
+settled_at0r
+submitted_for_settlement_at0r
+	voided_at0*
+__annotations__022"_typeshed.Incomplete22222#"!braintree.transaction.Transaction2"builtins.str2"builtins.dict2

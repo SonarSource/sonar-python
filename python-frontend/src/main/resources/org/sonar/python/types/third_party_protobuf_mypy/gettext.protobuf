@@ -1,511 +1,199 @@
 
-gettext⁄
-_TranslationsReadergettext._TranslationsReader"builtins.object*ê
-read gettext._TranslationsReader.read" 
-builtins.bytes"builtins.bytes*D
-self:
-gettext._TranslationsReader"gettext._TranslationsReader8Xı
-NullTranslationsgettext.NullTranslations"builtins.object*Ù
-__init__!gettext.NullTranslations.__init__"
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*{
-fpq
-'Union[gettext._TranslationsReader,None]:
-gettext._TranslationsReader"gettext._TranslationsReader
-None *∑
-_parsegettext.NullTranslations._parse"
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*B
-fp:
-gettext._TranslationsReader"gettext._TranslationsReader*√
-add_fallback%gettext.NullTranslations.add_fallback"
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*B
-fallback4
-gettext.NullTranslations"gettext.NullTranslations*¥
-gettext gettext.NullTranslations.gettext"
-builtins.str"builtins.str*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*)
-message
-builtins.str"builtins.str*Ñ
-ngettext!gettext.NullTranslations.ngettext"
-builtins.str"builtins.str*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.int*·
-pgettext!gettext.NullTranslations.pgettext"
-builtins.str"builtins.str*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*)
-context
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str*±
-	npgettext"gettext.NullTranslations.npgettext"
-builtins.str"builtins.str*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*)
-context
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.int*‹
-infogettext.NullTranslations.info"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*±
-charset gettext.NullTranslations.charset"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*¡
-output_charset'gettext.NullTranslations.output_charset"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations0*∏
-set_output_charset+gettext.NullTranslations.set_output_charset"
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*)
-charset
-builtins.str"builtins.str0*∏
-lgettext!gettext.NullTranslations.lgettext"
-builtins.str"builtins.str*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*)
-message
-builtins.str"builtins.str0*à
-	lngettext"gettext.NullTranslations.lngettext"
-builtins.str"builtins.str*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.int0*ê
-install gettext.NullTranslations.install"
-None*>
-self4
-gettext.NullTranslations"gettext.NullTranslations*ò
-namesä
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None §
-GNUTranslationsgettext.GNUTranslations"gettext.NullTranslationsrJ
-LE_MAGIC gettext.GNUTranslations.LE_MAGIC
-builtins.int"builtins.intrJ
-BE_MAGIC gettext.GNUTranslations.BE_MAGIC
-builtins.int"builtins.intrH
-CONTEXTgettext.GNUTranslations.CONTEXT
-builtins.str"builtins.strr|
-VERSIONS gettext.GNUTranslations.VERSIONSN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequenceí
+gettext@
+_TranslationsReader"builtins.object*
+read*
 
-textdomaingettext.textdomain"
-builtins.str"builtins.str*R
-domainD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None √
-bindtextdomaingettext.bindtextdomain"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None è
-dgettextgettext.dgettext"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.strﬂ
-	dngettextgettext.dngettext"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.intc
-gettextgettext.gettext"
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str≥
-ngettextgettext.ngettext"
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.intê
-pgettextgettext.pgettext"
-builtins.str"builtins.str*)
-context
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.strº
-	dpgettextgettext.dpgettext"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*)
-context
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str‡
-	npgettextgettext.npgettext"
-builtins.str"builtins.str*)
-context
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.intå
+self(8X¢
+NullTranslations"builtins.object*$
+__init__*
 
-dnpgettextgettext.dnpgettext"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*)
-context
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.intg
-lgettextgettext.lgettext"
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str0ì
-	ldgettextgettext.ldgettext"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str0∑
-	lngettextgettext.lngettext"
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.int0„
+self(*
 
-ldngettextgettext.ldngettext"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*(
-msgid1
-builtins.str"builtins.str*(
-msgid2
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.int0Ÿ
-bind_textdomain_codesetgettext.bind_textdomain_codeset"
-builtins.str"builtins.str*(
-domain
-builtins.str"builtins.str*S
-codesetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0ã
-c2pygettext.c2py"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*(
-plural
-builtins.str"builtins.str"á
-findgettext.findœ
-findgettext.find"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ô
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *E
-all:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX”
-findgettext.find"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ô
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *C
-all:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadXœ
-findgettext.find"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*(
-domain
-builtins.str"builtins.str*Œ
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None*ó
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None*C
-all:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadXˆ
-findgettext.find"
-Any*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ô
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *)
-all
-builtins.bool"builtins.bool 0:typing.overloadX"˛
-translationgettext.translationΩ
-translationgettext.translation"2
-gettext.GNUTranslations"gettext.GNUTranslations*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ô
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *
-class_
-None *J
-fallback:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *S
-codesetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX∫
-translationgettext.translation"n
-gettext._NullTranslationsT4
-gettext.NullTranslations"gettext.NullTranslations"gettext.NullTranslations*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ô
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *W
-class_K
-CallableType[builtins.function]&
-builtins.function"builtins.function*J
-fallback:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *S
-codesetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX∂
-translationgettext.translation"n
-gettext._NullTranslationsT4
-gettext.NullTranslations"gettext.NullTranslations"gettext.NullTranslations*(
-domain
-builtins.str"builtins.str*Œ
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None*ó
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None*W
-class_K
-CallableType[builtins.function]&
-builtins.function"builtins.function*J
-fallback:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *S
-codesetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX£
-translationgettext.translation"4
-gettext.NullTranslations"gettext.NullTranslations*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ô
-	languagesá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *ï
-class_Ü
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *.
-fallback
-builtins.bool"builtins.bool *S
-codesetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX"ò
-installgettext.install—
-installgettext.install"
-None*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *ò
-namesä
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None 0:typing.overloadXÄ
-installgettext.install"
-None*
-builtins.str"builtins.str*¡æ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None*FD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*ò
-namesä
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None 0:typing.overloadX§
-installgettext.install"
-None*(
-domain
-builtins.str"builtins.str*–
-	localediræ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *Q
-codesetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*ò
-namesä
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None 0:typing.overloadX*É
-__annotations__gettext.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*f
-__all__gettext.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*z
-Cataloggettext.Catalog^
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.function
+fp (* 
+_parse*
+
+self(*
+fp(*,
+add_fallback*
+
+self(*
+fallback(*&
+gettext*
+
+self(*
+message(*=
+ngettext*
+
+self(*
+msgid1(*
+msgid2(*
+n(*6
+pgettext*
+
+self(*
+context(*
+message(*M
+	npgettext*
+
+self(*
+context(*
+msgid1(*
+msgid2(*
+n(*
+info*
+
+self(*
+charset	*
+
+self(* 
+output_charset	*
+
+self(0*3
+set_output_charset*
+
+self(*
+charset(0*)
+lgettext*
+
+self(*
+message(0*@
+	lngettext*
+
+self(*
+msgid1(*
+msgid2(*
+n(0*&
+install*
+
+self(*
+names (b
+GNUTranslations"gettext.NullTranslationsr
+LE_MAGIC0r
+BE_MAGIC0r
+CONTEXT0r
+VERSIONS0
+
+textdomain*
+domain (	3
+bindtextdomain*
+domain(*
+	localedir ()
+dgettext*
+domain(*
+message(@
+	dngettext*
+domain(*
+msgid1(*
+msgid2(*
+n(
+gettext*
+message(1
+ngettext*
+msgid1(*
+msgid2(*
+n(*
+pgettext*
+context(*
+message(9
+	dpgettext*
+domain(*
+context(*
+message(A
+	npgettext*
+context(*
+msgid1(*
+msgid2(*
+n(P
+
+dnpgettext*
+domain(*
+context(*
+msgid1(*
+msgid2(*
+n(
+lgettext*
+message(0,
+	ldgettext*
+domain(*
+message(04
+	lngettext*
+msgid1(*
+msgid2(*
+n(0C
+
+ldngettext*
+domain(*
+msgid1(*
+msgid2(*
+n(0<
+bind_textdomain_codeset*
+domain(*
+codeset (	0
+c2py*
+plural("˛
+find^
+find	*
+domain(*
+	localedir (*
+	languages (*
+all (0:typing.overloadX\
+find*
+domain(*
+	localedir (*
+	languages (*	
+all(0:typing.overloadXX
+find*
+domain(*
+	localedir(*
+	languages(*	
+all(0:typing.overloadX^
+find*
+domain(*
+	localedir (*
+	languages (*
+all (0:typing.overloadX"Ω
+translationã
+translation*
+domain(*
+	localedir (*
+	languages (*
+class_ (*
+fallback (*
+codeset (	0:typing.overloadXâ
+translation*
+domain(*
+	localedir (*
+	languages (*
+class_(*
+fallback (*
+codeset (	0:typing.overloadXÖ
+translation*
+domain(*
+	localedir(*
+	languages(*
+class_(*
+fallback (*
+codeset (	0:typing.overloadXã
+translation*
+domain(*
+	localedir (*
+	languages (*
+class_ (*
+fallback (*
+codeset (	0:typing.overloadX"˘
+installP
+install*
+domain(*
+	localedir (*
+names (0:typing.overloadX;
+install*(*(*(	*
+names (0:typing.overloadX_
+install*
+domain(*
+	localedir (*
+codeset(	*
+names (0:typing.overloadX*
+__annotations__0*
+__all__0*
+Catalog02"builtins.bytes2"gettext._TranslationsReader22"gettext.NullTranslations222"builtins.str2"builtins.int2"builtins.dict2222"typing.Container222
+2"typing.Sequence22"os.PathLike2222"_typeshed.StrPath2222"builtins.function222"typing.Iterable2222"builtins.bool2	22"builtins.list222"gettext.GNUTranslations2"gettext.NullTranslations2222"builtins.dict22"builtins.function2

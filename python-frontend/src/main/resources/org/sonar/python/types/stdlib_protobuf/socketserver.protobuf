@@ -1,795 +1,293 @@
 
-socketserver≥C
-_socketsocket.socket"_socket.socket*Ù
-__init__socket.socket.__init__"
-None*(
-self
-socket.socket"socket.socket*Ü
-familyx
-(Union[socket.AddressFamily,builtins.int],
-socket.AddressFamily"socket.AddressFamily
-builtins.int"builtins.int *{
-typeo
-%Union[socket.SocketKind,builtins.int]&
-socket.SocketKind"socket.SocketKind
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *R
-filenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*—
-	__enter__socket.socket.__enter__"G
-socket.socket.Self
-socket.socket"socket.socket"socket.socket(*IG
-socket.socket.Self
-socket.socket"socket.socket"socket.socket(z310z311z312z313z314*è
-__exit__socket.socket.__exit__"
-None* 
-socket.socket"socket.socket*&"
-builtins.object"builtins.objectz310z311z312z313z314*Õ
-dupsocket.socket.dup"G
-socket.socket.Self
-socket.socket"socket.socket"socket.socket(*Q
-selfG
-socket.socket.Self
-socket.socket"socket.socket"socket.socket(z310z311z312z313z314*‹
-acceptsocket.socket.accept"y
-#Tuple[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_socket._RetAddress*(
-self
-socket.socket"socket.socketz310z311z312z313z314*∫
-sendfilesocket.socket.sendfile"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*6
-file,
-socket._SendableFile"socket._SendableFile**
-offset
-builtins.int"builtins.int *Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*¶
-familysocket.socket.family",
-socket.AddressFamily"socket.AddressFamily*(
-self
-socket.socket"socket.socket0:builtins.property`z310z311z312z313z314*ú
-typesocket.socket.type"&
-socket.SocketKind"socket.SocketKind*(
-self
-socket.socket"socket.socket0:builtins.property`z310z311z312z313z314*ì
-get_inheritablesocket.socket.get_inheritable"
-builtins.bool"builtins.bool*(
-self
-socket.socket"socket.socketz310z311z312z313z314*Æ
-set_inheritablesocket.socket.set_inheritable"
-None*(
-self
-socket.socket"socket.socket*/
-inheritable
-builtins.bool"builtins.boolz310z311z312z313z3142ó1
-makefilesocket.socket.makefile 
+socketserverﬂ	
+_socketsocket.socket"_socket.socket*U
+__init__*
 
-makefilesocket.socket.makefile""
-socket.SocketIO"socket.SocketIO*(
-self
-socket.socket"socket.socket*˚
-mode
-¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*F
-	buffering7
-Literal[builtins.int]	
-builtins.int"builtins.int*T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX«
-makefilesocket.socket.makefile"&
-io.BufferedRWPair"io.BufferedRWPair*(
-self
-socket.socket"socket.socket*
-modeÂ
-äUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*…
-	buffering∑
-7Union[Literal[builtins.int],Literal[builtins.int],None]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadXä
-makefilesocket.socket.makefile"&
-io.BufferedReader"io.BufferedReader*(
-self
-socket.socket"socket.socket*≥
-mode®
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*…
-	buffering∑
-7Union[Literal[builtins.int],Literal[builtins.int],None]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadXä
-makefilesocket.socket.makefile"&
-io.BufferedWriter"io.BufferedWriter*(
-self
-socket.socket"socket.socket*≥
-mode®
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*…
-	buffering∑
-7Union[Literal[builtins.int],Literal[builtins.int],None]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX£
+self(*
+family (*
+type (*
+proto (*
+fileno (*
+	__enter__	*(	*
+__exit__*(*(
+*
+dup	*
 
-makefilesocket.socket.makefile"
-	io.IOBase"	io.IOBase*(
-self
-socket.socket"socket.socket*˚
-mode
-¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*+
-	buffering
-builtins.int"builtins.int*T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadXÇ
-makefilesocket.socket.makefile"$
-io.TextIOWrapper"io.TextIOWrapper*(
-self
-socket.socket"socket.socket*¢
-modeï
-tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *U
-	bufferingD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX"310"311"312"313"314j310j311j312j313j314µK
+self(	*
+accept*
 
-BaseServersocketserver.BaseServer"builtins.object*ù
-__init__ socketserver.BaseServer.__init__"
-None*y
-selfo
-socketserver.BaseServer.Self2
-socketserver.BaseServer"socketserver.BaseServer"socketserver.BaseServer(*Í
+self(*C
+sendfile*
 
-server_address’
+self(*
 
- TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]Ò
-øUnion[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._Address*d
-RequestHandlerClassK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*ù
-filenosocketserver.BaseServer.fileno"
-builtins.int"builtins.int*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*ô
-handle_request&socketserver.BaseServer.handle_request"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*Œ
-serve_forever%socketserver.BaseServer.serve_forever"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*5
-poll_interval 
-builtins.float"builtins.float z310z311z312z313z314*ç
-shutdown socketserver.BaseServer.shutdown"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*ï
-server_close$socketserver.BaseServer.server_close"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*ú
-finish_request&socketserver.BaseServer.finish_request"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*Ø
-get_request#socketserver.BaseServer.get_request"$
-Tuple[Any,Any]
-Any
-Any*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*ò
-handle_error$socketserver.BaseServer.handle_error"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*ô
-handle_timeout&socketserver.BaseServer.handle_timeout"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*û
-process_request'socketserver.BaseServer.process_request"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*õ
-server_activate'socketserver.BaseServer.server_activate"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*ì
-server_bind#socketserver.BaseServer.server_bind"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*≤
-verify_request&socketserver.BaseServer.verify_request"
-builtins.bool"builtins.bool*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*´
-	__enter__!socketserver.BaseServer.__enter__"o
-socketserver.BaseServer.Self2
-socketserver.BaseServer"socketserver.BaseServer"socketserver.BaseServer(*qo
-socketserver.BaseServer.Self2
-socketserver.BaseServer"socketserver.BaseServer"socketserver.BaseServer(z310z311z312z313z314*ﬁ
-__exit__ socketserver.BaseServer.__exit__"
-None*42
-socketserver.BaseServer"socketserver.BaseServer*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*õ
-service_actions'socketserver.BaseServer.service_actions"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*⁄
-shutdown_request(socketserver.BaseServer.shutdown_request"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestTypez310z311z312z313z314*‘
-close_request%socketserver.BaseServer.close_request"
-None*<
-self2
-socketserver.BaseServer"socketserver.BaseServer*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestTypez310z311z312z313z314j310j311j312j313j314ro
-address_family&socketserver.BaseServer.address_family
-builtins.int"builtins.int*310*311*312*313*314r©
-server_address&socketserver.BaseServer.server_address’
+file(*
+offset (*
+count (*-
+family*
 
- TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]Ò
-øUnion[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._Address*310*311*312*313*314ra
-socketsocketserver.BaseServer.socket
-socket.socket"socket.socket*310*311*312*313*314r{
-allow_reuse_address+socketserver.BaseServer.allow_reuse_address
-builtins.bool"builtins.bool*310*311*312*313*314rw
-request_queue_size*socketserver.BaseServer.request_queue_size
-builtins.int"builtins.int*310*311*312*313*314ri
-socket_type#socketserver.BaseServer.socket_type
-builtins.int"builtins.int*310*311*312*313*314rè
-timeoutsocketserver.BaseServer.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*310*311*312*313*314r®
-RequestHandlerClass+socketserver.BaseServer.RequestHandlerClassK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314±
-	TCPServersocketserver.TCPServer"socketserver.BaseServer*Ö
-__init__socketserver.TCPServer.__init__"
-None*u
-selfk
-socketserver.TCPServer.Self0
-socketserver.TCPServer"socketserver.TCPServer"socketserver.TCPServer(*û
-server_addressâ
-TTypeAlias[Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]]ë
-ITuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]£
-5Union[builtins.str,builtins.bytes,builtins.bytearray]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray
-builtins.int"builtins.int"socketserver._AfInetAddress*d
-RequestHandlerClassK
-CallableType[builtins.function]&
-builtins.function"builtins.function*7
-bind_and_activate
-builtins.bool"builtins.bool z310z311z312z313z314*Å
-get_request"socketserver.TCPServer.get_request"y
-#Tuple[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_socket._RetAddress*:
-self0
-socketserver.TCPServer"socketserver.TCPServerz310z311z312z313z314j310j311j312j313j314r‹
-server_address%socketserver.TCPServer.server_addressâ
-TTypeAlias[Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]]ë
-ITuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]£
-5Union[builtins.str,builtins.bytes,builtins.bytearray]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray
-builtins.int"builtins.int"socketserver._AfInetAddress*310*311*312*313*314ro
-allow_reuse_port'socketserver.TCPServer.allow_reuse_port
-builtins.bool"builtins.bool*311*312*313*314¨
-	UDPServersocketserver.UDPServer"socketserver.TCPServer*„
-get_request"socketserver.UDPServer.get_request"⁄
-9Tuple[Tuple[builtins.bytes,socket.socket],TypeAlias[Any]]i
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_socket._RetAddress*:
-self0
-socketserver.UDPServer"socketserver.UDPServerz310z311z312z313z314j310j311j312j313j314rp
-max_packet_size&socketserver.UDPServer.max_packet_size
-builtins.int"builtins.int*310*311*312*313*314Ù
-UnixStreamServersocketserver.UnixStreamServer"socketserver.BaseServer*©
-__init__&socketserver.UnixStreamServer.__init__"
-None*í
-selfá
-"socketserver.UnixStreamServer.Self>
-socketserver.UnixStreamServer"socketserver.UnixStreamServer"socketserver.UnixStreamServer(*ù
+self(0:builtins.property`*+
+type*
 
-server_addressà
+self(0:builtins.property`*
+get_inheritable*
 
-∂TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]≠
-´Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"socketserver._AfUnixAddress*d
-RequestHandlerClassK
-CallableType[builtins.function]&
-builtins.function"builtins.function*7
-bind_and_activate
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314r‚
+self(*2
+set_inheritable*
 
-server_address,socketserver.UnixStreamServer.server_addressà
+self(*
+inheritable(2è
+makefile}
+makefile*
 
-∂TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]≠
-´Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"socketserver._AfUnixAddress*310*311*312*313*314Ñ
-UnixDatagramServersocketserver.UnixDatagramServer"socketserver.BaseServer*≥
-__init__(socketserver.UnixDatagramServer.__init__"
-None*ö
-selfè
-$socketserver.UnixDatagramServer.SelfB
-socketserver.UnixDatagramServer"socketserver.UnixDatagramServer"socketserver.UnixDatagramServer(*ù
+self(*
 
-server_addressà
+mode(*
+	buffering(*
+encoding (*
+errors (*
+newline (0:typing.overloadX
+makefile*
 
-∂TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]≠
-´Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"socketserver._AfUnixAddress*d
-RequestHandlerClassK
-CallableType[builtins.function]&
-builtins.function"builtins.function*7
-bind_and_activate
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314r‰
+self(*
 
-server_address.socketserver.UnixDatagramServer.server_addressà
+mode(*
+	buffering (*
+encoding (*
+errors (*
+newline (0:typing.overloadX
+makefile*
 
-∂TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]≠
-´Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"socketserver._AfUnixAddress*310*311*312*313*314Ñ
-ForkingMixInsocketserver.ForkingMixIn"builtins.object*”
-collect_children*socketserver.ForkingMixIn.collect_children"
-None*@
-self6
-socketserver.ForkingMixIn"socketserver.ForkingMixIn*.
-blocking
-builtins.bool"builtins.bool z310z311z312z313z314*ü
-handle_timeout(socketserver.ForkingMixIn.handle_timeout"
-None*@
-self6
-socketserver.ForkingMixIn"socketserver.ForkingMixInz310z311z312z313z314*°
-service_actions)socketserver.ForkingMixIn.service_actions"
-None*@
-self6
-socketserver.ForkingMixIn"socketserver.ForkingMixInz310z311z312z313z314*§
-process_request)socketserver.ForkingMixIn.process_request"
-None*@
-self6
-socketserver.ForkingMixIn"socketserver.ForkingMixIn*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*õ
-server_close&socketserver.ForkingMixIn.server_close"
-None*@
-self6
-socketserver.ForkingMixIn"socketserver.ForkingMixInz310z311z312z313z314j310j311j312j313j314rë
-timeout!socketserver.ForkingMixIn.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*310*311*312*313*314r’
-active_children)socketserver.ForkingMixIn.active_children~
-&Union[builtins.set[builtins.int],None]H
-builtins.set[builtins.int]
-builtins.int"builtins.int"builtins.set
-None*310*311*312*313*314rm
-max_children&socketserver.ForkingMixIn.max_children
-builtins.int"builtins.int*310*311*312*313*314rs
-block_on_close(socketserver.ForkingMixIn.block_on_close
-builtins.bool"builtins.bool*310*311*312*313*314—
-ThreadingMixInsocketserver.ThreadingMixIn"builtins.object*∏
-process_request_thread2socketserver.ThreadingMixIn.process_request_thread"
-None*D
-self:
-socketserver.ThreadingMixIn"socketserver.ThreadingMixIn*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*™
-process_request+socketserver.ThreadingMixIn.process_request"
-None*D
-self:
-socketserver.ThreadingMixIn"socketserver.ThreadingMixIn*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddressz310z311z312z313z314*°
-server_close(socketserver.ThreadingMixIn.server_close"
-None*D
-self:
-socketserver.ThreadingMixIn"socketserver.ThreadingMixInz310z311z312z313z314j310j311j312j313j314ru
-daemon_threads*socketserver.ThreadingMixIn.daemon_threads
-builtins.bool"builtins.bool*310*311*312*313*314ru
-block_on_close*socketserver.ThreadingMixIn.block_on_close
-builtins.bool"builtins.bool*310*311*312*313*314}
-ForkingTCPServersocketserver.ForkingTCPServer"socketserver.ForkingMixIn"socketserver.TCPServerj310j311j312j313j314}
-ForkingUDPServersocketserver.ForkingUDPServer"socketserver.ForkingMixIn"socketserver.UDPServerj310j311j312j313j314É
-ThreadingTCPServersocketserver.ThreadingTCPServer"socketserver.ThreadingMixIn"socketserver.TCPServerj310j311j312j313j314É
-ThreadingUDPServersocketserver.ThreadingUDPServer"socketserver.ThreadingMixIn"socketserver.UDPServerj310j311j312j313j314ò
-ThreadingUnixStreamServer&socketserver.ThreadingUnixStreamServer"socketserver.ThreadingMixIn"socketserver.UnixStreamServerj310j311j312j313j314û
-ThreadingUnixDatagramServer(socketserver.ThreadingUnixDatagramServer"socketserver.ThreadingMixIn"socketserver.UnixDatagramServerj310j311j312j313j314ó
-BaseRequestHandlersocketserver.BaseRequestHandler"builtins.object*Ë
-__init__(socketserver.BaseRequestHandler.__init__"
-None*L
-selfB
-socketserver.BaseRequestHandler"socketserver.BaseRequestHandler*∫
-request¨
-CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
-8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
-socket.socket"socket.socketi
-#Tuple[builtins.bytes,socket.socket] 
-builtins.bytes"builtins.bytes
-socket.socket"socket.socket"socketserver._RequestType*D
-client_address0
-TypeAlias[Any]
-Any"_socket._RetAddress*>
-server2
-socketserver.BaseServer"socketserver.BaseServerz310z311z312z313z314*ü
-setup%socketserver.BaseRequestHandler.setup"
-None*L
-selfB
-socketserver.BaseRequestHandler"socketserver.BaseRequestHandlerz310z311z312z313z314*°
-handle&socketserver.BaseRequestHandler.handle"
-None*L
-selfB
-socketserver.BaseRequestHandler"socketserver.BaseRequestHandlerz310z311z312z313z314*°
-finish&socketserver.BaseRequestHandler.finish"
-None*L
-selfB
-socketserver.BaseRequestHandler"socketserver.BaseRequestHandlerz310z311z312z313z314j310j311j312j313j314rT
-request'socketserver.BaseRequestHandler.request
-Any*310*311*312*313*314rã
-client_address.socketserver.BaseRequestHandler.client_address0
-TypeAlias[Any]
-Any"_socket._RetAddress*310*311*312*313*314r}
-server&socketserver.BaseRequestHandler.server2
-socketserver.BaseServer"socketserver.BaseServer*310*311*312*313*314π
-StreamRequestHandler!socketserver.StreamRequestHandler"socketserver.BaseRequestHandlerj310j311j312j313j314rm
-rbufsize*socketserver.StreamRequestHandler.rbufsize
-builtins.int"builtins.int*310*311*312*313*314rm
-wbufsize*socketserver.StreamRequestHandler.wbufsize
-builtins.int"builtins.int*310*311*312*313*314rô
-timeout)socketserver.StreamRequestHandler.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*310*311*312*313*314rç
-disable_nagle_algorithm9socketserver.StreamRequestHandler.disable_nagle_algorithm
-builtins.bool"builtins.bool*310*311*312*313*314r\
+self(*
 
-connection,socketserver.StreamRequestHandler.connection
-Any*310*311*312*313*314rm
-rfile'socketserver.StreamRequestHandler.rfile"
-typing.BinaryIO"typing.BinaryIO*310*311*312*313*314rm
-wfile'socketserver.StreamRequestHandler.wfile"
-typing.BinaryIO"typing.BinaryIO*310*311*312*313*314∑
-DatagramRequestHandler#socketserver.DatagramRequestHandler"socketserver.BaseRequestHandlerj310j311j312j313j314rm
-packet*socketserver.DatagramRequestHandler.packet
-socket.socket"socket.socket*310*311*312*313*314rm
-socket*socketserver.DatagramRequestHandler.socket
-socket.socket"socket.socket*310*311*312*313*314ro
-rfile)socketserver.DatagramRequestHandler.rfile"
-typing.BinaryIO"typing.BinaryIO*310*311*312*313*314ro
-wfile)socketserver.DatagramRequestHandler.wfile"
-typing.BinaryIO"typing.BinaryIO*310*311*312*313*314*°
-__annotations__socketserver.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Ñ
-__all__socketserver.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+mode(*
+	buffering (*
+encoding (*
+errors (*
+newline (0:typing.overloadX
+makefile*
+
+self(*
+
+mode(*
+	buffering (*
+encoding (*
+errors (*
+newline (0:typing.overloadX}
+makefile*
+
+self(*
+
+mode(*
+	buffering(*
+encoding (*
+errors (*
+newline (0:typing.overloadXÅ
+makefile*
+
+self(*
+mode (*
+	buffering (*
+encoding (*
+errors (*
+newline (0:typing.overloadXÈ
+
+BaseServer"builtins.object*I
+__init__*
+
+self( *
+server_address(.*
+RequestHandlerClass(0*
+fileno*
+
+self(*
+handle_request*
+
+self(*4
+serve_forever*
+
+self(*
+poll_interval (1*
+shutdown*
+
+self(*
+server_close*
+
+self(*C
+finish_request*
+
+self(*
+request(4*
+client_address(*
+get_request5*
+
+self(*A
+handle_error*
+
+self(*
+request(4*
+client_address(*
+handle_timeout*
+
+self(*D
+process_request*
+
+self(*
+request(4*
+client_address(*
+server_activate*
+
+self(*
+server_bind*
+
+self(*C
+verify_request*
+
+self(*
+request(4*
+client_address(*
+	__enter__ *( *
+__exit__*(*(8*(9*(;*
+service_actions*
+
+self(*/
+shutdown_request*
+
+self(*
+request(4*,
+close_request*
+
+self(*
+request(4r
+address_family0r
+server_address0.r
+
+socket0r
+allow_reuse_address0r
+request_queue_size0r
+socket_type0r
+timeout0<r
+RequestHandlerClass00Â
+	TCPServer"socketserver.BaseServer*d
+__init__*
+
+self(>*
+server_address(A*
+RequestHandlerClass(0*
+bind_and_activate (*
+get_request*
+
+self(=r
+server_address0Ar(
+allow_reuse_port*311*312*313*3140U
+	UDPServer"socketserver.TCPServer*
+get_requestB*
+
+self(Cr
+max_packet_size0•
+UnixStreamServer"socketserver.BaseServer*d
+__init__*
+
+self(E*
+server_address(G*
+RequestHandlerClass(0*
+bind_and_activate (r
+server_address0Gß
+UnixDatagramServer"socketserver.BaseServer*d
+__init__*
+
+self(I*
+server_address(G*
+RequestHandlerClass(0*
+bind_and_activate (r
+server_address0G¿
+ForkingMixIn"builtins.object*2
+collect_children*
+
+self(J*
+blocking (*
+handle_timeout*
+
+self(J*
+service_actions*
+
+self(J*D
+process_request*
+
+self(J*
+request(4*
+client_address(*
+server_close*
+
+self(Jr
+timeout0<r
+active_children0Lr
+max_children0r
+block_on_close0˙
+ThreadingMixIn"builtins.object*K
+process_request_thread*
+
+self(M*
+request(4*
+client_address(*D
+process_request*
+
+self(M*
+request(4*
+client_address(*
+server_close*
+
+self(Mr
+daemon_threads0r
+block_on_close0E
+ForkingTCPServer"socketserver.ForkingMixIn"socketserver.TCPServerE
+ForkingUDPServer"socketserver.ForkingMixIn"socketserver.UDPServerI
+ThreadingTCPServer"socketserver.ThreadingMixIn"socketserver.TCPServerI
+ThreadingUDPServer"socketserver.ThreadingMixIn"socketserver.UDPServerW
+ThreadingUnixStreamServer"socketserver.ThreadingMixIn"socketserver.UnixStreamServer[
+ThreadingUnixDatagramServer"socketserver.ThreadingMixIn"socketserver.UnixDatagramServerÊ
+BaseRequestHandler"builtins.object*K
+__init__*
+
+self(N*
+request(4*
+client_address(*
+server(*
+setup*
+
+self(N*
+handle*
+
+self(N*
+finish*
+
+self(Nr
+request0r
+client_address0r
+
+server0£
+StreamRequestHandler"socketserver.BaseRequestHandlerr
+rbufsize0r
+wbufsize0r
+timeout0<r
+disable_nagle_algorithm0r
+
+connection0r	
+rfile0Or	
+wfile0Og
+DatagramRequestHandler"socketserver.BaseRequestHandlerr
+
+packet0r
+
+socket0r	
+rfile0Or	
+wfile0O*
+__annotations__0P*
+__all__0Q22"socket.socket2"socket.AddressFamily2"builtins.int222"socket.SocketKind22222*
+socket.socket.Self"socket.socket(22"builtins.object22"_socket._RetAddress2222"socket._SendableFile2"builtins.bool2"socket.SocketIO2"builtins.str2	2222	2222"io.BufferedRWPair2
+2222"io.BufferedReader222"io.BufferedWriter2"	io.IOBase2"io.TextIOWrapper2	22"socketserver.BaseServer2>
+socketserver.BaseServer.Self"socketserver.BaseServer(22"builtins.tuple22"builtins.bytes2"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2#$%&'(2 "_typeshed.WriteableBuffer2)22"*2"_typeshed.ReadableBuffer2+22!,2"_socket._Address2-2"builtins.function22/2"builtins.float22"2222 "socketserver._RequestType23222"builtins.BaseException2"type262272262"types.TracebackType22:2212"socketserver.TCPServer2<
+socketserver.TCPServer.Self"socketserver.TCPServer(2=22"#22?2""socketserver._AfInetAddress2@2222"socketserver.UDPServer2"socketserver.UnixStreamServer2J
+"socketserver.UnixStreamServer.Self"socketserver.UnixStreamServer(2D22,2""socketserver._AfUnixAddress2F2!"socketserver.UnixDatagramServer2N
+$socketserver.UnixDatagramServer.Self"socketserver.UnixDatagramServer(2H2"socketserver.ForkingMixIn2"builtins.set222K2"socketserver.ThreadingMixIn2!"socketserver.BaseRequestHandler2"typing.BinaryIO2"builtins.dict22"builtins.list2

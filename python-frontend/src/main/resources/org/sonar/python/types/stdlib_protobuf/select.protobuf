@@ -1,220 +1,101 @@
 
-selectº
-pollselect.poll"builtins.object*Ô
-registerselect.poll.register"
-None*$
-self
-select.poll"select.poll*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*-
-	eventmask
-builtins.int"builtins.int z310z311z312z313z314*È
-modifyselect.poll.modify"
-None*$
-self
-select.poll"select.poll*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*+
-	eventmask
-builtins.int"builtins.intz310z311z312z313z314*ƒ
+selectŒ
+poll"builtins.object*5
+register*
 
-unregisterselect.poll.unregister"
-None*$
-self
-select.poll"select.poll*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLikez310z311z312z313z314*◊
-pollselect.poll.poll"¢
-/builtins.list[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*$
-self
-select.poll"select.poll*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314j310j311j312j313j314Ú
-epollselect.epoll"builtins.object*≈
-__init__select.epoll.__init__"
-None*&
-self
-select.epoll"select.epoll*,
-sizehint
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int z310z311z312z313z314*°
-	__enter__select.epoll.__enter__"
-select.epoll"select.epoll*EC
-select.epoll.Self
-select.epoll"select.epoll"select.epoll(z310z311z312z313z314*√
-__exit__select.epoll.__exit__"
-None*
-select.epoll"select.epoll*ïê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None *fb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None *]Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None z310z311z312z313z314*f
-closeselect.epoll.close"
-None*&
-self
-select.epoll"select.epollz310z311z312z313z314*|
-filenoselect.epoll.fileno"
-builtins.int"builtins.int*&
-self
-select.epoll"select.epollz310z311z312z313z314*Ú
-registerselect.epoll.register"
-None*&
-self
-select.epoll"select.epoll*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*-
-	eventmask
-builtins.int"builtins.int z310z311z312z313z314*Ï
-modifyselect.epoll.modify"
-None*&
-self
-select.epoll"select.epoll*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*+
-	eventmask
-builtins.int"builtins.intz310z311z312z313z314*«
+self(*
+fd(*
+	eventmask (*1
+modify*
 
-unregisterselect.epoll.unregister"
-None*&
-self
-select.epoll"select.epoll*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLikez310z311z312z313z314*â
-pollselect.epoll.poll"¢
-/builtins.list[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*&
-self
-select.epoll"select.epoll*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *-
-	maxevents
-builtins.int"builtins.int z310z311z312z313z314*Ñ
-fromfdselect.epoll.fromfd"
-select.epoll"select.epoll*C
-cls:
-Type[select.epoll]
-select.epoll"select.epoll"type*ŒÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike0:builtins.classmethodpz310z311z312z313z3148j310j311j312j313j314rV
-closedselect.epoll.closed
-builtins.bool"builtins.bool*310*311*312*313*314Ï
-selectselect.select"Õ
-?Tuple[builtins.list[Any],builtins.list[Any],builtins.list[Any]],
-builtins.list[Any]
-Any"builtins.list,
-builtins.list[Any]
-Any"builtins.list,
-builtins.list[Any]
-Any"builtins.list*20
-typing.Iterable[Any]
-Any"typing.Iterable*20
-typing.Iterable[Any]
-Any"typing.Iterable*20
-typing.Iterable[Any]
-Any"typing.Iterable*NJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*õ
-__annotations__select.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*R
-PIPE_BUFselect.PIPE_BUF
-builtins.int"builtins.int*310*311*312*313*314*P
-POLLERRselect.POLLERR
-builtins.int"builtins.int*310*311*312*313*314*P
-POLLHUPselect.POLLHUP
-builtins.int"builtins.int*310*311*312*313*314*N
-POLLINselect.POLLIN
-builtins.int"builtins.int*310*311*312*313*314*P
-POLLMSGselect.POLLMSG
-builtins.int"builtins.int*310*311*312*313*314*R
-POLLNVALselect.POLLNVAL
-builtins.int"builtins.int*310*311*312*313*314*P
-POLLOUTselect.POLLOUT
-builtins.int"builtins.int*310*311*312*313*314*P
-POLLPRIselect.POLLPRI
-builtins.int"builtins.int*310*311*312*313*314*V
+self(*
+fd(*
+	eventmask(*$
 
-POLLRDBANDselect.POLLRDBAND
-builtins.int"builtins.int*310*311*312*313*314*T
-	POLLRDHUPselect.POLLRDHUP
-builtins.int"builtins.int*310*311*312*313*314*V
+unregister*
 
-POLLRDNORMselect.POLLRDNORM
-builtins.int"builtins.int*310*311*312*313*314*V
+self(*
+fd(*%
+poll*
 
-POLLWRBANDselect.POLLWRBAND
-builtins.int"builtins.int*310*311*312*313*314*V
+self(*
+timeout (
+∆
+epoll"builtins.object*9
+__init__*
 
-POLLWRNORMselect.POLLWRNORM
-builtins.int"builtins.int*310*311*312*313*314*R
-EPOLLERRselect.EPOLLERR
-builtins.int"builtins.int*310*311*312*313*314*^
-EPOLLEXCLUSIVEselect.EPOLLEXCLUSIVE
-builtins.int"builtins.int*310*311*312*313*314*P
-EPOLLETselect.EPOLLET
-builtins.int"builtins.int*310*311*312*313*314*R
-EPOLLHUPselect.EPOLLHUP
-builtins.int"builtins.int*310*311*312*313*314*P
-EPOLLINselect.EPOLLIN
-builtins.int"builtins.int*310*311*312*313*314*R
-EPOLLMSGselect.EPOLLMSG
-builtins.int"builtins.int*310*311*312*313*314*Z
-EPOLLONESHOTselect.EPOLLONESHOT
-builtins.int"builtins.int*310*311*312*313*314*R
-EPOLLOUTselect.EPOLLOUT
-builtins.int"builtins.int*310*311*312*313*314*R
-EPOLLPRIselect.EPOLLPRI
-builtins.int"builtins.int*310*311*312*313*314*X
-EPOLLRDBANDselect.EPOLLRDBAND
-builtins.int"builtins.int*310*311*312*313*314*V
+self(*
+sizehint (*
+flags (*
+	__enter__*(*"
+__exit__*(* (* (* (*
+close*
 
-EPOLLRDHUPselect.EPOLLRDHUP
-builtins.int"builtins.int*310*311*312*313*314*X
-EPOLLRDNORMselect.EPOLLRDNORM
-builtins.int"builtins.int*310*311*312*313*314*X
-EPOLLWRBANDselect.EPOLLWRBAND
-builtins.int"builtins.int*310*311*312*313*314*X
-EPOLLWRNORMselect.EPOLLWRNORM
-builtins.int"builtins.int*310*311*312*313*314*X
-EPOLL_RDHUPselect.EPOLL_RDHUP
-builtins.int"builtins.int*310*311*312*313*314*\
-EPOLL_CLOEXECselect.EPOLL_CLOEXEC
-builtins.int"builtins.int*310*311*312*313*314
+self(*
+fileno*
+
+self(*5
+register*
+
+self(*
+fd(*
+	eventmask (*1
+modify*
+
+self(*
+fd(*
+	eventmask(*$
+
+unregister*
+
+self(*
+fd(*8
+poll*
+
+self(*
+timeout (
+*
+	maxevents (*3
+fromfd*	
+cls(*(0:builtins.classmethodp8r
+
+closed0
+select*(*(*(* (
+*
+__annotations__0*
+PIPE_BUF0*
+POLLERR0*
+POLLHUP0*
+
+POLLIN0*
+POLLMSG0*
+POLLNVAL0*
+POLLOUT0*
+POLLPRI0*
+
+POLLRDBAND0*
+	POLLRDHUP0*
+
+POLLRDNORM0*
+
+POLLWRBAND0*
+
+POLLWRNORM0*
+EPOLLERR0*
+EPOLLEXCLUSIVE0*
+EPOLLET0*
+EPOLLHUP0*
+EPOLLIN0*
+EPOLLMSG0*
+EPOLLONESHOT0*
+EPOLLOUT0*
+EPOLLPRI0*
+EPOLLRDBAND0*
+
+EPOLLRDHUP0*
+EPOLLRDNORM0*
+EPOLLWRBAND0*
+EPOLLWRNORM0*
+EPOLL_RDHUP0*
+EPOLL_CLOEXEC022"select.poll2"builtins.int2"_typeshed.HasFileno222#"_typeshed.FileDescriptorLike2222"builtins.list22"builtins.float22	2"select.epoll2(
+select.epoll.Self"select.epoll(22"builtins.BaseException2"type222222"types.TracebackType222"type22"builtins.bool22"builtins.list2222"typing.Iterable22"builtins.str2"builtins.dict2

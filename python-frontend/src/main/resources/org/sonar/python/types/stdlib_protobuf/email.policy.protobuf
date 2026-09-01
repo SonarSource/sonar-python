@@ -1,262 +1,150 @@
 
-email.policyÕ
-Policyemail.policy.Policy"builtins.object*≈
-__init__email.policy.Policy.__init__"
-None*4
-self*
-email.policy.Policy"email.policy.Policy*[
-max_line_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *+
-linesep
-builtins.str"builtins.str *,
-cte_type
-builtins.str"builtins.str *5
-raise_on_defect
-builtins.bool"builtins.bool *2
-mangle_from_
-builtins.bool"builtins.bool *û
-message_factoryÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z310z311z312z313z314*Æ
-cloneemail.policy.Policy.clone"*
-email.policy.Policy"email.policy.Policy*4
-self*
-email.policy.Policy"email.policy.Policy*
-kw
-Anyz310z311z312z313z314*ä
-handle_defect!email.policy.Policy.handle_defect"
-None*4
-self*
-email.policy.Policy"email.policy.Policy*7
-obj.
-email.message.Message"email.message.Message*D
-defect8
-email.errors.MessageDefect"email.errors.MessageDefectz310z311z312z313z314*é
-register_defect#email.policy.Policy.register_defect"
-None*4
-self*
-email.policy.Policy"email.policy.Policy*7
-obj.
-email.message.Message"email.message.Message*D
-defect8
-email.errors.MessageDefect"email.errors.MessageDefectz310z311z312z313z314*ı
-header_max_count$email.policy.Policy.header_max_count"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*4
-self*
-email.policy.Policy"email.policy.Policy*&
-name
-builtins.str"builtins.strz310z311z312z313z314*‰
-header_source_parse'email.policy.Policy.header_source_parse"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*4
-self*
-email.policy.Policy"email.policy.Policy*[
-sourcelinesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list0:abc.abstractmethod@z310z311z312z313z314*÷
-header_store_parse&email.policy.Policy.header_store_parse"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*4
-self*
-email.policy.Policy"email.policy.Policy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.str0:abc.abstractmethod@z310z311z312z313z314*í
-header_fetch_parse&email.policy.Policy.header_fetch_parse"
-builtins.str"builtins.str*4
-self*
-email.policy.Policy"email.policy.Policy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.str0:abc.abstractmethod@z310z311z312z313z314*ˆ
-foldemail.policy.Policy.fold"
-builtins.str"builtins.str*4
-self*
-email.policy.Policy"email.policy.Policy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.str0:abc.abstractmethod@z310z311z312z313z314*à
-fold_binaryemail.policy.Policy.fold_binary" 
-builtins.bytes"builtins.bytes*4
-self*
-email.policy.Policy"email.policy.Policy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.str0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314rï
-max_line_length#email.policy.Policy.max_line_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314r]
-linesepemail.policy.Policy.linesep
-builtins.str"builtins.str*310*311*312*313*314r_
-cte_typeemail.policy.Policy.cte_type
-builtins.str"builtins.str*310*311*312*313*314ro
-raise_on_defect#email.policy.Policy.raise_on_defect
-builtins.bool"builtins.bool*310*311*312*313*314ri
-mangle_from_ email.policy.Policy.mangle_from_
-builtins.bool"builtins.bool*310*311*312*313*314rÿ
-message_factory#email.policy.Policy.message_factoryÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*310*311*312*313*314ß
-Compat32email.policy.Compat32"email.policy.Policy*“
-header_source_parse)email.policy.Compat32.header_source_parse"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*8
-self.
-email.policy.Compat32"email.policy.Compat32*[
-sourcelinesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*ƒ
-header_store_parse(email.policy.Compat32.header_store_parse"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*8
-self.
-email.policy.Compat32"email.policy.Compat32*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*Ÿ
-header_fetch_parse(email.policy.Compat32.header_fetch_parse"u
-'Union[builtins.str,email.header.Header]
-builtins.str"builtins.str*
-email.header.Header"email.header.Header*8
-self.
-email.policy.Compat32"email.policy.Compat32*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*‰
-foldemail.policy.Compat32.fold"
-builtins.str"builtins.str*8
-self.
-email.policy.Compat32"email.policy.Compat32*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*ˆ
-fold_binary!email.policy.Compat32.fold_binary" 
-builtins.bytes"builtins.bytes*8
-self.
-email.policy.Compat32"email.policy.Compat32*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314í
-EmailPolicyemail.policy.EmailPolicy"email.policy.Policy*˘
-__init__!email.policy.EmailPolicy.__init__"
-None*>
-self4
-email.policy.EmailPolicy"email.policy.EmailPolicy*[
-max_line_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *+
-linesep
-builtins.str"builtins.str *,
-cte_type
-builtins.str"builtins.str *5
-raise_on_defect
-builtins.bool"builtins.bool *2
-mangle_from_
-builtins.bool"builtins.bool *û
-message_factoryÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None **
-utf8
-builtins.bool"builtins.bool *1
-refold_source
-builtins.str"builtins.str *a
-header_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function *a
-content_managerJ
-#email.contentmanager.ContentManager"#email.contentmanager.ContentManager z310z311z312z313z314*€
-header_source_parse,email.policy.EmailPolicy.header_source_parse"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*>
-self4
-email.policy.EmailPolicy"email.policy.EmailPolicy*[
-sourcelinesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*Õ
-header_store_parse+email.policy.EmailPolicy.header_store_parse"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*>
-self4
-email.policy.EmailPolicy"email.policy.EmailPolicy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*â
-header_fetch_parse+email.policy.EmailPolicy.header_fetch_parse"
-builtins.str"builtins.str*>
-self4
-email.policy.EmailPolicy"email.policy.EmailPolicy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*Ì
-foldemail.policy.EmailPolicy.fold"
-builtins.str"builtins.str*>
-self4
-email.policy.EmailPolicy"email.policy.EmailPolicy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*ˇ
-fold_binary$email.policy.EmailPolicy.fold_binary" 
-builtins.bytes"builtins.bytes*>
-self4
-email.policy.EmailPolicy"email.policy.EmailPolicy*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314r^
-utf8email.policy.EmailPolicy.utf8
-builtins.bool"builtins.bool*310*311*312*313*314rn
-refold_source&email.policy.EmailPolicy.refold_source
-builtins.str"builtins.str*310*311*312*313*314rü
-header_factory'email.policy.EmailPolicy.header_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r†
-content_manager(email.policy.EmailPolicy.content_managerJ
-#email.contentmanager.ContentManager"#email.contentmanager.ContentManager*310*311*312*313*314*°
-__annotations__email.policy.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Ñ
-__all__email.policy.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*j
-compat32email.policy.compat32.
-email.policy.Compat32"email.policy.Compat32*310*311*312*313*314*n
-defaultemail.policy.default4
-email.policy.EmailPolicy"email.policy.EmailPolicy*310*311*312*313*314*h
-SMTPemail.policy.SMTP4
-email.policy.EmailPolicy"email.policy.EmailPolicy*310*311*312*313*314*p
-SMTPUTF8email.policy.SMTPUTF84
-email.policy.EmailPolicy"email.policy.EmailPolicy*310*311*312*313*314*h
-HTTPemail.policy.HTTP4
-email.policy.EmailPolicy"email.policy.EmailPolicy*310*311*312*313*314*l
-strictemail.policy.strict4
-email.policy.EmailPolicy"email.policy.EmailPolicy*310*311*312*313*314
+email.policyÉ
+Policy"builtins.object*ú
+__init__*
+
+self(*
+max_line_length (*
+linesep (*
+cte_type (*
+raise_on_defect (*
+mangle_from_ (*
+message_factory (	*
+clone*
+
+self(*
+kw(
+*6
+handle_defect*
+
+self(*	
+obj(*
+defect(*8
+register_defect*
+
+self(*	
+obj(*
+defect(*,
+header_max_count*
+
+self(*
+
+name(*N
+header_source_parse*
+
+self(*
+sourcelines(0:abc.abstractmethod@*S
+header_store_parse*
+
+self(*
+
+name(*
+value(0:abc.abstractmethod@*S
+header_fetch_parse*
+
+self(*
+
+name(*
+value(0:abc.abstractmethod@*E
+fold*
+
+self(*
+
+name(*
+value(0:abc.abstractmethod@*L
+fold_binary*
+
+self(*
+
+name(*
+value(0:abc.abstractmethod@@babc.ABCMetar
+max_line_length0r
+linesep0r
+cte_type0r
+raise_on_defect0r
+mangle_from_0r
+message_factory0	∂
+Compat32"email.policy.Policy*6
+header_source_parse*
+
+self(*
+sourcelines(*;
+header_store_parse*
+
+self(*
+
+name(*
+value(*;
+header_fetch_parse*
+
+self(*
+
+name(*
+value(*-
+fold*
+
+self(*
+
+name(*
+value(*4
+fold_binary*
+
+self(*
+
+name(*
+value(Ù
+EmailPolicy"email.policy.Policy*Ú
+__init__*
+
+self(*
+max_line_length (*
+linesep (*
+cte_type (*
+raise_on_defect (*
+mangle_from_ (*
+message_factory (	*
+utf8 (*
+refold_source (*
+header_factory (*
+content_manager (*6
+header_source_parse*
+
+self(*
+sourcelines(*;
+header_store_parse*
+
+self(*
+
+name(*
+value(*;
+header_fetch_parse*
+
+self(*
+
+name(*
+value(*-
+fold*
+
+self(*
+
+name(*
+value(*4
+fold_binary*
+
+self(*
+
+name(*
+value(r
+utf80r
+refold_source0r
+header_factory0r
+content_manager0*
+__annotations__0*
+__all__0*
+compat320*
+default0*
+SMTP0*
+SMTPUTF80*
+HTTP0*
+
+strict022"email.policy.Policy2"builtins.int222"builtins.str2"builtins.bool2"builtins.function222222"email.message.Message2"email.errors.MessageDefect222"builtins.list22"builtins.bytes2"email.policy.Compat322"email.header.Header222"email.policy.EmailPolicy2%"#email.contentmanager.ContentManager2"builtins.dict2

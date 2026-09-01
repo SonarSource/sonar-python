@@ -1,134 +1,70 @@
 
-django.views.generic.listÜ
-MultipleObjectMixin-django.views.generic.list.MultipleObjectMixin"&django.views.generic.base.ContextMixin*½
-get_queryset:django.views.generic.list.MultipleObjectMixin.get_queryset"
-Any*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*Ü
-get_ordering:django.views.generic.list.MultipleObjectMixin.get_ordering"&
-Union[Any,None]
-Any
-None*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*ã
-paginate_queryset?django.views.generic.list.MultipleObjectMixin.paginate_queryset"_
- Tuple[Any,Any,Any,builtins.bool]
-Any
-Any
-Any
-builtins.bool"builtins.bool*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*
-queryset
-Any*+
-	page_size
-builtins.int"builtins.int*—
-get_paginate_by=django.views.generic.list.MultipleObjectMixin.get_paginate_by"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*
-queryset
-Any*‚
-get_paginator;django.views.generic.list.MultipleObjectMixin.get_paginator"
-Any*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*
-queryset
-Any**
-per_page
-builtins.int"builtins.int*+
-orphans
-builtins.int"builtins.int *<
-allow_empty_first_page
-builtins.bool"builtins.bool *
-kwargs
-Any*â
-get_paginate_orphansBdjango.views.generic.list.MultipleObjectMixin.get_paginate_orphans"
-builtins.int"builtins.int*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*Ú
-get_allow_empty=django.views.generic.list.MultipleObjectMixin.get_allow_empty"
-builtins.bool"builtins.bool*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*ª
-get_context_object_nameEdjango.views.generic.list.MultipleObjectMixin.get_context_object_name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*
-object_list
-Any*å
-get_context_data>django.views.generic.list.MultipleObjectMixin.get_context_data"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*h
-self^
--django.views.generic.list.MultipleObjectMixin"-django.views.generic.list.MultipleObjectMixin*9
-object_list&
-Union[Any,None]
-Any
-None *
-kwargs
-Anyrh
-allow_empty9django.views.generic.list.MultipleObjectMixin.allow_empty
-builtins.bool"builtins.boolrj
-queryset6django.views.generic.list.MultipleObjectMixin.queryset&
-Union[Any,None]
-Any
-Nonerã
-model3django.views.generic.list.MultipleObjectMixin.model¤
--Union[Type[django.db.models.base.Model],None]g
-!Type[django.db.models.base.Model]:
-django.db.models.base.Model"django.db.models.base.Model"type
-NonerŽ
-paginate_by9django.views.generic.list.MultipleObjectMixin.paginate_byD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerp
-paginate_orphans>django.views.generic.list.MultipleObjectMixin.paginate_orphans
-builtins.int"builtins.intrž
-context_object_nameAdjango.views.generic.list.MultipleObjectMixin.context_object_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonern
-paginator_class=django.views.generic.list.MultipleObjectMixin.paginator_class
-	Type[Any]
-Any"typerd
+django.views.generic.listâ
+MultipleObjectMixin"&django.views.generic.base.ContextMixin*
+get_queryset*
 
-page_kwarg8django.views.generic.list.MultipleObjectMixin.page_kwarg
-builtins.str"builtins.strrj
-ordering6django.views.generic.list.MultipleObjectMixin.ordering&
-Union[Any,None]
-Any
-NonerQ
-object_list9django.views.generic.list.MultipleObjectMixin.object_list
-AnyÖ
-BaseListView&django.views.generic.list.BaseListView"-django.views.generic.list.MultipleObjectMixin"django.views.generic.base.View*Î
-get*django.views.generic.list.BaseListView.get"F
-!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
-selfP
-&django.views.generic.list.BaseListView"&django.views.generic.list.BaseListView*O
-requestB
-django.http.request.HttpRequest"django.http.request.HttpRequest*
-args
-Any*
-kwargs
-Anyà
-#MultipleObjectTemplateResponseMixin=django.views.generic.list.MultipleObjectTemplateResponseMixin"/django.views.generic.base.TemplateResponseMixin*½
-get_template_namesPdjango.views.generic.list.MultipleObjectTemplateResponseMixin.get_template_names"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*ˆ
-self~
-=django.views.generic.list.MultipleObjectTemplateResponseMixin"=django.views.generic.list.MultipleObjectTemplateResponseMixinrˆ
-template_name_suffixRdjango.views.generic.list.MultipleObjectTemplateResponseMixin.template_name_suffix
-builtins.str"builtins.str•
-ListView"django.views.generic.list.ListView"=django.views.generic.list.MultipleObjectTemplateResponseMixin"&django.views.generic.list.BaseListView*•
-__annotations__)django.views.generic.list.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*9
-	Paginator#django.views.generic.list.Paginator
-Any
+self(*
+get_ordering*
+
+self(*B
+paginate_queryset*
+
+self(*
+queryset(*
+	page_size(*/
+get_paginate_by*
+
+self(*
+queryset(*|
+get_paginator*
+
+self(*
+queryset(*
+per_page(*
+orphans (*
+allow_empty_first_page (*
+kwargs(*$
+get_paginate_orphans*
+
+self(*
+get_allow_empty*
+
+self(*:
+get_context_object_name
+*
+
+self(*
+object_list(*C
+get_context_data*
+
+self(*
+object_list (*
+kwargs(r
+allow_empty0r
+queryset0r	
+model0r
+paginate_by0r
+paginate_orphans0r
+context_object_name0
+r
+paginator_class0r
+
+page_kwarg0	r
+ordering0r
+object_list0›
+BaseListView"-django.views.generic.list.MultipleObjectMixin"django.views.generic.base.View*<
+get*
+
+self(*
+request(*
+
+args(*
+kwargs(”
+#MultipleObjectTemplateResponseMixin"/django.views.generic.base.TemplateResponseMixin*"
+get_template_names*
+
+self(r
+template_name_suffix0	q
+ListView"=django.views.generic.list.MultipleObjectTemplateResponseMixin"&django.views.generic.list.BaseListView*
+__annotations__0*
+	Paginator022/"-django.views.generic.list.MultipleObjectMixin2222"builtins.bool222"builtins.int222"builtins.str22	2"builtins.dict2	2"django.db.models.base.Model2"type2222"type22#"!django.http.response.HttpResponse2("&django.views.generic.list.BaseListView2!"django.http.request.HttpRequest2"builtins.list2	2?"=django.views.generic.list.MultipleObjectTemplateResponseMixin

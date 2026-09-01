@@ -1,153 +1,62 @@
 
-pyspark.sql.utils∂	
-ForeachBatchFunction&pyspark.sql.utils.ForeachBatchFunction"builtins.object*À
-__init__/pyspark.sql.utils.ForeachBatchFunction.__init__"
-None*Z
-selfP
-&pyspark.sql.utils.ForeachBatchFunction"&pyspark.sql.utils.ForeachBatchFunction*Q
-sessionD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*◊
-call+pyspark.sql.utils.ForeachBatchFunction.call"
-None*Z
-selfP
-&pyspark.sql.utils.ForeachBatchFunction"&pyspark.sql.utils.ForeachBatchFunction*
-jdf
-Any**
-batch_id
-builtins.int"builtins.intrÄ
-func+pyspark.sql.utils.ForeachBatchFunction.funcK
-CallableType[builtins.function]&
-builtins.function"builtins.functionr
-session.pyspark.sql.utils.ForeachBatchFunction.sessionD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSessionr_
-error,pyspark.sql.utils.ForeachBatchFunction.error(
-builtins.Exception"builtins.Exceptionz◊
-Java+pyspark.sql.utils.ForeachBatchFunction.Java"builtins.objectrê
+pyspark.sql.utilsÿ
+ForeachBatchFunction"builtins.object*3
+__init__*
 
-implements6pyspark.sql.utils.ForeachBatchFunction.Java.implementsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listî
-toJArraypyspark.sql.utils.toJArray"
-Any*
-gateway
-Any*
-jtype
-Any*9
-arr0
-typing.Sequence[Any]
-Any"typing.SequenceJ
-require_test_compiled'pyspark.sql.utils.require_test_compiled"
-None|
-to_strpyspark.sql.utils.to_str"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*
-value
-Anyj
-is_timestamp_ntz_preferred,pyspark.sql.utils.is_timestamp_ntz_preferred"
-builtins.bool"builtins.boolH
-	is_remotepyspark.sql.utils.is_remote"
-builtins.bool"builtins.boolô
-try_remote_functions&pyspark.sql.utils.try_remote_functions"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function£
-try_remote_avro_functions+pyspark.sql.utils.try_remote_avro_functions"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function´
-try_remote_protobuf_functions/pyspark.sql.utils.try_remote_protobuf_functions"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.functionì
-try_remote_window#pyspark.sql.utils.try_remote_window"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.functionõ
-try_remote_windowspec'pyspark.sql.utils.try_remote_windowspec"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.functionÑ
-get_active_spark_context*pyspark.sql.utils.get_active_spark_context"<
-pyspark.context.SparkContext"pyspark.context.SparkContextù
-try_remote_observation(pyspark.sql.utils.try_remote_observation"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function≠
-try_remote_session_classmethod0pyspark.sql.utils.try_remote_session_classmethod"h
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-fh
-pyspark.sql.utils.FuncTK
-CallableType[builtins.function]&
-builtins.function"builtins.functionâ
-pyspark_column_op#pyspark.sql.utils.pyspark_column_op"÷
-aUnion[TypeAlias[Union[pyspark.pandas.series.Series[Any],pyspark.pandas.indexes.base.Index]],None]‰
-UTypeAlias[Union[pyspark.pandas.series.Series[Any],pyspark.pandas.indexes.base.Index]]‚
-JUnion[pyspark.pandas.series.Series[Any],pyspark.pandas.indexes.base.Index]J
-!pyspark.pandas.series.Series[Any]
-Any"pyspark.pandas.series.SeriesF
-!pyspark.pandas.indexes.base.Index"!pyspark.pandas.indexes.base.Index"$pyspark.pandas._typing.SeriesOrIndex
-None*+
-	func_name
-builtins.str"builtins.str*ù
-leftí
-#pyspark.pandas._typing.IndexOpsLikeF
-!pyspark.pandas.base.IndexOpsMixin"!pyspark.pandas.base.IndexOpsMixin"!pyspark.pandas.base.IndexOpsMixin*
-right
-Any*
-fillna
-Any ô
-get_column_class"pyspark.sql.utils.get_column_class"a
-Type[pyspark.sql.column.Column]6
-pyspark.sql.column.Column"pyspark.sql.column.Column"type±
-get_dataframe_class%pyspark.sql.utils.get_dataframe_class"s
-%Type[pyspark.sql.dataframe.DataFrame]B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame"typeô
-get_window_class"pyspark.sql.utils.get_window_class"a
-Type[pyspark.sql.window.Window]6
-pyspark.sql.window.Window"pyspark.sql.window.Window"type*ç
-__annotations__!pyspark.sql.utils.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*1
-	JavaArraypyspark.sql.utils.JavaArray
-Any*1
-	JavaClasspyspark.sql.utils.JavaClass
-Any*5
-JavaGatewaypyspark.sql.utils.JavaGateway
-Any*3
+self(*
+session(*
 
-JavaObjectpyspark.sql.utils.JavaObject
-Any*H
-	has_numpypyspark.sql.utils.has_numpy
-builtins.bool"builtins.bool*
-npnumpy 
+func(*/
+call*
+
+self(*	
+jdf(*
+batch_id(r
+func0r
+session0r	
+error0
+z'
+Java"builtins.objectr
+
+implements0	3
+toJArray*
+gateway(*
+jtype(*	
+arr(
+require_test_compiled
+to_str*
+value(
+is_timestamp_ntz_preferred
+	is_remote!
+try_remote_functions*
+f(&
+try_remote_avro_functions*
+f(*
+try_remote_protobuf_functions*
+f(
+try_remote_window*
+f("
+try_remote_windowspec*
+f(
+get_active_spark_context#
+try_remote_observation*
+f(+
+try_remote_session_classmethod*
+f(O
+pyspark_column_op*
+	func_name(*
+
+left(*
+right(*
+fillna (
+get_column_class
+get_dataframe_class
+get_window_class*
+__annotations__0*
+	JavaArray0*
+	JavaClass0*
+JavaGateway0*
+
+JavaObject0*
+	has_numpy0*
+npnumpy 22("&pyspark.sql.utils.ForeachBatchFunction2"" pyspark.sql.session.SparkSession2"builtins.function2222"builtins.int2"builtins.str2"builtins.list22"builtins.Exception2"typing.Sequence2222"builtins.bool222"pyspark.context.SparkContext2!"pyspark.pandas.series.Series22#"!pyspark.pandas.indexes.base.Index222+"$pyspark.pandas._typing.SeriesOrIndex2222#"!pyspark.pandas.base.IndexOpsMixin2("!pyspark.pandas.base.IndexOpsMixin22"pyspark.sql.column.Column2"type22!"pyspark.sql.dataframe.DataFrame2"type22"pyspark.sql.window.Window2"type22"builtins.dict2

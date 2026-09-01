@@ -1,280 +1,125 @@
 
- torchvision.models.detection.ssdö
-SSD300_VGG16_Weights5torchvision.models.detection.ssd.SSD300_VGG16_Weights"#torchvision.models._api.WeightsEnumHrQ
-COCO_V1=torchvision.models.detection.ssd.SSD300_VGG16_Weights.COCO_V1
-AnyrQ
-DEFAULT=torchvision.models.detection.ssd.SSD300_VGG16_Weights.DEFAULT
-AnyÇ
-SSDHead(torchvision.models.detection.ssd.SSDHead"torch.nn.modules.module.Module*ê
-__init__1torchvision.models.detection.ssd.SSDHead.__init__"
-None*^
-selfT
-(torchvision.models.detection.ssd.SSDHead"(torchvision.models.detection.ssd.SSDHead*[
-in_channelsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*[
-num_anchorsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*-
-num_classes
-builtins.int"builtins.int*Â
-forward0torchvision.models.detection.ssd.SSDHead.forward"u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*^
-selfT
-(torchvision.models.detection.ssd.SSDHead"(torchvision.models.detection.ssd.SSDHead*Q
-xJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.listr\
-classification_head<torchvision.models.detection.ssd.SSDHead.classification_head
-AnyrT
-regression_head8torchvision.models.detection.ssd.SSDHead.regression_head
-Any˛
-SSDScoringHead/torchvision.models.detection.ssd.SSDScoringHead"torch.nn.modules.module.Module*Ã
-__init__8torchvision.models.detection.ssd.SSDScoringHead.__init__"
-None*l
-selfb
-/torchvision.models.detection.ssd.SSDScoringHead"/torchvision.models.detection.ssd.SSDScoringHead*_
-module_listN
-%torch.nn.modules.container.ModuleList"%torch.nn.modules.container.ModuleList*-
-num_columns
-builtins.int"builtins.int*°
-forward7torchvision.models.detection.ssd.SSDScoringHead.forward"
-torch.Tensor"torch.Tensor*l
-selfb
-/torchvision.models.detection.ssd.SSDScoringHead"/torchvision.models.detection.ssd.SSDScoringHead*Q
-xJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.listrS
-module_list;torchvision.models.detection.ssd.SSDScoringHead.module_list
-AnyrS
-num_columns;torchvision.models.detection.ssd.SSDScoringHead.num_columns
-AnyΩ
-SSDClassificationHead6torchvision.models.detection.ssd.SSDClassificationHead"/torchvision.models.detection.ssd.SSDScoringHead*∫
-__init__?torchvision.models.detection.ssd.SSDClassificationHead.__init__"
-None*z
-selfp
-6torchvision.models.detection.ssd.SSDClassificationHead"6torchvision.models.detection.ssd.SSDClassificationHead*[
-in_channelsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*[
-num_anchorsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*-
-num_classes
-builtins.int"builtins.int˙
-SSDRegressionHead2torchvision.models.detection.ssd.SSDRegressionHead"/torchvision.models.detection.ssd.SSDScoringHead*ˇ
-__init__;torchvision.models.detection.ssd.SSDRegressionHead.__init__"
-None*r
-selfh
-2torchvision.models.detection.ssd.SSDRegressionHead"2torchvision.models.detection.ssd.SSDRegressionHead*[
-in_channelsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*[
-num_anchorsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.listÆ-
-SSD$torchvision.models.detection.ssd.SSD"torch.nn.modules.module.Module*æ
+ torchvision.models.detection.ssdW
+SSD300_VGG16_Weights"#torchvision.models._api.WeightsEnumHr
+COCO_V10r
+DEFAULT0Ã
+SSDHead"torch.nn.modules.module.Module*Q
+__init__*
 
-__init__-torchvision.models.detection.ssd.SSD.__init__"
-None*V
-selfL
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*N
-backbone@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module*î
-anchor_generator~
-=torchvision.models.detection.anchor_utils.DefaultBoxGenerator"=torchvision.models.detection.anchor_utils.DefaultBoxGenerator*j
-size`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*-
-num_classes
-builtins.int"builtins.int*ú
+self(*
+in_channels(*
+num_anchors(*
+num_classes(* 
+forward*
 
-image_meanâ
-)Union[builtins.list[builtins.float],None]P
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.list
-None *õ
-	image_stdâ
-)Union[builtins.list[builtins.float],None]P
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.list
-None *Ü
-headz
-*Union[torch.nn.modules.module.Module,None]@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module
-None *4
-score_thresh 
-builtins.float"builtins.float *2
+self(*
+x(	r
+classification_head0r
+regression_head0¥
+SSDScoringHead"torch.nn.modules.module.Module*>
+__init__*
 
-nms_thresh 
-builtins.float"builtins.float *6
-detections_per_img
-builtins.int"builtins.int *2
+self(
+*
+module_list(*
+num_columns(* 
+forward*
 
-iou_thresh 
-builtins.float"builtins.float *3
-topk_candidates
-builtins.int"builtins.int *9
-positive_fraction 
-builtins.float"builtins.float *
-kwargs
-Any*ô
-eager_outputs2torchvision.models.detection.ssd.SSD.eager_outputs"§
-gTuple[builtins.dict[builtins.str,torch.Tensor],builtins.list[builtins.dict[builtins.str,torch.Tensor]]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dictø
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*V
-selfL
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*Å
-lossesu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*–
+self(
+*
+x(	r
+module_list0r
+num_columns0õ
+SSDClassificationHead"/torchvision.models.detection.ssd.SSDScoringHead*Q
+__init__*
 
-detectionsø
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*°
-compute_loss1torchvision.models.detection.ssd.SSD.compute_loss"u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*V
-selfL
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*Õ
-targetsø
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*á
-head_outputsu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*W
-anchorsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*\
-matched_idxsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*¥
-forward,torchvision.models.detection.ssd.SSD.forward"§
-gTuple[builtins.dict[builtins.str,torch.Tensor],builtins.list[builtins.dict[builtins.str,torch.Tensor]]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dictø
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*V
-selfL
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*V
-imagesJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*£
-targetsì
-CUnion[builtins.list[builtins.dict[builtins.str,torch.Tensor]],None]ø
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list
-None *ê
-postprocess_detections;torchvision.models.detection.ssd.SSD.postprocess_detections"ø
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*V
-selfL
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*á
-head_outputsu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*]
-image_anchorsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*µ
-image_shapes¢
-/builtins.list[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.listrP
-__annotations__4torchvision.models.detection.ssd.SSD.__annotations__
-AnyrB
-backbone-torchvision.models.detection.ssd.SSD.backbone
-AnyrR
-anchor_generator5torchvision.models.detection.ssd.SSD.anchor_generator
-AnyrD
-	box_coder.torchvision.models.detection.ssd.SSD.box_coder
-Anyr:
-head)torchvision.models.detection.ssd.SSD.head
-AnyrR
-proposal_matcher5torchvision.models.detection.ssd.SSD.proposal_matcher
-AnyrD
-	transform.torchvision.models.detection.ssd.SSD.transform
-AnyrJ
-score_thresh1torchvision.models.detection.ssd.SSD.score_thresh
-AnyrF
+self(*
+in_channels(*
+num_anchors(*
+num_classes(Ñ
+SSDRegressionHead"/torchvision.models.detection.ssd.SSDScoringHead*>
+__init__*
 
-nms_thresh/torchvision.models.detection.ssd.SSD.nms_thresh
-AnyrV
-detections_per_img7torchvision.models.detection.ssd.SSD.detections_per_img
-AnyrP
-topk_candidates4torchvision.models.detection.ssd.SSD.topk_candidates
-AnyrR
-neg_to_pos_ratio5torchvision.models.detection.ssd.SSD.neg_to_pos_ratio
-Any≥
-SSDFeatureExtractorVGG7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"torch.nn.modules.module.Module*—
-__init__@torchvision.models.detection.ssd.SSDFeatureExtractorVGG.__init__"
-None*|
-selfr
-7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"7torchvision.models.detection.ssd.SSDFeatureExtractorVGG*N
-backbone@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
-highres
-builtins.bool"builtins.bool*‰
-forward?torchvision.models.detection.ssd.SSDFeatureExtractorVGG.forward"u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*|
-selfr
-7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"7torchvision.models.detection.ssd.SSDFeatureExtractorVGG*#
-x
-torch.Tensor"torch.Tensorr]
-scale_weightDtorchvision.models.detection.ssd.SSDFeatureExtractorVGG.scale_weight
-AnyrU
-features@torchvision.models.detection.ssd.SSDFeatureExtractorVGG.features
-AnyrO
-extra=torchvision.models.detection.ssd.SSDFeatureExtractorVGG.extra
-Anyä
-ssd300_vgg16-torchvision.models.detection.ssd.ssd300_vgg16"L
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*œ
-weightsø
-AUnion[torchvision.models.detection.ssd.SSD300_VGG16_Weights,None]n
-5torchvision.models.detection.ssd.SSD300_VGG16_Weights"5torchvision.models.detection.ssd.SSD300_VGG16_Weights
-None *.
-progress
-builtins.bool"builtins.bool *W
-num_classesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *•
-weights_backboneå
-0Union[torchvision.models.vgg.VGG16_Weights,None]L
-$torchvision.models.vgg.VGG16_Weights"$torchvision.models.vgg.VGG16_Weights
-None *e
-trainable_backbone_layersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *
-kwargs
-Any*ú
-__annotations__0torchvision.models.detection.ssd.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+in_channels(*
+num_anchors(Ù
+SSD"torch.nn.modules.module.Module*∞
+__init__*
+
+self(*
+backbone(*
+anchor_generator(*
+
+size(*
+num_classes(*
+
+image_mean (*
+	image_std (*
+head (*
+score_thresh (*
+
+nms_thresh (*
+detections_per_img (*
+
+iou_thresh (*
+topk_candidates (*
+positive_fraction (*
+kwargs(*=
+eager_outputs*
+
+self(*
+losses(*
+
+detections(*b
+compute_loss*
+
+self(*
+targets(*
+head_outputs(*
+anchors(	*
+matched_idxs(	*6
+forward*
+
+self(*
+images(	*
+targets (*c
+postprocess_detections*
+
+self(*
+head_outputs(*
+image_anchors(	*
+image_shapes(r
+__annotations__0r
+backbone0r
+anchor_generator0r
+	box_coder0r
+head0r
+proposal_matcher0r
+	transform0r
+score_thresh0r
+
+nms_thresh0r
+detections_per_img0r
+topk_candidates0r
+neg_to_pos_ratio0æ
+SSDFeatureExtractorVGG"torch.nn.modules.module.Module*7
+__init__*
+
+self(*
+backbone(*
+highres(* 
+forward*
+
+self(*
+x(r
+scale_weight0r
+features0r	
+extra0ì
+ssd300_vgg16*
+weights (*
+progress (*
+num_classes (*
+weights_backbone ( *!
+trainable_backbone_layers (*
+kwargs(*
+__annotations__0!222*"(torchvision.models.detection.ssd.SSDHead2"builtins.int2"builtins.list22"builtins.str2"torch.Tensor2"builtins.dict22"builtins.list221"/torchvision.models.detection.ssd.SSDScoringHead2'"%torch.nn.modules.container.ModuleList28"6torchvision.models.detection.ssd.SSDClassificationHead24"2torchvision.models.detection.ssd.SSDRegressionHead2&"$torchvision.models.detection.ssd.SSD2 "torch.nn.modules.module.Module2?"=torchvision.models.detection.anchor_utils.DefaultBoxGenerator222"builtins.float2"builtins.list222222"builtins.list222222"builtins.list229"7torchvision.models.detection.ssd.SSDFeatureExtractorVGG2"builtins.bool27"5torchvision.models.detection.ssd.SSD300_VGG16_Weights22222&"$torchvision.models.vgg.VGG16_Weights222"builtins.dict2

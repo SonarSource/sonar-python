@@ -1,351 +1,134 @@
 
-flask_migrateÕ
-Configflask_migrate.Config"builtins.object*¨
-__init__flask_migrate.Config.__init__"
-None*6
-self,
-flask_migrate.Config"flask_migrate.Config*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*¥
-get_template_directory+flask_migrate.Config.get_template_directory"
-builtins.str"builtins.str*6
-self,
-flask_migrate.Config"flask_migrate.Configz310z311z312z313z314j310j311j312j313j314rú
-template_directory'flask_migrate.Config.template_directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314≤
-Migrateflask_migrate.Migrate"builtins.object*∫
-__init__flask_migrate.Migrate.__init__"
-None*8
-self.
-flask_migrate.Migrate"flask_migrate.Migrate*X
-appM
-Union[flask.app.Flask,None]"
-flask.app.Flask"flask.app.Flask
-None *{
-dbq
-'Union[flask_sqlalchemy.SQLAlchemy,None]:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy
-None *-
-	directory
-builtins.str"builtins.str *+
-command
-builtins.str"builtins.str *2
-compare_type
-builtins.bool"builtins.bool *5
-render_as_batch
-builtins.bool"builtins.bool *
-kwargs
-Anyz310z311z312z313z314*Ø
-init_appflask_migrate.Migrate.init_app"
-None*8
-self.
-flask_migrate.Migrate"flask_migrate.Migrate*+
-app"
-flask.app.Flask"flask.app.Flask*{
-dbq
-'Union[flask_sqlalchemy.SQLAlchemy,None]:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy
-None *U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-commandD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *[
-compare_typeG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *^
-render_as_batchG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-kwargs
-Anyz310z311z312z313z314*«
-	configureflask_migrate.Migrate.configure"ù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" flask_migrate._ConfigureCallback*8
-self.
-flask_migrate.Migrate"flask_migrate.Migrate*•
-fù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" flask_migrate._ConfigureCallbackz310z311z312z313z314*‡
-call_configure_callbacks.flask_migrate.Migrate.call_configure_callbacks"
-Any*8
-self.
-flask_migrate.Migrate"flask_migrate.Migrate*8
-config,
-flask_migrate.Config"flask_migrate.Configz310z311z312z313z314*ª
+flask_migrateç
+Config"builtins.object*2
+__init__*
 
-get_config flask_migrate.Migrate.get_config"
-Any*8
-self.
-flask_migrate.Migrate"flask_migrate.Migrate*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¿
-x_arg≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *î
-optsá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None z310z311z312z313z314j310j311j312j313j314r∆
-configure_callbacks)flask_migrate.Migrate.configure_callbacksÍ
-9builtins.list[TypeAlias[CallableType[builtins.function]]]ù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" flask_migrate._ConfigureCallback"builtins.list*310*311*312*313*314r™
-dbflask_migrate.Migrate.dbq
-'Union[flask_sqlalchemy.SQLAlchemy,None]:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy
-None*310*311*312*313*314rc
-	directoryflask_migrate.Migrate.directory
-builtins.str"builtins.str*310*311*312*313*314r∞
-alembic_ctx_kwargs(flask_migrate.Migrate.alembic_ctx_kwargsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314‰
-catch_errorsflask_migrate.catch_errors"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*R
-fK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314Q
-list_templatesflask_migrate.list_templates"
-Nonez310z311z312z313z314»
-initflask_migrate.init"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-multidb
-builtins.bool"builtins.bool *T
-templateD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-package
-builtins.bool"builtins.bool z310z311z312z313z314∞
-revisionflask_migrate.revision"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *2
-autogenerate
-builtins.bool"builtins.bool *)
-sql
-builtins.bool"builtins.bool *(
-head
-builtins.str"builtins.str *,
-splice
-builtins.bool"builtins.bool *X
-branch_labelD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-version_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-rev_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314Ω
-migrateflask_migrate.migrate"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *)
-sql
-builtins.bool"builtins.bool *(
-head
-builtins.str"builtins.str *,
-splice
-builtins.bool"builtins.bool *X
-branch_labelD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-version_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-rev_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¿
-x_arg≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None z310z311z312z313z314¬
-editflask_migrate.edit"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-revision
-builtins.str"builtins.str z310z311z312z313z314»
-mergeflask_migrate.merge"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-	revisions
-builtins.str"builtins.str *S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-branch_labelD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-rev_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314á
-upgradeflask_migrate.upgrade"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-revision
-builtins.str"builtins.str *)
-sql
-builtins.bool"builtins.bool *O
-tagD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¿
-x_arg≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None z310z311z312z313z314ã
-	downgradeflask_migrate.downgrade"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-revision
-builtins.str"builtins.str *)
-sql
-builtins.bool"builtins.bool *O
-tagD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¿
-x_arg≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None z310z311z312z313z314¬
-showflask_migrate.show"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-revision
-builtins.str"builtins.str z310z311z312z313z314ÿ
-historyflask_migrate.history"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	rev_rangeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-verbose
-builtins.bool"builtins.bool *6
-indicate_current
-builtins.bool"builtins.bool z310z311z312z313z314Å
-headsflask_migrate.heads"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-verbose
-builtins.bool"builtins.bool *:
-resolve_dependencies
-builtins.bool"builtins.bool z310z311z312z313z314À
-branchesflask_migrate.branches"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-verbose
-builtins.bool"builtins.bool z310z311z312z313z314…
-currentflask_migrate.current"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-verbose
-builtins.bool"builtins.bool z310z311z312z313z314¿
-stampflask_migrate.stamp"
-None*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-revision
-builtins.str"builtins.str *)
-sql
-builtins.bool"builtins.bool *O
-tagD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*á
-__path__flask_migrate.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*¢
-__annotations__flask_migrate.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*◊
-alembic_versionflask_migrate.alembic_versionã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*310*311*312*313*314*S
-logflask_migrate.log 
-logging.Logger"logging.Logger*310*311*312*313*314
+self(*
+
+args(*
+kwargs(*&
+get_template_directory*
+
+self(r
+template_directory0≤
+Migrate"builtins.object*í
+__init__*
+
+self(*
+app (*
+
+db (
+*
+	directory (*
+command (*
+compare_type (*
+render_as_batch (*
+kwargs(*ê
+init_app*
+
+self(*	
+app(*
+
+db (
+*
+	directory (*
+command (*
+compare_type (*
+render_as_batch (*
+kwargs(*"
+	configure*
+
+self(*
+f(*6
+call_configure_callbacks*
+
+self(*
+config(*J
+
+get_config*
+
+self(*
+	directory (*
+x_arg (*
+opts (r
+configure_callbacks0r
+db0
+r
+	directory0r
+alembic_ctx_kwargs0
+catch_errors*
+f(
+list_templatesO
+init*
+	directory (*
+multidb (*
+template (*
+package (≠
+revision*
+	directory (*
+message (*
+autogenerate (*
+sql (*
+head (*
+splice (*
+branch_label (*
+version_path (*
+rev_id (•
+migrate*
+	directory (*
+message (*
+sql (*
+head (*
+splice (*
+branch_label (*
+version_path (*
+rev_id (*
+x_arg (-
+edit*
+	directory (*
+revision (f
+merge*
+	directory (*
+	revisions (*
+message (*
+branch_label (*
+rev_id (Y
+upgrade*
+	directory (*
+revision (*
+sql (*
+tag (*
+x_arg ([
+	downgrade*
+	directory (*
+revision (*
+sql (*
+tag (*
+x_arg (-
+show*
+	directory (*
+revision (\
+history*
+	directory (*
+	rev_range (*
+verbose (*
+indicate_current (K
+heads*
+	directory (*
+verbose (*
+resolve_dependencies (0
+branches*
+	directory (*
+verbose (/
+current*
+	directory (*
+verbose (H
+stamp*
+	directory (*
+revision (*
+sql (*
+tag (*
+__path__0*
+__annotations__0*
+alembic_version0*
+log022"flask_migrate.Config22"builtins.str222"flask_migrate.Migrate2"flask.app.Flask222"flask_sqlalchemy.SQLAlchemy22	2"builtins.bool222"builtins.function222'" flask_migrate._ConfigureCallback22"typing.Sequence2222"typing.Iterable2222"builtins.list22"builtins.dict22"builtins.list22"builtins.int222"logging.Logger

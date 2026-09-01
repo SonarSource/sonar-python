@@ -1,481 +1,128 @@
 
-pandas.io.stataæ
-StataParserpandas.io.stata.StataParser"builtins.object*Ä
-__init__$pandas.io.stata.StataParser.__init__"
-None*D
-self:
-pandas.io.stata.StataParser"pandas.io.stata.StataParser”-
-StataReaderpandas.io.stata.StataReader"pandas.io.stata.StataParser"typing.Iterator*ò
-__init__$pandas.io.stata.StataReader.__init__"
-None*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*€
-path_or_buf…
-iUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes]]Ô
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
-)pandas._typing.ReadBuffer[builtins.bytes] 
-builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer*3
-convert_dates
-builtins.bool"builtins.bool *:
-convert_categoricals
-builtins.bool"builtins.bool *U
-	index_colD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *5
-convert_missing
-builtins.bool"builtins.bool *5
-preserve_dtypes
-builtins.bool"builtins.bool *ó
-columnsá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *8
-order_categoricals
-builtins.bool"builtins.bool *U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Õ
-compressionπ
-≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
-∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strß
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *Ü
-storage_optionsÓ
-6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None"pandas._typing.StorageOptions *∑
-	__enter__%pandas.io.stata.StataReader.__enter__"
- pandas.io.stata.StataReader.Self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader"pandas.io.stata.StataReader(*Å
- pandas.io.stata.StataReader.Self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader"pandas.io.stata.StataReader(*—
-__exit__$pandas.io.stata.StataReader.__exit__"
-None*<:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*z
-close!pandas.io.stata.StataReader.close"
-None*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*≤
-__next__$pandas.io.stata.StataReader.__next__":
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*Ü
-	get_chunk%pandas.io.stata.StataReader.get_chunk":
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *õ
-read pandas.io.stata.StataReader.read"
-Any*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*Q
-nrowsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-convert_datesG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *c
-convert_categoricalsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *U
-	index_colD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *^
-convert_missingG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *^
-preserve_dtypesG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *ë
-columnsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *a
-order_categoricalsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Ø
+pandas.io.stata8
+StataParser"builtins.object*
+__init__*
 
-data_label&pandas.io.stata.StataReader.data_label"
-builtins.str"builtins.str*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader0:builtins.property`*˚
-variable_labels+pandas.io.stata.StataReader.variable_labels"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*Û
-value_labels(pandas.io.stata.StataReader.value_labels"Ú
-Fbuiltins.dict[builtins.str,builtins.dict[builtins.float,builtins.str]]
-builtins.str"builtins.str{
-*builtins.dict[builtins.float,builtins.str] 
-builtins.float"builtins.float
-builtins.str"builtins.str"builtins.dict"builtins.dict*D
-self:
-pandas.io.stata.StataReader"pandas.io.stata.StataReaderr~
-	col_sizes%pandas.io.stata.StataReader.col_sizesJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.listrR
-path_or_buf'pandas.io.stata.StataReader.path_or_buf
-_io.BytesIO"_io.BytesIOº+
-StataWriterpandas.io.stata.StataWriter"pandas.io.stata.StataParser*Î)
-__init__$pandas.io.stata.StataWriter.__init__"
-None*D
-self:
-pandas.io.stata.StataWriter"pandas.io.stata.StataWriter*ÿ
-fnameÃ
-jUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.WriteBuffer[builtins.bytes]]Ô
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathj
-*pandas._typing.WriteBuffer[builtins.bytes] 
-builtins.bytes"builtins.bytes"pandas._typing.WriteBuffer*D
-data:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*√
-convert_dates≠
-˙Union[builtins.dict[pandas._typing.HashableT1,TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]],None]°
-Óbuiltins.dict[pandas._typing.HashableT1,TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]R
-pandas._typing.HashableT1"
-typing.Hashable"typing.Hashable"typing.Hashable 
-≈TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]›
-∫Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"pandas._typing.StataDateFormat"builtins.dict
-None *1
-write_index
-builtins.bool"builtins.bool *U
-	byteorderD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *e
+self(ª
+StataReader"pandas.io.stata.StataParser"typing.Iterator*ì
+__init__*
 
-time_stampS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None *V
+self(*
+path_or_buf(
+*
+convert_dates (*
+convert_categoricals (*
+	index_col (*
+convert_missing (*
+preserve_dtypes (*
+columns (*
+order_categoricals (*
+	chunksize (*
+compression (*
+storage_options (*
+	__enter__*(*
+__exit__*(*(*(*(*
+close*
 
-data_labelD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¢
-variable_labelsä
-AUnion[builtins.dict[pandas._typing.HashableT2,builtins.str],None]∏
-5builtins.dict[pandas._typing.HashableT2,builtins.str]R
-pandas._typing.HashableT2"
-typing.Hashable"typing.Hashable"typing.Hashable
-builtins.str"builtins.str"builtins.dict
-None *Õ
-compressionπ
-≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
-∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strß
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *Ü
-storage_optionsÓ
-6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None"pandas._typing.StorageOptions *∫
-value_labels•
-_Union[builtins.dict[pandas._typing.HashableT3,builtins.dict[builtins.float,builtins.str]],None]µ
-Sbuiltins.dict[pandas._typing.HashableT3,builtins.dict[builtins.float,builtins.str]]R
-pandas._typing.HashableT3"
-typing.Hashable"typing.Hashable"typing.Hashable{
-*builtins.dict[builtins.float,builtins.str] 
-builtins.float"builtins.float
-builtins.str"builtins.str"builtins.dict"builtins.dict
-None *Ñ
+self(*
+__next__ *
 
-write_file&pandas.io.stata.StataWriter.write_file"
-None*D
-self:
-pandas.io.stata.StataWriter"pandas.io.stata.StataWriter"±<
+self(*'
+	get_chunk *
 
-read_statapandas.io.stata.read_stata™
+self(*
+size (* 
+read*
 
-read_statapandas.io.stata.read_stata":
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*‚
-filepath_or_buffer…
-iUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes]]Ô
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
-)pandas._typing.ReadBuffer[builtins.bytes] 
-builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer*3
-convert_dates
-builtins.bool"builtins.bool *:
-convert_categoricals
-builtins.bool"builtins.bool *U
-	index_colD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *5
-convert_missing
-builtins.bool"builtins.bool *5
-preserve_dtypes
-builtins.bool"builtins.bool *ﬂ
-columnsœ
-3Union[builtins.list[pandas._typing.HashableT],None]ã
-'builtins.list[pandas._typing.HashableT]Q
-pandas._typing.HashableT"
-typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
-None *8
-order_categoricals
-builtins.bool"builtins.bool *U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *H
-iterator:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*Õ
-compressionπ
-≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
-∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strß
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *Ü
-storage_optionsÓ
-6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None"pandas._typing.StorageOptions 0:typing.overloadXÊ
+self(*
+nrows (*
+convert_dates (!*
+convert_categoricals (!*
+	index_col (*
+convert_missing (!*
+preserve_dtypes (!*
+columns (#*
+order_categoricals (!*1
 
-read_statapandas.io.stata.read_stata":
-pandas.io.stata.StataReader"pandas.io.stata.StataReader*‚
-filepath_or_buffer…
-iUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes]]Ô
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
-)pandas._typing.ReadBuffer[builtins.bytes] 
-builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer*3
-convert_dates
-builtins.bool"builtins.bool *:
-convert_categoricals
-builtins.bool"builtins.bool *U
-	index_colD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *5
-convert_missing
-builtins.bool"builtins.bool *5
-preserve_dtypes
-builtins.bool"builtins.bool *ﬂ
-columnsœ
-3Union[builtins.list[pandas._typing.HashableT],None]ã
-'builtins.list[pandas._typing.HashableT]Q
-pandas._typing.HashableT"
-typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
-None *8
-order_categoricals
-builtins.bool"builtins.bool *+
-	chunksize
-builtins.int"builtins.int*.
-iterator
-builtins.bool"builtins.bool *Õ
-compressionπ
-≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
-∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strß
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *Ü
-storage_optionsÓ
-6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None"pandas._typing.StorageOptions 0:typing.overloadX
+data_label*
 
-read_statapandas.io.stata.read_stata":
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*‚
-filepath_or_buffer…
-iUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes]]Ô
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
-)pandas._typing.ReadBuffer[builtins.bytes] 
-builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer*3
-convert_dates
-builtins.bool"builtins.bool *:
-convert_categoricals
-builtins.bool"builtins.bool *U
-	index_colD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *5
-convert_missing
-builtins.bool"builtins.bool *5
-preserve_dtypes
-builtins.bool"builtins.bool *ﬂ
-columnsœ
-3Union[builtins.list[pandas._typing.HashableT],None]ã
-'builtins.list[pandas._typing.HashableT]Q
-pandas._typing.HashableT"
-typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
-None *8
-order_categoricals
-builtins.bool"builtins.bool *
-	chunksize
-None *J
-iterator:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *Õ
-compressionπ
-≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
-∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strß
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *Ü
-storage_optionsÓ
-6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None"pandas._typing.StorageOptions 0:typing.overloadX*ã
-__annotations__pandas.io.stata.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(0:builtins.property`*
+variable_labels$*
+
+self(*
+value_labels'*
+
+self(r
+	col_sizes0(r
+path_or_buf0)æ
+StataWriter"pandas.io.stata.StataParser*ı
+__init__*
+
+self(**
+fname(,*
+
+data( *
+convert_dates (2*
+write_index (*
+	byteorder (*
+
+time_stamp (4*
+
+data_label (*
+variable_labels (6*
+compression (*
+storage_options (*
+value_labels (8*
+
+write_file*
+
+self(*"∂
+
+read_stataµ
+
+read_stata*
+filepath_or_buffer(
+*
+convert_dates (*
+convert_categoricals (*
+	index_col (*
+convert_missing (*
+preserve_dtypes (*
+columns (:*
+order_categoricals (*
+	chunksize (*
+iterator(;*
+compression (*
+storage_options (0:typing.overloadXµ
+
+read_stata*
+filepath_or_buffer(
+*
+convert_dates (*
+convert_categoricals (*
+	index_col (*
+convert_missing (*
+preserve_dtypes (*
+columns (:*
+order_categoricals (*
+	chunksize(*
+iterator (*
+compression (*
+storage_options (0:typing.overloadX∑
+
+read_stata *
+filepath_or_buffer(
+*
+convert_dates (*
+convert_categoricals (*
+	index_col (*
+convert_missing (*
+preserve_dtypes (*
+columns (:*
+order_categoricals (*
+	chunksize (*
+iterator (;*
+compression (*
+storage_options (0:typing.overloadX*
+__annotations__022"pandas.io.stata.StataParser2"pandas.io.stata.StataReader2"builtins.str2"os.PathLike2222"pandas._typing.FilePath22"builtins.bytes2"pandas._typing.ReadBuffer222	2"builtins.bool222"typing.Sequence2222"builtins.int222	222"builtins.dict22%"pandas._typing.CompressionDict2222("!pandas._typing.CompressionOptions2222$"pandas._typing.StorageOptions22F
+ pandas.io.stata.StataReader.Self"pandas.io.stata.StataReader(22"builtins.BaseException2"type222222"types.TracebackType222"pandas.core.frame.DataFrame222"builtins.list222"2"builtins.dict22"builtins.float2"builtins.dict2%2"builtins.dict2&2"builtins.list22"_io.BytesIO2"pandas.io.stata.StataWriter2"pandas._typing.WriteBuffer222+2"typing.Hashable2"typing.Hashable2-222%"pandas._typing.StataDateFormat2/2"builtins.dict2.02212"datetime.datetime2232"builtins.dict2.2252"builtins.dict2.&2272"builtins.list2.2292	2

@@ -1,165 +1,95 @@
 
-paho.mqtt.propertiesU
-MQTTExceptionpaho.mqtt.MQTTException"builtins.Exceptionj310j311j312j313j314i
-MalformedPacket$paho.mqtt.properties.MalformedPacket"paho.mqtt.MQTTExceptionj310j311j312j313j314¤
-VariableByteIntegers)paho.mqtt.properties.VariableByteIntegers"builtins.object*µ
-encode0paho.mqtt.properties.VariableByteIntegers.encode" 
-builtins.bytes"builtins.bytes*#
-x
-builtins.int"builtins.int0:builtins.staticmethodhz310z311z312z313z314*þ
-decode0paho.mqtt.properties.VariableByteIntegers.decode"`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*,
-buffer 
-builtins.bytes"builtins.bytes0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314º
+paho.mqtt.properties<
+MQTTExceptionpaho.mqtt.MQTTException"builtins.Exception*
+MalformedPacket"paho.mqtt.MQTTExceptionŒ
+VariableByteIntegers"builtins.object*.
+encode*
+x(0:builtins.staticmethodh*3
+decode*
+buffer(0:builtins.staticmethodhë
 
-Propertiespaho.mqtt.properties.Properties"builtins.object*Ó
-__init__(paho.mqtt.properties.Properties.__init__"
-None*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*,
+Properties"builtins.object**
+__init__*
 
-packetType
-builtins.int"builtins.intz310z311z312z313z314*ù
-allowsMultiple.paho.mqtt.properties.Properties.allowsMultiple"
-builtins.bool"builtins.bool*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*0
-compressedName
-builtins.str"builtins.strz310z311z312z313z314*û
-getIdentFromName0paho.mqtt.properties.Properties.getIdentFromName"
-builtins.int"builtins.int*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*0
-compressedName
-builtins.str"builtins.strz310z311z312z313z314*ç
-__setattr__+paho.mqtt.properties.Properties.__setattr__"
-None*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*&
-name
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314*ì
-json$paho.mqtt.properties.Properties.json"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Propertiesz310z311z312z313z314*¹
-isEmpty'paho.mqtt.properties.Properties.isEmpty"
-builtins.bool"builtins.bool*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Propertiesz310z311z312z313z314*Ÿ
-clear%paho.mqtt.properties.Properties.clear"
-None*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Propertiesz310z311z312z313z314*±
-writeProperty-paho.mqtt.properties.Properties.writeProperty" 
-builtins.bytes"builtins.bytes*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*,
+self(*
 
-identifier
-builtins.int"builtins.int*&
-type
-builtins.int"builtins.int*
-value
-Anyz310z311z312z313z314*µ
-pack$paho.mqtt.properties.Properties.pack" 
-builtins.bytes"builtins.bytes*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Propertiesz310z311z312z313z314*®
-readProperty,paho.mqtt.properties.Properties.readProperty"
-Any*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*,
-buffer 
-builtins.bytes"builtins.bytes*&
-type
-builtins.int"builtins.int**
-propslen
-builtins.int"builtins.intz310z311z312z313z314*Ÿ
-getNameFromIdent0paho.mqtt.properties.Properties.getNameFromIdent"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*,
+packetType(*4
+allowsMultiple*
 
-identifier
-builtins.int"builtins.intz310z311z312z313z314*á
-unpack&paho.mqtt.properties.Properties.unpack"™
-3Tuple[paho.mqtt.properties.Properties,builtins.int]B
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties
-builtins.int"builtins.int*L
-selfB
-paho.mqtt.properties.Properties"paho.mqtt.properties.Properties*,
-buffer 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314ro
+self(*
+compressedName(*6
+getIdentFromName*
 
-packetType*paho.mqtt.properties.Properties.packetType
-builtins.int"builtins.int*310*311*312*313*314r“
-types%paho.mqtt.properties.Properties.typesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r¾
-names%paho.mqtt.properties.Properties.namesu
-(builtins.dict[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*310*311*312*313*314rî
+self(*
+compressedName(*4
+__setattr__*
 
-properties*paho.mqtt.properties.Properties.propertiesš
-Kbuiltins.dict[builtins.int,Tuple[builtins.int,builtins.list[builtins.int]]]
-builtins.int"builtins.int
-/Tuple[builtins.int,builtins.list[builtins.int]]
-builtins.int"builtins.intJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list"builtins.dict*310*311*312*313*314š
+self(*
 
-writeInt16paho.mqtt.properties.writeInt16"(
-builtins.bytearray"builtins.bytearray*(
-length
-builtins.int"builtins.intz310z311z312z313z314
-	readInt16paho.mqtt.properties.readInt16"
-builtins.int"builtins.int*)
-buf 
-builtins.bytes"builtins.bytesz310z311z312z313z314š
+name(*
+value(*
+json	*
 
-writeInt32paho.mqtt.properties.writeInt32"(
-builtins.bytearray"builtins.bytearray*(
-length
-builtins.int"builtins.intz310z311z312z313z314
-	readInt32paho.mqtt.properties.readInt32"
-builtins.int"builtins.int*)
-buf 
-builtins.bytes"builtins.bytesz310z311z312z313z314Þ
-writeUTFpaho.mqtt.properties.writeUTF"(
-builtins.bytearray"builtins.bytearray*p
-dataf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz310z311z312z313z314ú
-readUTFpaho.mqtt.properties.readUTF"`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*,
-buffer 
-builtins.bytes"builtins.bytes*(
-maxlen
-builtins.int"builtins.intz310z311z312z313z314ž
+self(*
+isEmpty*
 
-writeBytespaho.mqtt.properties.writeBytes"(
-builtins.bytearray"builtins.bytearray*,
-buffer 
-builtins.bytes"builtins.bytesz310z311z312z313z314Ú
-	readBytespaho.mqtt.properties.readBytes"f
-"Tuple[builtins.bytes,builtins.int] 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int*,
-buffer 
-builtins.bytes"builtins.bytesz310z311z312z313z314*©
-__annotations__$paho.mqtt.properties.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+clear*
+
+self(*H
+writeProperty*
+
+self(*
+
+identifier(*
+
+type(*
+value(*
+pack*
+
+self(*F
+readProperty*
+
+self(*
+buffer(*
+
+type(*
+propslen(*2
+getNameFromIdent
+*
+
+self(*
+
+identifier(*$
+unpack*
+
+self(*
+buffer(r
+
+packetType0r	
+types0r	
+names0r
+
+properties0
+
+writeInt16*
+length(
+	readInt16*	
+buf(
+
+writeInt32*
+length(
+	readInt32*	
+buf(
+writeUTF*
+
+data('
+readUTF*
+buffer(*
+maxlen(
+
+writeBytes*
+buffer(
+	readBytes*
+buffer(*
+__annotations__0	2"builtins.bytes2"builtins.int2222!"paho.mqtt.properties.Properties2"builtins.bool2"builtins.str22"builtins.dict222222"builtins.list22"builtins.dict22"builtins.list2222"builtins.dict22"builtins.bytearray222222

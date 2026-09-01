@@ -1,162 +1,108 @@
 
-ldap3.strategy.baseâ(
-BaseStrategy ldap3.strategy.base.BaseStrategy"builtins.object*Æ
-__init__)ldap3.strategy.base.BaseStrategy.__init__"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
-ldap_connection
-Anyz310z311z312z313z314*‹
-open%ldap3.strategy.base.BaseStrategy.open"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*1
-reset_usage
-builtins.bool"builtins.bool *6
-read_server_info
-builtins.bool"builtins.bool z310z311z312z313z314*¢
-close&ldap3.strategy.base.BaseStrategy.close"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategyz310z311z312z313z314*½
-send%ldap3.strategy.base.BaseStrategy.send"
-Any*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
-message_type
-Any*
-request
-Any*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ç
-get_response-ldap3.strategy.base.BaseStrategy.get_response"
-Any*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
+ldap3.strategy.base°
+BaseStrategy"builtins.object*/
+__init__*
 
-message_id
-Any*j
-timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *1
-get_request
-builtins.bool"builtins.bool z310z311z312z313z314*•
-compute_ldap_message_size:ldap3.strategy.base.BaseStrategy.compute_ldap_message_size*
-data0:builtins.staticmethodhz310z311z312z313z314*x
-decode_response0ldap3.strategy.base.BaseStrategy.decode_response*
+self(*
+ldap_connection(*C
+open*
+
+self(*
+reset_usage (*
+read_server_info (*
+close*
+
+self(*I
+send*
+
+self(*
+message_type(*
+request(*
+controls (*T
+get_response*
+
+self(*
+
+message_id(*
+timeout (*
+get_request (*@
+compute_ldap_message_size*
+data0:builtins.staticmethodh*-
+decode_response*
 self*
-ldap_messagez310z311z312z313z314*‚
-decode_response_fast5ldap3.strategy.base.BaseStrategy.decode_response_fast*
+ldap_message*2
+decode_response_fast*
 self*
-ldap_messagez310z311z312z313z314*‚
-decode_control/ldap3.strategy.base.BaseStrategy.decode_control*
-control0:builtins.staticmethodhz310z311z312z313z314*Ñ
-decode_control_fast4ldap3.strategy.base.BaseStrategy.decode_control_fast"
-Any*
-control
-Any*1
-from_server
-builtins.bool"builtins.bool 0:builtins.staticmethodhz310z311z312z313z314*ž
-decode_request/ldap3.strategy.base.BaseStrategy.decode_request"
-Any*
-message_type
-Any*
-	component
-Any*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*}
-valid_referral_list4ldap3.strategy.base.BaseStrategy.valid_referral_list*
+ldap_message*8
+decode_control*
+control0:builtins.staticmethodh*V
+decode_control_fast*
+control(*
+from_server (0:builtins.staticmethodh*d
+decode_request*
+message_type(*
+	component(*
+controls (0:builtins.staticmethodh*.
+valid_referral_list*
 self*
-	referralsz310z311z312z313z314*š
-do_next_range_search5ldap3.strategy.base.BaseStrategy.do_next_range_search*
+	referrals*J
+do_next_range_search*
 self*
 request*
 response*
-	attr_namez310z311z312z313z314*‘
-do_search_on_auto_range8ldap3.strategy.base.BaseStrategy.do_search_on_auto_range*
+	attr_name*>
+do_search_on_auto_range*
 self*
 request*
-responsez310z311z312z313z314*‹
-create_referral_connection;ldap3.strategy.base.BaseStrategy.create_referral_connection*
+response*5
+create_referral_connection*
 self*
-	referralsz310z311z312z313z314*”
-do_operation_on_referral9ldap3.strategy.base.BaseStrategy.do_operation_on_referral*
+	referrals*@
+do_operation_on_referral*
 self*
 request*
-	referralsz310z311z312z313z314*Á
-sending(ldap3.strategy.base.BaseStrategy.sending"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
-ldap_message
-Anyz310z311z312z313z314*ª
-	receiving*ldap3.strategy.base.BaseStrategy.receiving"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategyz310z311z312z313z314*ã
-post_send_single_response:ldap3.strategy.base.BaseStrategy.post_send_single_response"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
+	referrals*+
+sending*
 
-message_id
-Anyz310z311z312z313z314*Ñ
-post_send_search1ldap3.strategy.base.BaseStrategy.post_send_search"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
+self(*
+ldap_message(*
+	receiving*
 
-message_id
-Anyz310z311z312z313z314*¬
+self(*;
+post_send_single_response*
 
-get_stream+ldap3.strategy.base.BaseStrategy.get_stream"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategyz310z311z312z313z314*À
+self(*
 
-set_stream+ldap3.strategy.base.BaseStrategy.set_stream"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategy*
-value
-Anyz310z311z312z313z314*Â
-unbind_referral_cache6ldap3.strategy.base.BaseStrategy.unbind_referral_cache"
-None*N
-selfD
- ldap3.strategy.base.BaseStrategy" ldap3.strategy.base.BaseStrategyz310z311z312z313z314j310j311j312j313j314r[
+message_id(*2
+post_send_search*
 
-connection+ldap3.strategy.base.BaseStrategy.connection
-Any*310*311*312*313*314rO
-sync%ldap3.strategy.base.BaseStrategy.sync
-Any*310*311*312*313*314r]
-no_real_dsa,ldap3.strategy.base.BaseStrategy.no_real_dsa
-Any*310*311*312*313*314rS
-pooled'ldap3.strategy.base.BaseStrategy.pooled
-Any*310*311*312*313*314r[
+self(*
 
-can_stream+ldap3.strategy.base.BaseStrategy.can_stream
-Any*310*311*312*313*314rc
-referral_cache/ldap3.strategy.base.BaseStrategy.referral_cache
-Any*310*311*312*313*314rt
-thread_safe,ldap3.strategy.base.BaseStrategy.thread_safe
-builtins.bool"builtins.bool*310*311*312*313*314*¨
-__annotations__#ldap3.strategy.base.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*{
-unix_socket_available)ldap3.strategy.base.unix_socket_available
-builtins.bool"builtins.bool*310*311*312*313*314*‡
-SESSION_TERMINATED_BY_SERVER0ldap3.strategy.base.SESSION_TERMINATED_BY_SERVER
-builtins.str"builtins.str*310*311*312*313*314*q
-TRANSACTION_ERROR%ldap3.strategy.base.TRANSACTION_ERROR
-builtins.str"builtins.str*310*311*312*313*314*q
-RESPONSE_COMPLETE%ldap3.strategy.base.RESPONSE_COMPLETE
-builtins.str"builtins.str*310*311*312*313*314
+message_id(*
+
+get_stream*
+
+self(*'
+
+set_stream*
+
+self(*
+value(*%
+unbind_referral_cache*
+
+self(r
+
+connection0r
+sync0r
+no_real_dsa0r
+
+pooled0r
+
+can_stream0r
+referral_cache0r
+thread_safe0*
+__annotations__0*
+unix_socket_available0* 
+SESSION_TERMINATED_BY_SERVER0*
+TRANSACTION_ERROR0*
+RESPONSE_COMPLETE022"" ldap3.strategy.base.BaseStrategy22"builtins.bool2"_typeshed.Incomplete2222"builtins.str2"builtins.dict2

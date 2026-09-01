@@ -1,194 +1,116 @@
 
-serial.serialposixﬁ
-PlatformSpecificBase'serial.serialposix.PlatformSpecificBase"builtins.object*è
-set_low_latency_mode<serial.serialposix.PlatformSpecificBase.set_low_latency_mode"
-None*\
-selfR
-'serial.serialposix.PlatformSpecificBase"'serial.serialposix.PlatformSpecificBase*8
-low_latency_settings
-builtins.bool"builtins.boolz310z311z312z313z314j310j311j312j313j314r‡
-BAUDRATE_CONSTANTS:serial.serialposix.PlatformSpecificBase.BAUDRATE_CONSTANTSu
-(builtins.dict[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.dict*310*311*312*313*314y
-PlatformSpecific#serial.serialposix.PlatformSpecific"'serial.serialposix.PlatformSpecificBasej310j311j312j313j314Ä"
-Serialserial.serialposix.Serial"serial.serialutil.SerialBase"#serial.serialposix.PlatformSpecific*ã
-openserial.serialposix.Serial.open"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serialz310z311z312z313z314*¬
+serial.serialposixÅ
+PlatformSpecificBase"builtins.object*@
+set_low_latency_mode*
 
-in_waiting$serial.serialposix.Serial.in_waiting"
-builtins.int"builtins.int*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial0:builtins.property`z310z311z312z313z314*Õ
-readserial.serialposix.Serial.read" 
-builtins.bytes"builtins.bytes*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial*(
-size
-builtins.int"builtins.int z310z311z312z313z314*ô
-cancel_read%serial.serialposix.Serial.cancel_read"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serialz310z311z312z313z314*õ
-cancel_write&serial.serialposix.Serial.cancel_write"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serialz310z311z312z313z314*Ú
-writeserial.serialposix.Serial.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial*64
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*ı
-writeserial.serialposix.Serial.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial*42
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*ß
-reset_input_buffer,serial.serialposix.Serial.reset_input_buffer"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serialz310z311z312z313z314*©
-reset_output_buffer-serial.serialposix.Serial.reset_output_buffer"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serialz310z311z312z313z314*…
+self(*
+low_latency_settings(r
+BAUDRATE_CONSTANTS0;
+PlatformSpecific"'serial.serialposix.PlatformSpecificBaseè
+Serial"serial.serialutil.SerialBase"#serial.serialposix.PlatformSpecific*
+open*
 
-send_break$serial.serialposix.Serial.send_break"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial*0
-duration 
-builtins.float"builtins.float z310z311z312z313z314*∂
-ctsserial.serialposix.Serial.cts"
-builtins.bool"builtins.bool*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial0:builtins.property`z310z311z312z313z314*∂
-dsrserial.serialposix.Serial.dsr"
-builtins.bool"builtins.bool*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial0:builtins.property`z310z311z312z313z314*¥
-riserial.serialposix.Serial.ri"
-builtins.bool"builtins.bool*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial0:builtins.property`z310z311z312z313z314*¥
-cdserial.serialposix.Serial.cd"
-builtins.bool"builtins.bool*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial0:builtins.property`z310z311z312z313z314*ƒ
-out_waiting%serial.serialposix.Serial.out_waiting"
-builtins.int"builtins.int*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial0:builtins.property`z310z311z312z313z314*›
-set_input_flow_control0serial.serialposix.Serial.set_input_flow_control"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial*,
-enable
-builtins.bool"builtins.bool z310z311z312z313z314*ﬂ
-set_output_flow_control1serial.serialposix.Serial.set_output_flow_control"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serial*,
-enable
-builtins.bool"builtins.bool z310z311z312z313z314*ô
-nonblocking%serial.serialposix.Serial.nonblocking"
-None*@
-self6
-serial.serialposix.Serial"serial.serialposix.Serialz310z311z312z313z314j310j311j312j313j314rÅ
-fdserial.serialposix.Serial.fdD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rü
-pipe_abort_read_w+serial.serialposix.Serial.pipe_abort_read_wD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rü
-pipe_abort_read_r+serial.serialposix.Serial.pipe_abort_read_rD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314r°
-pipe_abort_write_w,serial.serialposix.Serial.pipe_abort_write_wD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314r°
-pipe_abort_write_r,serial.serialposix.Serial.pipe_abort_write_rD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314i
-PosixPollSerial"serial.serialposix.PosixPollSerial"serial.serialposix.Serialj310j311j312j313j314ß
-VTIMESerialserial.serialposix.VTIMESerial"serial.serialposix.Serial*√
-cancel_read*serial.serialposix.VTIMESerial.cancel_read"
-NoReturn
-*J
-self@
-serial.serialposix.VTIMESerial"serial.serialposix.VTIMESerial0:builtins.property`z310z311z312z313z314j310j311j312j313j314*ß
-__annotations__"serial.serialposix.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Z
-CMSPARserial.serialposix.CMSPAR
-builtins.int"builtins.int*310*311*312*313*314*\
-TCGETS2serial.serialposix.TCGETS2
-builtins.int"builtins.int*310*311*312*313*314*\
-TCSETS2serial.serialposix.TCSETS2
-builtins.int"builtins.int*310*311*312*313*314*Z
-BOTHERserial.serialposix.BOTHER
-builtins.int"builtins.int*310*311*312*313*314*b
+self(*1
 
-TIOCGRS485serial.serialposix.TIOCGRS485
-builtins.int"builtins.int*310*311*312*313*314*b
+in_waiting*
 
-TIOCSRS485serial.serialposix.TIOCSRS485
-builtins.int"builtins.int*310*311*312*313*314*p
-SER_RS485_ENABLED$serial.serialposix.SER_RS485_ENABLED
-builtins.int"builtins.int*310*311*312*313*314*x
-SER_RS485_RTS_ON_SEND(serial.serialposix.SER_RS485_RTS_ON_SEND
-builtins.int"builtins.int*310*311*312*313*314*~
-SER_RS485_RTS_AFTER_SEND+serial.serialposix.SER_RS485_RTS_AFTER_SEND
-builtins.int"builtins.int*310*311*312*313*314*z
-SER_RS485_RX_DURING_TX)serial.serialposix.SER_RS485_RX_DURING_TX
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCMGETserial.serialposix.TIOCMGET
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCMBISserial.serialposix.TIOCMBIS
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCMBICserial.serialposix.TIOCMBIC
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCMSETserial.serialposix.TIOCMSET
-builtins.int"builtins.int*310*311*312*313*314*`
-	TIOCM_DTRserial.serialposix.TIOCM_DTR
-builtins.int"builtins.int*310*311*312*313*314*`
-	TIOCM_RTSserial.serialposix.TIOCM_RTS
-builtins.int"builtins.int*310*311*312*313*314*`
-	TIOCM_CTSserial.serialposix.TIOCM_CTS
-builtins.int"builtins.int*310*311*312*313*314*`
-	TIOCM_CARserial.serialposix.TIOCM_CAR
-builtins.int"builtins.int*310*311*312*313*314*`
-	TIOCM_RNGserial.serialposix.TIOCM_RNG
-builtins.int"builtins.int*310*311*312*313*314*`
-	TIOCM_DSRserial.serialposix.TIOCM_DSR
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCM_CDserial.serialposix.TIOCM_CD
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCM_RIserial.serialposix.TIOCM_RI
-builtins.int"builtins.int*310*311*312*313*314*\
-TIOCINQserial.serialposix.TIOCINQ
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCOUTQserial.serialposix.TIOCOUTQ
-builtins.int"builtins.int*310*311*312*313*314*n
-TIOCM_zero_str!serial.serialposix.TIOCM_zero_str 
-builtins.bytes"builtins.bytes*310*311*312*313*314*l
-TIOCM_RTS_str serial.serialposix.TIOCM_RTS_str 
-builtins.bytes"builtins.bytes*310*311*312*313*314*l
-TIOCM_DTR_str serial.serialposix.TIOCM_DTR_str 
-builtins.bytes"builtins.bytes*310*311*312*313*314*^
-TIOCSBRKserial.serialposix.TIOCSBRK
-builtins.int"builtins.int*310*311*312*313*314*^
-TIOCCBRKserial.serialposix.TIOCCBRK
-builtins.int"builtins.int*310*311*312*313*314
+self(0:builtins.property`*"
+read*
+
+self(*
+size (*
+cancel_read*
+
+self(*
+cancel_write*
+
+self(*#
+write*
+
+self(*(	z310z311*(
+write*
+
+self(*(
+z312z313z314*"
+reset_input_buffer*
+
+self(*#
+reset_output_buffer*
+
+self(*,
+
+send_break*
+
+self(*
+duration (**
+cts*
+
+self(0:builtins.property`**
+dsr*
+
+self(0:builtins.property`*)
+ri*
+
+self(0:builtins.property`*)
+cd*
+
+self(0:builtins.property`*2
+out_waiting*
+
+self(0:builtins.property`*6
+set_input_flow_control*
+
+self(*
+enable (*7
+set_output_flow_control*
+
+self(*
+enable (*
+nonblocking*
+
+self(r
+fd0r
+pipe_abort_read_w0r
+pipe_abort_read_r0r
+pipe_abort_write_w0r
+pipe_abort_write_r0,
+PosixPollSerial"serial.serialposix.Serial\
+VTIMESerial"serial.serialposix.Serial*2
+cancel_read*
+
+self(0:builtins.property`*
+__annotations__0*
+
+CMSPAR0*
+TCGETS20*
+TCSETS20*
+
+BOTHER0*
+
+TIOCGRS4850*
+
+TIOCSRS4850*
+SER_RS485_ENABLED0*
+SER_RS485_RTS_ON_SEND0*
+SER_RS485_RTS_AFTER_SEND0*
+SER_RS485_RX_DURING_TX0*
+TIOCMGET0*
+TIOCMBIS0*
+TIOCMBIC0*
+TIOCMSET0*
+	TIOCM_DTR0*
+	TIOCM_RTS0*
+	TIOCM_CTS0*
+	TIOCM_CAR0*
+	TIOCM_RNG0*
+	TIOCM_DSR0*
+TIOCM_CD0*
+TIOCM_RI0*
+TIOCINQ0*
+TIOCOUTQ0*
+TIOCM_zero_str0*
+TIOCM_RTS_str0*
+TIOCM_DTR_str0*
+TIOCSBRK0*
+TIOCCBRK022)"'serial.serialposix.PlatformSpecificBase2"builtins.bool2"builtins.int2"builtins.dict22"serial.serialposix.Serial2"builtins.bytes222"typing_extensions.Buffer2"_collections_abc.Buffer2"builtins.float2
+2 "serial.serialposix.VTIMESerial2"builtins.str22"builtins.dict2

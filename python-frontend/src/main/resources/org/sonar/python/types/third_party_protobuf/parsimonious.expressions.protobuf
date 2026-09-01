@@ -1,209 +1,119 @@
 
-parsimonious.expressionsÝ
+parsimonious.expressionså
 
-Expression#parsimonious.expressions.Expression"parsimonious.utils.StrAndRepr*Û
-__init__,parsimonious.expressions.Expression.__init__"
-None*T
-selfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*(
-name
-builtins.str"builtins.str z310z311z312z313z314*ö
-resolve_refs0parsimonious.expressions.Expression.resolve_refs"Ÿ
-(parsimonious.expressions.Expression.SelfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression"#parsimonious.expressions.Expression(*ª
-selfŸ
-(parsimonious.expressions.Expression.SelfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression"#parsimonious.expressions.Expression(*Ë
-rule_map¼
-@typing.Mapping[builtins.str,parsimonious.expressions.Expression]
-builtins.str"builtins.strJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression"typing.Mappingz310z311z312z313z314*¦
-parse)parsimonious.expressions.Expression.parse"2
-parsimonious.nodes.Node"parsimonious.nodes.Node*T
-selfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*&
-text
-builtins.str"builtins.str*'
-pos
-builtins.int"builtins.int z310z311z312z313z314*¦
-match)parsimonious.expressions.Expression.match"2
-parsimonious.nodes.Node"parsimonious.nodes.Node*T
-selfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*&
-text
-builtins.str"builtins.str*'
-pos
-builtins.int"builtins.int z310z311z312z313z314*‚
+Expression"parsimonious.utils.StrAndRepr*&
+__init__*
 
-match_core.parsimonious.expressions.Expression.match_core"2
-parsimonious.nodes.Node"parsimonious.nodes.Node*T
-selfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*&
-text
-builtins.str"builtins.str*%
-pos
-builtins.int"builtins.int*ü
-cacheð
-Htyping.Mapping[Tuple[builtins.int,builtins.int],parsimonious.nodes.Node]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int2
-parsimonious.nodes.Node"parsimonious.nodes.Node"typing.Mapping*S
-errorH
-"parsimonious.exceptions.ParseError""parsimonious.exceptions.ParseErrorz310z311z312z313z314*Ã
-as_rule+parsimonious.expressions.Expression.as_rule"
-builtins.str"builtins.str*T
-selfJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expressionz310z311z312z313z314j310j311j312j313j314rg
-name(parsimonious.expressions.Expression.name
-builtins.str"builtins.str*310*311*312*313*314r”
-identity_tuple2parsimonious.expressions.Expression.identity_tuple5
-Tuple[builtins.str]
-builtins.str"builtins.str*310*311*312*313*314”
-Literal parsimonious.expressions.Literal"#parsimonious.expressions.Expression*ý
-__init__)parsimonious.expressions.Literal.__init__"
-None*N
-selfD
- parsimonious.expressions.Literal" parsimonious.expressions.Literal*)
-literal
-builtins.str"builtins.str*(
-name
-builtins.str"builtins.str z310z311z312z313z314j310j311j312j313j314rj
-literal(parsimonious.expressions.Literal.literal
-builtins.str"builtins.str*310*311*312*313*314r¼
-identity_tuple/parsimonious.expressions.Literal.identity_tuple`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*310*311*312*313*314p
-TokenMatcher%parsimonious.expressions.TokenMatcher" parsimonious.expressions.Literalj310j311j312j313j314¦
-Regexparsimonious.expressions.Regex"#parsimonious.expressions.Expression*Ã
-__init__'parsimonious.expressions.Regex.__init__"
-None*J
-self@
-parsimonious.expressions.Regex"parsimonious.expressions.Regex*)
-pattern
-builtins.str"builtins.str*(
-name
-builtins.str"builtins.str *1
-ignore_case
-builtins.bool"builtins.bool *,
-locale
-builtins.bool"builtins.bool */
-	multiline
-builtins.bool"builtins.bool *-
-dot_all
-builtins.bool"builtins.bool *-
-unicode
-builtins.bool"builtins.bool *-
-verbose
-builtins.bool"builtins.bool *+
-ascii
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314r†
-re!parsimonious.expressions.Regex.reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314rï
-identity_tuple-parsimonious.expressions.Regex.identity_tuple”
-,Tuple[builtins.str,re.Pattern[builtins.str]]
-builtins.str"builtins.strD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314í
-Compound!parsimonious.expressions.Compound"#parsimonious.expressions.Expression*™
-__init__*parsimonious.expressions.Compound.__init__"
-None*P
-selfF
-!parsimonious.expressions.Compound"!parsimonious.expressions.Compound*W
-membersJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rã
-members)parsimonious.expressions.Compound.members“
-4typing.Sequence[parsimonious.expressions.Expression]J
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression"typing.Sequence*310*311*312*313*314i
-Sequence!parsimonious.expressions.Sequence"!parsimonious.expressions.Compoundj310j311j312j313j314c
-OneOfparsimonious.expressions.OneOf"!parsimonious.expressions.Compoundj310j311j312j313j314¯
-	Lookahead"parsimonious.expressions.Lookahead"!parsimonious.expressions.Compound*Ë
-__init__+parsimonious.expressions.Lookahead.__init__"
-None*R
-selfH
-"parsimonious.expressions.Lookahead""parsimonious.expressions.Lookahead*V
-memberJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*.
-negative
-builtins.bool"builtins.bool *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rt
+self(*
+name (*,
+resolve_refs*
 
-negativity-parsimonious.expressions.Lookahead.negativity
-builtins.bool"builtins.bool*310*311*312*313*314à
+self(*
+rule_map(*.
+parse*
 
-Quantifier#parsimonious.expressions.Quantifier"!parsimonious.expressions.Compound*ž
-__init__,parsimonious.expressions.Quantifier.__init__"
-None*T
-selfJ
-#parsimonious.expressions.Quantifier"#parsimonious.expressions.Quantifier*V
-memberJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*'
-min
-builtins.int"builtins.int *+
-max 
-builtins.float"builtins.float *(
-name
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314re
-min'parsimonious.expressions.Quantifier.min
-builtins.int"builtins.int*310*311*312*313*314ri
-max'parsimonious.expressions.Quantifier.max 
-builtins.float"builtins.float*310*311*312*313*314›
-is_callable$parsimonious.expressions.is_callable"
-builtins.bool"builtins.bool*-
-value"
-builtins.object"builtins.objectz310z311z312z313z314…
+self(*
 
-expression#parsimonious.expressions.expression"J
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*ô
-callableå
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]ä
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"'parsimonious.expressions._CALLABLE_TYPE*+
-	rule_name
-builtins.str"builtins.str*I
-grammar<
-parsimonious.grammar.Grammar"parsimonious.grammar.Grammarz310z311z312z313z314Ü
-Notparsimonious.expressions.Not"H
-"parsimonious.expressions.Lookahead""parsimonious.expressions.Lookahead*T
-termJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expressionz310z311z312z313z314˜
+text(*
+pos (*.
+match*
 
-ZeroOrMore#parsimonious.expressions.ZeroOrMore"J
-#parsimonious.expressions.Quantifier"#parsimonious.expressions.Quantifier*V
-memberJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*(
-name
-builtins.str"builtins.str z310z311z312z313z314¿
-	OneOrMore"parsimonious.expressions.OneOrMore"J
-#parsimonious.expressions.Quantifier"#parsimonious.expressions.Quantifier*V
-memberJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*(
-name
-builtins.str"builtins.str *'
-min
-builtins.int"builtins.int z310z311z312z313z314”
-Optional!parsimonious.expressions.Optional"J
-#parsimonious.expressions.Quantifier"#parsimonious.expressions.Quantifier*V
-memberJ
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression*(
-name
-builtins.str"builtins.str z310z311z312z313z314*­
-__annotations__(parsimonious.expressions.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*5
-collectionscollections *310*311*312*313*314*p
-IN_PROGRESS$parsimonious.expressions.IN_PROGRESS"
-builtins.object"builtins.object*310*311*312*313*314
+self(*
+
+text(*
+pos (*K
+
+match_core*
+
+self(*
+
+text(*	
+pos(*
+cache(	*
+error(
+*
+as_rule*
+
+self(r
+name0r
+identity_tuple0†
+Literal"#parsimonious.expressions.Expression*5
+__init__*
+
+self(*
+literal(*
+name (r
+literal0r
+identity_tuple00
+TokenMatcher" parsimonious.expressions.Literalú
+Regex"#parsimonious.expressions.Expression*¯
+__init__*
+
+self(*
+pattern(*
+name (*
+ignore_case (*
+locale (*
+	multiline (*
+dot_all (*
+unicode (*
+verbose (*
+ascii (r
+re0r
+identity_tuple0s
+Compound"#parsimonious.expressions.Expression*5
+__init__*
+
+self(*
+members(*
+kwargs(r
+members0-
+Sequence"!parsimonious.expressions.Compound*
+OneOf"!parsimonious.expressions.Compound†
+	Lookahead"!parsimonious.expressions.Compound*F
+__init__*
+
+self(*
+member(*
+negative (*
+kwargs(r
+
+negativity0Ÿ
+
+Quantifier"!parsimonious.expressions.Compound*\
+__init__*
+
+self(*
+member(*
+min (*
+max (*
+name (*
+kwargs(r
+min0r
+max0
+is_callable*
+value(>
+
+expression*
+callable(*
+	rule_name(*
+grammar(
+Not*
+
+term(*
+
+ZeroOrMore*
+member(*
+name (6
+	OneOrMore*
+member(*
+name (*
+min ((
+Optional*
+member(*
+name (*
+__annotations__0*
+collectionscollections *
+IN_PROGRESS022%"#parsimonious.expressions.Expression2"builtins.str2V
+(parsimonious.expressions.Expression.Self"#parsimonious.expressions.Expression(22"typing.Mapping22"parsimonious.nodes.Node2"builtins.int222"typing.Mapping22$""parsimonious.exceptions.ParseError222"" parsimonious.expressions.Literal222 "parsimonious.expressions.Regex2"builtins.bool2"
+re.Pattern2222#"!parsimonious.expressions.Compound22"typing.Sequence22$""parsimonious.expressions.Lookahead2%"#parsimonious.expressions.Quantifier2"builtins.float2"builtins.object2"builtins.function22222."'parsimonious.expressions._CALLABLE_TYPE22"parsimonious.grammar.Grammar2"builtins.dict2

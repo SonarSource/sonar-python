@@ -1,535 +1,119 @@
 
-#sklearn.datasets._twenty_newsgroups¨•
-CountVectorizer/sklearn.feature_extraction.text.CountVectorizer"0sklearn.feature_extraction.text._VectorizerMixin"sklearn.base.BaseEstimator*‹>
-__init__8sklearn.feature_extraction.text.CountVectorizer.__init__"
-None*l
-selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*‘
-input∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *,
-encoding
-builtins.str"builtins.str *€
-decode_error∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *∫
-strip_accents§
-WUnion[None,Literal[builtins.str],Literal[builtins.str],CallableType[builtins.function]]
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function */
-	lowercase
-builtins.bool"builtins.bool *õ
-preprocessorÜ
-+Union[None,CallableType[builtins.function]]
-NoneK
-CallableType[builtins.function]&
-builtins.function"builtins.function *ò
-	tokenizerÜ
-+Union[None,CallableType[builtins.function]]
-NoneK
-CallableType[builtins.function]&
-builtins.function"builtins.function *§
+#sklearn.datasets._twenty_newsgroups‘
+CountVectorizer/sklearn.feature_extraction.text.CountVectorizer"0sklearn.feature_extraction.text._VectorizerMixin"sklearn.base.BaseEstimator*›
+__init__*
 
-stop_wordsë
-õUnion[None,builtins.str,TypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]]
-None
-builtins.str"builtins.str∆
-ÇTypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]°
-˜TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]˝
-ÏUnion[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]F
-!numpy._typing._array_like._Buffer"!numpy._typing._array_like._Buffer¡
-√TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]Ã	
-∏Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArrayÖ
-{numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArray".numpy._typing._nested_sequence._NestedSequenceU
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object’
-Lnumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]U
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object".numpy._typing._nested_sequence._NestedSequence"(numpy._typing._array_like._DualArrayLike"#numpy._typing._array_like.ArrayLike"sklearn._typing.ArrayLike *Y
-token_patternD
-Union[None,builtins.str]
-None
-builtins.str"builtins.str *
-ngram_rangel
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.float *ƒ
-analyzer≥
-~Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],CallableType[builtins.function]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function *t
-max_dff
-"Union[builtins.float,builtins.int] 
-builtins.float"builtins.float
-builtins.int"builtins.int *t
-min_dff
-"Union[builtins.float,builtins.int] 
-builtins.float"builtins.float
-builtins.int"builtins.int *Œ
-max_featuresπ
-©Union[None,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]]
-None˛
-ùTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]ƒ	
-íUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]
-builtins.int"builtins.int›
->TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]]å
-3numpy.signedinteger[numpy._typing._nbit_base._8Bit]@
-numpy._typing._nbit_base._8Bit"numpy._typing._nbit_base._8Bit"numpy.signedinteger"
-numpy.int8‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._16Bit]B
-numpy._typing._nbit_base._16Bit"numpy._typing._nbit_base._16Bit"numpy.signedinteger"numpy.int16‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._32Bit]B
-numpy._typing._nbit_base._32Bit"numpy._typing._nbit_base._32Bit"numpy.signedinteger"numpy.int32‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._64Bit]B
-numpy._typing._nbit_base._64Bit"numpy._typing._nbit_base._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *»
+self(*
+input (*
+encoding (*
+decode_error (*
+strip_accents (*
+	lowercase (	*
+preprocessor (
+*
+	tokenizer (
+*
 
-vocabularyµ
-8Union[typing.Iterable[Any],None,typing.Mapping[Any,Any]]0
-typing.Iterable[Any]
-Any"typing.Iterable
-None;
-typing.Mapping[Any,Any]
-Any
-Any"typing.Mapping *,
-binary
-builtins.bool"builtins.bool *
-dtype
-Any *º
-fit3sklearn.feature_extraction.text.CountVectorizer.fit"Õ
-4sklearn.feature_extraction.text.CountVectorizer_Selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*ÿ
-selfÕ
-4sklearn.feature_extraction.text.CountVectorizer_Selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*C
-raw_documents0
-typing.Iterable[Any]
-Any"typing.Iterable*
-y
-Any *ª
-fit_transform=sklearn.feature_extraction.text.CountVectorizer.fit_transform"Ï
->Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],Any]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray
-Any*l
-selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*¢
-raw_documentsé
-kUnion[builtins.list[builtins.str],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],typing.Iterable[Any]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray0
-typing.Iterable[Any]
-Any"typing.Iterable*Ë
-yﬁ
-ÏUnion[None,numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],builtins.list[TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]]]
-Noneû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayø
-¨builtins.list[TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]]˛
-ùTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]ƒ	
-íUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]
-builtins.int"builtins.int›
->TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]]å
-3numpy.signedinteger[numpy._typing._nbit_base._8Bit]@
-numpy._typing._nbit_base._8Bit"numpy._typing._nbit_base._8Bit"numpy.signedinteger"
-numpy.int8‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._16Bit]B
-numpy._typing._nbit_base._16Bit"numpy._typing._nbit_base._16Bit"numpy.signedinteger"numpy.int16‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._32Bit]B
-numpy._typing._nbit_base._32Bit"numpy._typing._nbit_base._32Bit"numpy.signedinteger"numpy.int32‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._64Bit]B
-numpy._typing._nbit_base._64Bit"numpy._typing._nbit_base._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int"builtins.list *‚
-	transform9sklearn.feature_extraction.text.CountVectorizer.transform"
-Any*l
-selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*¢
-raw_documentsé
-kUnion[builtins.list[builtins.str],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],typing.Iterable[Any]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray0
-typing.Iterable[Any]
-Any"typing.Iterable*“!
-inverse_transformAsklearn.feature_extraction.text.CountVectorizer.inverse_transform"Ù
-Bbuiltins.list[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray"builtins.list*l
-selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*î
-Xå
-ÔUnion[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pandas.core.frame.DataFrame,Any]],TypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]]Ã
-eTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pandas.core.frame.DataFrame,Any]]ƒ
-ZUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pandas.core.frame.DataFrame,Any]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame
-Any"sklearn._typing.MatrixLike∆
-ÇTypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]°
-˜TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]˝
-ÏUnion[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]F
-!numpy._typing._array_like._Buffer"!numpy._typing._array_like._Buffer¡
-√TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]Ã	
-∏Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArrayÖ
-{numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArray".numpy._typing._nested_sequence._NestedSequenceU
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object’
-Lnumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]U
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object".numpy._typing._nested_sequence._NestedSequence"(numpy._typing._array_like._DualArrayLike"#numpy._typing._array_like.ArrayLike"sklearn._typing.ArrayLike*Ì
-get_feature_names_outEsklearn.feature_extraction.text.CountVectorizer.get_feature_names_out"û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*l
-selfb
-/sklearn.feature_extraction.text.CountVectorizer"/sklearn.feature_extraction.text.CountVectorizer*˝
-input_featuresÊ
-éUnion[None,TypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]]
-None∆
-ÇTypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]°
-˜TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]˝
-ÏUnion[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]F
-!numpy._typing._array_like._Buffer"!numpy._typing._array_like._Buffer¡
-√TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]Ã	
-∏Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArrayÖ
-{numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArray".numpy._typing._nested_sequence._NestedSequenceU
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object’
-Lnumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]U
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object".numpy._typing._nested_sequence._NestedSequence"(numpy._typing._array_like._DualArrayLike"#numpy._typing._array_like.ArrayLike"sklearn._typing.ArrayLike rv
-stop_words_;sklearn.feature_extraction.text.CountVectorizer.stop_words_*
-builtins.set[Any]
-Any"builtins.setrv
-fixed_vocabulary_Asklearn.feature_extraction.text.CountVectorizer.fixed_vocabulary_
-builtins.bool"builtins.boolrÖ
-vocabulary_;sklearn.feature_extraction.text.CountVectorizer.vocabulary_9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrõ
-_parameter_constraintsFsklearn.feature_extraction.text.CountVectorizer._parameter_constraints9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict∞
-check_random_state+sklearn.utils.validation.check_random_state"B
-numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomState*®
-seedù
-…Union[None,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]],numpy.random.mtrand.RandomState]
-None˛
-ùTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]ƒ	
-íUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]
-builtins.int"builtins.int›
->TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]]å
-3numpy.signedinteger[numpy._typing._nbit_base._8Bit]@
-numpy._typing._nbit_base._8Bit"numpy._typing._nbit_base._8Bit"numpy.signedinteger"
-numpy.int8‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._16Bit]B
-numpy._typing._nbit_base._16Bit"numpy._typing._nbit_base._16Bit"numpy.signedinteger"numpy.int16‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._32Bit]B
-numpy._typing._nbit_base._32Bit"numpy._typing._nbit_base._32Bit"numpy.signedinteger"numpy.int32‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._64Bit]B
-numpy._typing._nbit_base._64Bit"numpy._typing._nbit_base._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.IntB
-numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomState™
-get_data_home$sklearn.datasets._base.get_data_home"
-builtins.str"builtins.str*U
-	data_homeD
-Union[None,builtins.str]
-None
-builtins.str"builtins.str Ç
+stop_words (*
+token_pattern (*
+ngram_range (*
+analyzer (*
+max_df (*
+min_df (*
+max_features (.*
 
-load_files!sklearn.datasets._base.load_files"8
-sklearn.utils._bunch.Bunch"sklearn.utils._bunch.Bunch*0
-container_path
-builtins.str"builtins.str*W
-descriptionD
-Union[None,builtins.str]
-None
-builtins.str"builtins.str *ö
+vocabulary (1*
+binary (	*
+dtype (*3
+fit2*
 
-categoriesá
-)Union[None,typing.Sequence[builtins.str]]
-NoneN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence *2
-load_content
-builtins.bool"builtins.bool *-
-shuffle
-builtins.bool"builtins.bool *T
-encodingD
-Union[None,builtins.str]
-None
-builtins.str"builtins.str *€
-decode_error∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *≤
-random_stateù
-…Union[numpy.random.mtrand.RandomState,None,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]]B
-numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomState
-None˛
-ùTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]ƒ	
-íUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]
-builtins.int"builtins.int›
->TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]]å
-3numpy.signedinteger[numpy._typing._nbit_base._8Bit]@
-numpy._typing._nbit_base._8Bit"numpy._typing._nbit_base._8Bit"numpy.signedinteger"
-numpy.int8‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._16Bit]B
-numpy._typing._nbit_base._16Bit"numpy._typing._nbit_base._16Bit"numpy.signedinteger"numpy.int16‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._32Bit]B
-numpy._typing._nbit_base._32Bit"numpy._typing._nbit_base._32Bit"numpy.signedinteger"numpy.int32‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._64Bit]B
-numpy._typing._nbit_base._64Bit"numpy._typing._nbit_base._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *¢
-allowed_extensionsá
-)Union[None,typing.Sequence[builtins.str]]
-NoneN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence ≤
+self(2*
+raw_documents(/*	
+y (*=
+fit_transform5*
 
-load_descr!sklearn.datasets._base.load_descr"
-builtins.str"builtins.str*1
-descr_file_name
-builtins.str"builtins.str*0
-descr_module
-builtins.str"builtins.str ö
-strip_newsgroup_header:sklearn.datasets._twenty_newsgroups.strip_newsgroup_header"
-builtins.str"builtins.str*&
-text
-builtins.str"builtins.strú
-strip_newsgroup_quoting;sklearn.datasets._twenty_newsgroups.strip_newsgroup_quoting"
-builtins.str"builtins.str*&
-text
-builtins.str"builtins.strö
-strip_newsgroup_footer:sklearn.datasets._twenty_newsgroups.strip_newsgroup_footer"
-builtins.str"builtins.str*&
-text
-builtins.str"builtins.strÊ4
-fetch_20newsgroups6sklearn.datasets._twenty_newsgroups.fetch_20newsgroups"›
-ÆUnion[sklearn.utils._bunch.Bunch,Tuple[builtins.list[builtins.str],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]],Tuple[sklearn.utils._bunch.Bunch,builtins.tuple[Any]]]8
-sklearn.utils._bunch.Bunch"sklearn.utils._bunch.Bunch«
-VTuple[builtins.list[builtins.str],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray£
-5Tuple[sklearn.utils._bunch.Bunch,builtins.tuple[Any]]8
-sklearn.utils._bunch.Bunch"sklearn.utils._bunch.Bunch.
-builtins.tuple[Any]
-Any"builtins.tuple*U
-	data_homeD
-Union[None,builtins.str]
-None
-builtins.str"builtins.str *’
-subset∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *˘
+self(*
+raw_documents(7*	
+y (9*.
+	transform*
 
-categoriesÊ
-éUnion[None,TypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]]
-None∆
-ÇTypeAlias[TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]]°
-˜TypeAlias[Union[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]]˝
-ÏUnion[numpy._typing._array_like._Buffer,TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]F
-!numpy._typing._array_like._Buffer"!numpy._typing._array_like._Buffer¡
-√TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]Ã	
-∏Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArrayÖ
-{numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]]’
-Knumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DTypeT]\
-!numpy._typing._array_like._DTypeT(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArray".numpy._typing._nested_sequence._NestedSequenceU
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object’
-Lnumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]U
-numpy._typing._array_like._T"
-builtins.object"builtins.object"builtins.object".numpy._typing._nested_sequence._NestedSequence"(numpy._typing._array_like._DualArrayLike"#numpy._typing._array_like.ArrayLike"sklearn._typing.ArrayLike *-
-shuffle
-builtins.bool"builtins.bool *≤
-random_stateù
-…Union[numpy.random.mtrand.RandomState,None,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]]B
-numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomState
-None˛
-ùTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]]ƒ	
-íUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]]
-builtins.int"builtins.int›
->TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._8Bit]]å
-3numpy.signedinteger[numpy._typing._nbit_base._8Bit]@
-numpy._typing._nbit_base._8Bit"numpy._typing._nbit_base._8Bit"numpy.signedinteger"
-numpy.int8‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._16Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._16Bit]B
-numpy._typing._nbit_base._16Bit"numpy._typing._nbit_base._16Bit"numpy.signedinteger"numpy.int16‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._32Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._32Bit]B
-numpy._typing._nbit_base._32Bit"numpy._typing._nbit_base._32Bit"numpy.signedinteger"numpy.int32‚
-?TypeAlias[numpy.signedinteger[numpy._typing._nbit_base._64Bit]]è
-4numpy.signedinteger[numpy._typing._nbit_base._64Bit]B
-numpy._typing._nbit_base._64Bit"numpy._typing._nbit_base._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *<
-remove.
-builtins.tuple[Any]
-Any"builtins.tuple *9
-download_if_missing
-builtins.bool"builtins.bool *0
+self(*
+raw_documents(7**
+inverse_transform:*
 
-return_X_y
-builtins.bool"builtins.bool √
-fetch_20newsgroups_vectorizedAsklearn.datasets._twenty_newsgroups.fetch_20newsgroups_vectorized"£
-5Tuple[sklearn.utils._bunch.Bunch,builtins.tuple[Any]]8
-sklearn.utils._bunch.Bunch"sklearn.utils._bunch.Bunch.
-builtins.tuple[Any]
-Any"builtins.tuple*’
-subset∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *<
-remove.
-builtins.tuple[Any]
-Any"builtins.tuple *U
-	data_homeD
-Union[None,builtins.str]
-None
-builtins.str"builtins.str *9
-download_if_missing
-builtins.bool"builtins.bool *0
+self(*
+X(>*=
+get_feature_names_out4*
 
-return_X_y
-builtins.bool"builtins.bool */
-	normalize
-builtins.bool"builtins.bool *.
-as_frame
-builtins.bool"builtins.bool *ü
-__annotations__3sklearn.datasets._twenty_newsgroups.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*=
-joblib*sklearn.datasets._twenty_newsgroups.joblib
-Any*
-npnumpy *5
-sp&sklearn.datasets._twenty_newsgroups.sp
-Any*(
-preprocessingsklearn.preprocessing *i
-RemoteFileMetadata)sklearn.datasets._base.RemoteFileMetadata(
-types.EllipsisType"types.EllipsisType*^
-logger*sklearn.datasets._twenty_newsgroups.logger(
-types.EllipsisType"types.EllipsisType*`
-ARCHIVE+sklearn.datasets._twenty_newsgroups.ARCHIVE(
-types.EllipsisType"types.EllipsisType*Z
+self(*
+input_features (?r
+stop_words_0@r
+fixed_vocabulary_0	r
+vocabulary_0Ar
+_parameter_constraints0AO
+check_random_state+sklearn.utils.validation.check_random_stateB*
 
-CACHE_NAME.sklearn.datasets._twenty_newsgroups.CACHE_NAME
-builtins.str"builtins.str*^
-TRAIN_FOLDER0sklearn.datasets._twenty_newsgroups.TRAIN_FOLDER
-builtins.str"builtins.str*\
-TEST_FOLDER/sklearn.datasets._twenty_newsgroups.TEST_FOLDER
-builtins.str"builtins.str*d
-	_QUOTE_RE-sklearn.datasets._twenty_newsgroups._QUOTE_RE(
-types.EllipsisType"types.EllipsisType
+seed(CJ
+get_data_home$sklearn.datasets._base.get_data_home*
+	data_home (Ò
+
+load_files!sklearn.datasets._base.load_filesD*
+container_path(*
+description (*
+
+categories (F*
+load_content (	*
+shuffle (	*
+encoding (*
+decode_error (*
+random_state (G*
+allowed_extensions (F^
+
+load_descr!sklearn.datasets._base.load_descr*
+descr_file_name(*
+descr_module (&
+strip_newsgroup_header*
+
+text('
+strip_newsgroup_quoting*
+
+text(&
+strip_newsgroup_footer*
+
+text(µ
+fetch_20newsgroupsJ*
+	data_home (*
+subset (*
+
+categories (?*
+shuffle (	*
+random_state (G*
+remove (3*
+download_if_missing (	*
+
+return_X_y (	™
+fetch_20newsgroups_vectorizedI*
+subset (*
+remove (3*
+	data_home (*
+download_if_missing (	*
+
+return_X_y (	*
+	normalize (	*
+as_frame (	*
+__annotations__0K*
+
+joblib0*
+npnumpy *
+sp0*(
+preprocessingsklearn.preprocessing *A
+RemoteFileMetadata)sklearn.datasets._base.RemoteFileMetadata0L*
+
+logger0L*
+ARCHIVE0L*
+
+CACHE_NAME0*
+TRAIN_FOLDER0*
+TEST_FOLDER0*
+	_QUOTE_RE0L221"/sklearn.feature_extraction.text.CountVectorizer2"builtins.str2	2222"builtins.function22222"builtins.bool222#"!numpy._typing._array_like._Buffer22"numpy.dtype22"numpy.dtype22-"(numpy._typing._array_like._SupportsArray223".numpy._typing._nested_sequence._NestedSequence22"builtins.object2"builtins.object223".numpy._typing._nested_sequence._NestedSequence2222/"(numpy._typing._array_like._DualArrayLike2222*"#numpy._typing._array_like.ArrayLike22 "sklearn._typing.ArrayLike222222"builtins.float222	22"builtins.int222 "numpy._typing._nbit_base._8Bit2"numpy.signedinteger2 2"
+numpy.int82!2!"numpy._typing._nbit_base._16Bit2"numpy.signedinteger2#2"numpy.int162$2!"numpy._typing._nbit_base._32Bit2"numpy.signedinteger2&2"numpy.int322'2!"numpy._typing._nbit_base._64Bit2"numpy.signedinteger2)2"numpy.int642*2	2"%(+2"sklearn._typing.Int2,22-2"typing.Iterable22"typing.Mapping222/026"/sklearn.feature_extraction.text.CountVectorizer22"builtins.tuple22"numpy.ndarray232242"builtins.list22264/2"builtins.list2-22482"builtins.list242"pandas.core.frame.DataFrame224;2!"sklearn._typing.MatrixLike2<22=222"builtins.set22"builtins.dict22!"numpy.random.mtrand.RandomState22-B2"sklearn.utils._bunch.Bunch2"typing.Sequence222E22B-226422D322DHI2"builtins.dict22"types.EllipsisType

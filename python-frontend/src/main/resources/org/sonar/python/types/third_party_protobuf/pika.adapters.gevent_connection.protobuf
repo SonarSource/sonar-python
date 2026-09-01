@@ -1,203 +1,127 @@
 
-pika.adapters.gevent_connection–
-GeventConnection0pika.adapters.gevent_connection.GeventConnection",pika.adapters.base_connection.BaseConnection*„
-__init__9pika.adapters.gevent_connection.GeventConnection.__init__"
-None*n
-selfd
-0pika.adapters.gevent_connection.GeventConnection"0pika.adapters.gevent_connection.GeventConnection*m
+pika.adapters.gevent_connectionê
+GeventConnection",pika.adapters.base_connection.BaseConnection*æ
+__init__*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *s
-on_open_callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *y
-on_open_error_callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *t
-on_close_callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-custom_ioloop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *B
-internal_connection_workflow
-builtins.bool"builtins.bool z310z311z312z313z314*‹
-create_connectionBpika.adapters.gevent_connection.GeventConnection.create_connection"
-Any*∞
-cls¶
-6Type[pika.adapters.gevent_connection.GeventConnection]d
-0pika.adapters.gevent_connection.GeventConnection"0pika.adapters.gevent_connection.GeventConnection"type*
-connection_configs
-Any*
-on_done
-Any*p
-custom_ioloop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-workflow[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.classmethodpz310z311z312z313z314j310j311j312j313j314ﬂ
-_TSafeCallbackQueue3pika.adapters.gevent_connection._TSafeCallbackQueue"builtins.object*·
-__init__<pika.adapters.gevent_connection._TSafeCallbackQueue.__init__"
-None*t
-selfj
-3pika.adapters.gevent_connection._TSafeCallbackQueue"3pika.adapters.gevent_connection._TSafeCallbackQueuez310z311z312z313z314*v
-fd6pika.adapters.gevent_connection._TSafeCallbackQueue.fd*
-self0:builtins.property`z310z311z312z313z314*ñ
-add_callback_threadsafeKpika.adapters.gevent_connection._TSafeCallbackQueue.add_callback_threadsafe"
-None*t
-selfj
-3pika.adapters.gevent_connection._TSafeCallbackQueue"3pika.adapters.gevent_connection._TSafeCallbackQueue*
-callback
-Anyz310z311z312z313z314*Û
-run_next_callbackEpika.adapters.gevent_connection._TSafeCallbackQueue.run_next_callback"
-None*t
-selfj
-3pika.adapters.gevent_connection._TSafeCallbackQueue"3pika.adapters.gevent_connection._TSafeCallbackQueuez310z311z312z313z314j310j311j312j313j314õ
-_GeventSelectorIOLoop5pika.adapters.gevent_connection._GeventSelectorIOLoop"Bpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop*÷
-__init__>pika.adapters.gevent_connection._GeventSelectorIOLoop.__init__"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoop*m
+self(*
 
-gevent_hub[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*·
-close;pika.adapters.gevent_connection._GeventSelectorIOLoop.close"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoopz310z311z312z313z314*·
-start;pika.adapters.gevent_connection._GeventSelectorIOLoop.start"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoopz310z311z312z313z314*ﬂ
-stop:pika.adapters.gevent_connection._GeventSelectorIOLoop.stop"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoopz310z311z312z313z314*Ü
-add_callbackBpika.adapters.gevent_connection._GeventSelectorIOLoop.add_callback"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoop*
-callback
-Anyz310z311z312z313z314*ä
+parameters (*
+on_open_callback (*
+on_open_error_callback (*
+on_close_callback (*
+custom_ioloop (*$
+internal_connection_workflow (*å
+create_connection*	
+cls(*
+connection_configs(*
+on_done(*
+custom_ioloop (*
+workflow (0:builtins.classmethodp√
+_TSafeCallbackQueue"builtins.object*
+__init__*
 
-call_later@pika.adapters.gevent_connection._GeventSelectorIOLoop.call_later*
+self(*%
+fd*
+self0:builtins.property`*7
+add_callback_threadsafe*
+
+self(*
+callback(*!
+run_next_callback*
+
+self(®
+_GeventSelectorIOLoop"Bpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop*,
+__init__*
+
+self(	*
+
+gevent_hub (*
+close*
+
+self(	*
+start*
+
+self(	*
+stop*
+
+self(	*,
+add_callback*
+
+self(	*
+callback(*/
+
+call_later*
 self*	
 delay*
-callbackz310z311z312z313z314*ê
-remove_timeoutDpika.adapters.gevent_connection._GeventSelectorIOLoop.remove_timeout"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoop*
-timeout_handle
-Anyz310z311z312z313z314*©
-add_handlerApika.adapters.gevent_connection._GeventSelectorIOLoop.add_handler"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoop*
-fd
-Any*
-handler
-Any*
-events
-Anyz310z311z312z313z314*ô
-update_handlerDpika.adapters.gevent_connection._GeventSelectorIOLoop.update_handler"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoop*
-fd
-Any*
-events
-Anyz310z311z312z313z314*Ñ
-remove_handlerDpika.adapters.gevent_connection._GeventSelectorIOLoop.remove_handler"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventSelectorIOLoop"5pika.adapters.gevent_connection._GeventSelectorIOLoop*
-fd
-Anyz310z311z312z313z314j310j311j312j313j314ry
-READ:pika.adapters.gevent_connection._GeventSelectorIOLoop.READ
-builtins.int"builtins.int*310*311*312*313*314r{
-WRITE;pika.adapters.gevent_connection._GeventSelectorIOLoop.WRITE
-builtins.int"builtins.int*310*311*312*313*314r{
-ERROR;pika.adapters.gevent_connection._GeventSelectorIOLoop.ERROR
-builtins.int"builtins.int*310*311*312*313*314¬
- _GeventSelectorIOServicesAdapter@pika.adapters.gevent_connection._GeventSelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*˚
-getaddrinfoLpika.adapters.gevent_connection._GeventSelectorIOServicesAdapter.getaddrinfo"
-Any*è
-selfÑ
-@pika.adapters.gevent_connection._GeventSelectorIOServicesAdapter"@pika.adapters.gevent_connection._GeventSelectorIOServicesAdapter*
-host
-Any*
-port
-Any*
-on_done
-Any**
-family
-builtins.int"builtins.int *,
-socktype
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314ä
-_GeventIOLoopIOHandle5pika.adapters.gevent_connection._GeventIOLoopIOHandle"6pika.adapters.utils.nbio_interface.AbstractIOReference*˝
-__init__>pika.adapters.gevent_connection._GeventIOLoopIOHandle.__init__"
-None*x
-selfn
-5pika.adapters.gevent_connection._GeventIOLoopIOHandle"5pika.adapters.gevent_connection._GeventIOLoopIOHandle*
-subject
-Anyz310z311z312z313z314*i
-cancel<pika.adapters.gevent_connection._GeventIOLoopIOHandle.cancel*
-selfz310z311z312z313z314j310j311j312j313j314‰
-_GeventAddressResolver6pika.adapters.gevent_connection._GeventAddressResolver"builtins.object*î
-__init__?pika.adapters.gevent_connection._GeventAddressResolver.__init__"
-None*z
-selfp
-6pika.adapters.gevent_connection._GeventAddressResolver"6pika.adapters.gevent_connection._GeventAddressResolver*
-native_loop
-Any*
-host
-Any*
-port
-Any*
-family
-Any*
-socktype
-Any*
-proto
-Any*
-flags
-Any*
-on_done
-Anyz310z311z312z313z314*‰
-start<pika.adapters.gevent_connection._GeventAddressResolver.start"
-None*z
-selfp
-6pika.adapters.gevent_connection._GeventAddressResolver"6pika.adapters.gevent_connection._GeventAddressResolverz310z311z312z313z314*j
-cancel=pika.adapters.gevent_connection._GeventAddressResolver.cancel*
-selfz310z311z312z313z314j310j311j312j313j314*¥
-__annotations__/pika.adapters.gevent_connection.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*|
-LOGGER&pika.adapters.gevent_connection.LOGGER1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314
+callback*4
+remove_timeout*
+
+self(	*
+timeout_handle(*B
+add_handler*
+
+self(	*
+fd(*
+handler(*
+events(*6
+update_handler*
+
+self(	*
+fd(*
+events(*(
+remove_handler*
+
+self(	*
+fd(r
+READ0
+r	
+WRITE0
+r	
+ERROR0
+Ó
+ _GeventSelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*Ç
+getaddrinfo*
+
+self(*
+
+host(*
+
+port(*
+on_done(*
+family (
+*
+socktype (
+*
+proto (
+*
+flags (
+å
+_GeventIOLoopIOHandle"6pika.adapters.utils.nbio_interface.AbstractIOReference*'
+__init__*
+
+self(*
+subject(*
+cancel*
+self·
+_GeventAddressResolver"builtins.object*ä
+__init__*
+
+self(*
+native_loop(*
+
+host(*
+
+port(*
+family(*
+socktype(*
+proto(*
+flags(*
+on_done(*
+start*
+
+self(*
+cancel*
+self*
+__annotations__0*
+
+LOGGER0222"0pika.adapters.gevent_connection.GeventConnection22"_typeshed.Incomplete2222"builtins.bool2"type225"3pika.adapters.gevent_connection._TSafeCallbackQueue27"5pika.adapters.gevent_connection._GeventSelectorIOLoop2"builtins.int2B"@pika.adapters.gevent_connection._GeventSelectorIOServicesAdapter27"5pika.adapters.gevent_connection._GeventIOLoopIOHandle28"6pika.adapters.gevent_connection._GeventAddressResolver2"builtins.str2"builtins.dict2

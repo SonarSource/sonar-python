@@ -1,190 +1,118 @@
 
-boto.s3.aclï
-Policyboto.s3.acl.Policy"builtins.object*È
-__init__boto.s3.acl.Policy.__init__"
-None*2
-self(
-boto.s3.acl.Policy"boto.s3.acl.Policy*i
-parent[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ê
-startElementboto.s3.acl.Policy.startElement"á
--Union[None,boto.s3.user.User,boto.s3.acl.ACL]
-None&
-boto.s3.user.User"boto.s3.user.User"
-boto.s3.acl.ACL"boto.s3.acl.ACL*2
-self(
-boto.s3.acl.Policy"boto.s3.acl.Policy*&
-name
-builtins.str"builtins.str*b
-attrsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*R
+boto.s3.aclö
+Policy"builtins.object*(
+__init__*
 
-connectionB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connectionz310z311z312z313z314*í
+self(*
+parent (*G
+startElement*
 
-endElementboto.s3.acl.Policy.endElement"
-None*2
-self(
-boto.s3.acl.Policy"boto.s3.acl.Policy*&
-name
-builtins.str"builtins.str*
-value
-Any*R
+self(*
 
-connectionB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connectionz310z311z312z313z314*é
-to_xmlboto.s3.acl.Policy.to_xml"
-builtins.str"builtins.str*2
-self(
-boto.s3.acl.Policy"boto.s3.acl.Policyz310z311z312z313z314j310j311j312j313j314rE
-parentboto.s3.acl.Policy.parent
-Any*310*311*312*313*314rK
-	namespaceboto.s3.acl.Policy.namespace
-Any*310*311*312*313*314rZ
-aclboto.s3.acl.Policy.acl"
-boto.s3.acl.ACL"boto.s3.acl.ACL*310*311*312*313*314rb
-ownerboto.s3.acl.Policy.owner&
-boto.s3.user.User"boto.s3.user.User*310*311*312*313*314Ì
-ACLboto.s3.acl.ACL"builtins.object*€
-__init__boto.s3.acl.ACL.__init__"
-None*,
-self"
-boto.s3.acl.ACL"boto.s3.acl.ACL*d
-policyV
-Union[boto.s3.acl.Policy,None](
-boto.s3.acl.Policy"boto.s3.acl.Policy
-None z310z311z312z313z314*™
-	add_grantboto.s3.acl.ACL.add_grant"
-None*,
-self"
-boto.s3.acl.ACL"boto.s3.acl.ACL*1
-grant&
-boto.s3.acl.Grant"boto.s3.acl.Grantz310z311z312z313z314*‚
-add_email_grantboto.s3.acl.ACL.add_email_grant"
-None*,
-self"
-boto.s3.acl.ACL"boto.s3.acl.ACL*,
+name(	*
+attrs(
+*
 
-permission
-builtins.str"builtins.str*/
-email_address
-builtins.str"builtins.strz310z311z312z313z314*¥
-add_user_grantboto.s3.acl.ACL.add_user_grant"
-None*,
-self"
-boto.s3.acl.ACL"boto.s3.acl.ACL*,
+connection(*E
 
-permission
-builtins.str"builtins.str*)
-user_id
-builtins.str"builtins.str*X
-display_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*t
-startElementboto.s3.acl.ACL.startElement*
+endElement*
+
+self(*
+
+name(	*
+value(*
+
+connection(*
+to_xml	*
+
+self(r
+
+parent0r
+	namespace0r
+acl0r	
+owner0Ω
+ACL"builtins.object*(
+__init__*
+
+self(*
+policy (*&
+	add_grant*
+
+self(*
+grant(*F
+add_email_grant*
+
+self(*
+
+permission(	*
+email_address(	*U
+add_user_grant*
+
+self(*
+
+permission(	*
+user_id(	*
+display_name (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*â
+connection*E
 
-endElementboto.s3.acl.ACL.endElement"
-None*,
-self"
-boto.s3.acl.ACL"boto.s3.acl.ACL*&
-name
-builtins.str"builtins.str*
-value
-Any*R
+endElement*
 
-connectionB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connectionz310z311z312z313z314*Ö
-to_xmlboto.s3.acl.ACL.to_xml"
-builtins.str"builtins.str*,
-self"
-boto.s3.acl.ACL"boto.s3.acl.ACLz310z311z312z313z314j310j311j312j313j314rc
-policyboto.s3.acl.ACL.policy(
-boto.s3.acl.Policy"boto.s3.acl.Policy*310*311*312*313*314rî
-grantsboto.s3.acl.ACL.grantsY
- builtins.list[boto.s3.acl.Grant]&
-boto.s3.acl.Grant"boto.s3.acl.Grant"builtins.list*310*311*312*313*314Ì
-Grantboto.s3.acl.Grant"builtins.object*˚
-__init__boto.s3.acl.Grant.__init__"
-None*0
-self&
-boto.s3.acl.Grant"boto.s3.acl.Grant*V
+self(*
 
-permissionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *N
-idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-display_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *O
-uriD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-email_addressD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*v
-startElementboto.s3.acl.Grant.startElement*
+name(	*
+value(*
+
+connection(*
+to_xml	*
+
+self(r
+
+policy0r
+
+grants0ò
+Grant"builtins.object*Ä
+__init__*
+
+self(*
+
+permission (*
+type (*
+
+id (*
+display_name (*
+uri (*
+email_address (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*è
+connection*E
 
-endElementboto.s3.acl.Grant.endElement"
-None*0
-self&
-boto.s3.acl.Grant"boto.s3.acl.Grant*&
-name
-builtins.str"builtins.str*
-value
-Any*R
+endElement*
 
-connectionB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connectionz310z311z312z313z314*ã
-to_xmlboto.s3.acl.Grant.to_xml"
-builtins.str"builtins.str*0
-self&
-boto.s3.acl.Grant"boto.s3.acl.Grantz310z311z312z313z314j310j311j312j313j314r_
-	NameSpaceboto.s3.acl.Grant.NameSpace
-builtins.str"builtins.str*310*311*312*313*314ra
+self(*
 
-permissionboto.s3.acl.Grant.permission
-builtins.str"builtins.str*310*311*312*313*314rQ
-idboto.s3.acl.Grant.id
-builtins.str"builtins.str*310*311*312*313*314re
-display_nameboto.s3.acl.Grant.display_name
-builtins.str"builtins.str*310*311*312*313*314rS
-uriboto.s3.acl.Grant.uri
-builtins.str"builtins.str*310*311*312*313*314rg
-email_addressboto.s3.acl.Grant.email_address
-builtins.str"builtins.str*310*311*312*313*314rU
-typeboto.s3.acl.Grant.type
-builtins.str"builtins.str*310*311*312*313*314*†
-__annotations__boto.s3.acl.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ï
-CannedACLStringsboto.s3.acl.CannedACLStringsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+name(	*
+value(*
+
+connection(*
+to_xml	*
+
+self(r
+	NameSpace0	r
+
+permission0	r
+id0	r
+display_name0	r
+uri0	r
+email_address0	r
+type0	*
+__annotations__0
+*
+CannedACLStrings022"boto.s3.acl.Policy22"_typeshed.Incomplete2222"boto.s3.user.User2"boto.s3.acl.ACL222"builtins.str2"builtins.dict2	2!"boto.s3.connection.S3Connection222"boto.s3.acl.Grant22	2"builtins.list22"builtins.list2	

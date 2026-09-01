@@ -1,546 +1,313 @@
 
-hdbcli.dbapi¹
+hdbcli.dbapiô
 
-Connectionhdbcli.dbapi.Connection"builtins.object*Ç
-__init__ hdbcli.dbapi.Connection.__init__"
-None*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connection*)
-address
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.int*&
-user
-builtins.str"builtins.str**
-password
-builtins.str"builtins.str*0
+Connection"builtins.object*º
+__init__*
 
-autocommit
-builtins.bool"builtins.bool *V
+self(*
+address(*
 
-packetsizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *S
-userkeyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ò
-sessionvariables¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *]
-forcebulkfetchG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z310z311z312z313z314*Ÿ
-cancelhdbcli.dbapi.Connection.cancel"
-builtins.bool"builtins.bool*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*‡
-closehdbcli.dbapi.Connection.close"
-None*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*‰
-commithdbcli.dbapi.Connection.commit"
-None*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*«
-cursorhdbcli.dbapi.Connection.cursor"*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*¥
+port(*
 
-getaddress"hdbcli.dbapi.Connection.getaddress"
-builtins.str"builtins.str*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*­
-getautocommit%hdbcli.dbapi.Connection.getautocommit"
-builtins.bool"builtins.bool*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*Ž
-getclientinfo%hdbcli.dbapi.Connection.getclientinfo"Õ
-<Union[builtins.str,builtins.dict[builtins.str,builtins.str]]
-builtins.str"builtins.stru
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connection*'
-key
-builtins.str"builtins.str z310z311z312z313z314*¸
-getproperty#hdbcli.dbapi.Connection.getproperty"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connection*;
-args1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*=
-kwargs1
-TypeAlias[Any]
-Any"_typeshed.Incompletez310z311z312z313z314*©
-isconnected#hdbcli.dbapi.Connection.isconnected"
-builtins.bool"builtins.bool*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*
-rollback hdbcli.dbapi.Connection.rollback"
-None*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connectionz310z311z312z313z314*Ã
-setautocommit%hdbcli.dbapi.Connection.setautocommit"
-None*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connection**
-auto
-builtins.bool"builtins.bool z310z311z312z313z314*‘
-setclientinfo%hdbcli.dbapi.Connection.setclientinfo"
-None*<
-self2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connection*%
-key
-builtins.str"builtins.str*Q
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314j310j311j312j313j314ž	
-LOBhdbcli.dbapi.LOB"builtins.object* 
-__init__hdbcli.dbapi.LOB.__init__"
-None*.
-self$
-hdbcli.dbapi.LOB"hdbcli.dbapi.LOB*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*ˆ
-closehdbcli.dbapi.LOB.close"
-builtins.bool"builtins.bool*.
-self$
-hdbcli.dbapi.LOB"hdbcli.dbapi.LOBz310z311z312z313z314*†
-findhdbcli.dbapi.LOB.find"
-builtins.int"builtins.int*.
-self$
-hdbcli.dbapi.LOB"hdbcli.dbapi.LOB*(
-object
-builtins.str"builtins.str*(
-length
-builtins.int"builtins.int*,
-position
-builtins.int"builtins.int z310z311z312z313z314*¦
-readhdbcli.dbapi.LOB.read"f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*.
-self$
-hdbcli.dbapi.LOB"hdbcli.dbapi.LOB*(
-size
-builtins.int"builtins.int *,
-position
-builtins.int"builtins.int z310z311z312z313z314*ú
-writehdbcli.dbapi.LOB.write"
-builtins.int"builtins.int*.
-self$
-hdbcli.dbapi.LOB"hdbcli.dbapi.LOB*r
-objectf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314·K
-Cursorhdbcli.dbapi.Cursor"builtins.object*©
-__init__hdbcli.dbapi.Cursor.__init__"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*¤
-	__enter__hdbcli.dbapi.Cursor.__enter__"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*,*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*Ò
-__exit__hdbcli.dbapi.Cursor.__exit__"
-None*,*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*“
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*Å
-callprochdbcli.dbapi.Cursor.callproc".
-builtins.tuple[Any]
-Any"builtins.tuple*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor**
-procname
-builtins.str"builtins.str*@
+user(*
+password(*
 
-parameters.
-builtins.tuple[Any]
-Any"builtins.tuple *.
-overview
-builtins.bool"builtins.bool z310z311z312z313z314*{
-closehdbcli.dbapi.Cursor.close"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*î
-description_ext#hdbcli.dbapi.Cursor.description_ext"g
-$typing.Sequence[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"typing.Sequence*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*‚
-executehdbcli.dbapi.Cursor.execute"
-builtins.bool"builtins.bool*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*+
-	operation
-builtins.str"builtins.str*>
+autocommit (*
 
-parameters.
-builtins.tuple[Any]
-Any"builtins.tuplez310z311z312z313z314*ý
-executemanyhdbcli.dbapi.Cursor.executemany"
-Any*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*+
-	operation
-builtins.str"builtins.str*Ç
+packetsize (*
+userkey (*
+sessionvariables (	*
+forcebulkfetch (
+*
+cancel*
 
-parameters¶
-/TypeAlias[typing.Sequence[builtins.tuple[Any]]]g
-$typing.Sequence[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"typing.Sequence"hdbcli.dbapi._Parametersz310z311z312z313z314*à
-executemanyprepared'hdbcli.dbapi.Cursor.executemanyprepared"
-Any*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*Ç
+self(*
+close*
 
-parameters¶
-/TypeAlias[typing.Sequence[builtins.tuple[Any]]]g
-$typing.Sequence[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"typing.Sequence"hdbcli.dbapi._Parametersz310z311z312z313z314*Ú
-executeprepared#hdbcli.dbapi.Cursor.executeprepared"
-Any*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*É
+self(*
+commit*
 
-parameters¶
-/TypeAlias[typing.Sequence[builtins.tuple[Any]]]g
-$typing.Sequence[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"typing.Sequence"hdbcli.dbapi._Parameters z310z311z312z313z314*•
-fetchonehdbcli.dbapi.Cursor.fetchone"n
-&Union[hdbcli.resultrow.ResultRow,None]8
-hdbcli.resultrow.ResultRow"hdbcli.resultrow.ResultRow
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*,
-uselob
-builtins.bool"builtins.bool z310z311z312z313z314*í
-fetchallhdbcli.dbapi.Cursor.fetchall"t
-)builtins.list[hdbcli.resultrow.ResultRow]8
-hdbcli.resultrow.ResultRow"hdbcli.resultrow.ResultRow"builtins.list*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*Á
-	fetchmanyhdbcli.dbapi.Cursor.fetchmany"t
-)builtins.list[hdbcli.resultrow.ResultRow]8
-hdbcli.resultrow.ResultRow"hdbcli.resultrow.ResultRow"builtins.list*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*Á
-getrowsaffectedcounts)hdbcli.dbapi.Cursor.getrowsaffectedcounts".
-builtins.tuple[Any]
-Any"builtins.tuple*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*Ÿ
-getpacketsize!hdbcli.dbapi.Cursor.getpacketsize"
-builtins.int"builtins.int*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*·
-get_resultset_holdability-hdbcli.dbapi.Cursor.get_resultset_holdability"
-builtins.int"builtins.int*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*Ù
+self(*
+cursor*
 
-getwarninghdbcli.dbapi.Cursor.getwarning"\
- Union[hdbcli.dbapi.Warning,None],
-hdbcli.dbapi.Warning"hdbcli.dbapi.Warning
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*›
+self(*
 
-haswarninghdbcli.dbapi.Cursor.haswarning"
-builtins.bool"builtins.bool*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*‰
-clearwarning hdbcli.dbapi.Cursor.clearwarning"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*£
-has_result_set"hdbcli.dbapi.Cursor.has_result_set"
-builtins.bool"builtins.bool*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*
-nextsethdbcli.dbapi.Cursor.nextset"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*ß
-parameter_description)hdbcli.dbapi.Cursor.parameter_description"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*°
-print_message!hdbcli.dbapi.Cursor.print_message"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*;
-args1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*=
-kwargs1
-TypeAlias[Any]
-Any"_typeshed.Incompletez310z311z312z313z314*´
-parsenamedquery#hdbcli.dbapi.Cursor.parsenamedquery"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*;
-args1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*=
-kwargs1
-TypeAlias[Any]
-Any"_typeshed.Incompletez310z311z312z313z314*Þ
-scrollhdbcli.dbapi.Cursor.scroll"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*'
-value
-builtins.int"builtins.int*µ
-mode¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str z310z311z312z313z314*£
-server_cpu_time#hdbcli.dbapi.Cursor.server_cpu_time"
-builtins.int"builtins.int*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*«
-server_memory_usage'hdbcli.dbapi.Cursor.server_memory_usage"
-builtins.int"builtins.int*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*±
-server_processing_time*hdbcli.dbapi.Cursor.server_processing_time"
-builtins.int"builtins.int*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursorz310z311z312z313z314*³
-setinputsizes!hdbcli.dbapi.Cursor.setinputsizes"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*²
-setfetchsize hdbcli.dbapi.Cursor.setfetchsize"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*'
-value
-builtins.int"builtins.intz310z311z312z313z314*¸
-setquerytimeout#hdbcli.dbapi.Cursor.setquerytimeout"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*'
-value
-builtins.int"builtins.intz310z311z312z313z314*´
-setpacketsize!hdbcli.dbapi.Cursor.setpacketsize"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*'
-value
-builtins.int"builtins.intz310z311z312z313z314*Ò
-set_resultset_holdability-hdbcli.dbapi.Cursor.set_resultset_holdability"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*-
-holdability
-builtins.int"builtins.intz310z311z312z313z314*³
-setoutputsize!hdbcli.dbapi.Cursor.setoutputsize"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*ì
-setcommandinfo"hdbcli.dbapi.Cursor.setcommandinfo"
-None*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*.
-command_info
-builtins.str"builtins.str*-
-line_number
-builtins.int"builtins.intz310z311z312z313z3142Ì
-preparehdbcli.dbapi.Cursor.prepare•
-preparehdbcli.dbapi.Cursor.prepare"*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*+
-	operation
-builtins.str"builtins.str*I
-	newcursor:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadXò
-preparehdbcli.dbapi.Cursor.prepare"
-Any*4
-self*
-hdbcli.dbapi.Cursor"hdbcli.dbapi.Cursor*+
-	operation
-builtins.str"builtins.str*I
-	newcursor:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX"310"311"312"313"314j310j311j312j313j314r®
-descriptionhdbcli.dbapi.Cursor.descriptione
-#builtins.tuple[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"builtins.tuple*310*311*312*313*314r_
-rowcounthdbcli.dbapi.Cursor.rowcount
-builtins.int"builtins.int*310*311*312*313*314r‘
-statementhash!hdbcli.dbapi.Cursor.statementhashD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314ry
+getaddress*
 
-connectionhdbcli.dbapi.Cursor.connection2
-hdbcli.dbapi.Connection"hdbcli.dbapi.Connection*310*311*312*313*314ra
-	arraysizehdbcli.dbapi.Cursor.arraysize
-builtins.int"builtins.int*310*311*312*313*314rv
-	refreshtshdbcli.dbapi.Cursor.refreshts1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r[
-maxagehdbcli.dbapi.Cursor.maxage
-builtins.int"builtins.int*310*311*312*313*314”
-Warninghdbcli.dbapi.Warning"builtins.Exceptionj310j311j312j313j314rb
-	errorcodehdbcli.dbapi.Warning.errorcode
-builtins.int"builtins.int*310*311*312*313*314rb
-	errortexthdbcli.dbapi.Warning.errortext
-builtins.str"builtins.str*310*311*312*313*314Œ
-Errorhdbcli.dbapi.Error"builtins.Exceptionj310j311j312j313j314r`
-	errorcodehdbcli.dbapi.Error.errorcode
-builtins.int"builtins.int*310*311*312*313*314r`
-	errortexthdbcli.dbapi.Error.errortext
-builtins.str"builtins.str*310*311*312*313*314X
-DatabaseErrorhdbcli.dbapi.DatabaseError"hdbcli.dbapi.Errorj310j311j312j313j314f
-OperationalErrorhdbcli.dbapi.OperationalError"hdbcli.dbapi.DatabaseErrorj310j311j312j313j314f
-ProgrammingErrorhdbcli.dbapi.ProgrammingError"hdbcli.dbapi.DatabaseErrorj310j311j312j313j314b
-IntegrityErrorhdbcli.dbapi.IntegrityError"hdbcli.dbapi.DatabaseErrorj310j311j312j313j314Z
-InterfaceErrorhdbcli.dbapi.InterfaceError"hdbcli.dbapi.Errorj310j311j312j313j314`
-InternalErrorhdbcli.dbapi.InternalError"hdbcli.dbapi.DatabaseErrorj310j311j312j313j314X
-	DataErrorhdbcli.dbapi.DataError"hdbcli.dbapi.DatabaseErrorj310j311j312j313j314h
-NotSupportedErrorhdbcli.dbapi.NotSupportedError"hdbcli.dbapi.DatabaseErrorj310j311j312j313j314Ú
-ExecuteManyErrorhdbcli.dbapi.ExecuteManyError"hdbcli.dbapi.Errorj310j311j312j313j314rz
-errors$hdbcli.dbapi.ExecuteManyError.errors1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314Ú
-ExecuteManyErrorEntry"hdbcli.dbapi.ExecuteManyErrorEntry"hdbcli.dbapi.Errorj310j311j312j313j314rp
-	rownumber,hdbcli.dbapi.ExecuteManyErrorEntry.rownumber
-builtins.int"builtins.int*310*311*312*313*314Ê
-Datehdbcli.dbapi.Date"
-datetime.date"datetime.date*&
-year
-builtins.int"builtins.int*'
-month
-builtins.int"builtins.int*%
-day
-builtins.int"builtins.intz310z311z312z313z314ÿ
-Timehdbcli.dbapi.Time"
-datetime.time"datetime.time*&
-hour
-builtins.int"builtins.int*(
-minute
-builtins.int"builtins.int*(
-second
-builtins.int"builtins.int*/
-millisecond
-builtins.int"builtins.int z310z311z312z313z314‰
-	Timestamphdbcli.dbapi.Timestamp"&
-datetime.datetime"datetime.datetime*&
-year
-builtins.int"builtins.int*'
-month
-builtins.int"builtins.int*%
-day
-builtins.int"builtins.int*&
-hour
-builtins.int"builtins.int*(
-minute
-builtins.int"builtins.int*(
-second
-builtins.int"builtins.int*/
-millisecond
-builtins.int"builtins.int z310z311z312z313z314‘
-DateFromTickshdbcli.dbapi.DateFromTicks"
-datetime.date"datetime.date*+
-ticks 
-builtins.float"builtins.floatz310z311z312z313z314‘
-TimeFromTickshdbcli.dbapi.TimeFromTicks"
-datetime.time"datetime.time*+
-ticks 
-builtins.float"builtins.floatz310z311z312z313z314£
-TimestampFromTickshdbcli.dbapi.TimestampFromTicks"&
-datetime.datetime"datetime.datetime*+
-ticks 
-builtins.float"builtins.floatz310z311z312z313z314¿
-Binaryhdbcli.dbapi.Binary"V
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*>
-data4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311Â
-Binaryhdbcli.dbapi.Binary"V
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*<
-data2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*¡
-__annotations__hdbcli.dbapi.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*X
-apilevelhdbcli.dbapi.apilevel
-builtins.str"builtins.str*310*311*312*313*314*`
-threadsafetyhdbcli.dbapi.threadsafety
-builtins.int"builtins.int*310*311*312*313*314*Œ
+self(*
+getautocommit*
 
-paramstylehdbcli.dbapi.paramstyleL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*310*311*312*313*314*È
-NUMBERhdbcli.dbapi.NUMBER
-EUnion[Type[builtins.int],Type[builtins.float],Type[builtins.complex]]:
-Type[builtins.int]
-builtins.int"builtins.int"type@
-Type[builtins.float] 
-builtins.float"builtins.float"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type*310*311*312*313*314*Ð
-DATETIMEhdbcli.dbapi.DATETIME“
-FUnion[Type[datetime.date],Type[datetime.time],Type[datetime.datetime]]=
-Type[datetime.date]
-datetime.date"datetime.date"type=
-Type[datetime.time]
-datetime.time"datetime.time"typeI
-Type[datetime.datetime]&
-datetime.datetime"datetime.datetime"type*310*311*312*313*314
+self(**
+getclientinfo*
+
+self(*
+key (*5
+getproperty*
+
+self(*
+
+args(*
+kwargs(*
+isconnected*
+
+self(*
+rollback*
+
+self(*+
+setautocommit*
+
+self(*
+auto (*7
+setclientinfo*
+
+self(*	
+key(*
+value (€
+LOB"builtins.object*2
+__init__*
+
+self(*
+
+args(*
+kwargs(*
+close*
+
+self(*B
+find*
+
+self(*
+object(*
+length(*
+position (*4
+read*
+
+self(*
+size (*
+position (*#
+write*
+
+self(*
+object(«
+Cursor"builtins.object*2
+__init__*
+
+self(*
+
+args(*
+kwargs(*
+	__enter__*(*
+__exit__*(*(*(*(*N
+callproc*
+
+self(*
+procname(*
+
+parameters (*
+overview (*
+close*
+
+self(*
+description_ext*
+
+self(*:
+execute*
+
+self(*
+	operation(*
+
+parameters(*>
+executemany*
+
+self(*
+	operation(*
+
+parameters(*5
+executemanyprepared*
+
+self(*
+
+parameters(*3
+executeprepared*
+
+self(*
+
+parameters (*(
+fetchone*
+
+self(*
+uselob (*
+fetchall*
+
+self(*'
+	fetchmany*
+
+self(*
+size (*%
+getrowsaffectedcounts*
+
+self(*
+getpacketsize*
+
+self(*)
+get_resultset_holdability*
+
+self(*
+
+getwarning*
+
+self(*
+
+haswarning*
+
+self(*
+clearwarning*
+
+self(*
+has_result_set*
+
+self(*
+nextset*
+
+self(*%
+parameter_description *
+
+self(*7
+print_message*
+
+self(*
+
+args(*
+kwargs(*9
+parsenamedquery*
+
+self(*
+
+args(*
+kwargs(*1
+scroll*
+
+self(*
+value(*
+mode ("*
+server_cpu_time*
+
+self(*#
+server_memory_usage*
+
+self(*&
+server_processing_time*
+
+self(*7
+setinputsizes*
+
+self(*
+
+args(*
+kwargs(*)
+setfetchsize*
+
+self(*
+value(*,
+setquerytimeout*
+
+self(*
+value(**
+setpacketsize*
+
+self(*
+value(*<
+set_resultset_holdability*
+
+self(*
+holdability(*7
+setoutputsize*
+
+self(*
+
+args(*
+kwargs(*E
+setcommandinfo*
+
+self(*
+command_info(*
+line_number(2©
+prepareN
+prepare*
+
+self(*
+	operation(*
+	newcursor(#0:typing.overloadXN
+prepare*
+
+self(*
+	operation(*
+	newcursor(#0:typing.overloadXr
+description0$r
+rowcount0r
+statementhash0r
+
+connection0r
+	arraysize0r
+	refreshts0r
+
+maxage0;
+Warning"builtins.Exceptionr
+	errorcode0r
+	errortext09
+Error"builtins.Exceptionr
+	errorcode0r
+	errortext0#
+DatabaseError"hdbcli.dbapi.Error.
+OperationalError"hdbcli.dbapi.DatabaseError.
+ProgrammingError"hdbcli.dbapi.DatabaseError,
+IntegrityError"hdbcli.dbapi.DatabaseError$
+InterfaceError"hdbcli.dbapi.Error+
+InternalError"hdbcli.dbapi.DatabaseError'
+	DataError"hdbcli.dbapi.DatabaseError/
+NotSupportedError"hdbcli.dbapi.DatabaseError2
+ExecuteManyError"hdbcli.dbapi.Errorr
+
+errors0:
+ExecuteManyErrorEntry"hdbcli.dbapi.Errorr
+	rownumber0,
+Date%*
+
+year(*
+month(*	
+day(E
+Time&*
+
+hour(*
+minute(*
+second(*
+millisecond (n
+	Timestamp'*
+
+year(*
+month(*	
+day(*
+
+hour(*
+minute(*
+second(*
+millisecond (
+DateFromTicks%*
+ticks((
+TimeFromTicks&*
+ticks((#
+TimestampFromTicks'*
+ticks(( 
+Binary)*
+
+data(*z310z311%
+Binary)*
+
+data(+z312z313z314*
+__annotations__0,*
+apilevel0*
+threadsafety0*
+
+paramstyle0 *
+
+NUMBER01*
+DATETIME0522"hdbcli.dbapi.Connection2"builtins.str2"builtins.int2"builtins.bool22222"builtins.dict222222"hdbcli.dbapi.Cursor2222"_typeshed.Incomplete22"hdbcli.dbapi.LOB2"builtins.bytes222"builtins.BaseException2"type222222"types.TracebackType222"builtins.tuple22"typing.Sequence22"hdbcli.dbapi._Parameters22"hdbcli.resultrow.ResultRow222"builtins.list22"hdbcli.dbapi.Warning222"builtins.tuple22	222!!2	22"builtins.tuple22"datetime.date2"datetime.time2"datetime.datetime2"builtins.float2"builtins.memoryview22"typing_extensions.Buffer2"_collections_abc.Buffer2"builtins.dict22"type22"type2(2"builtins.complex2"type2/22-.02"type2%2"type2&2"type2'22234

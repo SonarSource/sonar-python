@@ -1,722 +1,510 @@
 
-OpenSSL.SSLG
-ErrorOpenSSL.SSL.Error"builtins.Exceptionj310j311j312j313j314V
-WantReadErrorOpenSSL.SSL.WantReadError"OpenSSL.SSL.Errorj310j311j312j313j314X
-WantWriteErrorOpenSSL.SSL.WantWriteError"OpenSSL.SSL.Errorj310j311j312j313j314b
-WantX509LookupErrorOpenSSL.SSL.WantX509LookupError"OpenSSL.SSL.Errorj310j311j312j313j314Z
-ZeroReturnErrorOpenSSL.SSL.ZeroReturnError"OpenSSL.SSL.Errorj310j311j312j313j314T
-SysCallErrorOpenSSL.SSL.SysCallError"OpenSSL.SSL.Errorj310j311j312j313j314H
-SessionOpenSSL.SSL.Session"builtins.objectj310j311j312j313j314˜q
+OpenSSL.SSL
+Error"builtins.Exception"
+WantReadError"OpenSSL.SSL.Error#
+WantWriteError"OpenSSL.SSL.Error(
+WantX509LookupError"OpenSSL.SSL.Error$
+ZeroReturnError"OpenSSL.SSL.Error!
+SysCallError"OpenSSL.SSL.Error
+Session"builtins.object”
 
-ConnectionOpenSSL.SSL.Connection"builtins.object*ß
-__getattr__"OpenSSL.SSL.Connection.__getattr__"
-Any*20
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*
-builtins.str"builtins.strz310z311z312z313z314*ö
-__init__OpenSSL.SSL.Connection.__init__"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*7
-context*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*U
-socketG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None z310z311z312z313z314*≤
-get_context"OpenSSL.SSL.Connection.get_context"*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*…
-set_context"OpenSSL.SSL.Connection.set_context"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*7
-context*
-OpenSSL.SSL.Context"OpenSSL.SSL.Contextz310z311z312z313z314*ÿ
-get_servername%OpenSSL.SSL.Connection.get_servername"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*Œ
-set_tlsext_host_name+OpenSSL.SSL.Connection.set_tlsext_host_name"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection**
-name 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ú
-pendingOpenSSL.SSL.Connection.pending"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*√
-sendOpenSSL.SSL.Connection.send"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*é
-bufÑ
-,Union[typing_extensions.Buffer,builtins.str]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str*)
-flags
-builtins.int"builtins.int z310z311*≈
-sendOpenSSL.SSL.Connection.send"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*ã
-bufÅ
-+Union[_collections_abc.Buffer,builtins.str]2
-_collections_abc.Buffer"_collections_abc.Buffer
-builtins.str"builtins.str*)
-flags
-builtins.int"builtins.int z312z313z314*…
-sendallOpenSSL.SSL.Connection.sendall"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*é
-bufÑ
-,Union[typing_extensions.Buffer,builtins.str]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str*)
-flags
-builtins.int"builtins.int z310z311*À
-sendallOpenSSL.SSL.Connection.sendall"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*ã
-bufÅ
-+Union[_collections_abc.Buffer,builtins.str]2
-_collections_abc.Buffer"_collections_abc.Buffer
-builtins.str"builtins.str*)
-flags
-builtins.int"builtins.int z312z313z314*ó
-recvOpenSSL.SSL.Connection.recv" 
-builtins.bytes"builtins.bytes*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*(
-bufsiz
-builtins.int"builtins.int*Q
-flagsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*±
-	recv_into OpenSSL.SSL.Connection.recv_into"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*h
-buffer\
-$typing.MutableSequence[builtins.int]
-builtins.int"builtins.int"typing.MutableSequence*R
-nbytesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Q
-flagsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*◊
-connectOpenSSL.SSL.Connection.connect"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*Ã
-addr¡
-TUnion[builtins.str,builtins.bytes,typing.Sequence[Union[builtins.str,builtins.int]]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes¶
-1typing.Sequence[Union[builtins.str,builtins.int]]`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"typing.Sequencez310z311z312z313z314*◊
+Connection"builtins.object*
+__getattr__*(*(*7
+__init__*
 
-connect_ex!OpenSSL.SSL.Connection.connect_ex"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*¡
-addr∂
-aUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer]],builtins.bytes]¨
-KTypeAlias[Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer]]»
-@Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer"_socket._Address 
-builtins.bytes"builtins.bytesz310z311*◊
+self(*
+context(*
+socket (*
+get_context*
 
-connect_ex!OpenSSL.SSL.Connection.connect_ex"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*º
-addr±
-`Union[TypeAlias[Union[builtins.tuple[Any],builtins.str,_collections_abc.Buffer]],builtins.bytes]®
-JTypeAlias[Union[builtins.tuple[Any],builtins.str,_collections_abc.Buffer]]≈
-?Union[builtins.tuple[Any],builtins.str,_collections_abc.Buffer].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str2
-_collections_abc.Buffer"_collections_abc.Buffer"_socket._Address 
-builtins.bytes"builtins.bytesz312z313z314*ì
-acceptOpenSSL.SSL.Connection.accept"î
-,Tuple[OpenSSL.SSL.Connection,TypeAlias[Any]]0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection0
-TypeAlias[Any]
-Any"_socket._RetAddress*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*î
-DTLSv1_listen$OpenSSL.SSL.Connection.DTLSv1_listen"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*‡
-DTLSv1_get_timeout)OpenSSL.SSL.Connection.DTLSv1_get_timeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*∫
-DTLSv1_handle_timeout,OpenSSL.SSL.Connection.DTLSv1_handle_timeout"
-builtins.bool"builtins.bool*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*†
-shutdownOpenSSL.SSL.Connection.shutdown"
-builtins.bool"builtins.bool*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*í
-do_handshake#OpenSSL.SSL.Connection.do_handshake"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*È
-get_certificate&OpenSSL.SSL.Connection.get_certificate"Y
-Union[OpenSSL.crypto.X509,None]*
-OpenSSL.crypto.X509"OpenSSL.crypto.X509
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*Û
-get_peer_certificate+OpenSSL.SSL.Connection.get_peer_certificate"Y
-Union[OpenSSL.crypto.X509,None]*
-OpenSSL.crypto.X509"OpenSSL.crypto.X509
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*∂
-get_peer_cert_chain*OpenSSL.SSL.Connection.get_peer_cert_chain"ù
-.Union[builtins.list[OpenSSL.crypto.X509],None]_
-"builtins.list[OpenSSL.crypto.X509]*
-OpenSSL.crypto.X509"OpenSSL.crypto.X509"builtins.list
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*¥
-get_verified_chain)OpenSSL.SSL.Connection.get_verified_chain"ù
-.Union[builtins.list[OpenSSL.crypto.X509],None]_
-"builtins.list[OpenSSL.crypto.X509]*
-OpenSSL.crypto.X509"OpenSSL.crypto.X509"builtins.list
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*Ã
-bio_readOpenSSL.SSL.Connection.bio_read" 
-builtins.bytes"builtins.bytes*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*(
-bufsiz
-builtins.int"builtins.intz310z311z312z313z314*À
-	bio_write OpenSSL.SSL.Connection.bio_write"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*)
-buf 
-builtins.bytes"builtins.bytesz310z311z312z313z314*í
-bio_shutdown#OpenSSL.SSL.Connection.bio_shutdown"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*¶
-renegotiate"OpenSSL.SSL.Connection.renegotiate"
-builtins.bool"builtins.bool*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*∂
-renegotiate_pending*OpenSSL.SSL.Connection.renegotiate_pending"
-builtins.bool"builtins.bool*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*∂
-total_renegotiations+OpenSSL.SSL.Connection.total_renegotiations"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*ö
-set_accept_state'OpenSSL.SSL.Connection.set_accept_state"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*ú
-set_connect_state(OpenSSL.SSL.Connection.set_connect_state"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*Å
-get_client_ca_list)OpenSSL.SSL.Connection.get_client_ca_list"k
-&builtins.list[OpenSSL.crypto.X509Name]2
-OpenSSL.crypto.X509Name"OpenSSL.crypto.X509Name"builtins.list*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*⁄
-get_cipher_list&OpenSSL.SSL.Connection.get_cipher_list"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*‘
-get_cipher_name&OpenSSL.SSL.Connection.get_cipher_name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*‘
-get_cipher_bits&OpenSSL.SSL.Connection.get_cipher_bits"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*⁄
-get_cipher_version)OpenSSL.SSL.Connection.get_cipher_version"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*¿
-get_protocol_version_name0OpenSSL.SSL.Connection.get_protocol_version_name"
-builtins.str"builtins.str*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*∂
-get_protocol_version+OpenSSL.SSL.Connection.get_protocol_version"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*¶
-get_shutdown#OpenSSL.SSL.Connection.get_shutdown"
-builtins.int"builtins.int*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*ª
-set_shutdown#OpenSSL.SSL.Connection.set_shutdown"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*'
-state
-builtins.int"builtins.intz310z311z312z313z314*≤
-get_state_string'OpenSSL.SSL.Connection.get_state_string" 
-builtins.bytes"builtins.bytes*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*÷
-server_random$OpenSSL.SSL.Connection.server_random"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*÷
-client_random$OpenSSL.SSL.Connection.client_random"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*–
+self(**
+set_context*
 
-master_key!OpenSSL.SSL.Connection.master_key"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*å
-export_keying_material-OpenSSL.SSL.Connection.export_keying_material"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*<
-label1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*;
-olen1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*@
-context1
-TypeAlias[Any]
-Any"_typeshed.Incomplete z310z311z312z313z314*ë
-get_app_data#OpenSSL.SSL.Connection.get_app_data"
-Any*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*•
-set_app_data#OpenSSL.SSL.Connection.set_app_data"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*
-data
-Anyz310z311z312z313z314*¥
-sock_shutdown$OpenSSL.SSL.Connection.sock_shutdown"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*
-builtins.int"builtins.intz310z311z312z313z314*¢
-	want_read OpenSSL.SSL.Connection.want_read"
-builtins.bool"builtins.bool*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*§
+self(*
+context(*
+get_servername	*
 
-want_write!OpenSSL.SSL.Connection.want_write"
-builtins.bool"builtins.bool*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*·
-get_session"OpenSSL.SSL.Connection.get_session"Y
-Union[OpenSSL.SSL.Session,None]*
-OpenSSL.SSL.Session"OpenSSL.SSL.Session
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*…
-set_session"OpenSSL.SSL.Connection.set_session"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*7
-session*
-OpenSSL.SSL.Session"OpenSSL.SSL.Sessionz310z311z312z313z314*‘
-get_finished#OpenSSL.SSL.Connection.get_finished"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*ﬁ
-get_peer_finished(OpenSSL.SSL.Connection.get_peer_finished"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*˙
-set_alpn_protos&OpenSSL.SSL.Connection.set_alpn_protos"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connection*`
-protosT
-typing.Sequence[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Sequencez310z311z312z313z314*ƒ
-get_alpn_proto_negotiated0OpenSSL.SSL.Connection.get_alpn_proto_negotiated" 
-builtins.bytes"builtins.bytes*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314*í
-request_ocsp#OpenSSL.SSL.Connection.request_ocsp"
-None*:
-self0
-OpenSSL.SSL.Connection"OpenSSL.SSL.Connectionz310z311z312z313z314j310j311j312j313j314rã
-writeOpenSSL.SSL.Connection.writeK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314râ
-readOpenSSL.SSL.Connection.readK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314Â&
-ContextOpenSSL.SSL.Context"builtins.object*»
-__getattr__OpenSSL.SSL.Context.__getattr__"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*,*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*
-builtins.str"builtins.strz310z311z312z313z314*´
-__init__OpenSSL.SSL.Context.__init__"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*(
-method
-builtins.int"builtins.intz310z311z312z313z314*¡
-load_verify_locations)OpenSSL.SSL.Context.load_verify_locations"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*P
-cafileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*R
-capathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*≤
-set_optionsOpenSSL.SSL.Context.set_options"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*)
-options
-builtins.int"builtins.intz310z311z312z313z314*«
+self(*0
+set_tlsext_host_name*
 
-set_verifyOpenSSL.SSL.Context.set_verify"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*&
-mode
-builtins.int"builtins.int*ó
-callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z310z311z312z313z314*∆
-set_min_proto_version)OpenSSL.SSL.Context.set_min_proto_version"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*)
-version
-builtins.int"builtins.intz310z311z312z313z314*∆
-set_max_proto_version)OpenSSL.SSL.Context.set_max_proto_version"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*)
-version
-builtins.int"builtins.intz310z311z312z313z314*õ
-use_certificate_chain_file.OpenSSL.SSL.Context.use_certificate_chain_file"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*t
-certfilef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Ω
-use_certificate_file(OpenSSL.SSL.Context.use_certificate_file"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*t
-certfilef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*,
-filetype
-builtins.int"builtins.int z310z311z312z313z314*≈
-use_certificate#OpenSSL.SSL.Context.use_certificate"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*4
-cert*
-OpenSSL.crypto.X509"OpenSSL.crypto.X509z310z311z312z313z314*‚
-use_privatekey_file'OpenSSL.SSL.Context.use_privatekey_file"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*s
-keyfilef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*T
-filetypeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*√
-use_privatekey"OpenSSL.SSL.Context.use_privatekey"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*4
-pkey*
-OpenSSL.crypto.PKey"OpenSSL.crypto.PKeyz310z311z312z313z314*“
-add_extra_chain_cert(OpenSSL.SSL.Context.add_extra_chain_cert"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*7
-certobj*
-OpenSSL.crypto.X509"OpenSSL.crypto.X509z310z311z312z313z314*¬
-set_cipher_list#OpenSSL.SSL.Context.set_cipher_list"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*1
-cipher_list 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Ú
-set_keylog_callback'OpenSSL.SSL.Context.set_keylog_callback"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*Ò
-set_alpn_protos#OpenSSL.SSL.Context.set_alpn_protos"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*`
-protosT
-typing.Sequence[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Sequencez310z311z312z313z314*¸
-set_alpn_select_callback,OpenSSL.SSL.Context.set_alpn_select_callback"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*˚
-set_ocsp_server_callback,OpenSSL.SSL.Context.set_ocsp_server_callback"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*}
-dataq
-Union[OpenSSL.SSL._T,None]G
-OpenSSL.SSL._T"
-builtins.object"builtins.object"builtins.object
-None z310z311z312z313z314*˚
-set_ocsp_client_callback,OpenSSL.SSL.Context.set_ocsp_client_callback"
-None*4
-self*
-OpenSSL.SSL.Context"OpenSSL.SSL.Context*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*}
-dataq
-Union[OpenSSL.SSL._T,None]G
-OpenSSL.SSL._T"
-builtins.object"builtins.object"builtins.object
-None z310z311z312z313z314j310j311j312j313j314è
-SSLeay_versionOpenSSL.SSL.SSLeay_version" 
-builtins.bytes"builtins.bytes*&
-type
-builtins.int"builtins.intz310z311z312z313z314*†
-__annotations__OpenSSL.SSL.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*s
-OPENSSL_VERSION_NUMBER"OpenSSL.SSL.OPENSSL_VERSION_NUMBER
-builtins.int"builtins.int*310*311*312*313*314*c
-SSLEAY_VERSIONOpenSSL.SSL.SSLEAY_VERSION
-builtins.int"builtins.int*310*311*312*313*314*a
-SSLEAY_CFLAGSOpenSSL.SSL.SSLEAY_CFLAGS
-builtins.int"builtins.int*310*311*312*313*314*e
-SSLEAY_PLATFORMOpenSSL.SSL.SSLEAY_PLATFORM
-builtins.int"builtins.int*310*311*312*313*314*[
+self(*
 
-SSLEAY_DIROpenSSL.SSL.SSLEAY_DIR
-builtins.int"builtins.int*310*311*312*313*314*e
-SSLEAY_BUILT_ONOpenSSL.SSL.SSLEAY_BUILT_ON
-builtins.int"builtins.int*310*311*312*313*314*a
-SENT_SHUTDOWNOpenSSL.SSL.SENT_SHUTDOWN
-builtins.int"builtins.int*310*311*312*313*314*i
-RECEIVED_SHUTDOWNOpenSSL.SSL.RECEIVED_SHUTDOWN
-builtins.int"builtins.int*310*311*312*313*314*a
-SSLv23_METHODOpenSSL.SSL.SSLv23_METHOD
-builtins.int"builtins.int*310*311*312*313*314*_
-TLSv1_METHODOpenSSL.SSL.TLSv1_METHOD
-builtins.int"builtins.int*310*311*312*313*314*c
-TLSv1_1_METHODOpenSSL.SSL.TLSv1_1_METHOD
-builtins.int"builtins.int*310*311*312*313*314*c
-TLSv1_2_METHODOpenSSL.SSL.TLSv1_2_METHOD
-builtins.int"builtins.int*310*311*312*313*314*[
+name(*
+pending
+*
 
-TLS_METHODOpenSSL.SSL.TLS_METHOD
-builtins.int"builtins.int*310*311*312*313*314*i
-TLS_SERVER_METHODOpenSSL.SSL.TLS_SERVER_METHOD
-builtins.int"builtins.int*310*311*312*313*314*i
-TLS_CLIENT_METHODOpenSSL.SSL.TLS_CLIENT_METHOD
-builtins.int"builtins.int*310*311*312*313*314*_
-SSL3_VERSIONOpenSSL.SSL.SSL3_VERSION
-builtins.int"builtins.int*310*311*312*313*314*_
-TLS1_VERSIONOpenSSL.SSL.TLS1_VERSION
-builtins.int"builtins.int*310*311*312*313*314*c
-TLS1_1_VERSIONOpenSSL.SSL.TLS1_1_VERSION
-builtins.int"builtins.int*310*311*312*313*314*c
-TLS1_2_VERSIONOpenSSL.SSL.TLS1_2_VERSION
-builtins.int"builtins.int*310*311*312*313*314*c
-TLS1_3_VERSIONOpenSSL.SSL.TLS1_3_VERSION
-builtins.int"builtins.int*310*311*312*313*314*]
-OP_NO_SSLv2OpenSSL.SSL.OP_NO_SSLv2
-builtins.int"builtins.int*310*311*312*313*314*]
-OP_NO_SSLv3OpenSSL.SSL.OP_NO_SSLv3
-builtins.int"builtins.int*310*311*312*313*314*]
-OP_NO_TLSv1OpenSSL.SSL.OP_NO_TLSv1
-builtins.int"builtins.int*310*311*312*313*314*a
-OP_NO_TLSv1_1OpenSSL.SSL.OP_NO_TLSv1_1
-builtins.int"builtins.int*310*311*312*313*314*a
-OP_NO_TLSv1_2OpenSSL.SSL.OP_NO_TLSv1_2
-builtins.int"builtins.int*310*311*312*313*314*a
-OP_NO_TLSv1_3OpenSSL.SSL.OP_NO_TLSv1_3
-builtins.int"builtins.int*310*311*312*313*314*o
-MODE_RELEASE_BUFFERS OpenSSL.SSL.MODE_RELEASE_BUFFERS
-builtins.int"builtins.int*310*311*312*313*314*g
-OP_SINGLE_DH_USEOpenSSL.SSL.OP_SINGLE_DH_USE
-builtins.int"builtins.int*310*311*312*313*314*k
-OP_SINGLE_ECDH_USEOpenSSL.SSL.OP_SINGLE_ECDH_USE
-builtins.int"builtins.int*310*311*312*313*314*g
-OP_EPHEMERAL_RSAOpenSSL.SSL.OP_EPHEMERAL_RSA
-builtins.int"builtins.int*310*311*312*313*314*w
-OP_MICROSOFT_SESS_ID_BUG$OpenSSL.SSL.OP_MICROSOFT_SESS_ID_BUG
-builtins.int"builtins.int*310*311*312*313*314*y
-OP_NETSCAPE_CHALLENGE_BUG%OpenSSL.SSL.OP_NETSCAPE_CHALLENGE_BUG
-builtins.int"builtins.int*310*311*312*313*314*ç
-#OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG/OpenSSL.SSL.OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG
-builtins.int"builtins.int*310*311*312*313*314*É
-OP_SSLREF2_REUSE_CERT_TYPE_BUG*OpenSSL.SSL.OP_SSLREF2_REUSE_CERT_TYPE_BUG
-builtins.int"builtins.int*310*311*312*313*314*Å
-OP_MICROSOFT_BIG_SSLV3_BUFFER)OpenSSL.SSL.OP_MICROSOFT_BIG_SSLV3_BUFFER
-builtins.int"builtins.int*310*311*312*313*314*y
-OP_MSIE_SSLV2_RSA_PADDING%OpenSSL.SSL.OP_MSIE_SSLV2_RSA_PADDING
-builtins.int"builtins.int*310*311*312*313*314*}
-OP_SSLEAY_080_CLIENT_DH_BUG'OpenSSL.SSL.OP_SSLEAY_080_CLIENT_DH_BUG
-builtins.int"builtins.int*310*311*312*313*314*a
-OP_TLS_D5_BUGOpenSSL.SSL.OP_TLS_D5_BUG
-builtins.int"builtins.int*310*311*312*313*314*w
-OP_TLS_BLOCK_PADDING_BUG$OpenSSL.SSL.OP_TLS_BLOCK_PADDING_BUG
-builtins.int"builtins.int*310*311*312*313*314*É
-OP_DONT_INSERT_EMPTY_FRAGMENTS*OpenSSL.SSL.OP_DONT_INSERT_EMPTY_FRAGMENTS
-builtins.int"builtins.int*310*311*312*313*314*}
-OP_CIPHER_SERVER_PREFERENCE'OpenSSL.SSL.OP_CIPHER_SERVER_PREFERENCE
-builtins.int"builtins.int*310*311*312*313*314*m
-OP_TLS_ROLLBACK_BUGOpenSSL.SSL.OP_TLS_ROLLBACK_BUG
-builtins.int"builtins.int*310*311*312*313*314*g
-OP_PKCS1_CHECK_1OpenSSL.SSL.OP_PKCS1_CHECK_1
-builtins.int"builtins.int*310*311*312*313*314*g
-OP_PKCS1_CHECK_2OpenSSL.SSL.OP_PKCS1_CHECK_2
-builtins.int"builtins.int*310*311*312*313*314*q
-OP_NETSCAPE_CA_DN_BUG!OpenSSL.SSL.OP_NETSCAPE_CA_DN_BUG
-builtins.int"builtins.int*310*311*312*313*314*ã
-"OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG.OpenSSL.SSL.OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG
-builtins.int"builtins.int*310*311*312*313*314*i
-OP_NO_COMPRESSIONOpenSSL.SSL.OP_NO_COMPRESSION
-builtins.int"builtins.int*310*311*312*313*314*e
-OP_NO_QUERY_MTUOpenSSL.SSL.OP_NO_QUERY_MTU
-builtins.int"builtins.int*310*311*312*313*314*k
-OP_COOKIE_EXCHANGEOpenSSL.SSL.OP_COOKIE_EXCHANGE
-builtins.int"builtins.int*310*311*312*313*314*_
-OP_NO_TICKETOpenSSL.SSL.OP_NO_TICKET
-builtins.int"builtins.int*310*311*312*313*314*S
-OP_ALLOpenSSL.SSL.OP_ALL
-builtins.int"builtins.int*310*311*312*313*314*]
-VERIFY_PEEROpenSSL.SSL.VERIFY_PEER
-builtins.int"builtins.int*310*311*312*313*314*}
-VERIFY_FAIL_IF_NO_PEER_CERT'OpenSSL.SSL.VERIFY_FAIL_IF_NO_PEER_CERT
-builtins.int"builtins.int*310*311*312*313*314*k
-VERIFY_CLIENT_ONCEOpenSSL.SSL.VERIFY_CLIENT_ONCE
-builtins.int"builtins.int*310*311*312*313*314*]
-VERIFY_NONEOpenSSL.SSL.VERIFY_NONE
-builtins.int"builtins.int*310*311*312*313*314*c
-SESS_CACHE_OFFOpenSSL.SSL.SESS_CACHE_OFF
-builtins.int"builtins.int*310*311*312*313*314*i
-SESS_CACHE_CLIENTOpenSSL.SSL.SESS_CACHE_CLIENT
-builtins.int"builtins.int*310*311*312*313*314*i
-SESS_CACHE_SERVEROpenSSL.SSL.SESS_CACHE_SERVER
-builtins.int"builtins.int*310*311*312*313*314*e
-SESS_CACHE_BOTHOpenSSL.SSL.SESS_CACHE_BOTH
-builtins.int"builtins.int*310*311*312*313*314*w
-SESS_CACHE_NO_AUTO_CLEAR$OpenSSL.SSL.SESS_CACHE_NO_AUTO_CLEAR
-builtins.int"builtins.int*310*311*312*313*314*Å
-SESS_CACHE_NO_INTERNAL_LOOKUP)OpenSSL.SSL.SESS_CACHE_NO_INTERNAL_LOOKUP
-builtins.int"builtins.int*310*311*312*313*314*
-SESS_CACHE_NO_INTERNAL_STORE(OpenSSL.SSL.SESS_CACHE_NO_INTERNAL_STORE
-builtins.int"builtins.int*310*311*312*313*314*s
-SESS_CACHE_NO_INTERNAL"OpenSSL.SSL.SESS_CACHE_NO_INTERNAL
-builtins.int"builtins.int*310*311*312*313*314*c
-SSL_ST_CONNECTOpenSSL.SSL.SSL_ST_CONNECT
-builtins.int"builtins.int*310*311*312*313*314*a
-SSL_ST_ACCEPTOpenSSL.SSL.SSL_ST_ACCEPT
-builtins.int"builtins.int*310*311*312*313*314*]
-SSL_ST_MASKOpenSSL.SSL.SSL_ST_MASK
-builtins.int"builtins.int*310*311*312*313*314*]
-SSL_CB_LOOPOpenSSL.SSL.SSL_CB_LOOP
-builtins.int"builtins.int*310*311*312*313*314*]
-SSL_CB_EXITOpenSSL.SSL.SSL_CB_EXIT
-builtins.int"builtins.int*310*311*312*313*314*]
-SSL_CB_READOpenSSL.SSL.SSL_CB_READ
-builtins.int"builtins.int*310*311*312*313*314*_
-SSL_CB_WRITEOpenSSL.SSL.SSL_CB_WRITE
-builtins.int"builtins.int*310*311*312*313*314*_
-SSL_CB_ALERTOpenSSL.SSL.SSL_CB_ALERT
-builtins.int"builtins.int*310*311*312*313*314*i
-SSL_CB_READ_ALERTOpenSSL.SSL.SSL_CB_READ_ALERT
-builtins.int"builtins.int*310*311*312*313*314*k
-SSL_CB_WRITE_ALERTOpenSSL.SSL.SSL_CB_WRITE_ALERT
-builtins.int"builtins.int*310*311*312*313*314*k
-SSL_CB_ACCEPT_LOOPOpenSSL.SSL.SSL_CB_ACCEPT_LOOP
-builtins.int"builtins.int*310*311*312*313*314*k
-SSL_CB_ACCEPT_EXITOpenSSL.SSL.SSL_CB_ACCEPT_EXIT
-builtins.int"builtins.int*310*311*312*313*314*m
-SSL_CB_CONNECT_LOOPOpenSSL.SSL.SSL_CB_CONNECT_LOOP
-builtins.int"builtins.int*310*311*312*313*314*m
-SSL_CB_CONNECT_EXITOpenSSL.SSL.SSL_CB_CONNECT_EXIT
-builtins.int"builtins.int*310*311*312*313*314*s
-SSL_CB_HANDSHAKE_START"OpenSSL.SSL.SSL_CB_HANDSHAKE_START
-builtins.int"builtins.int*310*311*312*313*314*q
-SSL_CB_HANDSHAKE_DONE!OpenSSL.SSL.SSL_CB_HANDSHAKE_DONE
-builtins.int"builtins.int*310*311*312*313*314*}
-NO_OVERLAPPING_PROTOCOLS$OpenSSL.SSL.NO_OVERLAPPING_PROTOCOLS"
-builtins.object"builtins.object*310*311*312*313*314
+self(*8
+send
+*
+
+self(*	
+buf(*
+flags (
+z310z311*=
+send
+*
+
+self(*	
+buf(*
+flags (
+z312z313z314*;
+sendall
+*
+
+self(*	
+buf(*
+flags (
+z310z311*@
+sendall
+*
+
+self(*	
+buf(*
+flags (
+z312z313z314*1
+recv*
+
+self(*
+bufsiz(
+*
+flags (*F
+	recv_into
+*
+
+self(*
+buffer(*
+nbytes (*
+flags (*#
+connect*
+
+self(*
+
+addr(*0
+
+connect_ex
+*
+
+self(*
+
+addr(z310z311*5
+
+connect_ex
+*
+
+self(*
+
+addr(z312z313z314*
+accept*
+
+self(*
+DTLSv1_listen*
+
+self(*"
+DTLSv1_get_timeout*
+
+self(*%
+DTLSv1_handle_timeout*
+
+self(*
+shutdown*
+
+self(*
+do_handshake*
+
+self(*
+get_certificate!*
+
+self(*$
+get_peer_certificate!*
+
+self(*#
+get_peer_cert_chain#*
+
+self(*"
+get_verified_chain#*
+
+self(*&
+bio_read*
+
+self(*
+bufsiz(
+*$
+	bio_write
+*
+
+self(*	
+buf(*
+bio_shutdown*
+
+self(*
+renegotiate*
+
+self(*#
+renegotiate_pending*
+
+self(*$
+total_renegotiations
+*
+
+self(* 
+set_accept_state*
+
+self(*!
+set_connect_state*
+
+self(*"
+get_client_ca_list%*
+
+self(*
+get_cipher_list&*
+
+self(*
+get_cipher_name'*
+
+self(*
+get_cipher_bits*
+
+self(*"
+get_cipher_version'*
+
+self(*)
+get_protocol_version_name*
+
+self(*$
+get_protocol_version
+*
+
+self(*
+get_shutdown
+*
+
+self(*)
+set_shutdown*
+
+self(*
+state(
+* 
+get_state_string*
+
+self(*
+server_random	*
+
+self(*
+client_random	*
+
+self(*
+
+master_key	*
+
+self(*P
+export_keying_material(*
+
+self(*
+label((*
+
+olen((*
+context ((*
+get_app_data*
+
+self(*(
+set_app_data*
+
+self(*
+
+data(*!
+sock_shutdown*
+
+self(*(
+*
+	want_read*
+
+self(*
+
+want_write*
+
+self(*
+get_session**
+
+self(**
+set_session*
+
+self(*
+session()*
+get_finished	*
+
+self(*!
+get_peer_finished	*
+
+self(*-
+set_alpn_protos*
+
+self(*
+protos(+*)
+get_alpn_proto_negotiated*
+
+self(*
+request_ocsp*
+
+self(r	
+write0-r
+read0-¨
+Context"builtins.object*
+__getattr__(*(*(*&
+__init__*
+
+self(*
+method(
+*C
+load_verify_locations*
+
+self(*
+cafile('*
+capath ('**
+set_options*
+
+self(*
+options(
+*8
+
+set_verify*
+
+self(*
+
+mode(
+*
+callback (.*4
+set_min_proto_version*
+
+self(*
+version(
+*4
+set_max_proto_version*
+
+self(*
+version(
+*:
+use_certificate_chain_file*
+
+self(*
+certfile(/*F
+use_certificate_file*
+
+self(*
+certfile(/*
+filetype (
+*+
+use_certificate*
+
+self(*
+
+cert( *D
+use_privatekey_file*
+
+self(*
+keyfile(/*
+filetype (**
+use_privatekey*
+
+self(*
+
+pkey(0*3
+add_extra_chain_cert*
+
+self(*
+certobj( *2
+set_cipher_list*
+
+self(*
+cipher_list(*3
+set_keylog_callback*
+
+self(*
+callback(-*-
+set_alpn_protos*
+
+self(*
+protos(+*8
+set_alpn_select_callback*
+
+self(*
+callback(-*F
+set_ocsp_server_callback*
+
+self(*
+callback(-*
+data (3*F
+set_ocsp_client_callback*
+
+self(*
+callback(-*
+data (3
+SSLeay_version*
+
+type(
+*
+__annotations__04*
+OPENSSL_VERSION_NUMBER0
+*
+SSLEAY_VERSION0
+*
+SSLEAY_CFLAGS0
+*
+SSLEAY_PLATFORM0
+*
+
+SSLEAY_DIR0
+*
+SSLEAY_BUILT_ON0
+*
+SENT_SHUTDOWN0
+*
+RECEIVED_SHUTDOWN0
+*
+SSLv23_METHOD0
+*
+TLSv1_METHOD0
+*
+TLSv1_1_METHOD0
+*
+TLSv1_2_METHOD0
+*
+
+TLS_METHOD0
+*
+TLS_SERVER_METHOD0
+*
+TLS_CLIENT_METHOD0
+*
+SSL3_VERSION0
+*
+TLS1_VERSION0
+*
+TLS1_1_VERSION0
+*
+TLS1_2_VERSION0
+*
+TLS1_3_VERSION0
+*
+OP_NO_SSLv20
+*
+OP_NO_SSLv30
+*
+OP_NO_TLSv10
+*
+OP_NO_TLSv1_10
+*
+OP_NO_TLSv1_20
+*
+OP_NO_TLSv1_30
+*
+MODE_RELEASE_BUFFERS0
+*
+OP_SINGLE_DH_USE0
+*
+OP_SINGLE_ECDH_USE0
+*
+OP_EPHEMERAL_RSA0
+*
+OP_MICROSOFT_SESS_ID_BUG0
+*
+OP_NETSCAPE_CHALLENGE_BUG0
+*'
+#OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG0
+*"
+OP_SSLREF2_REUSE_CERT_TYPE_BUG0
+*!
+OP_MICROSOFT_BIG_SSLV3_BUFFER0
+*
+OP_MSIE_SSLV2_RSA_PADDING0
+*
+OP_SSLEAY_080_CLIENT_DH_BUG0
+*
+OP_TLS_D5_BUG0
+*
+OP_TLS_BLOCK_PADDING_BUG0
+*"
+OP_DONT_INSERT_EMPTY_FRAGMENTS0
+*
+OP_CIPHER_SERVER_PREFERENCE0
+*
+OP_TLS_ROLLBACK_BUG0
+*
+OP_PKCS1_CHECK_10
+*
+OP_PKCS1_CHECK_20
+*
+OP_NETSCAPE_CA_DN_BUG0
+*&
+"OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG0
+*
+OP_NO_COMPRESSION0
+*
+OP_NO_QUERY_MTU0
+*
+OP_COOKIE_EXCHANGE0
+*
+OP_NO_TICKET0
+*
+
+OP_ALL0
+*
+VERIFY_PEER0
+*
+VERIFY_FAIL_IF_NO_PEER_CERT0
+*
+VERIFY_CLIENT_ONCE0
+*
+VERIFY_NONE0
+*
+SESS_CACHE_OFF0
+*
+SESS_CACHE_CLIENT0
+*
+SESS_CACHE_SERVER0
+*
+SESS_CACHE_BOTH0
+*
+SESS_CACHE_NO_AUTO_CLEAR0
+*!
+SESS_CACHE_NO_INTERNAL_LOOKUP0
+* 
+SESS_CACHE_NO_INTERNAL_STORE0
+*
+SESS_CACHE_NO_INTERNAL0
+*
+SSL_ST_CONNECT0
+*
+SSL_ST_ACCEPT0
+*
+SSL_ST_MASK0
+*
+SSL_CB_LOOP0
+*
+SSL_CB_EXIT0
+*
+SSL_CB_READ0
+*
+SSL_CB_WRITE0
+*
+SSL_CB_ALERT0
+*
+SSL_CB_READ_ALERT0
+*
+SSL_CB_WRITE_ALERT0
+*
+SSL_CB_ACCEPT_LOOP0
+*
+SSL_CB_ACCEPT_EXIT0
+*
+SSL_CB_CONNECT_LOOP0
+*
+SSL_CB_CONNECT_EXIT0
+*
+SSL_CB_HANDSHAKE_START0
+*
+SSL_CB_HANDSHAKE_DONE0
+*
+NO_OVERLAPPING_PROTOCOLS0122"OpenSSL.SSL.Connection2"builtins.str22"OpenSSL.SSL.Context2"socket.socket222"builtins.bytes222"builtins.int2"typing_extensions.Buffer222"_collections_abc.Buffer2222
+2"typing.MutableSequence2
+22
+2"typing.Sequence2222"builtins.tuple2222"_socket._Address222222"_socket._Address2222"_socket._RetAddress2222"builtins.float222"builtins.bool2"OpenSSL.crypto.X50922 2"builtins.list2 22"2"OpenSSL.crypto.X509Name2"builtins.list2$2"builtins.list2222"_typeshed.Incomplete22"OpenSSL.SSL.Session22)2"typing.Sequence22"builtins.function22,22-222"OpenSSL.crypto.PKey2"builtins.object2"builtins.object212222"builtins.dict2

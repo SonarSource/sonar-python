@@ -1,245 +1,165 @@
 
-sqlalchemy.pool.base‹
-_ConnDialect!sqlalchemy.pool.base._ConnDialect"builtins.object*–
-do_rollback-sqlalchemy.pool.base._ConnDialect.do_rollback"
-None*P
-selfF
-!sqlalchemy.pool.base._ConnDialect"!sqlalchemy.pool.base._ConnDialect*
-dbapi_connection
-Anyz310z311z312z313z314*Ã
-	do_commit+sqlalchemy.pool.base._ConnDialect.do_commit"
-None*P
-selfF
-!sqlalchemy.pool.base._ConnDialect"!sqlalchemy.pool.base._ConnDialect*
-dbapi_connection
-Anyz310z311z312z313z314*“
-do_terminate.sqlalchemy.pool.base._ConnDialect.do_terminate"
-None*P
-selfF
-!sqlalchemy.pool.base._ConnDialect"!sqlalchemy.pool.base._ConnDialect*
-dbapi_connection
-Anyz310z311z312z313z314* 
-do_close*sqlalchemy.pool.base._ConnDialect.do_close"
-None*P
-selfF
-!sqlalchemy.pool.base._ConnDialect"!sqlalchemy.pool.base._ConnDialect*
-dbapi_connection
-Anyz310z311z312z313z314*»
-do_ping)sqlalchemy.pool.base._ConnDialect.do_ping"
-None*P
-selfF
-!sqlalchemy.pool.base._ConnDialect"!sqlalchemy.pool.base._ConnDialect*
-dbapi_connection
-Anyz310z311z312z313z314*É
-get_driver_connection7sqlalchemy.pool.base._ConnDialect.get_driver_connection*
+sqlalchemy.pool.baseÙ
+_ConnDialect"builtins.object*3
+do_rollback*
+
+self(*
+dbapi_connection(*1
+	do_commit*
+
+self(*
+dbapi_connection(*4
+do_terminate*
+
+self(*
+dbapi_connection(*0
+do_close*
+
+self(*
+dbapi_connection(*/
+do_ping*
+
+self(*
+dbapi_connection(*1
+get_driver_connection*
 self*
 
-connectionz310z311z312z313z314j310j311j312j313j314ro
-is_async*sqlalchemy.pool.base._ConnDialect.is_async
-builtins.bool"builtins.bool*310*311*312*313*314ry
-has_terminate/sqlalchemy.pool.base._ConnDialect.has_terminate
-builtins.bool"builtins.bool*310*311*312*313*314Ì
-_AsyncConnDialect&sqlalchemy.pool.base._AsyncConnDialect"!sqlalchemy.pool.base._ConnDialectj310j311j312j313j314rt
-is_async/sqlalchemy.pool.base._AsyncConnDialect.is_async
-builtins.bool"builtins.bool*310*311*312*313*314•
-Poolsqlalchemy.pool.base.Pool"sqlalchemy.log.Identified*†
-__init__"sqlalchemy.pool.base.Pool.__init__"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Pool*X
-creatorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*+
-recycle
-builtins.int"builtins.int *g
-echo[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-logging_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-reset_on_return
-builtins.bool"builtins.bool *i
-events[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-dialect[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *.
-pre_ping
-builtins.bool"builtins.bool *l
-	_dispatch[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ì
-recreate"sqlalchemy.pool.base.Pool.recreate"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Poolz310z311z312z313z314*ë
-dispose!sqlalchemy.pool.base.Pool.dispose"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Poolz310z311z312z313z314*O
-connect!sqlalchemy.pool.base.Pool.connect*
-selfz310z311z312z313z314*è
-status sqlalchemy.pool.base.Pool.status"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Poolz310z311z312z313z314j310j311j312j313j314rX
-logging_name&sqlalchemy.pool.base.Pool.logging_name
-Any*310*311*312*313*314rH
-echosqlalchemy.pool.base.Pool.echo
-Any*310*311*312*313*314rz
-dispatch"sqlalchemy.pool.base.Pool.dispatch1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314î
-_ConnectionRecord&sqlalchemy.pool.base._ConnectionRecord"builtins.object*¸
-__init__/sqlalchemy.pool.base._ConnectionRecord.__init__"
-None*Z
-selfP
-&sqlalchemy.pool.base._ConnectionRecord"&sqlalchemy.pool.base._ConnectionRecord*
-pool
-Any*-
-connect
-builtins.bool"builtins.bool z310z311z312z313z314*á
-driver_connection8sqlalchemy.pool.base._ConnectionRecord.driver_connection*
-self0:builtins.property`z310z311z312z313z314*á
-info+sqlalchemy.pool.base._ConnectionRecord.info*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*ï
-record_info2sqlalchemy.pool.base._ConnectionRecord.record_info*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*Å
-checkout/sqlalchemy.pool.base._ConnectionRecord.checkout*
+connectionr
+is_async0r
+has_terminate0D
+_AsyncConnDialect"!sqlalchemy.pool.base._ConnDialectr
+is_async0È
+Pool"sqlalchemy.log.Identified*ª
+__init__*
+
+self(*
+creator(*
+recycle (*
+echo (
+*
+logging_name (
+*
+reset_on_return (*
+events (
+*
+dialect (
+*
+pre_ping (*
+	_dispatch (
+*
+recreate*
+
+self(*
+dispose*
+
+self(*
+connect*
+self*
+status*
+
+self(r
+logging_name0r
+echo0r
+dispatch0	û
+_ConnectionRecord"builtins.object*5
+__init__*
+
+self(*
+
+pool(*
+connect (*4
+driver_connection*
+self0:builtins.property`*A
+info*
+self0:-sqlalchemy.util.langhelpers.memoized_property*H
+record_info*
+self0:-sqlalchemy.util.langhelpers.memoized_property*7
+checkout*
 cls*
-pool0:builtins.classmethodpz310z311z312z313z314*Ú
-checkin.sqlalchemy.pool.base._ConnectionRecord.checkin"
-None*Z
-selfP
-&sqlalchemy.pool.base._ConnectionRecord"&sqlalchemy.pool.base._ConnectionRecord*8
-_fairy_was_created
-builtins.bool"builtins.bool z310z311z312z313z314*q
-in_use-sqlalchemy.pool.base._ConnectionRecord.in_use*
-self0:builtins.property`z310z311z312z313z314*á
-last_connect_time8sqlalchemy.pool.base._ConnectionRecord.last_connect_time*
-self0:builtins.property`z310z311z312z313z314*¥
-close,sqlalchemy.pool.base._ConnectionRecord.close"
-None*Z
-selfP
-&sqlalchemy.pool.base._ConnectionRecord"&sqlalchemy.pool.base._ConnectionRecordz310z311z312z313z314*–
+pool0:builtins.classmethodp*3
+checkin*
 
-invalidate1sqlalchemy.pool.base._ConnectionRecord.invalidate"
-None*Z
-selfP
-&sqlalchemy.pool.base._ConnectionRecord"&sqlalchemy.pool.base._ConnectionRecord*d
-e[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-soft
-builtins.bool"builtins.bool z310z311z312z313z314*j
-get_connection5sqlalchemy.pool.base._ConnectionRecord.get_connection*
-selfz310z311z312z313z3142É
+self(*
+_fairy_was_created (*)
+in_use*
+self0:builtins.property`*4
+last_connect_time*
+self0:builtins.property`*
+close*
 
-connection1sqlalchemy.pool.base._ConnectionRecord.connectionb
+self(*3
 
-connection1sqlalchemy.pool.base._ConnectionRecord.connection*
-self0:builtins.propertyX`ƒ
+invalidate*
 
-connection1sqlalchemy.pool.base._ConnectionRecord.connection"
-None*Z
-selfP
-&sqlalchemy.pool.base._ConnectionRecord"&sqlalchemy.pool.base._ConnectionRecord*
-value
-Any0:.setter"310"311"312"313"314j310j311j312j313j314ro
-finalize_callback8sqlalchemy.pool.base._ConnectionRecord.finalize_callback
-Any*310*311*312*313*314rn
-fresh,sqlalchemy.pool.base._ConnectionRecord.fresh
-builtins.bool"builtins.bool*310*311*312*313*314r_
-	fairy_ref0sqlalchemy.pool.base._ConnectionRecord.fairy_ref
-Any*310*311*312*313*314r_
-	starttime0sqlalchemy.pool.base._ConnectionRecord.starttime
-Any*310*311*312*313*314rm
-dbapi_connection7sqlalchemy.pool.base._ConnectionRecord.dbapi_connection
-Any*310*311*312*313*314‰
-_ConnectionFairy%sqlalchemy.pool.base._ConnectionFairy"builtins.object*â
-__init__.sqlalchemy.pool.base._ConnectionFairy.__init__"
-None*X
-selfN
-%sqlalchemy.pool.base._ConnectionFairy"%sqlalchemy.pool.base._ConnectionFairy*
-dbapi_connection
-Any*
-connection_record
-Any*
-echo
-Anyz310z311z312z313z314*Ü
-driver_connection7sqlalchemy.pool.base._ConnectionFairy.driver_connection*
-self0:builtins.property`z310z311z312z313z314*t
-is_valid.sqlalchemy.pool.base._ConnectionFairy.is_valid*
-self0:builtins.property`z310z311z312z313z314*Ü
-info*sqlalchemy.pool.base._ConnectionFairy.info*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*z
-record_info1sqlalchemy.pool.base._ConnectionFairy.record_info*
-self0:builtins.property`z310z311z312z313z314*Õ
+self(*	
+e (
+*
+soft (*
+get_connection*
+self2q
 
-invalidate0sqlalchemy.pool.base._ConnectionFairy.invalidate"
-None*X
-selfN
-%sqlalchemy.pool.base._ConnectionFairy"%sqlalchemy.pool.base._ConnectionFairy*d
-e[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-soft
-builtins.bool"builtins.bool z310z311z312z313z314*o
-cursor,sqlalchemy.pool.base._ConnectionFairy.cursor*
+connection/
+
+connection*
+self0:builtins.propertyX`2
+
+connection*
+
+self(*
+value(0:.setterr
+finalize_callback0r	
+fresh0r
+	fairy_ref0r
+	starttime0r
+dbapi_connection0Ä
+_ConnectionFairy"builtins.object*U
+__init__*
+
+self(*
+dbapi_connection(*
+connection_record(*
+
+echo(*4
+driver_connection*
+self0:builtins.property`*+
+is_valid*
+self0:builtins.property`*A
+info*
+self0:-sqlalchemy.util.langhelpers.memoized_property*.
+record_info*
+self0:builtins.property`*3
+
+invalidate*
+
+self(*	
+e (
+*
+soft (*(
+cursor*
 self*
 args*
 
-kwargsz310z311z312z313z314*‘
-__getattr__1sqlalchemy.pool.base._ConnectionFairy.__getattr__"
-Any*PN
-%sqlalchemy.pool.base._ConnectionFairy"%sqlalchemy.pool.base._ConnectionFairy*
-builtins.str"builtins.strz310z311z312z313z314*≥
-detach,sqlalchemy.pool.base._ConnectionFairy.detach"
-None*X
-selfN
-%sqlalchemy.pool.base._ConnectionFairy"%sqlalchemy.pool.base._ConnectionFairyz310z311z312z313z314*±
-close+sqlalchemy.pool.base._ConnectionFairy.close"
-None*X
-selfN
-%sqlalchemy.pool.base._ConnectionFairy"%sqlalchemy.pool.base._ConnectionFairyz310z311z312z313z3142˛
+kwargs*
+__getattr__*(*(*
+detach*
 
-connection0sqlalchemy.pool.base._ConnectionFairy.connectiona
+self(*
+close*
 
-connection0sqlalchemy.pool.base._ConnectionFairy.connection*
-self0:builtins.propertyX`¡
+self(2q
 
-connection0sqlalchemy.pool.base._ConnectionFairy.connection"
-None*X
-selfN
-%sqlalchemy.pool.base._ConnectionFairy"%sqlalchemy.pool.base._ConnectionFairy*
-value
-Any0:.setter"310"311"312"313"314j310j311j312j313j314rl
-dbapi_connection6sqlalchemy.pool.base._ConnectionFairy.dbapi_connection
-Any*310*311*312*313*314*©
-__annotations__$sqlalchemy.pool.base.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*W
-reset_rollback#sqlalchemy.pool.base.reset_rollback
-Any*310*311*312*313*314*S
-reset_commit!sqlalchemy.pool.base.reset_commit
-Any*310*311*312*313*314*O
+connection/
 
-reset_nonesqlalchemy.pool.base.reset_none
-Any*310*311*312*313*314
+connection*
+self0:builtins.propertyX`2
+
+connection*
+
+self(*
+value(0:.setterr
+dbapi_connection0*
+__annotations__0*
+reset_rollback0*
+reset_commit0*
+
+reset_none022#"!sqlalchemy.pool.base._ConnDialect22"builtins.bool2"sqlalchemy.pool.base.Pool2"builtins.function222"builtins.int2"_typeshed.Incomplete222	2("&sqlalchemy.pool.base._ConnectionRecord2'"%sqlalchemy.pool.base._ConnectionFairy2"builtins.str2"builtins.dict2

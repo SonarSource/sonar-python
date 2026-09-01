@@ -1,399 +1,219 @@
 
-asyncoreH
-ExitNowasyncore.ExitNow"builtins.Exceptionj310j311j312j313j314›9
+asyncore
+ExitNow"builtins.Exception˘
 
-dispatcherasyncore.dispatcher"builtins.object*∆
-__init__asyncore.dispatcher.__init__"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*S
-sockG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None *Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314*˜
-add_channelasyncore.dispatcher.add_channel"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314*˜
-del_channelasyncore.dispatcher.del_channel"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314*·
-create_socket!asyncore.dispatcher.create_socket"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher**
-family
-builtins.int"builtins.int *(
-type
-builtins.int"builtins.int z310z311z312z313z314*ü
+dispatcher"builtins.object*3
+__init__*
 
-set_socketasyncore.dispatcher.set_socket"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*(
-sock
-socket.socket"socket.socket*Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314*ç
-set_reuse_addr"asyncore.dispatcher.set_reuse_addr"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ó
-readableasyncore.dispatcher.readable"
-builtins.bool"builtins.bool*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ó
-writableasyncore.dispatcher.writable"
-builtins.bool"builtins.bool*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*§
-listenasyncore.dispatcher.listen"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*%
-num
-builtins.int"builtins.intz310z311z312z313z314*ˇ
-bindasyncore.dispatcher.bind"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*É
-addry
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.strz310z311z312z313z314*à
-connectasyncore.dispatcher.connect"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*Ü
-addressy
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.strz310z311z312z313z314*Ó
-acceptasyncore.dispatcher.accept"y
-$Union[Tuple[socket.socket,Any],None]E
-Tuple[socket.socket,Any]
-socket.socket"socket.socket
-Any
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*˜
-sendasyncore.dispatcher.send"
-builtins.int"builtins.int*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*Á
-data‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz310z311z312z313z314*¿
-recvasyncore.dispatcher.recv" 
-builtins.bytes"builtins.bytes*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*-
-buffer_size
-builtins.int"builtins.intz310z311z312z313z314*{
-closeasyncore.dispatcher.close"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ç
-logasyncore.dispatcher.log"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*
-message
-Anyz310z311z312z313z314*¡
-log_infoasyncore.dispatcher.log_info"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcher*
-message
-Any*(
-type
-builtins.str"builtins.str z310z311z312z313z314*ì
-handle_read_event%asyncore.dispatcher.handle_read_event"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ô
-handle_connect_event(asyncore.dispatcher.handle_connect_event"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ï
-handle_write_event&asyncore.dispatcher.handle_write_event"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ì
-handle_expt_event%asyncore.dispatcher.handle_expt_event"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*â
-handle_error asyncore.dispatcher.handle_error"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*á
-handle_exptasyncore.dispatcher.handle_expt"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*á
-handle_readasyncore.dispatcher.handle_read"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*â
-handle_write asyncore.dispatcher.handle_write"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ç
-handle_connect"asyncore.dispatcher.handle_connect"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*ã
-handle_accept!asyncore.dispatcher.handle_accept"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314*â
-handle_close asyncore.dispatcher.handle_close"
-None*4
-self*
-asyncore.dispatcher"asyncore.dispatcherz310z311z312z313z314j310j311j312j313j314r[
-debugasyncore.dispatcher.debug
-builtins.bool"builtins.bool*310*311*312*313*314rc
-	connectedasyncore.dispatcher.connected
-builtins.bool"builtins.bool*310*311*312*313*314rc
-	acceptingasyncore.dispatcher.accepting
-builtins.bool"builtins.bool*310*311*312*313*314re
+self(*
+sock (*
+map (	*(
+add_channel*
 
-connectingasyncore.dispatcher.connecting
-builtins.bool"builtins.bool*310*311*312*313*314r_
-closingasyncore.dispatcher.closing
-builtins.bool"builtins.bool*310*311*312*313*314rß
-ignore_log_types$asyncore.dispatcher.ignore_log_typesT
- builtins.frozenset[builtins.str]
-builtins.str"builtins.str"builtins.frozenset*310*311*312*313*314rÜ
-socketasyncore.dispatcher.socketG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None*310*311*312*313*314è
-dispatcher_with_sendasyncore.dispatcher_with_send"asyncore.dispatcher*©
-initiate_send+asyncore.dispatcher_with_send.initiate_send"
-None*H
-self>
-asyncore.dispatcher_with_send"asyncore.dispatcher_with_sendz310z311z312z313z314j310j311j312j313j314§
-file_wrapperasyncore.file_wrapper"builtins.object*≠
-__init__asyncore.file_wrapper.__init__"
-None*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper*$
-fd
-builtins.int"builtins.intz310z311z312z313z314*Ì
-recvasyncore.file_wrapper.recv" 
-builtins.bytes"builtins.bytes*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper*)
-bufsize
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*Í
-sendasyncore.file_wrapper.send"
-builtins.int"builtins.int*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper**
-data 
-builtins.bytes"builtins.bytes*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*Ì
-readasyncore.file_wrapper.read" 
-builtins.bytes"builtins.bytes*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper*)
-bufsize
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*Ï
-writeasyncore.file_wrapper.write"
-builtins.int"builtins.int*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper**
-data 
-builtins.bytes"builtins.bytes*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*Å
-closeasyncore.file_wrapper.close"
-None*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapperz310z311z312z313z314*ó
-filenoasyncore.file_wrapper.fileno"
-builtins.int"builtins.int*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapperz310z311z312z313z3142Ò
+self(*
+map (	*(
+del_channel*
 
-getsockopt asyncore.file_wrapper.getsockoptá
+self(*
+map (	*;
+create_socket*
 
-getsockopt asyncore.file_wrapper.getsockopt"
-builtins.int"builtins.int*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper*'
-level
-builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int*
-buflen
-None 0:typing.overloadXù
+self(*
+family (*
+type (*3
 
-getsockopt asyncore.file_wrapper.getsockopt" 
-builtins.bytes"builtins.bytes*8
-self.
-asyncore.file_wrapper"asyncore.file_wrapper*'
-level
-builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int*(
-buflen
-builtins.int"builtins.int0:typing.overloadX"310"311"312"313"314j310j311j312j313j314rU
-fdasyncore.file_wrapper.fd
-builtins.int"builtins.int*310*311*312*313*314Ï
-file_dispatcherasyncore.file_dispatcher"asyncore.dispatcher*◊
-__init__!asyncore.file_dispatcher.__init__"
-None*>
-self4
-asyncore.file_dispatcher"asyncore.file_dispatcher*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314*∂
-set_file!asyncore.file_dispatcher.set_file"
-None*>
-self4
-asyncore.file_dispatcher"asyncore.file_dispatcher*$
-fd
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314J
-readasyncore.read"
-None*
-obj
-Anyz310z311z312z313z314L
-writeasyncore.write"
-None*
-obj
-Anyz310z311z312z313z314}
-	readwriteasyncore.readwrite"
-None*
-obj
-Any*'
-flags
-builtins.int"builtins.intz310z311z312z313z314Ÿ
-pollasyncore.poll"
-None*/
-timeout 
-builtins.float"builtins.float *Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314€
-poll2asyncore.poll2"
-None*/
-timeout 
-builtins.float"builtins.float *Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None z310z311z312z313z314‹
-loopasyncore.loop"
-None*/
-timeout 
-builtins.float"builtins.float *.
-use_poll
-builtins.bool"builtins.bool *Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None *Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314ò
-compact_tracebackasyncore.compact_traceback"Õ
-]Tuple[Tuple[builtins.str,builtins.str,builtins.str],builtins.type,builtins.type,builtins.str]ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.type"builtins.type
-builtins.type"builtins.type
-builtins.str"builtins.strz310z311z312z313z314‰
-	close_allasyncore.close_all"
-None*Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None *0
+set_socket*
 
-ignore_all
-builtins.bool"builtins.bool z310z311z312z313z314*ù
-__annotations__asyncore.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*◊
+self(*
 
-socket_mapasyncore.socket_mapö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType*310*311*312*313*314*}
-poll3asyncore.poll3K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314
+sock(*
+map (	*
+set_reuse_addr*
+
+self(*
+readable
+*
+
+self(*
+writable
+*
+
+self(*!
+listen*
+
+self(*	
+num(* 
+bind*
+
+self(*
+
+addr(*&
+connect*
+
+self(*
+address(*
+accept*
+
+self(* 
+send*
+
+self(*
+
+data(*'
+recv*
+
+self(*
+buffer_size(*
+close*
+
+self(*"
+log*
+
+self(*
+message(*5
+log_info*
+
+self(*
+message(*
+type (*!
+handle_read_event*
+
+self(*$
+handle_connect_event*
+
+self(*"
+handle_write_event*
+
+self(*!
+handle_expt_event*
+
+self(*
+handle_error*
+
+self(*
+handle_expt*
+
+self(*
+handle_read*
+
+self(*
+handle_write*
+
+self(*
+handle_connect*
+
+self(*
+handle_accept*
+
+self(*
+handle_close*
+
+self(r	
+debug0
+r
+	connected0
+r
+	accepting0
+r
+
+connecting0
+r
+closing0
+r
+ignore_log_types0r
+
+socket0J
+dispatcher_with_send"asyncore.dispatcher*
+initiate_send*
+
+self(å
+file_wrapper"builtins.object*"
+__init__*
+
+self(*
+fd(*2
+recv*
+
+self(*
+bufsize(*
+flags (*/
+send*
+
+self(*
+
+data(*
+flags (*2
+read*
+
+self(*
+bufsize(*
+flags (*0
+write*
+
+self(*
+
+data(*
+flags (*
+close*
+
+self(*
+fileno*
+
+self(2ƒ
+
+getsockopt[
+
+getsockopt*
+
+self(*
+level(*
+optname(*
+buflen (0:typing.overloadXY
+
+getsockopt*
+
+self(*
+level(*
+optname(*
+buflen(0:typing.overloadXr
+fd0{
+file_dispatcher"asyncore.dispatcher*/
+__init__*
+
+self(*
+fd(!*
+map (	*"
+set_file*
+
+self(*
+fd(
+read*	
+obj(
+write*	
+obj(%
+	readwrite*	
+obj(*
+flags(&
+poll*
+timeout ("*
+map (	'
+poll2*
+timeout ("*
+map (	G
+loop*
+timeout ("*
+use_poll (
+*
+map (	*
+count (#
+compact_traceback&.
+	close_all*
+map (	*
+
+ignore_all (
+*
+__annotations__0'*
+
+socket_map0*	
+poll30)22"asyncore.dispatcher2"socket.socket222"builtins.int22"builtins.dict22"asyncore._MapType2222"builtins.bool2"builtins.tuple22"builtins.str2222222"builtins.bytes2"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"builtins.frozenset22"asyncore.dispatcher_with_send2"asyncore.file_wrapper2"asyncore.file_dispatcher2"_typeshed.HasFileno222#"_typeshed.FileDescriptorLike2 2"builtins.float22222"builtins.type22$%%2"builtins.dict22"builtins.function22(

@@ -1,319 +1,170 @@
 
-waitress.serverÿ
-MultiSocketServer!waitress.server.MultiSocketServer"builtins.object*‘
-__init__*waitress.server.MultiSocketServer.__init__"
-None*P
-selfF
-!waitress.server.MultiSocketServer"!waitress.server.MultiSocketServer*f
-map[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *å
-adjÄ
-,Union[waitress.adjustments.Adjustments,None]D
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments
-None *ç
-effective_listenÙ
-=Union[typing.Sequence[Tuple[builtins.str,builtins.int]],None]¶
-1typing.Sequence[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"typing.Sequence
-None *ü
+waitress.server≠
+MultiSocketServer"builtins.object*`
+__init__*
 
-dispatcherå
-0Union[waitress.task.ThreadedTaskDispatcher,None]L
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher
-None z310z311z312z313z314*·
-print_listen.waitress.server.MultiSocketServer.print_listen"
-None*P
-selfF
-!waitress.server.MultiSocketServer"!waitress.server.MultiSocketServer*,
+self(*
+map (*
+adj (*
+effective_listen (*
 
-format_str
-builtins.str"builtins.strz310z311z312z313z314*°
-run%waitress.server.MultiSocketServer.run"
-None*P
-selfF
-!waitress.server.MultiSocketServer"!waitress.server.MultiSocketServerz310z311z312z313z314*•
-close'waitress.server.MultiSocketServer.close"
-None*P
-selfF
-!waitress.server.MultiSocketServer"!waitress.server.MultiSocketServerz310z311z312z313z314j310j311j312j313j314rX
-asyncore*waitress.server.MultiSocketServer.asyncore
-Any*310*311*312*313*314rã
-adj%waitress.server.MultiSocketServer.adjD
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments*310*311*312*313*314rN
-map%waitress.server.MultiSocketServer.map
-Any*310*311*312*313*314rà
-effective_listen2waitress.server.MultiSocketServer.effective_listen¶
-1typing.Sequence[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"typing.Sequence*310*311*312*313*314r´
-task_dispatcher1waitress.server.MultiSocketServer.task_dispatcherL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*310*311*312*313*314Ü0
-BaseWSGIServerwaitress.server.BaseWSGIServer"builtins.object*û
-__init__'waitress.server.BaseWSGIServer.__init__"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*
-application
-Any*f
-map[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-_start
-builtins.bool"builtins.bool *h
-_sock[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *ü
+dispatcher (*.
+print_listen*
 
-dispatcherå
-0Union[waitress.task.ThreadedTaskDispatcher,None]L
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher
-None *å
-adjÄ
-,Union[waitress.adjustments.Adjustments,None]D
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments
-None *k
-sockinfo[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *1
-bind_socket
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314*∂
-bind_server_socket1waitress.server.BaseWSGIServer.bind_server_socket"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*Í
-get_server_name.waitress.server.BaseWSGIServer.get_server_name"
-builtins.str"builtins.str*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*$
-ip
-builtins.str"builtins.strz310z311z312z313z314*ß
-getsockname*waitress.server.BaseWSGIServer.getsockname"
-Any*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*∂
-accept_connections1waitress.server.BaseWSGIServer.accept_connections"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*÷
-add_task'waitress.server.BaseWSGIServer.add_task"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*2
-task(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*∏
-readable'waitress.server.BaseWSGIServer.readable"
-builtins.bool"builtins.bool*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*∏
-writable'waitress.server.BaseWSGIServer.writable"
-builtins.bool"builtins.bool*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*®
-handle_read*waitress.server.BaseWSGIServer.handle_read"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*Æ
-handle_connect-waitress.server.BaseWSGIServer.handle_connect"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*¨
-handle_accept,waitress.server.BaseWSGIServer.handle_accept"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*ò
-run"waitress.server.BaseWSGIServer.run"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*™
-pull_trigger+waitress.server.BaseWSGIServer.pull_trigger"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314*…
-set_socket_options1waitress.server.BaseWSGIServer.set_socket_options"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*
-conn
-Anyz310z311z312z313z314*¥
-fix_addr'waitress.server.BaseWSGIServer.fix_addr"
-Any*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*
-addr
-Anyz310z311z312z313z314*œ
-maintenance*waitress.server.BaseWSGIServer.maintenance"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*%
-now
-builtins.int"builtins.intz310z311z312z313z314*ÿ
-print_listen+waitress.server.BaseWSGIServer.print_listen"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*,
+self(*
 
-format_str
-builtins.str"builtins.strz310z311z312z313z314*ú
-close$waitress.server.BaseWSGIServer.close"
-None*J
-self@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz310z311z312z313z314j310j311j312j313j314rî
-channel_class,waitress.server.BaseWSGIServer.channel_class<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*310*311*312*313*314rÇ
-next_channel_cleanup3waitress.server.BaseWSGIServer.next_channel_cleanup
-builtins.int"builtins.int*310*311*312*313*314rn
-	socketmod(waitress.server.BaseWSGIServer.socketmod
-socket.socket"socket.socket*310*311*312*313*314rU
-asyncore'waitress.server.BaseWSGIServer.asyncore
-Any*310*311*312*313*314r›
-sockinfo'waitress.server.BaseWSGIServer.sockinfoé
-NTuple[builtins.int,builtins.int,builtins.int,Tuple[builtins.str,builtins.int]]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*310*311*312*313*314rf
-family%waitress.server.BaseWSGIServer.family
-builtins.int"builtins.int*310*311*312*313*314rj
-socktype'waitress.server.BaseWSGIServer.socktype
-builtins.int"builtins.int*310*311*312*313*314r[
-application*waitress.server.BaseWSGIServer.application
-Any*310*311*312*313*314rà
-adj"waitress.server.BaseWSGIServer.adjD
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments*310*311*312*313*314rh
-trigger&waitress.server.BaseWSGIServer.trigger
-builtins.int"builtins.int*310*311*312*313*314r®
-task_dispatcher.waitress.server.BaseWSGIServer.task_dispatcherL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*310*311*312*313*314rp
-server_name*waitress.server.BaseWSGIServer.server_name
-builtins.str"builtins.str*310*311*312*313*314rò
-active_channels.waitress.server.BaseWSGIServer.active_channels<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*310*311*312*313*314rn
-	accepting(waitress.server.BaseWSGIServer.accepting
-builtins.bool"builtins.bool*310*311*312*313*314÷
-TcpWSGIServerwaitress.server.TcpWSGIServer"waitress.server.BaseWSGIServer*≥
-bind_server_socket0waitress.server.TcpWSGIServer.bind_server_socket"
-None*H
-self>
-waitress.server.TcpWSGIServer"waitress.server.TcpWSGIServerz310z311z312z313z314*÷
-getsockname)waitress.server.TcpWSGIServer.getsockname"∏
-4Tuple[builtins.str,Tuple[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*H
-self>
-waitress.server.TcpWSGIServer"waitress.server.TcpWSGIServerz310z311z312z313z314*›
-set_socket_options0waitress.server.TcpWSGIServer.set_socket_options"
-None*H
-self>
-waitress.server.TcpWSGIServer"waitress.server.TcpWSGIServer*(
-conn
-socket.socket"socket.socketz310z311z312z313z314j310j311j312j313j314Ö
-UnixWSGIServerwaitress.server.UnixWSGIServer"waitress.server.BaseWSGIServer*∏
-__init__'waitress.server.UnixWSGIServer.__init__"
-None*J
-self@
-waitress.server.UnixWSGIServer"waitress.server.UnixWSGIServer*
-application
-Any*f
-map[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-_start
-builtins.bool"builtins.bool *h
-_sock[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+format_str(*
+run*
 
-dispatcher[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *å
-adjÄ
-,Union[waitress.adjustments.Adjustments,None]D
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments
-None *k
-sockinfo[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314*∂
-bind_server_socket1waitress.server.UnixWSGIServer.bind_server_socket"
-None*J
-self@
-waitress.server.UnixWSGIServer"waitress.server.UnixWSGIServerz310z311z312z313z314*Ÿ
-getsockname*waitress.server.UnixWSGIServer.getsockname"∏
-4Tuple[builtins.str,Tuple[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*J
-self@
-waitress.server.UnixWSGIServer"waitress.server.UnixWSGIServerz310z311z312z313z314*Ò
-fix_addr'waitress.server.UnixWSGIServer.fix_addr"D
-Tuple[builtins.str,None]
-builtins.str"builtins.str
-None*J
-self@
-waitress.server.UnixWSGIServer"waitress.server.UnixWSGIServer*
-addr
-Anyz310z311z312z313z314*’
-get_server_name.waitress.server.UnixWSGIServer.get_server_name"
-builtins.str"builtins.str*J
-self@
-waitress.server.UnixWSGIServer"waitress.server.UnixWSGIServer*
-ip
-Anyz310z311z312z313z314j310j311j312j313j314Ÿ
-create_serverwaitress.server.create_server"’
-GUnion[waitress.server.MultiSocketServer,waitress.server.BaseWSGIServer]F
-!waitress.server.MultiSocketServer"!waitress.server.MultiSocketServer@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*
-application
-Any*f
-map[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-_start
-builtins.bool"builtins.bool *T
-_sockG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None *†
-_dispatcherå
-0Union[waitress.task.ThreadedTaskDispatcher,None]L
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher
-None *
-kw
-Anyz310z311z312z313z314*§
-__annotations__waitress.server.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Å
+self(*
+close*
 
-WSGIServerwaitress.server.WSGIServer>
-waitress.server.TcpWSGIServer"waitress.server.TcpWSGIServer*310*311*312*313*314
+self(r
+asyncore0r
+adj0r
+map0r
+effective_listen0r
+task_dispatcher0Ó
+BaseWSGIServer"builtins.object*©
+__init__*
+
+self(*
+application(*
+map (*
+_start (*
+_sock (*
+
+dispatcher (*
+adj (*
+sockinfo (*
+bind_socket (*
+kw(*"
+bind_server_socket*
+
+self(*)
+get_server_name*
+
+self(*
+ip(*
+getsockname*
+
+self(*"
+accept_connections*
+
+self(*$
+add_task*
+
+self(*
+
+task(*
+readable*
+
+self(*
+writable*
+
+self(*
+handle_read*
+
+self(*
+handle_connect*
+
+self(*
+handle_accept*
+
+self(*
+run*
+
+self(*
+pull_trigger*
+
+self(*.
+set_socket_options*
+
+self(*
+
+conn(*$
+fix_addr*
+
+self(*
+
+addr(*&
+maintenance*
+
+self(*	
+now(	*.
+print_listen*
+
+self(*
+
+format_str(*
+close*
+
+self(r
+channel_class0r
+next_channel_cleanup0	r
+	socketmod0r
+asyncore0r
+sockinfo0r
+
+family0	r
+socktype0	r
+application0r
+adj0r
+trigger0	r
+task_dispatcher0r
+server_name0r
+active_channels0r
+	accepting0†
+TcpWSGIServer"waitress.server.BaseWSGIServer*"
+bind_server_socket*
+
+self(*
+getsockname*
+
+self(*.
+set_socket_options*
+
+self(*
+
+conn(Ÿ
+UnixWSGIServer"waitress.server.BaseWSGIServer*î
+__init__*
+
+self(*
+application(*
+map (*
+_start (*
+_sock (*
+
+dispatcher (*
+adj (*
+sockinfo (*
+kw(*"
+bind_server_socket*
+
+self(*
+getsockname*
+
+self(*$
+fix_addr*
+
+self(*
+
+addr(*)
+get_server_name*
+
+self(*
+ip(o
+create_server*
+application(*
+map (*
+_start (*
+_sock (*
+_dispatcher (*
+kw(*
+__annotations__0*
+
+WSGIServer022#"!waitress.server.MultiSocketServer22"_typeshed.Incomplete2222"" waitress.adjustments.Adjustments222"builtins.str2"builtins.int22	2"typing.Sequence2
+222&"$waitress.task.ThreadedTaskDispatcher222 "waitress.server.BaseWSGIServer2"builtins.bool2"waitress.task.Task2"waitress.channel.HTTPChannel2"socket.socket22			
+2"waitress.server.TcpWSGIServer22
+2 "waitress.server.UnixWSGIServer2222222"builtins.dict2

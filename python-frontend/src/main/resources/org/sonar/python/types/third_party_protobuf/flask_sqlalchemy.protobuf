@@ -1,408 +1,210 @@
 
-flask_sqlalchemyø
-DefaultMeta"flask_sqlalchemy.model.DefaultMeta"$flask_sqlalchemy.model.NameMetaMixin"$flask_sqlalchemy.model.BindMetaMixin"'sqlalchemy.orm.decl_api.DeclarativeMetaj310j311j312j313j314®
-Modelflask_sqlalchemy.model.Model"builtins.objectj310j311j312j313j314rã
-query_class(flask_sqlalchemy.model.Model.query_class∏
-1Union[Type[sqlalchemy.orm.query.Query[Any]],None]w
-%Type[sqlalchemy.orm.query.Query[Any]]F
-sqlalchemy.orm.query.Query[Any]
-Any"sqlalchemy.orm.query.Query"type
-None*310*311*312*313*314r»
-query"flask_sqlalchemy.model.Model.queryÅ
-+Union[sqlalchemy.orm.query.Query[Any],None]F
-sqlalchemy.orm.query.Query[Any]
-Any"sqlalchemy.orm.query.Query
-None*310*311*312*313*314Ç
-SignallingSession"flask_sqlalchemy.SignallingSession"sqlalchemy.orm.session.Session*∏
-__init__+flask_sqlalchemy.SignallingSession.__init__"
-None*R
-selfH
-"flask_sqlalchemy.SignallingSession""flask_sqlalchemy.SignallingSession*
-db
-Any*0
+flask_sqlalchemy¶
+DefaultMeta"flask_sqlalchemy.model.DefaultMeta"$flask_sqlalchemy.model.NameMetaMixin"$flask_sqlalchemy.model.BindMetaMixin"'sqlalchemy.orm.decl_api.DeclarativeMetaR
+Modelflask_sqlalchemy.model.Model"builtins.objectr
+query_class0r	
+query0–
+SignallingSession"sqlalchemy.orm.session.Session*X
+__init__*
 
-autocommit
-builtins.bool"builtins.bool */
-	autoflush
-builtins.bool"builtins.bool *
-options
-Anyz310z311z312z313z314*É
-get_bind+flask_sqlalchemy.SignallingSession.get_bind"
-Any*R
-selfH
-"flask_sqlalchemy.SignallingSession""flask_sqlalchemy.SignallingSession*i
-mapper[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-clause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rO
-app&flask_sqlalchemy.SignallingSession.app
-Any*310*311*312*313*314‰
-	BaseQueryflask_sqlalchemy.BaseQuery"sqlalchemy.orm.query.Query*Ç
+self(*
+db(*
 
-get_or_404%flask_sqlalchemy.BaseQuery.get_or_404"
-Any*¶
-selfõ
-/flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.BaseQuery*
-ident
-Any*n
-description[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ú
-first_or_404'flask_sqlalchemy.BaseQuery.first_or_404"
-Any*¶
-selfõ
-/flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.BaseQuery*n
-description[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*â
-paginate#flask_sqlalchemy.BaseQuery.paginate"ù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*¶
-selfõ
-/flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.BaseQuery*g
-page[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-per_page[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	error_out
-builtins.bool"builtins.bool *o
-max_per_page[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314Pj310j311j312j313j314Á#
+autocommit (*
+	autoflush (*
+options(*8
+get_bind*
 
-Paginationflask_sqlalchemy.Pagination"builtins.object*≠
-__init__$flask_sqlalchemy.Pagination.__init__"
-None*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*Û
-queryÁ
-;Union[flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T],None]õ
-/flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.BaseQuery
-None*&
-page
-builtins.int"builtins.int**
-per_page
-builtins.int"builtins.int*O
-totalD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*
-items
-Anyz310z311z312z313z314*£
-pages!flask_sqlalchemy.Pagination.pages"
-builtins.int"builtins.int*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination0:builtins.property`z310z311z312z313z314*Ω
-prev flask_sqlalchemy.Pagination.prev"ù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*/
-	error_out
-builtins.bool"builtins.bool z310z311z312z313z314*—
-prev_num$flask_sqlalchemy.Pagination.prev_num"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination0:builtins.property`z310z311z312z313z314*´
-has_prev$flask_sqlalchemy.Pagination.has_prev"
-builtins.bool"builtins.bool*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination0:builtins.property`z310z311z312z313z314*Ω
-next flask_sqlalchemy.Pagination.next"ù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*/
-	error_out
-builtins.bool"builtins.bool z310z311z312z313z314*´
-has_next$flask_sqlalchemy.Pagination.has_next"
-builtins.bool"builtins.bool*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination0:builtins.property`z310z311z312z313z314*—
-next_num$flask_sqlalchemy.Pagination.next_num"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination0:builtins.property`z310z311z312z313z314*·
+self(*
+mapper (
+*
+clause (
+r
+app0˝
+	BaseQuery"sqlalchemy.orm.query.Query*<
 
-iter_pages&flask_sqlalchemy.Pagination.iter_pages"¢
-4typing.Generator[Union[builtins.int,None],None,None]D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None
-None
-None"typing.Generator*®
-selfù
-0flask_sqlalchemy.Pagination[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.Pagination*-
-	left_edge
-builtins.int"builtins.int *0
-left_current
-builtins.int"builtins.int *1
-right_current
-builtins.int"builtins.int *.
+get_or_404*
 
-right_edge
-builtins.int"builtins.int z310z311z312z313z314Pj310j311j312j313j314r≠
-query!flask_sqlalchemy.Pagination.queryÁ
-;Union[flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T],None]õ
-/flask_sqlalchemy.BaseQuery[flask_sqlalchemy._T]L
-flask_sqlalchemy._T"
-builtins.object"builtins.object"builtins.object"flask_sqlalchemy.BaseQuery
-None*310*311*312*313*314r_
-page flask_sqlalchemy.Pagination.page
-builtins.int"builtins.int*310*311*312*313*314rg
-per_page$flask_sqlalchemy.Pagination.per_page
-builtins.int"builtins.int*310*311*312*313*314râ
-total!flask_sqlalchemy.Pagination.totalD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rL
-items!flask_sqlalchemy.Pagination.items
-Any*310*311*312*313*314í*
+self(*
+ident(*
+description (
+*1
+first_or_404*
 
-SQLAlchemyflask_sqlalchemy.SQLAlchemy"builtins.object*«
-__init__$flask_sqlalchemy.SQLAlchemy.__init__"
-None*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *8
-use_native_unicode
-builtins.bool"builtins.bool *r
-session_options[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-metadata[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-query_class
-Any *
-model_class
-Any *q
-engine_options[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*j
-metadata$flask_sqlalchemy.SQLAlchemy.metadata*
-self0:builtins.property`z310z311z312z313z314*û
-create_scoped_session1flask_sqlalchemy.SQLAlchemy.create_scoped_session"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*j
-options[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*l
-create_session*flask_sqlalchemy.SQLAlchemy.create_session*
+self(*
+description (
+*a
+paginate*
+
+self(*
+page (
+*
+per_page (
+*
+	error_out (*
+max_per_page (
+PÈ
+
+Pagination"builtins.object*[
+__init__*
+
+self(*
+query(*
+
+page(*
+per_page(*
+total(*
+items(*,
+pages*
+
+self(0:builtins.property`*'
+prev*
+
+self(*
+	error_out (*/
+prev_num*
+
+self(0:builtins.property`*/
+has_prev*
+
+self(0:builtins.property`*'
+next*
+
+self(*
+	error_out (*/
+has_next*
+
+self(0:builtins.property`*/
+next_num*
+
+self(0:builtins.property`*n
+
+iter_pages*
+
+self(*
+	left_edge (*
+left_current (*
+right_current (*
+
+right_edge (Pr	
+query0r
+page0r
+per_page0r	
+total0r	
+items0ó	
+
+SQLAlchemy"builtins.object*Æ
+__init__*
+
+self(*
+app (
+*
+use_native_unicode (*
+session_options (
+*
+metadata (
+*
+query_class (*
+model_class (*
+engine_options (
+*+
+metadata*
+self0:builtins.property`*6
+create_scoped_session*
+
+self(*
+options (
+*'
+create_session*
 self*
-optionsz310z311z312z313z314*≥
-make_declarative_base1flask_sqlalchemy.SQLAlchemy.make_declarative_base"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*
-model
-Any*k
-metadata[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*\
-init_app$flask_sqlalchemy.SQLAlchemy.init_app*
+options*D
+make_declarative_base*
+
+self(*
+model(*
+metadata (
+*
+init_app*
 self*
-appz310z311z312z313z314*
-apply_pool_defaults/flask_sqlalchemy.SQLAlchemy.apply_pool_defaults*
+app*5
+apply_pool_defaults*
 self*
 app*
-optionsz310z311z312z313z314*â
-apply_driver_hacks.flask_sqlalchemy.SQLAlchemy.apply_driver_hacks*
+options*@
+apply_driver_hacks*
 self*
 app*
 
 sa_url*
-optionsz310z311z312z313z314*f
-engine"flask_sqlalchemy.SQLAlchemy.engine*
-self0:builtins.property`z310z311z312z313z314*ı
-make_connector*flask_sqlalchemy.SQLAlchemy.make_connector"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ì
+options*)
+engine*
+self0:builtins.property`*9
+make_connector*
 
-get_engine&flask_sqlalchemy.SQLAlchemy.get_engine"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*z
-create_engine)flask_sqlalchemy.SQLAlchemy.create_engine*
+self(*
+app (
+*
+bind (
+*5
+
+get_engine*
+
+self(*
+app (
+*
+bind (
+*6
+create_engine*
 self*
 
 sa_url*
-engine_optsz310z311z312z313z314*à
-get_app#flask_sqlalchemy.SQLAlchemy.get_app"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*p
-reference_app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ó
-get_tables_for_bind/flask_sqlalchemy.SQLAlchemy.get_tables_for_bind"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ç
-	get_binds%flask_sqlalchemy.SQLAlchemy.get_binds"
-Any*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ø
+engine_opts*.
+get_app*
 
-create_all&flask_sqlalchemy.SQLAlchemy.create_all"
-None*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*(
-bind
-builtins.str"builtins.str *f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*´
-drop_all$flask_sqlalchemy.SQLAlchemy.drop_all"
-None*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*(
-bind
-builtins.str"builtins.str *f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*©
-reflect#flask_sqlalchemy.SQLAlchemy.reflect"
-None*D
-self:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*(
-bind
-builtins.str"builtins.str *f
-app[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*∂
-__getattr__'flask_sqlalchemy.SQLAlchemy.__getattr__"
-Any*<:
-flask_sqlalchemy.SQLAlchemy"flask_sqlalchemy.SQLAlchemy*
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rL
-Query!flask_sqlalchemy.SQLAlchemy.Query
-Any*310*311*312*313*314rf
-use_native_unicode.flask_sqlalchemy.SQLAlchemy.use_native_unicode
-Any*310*311*312*313*314ró
-session#flask_sqlalchemy.SQLAlchemy.sessionN
-%sqlalchemy.orm.scoping.scoped_session"%sqlalchemy.orm.scoping.scoped_session*310*311*312*313*314rÅ
-Model!flask_sqlalchemy.SQLAlchemy.Model<
-flask_sqlalchemy.model.Model"flask_sqlalchemy.model.Model*310*311*312*313*314rH
-appflask_sqlalchemy.SQLAlchemy.app
-Any*310*311*312*313*314u
-FSADeprecationWarning&flask_sqlalchemy.FSADeprecationWarning"builtins.DeprecationWarningj310j311j312j313j314P
-get_debug_queries"flask_sqlalchemy.get_debug_queriesz310z311z312z313z314I
-	get_stateflask_sqlalchemy.get_state*
-appz310z311z312z313z314*ä
-__path__flask_sqlalchemy.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*•
-__annotations__ flask_sqlalchemy.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*:
-utilsflask_sqlalchemy.utils *310*311*312*313*314*W
-models_committed!flask_sqlalchemy.models_committed
-Any*310*311*312*313*314*e
-before_models_committed(flask_sqlalchemy.before_models_committed
-Any*310*311*312*313*314
+self(*
+reference_app (
+*1
+get_tables_for_bind*
+
+self(*
+bind (
+*&
+	get_binds*
+
+self(*
+app (
+*5
+
+create_all*
+
+self(*
+bind (*
+app (
+*3
+drop_all*
+
+self(*
+bind (*
+app (
+*2
+reflect*
+
+self(*
+bind (*
+app (
+*
+__getattr__*(*(r	
+Query0r
+use_native_unicode0r
+session0r	
+Model0r
+app04
+FSADeprecationWarning"builtins.DeprecationWarning
+get_debug_queries
+	get_state*
+app*
+__path__0*
+__annotations__0*!
+utilsflask_sqlalchemy.utils *
+models_committed0*
+before_models_committed022"sqlalchemy.orm.query.Query22"type2222222$""flask_sqlalchemy.SignallingSession2"builtins.bool2"_typeshed.Incomplete222	2"builtins.object2"builtins.object22"flask_sqlalchemy.BaseQuery22 "flask_sqlalchemy.Pagination2222"builtins.int222"typing.Generator22"flask_sqlalchemy.SQLAlchemy2"builtins.str2'"%sqlalchemy.orm.scoping.scoped_session2"flask_sqlalchemy.model.Model2"builtins.list22"builtins.dict2

@@ -1,495 +1,279 @@
 
-sqlalchemy.orm.util›	
-InspectionAttr"sqlalchemy.orm.base.InspectionAttr"builtins.objectj310j311j312j313j314rz
-is_selectable0sqlalchemy.orm.base.InspectionAttr.is_selectable
-builtins.bool"builtins.bool*310*311*312*313*314r€
-is_aliased_class3sqlalchemy.orm.base.InspectionAttr.is_aliased_class
-builtins.bool"builtins.bool*310*311*312*313*314rv
-is_instance.sqlalchemy.orm.base.InspectionAttr.is_instance
-builtins.bool"builtins.bool*310*311*312*313*314rr
-	is_mapper,sqlalchemy.orm.base.InspectionAttr.is_mapper
-builtins.bool"builtins.bool*310*311*312*313*314rr
-	is_bundle,sqlalchemy.orm.base.InspectionAttr.is_bundle
-builtins.bool"builtins.bool*310*311*312*313*314rv
-is_property.sqlalchemy.orm.base.InspectionAttr.is_property
-builtins.bool"builtins.bool*310*311*312*313*314rx
-is_attribute/sqlalchemy.orm.base.InspectionAttr.is_attribute
-builtins.bool"builtins.bool*310*311*312*313*314r‚
-is_clause_element4sqlalchemy.orm.base.InspectionAttr.is_clause_element
-builtins.bool"builtins.bool*310*311*312*313*314re
-extension_type1sqlalchemy.orm.base.InspectionAttr.extension_type
-Any*310*311*312*313*314ƒ
-CascadeOptions"sqlalchemy.orm.util.CascadeOptions"builtins.frozenset*i
-__new__*sqlalchemy.orm.util.CascadeOptions.__new__*
+sqlalchemy.orm.utilë
+InspectionAttr"sqlalchemy.orm.base.InspectionAttr"builtins.objectr
+is_selectable0r
+is_aliased_class0r
+is_instance0r
+	is_mapper0r
+	is_bundle0r
+is_property0r
+is_attribute0r
+is_clause_element0r
+extension_type0á
+CascadeOptions"builtins.frozenset*$
+__new__*
 cls*
 
-value_listhz310z311z312z313z314*‚
-from_string.sqlalchemy.orm.util.CascadeOptions.from_string*
+value_listh*9
+from_string*
 cls*
-arg0:builtins.classmethodpz310z311z312z313z314j310j311j312j313j314r_
-save_update.sqlalchemy.orm.util.CascadeOptions.save_update
-Any*310*311*312*313*314rU
-delete)sqlalchemy.orm.util.CascadeOptions.delete
-Any*310*311*312*313*314re
-refresh_expire1sqlalchemy.orm.util.CascadeOptions.refresh_expire
-Any*310*311*312*313*314rS
-merge(sqlalchemy.orm.util.CascadeOptions.merge
-Any*310*311*312*313*314rW
-expunge*sqlalchemy.orm.util.CascadeOptions.expunge
-Any*310*311*312*313*314rc
-delete_orphan0sqlalchemy.orm.util.CascadeOptions.delete_orphan
-Any*310*311*312*313*314ï
+arg0:builtins.classmethodpr
+save_update0r
 
-ORMAdaptersqlalchemy.orm.util.ORMAdapter"!sqlalchemy.sql.util.ColumnAdapter*Ð
-__init__'sqlalchemy.orm.util.ORMAdapter.__init__"
-None*J
-self@
-sqlalchemy.orm.util.ORMAdapter"sqlalchemy.orm.util.ORMAdapter*
-entity
-Any*n
-equivalents[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *4
-adapt_required
-builtins.bool"builtins.bool *9
-allow_label_resolve
-builtins.bool"builtins.bool *6
-anonymize_labels
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rQ
-mapper%sqlalchemy.orm.util.ORMAdapter.mapper
-Any*310*311*312*313*314r_
-aliased_class,sqlalchemy.orm.util.ORMAdapter.aliased_class
-Any*310*311*312*313*314³	
-AliasedClass sqlalchemy.orm.util.AliasedClass"builtins.object*Ž
-__init__)sqlalchemy.orm.util.AliasedClass.__init__"
-None*N
-selfD
- sqlalchemy.orm.util.AliasedClass" sqlalchemy.orm.util.AliasedClass*
-mapped_class_or_ac
-Any*h
-alias[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-flat
-builtins.bool"builtins.bool *4
-adapt_on_names
-builtins.bool"builtins.bool *'
-with_polymorphic_mappers
-Any *
-with_polymorphic_discriminator[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+delete0r
+refresh_expire0r	
+merge0r
+expunge0r
+delete_orphan0Û
 
-base_alias[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-use_mapper_path
-builtins.bool"builtins.bool *;
-represents_outer_join
-builtins.bool"builtins.bool z310z311z312z313z314*Å
-__getattr__,sqlalchemy.orm.util.AliasedClass.__getattr__"
-Any*FD
- sqlalchemy.orm.util.AliasedClass" sqlalchemy.orm.util.AliasedClass*
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314
-AliasedInspsqlalchemy.orm.util.AliasedInsp"4sqlalchemy.orm.interfaces.ORMEntityColumnsClauseRole"+sqlalchemy.orm.interfaces.ORMFromClauseRole"-sqlalchemy.sql.traversals.MemoizedHasCacheKey""sqlalchemy.orm.base.InspectionAttr*ï
-__init__(sqlalchemy.orm.util.AliasedInsp.__init__"
-None*L
-selfB
-sqlalchemy.orm.util.AliasedInsp"sqlalchemy.orm.util.AliasedInsp*
-entity
-Any*
-	inspected
-Any*
+ORMAdapter"!sqlalchemy.sql.util.ColumnAdapter*Š
+__init__*
 
-selectable
-Any*
-name
-Any*%
-with_polymorphic_mappers
-Any*
-polymorphic_on
-Any*
-_base_alias
-Any*
-_use_mapper_path
-Any*
-adapt_on_names
-Any*"
-represents_outer_join
-Any*1
-nest_adapters
-builtins.bool"builtins.boolz310z311z312z313z314*j
-entity&sqlalchemy.orm.util.AliasedInsp.entity*
-self0:builtins.property`z310z311z312z313z314*k
-__clause_element__2sqlalchemy.orm.util.AliasedInsp.__clause_element__*
-selfz310z311z312z313z314*~
-entity_namespace0sqlalchemy.orm.util.AliasedInsp.entity_namespace*
-self0:builtins.property`z310z311z312z313z314*j
-class_&sqlalchemy.orm.util.AliasedInsp.class_*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rR
-mapper&sqlalchemy.orm.util.AliasedInsp.mapper
-Any*310*311*312*313*314rZ
+self(*
+entity(*
+equivalents (*
+adapt_required (*
+allow_label_resolve (*
+anonymize_labels (r
 
-selectable*sqlalchemy.orm.util.AliasedInsp.selectable
-Any*310*311*312*313*314rN
-name$sqlalchemy.orm.util.AliasedInsp.name
-Any*310*311*312*313*314rb
-polymorphic_on.sqlalchemy.orm.util.AliasedInsp.polymorphic_on
-Any*310*311*312*313*314rp
-represents_outer_join5sqlalchemy.orm.util.AliasedInsp.represents_outer_join
-Any*310*311*312*313*314rv
-with_polymorphic_mappers8sqlalchemy.orm.util.AliasedInsp.with_polymorphic_mappers
-Any*310*311*312*313*314r}
-is_aliased_class0sqlalchemy.orm.util.AliasedInsp.is_aliased_class
-builtins.bool"builtins.bool*310*311*312*313*314ß
-_WrapUserEntity#sqlalchemy.orm.util._WrapUserEntity"builtins.object*Ç
-__init__,sqlalchemy.orm.util._WrapUserEntity.__init__"
-None*T
-selfJ
-#sqlalchemy.orm.util._WrapUserEntity"#sqlalchemy.orm.util._WrapUserEntity*
-subject
-Anyz310z311z312z313z314*Ø
-__getattribute__4sqlalchemy.orm.util._WrapUserEntity.__getattribute__"
-Any*LJ
-#sqlalchemy.orm.util._WrapUserEntity"#sqlalchemy.orm.util._WrapUserEntity*
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rX
-subject+sqlalchemy.orm.util._WrapUserEntity.subject
-Any*310*311*312*313*314É
-LoaderCriteriaOption(sqlalchemy.orm.util.LoaderCriteriaOption"(sqlalchemy.orm.interfaces.CriteriaOption*ß
-__init__1sqlalchemy.orm.util.LoaderCriteriaOption.__init__"
-None*^
-selfT
-(sqlalchemy.orm.util.LoaderCriteriaOption"(sqlalchemy.orm.util.LoaderCriteriaOption*
-entity_or_base
-Any*
-where_criteria
-Any*1
-loader_only
-builtins.bool"builtins.bool *5
-include_aliases
-builtins.bool"builtins.bool *:
-propagate_to_loaders
-builtins.bool"builtins.bool *=
-track_closure_variables
-builtins.bool"builtins.bool z310z311z312z313z314*Æ
-'process_compile_state_replaced_entitiesPsqlalchemy.orm.util.LoaderCriteriaOption.process_compile_state_replaced_entities*
+mapper0r
+aliased_class0Æ
+AliasedClass"builtins.object*‹
+__init__*
+
+self(*
+mapped_class_or_ac(*
+alias (*
+name (*
+flat (*
+adapt_on_names (* 
+with_polymorphic_mappers (*&
+with_polymorphic_discriminator (*
+
+base_alias (*
+use_mapper_path (*
+represents_outer_join (*
+__getattr__*(*(ø
+AliasedInsp"4sqlalchemy.orm.interfaces.ORMEntityColumnsClauseRole"+sqlalchemy.orm.interfaces.ORMFromClauseRole"-sqlalchemy.sql.traversals.MemoizedHasCacheKey""sqlalchemy.orm.base.InspectionAttr*þ
+__init__*
+
+self(	*
+entity(*
+	inspected(*
+
+selectable(*
+
+name(*
+with_polymorphic_mappers(*
+polymorphic_on(*
+_base_alias(*
+_use_mapper_path(*
+adapt_on_names(*
+represents_outer_join(*
+nest_adapters(*)
+entity*
+self0:builtins.property`*
+__clause_element__*
+self*3
+entity_namespace*
+self0:builtins.property`*)
+class_*
+self0:builtins.property`r
+
+mapper0r
+
+selectable0r
+name0r
+polymorphic_on0r
+represents_outer_join0r
+with_polymorphic_mappers0r
+is_aliased_class0v
+_WrapUserEntity"builtins.object*'
+__init__*
+
+self(
+*
+subject(*
+__getattribute__*(
+*(r
+subject0Á
+LoaderCriteriaOption"(sqlalchemy.orm.interfaces.CriteriaOption*±
+__init__*
+
+self(*
+entity_or_base(*
+where_criteria(*
+loader_only (*
+include_aliases (*
+propagate_to_loaders (*
+track_closure_variables (*[
+'process_compile_state_replaced_entities*
 self*
 compile_state*
-mapper_entitiesz310z311z312z313z314*ö
-process_compile_state>sqlalchemy.orm.util.LoaderCriteriaOption.process_compile_state"
-None*^
-selfT
-(sqlalchemy.orm.util.LoaderCriteriaOption"(sqlalchemy.orm.util.LoaderCriteriaOption*
-compile_state
-Anyz310z311z312z313z314*ï
-get_global_criteria<sqlalchemy.orm.util.LoaderCriteriaOption.get_global_criteria"
-None*^
-selfT
-(sqlalchemy.orm.util.LoaderCriteriaOption"(sqlalchemy.orm.util.LoaderCriteriaOption*
+mapper_entities*:
+process_compile_state*
 
-attributes
-Anyz310z311z312z313z314j310j311j312j313j314re
-root_entity4sqlalchemy.orm.util.LoaderCriteriaOption.root_entity
-Any*310*311*312*313*314r[
-entity/sqlalchemy.orm.util.LoaderCriteriaOption.entity
-Any*310*311*312*313*314r”
-deferred_where_criteria@sqlalchemy.orm.util.LoaderCriteriaOption.deferred_where_criteria
-builtins.bool"builtins.bool*310*311*312*313*314rk
-where_criteria7sqlalchemy.orm.util.LoaderCriteriaOption.where_criteria
-Any*310*311*312*313*314rm
-include_aliases8sqlalchemy.orm.util.LoaderCriteriaOption.include_aliases
-Any*310*311*312*313*314rw
-propagate_to_loaders=sqlalchemy.orm.util.LoaderCriteriaOption.propagate_to_loaders
-Any*310*311*312*313*314¶
-Bundlesqlalchemy.orm.util.Bundle".sqlalchemy.orm.interfaces.ORMColumnsClauseRole"2sqlalchemy.sql.annotation.SupportsCloneAnnotations"-sqlalchemy.sql.traversals.MemoizedHasCacheKey""sqlalchemy.orm.base.InspectionAttr*Î
-__init__#sqlalchemy.orm.util.Bundle.__init__"
-None*B
-self8
-sqlalchemy.orm.util.Bundle"sqlalchemy.orm.util.Bundle*
-name
-Any*
-exprs
-Any*
-kw
-Anyz310z311z312z313z314*e
-mapper!sqlalchemy.orm.util.Bundle.mapper*
-self0:builtins.property`z310z311z312z313z314*e
-entity!sqlalchemy.orm.util.Bundle.entity*
-self0:builtins.property`z310z311z312z313z314*y
-entity_namespace+sqlalchemy.orm.util.Bundle.entity_namespace*
-self0:builtins.property`z310z311z312z313z314*f
-__clause_element__-sqlalchemy.orm.util.Bundle.__clause_element__*
-selfz310z311z312z313z314*g
-clauses"sqlalchemy.orm.util.Bundle.clauses*
-self0:builtins.property`z310z311z312z313z314*V
-label sqlalchemy.orm.util.Bundle.label*
+self(*
+compile_state(*5
+get_global_criteria*
+
+self(*
+
+attributes(r
+root_entity0r
+
+entity0r
+deferred_where_criteria0r
+where_criteria0r
+include_aliases0r
+propagate_to_loaders0»
+Bundle".sqlalchemy.orm.interfaces.ORMColumnsClauseRole"2sqlalchemy.sql.annotation.SupportsCloneAnnotations"-sqlalchemy.sql.traversals.MemoizedHasCacheKey""sqlalchemy.orm.base.InspectionAttr*;
+__init__*
+
+self(*
+
+name(*
+exprs(*
+kw(*)
+mapper*
+self0:builtins.property`*)
+entity*
+self0:builtins.property`*3
+entity_namespace*
+self0:builtins.property`*
+__clause_element__*
+self**
+clauses*
+self0:builtins.property`*
+label*
 self*
-namez310z311z312z313z314*Œ
-create_row_processor/sqlalchemy.orm.util.Bundle.create_row_processor*
+name*B
+create_row_processor*
 self*	
 query*	
 procs*
 
-labelsz310z311z312z313z314j310j311j312j313j314rr
-single_entity(sqlalchemy.orm.util.Bundle.single_entity
-builtins.bool"builtins.bool*310*311*312*313*314rz
-is_clause_element,sqlalchemy.orm.util.Bundle.is_clause_element
-builtins.bool"builtins.bool*310*311*312*313*314rj
-	is_mapper$sqlalchemy.orm.util.Bundle.is_mapper
-builtins.bool"builtins.bool*310*311*312*313*314rx
-is_aliased_class+sqlalchemy.orm.util.Bundle.is_aliased_class
-builtins.bool"builtins.bool*310*311*312*313*314rj
-	is_bundle$sqlalchemy.orm.util.Bundle.is_bundle
-builtins.bool"builtins.bool*310*311*312*313*314rI
-namesqlalchemy.orm.util.Bundle.name
-Any*310*311*312*313*314rK
-exprs sqlalchemy.orm.util.Bundle.exprs
-Any*310*311*312*313*314rC
-csqlalchemy.orm.util.Bundle.c
-Any*310*311*312*313*314rO
-columns"sqlalchemy.orm.util.Bundle.columns
-Any*310*311*312*313*314»
-_ORMJoinsqlalchemy.orm.util._ORMJoin"sqlalchemy.sql.selectable.Join*Š
-__init__%sqlalchemy.orm.util._ORMJoin.__init__"
-None*F
-self<
-sqlalchemy.orm.util._ORMJoin"sqlalchemy.orm.util._ORMJoin*
-left
-Any*
-right
-Any*k
-onclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *-
-isouter
-builtins.bool"builtins.bool **
-full
-builtins.bool"builtins.bool *m
+labelsr
+single_entity0r
+is_clause_element0r
+	is_mapper0r
+is_aliased_class0r
+	is_bundle0r
+name0r	
+exprs0r
+c0r
+columns0Î
+_ORMJoin"sqlalchemy.sql.selectable.Join*¤
+__init__*
 
-_left_memo[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-_right_memo[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-_extra_criteria
-Any z310z311z312z313z314*à
-join!sqlalchemy.orm.util._ORMJoin.join"
-Any*F
-self<
-sqlalchemy.orm.util._ORMJoin"sqlalchemy.orm.util._ORMJoin*
-right
-Any*k
-onclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *-
-isouter
-builtins.bool"builtins.bool **
-full
-builtins.bool"builtins.bool *o
-join_to_left[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*»
-	outerjoin&sqlalchemy.orm.util._ORMJoin.outerjoin"
-Any*F
-self<
-sqlalchemy.orm.util._ORMJoin"sqlalchemy.orm.util._ORMJoin*
-right
-Any*k
-onclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-full
-builtins.bool"builtins.bool *o
-join_to_left[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314r_
-__visit_name__+sqlalchemy.orm.util._ORMJoin.__visit_name__
-Any*310*311*312*313*314rt
-inherit_cache*sqlalchemy.orm.util._ORMJoin.inherit_cache
-builtins.bool"builtins.bool*310*311*312*313*314rS
-onclause%sqlalchemy.orm.util._ORMJoin.onclause
-Any*310*311*312*313*314f
+self(*
+
+left(*
+right(*
+onclause (*
+isouter (*
+full (*
+
+_left_memo (*
+_right_memo (*
+_extra_criteria (*h
+join*
+
+self(*
+right(*
+onclause (*
+isouter (*
+full (*
+join_to_left (*\
+	outerjoin*
+
+self(*
+right(*
+onclause (*
+full (*
+join_to_left (r
+__visit_name__0r
+inherit_cache0r
+onclause0M
 _class_to_mapper$sqlalchemy.orm.base._class_to_mapper*
-class_or_mapperz310z311z312z313z314h
+class_or_mapperO
 attribute_str!sqlalchemy.orm.base.attribute_str*
 instance*
-	attributez310z311z312z313z314˜
-class_mapper sqlalchemy.orm.base.class_mapper"
-Any*
-class_
-Any*/
-	configure
-builtins.bool"builtins.bool z310z311z312z313z314W
+	attributeS
+class_mapper sqlalchemy.orm.base.class_mapper*
+class_(*
+	configure (>
 instance_str sqlalchemy.orm.base.instance_str*
-instancez310z311z312z313z314Y
+instance@
 object_mapper!sqlalchemy.orm.base.object_mapper*
-instancez310z311z312z313z314W
+instance>
 object_state sqlalchemy.orm.base.object_state*
-instancez310z311z312z313z314q
+instanceX
 state_attribute_str'sqlalchemy.orm.base.state_attribute_str*	
 state*
-	attributez310z311z312z313z314Z
+	attributeA
 state_class_str#sqlalchemy.orm.base.state_class_str*	
-statez310z311z312z313z314N
+state5
 	state_strsqlalchemy.orm.base.state_str*	
-statez310z311z312z313z314ï
-polymorphic_union%sqlalchemy.orm.util.polymorphic_union"
-Any*
-	table_map
-Any*
-typecolname
-Any*-
-	aliasname
-builtins.str"builtins.str *0
+state`
+polymorphic_union*
+	table_map(*
+typecolname(*
+	aliasname (*
 
-cast_nulls
-builtins.bool"builtins.bool z310z311z312z313z314_
-identity_key sqlalchemy.orm.util.identity_key*
+cast_nulls ($
+identity_key*
 args*
 
-kwargsz310z311z312z313z314“
-aliasedsqlalchemy.orm.util.aliased"
-Any*
-element
-Any*h
-alias[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-flat
-builtins.bool"builtins.bool *4
-adapt_on_names
-builtins.bool"builtins.bool z310z311z312z313z314Ó
-with_polymorphic$sqlalchemy.orm.util.with_polymorphic"D
- sqlalchemy.orm.util.AliasedClass" sqlalchemy.orm.util.AliasedClass*
-base
-Any*
-classes
-Any*0
+kwargs]
+aliased*
+element(*
+alias (*
+name (*
+flat (*
+adapt_on_names (Ø
+with_polymorphic*
 
-selectable
-builtins.bool"builtins.bool **
-flat
-builtins.bool"builtins.bool *q
-polymorphic_on[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *-
-aliased
-builtins.bool"builtins.bool *4
-adapt_on_names
-builtins.bool"builtins.bool */
-	innerjoin
-builtins.bool"builtins.bool *6
-_use_mapper_path
-builtins.bool"builtins.bool *r
-_existing_alias[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314¢
-joinsqlalchemy.orm.util.join"
-Any*
-left
-Any*
-right
-Any*k
-onclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *-
-isouter
-builtins.bool"builtins.bool **
-full
-builtins.bool"builtins.bool *o
-join_to_left[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314ý
-	outerjoinsqlalchemy.orm.util.outerjoin"
-Any*
-left
-Any*
-right
-Any*k
-onclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-full
-builtins.bool"builtins.bool *o
-join_to_left[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314ê
-with_parentsqlalchemy.orm.util.with_parent"
-Any*
-instance
-Any*
-prop
-Any*n
-from_entity[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314V
-has_identity sqlalchemy.orm.util.has_identity*
-object_z310z311z312z313z314T
-was_deletedsqlalchemy.orm.util.was_deleted*
-object_z310z311z312z313z314c
-randomize_unitofwork(sqlalchemy.orm.util.randomize_unitofwork"
-Nonez310z311z312z313z314*¨
-__annotations__#sqlalchemy.orm.util.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*:
-sql_basesqlalchemy.sql.base *310*311*312*313*314*:
-sql_utilsqlalchemy.sql.util *310*311*312*313*314*}
+base(*
+classes(*
 
-_never_setsqlalchemy.orm.base._never_set6
-builtins.frozenset[Any]
-Any"builtins.frozenset*310*311*312*313*314*{
-	_none_setsqlalchemy.orm.base._none_set6
-builtins.frozenset[Any]
-Any"builtins.frozenset*310*311*312*313*314*R
-all_cascades sqlalchemy.orm.util.all_cascades
-Any*310*311*312*313*314
+selectable (*
+flat (*
+polymorphic_on (*
+aliased (*
+adapt_on_names (*
+	innerjoin (*
+_use_mapper_path (*
+_existing_alias (h
+join*
+
+left(*
+right(*
+onclause (*
+isouter (*
+full (*
+join_to_left (\
+	outerjoin*
+
+left(*
+right(*
+onclause (*
+full (*
+join_to_left (@
+with_parent*
+instance(*
+
+prop(*
+from_entity (
+has_identity*
+object_
+was_deleted*
+object_
+randomize_unitofwork*
+__annotations__0*!
+sql_basesqlalchemy.sql.base *!
+sql_utilsqlalchemy.sql.util *.
+
+_never_setsqlalchemy.orm.base._never_set0*,
+	_none_setsqlalchemy.orm.base._none_set0*
+all_cascades02"builtins.bool222 "sqlalchemy.orm.util.ORMAdapter2"_typeshed.Incomplete2222"" sqlalchemy.orm.util.AliasedClass2"builtins.str2!"sqlalchemy.orm.util.AliasedInsp2%"#sqlalchemy.orm.util._WrapUserEntity2*"(sqlalchemy.orm.util.LoaderCriteriaOption2"sqlalchemy.orm.util.Bundle2"sqlalchemy.orm.util._ORMJoin2"builtins.dict22"builtins.frozenset2

@@ -1,122 +1,71 @@
 
-fpdf.actionsﬂ
-Actionfpdf.actions.Action"abc.ABC*¢
-__init__fpdf.actions.Action.__init__"
-None*4
-self*
-fpdf.actions.Action"fpdf.actions.Action*û
-next_actionä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None z310z311z312z313z314*Ø
-	serializefpdf.actions.Action.serialize"
-builtins.str"builtins.str*4
-self*
-fpdf.actions.Action"fpdf.actions.Action0:abc.abstractmethod@z310z311z312z313z314j310j311j312j313j314r∆
-nextfpdf.actions.Action.nextä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None*310*311*312*313*314£
-	URIActionfpdf.actions.URIAction"fpdf.actions.Action*“
-__init__fpdf.actions.URIAction.__init__"
-None*:
-self0
-fpdf.actions.URIAction"fpdf.actions.URIAction*%
-uri
-builtins.str"builtins.str*û
-next_actionä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None z310z311z312z313z314*†
-	serialize fpdf.actions.URIAction.serialize"
-builtins.str"builtins.str*:
-self0
-fpdf.actions.URIAction"fpdf.actions.URIActionz310z311z312z313z314j310j311j312j313j314rX
-urifpdf.actions.URIAction.uri
-builtins.str"builtins.str*310*311*312*313*314Õ
-NamedActionfpdf.actions.NamedAction"fpdf.actions.Action*‡
-__init__!fpdf.actions.NamedAction.__init__"
-None*>
-self4
-fpdf.actions.NamedAction"fpdf.actions.NamedAction*-
-action_name
-builtins.str"builtins.str*û
-next_actionä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None z310z311z312z313z314*¶
-	serialize"fpdf.actions.NamedAction.serialize"
-builtins.str"builtins.str*>
-self4
-fpdf.actions.NamedAction"fpdf.actions.NamedActionz310z311z312z313z314j310j311j312j313j314rj
-action_name$fpdf.actions.NamedAction.action_name
-builtins.str"builtins.str*310*311*312*313*314Ø
+fpdf.actions}
+Action"abc.ABC*-
+__init__*
 
-GoToActionfpdf.actions.GoToAction"fpdf.actions.Action*¡
-__init__ fpdf.actions.GoToAction.__init__"
-None*<
-self2
-fpdf.actions.GoToAction"fpdf.actions.GoToAction*
-dest
-Any*û
-next_actionä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None z310z311z312z313z314*£
-	serialize!fpdf.actions.GoToAction.serialize"
-builtins.str"builtins.str*<
-self2
-fpdf.actions.GoToAction"fpdf.actions.GoToActionz310z311z312z313z314j310j311j312j313j314rp
-destfpdf.actions.GoToAction.dest1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314
-GoToRemoteActionfpdf.actions.GoToRemoteAction"fpdf.actions.Action*˚
-__init__&fpdf.actions.GoToRemoteAction.__init__"
-None*H
-self>
-fpdf.actions.GoToRemoteAction"fpdf.actions.GoToRemoteAction*&
-file
-builtins.str"builtins.str*
-dest
-Any*û
-next_actionä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None z310z311z312z313z314*µ
-	serialize'fpdf.actions.GoToRemoteAction.serialize"
-builtins.str"builtins.str*H
-self>
-fpdf.actions.GoToRemoteAction"fpdf.actions.GoToRemoteActionz310z311z312z313z314j310j311j312j313j314ra
-file"fpdf.actions.GoToRemoteAction.file
-builtins.str"builtins.str*310*311*312*313*314rv
-dest"fpdf.actions.GoToRemoteAction.dest1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314¡
-LaunchActionfpdf.actions.LaunchAction"fpdf.actions.Action*‹
-__init__"fpdf.actions.LaunchAction.__init__"
-None*@
-self6
-fpdf.actions.LaunchAction"fpdf.actions.LaunchAction*&
-file
-builtins.str"builtins.str*û
-next_actionä
-.Union[fpdf.syntax.PDFObject,builtins.str,None].
-fpdf.syntax.PDFObject"fpdf.syntax.PDFObject
-builtins.str"builtins.str
-None z310z311z312z313z314*©
-	serialize#fpdf.actions.LaunchAction.serialize"
-builtins.str"builtins.str*@
-self6
-fpdf.actions.LaunchAction"fpdf.actions.LaunchActionz310z311z312z313z314j310j311j312j313j314r]
-filefpdf.actions.LaunchAction.file
-builtins.str"builtins.str*310*311*312*313*314*°
-__annotations__fpdf.actions.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+next_action (*1
+	serialize*
+
+self(0:abc.abstractmethod@r
+next0~
+	URIAction"fpdf.actions.Action*8
+__init__*
+
+self(*	
+uri(*
+next_action (*
+	serialize*
+
+self(r
+uri0ê
+NamedAction"fpdf.actions.Action*@
+__init__*
+
+self(*
+action_name(*
+next_action (*
+	serialize*
+
+self(r
+action_name0Å
+
+GoToAction"fpdf.actions.Action*9
+__init__*
+
+self(*
+
+dest(	*
+next_action (*
+	serialize*
+
+self(r
+dest0
+ù
+GoToRemoteAction"fpdf.actions.Action*E
+__init__*
+
+self(*
+
+file(*
+
+dest(	*
+next_action (*
+	serialize*
+
+self(r
+file0r
+dest0
+É
+LaunchAction"fpdf.actions.Action*9
+__init__*
+
+self(*
+
+file(*
+next_action (*
+	serialize*
+
+self(r
+file0*
+__annotations__022"fpdf.actions.Action2"fpdf.syntax.PDFObject2"builtins.str222"fpdf.actions.URIAction2"fpdf.actions.NamedAction2"fpdf.actions.GoToAction22"_typeshed.Incomplete2	2"fpdf.actions.GoToRemoteAction2"fpdf.actions.LaunchAction2"builtins.dict2	

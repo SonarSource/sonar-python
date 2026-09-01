@@ -1,108 +1,73 @@
 
-"serial.urlhandler.protocol_rfc2217¥
-Serialserial.rfc2217.Serial"serial.serialutil.SerialBase*
-openserial.rfc2217.Serial.open"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serialz310z311z312z313z314*†
-from_urlserial.rfc2217.Serial.from_url"`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*%
-url
-builtins.str"builtins.strz310z311z312z313z314*¶
+"serial.urlhandler.protocol_rfc2217Ú
+Serialserial.rfc2217.Serial"serial.serialutil.SerialBase*
+open*
 
-in_waiting serial.rfc2217.Serial.in_waiting"
-builtins.int"builtins.int*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial0:builtins.property`z310z311z312z313z314*Á
-readserial.rfc2217.Serial.read" 
-builtins.bytes"builtins.bytes*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*(
-size
-builtins.int"builtins.int z310z311z312z313z314*æ
-writeserial.rfc2217.Serial.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*64
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*é
-writeserial.rfc2217.Serial.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*42
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*›
-reset_input_buffer(serial.rfc2217.Serial.reset_input_buffer"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serialz310z311z312z313z314*
-reset_output_buffer)serial.rfc2217.Serial.reset_output_buffer"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serialz310z311z312z313z314*ª
-ctsserial.rfc2217.Serial.cts"
-builtins.bool"builtins.bool*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial0:builtins.property`z310z311z312z313z314*ª
-dsrserial.rfc2217.Serial.dsr"
-builtins.bool"builtins.bool*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial0:builtins.property`z310z311z312z313z314*¨
-riserial.rfc2217.Serial.ri"
-builtins.bool"builtins.bool*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial0:builtins.property`z310z311z312z313z314*¨
-cdserial.rfc2217.Serial.cd"
-builtins.bool"builtins.bool*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial0:builtins.property`z310z311z312z313z314*÷
-telnet_send_option(serial.rfc2217.Serial.telnet_send_option"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*,
-action 
-builtins.bytes"builtins.bytes*,
-option 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Š
-rfc2217_send_subnegotiation1serial.rfc2217.Serial.rfc2217_send_subnegotiation"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*,
-option 
-builtins.bytes"builtins.bytes*-
-value 
-builtins.bytes"builtins.bytes z310z311z312z313z314*È
-rfc2217_send_purge(serial.rfc2217.Serial.rfc2217_send_purge"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*+
-value 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Ê
-rfc2217_set_control)serial.rfc2217.Serial.rfc2217_set_control"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serial*+
-value 
-builtins.bytes"builtins.bytesz310z311z312z313z314*©
-rfc2217_flow_server_ready/serial.rfc2217.Serial.rfc2217_flow_server_ready"
-None*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serialz310z311z312z313z314*©
-get_modem_state%serial.rfc2217.Serial.get_modem_state"
-builtins.int"builtins.int*8
-self.
-serial.rfc2217.Serial"serial.rfc2217.Serialz310z311z312z313z314j310j311j312j313j314r‹
-loggerserial.rfc2217.Serial.loggerJ
-Union[logging.Logger,None] 
-logging.Logger"logging.Logger
-None*310*311*312*313*314*·
-__annotations__2serial.urlhandler.protocol_rfc2217.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*#
+from_url*
+
+self(*	
+url(*1
+
+in_waiting*
+
+self(0:builtins.property`*"
+read*
+
+self(*
+size (*#
+write*
+
+self(*(z310z311*(
+write*
+
+self(*(	z312z313z314*"
+reset_input_buffer*
+
+self(*#
+reset_output_buffer*
+
+self(**
+cts
+*
+
+self(0:builtins.property`**
+dsr
+*
+
+self(0:builtins.property`*)
+ri
+*
+
+self(0:builtins.property`*)
+cd
+*
+
+self(0:builtins.property`*>
+telnet_send_option*
+
+self(*
+action(*
+option(*H
+rfc2217_send_subnegotiation*
+
+self(*
+option(*
+value (*/
+rfc2217_send_purge*
+
+self(*
+value(*0
+rfc2217_set_control*
+
+self(*
+value(*)
+rfc2217_flow_server_ready*
+
+self(*
+get_modem_state*
+
+self(r
+
+logger0*
+__annotations__022"serial.rfc2217.Serial2"builtins.str2"builtins.int222"builtins.bytes222"typing_extensions.Buffer2"_collections_abc.Buffer2"builtins.bool2"logging.Logger2222"builtins.dict2

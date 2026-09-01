@@ -1,199 +1,63 @@
 
-pandas.core.algorithms⁄
-value_counts#pandas.core.algorithms.value_counts"D
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series*–
-values√
-ôUnion[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],builtins.list[Any],builtins.tuple[Any]]ƒ
-kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
-`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.IndexD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarray"pandas._typing.AnyArrayLike,
-builtins.list[Any]
-Any"builtins.list.
-builtins.tuple[Any]
-Any"builtins.tuple**
-sort
-builtins.bool"builtins.bool */
-	ascending
-builtins.bool"builtins.bool */
-	normalize
-builtins.bool"builtins.bool *P
-binsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *,
-dropna
-builtins.bool"builtins.bool Ω
-takepandas.core.algorithms.take"
-Any*
-arr
-Any*˜
-indicesÈ
-ºTypeAlias[Union[typing.Sequence[builtins.int],typing.Sequence[numpy.integer[Any]],TypeAlias[numpy.ndarray[TypeAlias[builtins.tuple[Any]],numpy.dtype[numpy._typing._array_like._ScalarT]]]]]â
-±Union[typing.Sequence[builtins.int],typing.Sequence[numpy.integer[Any]],TypeAlias[numpy.ndarray[TypeAlias[builtins.tuple[Any]],numpy.dtype[numpy._typing._array_like._ScalarT]]]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequenced
-#typing.Sequence[numpy.integer[Any]],
-numpy.integer[Any]
-Any"numpy.integer"typing.Sequenceö
-hTypeAlias[numpy.ndarray[TypeAlias[builtins.tuple[Any]],numpy.dtype[numpy._typing._array_like._ScalarT]]]à
-]numpy.ndarray[TypeAlias[builtins.tuple[Any]],numpy.dtype[numpy._typing._array_like._ScalarT]]r
-TypeAlias[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"numpy._typing._shape._AnyShape£
-/numpy.dtype[numpy._typing._array_like._ScalarT]c
-"numpy._typing._array_like._ScalarT,
-numpy.generic[Any]
-Any"numpy.generic"numpy.generic"numpy.dtype"numpy.ndarray"!numpy._typing._array_like.NDArray"pandas._typing.TakeIndexer*µ
-axis®
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int *0
+pandas.core.algorithmsp
+value_counts*
+values(	*
+sort (
+*
+	ascending (
+*
+	normalize (
+*
+bins (*
+dropna (
+X
+take*	
+arr(*
+indices(*
+axis (*
 
-allow_fill
-builtins.bool"builtins.bool *
+allow_fill (
+*
 
-fill_value
-Any "µ
-uniquepandas.core.algorithms.uniqueÏ
-uniquepandas.core.algorithms.unique"P
-&pandas.core.indexes.period.PeriodIndex"&pandas.core.indexes.period.PeriodIndex*\
-valuesP
-&pandas.core.indexes.period.PeriodIndex"&pandas.core.indexes.period.PeriodIndex0:typing.overloadX§
-uniquepandas.core.algorithms.unique"l
-2pandas.core.indexes.category.CategoricalIndex[Any]
-Any"-pandas.core.indexes.category.CategoricalIndex*x
-valuesl
-2pandas.core.indexes.category.CategoricalIndex[Any]
-Any"-pandas.core.indexes.category.CategoricalIndex0:typing.overloadX—
-uniquepandas.core.algorithms.unique"Å
-Dpandas.core.indexes.interval.IntervalIndex[pandas._typing.IntervalT]å
-pandas._typing.IntervalTN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.Interval"pandas._libs.interval.Interval"*pandas.core.indexes.interval.IntervalIndex*é
-valuesÅ
-Dpandas.core.indexes.interval.IntervalIndex[pandas._typing.IntervalT]å
-pandas._typing.IntervalTN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.Interval"pandas._libs.interval.Interval"*pandas.core.indexes.interval.IntervalIndex0:typing.overloadXπ
-uniquepandas.core.algorithms.unique"û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*Z
-valuesN
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Index0:typing.overloadX¸
-uniquepandas.core.algorithms.unique"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*d
-valuesX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical0:typing.overloadXÈ
-uniquepandas.core.algorithms.unique"ÿ
-aUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pandas.core.arrays.base.ExtensionArray]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayP
-&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray*P
-valuesD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series0:typing.overloadXã
-uniquepandas.core.algorithms.unique"û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*´
-valuesû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray0:typing.overloadXÏ
-uniquepandas.core.algorithms.unique"P
-&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray*\
-valuesP
-&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray0:typing.overloadX"•
-	factorize pandas.core.algorithms.factorize·
-	factorize pandas.core.algorithms.factorize"¥
-nTuple[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*´
-valuesû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray**
-sort
-builtins.bool"builtins.bool *5
-use_na_sentinel
-builtins.bool"builtins.bool *U
-	size_hintD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadX≈
-	factorize pandas.core.algorithms.factorize"”
-^Tuple[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pandas.core.indexes.base.Index[Any]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayN
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Index*
-values„
-IUnion[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any]]N
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.IndexD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series**
-sort
-builtins.bool"builtins.bool *5
-use_na_sentinel
-builtins.bool"builtins.bool *U
-	size_hintD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadX…
-	factorize pandas.core.algorithms.factorize"‰
-eTuple[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pandas.core.arrays.categorical.Categorical]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*d
-valuesX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical**
-sort
-builtins.bool"builtins.bool *5
-use_na_sentinel
-builtins.bool"builtins.bool *U
-	size_hintD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadX*í
-__annotations__&pandas.core.algorithms.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-npnumpy 
+fill_value ("Ä
+unique-
+unique*
+values(0:typing.overloadX-
+unique*
+values(0:typing.overloadX-
+unique*
+values(0:typing.overloadX-
+unique!*
+values(0:typing.overloadX-
+unique"*
+values("0:typing.overloadX-
+unique$*
+values(0:typing.overloadX-
+unique!*
+values(!0:typing.overloadX-
+unique#*
+values(#0:typing.overloadX"œ
+	factorizej
+	factorize%*
+values(!*
+sort (
+*
+use_na_sentinel (
+*
+	size_hint (0:typing.overloadXj
+	factorize&*
+values('*
+sort (
+*
+use_na_sentinel (
+*
+	size_hint (0:typing.overloadXj
+	factorize(*
+values("*
+sort (
+*
+use_na_sentinel (
+*
+	size_hint (0:typing.overloadX*
+__annotations__0**
+npnumpy 22"pandas.core.series.Series22#"pandas.core.indexes.base.Index22"numpy.ndarray2222""pandas._typing.AnyArrayLike22"builtins.list22"builtins.tuple2222"builtins.bool2"builtins.int2222"typing.Sequence22"numpy.integer22"typing.Sequence22%"numpy._typing._shape._AnyShape22"numpy.generic22"numpy.generic22"numpy.dtype22"numpy.ndarray22("!numpy._typing._array_like.NDArray2222!"pandas._typing.TakeIndexer22	2222("&pandas.core.indexes.period.PeriodIndex22"-pandas.core.indexes.category.CategoricalIndex22#"pandas._libs.interval.Interval22%"pandas._libs.interval.Interval22/"*pandas.core.indexes.interval.IntervalIndex22"numpy.dtype22"numpy.ndarray2 2,"*pandas.core.arrays.categorical.Categorical2("&pandas.core.arrays.base.ExtensionArray22!#22!!22!2222!"2"builtins.str2"builtins.dict2)

@@ -1,111 +1,79 @@
 
-'pika.adapters.utils.connection_workflow…
-AMQPConnectorException>pika.adapters.utils.connection_workflow.AMQPConnectorException"builtins.Exceptionj310j311j312j313j314·
-AMQPConnectorStackTimeoutApika.adapters.utils.connection_workflow.AMQPConnectorStackTimeout">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionj310j311j312j313j314­
-AMQPConnectorAborted<pika.adapters.utils.connection_workflow.AMQPConnectorAborted">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionj310j311j312j313j314³
-AMQPConnectorWrongState?pika.adapters.utils.connection_workflow.AMQPConnectorWrongState">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionj310j311j312j313j314¥
-AMQPConnectorPhaseErrorBaseCpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase">pika.adapters.utils.connection_workflow.AMQPConnectorException*¾
-__init__Lpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase.__init__"
-None*•
-selfŠ
-Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase*
-	exception
-Any*
-args
-Anyz310z311z312z313z314j310j311j312j313j314r¦
-	exceptionMpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase.exception1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314È
-AMQPConnectorSocketConnectErrorGpika.adapters.utils.connection_workflow.AMQPConnectorSocketConnectError"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBasej310j311j312j313j314Ê
- AMQPConnectorTransportSetupErrorHpika.adapters.utils.connection_workflow.AMQPConnectorTransportSetupError"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBasej310j311j312j313j314È
-AMQPConnectorAMQPHandshakeErrorGpika.adapters.utils.connection_workflow.AMQPConnectorAMQPHandshakeError"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBasej310j311j312j313j314¿
-AMQPConnectionWorkflowAbortedEpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowAborted">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionj310j311j312j313j314Å
- AMQPConnectionWorkflowWrongStateHpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowWrongState">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionj310j311j312j313j314®
-AMQPConnectionWorkflowFailedDpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowFailed">pika.adapters.utils.connection_workflow.AMQPConnectorException*Â
-__init__Mpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowFailed.__init__"
-None*—
-selfŒ
-Dpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowFailed"Dpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowFailed*
+'pika.adapters.utils.connection_workflow,
+AMQPConnectorException"builtins.Exception[
+AMQPConnectorStackTimeout">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionV
+AMQPConnectorAborted">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionY
+AMQPConnectorWrongState">pika.adapters.utils.connection_workflow.AMQPConnectorException£
+AMQPConnectorPhaseErrorBase">pika.adapters.utils.connection_workflow.AMQPConnectorException*5
+__init__*
 
-exceptions
-Any*
-args
-Anyz310z311z312z313z314j310j311j312j313j314r©
+self(*
+	exception(*
 
-exceptionsOpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowFailed.exceptions1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314š
-AMQPConnector5pika.adapters.utils.connection_workflow.AMQPConnector"builtins.object*•
-__init__>pika.adapters.utils.connection_workflow.AMQPConnector.__init__"
-None*x
-selfn
-5pika.adapters.utils.connection_workflow.AMQPConnector"5pika.adapters.utils.connection_workflow.AMQPConnector*
-conn_factory
-Any*
-nbio
-Anyz310z311z312z313z314*«
-start;pika.adapters.utils.connection_workflow.AMQPConnector.start"
-None*x
-selfn
-5pika.adapters.utils.connection_workflow.AMQPConnector"5pika.adapters.utils.connection_workflow.AMQPConnector*
-addr_record
-Any*
-conn_params
-Any*
-on_done
-Anyz310z311z312z313z314*á
-abort;pika.adapters.utils.connection_workflow.AMQPConnector.abort"
-None*x
-selfn
-5pika.adapters.utils.connection_workflow.AMQPConnector"5pika.adapters.utils.connection_workflow.AMQPConnectorz310z311z312z313z314j310j311j312j313j314¾
-AbstractAMQPConnectionWorkflowFpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow"pika.compat.AbstractBase*‡
-startLpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow.start"
-None*›
-self
-Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow"Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow*
-connection_configs
-Any*
-connector_factory
-Any*
-native_loop
-Any*
-on_done
-Anyz310z311z312z313z314*–
-abortLpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow.abort"
-None*›
-self
-Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow"Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflowz310z311z312z313z314j310j311j312j313j314œ
-AMQPConnectionWorkflow>pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow"Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow*Å
-__init__Gpika.adapters.utils.connection_workflow.AMQPConnectionWorkflow.__init__"
-None*‹
-self€
->pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow">pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow*?
-_until_first_amqp_attempt
-builtins.bool"builtins.bool z310z311z312z313z314*¥
-set_io_servicesNpika.adapters.utils.connection_workflow.AMQPConnectionWorkflow.set_io_services"
-None*‹
-self€
->pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow">pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow*
-nbio
-Anyz310z311z312z313z314*ï
-startDpika.adapters.utils.connection_workflow.AMQPConnectionWorkflow.start"
-None*‹
-self€
->pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow">pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow*
-connection_configs
-Any*
-connector_factory
-Any*
-native_loop
-Any*
-on_done
-Anyz310z311z312z313z314*þ
-abortDpika.adapters.utils.connection_workflow.AMQPConnectionWorkflow.abort"
-None*‹
-self€
->pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow">pika.adapters.utils.connection_workflow.AMQPConnectionWorkflowz310z311z312z313z314j310j311j312j313j314*¼
-__annotations__7pika.adapters.utils.connection_workflow.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*'
-pikapika *310*311*312*313*314
+args(r
+	exception0f
+AMQPConnectorSocketConnectError"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBaseg
+ AMQPConnectorTransportSetupError"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBasef
+AMQPConnectorAMQPHandshakeError"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase_
+AMQPConnectionWorkflowAborted">pika.adapters.utils.connection_workflow.AMQPConnectorExceptionb
+ AMQPConnectionWorkflowWrongState">pika.adapters.utils.connection_workflow.AMQPConnectorException¦
+AMQPConnectionWorkflowFailed">pika.adapters.utils.connection_workflow.AMQPConnectorException*6
+__init__*
+
+self(*
+
+exceptions(*
+
+args(r
+
+exceptions0½
+AMQPConnector"builtins.object*8
+__init__*
+
+self(*
+conn_factory(*
+
+nbio(*J
+start*
+
+self(*
+addr_record(*
+conn_params(*
+on_done(*
+abort*
+
+self(½
+AbstractAMQPConnectionWorkflow"pika.compat.AbstractBase*j
+start*
+
+self(*
+connection_configs(*
+connector_factory(*
+native_loop(*
+on_done(*
+abort*
+
+self(Í
+AMQPConnectionWorkflow"Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow*;
+__init__*
+
+self(*!
+_until_first_amqp_attempt (	*+
+set_io_services*
+
+self(*
+
+nbio(*j
+start*
+
+self(*
+connection_configs(*
+connector_factory(*
+native_loop(*
+on_done(*
+abort*
+
+self(*
+__annotations__0*
+pikapika 22E"Cpika.adapters.utils.connection_workflow.AMQPConnectorPhaseErrorBase22"_typeshed.Incomplete22F"Dpika.adapters.utils.connection_workflow.AMQPConnectionWorkflowFailed27"5pika.adapters.utils.connection_workflow.AMQPConnector2H"Fpika.adapters.utils.connection_workflow.AbstractAMQPConnectionWorkflow2@">pika.adapters.utils.connection_workflow.AMQPConnectionWorkflow2"builtins.bool2"builtins.str2"builtins.dict2
+

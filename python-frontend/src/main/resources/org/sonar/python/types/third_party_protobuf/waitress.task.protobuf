@@ -1,187 +1,114 @@
 
-waitress.taskµ
-ThreadedTaskDispatcher$waitress.task.ThreadedTaskDispatcher"builtins.object*ì
-start_new_thread5waitress.task.ThreadedTaskDispatcher.start_new_thread"
-None*V
-selfL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*
-target
-Any*
-args
-Anyz310z311z312z313z314*í
-handler_thread3waitress.task.ThreadedTaskDispatcher.handler_thread"
-None*V
-selfL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*+
-	thread_no
-builtins.int"builtins.intz310z311z312z313z314*í
-set_thread_count5waitress.task.ThreadedTaskDispatcher.set_thread_count"
-None*V
-selfL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*'
-count
-builtins.int"builtins.intz310z311z312z313z314*è
-add_task-waitress.task.ThreadedTaskDispatcher.add_task"
-None*V
-selfL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*2
-task(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*­
-shutdown-waitress.task.ThreadedTaskDispatcher.shutdown"
-builtins.bool"builtins.bool*V
-selfL
-$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*4
-cancel_pending
-builtins.bool"builtins.bool *+
-timeout
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314rt
+waitress.taskÕ
+ThreadedTaskDispatcher"builtins.object*:
+start_new_thread*
 
-stop_count/waitress.task.ThreadedTaskDispatcher.stop_count
-builtins.int"builtins.int*310*311*312*313*314rx
-active_count1waitress.task.ThreadedTaskDispatcher.active_count
-builtins.int"builtins.int*310*311*312*313*314rp
-logger+waitress.task.ThreadedTaskDispatcher.logger 
-logging.Logger"logging.Logger*310*311*312*313*314r|
-queue_logger1waitress.task.ThreadedTaskDispatcher.queue_logger 
-logging.Logger"logging.Logger*310*311*312*313*314r|
-threads,waitress.task.ThreadedTaskDispatcher.threads*
-builtins.set[Any]
-Any"builtins.set*310*311*312*313*314r²
-queue*waitress.task.ThreadedTaskDispatcher.queued
-%collections.deque[waitress.task.Task](
-waitress.task.Task"waitress.task.Task"collections.deque*310*311*312*313*314rf
-lock)waitress.task.ThreadedTaskDispatcher.lock$
-_thread.LockType"_thread.LockType*310*311*312rY
-lock)waitress.task.ThreadedTaskDispatcher.lock
-_thread.lock"_thread.lock*313*314r~
-queue_cv-waitress.task.ThreadedTaskDispatcher.queue_cv*
-threading.Condition"threading.Condition*310*311*312*313*314rŠ
-thread_exit_cv3waitress.task.ThreadedTaskDispatcher.thread_exit_cv*
-threading.Condition"threading.Condition*310*311*312*313*314•
-Taskwaitress.task.Task"builtins.object*Œ
-__init__waitress.task.Task.__init__"
-None*2
-self(
-waitress.task.Task"waitress.task.Task*I
-channel<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*A
-request4
-waitress.utilities.Error"waitress.utilities.Errorz310z311z312z313z314*|
-servicewaitress.task.Task.service"
-None*2
-self(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*«
-has_bodywaitress.task.Task.has_body"
-builtins.bool"builtins.bool*2
-self(
-waitress.task.Task"waitress.task.Task0:builtins.property`z310z311z312z313z314*°
-build_response_header(waitress.task.Task.build_response_header" 
-builtins.bytes"builtins.bytes*2
-self(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*¦
-remove_content_length_header/waitress.task.Task.remove_content_length_header"
-None*2
-self(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*x
-startwaitress.task.Task.start"
-None*2
-self(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*z
-finishwaitress.task.Task.finish"
-None*2
-self(
-waitress.task.Task"waitress.task.Taskz310z311z312z313z314*¤
-writewaitress.task.Task.write"
-None*2
-self(
-waitress.task.Task"waitress.task.Task**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314rn
-close_on_finish"waitress.task.Task.close_on_finish
-builtins.bool"builtins.bool*310*311*312*313*314rZ
-statuswaitress.task.Task.status
-builtins.str"builtins.str*310*311*312*313*314rh
-wrote_headerwaitress.task.Task.wrote_header
-builtins.bool"builtins.bool*310*311*312*313*314rb
+self(*
+target(*
 
-start_timewaitress.task.Task.start_time
-builtins.int"builtins.int*310*311*312*313*314r’
-content_length!waitress.task.Task.content_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rx
-content_bytes_written(waitress.task.Task.content_bytes_written
-builtins.int"builtins.int*310*311*312*313*314rv
-logged_write_excess&waitress.task.Task.logged_write_excess
-builtins.bool"builtins.bool*310*311*312*313*314rx
-logged_write_no_body'waitress.task.Task.logged_write_no_body
-builtins.bool"builtins.bool*310*311*312*313*314r`
-completewaitress.task.Task.complete
-builtins.bool"builtins.bool*310*311*312*313*314rp
-chunked_response#waitress.task.Task.chunked_response
-builtins.bool"builtins.bool*310*311*312*313*314r^
-loggerwaitress.task.Task.logger 
-logging.Logger"logging.Logger*310*311*312*313*314r|
-channelwaitress.task.Task.channel<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*310*311*312*313*314rt
-requestwaitress.task.Task.request4
-waitress.utilities.Error"waitress.utilities.Error*310*311*312*313*314rù
-response_headers#waitress.task.Task.response_headers¦
-1typing.Sequence[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Sequence*310*311*312*313*314r\
-versionwaitress.task.Task.version
-builtins.str"builtins.str*310*311*312*313*314
-	ErrorTaskwaitress.task.ErrorTask"waitress.task.Task*‹
-executewaitress.task.ErrorTask.execute"
-None*<
-self2
-waitress.task.ErrorTask"waitress.task.ErrorTaskz310z311z312z313z314j310j311j312j313j314re
-complete waitress.task.ErrorTask.complete
-builtins.bool"builtins.bool*310*311*312*313*314r_
-statuswaitress.task.ErrorTask.status
-builtins.str"builtins.str*310*311*312*313*314rs
-close_on_finish'waitress.task.ErrorTask.close_on_finish
-builtins.bool"builtins.bool*310*311*312*313*314ro
-content_length&waitress.task.ErrorTask.content_length
-builtins.int"builtins.int*310*311*312*313*314À	
-WSGITaskwaitress.task.WSGITask"waitress.task.Task*ˆ
-executewaitress.task.WSGITask.execute"
-None*:
-self0
-waitress.task.WSGITask"waitress.task.WSGITaskz310z311z312z313z314*—
-get_environment&waitress.task.WSGITask.get_environment"
-Any*:
-self0
-waitress.task.WSGITask"waitress.task.WSGITaskz310z311z312z313z314j310j311j312j313j314rŸ
-environwaitress.task.WSGITask.environ[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None*310*311*312*313*314rı
-response_headers'waitress.task.WSGITask.response_headers¦
-1typing.Sequence[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Sequence*310*311*312*313*314rd
-completewaitress.task.WSGITask.complete
-builtins.bool"builtins.bool*310*311*312*313*314r^
-statuswaitress.task.WSGITask.status
-builtins.str"builtins.str*310*311*312*313*314rn
-content_length%waitress.task.WSGITask.content_length
-builtins.int"builtins.int*310*311*312*313*314rr
-close_on_finish&waitress.task.WSGITask.close_on_finish
-builtins.bool"builtins.bool*310*311*312*313*314*¢
-__annotations__waitress.task.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*À
-rename_headerswaitress.task.rename_headersw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*310*311*312*313*314*w
+args(*/
+handler_thread*
 
-hop_by_hopwaitress.task.hop_by_hop6
-builtins.frozenset[Any]
-Any"builtins.frozenset*310*311*312*313*314
+self(*
+	thread_no(*-
+set_thread_count*
+
+self(*
+count(*$
+add_task*
+
+self(*
+
+task(*A
+shutdown*
+
+self(*
+cancel_pending (*
+timeout (r
+
+stop_count0r
+active_count0r
+
+logger0r
+queue_logger0r
+threads0r	
+queue0	r
+lock*310*311*3120
+r
+lock*313*3140r
+queue_cv0r
+thread_exit_cv0Ò
+Task"builtins.object*6
+__init__*
+
+self(*
+channel(*
+request(*
+service*
+
+self(*/
+has_body*
+
+self(0:builtins.property`*%
+build_response_header*
+
+self(*,
+remove_content_length_header*
+
+self(*
+start*
+
+self(*
+finish*
+
+self(*!
+write*
+
+self(*
+
+data(r
+close_on_finish0r
+
+status0r
+wrote_header0r
+
+start_time0r
+content_length0r
+content_bytes_written0r
+logged_write_excess0r
+logged_write_no_body0r
+complete0r
+chunked_response0r
+
+logger0r
+channel0r
+request0r
+response_headers0r
+version0{
+	ErrorTask"waitress.task.Task*
+execute*
+
+self(r
+complete0r
+
+status0r
+close_on_finish0r
+content_length0¾
+WSGITask"waitress.task.Task*
+execute*
+
+self(*
+get_environment*
+
+self(r
+environ0r
+response_headers0r
+complete0r
+
+status0r
+content_length0r
+close_on_finish0*
+__annotations__0*
+rename_headers0*
+
+hop_by_hop022&"$waitress.task.ThreadedTaskDispatcher22"builtins.int2"waitress.task.Task2"builtins.bool2"logging.Logger2"builtins.set22"collections.deque22"_thread.LockType2"_thread.lock2"threading.Condition2"waitress.channel.HTTPChannel2"waitress.utilities.Error2"builtins.bytes2"builtins.str22222"typing.Sequence22"waitress.task.ErrorTask2"waitress.task.WSGITask2"_typeshed.Incomplete2222"builtins.dict22"typing.Mapping22"builtins.frozenset2

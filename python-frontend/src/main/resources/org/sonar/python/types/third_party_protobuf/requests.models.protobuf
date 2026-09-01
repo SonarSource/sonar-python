@@ -1,471 +1,231 @@
 
-requests.models⁄
-CaseInsensitiveDict'requests.structures.CaseInsensitiveDict"typing.MutableMapping*–
-__init__0requests.structures.CaseInsensitiveDict.__init__"
-None*»
-selfΩ
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDict*≈
-data∏
-}Union[typing.Mapping[builtins.str,requests.structures._VT],typing.Iterable[Tuple[builtins.str,requests.structures._VT]],None]∂
-4typing.Mapping[builtins.str,requests.structures._VT]
-builtins.str"builtins.strP
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"typing.MappingÒ
-<typing.Iterable[Tuple[builtins.str,requests.structures._VT]]ü
-+Tuple[builtins.str,requests.structures._VT]
-builtins.str"builtins.strP
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"typing.Iterable
-None *\
-kwargsP
-requests.structures._VT"
-builtins.object"builtins.object"builtins.objectz310z311z312z313z314*ö
-lower_items3requests.structures.CaseInsensitiveDict.lower_items"Ò
-<typing.Iterator[Tuple[builtins.str,requests.structures._VT]]ü
-+Tuple[builtins.str,requests.structures._VT]
-builtins.str"builtins.strP
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"typing.Iterator*»
-selfΩ
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDictz310z311z312z313z314*ú
-__setitem__3requests.structures.CaseInsensitiveDict.__setitem__"
-None*¿Ω
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDict*
-builtins.str"builtins.str*RP
-requests.structures._VT"
-builtins.object"builtins.object"builtins.objectz310z311z312z313z314*ê
-__getitem__3requests.structures.CaseInsensitiveDict.__getitem__"P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object*¿Ω
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDict*
-builtins.str"builtins.strz310z311z312z313z314*»
-__delitem__3requests.structures.CaseInsensitiveDict.__delitem__"
-None*¿Ω
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDict*
-builtins.str"builtins.strz310z311z312z313z314*Ë
-__iter__0requests.structures.CaseInsensitiveDict.__iter__"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*¿Ω
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDictz310z311z312z313z314*¥
-__len__/requests.structures.CaseInsensitiveDict.__len__"
-builtins.int"builtins.int*¿Ω
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDictz310z311z312z313z314*ÿ
-copy,requests.structures.CaseInsensitiveDict.copy"Ω
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDict*»
-selfΩ
-@requests.structures.CaseInsensitiveDict[requests.structures._VT]P
-requests.structures._VT"
-builtins.object"builtins.object"builtins.object"'requests.structures.CaseInsensitiveDictz310z311z312z313z314Pj310j311j312j313j314»
-RequestEncodingMixin$requests.models.RequestEncodingMixin"builtins.object*ﬂ
-path_url-requests.models.RequestEncodingMixin.path_url"
-builtins.str"builtins.str*V
-selfL
-$requests.models.RequestEncodingMixin"$requests.models.RequestEncodingMixin0:builtins.property`z310z311z312z313z314j310j311j312j313j314ÿ
-RequestHooksMixin!requests.models.RequestHooksMixin"builtins.object*x
-register_hook/requests.models.RequestHooksMixin.register_hook*
+requests.models≤
+CaseInsensitiveDict'requests.structures.CaseInsensitiveDict"typing.MutableMapping*4
+__init__*
+
+self(*
+data (	*
+kwargs(*
+lower_items
+*
+
+self(*
+__setitem__*(*(*(*
+__getitem__*(*(*
+__delitem__*(*(*
+__iter__*(*
+__len__*(*
+copy*
+
+self(PX
+RequestEncodingMixin"builtins.object*/
+path_url*
+
+self(0:builtins.property`Ü
+RequestHooksMixin"builtins.object*.
+register_hook*
 self*	
 event*
-hookz310z311z312z313z314*|
-deregister_hook1requests.models.RequestHooksMixin.deregister_hook*
+hook*0
+deregister_hook*
 self*	
 event*
-hookz310z311z312z313z314j310j311j312j313j314˘
+hookÊ
+Request"!requests.models.RequestHooksMixin*Ø
+__init__*
 
-Requestrequests.models.Request"!requests.models.RequestHooksMixin*Í
-__init__ requests.models.Request.__init__"
-None*<
-self2
-requests.models.Request"requests.models.Request*
-method
-Any *
-url
-Any *
-headers
-Any *
-files
-Any *
-data
-Any *
-params
-Any *
-auth
-Any *
-cookies
-Any *
-hooks
-Any *
-json
-Any z310z311z312z313z314*≈
-preparerequests.models.Request.prepare"B
-requests.models.PreparedRequest"requests.models.PreparedRequest*<
-self2
-requests.models.Request"requests.models.Requestz310z311z312z313z314j310j311j312j313j314rH
-hooksrequests.models.Request.hooks
-Any*310*311*312*313*314rJ
-methodrequests.models.Request.method
-Any*310*311*312*313*314rD
-urlrequests.models.Request.url
-Any*310*311*312*313*314rL
-headersrequests.models.Request.headers
-Any*310*311*312*313*314rH
-filesrequests.models.Request.files
-Any*310*311*312*313*314rF
-datarequests.models.Request.data
-Any*310*311*312*313*314rF
-jsonrequests.models.Request.json
-Any*310*311*312*313*314rJ
-paramsrequests.models.Request.params
-Any*310*311*312*313*314rF
-authrequests.models.Request.auth
-Any*310*311*312*313*314rL
-cookiesrequests.models.Request.cookies
-Any*310*311*312*313*314¨
-PreparedRequestrequests.models.PreparedRequest"$requests.models.RequestEncodingMixin"!requests.models.RequestHooksMixin*•
-__init__(requests.models.PreparedRequest.__init__"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequestz310z311z312z313z314*Ä
-prepare'requests.models.PreparedRequest.prepare"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-method
-Any *
-url
-Any *
-headers
-Any *
-files
-Any *
-data
-Any *
-params
-Any *
-auth
-Any *
-cookies
-Any *
-hooks
-Any *
-json
-Any z310z311z312z313z314*◊
-copy$requests.models.PreparedRequest.copy"B
-requests.models.PreparedRequest"requests.models.PreparedRequest*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequestz310z311z312z313z314*∆
-prepare_method.requests.models.PreparedRequest.prepare_method"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-method
-Anyz310z311z312z313z314*“
-prepare_url+requests.models.PreparedRequest.prepare_url"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-url
-Any*
-params
-Anyz310z311z312z313z314*…
-prepare_headers/requests.models.PreparedRequest.prepare_headers"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-headers
-Anyz310z311z312z313z314*È
-prepare_body,requests.models.PreparedRequest.prepare_body"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-data
-Any*
-files
-Any*
-json
-Any z310z311z312z313z314*‘
-prepare_content_length6requests.models.PreparedRequest.prepare_content_length"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-body
-Anyz310z311z312z313z314*‘
-prepare_auth,requests.models.PreparedRequest.prepare_auth"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-auth
-Any*
-url
-Any z310z311z312z313z314*…
-prepare_cookies/requests.models.PreparedRequest.prepare_cookies"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-cookies
-Anyz310z311z312z313z314*√
-prepare_hooks-requests.models.PreparedRequest.prepare_hooks"
-None*L
-selfB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-hooks
-Anyz310z311z312z313z314j310j311j312j313j314rè
-method&requests.models.PreparedRequest.methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314râ
-url#requests.models.PreparedRequest.urlD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÀ
-headers'requests.models.PreparedRequest.headers~
-5requests.structures.CaseInsensitiveDict[builtins.str]
-builtins.str"builtins.str"'requests.structures.CaseInsensitiveDict*310*311*312*313*314rº
-body$requests.models.PreparedRequest.bodyu
-'Union[builtins.bytes,builtins.str,None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-None*310*311*312*313*314rP
-hooks%requests.models.PreparedRequest.hooks
-Any*310*311*312*313*314•4
-Responserequests.models.Response"builtins.object*ê
-__init__!requests.models.Response.__init__"
-None*>
-self4
-requests.models.Response"requests.models.Responsez310z311z312z313z314*¶
-__bool__!requests.models.Response.__bool__"
-builtins.bool"builtins.bool*>
-self4
-requests.models.Response"requests.models.Responsez310z311z312z313z314*¨
-__nonzero__$requests.models.Response.__nonzero__"
-builtins.bool"builtins.bool*>
-self4
-requests.models.Response"requests.models.Responsez310z311z312z313z314*‘
-__iter__!requests.models.Response.__iter__"T
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator*64
-requests.models.Response"requests.models.Responsez310z311z312z313z314*¥
-	__enter__"requests.models.Response.__enter__"s
-requests.models.Response.Self4
-requests.models.Response"requests.models.Response"requests.models.Response(*us
-requests.models.Response.Self4
-requests.models.Response"requests.models.Response"requests.models.Response(z310z311z312z313z314*∞
-__exit__!requests.models.Response.__exit__"
-None*64
-requests.models.Response"requests.models.Response*&"
-builtins.object"builtins.objectz310z311z312z313z314*î
-nextrequests.models.Response.next"}
-+Union[requests.models.PreparedRequest,None]B
-requests.models.PreparedRequest"requests.models.PreparedRequest
-None*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*±
-okrequests.models.Response.ok"
-builtins.bool"builtins.bool*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*√
-is_redirect$requests.models.Response.is_redirect"
-builtins.bool"builtins.bool*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*◊
-is_permanent_redirect.requests.models.Response.is_permanent_redirect"
-builtins.bool"builtins.bool*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*Õ
-apparent_encoding*requests.models.Response.apparent_encoding"
-builtins.str"builtins.str*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*Œ
-iter_content%requests.models.Response.iter_content"0
-typing.Iterator[Any]
-Any"typing.Iterator*>
-self4
-requests.models.Response"requests.models.Response*V
+self(*
+method (*
+url (*
+headers (*
+files (*
+data (*
+params (*
+auth (*
+cookies (*
+hooks (*
+json (*
+prepare*
 
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *4
-decode_unicode
-builtins.bool"builtins.bool z310z311z312z313z314*”
+self(r	
+hooks0r
 
-iter_lines#requests.models.Response.iter_lines"0
-typing.Iterator[Any]
-Any"typing.Iterator*>
-self4
-requests.models.Response"requests.models.Response*V
+method0r
+url0r
+headers0r	
+files0r
+data0r
+json0r
 
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *4
-decode_unicode
-builtins.bool"builtins.bool *Ü
-	delimiteru
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z310z311z312z313z314*Ω
-content requests.models.Response.content" 
-builtins.bytes"builtins.bytes*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*≥
-textrequests.models.Response.text"
-builtins.str"builtins.str*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*Ÿ
-jsonrequests.models.Response.json"
-Any*>
-self4
-requests.models.Response"requests.models.Response*§
-clsò
-*Union[Type[json.decoder.JSONDecoder],None]^
-Type[json.decoder.JSONDecoder]4
-json.decoder.JSONDecoder"json.decoder.JSONDecoder"type
-None *ö
-object_hookÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *ö
-parse_floatÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *ò
-	parse_intÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *ù
-parse_constantÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *†
-object_pairs_hookÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-kwds
-Anyz310z311z312z313z314*“
-linksrequests.models.Response.links"9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*>
-self4
-requests.models.Response"requests.models.Response0:builtins.property`z310z311z312z313z314*†
-raise_for_status)requests.models.Response.raise_for_status"
-None*>
-self4
-requests.models.Response"requests.models.Responsez310z311z312z313z314*ä
-closerequests.models.Response.close"
-None*>
-self4
-requests.models.Response"requests.models.Responsez310z311z312z313z314j310j311j312j313j314rQ
-	__attrs__"requests.models.Response.__attrs__
-Any*310*311*312*313*314rí
-_content!requests.models.Response._contentJ
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*310*311*312*313*314rj
-status_code$requests.models.Response.status_code
-builtins.int"builtins.int*310*311*312*313*314rƒ
-headers requests.models.Response.headers~
-5requests.structures.CaseInsensitiveDict[builtins.str]
-builtins.str"builtins.str"'requests.structures.CaseInsensitiveDict*310*311*312*313*314rE
-rawrequests.models.Response.raw
-Any*310*311*312*313*314rZ
-urlrequests.models.Response.url
-builtins.str"builtins.str*310*311*312*313*314rå
-encoding!requests.models.Response.encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r¥
-history requests.models.Response.historyn
-'builtins.list[requests.models.Response]4
-requests.models.Response"requests.models.Response"builtins.list*310*311*312*313*314r`
-reasonrequests.models.Response.reason
-builtins.str"builtins.str*310*311*312*313*314ré
-cookies requests.models.Response.cookiesH
-"requests.cookies.RequestsCookieJar""requests.cookies.RequestsCookieJar*310*311*312*313*314rn
-elapsed requests.models.Response.elapsed(
-datetime.timedelta"datetime.timedelta*310*311*312*313*314rà
-request requests.models.Response.requestB
-requests.models.PreparedRequest"requests.models.PreparedRequest*310*311*312*313*314*§
-__annotations__requests.models.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*C
-urllib3_exceptionsurllib3.exceptions *310*311*312*313*314*î
-default_hooksrequests.models.default_hooksK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*†
-cookiejar_from_dict#requests.models.cookiejar_from_dictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ú
-get_cookie_header!requests.models.get_cookie_headerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*¨
-encode_multipart_formdata)requests.models.encode_multipart_formdataK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*å
-	parse_urlrequests.models.parse_urlK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ñ
-guess_filenamerequests.models.guess_filenameK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ú
-get_auth_from_url!requests.models.get_auth_from_urlK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ê
-requote_urirequests.models.requote_uriK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*∂
-stream_decode_response_unicode.requests.models.stream_decode_response_unicodeK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ò
-to_key_val_listrequests.models.to_key_val_listK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*û
-parse_header_links"requests.models.parse_header_linksK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ê
-iter_slicesrequests.models.iter_slicesK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ñ
-guess_json_utfrequests.models.guess_json_utfK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*å
-	super_lenrequests.models.super_lenK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ö
-to_native_string requests.models.to_native_stringK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*@
-codesrequests.models.codes
-Any*310*311*312*313*314*R
-REDIRECT_STATIrequests.models.REDIRECT_STATI
-Any*310*311*312*313*314*b
-DEFAULT_REDIRECT_LIMIT&requests.models.DEFAULT_REDIRECT_LIMIT
-Any*310*311*312*313*314*Z
-CONTENT_CHUNK_SIZE"requests.models.CONTENT_CHUNK_SIZE
-Any*310*311*312*313*314*T
-ITER_CHUNK_SIZErequests.models.ITER_CHUNK_SIZE
-Any*310*311*312*313*314
+params0r
+auth0r
+cookies0í
+PreparedRequest"$requests.models.RequestEncodingMixin"!requests.models.RequestHooksMixin*
+__init__*
+
+self(*Æ
+prepare*
+
+self(*
+method (*
+url (*
+headers (*
+files (*
+data (*
+params (*
+auth (*
+cookies (*
+hooks (*
+json (*
+copy*
+
+self(*,
+prepare_method*
+
+self(*
+method(*4
+prepare_url*
+
+self(*	
+url(*
+params(*.
+prepare_headers*
+
+self(*
+headers(*C
+prepare_body*
+
+self(*
+
+data(*
+files(*
+json (*2
+prepare_content_length*
+
+self(*
+
+body(*5
+prepare_auth*
+
+self(*
+
+auth(*
+url (*.
+prepare_cookies*
+
+self(*
+cookies(**
+prepare_hooks*
+
+self(*
+hooks(r
+
+method0r
+url0r
+headers0r
+body0r	
+hooks0—
+Response"builtins.object*
+__init__*
+
+self(*
+__bool__*
+
+self(*
+__nonzero__*
+
+self(*
+__iter__*(*
+	__enter__*(*
+__exit__*(*(*+
+next*
+
+self(0:builtins.property`*)
+ok*
+
+self(0:builtins.property`*2
+is_redirect*
+
+self(0:builtins.property`*<
+is_permanent_redirect*
+
+self(0:builtins.property`*8
+apparent_encoding*
+
+self(0:builtins.property`*H
+iter_content*
+
+self(*
+
+chunk_size (*
+decode_unicode (*Y
+
+iter_lines*
+
+self(*
+
+chunk_size (*
+decode_unicode (*
+	delimiter (*.
+content*
+
+self(0:builtins.property`*+
+text*
+
+self(0:builtins.property`*ù
+json*
+
+self(*
+cls (*
+object_hook ("*
+parse_float ("*
+	parse_int ("*
+parse_constant ("*
+object_pairs_hook ("*
+
+kwds(*,
+links#*
+
+self(0:builtins.property`* 
+raise_for_status*
+
+self(*
+close*
+
+self(r
+	__attrs__0r
+_content0$r
+status_code0r
+headers0r
+raw0r
+url0r
+encoding0r
+history0%r
+
+reason0r
+cookies0&r
+elapsed0'r
+request0*
+__annotations__0(**
+urllib3_exceptionsurllib3.exceptions *
+default_hooks0!*
+cookiejar_from_dict0!*
+get_cookie_header0!*
+encode_multipart_formdata0!*
+	parse_url0!*
+guess_filename0!*
+get_auth_from_url0!*
+requote_uri0!*"
+stream_decode_response_unicode0!*
+to_key_val_list0!*
+parse_header_links0!*
+iter_slices0!*
+guess_json_utf0!*
+	super_len0!*
+to_native_string0!*	
+codes0*
+REDIRECT_STATI0*
+DEFAULT_REDIRECT_LIMIT0*
+CONTENT_CHUNK_SIZE0*
+ITER_CHUNK_SIZE022"builtins.object2"builtins.object22,"'requests.structures.CaseInsensitiveDict22"builtins.str2"typing.Mapping2222"typing.Iterable2222"typing.Iterator22"typing.Iterator22"builtins.int2&"$requests.models.RequestEncodingMixin2"requests.models.Request22!"requests.models.PreparedRequest222,"'requests.structures.CaseInsensitiveDict22"builtins.bytes222"requests.models.Response2"builtins.bool2"typing.Iterator22@
+requests.models.Response.Self"requests.models.Response(2222"typing.Iterator222222"json.decoder.JSONDecoder2"type2222"builtins.function22 22!2"builtins.dict2222"builtins.list22$""requests.cookies.RequestsCookieJar2"datetime.timedelta2"builtins.dict2

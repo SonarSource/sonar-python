@@ -1,96 +1,61 @@
 
-pandas.api.interchange´#
-	DataFrame4pandas.core.interchange.dataframe_protocol.DataFrame"abc.ABC*Ñ
-__dataframe__Bpandas.core.interchange.dataframe_protocol.DataFrame.__dataframe__"
-Any*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*1
-nan_as_null
-builtins.bool"builtins.bool *0
+pandas.api.interchangeò
+	DataFrame4pandas.core.interchange.dataframe_protocol.DataFrame"abc.ABC*^
+__dataframe__*
 
-allow_copy
-builtins.bool"builtins.bool 0:abc.abstractmethod@*Ç
-metadata=pandas.core.interchange.dataframe_protocol.DataFrame.metadata"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:builtins.property:abc.abstractmethod@`*ý
-num_columns@pandas.core.interchange.dataframe_protocol.DataFrame.num_columns"
-builtins.int"builtins.int*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*Ÿ
-num_rows=pandas.core.interchange.dataframe_protocol.DataFrame.num_rows"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*û
+self(*
+nan_as_null (*
 
-num_chunks?pandas.core.interchange.dataframe_protocol.DataFrame.num_chunks"
-builtins.int"builtins.int*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*±
-column_namesApandas.core.interchange.dataframe_protocol.DataFrame.column_names"N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*ê
+allow_copy (0:abc.abstractmethod@*E
+metadata*
 
-get_column?pandas.core.interchange.dataframe_protocol.DataFrame.get_column"f
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*#
-i
-builtins.int"builtins.int0:abc.abstractmethod@*ý
-get_column_by_nameGpandas.core.interchange.dataframe_protocol.DataFrame.get_column_by_name"f
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*&
-name
-builtins.str"builtins.str0:abc.abstractmethod@*Ÿ
-get_columns@pandas.core.interchange.dataframe_protocol.DataFrame.get_columns"½
-Btyping.Iterable[pandas.core.interchange.dataframe_protocol.Column]f
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column"typing.Iterable*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*°
-select_columnsCpandas.core.interchange.dataframe_protocol.DataFrame.select_columns"l
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*[
-indicesN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence0:abc.abstractmethod@*¾
-select_columns_by_nameKpandas.core.interchange.dataframe_protocol.DataFrame.select_columns_by_name"l
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*Y
-namesN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence0:abc.abstractmethod@*ü
+self(0:builtins.property:abc.abstractmethod@`*3
+num_columns*
 
-get_chunks?pandas.core.interchange.dataframe_protocol.DataFrame.get_chunks"Æ
-Etyping.Iterable[pandas.core.interchange.dataframe_protocol.DataFrame]l
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame"typing.Iterable*v
-selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*T
-n_chunksD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:abc.abstractmethod@@babc.ABCMetare
-version<pandas.core.interchange.dataframe_protocol.DataFrame.version
-builtins.int"builtins.intÆ
-from_dataframe5pandas.core.interchange.from_dataframe.from_dataframe":
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*
-df
-Any*0
+self(0:abc.abstractmethod@*0
+num_rows*
 
-allow_copy
-builtins.bool"builtins.bool *w
-__path__pandas.api.interchange.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*’
-__annotations__&pandas.api.interchange.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(0:abc.abstractmethod@*2
+
+num_chunks*
+
+self(0:abc.abstractmethod@*4
+column_names	*
+
+self(0:abc.abstractmethod@*;
+
+get_column
+*
+
+self(*
+i(0:abc.abstractmethod@*F
+get_column_by_name
+*
+
+self(*
+
+name(0:abc.abstractmethod@*3
+get_columns*
+
+self(0:abc.abstractmethod@*E
+select_columns*
+
+self(*
+indices(0:abc.abstractmethod@*K
+select_columns_by_name*
+
+self(*
+names(0:abc.abstractmethod@*D
+
+get_chunks*
+
+self(*
+n_chunks (0:abc.abstractmethod@@babc.ABCMetar
+version0g
+from_dataframe5pandas.core.interchange.from_dataframe.from_dataframe*
+df(*
+
+allow_copy (*
+__path__0*
+__annotations__0226"4pandas.core.interchange.dataframe_protocol.DataFrame2"builtins.bool2"builtins.str2"builtins.dict22"builtins.int2222"typing.Iterable223"1pandas.core.interchange.dataframe_protocol.Column2"typing.Iterable2
+2"typing.Sequence22"typing.Sequence22"typing.Iterable22"pandas.core.frame.DataFrame2"builtins.list2

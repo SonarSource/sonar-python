@@ -1,300 +1,124 @@
 
-markdownÃ4
-Markdownmarkdown.core.Markdown"builtins.object*—
-__init__markdown.core.Markdown.__init__"
-None*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*›
+markdownﬁ
+Markdownmarkdown.core.Markdown"builtins.object*r
+__init__*
 
-extensions 
-NUnion[typing.Sequence[Union[builtins.str,markdown.extensions.Extension]],None]Î
-Btyping.Sequence[Union[builtins.str,markdown.extensions.Extension]]ì
-1Union[builtins.str,markdown.extensions.Extension]
-builtins.str"builtins.str>
-markdown.extensions.Extension"markdown.extensions.Extension"typing.Sequence
-None *º
-extension_configs¢
-IUnion[typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]],None]»
-=typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]]
-builtins.str"builtins.strY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Mapping
-None *Õ
-output_format∑
-7Union[Literal[builtins.str],Literal[builtins.str],None]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str
-None *V
+self(*
 
-tab_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*∫
-build_parser#markdown.core.Markdown.build_parser"0
-markdown.core.Markdown"markdown.core.Markdown*:
-self0
-markdown.core.Markdown"markdown.core.Markdownz310z311z312z313z314*û
-registerExtensions)markdown.core.Markdown.registerExtensions"0
-markdown.core.Markdown"markdown.core.Markdown*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*¸
+extensions (*
+extension_configs (*
+output_format (*
 
-extensionsÎ
-Btyping.Sequence[Union[markdown.extensions.Extension,builtins.str]]ì
-1Union[markdown.extensions.Extension,builtins.str]>
-markdown.extensions.Extension"markdown.extensions.Extension
-builtins.str"builtins.str"typing.Sequence*÷
-configs»
-=typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]]
-builtins.str"builtins.strY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Mappingz310z311z312z313z314*Å
-build_extension&markdown.core.Markdown.build_extension">
-markdown.extensions.Extension"markdown.extensions.Extension*:
-self0
-markdown.core.Markdown"markdown.core.Markdown**
-ext_name
-builtins.str"builtins.str*Ñ
-configsw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz310z311z312z313z314*ì
-registerExtension(markdown.core.Markdown.registerExtension"0
-markdown.core.Markdown"markdown.core.Markdown*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*M
-	extension>
-markdown.extensions.Extension"markdown.extensions.Extensionz310z311z312z313z314*¢
-resetmarkdown.core.Markdown.reset"k
-markdown.core.Markdown.Self0
-markdown.core.Markdown"markdown.core.Markdown"markdown.core.Markdown(*u
-selfk
-markdown.core.Markdown.Self0
-markdown.core.Markdown"markdown.core.Markdown"markdown.core.Markdown(z310z311z312z313z314*¸
-set_output_format(markdown.core.Markdown.set_output_format"0
-markdown.core.Markdown"markdown.core.Markdown*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*µ
-format®
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strz310z311z312z313z314*”
-is_block_level%markdown.core.Markdown.is_block_level"
-builtins.bool"builtins.bool*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*%
-tag
-builtins.str"builtins.strz310z311z312z313z314*∆
-convertmarkdown.core.Markdown.convert"
-builtins.str"builtins.str*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*(
-source
-builtins.str"builtins.strz310z311z312z313z314*ı
-convertFile"markdown.core.Markdown.convertFile"0
-markdown.core.Markdown"markdown.core.Markdown*:
-self0
-markdown.core.Markdown"markdown.core.Markdown*∞
-input¢
-6Union[builtins.str,markdown.core._ReadableStream,None]
-builtins.str"builtins.str>
-markdown.core._ReadableStream"markdown.core._ReadableStream
-None *±
-output¢
-6Union[builtins.str,markdown.core._WritableStream,None]
-builtins.str"builtins.str>
-markdown.core._WritableStream"markdown.core._WritableStream
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314j310j311j312j313j314rÄ
-preprocessors$markdown.core.Markdown.preprocessors0
-markdown.util.Registry"markdown.util.Registry*310*311*312*313*314rÇ
-inlinePatterns%markdown.core.Markdown.inlinePatterns0
-markdown.util.Registry"markdown.util.Registry*310*311*312*313*314rÇ
-treeprocessors%markdown.core.Markdown.treeprocessors0
-markdown.util.Registry"markdown.util.Registry*310*311*312*313*314rÇ
-postprocessors%markdown.core.Markdown.postprocessors0
-markdown.util.Registry"markdown.util.Registry*310*311*312*313*314rÜ
-parsermarkdown.core.Markdown.parserD
- markdown.blockparser.BlockParser" markdown.blockparser.BlockParser*310*311*312*313*314rz
-	htmlStash markdown.core.Markdown.htmlStash2
-markdown.util.HtmlStash"markdown.util.HtmlStash*310*311*312*313*314rΩ
-output_formats%markdown.core.Markdown.output_formatsÍ
-abuiltins.dict[Union[Literal[builtins.str],Literal[builtins.str]],CallableType[builtins.function]]®
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dict*310*311*312*313*314r˘
-output_format$markdown.core.Markdown.output_format®
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*310*311*312*313*314rï
+tab_length (*
+build_parser*
 
-serializer!markdown.core.Markdown.serializerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rf
+self(*C
+registerExtensions*
 
-tab_length!markdown.core.Markdown.tab_length
-builtins.int"builtins.int*310*311*312*313*314r®
-block_level_elements+markdown.core.Markdown.block_level_elementsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r€
-registeredExtensions+markdown.core.Markdown.registeredExtensions}
-,builtins.list[markdown.extensions.Extension]>
-markdown.extensions.Extension"markdown.extensions.Extension"builtins.list*310*311*312*313*314rö
-ESCAPED_CHARS$markdown.core.Markdown.ESCAPED_CHARSJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314÷
-	Extensionmarkdown.extensions.Extension"builtins.object*¥
-__init__&markdown.extensions.Extension.__init__"
-None*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extension*
-kwargs
-Anyz310z311z312z313z314*ﬂ
-	getConfig'markdown.extensions.Extension.getConfig"
-Any*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extension*%
-key
-builtins.str"builtins.str*
-default
-Any z310z311z312z313z314*Ú
+self(*
 
-getConfigs(markdown.extensions.Extension.getConfigs"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extensionz310z311z312z313z314*ƒ
-getConfigInfo+markdown.extensions.Extension.getConfigInfo"¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extensionz310z311z312z313z314*‹
-	setConfig'markdown.extensions.Extension.setConfig"
-None*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extension*%
-key
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314*â
+extensions(*
+configs(
+*>
+build_extension*
 
-setConfigs(markdown.extensions.Extension.setConfigs"
-None*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extension*d
-itemsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mappingz310z311z312z313z314*Â
-extendMarkdown,markdown.extensions.Extension.extendMarkdown"
-None*H
-self>
-markdown.extensions.Extension"markdown.extensions.Extension*8
-md0
-markdown.core.Markdown"markdown.core.Markdownz310z311z312z313z314j310j311j312j313j314r◊
-config$markdown.extensions.Extension.configç
-/typing.Mapping[builtins.str,builtins.list[Any]]
-builtins.str"builtins.str,
-builtins.list[Any]
-Any"builtins.list"typing.Mapping*310*311*312*313*314»
-markdownmarkdown.core.markdown"
-builtins.str"builtins.str*&
-text
-builtins.str"builtins.str*›
+self(*
+ext_name(*
+configs(*2
+registerExtension*
 
-extensions 
-NUnion[typing.Sequence[Union[builtins.str,markdown.extensions.Extension]],None]Î
-Btyping.Sequence[Union[builtins.str,markdown.extensions.Extension]]ì
-1Union[builtins.str,markdown.extensions.Extension]
-builtins.str"builtins.str>
-markdown.extensions.Extension"markdown.extensions.Extension"typing.Sequence
-None *º
-extension_configs¢
-IUnion[typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]],None]»
-=typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]]
-builtins.str"builtins.strY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Mapping
-None *Õ
-output_format∑
-7Union[Literal[builtins.str],Literal[builtins.str],None]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str
-None *V
+self(*
+	extension(*
+reset*
 
-tab_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314Ÿ
-markdownFromFilemarkdown.core.markdownFromFile"
-None*∞
-input¢
-6Union[builtins.str,markdown.core._ReadableStream,None]
-builtins.str"builtins.str>
-markdown.core._ReadableStream"markdown.core._ReadableStream
-None *±
-output¢
-6Union[builtins.str,markdown.core._WritableStream,None]
-builtins.str"builtins.str>
-markdown.core._WritableStream"markdown.core._WritableStream
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *›
+self(*/
+set_output_format*
 
-extensions 
-NUnion[typing.Sequence[Union[builtins.str,markdown.extensions.Extension]],None]Î
-Btyping.Sequence[Union[builtins.str,markdown.extensions.Extension]]ì
-1Union[builtins.str,markdown.extensions.Extension]
-builtins.str"builtins.str>
-markdown.extensions.Extension"markdown.extensions.Extension"typing.Sequence
-None *º
-extension_configs¢
-IUnion[typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]],None]»
-=typing.Mapping[builtins.str,typing.Mapping[builtins.str,Any]]
-builtins.str"builtins.strY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Mapping
-None *Õ
-output_format∑
-7Union[Literal[builtins.str],Literal[builtins.str],None]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str
-None *V
+self(*
+format(*)
+is_block_level*
 
-tab_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*Ç
-__path__markdown.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*ù
-__annotations__markdown.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*	
+tag(*%
+convert*
+
+self(*
+source(*L
+convertFile*
+
+self(*
+input (*
+output (*
+encoding (r
+preprocessors0r
+inlinePatterns0r
+treeprocessors0r
+postprocessors0r
+
+parser0r
+	htmlStash0r
+output_formats0 r
+output_format0r
+
+serializer0r
+
+tab_length0r
+block_level_elements0!r
+registeredExtensions0"r
+ESCAPED_CHARS0!Á
+	Extensionmarkdown.extensions.Extension"builtins.object*&
+__init__*
+
+self(*
+kwargs(*5
+	getConfig*
+
+self(*	
+key(*
+default (*
+
+getConfigs#*
+
+self(*
+getConfigInfo%*
+
+self(*1
+	setConfig*
+
+self(*	
+key(*
+value(*'
+
+setConfigs*
+
+self(*
+items(	*(
+extendMarkdown*
+
+self(*
+md(r
+
+config0'ä
+markdownmarkdown.core.markdown*
+
+text(*
+
+extensions (*
+extension_configs (*
+output_format (*
+
+tab_length (ø
+markdownFromFilemarkdown.core.markdownFromFile*
+input (*
+output (*
+encoding (*
+
+extensions (*
+extension_configs (*
+output_format (*
+
+tab_length (*
+__path__0!*
+__annotations__0#22"markdown.core.Markdown2"builtins.str2"markdown.extensions.Extension222"typing.Sequence22222"typing.Mapping22"typing.Mapping2	22
+2	2222"builtins.int22222"typing.Sequence22"typing.Mapping22<
+markdown.core.Markdown.Self"markdown.core.Markdown(2222"builtins.bool2"markdown.core._ReadableStream222"markdown.core._WritableStream22222"markdown.util.Registry2"" markdown.blockparser.BlockParser2"markdown.util.HtmlStash2"builtins.function222"builtins.dict22"builtins.list22"builtins.list22"builtins.dict2222"builtins.list2$2"builtins.list22"typing.Mapping2&

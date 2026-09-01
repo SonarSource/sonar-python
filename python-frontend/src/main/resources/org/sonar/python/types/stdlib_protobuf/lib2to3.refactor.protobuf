@@ -1,451 +1,189 @@
 
-lib2to3.refactorV
+lib2to3.refactor 
 
-FixerErrorlib2to3.refactor.FixerError"builtins.Exceptionj310j311j312j313j314˛è
-RefactoringTool lib2to3.refactor.RefactoringTool"builtins.object*É
-__init__)lib2to3.refactor.RefactoringTool.__init__"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*_
-fixer_namesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*Ÿ
-options…
-8Union[typing.Mapping[builtins.str,builtins.object],None]Ä
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mapping
-None *õ
-explicitä
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None z310z311z312z313z314*Ô
+FixerError"builtins.Exception¿
+RefactoringTool"builtins.object*N
+__init__*
 
-get_fixers+lib2to3.refactor.RefactoringTool.get_fixers" 
-ZTuple[builtins.list[lib2to3.fixer_base.BaseFix],builtins.list[lib2to3.fixer_base.BaseFix]]t
-)builtins.list[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"builtins.listt
-)builtins.list[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"builtins.list*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringToolz310z311z312z313z314*—
-	log_error*lib2to3.refactor.RefactoringTool.log_error"
-NoReturn
-*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*%
-msg
-builtins.str"builtins.str*X
-argsN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*ü	
-kwargsí	
-æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∂
-≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
-None
-builtins.bool"builtins.boolü
-ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]¸
-wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]≈
-ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type0
-builtins.BaseException"builtins.BaseExceptionY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None7
-Tuple[None,None,None]
-None
-None
-None"logging._SysExcInfoType0
-builtins.BaseException"builtins.BaseException"logging._ExcInfoTypez310z311z312z313z314*Æ
-print_output-lib2to3.refactor.RefactoringTool.print_output"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool**
-old_text
-builtins.str"builtins.str**
-new_text
-builtins.str"builtins.str*¯
-filenameÈ
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*)
-equal
-builtins.bool"builtins.boolz310z311z312z313z314*Â
-refactor)lib2to3.refactor.RefactoringTool.refactor"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*Y
-itemsN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*+
-write
-builtins.bool"builtins.bool *3
-doctests_only
-builtins.bool"builtins.bool z310z311z312z313z314*æ
-refactor_dir-lib2to3.refactor.RefactoringTool.refactor_dir"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool**
-dir_name
-builtins.str"builtins.str*+
-write
-builtins.bool"builtins.bool *3
-doctests_only
-builtins.bool"builtins.bool z310z311z312z313z314*§
-_read_python_source4lib2to3.refactor.RefactoringTool._read_python_source"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*ã
-filename¸
-ÇTypeAlias[Union[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]“
-wUnion[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]
-builtins.int"builtins.int∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPathz310z311z312z313z314*è
-refactor_file.lib2to3.refactor.RefactoringTool.refactor_file"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*¯
-filenameÈ
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*+
-write
-builtins.bool"builtins.bool *3
-doctests_only
-builtins.bool"builtins.bool z310z311z312z313z314*◊
-refactor_string0lib2to3.refactor.RefactoringTool.refactor_string"Y
-Union[lib2to3.pytree.Node,None]*
-lib2to3.pytree.Node"lib2to3.pytree.Node
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*&
-data
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.strz310z311z312z313z314*È
-refactor_stdin/lib2to3.refactor.RefactoringTool.refactor_stdin"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*3
-doctests_only
-builtins.bool"builtins.bool z310z311z312z313z314*¶
-refactor_tree.lib2to3.refactor.RefactoringTool.refactor_tree"
-builtins.bool"builtins.bool*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*4
-tree*
-lib2to3.pytree.Node"lib2to3.pytree.Node*&
-name
-builtins.str"builtins.strz310z311z312z313z314*™
-traverse_by,lib2to3.refactor.RefactoringTool.traverse_by"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*Ö
-fixers¯
-_Union[_typeshed.SupportsGetItem[builtins.int,typing.Iterable[lib2to3.fixer_base.BaseFix]],None]à
-S_typeshed.SupportsGetItem[builtins.int,typing.Iterable[lib2to3.fixer_base.BaseFix]]
-builtins.int"builtins.intx
-+typing.Iterable[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"typing.Iterable"_typeshed.SupportsGetItem
-None*r
-	traversalc
-$typing.Iterable[lib2to3.pytree.Node]*
-lib2to3.pytree.Node"lib2to3.pytree.Node"typing.Iterablez310z311z312z313z314*¥
-processed_file/lib2to3.refactor.RefactoringTool.processed_file"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool**
-new_text
-builtins.str"builtins.str*¯
-filenameÈ
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*T
-old_textD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *+
-write
-builtins.bool"builtins.bool *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ë
+self(*
+fixer_names(*
+options (*
+explicit (	*
 
-write_file+lib2to3.refactor.RefactoringTool.write_file"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool**
-new_text
-builtins.str"builtins.str*ã
-filename¸
-ÇTypeAlias[Union[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]“
-wUnion[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]
-builtins.int"builtins.int∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPath**
-old_text
-builtins.str"builtins.str*T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ù
-refactor_docstring3lib2to3.refactor.RefactoringTool.refactor_docstring"
-builtins.str"builtins.str*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*'
-input
-builtins.str"builtins.str*¯
-filenameÈ
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313z314*†
-refactor_doctest1lib2to3.refactor.RefactoringTool.refactor_doctest"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*U
-blockJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*(
-lineno
-builtins.int"builtins.int*(
-indent
-builtins.int"builtins.int*¯
-filenameÈ
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313z314*™
-	summarize*lib2to3.refactor.RefactoringTool.summarize"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringToolz310z311z312z313z314*ˇ
-parse_block,lib2to3.refactor.RefactoringTool.parse_block"*
-lib2to3.pytree.Node"lib2to3.pytree.Node*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*Y
-blockN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*(
-lineno
-builtins.int"builtins.int*(
-indent
-builtins.int"builtins.intz310z311z312z313z314*ö
-	wrap_toks*lib2to3.refactor.RefactoringTool.wrap_toks"»
-ãtyping.Generator[Tuple[builtins.int,builtins.str,Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],builtins.str],None,None]ë
-oTuple[builtins.int,builtins.str,Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str
-None
-None"typing.Generator*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*Y
-blockN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*(
-lineno
-builtins.int"builtins.int*(
-indent
-builtins.int"builtins.intz310z311z312z313z314*ï
-	gen_lines*lib2to3.refactor.RefactoringTool.gen_lines"n
-(typing.Generator[builtins.str,None,None]
-builtins.str"builtins.str
-None
-None"typing.Generator*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*Y
-blockN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*(
-indent
-builtins.int"builtins.intz310z311z312z313z3142∞
-log_message,lib2to3.refactor.RefactoringTool.log_message◊
-log_message,lib2to3.refactor.RefactoringTool.log_message"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*+
-msg"
-builtins.object"builtins.object0:typing.overloadXˇ
-log_message,lib2to3.refactor.RefactoringTool.log_message"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*%
-msg
-builtins.str"builtins.str*,
-args"
-builtins.object"builtins.object0:typing.overloadX"310"311"312"313"3142§
-	log_debug*lib2to3.refactor.RefactoringTool.log_debug”
-	log_debug*lib2to3.refactor.RefactoringTool.log_debug"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*+
-msg"
-builtins.object"builtins.object0:typing.overloadX˚
-	log_debug*lib2to3.refactor.RefactoringTool.log_debug"
-None*N
-selfD
- lib2to3.refactor.RefactoringTool" lib2to3.refactor.RefactoringTool*%
-msg
-builtins.str"builtins.str*,
-args"
-builtins.object"builtins.object0:typing.overloadX"310"311"312"313"314j310j311j312j313j314rt
-CLASS_PREFIX-lib2to3.refactor.RefactoringTool.CLASS_PREFIX
-builtins.str"builtins.str*310*311*312*313*314rr
-FILE_PREFIX,lib2to3.refactor.RefactoringTool.FILE_PREFIX
-builtins.str"builtins.str*310*311*312*313*314rö
-fixers'lib2to3.refactor.RefactoringTool.fixersN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*310*311*312*313*314r†
-explicit)lib2to3.refactor.RefactoringTool.explicitP
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container*310*311*312*313*314r•
-options(lib2to3.refactor.RefactoringTool.optionsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314rå
-grammar(lib2to3.refactor.RefactoringTool.grammar>
-lib2to3.pgen2.grammar.Grammar"lib2to3.pgen2.grammar.Grammar*310*311*312*313*314rà
-write_unchanged_files6lib2to3.refactor.RefactoringTool.write_unchanged_files
-builtins.bool"builtins.bool*310*311*312*313*314rû
-errors'lib2to3.refactor.RefactoringTool.errors—
-õbuiltins.list[Tuple[builtins.str,typing.Iterable[builtins.str],builtins.dict[builtins.str,TypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]]]]°
-åTuple[builtins.str,typing.Iterable[builtins.str],builtins.dict[builtins.str,TypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]]]
-builtins.str"builtins.strN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterableü
-⁄builtins.dict[builtins.str,TypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]]
-builtins.str"builtins.strí	
-æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∂
-≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
-None
-builtins.bool"builtins.boolü
-ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]¸
-wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]≈
-ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type0
-builtins.BaseException"builtins.BaseExceptionY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None7
-Tuple[None,None,None]
-None
-None
-None"logging._SysExcInfoType0
-builtins.BaseException"builtins.BaseException"logging._ExcInfoType"builtins.dict"builtins.list*310*311*312*313*314rl
-logger'lib2to3.refactor.RefactoringTool.logger 
-logging.Logger"logging.Logger*310*311*312*313*314rú
-	fixer_log*lib2to3.refactor.RefactoringTool.fixer_logJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rh
-wrote&lib2to3.refactor.RefactoringTool.wrote
-builtins.bool"builtins.bool*310*311*312*313*314rÜ
-driver'lib2to3.refactor.RefactoringTool.driver:
-lib2to3.pgen2.driver.Driver"lib2to3.pgen2.driver.Driver*310*311*312*313*314r∆
-	pre_order*lib2to3.refactor.RefactoringTool.pre_ordert
-)builtins.list[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"builtins.list*310*311*312*313*314r»
+get_fixers*
 
-post_order+lib2to3.refactor.RefactoringTool.post_ordert
-)builtins.list[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"builtins.list*310*311*312*313*314rè
-files&lib2to3.refactor.RefactoringTool.filesƒ
-Gbuiltins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath"builtins.list*310*311*312*313*314rä
-BM#lib2to3.refactor.RefactoringTool.BMF
-!lib2to3.btm_matcher.BottomMatcher"!lib2to3.btm_matcher.BottomMatcher*310*311*312*313*314rŒ
-bmi_pre_order.lib2to3.refactor.RefactoringTool.bmi_pre_ordert
-)builtins.list[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"builtins.list*310*311*312*313*314r–
-bmi_post_order/lib2to3.refactor.RefactoringTool.bmi_post_ordert
-)builtins.list[lib2to3.fixer_base.BaseFix]8
-lib2to3.fixer_base.BaseFix"lib2to3.fixer_base.BaseFix"builtins.list*310*311*312*313*314rb
-PS1$lib2to3.refactor.RefactoringTool.PS1
-builtins.str"builtins.str*310*311*312*313*314rb
-PS2$lib2to3.refactor.RefactoringTool.PS2
-builtins.str"builtins.str*310*311*312*313*314v
-MultiprocessingUnsupported+lib2to3.refactor.MultiprocessingUnsupported"builtins.Exceptionj310j311j312j313j314†
-MultiprocessRefactoringTool,lib2to3.refactor.MultiprocessRefactoringTool" lib2to3.refactor.RefactoringTool*º
-refactor5lib2to3.refactor.MultiprocessRefactoringTool.refactor"
-None*f
-self\
-,lib2to3.refactor.MultiprocessRefactoringTool",lib2to3.refactor.MultiprocessRefactoringTool*Y
-itemsN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*+
-write
-builtins.bool"builtins.bool *3
-doctests_only
-builtins.bool"builtins.bool *1
-num_processes
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314rÚ
-queue2lib2to3.refactor.MultiprocessRefactoringTool.queueõ
-ÑUnion[multiprocessing.queues.JoinableQueue[Union[None,Tuple[typing.Iterable[builtins.str],Union[builtins.bool,builtins.int]]]],None]Ö
-xmultiprocessing.queues.JoinableQueue[Union[None,Tuple[typing.Iterable[builtins.str],Union[builtins.bool,builtins.int]]]]‚
-RUnion[None,Tuple[typing.Iterable[builtins.str],Union[builtins.bool,builtins.int]]]
-Noneˇ
-FTuple[typing.Iterable[builtins.str],Union[builtins.bool,builtins.int]]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterablec
-!Union[builtins.bool,builtins.int]
-builtins.bool"builtins.bool
-builtins.int"builtins.int"$multiprocessing.queues.JoinableQueue
-None*310*311*312*313*314r„
-output_lock8lib2to3.refactor.MultiprocessRefactoringTool.output_lockÄ
-,Union[multiprocessing.synchronize.Lock,None]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.Lock
-None*310*311*312*313*314˛
-get_all_fix_names"lib2to3.refactor.get_all_fix_names"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*+
-	fixer_pkg
-builtins.str"builtins.str*3
-remove_prefix
-builtins.bool"builtins.bool z310z311z312z313z314‘
-get_fixers_from_package(lib2to3.refactor.get_fixers_from_package"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list**
-pkg_name
-builtins.str"builtins.strz310z311z312z313z314*•
-__annotations__ lib2to3.refactor.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*>
+	log_error*
+
+self(*	
+msg(*
+
+args(*
+kwargs(*Y
+print_output*
+
+self(*
+old_text(*
+new_text(*
+filename(*
+equal(*K
+refactor*
+
+self(*
+items(*
+write (*
+doctests_only (*R
+refactor_dir*
+
+self(*
+dir_name(*
+write (*
+doctests_only (*3
+_read_python_source*
+
+self(*
+filename(#*S
+refactor_file*
+
+self(*
+filename(*
+write (*
+doctests_only (*7
+refactor_string%*
+
+self(*
+
+data(*
+
+name(*5
+refactor_stdin*
+
+self(*
+doctests_only (*5
+refactor_tree*
+
+self(*
+
+tree($*
+
+name(*:
+traverse_by*
+
+self(*
+fixers((*
+	traversal()*q
+processed_file*
+
+self(*
+new_text(*
+filename(*
+old_text (**
+write (*
+encoding (**\
+
+write_file*
+
+self(*
+new_text(*
+filename(#*
+old_text(*
+encoding (**?
+refactor_docstring*
+
+self(*
+input(*
+filename(*Y
+refactor_doctest+*
+
+self(*
+block(+*
+lineno(*
+indent(*
+filename(*
+	summarize*
+
+self(*D
+parse_block$*
+
+self(*
+block(*
+lineno(*
+indent(*B
+	wrap_toks.*
+
+self(*
+block(*
+lineno(*
+indent(*4
+	gen_lines/*
+
+self(*
+block(*
+indent(2ì
+log_message;
+log_message*
+
+self(*	
+msg(0:typing.overloadXG
+log_message*
+
+self(*	
+msg(*
+
+args(0:typing.overloadX2ç
+	log_debug9
+	log_debug*
+
+self(*	
+msg(0:typing.overloadXE
+	log_debug*
+
+self(*	
+msg(*
+
+args(0:typing.overloadXr
+CLASS_PREFIX0r
+FILE_PREFIX0r
+
+fixers0r
+explicit0r
+options01r
+grammar02r
+write_unchanged_files0r
+
+errors05r
+
+logger06r
+	fixer_log0+r	
+wrote0r
+
+driver07r
+	pre_order0r
+
+post_order0r	
+files08r
+BM09r
+bmi_pre_order0r
+bmi_post_order0r
+PS10r
+PS200
+MultiprocessingUnsupported"builtins.Exceptionø
+MultiprocessRefactoringTool" lib2to3.refactor.RefactoringTool*b
+refactor*
+
+self(:*
+items(*
+write (*
+doctests_only (*
+num_processes (r	
+queue0?r
+output_lock0A=
+get_all_fix_names+*
+	fixer_pkg(*
+remove_prefix (+
+get_fixers_from_package+*
+pkg_name(*
+__annotations__0122"" lib2to3.refactor.RefactoringTool2"builtins.str2"typing.Iterable22"builtins.object2"typing.Mapping2222"typing.Container2222"lib2to3.fixer_base.BaseFix2"builtins.list2
+222
+2"builtins.bool2"builtins.BaseException2"type22"types.TracebackType222222222"logging._SysExcInfoType2222"logging._ExcInfoType22"os.PathLike2222"_typeshed.StrPath2222"builtins.int2"builtins.bytes2"os.PathLike2222"_typeshed.StrOrBytesPath2 22!2%"_typeshed.FileDescriptorOrPath2"2"lib2to3.pytree.Node22$2"typing.Iterable2
+2"_typeshed.SupportsGetItem2&22'2"typing.Iterable2$222"builtins.list2222	2,,2"typing.Generator2-2"typing.Generator222"builtins.dict202"lib2to3.pgen2.grammar.Grammar2"builtins.dict22232"builtins.list242"logging.Logger2"lib2to3.pgen2.driver.Driver2"builtins.list22#"!lib2to3.btm_matcher.BottomMatcher2.",lib2to3.refactor.MultiprocessRefactoringTool2222;22<2)"$multiprocessing.queues.JoinableQueue2=22>2"" multiprocessing.synchronize.Lock22@

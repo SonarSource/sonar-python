@@ -1,338 +1,185 @@
 
-pika.adaptersÌ
-BaseConnection,pika.adapters.base_connection.BaseConnection"pika.connection.Connection*ä
-__init__5pika.adapters.base_connection.BaseConnection.__init__"
-None*Œ
-self√
-1pika.adapters.base_connection.BaseConnection.Self\
-,pika.adapters.base_connection.BaseConnection",pika.adapters.base_connection.BaseConnection",pika.adapters.base_connection.BaseConnection(*
+pika.adaptersÂ
+BaseConnection,pika.adapters.base_connection.BaseConnection"pika.connection.Connection*©
+__init__*
 
-parameters
-Any*ù
-on_open_callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*£
-on_open_error_callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*û
-on_close_callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*
-nbio
-Any*@
-internal_connection_workflow
-builtins.bool"builtins.boolz310z311z312z313z314*‚
-create_connection>pika.adapters.base_connection.BaseConnection.create_connection"
-Any*§
-clsö
-2Type[pika.adapters.base_connection.BaseConnection]\
-,pika.adapters.base_connection.BaseConnection",pika.adapters.base_connection.BaseConnection"type*
-connection_configs
-Any*
-on_done
-Any*p
-custom_ioloop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-workflow[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.classmethod:abc.abstractmethod@pz310z311z312z313z314*w
-ioloop3pika.adapters.base_connection.BaseConnection.ioloop*
-self0:builtins.property`z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314˚9
-BlockingConnection4pika.adapters.blocking_connection.BlockingConnection"builtins.object*˛
-__init__=pika.adapters.blocking_connection.BlockingConnection.__init__"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*ß
+self(*
 
-parametersî
-RUnion[pika.connection.Parameters,typing.Sequence[pika.connection.Parameters],None]8
-pika.connection.Parameters"pika.connection.Parametersx
-+typing.Sequence[pika.connection.Parameters]8
-pika.connection.Parameters"pika.connection.Parameters"typing.Sequence
-None *n
-_impl_class[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*≥
-	__enter__>pika.adapters.blocking_connection.BlockingConnection.__enter__"„
-9pika.adapters.blocking_connection.BlockingConnection.Selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection(*Ê„
-9pika.adapters.blocking_connection.BlockingConnection.Selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection(z310z311z312z313z314*µ
-__exit__=pika.adapters.blocking_connection.BlockingConnection.__exit__"
-None*nl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*Ø
-"add_on_connection_blocked_callbackWpika.adapters.blocking_connection.BlockingConnection.add_on_connection_blocked_callback"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*
-callback
-Anyz310z311z312z313z314*≥
-$add_on_connection_unblocked_callbackYpika.adapters.blocking_connection.BlockingConnection.add_on_connection_unblocked_callback"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*
-callback
-Anyz310z311z312z313z314*â
+parameters(*
+on_open_callback(*
+on_open_error_callback(*
+on_close_callback(*
 
-call_later?pika.adapters.blocking_connection.BlockingConnection.call_later*
+nbio(*"
+internal_connection_workflow(*¢
+create_connection*	
+cls(	*
+connection_configs(*
+on_done(*
+custom_ioloop (*
+workflow (0:builtins.classmethod:abc.abstractmethod@p*)
+ioloop*
+self0:builtins.property`@babc.ABCMeta‚	
+BlockingConnection4pika.adapters.blocking_connection.BlockingConnection"builtins.object*A
+__init__*
+
+self(*
+
+parameters (*
+_impl_class (*
+	__enter__*(*
+__exit__*(*(*(*(*B
+"add_on_connection_blocked_callback*
+
+self(*
+callback(*D
+$add_on_connection_unblocked_callback*
+
+self(*
+callback(*/
+
+call_later*
 self*	
 delay*
-callbackz310z311z312z313z314*ô
-add_callback_threadsafeLpika.adapters.blocking_connection.BlockingConnection.add_callback_threadsafe"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*
-callback
-Anyz310z311z312z313z314*â
-remove_timeoutCpika.adapters.blocking_connection.BlockingConnection.remove_timeout"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*
+callback*7
+add_callback_threadsafe*
 
-timeout_id
-Anyz310z311z312z313z314*ú
-update_secretBpika.adapters.blocking_connection.BlockingConnection.update_secret"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*
+self(*
+callback(*0
+remove_timeout*
 
-new_secret
-Any*
-reason
-Anyz310z311z312z313z314*æ
-close:pika.adapters.blocking_connection.BlockingConnection.close"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*.
+self(*
 
-reply_code
-builtins.int"builtins.int *.
+timeout_id(*=
+update_secret*
 
-reply_text
-builtins.str"builtins.str z310z311z312z313z314*©
-process_data_eventsHpika.adapters.blocking_connection.BlockingConnection.process_data_events"
-Any*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*.
+self(*
 
-time_limit
-builtins.int"builtins.int z310z311z312z313z314*é
-sleep:pika.adapters.blocking_connection.BlockingConnection.sleep"
-None*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*.
-duration 
-builtins.float"builtins.floatz310z311z312z313z314*ú
-channel<pika.adapters.blocking_connection.BlockingConnection.channel"f
-1pika.adapters.blocking_connection.BlockingChannel"1pika.adapters.blocking_connection.BlockingChannel*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection*Z
-channel_numberD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*ì
-	is_closed>pika.adapters.blocking_connection.BlockingConnection.is_closed"
-builtins.bool"builtins.bool*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection0:builtins.property`z310z311z312z313z314*è
-is_open<pika.adapters.blocking_connection.BlockingConnection.is_open"
-builtins.bool"builtins.bool*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection0:builtins.property`z310z311z312z313z314*©
-basic_nack_supportedIpika.adapters.blocking_connection.BlockingConnection.basic_nack_supported"
-builtins.bool"builtins.bool*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection0:builtins.property`z310z311z312z313z314*¡
- consumer_cancel_notify_supportedUpika.adapters.blocking_connection.BlockingConnection.consumer_cancel_notify_supported"
-builtins.bool"builtins.bool*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection0:builtins.property`z310z311z312z313z314*…
-$exchange_exchange_bindings_supportedYpika.adapters.blocking_connection.BlockingConnection.exchange_exchange_bindings_supported"
-builtins.bool"builtins.bool*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection0:builtins.property`z310z311z312z313z314*π
-publisher_confirms_supportedQpika.adapters.blocking_connection.BlockingConnection.publisher_confirms_supported"
-builtins.bool"builtins.bool*v
-selfl
-4pika.adapters.blocking_connection.BlockingConnection"4pika.adapters.blocking_connection.BlockingConnection0:builtins.property`z310z311z312z313z314j310j311j312j313j314r≥
+new_secret(*
+reason(*=
+close*
 
-basic_nack?pika.adapters.blocking_connection.BlockingConnection.basic_nackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rÀ
-consumer_cancel_notifyKpika.adapters.blocking_connection.BlockingConnection.consumer_cancel_notifyK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r”
-exchange_exchange_bindingsOpika.adapters.blocking_connection.BlockingConnection.exchange_exchange_bindingsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r√
-publisher_confirmsGpika.adapters.blocking_connection.BlockingConnection.publisher_confirmsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314¡
-IOLoop&pika.adapters.select_connection.IOLoop"Bpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop*∫
-__init__/pika.adapters.select_connection.IOLoop.__init__"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*¥
-close,pika.adapters.select_connection.IOLoop.close"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*{
+self(*
 
-call_later1pika.adapters.select_connection.IOLoop.call_later*
+reply_code (*
+
+reply_text (*7
+process_data_events*
+
+self(*
+
+time_limit (*%
+sleep*
+
+self(*
+duration(*/
+channel*
+
+self(*
+channel_number (*0
+	is_closed*
+
+self(0:builtins.property`*.
+is_open*
+
+self(0:builtins.property`*;
+basic_nack_supported*
+
+self(0:builtins.property`*G
+ consumer_cancel_notify_supported*
+
+self(0:builtins.property`*K
+$exchange_exchange_bindings_supported*
+
+self(0:builtins.property`*C
+publisher_confirms_supported*
+
+self(0:builtins.property`r
+
+basic_nack0r
+consumer_cancel_notify0r
+exchange_exchange_bindings0r
+publisher_confirms0∆
+IOLoop&pika.adapters.select_connection.IOLoop"Bpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop*
+__init__*
+
+self(*
+close*
+
+self(*/
+
+call_later*
 self*	
 delay*
-callbackz310z311z312z313z314*„
-remove_timeout5pika.adapters.select_connection.IOLoop.remove_timeout"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoop*
-timeout_handle
-Anyz310z311z312z313z314*Ô
-add_callback_threadsafe>pika.adapters.select_connection.IOLoop.add_callback_threadsafe"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoop*
-callback
-Anyz310z311z312z313z314* 
-process_timeouts7pika.adapters.select_connection.IOLoop.process_timeouts"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*¸
-add_handler2pika.adapters.select_connection.IOLoop.add_handler"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoop*
-fd
-Any*
-handler
-Any*
-events
-Anyz310z311z312z313z314*Ï
-update_handler5pika.adapters.select_connection.IOLoop.update_handler"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoop*
-fd
-Any*
-events
-Anyz310z311z312z313z314*◊
-remove_handler5pika.adapters.select_connection.IOLoop.remove_handler"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoop*
-fd
-Anyz310z311z312z313z314*¥
-start,pika.adapters.select_connection.IOLoop.start"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*≤
-stop+pika.adapters.select_connection.IOLoop.stop"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*»
-activate_poller6pika.adapters.select_connection.IOLoop.activate_poller"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*Ã
-deactivate_poller8pika.adapters.select_connection.IOLoop.deactivate_poller"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314*≤
-poll+pika.adapters.select_connection.IOLoop.poll"
-None*Z
-selfP
-&pika.adapters.select_connection.IOLoop"&pika.adapters.select_connection.IOLoopz310z311z312z313z314j310j311j312j313j314r
-READ+pika.adapters.select_connection.IOLoop.READ1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÅ
-WRITE,pika.adapters.select_connection.IOLoop.WRITE1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÅ
-ERROR,pika.adapters.select_connection.IOLoop.ERROR1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rè
-add_callback3pika.adapters.select_connection.IOLoop.add_callback1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314–
-SelectConnection0pika.adapters.select_connection.SelectConnection",pika.adapters.base_connection.BaseConnection*„
-__init__9pika.adapters.select_connection.SelectConnection.__init__"
-None*n
-selfd
-0pika.adapters.select_connection.SelectConnection"0pika.adapters.select_connection.SelectConnection*m
+callback*4
+remove_timeout*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *s
-on_open_callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *y
-on_open_error_callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *t
-on_close_callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-custom_ioloop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *B
-internal_connection_workflow
-builtins.bool"builtins.bool z310z311z312z313z314*‹
-create_connectionBpika.adapters.select_connection.SelectConnection.create_connection"
-Any*∞
-cls¶
-6Type[pika.adapters.select_connection.SelectConnection]d
-0pika.adapters.select_connection.SelectConnection"0pika.adapters.select_connection.SelectConnection"type*
-connection_configs
-Any*
-on_done
-Any*p
-custom_ioloop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-workflow[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.classmethodpz310z311z312z313z314j310j311j312j313j314*á
-__path__pika.adapters.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*¢
-__annotations__pika.adapters.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+timeout_handle(*7
+add_callback_threadsafe*
+
+self(*
+callback(* 
+process_timeouts*
+
+self(*B
+add_handler*
+
+self(*
+fd(*
+handler(*
+events(*6
+update_handler*
+
+self(*
+fd(*
+events(*(
+remove_handler*
+
+self(*
+fd(*
+start*
+
+self(*
+stop*
+
+self(*
+activate_poller*
+
+self(*!
+deactivate_poller*
+
+self(*
+poll*
+
+self(r
+READ0
+r	
+WRITE0
+r	
+ERROR0
+r
+add_callback0
+¬
+SelectConnection0pika.adapters.select_connection.SelectConnection",pika.adapters.base_connection.BaseConnection*æ
+__init__*
+
+self(*
+
+parameters (*
+on_open_callback (*
+on_open_error_callback (*
+on_close_callback (*
+custom_ioloop (*$
+internal_connection_workflow (*å
+create_connection*	
+cls(*
+connection_configs(*
+on_done(*
+custom_ioloop (*
+workflow (0:builtins.classmethodp*
+__path__0*
+__annotations__0 22.",pika.adapters.base_connection.BaseConnection2h
+1pika.adapters.base_connection.BaseConnection.Self",pika.adapters.base_connection.BaseConnection(222"builtins.function22222"builtins.bool2"type22"_typeshed.Incomplete222
+26"4pika.adapters.blocking_connection.BlockingConnection2"pika.connection.Parameters2"typing.Sequence2222x
+9pika.adapters.blocking_connection.BlockingConnection.Self"4pika.adapters.blocking_connection.BlockingConnection(22"builtins.BaseException2"type222222"types.TracebackType222"builtins.int2"builtins.str2"builtins.float23"1pika.adapters.blocking_connection.BlockingChannel222("&pika.adapters.select_connection.IOLoop22"0pika.adapters.select_connection.SelectConnection2"type22"builtins.list22"builtins.dict2

@@ -1,145 +1,90 @@
 
 
-pika.frameê
+pika.frame∞
 
-AMQPMethodpika.amqp_object.Method"pika.amqp_object.AMQPObject*¿
-synchronous#pika.amqp_object.Method.synchronous"
-builtins.bool"builtins.bool*<
-self2
-pika.amqp_object.Method"pika.amqp_object.Method0:builtins.property`z310z311z312z313z314*À
-get_properties&pika.amqp_object.Method.get_properties":
-pika.amqp_object.Properties"pika.amqp_object.Properties*<
-self2
-pika.amqp_object.Method"pika.amqp_object.Methodz310z311z312z313z314*°
-get_body pika.amqp_object.Method.get_body"
-builtins.str"builtins.str*<
-self2
-pika.amqp_object.Method"pika.amqp_object.Methodz310z311z312z313z314j310j311j312j313j314ü
-Framepika.frame.Frame"pika.amqp_object.AMQPObject*ÿ
-__init__pika.frame.Frame.__init__"
-None*.
-self$
-pika.frame.Frame"pika.frame.Frame*,
+AMQPMethodpika.amqp_object.Method"pika.amqp_object.AMQPObject*2
+synchronous*
 
-frame_type
-builtins.int"builtins.int*0
-channel_number
-builtins.int"builtins.intz310z311z312z313z314*¶
-marshalpika.frame.Frame.marshal" 
-builtins.bytes"builtins.bytes*.
-self$
-pika.frame.Frame"pika.frame.Frame0:abc.abstractmethod@z310z311z312z313z314j310j311j312j313j314r`
+self(0:builtins.property`*
+get_properties*
 
-frame_typepika.frame.Frame.frame_type
-builtins.int"builtins.int*310*311*312*313*314rh
-channel_numberpika.frame.Frame.channel_number
-builtins.int"builtins.int*310*311*312*313*314¯
-Methodpika.frame.Method"pika.frame.Frame*ä
-__init__pika.frame.Method.__init__"
-None*†
-selfï
- pika.frame.Method[pika.frame._M]^
-pika.frame._M2
-pika.amqp_object.Method"pika.amqp_object.Method"pika.amqp_object.Method"pika.frame.Method*0
-channel_number
-builtins.int"builtins.int*j
-method^
-pika.frame._M2
-pika.amqp_object.Method"pika.amqp_object.Method"pika.amqp_object.Methodz310z311z312z313z314*Ç
-marshalpika.frame.Method.marshal" 
-builtins.bytes"builtins.bytes*†
-selfï
- pika.frame.Method[pika.frame._M]^
-pika.frame._M2
-pika.amqp_object.Method"pika.amqp_object.Method"pika.amqp_object.Method"pika.frame.Methodz310z311z312z313z314Pj310j311j312j313j314rõ
-methodpika.frame.Method.method^
-pika.frame._M2
-pika.amqp_object.Method"pika.amqp_object.Method"pika.amqp_object.Method*310*311*312*313*314ÿ
-Headerpika.frame.Header"pika.frame.Frame*ù
-__init__pika.frame.Header.__init__"
-None*0
-self&
-pika.frame.Header"pika.frame.Header*0
-channel_number
-builtins.int"builtins.int*+
-	body_size
-builtins.int"builtins.int*A
-props6
-pika.spec.BasicProperties"pika.spec.BasicPropertiesz310z311z312z313z314*ë
-marshalpika.frame.Header.marshal" 
-builtins.bytes"builtins.bytes*0
-self&
-pika.frame.Header"pika.frame.Headerz310z311z312z313z314j310j311j312j313j314r_
-	body_sizepika.frame.Header.body_size
-builtins.int"builtins.int*310*311*312*313*314r{
+self(*
+get_body*
 
-propertiespika.frame.Header.properties6
-pika.spec.BasicProperties"pika.spec.BasicProperties*310*311*312*313*314ã
-Bodypika.frame.Body"pika.frame.Frame*◊
-__init__pika.frame.Body.__init__"
-None*,
-self"
-pika.frame.Body"pika.frame.Body*0
-channel_number
-builtins.int"builtins.int*.
-fragment 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ã
-marshalpika.frame.Body.marshal" 
-builtins.bytes"builtins.bytes*,
-self"
-pika.frame.Body"pika.frame.Bodyz310z311z312z313z314j310j311j312j313j314r_
-fragmentpika.frame.Body.fragment 
-builtins.bytes"builtins.bytes*310*311*312*313*314
-	Heartbeatpika.frame.Heartbeat"pika.frame.Frame*Ñ
-__init__pika.frame.Heartbeat.__init__"
-None*6
-self,
-pika.frame.Heartbeat"pika.frame.Heartbeatz310z311z312z313z314*ö
-marshalpika.frame.Heartbeat.marshal" 
-builtins.bytes"builtins.bytes*6
-self,
-pika.frame.Heartbeat"pika.frame.Heartbeatz310z311z312z313z314j310j311j312j313j314≥
-ProtocolHeaderpika.frame.ProtocolHeader"pika.amqp_object.AMQPObject*è
-__init__"pika.frame.ProtocolHeader.__init__"
-None*@
-self6
-pika.frame.ProtocolHeader"pika.frame.ProtocolHeader*Q
-majorD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Q
-minorD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-revisionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*©
-marshal!pika.frame.ProtocolHeader.marshal" 
-builtins.bytes"builtins.bytes*@
-self6
-pika.frame.ProtocolHeader"pika.frame.ProtocolHeaderz310z311z312z313z314j310j311j312j313j314ri
+self(ª
+Frame"pika.amqp_object.AMQPObject*@
+__init__*
 
-frame_type$pika.frame.ProtocolHeader.frame_type
-builtins.int"builtins.int*310*311*312*313*314r_
-majorpika.frame.ProtocolHeader.major
-builtins.int"builtins.int*310*311*312*313*314r_
-minorpika.frame.ProtocolHeader.minor
-builtins.int"builtins.int*310*311*312*313*314re
-revision"pika.frame.ProtocolHeader.revision
-builtins.int"builtins.int*310*311*312*313*314ñ
-decode_framepika.frame.decode_frame"§
-0Tuple[builtins.int,Union[pika.frame.Frame,None]]
-builtins.int"builtins.intP
-Union[pika.frame.Frame,None]$
-pika.frame.Frame"pika.frame.Frame
-None*-
-data_in 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ü
-__annotations__pika.frame.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*V
-LOGGERpika.frame.LOGGER 
-logging.Logger"logging.Logger*310*311*312*313*314
+self(*
+
+frame_type(*
+channel_number(*/
+marshal*
+
+self(0:abc.abstractmethod@r
+
+frame_type0r
+channel_number0
+Method"pika.frame.Frame*<
+__init__*
+
+self(
+*
+channel_number(*
+method(	*
+marshal*
+
+self(
+Pr
+
+method0	†
+Header"pika.frame.Frame*L
+__init__*
+
+self(*
+channel_number(*
+	body_size(*
+props(*
+marshal*
+
+self(r
+	body_size0r
+
+properties0
+Body"pika.frame.Frame*>
+__init__*
+
+self(*
+channel_number(*
+fragment(*
+marshal*
+
+self(r
+fragment0P
+	Heartbeat"pika.frame.Frame*
+__init__*
+
+self(*
+marshal*
+
+self(ƒ
+ProtocolHeader"pika.amqp_object.AMQPObject*H
+__init__*
+
+self(*
+major (*
+minor (*
+revision (*
+marshal*
+
+self(r
+
+frame_type0r	
+major0r	
+minor0r
+revision0
+decode_frame*
+data_in(*
+__annotations__0*
+
+LOGGER02"builtins.bool2"pika.amqp_object.Method2"pika.amqp_object.Properties2"builtins.str22"pika.frame.Frame2"builtins.int2"builtins.bytes2"pika.amqp_object.Method22"pika.frame.Method2	2"pika.frame.Header2"pika.spec.BasicProperties2"pika.frame.Body2"pika.frame.Heartbeat2"pika.frame.ProtocolHeader22222222"builtins.dict22"logging.Logger

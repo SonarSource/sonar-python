@@ -1,234 +1,98 @@
 
-anyio.abc._socketsû
+anyio.abc._socketsŸ
+SocketAttribute"(anyio._core._typedattr.TypedAttributeSetr
 
-SocketAttribute"anyio.abc._sockets.SocketAttribute"(anyio._core._typedattr.TypedAttributeSetra
-family)anyio.abc._sockets.SocketAttribute.family,
-socket.AddressFamily"socket.AddressFamilyrÎ
-local_address0anyio.abc._sockets.SocketAttribute.local_addressŠ
-JTypeAlias[Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]]˜
-?Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]´
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"!anyio.abc._sockets.IPSockAddrType
-builtins.str"builtins.str"anyio.abc._sockets.SockAddrTyperY
+family0r
+local_address0r
 
-local_port-anyio.abc._sockets.SocketAttribute.local_port
-builtins.int"builtins.intr[
+local_port0r
 
-raw_socket-anyio.abc._sockets.SocketAttribute.raw_socket
-socket.socket"socket.socketrÐ
-remote_address1anyio.abc._sockets.SocketAttribute.remote_addressŠ
-JTypeAlias[Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]]˜
-?Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]´
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"!anyio.abc._sockets.IPSockAddrType
-builtins.str"builtins.str"anyio.abc._sockets.SockAddrTyper[
-remote_port.anyio.abc._sockets.SocketAttribute.remote_port
-builtins.int"builtins.int˜
-_SocketProvider"anyio.abc._sockets._SocketProvider"-anyio._core._typedattr.TypedAttributeProvider*Ð
-extra_attributes3anyio.abc._sockets._SocketProvider.extra_attributes"›
-3typing.Mapping[Any,CallableType[builtins.function]]
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function"typing.Mapping*R
-selfH
-"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:builtins.property`*Þ
-_raw_socket.anyio.abc._sockets._SocketProvider._raw_socket"
-socket.socket"socket.socket*R
-selfH
-"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:builtins.property:abc.abstractmethod@`ä
-SocketStreamanyio.abc._sockets.SocketStream"anyio.abc._streams.ByteStream""anyio.abc._sockets._SocketProvider*ï
-from_socket+anyio.abc._sockets.SocketStream.from_socket"£
-9typing.Coroutine[Any,Any,anyio.abc._sockets.SocketStream]
-Any
-AnyB
-anyio.abc._sockets.SocketStream"anyio.abc._sockets.SocketStream"typing.Coroutine*|
-clss
-%Type[anyio.abc._sockets.SocketStream]B
-anyio.abc._sockets.SocketStream"anyio.abc._sockets.SocketStream"type*s
+raw_socket0r
+remote_address0r
+remote_port0Ã
+_SocketProvider"-anyio._core._typedattr.TypedAttributeProvider*7
+extra_attributes*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHpÛ
-UNIXSocketStream#anyio.abc._sockets.UNIXSocketStream"anyio.abc._sockets.SocketStream*Œ
-from_socket/anyio.abc._sockets.UNIXSocketStream.from_socket"¯
-=typing.Coroutine[Any,Any,anyio.abc._sockets.UNIXSocketStream]
-Any
-AnyJ
-#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream"typing.Coroutine*ˆ
-cls
-)Type[anyio.abc._sockets.UNIXSocketStream]J
-#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream"type*s
+self(0:builtins.property`*H
+_raw_socket*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHp*Ò
-send_fds,anyio.abc._sockets.UNIXSocketStream.send_fds"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*T
-selfJ
-#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream*-
-message 
-builtins.bytes"builtins.bytes*¨
-fdsž
-0typing.Collection[Union[builtins.int,io.IOBase]]W
-Union[builtins.int,io.IOBase]
-builtins.int"builtins.int
-	io.IOBase"	io.IOBase"typing.Collection0:abc.abstractmethod@H*œ
-receive_fds/anyio.abc._sockets.UNIXSocketStream.receive_fds"—
-Ktyping.Coroutine[Any,Any,Tuple[builtins.bytes,builtins.list[builtins.int]]]
-Any
-Any£
-1Tuple[builtins.bytes,builtins.list[builtins.int]] 
-builtins.bytes"builtins.bytesJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list"typing.Coroutine*T
-selfJ
-#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream*(
-msglen
-builtins.int"builtins.int*(
-maxfds
-builtins.int"builtins.int0:abc.abstractmethod@Hð
+self(0:builtins.property:abc.abstractmethod@`›
+SocketStream"anyio.abc._streams.ByteStream""anyio.abc._sockets._SocketProvider*H
+from_socket*	
+cls(*
 
-SocketListener!anyio.abc._sockets.SocketListener"anyio.abc._streams.Listener""anyio.abc._sockets._SocketProvider*þ
-from_socket-anyio.abc._sockets.SocketListener.from_socket"©
-;typing.Coroutine[Any,Any,anyio.abc._sockets.SocketListener]
-Any
-AnyF
-!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener"typing.Coroutine*‚
-clsy
-'Type[anyio.abc._sockets.SocketListener]F
-!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener"type*s
+sock_or_fd(0:builtins.classmethodHpž
+UNIXSocketStream"anyio.abc._sockets.SocketStream*H
+from_socket*	
+cls(*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHp*Ä
-accept(anyio.abc._sockets.SocketListener.accept"£
-9typing.Coroutine[Any,Any,anyio.abc._sockets.SocketStream]
-Any
-AnyB
-anyio.abc._sockets.SocketStream"anyio.abc._sockets.SocketStream"typing.Coroutine*P
-selfF
-!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener0:abc.abstractmethod@H*±
-serve'anyio.abc._sockets.SocketListener.serve"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener*X
-handlerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*€
+sock_or_fd(0:builtins.classmethodHp*L
+send_fds*
 
-task_groupn
-&Union[anyio.abc._tasks.TaskGroup,None]8
-anyio.abc._tasks.TaskGroup"anyio.abc._tasks.TaskGroup
-None H›
-	UDPSocketanyio.abc._sockets.UDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*Ú
-from_socket(anyio.abc._sockets.UDPSocket.from_socket"š
-6typing.Coroutine[Any,Any,anyio.abc._sockets.UDPSocket]
-Any
-Any<
-anyio.abc._sockets.UDPSocket"anyio.abc._sockets.UDPSocket"typing.Coroutine*s
-clsj
-"Type[anyio.abc._sockets.UDPSocket]<
-anyio.abc._sockets.UDPSocket"anyio.abc._sockets.UDPSocket"type*s
+self(*
+message(*	
+fds(0:abc.abstractmethod@H*Q
+receive_fds*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHp*Ã
-sendto#anyio.abc._sockets.UDPSocket.sendto"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*F
-self<
-anyio.abc._sockets.UDPSocket"anyio.abc._sockets.UDPSocket**
-data 
-builtins.bytes"builtins.bytes*&
-host
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.intH¨
-ConnectedUDPSocket%anyio.abc._sockets.ConnectedUDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*›
-from_socket1anyio.abc._sockets.ConnectedUDPSocket.from_socket"µ
-?typing.Coroutine[Any,Any,anyio.abc._sockets.ConnectedUDPSocket]
-Any
-AnyN
-%anyio.abc._sockets.ConnectedUDPSocket"%anyio.abc._sockets.ConnectedUDPSocket"typing.Coroutine*
-cls…
-+Type[anyio.abc._sockets.ConnectedUDPSocket]N
-%anyio.abc._sockets.ConnectedUDPSocket"%anyio.abc._sockets.ConnectedUDPSocket"type*s
+self(*
+msglen(*
+maxfds(0:abc.abstractmethod@H‰
+SocketListener"anyio.abc._streams.Listener""anyio.abc._sockets._SocketProvider*H
+from_socket*	
+cls( *
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHpá
-UNIXDatagramSocket%anyio.abc._sockets.UNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*›
-from_socket1anyio.abc._sockets.UNIXDatagramSocket.from_socket"µ
-?typing.Coroutine[Any,Any,anyio.abc._sockets.UNIXDatagramSocket]
-Any
-AnyN
-%anyio.abc._sockets.UNIXDatagramSocket"%anyio.abc._sockets.UNIXDatagramSocket"typing.Coroutine*
-cls…
-+Type[anyio.abc._sockets.UNIXDatagramSocket]N
-%anyio.abc._sockets.UNIXDatagramSocket"%anyio.abc._sockets.UNIXDatagramSocket"type*s
+sock_or_fd(0:builtins.classmethodHp*0
+accept*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHp*¶
-sendto,anyio.abc._sockets.UNIXDatagramSocket.sendto"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*X
-selfN
-%anyio.abc._sockets.UNIXDatagramSocket"%anyio.abc._sockets.UNIXDatagramSocket**
-data 
-builtins.bytes"builtins.bytes*&
-path
-builtins.str"builtins.strHù
-ConnectedUNIXDatagramSocket.anyio.abc._sockets.ConnectedUNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*Ú
-from_socket:anyio.abc._sockets.ConnectedUNIXDatagramSocket.from_socket"Ð
-Htyping.Coroutine[Any,Any,anyio.abc._sockets.ConnectedUNIXDatagramSocket]
-Any
-Any`
-.anyio.abc._sockets.ConnectedUNIXDatagramSocket".anyio.abc._sockets.ConnectedUNIXDatagramSocket"typing.Coroutine*ª
-cls 
-4Type[anyio.abc._sockets.ConnectedUNIXDatagramSocket]`
-.anyio.abc._sockets.ConnectedUNIXDatagramSocket".anyio.abc._sockets.ConnectedUNIXDatagramSocket"type*s
+self(0:abc.abstractmethod@H*:
+serve*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int0:builtins.classmethodHp²
-_validate_socket#anyio.abc._sockets._validate_socket"
-socket.socket"socket.socket*s
+self(*
+handler(*
 
-sock_or_fdc
-!Union[socket.socket,builtins.int]
-socket.socket"socket.socket
-builtins.int"builtins.int*5
-	sock_type&
-socket.SocketKind"socket.SocketKind*?
-addr_family,
-socket.AddressFamily"socket.AddressFamily *7
-require_connected
-builtins.bool"builtins.bool *3
-require_bound
-builtins.bool"builtins.bool *Ž
-__annotations__"anyio.abc._sockets.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+task_group ("Hâ
+	UDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*H
+from_socket$*	
+cls(%*
+
+sock_or_fd(0:builtins.classmethodHp*<
+sendto*
+
+self(#*
+
+data(*
+
+host(*
+
+port(H­
+ConnectedUDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*H
+from_socket'*	
+cls((*
+
+sock_or_fd(0:builtins.classmethodHpß
+UNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*H
+from_socket**	
+cls(+*
+
+sock_or_fd(0:builtins.classmethodHp*0
+sendto*
+
+self()*
+
+data(*
+
+path(H¶
+ConnectedUNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*H
+from_socket-*	
+cls(.*
+
+sock_or_fd(0:builtins.classmethodHp~
+_validate_socket*
+
+sock_or_fd(*
+	sock_type(/*
+addr_family (*
+require_connected (0*
+require_bound (0*
+__annotations__012"socket.AddressFamily2"builtins.str2"builtins.int222("!anyio.abc._sockets.IPSockAddrType2222&"anyio.abc._sockets.SockAddrType22"socket.socket22"builtins.function22
+2"typing.Mapping2	2$""anyio.abc._sockets._SocketProvider2!"anyio.abc._sockets.SocketStream2"typing.Coroutine2		2"type2222%"#anyio.abc._sockets.UNIXSocketStream2"typing.Coroutine2		2"type222"typing.Coroutine2		2"builtins.bytes2"	io.IOBase222"typing.Collection22"builtins.list2222"typing.Coroutine2		2#"!anyio.abc._sockets.SocketListener2"typing.Coroutine2		2"type22"anyio.abc._tasks.TaskGroup22!2"anyio.abc._sockets.UDPSocket2"typing.Coroutine2		#2"type2#2'"%anyio.abc._sockets.ConnectedUDPSocket2"typing.Coroutine2		&2"type2&2'"%anyio.abc._sockets.UNIXDatagramSocket2"typing.Coroutine2		)2"type2)20".anyio.abc._sockets.ConnectedUNIXDatagramSocket2"typing.Coroutine2		,2"type2,2"socket.SocketKind2"builtins.bool2"builtins.dict2	

@@ -1,111 +1,55 @@
 
-json.encoderÿ
-JSONEncoderjson.encoder.JSONEncoder"builtins.object*½
-__init__!json.encoder.JSONEncoder.__init__"
-None*>
-self4
-json.encoder.JSONEncoder"json.encoder.JSONEncoder*.
-skipkeys
-builtins.bool"builtins.bool *2
-ensure_ascii
-builtins.bool"builtins.bool *4
-check_circular
-builtins.bool"builtins.bool */
-	allow_nan
-builtins.bool"builtins.bool */
-	sort_keys
-builtins.bool"builtins.bool *}
-indento
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *¯
+json.encoderÔ
+JSONEncoder"builtins.object*³
+__init__*
 
-separatorsœ
-,Union[Tuple[builtins.str,builtins.str],None]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-None *–
-default†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *„
-default json.encoder.JSONEncoder.default"
-Any*>
-self4
-json.encoder.JSONEncoder"json.encoder.JSONEncoder*
-o
-Any*—
-encodejson.encoder.JSONEncoder.encode"
-builtins.str"builtins.str*>
-self4
-json.encoder.JSONEncoder"json.encoder.JSONEncoder*
-o
-Any*‚
+self(*
+skipkeys (*
+ensure_ascii (*
+check_circular (*
+	allow_nan (*
+	sort_keys (*
+indent (*
 
-iterencode#json.encoder.JSONEncoder.iterencode"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*>
-self4
-json.encoder.JSONEncoder"json.encoder.JSONEncoder*
-o
-Any*/
-	_one_shot
-builtins.bool"builtins.bool rW
-item_separator'json.encoder.JSONEncoder.item_separator
-builtins.str"builtins.strrU
-key_separator&json.encoder.JSONEncoder.key_separator
-builtins.str"builtins.strrM
-skipkeys!json.encoder.JSONEncoder.skipkeys
-builtins.bool"builtins.boolrU
-ensure_ascii%json.encoder.JSONEncoder.ensure_ascii
-builtins.bool"builtins.boolrY
-check_circular'json.encoder.JSONEncoder.check_circular
-builtins.bool"builtins.boolrO
-	allow_nan"json.encoder.JSONEncoder.allow_nan
-builtins.bool"builtins.boolrO
-	sort_keys"json.encoder.JSONEncoder.sort_keys
-builtins.bool"builtins.boolr‹
-indentjson.encoder.JSONEncoder.indent`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str|
-py_encode_basestring!json.encoder.py_encode_basestring"
-builtins.str"builtins.str*#
-s
-builtins.str"builtins.strˆ
-py_encode_basestring_ascii'json.encoder.py_encode_basestring_ascii"
-builtins.str"builtins.str*#
-s
-builtins.str"builtins.strq
-encode_basestringjson.encoder.encode_basestring"
-builtins.str"builtins.str*
-builtins.str"builtins.str}
-encode_basestring_ascii$json.encoder.encode_basestring_ascii"
-builtins.str"builtins.str*
-builtins.str"builtins.str*ˆ
-__annotations__json.encoder.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*c
-ESCAPEjson.encoder.ESCAPED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*o
-ESCAPE_ASCIIjson.encoder.ESCAPE_ASCIID
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*m
-HAS_UTF8json.encoder.HAS_UTF8J
-re.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"
-re.Pattern*œ
+separators (*
+default (* 
+default*
 
-ESCAPE_DCTjson.encoder.ESCAPE_DCTu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*C
-INFINITYjson.encoder.INFINITY 
-builtins.float"builtins.float
+self(*
+o(*
+encode*
+
+self(*
+o(*6
+
+iterencode*
+
+self(*
+o(*
+	_one_shot (r
+item_separator0r
+key_separator0r
+skipkeys0r
+ensure_ascii0r
+check_circular0r
+	allow_nan0r
+	sort_keys0r
+
+indent0!
+py_encode_basestring*
+s('
+py_encode_basestring_ascii*
+s(
+encode_basestring*(
+encode_basestring_ascii*(*
+__annotations__0*
+
+ESCAPE0*
+ESCAPE_ASCII0*
+HAS_UTF80*
+
+ESCAPE_DCT0*
+INFINITY022"json.encoder.JSONEncoder2"builtins.bool2"builtins.int2"builtins.str2222222"builtins.function22	22
+22"typing.Iterator2222"builtins.dict22"
+re.Pattern22"builtins.bytes2"
+re.Pattern22"builtins.dict22"builtins.float

@@ -1,364 +1,164 @@
 
-flask.blueprintsí
-BlueprintSetupState$flask.blueprints.BlueprintSetupState"builtins.object*ﬂ
-__init__-flask.blueprints.BlueprintSetupState.__init__"
-None*V
-selfL
-$flask.blueprints.BlueprintSetupState"$flask.blueprints.BlueprintSetupState*G
-	blueprint8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*+
-app"
-flask.app.Flask"flask.app.Flask*
-options
-Any*6
-first_registration
-builtins.bool"builtins.bool*“
-add_url_rule1flask.blueprints.BlueprintSetupState.add_url_rule"
-None*V
-selfL
-$flask.blueprints.BlueprintSetupState"$flask.blueprints.BlueprintSetupState*&
-rule
-builtins.str"builtins.str*T
-endpointD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ò
-	view_funcÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-options
-AnyrS
-app(flask.blueprints.BlueprintSetupState.app"
-flask.app.Flask"flask.app.Flaskru
-	blueprint.flask.blueprints.BlueprintSetupState.blueprint8
-flask.blueprints.Blueprint"flask.blueprints.Blueprintr@
-options,flask.blueprints.BlueprintSetupState.options
-Anyrm
-first_registration7flask.blueprints.BlueprintSetupState.first_registration
-builtins.bool"builtins.boolrD
-	subdomain.flask.blueprints.BlueprintSetupState.subdomain
-AnyrF
+flask.blueprintsÏ
+BlueprintSetupState"builtins.object*]
+__init__*
 
-url_prefix/flask.blueprints.BlueprintSetupState.url_prefix
-Anyr:
-name)flask.blueprints.BlueprintSetupState.name
-AnyrH
-name_prefix0flask.blueprints.BlueprintSetupState.name_prefix
-Anyr|
-url_defaults1flask.blueprints.BlueprintSetupState.url_defaults9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictÖV
-	Blueprintflask.blueprints.Blueprint"flask.scaffold.Scaffold*ø
-__init__#flask.blueprints.Blueprint.__init__"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*&
-name
-builtins.str"builtins.str*-
-import_name
-builtins.str"builtins.str*î
-static_folder
-)Union[builtins.str,os.PathLike[Any],None]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike
-None *[
-static_url_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ñ
-template_folder
-)Union[builtins.str,os.PathLike[Any],None]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike
-None *V
+self(*
+	blueprint(*	
+app(*
+options(*
+first_registration(*\
+add_url_rule*
 
-url_prefixD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	subdomainD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-url_defaultsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict
-None *U
-	root_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	cli_groupD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¡
-_check_setup_finished0flask.blueprints.Blueprint._check_setup_finished"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*(
-f_name
-builtins.str"builtins.str*Ó
-record!flask.blueprints.Blueprint.record"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*¯
-record_once&flask.blueprints.Blueprint.record_once"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*Ä
-make_setup_state+flask.blueprints.Blueprint.make_setup_state"L
-$flask.blueprints.BlueprintSetupState"$flask.blueprints.BlueprintSetupState*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*+
-app"
-flask.app.Flask"flask.app.Flask*F
-options9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*8
-first_registration
-builtins.bool"builtins.bool *é
-register_blueprint-flask.blueprints.Blueprint.register_blueprint"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*G
-	blueprint8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*
-options
-Any0:flask.scaffold.setupmethod*Ú
-register#flask.blueprints.Blueprint.register"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*+
-app"
-flask.app.Flask"flask.app.Flask*F
-options9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*¸
-add_url_rule'flask.blueprints.Blueprint.add_url_rule"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*&
-rule
-builtins.str"builtins.str*T
-endpointD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ÿ
-	view_func∆
-]Union[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]],None]ÿ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"flask.typing.RouteCallable
-None *h
-provide_automatic_optionsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-options
-Any0:flask.scaffold.setupmethod*∆
-app_template_filter.flask.blueprints.Blueprint.app_template_filter"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∂
-add_app_template_filter2flask.blueprints.Blueprint.add_app_template_filter"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*®
-f†
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"#flask.typing.TemplateFilterCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*¬
-app_template_test,flask.blueprints.Blueprint.app_template_test"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∞
-add_app_template_test0flask.blueprints.Blueprint.add_app_template_test"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*¶
-fû
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"!flask.typing.TemplateTestCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∆
-app_template_global.flask.blueprints.Blueprint.app_template_global"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∂
-add_app_template_global2flask.blueprints.Blueprint.add_app_template_global"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*®
-f†
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"#flask.typing.TemplateGlobalCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*À
-before_app_request-flask.blueprints.Blueprint.before_app_request"å
-!flask.blueprints.T_before_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*î
-få
-!flask.blueprints.T_before_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*«
-after_app_request,flask.blueprints.Blueprint.after_app_request"ã
- flask.blueprints.T_after_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*ì
-fã
- flask.blueprints.T_after_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*√
-teardown_app_request/flask.blueprints.Blueprint.teardown_app_request"Ü
-flask.blueprints.T_teardown‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*é
-fÜ
-flask.blueprints.T_teardown‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*≥
-app_context_processor0flask.blueprints.Blueprint.app_context_processor"~
--flask.blueprints.T_template_context_processorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*Ö
-f~
--flask.blueprints.T_template_context_processorK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*ò
-app_errorhandler+flask.blueprints.Blueprint.app_errorhandler"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*ß
-codeú
-,Union[Type[builtins.Exception],builtins.int]L
-Type[builtins.Exception](
-builtins.Exception"builtins.Exception"type
-builtins.int"builtins.int0:flask.scaffold.setupmethod*µ
-app_url_value_preprocessor5flask.blueprints.Blueprint.app_url_value_preprocessor"z
-)flask.blueprints.T_url_value_preprocessorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*Å
-fz
-)flask.blueprints.T_url_value_preprocessorK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*å
-app_url_defaults+flask.blueprints.Blueprint.app_url_defaults"p
-flask.blueprints.T_url_defaultsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*w
-fp
-flask.blueprints.T_url_defaultsK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethodrg
-_got_registered_once/flask.blueprints.Blueprint._got_registered_once
-builtins.bool"builtins.boolry
+self(*
 
-url_prefix%flask.blueprints.Blueprint.url_prefixD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerw
-	subdomain$flask.blueprints.Blueprint.subdomainD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner∂
-deferred_functions-flask.blueprints.Blueprint.deferred_functions
-9builtins.list[TypeAlias[CallableType[builtins.function]]]£
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"&flask.blueprints.DeferredSetupFunction"builtins.listrÄ
-url_values_defaults.flask.blueprints.Blueprint.url_values_defaults9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrw
-	cli_group$flask.blueprints.Blueprint.cli_groupD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerƒ
-_blueprints&flask.blueprints.Blueprint._blueprintså
-Gbuiltins.list[Tuple[flask.blueprints.Blueprint,builtins.dict[Any,Any]]]±
-8Tuple[flask.blueprints.Blueprint,builtins.dict[Any,Any]]8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict"builtins.list*å
-__annotations__ flask.blueprints.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
+rule(*
+endpoint (*
+	view_func (*
+options(r
+app0r
+	blueprint0r
+options0r
+first_registration0r
+	subdomain0r
+
+url_prefix0r
+name0r
+name_prefix0r
+url_defaults0Å
+	Blueprint"flask.scaffold.Scaffold*„
+__init__*
+
+self(*
+
+name(*
+import_name(*
+static_folder (*
+static_url_path (*
+template_folder (*
+
+url_prefix (*
+	subdomain (*
+url_defaults (*
+	root_path (*
+	cli_group (*3
+_check_setup_finished*
+
+self(*
+f_name(*@
+record*
+
+self(*
+
+func(
+0:flask.scaffold.setupmethod*E
+record_once*
+
+self(*
+
+func(
+0:flask.scaffold.setupmethod*V
+make_setup_state*
+
+self(*	
+app(*
+options(*
+first_registration (*`
+register_blueprint*
+
+self(*
+	blueprint(*
+options(0:flask.scaffold.setupmethod*2
+register*
+
+self(*	
+app(*
+options(*ù
+add_url_rule*
+
+self(*
+
+rule(*
+endpoint (*
+	view_func (*!
+provide_automatic_options (*
+options(0:flask.scaffold.setupmethod*O
+app_template_filter
+*
+
+self(*
+name (0:flask.scaffold.setupmethod*\
+add_app_template_filter*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*M
+app_template_test
+*
+
+self(*
+name (0:flask.scaffold.setupmethod*Z
+add_app_template_test*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*O
+app_template_global
+*
+
+self(*
+name (0:flask.scaffold.setupmethod*\
+add_app_template_global*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*I
+before_app_request*
+
+self(*
+f(0:flask.scaffold.setupmethod*H
+after_app_request*
+
+self(*
+f(0:flask.scaffold.setupmethod*K
+teardown_app_request*
+
+self(*
+f(0:flask.scaffold.setupmethod*L
+app_context_processor*
+
+self(*
+f(0:flask.scaffold.setupmethod*J
+app_errorhandler
+*
+
+self(*
+
+code(0:flask.scaffold.setupmethod*Q
+app_url_value_preprocessor*
+
+self(*
+f(0:flask.scaffold.setupmethod*G
+app_url_defaults*
+
+self(*
+f(0:flask.scaffold.setupmethodr
+_got_registered_once0r
+
+url_prefix0r
+	subdomain0r
+deferred_functions0r
+url_values_defaults0r
+	cli_group0r
+_blueprints0 *
+__annotations__0!*
 ttyping *
-ftflask.typing 
+ftflask.typing 22&"$flask.blueprints.BlueprintSetupState2"flask.blueprints.Blueprint2"flask.app.Flask22"builtins.bool2"builtins.str222"builtins.function22	22
+2"builtins.dict22"os.PathLike2222222
+
+2!"flask.typing.RouteCallable222222*"#flask.typing.TemplateFilterCallable2
+2("!flask.typing.TemplateTestCallable2
+2*"#flask.typing.TemplateGlobalCallable2
+2222
+2"builtins.Exception2"type22"builtins.int222-"&flask.blueprints.DeferredSetupFunction2
+2"builtins.list2222"builtins.list22"builtins.dict2

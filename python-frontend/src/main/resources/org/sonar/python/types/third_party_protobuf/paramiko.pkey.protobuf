@@ -1,205 +1,100 @@
 
-paramiko.pkeyå#
-PKeyparamiko.pkey.PKey"builtins.object*Å
-__init__paramiko.pkey.PKey.__init__"
-None*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKey*s
-msgh
-$Union[paramiko.message.Message,None]4
-paramiko.message.Message"paramiko.message.Message
-None *P
-dataD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*”
-asbytesparamiko.pkey.PKey.asbytes" 
-builtins.bytes"builtins.bytes*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*˜
-	__bytes__paramiko.pkey.PKey.__bytes__" 
-builtins.bytes"builtins.bytes*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*®
-__eq__paramiko.pkey.PKey.__eq__"
-builtins.bool"builtins.bool**(
-paramiko.pkey.PKey"paramiko.pkey.PKey*$"
-builtins.object"builtins.objectz310z311z312z313z314*’
-get_nameparamiko.pkey.PKey.get_name"
-builtins.str"builtins.str*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*’
-get_bitsparamiko.pkey.PKey.get_bits"
-builtins.int"builtins.int*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*”
-can_signparamiko.pkey.PKey.can_sign"
-builtins.bool"builtins.bool*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*¤
-get_fingerprint"paramiko.pkey.PKey.get_fingerprint" 
-builtins.bytes"builtins.bytes*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*–
+paramiko.pkey¾
+PKey"builtins.object*3
+__init__*
 
-get_base64paramiko.pkey.PKey.get_base64"
-builtins.str"builtins.str*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*·
-sign_ssh_data paramiko.pkey.PKey.sign_ssh_data"4
-paramiko.message.Message"paramiko.message.Message*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKey**
-data 
-builtins.bytes"builtins.bytes*U
-	algorithmD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*‹
-verify_ssh_sig!paramiko.pkey.PKey.verify_ssh_sig"
-builtins.bool"builtins.bool*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKey**
-data 
-builtins.bytes"builtins.bytes*=
-msg4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*ä
-from_private_key_file(paramiko.pkey.PKey.from_private_key_file"[
-paramiko.pkey.PKey.Self(
-paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey(*Ž
-cls„
-Type[paramiko.pkey.PKey.Self][
-paramiko.pkey.PKey.Self(
-paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey("type**
-filename
-builtins.str"builtins.str*T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:builtins.classmethodpz310z311z312z313z314*€
-from_private_key#paramiko.pkey.PKey.from_private_key"[
-paramiko.pkey.PKey.Self(
-paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey(*Ž
-cls„
-Type[paramiko.pkey.PKey.Self][
-paramiko.pkey.PKey.Self(
-paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey("type*P
-file_objB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:builtins.classmethodpz310z311z312z313z314*œ
-write_private_key_file)paramiko.pkey.PKey.write_private_key_file"
-None*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKey**
-filename
-builtins.str"builtins.str*T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*¸
-write_private_key$paramiko.pkey.PKey.write_private_key"
-None*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKey*P
-file_objB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*¡
-load_certificate#paramiko.pkey.PKey.load_certificate"
-None*2
-self(
-paramiko.pkey.PKey"paramiko.pkey.PKey*
-value„
-,Union[paramiko.message.Message,builtins.str]4
-paramiko.message.Message"paramiko.message.Message
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314r°
-public_blobparamiko.pkey.PKey.public_blobh
-$Union[paramiko.pkey.PublicBlob,None]4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob
-None*310*311*312*313*314rˆ
-	BEGIN_TAGparamiko.pkey.PKey.BEGIN_TAGD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314r„
-END_TAGparamiko.pkey.PKey.END_TAGD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314…
+self(*
+msg (*
+data (*
+asbytes*
 
-PublicBlobparamiko.pkey.PublicBlob"builtins.object*º
-__init__!paramiko.pkey.PublicBlob.__init__"
-None*>
-self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*'
-type_
-builtins.str"builtins.str**
-blob 
-builtins.bytes"builtins.bytes*S
-commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*²
-	from_file"paramiko.pkey.PublicBlob.from_file"s
-paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob(*¬
-cls¢
-#Type[paramiko.pkey.PublicBlob.Self]s
-paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob("type**
-filename
-builtins.str"builtins.str0:builtins.classmethodpz310z311z312z313z314*´
-from_string$paramiko.pkey.PublicBlob.from_string"s
-paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob(*¬
-cls¢
-#Type[paramiko.pkey.PublicBlob.Self]s
-paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob("type*(
-string
-builtins.str"builtins.str0:builtins.classmethodpz310z311z312z313z314*Ï
-from_message%paramiko.pkey.PublicBlob.from_message"s
-paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob(*¬
-cls¢
-#Type[paramiko.pkey.PublicBlob.Self]s
-paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob("type*A
-message4
-paramiko.message.Message"paramiko.message.Message0:builtins.classmethodpz310z311z312z313z314*À
-__eq__paramiko.pkey.PublicBlob.__eq__"
-builtins.bool"builtins.bool*64
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*$"
-builtins.object"builtins.objectz310z311z312z313z314*À
-__ne__paramiko.pkey.PublicBlob.__ne__"
-builtins.bool"builtins.bool*64
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*$"
-builtins.object"builtins.objectz310z311z312z313z314j310j311j312j313j314rd
-key_type!paramiko.pkey.PublicBlob.key_type
-builtins.str"builtins.str*310*311*312*313*314rh
-key_blob!paramiko.pkey.PublicBlob.key_blob 
-builtins.bytes"builtins.bytes*310*311*312*313*314rb
-comment paramiko.pkey.PublicBlob.comment
-builtins.str"builtins.str*310*311*312*313*314þ
-_unpad_opensshparamiko.pkey._unpad_openssh"“
-paramiko.pkey._BytesTx
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*ž
-data“
-paramiko.pkey._BytesTx
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayz310z311z312z313z314*¢
-__annotations__paramiko.pkey.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*q
-OPENSSH_AUTH_MAGIC paramiko.pkey.OPENSSH_AUTH_MAGIC 
-builtins.bytes"builtins.bytes*310*311*312*313*314
+self(*
+	__bytes__*
+
+self(*
+__eq__*(*(	*
+get_name*
+
+self(*
+get_bits
+*
+
+self(*
+can_sign*
+
+self(*
+get_fingerprint*
+
+self(*
+
+get_base64*
+
+self(*<
+sign_ssh_data*
+
+self(*
+
+data(*
+	algorithm (*5
+verify_ssh_sig*
+
+self(*
+
+data(*	
+msg(*`
+from_private_key_file*	
+cls(*
+filename(*
+password (0:builtins.classmethodp*[
+from_private_key*	
+cls(*
+file_obj(*
+password (0:builtins.classmethodp*H
+write_private_key_file*
+
+self(*
+filename(*
+password (*C
+write_private_key*
+
+self(*
+file_obj(*
+password (*-
+load_certificate*
+
+self(*
+value(r
+public_blob0r
+	BEGIN_TAG0r
+END_TAG0€
+
+PublicBlob"builtins.object*B
+__init__*
+
+self(*
+type_(*
+
+blob(*
+comment (*B
+	from_file*	
+cls(*
+filename(0:builtins.classmethodp*B
+from_string*	
+cls(*
+string(0:builtins.classmethodp*D
+from_message*	
+cls(*
+message(0:builtins.classmethodp*
+__eq__*(*(	*
+__ne__*(*(	r
+key_type0r
+key_blob0r
+comment0
+_unpad_openssh*
+
+data(*
+__annotations__0*
+OPENSSH_AUTH_MAGIC022"paramiko.pkey.PKey2"paramiko.message.Message222"builtins.str222"builtins.bytes2"builtins.bool2"builtins.object2"builtins.int24
+paramiko.pkey.PKey.Self"paramiko.pkey.PKey(22"type22"	typing.IO2222"paramiko.pkey.PublicBlob222"
+re.Pattern22@
+paramiko.pkey.PublicBlob.Self"paramiko.pkey.PublicBlob(22"type22"builtins.bytearray222222"builtins.dict2

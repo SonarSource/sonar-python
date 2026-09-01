@@ -1,367 +1,294 @@
 
-	boto.auth˝
-AuthHandlerboto.auth_handler.AuthHandler"boto.plugin.Plugin*ﬁ
-__init__&boto.auth_handler.AuthHandler.__init__"
-None*H
-self>
-boto.auth_handler.AuthHandler"boto.auth_handler.AuthHandler*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*g
-add_auth&boto.auth_handler.AuthHandler.add_auth*
-self*
-http_requestz310z311z312z313z314j310j311j312j313j314rX
+	boto.authº
+AuthHandlerboto.auth_handler.AuthHandler"boto.plugin.Plugin*B
+__init__*
 
-capability(boto.auth_handler.AuthHandler.capability
-Any*310*311*312*313*314Á
-HmacKeysboto.auth.HmacKeys"builtins.object*Ω
-__init__boto.auth.HmacKeys.__init__"
-None*2
-self(
-boto.auth.HmacKeys"boto.auth.HmacKeys*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*f
-update_provider"boto.auth.HmacKeys.update_provider*
+self(*
+
+host(*
+config(*
+provider(*&
+add_auth*
+self*
+http_requestr
+
+capability0ÿ
+HmacKeys"builtins.object*B
+__init__*
+
+self(*
+
+host(*
+config(*
+provider(*)
+update_provider*
 self*
-providerz310z311z312z313z314*L
-	algorithmboto.auth.HmacKeys.algorithm*
-selfz310z311z312z313z314*d
-sign_stringboto.auth.HmacKeys.sign_string*
+provider*
+	algorithm*
+self*+
+sign_string*
 self*
-string_to_signz310z311z312z313z314j310j311j312j313j314rA
-hostboto.auth.HmacKeys.host
-Any*310*311*312*313*314î
-AnonAuthHandlerboto.auth.AnonAuthHandler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*“
-__init__"boto.auth.AnonAuthHandler.__init__"
-None*@
-self6
-boto.auth.AnonAuthHandler"boto.auth.AnonAuthHandler*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*o
-add_auth"boto.auth.AnonAuthHandler.add_auth*
+string_to_signr
+host0Ã
+AnonAuthHandler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*B
+__init__*
+
+self(*
+
+host(*
+config(*
+provider(*2
+add_auth*
 self*
 http_request*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rT
+kwargsr
 
-capability$boto.auth.AnonAuthHandler.capability
-Any*310*311*312*313*314ì
-HmacAuthV1Handlerboto.auth.HmacAuthV1Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*ÿ
-__init__$boto.auth.HmacAuthV1Handler.__init__"
-None*D
-self:
-boto.auth.HmacAuthV1Handler"boto.auth.HmacAuthV1Handler*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*o
-update_provider+boto.auth.HmacAuthV1Handler.update_provider*
+capability0˘
+HmacAuthV1Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*B
+__init__*
+
+self(*
+
+host(*
+config(*
+provider(*)
+update_provider*
 self*
-providerz310z311z312z313z314*q
-add_auth$boto.auth.HmacAuthV1Handler.add_auth*
+provider*2
+add_auth*
 self*
 http_request*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rV
+kwargsr
 
-capability&boto.auth.HmacAuthV1Handler.capability
-Any*310*311*312*313*314ì
-HmacAuthV2Handlerboto.auth.HmacAuthV2Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*ÿ
-__init__$boto.auth.HmacAuthV2Handler.__init__"
-None*D
-self:
-boto.auth.HmacAuthV2Handler"boto.auth.HmacAuthV2Handler*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*o
-update_provider+boto.auth.HmacAuthV2Handler.update_provider*
+capability0˘
+HmacAuthV2Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*B
+__init__*
+
+self(*
+
+host(*
+config(*
+provider(*)
+update_provider*
 self*
-providerz310z311z312z313z314*q
-add_auth$boto.auth.HmacAuthV2Handler.add_auth*
+provider*2
+add_auth*
 self*
 http_request*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rV
+kwargsr
 
-capability&boto.auth.HmacAuthV2Handler.capability
-Any*310*311*312*313*314¢
-HmacAuthV3Handlerboto.auth.HmacAuthV3Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*ÿ
-__init__$boto.auth.HmacAuthV3Handler.__init__"
-None*D
-self:
-boto.auth.HmacAuthV3Handler"boto.auth.HmacAuthV3Handler*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*q
-add_auth$boto.auth.HmacAuthV3Handler.add_auth*
+capability0Œ
+HmacAuthV3Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*B
+__init__*
+
+self(*
+
+host(*
+config(*
+provider(*2
+add_auth*
 self*
 http_request*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rV
+kwargsr
 
-capability&boto.auth.HmacAuthV3Handler.capability
-Any*310*311*312*313*314•
-HmacAuthV3HTTPHandlerboto.auth.HmacAuthV3HTTPHandler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*‰
-__init__(boto.auth.HmacAuthV3HTTPHandler.__init__"
-None*L
-selfB
-boto.auth.HmacAuthV3HTTPHandler"boto.auth.HmacAuthV3HTTPHandler*
-host
-Any*
-config
-Any*
-provider
-Anyz310z311z312z313z314*w
-headers_to_sign/boto.auth.HmacAuthV3HTTPHandler.headers_to_sign*
+capability0⁄
+HmacAuthV3HTTPHandler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*B
+__init__*
+
+self(	*
+
+host(*
+config(*
+provider(*-
+headers_to_sign*
 self*
-http_requestz310z311z312z313z314*~
-canonical_headers1boto.auth.HmacAuthV3HTTPHandler.canonical_headers*
+http_request*2
+canonical_headers*
 self*
-headers_to_signz310z311z312z313z314*u
-string_to_sign.boto.auth.HmacAuthV3HTTPHandler.string_to_sign*
+headers_to_sign*,
+string_to_sign*
 self*
-http_requestz310z311z312z313z314*l
-add_auth(boto.auth.HmacAuthV3HTTPHandler.add_auth*
+http_request*)
+add_auth*
 self*
 req*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rZ
+kwargsr
 
-capability*boto.auth.HmacAuthV3HTTPHandler.capability
-Any*310*311*312*313*314ì
-HmacAuthV4Handlerboto.auth.HmacAuthV4Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*π
-__init__$boto.auth.HmacAuthV4Handler.__init__"
-None*D
-self:
-boto.auth.HmacAuthV4Handler"boto.auth.HmacAuthV4Handler*
-host
-Any*
-config
-Any*
-provider
-Any*o
-service_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-region_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*s
-headers_to_sign+boto.auth.HmacAuthV4Handler.headers_to_sign*
+capability0ù
+HmacAuthV4Handler"boto.auth_handler.AuthHandler"boto.auth.HmacKeys*m
+__init__*
+
+self(
+*
+
+host(*
+config(*
+provider(*
+service_name (*
+region_name (*-
+headers_to_sign*
 self*
-http_requestz310z311z312z313z314*u
-host_header'boto.auth.HmacAuthV4Handler.host_header*
+http_request*3
+host_header*
 self*
 host*
-http_requestz310z311z312z313z314*m
-query_string(boto.auth.HmacAuthV4Handler.query_string*
+http_request**
+query_string*
 self*
-http_requestz310z311z312z313z314*Å
-canonical_query_string2boto.auth.HmacAuthV4Handler.canonical_query_string*
+http_request*4
+canonical_query_string*
 self*
-http_requestz310z311z312z313z314*z
-canonical_headers-boto.auth.HmacAuthV4Handler.canonical_headers*
+http_request*2
+canonical_headers*
 self*
-headers_to_signz310z311z312z313z314*t
-signed_headers*boto.auth.HmacAuthV4Handler.signed_headers*
+headers_to_sign*/
+signed_headers*
 self*
-headers_to_signz310z311z312z313z314*o
-canonical_uri)boto.auth.HmacAuthV4Handler.canonical_uri*
+headers_to_sign*+
+canonical_uri*
 self*
-http_requestz310z311z312z313z314*c
-payload#boto.auth.HmacAuthV4Handler.payload*
+http_request*%
+payload*
 self*
-http_requestz310z311z312z313z314*w
-canonical_request-boto.auth.HmacAuthV4Handler.canonical_request*
+http_request*/
+canonical_request*
 self*
-http_requestz310z311z312z313z314*_
-scope!boto.auth.HmacAuthV4Handler.scope*
+http_request*#
+scope*
 self*
-http_requestz310z311z312z313z314*m
-split_host_parts,boto.auth.HmacAuthV4Handler.split_host_parts*
+http_request*&
+split_host_parts*
 self*
-hostz310z311z312z313z314*w
-determine_region_name1boto.auth.HmacAuthV4Handler.determine_region_name*
+host*+
+determine_region_name*
 self*
-hostz310z311z312z313z314*y
-determine_service_name2boto.auth.HmacAuthV4Handler.determine_service_name*
+host*,
+determine_service_name*
 self*
-hostz310z311z312z313z314*u
-credential_scope,boto.auth.HmacAuthV4Handler.credential_scope*
+host*.
+credential_scope*
 self*
-http_requestz310z311z312z313z314*à
-string_to_sign*boto.auth.HmacAuthV4Handler.string_to_sign*
+http_request*C
+string_to_sign*
 self*
 http_request*
-canonical_requestz310z311z312z313z314*{
-	signature%boto.auth.HmacAuthV4Handler.signature*
+canonical_request*;
+	signature*
 self*
 http_request*
-string_to_signz310z311z312z313z314*h
-add_auth$boto.auth.HmacAuthV4Handler.add_auth*
+string_to_sign*)
+add_auth*
 self*
 req*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rV
+kwargsr
 
-capability&boto.auth.HmacAuthV4Handler.capability
-Any*310*311*312*313*314rZ
-service_name(boto.auth.HmacAuthV4Handler.service_name
-Any*310*311*312*313*314rX
-region_name'boto.auth.HmacAuthV4Handler.region_name
-Any*310*311*312*313*314Á
-S3HmacAuthV4Handlerboto.auth.S3HmacAuthV4Handler"boto.auth.HmacAuthV4Handler"boto.auth_handler.AuthHandler*«
-__init__&boto.auth.S3HmacAuthV4Handler.__init__"
-None*H
-self>
-boto.auth.S3HmacAuthV4Handler"boto.auth.S3HmacAuthV4Handler*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*x
-clean_region_name/boto.auth.S3HmacAuthV4Handler.clean_region_name*
+capability0r
+service_name0r
+region_name0º
+S3HmacAuthV4Handler"boto.auth.HmacAuthV4Handler"boto.auth_handler.AuthHandler*2
+__init__*
+
+self(*
+
+args(*
+kwargs(*.
+clean_region_name*
 self*
-region_namez310z311z312z313z314*q
-canonical_uri+boto.auth.S3HmacAuthV4Handler.canonical_uri*
+region_name*+
+canonical_uri*
 self*
-http_requestz310z311z312z313z314*É
-canonical_query_string4boto.auth.S3HmacAuthV4Handler.canonical_query_string*
+http_request*4
+canonical_query_string*
 self*
-http_requestz310z311z312z313z314*w
-host_header)boto.auth.S3HmacAuthV4Handler.host_header*
+http_request*3
+host_header*
 self*
 host*
-http_requestz310z311z312z313z314*u
-headers_to_sign-boto.auth.S3HmacAuthV4Handler.headers_to_sign*
+http_request*-
+headers_to_sign*
 self*
-http_requestz310z311z312z313z314*y
-determine_region_name3boto.auth.S3HmacAuthV4Handler.determine_region_name*
+http_request*+
+determine_region_name*
 self*
-hostz310z311z312z313z314*{
-determine_service_name4boto.auth.S3HmacAuthV4Handler.determine_service_name*
+host*,
+determine_service_name*
 self*
-hostz310z311z312z313z314*z
-mangle_path_and_params4boto.auth.S3HmacAuthV4Handler.mangle_path_and_params*
+host*+
+mangle_path_and_params*
 self*
-reqz310z311z312z313z314*e
-payload%boto.auth.S3HmacAuthV4Handler.payload*
+req*%
+payload*
 self*
-http_requestz310z311z312z313z314*j
-add_auth&boto.auth.S3HmacAuthV4Handler.add_auth*
+http_request*)
+add_auth*
 self*
 req*
 
-kwargsz310z311z312z313z314*±
-presign%boto.auth.S3HmacAuthV4Handler.presign"
-Any*H
-self>
-boto.auth.S3HmacAuthV4Handler"boto.auth.S3HmacAuthV4Handler*
-req
-Any*
-expires
-Any*k
-iso_date[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rX
+kwargs*C
+presign*
 
-capability(boto.auth.S3HmacAuthV4Handler.capability
-Any*310*311*312*313*314rZ
-region_name)boto.auth.S3HmacAuthV4Handler.region_name
-Any*310*311*312*313*314ß
-STSAnonHandlerboto.auth.STSAnonHandler"boto.auth_handler.AuthHandler*n
-add_auth!boto.auth.STSAnonHandler.add_auth*
+self(*	
+req(*
+expires(*
+iso_date (r
+
+capability0r
+region_name0s
+STSAnonHandler"boto.auth_handler.AuthHandler*2
+add_auth*
 self*
 http_request*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rS
+kwargsr
 
-capability#boto.auth.STSAnonHandler.capability
-Any*310*311*312*313*314Ÿ
-QuerySignatureHelperboto.auth.QuerySignatureHelper"boto.auth.HmacKeys*t
-add_auth'boto.auth.QuerySignatureHelper.add_auth*
+capability0^
+QuerySignatureHelper"boto.auth.HmacKeys*2
+add_auth*
 self*
 http_request*
 
-kwargsz310z311z312z313z314j310j311j312j313j314Ç
-QuerySignatureV0AuthHandler%boto.auth.QuerySignatureV0AuthHandler"boto.auth.QuerySignatureHelper"boto.auth_handler.AuthHandlerj310j311j312j313j314rÅ
-SignatureVersion6boto.auth.QuerySignatureV0AuthHandler.SignatureVersion
-builtins.int"builtins.int*310*311*312*313*314r`
+kwargsÇ
+QuerySignatureV0AuthHandler"boto.auth.QuerySignatureHelper"boto.auth_handler.AuthHandlerr
+SignatureVersion0r
 
-capability0boto.auth.QuerySignatureV0AuthHandler.capability
-Any*310*311*312*313*314‡
-QuerySignatureV1AuthHandler%boto.auth.QuerySignatureV1AuthHandler"boto.auth.QuerySignatureHelper"boto.auth_handler.AuthHandler*€
-__init__.boto.auth.QuerySignatureV1AuthHandler.__init__"
-None*X
-selfN
-%boto.auth.QuerySignatureV1AuthHandler"%boto.auth.QuerySignatureV1AuthHandler*
-args
-Any*
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rÅ
-SignatureVersion6boto.auth.QuerySignatureV1AuthHandler.SignatureVersion
-builtins.int"builtins.int*310*311*312*313*314r`
+capability0≤
+QuerySignatureV1AuthHandler"boto.auth.QuerySignatureHelper"boto.auth_handler.AuthHandler*.
+__init__*
 
-capability0boto.auth.QuerySignatureV1AuthHandler.capability
-Any*310*311*312*313*314Ç
-QuerySignatureV2AuthHandler%boto.auth.QuerySignatureV2AuthHandler"boto.auth.QuerySignatureHelper"boto.auth_handler.AuthHandlerj310j311j312j313j314rÅ
-SignatureVersion6boto.auth.QuerySignatureV2AuthHandler.SignatureVersion
-builtins.int"builtins.int*310*311*312*313*314r`
+self(*
 
-capability0boto.auth.QuerySignatureV2AuthHandler.capability
-Any*310*311*312*313*314È
-POSTPathQSV2AuthHandler!boto.auth.POSTPathQSV2AuthHandler"%boto.auth.QuerySignatureV2AuthHandler"boto.auth_handler.AuthHandler*n
-add_auth*boto.auth.POSTPathQSV2AuthHandler.add_auth*
+args(*
+kw(r
+SignatureVersion0r
+
+capability0Ç
+QuerySignatureV2AuthHandler"boto.auth.QuerySignatureHelper"boto.auth_handler.AuthHandlerr
+SignatureVersion0r
+
+capability0ö
+POSTPathQSV2AuthHandler"%boto.auth.QuerySignatureV2AuthHandler"boto.auth_handler.AuthHandler*)
+add_auth*
 self*
 req*
 
-kwargsz310z311z312z313z314j310j311j312j313j314r\
+kwargsr
 
-capability,boto.auth.POSTPathQSV2AuthHandler.capability
-Any*310*311*312*313*314à
-get_auth_handlerboto.auth.get_auth_handler"
-Any*
-host
-Any*
-config
-Any*
-provider
-Any*w
-requested_capability[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314]
-detect_potential_sigv4 boto.auth.detect_potential_sigv4*
-funcz310z311z312z313z314a
-detect_potential_s3sigv4"boto.auth.detect_potential_s3sigv4*
-funcz310z311z312z313z314*û
-__annotations__boto.auth.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*H
-SIGV4_DETECTboto.auth.SIGV4_DETECT
-Any*310*311*312*313*314
+capability0\
+get_auth_handler*
+
+host(*
+config(*
+provider(*
+requested_capability ("
+detect_potential_sigv4*
+func$
+detect_potential_s3sigv4*
+func*
+__annotations__0*
+SIGV4_DETECT022"boto.auth_handler.AuthHandler22"boto.auth.HmacKeys2"boto.auth.AnonAuthHandler2"boto.auth.HmacAuthV1Handler2"boto.auth.HmacAuthV2Handler2"boto.auth.HmacAuthV3Handler2!"boto.auth.HmacAuthV3HTTPHandler2"boto.auth.HmacAuthV4Handler2"_typeshed.Incomplete2222"boto.auth.S3HmacAuthV4Handler2"builtins.int2'"%boto.auth.QuerySignatureV1AuthHandler2"builtins.str2"builtins.dict2

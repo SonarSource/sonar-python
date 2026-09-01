@@ -1,208 +1,144 @@
 
-'aws_xray_sdk.core.models.facade_segmentï
-FacadeSegmentMutationExceptionFaws_xray_sdk.core.exceptions.exceptions.FacadeSegmentMutationException"builtins.Exceptionj310j311j312j313j314æ
-Segment(aws_xray_sdk.core.models.segment.Segment"&aws_xray_sdk.core.models.entity.Entity*Ñ
-__init__1aws_xray_sdk.core.models.segment.Segment.__init__"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
-name
-Any*T
-entityidD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-traceidD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	parent_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-sampled
-builtins.bool"builtins.bool z310z311z312z313z314*æ
-add_subsegment7aws_xray_sdk.core.models.segment.Segment.add_subsegment"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*p
+'aws_xray_sdk.core.models.facade_segment|
+FacadeSegmentMutationExceptionFaws_xray_sdk.core.exceptions.exceptions.FacadeSegmentMutationException"builtins.Exception„
+Segment(aws_xray_sdk.core.models.segment.Segment"&aws_xray_sdk.core.models.entity.Entity*k
+__init__*
 
-subsegment`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz310z311z312z313z314*¬
-	increment2aws_xray_sdk.core.models.segment.Segment.increment"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz310z311z312z313z314*⁄
-decrement_ref_counter>aws_xray_sdk.core.models.segment.Segment.decrement_ref_counter"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz310z311z312z313z314*j
-ready_to_send6aws_xray_sdk.core.models.segment.Segment.ready_to_send*
-selfz310z311z312z313z314*Ñ
-get_total_subsegments_sizeCaws_xray_sdk.core.models.segment.Segment.get_total_subsegments_size*
-selfz310z311z312z313z314*Ñ
-decrement_subsegments_sizeCaws_xray_sdk.core.models.segment.Segment.decrement_subsegments_size*
-selfz310z311z312z313z314*Î
-remove_subsegment:aws_xray_sdk.core.models.segment.Segment.remove_subsegment"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
+self(*
 
-subsegment
-Anyz310z311z312z313z314*”
-set_user1aws_xray_sdk.core.models.segment.Segment.set_user"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
-user
-Anyz310z311z312z313z314*·
-set_service4aws_xray_sdk.core.models.segment.Segment.set_service"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
-service_info
-Anyz310z311z312z313z314*‚
-set_rule_name6aws_xray_sdk.core.models.segment.Segment.set_rule_name"
-None*^
-selfT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
-	rule_name
-Anyz310z311z312z313z314*^
-to_dict0aws_xray_sdk.core.models.segment.Segment.to_dict*
-selfz310z311z312z313z314j310j311j312j313j314rú
-trace_id1aws_xray_sdk.core.models.segment.Segment.trace_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rê
-id+aws_xray_sdk.core.models.segment.Segment.idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r|
-in_progress4aws_xray_sdk.core.models.segment.Segment.in_progress
-builtins.bool"builtins.bool*310*311*312*313*314rt
-sampled0aws_xray_sdk.core.models.segment.Segment.sampled
-builtins.bool"builtins.bool*310*311*312*313*314rî
-user-aws_xray_sdk.core.models.segment.Segment.userD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r 
-ref_counter4aws_xray_sdk.core.models.segment.Segment.ref_counterl
-4aws_xray_sdk.core.utils.atomic_counter.AtomicCounter"4aws_xray_sdk.core.utils.atomic_counter.AtomicCounter*310*311*312*313*314rû
-	parent_id2aws_xray_sdk.core.models.segment.Segment.parent_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÀ
-service0aws_xray_sdk.core.models.segment.Segment.serviceu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*310*311*312*313*314™#
-FacadeSegment5aws_xray_sdk.core.models.facade_segment.FacadeSegment"(aws_xray_sdk.core.models.segment.Segment*Ω
-__init__>aws_xray_sdk.core.models.facade_segment.FacadeSegment.__init__"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-name
-Any*
-entityid
-Any*
-traceid
-Any*
-sampled
-Anyz310z311z312z313z314*Œ
-close;aws_xray_sdk.core.models.facade_segment.FacadeSegment.close"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*k
-end_time[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ó
-put_http_metaCaws_xray_sdk.core.models.facade_segment.FacadeSegment.put_http_meta"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-key
-Any*
-value
-Anyz310z311z312z313z314*ô
-put_annotationDaws_xray_sdk.core.models.facade_segment.FacadeSegment.put_annotation"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-key
-Any*
-value
-Anyz310z311z312z313z314*ƒ
-put_metadataBaws_xray_sdk.core.models.facade_segment.FacadeSegment.put_metadata"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-key
-Any*
-value
-Any*-
-	namespace
-builtins.str"builtins.str z310z311z312z313z314*¸
-set_aws=aws_xray_sdk.core.models.facade_segment.FacadeSegment.set_aws"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-aws_meta
-Anyz310z311z312z313z314*˙
-set_user>aws_xray_sdk.core.models.facade_segment.FacadeSegment.set_user"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-user
-Anyz310z311z312z313z314*˘
-add_throttle_flagGaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_throttle_flag"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*Û
-add_fault_flagDaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_fault_flag"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*Û
-add_error_flagDaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_error_flag"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*À
-add_exceptionCaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_exception"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-	exception
-Any*
-stack
-Any*,
-remote
-builtins.bool"builtins.bool z310z311z312z313z314*ì
-apply_status_codeGaws_xray_sdk.core.models.facade_segment.FacadeSegment.apply_status_code"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-status_code
-Anyz310z311z312z313z314*È
-	serialize?aws_xray_sdk.core.models.facade_segment.FacadeSegment.serialize"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*w
-ready_to_sendCaws_xray_sdk.core.models.facade_segment.FacadeSegment.ready_to_send*
-selfz310z311z312z313z314*È
-	increment?aws_xray_sdk.core.models.facade_segment.FacadeSegment.increment"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*Å
-decrement_ref_counterKaws_xray_sdk.core.models.facade_segment.FacadeSegment.decrement_ref_counter"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314j310j311j312j313j314rt
-initializingBaws_xray_sdk.core.models.facade_segment.FacadeSegment.initializing
-Any*310*311*312*313*314*º
-__annotations__7aws_xray_sdk.core.models.facade_segment.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*õ
-MUTATION_UNSUPPORTED_MESSAGEDaws_xray_sdk.core.models.facade_segment.MUTATION_UNSUPPORTED_MESSAGE
-builtins.str"builtins.str*310*311*312*313*314
+name(*
+entityid (*
+traceid (*
+	parent_id (*
+sampled (*0
+add_subsegment*
+
+self(*
+
+subsegment(*
+	increment*
+
+self(*%
+decrement_ref_counter*
+
+self(*
+ready_to_send*
+self*&
+get_total_subsegments_size*
+self*&
+decrement_subsegments_size*
+self*3
+remove_subsegment*
+
+self(*
+
+subsegment(*$
+set_user*
+
+self(*
+
+user(*/
+set_service*
+
+self(*
+service_info(*.
+set_rule_name*
+
+self(*
+	rule_name(*
+to_dict*
+selfr
+trace_id0r
+id0r
+in_progress0r
+sampled0r
+user0r
+ref_counter0r
+	parent_id0r
+service0	≠
+FacadeSegment"(aws_xray_sdk.core.models.segment.Segment*R
+__init__*
+
+self(
+*
+
+name(*
+entityid(*
+traceid(*
+sampled(*'
+close*
+
+self(
+*
+end_time (*5
+put_http_meta*
+
+self(
+*	
+key(*
+value(*6
+put_annotation*
+
+self(
+*	
+key(*
+value(*G
+put_metadata*
+
+self(
+*	
+key(*
+value(*
+	namespace (*'
+set_aws*
+
+self(
+*
+aws_meta(*$
+set_user*
+
+self(
+*
+
+user(*!
+add_throttle_flag*
+
+self(
+*
+add_fault_flag*
+
+self(
+*
+add_error_flag*
+
+self(
+*K
+add_exception*
+
+self(
+*
+	exception(*
+stack(*
+remote (*4
+apply_status_code*
+
+self(
+*
+status_code(*
+	serialize*
+
+self(
+*
+ready_to_send*
+self*
+	increment*
+
+self(
+*%
+decrement_ref_counter*
+
+self(
+r
+initializing0*
+__annotations__0* 
+MUTATION_UNSUPPORTED_MESSAGE022*"(aws_xray_sdk.core.models.segment.Segment22"builtins.str222"builtins.bool20".aws_xray_sdk.core.models.subsegment.Subsegment26"4aws_xray_sdk.core.utils.atomic_counter.AtomicCounter2"builtins.dict227"5aws_xray_sdk.core.models.facade_segment.FacadeSegment2"_typeshed.Incomplete2222"builtins.dict2

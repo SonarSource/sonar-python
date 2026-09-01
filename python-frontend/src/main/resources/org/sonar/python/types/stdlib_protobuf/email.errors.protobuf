@@ -1,48 +1,37 @@
 
-email.errorsV
-MessageErroremail.errors.MessageError"builtins.Exceptionj310j311j312j313j314g
-MessageParseErroremail.errors.MessageParseError"email.errors.MessageErrorj310j311j312j313j314j
-HeaderParseErroremail.errors.HeaderParseError"email.errors.MessageParseErrorj310j311j312j313j314d
-BoundaryErroremail.errors.BoundaryError"email.errors.MessageParseErrorj310j311j312j313j314‰
-MultipartConversionError%email.errors.MultipartConversionError"email.errors.MessageError"builtins.TypeErrorj310j311j312j313j314]
-CharsetErroremail.errors.CharsetError"email.errors.MessageErrorj310j311j312j313j314Ä
-MessageDefectemail.errors.MessageDefect"builtins.ValueError*è
-__init__#email.errors.MessageDefect.__init__"
-None*B
-self8
-email.errors.MessageDefect"email.errors.MessageDefect*P
-lineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314j310j311j312j313j314|
-NoBoundaryInMultipartDefect(email.errors.NoBoundaryInMultipartDefect"email.errors.MessageDefectj310j311j312j313j314|
-StartBoundaryNotFoundDefect(email.errors.StartBoundaryNotFoundDefect"email.errors.MessageDefectj310j311j312j313j314Œ
-#FirstHeaderLineIsContinuationDefect0email.errors.FirstHeaderLineIsContinuationDefect"email.errors.MessageDefectj310j311j312j313j314€
-MisplacedEnvelopeHeaderDefect*email.errors.MisplacedEnvelopeHeaderDefect"email.errors.MessageDefectj310j311j312j313j314ˆ
-!MultipartInvariantViolationDefect.email.errors.MultipartInvariantViolationDefect"email.errors.MessageDefectj310j311j312j313j314 
--InvalidMultipartContentTransferEncodingDefect:email.errors.InvalidMultipartContentTransferEncodingDefect"email.errors.MessageDefectj310j311j312j313j314r
-UndecodableBytesDefect#email.errors.UndecodableBytesDefect"email.errors.MessageDefectj310j311j312j313j314z
-InvalidBase64PaddingDefect'email.errors.InvalidBase64PaddingDefect"email.errors.MessageDefectj310j311j312j313j314€
-InvalidBase64CharactersDefect*email.errors.InvalidBase64CharactersDefect"email.errors.MessageDefectj310j311j312j313j314x
-InvalidBase64LengthDefect&email.errors.InvalidBase64LengthDefect"email.errors.MessageDefectj310j311j312j313j314|
-CloseBoundaryNotFoundDefect(email.errors.CloseBoundaryNotFoundDefect"email.errors.MessageDefectj310j311j312j313j314†
- MissingHeaderBodySeparatorDefect-email.errors.MissingHeaderBodySeparatorDefect"email.errors.MessageDefectj310j311j312j313j314^
-HeaderDefectemail.errors.HeaderDefect"email.errors.MessageDefectj310j311j312j313j314k
-InvalidHeaderDefect email.errors.InvalidHeaderDefect"email.errors.HeaderDefectj310j311j312j313j314y
-HeaderMissingRequiredValue'email.errors.HeaderMissingRequiredValue"email.errors.HeaderDefectj310j311j312j313j314ë
-NonPrintableDefectemail.errors.NonPrintableDefect"email.errors.HeaderDefect*ÿ
-__init__(email.errors.NonPrintableDefect.__init__"
-None*L
-selfB
-email.errors.NonPrintableDefect"email.errors.NonPrintableDefect*X
-non_printablesD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez310z311z312z313z314j310j311j312j313j314m
-ObsoleteHeaderDefect!email.errors.ObsoleteHeaderDefect"email.errors.HeaderDefectj310j311j312j313j314s
-NonASCIILocalPartDefect$email.errors.NonASCIILocalPartDefect"email.errors.HeaderDefectj310j311j312j313j314g
-InvalidDateDefectemail.errors.InvalidDateDefect"email.errors.HeaderDefectj310j311j312j313j314*¡
-__annotations__email.errors.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+email.errors"
+MessageError"builtins.Exception.
+MessageParseError"email.errors.MessageError2
+HeaderParseError"email.errors.MessageParseError/
+BoundaryError"email.errors.MessageParseErrorI
+MultipartConversionError"email.errors.MessageError"builtins.TypeError)
+CharsetError"email.errors.MessageErrorL
+MessageDefect"builtins.ValueError*&
+__init__*
+
+self(*
+line (9
+NoBoundaryInMultipartDefect"email.errors.MessageDefect9
+StartBoundaryNotFoundDefect"email.errors.MessageDefectA
+#FirstHeaderLineIsContinuationDefect"email.errors.MessageDefect;
+MisplacedEnvelopeHeaderDefect"email.errors.MessageDefect?
+!MultipartInvariantViolationDefect"email.errors.MessageDefectK
+-InvalidMultipartContentTransferEncodingDefect"email.errors.MessageDefect4
+UndecodableBytesDefect"email.errors.MessageDefect8
+InvalidBase64PaddingDefect"email.errors.MessageDefect;
+InvalidBase64CharactersDefect"email.errors.MessageDefect7
+InvalidBase64LengthDefect"email.errors.MessageDefect9
+CloseBoundaryNotFoundDefect"email.errors.MessageDefect>
+ MissingHeaderBodySeparatorDefect"email.errors.MessageDefect*
+HeaderDefect"email.errors.MessageDefect0
+InvalidHeaderDefect"email.errors.HeaderDefect7
+HeaderMissingRequiredValue"email.errors.HeaderDefect_
+NonPrintableDefect"email.errors.HeaderDefect*.
+__init__*
+
+self(*
+non_printables(1
+ObsoleteHeaderDefect"email.errors.HeaderDefect4
+NonASCIILocalPartDefect"email.errors.HeaderDefect.
+InvalidDateDefect"email.errors.HeaderDefect*
+__annotations__022"email.errors.MessageDefect2"builtins.str222!"email.errors.NonPrintableDefect22"builtins.dict2

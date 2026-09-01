@@ -1,134 +1,66 @@
 
 maxminddb.extensionT
-InvalidDatabaseError%maxminddb.errors.InvalidDatabaseError"builtins.RuntimeError‚
-Readermaxminddb.extension.Reader"builtins.object*´
-__init__#maxminddb.extension.Reader.__init__"
-None*B
-self8
-maxminddb.extension.Reader"maxminddb.extension.Reader*Š
-databaseû
-AUnion[typing.AnyStr,builtins.int,os.PathLike[Any],typing.IO[Any]]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object
-builtins.int"builtins.int(
-os.PathLike[Any]
-Any"os.PathLike$
-typing.IO[Any]
-Any"	typing.IO*(
-mode
-builtins.int"builtins.int *w
-close maxminddb.extension.Reader.close"
-None*B
-self8
-maxminddb.extension.Reader"maxminddb.extension.Reader*ø	
-getmaxminddb.extension.Reader.get"·
-Union[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]],None]ˆ
-‘TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]×
-†Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]Õ
-ITypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]ê
->Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int"maxminddb.types.Primitive8
-maxminddb.types.RecordList"maxminddb.types.RecordList8
-maxminddb.types.RecordDict"maxminddb.types.RecordDict"maxminddb.types.Record
-None*B
-self8
-maxminddb.extension.Reader"maxminddb.extension.Reader*Ò
+InvalidDatabaseError%maxminddb.errors.InvalidDatabaseError"builtins.RuntimeError—
+Reader"builtins.object*6
+__init__*
 
-ip_addressÁ
-?Union[builtins.str,ipaddress.IPv6Address,ipaddress.IPv4Address]
-builtins.str"builtins.str.
-ipaddress.IPv6Address"ipaddress.IPv6Address.
-ipaddress.IPv4Address"ipaddress.IPv4Address*ï
-get_with_prefix_len.maxminddb.extension.Reader.get_with_prefix_len"Ž	
-±Tuple[Union[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]],None],builtins.int]·
-Union[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]],None]ˆ
-‘TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]×
-†Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]Õ
-ITypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]ê
->Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int"maxminddb.types.Primitive8
-maxminddb.types.RecordList"maxminddb.types.RecordList8
-maxminddb.types.RecordDict"maxminddb.types.RecordDict"maxminddb.types.Record
-None
-builtins.int"builtins.int*B
-self8
-maxminddb.extension.Reader"maxminddb.extension.Reader*Ò
+self(*
+database(	*
+mode (*
+close*
 
-ip_addressÁ
-?Union[builtins.str,ipaddress.IPv6Address,ipaddress.IPv4Address]
-builtins.str"builtins.str.
-ipaddress.IPv6Address"ipaddress.IPv6Address.
-ipaddress.IPv4Address"ipaddress.IPv4Address*±
-metadata#maxminddb.extension.Reader.metadata"<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata*B
-self8
-maxminddb.extension.Reader"maxminddb.extension.Reader*§
-	__enter__$maxminddb.extension.Reader.__enter__"8
-maxminddb.extension.Reader"maxminddb.extension.Reader*:8
-maxminddb.extension.Reader"maxminddb.extension.Reader*‚
-__exit__#maxminddb.extension.Reader.__exit__"
-None*:8
-maxminddb.extension.Reader"maxminddb.extension.Reader*
-AnyrK
-closed!maxminddb.extension.Reader.closed
-builtins.bool"builtins.boolŒ
-Metadatamaxminddb.extension.Metadata"builtins.object*²
+self(*%
+get*
 
-node_count'maxminddb.extension.Metadata.node_count"
-builtins.int"builtins.int*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*´
-record_size(maxminddb.extension.Metadata.record_size"
-builtins.int"builtins.int*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*²
+self(*
 
-ip_version'maxminddb.extension.Metadata.ip_version"
-builtins.int"builtins.int*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*¸
-database_type*maxminddb.extension.Metadata.database_type"
-builtins.str"builtins.str*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*â
-	languages&maxminddb.extension.Metadata.languages"N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*Ô
-binary_format_major_version8maxminddb.extension.Metadata.binary_format_major_version"
-builtins.int"builtins.int*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*Ô
-binary_format_minor_version8maxminddb.extension.Metadata.binary_format_minor_version"
-builtins.int"builtins.int*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*´
-build_epoch(maxminddb.extension.Metadata.build_epoch"
-builtins.int"builtins.int*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*
-description(maxminddb.extension.Metadata.description"w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata0:builtins.property`*˜
-__init__%maxminddb.extension.Metadata.__init__"
-None*F
-self<
-maxminddb.extension.Metadata"maxminddb.extension.Metadata*
-kwargs
-Any*
-__annotations__#maxminddb.extension.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+ip_address(*5
+get_with_prefix_len*
+
+self(*
+
+ip_address(*
+metadata*
+
+self(*
+	__enter__*(*
+__exit__*(*(r
+
+closed0
+µ
+Metadata"builtins.object*1
+
+node_count*
+
+self(0:builtins.property`*2
+record_size*
+
+self(0:builtins.property`*1
+
+ip_version*
+
+self(0:builtins.property`*4
+database_type*
+
+self(0:builtins.property`*0
+	languages*
+
+self(0:builtins.property`*B
+binary_format_major_version*
+
+self(0:builtins.property`*B
+binary_format_minor_version*
+
+self(0:builtins.property`*2
+build_epoch*
+
+self(0:builtins.property`*2
+description*
+
+self(0:builtins.property`*&
+__init__*
+
+self(*
+kwargs(*
+__annotations__022"maxminddb.extension.Reader2"builtins.object2"builtins.object22"builtins.int22"os.PathLike22"	typing.IO2222"builtins.bool2"builtins.float22
+2 "maxminddb.types.Primitive22"maxminddb.types.RecordList2"maxminddb.types.RecordDict222"maxminddb.types.Record2222"builtins.str2"ipaddress.IPv6Address2"ipaddress.IPv4Address22222"maxminddb.extension.Metadata2"typing.Sequence22"typing.Mapping22"builtins.dict2

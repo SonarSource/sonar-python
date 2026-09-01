@@ -1,1452 +1,435 @@
 
-anyio._core._fileio=
-	AsyncFileanyio._core._fileio.AsyncFile""anyio.abc._resources.AsyncResource*
-__init__&anyio._core._fileio.AsyncFile.__init__"
-None* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*u
-fpm
-typing.IO[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"	typing.IO*´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None *—
-__getattr__)anyio._core._fileio.AsyncFile.__getattr__""
-builtins.object"builtins.object*˜•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*
-builtins.str"builtins.str*‘
-limiter%anyio._core._fileio.AsyncFile.limiter"¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile0:builtins.property`*Ù
-wrapped%anyio._core._fileio.AsyncFile.wrapped"m
-typing.IO[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"	typing.IO* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile0:builtins.property`*ß
-	__aiter__'anyio._core._fileio.AsyncFile.__aiter__"ƒ
-#typing.AsyncIterator[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"typing.AsyncIterator* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*£
-aclose$anyio._core._fileio.AsyncFile.aclose"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*‘
-read"anyio._core._fileio.AsyncFile.read"•
-'typing.Coroutine[Any,Any,typing.AnyStr]
-Any
-AnyF
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*(
-size
-builtins.int"builtins.int H*Æ
-read1#anyio._core._fileio.AsyncFile.read1"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*z
-selfp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*(
-size
-builtins.int"builtins.int H*ï
-readline&anyio._core._fileio.AsyncFile.readline"•
-'typing.Coroutine[Any,Any,typing.AnyStr]
-Any
-AnyF
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*¯
-	readlines'anyio._core._fileio.AsyncFile.readlines"Ó
-6typing.Coroutine[Any,Any,builtins.list[typing.AnyStr]]
-Any
-Anyu
-builtins.list[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"builtins.list"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*Ù
-readinto&anyio._core._fileio.AsyncFile.readinto"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*z
-selfp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*;
-b4
-typing_extensions.Buffer"typing_extensions.BufferH*Û
-	readinto1'anyio._core._fileio.AsyncFile.readinto1"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*z
-selfp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*;
-b4
-typing_extensions.Buffer"typing_extensions.BufferH*•
-truncate&anyio._core._fileio.AsyncFile.truncate"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None H*¹
-seek"anyio._core._fileio.AsyncFile.seek"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*(
-offset
-builtins.int"builtins.int*R
-whenceD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None H*»
-tell"anyio._core._fileio.AsyncFile.tell"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*¡
-flush#anyio._core._fileio.AsyncFile.flush"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine* 
-self•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH2ä
-write#anyio._core._fileio.AsyncFile.writeè
-write#anyio._core._fileio.AsyncFile.write"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*z
-selfp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*;
-b4
-typing_extensions.Buffer"typing_extensions.Buffer0:typing.overloadHXÊ
-write#anyio._core._fileio.AsyncFile.write"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*t
-selfj
-+anyio._core._fileio.AsyncFile[builtins.str]
-builtins.str"builtins.str"anyio._core._fileio.AsyncFile*#
-b
-builtins.str"builtins.str0:typing.overloadHX2Â
+anyio._core._fileio•
+	AsyncFile""anyio.abc._resources.AsyncResource*3
+__init__*
 
-writelines(anyio._core._fileio.AsyncFile.writelines˜
+self(*
+fp(*
+limiter (*
+__getattr__*(*(*.
+limiter*
 
-writelines(anyio._core._fileio.AsyncFile.writelines"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*z
-selfp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*}
-linesr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable0:typing.overloadHXî
+self(0:builtins.property`*.
+wrapped*
 
-writelines(anyio._core._fileio.AsyncFile.writelines"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*t
-selfj
-+anyio._core._fileio.AsyncFile[builtins.str]
-builtins.str"builtins.str"anyio._core._fileio.AsyncFile*Y
-linesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable0:typing.overloadHXPr1
-_fp!anyio._core._fileio.AsyncFile._fp
-AnyrÙ
-_limiter&anyio._core._fileio.AsyncFile._limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None…
-_PathIterator!anyio._core._fileio._PathIterator"typing.AsyncIterator*Ó
-	__anext__+anyio._core._fileio._PathIterator.__anext__"À
-/typing.Coroutine[Any,Any,anyio._core._fileio.T]
-Any
-Anyi
-anyio._core._fileio.T4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*Ó
-selfÈ
-8anyio._core._fileio._PathIterator[anyio._core._fileio.T]i
-anyio._core._fileio.T4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"!anyio._core._fileio._PathIteratorH*„
-__init__*anyio._core._fileio._PathIterator.__init__"
-None*Ó
-selfÈ
-8anyio._core._fileio._PathIterator[anyio._core._fileio.T]i
-anyio._core._fileio.T4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"!anyio._core._fileio._PathIterator*”
-iterator…
-*typing.Iterator[os.PathLike[builtins.str]]F
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"typing.Iterator*²
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None*Ÿ
-path_cls
-Type[anyio._core._fileio.T]i
-anyio._core._fileio.T4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"type*Ä
-__mypy-replace0anyio._core._fileio._PathIterator.__mypy-replace"
-None*–
-iterator…
-*typing.Iterator[os.PathLike[builtins.str]]F
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"typing.Iterator *´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None *¡
-path_cls
-Type[anyio._core._fileio.T]i
-anyio._core._fileio.T4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"type 0h8Pr¾
-iterator*anyio._core._fileio._PathIterator.iterator…
-*typing.Iterator[os.PathLike[builtins.str]]F
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"typing.IteratorrÛ
-limiter)anyio._core._fileio._PathIterator.limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-NonerÉ
-path_cls*anyio._core._fileio._PathIterator.path_cls
-Type[anyio._core._fileio.T]i
-anyio._core._fileio.T4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"typer¼
-__match_args__0anyio._core._fileio._PathIterator.__match_args__÷
-HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strrè
-__dataclass_fields__6anyio._core._fileio._PathIterator.__dataclass_fields__—
-2builtins.dict[builtins.str,dataclasses.Field[Any]]
-builtins.str"builtins.str4
-dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict¦³
-Pathanyio._core._fileio.Path"builtins.object*Ó
-__init__!anyio._core._fileio.Path.__init__"
-None*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¢
-args—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None *
+self(0:builtins.property`*
+	__aiter__	*
 
-__fspath__#anyio._core._fileio.Path.__fspath__"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*
-__str__ anyio._core._fileio.Path.__str__"
-builtins.str"builtins.str*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*ƒ
-__repr__!anyio._core._fileio.Path.__repr__"
-builtins.str"builtins.str*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*‘
-	__bytes__"anyio._core._fileio.Path.__bytes__" 
-builtins.bytes"builtins.bytes*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*‹
-__hash__!anyio._core._fileio.Path.__hash__"
-builtins.int"builtins.int*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*§
-__eq__anyio._core._fileio.Path.__eq__"
-builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*$"
-builtins.object"builtins.object*—
-__lt__anyio._core._fileio.Path.__lt__"
-builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*—
-__le__anyio._core._fileio.Path.__le__"
-builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*—
-__gt__anyio._core._fileio.Path.__gt__"
-builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*—
-__ge__anyio._core._fileio.Path.__ge__"
-builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¼
-__truediv__$anyio._core._fileio.Path.__truediv__"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*us
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*š—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*¾
-__rtruediv__%anyio._core._fileio.Path.__rtruediv__"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*us
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*š—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*©
-limiter anyio._core._fileio.Path.limiter"¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*Ì
-partsanyio._core._fileio.Path.parts"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*œ
-driveanyio._core._fileio.Path.drive"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*š
-rootanyio._core._fileio.Path.root"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*
-anchoranyio._core._fileio.Path.anchor"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*ú
-parents anyio._core._fileio.Path.parents"¶
-.typing.Sequence[anyio._core._fileio.Path.Self]s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Sequence*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(0:builtins.property`*´
-parentanyio._core._fileio.Path.parent"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(0:builtins.property`*š
-nameanyio._core._fileio.Path.name"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*
-suffixanyio._core._fileio.Path.suffix"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*Ğ
-suffixes!anyio._core._fileio.Path.suffixes"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*š
-stemanyio._core._fileio.Path.stem"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*ƒ
-absolute!anyio._core._fileio.Path.absolute"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*‹
-as_posix!anyio._core._fileio.Path.as_posix"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*‡
-as_urianyio._core._fileio.Path.as_uri"
-builtins.str"builtins.str*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*·
-matchanyio._core._fileio.Path.match"
-builtins.bool"builtins.bool*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*.
-path_pattern
-builtins.str"builtins.str*¿
-is_relative_to'anyio._core._fileio.Path.is_relative_to"
-builtins.bool"builtins.bool*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*£
-other—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*˜
-chmodanyio._core._fileio.Path.chmod"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*&
-mode
-builtins.int"builtins.int*5
-follow_symlinks
-builtins.bool"builtins.bool H*ú
-cwdanyio._core._fileio.Path.cwd"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*¬
-cls¢
-#Type[anyio._core._fileio.Path.Self]s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("type*´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None 0:builtins.classmethodHp*Ú
-existsanyio._core._fileio.Path.exists"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‡
+self(H*
+aclose*
 
-expanduser#anyio._core._fileio.Path.expanduser"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*’
-globanyio._core._fileio.Path.glob"À
-3typing.AsyncIterator[anyio._core._fileio.Path.Self]s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.AsyncIterator*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*)
-pattern
-builtins.str"builtins.str*Õ
-groupanyio._core._fileio.Path.group"j
-&typing.Coroutine[Any,Any,builtins.str]
-Any
-Any
-builtins.str"builtins.str"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‡
-hardlink_to$anyio._core._fileio.Path.hardlink_to"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¿
-target²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLikeH*ü
-homeanyio._core._fileio.Path.home"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*¬
-cls¢
-#Type[anyio._core._fileio.Path.Self]s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("type*´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None 0:builtins.classmethodHp*“
-is_absolute$anyio._core._fileio.Path.is_absolute"
-builtins.bool"builtins.bool*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*ì
-is_block_device(anyio._core._fileio.Path.is_block_device"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*ê
-is_char_device'anyio._core._fileio.Path.is_char_device"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ú
-is_diranyio._core._fileio.Path.is_dir"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ü
-is_fifo anyio._core._fileio.Path.is_fifo"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ü
-is_file anyio._core._fileio.Path.is_file"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ş
-is_mount!anyio._core._fileio.Path.is_mount"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*“
-is_reserved$anyio._core._fileio.Path.is_reserved"
-builtins.bool"builtins.bool*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*à
-	is_socket"anyio._core._fileio.Path.is_socket"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*â
+self(H*$
+read*
 
-is_symlink#anyio._core._fileio.Path.is_symlink"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*ï
-iterdir anyio._core._fileio.Path.iterdir"À
-3typing.AsyncIterator[anyio._core._fileio.Path.Self]s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.AsyncIterator*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*Æ
-joinpath!anyio._core._fileio.Path.joinpath"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*¢
-args—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*ã
-lchmodanyio._core._fileio.Path.lchmod"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*&
-mode
-builtins.int"builtins.intH*Å
-lstatanyio._core._fileio.Path.lstat"Ù
-³typing.Coroutine[Any,Any,TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]]
-Any
-Anyü
-™TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]Ë
-Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int 
-builtins.float"builtins.float 
-builtins.float"builtins.float 
-builtins.float"builtins.float"os.stat_result"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Â
-mkdiranyio._core._fileio.Path.mkdir"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*(
-mode
-builtins.int"builtins.int *-
-parents
-builtins.bool"builtins.bool *.
-exist_ok
-builtins.bool"builtins.bool H*Õ
-owneranyio._core._fileio.Path.owner"j
-&typing.Coroutine[Any,Any,builtins.str]
-Any
-Any
-builtins.str"builtins.str"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*å
+self(*
+size (H*%
+read1*
 
-read_bytes#anyio._core._fileio.Path.read_bytes"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‡
-	read_text"anyio._core._fileio.Path.read_text"j
-&typing.Coroutine[Any,Any,builtins.str]
-Any
-Any
-builtins.str"builtins.str"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None H*Í
-relative_to$anyio._core._fileio.Path.relative_to"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*£
-other—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*ƒ
-readlink!anyio._core._fileio.Path.readlink"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*Ê
-renameanyio._core._fileio.Path.rename"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*È
-target»
-=Union[builtins.str,pathlib.PurePath,anyio._core._fileio.Path]
-builtins.str"builtins.str$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ì
-replace anyio._core._fileio.Path.replace"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*È
-target»
-=Union[builtins.str,pathlib.PurePath,anyio._core._fileio.Path]
-builtins.str"builtins.str$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*¯
-resolve anyio._core._fileio.Path.resolve"Ò
-7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
-Any
-Anys
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*,
-strict
-builtins.bool"builtins.bool H*”
-rglobanyio._core._fileio.Path.rglob"À
-3typing.AsyncIterator[anyio._core._fileio.Path.Self]s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.AsyncIterator*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*)
-pattern
-builtins.str"builtins.str*¹
-rmdiranyio._core._fileio.Path.rmdir"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‰
-samefile!anyio._core._fileio.Path.samefile"m
-'typing.Coroutine[Any,Any,builtins.bool]
-Any
-Any
-builtins.bool"builtins.bool"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¨
+self(*
+size (H*
+readline*
 
-other_path—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeH*ú
-statanyio._core._fileio.Path.stat"Ù
-³typing.Coroutine[Any,Any,TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]]
-Any
-Anyü
-™TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]Ë
-Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int 
-builtins.float"builtins.float 
-builtins.float"builtins.float 
-builtins.float"builtins.float"os.stat_result"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*5
-follow_symlinks
-builtins.bool"builtins.bool H*À
+self(H*
+	readlines*
 
-symlink_to#anyio._core._fileio.Path.symlink_to"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¿
-target²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike*9
-target_is_directory
-builtins.bool"builtins.bool H*“
-touchanyio._core._fileio.Path.touch"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*(
-mode
-builtins.int"builtins.int *.
-exist_ok
-builtins.bool"builtins.bool H*í
-unlinkanyio._core._fileio.Path.unlink"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*0
+self(H*#
+readinto*
 
-missing_ok
-builtins.bool"builtins.bool H*Ë
-	with_name"anyio._core._fileio.Path.with_name"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*&
-name
-builtins.str"builtins.str*Ë
-	with_stem"anyio._core._fileio.Path.with_stem"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*&
-stem
-builtins.str"builtins.str*Ñ
-with_suffix$anyio._core._fileio.Path.with_suffix"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*(
-suffix
-builtins.str"builtins.str*Ø
-with_segments&anyio._core._fileio.Path.with_segments"s
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
-selfs
-anyio._core._fileio.Path.Self4
-anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*ª
-pathsegments—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*¡
-write_bytes$anyio._core._fileio.Path.write_bytes"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-data4
-typing_extensions.Buffer"typing_extensions.BufferH*†
+self(*
+b(H*$
+	readinto1*
 
-write_text#anyio._core._fileio.Path.write_text"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*&
-data
-builtins.str"builtins.str*T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None H2âw
-openanyio._core._fileio.Path.open£3
-openanyio._core._fileio.Path.open"ß
-Gtyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.bytes]]
-Any
-Anyp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*”.
-mode‰.
-‹TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]Ü&
-€Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]¾
-¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
-–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdatingí
-ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
-¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeReading£
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting"_typeshed.OpenBinaryMode*-
-	buffering
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadHX”D
-openanyio._core._fileio.Path.open"×
-Etyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.str]]
-Any
-Anyj
-+anyio._core._fileio.AsyncFile[builtins.str]
-builtins.str"builtins.str"anyio._core._fileio.AsyncFile"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*?
-mode€?
-Õ	TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]‹5
-Ê	Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]ä
-ÑTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ë
-ÆUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeUpdatingĞ
-×TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Ò
-ÌUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeWritingÿ	
-™TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]¿
-Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeReading"_typeshed.OpenTextMode *-
-	buffering
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadHXr½
-	__slots__"anyio._core._fileio.Path.__slots__‹
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr<
-__weakref__$anyio._core._fileio.Path.__weakref__
-AnyrE
-_pathanyio._core._fileio.Path._path
-pathlib.Path"pathlib.PathrÔ
-_limiter!anyio._core._fileio.Path._limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-Noneò
-	wrap_fileanyio._core._fileio.wrap_file"•
-,anyio._core._fileio.AsyncFile[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*w
-filem
-typing.IO[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"	typing.IO*´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None "€
-	open_fileanyio._core._fileio.open_file¶7
-	open_fileanyio._core._fileio.open_file"ß
-Gtyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.bytes]]
-Any
-Anyp
--anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile"typing.Coroutine*Í
-fileÂ
-:Union[builtins.str,os.PathLike[builtins.str],builtins.int]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
-builtins.int"builtins.int*”.
-mode‰.
-‹TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]Ü&
-€Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]¾
-¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
-–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdatingí
-ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
-¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeReading£
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting"_typeshed.OpenBinaryMode*-
-	buffering
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-closefd
-builtins.bool"builtins.bool *•
-opener†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None 0:typing.overloadHX§H
-	open_fileanyio._core._fileio.open_file"×
-Etyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.str]]
-Any
-Anyj
-+anyio._core._fileio.AsyncFile[builtins.str]
-builtins.str"builtins.str"anyio._core._fileio.AsyncFile"typing.Coroutine*Í
-fileÂ
-:Union[builtins.str,os.PathLike[builtins.str],builtins.int]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
-builtins.int"builtins.int*?
-mode€?
-Õ	TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]‹5
-Ê	Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]ä
-ÑTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ë
-ÆUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeUpdatingĞ
-×TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Ò
-ÌUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeWritingÿ	
-™TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]¿
-Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeReading"_typeshed.OpenTextMode *-
-	buffering
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-closefd
-builtins.bool"builtins.bool *•
-opener†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *´
-limiter¤
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-None 0:typing.overloadHX*
-__annotations__#anyio._core._fileio.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+b(H*(
+truncate*
+
+self(*
+size (H*4
+seek*
+
+self(*
+offset(*
+whence (H*
+tell*
+
+self(H*
+flush*
+
+self(H2u
+write5
+write*
+
+self(*
+b(0:typing.overloadHX5
+write*
+
+self(*
+b(0:typing.overloadHX2Œ
+
+writelines>
+
+writelines*
+
+self(*
+lines(0:typing.overloadHX>
+
+writelines*
+
+self(*
+lines(0:typing.overloadHXPr
+_fp0
+r
+_limiter0³
+_PathIterator"typing.AsyncIterator*
+	__anext__*
+
+self(H*G
+__init__*
+
+self(*
+iterator(*
+limiter(*
+path_cls(*K
+__mypy-replace*
+iterator (*
+limiter (*
+path_cls (0h8Pr
+iterator0r
+limiter0r
+path_cls0r
+__match_args__0!r
+__dataclass_fields__0#Ğ
+Path"builtins.object*5
+__init__*
+
+self(*
+
+args($*
+limiter (*
+
+__fspath__*
+
+self(*
+__str__*(*
+__repr__*(*
+	__bytes__*
+
+self(*
+__hash__*
+
+self(*
+__eq__%*(*(*
+__lt__%*(*('*
+__le__%*(*('*
+__gt__%*(*('*
+__ge__%*(*('*
+__truediv__(*((*($*
+__rtruediv__(*((*($*.
+limiter*
+
+self(0:builtins.property`*,
+parts)*
+
+self(0:builtins.property`*,
+drive*
+
+self(0:builtins.property`*+
+root*
+
+self(0:builtins.property`*-
+anchor*
+
+self(0:builtins.property`*.
+parents**
+
+self((0:builtins.property`*-
+parent(*
+
+self((0:builtins.property`*+
+name*
+
+self(0:builtins.property`*-
+suffix*
+
+self(0:builtins.property`*/
+suffixes+*
+
+self(0:builtins.property`*+
+stem*
+
+self(0:builtins.property`*
+absolute,*
+
+self((H*
+as_posix*
+
+self(*
+as_uri*
+
+self(*)
+match%*
+
+self(*
+path_pattern(*+
+is_relative_to%*
+
+self(*
+other($*<
+chmod*
+
+self(*
+
+mode(*
+follow_symlinks (%H*?
+cwd,*	
+cls(-*
+limiter (0:builtins.classmethodHp*
+exists.*
+
+self(H*
+
+expanduser,*
+
+self((H*#
+glob/*
+
+self((*
+pattern(*
+group0*
+
+self(H*+
+hardlink_to*
+
+self(*
+target(2H*@
+home,*	
+cls(-*
+limiter (0:builtins.classmethodHp*
+is_absolute%*
+
+self(*!
+is_block_device.*
+
+self(H* 
+is_char_device.*
+
+self(H*
+is_dir.*
+
+self(H*
+is_fifo.*
+
+self(H*
+is_file.*
+
+self(H*
+is_mount.*
+
+self(H*
+is_reserved%*
+
+self(*
+	is_socket.*
+
+self(H*
+
+is_symlink.*
+
+self(H*
+iterdir/*
+
+self((H*$
+joinpath(*
+
+self((*
+
+args($*$
+lchmod*
+
+self(*
+
+mode(H*
+lstat6*
+
+self(H*H
+mkdir*
+
+self(*
+mode (*
+parents (%*
+exist_ok (%H*
+owner0*
+
+self(H*
+
+read_bytes*
+
+self(H*=
+	read_text0*
+
+self(*
+encoding (7*
+errors (7H*(
+relative_to(*
+
+self((*
+other($*
+readlink,*
+
+self((H*&
+rename,*
+
+self((*
+target(8H*'
+replace,*
+
+self((*
+target(8H*)
+resolve,*
+
+self((*
+strict (%H*$
+rglob/*
+
+self((*
+pattern(*
+rmdir*
+
+self(H*,
+samefile.*
+
+self(*
+
+other_path($H*/
+stat6*
+
+self(*
+follow_symlinks (%H*G
+
+symlink_to*
+
+self(*
+target(2*
+target_is_directory (%H*7
+touch*
+
+self(*
+mode (*
+exist_ok (%H*,
+unlink*
+
+self(*
+
+missing_ok (%H*%
+	with_name(*
+
+self((*
+
+name(*%
+	with_stem(*
+
+self((*
+
+stem(*)
+with_suffix(*
+
+self((*
+suffix(*1
+with_segments(*
+
+self((*
+pathsegments($*)
+write_bytes*
+
+self(*
+
+data(H*[
+
+write_text*
+
+self(*
+
+data(*
+encoding (7*
+errors (7*
+newline (7H2†
+open}
+open9*
+
+self(*
+
+mode(A*
+	buffering (*
+encoding (7*
+errors (7*
+newline (70:typing.overloadHX
+openB*
+
+self(*
+mode (J*
+	buffering (*
+encoding (7*
+errors (7*
+newline (70:typing.overloadHXr
+	__slots__0Kr
+__weakref__0
+r	
+_path0Lr
+_limiter0*
+	wrap_file*
+
+file(*
+limiter ("û
+	open_file´
+	open_file9*
+
+file(M*
+
+mode(A*
+	buffering (*
+encoding (7*
+errors (7*
+newline (7*
+closefd (%*
+opener (P*
+limiter (0:typing.overloadHX¶
+	open_fileB*
+
+file(M*
+mode (J*
+	buffering (*
+encoding (7*
+errors (7*
+newline (7*
+closefd (%*
+opener (P*
+limiter (0:typing.overloadHX*
+__annotations__0Q22"builtins.object2"builtins.object22""anyio._core._fileio.AsyncFile22"	typing.IO22.",anyio._core._synchronization.CapacityLimiter222"builtins.str2"typing.AsyncIterator222"typing.Coroutine2
+
+2"typing.Coroutine2
+
+2"builtins.int2"builtins.bytes2"typing.Coroutine2
+
+2""anyio._core._fileio.AsyncFile22"builtins.list22"typing.Coroutine2
+
+2"typing.Coroutine2
+
+2"typing_extensions.Buffer222""anyio._core._fileio.AsyncFile22"typing.Iterable22"typing.Iterable22"anyio._core._fileio.Path2"anyio._core._fileio.Path22"typing.Coroutine2
+
+2&"!anyio._core._fileio._PathIterator22"os.PathLike22"typing.Iterator22"type22	222   2"dataclasses.Field2
+2"builtins.dict2"222"builtins.bool2"pathlib.PurePath22&2@
+anyio._core._fileio.Path.Self"anyio._core._fileio.Path(22"builtins.tuple22"typing.Sequence2(2"builtins.list22"typing.Coroutine2
+
+(2"type2(2"typing.Coroutine2
+
+%2"typing.AsyncIterator2(2"typing.Coroutine2
+
+2"os.PathLike22212"builtins.float22
+3332"os.stat_result242"typing.Coroutine2
+
+52222&2"typing.Coroutine2
+
+22                        2'" _typeshed.OpenBinaryModeUpdating2:22        2&"_typeshed.OpenBinaryModeReading2<2
+2      2&"_typeshed.OpenBinaryModeWriting2>22;=?2"_typeshed.OpenBinaryMode2@2"typing.Coroutine2
+
+2$2                                 2%"_typeshed.OpenTextModeUpdating2C22	         2$"_typeshed.OpenTextModeWriting2E22            2$"_typeshed.OpenTextModeReading2G22DFH2"_typeshed.OpenTextMode2I222"pathlib.Path222"builtins.function22N22O2"builtins.dict2

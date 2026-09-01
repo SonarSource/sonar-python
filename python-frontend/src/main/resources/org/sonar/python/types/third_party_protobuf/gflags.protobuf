@@ -1,970 +1,571 @@
 
-gflagsB
-Errorgflags.Error"builtins.Exceptionj310j311j312j313j314L
-DuplicateFlaggflags.DuplicateFlag"gflags.Errorj310j311j312j313j314\
-CantOpenFlagFileErrorgflags.CantOpenFlagFileError"gflags.Errorj310j311j312j313j314Ü
-&DuplicateFlagCannotPropagateNoneToSwig-gflags.DuplicateFlagCannotPropagateNoneToSwig"gflags.DuplicateFlagj310j311j312j313j314ö
-DuplicateFlagErrorgflags.DuplicateFlagError"gflags.DuplicateFlag*π
-__init__"gflags.DuplicateFlagError.__init__"
-None*@
-self6
-gflags.DuplicateFlagError"gflags.DuplicateFlagError**
-flagname
-builtins.str"builtins.str*7
-flag_values&
-gflags.FlagValues"gflags.FlagValues*?
-other_flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314j310j311j312j313j314\
-IllegalFlagValueErrorgflags.IllegalFlagValueError"gflags.Errorj310j311j312j313j314R
-UnrecognizedFlaggflags.UnrecognizedFlag"gflags.Errorj310j311j312j313j314·
-UnrecognizedFlagErrorgflags.UnrecognizedFlagError"gflags.UnrecognizedFlag*˜
-__init__%gflags.UnrecognizedFlagError.__init__"
-None*F
-self<
-gflags.UnrecognizedFlagError"gflags.UnrecognizedFlagError**
-flagname
-builtins.str"builtins.str*-
-	flagvalue
-builtins.str"builtins.str z310z311z312z313z314j310j311j312j313j314—Q
+gflags
+Error"builtins.Exception
+DuplicateFlag"gflags.Error%
+CantOpenFlagFileError"gflags.Error>
+&DuplicateFlagCannotPropagateNoneToSwig"gflags.DuplicateFlagÇ
+DuplicateFlagError"gflags.DuplicateFlag*V
+__init__*
 
-FlagValuesgflags.FlagValues"builtins.object*π
-UseGnuGetOptgflags.FlagValues.UseGnuGetOpt"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*4
-use_gnu_getopt
-builtins.bool"builtins.bool z310z311z312z313z314*õ
-is_gnu_getoptgflags.FlagValues.is_gnu_getopt"
-builtins.bool"builtins.bool*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*¨
-FlagDictgflags.FlagValues.FlagDict"9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*∫
-flags_by_module_dict&gflags.FlagValues.flags_by_module_dict"Æ
-6builtins.dict[builtins.str,builtins.list[gflags.Flag]]
-builtins.str"builtins.strG
-builtins.list[gflags.Flag]
-gflags.Flag"gflags.Flag"builtins.list"builtins.dict*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*¿
-flags_by_module_id_dict)gflags.FlagValues.flags_by_module_id_dict"Æ
-6builtins.dict[builtins.int,builtins.list[gflags.Flag]]
-builtins.int"builtins.intG
-builtins.list[gflags.Flag]
-gflags.Flag"gflags.Flag"builtins.list"builtins.dict*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*¬
-key_flags_by_module_dict*gflags.FlagValues.key_flags_by_module_dict"Æ
-6builtins.dict[builtins.str,builtins.list[gflags.Flag]]
-builtins.str"builtins.strG
-builtins.list[gflags.Flag]
-gflags.Flag"gflags.Flag"builtins.list"builtins.dict*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*ä
-find_module_defining_flag+gflags.FlagValues.find_module_defining_flag"
-builtins.str"builtins.str*0
-self&
-gflags.FlagValues"gflags.FlagValues**
-flagname
-builtins.str"builtins.str*+
-default
-builtins.str"builtins.str z310z311z312z313z314*ê
-find_module_id_defining_flag.gflags.FlagValues.find_module_id_defining_flag"
-builtins.int"builtins.int*0
-self&
-gflags.FlagValues"gflags.FlagValues**
-flagname
-builtins.str"builtins.str*+
-default
-builtins.int"builtins.int z310z311z312z313z314*»
-append_flag_values$gflags.FlagValues.append_flag_values"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*7
-flag_values&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*»
-remove_flag_values$gflags.FlagValues.remove_flag_values"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*7
-flag_values&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*∑
-__setitem__gflags.FlagValues.__setitem__"
-None*(&
-gflags.FlagValues"gflags.FlagValues*
-builtins.str"builtins.str*
-gflags.Flag"gflags.Flagz310z311z312z313z314*´
-__getitem__gflags.FlagValues.__getitem__"
-gflags.Flag"gflags.Flag*(&
-gflags.FlagValues"gflags.FlagValues*
-builtins.str"builtins.strz310z311z312z313z314*ò
-__getattr__gflags.FlagValues.__getattr__"
-Any*(&
-gflags.FlagValues"gflags.FlagValues*
-builtins.str"builtins.strz310z311z312z313z314*Ω
-__setattr__gflags.FlagValues.__setattr__"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*&
-name
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314*ô
-__delattr__gflags.FlagValues.__delattr__"
-None*(&
-gflags.FlagValues"gflags.FlagValues*
-builtins.str"builtins.strz310z311z312z313z314*Ω
-set_defaultgflags.FlagValues.set_default"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*&
-name
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314*±
-__contains__gflags.FlagValues.__contains__"
-builtins.bool"builtins.bool*(&
-gflags.FlagValues"gflags.FlagValues*
-builtins.str"builtins.strz310z311z312z313z314*π
-__iter__gflags.FlagValues.__iter__"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*(&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*≈
-__call__gflags.FlagValues.__call__"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
-self&
-gflags.FlagValues"gflags.FlagValues*T
-argvJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
+self(*
+flagname(*
+flag_values(*
+other_flag_values (%
+IllegalFlagValueError"gflags.Error 
+UnrecognizedFlag"gflags.Errorm
+UnrecognizedFlagError"gflags.UnrecognizedFlag*;
+__init__*
 
-known_only
-builtins.bool"builtins.bool z310z311z312z313z314*u
-resetgflags.FlagValues.reset"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*À
-RegisteredFlags!gflags.FlagValues.RegisteredFlags"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*⁄
-flag_values_dict"gflags.FlagValues.flag_values_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*π
-GetHelpgflags.FlagValues.GetHelp"
-builtins.str"builtins.str*0
-self&
-gflags.FlagValues"gflags.FlagValues**
-prefix
-builtins.str"builtins.str z310z311z312z313z314*è
-module_helpgflags.FlagValues.module_help"
-builtins.str"builtins.str*0
-self&
-gflags.FlagValues"gflags.FlagValues*x
-modulel
-$Union[types.ModuleType,builtins.str]$
-types.ModuleType"types.ModuleType
-builtins.str"builtins.strz310z311z312z313z314*ü
-main_module_help"gflags.FlagValues.main_module_help"
-builtins.str"builtins.str*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*Æ
-getgflags.FlagValues.get"
-Any*0
-self&
-gflags.FlagValues"gflags.FlagValues*&
-name
-builtins.str"builtins.str*
-default
-Anyz310z311z312z313z314*Ä
-ShortestUniquePrefixes(gflags.FlagValues.ShortestUniquePrefixes"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*0
-self&
-gflags.FlagValues"gflags.FlagValues*z
-flr
-'builtins.dict[builtins.str,gflags.Flag]
-builtins.str"builtins.str
-gflags.Flag"gflags.Flag"builtins.dictz310z311z312z313z314*Õ
-ExtractFilename!gflags.FlagValues.ExtractFilename"
-builtins.str"builtins.str*0
-self&
-gflags.FlagValues"gflags.FlagValues*.
-flagfile_str
-builtins.str"builtins.strz310z311z312z313z314*ﬁ
-read_flags_from_files'gflags.FlagValues.read_flags_from_files"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
-self&
-gflags.FlagValues"gflags.FlagValues*T
-argvJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*/
-	force_gnu
-builtins.bool"builtins.bool z310z311z312z313z314*°
-flags_into_string#gflags.FlagValues.flags_into_string"
-builtins.str"builtins.str*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314*√
-append_flags_into_file(gflags.FlagValues.append_flags_into_file"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues**
-filename
-builtins.str"builtins.strz310z311z312z313z314*Ó
-write_help_in_xml_format*gflags.FlagValues.write_help_in_xml_format"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*Q
-outfileB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO z310z311z312z313z314*õ
-AddValidatorgflags.FlagValues.AddValidator"
-None*0
-self&
-gflags.FlagValues"gflags.FlagValues*
-	validator
-Anyz310z311z312z313z314*ì
-	is_parsedgflags.FlagValues.is_parsed"
-builtins.bool"builtins.bool*0
-self&
-gflags.FlagValues"gflags.FlagValuesz310z311z312z313z314j310j311j312j313j314rí
-IsGnuGetOptgflags.FlagValues.IsGnuGetOptK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rû
-FlagsByModuleDict#gflags.FlagValues.FlagsByModuleDictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r¢
-FlagsByModuleIdDict%gflags.FlagValues.FlagsByModuleIdDictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r§
-KeyFlagsByModuleDict&gflags.FlagValues.KeyFlagsByModuleDictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r®
-FindModuleDefiningFlag(gflags.FlagValues.FindModuleDefiningFlagK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r¨
-FindModuleIdDefiningFlag*gflags.FlagValues.FindModuleIdDefiningFlagK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rú
-AppendFlagValues"gflags.FlagValues.AppendFlagValuesK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rú
-RemoveFlagValues"gflags.FlagValues.RemoveFlagValuesK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rê
+self(*
+flagname(*
+	flagvalue (‰
 
-SetDefaultgflags.FlagValues.SetDefaultK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rä
-has_keygflags.FlagValues.has_keyK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rÜ
-Resetgflags.FlagValues.ResetK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rò
-FlagValuesDict gflags.FlagValues.FlagValuesDictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rê
+FlagValues"builtins.object*4
+UseGnuGetOpt*
 
-ModuleHelpgflags.FlagValues.ModuleHelpK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rò
-MainModuleHelp gflags.FlagValues.MainModuleHelpK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r†
-ReadFlagsFromFiles$gflags.FlagValues.ReadFlagsFromFilesK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rö
-FlagsIntoString!gflags.FlagValues.FlagsIntoStringK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r¢
-AppendFlagsIntoFile%gflags.FlagValues.AppendFlagsIntoFileK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r§
-WriteHelpInXMLFormat&gflags.FlagValues.WriteHelpInXMLFormatK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rå
-IsParsedgflags.FlagValues.IsParsedK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314Ö
-Flaggflags.Flag"builtins.object*¨
-__init__gflags.Flag.__init__"
-None*$
-self
-gflags.Flag"gflags.Flag*:
-parser.
-gflags.ArgumentParser"gflags.ArgumentParser*F
+self(*
+use_gnu_getopt (*
+is_gnu_getopt*
 
-serializer6
-gflags.ArgumentSerializer"gflags.ArgumentSerializer*&
-name
-builtins.str"builtins.str*Q
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*-
-help_string
-builtins.str"builtins.str*.
+self(*
+FlagDict*
 
-short_name
-builtins.str"builtins.str *-
-boolean
-builtins.bool"builtins.bool *4
-allow_override
-builtins.bool"builtins.bool z310z311z312z313z314*y
-Parsegflags.Flag.Parse"
-Any*$
-self
-gflags.Flag"gflags.Flag*
-argument
-Anyz310z311z312z313z314*g
-Unparsegflags.Flag.Unparse"
-None*$
-self
-gflags.Flag"gflags.Flagz310z311z312z313z314*
-	Serializegflags.Flag.Serialize"
-builtins.str"builtins.str*$
-self
-gflags.Flag"gflags.Flagz310z311z312z313z314*Å
+self(*$
+flags_by_module_dict*
 
-SetDefaultgflags.Flag.SetDefault"
-None*$
-self
-gflags.Flag"gflags.Flag*
-value
-Anyz310z311z312z313z314*u
-Typegflags.Flag.Type"
-builtins.str"builtins.str*$
-self
-gflags.Flag"gflags.Flagz310z311z312z313z314*€
-WriteInfoInXMLFormat gflags.Flag.WriteInfoInXMLFormat"
-None*$
-self
-gflags.Flag"gflags.Flag*O
-outfileB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*-
-module_name
-builtins.str"builtins.str*,
-is_key
-builtins.bool"builtins.bool **
-indent
-builtins.str"builtins.str z310z311z312z313z314j310j311j312j313j314rO
-namegflags.Flag.name
-builtins.str"builtins.str*310*311*312*313*314r@
-defaultgflags.Flag.default
-Any*310*311*312*313*314rc
-default_as_strgflags.Flag.default_as_str
-builtins.str"builtins.str*310*311*312*313*314r<
-valuegflags.Flag.value
-Any*310*311*312*313*314rO
-helpgflags.Flag.help
-builtins.str"builtins.str*310*311*312*313*314r[
+self(*'
+flags_by_module_id_dict*
 
-short_namegflags.Flag.short_name
-builtins.str"builtins.str*310*311*312*313*314rW
-booleangflags.Flag.boolean
-builtins.bool"builtins.bool*310*311*312*313*314rW
-presentgflags.Flag.present
-builtins.bool"builtins.bool*310*311*312*313*314re
-parsergflags.Flag.parser.
-gflags.ArgumentParser"gflags.ArgumentParser*310*311*312*313*314ru
+self(*(
+key_flags_by_module_dict*
 
-serializergflags.Flag.serializer6
-gflags.ArgumentSerializer"gflags.ArgumentSerializer*310*311*312*313*314re
-allow_overridegflags.Flag.allow_override
-builtins.bool"builtins.bool*310*311*312*313*314Ω
-ArgumentParsergflags.ArgumentParser"builtins.object*ó
-parsegflags.ArgumentParser.parse"
-Any*8
-self.
-gflags.ArgumentParser"gflags.ArgumentParser*
-argument
-Anyz310z311z312z313z314*ù
-	flag_typegflags.ArgumentParser.flag_type"
-builtins.str"builtins.str*8
-self.
-gflags.ArgumentParser"gflags.ArgumentParserz310z311z312z313z314*¶
-WriteCustomInfoInXMLFormat0gflags.ArgumentParser.WriteCustomInfoInXMLFormat"
-None*8
-self.
-gflags.ArgumentParser"gflags.ArgumentParser*O
-outfileB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*(
-indent
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rm
-syntactic_help$gflags.ArgumentParser.syntactic_help
-builtins.str"builtins.str*310*311*312*313*314rå
-Parsergflags.ArgumentParser.ParserK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rà
-Typegflags.ArgumentParser.TypeK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314ô
-ArgumentSerializergflags.ArgumentSerializer"builtins.object*Ω
-	Serialize#gflags.ArgumentSerializer.Serialize"
-builtins.str"builtins.str*@
-self6
-gflags.ArgumentSerializer"gflags.ArgumentSerializer*
-value
-Anyz310z311z312z313z314j310j311j312j313j314Í
-ListSerializergflags.ListSerializer"gflags.ArgumentSerializer*≥
-__init__gflags.ListSerializer.__init__"
-None*8
-self.
-gflags.ListSerializer"gflags.ListSerializer**
-list_sep
-builtins.str"builtins.strz310z311z312z313z314*÷
-	Serializegflags.ListSerializer.Serialize"
-builtins.str"builtins.str*8
-self.
-gflags.ListSerializer"gflags.ListSerializer*7
-value,
-builtins.list[Any]
-Any"builtins.listz310z311z312z313z314j310j311j312j313j314µ
-BooleanParsergflags.BooleanParser"gflags.ArgumentParser*Ø
-Convertgflags.BooleanParser.Convert"
-builtins.bool"builtins.bool*6
-self,
-gflags.BooleanParser"gflags.BooleanParser*
-argument
-Anyz310z311z312z313z314*´
-Parsegflags.BooleanParser.Parse"
-builtins.bool"builtins.bool*6
-self,
-gflags.BooleanParser"gflags.BooleanParser*
-argument
-Anyz310z311z312z313z314j310j311j312j313j314±
-BooleanFlaggflags.BooleanFlag"gflags.Flag*Á
-__init__gflags.BooleanFlag.__init__"
-None*2
-self(
-gflags.BooleanFlag"gflags.BooleanFlag*&
-name
-builtins.str"builtins.str*T
-defaultG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*&
-help
-builtins.str"builtins.str*.
+self(*J
+find_module_defining_flag*
 
-short_name
-builtins.str"builtins.str *
-args
-Anyz310z311z312z313z314j310j311j312j313j314√
-HelpFlaggflags.HelpFlag"gflags.BooleanFlag*u
-__init__gflags.HelpFlag.__init__"
-None*,
-self"
-gflags.HelpFlag"gflags.HelpFlagz310z311z312z313z314*Å
-Parsegflags.HelpFlag.Parse"
-None*,
-self"
-gflags.HelpFlag"gflags.HelpFlag*
-arg
-Anyz310z311z312z313z314j310j311j312j313j314€
-HelpXMLFlaggflags.HelpXMLFlag"gflags.BooleanFlag*~
-__init__gflags.HelpXMLFlag.__init__"
-None*2
-self(
-gflags.HelpXMLFlag"gflags.HelpXMLFlagz310z311z312z313z314*ä
-Parsegflags.HelpXMLFlag.Parse"
-None*2
-self(
-gflags.HelpXMLFlag"gflags.HelpXMLFlag*
-arg
-Anyz310z311z312z313z314j310j311j312j313j314Ï
-HelpshortFlaggflags.HelpshortFlag"gflags.BooleanFlag*Ñ
-__init__gflags.HelpshortFlag.__init__"
-None*6
-self,
-gflags.HelpshortFlag"gflags.HelpshortFlagz310z311z312z313z314*ê
-Parsegflags.HelpshortFlag.Parse"
-None*6
-self,
-gflags.HelpshortFlag"gflags.HelpshortFlag*
-arg
-Anyz310z311z312z313z314j310j311j312j313j314ú
-NumericParsergflags.NumericParser"gflags.ArgumentParser*”
-IsOutsideBounds$gflags.NumericParser.IsOutsideBounds"
-builtins.bool"builtins.bool*6
-self,
-gflags.NumericParser"gflags.NumericParser*)
-val 
-builtins.float"builtins.floatz310z311z312z313z314*≠
-Parsegflags.NumericParser.Parse" 
-builtins.float"builtins.float*6
-self,
-gflags.NumericParser"gflags.NumericParser*
-argument
-Anyz310z311z312z313z314*£
-WriteCustomInfoInXMLFormat/gflags.NumericParser.WriteCustomInfoInXMLFormat"
-None*6
-self,
-gflags.NumericParser"gflags.NumericParser*O
-outfileB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*(
-indent
-builtins.str"builtins.strz310z311z312z313z314*ò
-Convertgflags.NumericParser.Convert"
-Any*6
-self,
-gflags.NumericParser"gflags.NumericParser*
-argument
-Anyz310z311z312z313z314j310j311j312j313j314ß
-FloatParsergflags.FloatParser"gflags.NumericParser*Ë
-__init__gflags.FloatParser.__init__"
-None*2
-self(
-gflags.FloatParser"gflags.FloatParser*3
-lower_bound 
-builtins.float"builtins.float *3
-upper_bound 
-builtins.float"builtins.float z310z311z312z313z314*´
-Convertgflags.FloatParser.Convert" 
-builtins.float"builtins.float*2
-self(
-gflags.FloatParser"gflags.FloatParser*
-argument
-Anyz310z311z312z313z314j310j311j312j313j314rj
-number_article!gflags.FloatParser.number_article
-builtins.str"builtins.str*310*311*312*313*314rd
-number_namegflags.FloatParser.number_name
-builtins.str"builtins.str*310*311*312*313*314rj
-syntactic_help!gflags.FloatParser.syntactic_help
-builtins.str"builtins.str*310*311*312*313*314±
-IntegerParsergflags.IntegerParser"gflags.NumericParser*Ê
-__init__gflags.IntegerParser.__init__"
-None*6
-self,
-gflags.IntegerParser"gflags.IntegerParser*/
-lower_bound
-builtins.int"builtins.int */
-upper_bound
-builtins.int"builtins.int z310z311z312z313z314*≠
-Convertgflags.IntegerParser.Convert"
-builtins.int"builtins.int*6
-self,
-gflags.IntegerParser"gflags.IntegerParser*
-argument
-Anyz310z311z312z313z314j310j311j312j313j314rl
-number_article#gflags.IntegerParser.number_article
-builtins.str"builtins.str*310*311*312*313*314rf
-number_name gflags.IntegerParser.number_name
-builtins.str"builtins.str*310*311*312*313*314rl
-syntactic_help#gflags.IntegerParser.syntactic_help
-builtins.str"builtins.str*310*311*312*313*314∏
+self(*
+flagname(*
+default (*M
+find_module_id_defining_flag*
 
-EnumParsergflags.EnumParser"gflags.ArgumentParser*ÿ
-__init__gflags.EnumParser.__init__"
-None*0
-self&
-gflags.EnumParser"gflags.EnumParser*[
-enum_valuesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*ã
-Parsegflags.EnumParser.Parse"
-Any*0
-self&
-gflags.EnumParser"gflags.EnumParser*
-argument
-Anyz310z311z312z313z314j310j311j312j313j314˙
-EnumFlaggflags.EnumFlag"gflags.Flag*∂
-__init__gflags.EnumFlag.__init__"
-None*,
-self"
-gflags.EnumFlag"gflags.EnumFlag*&
-name
-builtins.str"builtins.str*Q
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*&
-help
-builtins.str"builtins.str*[
-enum_valuesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*,
+self(*
+flagname(*
+default (*5
+append_flag_values*
 
-short_name
-builtins.str"builtins.str*
-args
-Anyz310z311z312z313z314j310j311j312j313j314ı
-BaseListParsergflags.BaseListParser"gflags.ArgumentParser*‹
-__init__gflags.BaseListParser.__init__"
-None*8
-self.
-gflags.BaseListParser"gflags.BaseListParser*)
-token
-builtins.str"builtins.str *(
-name
-builtins.str"builtins.str z310z311z312z313z314*º
-Parsegflags.BaseListParser.Parse",
-builtins.list[Any]
-Any"builtins.list*8
-self.
-gflags.BaseListParser"gflags.BaseListParser*
-argument
-Anyz310z311z312z313z314j310j311j312j313j314Ã
+self(*
+flag_values(*5
+remove_flag_values*
 
-ListParsergflags.ListParser"gflags.BaseListParser*{
-__init__gflags.ListParser.__init__"
-None*0
-self&
-gflags.ListParser"gflags.ListParserz310z311z312z313z314j310j311j312j313j314¨
-WhitespaceSeparatedListParser$gflags.WhitespaceSeparatedListParser"gflags.BaseListParser*¥
-__init__-gflags.WhitespaceSeparatedListParser.__init__"
-None*V
-selfL
-$gflags.WhitespaceSeparatedListParser"$gflags.WhitespaceSeparatedListParserz310z311z312z313z314j310j311j312j313j314Ñ
-	MultiFlaggflags.MultiFlag"gflags.Flag*†
-__init__gflags.MultiFlag.__init__"
-None*.
-self$
-gflags.MultiFlag"gflags.MultiFlag*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*ä
-Parsegflags.MultiFlag.Parse"
-None*.
-self$
-gflags.MultiFlag"gflags.MultiFlag*
-	arguments
-Anyz310z311z312z313z314*é
-	Serializegflags.MultiFlag.Serialize"
-builtins.str"builtins.str*.
-self$
-gflags.MultiFlag"gflags.MultiFlagz310z311z312z313z314j310j311j312j313j314^
-get_help_widthgflags.get_help_width"
-builtins.int"builtins.intz310z311z312z313z314¥
-	text_wrapgflags.text_wrap"
-builtins.str"builtins.str*&
-text
-builtins.str"builtins.str**
-length
-builtins.int"builtins.int **
-indent
-builtins.str"builtins.str *4
-firstline_indent
-builtins.str"builtins.str *(
-tabs
-builtins.str"builtins.str z310z311z312z313z314
-doc_to_helpgflags.doc_to_help"
-builtins.str"builtins.str*%
-doc
-builtins.str"builtins.strz310z311z312z313z314¡
-register_validatorgflags.register_validator"
-None*+
-	flag_name
-builtins.str"builtins.str*X
-checkerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*+
-message
-builtins.str"builtins.str *9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314¿
-mark_flag_as_requiredgflags.mark_flag_as_required"
-None*+
-	flag_name
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314ı
-mark_flags_as_requiredgflags.mark_flags_as_required"
-None*^
+self(*
+flag_values(*
+__setitem__*(*(*(	*
+__getitem__	*(*(*
+__getattr__*(*(*4
+__setattr__*
 
-flag_namesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314µ
-mark_flags_as_mutual_exclusive%gflags.mark_flags_as_mutual_exclusive"
-None*^
+self(*
 
-flag_namesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*.
-required
-builtins.bool"builtins.bool *9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314Ù
-DEFINEgflags.DEFINE"
-None*:
-parser.
-gflags.ArgumentParser"gflags.ArgumentParser*&
-name
-builtins.str"builtins.str*
-default
-Any*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *H
+name(*
+value(*
+__delattr__*(*(*4
+set_default*
 
-serializer6
-gflags.ArgumentSerializer"gflags.ArgumentSerializer *
-args
-Anyz310z311z312z313z314•
-DEFINE_flaggflags.DEFINE_flag"
-None*$
-flag
-gflags.Flag"gflags.Flag*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314∂
-declare_key_flaggflags.declare_key_flag"
-None*+
-	flag_name
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314«
-adopt_module_key_flagsgflags.adopt_module_key_flags"
-None*0
-module$
-types.ModuleType"types.ModuleType*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues z310z311z312z313z314π
-DEFINE_stringgflags.DEFINE_string"
-None*&
-name
-builtins.str"builtins.str*Q
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314æ
-DEFINE_booleangflags.DEFINE_boolean"
-None*&
-name
-builtins.str"builtins.str*T
-defaultG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314ß
-DEFINE_floatgflags.DEFINE_float"
-None*&
-name
-builtins.str"builtins.str*W
-defaultJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*&
-help
-builtins.str"builtins.str*3
-lower_bound 
-builtins.float"builtins.float *3
-upper_bound 
-builtins.float"builtins.float *9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314ù
-DEFINE_integergflags.DEFINE_integer"
-None*&
-name
-builtins.str"builtins.str*Q
-defaultD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*&
-help
-builtins.str"builtins.str*/
-lower_bound
-builtins.int"builtins.int */
-upper_bound
-builtins.int"builtins.int *9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314ñ
-DEFINE_enumgflags.DEFINE_enum"
-None*&
-name
-builtins.str"builtins.str*Q
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*_
-enum_valuesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314Ù
-DEFINE_listgflags.DEFINE_list"
-None*&
-name
-builtins.str"builtins.str*è
-defaultÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314Ñ
-DEFINE_spaceseplistgflags.DEFINE_spaceseplist"
-None*&
-name
-builtins.str"builtins.str*è
-defaultÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314Ø
-DEFINE_multi_stringgflags.DEFINE_multi_string"
-None*&
-name
-builtins.str"builtins.str*∫
-default¨
-4Union[builtins.str,builtins.list[builtins.str],None]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314ì
-DEFINE_multi_integergflags.DEFINE_multi_integer"
-None*&
-name
-builtins.str"builtins.str*∫
-default¨
-4Union[builtins.int,builtins.list[builtins.int],None]
-builtins.int"builtins.intJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list
-None*&
-help
-builtins.str"builtins.str*/
-lower_bound
-builtins.int"builtins.int */
-upper_bound
-builtins.int"builtins.int *9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314•
-DEFINE_multi_floatgflags.DEFINE_multi_float"
-None*&
-name
-builtins.str"builtins.str*»
-default∫
-8Union[builtins.float,builtins.list[builtins.float],None] 
-builtins.float"builtins.floatP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.list
-None*&
-help
-builtins.str"builtins.str*3
-lower_bound 
-builtins.float"builtins.float *3
-upper_bound 
-builtins.float"builtins.float *9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *
-args
-Anyz310z311z312z313z314»
-DEFINE_multi_enumgflags.DEFINE_multi_enum"
-None*&
-name
-builtins.str"builtins.str*¿
-default≤
-6Union[typing.Sequence[builtins.str],builtins.str,None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-builtins.str"builtins.str
-None*_
-enum_valuesN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*&
-help
-builtins.str"builtins.str*9
-flag_values&
-gflags.FlagValues"gflags.FlagValues *4
-case_sensitive
-builtins.bool"builtins.bool *
-args
-Anyz310z311z312z313z314*õ
-__annotations__gflags.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*â
-GetHelpWidthgflags.GetHelpWidthK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*Å
-TextWrapgflags.TextWrapK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*É
-	DocToHelpgflags.DocToHelpK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*V
-FLAGSgflags.FLAGS&
-gflags.FlagValues"gflags.FlagValues*310*311*312*313*314*ì
-RegisterValidatorgflags.RegisterValidatorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ï
-MarkFlagAsRequiredgflags.MarkFlagAsRequiredK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ó
-MarkFlagsAsRequiredgflags.MarkFlagsAsRequiredK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*•
-MarkFlagsAsMutualExclusive!gflags.MarkFlagsAsMutualExclusiveK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ë
-DECLARE_key_flaggflags.DECLARE_key_flagK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ù
-ADOPT_module_key_flagsgflags.ADOPT_module_key_flagsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*á
-DEFINE_boolgflags.DEFINE_boolK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ï
-DEFINE_multistringgflags.DEFINE_multistringK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ë
-DEFINE_multi_intgflags.DEFINE_multi_intK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314
+self(*
+
+name(*
+value(*
+__contains__*(*(*
+__iter__*(*8
+__call__*
+
+self(*
+
+argv(*
+
+known_only (*
+reset*
+
+self(*
+RegisteredFlags*
+
+self(* 
+flag_values_dict*
+
+self(*'
+GetHelp*
+
+self(*
+prefix (*)
+module_help*
+
+self(*
+module(* 
+main_module_help*
+
+self(*.
+get*
+
+self(*
+
+name(*
+default(*0
+ShortestUniquePrefixes*
+
+self(*
+fl(*3
+ExtractFilename*
+
+self(*
+flagfile_str(*D
+read_flags_from_files*
+
+self(*
+
+argv(*
+	force_gnu (*!
+flags_into_string*
+
+self(*6
+append_flags_into_file*
+
+self(*
+filename(*9
+write_help_in_xml_format*
+
+self(*
+outfile (*-
+AddValidator*
+
+self(*
+	validator(*
+	is_parsed*
+
+self(r
+IsGnuGetOpt0r
+FlagsByModuleDict0r
+FlagsByModuleIdDict0r
+KeyFlagsByModuleDict0r
+FindModuleDefiningFlag0r
+FindModuleIdDefiningFlag0r
+AppendFlagValues0r
+RemoveFlagValues0r
+
+SetDefault0r
+has_key0r	
+Reset0r
+FlagValuesDict0r
+
+ModuleHelp0r
+MainModuleHelp0r
+ReadFlagsFromFiles0r
+FlagsIntoString0r
+AppendFlagsIntoFile0r
+WriteHelpInXMLFormat0r
+IsParsed0Ÿ
+Flag"builtins.object*£
+__init__*
+
+self(	*
+parser(*
+
+serializer(*
+
+name(*
+default(*
+help_string(*
+
+short_name (*
+boolean (*
+allow_override (*%
+Parse*
+
+self(	*
+argument(*
+Unparse*
+
+self(	*
+	Serialize*
+
+self(	*'
+
+SetDefault*
+
+self(	*
+value(*
+Type*
+
+self(	*f
+WriteInfoInXMLFormat*
+
+self(	*
+outfile(*
+module_name(*
+is_key (*
+indent (r
+name0r
+default0r
+default_as_str0r	
+value0r
+help0r
+
+short_name0r
+boolean0r
+present0r
+
+parser0r
+
+serializer0r
+allow_override0÷
+ArgumentParser"builtins.object*%
+parse*
+
+self(*
+argument(*
+	flag_type*
+
+self(*G
+WriteCustomInfoInXMLFormat*
+
+self(*
+outfile(*
+indent(r
+syntactic_help0r
+
+Parser0r
+Type0M
+ArgumentSerializer"builtins.object*&
+	Serialize*
+
+self(*
+value(}
+ListSerializer"gflags.ArgumentSerializer*(
+__init__*
+
+self(*
+list_sep(*&
+	Serialize*
+
+self(*
+value(v
+BooleanParser"gflags.ArgumentParser*'
+Convert*
+
+self(*
+argument(*%
+Parse*
+
+self(*
+argument({
+BooleanFlag"gflags.Flag*_
+__init__*
+
+self(*
+
+name(*
+default(*
+
+help(*
+
+short_name (*
+
+args(Z
+HelpFlag"gflags.BooleanFlag*
+__init__*
+
+self( * 
+Parse*
+
+self( *	
+arg(]
+HelpXMLFlag"gflags.BooleanFlag*
+__init__*
+
+self(!* 
+Parse*
+
+self(!*	
+arg(_
+HelpshortFlag"gflags.BooleanFlag*
+__init__*
+
+self("* 
+Parse*
+
+self("*	
+arg(Î
+NumericParser"gflags.ArgumentParser**
+IsOutsideBounds*
+
+self(#*	
+val($*%
+Parse$*
+
+self(#*
+argument(*G
+WriteCustomInfoInXMLFormat*
+
+self(#*
+outfile(*
+indent(*'
+Convert*
+
+self(#*
+argument(…
+FloatParser"gflags.NumericParser*B
+__init__*
+
+self(%*
+lower_bound ($*
+upper_bound ($*'
+Convert$*
+
+self(%*
+argument(r
+number_article0r
+number_name0r
+syntactic_help0À
+IntegerParser"gflags.NumericParser*B
+__init__*
+
+self(&*
+lower_bound (*
+upper_bound (*'
+Convert*
+
+self(&*
+argument(r
+number_article0r
+number_name0r
+syntactic_help0w
+
+EnumParser"gflags.ArgumentParser*+
+__init__*
+
+self('*
+enum_values(*%
+Parse*
+
+self('*
+argument(â
+EnumFlag"gflags.Flag*p
+__init__*
+
+self((*
+
+name(*
+default(*
+
+help(*
+enum_values(*
+
+short_name(*
+
+args(Ö
+BaseListParser"gflags.ArgumentParser*5
+__init__*
+
+self()*
+token (*
+name (*%
+Parse*
+
+self()*
+argument(=
+
+ListParser"gflags.BaseListParser*
+__init__*
+
+self(*P
+WhitespaceSeparatedListParser"gflags.BaseListParser*
+__init__*
+
+self(+è
+	MultiFlag"gflags.Flag*2
+__init__*
+
+self(,*
+
+args(*
+kwargs(*&
+Parse*
+
+self(,*
+	arguments(*
+	Serialize*
+
+self(,
+get_help_widtha
+	text_wrap*
+
+text(*
+length (*
+indent (*
+firstline_indent (*
+tabs (
+doc_to_help*	
+doc(\
+register_validator*
+	flag_name(*
+checker(*
+message (*
+flag_values (?
+mark_flag_as_required*
+	flag_name(*
+flag_values (A
+mark_flags_as_required*
+
+flag_names(-*
+flag_values ([
+mark_flags_as_mutual_exclusive*
+
+flag_names(-*
+required (*
+flag_values (t
+DEFINE*
+parser(*
+
+name(*
+default(*
+
+help(*
+flag_values (*
+
+serializer (*
+
+args(0
+DEFINE_flag*
+
+flag(	*
+flag_values (:
+declare_key_flag*
+	flag_name(*
+flag_values (=
+adopt_module_key_flags*
+module(*
+flag_values (Y
+DEFINE_string*
+
+name(*
+default(*
+
+help(*
+flag_values (*
+
+args(Z
+DEFINE_boolean*
+
+name(*
+default(*
+
+help(*
+flag_values (*
+
+args(Ç
+DEFINE_float*
+
+name(*
+default(.*
+
+help(*
+lower_bound ($*
+upper_bound ($*
+flag_values (*
+
+args(Ñ
+DEFINE_integer*
+
+name(*
+default(/*
+
+help(*
+lower_bound (*
+upper_bound (*
+flag_values (*
+
+args(j
+DEFINE_enum*
+
+name(*
+default(*
+enum_values(-*
+
+help(*
+flag_values (*
+
+args(W
+DEFINE_list*
+
+name(*
+default(0*
+
+help(*
+flag_values (*
+
+args(_
+DEFINE_spaceseplist*
+
+name(*
+default(0*
+
+help(*
+flag_values (*
+
+args(_
+DEFINE_multi_string*
+
+name(*
+default(1*
+
+help(*
+flag_values (*
+
+args(ä
+DEFINE_multi_integer*
+
+name(*
+default(3*
+
+help(*
+lower_bound (*
+upper_bound (*
+flag_values (*
+
+args(à
+DEFINE_multi_float*
+
+name(*
+default(5*
+
+help(*
+lower_bound ($*
+upper_bound ($*
+flag_values (*
+
+args(à
+DEFINE_multi_enum*
+
+name(*
+default(7*
+enum_values(6*
+
+help(*
+flag_values (*
+case_sensitive (*
+
+args(*
+__annotations__0*
+GetHelpWidth0*
+TextWrap0*
+	DocToHelp0*	
+FLAGS0*
+RegisterValidator0*
+MarkFlagAsRequired0*
+MarkFlagsAsRequired0*
+MarkFlagsAsMutualExclusive0*
+DECLARE_key_flag0*
+ADOPT_module_key_flags0*
+DEFINE_bool0*
+DEFINE_multistring0*
+DEFINE_multi_int022"gflags.DuplicateFlagError2"builtins.str2"gflags.FlagValues2"gflags.UnrecognizedFlagError2"builtins.bool22"builtins.dict22"gflags.Flag2"builtins.list2	2"builtins.dict2
+2"builtins.int2"builtins.dict2
+2"typing.Iterator22"builtins.list22"builtins.dict22"types.ModuleType222"builtins.dict22"builtins.dict2	2"	typing.IO22"builtins.function222"gflags.ArgumentParser2"gflags.ArgumentSerializer222"gflags.ListSerializer2"builtins.list22"gflags.BooleanParser2"gflags.BooleanFlag222"gflags.HelpFlag2"gflags.HelpXMLFlag2"gflags.HelpshortFlag2"gflags.NumericParser2"builtins.float2"gflags.FloatParser2"gflags.IntegerParser2"gflags.EnumParser2"gflags.EnumFlag2"gflags.BaseListParser2"gflags.ListParser2&"$gflags.WhitespaceSeparatedListParser2"gflags.MultiFlag2"typing.Iterable222$2222222"builtins.list22222"builtins.list2$22$42"typing.Sequence2226

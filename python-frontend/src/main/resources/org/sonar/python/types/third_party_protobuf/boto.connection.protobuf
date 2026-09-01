@@ -1,225 +1,146 @@
 
-boto.connection¿
-HostConnectionPool"boto.connection.HostConnectionPool"builtins.object*Æ
-__init__+boto.connection.HostConnectionPool.__init__"
-None*R
-selfH
-"boto.connection.HostConnectionPool""boto.connection.HostConnectionPoolz310z311z312z313z314*R
-size'boto.connection.HostConnectionPool.size*
-selfz310z311z312z313z314*Z
-put&boto.connection.HostConnectionPool.put*
+boto.connectionõ
+HostConnectionPool"builtins.object*
+__init__*
+
+self(*
+size*
+self*
+put*
 self*
-connz310z311z312z313z314*P
-get&boto.connection.HostConnectionPool.get*
-selfz310z311z312z313z314*T
-clean(boto.connection.HostConnectionPool.clean*
-selfz310z311z312z313z314j310j311j312j313j314rS
-queue(boto.connection.HostConnectionPool.queue
-Any*310*311*312*313*314ı	
-ConnectionPoolboto.connection.ConnectionPool"builtins.object*¢
-__init__'boto.connection.ConnectionPool.__init__"
-None*J
-self@
-boto.connection.ConnectionPool"boto.connection.ConnectionPoolz310z311z312z313z314*N
-size#boto.connection.ConnectionPool.size*
-selfz310z311z312z313z314*è
-get_http_connection2boto.connection.ConnectionPool.get_http_connection*
+conn*
+get*
+self*
+clean*
+selfr	
+queue0Ã
+ConnectionPool"builtins.object*
+__init__*
+
+self(*
+size*
+self*B
+get_http_connection*
 self*
 host*
 port*
-	is_securez310z311z312z313z314*ô
-put_http_connection2boto.connection.ConnectionPool.put_http_connection*
+	is_secure*L
+put_http_connection*
 self*
 host*
 port*
 	is_secure*
-connz310z311z312z313z314*P
-clean$boto.connection.ConnectionPool.clean*
-selfz310z311z312z313z314j310j311j312j313j314rz
-CLEAN_INTERVAL-boto.connection.ConnectionPool.CLEAN_INTERVAL 
-builtins.float"builtins.float*310*311*312*313*314rz
-STALE_DURATION-boto.connection.ConnectionPool.STALE_DURATION 
-builtins.float"builtins.float*310*311*312*313*314r]
-host_to_pool+boto.connection.ConnectionPool.host_to_pool
-Any*310*311*312*313*314r|
-last_clean_time.boto.connection.ConnectionPool.last_clean_time 
-builtins.float"builtins.float*310*311*312*313*314rO
-mutex$boto.connection.ConnectionPool.mutex
-Any*310*311*312*313*314Í	
-HTTPRequestboto.connection.HTTPRequest"builtins.object*‘
-__init__$boto.connection.HTTPRequest.__init__"
-None*D
-self:
-boto.connection.HTTPRequest"boto.connection.HTTPRequest*
-method
-Any*
-protocol
-Any*
-host
-Any*
-port
-Any*
-path
-Any*
-	auth_path
-Any*
-params
-Any*
-headers
-Any*
-body
-Anyz310z311z312z313z314*q
-	authorize%boto.connection.HTTPRequest.authorize*
+conn*
+clean*
+selfr
+CLEAN_INTERVAL0r
+STALE_DURATION0r
+host_to_pool0r
+last_clean_time0r	
+mutex0“
+HTTPRequest"builtins.object*î
+__init__*
+
+self(*
+method(*
+protocol(*
+
+host(*
+
+port(*
+
+path(*
+	auth_path(*
+params(*
+headers(*
+
+body(*1
+	authorize*
 self*
 
 connection*
 
-kwargsz310z311z312z313z314j310j311j312j313j314rN
-method"boto.connection.HTTPRequest.method
-Any*310*311*312*313*314rR
-protocol$boto.connection.HTTPRequest.protocol
-Any*310*311*312*313*314rJ
-host boto.connection.HTTPRequest.host
-Any*310*311*312*313*314rJ
-port boto.connection.HTTPRequest.port
-Any*310*311*312*313*314rJ
-path boto.connection.HTTPRequest.path
-Any*310*311*312*313*314rT
-	auth_path%boto.connection.HTTPRequest.auth_path
-Any*310*311*312*313*314rN
-params"boto.connection.HTTPRequest.params
-Any*310*311*312*313*314rP
-headers#boto.connection.HTTPRequest.headers
-Any*310*311*312*313*314rJ
-body boto.connection.HTTPRequest.body
-Any*310*311*312*313*314§
-HTTPResponseboto.connection.HTTPResponse"http.client.HTTPResponse*ƒ
-__init__%boto.connection.HTTPResponse.__init__"
-None*F
-self<
-boto.connection.HTTPResponse"boto.connection.HTTPResponse*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*˚
-read!boto.connection.HTTPResponse.read"
-Any*F
-self<
-boto.connection.HTTPResponse"boto.connection.HTTPResponse*f
-amt[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314úK
-AWSAuthConnection!boto.connection.AWSAuthConnection"builtins.object*ÿ
-__init__*boto.connection.AWSAuthConnection.__init__"
-None*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*
-host
-Any*t
-aws_access_key_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *x
-aws_secret_access_key[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	is_secure
-builtins.bool"builtins.bool *g
-port[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-proxy[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+kwargsr
 
-proxy_port[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+method0r
+protocol0r
+host0r
+port0r
+path0r
+	auth_path0r
 
-proxy_user[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+params0r
+headers0r
+body0
+HTTPResponse"http.client.HTTPResponse*2
+__init__*
 
-proxy_pass[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *)
-debug
-builtins.int"builtins.int *{
-https_connection_factory[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-path
-builtins.str"builtins.str *,
-provider
-builtins.str"builtins.str *q
-security_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *=
-suppress_consec_slashes
-builtins.bool"builtins.bool *4
-validate_certs
-builtins.bool"builtins.bool *o
-profile_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*t
+self(*
 
-connection,boto.connection.AWSAuthConnection.connection*
-self0:builtins.property`z310z311z312z313z314*Ç
-aws_access_key_id3boto.connection.AWSAuthConnection.aws_access_key_id*
-self0:builtins.property`z310z311z312z313z314*—
-gs_access_key_id2boto.connection.AWSAuthConnection.gs_access_key_id"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection0:builtins.property`z310z311z312z313z314*t
+args(*
+kwargs(*!
+read*
 
-access_key,boto.connection.AWSAuthConnection.access_key*
-self0:builtins.property`z310z311z312z313z314*ä
-aws_secret_access_key7boto.connection.AWSAuthConnection.aws_secret_access_key*
-self0:builtins.property`z310z311z312z313z314*à
-gs_secret_access_key6boto.connection.AWSAuthConnection.gs_secret_access_key*
-self0:builtins.property`z310z311z312z313z314*t
+self(*
+amt (	Â
+AWSAuthConnection"builtins.object*Ç
+__init__*
 
-secret_key,boto.connection.AWSAuthConnection.secret_key*
-self0:builtins.property`z310z311z312z313z314*x
-profile_name.boto.connection.AWSAuthConnection.profile_name*
-self0:builtins.property`z310z311z312z313z314*‘
-get_path*boto.connection.AWSAuthConnection.get_path"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*(
-path
-builtins.str"builtins.str z310z311z312z313z314*ô
-server_name-boto.connection.AWSAuthConnection.server_name"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*g
-port[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ú
-handle_proxy.boto.connection.AWSAuthConnection.handle_proxy*
+self(
+*
+
+host(*
+aws_access_key_id (	*
+aws_secret_access_key (	*
+	is_secure (*
+port (	*
+proxy (	*
+
+proxy_port (	*
+
+proxy_user (	*
+
+proxy_pass (	*
+debug (* 
+https_connection_factory (	*
+path (*
+provider (*
+security_token (	*
+suppress_consec_slashes (*
+validate_certs (*
+profile_name (	*-
+
+connection*
+self0:builtins.property`*4
+aws_access_key_id*
+self0:builtins.property`*7
+gs_access_key_id*
+
+self(
+0:builtins.property`*-
+
+access_key*
+self0:builtins.property`*8
+aws_secret_access_key*
+self0:builtins.property`*7
+gs_secret_access_key*
+self0:builtins.property`*-
+
+secret_key*
+self0:builtins.property`*/
+profile_name*
+self0:builtins.property`*&
+get_path*
+
+self(
+*
+path (*)
+server_name*
+
+self(
+*
+port (	*S
+handle_proxy*
 self*	
 proxy*
 
@@ -227,372 +148,192 @@ proxy_port*
 
 proxy_user*
 
-proxy_passz310z311z312z313z314*í
-get_http_connection5boto.connection.AWSAuthConnection.get_http_connection*
+proxy_pass*B
+get_http_connection*
 self*
 host*
 port*
-	is_securez310z311z312z313z314*g
+	is_secure* 
 
-skip_proxy,boto.connection.AWSAuthConnection.skip_proxy*
+skip_proxy*
 self*
-hostz310z311z312z313z314*í
-new_http_connection5boto.connection.AWSAuthConnection.new_http_connection*
+host*B
+new_http_connection*
 self*
 host*
 port*
-	is_securez310z311z312z313z314*¢
-put_http_connection5boto.connection.AWSAuthConnection.put_http_connection*
+	is_secure*R
+put_http_connection*
 self*
 host*
 port*
 	is_secure*
 
-connectionz310z311z312z313z314*˛
-	proxy_ssl+boto.connection.AWSAuthConnection.proxy_ssl"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*g
-host[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-port[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*æ
-prefix_proxy_to_path6boto.connection.AWSAuthConnection.prefix_proxy_to_path"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*
-path
-Any*g
-host[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*s
-get_proxy_auth_header7boto.connection.AWSAuthConnection.get_proxy_auth_header*
-selfz310z311z312z313z314*w
-get_proxy_url_with_auth9boto.connection.AWSAuthConnection.get_proxy_url_with_auth*
-selfz310z311z312z313z314*t
-set_host_header1boto.connection.AWSAuthConnection.set_host_header*
+connection*5
+	proxy_ssl*
+
+self(
+*
+host (	*
+port (	*>
+prefix_proxy_to_path*
+
+self(
+*
+
+path(*
+host (	*!
+get_proxy_auth_header*
+self*#
+get_proxy_url_with_auth*
+self*(
+set_host_header*
 self*
-requestz310z311z312z313z314*s
-set_request_hook2boto.connection.AWSAuthConnection.set_request_hook*
+request*&
+set_request_hook*
 self*
-hookz310z311z312z313z314*Ú
-build_base_http_request9boto.connection.AWSAuthConnection.build_base_http_request"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*
-method
-Any*
-path
-Any*
-	auth_path
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-data
-builtins.str"builtins.str *g
-host[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*à
-make_request.boto.connection.AWSAuthConnection.make_request"
-Any*P
-selfF
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection*
-method
-Any*
-path
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-data
-builtins.str"builtins.str *g
-host[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	auth_path[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-sender[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *w
-override_num_retries[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-retry_handler[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*S
-close'boto.connection.AWSAuthConnection.close*
-selfz310z311z312z313z314j310j311j312j313j314rv
-suppress_consec_slashes9boto.connection.AWSAuthConnection.suppress_consec_slashes
-Any*310*311*312*313*314rs
-num_retries-boto.connection.AWSAuthConnection.num_retries
-builtins.int"builtins.int*310*311*312*313*314rZ
-	is_secure+boto.connection.AWSAuthConnection.is_secure
-Any*310*311*312*313*314r~
-https_validate_certificates=boto.connection.AWSAuthConnection.https_validate_certificates
-Any*310*311*312*313*314rp
-ca_certificates_file6boto.connection.AWSAuthConnection.ca_certificates_file
-Any*310*311*312*313*314rP
-port&boto.connection.AWSAuthConnection.port
-Any*310*311*312*313*314rf
-http_exceptions1boto.connection.AWSAuthConnection.http_exceptions
-Any*310*311*312*313*314r~
-http_unretryable_exceptions=boto.connection.AWSAuthConnection.http_unretryable_exceptions
-Any*310*311*312*313*314rv
-socket_exception_values9boto.connection.AWSAuthConnection.socket_exception_values
-Any*310*311*312*313*314rx
-https_connection_factory:boto.connection.AWSAuthConnection.https_connection_factory
-Any*310*311*312*313*314rm
-protocol*boto.connection.AWSAuthConnection.protocol
-builtins.str"builtins.str*310*311*312*313*314rP
-host&boto.connection.AWSAuthConnection.host
-Any*310*311*312*313*314rP
-path&boto.connection.AWSAuthConnection.path
-Any*310*311*312*313*314rR
-debug'boto.connection.AWSAuthConnection.debug
-Any*310*311*312*313*314r^
-host_header-boto.connection.AWSAuthConnection.host_header
-Any*310*311*312*313*314rt
-http_connection_kwargs8boto.connection.AWSAuthConnection.http_connection_kwargs
-Any*310*311*312*313*314rX
-provider*boto.connection.AWSAuthConnection.provider
-Any*310*311*312*313*314rj
-auth_service_name3boto.connection.AWSAuthConnection.auth_service_name
-Any*310*311*312*313*314r`
-request_hook.boto.connection.AWSAuthConnection.request_hook
-Any*310*311*312*313*314rh
-auth_region_name2boto.connection.AWSAuthConnection.auth_region_name
-Any*310*311*312*313*314rR
-proxy'boto.connection.AWSAuthConnection.proxy
-Any*310*311*312*313*314r\
+hook*è
+build_base_http_request*
 
-proxy_port,boto.connection.AWSAuthConnection.proxy_port
-Any*310*311*312*313*314r\
+self(
+*
+method(*
 
-proxy_user,boto.connection.AWSAuthConnection.proxy_user
-Any*310*311*312*313*314r\
+path(*
+	auth_path(*
+params (	*
+headers (	*
+data (*
+host (	*À
+make_request*
 
-proxy_pass,boto.connection.AWSAuthConnection.proxy_pass
-Any*310*311*312*313*314rX
-no_proxy*boto.connection.AWSAuthConnection.no_proxy
-Any*310*311*312*313*314rZ
-	use_proxy+boto.connection.AWSAuthConnection.use_proxy
-Any*310*311*312*313*314° 
-AWSQueryConnection"boto.connection.AWSQueryConnection"!boto.connection.AWSAuthConnection*Ú
-__init__+boto.connection.AWSQueryConnection.__init__"
-None*R
-selfH
-"boto.connection.AWSQueryConnection""boto.connection.AWSQueryConnection*t
-aws_access_key_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *x
-aws_secret_access_key[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	is_secure
-builtins.bool"builtins.bool *g
-port[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-proxy[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+self(
+*
+method(*
 
-proxy_port[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+path(*
+headers (	*
+data (*
+host (	*
+	auth_path (	*
+sender (	*
+override_num_retries (	*
+params (	*
+retry_handler (	*
+close*
+selfr
+suppress_consec_slashes0r
+num_retries0r
+	is_secure0r
+https_validate_certificates0r
+ca_certificates_file0r
+port0r
+http_exceptions0r
+http_unretryable_exceptions0r
+socket_exception_values0r
+https_connection_factory0r
+protocol0r
+host0r
+path0r	
+debug0r
+host_header0r
+http_connection_kwargs0r
+provider0r
+auth_service_name0r
+request_hook0r
+auth_region_name0r	
+proxy0r
 
-proxy_user[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+proxy_port0r
 
-proxy_pass[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-host[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *)
-debug
-builtins.int"builtins.int *{
-https_connection_factory[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-path
-builtins.str"builtins.str *q
-security_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *4
-validate_certs
-builtins.bool"builtins.bool *o
-profile_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-provider
-builtins.str"builtins.str z310z311z312z313z314*q
-get_utf8_value1boto.connection.AWSQueryConnection.get_utf8_value*
+proxy_user0r
+
+proxy_pass0r
+no_proxy0r
+	use_proxy0≤
+AWSQueryConnection"!boto.connection.AWSAuthConnection*„
+__init__*
+
+self(*
+aws_access_key_id (	*
+aws_secret_access_key (	*
+	is_secure (*
+port (	*
+proxy (	*
+
+proxy_port (	*
+
+proxy_user (	*
+
+proxy_pass (	*
+host (	*
+debug (* 
+https_connection_factory (	*
+path (*
+security_token (	*
+validate_certs (*
+profile_name (	*
+provider (*%
+get_utf8_value*
 self*	
-valuez310z311z312z313z314*±
-make_request/boto.connection.AWSQueryConnection.make_request"
-Any*R
-selfH
-"boto.connection.AWSQueryConnection""boto.connection.AWSQueryConnection*
-action
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-path
-builtins.str"builtins.str *(
-verb
-builtins.str"builtins.str *
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*é
-build_list_params4boto.connection.AWSQueryConnection.build_list_params*
+value*p
+make_request*
+
+self(*
+action(*
+params (	*
+path (*
+verb (*
+
+args(*
+kwargs(*?
+build_list_params*
 self*
 
 params*	
 items*	
-labelz310z311z312z313z314*©
-build_complex_list_params<boto.connection.AWSQueryConnection.build_complex_list_params*
+label*R
+build_complex_list_params*
 self*
 
 params*	
 items*	
 label*	
-namesz310z311z312z313z314*¨
-get_list+boto.connection.AWSQueryConnection.get_list"
-Any*R
-selfH
-"boto.connection.AWSQueryConnection""boto.connection.AWSQueryConnection*
-action
-Any*
-params
-Any*
-markers
-Any*(
-path
-builtins.str"builtins.str *i
-parent[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-verb
-builtins.str"builtins.str z310z311z312z313z314*¨
+names*o
+get_list*
 
-get_object-boto.connection.AWSQueryConnection.get_object"
-Any*R
-selfH
-"boto.connection.AWSQueryConnection""boto.connection.AWSQueryConnection*
-action
-Any*
-params
-Any*
-cls
-Any*(
-path
-builtins.str"builtins.str *i
-parent[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-verb
-builtins.str"builtins.str z310z311z312z313z314*ö
+self(*
+action(*
+params(*
+markers(*
+path (*
+parent (	*
+verb (*m
 
-get_status-boto.connection.AWSQueryConnection.get_status"
-Any*R
-selfH
-"boto.connection.AWSQueryConnection""boto.connection.AWSQueryConnection*
-action
-Any*
-params
-Any*(
-path
-builtins.str"builtins.str *i
-parent[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-verb
-builtins.str"builtins.str z310z311z312z313z314j310j311j312j313j314rr
+get_object*
 
-APIVersion-boto.connection.AWSQueryConnection.APIVersion
-builtins.str"builtins.str*310*311*312*313*314rc
-ResponseError0boto.connection.AWSQueryConnection.ResponseError
-Any*310*311*312*313*314*§
-__annotations__boto.connection.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*'
-httphttp *310*311*312*313*314*w
-HAVE_HTTPS_CONNECTION%boto.connection.HAVE_HTTPS_CONNECTION
-builtins.bool"builtins.bool*310*311*312*313*314*P
-ON_APP_ENGINEboto.connection.ON_APP_ENGINE
-Any*310*311*312*313*314*X
-PORTS_BY_SECURITY!boto.connection.PORTS_BY_SECURITY
-Any*310*311*312*313*314*`
-DEFAULT_CA_CERTS_FILE%boto.connection.DEFAULT_CA_CERTS_FILE
-Any*310*311*312*313*314
+self(*
+action(*
+params(*	
+cls(*
+path (*
+parent (	*
+verb (*b
+
+get_status*
+
+self(*
+action(*
+params(*
+path (*
+parent (	*
+verb (r
+
+APIVersion0r
+ResponseError0*
+__annotations__0*
+httphttp *
+HAVE_HTTPS_CONNECTION0*
+ON_APP_ENGINE0*
+PORTS_BY_SECURITY0*
+DEFAULT_CA_CERTS_FILE022$""boto.connection.HostConnectionPool22 "boto.connection.ConnectionPool2"builtins.float2"boto.connection.HTTPRequest2"boto.connection.HTTPResponse2"_typeshed.Incomplete2222#"!boto.connection.AWSAuthConnection2"builtins.bool2"builtins.int2"builtins.str2$""boto.connection.AWSQueryConnection2"builtins.dict2

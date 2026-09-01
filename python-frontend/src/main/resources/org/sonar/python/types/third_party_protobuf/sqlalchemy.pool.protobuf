@@ -1,186 +1,125 @@
 
-sqlalchemy.pool¥
-Poolsqlalchemy.pool.base.Pool"sqlalchemy.log.Identified* 
-__init__"sqlalchemy.pool.base.Pool.__init__"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Pool*X
-creatorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*+
-recycle
-builtins.int"builtins.int *g
-echo[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-logging_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-reset_on_return
-builtins.bool"builtins.bool *i
-events[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-dialect[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *.
-pre_ping
-builtins.bool"builtins.bool *l
-	_dispatch[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*“
-recreate"sqlalchemy.pool.base.Pool.recreate"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Poolz310z311z312z313z314*‘
-dispose!sqlalchemy.pool.base.Pool.dispose"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Poolz310z311z312z313z314*O
-connect!sqlalchemy.pool.base.Pool.connect*
-selfz310z311z312z313z314*
-status sqlalchemy.pool.base.Pool.status"
-None*@
-self6
-sqlalchemy.pool.base.Pool"sqlalchemy.pool.base.Poolz310z311z312z313z314j310j311j312j313j314rX
-logging_name&sqlalchemy.pool.base.Pool.logging_name
-Any*310*311*312*313*314rH
-echosqlalchemy.pool.base.Pool.echo
-Any*310*311*312*313*314rz
-dispatch"sqlalchemy.pool.base.Pool.dispatch1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314Ÿ
-AssertionPool"sqlalchemy.pool.impl.AssertionPool"sqlalchemy.pool.base.Pool*Ò
-__init__+sqlalchemy.pool.impl.AssertionPool.__init__"
-None*R
-selfH
-"sqlalchemy.pool.impl.AssertionPool""sqlalchemy.pool.impl.AssertionPool*
-args
-Any*
-kw
-Anyz310z311z312z313z314*V
-status)sqlalchemy.pool.impl.AssertionPool.status*
-selfz310z311z312z313z314*¬
-dispose*sqlalchemy.pool.impl.AssertionPool.dispose"
-None*R
-selfH
-"sqlalchemy.pool.impl.AssertionPool""sqlalchemy.pool.impl.AssertionPoolz310z311z312z313z314*Z
-recreate+sqlalchemy.pool.impl.AssertionPool.recreate*
-selfz310z311z312z313z314j310j311j312j313j314|
-AsyncAdaptedQueuePool*sqlalchemy.pool.impl.AsyncAdaptedQueuePool"sqlalchemy.pool.impl.QueuePoolj310j311j312j313j314˜
-FallbackAsyncAdaptedQueuePool2sqlalchemy.pool.impl.FallbackAsyncAdaptedQueuePool"*sqlalchemy.pool.impl.AsyncAdaptedQueuePoolj310j311j312j313j314§
-NullPoolsqlalchemy.pool.impl.NullPool"sqlalchemy.pool.base.Pool*Q
-status$sqlalchemy.pool.impl.NullPool.status*
-selfz310z311z312z313z314*U
-recreate&sqlalchemy.pool.impl.NullPool.recreate*
-selfz310z311z312z313z314*
-dispose%sqlalchemy.pool.impl.NullPool.dispose"
-None*H
+sqlalchemy.pool„
+Poolsqlalchemy.pool.base.Pool"sqlalchemy.log.Identified*»
+__init__*
+
+self(*
+creator(*
+recycle (*
+echo (*
+logging_name (*
+reset_on_return (	*
+events (*
+dialect (*
+pre_ping (	*
+	_dispatch (*
+recreate*
+
+self(*
+dispose*
+
+self(*
+connect*
+self*
+status*
+
+self(r
+logging_name0r
+echo0r
+dispatch0Á
+AssertionPool"sqlalchemy.pool.impl.AssertionPool"sqlalchemy.pool.base.Pool*.
+__init__*
+
+self(
+*
+
+args(*
+kw(*
+status*
+self*
+dispose*
+
+self(
+*
+recreate*
+selfc
+AsyncAdaptedQueuePool*sqlalchemy.pool.impl.AsyncAdaptedQueuePool"sqlalchemy.pool.impl.QueuePool
+FallbackAsyncAdaptedQueuePool2sqlalchemy.pool.impl.FallbackAsyncAdaptedQueuePool"*sqlalchemy.pool.impl.AsyncAdaptedQueuePool‡
+NullPoolsqlalchemy.pool.impl.NullPool"sqlalchemy.pool.base.Pool*
+status*
+self*
+recreate*
+self*
+dispose*
+
+self(ô
+	QueuePoolsqlalchemy.pool.impl.QueuePool"sqlalchemy.pool.base.Pool*}
+__init__*
+
+self(*
+creator(*
+	pool_size (*
+max_overflow (*
+timeout (*
+use_lifo (	*
+kw(*
+recreate*
+self*
+dispose*
+
+self(*
+status*
+self*
+size*
+self*
+timeout*
+self*
+	checkedin*
+self*
+overflow*
+self*
+
+checkedout*
+self‚
+SingletonThreadPool(sqlalchemy.pool.impl.SingletonThreadPool"sqlalchemy.pool.base.Pool*D
+__init__*
+
+self(*
+creator(*
+	pool_size (*
+kw(*
+recreate*
+self*
+dispose*
+
+self(*
+status*
+self*
+connect*
+selfr
+size0Ô
+
+StaticPoolsqlalchemy.pool.impl.StaticPool"sqlalchemy.pool.base.Pool*G
+
+connection*
+self0:-sqlalchemy.util.langhelpers.memoized_property*
+status*
+self*
+dispose*
+
+self(*
+recreate*
 self>
-sqlalchemy.pool.impl.NullPool"sqlalchemy.pool.impl.NullPoolz310z311z312z313z314j310j311j312j313j314ð	
-	QueuePoolsqlalchemy.pool.impl.QueuePool"sqlalchemy.pool.base.Pool*‹
-__init__'sqlalchemy.pool.impl.QueuePool.__init__"
-None*J
-self@
-sqlalchemy.pool.impl.QueuePool"sqlalchemy.pool.impl.QueuePool*
-creator
-Any*-
-	pool_size
-builtins.int"builtins.int *0
-max_overflow
-builtins.int"builtins.int */
-timeout 
-builtins.float"builtins.float *.
-use_lifo
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314*V
-recreate'sqlalchemy.pool.impl.QueuePool.recreate*
-selfz310z311z312z313z314* 
-dispose&sqlalchemy.pool.impl.QueuePool.dispose"
-None*J
-self@
-sqlalchemy.pool.impl.QueuePool"sqlalchemy.pool.impl.QueuePoolz310z311z312z313z314*R
-status%sqlalchemy.pool.impl.QueuePool.status*
-selfz310z311z312z313z314*N
-size#sqlalchemy.pool.impl.QueuePool.size*
-selfz310z311z312z313z314*T
-timeout&sqlalchemy.pool.impl.QueuePool.timeout*
-selfz310z311z312z313z314*X
-	checkedin(sqlalchemy.pool.impl.QueuePool.checkedin*
-selfz310z311z312z313z314*V
-overflow'sqlalchemy.pool.impl.QueuePool.overflow*
-selfz310z311z312z313z314*Z
-
-checkedout)sqlalchemy.pool.impl.QueuePool.checkedout*
-selfz310z311z312z313z314j310j311j312j313j314Æ
-SingletonThreadPool(sqlalchemy.pool.impl.SingletonThreadPool"sqlalchemy.pool.base.Pool*–
-__init__1sqlalchemy.pool.impl.SingletonThreadPool.__init__"
-None*^
-selfT
-(sqlalchemy.pool.impl.SingletonThreadPool"(sqlalchemy.pool.impl.SingletonThreadPool*
-creator
-Any*-
-	pool_size
-builtins.int"builtins.int *
-kw
-Anyz310z311z312z313z314*`
-recreate1sqlalchemy.pool.impl.SingletonThreadPool.recreate*
-selfz310z311z312z313z314*¾
-dispose0sqlalchemy.pool.impl.SingletonThreadPool.dispose"
-None*^
-selfT
-(sqlalchemy.pool.impl.SingletonThreadPool"(sqlalchemy.pool.impl.SingletonThreadPoolz310z311z312z313z314*\
-status/sqlalchemy.pool.impl.SingletonThreadPool.status*
-selfz310z311z312z313z314*^
-connect0sqlalchemy.pool.impl.SingletonThreadPool.connect*
-selfz310z311z312z313z314j310j311j312j313j314rW
-size-sqlalchemy.pool.impl.SingletonThreadPool.size
-Any*310*311*312*313*314Ä
-
-StaticPoolsqlalchemy.pool.impl.StaticPool"sqlalchemy.pool.base.Pool*Œ
-
-connection*sqlalchemy.pool.impl.StaticPool.connection*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*S
-status&sqlalchemy.pool.impl.StaticPool.status*
-selfz310z311z312z313z314*£
-dispose'sqlalchemy.pool.impl.StaticPool.dispose"
-None*L
-selfB
-sqlalchemy.pool.impl.StaticPool"sqlalchemy.pool.impl.StaticPoolz310z311z312z313z314*W
-recreate(sqlalchemy.pool.impl.StaticPool.recreate*
-selfz310z311z312z313z314j310j311j312j313j314_
-clear_managers*sqlalchemy.pool.dbapi_proxy.clear_managers"
-Nonez310z311z312z313z314]
+clear_managers*sqlalchemy.pool.dbapi_proxy.clear_managersD
 manage"sqlalchemy.pool.dbapi_proxy.manage*
 
 module*
 
-paramsz310z311z312z313z314*‰
-__path__sqlalchemy.pool.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*¤
-__annotations__sqlalchemy.pool.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*S
-reset_commit!sqlalchemy.pool.base.reset_commit
-Any*310*311*312*313*314*O
+params*
+__path__0*
+__annotations__0*3
+reset_commit!sqlalchemy.pool.base.reset_commit0*/
 
-reset_nonesqlalchemy.pool.base.reset_none
-Any*310*311*312*313*314*W
-reset_rollback#sqlalchemy.pool.base.reset_rollback
-Any*310*311*312*313*314*‡
-__all__sqlalchemy.pool.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+reset_nonesqlalchemy.pool.base.reset_none0*7
+reset_rollback#sqlalchemy.pool.base.reset_rollback0*
+__all__022"sqlalchemy.pool.base.Pool2"builtins.function222"builtins.int22"_typeshed.Incomplete2222"builtins.bool2$""sqlalchemy.pool.impl.AssertionPool2"sqlalchemy.pool.impl.NullPool2 "sqlalchemy.pool.impl.QueuePool2"builtins.float2*"(sqlalchemy.pool.impl.SingletonThreadPool2!"sqlalchemy.pool.impl.StaticPool2"builtins.str2"builtins.list22"builtins.dict2

@@ -1,152 +1,95 @@
 
-braintree.configuration¢
-CredentialsParser.braintree.credentials_parser.CredentialsParser"builtins.object*£
-__init__7braintree.credentials_parser.CredentialsParser.__init__"
-None*j
-self`
-.braintree.credentials_parser.CredentialsParser".braintree.credentials_parser.CredentialsParser*l
-	client_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-client_secret[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-access_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ò
-parse_client_credentialsGbraintree.credentials_parser.CredentialsParser.parse_client_credentials"
-None*j
-self`
-.braintree.credentials_parser.CredentialsParser".braintree.credentials_parser.CredentialsParserz310z311z312z313z314*æ
-parse_access_tokenAbraintree.credentials_parser.CredentialsParser.parse_access_token"
-None*j
-self`
-.braintree.credentials_parser.CredentialsParser".braintree.credentials_parser.CredentialsParserz310z311z312z313z314*„
-get_environment>braintree.credentials_parser.CredentialsParser.get_environment*
+braintree.configuration¬
+CredentialsParser.braintree.credentials_parser.CredentialsParser"builtins.object*X
+__init__*
+
+self(*
+	client_id (*
+client_secret (*
+access_token (*(
+parse_client_credentials*
+
+self(*"
+parse_access_token*
+
+self(*+
+get_environment*
 self*
 
-credentialz310z311z312z313z314*„
-get_merchant_id>braintree.credentials_parser.CredentialsParser.get_merchant_id*
+credential*+
+get_merchant_id*
 self*
 
-credentialz310z311z312z313z314j310j311j312j313j314rg
-	client_id8braintree.credentials_parser.CredentialsParser.client_id
-Any*310*311*312*313*314ro
-client_secret<braintree.credentials_parser.CredentialsParser.client_secret
-Any*310*311*312*313*314rm
-access_token;braintree.credentials_parser.CredentialsParser.access_token
-Any*310*311*312*313*314rk
-environment:braintree.credentials_parser.CredentialsParser.environment
-Any*310*311*312*313*314rk
-merchant_id:braintree.credentials_parser.CredentialsParser.merchant_id
-Any*310*311*312*313*314ğ
-Environment!braintree.environment.Environment"builtins.object*–
-__init__*braintree.environment.Environment.__init__"
-None*P
-selfF
-!braintree.environment.Environment"!braintree.environment.Environment*
-name
-Any*
-server
-Any*
-port
-Any*
-auth_url
-Any*
-is_ssl
-Any*
-ssl_certificate
-Any*2
-graphql_server
-builtins.str"builtins.str *0
-graphql_port
-builtins.str"builtins.str z310z311z312z313z314*p
-base_url*braintree.environment.Environment.base_url*
-self0:builtins.property`z310z311z312z313z314*h
-port&braintree.environment.Environment.port*
-self0:builtins.property`z310z311z312z313z314*p
-auth_url*braintree.environment.Environment.auth_url*
-self0:builtins.property`z310z311z312z313z314*p
-protocol*braintree.environment.Environment.protocol*
-self0:builtins.property`z310z311z312z313z314*l
-server(braintree.environment.Environment.server*
-self0:builtins.property`z310z311z312z313z314*~
-server_and_port1braintree.environment.Environment.server_and_port*
-self0:builtins.property`z310z311z312z313z314*|
-graphql_server0braintree.environment.Environment.graphql_server*
-self0:builtins.property`z310z311z312z313z314*x
-graphql_port.braintree.environment.Environment.graphql_port*
-self0:builtins.property`z310z311z312z313z314*
-graphql_server_and_port9braintree.environment.Environment.graphql_server_and_port*
-self0:builtins.property`z310z311z312z313z314*
-parse_environment3braintree.environment.Environment.parse_environment*
-environment0:builtins.staticmethodhz310z311z312z313z314*v
-braintree_root0braintree.environment.Environment.braintree_root0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314rT
-is_ssl(braintree.environment.Environment.is_ssl
-Any*310*311*312*313*314rf
-ssl_certificate1braintree.environment.Environment.ssl_certificate
-Any*310*311*312*313*314¡
-ConfigurationError;braintree.exceptions.configuration_error.ConfigurationError"5braintree.exceptions.unexpected_error.UnexpectedErrorj310j311j312j313j314‘
+credentialr
+	client_id0r
+client_secret0r
+access_token0r
+environment0r
+merchant_id0£
+Environment!braintree.environment.Environment"builtins.object*¡
+__init__*
 
-GraphQLClient+braintree.util.graphql_client.GraphQLClient"braintree.util.http.Http*Ç
-!raise_exception_for_graphql_errorMbraintree.util.graphql_client.GraphQLClient.raise_exception_for_graphql_error"
-None*
-response
-Any0:builtins.staticmethodhz310z311z312z313z314*¤
-__init__4braintree.util.graphql_client.GraphQLClient.__init__"
-None*d
-selfZ
-+braintree.util.graphql_client.GraphQLClient"+braintree.util.graphql_client.GraphQLClient*i
-config[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-environment[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*¼
-query1braintree.util.graphql_client.GraphQLClient.query"
-Any*d
-selfZ
-+braintree.util.graphql_client.GraphQLClient"+braintree.util.graphql_client.GraphQLClient*
+self(*
 
-definition
-Any*l
-	variables[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *q
-operation_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rp
-graphql_headers;braintree.util.graphql_client.GraphQLClient.graphql_headers
-Any*310*311*312*313*314¹
-Configuration%braintree.configuration.Configuration"builtins.object*ö
-	configure/braintree.configuration.Configuration.configure"
-None*
-environment
-Any*
-merchant_id
-Any*
+name(*
+server(*
 
-public_key
-Any*
-private_key
-Any*
-kwargs
-Any0:builtins.staticmethodhz310z311z312z313z314*Â
-for_partner1braintree.configuration.Configuration.for_partner*
+port(*
+auth_url(*
+is_ssl(*
+ssl_certificate(*
+graphql_server (*
+graphql_port (*+
+base_url*
+self0:builtins.property`*'
+port*
+self0:builtins.property`*+
+auth_url*
+self0:builtins.property`*+
+protocol*
+self0:builtins.property`*)
+server*
+self0:builtins.property`*2
+server_and_port*
+self0:builtins.property`*1
+graphql_server*
+self0:builtins.property`*/
+graphql_port*
+self0:builtins.property`*:
+graphql_server_and_port*
+self0:builtins.property`*?
+parse_environment*
+environment0:builtins.staticmethodh*+
+braintree_root0:builtins.staticmethodhr
+
+is_ssl0r
+ssl_certificate0ˆ
+ConfigurationError;braintree.exceptions.configuration_error.ConfigurationError"5braintree.exceptions.unexpected_error.UnexpectedErrorĞ
+GraphQLClient+braintree.util.graphql_client.GraphQLClient"braintree.util.http.Http*P
+!raise_exception_for_graphql_error*
+response(0:builtins.staticmethodh*=
+__init__*
+
+self(*
+config (*
+environment (*R
+query*
+
+self(*
+
+definition(*
+	variables (*
+operation_name (r
+graphql_headers0¼
+Configuration"builtins.object*
+	configure*
+environment(*
+merchant_id(*
+
+public_key(*
+private_key(*
+kwargs(0:builtins.staticmethodh*v
+for_partner*
 environment*
 
 partner_id*
@@ -154,95 +97,53 @@ partner_id*
 public_key*
 private_key*
 
-kwargs0:builtins.staticmethodhz310z311z312z313z314*l
-gateway-braintree.configuration.Configuration.gateway0:builtins.staticmethodhz310z311z312z313z314*t
-instantiate1braintree.configuration.Configuration.instantiate0:builtins.staticmethodhz310z311z312z313z314*t
-api_version1braintree.configuration.Configuration.api_version0:builtins.staticmethodhz310z311z312z313z314*„
-graphql_api_version9braintree.configuration.Configuration.graphql_api_version0:builtins.staticmethodhz310z311z312z313z314*ï
-__init__.braintree.configuration.Configuration.__init__"
-None*X
-selfN
-%braintree.configuration.Configuration"%braintree.configuration.Configuration*n
-environment[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-merchant_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+kwargs0:builtins.staticmethodh*$
+gateway0:builtins.staticmethodh*(
+instantiate0:builtins.staticmethodh*(
+api_version0:builtins.staticmethodh*0
+graphql_api_version0:builtins.staticmethodh*Å
+__init__*
 
-public_key[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-private_key[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	client_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-client_secret[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-access_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*q
-base_merchant_path8braintree.configuration.Configuration.base_merchant_path*
-selfz310z311z312z313z314*]
-base_url.braintree.configuration.Configuration.base_url*
-selfz310z311z312z313z314*m
-graphql_base_url6braintree.configuration.Configuration.graphql_base_url*
-selfz310z311z312z313z314*U
-http*braintree.configuration.Configuration.http*
-selfz310z311z312z313z314*i
-graphql_client4braintree.configuration.Configuration.graphql_client*
-selfz310z311z312z313z314*g
-http_strategy3braintree.configuration.Configuration.http_strategy*
-selfz310z311z312z313z314*y
-has_client_credentials<braintree.configuration.Configuration.has_client_credentials*
-selfz310z311z312z313z314*á
-assert_has_client_credentialsCbraintree.configuration.Configuration.assert_has_client_credentials"
-None*X
-selfN
-%braintree.configuration.Configuration"%braintree.configuration.Configurationz310z311z312z313z314*m
-has_access_token6braintree.configuration.Configuration.has_access_token*
-selfz310z311z312z313z314j310j311j312j313j314rb
-environment1braintree.configuration.Configuration.environment
-Any*310*311*312*313*314rb
-merchant_id1braintree.configuration.Configuration.merchant_id
-Any*310*311*312*313*314r`
+self(	*
+environment (*
+merchant_id (*
 
-public_key0braintree.configuration.Configuration.public_key
-Any*310*311*312*313*314rb
-private_key1braintree.configuration.Configuration.private_key
-Any*310*311*312*313*314r^
-	client_id/braintree.configuration.Configuration.client_id
-Any*310*311*312*313*314rf
-client_secret3braintree.configuration.Configuration.client_secret
-Any*310*311*312*313*314rd
-access_token2braintree.configuration.Configuration.access_token
-Any*310*311*312*313*314rZ
-timeout-braintree.configuration.Configuration.timeout
-Any*310*311*312*313*314rt
-wrap_http_exceptions:braintree.configuration.Configuration.wrap_http_exceptions
-Any*310*311*312*313*314*¬
-__annotations__'braintree.configuration.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+public_key (*
+private_key (*
+	client_id (*
+client_secret (*
+access_token (*
+
+args(*
+kwargs(*
+base_merchant_path*
+self*
+base_url*
+self*
+graphql_base_url*
+self*
+http*
+self*
+graphql_client*
+self*
+http_strategy*
+self*"
+has_client_credentials*
+self*-
+assert_has_client_credentials*
+
+self(	*
+has_access_token*
+selfr
+environment0r
+merchant_id0r
+
+public_key0r
+private_key0r
+	client_id0r
+client_secret0r
+access_token0r
+timeout0r
+wrap_http_exceptions0*
+__annotations__0
+220".braintree.credentials_parser.CredentialsParser22"_typeshed.Incomplete2222#"!braintree.environment.Environment2"builtins.str2-"+braintree.util.graphql_client.GraphQLClient2'"%braintree.configuration.Configuration2"builtins.dict2

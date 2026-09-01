@@ -1,173 +1,97 @@
 
-filelock•
-AcquireReturnProxy filelock._api.AcquireReturnProxy"builtins.object*”
-__init__)filelock._api.AcquireReturnProxy.__init__"
-None*N
-selfD
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*B
-lock8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*π
-	__enter__*filelock._api.AcquireReturnProxy.__enter__"8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*FD
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*‡
-__exit__)filelock._api.AcquireReturnProxy.__exit__"
-None*FD
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonerg
-lock%filelock._api.AcquireReturnProxy.lock8
-filelock._api.BaseFileLock"filelock._api.BaseFileLockÙ
-BaseFileLockfilelock._api.BaseFileLock"abc.ABC*Ø
-__init__#filelock._api.BaseFileLock.__init__"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*
-	lock_filep
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike*/
-timeout 
-builtins.float"builtins.float *™
-	lock_file$filelock._api.BaseFileLock.lock_file"
-builtins.str"builtins.str*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:builtins.property`*ï
-_acquire#filelock._api.BaseFileLock._acquire"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:abc.abstractmethod@*ï
-_release#filelock._api.BaseFileLock._release"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:abc.abstractmethod@*¨
-	is_locked$filelock._api.BaseFileLock.is_locked"
-builtins.bool"builtins.bool*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:builtins.property`*´
-acquire"filelock._api.BaseFileLock.acquire"D
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *5
-poll_interval 
-builtins.float"builtins.float *`
-poll_intervallJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *®
-release"filelock._api.BaseFileLock.release"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*+
-force
-builtins.bool"builtins.bool *ß
-	__enter__$filelock._api.BaseFileLock.__enter__"8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*:8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*Œ
-__exit__#filelock._api.BaseFileLock.__exit__"
-None*:8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*s
-__del__"filelock._api.BaseFileLock.__del__"
-None*:8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock2ÿ
-timeout"filelock._api.BaseFileLock.timeout¨
-timeout"filelock._api.BaseFileLock.timeout" 
-builtins.float"builtins.float*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:builtins.propertyX`˘
-timeout"filelock._api.BaseFileLock.timeout"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*q
-valuef
-"Union[builtins.float,builtins.str] 
-builtins.float"builtins.float
-builtins.str"builtins.str0:.setterrQ
+filelock®
+AcquireReturnProxy filelock._api.AcquireReturnProxy"builtins.object*$
+__init__*
 
-_lock_file%filelock._api.BaseFileLock._lock_file
-builtins.str"builtins.strr
-_lock_file_fd(filelock._api.BaseFileLock._lock_file_fdD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noner]
-_thread_lock'filelock._api.BaseFileLock._thread_lock$
-_thread.LockType"_thread.LockTyperW
-_lock_counter(filelock._api.BaseFileLock._lock_counter
-builtins.int"builtins.intrQ
-_timeout#filelock._api.BaseFileLock._timeout 
-builtins.float"builtins.float´
-Timeoutfilelock._error.Timeout"builtins.TimeoutError*°
-__init__ filelock._error.Timeout.__init__"
-None*<
-self2
-filelock._error.Timeout"filelock._error.Timeout*+
-	lock_file
-builtins.str"builtins.str*~
-__str__filelock._error.Timeout.__str__"
-builtins.str"builtins.str*42
-filelock._error.Timeout"filelock._error.TimeoutrL
-	lock_file!filelock._error.Timeout.lock_file
-builtins.str"builtins.strÕ
-SoftFileLockfilelock._soft.SoftFileLock"filelock._api.BaseFileLock*Ä
-_acquire$filelock._soft.SoftFileLock._acquire"
-None*D
-self:
-filelock._soft.SoftFileLock"filelock._soft.SoftFileLock*Ä
-_release$filelock._soft.SoftFileLock._release"
-None*D
-self:
-filelock._soft.SoftFileLock"filelock._soft.SoftFileLockÕ
-UnixFileLockfilelock._unix.UnixFileLock"filelock._api.BaseFileLock*Ä
-_acquire$filelock._unix.UnixFileLock._acquire"
-None*D
-self:
-filelock._unix.UnixFileLock"filelock._unix.UnixFileLock*Ä
-_release$filelock._unix.UnixFileLock._release"
-None*D
-self:
-filelock._unix.UnixFileLock"filelock._unix.UnixFileLockY
-WindowsFileLock!filelock._windows.WindowsFileLock"filelock._api.BaseFileLock"abc.ABC*i
-__path__filelock.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Ñ
-__annotations__filelock.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*E
-	has_fcntlfilelock._unix.has_fcntl
-builtins.bool"builtins.bool*A
-versionfilelock.version.version
-builtins.str"builtins.str*A
-__version__filelock.__version__
-builtins.str"builtins.str*Ö
-	_FileLockfilelock._FileLockd
- Type[filelock._api.BaseFileLock]8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock"type*É
-FileLockfilelock.FileLockd
- Type[filelock._api.BaseFileLock]8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock"type*g
-__all__filelock.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*
+
+lock(*
+	__enter__*(*
+__exit__*(*(*(*(	r
+lock0æ
+BaseFileLockfilelock._api.BaseFileLock"abc.ABC*:
+__init__*
+
+self(*
+	lock_file(*
+timeout (*0
+	lock_file
+*
+
+self(0:builtins.property`*0
+_acquire*
+
+self(0:abc.abstractmethod@*0
+_release*
+
+self(0:abc.abstractmethod@*0
+	is_locked*
+
+self(0:builtins.property`*W
+acquire*
+
+self(*
+timeout (*
+poll_interval (*
+poll_intervall (*&
+release*
+
+self(*
+force (*
+	__enter__*(*
+__exit__*(*(*(*(	*
+__del__*(2l
+timeout0
+timeout*
+
+self(0:builtins.propertyX`/
+timeout*
+
+self(*
+value(0:.setterr
+
+_lock_file0
+r
+_lock_file_fd0r
+_thread_lock0r
+_lock_counter0r
+_timeout0Ñ
+Timeoutfilelock._error.Timeout"builtins.TimeoutError*)
+__init__*
+
+self(*
+	lock_file(
+*
+__str__
+*(r
+	lock_file0
+{
+SoftFileLockfilelock._soft.SoftFileLock"filelock._api.BaseFileLock*
+_acquire*
+
+self(*
+_release*
+
+self({
+UnixFileLockfilelock._unix.UnixFileLock"filelock._api.BaseFileLock*
+_acquire*
+
+self(*
+_release*
+
+self(Y
+WindowsFileLock!filelock._windows.WindowsFileLock"filelock._api.BaseFileLock"abc.ABC*
+__path__0*
+__annotations__0*'
+	has_fcntlfilelock._unix.has_fcntl0*%
+versionfilelock.version.version0
+*
+__version__0
+*
+	_FileLock0*
+FileLock0*
+__all__022"" filelock._api.AcquireReturnProxy2"filelock._api.BaseFileLock2"builtins.BaseException2"type222222"types.TracebackType222"builtins.str22"os.PathLike222
+2"builtins.float2"builtins.bool2222
+2"builtins.int222"_thread.LockType2"filelock._error.Timeout2"filelock._soft.SoftFileLock2"filelock._unix.UnixFileLock2"builtins.list2
+2"builtins.dict2
+2"type2

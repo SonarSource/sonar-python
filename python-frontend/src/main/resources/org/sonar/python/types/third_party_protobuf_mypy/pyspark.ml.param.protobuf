@@ -1,368 +1,191 @@
 
-pyspark.ml.param¯
-Parampyspark.ml.param.Param"builtins.object*å
-__init__pyspark.ml.param.Param.__init__"
-None*ú
-selfë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param*H
-parent<
-pyspark.ml.util.Identifiable"pyspark.ml.util.Identifiable*&
-name
-builtins.str"builtins.str*%
-doc
-builtins.str"builtins.str*ú
-typeConverterÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Ø
-_copy_new_parent'pyspark.ml.param.Param._copy_new_parent">
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*ú
-selfë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param*
-parent
-Any*ﬁ
-__str__pyspark.ml.param.Param.__str__"
-builtins.str"builtins.str*îë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param*‡
-__repr__pyspark.ml.param.Param.__repr__"
-builtins.str"builtins.str*îë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param*Ë
-__hash__pyspark.ml.param.Param.__hash__"
-builtins.int"builtins.int*ú
-selfë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param*È
-__eq__pyspark.ml.param.Param.__eq__"
-builtins.bool"builtins.bool*îë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param*	
-AnyPrE
-parentpyspark.ml.param.Param.parent
-builtins.str"builtins.strrA
-namepyspark.ml.param.Param.name
-builtins.str"builtins.strr?
-docpyspark.ml.param.Param.doc
-builtins.str"builtins.strrú
-typeConverter$pyspark.ml.param.Param.typeConverter‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.functionö
-TypeConverterspyspark.ml.param.TypeConverters"builtins.object*â
-_is_numeric+pyspark.ml.param.TypeConverters._is_numeric"
-builtins.bool"builtins.bool*
-value
-Any0:builtins.staticmethodh*â
-_is_integer+pyspark.ml.param.TypeConverters._is_integer"
-builtins.bool"builtins.bool*
-value
-Any0:builtins.staticmethodh*õ
-_can_convert_to_list4pyspark.ml.param.TypeConverters._can_convert_to_list"
-builtins.bool"builtins.bool*
-value
-Any0:builtins.staticmethodh*ü
-_can_convert_to_string6pyspark.ml.param.TypeConverters._can_convert_to_string"
-builtins.bool"builtins.bool*
-value
-Any0:builtins.staticmethodh*Ù
-identity(pyspark.ml.param.TypeConverters.identity"K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object*V
-valueK
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object0:builtins.staticmethodh*ç
-toList&pyspark.ml.param.TypeConverters.toList",
-builtins.list[Any]
-Any"builtins.list*
-value
-Any0:builtins.staticmethodh*ª
-toListFloat+pyspark.ml.param.TypeConverters.toListFloat"P
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.list*
-value
-Any0:builtins.staticmethodh*É
-toListListFloat/pyspark.ml.param.TypeConverters.toListListFloat"è
-,builtins.list[builtins.list[builtins.float]]P
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.list"builtins.list*
-value
-Any0:builtins.staticmethodh*±
-	toListInt)pyspark.ml.param.TypeConverters.toListInt"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*
-value
-Any0:builtins.staticmethodh*∑
-toListString,pyspark.ml.param.TypeConverters.toListString"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*
-value
-Any0:builtins.staticmethodh*ô
-toVector(pyspark.ml.param.TypeConverters.toVector"4
-pyspark.ml.linalg.Vector"pyspark.ml.linalg.Vector*
-value
-Any0:builtins.staticmethodh*ô
-toMatrix(pyspark.ml.param.TypeConverters.toMatrix"4
-pyspark.ml.linalg.Matrix"pyspark.ml.linalg.Matrix*
-value
-Any0:builtins.staticmethodh*É
-toFloat'pyspark.ml.param.TypeConverters.toFloat" 
-builtins.float"builtins.float*
-value
-Any0:builtins.staticmethodh*{
-toInt%pyspark.ml.param.TypeConverters.toInt"
-builtins.int"builtins.int*
-value
-Any0:builtins.staticmethodh*Å
-toString(pyspark.ml.param.TypeConverters.toString"
-builtins.str"builtins.str*
-value
-Any0:builtins.staticmethodh*Ö
-	toBoolean)pyspark.ml.param.TypeConverters.toBoolean"
-builtins.bool"builtins.bool*
-value
-Any0:builtins.staticmethodhü=
-Paramspyspark.ml.param.Params"pyspark.ml.util.Identifiable*t
-__init__ pyspark.ml.param.Params.__init__"
-None*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*|
-_copy_params$pyspark.ml.param.Params._copy_params"
-None*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*˙
-paramspyspark.ml.param.Params.params"{
-*builtins.list[pyspark.ml.param.Param[Any]]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param"builtins.list*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params0:builtins.property`*∞
-explainParam$pyspark.ml.param.Params.explainParam"
-builtins.str"builtins.str*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*ù
-paramë
-/Union[builtins.str,pyspark.ml.param.Param[Any]]
-builtins.str"builtins.str>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*í
-explainParams%pyspark.ml.param.Params.explainParams"
-builtins.str"builtins.str*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*◊
-getParam pyspark.ml.param.Params.getParam">
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*+
-	paramName
-builtins.str"builtins.str*§
-isSetpyspark.ml.param.Params.isSet"
-builtins.bool"builtins.bool*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*ù
-paramë
-/Union[builtins.str,pyspark.ml.param.Param[Any]]
-builtins.str"builtins.str>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*Æ
+pyspark.ml.param£
+Param"builtins.object*T
+__init__*
 
-hasDefault"pyspark.ml.param.Params.hasDefault"
-builtins.bool"builtins.bool*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*ù
-paramë
-/Union[builtins.str,pyspark.ml.param.Param[Any]]
-builtins.str"builtins.str>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*¨
-	isDefined!pyspark.ml.param.Params.isDefined"
-builtins.bool"builtins.bool*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*ù
-paramë
-/Union[builtins.str,pyspark.ml.param.Param[Any]]
-builtins.str"builtins.str>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*∑
-hasParam pyspark.ml.param.Params.hasParam"
-builtins.bool"builtins.bool*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*+
-	paramName
-builtins.str"builtins.str*¨
-extractParamMap'pyspark.ml.param.Params.extractParamMap"Â
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]à
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMap*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*…
-extraª
-EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]Â
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]à
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMap
-None *ƒ
-copypyspark.ml.param.Params.copy"c
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*m
-selfc
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*…
-extraª
-EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]Â
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]à
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMap
-None *…
-setpyspark.ml.param.Params.set"
-None*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*I
-param>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*
-value
-Any*√
+self(*
+parent(*
 
-_shouldOwn"pyspark.ml.param.Params._shouldOwn"
-None*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*I
-param>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*‘
-_resolveParam%pyspark.ml.param.Params._resolveParam">
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*ù
-paramë
-/Union[builtins.str,pyspark.ml.param.Param[Any]]
-builtins.str"builtins.str>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*Ú
-_testOwnParam%pyspark.ml.param.Params._testOwnParam"
-builtins.bool"builtins.bool*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*.
-param_parent
-builtins.str"builtins.str*,
+name(*	
+doc(*
+typeConverter (	*.
+_copy_new_parent*
 
-param_name
-builtins.str"builtins.str*w
-_dummypyspark.ml.param.Params._dummy"2
-pyspark.ml.param.Params"pyspark.ml.param.Params0:builtins.staticmethodh*ç
-_setpyspark.ml.param.Params._set"c
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*m
-selfc
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*
-kwargs
-Any*π
-clearpyspark.ml.param.Params.clear"
-None*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*I
-param>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param*õ
-_setDefault#pyspark.ml.param.Params._setDefault"c
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*m
-selfc
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*
-kwargs
-Any*é
-_copyValues#pyspark.ml.param.Params._copyValues"c
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*k
-toc
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*…
-extraª
-EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]Â
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]à
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMap
-None *ó
-	_resetUid!pyspark.ml.param.Params._resetUid"c
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*m
-selfc
-pyspark.ml.param.P2
-pyspark.ml.param.Params"pyspark.ml.param.Params"pyspark.ml.param.Params*
-newUid
-Any2Á
-getOrDefault$pyspark.ml.param.Params.getOrDefaultπ
-getOrDefault$pyspark.ml.param.Params.getOrDefault"
-Any*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*'
-param
-builtins.str"builtins.str0:typing.overloadXÙ
-getOrDefault$pyspark.ml.param.Params.getOrDefault"K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object*<
-self2
-pyspark.ml.param.Params"pyspark.ml.param.Params*ù
-paramë
-*pyspark.ml.param.Param[pyspark.ml.param.T]K
-pyspark.ml.param.T"
-builtins.object"builtins.object"builtins.object"pyspark.ml.param.Param0:typing.overloadX@babc.ABCMetarñ
-	_paramMap!pyspark.ml.param.Params._paramMapÂ
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]à
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMapr§
-_defaultParamMap(pyspark.ml.param.Params._defaultParamMapÂ
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]à
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMaprÓ
-_paramspyspark.ml.param.Params._params¡
-6Union[builtins.list[pyspark.ml.param.Param[Any]],None]{
-*builtins.list[pyspark.ml.param.Param[Any]]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param"builtins.list
-None*q
-__path__pyspark.ml.param.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*å
-__annotations__ pyspark.ml.param.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-npnumpy *2
+self(*
+parent(
+*
+__str__*(*
+__repr__*(*
+__hash__*
 
-JavaObjectpyspark.ml.param.JavaObject
-Any*o
-__all__pyspark.ml.param.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*
+__eq__*(*(
+Pr
+
+parent0r
+name0r
+doc0r
+typeConverter0´
+TypeConverters"builtins.object*7
+_is_numeric*
+value(
+0:builtins.staticmethodh*7
+_is_integer*
+value(
+0:builtins.staticmethodh*@
+_can_convert_to_list*
+value(
+0:builtins.staticmethodh*B
+_can_convert_to_string*
+value(
+0:builtins.staticmethodh*4
+identity*
+value(0:builtins.staticmethodh*2
+toList*
+value(
+0:builtins.staticmethodh*7
+toListFloat*
+value(
+0:builtins.staticmethodh*;
+toListListFloat*
+value(
+0:builtins.staticmethodh*5
+	toListInt*
+value(
+0:builtins.staticmethodh*8
+toListString*
+value(
+0:builtins.staticmethodh*4
+toVector*
+value(
+0:builtins.staticmethodh*4
+toMatrix*
+value(
+0:builtins.staticmethodh*3
+toFloat*
+value(
+0:builtins.staticmethodh*1
+toInt*
+value(
+0:builtins.staticmethodh*4
+toString*
+value(
+0:builtins.staticmethodh*5
+	toBoolean*
+value(
+0:builtins.staticmethodhã	
+Params"pyspark.ml.util.Identifiable*
+__init__*
+
+self(*
+_copy_params*
+
+self(*-
+params*
+
+self(0:builtins.property`*)
+explainParam*
+
+self(*
+param(*
+explainParams*
+
+self(*)
+getParam*
+
+self(*
+	paramName(*"
+isSet*
+
+self(*
+param(*'
+
+hasDefault*
+
+self(*
+param(*&
+	isDefined*
+
+self(*
+param(*)
+hasParam*
+
+self(*
+	paramName(*.
+extractParamMap*
+
+self(*
+extra (*#
+copy*
+
+self(*
+extra (*-
+set*
+
+self(*
+param(*
+value(
+*'
+
+_shouldOwn*
+
+self(*
+param(**
+_resolveParam*
+
+self(*
+param(*C
+_testOwnParam*
+
+self(*
+param_parent(*
+
+param_name(*%
+_dummy0:builtins.staticmethodh*"
+_set*
+
+self(*
+kwargs(
+*"
+clear*
+
+self(*
+param(*)
+_setDefault*
+
+self(*
+kwargs(
+*4
+_copyValues*
+
+self(*
+to(*
+extra (*'
+	_resetUid*
+
+self(*
+newUid(
+2é
+getOrDefault>
+getOrDefault
+*
+
+self(*
+param(0:typing.overloadX>
+getOrDefault*
+
+self(*
+param(0:typing.overloadX@babc.ABCMetar
+	_paramMap0r
+_defaultParamMap0r
+_params0*
+__path__0*
+__annotations__0*
+npnumpy *
+
+JavaObject0
+*
+__all__022"builtins.object2"builtins.object22"pyspark.ml.param.Param22"pyspark.ml.util.Identifiable2"builtins.str2"builtins.function222222"pyspark.ml.param.Param2
+2"builtins.int2"builtins.bool222"builtins.list2
+2"builtins.float2"builtins.list22"builtins.list22"builtins.list22"builtins.list22"pyspark.ml.linalg.Vector2"pyspark.ml.linalg.Matrix2"pyspark.ml.param.Params2"builtins.list2222"builtins.dict2
+2""pyspark.ml._typing.ParamMap2222"pyspark.ml.param.Params2222"builtins.dict2

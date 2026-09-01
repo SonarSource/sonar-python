@@ -1,141 +1,133 @@
 
-)influxdb_client.service.templates_serviceÜ#
-TemplatesService:influxdb_client.service.templates_service.TemplatesService"2influxdb_client.service._base_service._BaseService*Ê
-__init__Cinfluxdb_client.service.templates_service.TemplatesService.__init__"
-None*Ç
-selfx
-:influxdb_client.service.templates_service.TemplatesService":influxdb_client.service.templates_service.TemplatesService*m
+)influxdb_client.service.templates_service˜
+TemplatesService"2influxdb_client.service._base_service._BaseService*,
+__init__*
 
-api_client[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*û
-apply_templateIinfluxdb_client.service.templates_service.TemplatesService.apply_template*
+self(*
+
+api_client (*:
+apply_template*
 self*
 template_apply*
 
-kwargsz310z311z312z313z314*º
-apply_template_with_http_infoXinfluxdb_client.service.templates_service.TemplatesService.apply_template_with_http_info*
+kwargs*I
+apply_template_with_http_info*
 self*
 template_apply*
 
-kwargsz310z311z312z313z314*¨
-apply_template_asyncOinfluxdb_client.service.templates_service.TemplatesService.apply_template_async*
+kwargs*B
+apply_template_async*
 self*
 template_apply*
 
-kwargsHz310z311z312z313z314*Ü
-create_stackGinfluxdb_client.service.templates_service.TemplatesService.create_stack*
+kwargsH*$
+create_stack*
 self*
 
-kwargsz310z311z312z313z314*§
-create_stack_with_http_infoVinfluxdb_client.service.templates_service.TemplatesService.create_stack_with_http_info*
+kwargs*3
+create_stack_with_http_info*
 self*
 
-kwargsz310z311z312z313z314*î
-create_stack_asyncMinfluxdb_client.service.templates_service.TemplatesService.create_stack_async*
+kwargs*,
+create_stack_async*
 self*
 
-kwargsHz310z311z312z313z314*†
-delete_stackGinfluxdb_client.service.templates_service.TemplatesService.delete_stack*
+kwargsH*>
+delete_stack*
 self*
 stack_id*
 
 org_id*
 
-kwargsz310z311z312z313z314*æ
-delete_stack_with_http_infoVinfluxdb_client.service.templates_service.TemplatesService.delete_stack_with_http_info*
+kwargs*M
+delete_stack_with_http_info*
 self*
 stack_id*
 
 org_id*
 
-kwargsz310z311z312z313z314*Æ
-delete_stack_asyncMinfluxdb_client.service.templates_service.TemplatesService.delete_stack_async*
+kwargs*F
+delete_stack_async*
 self*
 stack_id*
 
 org_id*
 
-kwargsHz310z311z312z313z314*å
-export_templateJinfluxdb_client.service.templates_service.TemplatesService.export_template*
+kwargsH*'
+export_template*
 self*
 
-kwargsz310z311z312z313z314*™
-export_template_with_http_infoYinfluxdb_client.service.templates_service.TemplatesService.export_template_with_http_info*
+kwargs*6
+export_template_with_http_info*
 self*
 
-kwargsz310z311z312z313z314*ö
-export_template_asyncPinfluxdb_client.service.templates_service.TemplatesService.export_template_async*
+kwargs*/
+export_template_async*
 self*
 
-kwargsHz310z311z312z313z314*ê
-list_stacksFinfluxdb_client.service.templates_service.TemplatesService.list_stacks*
-self*
-
-org_id*
-
-kwargsz310z311z312z313z314*Æ
-list_stacks_with_http_infoUinfluxdb_client.service.templates_service.TemplatesService.list_stacks_with_http_info*
+kwargsH*/
+list_stacks*
 self*
 
 org_id*
 
-kwargsz310z311z312z313z314*û
-list_stacks_asyncLinfluxdb_client.service.templates_service.TemplatesService.list_stacks_async*
+kwargs*>
+list_stacks_with_http_info*
 self*
 
 org_id*
 
-kwargsHz310z311z312z313z314*ê
+kwargs*7
+list_stacks_async*
+self*
 
-read_stackEinfluxdb_client.service.templates_service.TemplatesService.read_stack*
+org_id*
+
+kwargsH*0
+
+read_stack*
 self*
 stack_id*
 
-kwargsz310z311z312z313z314*Æ
-read_stack_with_http_infoTinfluxdb_client.service.templates_service.TemplatesService.read_stack_with_http_info*
+kwargs*?
+read_stack_with_http_info*
 self*
 stack_id*
 
-kwargsz310z311z312z313z314*û
-read_stack_asyncKinfluxdb_client.service.templates_service.TemplatesService.read_stack_async*
+kwargs*8
+read_stack_async*
 self*
 stack_id*
 
-kwargsHz310z311z312z313z314*ö
-uninstall_stackJinfluxdb_client.service.templates_service.TemplatesService.uninstall_stack*
+kwargsH*5
+uninstall_stack*
 self*
 stack_id*
 
-kwargsz310z311z312z313z314*∏
-uninstall_stack_with_http_infoYinfluxdb_client.service.templates_service.TemplatesService.uninstall_stack_with_http_info*
+kwargs*D
+uninstall_stack_with_http_info*
 self*
 stack_id*
 
-kwargsz310z311z312z313z314*®
-uninstall_stack_asyncPinfluxdb_client.service.templates_service.TemplatesService.uninstall_stack_async*
+kwargs*=
+uninstall_stack_async*
 self*
 stack_id*
 
-kwargsHz310z311z312z313z314*î
-update_stackGinfluxdb_client.service.templates_service.TemplatesService.update_stack*
+kwargsH*2
+update_stack*
 self*
 stack_id*
 
-kwargsz310z311z312z313z314*≤
-update_stack_with_http_infoVinfluxdb_client.service.templates_service.TemplatesService.update_stack_with_http_info*
+kwargs*A
+update_stack_with_http_info*
 self*
 stack_id*
 
-kwargsz310z311z312z313z314*¢
-update_stack_asyncMinfluxdb_client.service.templates_service.TemplatesService.update_stack_async*
+kwargs*:
+update_stack_async*
 self*
 stack_id*
 
-kwargsHz310z311z312z313z314j310j311j312j313j314*æ
-__annotations__9influxdb_client.service.templates_service.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+kwargsH*
+__annotations__022<":influxdb_client.service.templates_service.TemplatesService22"_typeshed.Incomplete2222"builtins.str2"builtins.dict2

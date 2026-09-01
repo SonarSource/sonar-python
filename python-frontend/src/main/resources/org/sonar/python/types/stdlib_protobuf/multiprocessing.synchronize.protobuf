@@ -1,185 +1,102 @@
 
-multiprocessing.synchronizeÅ
-Barrier#multiprocessing.synchronize.Barrier"threading.Barrier*§
-__init__,multiprocessing.synchronize.Barrier.__init__"
-None*T
-selfJ
-#multiprocessing.synchronize.Barrier"#multiprocessing.synchronize.Barrier*)
-parties
-builtins.int"builtins.int*ï
-actionÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314j310j311j312j313j314π
-	Condition%multiprocessing.synchronize.Condition"!contextlib.AbstractContextManager*Í
-__init__.multiprocessing.synchronize.Condition.__init__"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*€
-lockŒ
-`Union[TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]],None]›
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"%multiprocessing.synchronize._LockLike
-None *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*⁄
-notify,multiprocessing.synchronize.Condition.notify"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*%
-n
-builtins.int"builtins.int z310z311z312z313z314*ª
+multiprocessing.synchronizeq
+Barrier"threading.Barrier*S
+__init__*
 
-notify_all0multiprocessing.synchronize.Condition.notify_all"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Conditionz310z311z312z313z314*†
-wait*multiprocessing.synchronize.Condition.wait"
-builtins.bool"builtins.bool*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*Ñ
-wait_for.multiprocessing.synchronize.Condition.wait_for"
-builtins.bool"builtins.bool*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*Z
-	predicateK
-CallableType[builtins.function]&
-builtins.function"builtins.function*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*”
-acquire-multiprocessing.synchronize.Condition.acquire"
-builtins.bool"builtins.bool*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*µ
-release-multiprocessing.synchronize.Condition.release"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Conditionz310z311z312z313z314*à
-__exit__.multiprocessing.synchronize.Condition.__exit__"
-None*PN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314j310j311j312j313j314˙
-Event!multiprocessing.synchronize.Event"builtins.object*Ä
-__init__*multiprocessing.synchronize.Event.__init__"
-None*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*Ω
-is_set(multiprocessing.synchronize.Event.is_set"
-builtins.bool"builtins.bool*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Eventz310z311z312z313z314*°
-set%multiprocessing.synchronize.Event.set"
-None*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Eventz310z311z312z313z314*•
-clear'multiprocessing.synchronize.Event.clear"
-None*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Eventz310z311z312z313z314*î
-wait&multiprocessing.synchronize.Event.wait"
-builtins.bool"builtins.bool*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314j310j311j312j313j314Ò
-SemLock#multiprocessing.synchronize.SemLock"!contextlib.AbstractContextManager*Õ
-acquire+multiprocessing.synchronize.SemLock.acquire"
-builtins.bool"builtins.bool*T
-selfJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*Ø
-release+multiprocessing.synchronize.SemLock.release"
-None*T
-selfJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLockz310z311z312z313z314*Ç
-__exit__,multiprocessing.synchronize.SemLock.__exit__"
-None*LJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314j310j311j312j313j314Ê
-Lock multiprocessing.synchronize.Lock"#multiprocessing.synchronize.SemLock*˝
-__init__)multiprocessing.synchronize.Lock.__init__"
-None*N
-selfD
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.Lock*S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314j310j311j312j313j314Î
-RLock!multiprocessing.synchronize.RLock"#multiprocessing.synchronize.SemLock*Ä
-__init__*multiprocessing.synchronize.RLock.__init__"
-None*P
-selfF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock*S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314j310j311j312j313j314™
-	Semaphore%multiprocessing.synchronize.Semaphore"#multiprocessing.synchronize.SemLock*∑
-__init__.multiprocessing.synchronize.Semaphore.__init__"
-None*X
-selfN
-%multiprocessing.synchronize.Semaphore"%multiprocessing.synchronize.Semaphore*)
-value
-builtins.int"builtins.int *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314j310j311j312j313j314œ
-BoundedSemaphore,multiprocessing.synchronize.BoundedSemaphore"%multiprocessing.synchronize.Semaphore*Ã
-__init__5multiprocessing.synchronize.BoundedSemaphore.__init__"
-None*f
-self\
-,multiprocessing.synchronize.BoundedSemaphore",multiprocessing.synchronize.BoundedSemaphore*)
-value
-builtins.int"builtins.int *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314j310j311j312j313j314*∞
-__annotations__+multiprocessing.synchronize.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ì
-__all__#multiprocessing.synchronize.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+self(*
+parties(*
+action (*
+timeout (*	
+ctx(	Û
+	Condition"!contextlib.AbstractContextManager*1
+__init__*
+
+self(
+*
+lock (*	
+ctx(	*!
+notify*
+
+self(
+*	
+n (*
+
+notify_all*
+
+self(
+*%
+wait*
+
+self(
+*
+timeout (*:
+wait_for*
+
+self(
+*
+	predicate(*
+timeout (*7
+acquire*
+
+self(
+*
+block (*
+timeout (*
+release*
+
+self(
+*
+__exit__*(
+*(*(*(®
+Event"builtins.object*#
+__init__*
+
+self(*	
+ctx(	*
+is_set*
+
+self(*
+set*
+
+self(*
+clear*
+
+self(*%
+wait*
+
+self(*
+timeout (ú
+SemLock"!contextlib.AbstractContextManager*7
+acquire*
+
+self(*
+block (*
+timeout (*
+release*
+
+self(*
+__exit__*(*(*(*(P
+Lock"#multiprocessing.synchronize.SemLock*#
+__init__*
+
+self(*	
+ctx(	Q
+RLock"#multiprocessing.synchronize.SemLock*#
+__init__*
+
+self(*	
+ctx(	d
+	Semaphore"#multiprocessing.synchronize.SemLock*2
+__init__*
+
+self(*
+value (*	
+ctx(	m
+BoundedSemaphore"%multiprocessing.synchronize.Semaphore*2
+__init__*
+
+self(*
+value (*	
+ctx(	*
+__annotations__0*
+__all__022%"#multiprocessing.synchronize.Barrier2"builtins.int2"builtins.function22222"builtins.float222%"#multiprocessing.context.BaseContext2'"%multiprocessing.synchronize.Condition2"" multiprocessing.synchronize.Lock2#"!multiprocessing.synchronize.RLock222,"%multiprocessing.synchronize._LockLike2222"builtins.bool2"builtins.BaseException2"type222222"types.TracebackType222#"!multiprocessing.synchronize.Event2%"#multiprocessing.synchronize.SemLock2'"%multiprocessing.synchronize.Semaphore2.",multiprocessing.synchronize.BoundedSemaphore2"builtins.str22"builtins.dict22"builtins.list2

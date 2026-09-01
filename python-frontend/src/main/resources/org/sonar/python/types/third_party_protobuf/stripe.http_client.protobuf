@@ -1,319 +1,170 @@
 
-stripe.http_clientâ
-RequestMetrics%stripe.request_metrics.RequestMetrics"builtins.object*Ú
-__init__.stripe.request_metrics.RequestMetrics.__init__"
-None*X
-selfN
-%stripe.request_metrics.RequestMetrics"%stripe.request_metrics.RequestMetrics*
+stripe.http_clientÕ
+RequestMetrics%stripe.request_metrics.RequestMetrics"builtins.object*E
+__init__*
 
-request_id
-Any* 
-request_duration_ms
-Anyz310z311z312z313z314*[
-payload-stripe.request_metrics.RequestMetrics.payload*
-selfz310z311z312z313z314j310j311j312j313j314r`
+self(*
 
-request_id0stripe.request_metrics.RequestMetrics.request_id
-Any*310*311*312*313*314rr
-request_duration_ms9stripe.request_metrics.RequestMetrics.request_duration_ms
-Any*310*311*312*313*314é
+request_id(*
+request_duration_ms(*
+payload*
+selfr
 
-HTTPClientstripe.http_client.HTTPClient"builtins.object*¡
-__init__&stripe.http_client.HTTPClient.__init__"
-None*H
-self>
-stripe.http_client.HTTPClient"stripe.http_client.HTTPClient*6
-verify_ssl_certs
-builtins.bool"builtins.bool *h
-proxy[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*·
-request_with_retries2stripe.http_client.HTTPClient.request_with_retries"
-Any*H
-self>
-stripe.http_client.HTTPClient"stripe.http_client.HTTPClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ô
-request_stream_with_retries9stripe.http_client.HTTPClient.request_stream_with_retries"
-Any*H
-self>
-stripe.http_client.HTTPClient"stripe.http_client.HTTPClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*»
-request%stripe.http_client.HTTPClient.request"
-None*H
-self>
-stripe.http_client.HTTPClient"stripe.http_client.HTTPClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*÷
-request_stream,stripe.http_client.HTTPClient.request_stream"
-None*H
-self>
-stripe.http_client.HTTPClient"stripe.http_client.HTTPClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ô
-close#stripe.http_client.HTTPClient.close"
-None*H
-self>
-stripe.http_client.HTTPClient"stripe.http_client.HTTPClientz310z311z312z313z314j310j311j312j313j314rk
-	MAX_DELAY'stripe.http_client.HTTPClient.MAX_DELAY
-builtins.int"builtins.int*310*311*312*313*314rw
-INITIAL_DELAY+stripe.http_client.HTTPClient.INITIAL_DELAY 
-builtins.float"builtins.float*310*311*312*313*314rw
-MAX_RETRY_AFTER-stripe.http_client.HTTPClient.MAX_RETRY_AFTER
-builtins.int"builtins.int*310*311*312*313*314ê
-RequestsClient!stripe.http_client.RequestsClient"stripe.http_client.HTTPClient*Ÿ
-__init__*stripe.http_client.RequestsClient.__init__"
-None*P
-selfF
-!stripe.http_client.RequestsClient"!stripe.http_client.RequestsClient*+
-timeout
-builtins.int"builtins.int *j
-session[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*”
-request)stripe.http_client.RequestsClient.request"
-Any*P
-selfF
-!stripe.http_client.RequestsClient"!stripe.http_client.RequestsClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*·
-request_stream0stripe.http_client.RequestsClient.request_stream"
-Any*P
-selfF
-!stripe.http_client.RequestsClient"!stripe.http_client.RequestsClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*•
-close'stripe.http_client.RequestsClient.close"
-None*P
-selfF
-!stripe.http_client.RequestsClient"!stripe.http_client.RequestsClientz310z311z312z313z314j310j311j312j313j314re
-name&stripe.http_client.RequestsClient.name
-builtins.str"builtins.str*310*311*312*313*314≤
-UrlFetchClient!stripe.http_client.UrlFetchClient"stripe.http_client.HTTPClient*˚
-__init__*stripe.http_client.UrlFetchClient.__init__"
-None*P
-selfF
-!stripe.http_client.UrlFetchClient"!stripe.http_client.UrlFetchClient*6
-verify_ssl_certs
-builtins.bool"builtins.bool *h
-proxy[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-deadline
-builtins.int"builtins.int z310z311z312z313z314*”
-request)stripe.http_client.UrlFetchClient.request"
-Any*P
-selfF
-!stripe.http_client.UrlFetchClient"!stripe.http_client.UrlFetchClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*·
-request_stream0stripe.http_client.UrlFetchClient.request_stream"
-Any*P
-selfF
-!stripe.http_client.UrlFetchClient"!stripe.http_client.UrlFetchClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*•
-close'stripe.http_client.UrlFetchClient.close"
-None*P
-selfF
-!stripe.http_client.UrlFetchClient"!stripe.http_client.UrlFetchClientz310z311z312z313z314j310j311j312j313j314re
-name&stripe.http_client.UrlFetchClient.name
-builtins.str"builtins.str*310*311*312*313*314”
-PycurlClientstripe.http_client.PycurlClient"stripe.http_client.HTTPClient*«
-__init__(stripe.http_client.PycurlClient.__init__"
-None*L
-selfB
-stripe.http_client.PycurlClient"stripe.http_client.PycurlClient*6
-verify_ssl_certs
-builtins.bool"builtins.bool *h
-proxy[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*k
-parse_headers-stripe.http_client.PycurlClient.parse_headers*
+request_id0r
+request_duration_ms0¶
+
+HTTPClient"builtins.object*A
+__init__*
+
+self(*
+verify_ssl_certs (*
+proxy (*_
+request_with_retries*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*f
+request_stream_with_retries*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*R
+request*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*Y
+request_stream*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*
+close*
+
+self(r
+	MAX_DELAY0r
+INITIAL_DELAY0	r
+MAX_RETRY_AFTER0…
+RequestsClient"stripe.http_client.HTTPClient*H
+__init__*
+
+self(
+*
+timeout (*
+session (*
+kwargs(*R
+request*
+
+self(
+*
+method(*	
+url(*
+headers(*
+	post_data (*Y
+request_stream*
+
+self(
+*
+method(*	
+url(*
+headers(*
+	post_data (*
+close*
+
+self(
+r
+name0‘
+UrlFetchClient"stripe.http_client.HTTPClient*S
+__init__*
+
+self(*
+verify_ssl_certs (*
+proxy (*
+deadline (*R
+request*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*Y
+request_stream*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*
+close*
+
+self(r
+name0Â
+PycurlClient"stripe.http_client.HTTPClient*A
+__init__*
+
+self(*
+verify_ssl_certs (*
+proxy (*#
+parse_headers*
 self*
-dataz310z311z312z313z314*Õ
-request'stripe.http_client.PycurlClient.request"
-Any*L
-selfB
-stripe.http_client.PycurlClient"stripe.http_client.PycurlClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*€
-request_stream.stripe.http_client.PycurlClient.request_stream"
-Any*L
-selfB
-stripe.http_client.PycurlClient"stripe.http_client.PycurlClient*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ü
-close%stripe.http_client.PycurlClient.close"
-None*L
-selfB
-stripe.http_client.PycurlClient"stripe.http_client.PycurlClientz310z311z312z313z314j310j311j312j313j314rc
-name$stripe.http_client.PycurlClient.name
-builtins.str"builtins.str*310*311*312*313*314ı
+data*R
+request*
 
-Urllib2Client stripe.http_client.Urllib2Client"stripe.http_client.HTTPClient* 
-__init__)stripe.http_client.Urllib2Client.__init__"
-None*N
-selfD
- stripe.http_client.Urllib2Client" stripe.http_client.Urllib2Client*6
-verify_ssl_certs
-builtins.bool"builtins.bool *h
-proxy[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*–
-request(stripe.http_client.Urllib2Client.request"
-Any*N
-selfD
- stripe.http_client.Urllib2Client" stripe.http_client.Urllib2Client*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ﬁ
-request_stream/stripe.http_client.Urllib2Client.request_stream"
-Any*N
-selfD
- stripe.http_client.Urllib2Client" stripe.http_client.Urllib2Client*
-method
-Any*
-url
-Any*
-headers
-Any*l
-	post_data[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*¢
-close&stripe.http_client.Urllib2Client.close"
-None*N
-selfD
- stripe.http_client.Urllib2Client" stripe.http_client.Urllib2Clientz310z311z312z313z314j310j311j312j313j314rd
-name%stripe.http_client.Urllib2Client.name
-builtins.str"builtins.str*310*311*312*313*314t
-new_default_http_client*stripe.http_client.new_default_http_client*
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*Y
+request_stream*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*
+close*
+
+self(r
+name0¡
+Urllib2Client"stripe.http_client.HTTPClient*A
+__init__*
+
+self(*
+verify_ssl_certs (*
+proxy (*R
+request*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*Y
+request_stream*
+
+self(*
+method(*	
+url(*
+headers(*
+	post_data (*
+close*
+
+self(r
+name0/
+new_default_http_client*
 args*
 
-kwargsz310z311z312z313z314*ß
-__annotations__"stripe.http_client.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*0
-errorstripe.error *310*311*312*313*314*G
-versionstripe.http_client.version
-Any*310*311*312*313*314*C
-majorstripe.http_client.major
-Any*310*311*312*313*314*C
-minorstripe.http_client.minor
-Any*310*311*312*313*314*C
-patchstripe.http_client.patch
-Any*310*311*312*313*314
+kwargs*
+__annotations__0*
+errorstripe.error *
+version0*	
+major0*	
+minor0*	
+patch022'"%stripe.request_metrics.RequestMetrics22"stripe.http_client.HTTPClient2"builtins.bool2"_typeshed.Incomplete2222"builtins.int2"builtins.float2#"!stripe.http_client.RequestsClient2"builtins.str2#"!stripe.http_client.UrlFetchClient2!"stripe.http_client.PycurlClient2"" stripe.http_client.Urllib2Client2"builtins.dict2

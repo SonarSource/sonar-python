@@ -1,281 +1,143 @@
 
 urllib3.connection=
-ConnectionErrorbuiltins.ConnectionError"builtins.OSError¡4
-_HTTPConnectionhttp.client.HTTPConnection"builtins.object*·
-__init__#http.client.HTTPConnection.__init__"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *³
-source_addressœ
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *-
-	blocksize
-builtins.int"builtins.int *¬
-request"http.client.HTTPConnection.request"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*ì
-bodyß
-”Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str,None]›
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]‚
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-builtins.str"builtins.str
-None *¸
-headers¨
-atyping.Mapping[builtins.str,TypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]]
-builtins.str"builtins.str”
-DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]¯
-9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
-encode_chunked
-builtins.bool"builtins.bool *¯
-getresponse&http.client.HTTPConnection.getresponse"4
-http.client.HTTPResponse"http.client.HTTPResponse*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*²
-set_debuglevel)http.client.HTTPConnection.set_debuglevel"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*'
-level
-builtins.int"builtins.int*Ê
+ConnectionErrorbuiltins.ConnectionError"builtins.OSErrorà
+_HTTPConnectionhttp.client.HTTPConnection"builtins.object*n
+__init__*
 
-set_tunnel%http.client.HTTPConnection.set_tunnel"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Ì
-headers¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *{
-connect"http.client.HTTPConnection.connect"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*w
-close http.client.HTTPConnection.close"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*¿
+self(*
 
-putrequest%http.client.HTTPConnection.putrequest"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*/
-	skip_host
-builtins.bool"builtins.bool *:
-skip_accept_encoding
-builtins.bool"builtins.bool *—
-	putheader$http.client.HTTPConnection.putheader"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*r
-headerf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*¡
-values”
-DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]¯
-9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValue*ƒ
+host(*
+port (*
+timeout (*
+source_address (	*
+	blocksize (*g
+request*
 
-endheaders%http.client.HTTPConnection.endheaders"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*É
-message_body´
-‡Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],None]›
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]‚
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-None *4
-encode_chunked
-builtins.bool"builtins.bool *Ó
-sendhttp.client.HTTPConnection.send"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*Û
-dataÐ
-Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str]›
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]‚
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-builtins.str"builtins.strrO
-	blocksize$http.client.HTTPConnection.blocksize
-builtins.int"builtins.intrO
-	auto_open$http.client.HTTPConnection.auto_open
-builtins.int"builtins.intrQ
+self(*
+method(*	
+url(*
+body (*
+headers (*
+encode_chunked (*
+getresponse*
 
-debuglevel%http.client.HTTPConnection.debuglevel
-builtins.int"builtins.intrU
-default_port'http.client.HTTPConnection.default_port
-builtins.int"builtins.intr›
-response_class)http.client.HTTPConnection.response_class^
-Type[http.client.HTTPResponse]4
-http.client.HTTPResponse"http.client.HTTPResponse"typery
-timeout"http.client.HTTPConnection.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-NonerE
-hosthttp.client.HTTPConnection.host
-builtins.str"builtins.strrE
-porthttp.client.HTTPConnection.port
-builtins.int"builtins.intr¢
-sockhttp.client.HTTPConnection.socky
-#Union[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_typeshed.MaybeNone>
-HTTPExceptionhttp.client.HTTPException"builtins.ExceptionF
-DummyConnection"urllib3.connection.DummyConnection"builtins.objectÏ
-HTTPConnection!urllib3.connection.HTTPConnection"http.client.HTTPConnection*¶
-__init__*urllib3.connection.HTTPConnection.__init__"
-None*P
-selfF
-!urllib3.connection.HTTPConnection"!urllib3.connection.HTTPConnection*
-args
-Any*
-kw
-Any*>
-connect)urllib3.connection.HTTPConnection.connect*
-selfrG
-default_port.urllib3.connection.HTTPConnection.default_port
-Anyr[
-default_socket_options8urllib3.connection.HTTPConnection.default_socket_options
-AnyrE
-is_verified-urllib3.connection.HTTPConnection.is_verified
-AnyrK
-source_address0urllib3.connection.HTTPConnection.source_address
-AnyrK
-socket_options0urllib3.connection.HTTPConnection.socket_options
-AnyÖ
-HTTPSConnection"urllib3.connection.HTTPSConnection"!urllib3.connection.HTTPConnection*°
-__init__+urllib3.connection.HTTPSConnection.__init__"
-None*R
-selfH
-"urllib3.connection.HTTPSConnection""urllib3.connection.HTTPSConnection*
-host
-Any*
-port
-Any *
-key_file
-Any *
-	cert_file
-Any *
-strict
-Any *
-timeout
-Any *
-kw
-Any*?
-connect*urllib3.connection.HTTPSConnection.connect*
-selfrH
-default_port/urllib3.connection.HTTPSConnection.default_port
-Anyr@
-key_file+urllib3.connection.HTTPSConnection.key_file
-AnyrB
-	cert_file,urllib3.connection.HTTPSConnection.cert_file
-Anyr8
-sock'urllib3.connection.HTTPSConnection.sock
-Any	
-VerifiedHTTPSConnection*urllib3.connection.VerifiedHTTPSConnection""urllib3.connection.HTTPSConnection*¼
-set_cert3urllib3.connection.VerifiedHTTPSConnection.set_cert*
+self(*+
+set_debuglevel*
+
+self(*
+level(*E
+
+set_tunnel*
+
+self(*
+
+host(*
+port (*
+headers (*
+connect*
+
+self(*
+close*
+
+self(*d
+
+putrequest*
+
+self(*
+method(*	
+url(*
+	skip_host (*
+skip_accept_encoding (*5
+	putheader*
+
+self(*
+header(*
+values(*H
+
+endheaders*
+
+self(*
+message_body (*
+encode_chunked (* 
+send*
+
+self(*
+
+data(r
+	blocksize0r
+	auto_open0r
+
+debuglevel0r
+default_port0r
+response_class0r
+timeout0r
+host0r
+port0r
+sock0>
+HTTPExceptionhttp.client.HTTPException"builtins.Exception"
+DummyConnection"builtins.objectØ
+HTTPConnection"http.client.HTTPConnection*.
+__init__*
+
+self( *
+
+args(*
+kw(*
+connect*
+selfr
+default_port0r
+default_socket_options0r
+is_verified0r
+source_address0r
+socket_options0‡
+HTTPSConnection"!urllib3.connection.HTTPConnection*‚
+__init__*
+
+self(!*
+
+host(*
+port (*
+key_file (*
+	cert_file (*
+strict (*
+timeout (*
+kw(*
+connect*
+selfr
+default_port0r
+key_file0r
+	cert_file0r
+sock0þ
+VerifiedHTTPSConnection""urllib3.connection.HTTPSConnection*‡
+set_cert*
 self*
 key_file *
 	cert_file *
 	cert_reqs *
 ca_certs *
 assert_hostname *
-assert_fingerprint *G
-connect2urllib3.connection.VerifiedHTTPSConnection.connect*
-selfrJ
-	cert_reqs4urllib3.connection.VerifiedHTTPSConnection.cert_reqs
-AnyrH
-ca_certs3urllib3.connection.VerifiedHTTPSConnection.ca_certs
-AnyrN
-ssl_version6urllib3.connection.VerifiedHTTPSConnection.ssl_version
-Anyr\
-assert_fingerprint=urllib3.connection.VerifiedHTTPSConnection.assert_fingerprint
-AnyrH
-key_file3urllib3.connection.VerifiedHTTPSConnection.key_file
-AnyrJ
-	cert_file4urllib3.connection.VerifiedHTTPSConnection.cert_file
-AnyrV
-assert_hostname:urllib3.connection.VerifiedHTTPSConnection.assert_hostname
-Anyr@
-sock/urllib3.connection.VerifiedHTTPSConnection.sock
-AnyrJ
-	auto_open4urllib3.connection.VerifiedHTTPSConnection.auto_open
-AnyrN
-is_verified6urllib3.connection.VerifiedHTTPSConnection.is_verified
-Any*Ž
-__annotations__"urllib3.connection.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*€
-match_hostname!urllib3.connection.match_hostnameK
-CallableType[builtins.function]&
-builtins.function"builtins.function*†
-resolve_cert_reqs$urllib3.connection.resolve_cert_reqsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*Š
-resolve_ssl_version&urllib3.connection.resolve_ssl_versionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*‚
-ssl_wrap_socket"urllib3.connection.ssl_wrap_socketK
-CallableType[builtins.function]&
-builtins.function"builtins.function*ˆ
-assert_fingerprint%urllib3.connection.assert_fingerprintK
-CallableType[builtins.function]&
-builtins.function"builtins.function*'
+assert_fingerprint *
+connect*
+selfr
+	cert_reqs0r
+ca_certs0r
+ssl_version0r
+assert_fingerprint0r
+key_file0r
+	cert_file0r
+assert_hostname0r
+sock0r
+	auto_open0r
+is_verified0*
+__annotations__0"*
+match_hostname0$*
+resolve_cert_reqs0$*
+resolve_ssl_version0$*
+ssl_wrap_socket0$*
+assert_fingerprint0$*'
 
-connectionurllib3.util.connection *<
-port_by_scheme!urllib3.connection.port_by_scheme
-Any*6
-RECENT_DATEurllib3.connection.RECENT_DATE
-Any
+connectionurllib3.util.connection *
+port_by_scheme0*
+RECENT_DATE022"http.client.HTTPConnection2"builtins.str2"builtins.int222"builtins.float2222222"builtins.bytes2"_typeshed.SupportsRead2
+2"typing_extensions.Buffer2"typing.Iterable2222"http.client._DataType222222"http.client._HeaderValue22"typing.Mapping22"builtins.bool2"http.client.HTTPResponse2"typing.Mapping22222
+22222"type22"socket.socket22"_typeshed.MaybeNone2222#"!urllib3.connection.HTTPConnection2$""urllib3.connection.HTTPSConnection2"builtins.dict22"builtins.function22#

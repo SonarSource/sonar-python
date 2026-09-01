@@ -1,90 +1,64 @@
 
-)influxdb_client.client.authorizations_api¾$
-AuthorizationsApi;influxdb_client.client.authorizations_api.AuthorizationsApi"builtins.object*˜
-__init__Dinfluxdb_client.client.authorizations_api.AuthorizationsApi.__init__"
-None*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*
-influxdb_client
-Anyz310z311z312z313z314*Ý
-create_authorizationPinfluxdb_client.client.authorizations_api.AuthorizationsApi.create_authorization"h
-2influxdb_client.domain.authorization.Authorization"2influxdb_client.domain.authorization.Authorization*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*i
-org_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *®
-permissionsš
-)Union[builtins.list[TypeAlias[Any]],None]a
-builtins.list[TypeAlias[Any]]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"builtins.list
-None *Ì
-authorization¶
->Union[influxdb_client.domain.authorization.Authorization,None]h
-2influxdb_client.domain.authorization.Authorization"2influxdb_client.domain.authorization.Authorization
-None z310z311z312z313z314*¥
-find_authorization_by_idTinfluxdb_client.client.authorizations_api.AuthorizationsApi.find_authorization_by_id"h
-2influxdb_client.domain.authorization.Authorization"2influxdb_client.domain.authorization.Authorization*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*)
-auth_id
-builtins.str"builtins.strz310z311z312z313z314*•
-find_authorizationsOinfluxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations*
+)influxdb_client.client.authorizations_api–
+AuthorizationsApi"builtins.object*/
+__init__*
+
+self(*
+influxdb_client(*`
+create_authorization*
+
+self(*
+org_id (*
+permissions (*
+authorization (	*7
+find_authorization_by_id*
+
+self(*
+auth_id(
+*+
+find_authorizations*
 self*
 
-kwargsz310z311z312z313z314*ï
-find_authorizations_by_userWinfluxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations_by_user"
-Any*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*N
-userD
- influxdb_client.domain.user.User" influxdb_client.domain.user.Userz310z311z312z313z314*Ð
-find_authorizations_by_user_idZinfluxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations_by_user_id"
-Any*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*)
-user_id
-builtins.str"builtins.strz310z311z312z313z314*Ö
- find_authorizations_by_user_name\influxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations_by_user_name"
-Any*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*+
-	user_name
-builtins.str"builtins.strz310z311z312z313z314*Œ
-find_authorizations_by_orgVinfluxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations_by_org"
-Any*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*m
-orgd
-0influxdb_client.domain.organization.Organization"0influxdb_client.domain.organization.Organizationz310z311z312z313z314*Ó
-find_authorizations_by_org_name[influxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations_by_org_name"
-Any*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi**
-org_name
-builtins.str"builtins.strz310z311z312z313z314*Í
-find_authorizations_by_org_idYinfluxdb_client.client.authorizations_api.AuthorizationsApi.find_authorizations_by_org_id"
-Any*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*(
-org_id
-builtins.str"builtins.strz310z311z312z313z314*•
-update_authorizationPinfluxdb_client.client.authorizations_api.AuthorizationsApi.update_authorization*
+kwargs*7
+find_authorizations_by_user*
+
+self(*
+
+user(*=
+find_authorizations_by_user_id*
+
+self(*
+user_id(
+*A
+ find_authorizations_by_user_name*
+
+self(*
+	user_name(
+*5
+find_authorizations_by_org*
+
+self(*	
+org(*?
+find_authorizations_by_org_name*
+
+self(*
+org_name(
+*;
+find_authorizations_by_org_id*
+
+self(*
+org_id(
+**
+update_authorization*
 self*
-authz310z311z312z313z314*ƒ
-clone_authorizationOinfluxdb_client.client.authorizations_api.AuthorizationsApi.clone_authorization"h
-2influxdb_client.domain.authorization.Authorization"2influxdb_client.domain.authorization.Authorization*„
-selfz
-;influxdb_client.client.authorizations_api.AuthorizationsApi";influxdb_client.client.authorizations_api.AuthorizationsApi*
-auth
-Anyz310z311z312z313z314*•
-delete_authorizationPinfluxdb_client.client.authorizations_api.AuthorizationsApi.delete_authorization*
+auth*/
+clone_authorization*
+
+self(*
+
+auth(**
+delete_authorization*
 self*
-authz310z311z312z313z314j310j311j312j313j314*¾
-__annotations__9influxdb_client.client.authorizations_api.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+auth*
+__annotations__022=";influxdb_client.client.authorizations_api.AuthorizationsApi224"2influxdb_client.domain.authorization.Authorization2"_typeshed.Incomplete2222"builtins.list222222"builtins.str2"" influxdb_client.domain.user.User22"0influxdb_client.domain.organization.Organization2"builtins.dict2
+

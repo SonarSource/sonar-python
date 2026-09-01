@@ -1,220 +1,122 @@
 
-torchvision.models.mobilenet¢	
-InvertedResidual/torchvision.models.mobilenetv2.InvertedResidual"torch.nn.modules.module.Module*€
-__init__8torchvision.models.mobilenetv2.InvertedResidual.__init__"
-None*l
-selfb
-/torchvision.models.mobilenetv2.InvertedResidual"/torchvision.models.mobilenetv2.InvertedResidual*%
-inp
-builtins.int"builtins.int*%
-oup
-builtins.int"builtins.int*(
-stride
-builtins.int"builtins.int*.
-expand_ratio
-builtins.int"builtins.int*™
+torchvision.models.mobilenet¨
+InvertedResidual/torchvision.models.mobilenetv2.InvertedResidual"torch.nn.modules.module.Module*d
+__init__*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *ó
-forward7torchvision.models.mobilenetv2.InvertedResidual.forward"
-torch.Tensor"torch.Tensor*l
-selfb
-/torchvision.models.mobilenetv2.InvertedResidual"/torchvision.models.mobilenetv2.InvertedResidual*#
-x
-torch.Tensor"torch.TensorrI
-stride6torchvision.models.mobilenetv2.InvertedResidual.stride
-Anyr[
-use_res_connect?torchvision.models.mobilenetv2.InvertedResidual.use_res_connect
-AnyrE
-conv4torchvision.models.mobilenetv2.InvertedResidual.conv
-AnyrU
-out_channels<torchvision.models.mobilenetv2.InvertedResidual.out_channels
-AnyÉ
-MobileNetV2*torchvision.models.mobilenetv2.MobileNetV2"torch.nn.modules.module.Module*œ
-__init__3torchvision.models.mobilenetv2.MobileNetV2.__init__"
-None*b
-selfX
-*torchvision.models.mobilenetv2.MobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*/
-num_classes
-builtins.int"builtins.int *2
+self(*	
+inp(*	
+oup(*
+stride(*
+expand_ratio(*
 
-width_mult 
-builtins.float"builtins.float *ð
-inverted_residual_settingÎ
-6Union[builtins.list[builtins.list[builtins.int]],None]‡
-*builtins.list[builtins.list[builtins.int]]J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list"builtins.list
-None *1
-round_nearest
-builtins.int"builtins.int *”
-block†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *™
+norm_layer (* 
+forward*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None */
-dropout 
-builtins.float"builtins.float *ä
-forward2torchvision.models.mobilenetv2.MobileNetV2.forward"
-torch.Tensor"torch.Tensor*b
-selfX
-*torchvision.models.mobilenetv2.MobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*#
-x
-torch.Tensor"torch.TensorrP
-last_channel7torchvision.models.mobilenetv2.MobileNetV2.last_channel
-AnyrH
-features3torchvision.models.mobilenetv2.MobileNetV2.features
-AnyrL
+self(*
+x(r
 
-classifier5torchvision.models.mobilenetv2.MobileNetV2.classifier
-Anyý
-MobileNet_V2_Weights3torchvision.models.mobilenetv2.MobileNet_V2_Weights"#torchvision.models._api.WeightsEnumHr[
-IMAGENET1K_V1Atorchvision.models.mobilenetv2.MobileNet_V2_Weights.IMAGENET1K_V1
-Anyr[
-IMAGENET1K_V2Atorchvision.models.mobilenetv2.MobileNet_V2_Weights.IMAGENET1K_V2
-AnyrO
-DEFAULT;torchvision.models.mobilenetv2.MobileNet_V2_Weights.DEFAULT
-AnyŠ
-InvertedResidualConfig5torchvision.models.mobilenetv3.InvertedResidualConfig"*SonarPythonAnalyzerFakeStub.CustomStubBase*ñ
-__init__>torchvision.models.mobilenetv3.InvertedResidualConfig.__init__"
-None*x
-selfn
-5torchvision.models.mobilenetv3.InvertedResidualConfig"5torchvision.models.mobilenetv3.InvertedResidualConfig*0
-input_channels
-builtins.int"builtins.int*(
-kernel
-builtins.int"builtins.int*3
-expanded_channels
-builtins.int"builtins.int*.
-out_channels
-builtins.int"builtins.int**
-use_se
-builtins.bool"builtins.bool*,
+stride0r
+use_res_connect0r
+conv0r
+out_channels0Ý
+MobileNetV2*torchvision.models.mobilenetv2.MobileNetV2"torch.nn.modules.module.Module*¯
+__init__*
 
-activation
-builtins.str"builtins.str*(
-stride
-builtins.int"builtins.int**
-dilation
-builtins.int"builtins.int*0
+self(	*
+num_classes (*
 
-width_mult 
-builtins.float"builtins.float*Ú
-adjust_channelsEtorchvision.models.mobilenetv3.InvertedResidualConfig.adjust_channels"
-Any**
-channels
-builtins.int"builtins.int*0
+width_mult (
+*!
+inverted_residual_setting (*
+round_nearest (*
+block (*
 
-width_mult 
-builtins.float"builtins.float0:builtins.staticmethodhr_
-input_channelsDtorchvision.models.mobilenetv3.InvertedResidualConfig.input_channels
-AnyrO
-kernel<torchvision.models.mobilenetv3.InvertedResidualConfig.kernel
-Anyre
-expanded_channelsGtorchvision.models.mobilenetv3.InvertedResidualConfig.expanded_channels
-Anyr[
-out_channelsBtorchvision.models.mobilenetv3.InvertedResidualConfig.out_channels
-AnyrO
-use_se<torchvision.models.mobilenetv3.InvertedResidualConfig.use_se
-AnyrO
-use_hs<torchvision.models.mobilenetv3.InvertedResidualConfig.use_hs
-AnyrO
-stride<torchvision.models.mobilenetv3.InvertedResidualConfig.stride
-AnyrS
-dilation>torchvision.models.mobilenetv3.InvertedResidualConfig.dilation
-Any’
-MobileNetV3*torchvision.models.mobilenetv3.MobileNetV3"torch.nn.modules.module.Module*ï
-__init__3torchvision.models.mobilenetv3.MobileNetV3.__init__"
-None*b
-selfX
-*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*å
-inverted_residual_settingÅ
-Dbuiltins.list[torchvision.models.mobilenetv3.InvertedResidualConfig]n
-5torchvision.models.mobilenetv3.InvertedResidualConfig"5torchvision.models.mobilenetv3.InvertedResidualConfig"builtins.list*.
-last_channel
-builtins.int"builtins.int*/
-num_classes
-builtins.int"builtins.int *”
-block†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *™
+norm_layer (*
+dropout (
+* 
+forward*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None */
-dropout 
-builtins.float"builtins.float *
-kwargs
-Any*ä
-forward2torchvision.models.mobilenetv3.MobileNetV3.forward"
-torch.Tensor"torch.Tensor*b
-selfX
-*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*#
-x
-torch.Tensor"torch.TensorrH
-features3torchvision.models.mobilenetv3.MobileNetV3.features
-AnyrF
-avgpool2torchvision.models.mobilenetv3.MobileNetV3.avgpool
-AnyrL
+self(	*
+x(r
+last_channel0r
+features0r
 
-classifier5torchvision.models.mobilenetv3.MobileNetV3.classifier
-Any›
-MobileNet_V3_Large_Weights9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"#torchvision.models._api.WeightsEnumHra
-IMAGENET1K_V1Gtorchvision.models.mobilenetv3.MobileNet_V3_Large_Weights.IMAGENET1K_V1
-Anyra
-IMAGENET1K_V2Gtorchvision.models.mobilenetv3.MobileNet_V3_Large_Weights.IMAGENET1K_V2
-AnyrU
-DEFAULTAtorchvision.models.mobilenetv3.MobileNet_V3_Large_Weights.DEFAULT
-Any¸
-MobileNet_V3_Small_Weights9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights"#torchvision.models._api.WeightsEnumHra
-IMAGENET1K_V1Gtorchvision.models.mobilenetv3.MobileNet_V3_Small_Weights.IMAGENET1K_V1
-AnyrU
-DEFAULTAtorchvision.models.mobilenetv3.MobileNet_V3_Small_Weights.DEFAULT
-Any¦
-mobilenet_v2+torchvision.models.mobilenetv2.mobilenet_v2"X
-*torchvision.models.mobilenetv2.MobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*É
-weights¹
-?Union[torchvision.models.mobilenetv2.MobileNet_V2_Weights,None]j
-3torchvision.models.mobilenetv2.MobileNet_V2_Weights"3torchvision.models.mobilenetv2.MobileNet_V2_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-AnyÄ
-mobilenet_v3_large1torchvision.models.mobilenetv3.mobilenet_v3_large"X
-*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*Û
-weightsË
-EUnion[torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights,None]v
-9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-AnyÄ
-mobilenet_v3_small1torchvision.models.mobilenetv3.mobilenet_v3_small"X
-*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*Û
-weightsË
-EUnion[torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights,None]v
-9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights"9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*˜
-__annotations__,torchvision.models.mobilenet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+classifier0¥
+MobileNet_V2_Weights3torchvision.models.mobilenetv2.MobileNet_V2_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+IMAGENET1K_V20r
+DEFAULT0„
+InvertedResidualConfig5torchvision.models.mobilenetv3.InvertedResidualConfig"*SonarPythonAnalyzerFakeStub.CustomStubBase*¹
+__init__*
+
+self(*
+input_channels(*
+kernel(*
+expanded_channels(*
+out_channels(*
+use_se(*
+
+activation(*
+stride(*
+dilation(*
+
+width_mult(
+*P
+adjust_channels*
+channels(*
+
+width_mult(
+0:builtins.staticmethodhr
+input_channels0r
+
+kernel0r
+expanded_channels0r
+out_channels0r
+
+use_se0r
+
+use_hs0r
+
+stride0r
+dilation0Í
+MobileNetV3*torchvision.models.mobilenetv3.MobileNetV3"torch.nn.modules.module.Module*¤
+__init__*
+
+self(*
+inverted_residual_setting(*
+last_channel(*
+num_classes (*
+block (*
+
+norm_layer (*
+dropout (
+*
+kwargs(* 
+forward*
+
+self(*
+x(r
+features0r
+avgpool0r
+
+classifier0±
+MobileNet_V3_Large_Weights9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+IMAGENET1K_V20r
+DEFAULT0ž
+MobileNet_V3_Small_Weights9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0n
+mobilenet_v2+torchvision.models.mobilenetv2.mobilenet_v2	*
+weights (*
+progress (*
+kwargs(z
+mobilenet_v3_large1torchvision.models.mobilenetv3.mobilenet_v3_large*
+weights (*
+progress (*
+kwargs(z
+mobilenet_v3_small1torchvision.models.mobilenetv3.mobilenet_v3_small*
+weights (*
+progress (*
+kwargs(*
+__annotations__0221"/torchvision.models.mobilenetv2.InvertedResidual2"builtins.int2"builtins.function22222"torch.Tensor22,"*torchvision.models.mobilenetv2.MobileNetV22"builtins.float2"builtins.list22"builtins.list22227"5torchvision.models.mobilenetv3.InvertedResidualConfig2"builtins.bool2"builtins.str2,"*torchvision.models.mobilenetv3.MobileNetV32"builtins.list225"3torchvision.models.mobilenetv2.MobileNet_V2_Weights222;"9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights222;"9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights222"builtins.dict2

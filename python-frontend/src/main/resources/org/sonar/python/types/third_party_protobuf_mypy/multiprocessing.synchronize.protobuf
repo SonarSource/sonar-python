@@ -1,209 +1,116 @@
 
-multiprocessing.synchronizeœ
-Barrier#multiprocessing.synchronize.Barrier"threading.Barrier*ã
-__init__,multiprocessing.synchronize.Barrier.__init__"
-None*T
-selfJ
-#multiprocessing.synchronize.Barrier"#multiprocessing.synchronize.Barrier*)
-parties
-builtins.int"builtins.int*ï
-actionÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext˜
-	Condition%multiprocessing.synchronize.Condition"builtins.object*—
-__init__.multiprocessing.synchronize.Condition.__init__"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*€
-lockŒ
-`Union[TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]],None]›
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"%multiprocessing.synchronize._LockLike
-None *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*¡
-notify,multiprocessing.synchronize.Condition.notify"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*%
-n
-builtins.int"builtins.int *¢
+multiprocessing.synchronizeq
+Barrier"threading.Barrier*S
+__init__*
 
-notify_all0multiprocessing.synchronize.Condition.notify_all"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*á
-wait*multiprocessing.synchronize.Condition.wait"
-builtins.bool"builtins.bool*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *Î
-wait_for.multiprocessing.synchronize.Condition.wait_for"
-builtins.bool"builtins.bool*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*Z
-	predicateK
-CallableType[builtins.function]&
-builtins.function"builtins.function*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *Æ
-	__enter__/multiprocessing.synchronize.Condition.__enter__"
-builtins.bool"builtins.bool*PN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*Ô
-__exit__.multiprocessing.synchronize.Condition.__exit__"
-None*PN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*∫
-acquire-multiprocessing.synchronize.Condition.acquire"
-builtins.bool"builtins.bool*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *ú
-release-multiprocessing.synchronize.Condition.release"
-None*X
-selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition‰
-Event!multiprocessing.synchronize.Event"builtins.object*Á
-__init__*multiprocessing.synchronize.Event.__init__"
-None*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*§
-is_set(multiprocessing.synchronize.Event.is_set"
-builtins.bool"builtins.bool*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*à
-set%multiprocessing.synchronize.Event.set"
-None*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*å
-clear'multiprocessing.synchronize.Event.clear"
-None*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*˚
-wait&multiprocessing.synchronize.Event.wait"
-builtins.bool"builtins.bool*P
-selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None ‘
-SemLock#multiprocessing.synchronize.SemLock"builtins.object*´
-__init__,multiprocessing.synchronize.SemLock.__init__"
-None*T
-selfJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*&
-kind
-builtins.int"builtins.int*'
-value
-builtins.int"builtins.int**
-maxvalue
-builtins.int"builtins.int*ì
-ctxâ
-/Union[multiprocessing.context.BaseContext,None]J
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext
-None*®
-	__enter__-multiprocessing.synchronize.SemLock.__enter__"
-builtins.bool"builtins.bool*LJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*È
-__exit__,multiprocessing.synchronize.SemLock.__exit__"
-None*LJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*¥
-acquire+multiprocessing.synchronize.SemLock.acquire"
-builtins.bool"builtins.bool*T
-selfJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *ñ
-release+multiprocessing.synchronize.SemLock.release"
-None*T
-selfJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock¥
-Lock multiprocessing.synchronize.Lock"#multiprocessing.synchronize.SemLock*‰
-__init__)multiprocessing.synchronize.Lock.__init__"
-None*N
-selfD
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.Lock*S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextπ
-RLock!multiprocessing.synchronize.RLock"#multiprocessing.synchronize.SemLock*Á
-__init__*multiprocessing.synchronize.RLock.__init__"
-None*P
-selfF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock*S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextØ
-	Semaphore%multiprocessing.synchronize.Semaphore"#multiprocessing.synchronize.SemLock*û
-__init__.multiprocessing.synchronize.Semaphore.__init__"
-None*X
-selfN
-%multiprocessing.synchronize.Semaphore"%multiprocessing.synchronize.Semaphore*)
-value
-builtins.int"builtins.int *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*¥
-	get_value/multiprocessing.synchronize.Semaphore.get_value"
-builtins.int"builtins.int*X
-selfN
-%multiprocessing.synchronize.Semaphore"%multiprocessing.synchronize.Semaphoreù
-BoundedSemaphore,multiprocessing.synchronize.BoundedSemaphore"%multiprocessing.synchronize.Semaphore*≥
-__init__5multiprocessing.synchronize.BoundedSemaphore.__init__"
-None*f
-self\
-,multiprocessing.synchronize.BoundedSemaphore",multiprocessing.synchronize.BoundedSemaphore*)
-value
-builtins.int"builtins.int *S
-ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*ó
-__annotations__+multiprocessing.synchronize.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*z
-__all__#multiprocessing.synchronize.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*
+parties(*
+action (*
+timeout (*	
+ctx(	Ù
+	Condition"builtins.object*1
+__init__*
+
+self(
+*
+lock (*	
+ctx(	*!
+notify*
+
+self(
+*	
+n (*
+
+notify_all*
+
+self(
+*%
+wait*
+
+self(
+*
+timeout (*:
+wait_for*
+
+self(
+*
+	predicate(*
+timeout (*
+	__enter__*(
+*
+__exit__*(
+*(*(*(*7
+acquire*
+
+self(
+*
+block (*
+timeout (*
+release*
+
+self(
+®
+Event"builtins.object*#
+__init__*
+
+self(*	
+ctx(	*
+is_set*
+
+self(*
+set*
+
+self(*
+clear*
+
+self(*%
+wait*
+
+self(*
+timeout (Î
+SemLock"builtins.object*L
+__init__*
+
+self(*
+
+kind(*
+value(*
+maxvalue(*	
+ctx(*
+	__enter__*(*
+__exit__*(*(*(*(*7
+acquire*
+
+self(*
+block (*
+timeout (*
+release*
+
+self(P
+Lock"#multiprocessing.synchronize.SemLock*#
+__init__*
+
+self(*	
+ctx(	Q
+RLock"#multiprocessing.synchronize.SemLock*#
+__init__*
+
+self(*	
+ctx(	
+	Semaphore"#multiprocessing.synchronize.SemLock*2
+__init__*
+
+self(*
+value (*	
+ctx(	*
+	get_value*
+
+self(m
+BoundedSemaphore"%multiprocessing.synchronize.Semaphore*2
+__init__*
+
+self(*
+value (*	
+ctx(	*
+__annotations__0*
+__all__022%"#multiprocessing.synchronize.Barrier2"builtins.int2"builtins.function22222"builtins.float222%"#multiprocessing.context.BaseContext2'"%multiprocessing.synchronize.Condition2"" multiprocessing.synchronize.Lock2#"!multiprocessing.synchronize.RLock222,"%multiprocessing.synchronize._LockLike2222"builtins.bool2"builtins.BaseException2"type222222"types.TracebackType222#"!multiprocessing.synchronize.Event2%"#multiprocessing.synchronize.SemLock22	2'"%multiprocessing.synchronize.Semaphore2.",multiprocessing.synchronize.BoundedSemaphore2"builtins.str22"builtins.dict22"builtins.list2

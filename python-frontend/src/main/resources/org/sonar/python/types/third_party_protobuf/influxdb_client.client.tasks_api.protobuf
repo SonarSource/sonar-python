@@ -1,197 +1,139 @@
 
- influxdb_client.client.tasks_apiØ=
-TasksApi)influxdb_client.client.tasks_api.TasksApi"builtins.object*·
-__init__2influxdb_client.client.tasks_api.TasksApi.__init__"
-None*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*
-influxdb_client
-Anyz310z311z312z313z314*£
-find_task_by_id9influxdb_client.client.tasks_api.TasksApi.find_task_by_id"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*
-task_id
-Anyz310z311z312z313z314*q
+ influxdb_client.client.tasks_api€
+TasksApi"builtins.object*/
+__init__*
 
-find_tasks4influxdb_client.client.tasks_api.TasksApi.find_tasks*
+self(*
+influxdb_client(*.
+find_task_by_id*
+
+self(*
+task_id(*"
+
+find_tasks*
 self*
 
-kwargsz310z311z312z313z314*à
-create_task5influxdb_client.client.tasks_api.TasksApi.create_task"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*ç
-taskÄ
-,Union[influxdb_client.domain.task.Task,None]D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task
-None *
-task_create_request‘
-HUnion[influxdb_client.domain.task_create_request.TaskCreateRequest,None]|
-<influxdb_client.domain.task_create_request.TaskCreateRequest"<influxdb_client.domain.task_create_request.TaskCreateRequest
-None z310z311z312z313z314*Ê
-create_task_every;influxdb_client.client.tasks_api.TasksApi.create_task_every"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*
-name
-Any*
-flux
-Any*
-every
-Any*
-organization
-Anyz310z311z312z313z314*±
-create_task_cron:influxdb_client.client.tasks_api.TasksApi.create_task_cron"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*&
-name
-builtins.str"builtins.str*&
-flux
-builtins.str"builtins.str*&
-cron
-builtins.str"builtins.str*(
-org_id
-builtins.str"builtins.strz310z311z312z313z314*Û
-delete_task5influxdb_client.client.tasks_api.TasksApi.delete_task"
-Any*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.strz310z311z312z313z314*’
-update_task5influxdb_client.client.tasks_api.TasksApi.update_task"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*N
-taskD
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Taskz310z311z312z313z314*√
-update_task_request=influxdb_client.client.tasks_api.TasksApi.update_task_request"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*
-task_id
-Any*ï
-task_update_request|
-<influxdb_client.domain.task_update_request.TaskUpdateRequest"<influxdb_client.domain.task_update_request.TaskUpdateRequestz310z311z312z313z314*”
+kwargs*F
+create_task*
 
-clone_task4influxdb_client.client.tasks_api.TasksApi.clone_task"D
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Task*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*N
-taskD
- influxdb_client.domain.task.Task" influxdb_client.domain.task.Taskz310z311z312z313z314*r
+self(*
+task (*
+task_create_request (*Z
+create_task_every*
 
-get_labels4influxdb_client.client.tasks_api.TasksApi.get_labels*
+self(*
+
+name(*
+
+flux(*
+every(*
+organization(*R
+create_task_cron*
+
+self(*
+
+name(*
+
+flux(*
+
+cron(*
+org_id(**
+delete_task*
+
+self(*
+task_id(*'
+update_task*
+
+self(*
+
+task(*M
+update_task_request*
+
+self(*
+task_id(*
+task_update_request(	*&
+
+clone_task*
+
+self(*
+
+task(*#
+
+get_labels*
 self*
-task_idz310z311z312z313z314*˛
-	add_label3influxdb_client.client.tasks_api.TasksApi.add_label"j
-3influxdb_client.domain.label_response.LabelResponse"3influxdb_client.domain.label_response.LabelResponse*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi**
-label_id
-builtins.str"builtins.str*)
-task_id
-builtins.str"builtins.strz310z311z312z313z314*°
-delete_label6influxdb_client.client.tasks_api.TasksApi.delete_label"
-Any*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi**
-label_id
-builtins.str"builtins.str*)
-task_id
-builtins.str"builtins.strz310z311z312z313z314*Û
-get_members5influxdb_client.client.tasks_api.TasksApi.get_members"
-Any*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.strz310z311z312z313z314*Å
+task_id*8
+	add_label
+*
 
-add_member4influxdb_client.client.tasks_api.TasksApi.add_member*
+self(*
+label_id(*
+task_id(*;
+delete_label*
+
+self(*
+label_id(*
+task_id(**
+get_members*
+
+self(*
+task_id(*2
+
+add_member*
 self*
 	member_id*
-task_idz310z311z312z313z314*á
-delete_member7influxdb_client.client.tasks_api.TasksApi.delete_member*
+task_id*5
+delete_member*
 self*
 	member_id*
-task_idz310z311z312z313z314*r
+task_id*#
 
-get_owners4influxdb_client.client.tasks_api.TasksApi.get_owners*
+get_owners*
 self*
-task_idz310z311z312z313z314*~
-	add_owner3influxdb_client.client.tasks_api.TasksApi.add_owner*
+task_id*0
+	add_owner*
 self*
 owner_id*
-task_idz310z311z312z313z314*Ñ
-delete_owner6influxdb_client.client.tasks_api.TasksApi.delete_owner*
+task_id*3
+delete_owner*
 self*
 owner_id*
-task_idz310z311z312z313z314*Á
-get_runs2influxdb_client.client.tasks_api.TasksApi.get_runs"Ä
--builtins.list[influxdb_client.domain.run.Run]@
-influxdb_client.domain.run.Run"influxdb_client.domain.run.Run"builtins.list*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*
-task_id
-Any*
-kwargs
-Anyz310z311z312z313z314*Œ
-get_run1influxdb_client.client.tasks_api.TasksApi.get_run"@
-influxdb_client.domain.run.Run"influxdb_client.domain.run.Run*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.str*(
-run_id
-builtins.str"builtins.strz310z311z312z313z314*∫
-get_run_logs6influxdb_client.client.tasks_api.TasksApi.get_run_logs"°
-8builtins.list[influxdb_client.domain.log_event.LogEvent]V
-)influxdb_client.domain.log_event.LogEvent")influxdb_client.domain.log_event.LogEvent"builtins.list*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.str*(
-run_id
-builtins.str"builtins.strz310z311z312z313z314*ﬂ
-run_manually6influxdb_client.client.tasks_api.TasksApi.run_manually"
-Any*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.str*h
-scheduled_forS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None z310z311z312z313z314*ô
-	retry_run3influxdb_client.client.tasks_api.TasksApi.retry_run"
-Any*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.str*(
-run_id
-builtins.str"builtins.strz310z311z312z313z314*õ
+task_id*5
+get_runs*
 
-cancel_run4influxdb_client.client.tasks_api.TasksApi.cancel_run"
-Any*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.str*(
-run_id
-builtins.str"builtins.strz310z311z312z313z314*à
-get_logs2influxdb_client.client.tasks_api.TasksApi.get_logs"°
-8builtins.list[influxdb_client.domain.log_event.LogEvent]V
-)influxdb_client.domain.log_event.LogEvent")influxdb_client.domain.log_event.LogEvent"builtins.list*`
-selfV
-)influxdb_client.client.tasks_api.TasksApi")influxdb_client.client.tasks_api.TasksApi*)
-task_id
-builtins.str"builtins.strz310z311z312z313z314*á
-find_tasks_by_user<influxdb_client.client.tasks_api.TasksApi.find_tasks_by_user*
+self(*
+task_id(*
+kwargs(*4
+get_run*
+
+self(*
+task_id(*
+run_id(*9
+get_run_logs*
+
+self(*
+task_id(*
+run_id(*B
+run_manually*
+
+self(*
+task_id(*
+scheduled_for (*6
+	retry_run*
+
+self(*
+task_id(*
+run_id(*7
+
+cancel_run*
+
+self(*
+task_id(*
+run_id(*'
+get_logs*
+
+self(*
+task_id(*0
+find_tasks_by_user*
 self*
-task_user_idz310z311z312z313z314j310j311j312j313j314*µ
-__annotations__0influxdb_client.client.tasks_api.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+task_user_id*
+__annotations__022+")influxdb_client.client.tasks_api.TasksApi22"" influxdb_client.domain.task.Task222>"<influxdb_client.domain.task_create_request.TaskCreateRequest222"builtins.str2>"<influxdb_client.domain.task_update_request.TaskUpdateRequest25"3influxdb_client.domain.label_response.LabelResponse2 "influxdb_client.domain.run.Run2"builtins.list22+")influxdb_client.domain.log_event.LogEvent2"builtins.list22"datetime.datetime222"builtins.dict2

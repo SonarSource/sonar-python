@@ -1,340 +1,149 @@
 
-netaddr.eui¬
-BaseIdentifiernetaddr.eui.BaseIdentifier"builtins.object*–
-__init__#netaddr.eui.BaseIdentifier.__init__"
-None*B
-self8
-netaddr.eui.BaseIdentifier"netaddr.eui.BaseIdentifierz310z311z312z313z314* 
-__int__"netaddr.eui.BaseIdentifier.__int__"
-builtins.int"builtins.int*:8
-netaddr.eui.BaseIdentifier"netaddr.eui.BaseIdentifierz310z311z312z313z314*¢
-__long__#netaddr.eui.BaseIdentifier.__long__"
-builtins.int"builtins.int*:8
-netaddr.eui.BaseIdentifier"netaddr.eui.BaseIdentifierz310z311z312z313z314* 
-__oct__"netaddr.eui.BaseIdentifier.__oct__"
-builtins.str"builtins.str*:8
-netaddr.eui.BaseIdentifier"netaddr.eui.BaseIdentifierz310z311z312z313z314* 
-__hex__"netaddr.eui.BaseIdentifier.__hex__"
-builtins.str"builtins.str*:8
-netaddr.eui.BaseIdentifier"netaddr.eui.BaseIdentifierz310z311z312z313z314*¬
-	__index__$netaddr.eui.BaseIdentifier.__index__"
-builtins.int"builtins.int*B
-self8
-netaddr.eui.BaseIdentifier"netaddr.eui.BaseIdentifierz310z311z312z313z314j310j311j312j313j314Š
+netaddr.eui›
+BaseIdentifier"builtins.object*
+__init__*
 
-OUInetaddr.eui.OUI"netaddr.eui.BaseIdentifier*à
-__init__netaddr.eui.OUI.__init__"
-None*,
-self"
-netaddr.eui.OUI"netaddr.eui.OUI*i
-oui`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.intz310z311z312z313z314*¥
-__eq__netaddr.eui.OUI.__eq__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.OUI"netaddr.eui.OUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*¥
-__ne__netaddr.eui.OUI.__ne__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.OUI"netaddr.eui.OUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*¢
-	reg_countnetaddr.eui.OUI.reg_count"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.OUI"netaddr.eui.OUI0:builtins.property`z310z311z312z313z314*Ø
-registrationnetaddr.eui.OUI.registration"8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*,
-self"
-netaddr.eui.OUI"netaddr.eui.OUI*)
-index
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314r‰
-recordsnetaddr.eui.OUI.recordsË
-:builtins.list[builtins.dict[builtins.str,builtins.object]]~
-+builtins.dict[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"builtins.dict"builtins.list*310*311*312*313*314³
-IABnetaddr.eui.IAB"netaddr.eui.BaseIdentifier*ê
-split_iab_macnetaddr.eui.IAB.split_iab_mac"`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*L
-clsC
-Type[netaddr.eui.IAB]"
-netaddr.eui.IAB"netaddr.eui.IAB"type*)
-eui_int
-builtins.int"builtins.int*,
-strict
-builtins.bool"builtins.bool 0:builtins.classmethodpz310z311z312z313z314*
-__init__netaddr.eui.IAB.__init__"
-None*,
-self"
-netaddr.eui.IAB"netaddr.eui.IAB*i
-iab`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*,
-strict
-builtins.bool"builtins.bool z310z311z312z313z314*¥
-__eq__netaddr.eui.IAB.__eq__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.IAB"netaddr.eui.IAB*$"
-builtins.object"builtins.objectz310z311z312z313z314*¥
-__ne__netaddr.eui.IAB.__ne__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.IAB"netaddr.eui.IAB*$"
-builtins.object"builtins.objectz310z311z312z313z314*­
-registrationnetaddr.eui.IAB.registration"8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*,
-self"
-netaddr.eui.IAB"netaddr.eui.IABz310z311z312z313z314j310j311j312j313j314r«
-IAB_EUI_VALUESnetaddr.eui.IAB.IAB_EUI_VALUES`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*310*311*312*313*314r¹
-recordnetaddr.eui.IAB.record~
-+builtins.dict[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"builtins.dict*310*311*312*313*314ìG
-EUInetaddr.eui.EUI"netaddr.eui.BaseIdentifier*Ú
-__init__netaddr.eui.EUI.__init__"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*Ÿ
-addr”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.str*S
-versionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ë
-dialectÛ
-ZUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base],None]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314*œ
-ouinetaddr.eui.EUI.oui""
-netaddr.eui.OUI"netaddr.eui.OUI*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*”
-einetaddr.eui.EUI.ei"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*‡
-is_iabnetaddr.eui.EUI.is_iab"
-builtins.bool"builtins.bool*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUIz310z311z312z313z314*Ç
-iabnetaddr.eui.EUI.iab"M
-Union[netaddr.eui.IAB,None]"
-netaddr.eui.IAB"netaddr.eui.IAB
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*«
-versionnetaddr.eui.EUI.version"¨
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*³
-__setitem__netaddr.eui.EUI.__setitem__"
-None*$"
-netaddr.eui.EUI"netaddr.eui.EUI*
-builtins.int"builtins.int*
-builtins.int"builtins.intz310z311z312z313z314*‰
-__hash__netaddr.eui.EUI.__hash__"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUIz310z311z312z313z314*¥
-__eq__netaddr.eui.EUI.__eq__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*¥
-__ne__netaddr.eui.EUI.__ne__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*™
-__lt__netaddr.eui.EUI.__lt__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*™
-__le__netaddr.eui.EUI.__le__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*™
-__gt__netaddr.eui.EUI.__gt__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*™
-__ge__netaddr.eui.EUI.__ge__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*×
-bitsnetaddr.eui.EUI.bits"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*T
-word_sepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314* 
-packednetaddr.eui.EUI.packed" 
-builtins.bytes"builtins.bytes*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*Ê
-wordsnetaddr.eui.EUI.words"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*–
-binnetaddr.eui.EUI.bin"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*ã
-eui64netaddr.eui.EUI.eui64"O
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(*Y
-selfO
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(z310z311z312z313z314*õ
-modified_eui64netaddr.eui.EUI.modified_eui64"O
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(*Y
-selfO
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(z310z311z312z313z314*è
-ipv6netaddr.eui.EUI.ipv6",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*ã
-prefixÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndexz310z311*Ì
-ipv6netaddr.eui.EUI.ipv6",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*Â
-prefixµ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndexz312z313z314*§
-ipv6_link_localnetaddr.eui.EUI.ipv6_link_local",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUIz310z311z312z313z314*´
-infonetaddr.eui.EUI.info"8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*ó
-formatnetaddr.eui.EUI.format"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*ë
-dialectÛ
-ZUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base],None]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z3142÷
-valuenetaddr.eui.EUI.valueƒ
-valuenetaddr.eui.EUI.value"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.propertyX`Æ
-valuenetaddr.eui.EUI.value"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*â
-valueÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex0:.setter"310"3112Û
-valuenetaddr.eui.EUI.valueƒ
-valuenetaddr.eui.EUI.value"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.propertyX`¥
-valuenetaddr.eui.EUI.value"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*Á
-valueµ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndex0:.setter"312"313"3142È
-dialectnetaddr.eui.EUI.dialect¸
-dialectnetaddr.eui.EUI.dialect"Ì
-UUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base]]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.propertyX`Ï
-dialectnetaddr.eui.EUI.dialect"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*ç
-valueÛ
-ZUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base],None]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None0:.setter"310"311"312"313"3142’
-__getitem__netaddr.eui.EUI.__getitem__£
-__getitem__netaddr.eui.EUI.__getitem__"
-builtins.int"builtins.int*$"
-netaddr.eui.EUI"netaddr.eui.EUI*
-builtins.int"builtins.int0:typing.overloadXı
-__getitem__netaddr.eui.EUI.__getitem__"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*$"
-netaddr.eui.EUI"netaddr.eui.EUI*JH
-builtins.slice[Any,Any,Any]
-Any
-Any
-Any"builtins.slice0:typing.overloadX¦
-__getitem__netaddr.eui.EUI.__getitem__"
-/Union[builtins.int,builtins.list[builtins.int]]
-builtins.int"builtins.intJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*$"
-netaddr.eui.EUI"netaddr.eui.EUI*›
-/Union[builtins.int,builtins.slice[Any,Any,Any]]
-builtins.int"builtins.intH
-builtins.slice[Any,Any,Any]
-Any
-Any
-Any"builtins.slice0:typing.overloadX"310"311"312"313"314j310j311j312j313j314*…
-__path__netaddr.eui.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314* 
-__annotations__netaddr.eui.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+__int__*(*
+__long__*(*
+__oct__*(*
+__hex__*(*
+	__index__*
+
+self(Ú
+OUI"netaddr.eui.BaseIdentifier*#
+__init__*
+
+self(*	
+oui(*
+__eq__*(*(*
+__ne__*(*(*0
+	reg_count*
+
+self(0:builtins.property`*+
+registration	*
+
+self(*
+index (r
+records0“
+IAB"netaddr.eui.BaseIdentifier*U
+split_iab_mac*	
+cls(*
+eui_int(*
+strict (0:builtins.classmethodp*3
+__init__*
+
+self(*	
+iab(*
+strict (*
+__eq__*(*(*
+__ne__*(*(*
+registration	*
+
+self(r
+IAB_EUI_VALUES0r
+
+record0
+”
+EUI"netaddr.eui.BaseIdentifier*F
+__init__*
+
+self(*
+
+addr(*
+version (*
+dialect (**
+oui*
+
+self(0:builtins.property`*)
+ei*
+
+self(0:builtins.property`*
+is_iab*
+
+self(**
+iab*
+
+self(0:builtins.property`*.
+version*
+
+self(0:builtins.property`*
+__setitem__*(*(*(*
+__hash__*
+
+self(*
+__eq__*(*(*
+__ne__*(*(*
+__lt__*(*(*
+__le__*(*(*
+__gt__*(*(*
+__ge__*(*(*&
+bits*
+
+self(*
+word_sep (*-
+packed*
+
+self(0:builtins.property`*,
+words*
+
+self(0:builtins.property`**
+bin*
+
+self(0:builtins.property`*
+eui64*
+
+self(*
+modified_eui64*
+
+self(*,
+ipv6*
+
+self(*
+prefix(!z310z311*1
+ipv6*
+
+self(*
+prefix(#z312z313z314*
+ipv6_link_local*
+
+self(*+
+info	*
+
+self(0:builtins.property`*'
+format*
+
+self(*
+dialect (2p
+value.
+value*
+
+self(0:builtins.propertyX`-
+value*
+
+self(*
+value(!0:.setter"310"3112u
+value.
+value*
+
+self(0:builtins.propertyX`-
+value*
+
+self(*
+value(#0:.setter"312"313"3142l
+dialect0
+dialect$*
+
+self(0:builtins.propertyX`/
+dialect*
+
+self(*
+value(0:.setter2—
+__getitem__,
+__getitem__*(*(0:typing.overloadX,
+__getitem__%*(*('0:typing.overloadX,
+__getitem__(*(*()0:typing.overloadX*
+__path__0**
+__annotations__0+22"netaddr.eui.BaseIdentifier2"builtins.int2"builtins.str2"netaddr.eui.OUI222"builtins.bool2"builtins.object2"netaddr.core.DictDotLookup2"builtins.dict22"builtins.list2
+222"netaddr.eui.IAB2"type22"netaddr.eui.EUI22222"" netaddr.strategy.eui48.mac_eui482"type22#"!netaddr.strategy.eui64.eui64_base2"type222222	222222"builtins.bytes2"builtins.tuple22.
+netaddr.eui.EUI.Self"netaddr.eui.EUI(22"netaddr.ip.IPAddress2"typing.SupportsInt2!"typing_extensions.SupportsIndex22 2"typing.SupportsIndex22"222"builtins.list222"builtins.slice2&&&22%22'2"builtins.list22"builtins.dict2&

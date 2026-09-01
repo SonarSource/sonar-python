@@ -1,428 +1,271 @@
 
-jose.backends
-DIRKeyjose.backends.base.DIRKey"jose.backends.base.Key*∂
-__init__"jose.backends.base.DIRKey.__init__"
-None*@
-self6
-jose.backends.base.DIRKey"jose.backends.base.DIRKey*t
-key_dataf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*+
-	algorithm
-builtins.str"builtins.strz310z311z312z313z314*‡
-to_dict!jose.backends.base.DIRKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*@
-self6
-jose.backends.base.DIRKey"jose.backends.base.DIRKeyz310z311z312z313z314j310j311j312j313j314ó
-CryptographyAESKey5jose.backends.cryptography_backend.CryptographyAESKey"jose.backends.base.Key*ë
-__init__>jose.backends.cryptography_backend.CryptographyAESKey.__init__"
-None*x
-selfn
-5jose.backends.cryptography_backend.CryptographyAESKey"5jose.backends.cryptography_backend.CryptographyAESKey*
-key
-Any*
-	algorithm
-Anyz310z311z312z313z314*k
-to_dict=jose.backends.cryptography_backend.CryptographyAESKey.to_dict*
-selfz310z311z312z313z314*Â
-encrypt=jose.backends.cryptography_backend.CryptographyAESKey.encrypt"
-Any*x
-selfn
-5jose.backends.cryptography_backend.CryptographyAESKey"5jose.backends.cryptography_backend.CryptographyAESKey*
+jose.backendsè
+DIRKeyjose.backends.base.DIRKey"jose.backends.base.Key*9
+__init__*
 
-plain_text
-Any*f
-aad[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*µ
-decrypt=jose.backends.cryptography_backend.CryptographyAESKey.decrypt"
-Any*x
-selfn
-5jose.backends.cryptography_backend.CryptographyAESKey"5jose.backends.cryptography_backend.CryptographyAESKey*
-cipher_text
-Any*e
-iv[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *f
-aad[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *f
-tag[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*{
-wrap_key>jose.backends.cryptography_backend.CryptographyAESKey.wrap_key*
+self(*
+key_data(*
+	algorithm(*
+to_dict*
+
+self(‚
+CryptographyAESKey5jose.backends.cryptography_backend.CryptographyAESKey"jose.backends.base.Key*4
+__init__*
+
+self(*	
+key(*
+	algorithm(*
+to_dict*
+self*6
+encrypt*
+
+self(*
+
+plain_text(*
+aad (
+*P
+decrypt*
+
+self(*
+cipher_text(*
+
+iv (
+*
+aad (
+*
+tag (
+*"
+wrap_key*
 self*
-key_dataz310z311z312z313z314*Ç
+key_data*'
 
-unwrap_key@jose.backends.cryptography_backend.CryptographyAESKey.unwrap_key*
+unwrap_key*
 self*
-wrapped_keyz310z311z312z313z314j310j311j312j313j314rj
-KEY_128=jose.backends.cryptography_backend.CryptographyAESKey.KEY_128
-Any*310*311*312*313*314rj
-KEY_192=jose.backends.cryptography_backend.CryptographyAESKey.KEY_192
-Any*310*311*312*313*314rj
-KEY_256=jose.backends.cryptography_backend.CryptographyAESKey.KEY_256
-Any*310*311*312*313*314rj
-KEY_384=jose.backends.cryptography_backend.CryptographyAESKey.KEY_384
-Any*310*311*312*313*314rj
-KEY_512=jose.backends.cryptography_backend.CryptographyAESKey.KEY_512
-Any*310*311*312*313*314rr
-AES_KW_ALGSAjose.backends.cryptography_backend.CryptographyAESKey.AES_KW_ALGS
-Any*310*311*312*313*314rf
-MODES;jose.backends.cryptography_backend.CryptographyAESKey.MODES
-Any*310*311*312*313*314ˆ
-CryptographyECKey4jose.backends.cryptography_backend.CryptographyECKey"jose.backends.base.Key*≥
-__init__=jose.backends.cryptography_backend.CryptographyECKey.__init__"
-None*v
-selfl
-4jose.backends.cryptography_backend.CryptographyECKey"4jose.backends.cryptography_backend.CryptographyECKey*
-key
-Any*
-	algorithm
-Any*#
-cryptography_backend
-Any z310z311z312z313z314*m
-sign9jose.backends.cryptography_backend.CryptographyECKey.sign*
+wrapped_keyr
+KEY_1280r
+KEY_1920r
+KEY_2560r
+KEY_3840r
+KEY_5120r
+AES_KW_ALGS0r	
+MODES0¨
+CryptographyECKey4jose.backends.cryptography_backend.CryptographyECKey"jose.backends.base.Key*R
+__init__*
+
+self(*	
+key(*
+	algorithm(*
+cryptography_backend (*
+sign*
 self*
-msgz310z311z312z313z314*z
-verify;jose.backends.cryptography_backend.CryptographyECKey.verify*
+msg*$
+verify*
 self*
 msg*
-sigz310z311z312z313z314*n
-	is_public>jose.backends.cryptography_backend.CryptographyECKey.is_public*
-selfz310z311z312z313z314*p
+sig*
+	is_public*
+self*
 
-public_key?jose.backends.cryptography_backend.CryptographyECKey.public_key*
-selfz310z311z312z313z314*h
-to_pem;jose.backends.cryptography_backend.CryptographyECKey.to_pem*
-selfz310z311z312z313z314*j
-to_dict<jose.backends.cryptography_backend.CryptographyECKey.to_dict*
-selfz310z311z312z313z314j310j311j312j313j314rg
-SHA256;jose.backends.cryptography_backend.CryptographyECKey.SHA256
-Any*310*311*312*313*314rg
-SHA384;jose.backends.cryptography_backend.CryptographyECKey.SHA384
-Any*310*311*312*313*314rg
-SHA512;jose.backends.cryptography_backend.CryptographyECKey.SHA512
-Any*310*311*312*313*314rk
-hash_alg=jose.backends.cryptography_backend.CryptographyECKey.hash_alg
-Any*310*311*312*313*314rÉ
-cryptography_backendIjose.backends.cryptography_backend.CryptographyECKey.cryptography_backend
-Any*310*311*312*313*314rs
-prepared_keyAjose.backends.cryptography_backend.CryptographyECKey.prepared_key
-Any*310*311*312*313*314÷
-CryptographyHMACKey6jose.backends.cryptography_backend.CryptographyHMACKey"jose.backends.base.Key*î
-__init__?jose.backends.cryptography_backend.CryptographyHMACKey.__init__"
-None*z
-selfp
-6jose.backends.cryptography_backend.CryptographyHMACKey"6jose.backends.cryptography_backend.CryptographyHMACKey*
-key
-Any*
-	algorithm
-Anyz310z311z312z313z314*l
-to_dict>jose.backends.cryptography_backend.CryptographyHMACKey.to_dict*
-selfz310z311z312z313z314*o
-sign;jose.backends.cryptography_backend.CryptographyHMACKey.sign*
+public_key*
+self*
+to_pem*
+self*
+to_dict*
+selfr
+
+SHA2560r
+
+SHA3840r
+
+SHA5120r
+hash_alg0r
+cryptography_backend0r
+prepared_key0ê
+CryptographyHMACKey6jose.backends.cryptography_backend.CryptographyHMACKey"jose.backends.base.Key*4
+__init__*
+
+self(*	
+key(*
+	algorithm(*
+to_dict*
+self*
+sign*
 self*
-msgz310z311z312z313z314*|
-verify=jose.backends.cryptography_backend.CryptographyHMACKey.verify*
+msg*$
+verify*
 self*
 msg*
-sigz310z311z312z313z314j310j311j312j313j314rk
-ALG_MAP>jose.backends.cryptography_backend.CryptographyHMACKey.ALG_MAP
-Any*310*311*312*313*314ru
-prepared_keyCjose.backends.cryptography_backend.CryptographyHMACKey.prepared_key
-Any*310*311*312*313*314Ì
-CryptographyRSAKey5jose.backends.cryptography_backend.CryptographyRSAKey"jose.backends.base.Key*∂
-__init__>jose.backends.cryptography_backend.CryptographyRSAKey.__init__"
-None*x
-selfn
-5jose.backends.cryptography_backend.CryptographyRSAKey"5jose.backends.cryptography_backend.CryptographyRSAKey*
-key
-Any*
-	algorithm
-Any*#
-cryptography_backend
-Any z310z311z312z313z314*n
-sign:jose.backends.cryptography_backend.CryptographyRSAKey.sign*
+sigr
+ALG_MAP0r
+prepared_key0Ã
+CryptographyRSAKey5jose.backends.cryptography_backend.CryptographyRSAKey"jose.backends.base.Key*R
+__init__*
+
+self(*	
+key(*
+	algorithm(*
+cryptography_backend (*
+sign*
 self*
-msgz310z311z312z313z314*{
-verify<jose.backends.cryptography_backend.CryptographyRSAKey.verify*
+msg*$
+verify*
 self*
 msg*
-sigz310z311z312z313z314*o
-	is_public?jose.backends.cryptography_backend.CryptographyRSAKey.is_public*
-selfz310z311z312z313z314*q
+sig*
+	is_public*
+self*
 
-public_key@jose.backends.cryptography_backend.CryptographyRSAKey.public_key*
-selfz310z311z312z313z314*í
-to_pem<jose.backends.cryptography_backend.CryptographyRSAKey.to_pem"
-Any*x
-selfn
-5jose.backends.cryptography_backend.CryptographyRSAKey"5jose.backends.cryptography_backend.CryptographyRSAKey*.
+public_key*
+self**
+to_pem*
 
-pem_format
-builtins.str"builtins.str z310z311z312z313z314*k
-to_dict=jose.backends.cryptography_backend.CryptographyRSAKey.to_dict*
-selfz310z311z312z313z314*{
-wrap_key>jose.backends.cryptography_backend.CryptographyRSAKey.wrap_key*
+self(*
+
+pem_format (*
+to_dict*
+self*"
+wrap_key*
 self*
-key_dataz310z311z312z313z314*Ç
+key_data*'
 
-unwrap_key@jose.backends.cryptography_backend.CryptographyRSAKey.unwrap_key*
+unwrap_key*
 self*
-wrapped_keyz310z311z312z313z314j310j311j312j313j314rh
-SHA256<jose.backends.cryptography_backend.CryptographyRSAKey.SHA256
-Any*310*311*312*313*314rh
-SHA384<jose.backends.cryptography_backend.CryptographyRSAKey.SHA384
-Any*310*311*312*313*314rh
-SHA512<jose.backends.cryptography_backend.CryptographyRSAKey.SHA512
-Any*310*311*312*313*314rh
-RSA1_5<jose.backends.cryptography_backend.CryptographyRSAKey.RSA1_5
-Any*310*311*312*313*314rl
-RSA_OAEP>jose.backends.cryptography_backend.CryptographyRSAKey.RSA_OAEP
-Any*310*311*312*313*314rt
-RSA_OAEP_256Bjose.backends.cryptography_backend.CryptographyRSAKey.RSA_OAEP_256
-Any*310*311*312*313*314rl
-hash_alg>jose.backends.cryptography_backend.CryptographyRSAKey.hash_alg
-Any*310*311*312*313*314rj
-padding=jose.backends.cryptography_backend.CryptographyRSAKey.padding
-Any*310*311*312*313*314rÑ
-cryptography_backendJjose.backends.cryptography_backend.CryptographyRSAKey.cryptography_backend
-Any*310*311*312*313*314rt
-prepared_keyBjose.backends.cryptography_backend.CryptographyRSAKey.prepared_key
-Any*310*311*312*313*314›
+wrapped_keyr
 
-ECDSAECKey&jose.backends.ecdsa_backend.ECDSAECKey"jose.backends.base.Key*‰
-__init__/jose.backends.ecdsa_backend.ECDSAECKey.__init__"
-None*Z
-selfP
-&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKey*
-key
-Any*
-	algorithm
-Anyz310z311z312z313z314*_
-sign+jose.backends.ecdsa_backend.ECDSAECKey.sign*
+SHA2560r
+
+SHA3840r
+
+SHA5120r
+
+RSA1_50r
+RSA_OAEP0r
+RSA_OAEP_2560r
+hash_alg0r
+padding0r
+cryptography_backend0r
+prepared_key0ñ
+
+ECDSAECKey&jose.backends.ecdsa_backend.ECDSAECKey"jose.backends.base.Key*4
+__init__*
+
+self(*	
+key(*
+	algorithm(*
+sign*
 self*
-msgz310z311z312z313z314*l
-verify-jose.backends.ecdsa_backend.ECDSAECKey.verify*
+msg*$
+verify*
 self*
 msg*
-sigz310z311z312z313z314*“
-	is_public0jose.backends.ecdsa_backend.ECDSAECKey.is_public"
-builtins.bool"builtins.bool*Z
-selfP
-&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKeyz310z311z312z313z314*ø
+sig*
+	is_public*
 
-public_key1jose.backends.ecdsa_backend.ECDSAECKey.public_key"´
-+jose.backends.ecdsa_backend.ECDSAECKey.SelfP
-&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKey(*∂
-self´
-+jose.backends.ecdsa_backend.ECDSAECKey.SelfP
-&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKey(z310z311z312z313z314*Z
-to_pem-jose.backends.ecdsa_backend.ECDSAECKey.to_pem*
-selfz310z311z312z313z314*á
-to_dict.jose.backends.ecdsa_backend.ECDSAECKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*Z
-selfP
-&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKeyz310z311z312z313z314j310j311j312j313j314rù
-SHA256-jose.backends.ecdsa_backend.ECDSAECKey.SHA256K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rù
-SHA384-jose.backends.ecdsa_backend.ECDSAECKey.SHA384K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rù
-SHA512-jose.backends.ecdsa_backend.ECDSAECKey.SHA512K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r_
-	CURVE_MAP0jose.backends.ecdsa_backend.ECDSAECKey.CURVE_MAP
-Any*310*311*312*313*314rc
-CURVE_NAMES2jose.backends.ecdsa_backend.ECDSAECKey.CURVE_NAMES
-Any*310*311*312*313*314r]
-hash_alg/jose.backends.ecdsa_backend.ECDSAECKey.hash_alg
-Any*310*311*312*313*314rW
-curve,jose.backends.ecdsa_backend.ECDSAECKey.curve
-Any*310*311*312*313*314re
-prepared_key3jose.backends.ecdsa_backend.ECDSAECKey.prepared_key
-Any*310*311*312*313*314±
-NativeHMACKeyjose.backends.native.HMACKey"jose.backends.base.Key*µ
-__init__%jose.backends.native.HMACKey.__init__"
-None*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*È
-keyﬂ
-BUnion[builtins.str,builtins.bytes,builtins.dict[builtins.str,Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*+
-	algorithm
-builtins.str"builtins.strz310z311z312z313z314*ê
-sign!jose.backends.native.HMACKey.sign" 
-builtins.bytes"builtins.bytes*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*q
-msgh
-$Union[typing_extensions.Buffer,None]4
-typing_extensions.Buffer"typing_extensions.Buffer
-Nonez310z311*í
-sign!jose.backends.native.HMACKey.sign" 
-builtins.bytes"builtins.bytes*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*n
-msge
-#Union[_collections_abc.Buffer,None]2
-_collections_abc.Buffer"_collections_abc.Buffer
-Nonez312z313z314*É
-verify#jose.backends.native.HMACKey.verify"
-builtins.bool"builtins.bool*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*q
-msgh
-$Union[typing_extensions.Buffer,None]4
-typing_extensions.Buffer"typing_extensions.Buffer
-None*o
-sigf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz310z311*Ö
-verify#jose.backends.native.HMACKey.verify"
-builtins.bool"builtins.bool*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*n
-msge
-#Union[_collections_abc.Buffer,None]2
-_collections_abc.Buffer"_collections_abc.Buffer
-None*o
-sigf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz312z313z314*È
-to_dict$jose.backends.native.HMACKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKeyz310z311z312z313z314j310j311j312j313j314rÄ
-HASHES#jose.backends.native.HMACKey.HASHES∑
-;builtins.dict[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dict*310*311*312*313*314rt
-prepared_key)jose.backends.native.HMACKey.prepared_key 
-builtins.bytes"builtins.bytes*310*311*312*313*314ˇ
-BackendRSAKey jose.backends.rsa_backend.RSAKey"jose.backends.base.Key*“
-__init__)jose.backends.rsa_backend.RSAKey.__init__"
-None*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*
-key
-Any*
-	algorithm
-Anyz310z311z312z313z314*„
-sign%jose.backends.rsa_backend.RSAKey.sign" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*)
-msg 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ê
-verify'jose.backends.rsa_backend.RSAKey.verify"
-builtins.bool"builtins.bool*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*)
-msg 
-builtins.bytes"builtins.bytes*)
-sig 
-builtins.bytes"builtins.bytesz310z311z312z313z314*¿
-	is_public*jose.backends.rsa_backend.RSAKey.is_public"
-builtins.bool"builtins.bool*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKeyz310z311z312z313z314*â
+self(*
 
-public_key+jose.backends.rsa_backend.RSAKey.public_key"ì
-%jose.backends.rsa_backend.RSAKey.SelfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey(*û
-selfì
-%jose.backends.rsa_backend.RSAKey.SelfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey(z310z311z312z313z314*Ï
-to_pem'jose.backends.rsa_backend.RSAKey.to_pem" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*.
+public_key*
 
-pem_format
-builtins.str"builtins.str z310z311z312z313z314*ı
-to_dict(jose.backends.rsa_backend.RSAKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKeyz310z311z312z313z314*
-wrap_key)jose.backends.rsa_backend.RSAKey.wrap_key" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*.
-key_data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*˜
+self(*
+to_pem*
+self*
+to_dict*
 
-unwrap_key+jose.backends.rsa_backend.RSAKey.unwrap_key" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*1
-wrapped_key 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314rh
-SHA256'jose.backends.rsa_backend.RSAKey.SHA256
-builtins.str"builtins.str*310*311*312*313*314rh
-SHA384'jose.backends.rsa_backend.RSAKey.SHA384
-builtins.str"builtins.str*310*311*312*313*314rh
-SHA512'jose.backends.rsa_backend.RSAKey.SHA512
-builtins.str"builtins.str*310*311*312*313*314rl
-hash_alg)jose.backends.rsa_backend.RSAKey.hash_alg
-builtins.str"builtins.str*310*311*312*313*314*á
-__path__jose.backends.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*¢
-__annotations__jose.backends.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*«
-AESKeyjose.backends.AESKeyç
-GUnion[Type[jose.backends.cryptography_backend.CryptographyAESKey],None]µ
-;Type[jose.backends.cryptography_backend.CryptographyAESKey]n
-5jose.backends.cryptography_backend.CryptographyAESKey"5jose.backends.cryptography_backend.CryptographyAESKey"type
-None*310*311*312*313*314*Õ
-HMACKeyjose.backends.HMACKeyë
-fUnion[Type[jose.backends.cryptography_backend.CryptographyHMACKey],Type[jose.backends.native.HMACKey]]∏
-<Type[jose.backends.cryptography_backend.CryptographyHMACKey]p
-6jose.backends.cryptography_backend.CryptographyHMACKey"6jose.backends.cryptography_backend.CryptographyHMACKey"typej
-"Type[jose.backends.native.HMACKey]<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey"type*310*311*312*313*314*Ê
-RSAKeyjose.backends.RSAKey¨
-nUnion[Type[jose.backends.cryptography_backend.CryptographyRSAKey],Type[jose.backends.rsa_backend.RSAKey],None]µ
-;Type[jose.backends.cryptography_backend.CryptographyRSAKey]n
-5jose.backends.cryptography_backend.CryptographyRSAKey"5jose.backends.cryptography_backend.CryptographyRSAKey"typev
-&Type[jose.backends.rsa_backend.RSAKey]D
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey"type
-None*310*311*312*313*314*Í
-ECKeyjose.backends.ECKey≤
-nUnion[Type[jose.backends.cryptography_backend.CryptographyECKey],Type[jose.backends.ecdsa_backend.ECDSAECKey]]≤
-:Type[jose.backends.cryptography_backend.CryptographyECKey]l
-4jose.backends.cryptography_backend.CryptographyECKey"4jose.backends.cryptography_backend.CryptographyECKey"typeà
-,Type[jose.backends.ecdsa_backend.ECDSAECKey]P
-&jose.backends.ecdsa_backend.ECDSAECKey"&jose.backends.ecdsa_backend.ECDSAECKey"type*310*311*312*313*314*ò
-get_random_bytesjose.backends.get_random_bytesK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314
+self(r
+
+SHA2560r
+
+SHA3840r
+
+SHA5120r
+	CURVE_MAP0r
+CURVE_NAMES0r
+hash_alg0r	
+curve0r
+prepared_key0Ç
+NativeHMACKeyjose.backends.native.HMACKey"jose.backends.base.Key*4
+__init__*
+
+self(*	
+key(*
+	algorithm(*)
+sign*
+
+self(*	
+msg(z310z311*.
+sign*
+
+self(*	
+msg(z312z313z314*6
+verify*
+
+self(*	
+msg(*	
+sig(z310z311*;
+verify*
+
+self(*	
+msg(*	
+sig(z312z313z314*
+to_dict*
+
+self(r
+
+HASHES0r
+prepared_key0’
+BackendRSAKey jose.backends.rsa_backend.RSAKey"jose.backends.base.Key*4
+__init__*
+
+self(*	
+key(*
+	algorithm(*
+sign*
+
+self(*	
+msg(*,
+verify*
+
+self(*	
+msg(*	
+sig(*
+	is_public*
+
+self(*
+
+public_key*
+
+self(**
+to_pem*
+
+self(*
+
+pem_format (*
+to_dict*
+
+self(*(
+wrap_key*
+
+self(*
+key_data(*-
+
+unwrap_key*
+
+self(*
+wrapped_key(r
+
+SHA2560r
+
+SHA3840r
+
+SHA5120r
+hash_alg0*
+__path__0*
+__annotations__0*
+
+AESKey0*
+HMACKey0!*
+
+RSAKey0$*	
+ECKey0'*
+get_random_bytes022"jose.backends.base.DIRKey2"builtins.str2"builtins.bytes2222"builtins.dict227"5jose.backends.cryptography_backend.CryptographyAESKey2"_typeshed.Incomplete222	26"4jose.backends.cryptography_backend.CryptographyECKey28"6jose.backends.cryptography_backend.CryptographyHMACKey27"5jose.backends.cryptography_backend.CryptographyRSAKey2("&jose.backends.ecdsa_backend.ECDSAECKey2"builtins.bool2\
++jose.backends.ecdsa_backend.ECDSAECKey.Self"&jose.backends.ecdsa_backend.ECDSAECKey(22"builtins.function222"jose.backends.native.HMACKey222"typing_extensions.Buffer222"_collections_abc.Buffer222"builtins.dict22"" jose.backends.rsa_backend.RSAKey2P
+%jose.backends.rsa_backend.RSAKey.Self" jose.backends.rsa_backend.RSAKey(22"builtins.list22"type2222"type22"type222 2"type22"type222"#2"type22"type222%&

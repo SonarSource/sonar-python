@@ -1,112 +1,92 @@
 
-"pika.adapters.utils.nbio_interfaceÅ
-AbstractIOServices5pika.adapters.utils.nbio_interface.AbstractIOServices"pika.compat.AbstractBase*ó
-get_native_ioloopGpika.adapters.utils.nbio_interface.AbstractIOServices.get_native_ioloop*
-self0:abc.abstractmethod@z310z311z312z313z314*
-close;pika.adapters.utils.nbio_interface.AbstractIOServices.close*
-self0:abc.abstractmethod@z310z311z312z313z314*{
-run9pika.adapters.utils.nbio_interface.AbstractIOServices.run*
-self0:abc.abstractmethod@z310z311z312z313z314*}
-stop:pika.adapters.utils.nbio_interface.AbstractIOServices.stop*
-self0:abc.abstractmethod@z310z311z312z313z314*±
-add_callback_threadsafeMpika.adapters.utils.nbio_interface.AbstractIOServices.add_callback_threadsafe*
+"pika.adapters.utils.nbio_interface®
+AbstractIOServices"pika.compat.AbstractBase*5
+get_native_ioloop*
+self0:abc.abstractmethod@*)
+close*
+self0:abc.abstractmethod@*'
+run*
+self0:abc.abstractmethod@*(
+stop*
+self0:abc.abstractmethod@*I
+add_callback_threadsafe*
 self*
-callback0:abc.abstractmethod@z310z311z312z313z314*¢
+callback0:abc.abstractmethod@*G
 
-call_later@pika.adapters.utils.nbio_interface.AbstractIOServices.call_later*
+call_later*
 self*	
 delay*
-callback0:abc.abstractmethod@z310z311z312z313z314*
-getaddrinfoApika.adapters.utils.nbio_interface.AbstractIOServices.getaddrinfo"
-Any*x
-selfn
-5pika.adapters.utils.nbio_interface.AbstractIOServices"5pika.adapters.utils.nbio_interface.AbstractIOServices*
-host
-Any*
-port
-Any*
-on_done
-Any**
-family
-builtins.int"builtins.int *,
-socktype
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int 0:abc.abstractmethod@z310z311z312z313z314*ª
-connect_socketDpika.adapters.utils.nbio_interface.AbstractIOServices.connect_socket*
+callback0:abc.abstractmethod@*ö
+getaddrinfo*
+
+self(*
+
+host(*
+
+port(*
+on_done(*
+family (*
+socktype (*
+proto (*
+flags (0:abc.abstractmethod@*\
+connect_socket*
 self*
 sock*
 resolved_addr*
-on_done0:abc.abstractmethod@z310z311z312z313z314*–
-create_streaming_connectionQpika.adapters.utils.nbio_interface.AbstractIOServices.create_streaming_connection"
-Any*x
-selfn
-5pika.adapters.utils.nbio_interface.AbstractIOServices"5pika.adapters.utils.nbio_interface.AbstractIOServices*
-protocol_factory
-Any*
-sock
-Any*
-on_done
-Any*n
-ssl_context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *r
-server_hostname[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314”
-AbstractFileDescriptorServicesApika.adapters.utils.nbio_interface.AbstractFileDescriptorServices"pika.compat.AbstractBase*Æ
+on_done0:abc.abstractmethod@*§
+create_streaming_connection*
 
-set_readerLpika.adapters.utils.nbio_interface.AbstractFileDescriptorServices.set_reader*
+self(*
+protocol_factory(*
+
+sock(*
+on_done(*
+ssl_context (*
+server_hostname (0:abc.abstractmethod@@babc.ABCMeta—
+AbstractFileDescriptorServices"pika.compat.AbstractBase*G
+
+set_reader*
 self*
 fd*
-on_readable0:abc.abstractmethod@z310z311z312z313z314*£
-remove_readerOpika.adapters.utils.nbio_interface.AbstractFileDescriptorServices.remove_reader*
+on_readable0:abc.abstractmethod@*9
+remove_reader*
 self*
-fd0:abc.abstractmethod@z310z311z312z313z314*Æ
+fd0:abc.abstractmethod@*G
 
-set_writerLpika.adapters.utils.nbio_interface.AbstractFileDescriptorServices.set_writer*
+set_writer*
 self*
 fd*
-on_writable0:abc.abstractmethod@z310z311z312z313z314*£
-remove_writerOpika.adapters.utils.nbio_interface.AbstractFileDescriptorServices.remove_writer*
+on_writable0:abc.abstractmethod@*9
+remove_writer*
 self*
-fd0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314ù
-AbstractTimerReference9pika.adapters.utils.nbio_interface.AbstractTimerReference"pika.compat.AbstractBase*Ö
-cancel@pika.adapters.utils.nbio_interface.AbstractTimerReference.cancel*
-self0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314î
-AbstractIOReference6pika.adapters.utils.nbio_interface.AbstractIOReference"pika.compat.AbstractBase*Ç
-cancel=pika.adapters.utils.nbio_interface.AbstractIOReference.cancel*
-self0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314ó
-AbstractStreamProtocol9pika.adapters.utils.nbio_interface.AbstractStreamProtocol"pika.compat.AbstractBase*¶
-connection_madeIpika.adapters.utils.nbio_interface.AbstractStreamProtocol.connection_made*
+fd0:abc.abstractmethod@@babc.ABCMetam
+AbstractTimerReference"pika.compat.AbstractBase**
+cancel*
+self0:abc.abstractmethod@@babc.ABCMetaj
+AbstractIOReference"pika.compat.AbstractBase**
+cancel*
+self0:abc.abstractmethod@@babc.ABCMeta¥
+AbstractStreamProtocol"pika.compat.AbstractBase*B
+connection_made*
 self*
-	transport0:abc.abstractmethod@z310z311z312z313z314*¢
-connection_lostIpika.adapters.utils.nbio_interface.AbstractStreamProtocol.connection_lost*
+	transport0:abc.abstractmethod@*>
+connection_lost*
 self*	
-error0:abc.abstractmethod@z310z311z312z313z314*ë
-eof_receivedFpika.adapters.utils.nbio_interface.AbstractStreamProtocol.eof_received*
-self0:abc.abstractmethod@z310z311z312z313z314*ù
-data_receivedGpika.adapters.utils.nbio_interface.AbstractStreamProtocol.data_received*
+error0:abc.abstractmethod@*0
+eof_received*
+self0:abc.abstractmethod@*;
+data_received*
 self*
-data0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314Î
-AbstractStreamTransport:pika.adapters.utils.nbio_interface.AbstractStreamTransport"pika.compat.AbstractBase*Ñ
-abort@pika.adapters.utils.nbio_interface.AbstractStreamTransport.abort*
-self0:abc.abstractmethod@z310z311z312z313z314*í
-get_protocolGpika.adapters.utils.nbio_interface.AbstractStreamTransport.get_protocol*
-self0:abc.abstractmethod@z310z311z312z313z314*é
-write@pika.adapters.utils.nbio_interface.AbstractStreamTransport.write*
+data0:abc.abstractmethod@@babc.ABCMetaè
+AbstractStreamTransport"pika.compat.AbstractBase*)
+abort*
+self0:abc.abstractmethod@*0
+get_protocol*
+self0:abc.abstractmethod@*3
+write*
 self*
-data0:abc.abstractmethod@z310z311z312z313z314*§
-get_write_buffer_sizePpika.adapters.utils.nbio_interface.AbstractStreamTransport.get_write_buffer_size*
-self0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314*∑
-__annotations__2pika.adapters.utils.nbio_interface.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*'
-pikapika *310*311*312*313*314
+data0:abc.abstractmethod@*9
+get_write_buffer_size*
+self0:abc.abstractmethod@@babc.ABCMeta*
+__annotations__0*
+pikapika 227"5pika.adapters.utils.nbio_interface.AbstractIOServices2"builtins.int2"_typeshed.Incomplete22222"builtins.str2"builtins.dict2

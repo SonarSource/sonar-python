@@ -1,104 +1,62 @@
 
-google.protobuf.servicea
-RpcException$google.protobuf.service.RpcException"builtins.Exceptionj310j311j312j313j314¶
-Servicegoogle.protobuf.service.Service"builtins.object*Ð
-GetDescriptor-google.protobuf.service.Service.GetDescriptor"\
-,google.protobuf.descriptor.ServiceDescriptor",google.protobuf.descriptor.ServiceDescriptor0:builtins.staticmethodhz310z311z312z313z314*â
+google.protobuf.service"
+RpcException"builtins.Exception£
+Service"builtins.object*,
+GetDescriptor0:builtins.staticmethodh*d
 
-CallMethod*google.protobuf.service.Service.CallMethod"„
-LUnion[concurrent.futures._base.Future[google.protobuf.message.Message],None]§
-@concurrent.futures._base.Future[google.protobuf.message.Message]B
-google.protobuf.message.Message"google.protobuf.message.Message"concurrent.futures._base.Future
-None*L
-selfB
-google.protobuf.service.Service"google.protobuf.service.Service*q
-method_descriptorZ
-+google.protobuf.descriptor.MethodDescriptor"+google.protobuf.descriptor.MethodDescriptor*b
-rpc_controllerN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcController*O
-requestB
-google.protobuf.message.Message"google.protobuf.message.Message*‘
-done†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-Nonez310z311z312z313z314*‘
-GetRequestClass/google.protobuf.service.Service.GetRequestClass"s
-%Type[google.protobuf.message.Message]B
-google.protobuf.message.Message"google.protobuf.message.Message"type*L
-selfB
-google.protobuf.service.Service"google.protobuf.service.Service*q
-method_descriptorZ
-+google.protobuf.descriptor.MethodDescriptor"+google.protobuf.descriptor.MethodDescriptorz310z311z312z313z314*“
-GetResponseClass0google.protobuf.service.Service.GetResponseClass"s
-%Type[google.protobuf.message.Message]B
-google.protobuf.message.Message"google.protobuf.message.Message"type*L
-selfB
-google.protobuf.service.Service"google.protobuf.service.Service*q
-method_descriptorZ
-+google.protobuf.descriptor.MethodDescriptor"+google.protobuf.descriptor.MethodDescriptorz310z311z312z313z314j310j311j312j313j314ó
-RpcController%google.protobuf.service.RpcController"builtins.object*±
-Reset+google.protobuf.service.RpcController.Reset"
-None*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcControllerz310z311z312z313z314*É
-Failed,google.protobuf.service.RpcController.Failed"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcControllerz310z311z312z313z314*õ
-	ErrorText/google.protobuf.service.RpcController.ErrorText"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcControllerz310z311z312z313z314*½
-StartCancel1google.protobuf.service.RpcController.StartCancel"
-None*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcControllerz310z311z312z313z314*ã
-	SetFailed/google.protobuf.service.RpcController.SetFailed"
-None*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcController*(
-reason
-builtins.str"builtins.strz310z311z312z313z314*Ñ
+CallMethod*
 
-IsCanceled0google.protobuf.service.RpcController.IsCanceled"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcControllerz310z311z312z313z314*ž
-NotifyOnCancel4google.protobuf.service.RpcController.NotifyOnCancel"
-None*X
-selfN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcController*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314Ò
+self(*
+method_descriptor(*
+rpc_controller(*
+request(*
 
-RpcChannel"google.protobuf.service.RpcChannel"builtins.object*õ
+done(*8
+GetRequestClass*
 
-CallMethod-google.protobuf.service.RpcChannel.CallMethod"„
-LUnion[concurrent.futures._base.Future[google.protobuf.message.Message],None]§
-@concurrent.futures._base.Future[google.protobuf.message.Message]B
-google.protobuf.message.Message"google.protobuf.message.Message"concurrent.futures._base.Future
-None*R
-selfH
-"google.protobuf.service.RpcChannel""google.protobuf.service.RpcChannel*q
-method_descriptorZ
-+google.protobuf.descriptor.MethodDescriptor"+google.protobuf.descriptor.MethodDescriptor*b
-rpc_controllerN
-%google.protobuf.service.RpcController"%google.protobuf.service.RpcController*O
-requestB
-google.protobuf.message.Message"google.protobuf.message.Message*‡
-response_classs
-%Type[google.protobuf.message.Message]B
-google.protobuf.message.Message"google.protobuf.message.Message"type*‘
-done†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-Nonez310z311z312z313z314j310j311j312j313j314*¬
-__annotations__'google.protobuf.service.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+method_descriptor(*9
+GetResponseClass*
+
+self(*
+method_descriptor(ü
+RpcController"builtins.object*
+Reset*
+
+self(*
+Failed*
+
+self(*
+	ErrorText*
+
+self(*
+StartCancel*
+
+self(*'
+	SetFailed*
+
+self(*
+reason(*
+
+IsCanceled*
+
+self(*.
+NotifyOnCancel*
+
+self(*
+callback(
+™
+
+RpcChannel"builtins.object*z
+
+CallMethod*
+
+self(*
+method_descriptor(*
+rpc_controller(*
+request(*
+response_class(*
+
+done(*
+__annotations__02.",google.protobuf.descriptor.ServiceDescriptor2!"google.protobuf.message.Message2$"concurrent.futures._base.Future22222!"google.protobuf.service.Service2-"+google.protobuf.descriptor.MethodDescriptor2'"%google.protobuf.service.RpcController2"builtins.function22	22
+2"type22"builtins.bool2"builtins.str222$""google.protobuf.service.RpcChannel22"builtins.dict2

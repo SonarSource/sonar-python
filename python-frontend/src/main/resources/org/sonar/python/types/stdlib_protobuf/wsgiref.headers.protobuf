@@ -1,119 +1,60 @@
 
-wsgiref.headers†
-Headerswsgiref.headers.Headers"builtins.object*÷
-__init__ wsgiref.headers.Headers.__init__"
-None*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headers*ç
-headers×
-FUnion[TypeAlias[builtins.list[Tuple[builtins.str,builtins.str]]],None]€
-:TypeAlias[builtins.list[Tuple[builtins.str,builtins.str]]]¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list"wsgiref.headers._HeaderList
-None z310z311z312z313z314*—
-__len__wsgiref.headers.Headers.__len__"
-builtins.int"builtins.int*42
-wsgiref.headers.Headers"wsgiref.headers.Headersz310z311z312z313z314*Ë
-__setitem__#wsgiref.headers.Headers.__setitem__"
-None*42
-wsgiref.headers.Headers"wsgiref.headers.Headers*
-builtins.str"builtins.str*
-builtins.str"builtins.strz310z311z312z313z314*«
-__delitem__#wsgiref.headers.Headers.__delitem__"
-None*42
-wsgiref.headers.Headers"wsgiref.headers.Headers*
-builtins.str"builtins.strz310z311z312z313z314*ç
-__getitem__#wsgiref.headers.Headers.__getitem__"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*42
-wsgiref.headers.Headers"wsgiref.headers.Headers*
-builtins.str"builtins.strz310z311z312z313z314*Ã
-__contains__$wsgiref.headers.Headers.__contains__"
-builtins.bool"builtins.bool*42
-wsgiref.headers.Headers"wsgiref.headers.Headers*
-builtins.str"builtins.strz310z311z312z313z314*õ
-get_allwsgiref.headers.Headers.get_all"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headers*&
-name
-builtins.str"builtins.strz310z311z312z313z314*Ç
-keyswsgiref.headers.Headers.keys"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headersz310z311z312z313z314*Ë
-valueswsgiref.headers.Headers.values"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headersz310z311z312z313z314*€
-itemswsgiref.headers.Headers.items"€
-:TypeAlias[builtins.list[Tuple[builtins.str,builtins.str]]]¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list"wsgiref.headers._HeaderList*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headersz310z311z312z313z314*§
-	__bytes__!wsgiref.headers.Headers.__bytes__" 
-builtins.bytes"builtins.bytes*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headersz310z311z312z313z314*ö
+wsgiref.headersÓ
+Headers"builtins.object*)
+__init__*
 
-setdefault"wsgiref.headers.Headers.setdefault"
-builtins.str"builtins.str*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headers*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*ß
+self(*
+headers (*
+__len__*(*
+__setitem__*(*(*(*
+__delitem__*(*(*
+__getitem__	*(*(*
+__contains__
+*(*(*#
+get_all*
 
-add_header"wsgiref.headers.Headers.add_header"
-None*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headers*'
-_name
-builtins.str"builtins.str*P
-_valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*Q
-_paramsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez310z311z312z313z3142ß
-getwsgiref.headers.Headers.getæ
-getwsgiref.headers.Headers.get"
-builtins.str"builtins.str*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headers*&
-name
-builtins.str"builtins.str*)
-default
-builtins.str"builtins.str0:typing.overloadX¸
-getwsgiref.headers.Headers.get"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*<
-self2
-wsgiref.headers.Headers"wsgiref.headers.Headers*&
-name
-builtins.str"builtins.str*S
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX"310"311"312"313"314j310j311j312j313j314*¤
-__annotations__wsgiref.headers.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*…
-	tspecialswsgiref.headers.tspecialsD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314
+self(*
+
+name(*
+keys*
+
+self(*
+values*
+
+self(*
+items*
+
+self(*
+	__bytes__*
+
+self(*3
+
+setdefault*
+
+self(*
+
+name(*
+value(*D
+
+add_header*
+
+self(*
+_name(*
+_value(	*
+_params(	2‘
+getC
+get*
+
+self(*
+
+name(*
+default(0:typing.overloadXE
+get	*
+
+self(*
+
+name(*
+default (	0:typing.overloadX*
+__annotations__0*
+	tspecials022"wsgiref.headers.Headers2"builtins.str222"builtins.list22""wsgiref.headers._HeaderList2222"builtins.int222"builtins.bool2"builtins.list22"builtins.bytes22"builtins.dict22"
+re.Pattern2

@@ -1,227 +1,107 @@
 
-passpym
-RecursiveCopyMoveError(passpy.exceptions.RecursiveCopyMoveError"builtins.OSErrorj310j311j312j313j314{
-StoreNotInitialisedError*passpy.exceptions.StoreNotInitialisedError"builtins.FileNotFoundErrorj310j311j312j313j314Ó9
-Storepasspy.store.Store"builtins.object*š
-__init__passpy.store.Store.__init__"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*+
-gpg_bin
-builtins.str"builtins.str *+
-git_bin
-builtins.str"builtins.str *-
-	store_dir
-builtins.str"builtins.str */
-	use_agent
-builtins.bool"builtins.bool *1
-interactive
-builtins.bool"builtins.bool *-
-verbose
-builtins.bool"builtins.bool z310z311z312z313z314*¼
-__iter__passpy.store.Store.__iter__"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator**(
-passpy.store.Store"passpy.store.Storez310z311z312z313z314*’
-is_initpasspy.store.Store.is_init"
-builtins.bool"builtins.bool*2
-self(
-passpy.store.Store"passpy.store.Storez310z311z312z313z314*
+passpyT
+RecursiveCopyMoveError(passpy.exceptions.RecursiveCopyMoveError"builtins.OSErrorb
+StoreNotInitialisedError*passpy.exceptions.StoreNotInitialisedError"builtins.FileNotFoundError¯
+Storepasspy.store.Store"builtins.object*†
+__init__*
 
-init_storepasspy.store.Store.init_store"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*º
-gpg_ids¬
-4Union[None,builtins.str,builtins.list[builtins.str]]
-None
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Ë
-path¾
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None z310z311z312z313z314*~
-init_gitpasspy.store.Store.init_git"
-None*2
-self(
-passpy.store.Store"passpy.store.Storez310z311z312z313z314*ü
-gitpasspy.store.Store.git"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*(
-method
-builtins.str"builtins.str*,
-args"
-builtins.object"builtins.object*.
-kwargs"
-builtins.object"builtins.objectz310z311z312z313z314*„
-get_keypasspy.store.Store.get_key"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*2
-self(
-passpy.store.Store"passpy.store.Store*É
-path¾
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-Nonez310z311z312z313z314*¡
-set_keypasspy.store.Store.set_key"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*É
-path¾
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None**
-key_data
-builtins.str"builtins.str*+
-force
-builtins.bool"builtins.bool z310z311z312z313z314*Ù
-remove_pathpasspy.store.Store.remove_path"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*ô
-pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*/
-	recursive
-builtins.bool"builtins.bool *+
-force
-builtins.bool"builtins.bool z310z311z312z313z314*¹
-gen_keypasspy.store.Store.gen_key"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*2
-self(
-passpy.store.Store"passpy.store.Store*É
-path¾
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None*(
-length
-builtins.int"builtins.int*-
-symbols
-builtins.bool"builtins.bool *+
-force
-builtins.bool"builtins.bool *-
-inplace
-builtins.bool"builtins.bool z310z311z312z313z314*£
-	copy_pathpasspy.store.Store.copy_path"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*ø
-old_pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*ø
-new_pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*+
-force
-builtins.bool"builtins.bool z310z311z312z313z314*£
-	move_pathpasspy.store.Store.move_path"
-None*2
-self(
-passpy.store.Store"passpy.store.Store*ø
-old_pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*ø
-new_pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*+
-force
-builtins.bool"builtins.bool z310z311z312z313z314*È
-list_dirpasspy.store.Store.list_dir"Ú
->Tuple[builtins.list[builtins.str],builtins.list[builtins.str]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*2
-self(
-passpy.store.Store"passpy.store.Store*ô
-pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313z314*»
-iter_dirpasspy.store.Store.iter_dir"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*2
-self(
-passpy.store.Store"passpy.store.Store*ô
-pathé
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313z314*ó
-findpasspy.store.Store.find"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*2
-self(
-passpy.store.Store"passpy.store.Store*¸
-names¬
-4Union[None,builtins.str,builtins.list[builtins.str]]
-None
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*ý
-searchpasspy.store.Store.search"â
-Ubuiltins.dict[builtins.str,builtins.list[Tuple[builtins.str,re.Match[builtins.str]]]]
-builtins.str"builtins.strÛ
-9builtins.list[Tuple[builtins.str,re.Match[builtins.str]]]Ž
-*Tuple[builtins.str,re.Match[builtins.str]]
-builtins.str"builtins.str@
-re.Match[builtins.str]
-builtins.str"builtins.str"re.Match"builtins.list"builtins.dict*2
-self(
-passpy.store.Store"passpy.store.Store*&
-term
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314¸
-gen_passwordpasspy.util.gen_password"
-builtins.str"builtins.str*(
-length
-builtins.int"builtins.int*-
-symbols
-builtins.bool"builtins.bool z310z311z312z313z314*€
-__path__passpy.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*›
-__annotations__passpy.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*P
-VERSIONpasspy.VERSION
-builtins.str"builtins.str*310*311*312*313*314
+self(*
+gpg_bin (*
+git_bin (*
+	store_dir (*
+	use_agent (*
+interactive (*
+verbose (*
+__iter__*(*
+is_init*
+
+self(*7
+
+init_store*
+
+self(*
+gpg_ids(*
+path (*
+init_git*
+
+self(*;
+git*
+
+self(*
+method(*
+
+args(*
+kwargs(*#
+get_key*
+
+self(*
+
+path(*B
+set_key*
+
+self(*
+
+path(*
+key_data(*
+force (*I
+remove_path*
+
+self(*
+
+path(
+*
+	recursive (*
+force (*b
+gen_key*
+
+self(*
+
+path(*
+length(*
+symbols (*
+force (*
+inplace (*H
+	copy_path*
+
+self(*
+old_path(
+*
+new_path(
+*
+force (*H
+	move_path*
+
+self(*
+old_path(
+*
+new_path(
+*
+force (*$
+list_dir*
+
+self(*
+
+path(
+*$
+iter_dir*
+
+self(*
+
+path(
+*!
+find*
+
+self(*
+names(*"
+search*
+
+self(*
+
+term(I
+gen_passwordpasspy.util.gen_password*
+length(*
+symbols (*
+__path__0*
+__annotations__0*
+VERSION022"passpy.store.Store2"builtins.str2"builtins.bool2"typing.Iterator22"builtins.list2222"os.PathLike2222"_typeshed.StrPath2	22
+2"builtins.object222"builtins.int222"re.Match2222"builtins.list22"builtins.dict222"builtins.dict2

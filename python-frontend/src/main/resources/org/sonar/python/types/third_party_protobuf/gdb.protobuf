@@ -1,1975 +1,990 @@
 
-gdbB
-error	gdb.error"builtins.RuntimeErrorj310j311j312j313j314B
-MemoryErrorgdb.MemoryError"	gdb.errorj310j311j312j313j314E
-GdbErrorgdb.GdbError"builtins.Exceptionj310j311j312j313j314ΩB
-Value	gdb.Value"builtins.object*y
-	__index__gdb.Value.__index__"
-builtins.int"builtins.int* 
-self
-	gdb.Value"	gdb.Valuez310z311z312z313z314*m
-__int__gdb.Value.__int__"
-builtins.int"builtins.int*
-	gdb.Value"	gdb.Valuez310z311z312z313z314*u
-	__float__gdb.Value.__float__" 
-builtins.float"builtins.float*
-	gdb.Value"	gdb.Valuez310z311z312z313z314*É
-__add__gdb.Value.__add__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*É
-__sub__gdb.Value.__sub__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*É
-__mul__gdb.Value.__mul__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*ã
-__truediv__gdb.Value.__truediv__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*É
-__mod__gdb.Value.__mod__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*É
-__and__gdb.Value.__and__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*Å
-__or__gdb.Value.__or__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*É
-__xor__gdb.Value.__xor__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
+gdb
+error"builtins.RuntimeError
+MemoryError"	gdb.error
+GdbError"builtins.Exception≤
 
-__lshift__gdb.Value.__lshift__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
+Value"builtins.object*
+	__index__*
 
-__rshift__gdb.Value.__rshift__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
-__eq__gdb.Value.__eq__"
-builtins.bool"builtins.bool*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
-__ne__gdb.Value.__ne__"
-builtins.bool"builtins.bool*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
-__lt__gdb.Value.__lt__"
-builtins.bool"builtins.bool*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
-__le__gdb.Value.__le__"
-builtins.bool"builtins.bool*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
-__gt__gdb.Value.__gt__"
-builtins.bool"builtins.bool*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*â
-__ge__gdb.Value.__ge__"
-builtins.bool"builtins.bool*
-	gdb.Value"	gdb.Value*ôñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrIntz310z311z312z313z314*˜
-__getitem__gdb.Value.__getitem__"
-	gdb.Value"	gdb.Value*
-	gdb.Value"	gdb.Value*ÖÇ
-*Union[builtins.int,builtins.str,gdb.Field]
-builtins.int"builtins.int
-builtins.str"builtins.str
-	gdb.Field"	gdb.Fieldz310z311z312z313z314*ï
-__call__gdb.Value.__call__"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Value*°
-argsñ
-ETypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]]∂
-:Union[builtins.bool,builtins.float,builtins.str,gdb.Value]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.str"builtins.str
-	gdb.Value"	gdb.Value"gdb._ValueOrNativez310z311z312z313z314*Ü
-__init__gdb.Value.__init__"
-None* 
-self
-	gdb.Value"	gdb.Value*†
-valñ
-ETypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]]∂
-:Union[builtins.bool,builtins.float,builtins.str,gdb.Value]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.str"builtins.str
-	gdb.Value"	gdb.Value"gdb._ValueOrNativez310z311z312z313z314*â
-castgdb.Value.cast"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Value*
-type
-gdb.Type"gdb.Typez310z311z312z313z314*w
-dereferencegdb.Value.dereference"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Valuez310z311z312z313z314*Å
-referenced_valuegdb.Value.referenced_value"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Valuez310z311z312z313z314*
-reference_valuegdb.Value.reference_value"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Valuez310z311z312z313z314*w
-const_valuegdb.Value.const_value"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Valuez310z311z312z313z314*ô
-dynamic_castgdb.Value.dynamic_cast"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Value*
-type
-gdb.Type"gdb.Typez310z311z312z313z314*°
-reinterpret_castgdb.Value.reinterpret_cast"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Value"	gdb.Value*
-type
-gdb.Type"gdb.Typez310z311z312z313z314*π
-format_stringgdb.Value.format_string"
-builtins.str"builtins.str* 
-self
-	gdb.Value"	gdb.Value*)
-raw
-builtins.bool"builtins.bool *3
-pretty_arrays
-builtins.bool"builtins.bool *4
-pretty_structs
-builtins.bool"builtins.bool *3
-array_indexes
-builtins.bool"builtins.bool *-
-symbols
-builtins.bool"builtins.bool *,
-unions
-builtins.bool"builtins.bool *-
-address
-builtins.bool"builtins.bool *0
+self(*
+__int__*(*
+	__float__*(*
+__add__*(*(*
+__sub__*(*(*
+__mul__*(*(*
+__truediv__*(*(*
+__mod__*(*(*
+__and__*(*(*
+__or__*(*(*
+__xor__*(*(*
 
-deref_refs
-builtins.bool"builtins.bool *4
-actual_objects
-builtins.bool"builtins.bool *4
-static_members
-builtins.bool"builtins.bool *0
-max_elements
-builtins.int"builtins.int *-
-	max_depth
-builtins.int"builtins.int *4
-repeat_threshold
-builtins.int"builtins.int **
-format
-builtins.str"builtins.str z310z311z312z313z314*˘
-stringgdb.Value.string"
-builtins.str"builtins.str* 
-self
-	gdb.Value"	gdb.Value*,
-encoding
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str **
-length
-builtins.int"builtins.int z310z311z312z313z314*€
-lazy_stringgdb.Value.lazy_string" 
-gdb.LazyString"gdb.LazyString* 
-self
-	gdb.Value"	gdb.Value*,
-encoding
-builtins.str"builtins.str **
-length
-builtins.int"builtins.int z310z311z312z313z314*g
+__lshift__*(*(*
 
-fetch_lazygdb.Value.fetch_lazy"
-None* 
-self
-	gdb.Value"	gdb.Valuez310z311z312z313z314j310j311j312j313j314rM
-addressgdb.Value.address
-	gdb.Value"	gdb.Value*310*311*312*313*314rg
-is_optimized_outgdb.Value.is_optimized_out
-builtins.bool"builtins.bool*310*311*312*313*314rE
-typegdb.Value.type
-gdb.Type"gdb.Type*310*311*312*313*314rU
-dynamic_typegdb.Value.dynamic_type
-gdb.Type"gdb.Type*310*311*312*313*314rU
-is_lazygdb.Value.is_lazy
-builtins.bool"builtins.bool*310*311*312*313*314¡
-Typegdb.Type"builtins.object*ï
-fieldsgdb.Type.fields"A
-builtins.list[gdb.Field]
-	gdb.Field"	gdb.Field"builtins.list*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*™
-arraygdb.Type.array"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Type*_
-n1W
-Union[builtins.int,gdb.Value]
-builtins.int"builtins.int
-	gdb.Value"	gdb.Value*a
-n2W
-Union[builtins.int,gdb.Value]
-builtins.int"builtins.int
-	gdb.Value"	gdb.Value z310z311z312z313z314*∂
-vectorgdb.Type.vector"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Type*$
-n1
-builtins.int"builtins.int*&
-n2
-builtins.int"builtins.int z310z311z312z313z314*f
-constgdb.Type.const"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*l
-volatilegdb.Type.volatile"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*r
-unqualifiedgdb.Type.unqualified"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*≤
-rangegdb.Type.range"`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*n
-	referencegdb.Type.reference"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*j
-pointergdb.Type.pointer"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*x
-strip_typedefsgdb.Type.strip_typedefs"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*h
-targetgdb.Type.target"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Typez310z311z312z313z314*»
-template_argumentgdb.Type.template_argument"
-gdb.Type"gdb.Type*
-self
-gdb.Type"gdb.Type*#
-n
-builtins.int"builtins.int*#
-block
-	gdb.Block"	gdb.Block z310z311z312z313z314*x
-optimized_outgdb.Type.optimized_out"
-	gdb.Value"	gdb.Value*
-self
-gdb.Type"gdb.Typez310z311z312z313z314j310j311j312j313j314rR
-alignofgdb.Type.alignof
-builtins.int"builtins.int*310*311*312*313*314rL
-codegdb.Type.code
-builtins.int"builtins.int*310*311*312*313*314rT
-dynamicgdb.Type.dynamic
-builtins.bool"builtins.bool*310*311*312*313*314rL
-namegdb.Type.name
-builtins.str"builtins.str*310*311*312*313*314rP
-sizeofgdb.Type.sizeof
-builtins.int"builtins.int*310*311*312*313*314rr
-taggdb.Type.tagD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rw
-objfilegdb.Type.objfileA
-Union[gdb.Objfile,None]
-gdb.Objfile"gdb.Objfile
-None*310*311*312*313*314å
-Field	gdb.Field"builtins.objectj310j311j312j313j314rQ
-bitposgdb.Field.bitpos
-builtins.int"builtins.int*310*311*312*313*314rS
-enumvalgdb.Field.enumval
-builtins.int"builtins.int*310*311*312*313*314ru
-namegdb.Field.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r[
+__rshift__*(*(*
+__eq__*(*(*
+__ne__*(*(*
+__lt__*(*(*
+__le__*(*(*
+__gt__*(*(*
+__ge__*(*(*
+__getitem__*(*(	*$
+__call__*
 
-artificialgdb.Field.artificial
-builtins.bool"builtins.bool*310*311*312*313*314ra
-is_base_classgdb.Field.is_base_class
-builtins.bool"builtins.bool*310*311*312*313*314rS
-bitsizegdb.Field.bitsize
-builtins.int"builtins.int*310*311*312*313*314rE
-typegdb.Field.type
-gdb.Type"gdb.Type*310*311*312*313*314rS
-parent_typegdb.Field.parent_type
-gdb.Type"gdb.Type*310*311*312*313*314±
-_PrettyPrintergdb._PrettyPrinter"builtins.object*ﬁ
-	to_stringgdb._PrettyPrinter.to_string"f
-"Union[builtins.str,gdb.LazyString]
-builtins.str"builtins.str 
-gdb.LazyString"gdb.LazyString*2
-self(
-gdb._PrettyPrinter"gdb._PrettyPrinterz310z311z312z313z314Xj310j311j312j313j314£
-_FrameFiltergdb._FrameFilter"builtins.object*¬
-filtergdb._FrameFilter.filter"c
-$typing.Iterator[gdb._FrameDecorator]*
-gdb._FrameDecorator"gdb._FrameDecorator"typing.Iterator*.
-self$
-gdb._FrameFilter"gdb._FrameFilter*q
-iteratorc
-$typing.Iterator[gdb._FrameDecorator]*
-gdb._FrameDecorator"gdb._FrameDecorator"typing.Iteratorz310z311z312z313z314Xj310j311j312j313j314rT
-namegdb._FrameFilter.name
-builtins.str"builtins.str*310*311*312*313*314r\
-enabledgdb._FrameFilter.enabled
-builtins.bool"builtins.bool*310*311*312*313*314r\
-prioritygdb._FrameFilter.priority
-builtins.int"builtins.int*310*311*312*313*314õ
-_SymValueWrappergdb._SymValueWrapper"builtins.object*“
-symbolgdb._SymValueWrapper.symbol"Z
-Union[gdb.Symbol,builtins.str]
+self(*
 
-gdb.Symbol"
-gdb.Symbol
-builtins.str"builtins.str*6
-self,
-gdb._SymValueWrapper"gdb._SymValueWrapperz310z311z312z313z314*Ô
-valuegdb._SymValueWrapper.value"¯
-QUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]],None]ñ
-ETypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]]∂
-:Union[builtins.bool,builtins.float,builtins.str,gdb.Value]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.str"builtins.str
-	gdb.Value"	gdb.Value"gdb._ValueOrNative
-None*6
-self,
-gdb._SymValueWrapper"gdb._SymValueWrapperz310z311z312z313z314Xj310j311j312j313j314≠
-_FrameDecoratorgdb._FrameDecorator"builtins.object*
-elidedgdb._FrameDecorator.elided"{
-&Union[typing.Iterator[gdb.Frame],None]E
-typing.Iterator[gdb.Frame]
-	gdb.Frame"	gdb.Frame"typing.Iterator
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*Ω
-functiongdb._FrameDecorator.function"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*ª
-addressgdb._FrameDecorator.address"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*Ω
-filenamegdb._FrameDecorator.filename"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*µ
-linegdb._FrameDecorator.line"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*•
+args(*#
+__init__*
 
-frame_argsgdb._FrameDecorator.frame_args"ß
-1Union[typing.Iterator[gdb._SymValueWrapper],None]f
-%typing.Iterator[gdb._SymValueWrapper],
-gdb._SymValueWrapper"gdb._SymValueWrapper"typing.Iterator
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*©
-frame_locals gdb._FrameDecorator.frame_locals"ß
-1Union[typing.Iterator[gdb._SymValueWrapper],None]f
-%typing.Iterator[gdb._SymValueWrapper],
-gdb._SymValueWrapper"gdb._SymValueWrapper"typing.Iterator
-None*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314*õ
-inferior_frame"gdb._FrameDecorator.inferior_frame"
-	gdb.Frame"	gdb.Frame*4
-self*
-gdb._FrameDecorator"gdb._FrameDecoratorz310z311z312z313z314Xj310j311j312j313j314Å
-PendingFramegdb.PendingFrame"builtins.object*ø
-read_registergdb.PendingFrame.read_register"
-	gdb.Value"	gdb.Value*.
-self$
-gdb.PendingFrame"gdb.PendingFrame*¨©
-7Union[builtins.str,gdb.RegisterDescriptor,builtins.int]
-builtins.str"builtins.str0
-gdb.RegisterDescriptor"gdb.RegisterDescriptor
-builtins.int"builtins.intz310z311z312z313z314* 
-create_unwind_info#gdb.PendingFrame.create_unwind_info" 
-gdb.UnwindInfo"gdb.UnwindInfo*.
-self$
-gdb.PendingFrame"gdb.PendingFrame*$"
-builtins.object"builtins.objectz310z311z312z313z314*ú
-architecturegdb.PendingFrame.architecture"$
-gdb.Architecture"gdb.Architecture*.
-self$
-gdb.PendingFrame"gdb.PendingFramez310z311z312z313z314*Ü
-levelgdb.PendingFrame.level"
-builtins.int"builtins.int*.
-self$
-gdb.PendingFrame"gdb.PendingFramez310z311z312z313z314j310j311j312j313j314ò
+self(*	
+val(* 
+cast*
 
-UnwindInfogdb.UnwindInfo"builtins.object*œ
-add_saved_register!gdb.UnwindInfo.add_saved_register"
-None**
-self 
-gdb.UnwindInfo"gdb.UnwindInfo*¨©
-7Union[builtins.str,gdb.RegisterDescriptor,builtins.int]
-builtins.str"builtins.str0
-gdb.RegisterDescriptor"gdb.RegisterDescriptor
-builtins.int"builtins.int*
-	gdb.Value"	gdb.Valuez310z311z312z313z314j310j311j312j313j314 
-Unwindergdb.Unwinder"builtins.object*Ÿ
-__call__gdb.Unwinder.__call__"J
-Union[gdb.UnwindInfo,None] 
-gdb.UnwindInfo"gdb.UnwindInfo
-None*&
-self
-gdb.Unwinder"gdb.Unwinder*)
-pending_frame
-	gdb.Frame"	gdb.Framez310z311z312z313z314j310j311j312j313j314rP
-namegdb.Unwinder.name
-builtins.str"builtins.str*310*311*312*313*314rX
-enabledgdb.Unwinder.enabled
-builtins.bool"builtins.bool*310*311*312*313*314–
-Inferiorgdb.Inferior"builtins.object*Ç
-is_validgdb.Inferior.is_valid"
-builtins.bool"builtins.bool*&
-self
-gdb.Inferior"gdb.Inferiorz310z311z312z313z314*¿
-threadsgdb.Inferior.threads"^
-"builtins.tuple[gdb.InferiorThread](
-gdb.InferiorThread"gdb.InferiorThread"builtins.tuple*&
-self
-gdb.Inferior"gdb.Inferiorz310z311z312z313z314*ê
-architecturegdb.Inferior.architecture"$
-gdb.Architecture"gdb.Architecture*&
-self
-gdb.Inferior"gdb.Inferiorz310z311z312z313z314*ë
-read_memorygdb.Inferior.read_memory"V
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*&
-self
-gdb.Inferior"gdb.Inferior*§
-addressñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrInt*(
-length
-builtins.int"builtins.intz310z311z312z313z314*»
-write_memorygdb.Inferior.write_memory"V
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*&
-self
-gdb.Inferior"gdb.Inferior*§
-addressñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrInt*@
-buffer4
-typing_extensions.Buffer"typing_extensions.Buffer**
-length
-builtins.int"builtins.int z310z311*À
-write_memorygdb.Inferior.write_memory"V
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*&
-self
-gdb.Inferior"gdb.Inferior*§
-addressñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrInt*>
-buffer2
-_collections_abc.Buffer"_collections_abc.Buffer**
-length
-builtins.int"builtins.int z312z313z314*∑
-search_memorygdb.Inferior.search_memory"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*&
-self
-gdb.Inferior"gdb.Inferior*§
-addressñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrInt*(
-length
-builtins.int"builtins.int*A
-pattern4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*∫
-search_memorygdb.Inferior.search_memory"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*&
-self
-gdb.Inferior"gdb.Inferior*§
-addressñ
-(TypeAlias[Union[gdb.Value,builtins.int]]W
-Union[gdb.Value,builtins.int]
-	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrInt*(
-length
-builtins.int"builtins.int*?
-pattern2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*ƒ
-thread_from_handlegdb.Inferior.thread_from_handle"(
-gdb.InferiorThread"gdb.InferiorThread*&
-self
-gdb.Inferior"gdb.Inferior*"
-handle
-	gdb.Value"	gdb.Valuez310z311z312z313z314j310j311j312j313j314rN
-numgdb.Inferior.num
-builtins.int"builtins.int*310*311*312*313*314rd
-connection_numgdb.Inferior.connection_num
-builtins.int"builtins.int*310*311*312*313*314rN
-pidgdb.Inferior.pid
-builtins.int"builtins.int*310*311*312*313*314rb
-was_attachedgdb.Inferior.was_attached
-builtins.bool"builtins.bool*310*311*312*313*314r\
-	progspacegdb.Inferior.progspace
-gdb.Progspace"gdb.Progspace*310*311*312*313*314®
-InferiorThreadgdb.InferiorThread"builtins.object*î
-is_validgdb.InferiorThread.is_valid"
-builtins.bool"builtins.bool*2
-self(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314*z
-switchgdb.InferiorThread.switch"
-None*2
-self(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314*ò
+self(*
 
-is_stoppedgdb.InferiorThread.is_stopped"
-builtins.bool"builtins.bool*2
-self(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314*ò
+type(*
+dereference*
 
-is_runninggdb.InferiorThread.is_running"
-builtins.bool"builtins.bool*2
-self(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314*ñ
-	is_exitedgdb.InferiorThread.is_exited"
-builtins.bool"builtins.bool*2
-self(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314*í
-handlegdb.InferiorThread.handle" 
-builtins.bytes"builtins.bytes*2
-self(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314j310j311j312j313j314r~
-namegdb.InferiorThread.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rT
-numgdb.InferiorThread.num
-builtins.int"builtins.int*310*311*312*313*314rb
+self(* 
+referenced_value*
 
-global_numgdb.InferiorThread.global_num
-builtins.int"builtins.int*310*311*312*313*314r∆
-ptidgdb.InferiorThread.ptidã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*310*311*312*313*314r^
-inferiorgdb.InferiorThread.inferior
-gdb.Inferior"gdb.Inferior*310*311*312*313*314«
-Record
-gdb.Record"builtins.object*Ñ
-gotogdb.Record.goto"
-None*"
-self
+self(*
+reference_value*
 
-gdb.Record"
-gdb.Record*$"
-gdb.Instruction"gdb.Instructionz310z311z312z313z314j310j311j312j313j314rR
-methodgdb.Record.method
-builtins.str"builtins.str*310*311*312*313*314rz
-formatgdb.Record.formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rV
-begingdb.Record.begin"
-gdb.Instruction"gdb.Instruction*310*311*312*313*314rR
-endgdb.Record.end"
-gdb.Instruction"gdb.Instruction*310*311*312*313*314rï
-replay_positiongdb.Record.replay_positionM
-Union[gdb.Instruction,None]"
-gdb.Instruction"gdb.Instruction
-None*310*311*312*313*314r£
-instruction_historygdb.Record.instruction_historyS
-builtins.list[gdb.Instruction]"
-gdb.Instruction"gdb.Instruction"builtins.list*310*311*312*313*314r≈
-function_call_history gdb.Record.function_call_historyq
-(builtins.list[gdb.RecordFunctionSegment]6
-gdb.RecordFunctionSegment"gdb.RecordFunctionSegment"builtins.list*310*311*312*313*314Ÿ
-Instructiongdb.Instruction"builtins.objectj310j311j312j313j314rO
-pcgdb.Instruction.pc
-builtins.int"builtins.int*310*311*312*313*314rç
-datagdb.Instruction.dataV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*310*311*312*313*314rY
-decodedgdb.Instruction.decoded
-builtins.str"builtins.str*310*311*312*313*314rS
-sizegdb.Instruction.size
-builtins.int"builtins.int*310*311*312*313*314ª
-RecordInstructiongdb.RecordInstruction"gdb.Instructionj310j311j312j313j314r]
-numbergdb.RecordInstruction.number
-builtins.int"builtins.int*310*311*312*313*314rî
-salgdb.RecordInstruction.salY
-Union[gdb.Symtab_and_line,None]*
-gdb.Symtab_and_line"gdb.Symtab_and_line
-None*310*311*312*313*314ro
-is_speculative$gdb.RecordInstruction.is_speculative
-builtins.bool"builtins.bool*310*311*312*313*314›
-	RecordGapgdb.RecordGap"gdb.Instructionj310j311j312j313j314rU
-numbergdb.RecordGap.number
-builtins.int"builtins.int*310*311*312*313*314r]
+self(*
+const_value*
 
-error_codegdb.RecordGap.error_code
-builtins.int"builtins.int*310*311*312*313*314ra
-error_stringgdb.RecordGap.error_string
-builtins.str"builtins.str*310*311*312*313*314˜	
-RecordFunctionSegmentgdb.RecordFunctionSegment"builtins.objectj310j311j312j313j314ra
-number gdb.RecordFunctionSegment.number
-builtins.int"builtins.int*310*311*312*313*314rÉ
-symbol gdb.RecordFunctionSegment.symbol>
-Union[gdb.Symbol,None]
+self(*(
+dynamic_cast*
 
-gdb.Symbol"
-gdb.Symbol
-None*310*311*312*313*314rá
-levelgdb.RecordFunctionSegment.levelD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rú
-instructions&gdb.RecordFunctionSegment.instructions 
-9builtins.list[Union[gdb.RecordInstruction,gdb.RecordGap]]~
-*Union[gdb.RecordInstruction,gdb.RecordGap].
-gdb.RecordInstruction"gdb.RecordInstruction
-gdb.RecordGap"gdb.RecordGap"builtins.list*310*311*312*313*314r®
-upgdb.RecordFunctionSegment.upk
-%Union[gdb.RecordFunctionSegment,None]6
-gdb.RecordFunctionSegment"gdb.RecordFunctionSegment
-None*310*311*312*313*314r¨
-prevgdb.RecordFunctionSegment.prevk
-%Union[gdb.RecordFunctionSegment,None]6
-gdb.RecordFunctionSegment"gdb.RecordFunctionSegment
-None*310*311*312*313*314r¨
-nextgdb.RecordFunctionSegment.nextk
-%Union[gdb.RecordFunctionSegment,None]6
-gdb.RecordFunctionSegment"gdb.RecordFunctionSegment
-None*310*311*312*313*314Ò
-Commandgdb.Command"builtins.object*•
-__init__gdb.Command.__init__"
-None*$
-self
-gdb.Command"gdb.Command*&
-name
-builtins.str"builtins.str*/
-command_class
-builtins.int"builtins.int*3
-completer_class
-builtins.int"builtins.int *,
-prefix
-builtins.bool"builtins.bool z310z311z312z313z314*o
-dont_repeatgdb.Command.dont_repeat"
-None*$
-self
-gdb.Command"gdb.Commandz310z311z312z313z314*ø
-invokegdb.Command.invoke"
-None*$
-self
-gdb.Command"gdb.Command**
-argument
-builtins.str"builtins.str*,
-from_tty
-builtins.bool"builtins.boolz310z311z312z313z314*”
-completegdb.Command.complete""
-builtins.object"builtins.object*$
-self
-gdb.Command"gdb.Command*&
-text
-builtins.str"builtins.str*&
-word
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314ó
-	MICommandgdb.MICommand"builtins.object*ó
-__init__gdb.MICommand.__init__"
-None*(
-self
-gdb.MICommand"gdb.MICommand*&
-name
-builtins.str"builtins.strz310z311z312z313z314*Ñ
-invokegdb.MICommand.invoke"≈
-7Union[builtins.dict[builtins.str,builtins.object],None]~
-+builtins.dict[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"builtins.dict
-None*(
-self
-gdb.MICommand"gdb.MICommand*Y
-	argumentsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314j310j311j312j313j314rQ
-namegdb.MICommand.name
-builtins.str"builtins.str*310*311*312*313*314r]
-	installedgdb.MICommand.installed
-builtins.bool"builtins.bool*310*311*312*313*314Ü
-	Parametergdb.Parameter"builtins.object*‡
-__init__gdb.Parameter.__init__"
-None*(
-self
-gdb.Parameter"gdb.Parameter*&
-name
-builtins.str"builtins.str*/
-command_class
-builtins.int"builtins.int*1
-parameter_class
-builtins.int"builtins.int*c
-enum_sequenceN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence z310z311z312z313z314*è
-get_set_stringgdb.Parameter.get_set_string"
-builtins.str"builtins.str*(
-self
-gdb.Parameter"gdb.Parameterz310z311z312z313z314*ª
-get_show_stringgdb.Parameter.get_show_string"
-builtins.str"builtins.str*(
-self
-gdb.Parameter"gdb.Parameter*(
-svalue
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rW
-set_docgdb.Parameter.set_doc
-builtins.str"builtins.str*310*311*312*313*314rY
-show_docgdb.Parameter.show_doc
-builtins.str"builtins.str*310*311*312*313*314rY
-valuegdb.Parameter.value"
-builtins.object"builtins.object*310*311*312*313*314ı
-Functiongdb.Function"builtins.object*î
-__init__gdb.Function.__init__"
-None*&
-self
-gdb.Function"gdb.Function*&
-name
-builtins.str"builtins.strz310z311z312z313z314*ô
-invokegdb.Function.invoke"ñ
-ETypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]]∂
-:Union[builtins.bool,builtins.float,builtins.str,gdb.Value]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.str"builtins.str
-	gdb.Value"	gdb.Value"gdb._ValueOrNative*&
-self
-gdb.Function"gdb.Function* 
-args
-	gdb.Value"	gdb.Valuez310z311z312z313z314j310j311j312j313j314¬
-	Progspacegdb.Progspace"builtins.object* 
-block_for_pcgdb.Progspace.block_for_pc";
-Union[gdb.Block,None]
-	gdb.Block"	gdb.Block
-None*(
-self
-gdb.Progspace"gdb.Progspace*
-builtins.int"builtins.intz310z311z312z313z314*π
-find_pc_linegdb.Progspace.find_pc_line"*
-gdb.Symtab_and_line"gdb.Symtab_and_line*(
-self
-gdb.Progspace"gdb.Progspace*
-builtins.int"builtins.intz310z311z312z313z314*Ö
-is_validgdb.Progspace.is_valid"
-builtins.bool"builtins.bool*(
-self
-gdb.Progspace"gdb.Progspacez310z311z312z313z314*≤
-objfilesgdb.Progspace.objfiles"K
-typing.Sequence[gdb.Objfile]
-gdb.Objfile"gdb.Objfile"typing.Sequence*(
-self
-gdb.Progspace"gdb.Progspacez310z311z312z313z314*œ
+self(*
 
-solib_namegdb.Progspace.solib_name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*(
-self
-gdb.Progspace"gdb.Progspace*
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314rY
-filenamegdb.Progspace.filename
-builtins.str"builtins.str*310*311*312*313*314r∂
-pretty_printersgdb.Progspace.pretty_printersÍ
-9builtins.list[TypeAlias[CallableType[builtins.function]]]ù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" gdb._PrettyPrinterLookupFunction"builtins.list*310*311*312*313*314rØ
-type_printersgdb.Progspace.type_printersh
-%builtins.list[gdb.types._TypePrinter]0
-gdb.types._TypePrinter"gdb.types._TypePrinter"builtins.list*310*311*312*313*314rù
-frame_filtersgdb.Progspace.frame_filtersV
-builtins.list[gdb._FrameFilter]$
-gdb._FrameFilter"gdb._FrameFilter"builtins.list*310*311*312*313*314Ï
-Objfilegdb.Objfile"builtins.object*
-is_validgdb.Objfile.is_valid"
-builtins.bool"builtins.bool*$
-self
-gdb.Objfile"gdb.Objfilez310z311z312z313z314*Ø
-add_separate_debug_file#gdb.Objfile.add_separate_debug_file"
-None*$
-self
-gdb.Objfile"gdb.Objfile*&
-file
-builtins.str"builtins.strz310z311z312z313z314*ã
-lookup_global_symbol gdb.Objfile.lookup_global_symbol">
-Union[gdb.Symbol,None]
+type(*,
+reinterpret_cast*
 
-gdb.Symbol"
-gdb.Symbol
-None*$
-self
-gdb.Objfile"gdb.Objfile*&
-name
-builtins.str"builtins.str**
-domain
-builtins.int"builtins.int z310z311z312z313z314*ã
-lookup_static_method gdb.Objfile.lookup_static_method">
-Union[gdb.Symbol,None]
+self(*
 
-gdb.Symbol"
-gdb.Symbol
-None*$
-self
-gdb.Objfile"gdb.Objfile*&
-name
-builtins.str"builtins.str**
-domain
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314r
-filenamegdb.Objfile.filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r
-usernamegdb.Objfile.usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rv
-ownergdb.Objfile.ownerA
-Union[gdb.Objfile,None]
-gdb.Objfile"gdb.Objfile
-None*310*311*312*313*314r
-build_idgdb.Objfile.build_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r[
-	progspacegdb.Objfile.progspace
-gdb.Progspace"gdb.Progspace*310*311*312*313*314r¥
-pretty_printersgdb.Objfile.pretty_printersÍ
-9builtins.list[TypeAlias[CallableType[builtins.function]]]ù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" gdb._PrettyPrinterLookupFunction"builtins.list*310*311*312*313*314r≠
-type_printersgdb.Objfile.type_printersh
-%builtins.list[gdb.types._TypePrinter]0
-gdb.types._TypePrinter"gdb.types._TypePrinter"builtins.list*310*311*312*313*314rõ
-frame_filtersgdb.Objfile.frame_filtersV
-builtins.list[gdb._FrameFilter]$
-gdb._FrameFilter"gdb._FrameFilter"builtins.list*310*311*312*313*314Ó
-Frame	gdb.Frame"builtins.object*y
-is_validgdb.Frame.is_valid"
-builtins.bool"builtins.bool* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*ó
-namegdb.Frame.name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*á
-architecturegdb.Frame.architecture"$
-gdb.Architecture"gdb.Architecture* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*o
-typegdb.Frame.type"
-builtins.int"builtins.int* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*ã
-unwind_stop_reasongdb.Frame.unwind_stop_reason"
-builtins.int"builtins.int* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*e
-pcgdb.Frame.pc"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*k
-blockgdb.Frame.block"
-	gdb.Block"	gdb.Block* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*s
-functiongdb.Frame.function"
+type(*π
+format_string*
 
-gdb.Symbol"
-gdb.Symbol* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*ê
-oldergdb.Frame.older";
-Union[gdb.Frame,None]
-	gdb.Frame"	gdb.Frame
-None* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*ê
-newergdb.Frame.newer";
-Union[gdb.Frame,None]
-	gdb.Frame"	gdb.Frame
-None* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*Ö
-find_salgdb.Frame.find_sal"*
-gdb.Symtab_and_line"gdb.Symtab_and_line* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*™
-read_registergdb.Frame.read_register"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Frame"	gdb.Frame*¨©
-7Union[builtins.str,gdb.RegisterDescriptor,builtins.int]
-builtins.str"builtins.str0
-gdb.RegisterDescriptor"gdb.RegisterDescriptor
-builtins.int"builtins.intz310z311z312z313z314*ô
-read_vargdb.Frame.read_var"
-	gdb.Value"	gdb.Value* 
-self
-	gdb.Frame"	gdb.Frame*\Z
-Union[builtins.str,gdb.Symbol]
-builtins.str"builtins.str
+self(*
+raw (*
+pretty_arrays (*
+pretty_structs (*
+array_indexes (*
+symbols (*
+unions (*
+address (*
 
-gdb.Symbol"
-gdb.Symbol*H
-block;
-Union[gdb.Block,None]
-	gdb.Block"	gdb.Block
-None z310z311z312z313z314*_
-selectgdb.Frame.select"
-None* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314*q
-levelgdb.Frame.level"
-builtins.int"builtins.int* 
-self
-	gdb.Frame"	gdb.Framez310z311z312z313z314j310j311j312j313j314–
-Block	gdb.Block"builtins.object*y
-is_validgdb.Block.is_valid"
-builtins.bool"builtins.bool* 
-self
-	gdb.Block"	gdb.Blockz310z311z312z313z314*y
-__iter__gdb.Block.__iter__"&
-gdb.BlockIterator"gdb.BlockIterator*
-	gdb.Block"	gdb.Blockz310z311z312z313z314j310j311j312j313j314rO
-startgdb.Block.start
-builtins.int"builtins.int*310*311*312*313*314rK
-endgdb.Block.end
-builtins.int"builtins.int*310*311*312*313*314rw
-functiongdb.Block.function>
-Union[gdb.Symbol,None]
+deref_refs (*
+actual_objects (*
+static_members (*
+max_elements (*
+	max_depth (*
+repeat_threshold (*
+format (*H
+string*
 
-gdb.Symbol"
-gdb.Symbol
-None*310*311*312*313*314rx
+self(*
+encoding (*
+errors (*
+length (*=
+lazy_string*
 
-superblockgdb.Block.superblock;
-Union[gdb.Block,None]
-	gdb.Block"	gdb.Block
-None*310*311*312*313*314rW
-global_blockgdb.Block.global_block
-	gdb.Block"	gdb.Block*310*311*312*313*314r|
-static_blockgdb.Block.static_block;
-Union[gdb.Block,None]
-	gdb.Block"	gdb.Block
-None*310*311*312*313*314rY
-	is_globalgdb.Block.is_global
-builtins.bool"builtins.bool*310*311*312*313*314rY
-	is_staticgdb.Block.is_static
-builtins.bool"builtins.bool*310*311*312*313*314ƒ
-BlockIteratorgdb.BlockIterator"builtins.object*ë
-is_validgdb.BlockIterator.is_valid"
-builtins.bool"builtins.bool*0
-self&
-gdb.BlockIterator"gdb.BlockIteratorz310z311z312z313z314*”
-__iter__gdb.BlockIterator.__iter__"G
-_typeshed.Self"
-builtins.object"builtins.object"builtins.object*IG
-_typeshed.Self"
-builtins.object"builtins.object"builtins.objectz310z311z312z313z314*ã
-__next__gdb.BlockIterator.__next__"
+self(*
+encoding (*
+length (*
 
-gdb.Symbol"
-gdb.Symbol*0
-self&
-gdb.BlockIterator"gdb.BlockIteratorz310z311z312z313z314j310j311j312j313j314ù
-Symbol
-gdb.Symbol"builtins.object*|
-is_validgdb.Symbol.is_valid"
-builtins.bool"builtins.bool*"
-self
+fetch_lazy*
 
-gdb.Symbol"
-gdb.Symbolz310z311z312z313z314*ä
-valuegdb.Symbol.value"
-	gdb.Value"	gdb.Value*"
-self
+self(r
+address0r
+is_optimized_out0r
+type0r
+dynamic_type0r
+is_lazy0Ö
+Type"builtins.object*
+fields*
 
-gdb.Symbol"
-gdb.Symbol*
-	gdb.Frame"	gdb.Frame z310z311z312z313z314j310j311j312j313j314rj
-typegdb.Symbol.type8
-Union[gdb.Type,None]
-gdb.Type"gdb.Type
-None*310*311*312*313*314rN
-symtabgdb.Symbol.symtab
+self(*+
+array*
 
-gdb.Symtab"
-gdb.Symtab*310*311*312*313*314rN
-linegdb.Symbol.line
-builtins.int"builtins.int*310*311*312*313*314rN
-namegdb.Symbol.name
-builtins.str"builtins.str*310*311*312*313*314r^
-linkage_namegdb.Symbol.linkage_name
-builtins.str"builtins.str*310*311*312*313*314rZ
+self(*
+n1(*
 
-print_namegdb.Symbol.print_name
-builtins.str"builtins.str*310*311*312*313*314rZ
+n2 (*,
+vector*
 
-addr_classgdb.Symbol.addr_class
-builtins.int"builtins.int*310*311*312*313*314r^
-needs_framegdb.Symbol.needs_frame
-builtins.bool"builtins.bool*310*311*312*313*314r^
-is_argumentgdb.Symbol.is_argument
-builtins.bool"builtins.bool*310*311*312*313*314r^
-is_constantgdb.Symbol.is_constant
-builtins.bool"builtins.bool*310*311*312*313*314r^
-is_functiongdb.Symbol.is_function
-builtins.bool"builtins.bool*310*311*312*313*314r^
-is_variablegdb.Symbol.is_variable
-builtins.bool"builtins.bool*310*311*312*313*314 
-Symtab_and_linegdb.Symtab_and_line"builtins.object*ó
-is_validgdb.Symtab_and_line.is_valid"
-builtins.bool"builtins.bool*4
-self*
-gdb.Symtab_and_line"gdb.Symtab_and_linez310z311z312z313z314j310j311j312j313j314rW
-symtabgdb.Symtab_and_line.symtab
+self(*
+n1(*
 
-gdb.Symtab"
-gdb.Symtab*310*311*312*313*314rS
-pcgdb.Symtab_and_line.pc
-builtins.int"builtins.int*310*311*312*313*314rW
-lastgdb.Symtab_and_line.last
-builtins.int"builtins.int*310*311*312*313*314rW
-linegdb.Symtab_and_line.line
-builtins.int"builtins.int*310*311*312*313*314∏
-Symtab
-gdb.Symtab"builtins.object*|
-is_validgdb.Symtab.is_valid"
-builtins.bool"builtins.bool*"
-self
+n2 (*
+const*
 
-gdb.Symtab"
-gdb.Symtabz310z311z312z313z314*z
-fullnamegdb.Symtab.fullname"
-builtins.str"builtins.str*"
-self
+self(*
+volatile*
 
-gdb.Symtab"
-gdb.Symtabz310z311z312z313z314*|
-global_blockgdb.Symtab.global_block"
-	gdb.Block"	gdb.Block*"
-self
+self(*
+unqualified*
 
-gdb.Symtab"
-gdb.Symtabz310z311z312z313z314*|
-static_blockgdb.Symtab.static_block"
-	gdb.Block"	gdb.Block*"
-self
+self(*
+range*
 
-gdb.Symtab"
-gdb.Symtabz310z311z312z313z314*~
-	linetablegdb.Symtab.linetable"
-gdb.LineTable"gdb.LineTable*"
-self
+self(*
+	reference*
 
-gdb.Symtab"
-gdb.Symtabz310z311z312z313z314j310j311j312j313j314rV
-filenamegdb.Symtab.filename
-builtins.str"builtins.str*310*311*312*313*314rR
-objfilegdb.Symtab.objfile
-gdb.Objfile"gdb.Objfile*310*311*312*313*314rV
-producergdb.Symtab.producer
-builtins.str"builtins.str*310*311*312*313*314˙
-LineTableEntrygdb.LineTableEntry"builtins.objectj310j311j312j313j314rV
-linegdb.LineTableEntry.line
-builtins.int"builtins.int*310*311*312*313*314rR
-pcgdb.LineTableEntry.pc
-builtins.int"builtins.int*310*311*312*313*314Í
-	LineTablegdb.LineTable"typing.Iterator*œ
-__iter__gdb.LineTable.__iter__"G
-_typeshed.Self"
-builtins.object"builtins.object"builtins.object*IG
-_typeshed.Self"
-builtins.object"builtins.object"builtins.objectz310z311z312z313z314*è
-__next__gdb.LineTable.__next__"(
-gdb.LineTableEntry"gdb.LineTableEntry*(
-self
-gdb.LineTable"gdb.LineTablez310z311z312z313z314*›
-linegdb.LineTable.line"^
-"builtins.tuple[gdb.LineTableEntry](
-gdb.LineTableEntry"gdb.LineTableEntry"builtins.tuple*(
-self
-gdb.LineTable"gdb.LineTable*
-builtins.int"builtins.intz310z311z312z313z314*•
-has_linegdb.LineTable.has_line"
-builtins.bool"builtins.bool*(
-self
-gdb.LineTable"gdb.LineTable*
-builtins.int"builtins.intz310z311z312z313z314*∑
-source_lnesgdb.LineTable.source_lnes"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*(
-self
-gdb.LineTable"gdb.LineTablez310z311z312z313z314j310j311j312j313j314ä
+self(*
+pointer*
 
-Breakpointgdb.Breakpoint"builtins.object*Ä
-stopgdb.Breakpoint.stop"
-builtins.bool"builtins.bool**
-self 
-gdb.Breakpoint"gdb.Breakpointz310z311z312z313z314*à
-is_validgdb.Breakpoint.is_valid"
-builtins.bool"builtins.bool**
-self 
-gdb.Breakpoint"gdb.Breakpointz310z311z312z313z314*n
-deletegdb.Breakpoint.delete"
-None**
-self 
-gdb.Breakpoint"gdb.Breakpointz310z311z312z313z3142Ò
-__init__gdb.Breakpoint.__init__Ä
-__init__gdb.Breakpoint.__init__"
-None**
-self 
-gdb.Breakpoint"gdb.Breakpoint*&
-spec
-builtins.str"builtins.str*(
-type
-builtins.int"builtins.int *,
-wp_class
-builtins.int"builtins.int *.
-internal
-builtins.bool"builtins.bool */
-	temporary
-builtins.bool"builtins.bool */
-	qualified
-builtins.bool"builtins.bool 0:typing.overloadXØ
-__init__gdb.Breakpoint.__init__"
-None**
-self 
-gdb.Breakpoint"gdb.Breakpoint**
-source
-builtins.str"builtins.str *,
-function
-builtins.str"builtins.str *)
-label
-builtins.str"builtins.str *(
-line
-builtins.int"builtins.int *.
-internal
-builtins.bool"builtins.bool */
-	temporary
-builtins.bool"builtins.bool */
-	qualified
-builtins.bool"builtins.bool 0:typing.overloadX"310"311"312"313"314j310j311j312j313j314rZ
-enabledgdb.Breakpoint.enabled
-builtins.bool"builtins.bool*310*311*312*313*314rX
-silentgdb.Breakpoint.silent
-builtins.bool"builtins.bool*310*311*312*313*314rZ
-pendinggdb.Breakpoint.pending
-builtins.bool"builtins.bool*310*311*312*313*314r~
-threadgdb.Breakpoint.threadD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rz
-taskgdb.Breakpoint.taskD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rb
-ignore_countgdb.Breakpoint.ignore_count
-builtins.int"builtins.int*310*311*312*313*314rV
-numbergdb.Breakpoint.number
-builtins.int"builtins.int*310*311*312*313*314rR
-typegdb.Breakpoint.type
-builtins.int"builtins.int*310*311*312*313*314rZ
-visiblegdb.Breakpoint.visible
-builtins.bool"builtins.bool*310*311*312*313*314r^
-	temporarygdb.Breakpoint.temporary
-builtins.bool"builtins.bool*310*311*312*313*314r\
-	hit_countgdb.Breakpoint.hit_count
-builtins.int"builtins.int*310*311*312*313*314rÇ
-locationgdb.Breakpoint.locationD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÜ
+self(*
+strip_typedefs*
 
-expressiongdb.Breakpoint.expressionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÑ
-	conditiongdb.Breakpoint.conditionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÇ
-commandsgdb.Breakpoint.commandsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314∆
-FinishBreakpointgdb.FinishBreakpoint"gdb.Breakpoint*Ÿ
-__init__gdb.FinishBreakpoint.__init__"
-None*6
-self,
-gdb.FinishBreakpoint"gdb.FinishBreakpoint*#
-frame
-	gdb.Frame"	gdb.Frame *.
-internal
-builtins.bool"builtins.bool z310z311z312z313z314*å
-out_of_scope!gdb.FinishBreakpoint.out_of_scope"
-None*6
-self,
-gdb.FinishBreakpoint"gdb.FinishBreakpointz310z311z312z313z314j310j311j312j313j314rá
-return_value!gdb.FinishBreakpoint.return_value;
-Union[gdb.Value,None]
-	gdb.Value"	gdb.Value
-None*310*311*312*313*314ñ
+self(*
+target*
 
-LazyStringgdb.LazyString"builtins.object*z
-valuegdb.LazyString.value"
-	gdb.Value"	gdb.Value**
-self 
-gdb.LazyString"gdb.LazyStringz310z311z312z313z314j310j311j312j313j314rR
-addressgdb.LazyString.address
-	gdb.Value"	gdb.Value*310*311*312*313*314rV
-lengthgdb.LazyString.length
-builtins.int"builtins.int*310*311*312*313*314rZ
-encodinggdb.LazyString.encoding
-builtins.str"builtins.str*310*311*312*313*314rJ
-typegdb.LazyString.type
-gdb.Type"gdb.Type*310*311*312*313*314ö
+self(*9
+template_argument*
 
-Architecturegdb.Architecture"builtins.object*Ñ
-namegdb.Architecture.name"
-builtins.str"builtins.str*.
-self$
-gdb.Architecture"gdb.Architecturez310z311z312z313z314*≈
-disassemblegdb.Architecture.disassemble"À
-:builtins.list[builtins.dict[builtins.str,builtins.object]]~
-+builtins.dict[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"builtins.dict"builtins.list*.
-self$
-gdb.Architecture"gdb.Architecture**
-start_pc
-builtins.int"builtins.int**
-end_pc
-builtins.int"builtins.int *)
-count
-builtins.int"builtins.int z310z311z312z313z314*‚
-integer_typegdb.Architecture.integer_type"
-gdb.Type"gdb.Type*.
-self$
-gdb.Architecture"gdb.Architecture*&
-size
-builtins.int"builtins.int*,
-signed
-builtins.bool"builtins.bool z310z311z312z313z314*‡
-	registersgdb.Architecture.registers"@
-gdb.RegisterDescriptorIterator"gdb.RegisterDescriptorIterator*.
-self$
-gdb.Architecture"gdb.Architecture*,
-reggroup
-builtins.str"builtins.str z310z311z312z313z314*∂
-register_groups gdb.Architecture.register_groups"8
-gdb.RegisterGroupsIterator"gdb.RegisterGroupsIterator*.
-self$
-gdb.Architecture"gdb.Architecturez310z311z312z313z314j310j311j312j313j314≤
-RegisterDescriptorgdb.RegisterDescriptor"builtins.objectj310j311j312j313j314rZ
-namegdb.RegisterDescriptor.name
-builtins.str"builtins.str*310*311*312*313*314“
-RegisterDescriptorIteratorgdb.RegisterDescriptorIterator"typing.Iterator* 
-__next__'gdb.RegisterDescriptorIterator.__next__"0
-gdb.RegisterDescriptor"gdb.RegisterDescriptor*J
-self@
-gdb.RegisterDescriptorIterator"gdb.RegisterDescriptorIteratorz310z311z312z313z314*ú
-find#gdb.RegisterDescriptorIterator.find"b
-"Union[gdb.RegisterDescriptor,None]0
-gdb.RegisterDescriptor"gdb.RegisterDescriptor
-None*J
-self@
-gdb.RegisterDescriptorIterator"gdb.RegisterDescriptorIterator*&
-name
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314£
-RegisterGroupgdb.RegisterGroup"builtins.objectj310j311j312j313j314rU
-namegdb.RegisterGroup.name
-builtins.str"builtins.str*310*311*312*313*314ï
-RegisterGroupsIteratorgdb.RegisterGroupsIterator"typing.Iterator*¥
-__next__#gdb.RegisterGroupsIterator.__next__"&
-gdb.RegisterGroup"gdb.RegisterGroup*B
-self8
-gdb.RegisterGroupsIterator"gdb.RegisterGroupsIteratorz310z311z312z313z314j310j311j312j313j314í
-TargetConnectiongdb.TargetConnection"builtins.object*ö
-is_validgdb.TargetConnection.is_valid"
-builtins.bool"builtins.bool*6
-self,
-gdb.TargetConnection"gdb.TargetConnectionz310z311z312z313z314j310j311j312j313j314rV
-numgdb.TargetConnection.num
-builtins.int"builtins.int*310*311*312*313*314rX
-typegdb.TargetConnection.type
-builtins.str"builtins.str*310*311*312*313*314rf
-description gdb.TargetConnection.description
-builtins.str"builtins.str*310*311*312*313*314rÜ
-detailsgdb.TargetConnection.detailsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314é
-RemoteTargetConnectiongdb.RemoteTargetConnection"gdb.TargetConnection*®
-send_packet&gdb.RemoteTargetConnection.send_packet" 
-builtins.bytes"builtins.bytes*B
-self8
-gdb.RemoteTargetConnection"gdb.RemoteTargetConnection*r
-packetf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314Ë
-	TuiWindowgdb.TuiWindow"builtins.object*Ö
-is_validgdb.TuiWindow.is_valid"
-builtins.bool"builtins.bool*(
-self
-gdb.TuiWindow"gdb.TuiWindowz310z311z312z313z314*i
-erasegdb.TuiWindow.erase"
-None*(
-self
-gdb.TuiWindow"gdb.TuiWindowz310z311z312z313z314*≠
-writegdb.TuiWindow.write"
-None*(
-self
-gdb.TuiWindow"gdb.TuiWindow*
-builtins.str"builtins.str*"
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rS
-widthgdb.TuiWindow.width
-builtins.int"builtins.int*310*311*312*313*314rU
-heightgdb.TuiWindow.height
-builtins.int"builtins.int*310*311*312*313*314rS
-titlegdb.TuiWindow.title
-builtins.str"builtins.str*310*311*312*313*314ä
-_Windowgdb._Window"builtins.object*c
-closegdb._Window.close"
-None*$
-self
-gdb._Window"gdb._Windowz310z311z312z313z314*e
-rendergdb._Window.render"
-None*$
-self
-gdb._Window"gdb._Windowz310z311z312z313z314*é
-hscrollgdb._Window.hscroll"
-None*$
-self
-gdb._Window"gdb._Window*%
-num
-builtins.int"builtins.intz310z311z312z313z314*é
-vscrollgdb._Window.vscroll"
-None*$
-self
-gdb._Window"gdb._Window*%
-num
-builtins.int"builtins.intz310z311z312z313z314*◊
-clickgdb._Window.click"
-None*$
-self
-gdb._Window"gdb._Window*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*(
-button
-builtins.int"builtins.intz310z311z312z313z314Xj310j311j312j313j314Å
-executegdb.execute"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*)
-command
-builtins.str"builtins.str*.
-from_tty
-builtins.bool"builtins.bool */
-	to_string
-builtins.bool"builtins.bool z310z311z312z313z314ç
-breakpointsgdb.breakpoints"T
-typing.Sequence[gdb.Breakpoint] 
-gdb.Breakpoint"gdb.Breakpoint"typing.Sequencez310z311z312z313z314ﬁ
-rbreak
-gdb.rbreak"P
-builtins.list[gdb.Breakpoint] 
-gdb.Breakpoint"gdb.Breakpoint"builtins.list*'
-regex
-builtins.str"builtins.str*-
-minsyms
-builtins.bool"builtins.bool *,
-throttle
-builtins.int"builtins.int *W
-symtabsH
-typing.Iterator[gdb.Symtab]
+self(*
+n(*
+block (*
+optimized_out*
 
-gdb.Symtab"
-gdb.Symtab"typing.Iterator z310z311z312z313z314Û
-	parametergdb.parameter"ù
-3Union[builtins.bool,builtins.int,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.int"builtins.int
-builtins.str"builtins.str
-None*
-builtins.str"builtins.strz310z311z312z313z314ô
-set_parametergdb.set_parameter"
-None*&
-name
-builtins.str"builtins.str*©
-valueù
-3Union[builtins.bool,builtins.int,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.int"builtins.int
-builtins.str"builtins.str
-Nonez310z311z312z313z314Õ
-with_parametergdb.with_parameter"π
-Acontextlib.AbstractContextManager[None,Union[builtins.bool,None]]
-NoneG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None"!contextlib.AbstractContextManager*&
-name
-builtins.str"builtins.str*©
-valueù
-3Union[builtins.bool,builtins.int,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.int"builtins.int
-builtins.str"builtins.str
-Nonez310z311z312z313z314g
-historygdb.history"
-	gdb.Value"	gdb.Value*
-builtins.int"builtins.intz310z311z312z313z314o
-add_historygdb.add_history"
-builtins.int"builtins.int*
-	gdb.Value"	gdb.Valuez310z311z312z313z314Y
-history_countgdb.history_count"
-builtins.int"builtins.intz310z311z312z313z314¶
-convenience_variablegdb.convenience_variable";
-Union[gdb.Value,None]
-	gdb.Value"	gdb.Value
-None*
-builtins.str"builtins.strz310z311z312z313z314˘
-set_convenience_variablegdb.set_convenience_variable"
-None*
-builtins.str"builtins.str*˚¯
-QUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]],None]ñ
-ETypeAlias[Union[builtins.bool,builtins.float,builtins.str,gdb.Value]]∂
-:Union[builtins.bool,builtins.float,builtins.str,gdb.Value]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.str"builtins.str
-	gdb.Value"	gdb.Value"gdb._ValueOrNative
-Nonez310z311z312z313z314u
-parse_and_evalgdb.parse_and_eval"
-	gdb.Value"	gdb.Value*
-builtins.str"builtins.strz310z311z312z313z314∆
-find_pc_linegdb.find_pc_line"*
-gdb.Symtab_and_line"gdb.Symtab_and_line*_
-pcW
-Union[builtins.int,gdb.Value]
-builtins.int"builtins.int
-	gdb.Value"	gdb.Valuez310z311z312z313z314é
+self(r
+alignof0r
+code0r
+dynamic0r
+name0r
 
-post_eventgdb.post_event"
-None*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314ã
-write	gdb.write"
-None*(
-string
-builtins.str"builtins.str**
-stream
-builtins.int"builtins.int z310z311z312z313z314a
-flush	gdb.flush"
-None**
-stream
-builtins.int"builtins.int z310z311z312z313z314[
-target_charsetgdb.target_charset"
-builtins.str"builtins.strz310z311z312z313z314e
-target_wide_charsetgdb.target_wide_charset"
-builtins.str"builtins.strz310z311z312z313z314W
-host_charsetgdb.host_charset"
-builtins.str"builtins.strz310z311z312z313z314¶
+sizeof0r
+tag0r
+objfile0Ü
+Field"builtins.objectr
 
-solib_namegdb.solib_name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*)
-address
-builtins.int"builtins.intz310z311z312z313z314ò
-decode_linegdb.decode_line"º
-OTuple[Union[builtins.str,None],Union[builtins.tuple[gdb.Symtab_and_line],None]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None†
-/Union[builtins.tuple[gdb.Symtab_and_line],None]a
-#builtins.tuple[gdb.Symtab_and_line]*
-gdb.Symtab_and_line"gdb.Symtab_and_line"builtins.tuple
-None* 
-builtins.str"builtins.str z310z311z312z313z314á
-prompt_hookgdb.prompt_hook"
-builtins.str"builtins.str*0
-current_prompt
-builtins.str"builtins.strz310z311z312z313z314ë
-architecture_namesgdb.architecture_names"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314õ
-connectionsgdb.connections"b
-#builtins.list[gdb.TargetConnection],
-gdb.TargetConnection"gdb.TargetConnection"builtins.listz310z311z312z313z314ö
-lookup_typegdb.lookup_type"
-gdb.Type"gdb.Type*&
-name
-builtins.str"builtins.str*#
-block
-	gdb.Block"	gdb.Block z310z311z312z313z314∑
-default_visualizergdb.default_visualizer"V
-Union[gdb._PrettyPrinter,None](
-gdb._PrettyPrinter"gdb._PrettyPrinter
-None*
-	gdb.Value"	gdb.Valuez310z311z312z313z314Å
-	inferiorsgdb.inferiors"L
-builtins.tuple[gdb.Inferior]
-gdb.Inferior"gdb.Inferior"builtins.tuplez310z311z312z313z314a
-selected_inferiorgdb.selected_inferior"
-gdb.Inferior"gdb.Inferiorz310z311z312z313z314i
-selected_threadgdb.selected_thread"(
-gdb.InferiorThread"gdb.InferiorThreadz310z311z312z313z314ù
-start_recordinggdb.start_recording"
+bitpos0r
+enumval0r
+name0r
 
-gdb.Record"
-gdb.Record* 
-builtins.str"builtins.str * 
-builtins.str"builtins.str z310z311z312z313z314É
-current_recordinggdb.current_recording">
-Union[gdb.Record,None]
+artificial0r
+is_base_class0r
+bitsize0r
+type0r
+parent_type0>
+_PrettyPrinter"builtins.object*
+	to_string*
 
-gdb.Record"
-gdb.Record
-Nonez310z311z312z313z314G
-stop_recordinggdb.stop_recording"
-Nonez310z311z312z313z314©
-string_to_argvgdb.string_to_argv"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*
-builtins.str"builtins.strz310z311z312z313z314å
-current_progspacegdb.current_progspace"G
-Union[gdb.Progspace,None]
-gdb.Progspace"gdb.Progspace
-Nonez310z311z312z313z314à
+self(Xn
+_FrameFilter"builtins.object*&
+filter*
 
-progspacesgdb.progspaces"Q
-typing.Sequence[gdb.Progspace]
-gdb.Progspace"gdb.Progspace"typing.Sequencez310z311z312z313z314Ç
-current_objfilegdb.current_objfile"A
-Union[gdb.Objfile,None]
-gdb.Objfile"gdb.Objfile
-Nonez310z311z312z313z314z
-objfilesgdb.objfiles"G
-builtins.list[gdb.Objfile]
-gdb.Objfile"gdb.Objfile"builtins.listz310z311z312z313z314€
-lookup_objfilegdb.lookup_objfile"A
-Union[gdb.Objfile,None]
-gdb.Objfile"gdb.Objfile
-None*&
-name
-builtins.str"builtins.str*1
-by_build_id
-builtins.bool"builtins.bool z310z311z312z313z314U
-selected_framegdb.selected_frame"
-	gdb.Frame"	gdb.Framez310z311z312z313z314Q
-newest_framegdb.newest_frame"
-	gdb.Frame"	gdb.Framez310z311z312z313z314è
-frame_stop_reason_stringgdb.frame_stop_reason_string"
-builtins.str"builtins.str*
-builtins.int"builtins.intz310z311z312z313z314[
-invalidate_cached_framesgdb.invalidate_cached_frames"
-Nonez310z311z312z313z314ú
-block_for_pcgdb.block_for_pc";
-Union[gdb.Block,None]
-	gdb.Block"	gdb.Block
-None*$
-pc
-builtins.int"builtins.intz310z311z312z313z314Î
-lookup_symbolgdb.lookup_symbol"è
-+Tuple[Union[gdb.Symbol,None],builtins.bool]>
-Union[gdb.Symbol,None]
+self(*
+iterator(Xr
+name0r
+enabled0r
+priority0T
+_SymValueWrapper"builtins.object*
+symbol*
 
-gdb.Symbol"
-gdb.Symbol
-None
-builtins.bool"builtins.bool*&
-name
-builtins.str"builtins.str*H
-block;
-Union[gdb.Block,None]
-	gdb.Block"	gdb.Block
-None **
-domain
-builtins.int"builtins.int z310z311z312z313z314›
-lookup_global_symbolgdb.lookup_global_symbol">
-Union[gdb.Symbol,None]
+self(*
+value*
 
-gdb.Symbol"
-gdb.Symbol
-None*&
-name
-builtins.str"builtins.str**
-domain
-builtins.int"builtins.int z310z311z312z313z314›
-lookup_static_symbolgdb.lookup_static_symbol">
-Union[gdb.Symbol,None]
+self(X˘
+_FrameDecorator"builtins.object*
+elided!*
 
-gdb.Symbol"
-gdb.Symbol
-None*&
-name
-builtins.str"builtins.str**
-domain
-builtins.int"builtins.int z310z311z312z313z314Â
-lookup_static_symbolsgdb.lookup_static_symbols"D
-builtins.list[gdb.Symbol]
+self(*
+function*
 
-gdb.Symbol"
-gdb.Symbol"builtins.list*&
-name
-builtins.str"builtins.str**
-domain
-builtins.int"builtins.int z310z311z312z313z314’
-register_window_typegdb.register_window_type"
-None*&
-name
-builtins.str"builtins.str*X
-factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*}
-__path__gdb.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*ò
-__annotations__gdb.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*%
-gdbgdb *310*311*312*313*314*/
+self(*
+address"*
+
+self(*
+filename*
+
+self(*
+line"*
+
+self(*
+
+frame_args$*
+
+self(*
+frame_locals$*
+
+self(*
+inferior_frame*
+
+self(Xü
+PendingFrame"builtins.object*!
+read_register*
+
+self(%*('*&
+create_unwind_info(*
+
+self(%*()*
+architecture**
+
+self(%*
+level*
+
+self(%I
+
+UnwindInfo"builtins.object**
+add_saved_register*
+
+self((*('*(a
+Unwinder"builtins.object*-
+__call__+*
+
+self(,*
+pending_frame(r
+name0r
+enabled0˝
+Inferior"builtins.object*
+is_valid*
+
+self(-*
+threads/*
+
+self(-*
+architecture**
+
+self(-*8
+read_memory0*
+
+self(-*
+address(*
+length(*S
+write_memory0*
+
+self(-*
+address(*
+buffer(1*
+length (z310z311*X
+write_memory0*
+
+self(-*
+address(*
+buffer(2*
+length (z312z313z314*S
+search_memory"*
+
+self(-*
+address(*
+length(*
+pattern(1z310z311*X
+search_memory"*
+
+self(-*
+address(*
+length(*
+pattern(2z312z313z314*0
+thread_from_handle.*
+
+self(-*
+handle(r
+num0r
+connection_num0r
+pid0r
+was_attached0r
+	progspace03˘
+InferiorThread"builtins.object*
+is_valid*
+
+self(.*
+switch*
+
+self(.*
+
+is_stopped*
+
+self(.*
+
+is_running*
+
+self(.*
+	is_exited*
+
+self(.*
+handle4*
+
+self(.r
+name0r
+num0r
+
+global_num0r
+ptid05r
+inferior0-®
+Record"builtins.object*
+goto*
+
+self(6*(7r
+
+method0r
+
+format0r	
+begin07r
+end07r
+replay_position08r
+instruction_history09r
+function_call_history0;G
+Instruction"builtins.objectr
+pc0r
+data00r
+decoded0r
+size0M
+RecordInstruction"gdb.Instructionr
+
+number0r
+sal0=r
+is_speculative0J
+	RecordGap"gdb.Instructionr
+
+number0r
+
+error_code0r
+error_string0y
+RecordFunctionSegment"builtins.objectr
+
+number0r
+
+symbol0>r	
+level0"r
+instructions0Br
+up0Cr
+prev0Cr
+next0CÖ
+Command"builtins.object*b
+__init__*
+
+self(D*
+
+name(*
+command_class(*
+completer_class (*
+prefix (*
+dont_repeat*
+
+self(D*6
+invoke*
+
+self(D*
+argument(*
+from_tty(*0
+complete)*
+
+self(D*
+
+text(*
+
+word(Ñ
+	MICommand"builtins.object*$
+__init__*
+
+self(E*
+
+name(*'
+invokeG*
+
+self(E*
+	arguments(Hr
+name0r
+	installed0˙
+	Parameter"builtins.object*g
+__init__*
+
+self(I*
+
+name(*
+command_class(*
+parameter_class(*
+enum_sequence (J*
+get_set_string*
+
+self(I*-
+get_show_string*
+
+self(I*
+svalue(r
+set_doc0r
+show_doc0r	
+value0)e
+Function"builtins.object*$
+__init__*
+
+self(K*
+
+name(*"
+invoke*
+
+self(K*
+
+args(˝
+	Progspace"builtins.object* 
+block_for_pcL*
+
+self(3*(* 
+find_pc_line<*
+
+self(3*(*
+is_valid*
+
+self(3*
+objfilesM*
+
+self(3*
+
+solib_name*
+
+self(3*(r
+filename0r
+pretty_printers0Qr
+type_printers0Sr
+frame_filters0TÏ
+Objfile"builtins.object*
+is_valid*
+
+self(*3
+add_separate_debug_file*
+
+self(*
+
+file(*@
+lookup_global_symbol>*
+
+self(*
+
+name(*
+domain (*@
+lookup_static_method>*
+
+self(*
+
+name(*
+domain (r
+filename0r
+username0r	
+owner0r
+build_id0r
+	progspace03r
+pretty_printers0Qr
+type_printers0Sr
+frame_filters0T¨
+Frame"builtins.object*
+is_valid*
+
+self(*
+name*
+
+self(*
+architecture**
+
+self(*
+type*
+
+self(*"
+unwind_stop_reason*
+
+self(*
+pc*
+
+self(*
+block*
+
+self(*
+function*
+
+self(*
+olderU*
+
+self(*
+newerU*
+
+self(*
+find_sal<*
+
+self(*!
+read_register*
+
+self(*('*+
+read_var*
+
+self(*(V*
+block (L*
+select*
+
+self(*
+level*
+
+self(∏
+Block"builtins.object*
+is_valid*
+
+self(*
+__iter__W*(r	
+start0r
+end0r
+function0>r
+
+superblock0Lr
+global_block0r
+static_block0Lr
+	is_global0r
+	is_static0f
+BlockIterator"builtins.object*
+is_valid*
+
+self(W*
+__iter__X*(X*
+__next__*
+
+self(WÅ
+Symbol"builtins.object*
+is_valid*
+
+self(*
+value*
+
+self(* (r
+type0Yr
+
+symtab0Zr
+line0r
+name0r
+linkage_name0r
+
+print_name0r
+
+addr_class0r
+needs_frame0r
+is_argument0r
+is_constant0r
+is_function0r
+is_variable0d
+Symtab_and_line"builtins.object*
+is_valid*
+
+self(<r
+
+symtab0Zr
+pc0r
+last0r
+line0Õ
+Symtab"builtins.object*
+is_valid*
+
+self(Z*
+fullname*
+
+self(Z*
+global_block*
+
+self(Z*
+static_block*
+
+self(Z*
+	linetable[*
+
+self(Zr
+filename0r
+objfile0r
+producer03
+LineTableEntry"builtins.objectr
+line0r
+pc0ù
+	LineTable"typing.Iterator*
+__iter__X*(X*
+__next__\*
+
+self([*
+line]*
+
+self([*(*
+has_line*
+
+self([*(*
+source_lnes^*
+
+self([˜
+
+Breakpoint"builtins.object*
+stop*
+
+self(_*
+is_valid*
+
+self(_*
+delete*
+
+self(_2≈
+__init__ë
+__init__*
+
+self(_*
+
+spec(*
+type (*
+wp_class (*
+internal (*
+	temporary (*
+	qualified (0:typing.overloadX§
+__init__*
+
+self(_*
+source (*
+function (*
+label (*
+line (*
+internal (*
+	temporary (*
+	qualified (0:typing.overloadXr
+enabled0r
+
+silent0r
+pending0r
+
+thread0"r
+task0r
+ignore_count0r
+
+number0r
+type0r
+visible0r
+	temporary0r
+	hit_count0r
+location0r
+
+expression0r
+	condition0r
+commands0ç
+FinishBreakpoint"gdb.Breakpoint*9
+__init__*
+
+self(`*
+frame (*
+internal (*
+out_of_scope*
+
+self(`r
+return_value0ae
+
+LazyString"builtins.object*
+value*
+
+self(r
+address0r
+
+length0r
+encoding0r
+type0â
+Architecture"builtins.object*
+name*
+
+self(**J
+disassembleb*
+
+self(**
+start_pc(*
+end_pc (*
+count (*8
+integer_type*
+
+self(**
+
+size(*
+signed (*+
+	registersc*
+
+self(**
+reggroup (*
+register_groupsd*
+
+self(*/
+RegisterDescriptor"builtins.objectr
+name0i
+RegisterDescriptorIterator"typing.Iterator*
+__next__&*
+
+self(c* 
+finde*
+
+self(c*
+
+name(*
+RegisterGroup"builtins.objectr
+name0C
+RegisterGroupsIterator"typing.Iterator*
+__next__f*
+
+self(dn
+TargetConnection"builtins.object*
+is_valid*
+
+self(gr
+num0r
+type0r
+description0r
+details0Y
+RemoteTargetConnection"gdb.TargetConnection*)
+send_packet4*
+
+self(h*
+packet(iê
+	TuiWindow"builtins.object*
+is_valid*
+
+self(j*
+erase*
+
+self(j*
+write*
+
+self(j*(* (r	
+width0r
+
+height0r	
+title0 
+_Window"builtins.object*
+close*
+
+self(k*
+render*
+
+self(k*"
+hscroll*
+
+self(k*	
+num(*"
+vscroll*
+
+self(k*	
+num(*5
+click*
+
+self(k*
+x(*
+y(*
+button(X?
+execute*
+command(*
+from_tty (*
+	to_string (
+breakpointslK
+rbreakm*
+regex(*
+minsyms (*
+throttle (*
+symtabs (n
+	parametero*(*
+set_parameter*
+
+name(*
+value(o+
+with_parameterq*
+
+name(*
+value(o
+history*(
+add_history*(
+history_count
+convenience_variablea*($
+set_convenience_variable*(*(
+parse_and_eval*(
+find_pc_line<*
+pc(
+
+post_event*(O'
+write*
+string(*
+stream (
+flush*
+stream (
+target_charset
+target_wide_charset
+host_charset
+
+solib_name*
+address(
+decode_linet* (%
+prompt_hook*
+current_prompt(
+architecture_namesH
+connectionsu*
+lookup_type*
+
+name(*
+block (
+default_visualizerv*(
+	inferiorsw
+selected_inferior-
+selected_thread.
+start_recording6* (* (
+current_recordingx
+stop_recording
+string_to_argvH*(
+current_progspacey
+
+progspacesz
+current_objfile
+objfiles{3
+lookup_objfile*
+
+name(*
+by_build_id (
+selected_frame
+newest_frame 
+frame_stop_reason_string*(
+invalidate_cached_frames
+block_for_pcL*
+pc(<
+lookup_symbol|*
+
+name(*
+block (L*
+domain (4
+lookup_global_symbol>*
+
+name(*
+domain (4
+lookup_static_symbol>*
+
+name(*
+domain (5
+lookup_static_symbols}*
+
+name(*
+domain (3
+register_window_type*
+
+name(*
+factory(O*
+__path__0H*
+__annotations__0*
+gdbgdb *
 events
-gdb.events *310*311*312*313*314*3
-printinggdb.printing *310*311*312*313*314*/
+gdb.events *
+printinggdb.printing *
 prompt
-gdb.prompt *310*311*312*313*314*-
-types	gdb.types *310*311*312*313*314*Q
-	PYTHONDIRgdb.PYTHONDIR
-builtins.str"builtins.str*310*311*312*313*314*K
-STDOUT
-gdb.STDOUT
-builtins.int"builtins.int*310*311*312*313*314*K
-STDERR
-gdb.STDERR
-builtins.int"builtins.int*310*311*312*313*314*K
-STDLOG
-gdb.STDLOG
-builtins.int"builtins.int*310*311*312*313*314*Y
-TYPE_CODE_PTRgdb.TYPE_CODE_PTR
-builtins.int"builtins.int*310*311*312*313*314*]
-TYPE_CODE_ARRAYgdb.TYPE_CODE_ARRAY
-builtins.int"builtins.int*310*311*312*313*314*_
-TYPE_CODE_STRUCTgdb.TYPE_CODE_STRUCT
-builtins.int"builtins.int*310*311*312*313*314*]
-TYPE_CODE_UNIONgdb.TYPE_CODE_UNION
-builtins.int"builtins.int*310*311*312*313*314*[
-TYPE_CODE_ENUMgdb.TYPE_CODE_ENUM
-builtins.int"builtins.int*310*311*312*313*314*]
-TYPE_CODE_FLAGSgdb.TYPE_CODE_FLAGS
-builtins.int"builtins.int*310*311*312*313*314*[
-TYPE_CODE_FUNCgdb.TYPE_CODE_FUNC
-builtins.int"builtins.int*310*311*312*313*314*Y
-TYPE_CODE_INTgdb.TYPE_CODE_INT
-builtins.int"builtins.int*310*311*312*313*314*Y
-TYPE_CODE_FLTgdb.TYPE_CODE_FLT
-builtins.int"builtins.int*310*311*312*313*314*[
-TYPE_CODE_VOIDgdb.TYPE_CODE_VOID
-builtins.int"builtins.int*310*311*312*313*314*Y
-TYPE_CODE_SETgdb.TYPE_CODE_SET
-builtins.int"builtins.int*310*311*312*313*314*]
-TYPE_CODE_RANGEgdb.TYPE_CODE_RANGE
-builtins.int"builtins.int*310*311*312*313*314*_
-TYPE_CODE_STRINGgdb.TYPE_CODE_STRING
-builtins.int"builtins.int*310*311*312*313*314*e
-TYPE_CODE_BITSTRINGgdb.TYPE_CODE_BITSTRING
-builtins.int"builtins.int*310*311*312*313*314*]
-TYPE_CODE_ERRORgdb.TYPE_CODE_ERROR
-builtins.int"builtins.int*310*311*312*313*314*_
-TYPE_CODE_METHODgdb.TYPE_CODE_METHOD
-builtins.int"builtins.int*310*311*312*313*314*e
-TYPE_CODE_METHODPTRgdb.TYPE_CODE_METHODPTR
-builtins.int"builtins.int*310*311*312*313*314*e
-TYPE_CODE_MEMBERPTRgdb.TYPE_CODE_MEMBERPTR
-builtins.int"builtins.int*310*311*312*313*314*Y
-TYPE_CODE_REFgdb.TYPE_CODE_REF
-builtins.int"builtins.int*310*311*312*313*314*g
-TYPE_CODE_RVALUE_REFgdb.TYPE_CODE_RVALUE_REF
-builtins.int"builtins.int*310*311*312*313*314*[
-TYPE_CODE_CHARgdb.TYPE_CODE_CHAR
-builtins.int"builtins.int*310*311*312*313*314*[
-TYPE_CODE_BOOLgdb.TYPE_CODE_BOOL
-builtins.int"builtins.int*310*311*312*313*314*a
-TYPE_CODE_COMPLEXgdb.TYPE_CODE_COMPLEX
-builtins.int"builtins.int*310*311*312*313*314*a
-TYPE_CODE_TYPEDEFgdb.TYPE_CODE_TYPEDEF
-builtins.int"builtins.int*310*311*312*313*314*e
-TYPE_CODE_NAMESPACEgdb.TYPE_CODE_NAMESPACE
-builtins.int"builtins.int*310*311*312*313*314*c
-TYPE_CODE_DECFLOATgdb.TYPE_CODE_DECFLOAT
-builtins.int"builtins.int*310*311*312*313*314*u
-TYPE_CODE_INTERNAL_FUNCTIONgdb.TYPE_CODE_INTERNAL_FUNCTION
-builtins.int"builtins.int*310*311*312*313*314*¨
-pretty_printersgdb.pretty_printersÍ
-9builtins.list[TypeAlias[CallableType[builtins.function]]]ù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" gdb._PrettyPrinterLookupFunction"builtins.list*310*311*312*313*314*W
-COMMAND_NONEgdb.COMMAND_NONE
-builtins.int"builtins.int*310*311*312*313*314*]
-COMMAND_RUNNINGgdb.COMMAND_RUNNING
-builtins.int"builtins.int*310*311*312*313*314*W
-COMMAND_DATAgdb.COMMAND_DATA
-builtins.int"builtins.int*310*311*312*313*314*Y
-COMMAND_STACKgdb.COMMAND_STACK
-builtins.int"builtins.int*310*311*312*313*314*Y
-COMMAND_FILESgdb.COMMAND_FILES
-builtins.int"builtins.int*310*311*312*313*314*]
-COMMAND_SUPPORTgdb.COMMAND_SUPPORT
-builtins.int"builtins.int*310*311*312*313*314*[
-COMMAND_STATUSgdb.COMMAND_STATUS
-builtins.int"builtins.int*310*311*312*313*314*e
-COMMAND_BREAKPOINTSgdb.COMMAND_BREAKPOINTS
-builtins.int"builtins.int*310*311*312*313*314*e
-COMMAND_TRACEPOINTSgdb.COMMAND_TRACEPOINTS
-builtins.int"builtins.int*310*311*312*313*314*U
-COMMAND_TUIgdb.COMMAND_TUI
-builtins.int"builtins.int*310*311*312*313*314*W
-COMMAND_USERgdb.COMMAND_USER
-builtins.int"builtins.int*310*311*312*313*314*]
-COMMAND_OBSCUREgdb.COMMAND_OBSCURE
-builtins.int"builtins.int*310*311*312*313*314*e
-COMMAND_MAINTENANCEgdb.COMMAND_MAINTENANCE
-builtins.int"builtins.int*310*311*312*313*314*Y
-COMPLETE_NONEgdb.COMPLETE_NONE
-builtins.int"builtins.int*310*311*312*313*314*a
-COMPLETE_FILENAMEgdb.COMPLETE_FILENAME
-builtins.int"builtins.int*310*311*312*313*314*a
-COMPLETE_LOCATIONgdb.COMPLETE_LOCATION
-builtins.int"builtins.int*310*311*312*313*314*_
-COMPLETE_COMMANDgdb.COMPLETE_COMMAND
-builtins.int"builtins.int*310*311*312*313*314*]
-COMPLETE_SYMBOLgdb.COMPLETE_SYMBOL
-builtins.int"builtins.int*310*311*312*313*314*e
-COMPLETE_EXPRESSIONgdb.COMPLETE_EXPRESSION
-builtins.int"builtins.int*310*311*312*313*314*Y
-PARAM_BOOLEANgdb.PARAM_BOOLEAN
-builtins.int"builtins.int*310*311*312*313*314*c
-PARAM_AUTO_BOOLEANgdb.PARAM_AUTO_BOOLEAN
-builtins.int"builtins.int*310*311*312*313*314*[
-PARAM_UINTEGERgdb.PARAM_UINTEGER
-builtins.int"builtins.int*310*311*312*313*314*Y
-PARAM_INTEGERgdb.PARAM_INTEGER
-builtins.int"builtins.int*310*311*312*313*314*W
-PARAM_STRINGgdb.PARAM_STRING
-builtins.int"builtins.int*310*311*312*313*314*i
-PARAM_STRING_NOESCAPEgdb.PARAM_STRING_NOESCAPE
-builtins.int"builtins.int*310*311*312*313*314*m
-PARAM_OPTIONAL_FILENAMEgdb.PARAM_OPTIONAL_FILENAME
-builtins.int"builtins.int*310*311*312*313*314*[
-PARAM_FILENAMEgdb.PARAM_FILENAME
-builtins.int"builtins.int*310*311*312*313*314*[
-PARAM_ZINTEGERgdb.PARAM_ZINTEGER
-builtins.int"builtins.int*310*311*312*313*314*]
-PARAM_ZUINTEGERgdb.PARAM_ZUINTEGER
-builtins.int"builtins.int*310*311*312*313*314*q
-PARAM_ZUINTEGER_UNLIMITEDgdb.PARAM_ZUINTEGER_UNLIMITED
-builtins.int"builtins.int*310*311*312*313*314*S
+gdb.prompt *
+types	gdb.types *
+	PYTHONDIR0*
 
-PARAM_ENUMgdb.PARAM_ENUM
-builtins.int"builtins.int*310*311*312*313*314*W
-NORMAL_FRAMEgdb.NORMAL_FRAME
-builtins.int"builtins.int*310*311*312*313*314*W
-INLINE_FRAMEgdb.INLINE_FRAME
-builtins.int"builtins.int*310*311*312*313*314*[
-TAILCALL_FRAMEgdb.TAILCALL_FRAME
-builtins.int"builtins.int*310*311*312*313*314*[
-SIGTRAMP_FRAMEgdb.SIGTRAMP_FRAME
-builtins.int"builtins.int*310*311*312*313*314*S
+STDOUT0*
 
-ARCH_FRAMEgdb.ARCH_FRAME
-builtins.int"builtins.int*310*311*312*313*314*[
-SENTINEL_FRAMEgdb.SENTINEL_FRAME
-builtins.int"builtins.int*310*311*312*313*314*k
-FRAME_UNWIND_NO_REASONgdb.FRAME_UNWIND_NO_REASON
-builtins.int"builtins.int*310*311*312*313*314*g
-FRAME_UNWIND_NULL_IDgdb.FRAME_UNWIND_NULL_ID
-builtins.int"builtins.int*310*311*312*313*314*k
-FRAME_UNWIND_OUTERMOSTgdb.FRAME_UNWIND_OUTERMOST
-builtins.int"builtins.int*310*311*312*313*314*o
-FRAME_UNWIND_UNAVAILABLEgdb.FRAME_UNWIND_UNAVAILABLE
-builtins.int"builtins.int*310*311*312*313*314*i
-FRAME_UNWIND_INNER_IDgdb.FRAME_UNWIND_INNER_ID
-builtins.int"builtins.int*310*311*312*313*314*g
-FRAME_UNWIND_SAME_IDgdb.FRAME_UNWIND_SAME_ID
-builtins.int"builtins.int*310*311*312*313*314*o
-FRAME_UNWIND_NO_SAVED_PCgdb.FRAME_UNWIND_NO_SAVED_PC
-builtins.int"builtins.int*310*311*312*313*314*q
-FRAME_UNWIND_MEMORY_ERRORgdb.FRAME_UNWIND_MEMORY_ERROR
-builtins.int"builtins.int*310*311*312*313*314*o
-FRAME_UNWIND_FIRST_ERRORgdb.FRAME_UNWIND_FIRST_ERROR
-builtins.int"builtins.int*310*311*312*313*314*e
-SYMBOL_UNDEF_DOMAINgdb.SYMBOL_UNDEF_DOMAIN
-builtins.int"builtins.int*310*311*312*313*314*a
-SYMBOL_VAR_DOMAINgdb.SYMBOL_VAR_DOMAIN
-builtins.int"builtins.int*310*311*312*313*314*g
-SYMBOL_STRUCT_DOMAINgdb.SYMBOL_STRUCT_DOMAIN
-builtins.int"builtins.int*310*311*312*313*314*e
-SYMBOL_LABEL_DOMAINgdb.SYMBOL_LABEL_DOMAIN
-builtins.int"builtins.int*310*311*312*313*314*g
-SYMBOL_MODULE_DOMAINgdb.SYMBOL_MODULE_DOMAIN
-builtins.int"builtins.int*310*311*312*313*314*s
-SYMBOL_COMMON_BLOCK_DOMAINgdb.SYMBOL_COMMON_BLOCK_DOMAIN
-builtins.int"builtins.int*310*311*312*313*314*_
-SYMBOL_LOC_UNDEFgdb.SYMBOL_LOC_UNDEF
-builtins.int"builtins.int*310*311*312*313*314*_
-SYMBOL_LOC_CONSTgdb.SYMBOL_LOC_CONST
-builtins.int"builtins.int*310*311*312*313*314*a
-SYMBOL_LOC_STATICgdb.SYMBOL_LOC_STATIC
-builtins.int"builtins.int*310*311*312*313*314*e
-SYMBOL_LOC_REGISTERgdb.SYMBOL_LOC_REGISTER
-builtins.int"builtins.int*310*311*312*313*314*[
-SYMBOL_LOC_ARGgdb.SYMBOL_LOC_ARG
-builtins.int"builtins.int*310*311*312*313*314*c
-SYMBOL_LOC_REF_ARGgdb.SYMBOL_LOC_REF_ARG
-builtins.int"builtins.int*310*311*312*313*314*m
-SYMBOL_LOC_REGPARM_ADDRgdb.SYMBOL_LOC_REGPARM_ADDR
-builtins.int"builtins.int*310*311*312*313*314*_
-SYMBOL_LOC_LOCALgdb.SYMBOL_LOC_LOCAL
-builtins.int"builtins.int*310*311*312*313*314*c
-SYMBOL_LOC_TYPEDEFgdb.SYMBOL_LOC_TYPEDEF
-builtins.int"builtins.int*310*311*312*313*314*_
-SYMBOL_LOC_LABELgdb.SYMBOL_LOC_LABEL
-builtins.int"builtins.int*310*311*312*313*314*_
-SYMBOL_LOC_BLOCKgdb.SYMBOL_LOC_BLOCK
-builtins.int"builtins.int*310*311*312*313*314*k
-SYMBOL_LOC_CONST_BYTESgdb.SYMBOL_LOC_CONST_BYTES
-builtins.int"builtins.int*310*311*312*313*314*i
-SYMBOL_LOC_UNRESOLVEDgdb.SYMBOL_LOC_UNRESOLVED
-builtins.int"builtins.int*310*311*312*313*314*o
-SYMBOL_LOC_OPTIMIZED_OUTgdb.SYMBOL_LOC_OPTIMIZED_OUT
-builtins.int"builtins.int*310*311*312*313*314*e
-SYMBOL_LOC_COMPUTEDgdb.SYMBOL_LOC_COMPUTED
-builtins.int"builtins.int*310*311*312*313*314*m
-SYMBOL_LOC_COMMON_BLOCKgdb.SYMBOL_LOC_COMMON_BLOCK
-builtins.int"builtins.int*310*311*312*313*314*Y
-BP_BREAKPOINTgdb.BP_BREAKPOINT
-builtins.int"builtins.int*310*311*312*313*314*k
-BP_HARDWARE_BREAKPOINTgdb.BP_HARDWARE_BREAKPOINT
-builtins.int"builtins.int*310*311*312*313*314*Y
-BP_WATCHPOINTgdb.BP_WATCHPOINT
-builtins.int"builtins.int*310*311*312*313*314*k
-BP_HARDWARE_WATCHPOINTgdb.BP_HARDWARE_WATCHPOINT
-builtins.int"builtins.int*310*311*312*313*314*c
-BP_READ_WATCHPOINTgdb.BP_READ_WATCHPOINT
-builtins.int"builtins.int*310*311*312*313*314*g
-BP_ACCESS_WATCHPOINTgdb.BP_ACCESS_WATCHPOINT
-builtins.int"builtins.int*310*311*312*313*314*Y
-BP_CATCHPOINTgdb.BP_CATCHPOINT
-builtins.int"builtins.int*310*311*312*313*314*M
-WP_READgdb.WP_READ
-builtins.int"builtins.int*310*311*312*313*314*O
-WP_WRITEgdb.WP_WRITE
-builtins.int"builtins.int*310*311*312*313*314*Q
-	WP_ACCESSgdb.WP_ACCESS
-builtins.int"builtins.int*310*311*312*313*314
+STDERR0*
+
+STDLOG0*
+TYPE_CODE_PTR0*
+TYPE_CODE_ARRAY0*
+TYPE_CODE_STRUCT0*
+TYPE_CODE_UNION0*
+TYPE_CODE_ENUM0*
+TYPE_CODE_FLAGS0*
+TYPE_CODE_FUNC0*
+TYPE_CODE_INT0*
+TYPE_CODE_FLT0*
+TYPE_CODE_VOID0*
+TYPE_CODE_SET0*
+TYPE_CODE_RANGE0*
+TYPE_CODE_STRING0*
+TYPE_CODE_BITSTRING0*
+TYPE_CODE_ERROR0*
+TYPE_CODE_METHOD0*
+TYPE_CODE_METHODPTR0*
+TYPE_CODE_MEMBERPTR0*
+TYPE_CODE_REF0*
+TYPE_CODE_RVALUE_REF0*
+TYPE_CODE_CHAR0*
+TYPE_CODE_BOOL0*
+TYPE_CODE_COMPLEX0*
+TYPE_CODE_TYPEDEF0*
+TYPE_CODE_NAMESPACE0*
+TYPE_CODE_DECFLOAT0*
+TYPE_CODE_INTERNAL_FUNCTION0*
+pretty_printers0Q*
+COMMAND_NONE0*
+COMMAND_RUNNING0*
+COMMAND_DATA0*
+COMMAND_STACK0*
+COMMAND_FILES0*
+COMMAND_SUPPORT0*
+COMMAND_STATUS0*
+COMMAND_BREAKPOINTS0*
+COMMAND_TRACEPOINTS0*
+COMMAND_TUI0*
+COMMAND_USER0*
+COMMAND_OBSCURE0*
+COMMAND_MAINTENANCE0*
+COMPLETE_NONE0*
+COMPLETE_FILENAME0*
+COMPLETE_LOCATION0*
+COMPLETE_COMMAND0*
+COMPLETE_SYMBOL0*
+COMPLETE_EXPRESSION0*
+PARAM_BOOLEAN0*
+PARAM_AUTO_BOOLEAN0*
+PARAM_UINTEGER0*
+PARAM_INTEGER0*
+PARAM_STRING0*
+PARAM_STRING_NOESCAPE0*
+PARAM_OPTIONAL_FILENAME0*
+PARAM_FILENAME0*
+PARAM_ZINTEGER0*
+PARAM_ZUINTEGER0*
+PARAM_ZUINTEGER_UNLIMITED0*
+
+PARAM_ENUM0*
+NORMAL_FRAME0*
+INLINE_FRAME0*
+TAILCALL_FRAME0*
+SIGTRAMP_FRAME0*
+
+ARCH_FRAME0*
+SENTINEL_FRAME0*
+FRAME_UNWIND_NO_REASON0*
+FRAME_UNWIND_NULL_ID0*
+FRAME_UNWIND_OUTERMOST0*
+FRAME_UNWIND_UNAVAILABLE0*
+FRAME_UNWIND_INNER_ID0*
+FRAME_UNWIND_SAME_ID0*
+FRAME_UNWIND_NO_SAVED_PC0*
+FRAME_UNWIND_MEMORY_ERROR0*
+FRAME_UNWIND_FIRST_ERROR0*
+SYMBOL_UNDEF_DOMAIN0*
+SYMBOL_VAR_DOMAIN0*
+SYMBOL_STRUCT_DOMAIN0*
+SYMBOL_LABEL_DOMAIN0*
+SYMBOL_MODULE_DOMAIN0*
+SYMBOL_COMMON_BLOCK_DOMAIN0*
+SYMBOL_LOC_UNDEF0*
+SYMBOL_LOC_CONST0*
+SYMBOL_LOC_STATIC0*
+SYMBOL_LOC_REGISTER0*
+SYMBOL_LOC_ARG0*
+SYMBOL_LOC_REF_ARG0*
+SYMBOL_LOC_REGPARM_ADDR0*
+SYMBOL_LOC_LOCAL0*
+SYMBOL_LOC_TYPEDEF0*
+SYMBOL_LOC_LABEL0*
+SYMBOL_LOC_BLOCK0*
+SYMBOL_LOC_CONST_BYTES0*
+SYMBOL_LOC_UNRESOLVED0*
+SYMBOL_LOC_OPTIMIZED_OUT0*
+SYMBOL_LOC_COMPUTED0*
+SYMBOL_LOC_COMMON_BLOCK0*
+BP_BREAKPOINT0*
+BP_HARDWARE_BREAKPOINT0*
+BP_WATCHPOINT0*
+BP_HARDWARE_WATCHPOINT0*
+BP_READ_WATCHPOINT0*
+BP_ACCESS_WATCHPOINT0*
+BP_CATCHPOINT0*
+WP_READ0*
+WP_WRITE0*
+	WP_ACCESS02"builtins.int2"	gdb.Value2"builtins.float222"gdb._ValueOrInt22"builtins.bool2"builtins.str2"	gdb.Field22222"gdb._ValueOrNative2
+22
+"gdb.Type2"gdb.LazyString2"builtins.list222222"	gdb.Block222"gdb.Objfile22222"gdb._PrettyPrinter2"gdb._FrameDecorator2"typing.Iterator22"gdb._FrameFilter2"
+gdb.Symbol222"gdb._SymValueWrapper222"	gdb.Frame2"typing.Iterator222 222"typing.Iterator222#2"gdb.PendingFrame2"gdb.RegisterDescriptor22&2"gdb.UnwindInfo2"builtins.object2"gdb.Architecture22(2"gdb.Unwinder2"gdb.Inferior2"gdb.InferiorThread2"builtins.tuple2.2"builtins.memoryview22"typing_extensions.Buffer2"_collections_abc.Buffer2"gdb.Progspace2"builtins.bytes222"
+gdb.Record2"gdb.Instruction2272"builtins.list272"gdb.RecordFunctionSegment2"builtins.list2:2"gdb.Symtab_and_line22<222"gdb.RecordInstruction2"gdb.RecordGap22?@2"builtins.list2A22:2"gdb.Command2"gdb.MICommand2"builtins.dict2)22F2"builtins.list22"gdb.Parameter2"typing.Sequence22"gdb.Function222"typing.Sequence22"builtins.function22N2'" gdb._PrettyPrinterLookupFunction2O2"builtins.list2P2"gdb.types._TypePrinter2"builtins.list2R2"builtins.list222222"gdb.BlockIterator2&
+_typeshed.Self"builtins.object2)222"
+gdb.Symtab2"gdb.LineTable2"gdb.LineTableEntry2"builtins.tuple2\2"builtins.list22"gdb.Breakpoint2"gdb.FinishBreakpoint222"builtins.list2F2 "gdb.RegisterDescriptorIterator2"gdb.RegisterGroupsIterator22&2"gdb.RegisterGroup2"gdb.TargetConnection2"gdb.RemoteTargetConnection2242"gdb.TuiWindow2"gdb._Window2"typing.Sequence2_2"builtins.list2_2"typing.Iterator2Z22222'"!contextlib.AbstractContextManager2p2"builtins.tuple2<22r22s2"builtins.list2g222"builtins.tuple2-2262232"typing.Sequence232"builtins.list222>2"builtins.list222"builtins.dict2~

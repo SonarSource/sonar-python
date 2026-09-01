@@ -1,157 +1,96 @@
 
- pika.adapters.asyncio_connectionø
-AsyncioConnection2pika.adapters.asyncio_connection.AsyncioConnection",pika.adapters.base_connection.BaseConnection*†	
-__init__;pika.adapters.asyncio_connection.AsyncioConnection.__init__"
-None*Ê
-self€
-7pika.adapters.asyncio_connection.AsyncioConnection.Selfh
-2pika.adapters.asyncio_connection.AsyncioConnection"2pika.adapters.asyncio_connection.AsyncioConnection"2pika.adapters.asyncio_connection.AsyncioConnection(*Ä
+ pika.adapters.asyncio_connectionë
+AsyncioConnection",pika.adapters.base_connection.BaseConnection*æ
+__init__*
 
-parametersn
-&Union[pika.connection.Parameters,None]8
-pika.connection.Parameters"pika.connection.Parameters
-None *ü
-on_open_callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *•
-on_open_error_callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *†
-on_close_callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *ñ
-custom_ioloopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *B
-internal_connection_workflow
-builtins.bool"builtins.bool z310z311z312z313z314*ã
-create_connectionDpika.adapters.asyncio_connection.AsyncioConnection.create_connection"
-Any*∂
-cls¨
-8Type[pika.adapters.asyncio_connection.AsyncioConnection]h
-2pika.adapters.asyncio_connection.AsyncioConnection"2pika.adapters.asyncio_connection.AsyncioConnection"type*
-connection_configs
-Any*
-on_done
-Any*ñ
-custom_ioloopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *k
-workflow[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.classmethodpz310z311z312z313z314j310j311j312j313j314≥
-_AsyncioIOServicesAdapter:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter";pika.adapters.utils.io_services_utils.SocketConnectionMixin">pika.adapters.utils.io_services_utils.StreamingConnectionMixin"5pika.adapters.utils.nbio_interface.AbstractIOServices"Apika.adapters.utils.nbio_interface.AbstractFileDescriptorServices*‡
-__init__Cpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.__init__"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapter*g
-loop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ñ
-get_native_ioloopLpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.get_native_ioloop*
-selfz310z311z312z313z314*Ò
-close@pika.adapters.asyncio_connection._AsyncioIOServicesAdapter.close"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapterz310z311z312z313z314*Ì
-run>pika.adapters.asyncio_connection._AsyncioIOServicesAdapter.run"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapterz310z311z312z313z314*Ô
-stop?pika.adapters.asyncio_connection._AsyncioIOServicesAdapter.stop"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapterz310z311z312z313z314*¨
-add_callback_threadsafeRpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.add_callback_threadsafe"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapter*
-callback
-Anyz310z311z312z313z314*è
+self(*
 
-call_laterEpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.call_later*
+parameters (*
+on_open_callback (*
+on_open_error_callback (*
+on_close_callback (*
+custom_ioloop (
+*$
+internal_connection_workflow (*å
+create_connection*	
+cls(*
+connection_configs(*
+on_done(*
+custom_ioloop (
+*
+workflow (0:builtins.classmethodp¬
+_AsyncioIOServicesAdapter";pika.adapters.utils.io_services_utils.SocketConnectionMixin">pika.adapters.utils.io_services_utils.StreamingConnectionMixin"5pika.adapters.utils.nbio_interface.AbstractIOServices"Apika.adapters.utils.nbio_interface.AbstractFileDescriptorServices*&
+__init__*
+
+self(*
+loop (*
+get_native_ioloop*
+self*
+close*
+
+self(*
+run*
+
+self(*
+stop*
+
+self(*7
+add_callback_threadsafe*
+
+self(*
+callback(*/
+
+call_later*
 self*	
 delay*
-callbackz310z311z312z313z314*Ë
-getaddrinfoFpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.getaddrinfo"
-Any*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapter*
-host
-Any*
-port
-Any*
-on_done
-Any**
-family
-builtins.int"builtins.int *,
-socktype
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int z310z311z312z313z314*¶
+callback*Ç
+getaddrinfo*
 
-set_readerEpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.set_reader"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapter*
-fd
-Any*
-on_readable
-Anyz310z311z312z313z314*Ñ
-remove_readerHpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.remove_reader*
-self*
-fdz310z311z312z313z314*¶
+self(*
 
-set_writerEpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.set_writer"
-None*Ç
-selfx
-:pika.adapters.asyncio_connection._AsyncioIOServicesAdapter":pika.adapters.asyncio_connection._AsyncioIOServicesAdapter*
-fd
-Any*
-on_writable
-Anyz310z311z312z313z314*Ñ
-remove_writerHpika.adapters.asyncio_connection._AsyncioIOServicesAdapter.remove_writer*
+host(*
+
+port(*
+on_done(*
+family (*
+socktype (*
+proto (*
+flags (*7
+
+set_reader*
+
+self(*
+fd(*
+on_readable(*!
+remove_reader*
 self*
-fdz310z311z312z313z314j310j311j312j313j314∆
-_TimerHandle-pika.adapters.asyncio_connection._TimerHandle"9pika.adapters.utils.nbio_interface.AbstractTimerReference*‰
-__init__6pika.adapters.asyncio_connection._TimerHandle.__init__"
-None*h
-self^
--pika.adapters.asyncio_connection._TimerHandle"-pika.adapters.asyncio_connection._TimerHandle*
-handle
-Anyz310z311z312z313z314*À
-cancel4pika.adapters.asyncio_connection._TimerHandle.cancel"
-None*h
-self^
--pika.adapters.asyncio_connection._TimerHandle"-pika.adapters.asyncio_connection._TimerHandlez310z311z312z313z314j310j311j312j313j314ò
-_AsyncioIOReference4pika.adapters.asyncio_connection._AsyncioIOReference"6pika.adapters.utils.nbio_interface.AbstractIOReference*è
-__init__=pika.adapters.asyncio_connection._AsyncioIOReference.__init__"
-None*v
-selfl
-4pika.adapters.asyncio_connection._AsyncioIOReference"4pika.adapters.asyncio_connection._AsyncioIOReference*
-future
-Any*
-on_done
-Anyz310z311z312z313z314*h
-cancel;pika.adapters.asyncio_connection._AsyncioIOReference.cancel*
-selfz310z311z312z313z314j310j311j312j313j314*µ
-__annotations__0pika.adapters.asyncio_connection.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*l
-LOGGER'pika.adapters.asyncio_connection.LOGGER 
-logging.Logger"logging.Logger*310*311*312*313*314
+fd*7
+
+set_writer*
+
+self(*
+fd(*
+on_writable(*!
+remove_writer*
+self*
+fdâ
+_TimerHandle"9pika.adapters.utils.nbio_interface.AbstractTimerReference*&
+__init__*
+
+self(*
+handle(*
+cancel*
+
+self(ò
+_AsyncioIOReference"6pika.adapters.utils.nbio_interface.AbstractIOReference*5
+__init__*
+
+self(*
+future(*
+on_done(*
+cancel*
+self*
+__annotations__0*
+
+LOGGER0224"2pika.adapters.asyncio_connection.AsyncioConnection2t
+7pika.adapters.asyncio_connection.AsyncioConnection.Self"2pika.adapters.asyncio_connection.AsyncioConnection(22"pika.connection.Parameters222"builtins.function22222"" asyncio.events.AbstractEventLoop22	2"builtins.bool22"type22"_typeshed.Incomplete2222<":pika.adapters.asyncio_connection._AsyncioIOServicesAdapter2"builtins.int2/"-pika.adapters.asyncio_connection._TimerHandle26"4pika.adapters.asyncio_connection._AsyncioIOReference2"builtins.str2"builtins.dict22"logging.Logger

@@ -1,208 +1,133 @@
 
-paramiko.agentˇ
-_AgentProxyparamiko.agent._AgentProxy"builtins.object*î
-connect"paramiko.agent._AgentProxy.connect"
-None*B
-self8
-paramiko.agent._AgentProxy"paramiko.agent._AgentProxyz310z311z312z313z314*ê
-close paramiko.agent._AgentProxy.close"
-None*B
-self8
-paramiko.agent._AgentProxy"paramiko.agent._AgentProxyz310z311z312z313z314Xj310j311j312j313j314“
-AgentSSHparamiko.agent.AgentSSH"builtins.object*ç
-__init__ paramiko.agent.AgentSSH.__init__"
-None*<
-self2
-paramiko.agent.AgentSSH"paramiko.agent.AgentSSHz310z311z312z313z314*Ú
-get_keys paramiko.agent.AgentSSH.get_keys"m
-'builtins.tuple[paramiko.agent.AgentKey]2
-paramiko.agent.AgentKey"paramiko.agent.AgentKey"builtins.tuple*<
-self2
-paramiko.agent.AgentSSH"paramiko.agent.AgentSSHz310z311z312z313z314j310j311j312j313j314È
-AgentProxyThreadparamiko.agent.AgentProxyThread"threading.Thread*Í
-__init__(paramiko.agent.AgentProxyThread.__init__"
-None*L
-selfB
-paramiko.agent.AgentProxyThread"paramiko.agent.AgentProxyThread*C
-agent8
-paramiko.agent._AgentProxy"paramiko.agent._AgentProxyz310z311z312z313z314*õ
-run#paramiko.agent.AgentProxyThread.run"
-None*L
-selfB
-paramiko.agent.AgentProxyThread"paramiko.agent.AgentProxyThreadz310z311z312z313z314j310j311j312j313j314Å
-AgentLocalProxyparamiko.agent.AgentLocalProxy"paramiko.agent.AgentProxyThread*Ò
-__init__'paramiko.agent.AgentLocalProxy.__init__"
-None*J
-self@
-paramiko.agent.AgentLocalProxy"paramiko.agent.AgentLocalProxy*M
-agentB
-paramiko.agent.AgentServerProxy"paramiko.agent.AgentServerProxyz310z311z312z313z314*ü
-get_connection-paramiko.agent.AgentLocalProxy.get_connection"y
-#Tuple[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_socket._RetAddress*J
-self@
-paramiko.agent.AgentLocalProxy"paramiko.agent.AgentLocalProxyz310z311z312z313z314j310j311j312j313j314…
-AgentRemoteProxyparamiko.agent.AgentRemoteProxy"paramiko.agent.AgentProxyThread*¥
-__init__(paramiko.agent.AgentRemoteProxy.__init__"
-None*L
-selfB
-paramiko.agent.AgentRemoteProxy"paramiko.agent.AgentRemoteProxy*M
-agentB
-paramiko.agent.AgentClientProxy"paramiko.agent.AgentClientProxy*>
-chan4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*¢
-get_connection.paramiko.agent.AgentRemoteProxy.get_connection"y
-#Tuple[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_socket._RetAddress*L
-selfB
-paramiko.agent.AgentRemoteProxy"paramiko.agent.AgentRemoteProxyz310z311z312z313z314j310j311j312j313j314¢
-AgentClientProxyparamiko.agent.AgentClientProxy"builtins.object*Î
-__init__(paramiko.agent.AgentClientProxy.__init__"
-None*L
-selfB
-paramiko.agent.AgentClientProxy"paramiko.agent.AgentClientProxy*D
+paramiko.agentP
+_AgentProxy"builtins.object*
+connect*
 
-chanRemote4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*õ
-__del__'paramiko.agent.AgentClientProxy.__del__"
-None*DB
-paramiko.agent.AgentClientProxy"paramiko.agent.AgentClientProxyz310z311z312z313z314*£
-connect'paramiko.agent.AgentClientProxy.connect"
-None*L
-selfB
-paramiko.agent.AgentClientProxy"paramiko.agent.AgentClientProxyz310z311z312z313z314*ü
-close%paramiko.agent.AgentClientProxy.close"
-None*L
-selfB
-paramiko.agent.AgentClientProxy"paramiko.agent.AgentClientProxyz310z311z312z313z314j310j311j312j313j314ro
-thread&paramiko.agent.AgentClientProxy.thread$
-threading.Thread"threading.Thread*310*311*312*313*314º	
-AgentServerProxyparamiko.agent.AgentServerProxy"paramiko.agent.AgentSSH*Í
-__init__(paramiko.agent.AgentServerProxy.__init__"
-None*L
-selfB
-paramiko.agent.AgentServerProxy"paramiko.agent.AgentServerProxy*C
-t<
-paramiko.transport.Transport"paramiko.transport.Transportz310z311z312z313z314*õ
-__del__'paramiko.agent.AgentServerProxy.__del__"
-None*DB
-paramiko.agent.AgentServerProxy"paramiko.agent.AgentServerProxyz310z311z312z313z314*£
-connect'paramiko.agent.AgentServerProxy.connect"
-None*L
-selfB
-paramiko.agent.AgentServerProxy"paramiko.agent.AgentServerProxyz310z311z312z313z314*ü
-close%paramiko.agent.AgentServerProxy.close"
-None*L
-selfB
-paramiko.agent.AgentServerProxy"paramiko.agent.AgentServerProxyz310z311z312z313z314*ê
-get_env'paramiko.agent.AgentServerProxy.get_env"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*L
-selfB
-paramiko.agent.AgentServerProxy"paramiko.agent.AgentServerProxyz310z311z312z313z314j310j311j312j313j314ro
-thread&paramiko.agent.AgentServerProxy.thread$
-threading.Thread"threading.Thread*310*311*312*313*314¨
-AgentRequestHandler"paramiko.agent.AgentRequestHandler"builtins.object*Ù
-__init__+paramiko.agent.AgentRequestHandler.__init__"
-None*R
-selfH
-"paramiko.agent.AgentRequestHandler""paramiko.agent.AgentRequestHandler*D
+self(*
+close*
 
-chanClient4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*§
-__del__*paramiko.agent.AgentRequestHandler.__del__"
-None*JH
-"paramiko.agent.AgentRequestHandler""paramiko.agent.AgentRequestHandlerz310z311z312z313z314*®
-close(paramiko.agent.AgentRequestHandler.close"
-None*R
-selfH
-"paramiko.agent.AgentRequestHandler""paramiko.agent.AgentRequestHandlerz310z311z312z313z314j310j311j312j313j314÷
-Agentparamiko.agent.Agent"paramiko.agent.AgentSSH*Ñ
-__init__paramiko.agent.Agent.__init__"
-None*6
-self,
-paramiko.agent.Agent"paramiko.agent.Agentz310z311z312z313z314*~
-closeparamiko.agent.Agent.close"
-None*6
-self,
-paramiko.agent.Agent"paramiko.agent.Agentz310z311z312z313z314j310j311j312j313j314∂
-AgentKeyparamiko.agent.AgentKey"paramiko.pkey.PKey*˝
-__init__ paramiko.agent.AgentKey.__init__"
-None*<
-self2
-paramiko.agent.AgentKey"paramiko.agent.AgentKey*=
-agent2
-paramiko.agent.AgentSSH"paramiko.agent.AgentSSH*>
-blob4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*Ä
-__init__ paramiko.agent.AgentKey.__init__"
-None*<
-self2
-paramiko.agent.AgentKey"paramiko.agent.AgentKey*=
-agent2
-paramiko.agent.AgentSSH"paramiko.agent.AgentSSH*<
-blob2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*£
-asbytesparamiko.agent.AgentKey.asbytes" 
-builtins.bytes"builtins.bytes*<
-self2
-paramiko.agent.AgentKey"paramiko.agent.AgentKeyz310z311z312z313z314*°
-get_name paramiko.agent.AgentKey.get_name"
-builtins.str"builtins.str*<
-self2
-paramiko.agent.AgentKey"paramiko.agent.AgentKeyz310z311z312z313z314*ƒ
-sign_ssh_data%paramiko.agent.AgentKey.sign_ssh_data"4
-paramiko.message.Message"paramiko.message.Message*<
-self2
-paramiko.agent.AgentKey"paramiko.agent.AgentKey*∂
-data´
-hTypeAlias[Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,typing_extensions.Buffer]]ü
-]Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,typing_extensions.Buffer] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytes4
-typing_extensions.Buffer"typing_extensions.Buffer"paramiko.message._LikeBytes*U
-	algorithmD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311*≈
-sign_ssh_data%paramiko.agent.AgentKey.sign_ssh_data"4
-paramiko.message.Message"paramiko.message.Message*<
-self2
-paramiko.agent.AgentKey"paramiko.agent.AgentKey*≤
-dataß
-gTypeAlias[Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,_collections_abc.Buffer]]ú
-\Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,_collections_abc.Buffer] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytes2
-_collections_abc.Buffer"_collections_abc.Buffer"paramiko.message._LikeBytes*U
-	algorithmD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z312z313z314j310j311j312j313j314rs
-agentparamiko.agent.AgentKey.agent2
-paramiko.agent.AgentSSH"paramiko.agent.AgentSSH*310*311*312*313*314r_
-blobparamiko.agent.AgentKey.blob 
-builtins.bytes"builtins.bytes*310*311*312*313*314rU
-public_blob#paramiko.agent.AgentKey.public_blob
-None*310*311*312*313*314r[
-nameparamiko.agent.AgentKey.name
-builtins.str"builtins.str*310*311*312*313*314*£
-__annotations__paramiko.agent.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*å
-cSSH2_AGENTC_REQUEST_IDENTITIES.paramiko.agent.cSSH2_AGENTC_REQUEST_IDENTITIES 
-builtins.bytes"builtins.bytes*310*311*312*313*314*Ç
-SSH2_AGENT_IDENTITIES_ANSWER+paramiko.agent.SSH2_AGENT_IDENTITIES_ANSWER
-builtins.int"builtins.int*310*311*312*313*314*Ä
-cSSH2_AGENTC_SIGN_REQUEST(paramiko.agent.cSSH2_AGENTC_SIGN_REQUEST 
-builtins.bytes"builtins.bytes*310*311*312*313*314*z
-SSH2_AGENT_SIGN_RESPONSE'paramiko.agent.SSH2_AGENT_SIGN_RESPONSE
-builtins.int"builtins.int*310*311*312*313*314
+self(XO
+AgentSSH"builtins.object*
+__init__*
+
+self(*
+get_keys*
+
+self(`
+AgentProxyThread"threading.Thread*%
+__init__*
+
+self(*
+agent(*
+run*
+
+self(y
+AgentLocalProxy"paramiko.agent.AgentProxyThread*%
+__init__*
+
+self(*
+agent(*
+get_connection*
+
+self(Ü
+AgentRemoteProxy"paramiko.agent.AgentProxyThread*1
+__init__*
+
+self(*
+agent(*
+
+chan(*
+get_connection*
+
+self(ú
+AgentClientProxy"builtins.object**
+__init__*
+
+self(*
+
+chanRemote(*
+__del__*(*
+connect*
+
+self(*
+close*
+
+self(r
+
+thread0¥
+AgentServerProxy"paramiko.agent.AgentSSH*!
+__init__*
+
+self(*
+t(*
+__del__*(*
+connect*
+
+self(*
+close*
+
+self(*
+get_env*
+
+self(r
+
+thread0z
+AgentRequestHandler"builtins.object**
+__init__*
+
+self(*
+
+chanClient(*
+__del__*(*
+close*
+
+self(Q
+Agent"paramiko.agent.AgentSSH*
+__init__*
+
+self(*
+close*
+
+self(ï
+AgentKey"paramiko.pkey.PKey*;
+__init__*
+
+self(*
+agent(*
+
+blob(z310z311*@
+__init__*
+
+self(*
+agent(*
+
+blob(z312z313z314*
+asbytes*
+
+self(*
+get_name*
+
+self(*F
+sign_ssh_data*
+
+self(*
+
+data(*
+	algorithm (z310z311*K
+sign_ssh_data*
+
+self(*
+
+data(*
+	algorithm (z312z313z314r	
+agent0r
+blob0r
+public_blob0r
+name0*
+__annotations__0 *#
+cSSH2_AGENTC_REQUEST_IDENTITIES0* 
+SSH2_AGENT_IDENTITIES_ANSWER0!*
+cSSH2_AGENTC_SIGN_REQUEST0*
+SSH2_AGENT_SIGN_RESPONSE0!22"paramiko.agent._AgentProxy2"paramiko.agent.AgentSSH2"paramiko.agent.AgentKey2"builtins.tuple22!"paramiko.agent.AgentProxyThread2 "paramiko.agent.AgentLocalProxy2!"paramiko.agent.AgentServerProxy2"socket.socket22"_socket._RetAddress2
+22	2!"paramiko.agent.AgentRemoteProxy2!"paramiko.agent.AgentClientProxy2"paramiko.channel.Channel2"threading.Thread2"paramiko.transport.Transport2"builtins.str2"builtins.dict22$""paramiko.agent.AgentRequestHandler2"paramiko.agent.Agent2"typing_extensions.Buffer2"_collections_abc.Buffer2"builtins.bytes2"paramiko.message.Message2#"!paramiko.message._SupportsAsBytes222""paramiko.message._LikeBytes222222""paramiko.message._LikeBytes22"builtins.dict2
+2"builtins.int

@@ -1,3449 +1,1687 @@
 
-astœ
-
-_TypeVartyping.TypeVar"builtins.object*Ñ
-__name__typing.TypeVar.__name__"
-builtins.str"builtins.str**
-self 
-typing.TypeVar"typing.TypeVar0:builtins.property`*ê
-	__bound__typing.TypeVar.__bound__"&
-Union[Any,None]
-Any
-None**
-self 
-typing.TypeVar"typing.TypeVar0:builtins.property`*§
-__constraints__typing.TypeVar.__constraints__".
-builtins.tuple[Any]
-Any"builtins.tuple**
-self 
-typing.TypeVar"typing.TypeVar0:builtins.property`*ê
-__covariant__typing.TypeVar.__covariant__"
-builtins.bool"builtins.bool**
-self 
-typing.TypeVar"typing.TypeVar0:builtins.property`*ò
-__contravariant__ typing.TypeVar.__contravariant__"
-builtins.bool"builtins.bool**
-self 
-typing.TypeVar"typing.TypeVar0:builtins.property`*∂
-__init__typing.TypeVar.__init__"
-None**
-self 
-typing.TypeVar"typing.TypeVar*&
-name
-builtins.str"builtins.str*
-constraints
-Any*3
-bound&
-Union[Any,None]
-Any
-None */
-	covariant
-builtins.bool"builtins.bool *3
-contravariant
-builtins.bool"builtins.bool *z
-__or__typing.TypeVar.__or__"*
-typing._SpecialForm"typing._SpecialForm*" 
-typing.TypeVar"typing.TypeVar*	
-Any*|
-__ror__typing.TypeVar.__ror__"*
-typing._SpecialForm"typing._SpecialForm*" 
-typing.TypeVar"typing.TypeVar*	
-Any85
-_Attributesast._Attributes"typing._TypedDict8P≤
-ASTast.AST"builtins.objectr5
-__match_args__ast.AST.__match_args__
-Tuple[]rp
-_attributesast.AST._attributesL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuplerh
-_fieldsast.AST._fieldsL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-modast.mod"ast.ASTˇ
-Module
-ast.Module"ast.mod*˚
-__init__ast.Module.__init__"
-None*"
-self
-
-ast.Module"
-ast.Module*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*b
-type_ignoresP
-builtins.list[ast.TypeIgnore] 
-ast.TypeIgnore"ast.TypeIgnore"builtins.listrç
-__match_args__ast.Module.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrW
-bodyast.Module.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listry
-type_ignoresast.Module.type_ignoresP
-builtins.list[ast.TypeIgnore] 
-ast.TypeIgnore"ast.TypeIgnore"builtins.listó
-Interactiveast.Interactive"ast.mod*¶
-__init__ast.Interactive.__init__"
-None*,
-self"
-ast.Interactive"ast.Interactive*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrg
-__match_args__ast.Interactive.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr\
-bodyast.Interactive.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listª
-
-Expressionast.Expression"ast.mod*y
-__init__ast.Expression.__init__"
-None**
-self 
-ast.Expression"ast.Expression*
-body
-ast.expr"ast.exprrf
-__match_args__ast.Expression.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr1
-bodyast.Expression.body
-ast.expr"ast.expr¥
-FunctionTypeast.FunctionType"ast.mod*–
-__init__ast.FunctionType.__init__"
-None*.
-self$
-ast.FunctionType"ast.FunctionType*L
-argtypes>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*!
-returns
-ast.expr"ast.exprrì
-__match_args__ast.FunctionType.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strre
-argtypesast.FunctionType.argtypes>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listr9
-returnsast.FunctionType.returns
-ast.expr"ast.expr—
-stmtast.stmt"ast.AST*b
-__init__ast.stmt.__init__"
-None*
-self
-ast.stmt"ast.stmt*
-kwargs
-	TypedDictr7
-linenoast.stmt.lineno
-builtins.int"builtins.intr?
-
-col_offsetast.stmt.col_offset
-builtins.int"builtins.intrg
-
-end_linenoast.stmt.end_linenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonero
-end_col_offsetast.stmt.end_col_offsetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noneì
-FunctionDefast.FunctionDef"ast.stmt*ä
-__init__ast.FunctionDef.__init__"
-None*,
-self"
-ast.FunctionDef"ast.FunctionDef*&
-name
-builtins.str"builtins.str*(
-args
-ast.arguments"ast.arguments*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*R
-decorator_list>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*G
-returns8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrø
-__match_args__ast.FunctionDef.__match_args__å
-TTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr:
-nameast.FunctionDef.name
-builtins.str"builtins.strr<
-argsast.FunctionDef.args
-ast.arguments"ast.argumentsr\
-bodyast.FunctionDef.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrp
-decorator_listast.FunctionDef.decorator_list>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listr\
-returnsast.FunctionDef.returns8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Nonerr
-type_commentast.FunctionDef.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneœ
-AsyncFunctionDefast.AsyncFunctionDef"ast.stmt*ô
-__init__ast.AsyncFunctionDef.__init__"
-None*6
-self,
-ast.AsyncFunctionDef"ast.AsyncFunctionDef*&
-name
-builtins.str"builtins.str*(
-args
-ast.arguments"ast.arguments*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*R
-decorator_list>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*G
-returns8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrƒ
-__match_args__#ast.AsyncFunctionDef.__match_args__å
-TTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr?
-nameast.AsyncFunctionDef.name
-builtins.str"builtins.strrA
-argsast.AsyncFunctionDef.args
-ast.arguments"ast.argumentsra
-bodyast.AsyncFunctionDef.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listru
-decorator_list#ast.AsyncFunctionDef.decorator_list>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listra
-returnsast.AsyncFunctionDef.returns8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Nonerw
-type_comment!ast.AsyncFunctionDef.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None€	
-ClassDefast.ClassDef"ast.stmt*÷
-__init__ast.ClassDef.__init__"
-None*&
-self
-ast.ClassDef"ast.ClassDef*&
-name
-builtins.str"builtins.str*I
-bases>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*U
-keywordsG
-builtins.list[ast.keyword]
-ast.keyword"ast.keyword"builtins.list*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*R
-decorator_list>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictrë
-__match_args__ast.ClassDef.__match_args__·
-GTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr7
-nameast.ClassDef.name
-builtins.str"builtins.strr[
-basesast.ClassDef.bases>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listrj
-keywordsast.ClassDef.keywordsG
-builtins.list[ast.keyword]
-ast.keyword"ast.keyword"builtins.listrY
-bodyast.ClassDef.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrm
-decorator_listast.ClassDef.decorator_list>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listâ
-Return
-ast.Return"ast.stmt*Ø
-__init__ast.Return.__init__"
-None*"
-self
-
-ast.Return"
-ast.Return*E
-value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *
-kwargs
-	TypedDictrb
-__match_args__ast.Return.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strrS
-valueast.Return.value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noneô
-Delete
-ast.Delete"ast.stmt*µ
-__init__ast.Delete.__init__"
-None*"
-self
-
-ast.Delete"
-ast.Delete*K
-targets>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictrb
-__match_args__ast.Delete.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr]
-targetsast.Delete.targets>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listå
-Assign
-ast.Assign"ast.stmt*∞
-__init__ast.Assign.__init__"
-None*"
-self
-
-ast.Assign"
-ast.Assign*K
-targets>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-value
-ast.expr"ast.expr*X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrπ
-__match_args__ast.Assign.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr]
-targetsast.Assign.targets>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listr/
-valueast.Assign.value
-ast.expr"ast.exprrm
-type_commentast.Assign.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None∆
-	AugAssignast.AugAssign"ast.stmt*Õ
-__init__ast.AugAssign.__init__"
-None*(
-self
-ast.AugAssign"ast.AugAssign*í
-targetÖ
-+Union[ast.Name,ast.Attribute,ast.Subscript]
-ast.Name"ast.Name
-ast.Attribute"ast.Attribute
-ast.Subscript"ast.Subscript*$
-op
-ast.operator"ast.operator*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDictrº
-__match_args__ast.AugAssign.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr¶
-targetast.AugAssign.targetÖ
-+Union[ast.Name,ast.Attribute,ast.Subscript]
-ast.Name"ast.Name
-ast.Attribute"ast.Attribute
-ast.Subscript"ast.Subscriptr4
-opast.AugAssign.op
-ast.operator"ast.operatorr2
-valueast.AugAssign.value
-ast.expr"ast.exprò
-	AnnAssignast.AnnAssign"ast.stmt2ä
-__init__ast.AnnAssign.__init__∞
-__init__ast.AnnAssign.__init__"
-None*(
-self
-ast.AnnAssign"ast.AnnAssign*í
-targetÖ
-+Union[ast.Name,ast.Attribute,ast.Subscript]
-ast.Name"ast.Name
-ast.Attribute"ast.Attribute
-ast.Subscript"ast.Subscript*$
-
-annotation
-ast.expr"ast.expr*C
-value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None*(
-simple
-builtins.int"builtins.int*
-kwargs
-	TypedDict0:typing.overloadX≤
-__init__ast.AnnAssign.__init__"
-None*(
-self
-ast.AnnAssign"ast.AnnAssign*í
-targetÖ
-+Union[ast.Name,ast.Attribute,ast.Subscript]
-ast.Name"ast.Name
-ast.Attribute"ast.Attribute
-ast.Subscript"ast.Subscript*$
-
-annotation
-ast.expr"ast.expr*E
-value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *(
-simple
-builtins.int"builtins.int*
-kwargs
-	TypedDict0:typing.overloadXrÁ
-__match_args__ast.AnnAssign.__match_args__∂
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr¶
-targetast.AnnAssign.targetÖ
-+Union[ast.Name,ast.Attribute,ast.Subscript]
-ast.Name"ast.Name
-ast.Attribute"ast.Attribute
-ast.Subscript"ast.Subscriptr<
-
-annotationast.AnnAssign.annotation
-ast.expr"ast.exprrV
-valueast.AnnAssign.value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noner<
-simpleast.AnnAssign.simple
-builtins.int"builtins.int≥
-Forast.For"ast.stmt*ë
-__init__ast.For.__init__"
-None*
-self
-ast.For"ast.For* 
-target
-ast.expr"ast.expr*
-iter
-ast.expr"ast.expr*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*J
-orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrå
-__match_args__ast.For.__match_args__·
-GTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr.
-targetast.For.target
-ast.expr"ast.exprr*
-iterast.For.iter
-ast.expr"ast.exprrT
-bodyast.For.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrX
-orelseast.For.orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrj
-type_commentast.For.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneÍ
-AsyncForast.AsyncFor"ast.stmt*†
-__init__ast.AsyncFor.__init__"
-None*&
-self
-ast.AsyncFor"ast.AsyncFor* 
-target
-ast.expr"ast.expr*
-iter
-ast.expr"ast.expr*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*J
-orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrë
-__match_args__ast.AsyncFor.__match_args__·
-GTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr3
-targetast.AsyncFor.target
-ast.expr"ast.exprr/
-iterast.AsyncFor.iter
-ast.expr"ast.exprrY
-bodyast.AsyncFor.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listr]
-orelseast.AsyncFor.orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listro
-type_commentast.AsyncFor.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None◊
-While	ast.While"ast.stmt*õ
-__init__ast.While.__init__"
-None* 
-self
-	ast.While"	ast.While*
-test
-ast.expr"ast.expr*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*J
-orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*
-kwargs
-	TypedDictr∏
-__match_args__ast.While.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr,
-testast.While.test
-ast.expr"ast.exprrV
-bodyast.While.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrZ
-orelseast.While.orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listº
-Ifast.If"ast.stmt*í
-__init__ast.If.__init__"
-None*
-self
-ast.If"ast.If*
-test
-ast.expr"ast.expr*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*J
-orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*
-kwargs
-	TypedDictrµ
-__match_args__ast.If.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr)
-testast.If.test
-ast.expr"ast.exprrS
-bodyast.If.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrW
-orelseast.If.orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list›
-Withast.With"ast.stmt*›
-__init__ast.With.__init__"
-None*
-self
-ast.With"ast.With*U
-itemsJ
-builtins.list[ast.withitem]
-ast.withitem"ast.withitem"builtins.list*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictr∑
-__match_args__ast.With.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrc
-itemsast.With.itemsJ
-builtins.list[ast.withitem]
-ast.withitem"ast.withitem"builtins.listrU
-bodyast.With.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrk
-type_commentast.With.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneä
-	AsyncWithast.AsyncWith"ast.stmt*Ï
-__init__ast.AsyncWith.__init__"
-None*(
-self
-ast.AsyncWith"ast.AsyncWith*U
-itemsJ
-builtins.list[ast.withitem]
-ast.withitem"ast.withitem"builtins.list*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrº
-__match_args__ast.AsyncWith.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrh
-itemsast.AsyncWith.itemsJ
-builtins.list[ast.withitem]
-ast.withitem"ast.withitem"builtins.listrZ
-bodyast.AsyncWith.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrp
-type_commentast.AsyncWith.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None√
-Raise	ast.Raise"ast.stmt*Ò
-__init__ast.Raise.__init__"
-None* 
-self
-	ast.Raise"	ast.Raise*C
-exc8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *E
-cause8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *
-kwargs
-	TypedDictrå
-__match_args__ast.Raise.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrN
-excast.Raise.exc8
-Union[ast.expr,None]
-ast.expr"ast.expr
-NonerR
-causeast.Raise.cause8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noneµ
-Tryast.Try"ast.stmt*≠
-__init__ast.Try.__init__"
-None*
-self
-ast.Try"ast.Try*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*g
-handlersY
- builtins.list[ast.ExceptHandler]&
-ast.ExceptHandler"ast.ExceptHandler"builtins.list*J
-orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*M
-	finalbody>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*
-kwargs
-	TypedDictr·
-__match_args__ast.Try.__match_args__∂
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrT
-bodyast.Try.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listrw
-handlersast.Try.handlersY
- builtins.list[ast.ExceptHandler]&
-ast.ExceptHandler"ast.ExceptHandler"builtins.listrX
-orelseast.Try.orelse>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listr^
-	finalbodyast.Try.finalbody>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list˛
-Assert
-ast.Assert"ast.stmt*Õ
-__init__ast.Assert.__init__"
-None*"
-self
-
-ast.Assert"
-ast.Assert*
-test
-ast.expr"ast.expr*C
-msg8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *
-kwargs
-	TypedDictrç
-__match_args__ast.Assert.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr-
-testast.Assert.test
-ast.expr"ast.exprrO
-msgast.Assert.msg8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noneô
-Import
-ast.Import"ast.stmt*∂
-__init__ast.Import.__init__"
-None*"
-self
-
-ast.Import"
-ast.Import*L
-namesA
-builtins.list[ast.alias]
-	ast.alias"	ast.alias"builtins.list*
-kwargs
-	TypedDictrb
-__match_args__ast.Import.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr\
-namesast.Import.namesA
-builtins.list[ast.alias]
-	ast.alias"	ast.alias"builtins.listæ	
-
-ImportFromast.ImportFrom"ast.stmt2œ
-__init__ast.ImportFrom.__init__“
-__init__ast.ImportFrom.__init__"
-None**
-self 
-ast.ImportFrom"ast.ImportFrom*P
-moduleD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*L
-namesA
-builtins.list[ast.alias]
-	ast.alias"	ast.alias"builtins.list*'
-level
-builtins.int"builtins.int*
-kwargs
-	TypedDict0:typing.overloadX‘
-__init__ast.ImportFrom.__init__"
-None**
-self 
-ast.ImportFrom"ast.ImportFrom*R
-moduleD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *L
-namesA
-builtins.list[ast.alias]
-	ast.alias"	ast.alias"builtins.list*'
-level
-builtins.int"builtins.int*
-kwargs
-	TypedDict0:typing.overloadXrΩ
-__match_args__ast.ImportFrom.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strre
-moduleast.ImportFrom.moduleD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner`
-namesast.ImportFrom.namesA
-builtins.list[ast.alias]
-	ast.alias"	ast.alias"builtins.listr;
-levelast.ImportFrom.level
-builtins.int"builtins.int´
-Global
-ast.Global"ast.stmt*ø
-__init__ast.Global.__init__"
-None*"
-self
-
-ast.Global"
-ast.Global*U
-namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*
-kwargs
-	TypedDictrb
-__match_args__ast.Global.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strre
-namesast.Global.namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listπ
-Nonlocalast.Nonlocal"ast.stmt*≈
-__init__ast.Nonlocal.__init__"
-None*&
-self
-ast.Nonlocal"ast.Nonlocal*U
-namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*
-kwargs
-	TypedDictrd
-__match_args__ast.Nonlocal.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strrg
-namesast.Nonlocal.namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list±
-Exprast.Expr"ast.stmt*É
-__init__ast.Expr.__init__"
-None*
-self
-ast.Expr"ast.Expr*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDictr`
-__match_args__ast.Expr.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr-
-valueast.Expr.value
-ast.expr"ast.expr
-Passast.Pass"ast.stmt
-Break	ast.Break"ast.stmt"
-Continueast.Continue"ast.stmt—
-exprast.expr"ast.AST*b
-__init__ast.expr.__init__"
-None*
-self
-ast.expr"ast.expr*
-kwargs
-	TypedDictr7
-linenoast.expr.lineno
-builtins.int"builtins.intr?
-
-col_offsetast.expr.col_offset
-builtins.int"builtins.intrg
-
-end_linenoast.expr.end_linenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonero
-end_col_offsetast.expr.end_col_offsetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noneì
-BoolOp
-ast.BoolOp"ast.expr*÷
-__init__ast.BoolOp.__init__"
-None*"
-self
-
-ast.BoolOp"
-ast.BoolOp* 
-op
-
-ast.boolop"
-ast.boolop*J
-values>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictrç
-__match_args__ast.BoolOp.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr-
-opast.BoolOp.op
-
-ast.boolop"
-ast.boolopr[
-valuesast.BoolOp.values>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listÿ
-	NamedExprast.NamedExpr"ast.expr*¥
-__init__ast.NamedExpr.__init__"
-None*(
-self
-ast.NamedExpr"ast.NamedExpr* 
-target
-ast.Name"ast.Name*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDictrê
-__match_args__ast.NamedExpr.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr4
-targetast.NamedExpr.target
-ast.Name"ast.Namer2
-valueast.NamedExpr.value
-ast.expr"ast.expr∂
-BinOp	ast.BinOp"ast.expr*Ã
-__init__ast.BinOp.__init__"
-None* 
-self
-	ast.BinOp"	ast.BinOp*
-left
-ast.expr"ast.expr*$
-op
-ast.operator"ast.operator*
-right
-ast.expr"ast.expr*
-kwargs
-	TypedDictr∏
-__match_args__ast.BinOp.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr,
-leftast.BinOp.left
-ast.expr"ast.exprr0
-opast.BinOp.op
-ast.operator"ast.operatorr.
-rightast.BinOp.right
-ast.expr"ast.exprŒ
-UnaryOpast.UnaryOp"ast.expr*≤
-__init__ast.UnaryOp.__init__"
-None*$
-self
-ast.UnaryOp"ast.UnaryOp*"
-op
-ast.unaryop"ast.unaryop*!
-operand
-ast.expr"ast.expr*
-kwargs
-	TypedDictré
-__match_args__ast.UnaryOp.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr0
-opast.UnaryOp.op
-ast.unaryop"ast.unaryopr4
-operandast.UnaryOp.operand
-ast.expr"ast.exprÀ
-Lambda
-ast.Lambda"ast.expr*≤
-__init__ast.Lambda.__init__"
-None*"
-self
-
-ast.Lambda"
-ast.Lambda*(
-args
-ast.arguments"ast.arguments*
-body
-ast.expr"ast.expr*
-kwargs
-	TypedDictrç
-__match_args__ast.Lambda.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr7
-argsast.Lambda.args
-ast.arguments"ast.argumentsr-
-bodyast.Lambda.body
-ast.expr"ast.exprØ
-IfExp	ast.IfExp"ast.expr*«
-__init__ast.IfExp.__init__"
-None* 
-self
-	ast.IfExp"	ast.IfExp*
-test
-ast.expr"ast.expr*
-body
-ast.expr"ast.expr* 
-orelse
-ast.expr"ast.expr*
-kwargs
-	TypedDictr∏
-__match_args__ast.IfExp.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr,
-testast.IfExp.test
-ast.expr"ast.exprr,
-bodyast.IfExp.body
-ast.expr"ast.exprr0
-orelseast.IfExp.orelse
-ast.expr"ast.expr∂
-Dictast.Dict"ast.expr*®
-__init__ast.Dict.__init__"
-None*
-self
-ast.Dict"ast.Dict*x
-keysn
-#builtins.list[Union[ast.expr,None]]8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None"builtins.list*J
-values>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictrã
-__match_args__ast.Dict.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrÖ
-keysast.Dict.keysn
-#builtins.list[Union[ast.expr,None]]8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None"builtins.listrY
-valuesast.Dict.values>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list˚
-Setast.Set"ast.expr*©
-__init__ast.Set.__init__"
-None*
-self
-ast.Set"ast.Set*H
-elts>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictr_
-__match_args__ast.Set.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strrT
-eltsast.Set.elts>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list·
-ListCompast.ListComp"ast.expr*¯
-__init__ast.ListComp.__init__"
-None*&
-self
-ast.ListComp"ast.ListComp*
-elt
-ast.expr"ast.expr*i
-
-generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.list*
-kwargs
-	TypedDictrè
-__match_args__ast.ListComp.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr-
-eltast.ListComp.elt
-ast.expr"ast.exprrÄ
-
-generatorsast.ListComp.generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.listÿ
-SetCompast.SetComp"ast.expr*ı
-__init__ast.SetComp.__init__"
-None*$
-self
-ast.SetComp"ast.SetComp*
-elt
-ast.expr"ast.expr*i
-
-generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.list*
-kwargs
-	TypedDictré
-__match_args__ast.SetComp.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr,
-eltast.SetComp.elt
-ast.expr"ast.exprr
-
-generatorsast.SetComp.generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.list·
-DictCompast.DictComp"ast.expr*ô
-__init__ast.DictComp.__init__"
-None*&
-self
-ast.DictComp"ast.DictComp*
-key
-ast.expr"ast.expr*
-value
-ast.expr"ast.expr*i
-
-generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.list*
-kwargs
-	TypedDictrª
-__match_args__ast.DictComp.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr-
-keyast.DictComp.key
-ast.expr"ast.exprr1
-valueast.DictComp.value
-ast.expr"ast.exprrÄ
-
-generatorsast.DictComp.generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.listÅ
-GeneratorExpast.GeneratorExp"ast.expr*Ñ
-__init__ast.GeneratorExp.__init__"
-None*.
-self$
-ast.GeneratorExp"ast.GeneratorExp*
-elt
-ast.expr"ast.expr*i
-
-generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.list*
-kwargs
-	TypedDictrì
-__match_args__ast.GeneratorExp.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr1
-eltast.GeneratorExp.elt
-ast.expr"ast.exprrÑ
-
-generatorsast.GeneratorExp.generatorsY
- builtins.list[ast.comprehension]&
-ast.comprehension"ast.comprehension"builtins.list∏
-Await	ast.Await"ast.expr*Ü
-__init__ast.Await.__init__"
-None* 
-self
-	ast.Await"	ast.Await*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDictra
-__match_args__ast.Await.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr.
-valueast.Await.value
-ast.expr"ast.exprÇ
-Yield	ast.Yield"ast.expr*¨
-__init__ast.Yield.__init__"
-None* 
-self
-	ast.Yield"	ast.Yield*E
-value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *
-kwargs
-	TypedDictra
-__match_args__ast.Yield.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strrR
-valueast.Yield.value8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None‘
-	YieldFromast.YieldFrom"ast.expr*í
-__init__ast.YieldFrom.__init__"
-None*(
-self
-ast.YieldFrom"ast.YieldFrom*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDictre
-__match_args__ast.YieldFrom.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr2
-valueast.YieldFrom.value
-ast.expr"ast.expr˚
-Compareast.Compare"ast.expr*®
-__init__ast.Compare.__init__"
-None*$
-self
-ast.Compare"ast.Compare*
-left
-ast.expr"ast.expr*J
-opsA
-builtins.list[ast.cmpop]
-	ast.cmpop"	ast.cmpop"builtins.list*O
-comparators>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictr∫
-__match_args__ast.Compare.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr.
-leftast.Compare.left
-ast.expr"ast.exprrY
-opsast.Compare.opsA
-builtins.list[ast.cmpop]
-	ast.cmpop"	ast.cmpop"builtins.listrf
-comparatorsast.Compare.comparators>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listÊ
-Callast.Call"ast.expr*£
-__init__ast.Call.__init__"
-None*
-self
-ast.Call"ast.Call*
-func
-ast.expr"ast.expr*H
-args>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*U
-keywordsG
-builtins.list[ast.keyword]
-ast.keyword"ast.keyword"builtins.list*
-kwargs
-	TypedDictr∑
-__match_args__ast.Call.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr+
-funcast.Call.func
-ast.expr"ast.exprrU
-argsast.Call.args>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listrf
-keywordsast.Call.keywordsG
-builtins.list[ast.keyword]
-ast.keyword"ast.keyword"builtins.list˛
-FormattedValueast.FormattedValue"ast.expr*ú
-__init__ast.FormattedValue.__init__"
-None*2
-self(
-ast.FormattedValue"ast.FormattedValue*
-value
-ast.expr"ast.expr*,
-
-conversion
-builtins.int"builtins.int*K
-format_spec8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *
-kwargs
-	TypedDictr¡
-__match_args__!ast.FormattedValue.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr7
-valueast.FormattedValue.value
-ast.expr"ast.exprrI
-
-conversionast.FormattedValue.conversion
-builtins.int"builtins.intrg
-format_specast.FormattedValue.format_spec8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None´
-	JoinedStrast.JoinedStr"ast.expr*Ω
-__init__ast.JoinedStr.__init__"
-None*(
-self
-ast.JoinedStr"ast.JoinedStr*J
-values>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*
-kwargs
-	TypedDictre
-__match_args__ast.JoinedStr.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr^
-valuesast.JoinedStr.values>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listÜ 
-Constantast.Constant"ast.expr*ﬁ
-__init__ast.Constant.__init__"
-None*&
-self
-ast.Constant"ast.Constant*õ
-valueè
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValue*P
-kindD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDict2Ì	
-nast.Constant.nÊ
-nast.Constant.n"è
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValue*&
-self
-ast.Constant"ast.Constant0:builtins.propertyX`Ó
-nast.Constant.n"
-None*&
-self
-ast.Constant"ast.Constant*õ
-valueè
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValue0:.setter2Ì	
-sast.Constant.sÊ
-sast.Constant.s"è
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValue*&
-self
-ast.Constant"ast.Constant0:builtins.propertyX`Ó
-sast.Constant.s"
-None*&
-self
-ast.Constant"ast.Constant*õ
-valueè
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValue0:.setterrè
-__match_args__ast.Constant.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr≠
-valueast.Constant.valueè
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValuer_
-kindast.Constant.kindD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneˇ
-	Attributeast.Attribute"ast.expr*Î
-__init__ast.Attribute.__init__"
-None*(
-self
-ast.Attribute"ast.Attribute*
-value
-ast.expr"ast.expr*&
-attr
-builtins.str"builtins.str*/
-ctx$
-ast.expr_context"ast.expr_context *
-kwargs
-	TypedDictrº
-__match_args__ast.Attribute.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr2
-valueast.Attribute.value
-ast.expr"ast.exprr8
-attrast.Attribute.attr
-builtins.str"builtins.strr>
-ctxast.Attribute.ctx$
-ast.expr_context"ast.expr_contextÚ
-	Subscriptast.Subscript"ast.expr*‰
-__init__ast.Subscript.__init__"
-None*(
-self
-ast.Subscript"ast.Subscript*
-value
-ast.expr"ast.expr*
-slice
-ast.expr"ast.expr*/
-ctx$
-ast.expr_context"ast.expr_context *
-kwargs
-	TypedDictrº
-__match_args__ast.Subscript.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr2
-valueast.Subscript.value
-ast.expr"ast.exprr2
-sliceast.Subscript.slice
-ast.expr"ast.exprr>
-ctxast.Subscript.ctx$
-ast.expr_context"ast.expr_context·
-Starredast.Starred"ast.expr*Ω
-__init__ast.Starred.__init__"
-None*$
-self
-ast.Starred"ast.Starred*
-value
-ast.expr"ast.expr*/
-ctx$
-ast.expr_context"ast.expr_context *
-kwargs
-	TypedDictré
-__match_args__ast.Starred.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr0
-valueast.Starred.value
-ast.expr"ast.exprr<
-ctxast.Starred.ctx$
-ast.expr_context"ast.expr_context–
-Nameast.Name"ast.expr*π
-__init__ast.Name.__init__"
-None*
-self
-ast.Name"ast.Name*$
-id
-builtins.str"builtins.str*/
-ctx$
-ast.expr_context"ast.expr_context *
-kwargs
-	TypedDictrã
-__match_args__ast.Name.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr/
-idast.Name.id
-builtins.str"builtins.strr9
-ctxast.Name.ctx$
-ast.expr_context"ast.expr_contextö
-Listast.List"ast.expr*›
-__init__ast.List.__init__"
-None*
-self
-ast.List"ast.List*H
-elts>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*/
-ctx$
-ast.expr_context"ast.expr_context *
-kwargs
-	TypedDictrã
-__match_args__ast.List.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrU
-eltsast.List.elts>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listr9
-ctxast.List.ctx$
-ast.expr_context"ast.expr_context˙
-Tuple	ast.Tuple"ast.expr*‡
-__init__ast.Tuple.__init__"
-None* 
-self
-	ast.Tuple"	ast.Tuple*H
-elts>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*/
-ctx$
-ast.expr_context"ast.expr_context *
-kwargs
-	TypedDictrå
-__match_args__ast.Tuple.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrV
-eltsast.Tuple.elts>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listr:
-ctxast.Tuple.ctx$
-ast.expr_context"ast.expr_contextrV
-dimsast.Tuple.dims>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list
-slice	ast.slice"ast.AST8ç
-Slice	ast.Slice"ast.expr*π
-__init__ast.Slice.__init__"
-None* 
-self
-	ast.Slice"	ast.Slice*E
-lower8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *E
-upper8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *D
-step8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *
-kwargs
-	TypedDictr∏
-__match_args__ast.Slice.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrR
-lowerast.Slice.lower8
-Union[ast.expr,None]
-ast.expr"ast.expr
-NonerR
-upperast.Slice.upper8
-Union[ast.expr,None]
-ast.expr"ast.expr
-NonerP
-stepast.Slice.step8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noneî
-ExtSliceast.ExtSlice"	ast.slice*Ï
-__new__ast.ExtSlice.__new__"
-	ast.Tuple"	ast.Tuple*C
-cls:
-Type[ast.ExtSlice]
-ast.ExtSlice"ast.ExtSlice"type*Q
-dimsE
-typing.Iterable[ast.slice]
-	ast.slice"	ast.slice"typing.Iterable *
-kwargs
-	TypedDicth8Œ
-Index	ast.Index"	ast.slice*¨
-__new__ast.Index.__new__"
-ast.expr"ast.expr*:
-cls1
-Type[ast.Index]
-	ast.Index"	ast.Index"type*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDicth8)
-expr_contextast.expr_context"ast.AST*
-AugLoadast.AugLoad"ast.expr_context8,
-AugStoreast.AugStore"ast.expr_context8&
-Param	ast.Param"ast.expr_context8
-Suite	ast.Suite"ast.mod8"
-Loadast.Load"ast.expr_context$
-Store	ast.Store"ast.expr_context 
-Delast.Del"ast.expr_context
-boolop
-ast.boolop"ast.AST
-Andast.And"
-ast.boolop
-Orast.Or"
-ast.boolop!
-operatorast.operator"ast.AST
-Addast.Add"ast.operator
-Subast.Sub"ast.operator
-Multast.Mult"ast.operator$
-MatMultast.MatMult"ast.operator
-Divast.Div"ast.operator
-Modast.Mod"ast.operator
-Powast.Pow"ast.operator"
-LShift
-ast.LShift"ast.operator"
-RShift
-ast.RShift"ast.operator 
-BitOr	ast.BitOr"ast.operator"
-BitXor
-ast.BitXor"ast.operator"
-BitAnd
-ast.BitAnd"ast.operator&
-FloorDivast.FloorDiv"ast.operator
-unaryopast.unaryop"ast.AST!
-Invert
-ast.Invert"ast.unaryop
-Notast.Not"ast.unaryop
-UAddast.UAdd"ast.unaryop
-USubast.USub"ast.unaryop
-cmpop	ast.cmpop"ast.AST
-Eqast.Eq"	ast.cmpop
-NotEq	ast.NotEq"	ast.cmpop
-Ltast.Lt"	ast.cmpop
-LtEast.LtE"	ast.cmpop
-Gtast.Gt"	ast.cmpop
-GtEast.GtE"	ast.cmpop
-Isast.Is"	ast.cmpop
-IsNot	ast.IsNot"	ast.cmpop
-Inast.In"	ast.cmpop
-NotIn	ast.NotIn"	ast.cmpop…
-comprehensionast.comprehension"ast.AST*ô
-__init__ast.comprehension.__init__"
-None*0
-self&
-ast.comprehension"ast.comprehension* 
-target
-ast.expr"ast.expr*
-iter
-ast.expr"ast.expr*G
-ifs>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list**
-is_async
-builtins.int"builtins.intrÎ
-__match_args__ ast.comprehension.__match_args__∂
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr8
-targetast.comprehension.target
-ast.expr"ast.exprr4
-iterast.comprehension.iter
-ast.expr"ast.exprr\
-ifsast.comprehension.ifs>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listrD
-is_asyncast.comprehension.is_async
-builtins.int"builtins.int¢
-excepthandlerast.excepthandler"ast.AST*}
-__init__ast.excepthandler.__init__"
-None*0
-self&
-ast.excepthandler"ast.excepthandler*
-kwargs
-	TypedDictr@
-linenoast.excepthandler.lineno
-builtins.int"builtins.intrH
-
-col_offsetast.excepthandler.col_offset
-builtins.int"builtins.intrp
-
-end_linenoast.excepthandler.end_linenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerx
-end_col_offset ast.excepthandler.end_col_offsetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None´
-
-ExceptHandlerast.ExceptHandler"ast.excepthandler2ê
-__init__ast.ExceptHandler.__init__
-__init__ast.ExceptHandler.__init__"
-None*0
-self&
-ast.ExceptHandler"ast.ExceptHandler*B
-type8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None*N
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*
-kwargs
-	TypedDict0:typing.overloadXÙ
-__init__ast.ExceptHandler.__init__"
-None*0
-self&
-ast.ExceptHandler"ast.ExceptHandler*D
-type8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list*
-kwargs
-	TypedDict0:typing.overloadXr¿
-__match_args__ ast.ExceptHandler.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrX
-typeast.ExceptHandler.type8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Nonerd
-nameast.ExceptHandler.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner^
-bodyast.ExceptHandler.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.listı
-	argumentsast.arguments"ast.AST2î
-__init__ast.arguments.__init__°
-__init__ast.arguments.__init__"
-None*(
-self
-ast.arguments"ast.arguments*L
-posonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*E
-args;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*A
-vararg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-None*K
-
-kwonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*
-kw_defaultsn
-#builtins.list[Union[ast.expr,None]]8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None"builtins.list*@
-kwarg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-None*L
-defaults>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list0:typing.overloadX£
-__init__ast.arguments.__init__"
-None*(
-self
-ast.arguments"ast.arguments*L
-posonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*E
-args;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*A
-vararg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-None*K
-
-kwonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*
-kw_defaultsn
-#builtins.list[Union[ast.expr,None]]8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None"builtins.list*B
-kwarg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-None *L
-defaults>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list0:typing.overloadX•
-__init__ast.arguments.__init__"
-None*(
-self
-ast.arguments"ast.arguments*L
-posonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*E
-args;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*C
-vararg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-None *K
-
-kwonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.list*
-kw_defaultsn
-#builtins.list[Union[ast.expr,None]]8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None"builtins.list*B
-kwarg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-None *L
-defaults>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list0:typing.overloadXrË
-__match_args__ast.arguments.__match_args__∑
-aTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strre
-posonlyargsast.arguments.posonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.listrW
-argsast.arguments.args;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.listrU
-varargast.arguments.vararg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-Nonerc
-
-kwonlyargsast.arguments.kwonlyargs;
-builtins.list[ast.arg]
-ast.arg"ast.arg"builtins.listrò
-kw_defaultsast.arguments.kw_defaultsn
-#builtins.list[Union[ast.expr,None]]8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None"builtins.listrS
-kwargast.arguments.kwarg5
-Union[ast.arg,None]
-ast.arg"ast.arg
-Nonerb
-defaultsast.arguments.defaults>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list…
-argast.arg"ast.AST*¨
-__init__ast.arg.__init__"
-None*
-self
-ast.arg"ast.arg*%
-arg
-builtins.str"builtins.str*J
-
-annotation8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *X
-type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictr6
-linenoast.arg.lineno
-builtins.int"builtins.intr>
-
-col_offsetast.arg.col_offset
-builtins.int"builtins.intrf
-
-end_linenoast.arg.end_linenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonern
-end_col_offsetast.arg.end_col_offsetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noner∂
-__match_args__ast.arg.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr0
-argast.arg.arg
-builtins.str"builtins.strrZ
-
-annotationast.arg.annotation8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Nonerj
-type_commentast.arg.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None´	
-keywordast.keyword"ast.AST2à
-__init__ast.keyword.__init__
-__init__ast.keyword.__init__"
-None*$
-self
-ast.keyword"ast.keyword*M
-argD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDict0:typing.overloadXÚ
-__init__ast.keyword.__init__"
-None*$
-self
-ast.keyword"ast.keyword*O
-argD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDict0:typing.overloadXr:
-linenoast.keyword.lineno
-builtins.int"builtins.intrB
-
-col_offsetast.keyword.col_offset
-builtins.int"builtins.intrj
-
-end_linenoast.keyword.end_linenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerr
-end_col_offsetast.keyword.end_col_offsetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noneré
-__match_args__ast.keyword.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr\
-argast.keyword.argD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner0
-valueast.keyword.value
-ast.expr"ast.expr˛
-alias	ast.alias"ast.AST*·
-__init__ast.alias.__init__"
-None* 
-self
-	ast.alias"	ast.alias*&
-name
-builtins.str"builtins.str*R
-asnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictr4
-nameast.alias.name
-builtins.str"builtins.strr`
-asnameast.alias.asnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner8
-linenoast.alias.lineno
-builtins.int"builtins.intr@
-
-col_offsetast.alias.col_offset
-builtins.int"builtins.intrh
-
-end_linenoast.alias.end_linenoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerp
-end_col_offsetast.alias.end_col_offsetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerå
-__match_args__ast.alias.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str®
-withitemast.withitem"ast.AST* 
-__init__ast.withitem.__init__"
-None*&
-self
-ast.withitem"ast.withitem*&
-context_expr
-ast.expr"ast.expr*M
-optional_vars8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None rè
-__match_args__ast.withitem.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr?
-context_exprast.withitem.context_expr
-ast.expr"ast.exprre
-optional_varsast.withitem.optional_vars8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noneú
-patternast.pattern"ast.AST*k
-__init__ast.pattern.__init__"
-None*$
-self
-ast.pattern"ast.pattern*
-kwargs
-	TypedDictr:
-linenoast.pattern.lineno
-builtins.int"builtins.intrB
-
-col_offsetast.pattern.col_offset
-builtins.int"builtins.intrB
-
-end_linenoast.pattern.end_lineno
-builtins.int"builtins.intrJ
-end_col_offsetast.pattern.end_col_offset
-builtins.int"builtins.int‘
-
-match_caseast.match_case"ast.AST2˜
-__init__ast.match_case.__init__¶
-__init__ast.match_case.__init__"
-None**
-self 
-ast.match_case"ast.match_case*'
-pattern
-ast.pattern"ast.pattern*C
-guard8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None*H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list0:typing.overloadX®
-__init__ast.match_case.__init__"
-None**
-self 
-ast.match_case"ast.match_case*'
-pattern
-ast.pattern"ast.pattern*E
-guard8
-Union[ast.expr,None]
-ast.expr"ast.expr
-None *H
-body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list0:typing.overloadXrΩ
-__match_args__ast.match_case.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr=
-patternast.match_case.pattern
-ast.pattern"ast.patternrW
-guardast.match_case.guard8
-Union[ast.expr,None]
-ast.expr"ast.expr
-Noner[
-bodyast.match_case.body>
-builtins.list[ast.stmt]
-ast.stmt"ast.stmt"builtins.list≥
-Match	ast.Match"ast.stmt*Â
-__init__ast.Match.__init__"
-None* 
-self
-	ast.Match"	ast.Match*!
-subject
-ast.expr"ast.expr*[
-casesP
-builtins.list[ast.match_case] 
-ast.match_case"ast.match_case"builtins.list*
-kwargs
-	TypedDictrå
-__match_args__ast.Match.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr2
-subjectast.Match.subject
-ast.expr"ast.exprrj
-casesast.Match.casesP
-builtins.list[ast.match_case] 
-ast.match_case"ast.match_case"builtins.listﬁ
-
-MatchValueast.MatchValue"ast.pattern*ï
-__init__ast.MatchValue.__init__"
-None**
-self 
-ast.MatchValue"ast.MatchValue*
-value
-ast.expr"ast.expr*
-kwargs
-	TypedDictrf
-__match_args__ast.MatchValue.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr3
-valueast.MatchValue.value
-ast.expr"ast.expr‡
-MatchSingletonast.MatchSingleton"ast.pattern*‘
-__init__ast.MatchSingleton.__init__"
-None*2
-self(
-ast.MatchSingleton"ast.MatchSingleton*R
-valueG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*
-kwargs
-	TypedDictrj
-__match_args__!ast.MatchSingleton.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strrj
-valueast.MatchSingleton.valueG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None‚
-MatchSequenceast.MatchSequence"ast.pattern*‘
-__init__ast.MatchSequence.__init__"
-None*0
-self&
-ast.MatchSequence"ast.MatchSequence*U
-patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list*
-kwargs
-	TypedDictri
-__match_args__ ast.MatchSequence.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strro
-patternsast.MatchSequence.patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.listì
-MatchMappingast.MatchMapping"ast.pattern*Ì
-__init__ast.MatchMapping.__init__"
-None*.
-self$
-ast.MatchMapping"ast.MatchMapping*H
-keys>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.list*U
-patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list*P
-restD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictrø
-__match_args__ast.MatchMapping.__match_args__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr]
-keysast.MatchMapping.keys>
-builtins.list[ast.expr]
-ast.expr"ast.expr"builtins.listrn
-patternsast.MatchMapping.patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.listrc
-restast.MatchMapping.restD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneø
-
-MatchClassast.MatchClass"ast.pattern*†
-__init__ast.MatchClass.__init__"
-None**
-self 
-ast.MatchClass"ast.MatchClass*
-cls
-ast.expr"ast.expr*U
-patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list*Y
-	kwd_attrsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Y
-kwd_patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list*
-kwargs
-	TypedDictrË
-__match_args__ast.MatchClass.__match_args__∂
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr/
-clsast.MatchClass.cls
-ast.expr"ast.exprrl
-patternsast.MatchClass.patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.listrq
-	kwd_attrsast.MatchClass.kwd_attrsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrt
-kwd_patternsast.MatchClass.kwd_patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list∂
-	MatchStarast.MatchStar"ast.pattern*√
-__init__ast.MatchStar.__init__"
-None*(
-self
-ast.MatchStar"ast.MatchStar*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictre
-__match_args__ast.MatchStar.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strr`
-nameast.MatchStar.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneâ
-MatchAsast.MatchAs"ast.pattern*è
-__init__ast.MatchAs.__init__"
-None*$
-self
-ast.MatchAs"ast.MatchAs*P
-patternA
-Union[ast.pattern,None]
-ast.pattern"ast.pattern
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-	TypedDictré
-__match_args__ast.MatchAs.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strra
-patternast.MatchAs.patternA
-Union[ast.pattern,None]
-ast.pattern"ast.pattern
-Noner^
-nameast.MatchAs.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None∏
-MatchOrast.MatchOr"ast.pattern*¬
-__init__ast.MatchOr.__init__"
-None*$
-self
-ast.MatchOr"ast.MatchOr*U
-patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list*
-kwargs
-	TypedDictrc
-__match_args__ast.MatchOr.__match_args__5
-Tuple[builtins.str]
-builtins.str"builtins.strri
-patternsast.MatchOr.patternsG
-builtins.list[ast.pattern]
-ast.pattern"ast.pattern"builtins.list'
-type_ignoreast.type_ignore"ast.ASTÊ
-
-TypeIgnoreast.TypeIgnore"ast.type_ignore*™
-__init__ast.TypeIgnore.__init__"
-None**
-self 
-ast.TypeIgnore"ast.TypeIgnore*(
-lineno
-builtins.int"builtins.int*%
-tag
-builtins.str"builtins.strrë
-__match_args__ast.TypeIgnore.__match_args__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr=
-linenoast.TypeIgnore.lineno
-builtins.int"builtins.intr7
-tagast.TypeIgnore.tag
-builtins.str"builtins.strï
-_ABCast._ABC"builtins.type*t
-__init__ast._ABC.__init__"
-None*
-cls
-ast._ABC"ast._ABC*,
-args"
-builtins.object"builtins.objectÂ
-Numast.Num"ast.Constant*∏
-__new__ast.Num.__new__"
-ast.Constant"ast.Constant*4
-cls+
-Type[ast.Num]
-ast.Num"ast.Num"type*+
-n$
-builtins.complex"builtins.complex*
-kwargs
-	TypedDicth8@bast._ABC›
-Strast.Str"ast.Constant*∞
-__new__ast.Str.__new__"
-ast.Constant"ast.Constant*4
-cls+
-Type[ast.Str]
-ast.Str"ast.Str"type*#
-s
-builtins.str"builtins.str*
-kwargs
-	TypedDicth8@bast._ABCÌ
-Bytes	ast.Bytes"ast.Constant*º
-__new__ast.Bytes.__new__"
-ast.Constant"ast.Constant*:
-cls1
-Type[ast.Bytes]
-	ast.Bytes"	ast.Bytes"type*'
-s 
-builtins.bytes"builtins.bytes*
-kwargs
-	TypedDicth8@bast._ABC‹
-NameConstantast.NameConstant"ast.Constant*ù
-__new__ast.NameConstant.__new__"
-ast.Constant"ast.Constant*O
-clsF
-Type[ast.NameConstant]$
-ast.NameConstant"ast.NameConstant"type*õ
-valueè
-ÄTypeAlias[Union[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]]Û
-uUnion[builtins.str,builtins.bytes,builtins.bool,builtins.int,builtins.float,builtins.complex,None,types.EllipsisType]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex
-None(
-types.EllipsisType"types.EllipsisType"ast._ConstantValue*N
-kindD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*
-kwargs
-	TypedDicth8@bast._ABC÷
-Ellipsisast.Ellipsis"ast.Constant*ü
-__new__ast.Ellipsis.__new__"
-ast.Constant"ast.Constant*C
-cls:
-Type[ast.Ellipsis]
-ast.Ellipsis"ast.Ellipsis"type*
-kwargs
-	TypedDicth8@bast._ABC Ä
-NodeVisitorast.NodeVisitor"builtins.object*s
-visitast.NodeVisitor.visit"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.AST"ast.AST*É
-generic_visitast.NodeVisitor.generic_visit"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.AST"ast.AST*á
-visit_Moduleast.NodeVisitor.visit_Module"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Module"
-ast.Module*õ
-visit_Interactive!ast.NodeVisitor.visit_Interactive"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*,
-node"
-ast.Interactive"ast.Interactive*ó
-visit_Expression ast.NodeVisitor.visit_Expression"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor**
-node 
-ast.Expression"ast.Expression*õ
-visit_FunctionDef!ast.NodeVisitor.visit_FunctionDef"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*,
-node"
-ast.FunctionDef"ast.FunctionDef*Ø
-visit_AsyncFunctionDef&ast.NodeVisitor.visit_AsyncFunctionDef"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*6
-node,
-ast.AsyncFunctionDef"ast.AsyncFunctionDef*è
-visit_ClassDefast.NodeVisitor.visit_ClassDef"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.ClassDef"ast.ClassDef*á
-visit_Returnast.NodeVisitor.visit_Return"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Return"
-ast.Return*á
-visit_Deleteast.NodeVisitor.visit_Delete"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Delete"
-ast.Delete*á
-visit_Assignast.NodeVisitor.visit_Assign"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Assign"
-ast.Assign*ì
-visit_AugAssignast.NodeVisitor.visit_AugAssign"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.AugAssign"ast.AugAssign*ì
-visit_AnnAssignast.NodeVisitor.visit_AnnAssign"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.AnnAssign"ast.AnnAssign*{
-	visit_Forast.NodeVisitor.visit_For"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.For"ast.For*è
-visit_AsyncForast.NodeVisitor.visit_AsyncFor"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.AsyncFor"ast.AsyncFor*É
-visit_Whileast.NodeVisitor.visit_While"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.While"	ast.While*w
-visit_Ifast.NodeVisitor.visit_If"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.If"ast.If*
-
-visit_Withast.NodeVisitor.visit_With"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.With"ast.With*ì
-visit_AsyncWithast.NodeVisitor.visit_AsyncWith"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.AsyncWith"ast.AsyncWith*É
-visit_Raiseast.NodeVisitor.visit_Raise"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Raise"	ast.Raise*{
-	visit_Tryast.NodeVisitor.visit_Try"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Try"ast.Try*á
-visit_Assertast.NodeVisitor.visit_Assert"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Assert"
-ast.Assert*á
-visit_Importast.NodeVisitor.visit_Import"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Import"
-ast.Import*ó
-visit_ImportFrom ast.NodeVisitor.visit_ImportFrom"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor**
-node 
-ast.ImportFrom"ast.ImportFrom*á
-visit_Globalast.NodeVisitor.visit_Global"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Global"
-ast.Global*è
-visit_Nonlocalast.NodeVisitor.visit_Nonlocal"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.Nonlocal"ast.Nonlocal*
-
-visit_Exprast.NodeVisitor.visit_Expr"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Expr"ast.Expr*
-
-visit_Passast.NodeVisitor.visit_Pass"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Pass"ast.Pass*É
-visit_Breakast.NodeVisitor.visit_Break"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Break"	ast.Break*è
-visit_Continueast.NodeVisitor.visit_Continue"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.Continue"ast.Continue*É
-visit_Sliceast.NodeVisitor.visit_Slice"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Slice"	ast.Slice*á
-visit_BoolOpast.NodeVisitor.visit_BoolOp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.BoolOp"
-ast.BoolOp*É
-visit_BinOpast.NodeVisitor.visit_BinOp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.BinOp"	ast.BinOp*ã
-visit_UnaryOpast.NodeVisitor.visit_UnaryOp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.UnaryOp"ast.UnaryOp*á
-visit_Lambdaast.NodeVisitor.visit_Lambda"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Lambda"
-ast.Lambda*É
-visit_IfExpast.NodeVisitor.visit_IfExp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.IfExp"	ast.IfExp*
-
-visit_Dictast.NodeVisitor.visit_Dict"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Dict"ast.Dict*{
-	visit_Setast.NodeVisitor.visit_Set"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Set"ast.Set*è
-visit_ListCompast.NodeVisitor.visit_ListComp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.ListComp"ast.ListComp*ã
-visit_SetCompast.NodeVisitor.visit_SetComp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.SetComp"ast.SetComp*è
-visit_DictCompast.NodeVisitor.visit_DictComp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.DictComp"ast.DictComp*ü
-visit_GeneratorExp"ast.NodeVisitor.visit_GeneratorExp"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*.
-node$
-ast.GeneratorExp"ast.GeneratorExp*É
-visit_Awaitast.NodeVisitor.visit_Await"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Await"	ast.Await*É
-visit_Yieldast.NodeVisitor.visit_Yield"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Yield"	ast.Yield*ì
-visit_YieldFromast.NodeVisitor.visit_YieldFrom"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.YieldFrom"ast.YieldFrom*ã
-visit_Compareast.NodeVisitor.visit_Compare"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.Compare"ast.Compare*
-
-visit_Callast.NodeVisitor.visit_Call"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Call"ast.Call*ß
-visit_FormattedValue$ast.NodeVisitor.visit_FormattedValue"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*2
-node(
-ast.FormattedValue"ast.FormattedValue*ì
-visit_JoinedStrast.NodeVisitor.visit_JoinedStr"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.JoinedStr"ast.JoinedStr*è
-visit_Constantast.NodeVisitor.visit_Constant"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.Constant"ast.Constant*ì
-visit_NamedExprast.NodeVisitor.visit_NamedExpr"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.NamedExpr"ast.NamedExpr*ó
-visit_TypeIgnore ast.NodeVisitor.visit_TypeIgnore"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor**
-node 
-ast.TypeIgnore"ast.TypeIgnore*ì
-visit_Attributeast.NodeVisitor.visit_Attribute"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.Attribute"ast.Attribute*ì
-visit_Subscriptast.NodeVisitor.visit_Subscript"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.Subscript"ast.Subscript*ã
-visit_Starredast.NodeVisitor.visit_Starred"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.Starred"ast.Starred*
-
-visit_Nameast.NodeVisitor.visit_Name"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Name"ast.Name*
-
-visit_Listast.NodeVisitor.visit_List"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.List"ast.List*É
-visit_Tupleast.NodeVisitor.visit_Tuple"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Tuple"	ast.Tuple*{
-	visit_Delast.NodeVisitor.visit_Del"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Del"ast.Del*
-
-visit_Loadast.NodeVisitor.visit_Load"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Load"ast.Load*É
-visit_Storeast.NodeVisitor.visit_Store"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Store"	ast.Store*{
-	visit_Andast.NodeVisitor.visit_And"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.And"ast.And*w
-visit_Orast.NodeVisitor.visit_Or"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Or"ast.Or*{
-	visit_Addast.NodeVisitor.visit_Add"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Add"ast.Add*á
-visit_BitAndast.NodeVisitor.visit_BitAnd"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.BitAnd"
-ast.BitAnd*É
-visit_BitOrast.NodeVisitor.visit_BitOr"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.BitOr"	ast.BitOr*á
-visit_BitXorast.NodeVisitor.visit_BitXor"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.BitXor"
-ast.BitXor*{
-	visit_Divast.NodeVisitor.visit_Div"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Div"ast.Div*è
-visit_FloorDivast.NodeVisitor.visit_FloorDiv"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.FloorDiv"ast.FloorDiv*á
-visit_LShiftast.NodeVisitor.visit_LShift"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.LShift"
-ast.LShift*{
-	visit_Modast.NodeVisitor.visit_Mod"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Mod"ast.Mod*
-
-visit_Multast.NodeVisitor.visit_Mult"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Mult"ast.Mult*ã
-visit_MatMultast.NodeVisitor.visit_MatMult"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.MatMult"ast.MatMult*{
-	visit_Powast.NodeVisitor.visit_Pow"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Pow"ast.Pow*á
-visit_RShiftast.NodeVisitor.visit_RShift"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.RShift"
-ast.RShift*{
-	visit_Subast.NodeVisitor.visit_Sub"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Sub"ast.Sub*á
-visit_Invertast.NodeVisitor.visit_Invert"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*"
-node
-
-ast.Invert"
-ast.Invert*{
-	visit_Notast.NodeVisitor.visit_Not"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Not"ast.Not*
-
-visit_UAddast.NodeVisitor.visit_UAdd"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.UAdd"ast.UAdd*
-
-visit_USubast.NodeVisitor.visit_USub"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.USub"ast.USub*w
-visit_Eqast.NodeVisitor.visit_Eq"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Eq"ast.Eq*w
-visit_Gtast.NodeVisitor.visit_Gt"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Gt"ast.Gt*{
-	visit_GtEast.NodeVisitor.visit_GtE"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.GtE"ast.GtE*w
-visit_Inast.NodeVisitor.visit_In"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.In"ast.In*w
-visit_Isast.NodeVisitor.visit_Is"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Is"ast.Is*É
-visit_IsNotast.NodeVisitor.visit_IsNot"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.IsNot"	ast.IsNot*w
-visit_Ltast.NodeVisitor.visit_Lt"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Lt"ast.Lt*{
-	visit_LtEast.NodeVisitor.visit_LtE"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.LtE"ast.LtE*É
-visit_NotEqast.NodeVisitor.visit_NotEq"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.NotEq"	ast.NotEq*É
-visit_NotInast.NodeVisitor.visit_NotIn"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.NotIn"	ast.NotIn*£
-visit_comprehension#ast.NodeVisitor.visit_comprehension"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*0
-node&
-ast.comprehension"ast.comprehension*£
-visit_ExceptHandler#ast.NodeVisitor.visit_ExceptHandler"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*0
-node&
-ast.ExceptHandler"ast.ExceptHandler*ì
-visit_argumentsast.NodeVisitor.visit_arguments"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.arguments"ast.arguments*{
-	visit_argast.NodeVisitor.visit_arg"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.arg"ast.arg*ã
-visit_keywordast.NodeVisitor.visit_keyword"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.keyword"ast.keyword*É
-visit_aliasast.NodeVisitor.visit_alias"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.alias"	ast.alias*è
-visit_withitemast.NodeVisitor.visit_withitem"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.withitem"ast.withitem*É
-visit_Matchast.NodeVisitor.visit_Match"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Match"	ast.Match*ó
-visit_match_case ast.NodeVisitor.visit_match_case"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor**
-node 
-ast.match_case"ast.match_case*ó
-visit_MatchValue ast.NodeVisitor.visit_MatchValue"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor**
-node 
-ast.MatchValue"ast.MatchValue*£
-visit_MatchSequence#ast.NodeVisitor.visit_MatchSequence"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*0
-node&
-ast.MatchSequence"ast.MatchSequence*ß
-visit_MatchSingleton$ast.NodeVisitor.visit_MatchSingleton"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*2
-node(
-ast.MatchSingleton"ast.MatchSingleton*ì
-visit_MatchStarast.NodeVisitor.visit_MatchStar"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*(
-node
-ast.MatchStar"ast.MatchStar*ü
-visit_MatchMapping"ast.NodeVisitor.visit_MatchMapping"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*.
-node$
-ast.MatchMapping"ast.MatchMapping*ó
-visit_MatchClass ast.NodeVisitor.visit_MatchClass"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor**
-node 
-ast.MatchClass"ast.MatchClass*ã
-visit_MatchAsast.NodeVisitor.visit_MatchAs"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.MatchAs"ast.MatchAs*ã
-visit_MatchOrast.NodeVisitor.visit_MatchOr"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.MatchOr"ast.MatchOr*è
-visit_ExtSliceast.NodeVisitor.visit_ExtSlice"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.ExtSlice"ast.ExtSlice*É
-visit_Indexast.NodeVisitor.visit_Index"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Index"	ast.Index*É
-visit_Suiteast.NodeVisitor.visit_Suite"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Suite"	ast.Suite*ã
-visit_AugLoadast.NodeVisitor.visit_AugLoad"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*$
-node
-ast.AugLoad"ast.AugLoad*è
-visit_AugStoreast.NodeVisitor.visit_AugStore"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.AugStore"ast.AugStore*É
-visit_Paramast.NodeVisitor.visit_Param"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Param"	ast.Param*}
-	visit_Numast.NodeVisitor.visit_Num"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Num"ast.Num0*}
-	visit_Strast.NodeVisitor.visit_Str"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*
-node
-ast.Str"ast.Str0*Ö
-visit_Bytesast.NodeVisitor.visit_Bytes"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor* 
-node
-	ast.Bytes"	ast.Bytes0*°
-visit_NameConstant"ast.NodeVisitor.visit_NameConstant"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*.
-node$
-ast.NameConstant"ast.NameConstant0*ë
-visit_Ellipsisast.NodeVisitor.visit_Ellipsis"
-Any*,
-self"
-ast.NodeVisitor"ast.NodeVisitor*&
-node
-ast.Ellipsis"ast.Ellipsis0‘
-NodeTransformerast.NodeTransformer"ast.NodeVisitor*ö
-generic_visit!ast.NodeTransformer.generic_visit"
-ast.AST"ast.AST*4
-self*
-ast.NodeTransformer"ast.NodeTransformer*
-node
-ast.AST"ast.ASTê
-literal_evalast.literal_eval"
-Any*e
-node_or_stringQ
-Union[builtins.str,ast.AST]
-builtins.str"builtins.str
-ast.AST"ast.ASTº
-dumpast.dump"
-builtins.str"builtins.str*
-node
-ast.AST"ast.AST*5
-annotate_fields
-builtins.bool"builtins.bool *8
-include_attributes
-builtins.bool"builtins.bool *}
-indento
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None §
-copy_locationast.copy_location"'
-ast._T
-ast.AST"ast.AST"ast.AST*5
-new_node'
-ast._T
-ast.AST"ast.AST"ast.AST* 
-old_node
-ast.AST"ast.ASTé
-fix_missing_locationsast.fix_missing_locations"'
-ast._T
-ast.AST"ast.AST"ast.AST*1
-node'
-ast._T
-ast.AST"ast.AST"ast.AST´
-increment_linenoast.increment_lineno"'
-ast._T
-ast.AST"ast.AST"ast.AST*1
-node'
-ast._T
-ast.AST"ast.AST"ast.AST*%
-n
-builtins.int"builtins.int Ω
-iter_fieldsast.iter_fields"
-(typing.Iterator[Tuple[builtins.str,Any]]B
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Iterator*
-node
-ast.AST"ast.ASTá
-iter_child_nodesast.iter_child_nodes"?
-typing.Iterator[ast.AST]
-ast.AST"ast.AST"typing.Iterator*
-node
-ast.AST"ast.ASTÙ
-get_docstringast.get_docstring"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*‹
-node—
-CUnion[ast.AsyncFunctionDef,ast.FunctionDef,ast.ClassDef,ast.Module],
-ast.AsyncFunctionDef"ast.AsyncFunctionDef"
-ast.FunctionDef"ast.FunctionDef
-ast.ClassDef"ast.ClassDef
-
-ast.Module"
-ast.Module*+
-clean
-builtins.bool"builtins.bool Ë
-get_source_segmentast.get_source_segment"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*(
-source
-builtins.str"builtins.str*
-node
-ast.AST"ast.AST*,
-padded
-builtins.bool"builtins.bool o
-walkast.walk"?
-typing.Iterator[ast.AST]
-ast.AST"ast.AST"typing.Iterator*
-node
-ast.AST"ast.ASTU
-unparseast.unparse"
-builtins.str"builtins.str*
-ast_obj
-ast.AST"ast.AST
-mainast.main"
-None"Ó1
-parse	ast.parseß
-parse	ast.parse"'
-ast._T
-ast.AST"ast.AST"ast.AST*3
-source'
-ast._T
-ast.AST"ast.AST"ast.AST*≤
-filename°
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike *”
-mode∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadXÊ
-parse	ast.parse"
-
-ast.Module"
-ast.Module*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*≤
-filename°
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike *C
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str *3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadXÍ
-parse	ast.parse" 
-ast.Expression"ast.Expression*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*∞
-filename°
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadXÓ
-parse	ast.parse"$
-ast.FunctionType"ast.FunctionType*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*∞
-filename°
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadXÏ
-parse	ast.parse""
-ast.Interactive"ast.Interactive*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*∞
-filename°
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadX∑
-parse	ast.parse" 
-ast.Expression"ast.Expression*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadXª
-parse	ast.parse"$
-ast.FunctionType"ast.FunctionType*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadXπ
-parse	ast.parse""
-ast.Interactive"ast.Interactive*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadX≈
-parse	ast.parse"
-ast.mod"ast.mod*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*≤
-filename°
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike *(
-mode
-builtins.str"builtins.str *3
-type_comments
-builtins.bool"builtins.bool *ﬂ
-feature_version«
-9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
-None
-builtins.int"builtins.int`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int 0:typing.overloadX*
-__annotations__ast.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-astast *[
-PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT
-builtins.int"builtins.int*A
-PyCF_ONLY_AST_ast.PyCF_ONLY_AST
-builtins.int"builtins.int*K
-PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS
-builtins.int"builtins.int
+ast”
+_TypeVartyping.TypeVar"builtins.object*/
+__name__*
+
+self(0:builtins.property`*0
+	__bound__*
+
+self(0:builtins.property`*6
+__constraints__*
+
+self(0:builtins.property`*4
+__covariant__*
+
+self(0:builtins.property`*8
+__contravariant__*
+
+self(0:builtins.property`*p
+__init__*
+
+self(*
+
+name(*
+constraints(*
+bound (*
+	covariant (*
+contravariant (*
+__or__*(*(*
+__ror__*(*(8$
+_Attributes"typing._TypedDict8PH
+AST"builtins.objectr
+__match_args__0	r
+_attributes0
+r
+_fields0
+
+mod"ast.AST{
+Module"ast.mod*8
+__init__*
+
+self(*
+
+body(*
+type_ignores(r
+__match_args__0r
+body0r
+type_ignores0Z
+Interactive"ast.mod*$
+__init__*
+
+self(*
+
+body(r
+__match_args__0r
+body0Y
+
+Expression"ast.mod*$
+__init__*
+
+self(*
+
+body(r
+__match_args__0r
+body0
+FunctionType"ast.mod*7
+__init__*
+
+self(*
+argtypes(*
+returns(r
+__match_args__0r
+argtypes0r
+returns0w
+stmt"ast.AST*&
+__init__*
+
+self(*
+kwargs(r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0Ü
+FunctionDef"ast.stmt*á
+__init__*
+
+self(*
+
+name(*
+
+args(*
+
+body(*
+decorator_list(*
+returns (*
+type_comment (*
+kwargs(r
+__match_args__0r
+name0r
+args0r
+body0r
+decorator_list0r
+returns0r
+type_comment0ã
+AsyncFunctionDef"ast.stmt*á
+__init__*
+
+self(*
+
+name(*
+
+args(*
+
+body(*
+decorator_list(*
+returns (*
+type_comment (*
+kwargs(r
+__match_args__0r
+name0r
+args0r
+body0r
+decorator_list0r
+returns0r
+type_comment0‹
+ClassDef"ast.stmt*q
+__init__*
+
+self( *
+
+name(*
+bases(*
+keywords("*
+
+body(*
+decorator_list(*
+kwargs(r
+__match_args__0#r
+name0r	
+bases0r
+keywords0"r
+body0r
+decorator_list0h
+Return"ast.stmt*5
+__init__*
+
+self($*
+value (*
+kwargs(r
+__match_args__0r	
+value0j
+Delete"ast.stmt*5
+__init__*
+
+self(%*
+targets(*
+kwargs(r
+__match_args__0r
+targets0™
+Assign"ast.stmt*X
+__init__*
+
+self(&*
+targets(*
+value(*
+type_comment (*
+kwargs(r
+__match_args__0'r
+targets0r	
+value0r
+type_comment0ï
+	AugAssign"ast.stmt*K
+__init__*
+
+self((*
+target(,*
+op(-*
+value(*
+kwargs(r
+__match_args__0'r
+
+target0,r
+op0-r	
+value0€
+	AnnAssign"ast.stmt2¸
+__init__v
+__init__*
+
+self(.*
+target(,*
+
+annotation(*
+value(*
+simple(*
+kwargs(0:typing.overloadXx
+__init__*
+
+self(.*
+target(,*
+
+annotation(*
+value (*
+simple(*
+kwargs(0:typing.overloadXr
+__match_args__0/r
+
+target0,r
+
+annotation0r	
+value0r
+
+simple0”
+For"ast.stmt*p
+__init__*
+
+self(0*
+target(*
+
+iter(*
+
+body(*
+orelse(*
+type_comment (*
+kwargs(r
+__match_args__0#r
+
+target0r
+iter0r
+body0r
+
+orelse0r
+type_comment0ÿ
+AsyncFor"ast.stmt*p
+__init__*
+
+self(1*
+target(*
+
+iter(*
+
+body(*
+orelse(*
+type_comment (*
+kwargs(r
+__match_args__0#r
+
+target0r
+iter0r
+body0r
+
+orelse0r
+type_comment0ì
+While"ast.stmt*L
+__init__*
+
+self(2*
+
+test(*
+
+body(*
+orelse(*
+kwargs(r
+__match_args__0'r
+test0r
+body0r
+
+orelse0ê
+If"ast.stmt*L
+__init__*
+
+self(3*
+
+test(*
+
+body(*
+orelse(*
+kwargs(r
+__match_args__0'r
+test0r
+body0r
+
+orelse0¢
+With"ast.stmt*U
+__init__*
+
+self(4*
+items(6*
+
+body(*
+type_comment (*
+kwargs(r
+__match_args__0'r	
+items06r
+body0r
+type_comment0ß
+	AsyncWith"ast.stmt*U
+__init__*
+
+self(7*
+items(6*
+
+body(*
+type_comment (*
+kwargs(r
+__match_args__0'r	
+items06r
+body0r
+type_comment0}
+Raise"ast.stmt*B
+__init__*
+
+self(8*
+exc (*
+cause (*
+kwargs(r
+__match_args__0r
+exc0r	
+cause0π
+Try"ast.stmt*a
+__init__*
+
+self(9*
+
+body(*
+handlers(;*
+orelse(*
+	finalbody(*
+kwargs(r
+__match_args__0/r
+body0r
+handlers0;r
+
+orelse0r
+	finalbody0z
+Assert"ast.stmt*?
+__init__*
+
+self(<*
+
+test(*
+msg (*
+kwargs(r
+__match_args__0r
+test0r
+msg0f
+Import"ast.stmt*3
+__init__*
+
+self(=*
+names(?*
+kwargs(r
+__match_args__0r	
+names0?•
+
+ImportFrom"ast.stmt2÷
+__init__c
+__init__*
+
+self(@*
+module(*
+names(?*
+level(*
+kwargs(0:typing.overloadXe
+__init__*
+
+self(@*
+module (*
+names(?*
+level(*
+kwargs(0:typing.overloadXr
+__match_args__0'r
+
+module0r	
+names0?r	
+level0f
+Global"ast.stmt*3
+__init__*
+
+self(A*
+names(B*
+kwargs(r
+__match_args__0r	
+names0Bh
+Nonlocal"ast.stmt*3
+__init__*
+
+self(C*
+names(B*
+kwargs(r
+__match_args__0r	
+names0Bd
+Expr"ast.stmt*3
+__init__*
+
+self(D*
+value(*
+kwargs(r
+__match_args__0r	
+value0
+Pass"ast.stmt
+Break"ast.stmt
+Continue"ast.stmtw
+expr"ast.AST*&
+__init__*
+
+self(*
+kwargs(r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0z
+BoolOp"ast.expr*>
+__init__*
+
+self(E*
+op(F*
+values(*
+kwargs(r
+__match_args__0r
+op0Fr
+
+values0É
+	NamedExpr"ast.expr*A
+__init__*
+
+self(G*
+target()*
+value(*
+kwargs(r
+__match_args__0r
+
+target0)r	
+value0ç
+BinOp"ast.expr*I
+__init__*
+
+self(H*
+
+left(*
+op(-*
+right(*
+kwargs(r
+__match_args__0'r
+left0r
+op0-r	
+right0}
+UnaryOp"ast.expr*?
+__init__*
+
+self(I*
+op(J*
+operand(*
+kwargs(r
+__match_args__0r
+op0Jr
+operand0z
+Lambda"ast.expr*>
+__init__*
+
+self(K*
+
+args(*
+
+body(*
+kwargs(r
+__match_args__0r
+args0r
+body0ì
+IfExp"ast.expr*L
+__init__*
+
+self(L*
+
+test(*
+
+body(*
+orelse(*
+kwargs(r
+__match_args__0'r
+test0r
+body0r
+
+orelse0|
+Dict"ast.expr*@
+__init__*
+
+self(M*
+
+keys(N*
+values(*
+kwargs(r
+__match_args__0r
+keys0Nr
+
+values0a
+Set"ast.expr*2
+__init__*
+
+self(O*
+
+elts(*
+kwargs(r
+__match_args__0r
+elts0Ü
+ListComp"ast.expr*C
+__init__*
+
+self(P*	
+elt(*
+
+generators(R*
+kwargs(r
+__match_args__0r
+elt0r
+
+generators0RÖ
+SetComp"ast.expr*C
+__init__*
+
+self(S*	
+elt(*
+
+generators(R*
+kwargs(r
+__match_args__0r
+elt0r
+
+generators0Rû
+DictComp"ast.expr*P
+__init__*
+
+self(T*	
+key(*
+value(*
+
+generators(R*
+kwargs(r
+__match_args__0'r
+key0r	
+value0r
+
+generators0Rä
+GeneratorExp"ast.expr*C
+__init__*
+
+self(U*	
+elt(*
+
+generators(R*
+kwargs(r
+__match_args__0r
+elt0r
+
+generators0Re
+Await"ast.expr*3
+__init__*
+
+self(V*
+value(*
+kwargs(r
+__match_args__0r	
+value0g
+Yield"ast.expr*5
+__init__*
+
+self(W*
+value (*
+kwargs(r
+__match_args__0r	
+value0i
+	YieldFrom"ast.expr*3
+__init__*
+
+self(X*
+value(*
+kwargs(r
+__match_args__0r	
+value0ù
+Compare"ast.expr*P
+__init__*
+
+self(Y*
+
+left(*	
+ops([*
+comparators(*
+kwargs(r
+__match_args__0'r
+left0r
+ops0[r
+comparators0ñ
+Call"ast.expr*N
+__init__*
+
+self(\*
+
+func(*
+
+args(*
+keywords("*
+kwargs(r
+__match_args__0'r
+func0r
+args0r
+keywords0"∂
+FormattedValue"ast.expr*Z
+__init__*
+
+self(]*
+value(*
+
+conversion(*
+format_spec (*
+kwargs(r
+__match_args__0'r	
+value0r
+
+conversion0r
+format_spec0k
+	JoinedStr"ast.expr*4
+__init__*
+
+self(^*
+values(*
+kwargs(r
+__match_args__0r
+
+values0∏
+Constant"ast.expr*A
+__init__*
+
+self(_*
+value(e*
+kind (*
+kwargs(2Z
+n*
+ne*
+
+self(_0:builtins.propertyX`)
+n*
+
+self(_*
+value(e0:.setter2Z
+s*
+se*
+
+self(_0:builtins.propertyX`)
+s*
+
+self(_*
+value(e0:.setterr
+__match_args__0r	
+value0er
+kind0ï
+	Attribute"ast.expr*L
+__init__*
+
+self(**
+value(*
+
+attr(*
+ctx (f*
+kwargs(r
+__match_args__0'r	
+value0r
+attr0r
+ctx0fó
+	Subscript"ast.expr*M
+__init__*
+
+self(+*
+value(*
+slice(*
+ctx (f*
+kwargs(r
+__match_args__0'r	
+value0r	
+slice0r
+ctx0f}
+Starred"ast.expr*@
+__init__*
+
+self(g*
+value(*
+ctx (f*
+kwargs(r
+__match_args__0r	
+value0r
+ctx0ft
+Name"ast.expr*=
+__init__*
+
+self()*
+id(*
+ctx (f*
+kwargs(r
+__match_args__0r
+id0r
+ctx0fx
+List"ast.expr*?
+__init__*
+
+self(h*
+
+elts(*
+ctx (f*
+kwargs(r
+__match_args__0r
+elts0r
+ctx0fÉ
+Tuple"ast.expr*?
+__init__*
+
+self(i*
+
+elts(*
+ctx (f*
+kwargs(r
+__match_args__0r
+elts0r
+ctx0fr
+dims0
+slice"ast.AST8ô
+Slice"ast.expr*R
+__init__*
+
+self(j*
+lower (*
+upper (*
+step (*
+kwargs(r
+__match_args__0'r	
+lower0r	
+upper0r
+step0M
+ExtSlice"	ast.slice*4
+__new__i*	
+cls(l*
+dims (n*
+kwargs(h8I
+Index"	ast.slice*3
+__new__*	
+cls(p*
+value(*
+kwargs(h8
+expr_context"ast.AST
+AugLoad"ast.expr_context8
+AugStore"ast.expr_context8
+Param"ast.expr_context8
+Suite"ast.mod8
+Load"ast.expr_context
+Store"ast.expr_context
+Del"ast.expr_context
+boolop"ast.AST
+And"
+ast.boolop
+Or"
+ast.boolop
+operator"ast.AST
+Add"ast.operator
+Sub"ast.operator
+Mult"ast.operator
+MatMult"ast.operator
+Div"ast.operator
+Mod"ast.operator
+Pow"ast.operator
+LShift"ast.operator
+RShift"ast.operator
+BitOr"ast.operator
+BitXor"ast.operator
+BitAnd"ast.operator
+FloorDiv"ast.operator
+unaryop"ast.AST
+Invert"ast.unaryop
+Not"ast.unaryop
+UAdd"ast.unaryop
+USub"ast.unaryop
+cmpop"ast.AST
+Eq"	ast.cmpop
+NotEq"	ast.cmpop
+Lt"	ast.cmpop
+LtE"	ast.cmpop
+Gt"	ast.cmpop
+GtE"	ast.cmpop
+Is"	ast.cmpop
+IsNot"	ast.cmpop
+In"	ast.cmpop
+NotIn"	ast.cmpop®
+comprehension"ast.AST*M
+__init__*
+
+self(Q*
+target(*
+
+iter(*	
+ifs(*
+is_async(r
+__match_args__0/r
+
+target0r
+iter0r
+ifs0r
+is_async0Ä
+excepthandler"ast.AST*&
+__init__*
+
+self(q*
+kwargs(r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0ß
+ExceptHandler"ast.excepthandler2–
+__init___
+__init__*
+
+self(:*
+
+type(*
+
+name(*
+
+body(*
+kwargs(0:typing.overloadXc
+__init__*
+
+self(:*
+type (*
+name (*
+
+body(*
+kwargs(0:typing.overloadXr
+__match_args__0'r
+type0r
+name0r
+body0˘
+	arguments"ast.AST2Ì
+__init__ú
+__init__*
+
+self(*
+posonlyargs(s*
+
+args(s*
+vararg(t*
+
+kwonlyargs(s*
+kw_defaults(N*
+kwarg(t*
+defaults(0:typing.overloadXû
+__init__*
+
+self(*
+posonlyargs(s*
+
+args(s*
+vararg(t*
+
+kwonlyargs(s*
+kw_defaults(N*
+kwarg (t*
+defaults(0:typing.overloadX†
+__init__*
+
+self(*
+posonlyargs(s*
+
+args(s*
+vararg (t*
+
+kwonlyargs(s*
+kw_defaults(N*
+kwarg (t*
+defaults(0:typing.overloadXr
+__match_args__0ur
+posonlyargs0sr
+args0sr
+
+vararg0tr
+
+kwonlyargs0sr
+kw_defaults0Nr	
+kwarg0tr
+defaults0Í
+arg"ast.AST*[
+__init__*
+
+self(r*	
+arg(*
+
+annotation (*
+type_comment (*
+kwargs(r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0r
+__match_args__0'r
+arg0r
+
+annotation0r
+type_comment0≥
+keyword"ast.AST2∂
+__init__S
+__init__*
+
+self(!*	
+arg(*
+value(*
+kwargs(0:typing.overloadXU
+__init__*
+
+self(!*
+arg (*
+value(*
+kwargs(0:typing.overloadXr
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0r
+__match_args__0r
+arg0r	
+value0æ
+alias"ast.AST*B
+__init__*
+
+self(>*
+
+name(*
+asname (*
+kwargs(r
+name0r
+
+asname0r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0r
+__match_args__0ë
+withitem"ast.AST*C
+__init__*
+
+self(5*
+context_expr(*
+optional_vars (r
+__match_args__0r
+context_expr0r
+optional_vars0z
+pattern"ast.AST*&
+__init__*
+
+self(v*
+kwargs(r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0à
+
+match_case"ast.AST2∫
+__init__U
+__init__*
+
+self(w*
+pattern(v*
+guard(*
+
+body(0:typing.overloadXW
+__init__*
+
+self(w*
+pattern(v*
+guard (*
+
+body(0:typing.overloadXr
+__match_args__0'r
+pattern0vr	
+guard0r
+body0Å
+Match"ast.stmt*B
+__init__*
+
+self(x*
+subject(*
+cases(y*
+kwargs(r
+__match_args__0r
+subject0r	
+cases0ym
+
+MatchValue"ast.pattern*3
+__init__*
+
+self(z*
+value(*
+kwargs(r
+__match_args__0r	
+value0q
+MatchSingleton"ast.pattern*3
+__init__*
+
+self({*
+value(|*
+kwargs(r
+__match_args__0r	
+value0|v
+MatchSequence"ast.pattern*6
+__init__*
+
+self(}*
+patterns(~*
+kwargs(r
+__match_args__0r
+patterns0~£
+MatchMapping"ast.pattern*P
+__init__*
+
+self(*
+
+keys(*
+patterns(~*
+rest (*
+kwargs(r
+__match_args__0'r
+keys0r
+patterns0~r
+rest0Œ
+
+MatchClass"ast.pattern*g
+__init__*
+self(Ä*	
+cls(*
+patterns(~*
+	kwd_attrs(B*
+kwd_patterns(~*
+kwargs(r
+__match_args__0/r
+cls0r
+patterns0~r
+	kwd_attrs0Br
+kwd_patterns0~m
+	MatchStar"ast.pattern*5
+__init__*
+self(Å*
+name (*
+kwargs(r
+__match_args__0r
+name0ã
+MatchAs"ast.pattern*G
+__init__*
+self(Ç*
+pattern (É*
+name (*
+kwargs(r
+__match_args__0r
+pattern0Ér
+name0q
+MatchOr"ast.pattern*7
+__init__*
+self(Ñ*
+patterns(~*
+kwargs(r
+__match_args__0r
+patterns0~
+type_ignore"ast.ASTy
+
+TypeIgnore"ast.type_ignore*1
+__init__*
+
+self(*
+lineno(*	
+tag(r
+__match_args__0r
+
+lineno0r
+tag0<
+_ABC"builtins.type*%
+__init__*
+
+cls(Ö*
+args(ÜS
+Num"ast.Constant*0
+__new___*
+
+cls(à*
+n(b*
+kwargs(h8@bast._ABCS
+Str"ast.Constant*0
+__new___*
+
+cls(ä*
+s(*
+kwargs(h8@bast._ABCU
+Bytes"ast.Constant*0
+__new___*
+
+cls(å*
+s(`*
+kwargs(h8@bast._ABCl
+NameConstant"ast.Constant*@
+__new___*
+
+cls(é*
+value(e*
+
+kind(*
+kwargs(h8@bast._ABCO
+Ellipsis"ast.Constant*'
+__new___*
+
+cls(ê*
+kwargs(h8@bast._ABC“(
+NodeVisitor"builtins.object*#
+visit*
+self(ë*
+node(í*+
+generic_visit*
+self(ë*
+node(í*)
+visit_Module*
+self(ë*
+
+node(*.
+visit_Interactive*
+self(ë*
+
+node(*-
+visit_Expression*
+self(ë*
+
+node(*.
+visit_FunctionDef*
+self(ë*
+
+node(*3
+visit_AsyncFunctionDef*
+self(ë*
+
+node(*+
+visit_ClassDef*
+self(ë*
+
+node( *)
+visit_Return*
+self(ë*
+
+node($*)
+visit_Delete*
+self(ë*
+
+node(%*)
+visit_Assign*
+self(ë*
+
+node(&*,
+visit_AugAssign*
+self(ë*
+
+node((*,
+visit_AnnAssign*
+self(ë*
+
+node(.*&
+	visit_For*
+self(ë*
+
+node(0*+
+visit_AsyncFor*
+self(ë*
+
+node(1*(
+visit_While*
+self(ë*
+
+node(2*%
+visit_If*
+self(ë*
+
+node(3*'
+
+visit_With*
+self(ë*
+
+node(4*,
+visit_AsyncWith*
+self(ë*
+
+node(7*(
+visit_Raise*
+self(ë*
+
+node(8*&
+	visit_Try*
+self(ë*
+
+node(9*)
+visit_Assert*
+self(ë*
+
+node(<*)
+visit_Import*
+self(ë*
+
+node(=*-
+visit_ImportFrom*
+self(ë*
+
+node(@*)
+visit_Global*
+self(ë*
+
+node(A*+
+visit_Nonlocal*
+self(ë*
+
+node(C*'
+
+visit_Expr*
+self(ë*
+
+node(D*(
+
+visit_Pass*
+self(ë*
+node(ì*)
+visit_Break*
+self(ë*
+node(î*,
+visit_Continue*
+self(ë*
+node(ï*(
+visit_Slice*
+self(ë*
+
+node(j*)
+visit_BoolOp*
+self(ë*
+
+node(E*(
+visit_BinOp*
+self(ë*
+
+node(H**
+visit_UnaryOp*
+self(ë*
+
+node(I*)
+visit_Lambda*
+self(ë*
+
+node(K*(
+visit_IfExp*
+self(ë*
+
+node(L*'
+
+visit_Dict*
+self(ë*
+
+node(M*&
+	visit_Set*
+self(ë*
+
+node(O*+
+visit_ListComp*
+self(ë*
+
+node(P**
+visit_SetComp*
+self(ë*
+
+node(S*+
+visit_DictComp*
+self(ë*
+
+node(T*/
+visit_GeneratorExp*
+self(ë*
+
+node(U*(
+visit_Await*
+self(ë*
+
+node(V*(
+visit_Yield*
+self(ë*
+
+node(W*,
+visit_YieldFrom*
+self(ë*
+
+node(X**
+visit_Compare*
+self(ë*
+
+node(Y*'
+
+visit_Call*
+self(ë*
+
+node(\*1
+visit_FormattedValue*
+self(ë*
+
+node(]*,
+visit_JoinedStr*
+self(ë*
+
+node(^*+
+visit_Constant*
+self(ë*
+
+node(_*,
+visit_NamedExpr*
+self(ë*
+
+node(G*-
+visit_TypeIgnore*
+self(ë*
+
+node(*,
+visit_Attribute*
+self(ë*
+
+node(**,
+visit_Subscript*
+self(ë*
+
+node(+**
+visit_Starred*
+self(ë*
+
+node(g*'
+
+visit_Name*
+self(ë*
+
+node()*'
+
+visit_List*
+self(ë*
+
+node(h*(
+visit_Tuple*
+self(ë*
+
+node(i*'
+	visit_Del*
+self(ë*
+node(ñ*(
+
+visit_Load*
+self(ë*
+node(ó*)
+visit_Store*
+self(ë*
+node(ò*'
+	visit_And*
+self(ë*
+node(ô*&
+visit_Or*
+self(ë*
+node(ö*'
+	visit_Add*
+self(ë*
+node(õ**
+visit_BitAnd*
+self(ë*
+node(ú*)
+visit_BitOr*
+self(ë*
+node(ù**
+visit_BitXor*
+self(ë*
+node(û*'
+	visit_Div*
+self(ë*
+node(ü*,
+visit_FloorDiv*
+self(ë*
+node(†**
+visit_LShift*
+self(ë*
+node(°*'
+	visit_Mod*
+self(ë*
+node(¢*(
+
+visit_Mult*
+self(ë*
+node(£*+
+visit_MatMult*
+self(ë*
+node(§*'
+	visit_Pow*
+self(ë*
+node(•**
+visit_RShift*
+self(ë*
+node(¶*'
+	visit_Sub*
+self(ë*
+node(ß**
+visit_Invert*
+self(ë*
+node(®*'
+	visit_Not*
+self(ë*
+node(©*(
+
+visit_UAdd*
+self(ë*
+node(™*(
+
+visit_USub*
+self(ë*
+node(´*&
+visit_Eq*
+self(ë*
+node(¨*&
+visit_Gt*
+self(ë*
+node(≠*'
+	visit_GtE*
+self(ë*
+node(Æ*&
+visit_In*
+self(ë*
+node(Ø*&
+visit_Is*
+self(ë*
+node(∞*)
+visit_IsNot*
+self(ë*
+node(±*&
+visit_Lt*
+self(ë*
+node(≤*'
+	visit_LtE*
+self(ë*
+node(≥*)
+visit_NotEq*
+self(ë*
+node(¥*)
+visit_NotIn*
+self(ë*
+node(µ*0
+visit_comprehension*
+self(ë*
+
+node(Q*0
+visit_ExceptHandler*
+self(ë*
+
+node(:*,
+visit_arguments*
+self(ë*
+
+node(*&
+	visit_arg*
+self(ë*
+
+node(r**
+visit_keyword*
+self(ë*
+
+node(!*(
+visit_alias*
+self(ë*
+
+node(>*+
+visit_withitem*
+self(ë*
+
+node(5*(
+visit_Match*
+self(ë*
+
+node(x*-
+visit_match_case*
+self(ë*
+
+node(w*-
+visit_MatchValue*
+self(ë*
+
+node(z*0
+visit_MatchSequence*
+self(ë*
+
+node(}*1
+visit_MatchSingleton*
+self(ë*
+
+node({*-
+visit_MatchStar*
+self(ë*
+node(Å*/
+visit_MatchMapping*
+self(ë*
+
+node(*.
+visit_MatchClass*
+self(ë*
+node(Ä*+
+visit_MatchAs*
+self(ë*
+node(Ç*+
+visit_MatchOr*
+self(ë*
+node(Ñ*+
+visit_ExtSlice*
+self(ë*
+
+node(k*(
+visit_Index*
+self(ë*
+
+node(o*)
+visit_Suite*
+self(ë*
+node(∂*+
+visit_AugLoad*
+self(ë*
+node(∑*,
+visit_AugStore*
+self(ë*
+node(∏*)
+visit_Param*
+self(ë*
+node(π*)
+	visit_Num*
+self(ë*
+node(á0*)
+	visit_Str*
+self(ë*
+node(â0*+
+visit_Bytes*
+self(ë*
+node(ã0*2
+visit_NameConstant*
+self(ë*
+node(ç0*.
+visit_Ellipsis*
+self(ë*
+node(è0P
+NodeTransformer"ast.NodeVisitor*,
+generic_visití*
+self(∫*
+node(í'
+literal_eval*
+node_or_string(ª[
+dump*
+node(í*
+annotate_fields (*
+include_attributes (*
+indent (º4
+copy_locationΩ*
+new_node(Ω*
+old_node(í'
+fix_missing_locationsΩ*
+node(Ω-
+increment_linenoΩ*
+node(Ω*	
+n (
+iter_fieldsø*
+node(í"
+iter_child_nodes¿*
+node(í-
+get_docstring*
+node(¡*
+clean (A
+get_source_segment*
+source(*
+node(í*
+padded (
+walk¿*
+node(í
+unparse*
+ast_obj(í
+main"“
+parseÅ
+parseΩ*
+source(Ω*
+filename (√*
+mode (≈*
+type_comments (*
+feature_version («0:typing.overloadXÄ
+parse*
+source(…*
+filename (√*
+mode (ƒ*
+type_comments (*
+feature_version («0:typing.overloadX|
+parse*
+source(…*
+filename(√*
+mode(ƒ*
+type_comments (*
+feature_version («0:typing.overloadX|
+parse*
+source(…*
+filename(√*
+mode(ƒ*
+type_comments (*
+feature_version («0:typing.overloadX|
+parse*
+source(…*
+filename(√*
+mode(ƒ*
+type_comments (*
+feature_version («0:typing.overloadXk
+parse*
+source(…*
+mode(ƒ*
+type_comments (*
+feature_version («0:typing.overloadXk
+parse*
+source(…*
+mode(ƒ*
+type_comments (*
+feature_version («0:typing.overloadXk
+parse*
+source(…*
+mode(ƒ*
+type_comments (*
+feature_version («0:typing.overloadXÄ
+parse *
+source(…*
+filename (√*
+mode (*
+type_comments (*
+feature_version («0:typing.overloadX*
+__annotations__0À*
+astast *?
+PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT0*%
+PyCF_ONLY_AST_ast.PyCF_ONLY_AST0*/
+PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS02"builtins.str2"typing.TypeVar22222"builtins.tuple22"builtins.bool2"typing._SpecialForm22"builtins.tuple22"
+ast.Module2
+"ast.stmt2"builtins.list22"ast.TypeIgnore2"builtins.list2222"ast.Interactive222"ast.Expression2
+"ast.expr2"ast.FunctionType2"builtins.list222"builtins.int222"ast.FunctionDef2"ast.arguments22222
+22"ast.AsyncFunctionDef2"ast.ClassDef2"ast.keyword2"builtins.list2!2	22"
+ast.Return2"
+ast.Delete2"
+ast.Assign222"ast.AugAssign2
+"ast.Name2"ast.Attribute2"ast.Subscript22)*+2"ast.operator2"ast.AnnAssign222	"ast.For2"ast.AsyncFor2"	ast.While2"ast.If2
+"ast.With2"ast.withitem2"builtins.list252"ast.AsyncWith2"	ast.Raise2	"ast.Try2"ast.ExceptHandler2"builtins.list2:2"
+ast.Assert2"
+ast.Import2"	ast.alias2"builtins.list2>2"ast.ImportFrom2"
+ast.Global2"builtins.list22"ast.Nonlocal2
+"ast.Expr2"
+ast.BoolOp2"
+ast.boolop2"ast.NamedExpr2"	ast.BinOp2"ast.UnaryOp2"ast.unaryop2"
+ast.Lambda2"	ast.IfExp2
+"ast.Dict2"builtins.list22	"ast.Set2"ast.ListComp2"ast.comprehension2"builtins.list2Q2"ast.SetComp2"ast.DictComp2"ast.GeneratorExp2"	ast.Await2"	ast.Yield2"ast.YieldFrom2"ast.Compare2"	ast.cmpop2"builtins.list2Z2
+"ast.Call2"ast.FormattedValue2"ast.JoinedStr2"ast.Constant2"builtins.bytes2"builtins.float2"builtins.complex2"types.EllipsisType22`abc2"ast._ConstantValue2d2"ast.expr_context2"ast.Starred2
+"ast.List2"	ast.Tuple2"	ast.Slice2"ast.ExtSlice2"type2k2"	ast.slice2"typing.Iterable2m2"	ast.Index2"type2o2"ast.excepthandler2	"ast.arg2"builtins.list2r22r222"ast.pattern2"ast.match_case2"	ast.Match2"builtins.list2w2"ast.MatchValue2"ast.MatchSingleton222"ast.MatchSequence2"builtins.list2v2"ast.MatchMapping2"ast.MatchClass2"ast.MatchStar2"ast.MatchAs22v2"ast.MatchOr2
+"ast._ABC2"builtins.object2	"ast.Num2"type2á2	"ast.Str2"type2â2"	ast.Bytes2"type2ã2"ast.NameConstant2"type2ç2"ast.Ellipsis2"type2è2"ast.NodeVisitor2	"ast.AST2
+"ast.Pass2"	ast.Break2"ast.Continue2	"ast.Del2
+"ast.Load2"	ast.Store2	"ast.And2"ast.Or2	"ast.Add2"
+ast.BitAnd2"	ast.BitOr2"
+ast.BitXor2	"ast.Div2"ast.FloorDiv2"
+ast.LShift2	"ast.Mod2
+"ast.Mult2"ast.MatMult2	"ast.Pow2"
+ast.RShift2	"ast.Sub2"
+ast.Invert2	"ast.Not2
+"ast.UAdd2
+"ast.USub2"ast.Eq2"ast.Gt2	"ast.GtE2"ast.In2"ast.Is2"	ast.IsNot2"ast.Lt2	"ast.LtE2"	ast.NotEq2"	ast.NotIn2"	ast.Suite2"ast.AugLoad2"ast.AugStore2"	ast.Param2"ast.NodeTransformer22í222"ast.AST2í222"typing.Iterator2æ2"typing.Iterator2í22 2"os.PathLike222`¬2	222ƒƒƒƒ2222∆2"typing_extensions.Buffer22»2	"ast.mod2"builtins.dict2

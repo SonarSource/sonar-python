@@ -1,287 +1,152 @@
 
-pyspark.ml.pipelineã(
-Pipelinepyspark.ml.pipeline.Pipeline"pyspark.ml.base.Estimator"pyspark.ml.util.MLReadable"pyspark.ml.util.MLWritable*Ð
-__init__%pyspark.ml.pipeline.Pipeline.__init__"
-None*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*²
-stages£
-gUnion[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]],None]«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list
-None 0:pyspark.keyword_only*ó
-	setStages&pyspark.ml.pipeline.Pipeline.setStages"<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*·
-value«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list*«
-	getStages&pyspark.ml.pipeline.Pipeline.getStages"«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline0*†
-	setParams&pyspark.ml.pipeline.Pipeline.setParams"<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*²
-stages£
-gUnion[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]],None]«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list
-None 0:pyspark.keyword_only*Š
-_fit!pyspark.ml.pipeline.Pipeline._fit"F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*O
-datasetB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*û
-copy!pyspark.ml.pipeline.Pipeline.copy"<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*É
-extra»
-EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]ˆ
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMap
-None *«
-write"pyspark.ml.pipeline.Pipeline.write"4
-pyspark.ml.util.MLWriter"pyspark.ml.util.MLWriter*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline0*‚
-read!pyspark.ml.pipeline.Pipeline.read"H
-"pyspark.ml.pipeline.PipelineReader""pyspark.ml.pipeline.PipelineReader*s
-clsj
-"Type[pyspark.ml.pipeline.Pipeline]<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline"type0:builtins.classmethodp*›
+pyspark.ml.pipeline»
+Pipeline"pyspark.ml.base.Estimator"pyspark.ml.util.MLReadable"pyspark.ml.util.MLWritable*@
+__init__*
 
-_from_java'pyspark.ml.pipeline.Pipeline._from_java"<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*s
-clsj
-"Type[pyspark.ml.pipeline.Pipeline]<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline"type*
+self(*
+stages (	0:pyspark.keyword_only*&
+	setStages*
 
-java_stage
-Any0:builtins.classmethodp*‚
-_to_java%pyspark.ml.pipeline.Pipeline._to_java"
-Any*F
-self<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline8rë
-stages#pyspark.ml.pipeline.Pipeline.stages»
-spyspark.ml.param.Param[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]]«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list"pyspark.ml.param.Paramr”
-_input_kwargs*pyspark.ml.pipeline.Pipeline._input_kwargsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictë
-PipelineWriter"pyspark.ml.pipeline.PipelineWriter"pyspark.ml.util.MLWriter*á
-__init__+pyspark.ml.pipeline.PipelineWriter.__init__"
-None*R
-selfH
-"pyspark.ml.pipeline.PipelineWriter""pyspark.ml.pipeline.PipelineWriter*J
-instance<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*½
-saveImpl+pyspark.ml.pipeline.PipelineWriter.saveImpl"
-None*R
-selfH
-"pyspark.ml.pipeline.PipelineWriter""pyspark.ml.pipeline.PipelineWriter*&
-path
-builtins.str"builtins.str8ru
-instance+pyspark.ml.pipeline.PipelineWriter.instance<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipelineå
-PipelineReader"pyspark.ml.pipeline.PipelineReader"pyspark.ml.util.MLReader*Š
-__init__+pyspark.ml.pipeline.PipelineReader.__init__"
-None*R
-selfH
-"pyspark.ml.pipeline.PipelineReader""pyspark.ml.pipeline.PipelineReader*s
-clsj
-"Type[pyspark.ml.pipeline.Pipeline]<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline"type*é
-load'pyspark.ml.pipeline.PipelineReader.load"<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline*R
-selfH
-"pyspark.ml.pipeline.PipelineReader""pyspark.ml.pipeline.PipelineReader*&
-path
-builtins.str"builtins.str8r™
-cls&pyspark.ml.pipeline.PipelineReader.clsj
-"Type[pyspark.ml.pipeline.Pipeline]<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.Pipeline"type­
-PipelineModelWriter'pyspark.ml.pipeline.PipelineModelWriter"pyspark.ml.util.MLWriter*ú
-__init__0pyspark.ml.pipeline.PipelineModelWriter.__init__"
-None*\
-selfR
-'pyspark.ml.pipeline.PipelineModelWriter"'pyspark.ml.pipeline.PipelineModelWriter*T
-instanceF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*Ì
-saveImpl0pyspark.ml.pipeline.PipelineModelWriter.saveImpl"
-None*\
-selfR
-'pyspark.ml.pipeline.PipelineModelWriter"'pyspark.ml.pipeline.PipelineModelWriter*&
-path
-builtins.str"builtins.str8r„
-instance0pyspark.ml.pipeline.PipelineModelWriter.instanceF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel»
-PipelineModelReader'pyspark.ml.pipeline.PipelineModelReader"pyspark.ml.util.MLReader*©
-__init__0pyspark.ml.pipeline.PipelineModelReader.__init__"
-None*\
-selfR
-'pyspark.ml.pipeline.PipelineModelReader"'pyspark.ml.pipeline.PipelineModelReader*‚
-clsy
-'Type[pyspark.ml.pipeline.PipelineModel]F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel"type*‚
-load,pyspark.ml.pipeline.PipelineModelReader.load"F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*\
-selfR
-'pyspark.ml.pipeline.PipelineModelReader"'pyspark.ml.pipeline.PipelineModelReader*&
-path
-builtins.str"builtins.str8r­
-cls+pyspark.ml.pipeline.PipelineModelReader.clsy
-'Type[pyspark.ml.pipeline.PipelineModel]F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel"type¹
-PipelineModel!pyspark.ml.pipeline.PipelineModel"pyspark.ml.base.Model"pyspark.ml.util.MLReadable"pyspark.ml.util.MLWritable*˜
-__init__*pyspark.ml.pipeline.PipelineModel.__init__"
-None*P
-selfF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*ƒ
-stagesw
-*builtins.list[pyspark.ml.base.Transformer]:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer"builtins.list*¡
+self(*
+value(*
+	getStages*
 
-_transform,pyspark.ml.pipeline.PipelineModel._transform"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*P
-selfF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*O
-datasetB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*”
-copy&pyspark.ml.pipeline.PipelineModel.copy"F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*P
-selfF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*É
-extra»
-EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
-9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]ˆ
-.builtins.dict[pyspark.ml.param.Param[Any],Any]>
-pyspark.ml.param.Param[Any]
-Any"pyspark.ml.param.Param
-Any"builtins.dict"pyspark.ml._typing.ParamMap
-None *º
-write'pyspark.ml.pipeline.PipelineModel.write"4
-pyspark.ml.util.MLWriter"pyspark.ml.util.MLWriter*P
-selfF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel0*¡
-read&pyspark.ml.pipeline.PipelineModel.read"R
-'pyspark.ml.pipeline.PipelineModelReader"'pyspark.ml.pipeline.PipelineModelReader*‚
-clsy
-'Type[pyspark.ml.pipeline.PipelineModel]F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel"type0:builtins.classmethodp*º
+self(0*A
+	setParams*
 
-_from_java,pyspark.ml.pipeline.PipelineModel._from_java"F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*‚
-clsy
-'Type[pyspark.ml.pipeline.PipelineModel]F
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel"type*
+self(*
+stages (	0:pyspark.keyword_only*#
+_fit
+*
 
-java_stage
-Any0:builtins.classmethodp*‘
-_to_java*pyspark.ml.pipeline.PipelineModel._to_java"
-Any*P
-selfF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel8r«
-stages(pyspark.ml.pipeline.PipelineModel.stagesw
-*builtins.list[pyspark.ml.base.Transformer]:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer"builtins.listê
-PipelineSharedReadWrite+pyspark.ml.pipeline.PipelineSharedReadWrite"builtins.object*Ê
-checkStagesForJava>pyspark.ml.pipeline.PipelineSharedReadWrite.checkStagesForJava"
-builtins.bool"builtins.bool*¸
-stages«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list0:builtins.staticmethodh*¬
-validateStages:pyspark.ml.pipeline.PipelineSharedReadWrite.validateStages"
-None*¸
-stages«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list0:builtins.staticmethodh*ï
-saveImpl4pyspark.ml.pipeline.PipelineSharedReadWrite.saveImpl"
-None*Þ
-instanceÏ
-EUnion[pyspark.ml.pipeline.Pipeline,pyspark.ml.pipeline.PipelineModel]<
-pyspark.ml.pipeline.Pipeline"pyspark.ml.pipeline.PipelineF
-!pyspark.ml.pipeline.PipelineModel"!pyspark.ml.pipeline.PipelineModel*¸
-stages«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0:builtins.staticmethodh*ê
-load0pyspark.ml.pipeline.PipelineSharedReadWrite.load"¿
-oTuple[builtins.str,builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]]
-builtins.str"builtins.str«
-[builtins.list[TypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]]¼
-LTypeAlias[Union[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]]Ç
-AUnion[pyspark.ml.base.Estimator[Any],pyspark.ml.base.Transformer]D
-pyspark.ml.base.Estimator[Any]
-Any"pyspark.ml.base.Estimator:
-pyspark.ml.base.Transformer"pyspark.ml.base.Transformer" pyspark.ml._typing.PipelineStage"builtins.list*e
-metadataW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0:builtins.staticmethodh*³
-getStagePath8pyspark.ml.pipeline.PipelineSharedReadWrite.getStagePath"
-builtins.str"builtins.str**
-stageUid
-builtins.str"builtins.str**
-stageIdx
-builtins.int"builtins.int*+
-	numStages
-builtins.int"builtins.int*+
-	stagesDir
-builtins.str"builtins.str0:builtins.staticmethodh8*
-__annotations__#pyspark.ml.pipeline.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*5
+self(*
+dataset(*#
+copy*
 
-JavaObjectpyspark.ml.pipeline.JavaObject
-Any
+self(*
+extra (*
+write*
+
+self(0*-
+read*	
+cls(0:builtins.classmethodp*E
+
+_from_java*	
+cls(*
+
+java_stage(0:builtins.classmethodp*
+_to_java*
+
+self(8r
+
+stages0r
+_input_kwargs0Š
+PipelineWriter"pyspark.ml.util.MLWriter*(
+__init__*
+
+self(*
+instance(*$
+saveImpl*
+
+self(*
+
+path(8r
+instance0|
+PipelineReader"pyspark.ml.util.MLReader*#
+__init__*
+
+self(*	
+cls(* 
+load*
+
+self(*
+
+path(8r
+cls0
+PipelineModelWriter"pyspark.ml.util.MLWriter*(
+__init__*
+
+self(*
+instance(
+*$
+saveImpl*
+
+self(*
+
+path(8r
+instance0
+
+PipelineModelReader"pyspark.ml.util.MLReader*#
+__init__*
+
+self(*	
+cls(* 
+load
+*
+
+self(*
+
+path(8r
+cls0
+PipelineModel"pyspark.ml.base.Model"pyspark.ml.util.MLReadable"pyspark.ml.util.MLWritable*&
+__init__*
+
+self(
+*
+stages(*)
+
+_transform*
+
+self(
+*
+dataset(*#
+copy
+*
+
+self(
+*
+extra (*
+write*
+
+self(
+0*-
+read*	
+cls(0:builtins.classmethodp*E
+
+_from_java
+*	
+cls(*
+
+java_stage(0:builtins.classmethodp*
+_to_java*
+
+self(
+8r
+
+stages0Á
+PipelineSharedReadWrite"builtins.object*?
+checkStagesForJava*
+stages(0:builtins.staticmethodh*;
+validateStages*
+stages(0:builtins.staticmethodh*[
+saveImpl*
+instance(*
+stages(*
+sc(*
+
+path(0:builtins.staticmethodh*I
+load*
+metadata(*
+sc(*
+
+path(0:builtins.staticmethodh*m
+getStagePath*
+stageUid(*
+stageIdx(*
+	numStages(*
+	stagesDir(0:builtins.staticmethodh8*
+__annotations__0*
+
+JavaObject022"pyspark.ml.pipeline.Pipeline22"pyspark.ml.base.Estimator22"pyspark.ml.base.Transformer222'" pyspark.ml._typing.PipelineStage22"builtins.list2222#"!pyspark.ml.pipeline.PipelineModel2!"pyspark.sql.dataframe.DataFrame2"pyspark.ml.param.Param22"builtins.dict22""pyspark.ml._typing.ParamMap2222"pyspark.ml.util.MLWriter2$""pyspark.ml.pipeline.PipelineReader2"type22"pyspark.ml.param.Param22"builtins.str2"builtins.dict22$""pyspark.ml.pipeline.PipelineWriter2)"'pyspark.ml.pipeline.PipelineModelWriter2)"'pyspark.ml.pipeline.PipelineModelReader2"type2
+2"builtins.list22"builtins.bool22
+2"pyspark.context.SparkContext222"builtins.int

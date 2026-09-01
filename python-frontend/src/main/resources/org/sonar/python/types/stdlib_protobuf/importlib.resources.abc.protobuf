@@ -1,586 +1,138 @@
 
-importlib.resources.abcô
-ResourceReaderimportlib.abc.ResourceReader"builtins.object*¥
-open_resource*importlib.abc.ResourceReader.open_resource"H
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader**
-resource
-builtins.str"builtins.str0:abc.abstractmethod@z311z312z313z314*ù
-resource_path*importlib.abc.ResourceReader.resource_path"
-builtins.str"builtins.str*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader**
-resource
-builtins.str"builtins.str0:abc.abstractmethod@z311z312z313z314*ó
-is_resource(importlib.abc.ResourceReader.is_resource"
-builtins.bool"builtins.bool*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader*&
-path
-builtins.str"builtins.str0:abc.abstractmethod@z311z312z313z314*õ
-contents%importlib.abc.ResourceReader.contents"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abc.abstractmethod@z311z312z313z314@babc.ABCMetaj311j312j313j314³â
-Traversableimportlib.abc.Traversable"builtins.object*¸
-is_dir importlib.abc.Traversable.is_dir"
-builtins.bool"builtins.bool*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313z314*º
-is_file!importlib.abc.Traversable.is_file"
-builtins.bool"builtins.bool*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313z314*‘
-iterdir!importlib.abc.Traversable.iterdir"u
-*typing.Iterator[importlib.abc.Traversable]6
-importlib.abc.Traversable"importlib.abc.Traversable"typing.Iterator*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313z314*ƒ
-joinpath"importlib.abc.Traversable.joinpath"6
-importlib.abc.Traversable"importlib.abc.Traversable*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*-
-descendants
-builtins.str"builtins.str0:abc.abstractmethod@z311z312z313z314*Ç
-nameimportlib.abc.Traversable.name"
-builtins.str"builtins.str*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable0:builtins.property:abc.abstractmethod@`z311z312z313z314*ò
-__truediv__%importlib.abc.Traversable.__truediv__"6
-importlib.abc.Traversable"importlib.abc.Traversable*86
-importlib.abc.Traversable"importlib.abc.Traversable*
-builtins.str"builtins.str0:abc.abstractmethod@z311z312z313z314*Â
+importlib.resources.abc³
+ResourceReaderimportlib.abc.ResourceReader"builtins.object*Y
+open_resource*
 
-read_bytes$importlib.abc.Traversable.read_bytes" 
-builtins.bytes"builtins.bytes*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313z314*’
-	read_text#importlib.abc.Traversable.read_text"
-builtins.str"builtins.str*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:abc.abstractmethod@z311z312z313z3142³Ó
-openimportlib.abc.Traversable.open÷B
-openimportlib.abc.Traversable.open"$
-io.TextIOWrapper"io.TextIOWrapper*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*?
-mode€?
-Õ	TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]‹5
-Ê	Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]ä
-ÑTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ë
-ÆUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeUpdatingÐ
-×TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Ò
-ÌUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeWritingÿ	
-™TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]¿
-ŽUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenTextModeReading"_typeshed.OpenTextMode *-
-	buffering
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overload:abc.abstractmethod@XÕ0
-openimportlib.abc.Traversable.open"
-	io.FileIO"	io.FileIO*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*”.
-mode‰.
-‹TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]Ü&
-€Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]¾
-¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
-–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdatingí
-ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
-¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeReading£
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting"_typeshed.OpenBinaryMode*F
-	buffering7
-Literal[builtins.int]	
-builtins.int"builtins.int*
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overload:abc.abstractmethod@X
-openimportlib.abc.Traversable.open"&
-io.BufferedRandom"io.BufferedRandom*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*É
-mode¾
-¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
-–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdating*º
-	buffering¨
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overload:abc.abstractmethod@Xô
-openimportlib.abc.Traversable.open"&
-io.BufferedWriter"io.BufferedWriter*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*®
-mode£
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting*º
-	buffering¨
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overload:abc.abstractmethod@X¾
+self(*
+resource(0:abc.abstractmethod@z311z312z313z314*Y
+resource_path*
 
-openimportlib.abc.Traversable.open"&
-io.BufferedReader"io.BufferedReader*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*ø
-modeí
-ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
-¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeReading*º
-	buffering¨
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overload:abc.abstractmethod@XÈ0
-openimportlib.abc.Traversable.open""
-typing.BinaryIO"typing.BinaryIO*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*”.
-mode‰.
-‹TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]Ü&
-€Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]¾
-¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
-–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdatingí
-ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
-¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeReading£
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting"_typeshed.OpenBinaryMode*-
-	buffering
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overload:abc.abstractmethod@X
-openimportlib.abc.Traversable.open"$
-typing.IO[Any]
-Any"	typing.IO*@
-self6
-importlib.abc.Traversable"importlib.abc.Traversable*&
-mode
-builtins.str"builtins.str*-
-	buffering
-builtins.int"builtins.int *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overload:abc.abstractmethod@X"311"312"313"3148Xj311j312j313j314‹
+self(*
+resource(0:abc.abstractmethod@z311z312z313z314*S
+is_resource*
 
-TraversableResources"importlib.abc.TraversableResources"importlib.abc.ResourceReader*é
-files(importlib.abc.TraversableResources.files"6
-importlib.abc.Traversable"importlib.abc.Traversable*R
-selfH
-"importlib.abc.TraversableResources""importlib.abc.TraversableResources0:abc.abstractmethod@z311z312z313z314*ý
-open_resource0importlib.abc.TraversableResources.open_resource"&
-io.BufferedReader"io.BufferedReader*R
-selfH
-"importlib.abc.TraversableResources""importlib.abc.TraversableResources**
-resource
-builtins.str"builtins.strz311z312z313z314*Î
-resource_path0importlib.abc.TraversableResources.resource_path"
-NoReturn
-*R
-selfH
-"importlib.abc.TraversableResources""importlib.abc.TraversableResources*
-resource
-Anyz311z312z313z314*í
-is_resource.importlib.abc.TraversableResources.is_resource"
-builtins.bool"builtins.bool*R
-selfH
-"importlib.abc.TraversableResources""importlib.abc.TraversableResources*&
-path
-builtins.str"builtins.strz311z312z313z314*ï
-contents+importlib.abc.TraversableResources.contents"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*R
-selfH
-"importlib.abc.TraversableResources""importlib.abc.TraversableResourcesz311z312z313z314j311j312j313j314*¬
-__annotations__'importlib.resources.abc.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+
+path(0:abc.abstractmethod@z311z312z313z314*D
+contents*
+
+self(0:abc.abstractmethod@z311z312z313z314@babc.ABCMetaj311j312j313j314Þ
+Traversableimportlib.abc.Traversable"builtins.object*B
+is_dir*
+
+self(0:abc.abstractmethod@z311z312z313z314*C
+is_file*
+
+self(0:abc.abstractmethod@z311z312z313z314*C
+iterdir*
+
+self(0:abc.abstractmethod@z311z312z313z314*W
+joinpath*
+
+self(*
+descendants(0:abc.abstractmethod@z311z312z313z314*U
+name*
+
+self(0:builtins.property:abc.abstractmethod@`z311z312z313z314*C
+__truediv__*(*(0:abc.abstractmethod@z311z312z313z314*F
+
+read_bytes*
+
+self(0:abc.abstractmethod@z311z312z313z314*W
+	read_text*
+
+self(*
+encoding (
+0:abc.abstractmethod@z311z312z313z3142¦
+open“
+open*
+
+self(*
+mode (*
+	buffering (*
+encoding (
+*
+errors (
+*
+newline (
+0:typing.overload:abc.abstractmethod@X
+open*
+
+self(*
+
+mode(*
+	buffering(*
+encoding (	*
+errors (	*
+newline (	0:typing.overload:abc.abstractmethod@X‘
+open *
+
+self(*
+
+mode(*
+	buffering (!*
+encoding (	*
+errors (	*
+newline (	0:typing.overload:abc.abstractmethod@X‘
+open"*
+
+self(*
+
+mode(*
+	buffering (!*
+encoding (	*
+errors (	*
+newline (	0:typing.overload:abc.abstractmethod@X‘
+open#*
+
+self(*
+
+mode(*
+	buffering (!*
+encoding (	*
+errors (	*
+newline (	0:typing.overload:abc.abstractmethod@X‘
+open$*
+
+self(*
+
+mode(*
+	buffering (*
+encoding (	*
+errors (	*
+newline (	0:typing.overload:abc.abstractmethod@X‘
+open&*
+
+self(*
+
+mode(*
+	buffering (*
+encoding (
+*
+errors (
+*
+newline (
+0:typing.overload:abc.abstractmethod@X"311"312"313"3148Xj311j312j313j314 
+TraversableResources"importlib.abc.TraversableResources"importlib.abc.ResourceReader*A
+files*
+
+self('0:abc.abstractmethod@z311z312z313z314*A
+open_resource#*
+
+self('*
+resource(z311z312z313z314*A
+resource_path(*
+
+self('*
+resource(%z311z312z313z314*;
+is_resource*
+
+self('*
+
+path(z311z312z313z314*,
+contents*
+
+self('z311z312z313z314j311j312j313j314*
+__annotations__0)2"builtins.bytes2"	typing.IO22"importlib.abc.ResourceReader2"builtins.str2"builtins.bool2"typing.Iterator22"importlib.abc.Traversable2"typing.Iterator2222	2"io.TextIOWrapper2	22$2 2%"_typeshed.OpenTextModeUpdating222	2$"_typeshed.OpenTextModeWriting2222$"_typeshed.OpenTextModeReading2222"_typeshed.OpenTextMode22"builtins.int2"	io.FileIO222'" _typeshed.OpenBinaryModeUpdating2222&"_typeshed.OpenBinaryModeReading22
+22&"_typeshed.OpenBinaryModeWriting2222"_typeshed.OpenBinaryMode22	22"io.BufferedRandom222"io.BufferedWriter2"io.BufferedReader2"typing.BinaryIO22"	typing.IO2%2$""importlib.abc.TraversableResources2
+2"builtins.dict2%

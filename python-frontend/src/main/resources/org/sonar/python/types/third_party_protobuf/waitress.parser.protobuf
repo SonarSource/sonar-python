@@ -1,105 +1,55 @@
 
-waitress.parserY
-ParsingErrorwaitress.parser.ParsingError"builtins.Exceptionj310j311j312j313j314}
-TransferEncodingNotImplemented.waitress.parser.TransferEncodingNotImplemented"builtins.Exceptionj310j311j312j313j314õ
-HTTPRequestParser!waitress.parser.HTTPRequestParser"builtins.object*˙
-__init__*waitress.parser.HTTPRequestParser.__init__"
-None*P
-selfF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParser*M
-adjD
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustmentsz310z311z312z313z314*Î
-received*waitress.parser.HTTPRequestParser.received"
-builtins.int"builtins.int*P
-selfF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParser**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Ê
-parse_header.waitress.parser.HTTPRequestParser.parse_header"
-None*P
-selfF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParser*1
-header_plus 
-builtins.bytes"builtins.bytesz310z311z312z313z314*À
-get_body_stream1waitress.parser.HTTPRequestParser.get_body_stream"
-_io.BytesIO"_io.BytesIO*P
-selfF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParserz310z311z312z313z314*•
-close'waitress.parser.HTTPRequestParser.close"
-None*P
-selfF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParserz310z311z312z313z314j310j311j312j313j314rq
-	completed+waitress.parser.HTTPRequestParser.completed
-builtins.bool"builtins.bool*310*311*312*313*314ri
-empty'waitress.parser.HTTPRequestParser.empty
-builtins.bool"builtins.bool*310*311*312*313*314r}
-expect_continue1waitress.parser.HTTPRequestParser.expect_continue
-builtins.bool"builtins.bool*310*311*312*313*314r
-headers_finished2waitress.parser.HTTPRequestParser.headers_finished
-builtins.bool"builtins.bool*310*311*312*313*314rw
-header_plus-waitress.parser.HTTPRequestParser.header_plus 
-builtins.bytes"builtins.bytes*310*311*312*313*314rm
-chunked)waitress.parser.HTTPRequestParser.chunked
-builtins.bool"builtins.bool*310*311*312*313*314ry
-content_length0waitress.parser.HTTPRequestParser.content_length
-builtins.int"builtins.int*310*311*312*313*314rá
-header_bytes_received7waitress.parser.HTTPRequestParser.header_bytes_received
-builtins.int"builtins.int*310*311*312*313*314rÉ
-body_bytes_received5waitress.parser.HTTPRequestParser.body_bytes_received
-builtins.int"builtins.int*310*311*312*313*314rÀ
-body_rcv*waitress.parser.HTTPRequestParser.body_rcv˘
-SUnion[waitress.receiver.ChunkedReceiver,waitress.receiver.FixedStreamReceiver,None]F
-!waitress.receiver.ChunkedReceiver"!waitress.receiver.ChunkedReceiverN
-%waitress.receiver.FixedStreamReceiver"%waitress.receiver.FixedStreamReceiver
-None*310*311*312*313*314rk
-version)waitress.parser.HTTPRequestParser.version
-builtins.str"builtins.str*310*311*312*313*314r≥
-error'waitress.parser.HTTPRequestParser.errorh
-$Union[waitress.utilities.Error,None]4
-waitress.utilities.Error"waitress.utilities.Error
-None*310*311*312*313*314r
-connection_close2waitress.parser.HTTPRequestParser.connection_close
-builtins.bool"builtins.bool*310*311*312*313*314r∆
-headers)waitress.parser.HTTPRequestParser.headersw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*310*311*312*313*314rã
-adj%waitress.parser.HTTPRequestParser.adjD
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments*310*311*312*313*314rq
+waitress.parser"
+ParsingError"builtins.Exception4
+TransferEncodingNotImplemented"builtins.ExceptionÇ
+HTTPRequestParser"builtins.object*#
+__init__*
 
-first_line,waitress.parser.HTTPRequestParser.first_line
-builtins.str"builtins.str*310*311*312*313*314ro
-command)waitress.parser.HTTPRequestParser.command 
-builtins.bytes"builtins.bytes*310*311*312*313*314rq
+self(*	
+adj(*$
+received*
 
-url_scheme,waitress.parser.HTTPRequestParser.url_scheme
-builtins.str"builtins.str*310*311*312*313*314‘
-	split_uriwaitress.parser.split_uri"Á
-ITuple[builtins.str,builtins.str,builtins.bytes,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-builtins.str"builtins.str*)
-uri 
-builtins.bytes"builtins.bytesz310z311z312z313z314—
-get_header_lines waitress.parser.get_header_lines"T
-typing.Sequence[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Sequence*,
-header 
-builtins.bytes"builtins.bytesz310z311z312z313z314ï
-crack_first_line waitress.parser.crack_first_line"ù
-3Tuple[builtins.bytes,builtins.bytes,builtins.bytes] 
-builtins.bytes"builtins.bytes 
-builtins.bytes"builtins.bytes 
-builtins.bytes"builtins.bytes*&
-line
-builtins.str"builtins.strz310z311z312z313z314*§
-__annotations__waitress.parser.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*o
-first_line_rewaitress.parser.first_line_re&
-re.Pattern[Any]
-Any"
-re.Pattern*310*311*312*313*314
+self(*
+
+data(*/
+parse_header*
+
+self(*
+header_plus(*
+get_body_stream*
+
+self(*
+close*
+
+self(r
+	completed0r	
+empty0r
+expect_continue0r
+headers_finished0r
+header_plus0r
+chunked0r
+content_length0r
+header_bytes_received0r
+body_bytes_received0r
+body_rcv0
+r
+version0r	
+error0r
+connection_close0r
+headers0r
+adj0r
+
+first_line0r
+command0r
+
+url_scheme0
+	split_uri*	
+uri("
+get_header_lines*
+header( 
+crack_first_line*
+
+line(*
+__annotations__0*
+first_line_re022#"!waitress.parser.HTTPRequestParser2"" waitress.adjustments.Adjustments2"builtins.int2"builtins.bytes2"_io.BytesIO2"builtins.bool2#"!waitress.receiver.ChunkedReceiver2'"%waitress.receiver.FixedStreamReceiver22	2"builtins.str2"waitress.utilities.Error222"typing.Mapping22	22"typing.Sequence22222"builtins.dict22"
+re.Pattern2

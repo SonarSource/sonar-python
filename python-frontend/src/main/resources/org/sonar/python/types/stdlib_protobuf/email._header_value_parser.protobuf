@@ -1,972 +1,543 @@
 
-email._header_value_parseræ
-	TokenList$email._header_value_parser.TokenList"builtins.list*Ø
-__init__-email._header_value_parser.TokenList.__init__"
-None*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList*
-args
-Any*
-kw
-Anyz310z311z312z313z314*Ù
-value*email._header_value_parser.TokenList.value"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList0:builtins.property`z310z311z312z313z314*½
-all_defects0email._header_value_parser.TokenList.all_defects"t
-)builtins.list[email.errors.MessageDefect]8
-email.errors.MessageDefect"email.errors.MessageDefect"builtins.list*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList0:builtins.property`z310z311z312z313z314*Ö
-startswith_fws3email._header_value_parser.TokenList.startswith_fws"
-builtins.bool"builtins.bool*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenListz310z311z312z313z314*ë
-as_ew_allowed2email._header_value_parser.TokenList.as_ew_allowed"
-builtins.bool"builtins.bool*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList0:builtins.property`z310z311z312z313z314*
-comments-email._header_value_parser.TokenList.comments"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList0:builtins.property`z310z311z312z313z314*ø
-fold)email._header_value_parser.TokenList.fold"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList*6
-policy*
-email.policy.Policy"email.policy.Policyz310z311z312z313z314*Ü
-pprint+email._header_value_parser.TokenList.pprint"
-None*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList**
-indent
-builtins.str"builtins.str z310z311z312z313z314*î
-ppstr*email._header_value_parser.TokenList.ppstr"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.TokenList"$email._header_value_parser.TokenList**
-indent
-builtins.str"builtins.str z310z311z312z313z314j310j311j312j313j314rœ
+email._header_value_parserð
+	TokenList"builtins.list*.
+__init__*
 
-token_type/email._header_value_parser.TokenList.token_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r€
-syntactic_break4email._header_value_parser.TokenList.syntactic_break
-builtins.bool"builtins.bool*310*311*312*313*314r†
-ew_combine_allowed7email._header_value_parser.TokenList.ew_combine_allowed
-builtins.bool"builtins.bool*310*311*312*313*314rÆ
-defects,email._header_value_parser.TokenList.defectst
-)builtins.list[email.errors.MessageDefect]8
-email.errors.MessageDefect"email.errors.MessageDefect"builtins.list*310*311*312*313*314„
-WhiteSpaceTokenList.email._header_value_parser.WhiteSpaceTokenList"$email._header_value_parser.TokenListj310j311j312j313j314‹
-UnstructuredTokenList0email._header_value_parser.UnstructuredTokenList"$email._header_value_parser.TokenListj310j311j312j313j314r€
+self(*
 
-token_type;email._header_value_parser.UnstructuredTokenList.token_type
-builtins.str"builtins.str*310*311*312*313*314Ý
-Phrase!email._header_value_parser.Phrase"$email._header_value_parser.TokenListj310j311j312j313j314rq
+args(*
+kw(*,
+value*
 
-token_type,email._header_value_parser.Phrase.token_type
-builtins.str"builtins.str*310*311*312*313*314×
-Wordemail._header_value_parser.Word"$email._header_value_parser.TokenListj310j311j312j313j314ro
+self(0:builtins.property`*2
+all_defects*
 
-token_type*email._header_value_parser.Word.token_type
-builtins.str"builtins.str*310*311*312*313*314í
-CFWSList#email._header_value_parser.CFWSList".email._header_value_parser.WhiteSpaceTokenListj310j311j312j313j314rs
+self(0:builtins.property`*
+startswith_fws*
 
-token_type.email._header_value_parser.CFWSList.token_type
-builtins.str"builtins.str*310*311*312*313*314×
-Atomemail._header_value_parser.Atom"$email._header_value_parser.TokenListj310j311j312j313j314ro
+self(*4
+as_ew_allowed*
 
-token_type*email._header_value_parser.Atom.token_type
-builtins.str"builtins.str*310*311*312*313*314Ò
-Token email._header_value_parser.Token"$email._header_value_parser.TokenListj310j311j312j313j314rp
+self(0:builtins.property`*/
+comments*
 
-token_type+email._header_value_parser.Token.token_type
-builtins.str"builtins.str*310*311*312*313*314rv
-encode_as_ew-email._header_value_parser.Token.encode_as_ew
-builtins.bool"builtins.bool*310*311*312*313*314¯
-EncodedWord&email._header_value_parser.EncodedWord"$email._header_value_parser.TokenListj310j311j312j313j314rv
+self(0:builtins.property`*"
+fold*
 
-token_type1email._header_value_parser.EncodedWord.token_type
-builtins.str"builtins.str*310*311*312*313*314r
-cte*email._header_value_parser.EncodedWord.cteD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r˜
-charset.email._header_value_parser.EncodedWord.charsetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r’
-lang+email._header_value_parser.EncodedWord.langD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314Â
-QuotedString'email._header_value_parser.QuotedString"$email._header_value_parser.TokenList*æ
-content/email._header_value_parser.QuotedString.content"
-builtins.str"builtins.str*\
-selfR
-'email._header_value_parser.QuotedString"'email._header_value_parser.QuotedString0:builtins.property`z310z311z312z313z314*ð
-quoted_value4email._header_value_parser.QuotedString.quoted_value"
-builtins.str"builtins.str*\
-selfR
-'email._header_value_parser.QuotedString"'email._header_value_parser.QuotedString0:builtins.property`z310z311z312z313z314*ô
-stripped_value6email._header_value_parser.QuotedString.stripped_value"
-builtins.str"builtins.str*\
-selfR
-'email._header_value_parser.QuotedString"'email._header_value_parser.QuotedString0:builtins.property`z310z311z312z313z314j310j311j312j313j314rw
+self(*
+policy(	*&
+pprint*
 
-token_type2email._header_value_parser.QuotedString.token_type
-builtins.str"builtins.str*310*311*312*313*314þ
-BareQuotedString+email._header_value_parser.BareQuotedString"'email._header_value_parser.QuotedStringj310j311j312j313j314r{
+self(*
+indent (*%
+ppstr*
 
-token_type6email._header_value_parser.BareQuotedString.token_type
-builtins.str"builtins.str*310*311*312*313*314—
-Comment"email._header_value_parser.Comment".email._header_value_parser.WhiteSpaceTokenList*Ð
-quote(email._header_value_parser.Comment.quote"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Comment""email._header_value_parser.Comment*
-value
-Anyz310z311z312z313z314*×
-content*email._header_value_parser.Comment.content"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Comment""email._header_value_parser.Comment0:builtins.property`z310z311z312z313z314j310j311j312j313j314rr
+self(*
+indent (r
 
-token_type-email._header_value_parser.Comment.token_type
-builtins.str"builtins.str*310*311*312*313*314…
+token_type0
+r
+syntactic_break0r
+ew_combine_allowed0r
+defects0;
+WhiteSpaceTokenList"$email._header_value_parser.TokenListM
+UnstructuredTokenList"$email._header_value_parser.TokenListr
 
-AddressList&email._header_value_parser.AddressList"$email._header_value_parser.TokenList*Ø
-	addresses0email._header_value_parser.AddressList.addresses"Œ
-1builtins.list[email._header_value_parser.Address]H
-"email._header_value_parser.Address""email._header_value_parser.Address"builtins.list*Z
-selfP
-&email._header_value_parser.AddressList"&email._header_value_parser.AddressList0:builtins.property`z310z311z312z313z314*Ø
-	mailboxes0email._header_value_parser.AddressList.mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*Z
-selfP
-&email._header_value_parser.AddressList"&email._header_value_parser.AddressList0:builtins.property`z310z311z312z313z314*à
-all_mailboxes4email._header_value_parser.AddressList.all_mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*Z
-selfP
-&email._header_value_parser.AddressList"&email._header_value_parser.AddressList0:builtins.property`z310z311z312z313z314j310j311j312j313j314rv
+token_type0>
+Phrase"$email._header_value_parser.TokenListr
 
-token_type1email._header_value_parser.AddressList.token_type
-builtins.str"builtins.str*310*311*312*313*314ê
-Address"email._header_value_parser.Address"$email._header_value_parser.TokenList*á
-display_name/email._header_value_parser.Address.display_name"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Address""email._header_value_parser.Address0:builtins.property`z310z311z312z313z314*Ì
-	mailboxes,email._header_value_parser.Address.mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*R
-selfH
-"email._header_value_parser.Address""email._header_value_parser.Address0:builtins.property`z310z311z312z313z314*Ô
-all_mailboxes0email._header_value_parser.Address.all_mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*R
-selfH
-"email._header_value_parser.Address""email._header_value_parser.Address0:builtins.property`z310z311z312z313z314j310j311j312j313j314rr
+token_type0<
+Word"$email._header_value_parser.TokenListr
 
-token_type-email._header_value_parser.Address.token_type
-builtins.str"builtins.str*310*311*312*313*314ª
-MailboxList&email._header_value_parser.MailboxList"$email._header_value_parser.TokenList*Ø
-	mailboxes0email._header_value_parser.MailboxList.mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*Z
-selfP
-&email._header_value_parser.MailboxList"&email._header_value_parser.MailboxList0:builtins.property`z310z311z312z313z314*à
-all_mailboxes4email._header_value_parser.MailboxList.all_mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*Z
-selfP
-&email._header_value_parser.MailboxList"&email._header_value_parser.MailboxList0:builtins.property`z310z311z312z313z314j310j311j312j313j314rv
+token_type0J
+CFWSList".email._header_value_parser.WhiteSpaceTokenListr
 
-token_type1email._header_value_parser.MailboxList.token_type
-builtins.str"builtins.str*310*311*312*313*314˜
-	GroupList$email._header_value_parser.GroupList"$email._header_value_parser.TokenList*Ò
-	mailboxes.email._header_value_parser.GroupList.mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*V
-selfL
-$email._header_value_parser.GroupList"$email._header_value_parser.GroupList0:builtins.property`z310z311z312z313z314*Ú
-all_mailboxes2email._header_value_parser.GroupList.all_mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*V
-selfL
-$email._header_value_parser.GroupList"$email._header_value_parser.GroupList0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
+token_type0<
+Atom"$email._header_value_parser.TokenListr
 
-token_type/email._header_value_parser.GroupList.token_type
-builtins.str"builtins.str*310*311*312*313*314Ò
-Group email._header_value_parser.Group"$email._header_value_parser.TokenList*Æ
-	mailboxes*email._header_value_parser.Group.mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*N
-selfD
- email._header_value_parser.Group" email._header_value_parser.Group0:builtins.property`z310z311z312z313z314*Î
-all_mailboxes.email._header_value_parser.Group.all_mailboxes"Œ
-1builtins.list[email._header_value_parser.Mailbox]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox"builtins.list*N
-selfD
- email._header_value_parser.Group" email._header_value_parser.Group0:builtins.property`z310z311z312z313z314*Û
-display_name-email._header_value_parser.Group.display_name"
-builtins.str"builtins.str*N
-selfD
- email._header_value_parser.Group" email._header_value_parser.Group0:builtins.property`z310z311z312z313z314j310j311j312j313j314rp
+token_type0O
+Token"$email._header_value_parser.TokenListr
 
-token_type+email._header_value_parser.Group.token_type
-builtins.str"builtins.str*310*311*312*313*314ý
-NameAddr#email._header_value_parser.NameAddr"$email._header_value_parser.TokenList*ä
-display_name0email._header_value_parser.NameAddr.display_name"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.NameAddr"#email._header_value_parser.NameAddr0:builtins.property`z310z311z312z313z314*à
+token_type0r
+encode_as_ew0c
+EncodedWord"$email._header_value_parser.TokenListr
 
-local_part.email._header_value_parser.NameAddr.local_part"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.NameAddr"#email._header_value_parser.NameAddr0:builtins.property`z310z311z312z313z314*Ø
-domain*email._header_value_parser.NameAddr.domain"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.NameAddr"#email._header_value_parser.NameAddr0:builtins.property`z310z311z312z313z314*‘
-route)email._header_value_parser.NameAddr.route"Ö
-<Union[builtins.list[email._header_value_parser.Domain],None]‰
-0builtins.list[email._header_value_parser.Domain]F
-!email._header_value_parser.Domain"!email._header_value_parser.Domain"builtins.list
-None*T
-selfJ
-#email._header_value_parser.NameAddr"#email._header_value_parser.NameAddr0:builtins.property`z310z311z312z313z314*Þ
-	addr_spec-email._header_value_parser.NameAddr.addr_spec"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.NameAddr"#email._header_value_parser.NameAddr0:builtins.property`z310z311z312z313z314j310j311j312j313j314rs
+token_type0r
+cte0
+r
+charset0
+r
+lang0
+à
+QuotedString"$email._header_value_parser.TokenList*.
+content*
 
-token_type.email._header_value_parser.NameAddr.token_type
-builtins.str"builtins.str*310*311*312*313*314¥
+self(0:builtins.property`*3
+quoted_value*
 
-	AngleAddr$email._header_value_parser.AngleAddr"$email._header_value_parser.TokenList*ã
+self(0:builtins.property`*5
+stripped_value*
 
-local_part/email._header_value_parser.AngleAddr.local_part"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.AngleAddr"$email._header_value_parser.AngleAddr0:builtins.property`z310z311z312z313z314*Û
-domain+email._header_value_parser.AngleAddr.domain"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.AngleAddr"$email._header_value_parser.AngleAddr0:builtins.property`z310z311z312z313z314*”
-route*email._header_value_parser.AngleAddr.route"Ö
-<Union[builtins.list[email._header_value_parser.Domain],None]‰
-0builtins.list[email._header_value_parser.Domain]F
-!email._header_value_parser.Domain"!email._header_value_parser.Domain"builtins.list
-None*V
-selfL
-$email._header_value_parser.AngleAddr"$email._header_value_parser.AngleAddr0:builtins.property`z310z311z312z313z314*á
-	addr_spec.email._header_value_parser.AngleAddr.addr_spec"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.AngleAddr"$email._header_value_parser.AngleAddr0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
+self(0:builtins.property`r
 
-token_type/email._header_value_parser.AngleAddr.token_type
-builtins.str"builtins.str*310*311*312*313*314®
-ObsRoute#email._header_value_parser.ObsRoute"$email._header_value_parser.TokenList*È
-domains+email._header_value_parser.ObsRoute.domains"‰
-0builtins.list[email._header_value_parser.Domain]F
-!email._header_value_parser.Domain"!email._header_value_parser.Domain"builtins.list*T
-selfJ
-#email._header_value_parser.ObsRoute"#email._header_value_parser.ObsRoute0:builtins.property`z310z311z312z313z314j310j311j312j313j314rs
+token_type0K
+BareQuotedString"'email._header_value_parser.QuotedStringr
 
-token_type.email._header_value_parser.ObsRoute.token_type
-builtins.str"builtins.str*310*311*312*313*314Þ
+token_type0
+Comment".email._header_value_parser.WhiteSpaceTokenList*"
+quote*
 
-Mailbox"email._header_value_parser.Mailbox"$email._header_value_parser.TokenList*á
-display_name/email._header_value_parser.Mailbox.display_name"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox0:builtins.property`z310z311z312z313z314*Ý
+self(*
+value(*.
+content*
 
-local_part-email._header_value_parser.Mailbox.local_part"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox0:builtins.property`z310z311z312z313z314*Õ
-domain)email._header_value_parser.Mailbox.domain"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox0:builtins.property`z310z311z312z313z314*
-route(email._header_value_parser.Mailbox.route"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*R
-selfH
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox0:builtins.property`z310z311z312z313z314*Û
-	addr_spec,email._header_value_parser.Mailbox.addr_spec"
-builtins.str"builtins.str*R
-selfH
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox0:builtins.property`z310z311z312z313z314j310j311j312j313j314rr
+self(0:builtins.property`r
 
-token_type-email._header_value_parser.Mailbox.token_type
-builtins.str"builtins.str*310*311*312*313*314Ê
+token_type0Ý
+AddressList"$email._header_value_parser.TokenList*0
+	addresses*
 
-InvalidMailbox)email._header_value_parser.InvalidMailbox"$email._header_value_parser.TokenList*â
-display_name6email._header_value_parser.InvalidMailbox.display_name"
-None*`
-selfV
-)email._header_value_parser.InvalidMailbox")email._header_value_parser.InvalidMailbox0:builtins.property`z310z311z312z313z314*Þ
+self(0:builtins.property`*0
+	mailboxes*
 
-local_part4email._header_value_parser.InvalidMailbox.local_part"
-None*`
-selfV
-)email._header_value_parser.InvalidMailbox")email._header_value_parser.InvalidMailbox0:builtins.property`z310z311z312z313z314*Ö
-domain0email._header_value_parser.InvalidMailbox.domain"
-None*`
-selfV
-)email._header_value_parser.InvalidMailbox")email._header_value_parser.InvalidMailbox0:builtins.property`z310z311z312z313z314*Ô
-route/email._header_value_parser.InvalidMailbox.route"
-None*`
-selfV
-)email._header_value_parser.InvalidMailbox")email._header_value_parser.InvalidMailbox0:builtins.property`z310z311z312z313z314*Ü
-	addr_spec3email._header_value_parser.InvalidMailbox.addr_spec"
-None*`
-selfV
-)email._header_value_parser.InvalidMailbox")email._header_value_parser.InvalidMailbox0:builtins.property`z310z311z312z313z314j310j311j312j313j314ry
+self(0:builtins.property`*4
+all_mailboxes*
 
-token_type4email._header_value_parser.InvalidMailbox.token_type
-builtins.str"builtins.str*310*311*312*313*314­
-Domain!email._header_value_parser.Domain"$email._header_value_parser.TokenList*Ò
-domain(email._header_value_parser.Domain.domain"
-builtins.str"builtins.str*P
-selfF
-!email._header_value_parser.Domain"!email._header_value_parser.Domain0:builtins.property`z310z311z312z313z314j310j311j312j313j314rq
+self(0:builtins.property`r
 
-token_type,email._header_value_parser.Domain.token_type
-builtins.str"builtins.str*310*311*312*313*314ry
-as_ew_allowed/email._header_value_parser.Domain.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314à
-DotAtom"email._header_value_parser.DotAtom"$email._header_value_parser.TokenListj310j311j312j313j314rr
+token_type0Ü
+Address"$email._header_value_parser.TokenList*3
+display_name*
 
-token_type-email._header_value_parser.DotAtom.token_type
-builtins.str"builtins.str*310*311*312*313*314ì
-DotAtomText&email._header_value_parser.DotAtomText"$email._header_value_parser.TokenListj310j311j312j313j314rv
+self(0:builtins.property`*0
+	mailboxes*
 
-token_type1email._header_value_parser.DotAtomText.token_type
-builtins.str"builtins.str*310*311*312*313*314r~
-as_ew_allowed4email._header_value_parser.DotAtomText.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314õ
-NoFoldLiteral(email._header_value_parser.NoFoldLiteral"$email._header_value_parser.TokenListj310j311j312j313j314rx
+self(0:builtins.property`*4
+all_mailboxes*
 
-token_type3email._header_value_parser.NoFoldLiteral.token_type
-builtins.str"builtins.str*310*311*312*313*314r€
-as_ew_allowed6email._header_value_parser.NoFoldLiteral.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314ÿ
-AddrSpec#email._header_value_parser.AddrSpec"$email._header_value_parser.TokenList*à
+self(0:builtins.property`r
 
-local_part.email._header_value_parser.AddrSpec.local_part"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.AddrSpec"#email._header_value_parser.AddrSpec0:builtins.property`z310z311z312z313z314*Ø
-domain*email._header_value_parser.AddrSpec.domain"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.AddrSpec"#email._header_value_parser.AddrSpec0:builtins.property`z310z311z312z313z314*Þ
-	addr_spec-email._header_value_parser.AddrSpec.addr_spec"
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.AddrSpec"#email._header_value_parser.AddrSpec0:builtins.property`z310z311z312z313z314j310j311j312j313j314rs
+token_type0«
+MailboxList"$email._header_value_parser.TokenList*0
+	mailboxes*
 
-token_type.email._header_value_parser.AddrSpec.token_type
-builtins.str"builtins.str*310*311*312*313*314r{
-as_ew_allowed1email._header_value_parser.AddrSpec.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314ð
-ObsLocalPart'email._header_value_parser.ObsLocalPart"$email._header_value_parser.TokenListj310j311j312j313j314rw
+self(0:builtins.property`*4
+all_mailboxes*
 
-token_type2email._header_value_parser.ObsLocalPart.token_type
-builtins.str"builtins.str*310*311*312*313*314r
-as_ew_allowed5email._header_value_parser.ObsLocalPart.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314Ù
-DisplayName&email._header_value_parser.DisplayName"!email._header_value_parser.Phrase*í
-display_name3email._header_value_parser.DisplayName.display_name"
-builtins.str"builtins.str*Z
-selfP
-&email._header_value_parser.DisplayName"&email._header_value_parser.DisplayName0:builtins.property`z310z311z312z313z314j310j311j312j313j314rv
+self(0:builtins.property`r
 
-token_type1email._header_value_parser.DisplayName.token_type
-builtins.str"builtins.str*310*311*312*313*314Ê
-	LocalPart$email._header_value_parser.LocalPart"$email._header_value_parser.TokenList*ã
+token_type0©
+	GroupList"$email._header_value_parser.TokenList*0
+	mailboxes*
 
-local_part/email._header_value_parser.LocalPart.local_part"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.LocalPart"$email._header_value_parser.LocalPart0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
+self(0:builtins.property`*4
+all_mailboxes*
 
-token_type/email._header_value_parser.LocalPart.token_type
-builtins.str"builtins.str*310*311*312*313*314r|
-as_ew_allowed2email._header_value_parser.LocalPart.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314Á
-DomainLiteral(email._header_value_parser.DomainLiteral"$email._header_value_parser.TokenList*ç
-domain/email._header_value_parser.DomainLiteral.domain"
-builtins.str"builtins.str*^
-selfT
-(email._header_value_parser.DomainLiteral"(email._header_value_parser.DomainLiteral0:builtins.property`z310z311z312z313z314*ß
-ip+email._header_value_parser.DomainLiteral.ip"
-builtins.str"builtins.str*^
-selfT
-(email._header_value_parser.DomainLiteral"(email._header_value_parser.DomainLiteral0:builtins.property`z310z311z312z313z314j310j311j312j313j314rx
+self(0:builtins.property`r
 
-token_type3email._header_value_parser.DomainLiteral.token_type
-builtins.str"builtins.str*310*311*312*313*314r€
-as_ew_allowed6email._header_value_parser.DomainLiteral.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314š
-MIMEVersion&email._header_value_parser.MIMEVersion"$email._header_value_parser.TokenListj310j311j312j313j314rv
+token_type0Ú
+Group"$email._header_value_parser.TokenList*0
+	mailboxes*
 
-token_type1email._header_value_parser.MIMEVersion.token_type
-builtins.str"builtins.str*310*311*312*313*314r”
-major,email._header_value_parser.MIMEVersion.majorD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314r”
-minor,email._header_value_parser.MIMEVersion.minorD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314–
-	Parameter$email._header_value_parser.Parameter"$email._header_value_parser.TokenList*ë
-section_number3email._header_value_parser.Parameter.section_number"
-builtins.int"builtins.int*V
-selfL
-$email._header_value_parser.Parameter"$email._header_value_parser.Parameter0:builtins.property`z310z311z312z313z314*å
-param_value0email._header_value_parser.Parameter.param_value"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.Parameter"$email._header_value_parser.Parameter0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
+self(0:builtins.property`*4
+all_mailboxes*
 
-token_type/email._header_value_parser.Parameter.token_type
-builtins.str"builtins.str*310*311*312*313*314rt
-	sectioned.email._header_value_parser.Parameter.sectioned
-builtins.bool"builtins.bool*310*311*312*313*314rr
-extended-email._header_value_parser.Parameter.extended
-builtins.bool"builtins.bool*310*311*312*313*314rn
-charset,email._header_value_parser.Parameter.charset
-builtins.str"builtins.str*310*311*312*313*314û
-InvalidParameter+email._header_value_parser.InvalidParameter"$email._header_value_parser.Parameterj310j311j312j313j314r{
+self(0:builtins.property`*3
+display_name*
 
-token_type6email._header_value_parser.InvalidParameter.token_type
-builtins.str"builtins.str*310*311*312*313*314Ô
-	Attribute$email._header_value_parser.Attribute"$email._header_value_parser.TokenList*ë
-stripped_value3email._header_value_parser.Attribute.stripped_value"
-builtins.str"builtins.str*V
-selfL
-$email._header_value_parser.Attribute"$email._header_value_parser.Attribute0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
+self(0:builtins.property`r
 
-token_type/email._header_value_parser.Attribute.token_type
-builtins.str"builtins.str*310*311*312*313*314õ
-Section"email._header_value_parser.Section"$email._header_value_parser.TokenListj310j311j312j313j314rr
+token_type0·
+NameAddr"$email._header_value_parser.TokenList*3
+display_name*
 
-token_type-email._header_value_parser.Section.token_type
-builtins.str"builtins.str*310*311*312*313*314r’
-number)email._header_value_parser.Section.numberD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314¼
-Value email._header_value_parser.Value"$email._header_value_parser.TokenList*ß
-stripped_value/email._header_value_parser.Value.stripped_value"
-builtins.str"builtins.str*N
-selfD
- email._header_value_parser.Value" email._header_value_parser.Value0:builtins.property`z310z311z312z313z314j310j311j312j313j314rp
+self(0:builtins.property`*1
 
-token_type+email._header_value_parser.Value.token_type
-builtins.str"builtins.str*310*311*312*313*314õ
-MimeParameters)email._header_value_parser.MimeParameters"$email._header_value_parser.TokenList*õ
-params0email._header_value_parser.MimeParameters.params"¦
-1typing.Iterator[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Iterator*`
-selfV
-)email._header_value_parser.MimeParameters")email._header_value_parser.MimeParameters0:builtins.property`z310z311z312z313z314j310j311j312j313j314ry
+local_part*
 
-token_type4email._header_value_parser.MimeParameters.token_type
-builtins.str"builtins.str*310*311*312*313*314r…
-syntactic_break9email._header_value_parser.MimeParameters.syntactic_break
-builtins.bool"builtins.bool*310*311*312*313*314¶
-ParameterizedHeaderValue3email._header_value_parser.ParameterizedHeaderValue"$email._header_value_parser.TokenList*“
-params:email._header_value_parser.ParameterizedHeaderValue.params"¦
-1typing.Iterable[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Iterable*t
-selfj
-3email._header_value_parser.ParameterizedHeaderValue"3email._header_value_parser.ParameterizedHeaderValue0:builtins.property`z310z311z312z313z314j310j311j312j313j314r
-syntactic_breakCemail._header_value_parser.ParameterizedHeaderValue.syntactic_break
-builtins.bool"builtins.bool*310*311*312*313*314á
-ContentType&email._header_value_parser.ContentType"3email._header_value_parser.ParameterizedHeaderValuej310j311j312j313j314rv
+self(0:builtins.property`*-
+domain*
 
-token_type1email._header_value_parser.ContentType.token_type
-builtins.str"builtins.str*310*311*312*313*314r~
-as_ew_allowed4email._header_value_parser.ContentType.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314rr
-maintype/email._header_value_parser.ContentType.maintype
-builtins.str"builtins.str*310*311*312*313*314rp
-subtype.email._header_value_parser.ContentType.subtype
-builtins.str"builtins.str*310*311*312*313*314”
-ContentDisposition-email._header_value_parser.ContentDisposition"3email._header_value_parser.ParameterizedHeaderValuej310j311j312j313j314r}
+self(0:builtins.property`*,
+route*
 
-token_type8email._header_value_parser.ContentDisposition.token_type
-builtins.str"builtins.str*310*311*312*313*314r…
-as_ew_allowed;email._header_value_parser.ContentDisposition.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314rz
-content_dispositionAemail._header_value_parser.ContentDisposition.content_disposition
-Any*310*311*312*313*314”
-ContentTransferEncoding2email._header_value_parser.ContentTransferEncoding"$email._header_value_parser.TokenListj310j311j312j313j314r‚
+self(0:builtins.property`*0
+	addr_spec*
 
-token_type=email._header_value_parser.ContentTransferEncoding.token_type
-builtins.str"builtins.str*310*311*312*313*314rŠ
-as_ew_allowed@email._header_value_parser.ContentTransferEncoding.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314rt
-cte6email._header_value_parser.ContentTransferEncoding.cte
-builtins.str"builtins.str*310*311*312*313*314ì
-HeaderLabel&email._header_value_parser.HeaderLabel"$email._header_value_parser.TokenListj310j311j312j313j314rv
+self(0:builtins.property`r
 
-token_type1email._header_value_parser.HeaderLabel.token_type
-builtins.str"builtins.str*310*311*312*313*314r~
-as_ew_allowed4email._header_value_parser.HeaderLabel.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314Ã
-MsgID email._header_value_parser.MsgID"$email._header_value_parser.TokenList*ì
-fold%email._header_value_parser.MsgID.fold"
-builtins.str"builtins.str*N
-selfD
- email._header_value_parser.MsgID" email._header_value_parser.MsgID*6
-policy*
-email.policy.Policy"email.policy.Policyz310z311z312z313z314j310j311j312j313j314rp
+token_type0ƒ
+	AngleAddr"$email._header_value_parser.TokenList*1
 
-token_type+email._header_value_parser.MsgID.token_type
-builtins.str"builtins.str*310*311*312*313*314rx
-as_ew_allowed.email._header_value_parser.MsgID.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314â
-	MessageID$email._header_value_parser.MessageID" email._header_value_parser.MsgIDj310j311j312j313j314rt
+local_part*
 
-token_type/email._header_value_parser.MessageID.token_type
-builtins.str"builtins.str*310*311*312*313*314û
-InvalidMessageID+email._header_value_parser.InvalidMessageID"$email._header_value_parser.MessageIDj310j311j312j313j314r{
+self(0:builtins.property`*-
+domain*
 
-token_type6email._header_value_parser.InvalidMessageID.token_type
-builtins.str"builtins.str*310*311*312*313*314Ý
-Header!email._header_value_parser.Header"$email._header_value_parser.TokenListj310j311j312j313j314rq
+self(0:builtins.property`*,
+route*
 
-token_type,email._header_value_parser.Header.token_type
-builtins.str"builtins.str*310*311*312*313*314¡
-Terminal#email._header_value_parser.Terminal"builtins.str*±
-__new__+email._header_value_parser.Terminal.__new__"Ÿ
-(email._header_value_parser.Terminal.SelfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminal"#email._header_value_parser.Terminal(*ä
-clsÚ
-.Type[email._header_value_parser.Terminal.Self]Ÿ
-(email._header_value_parser.Terminal.SelfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminal"#email._header_value_parser.Terminal("type*'
-value
-builtins.str"builtins.str*,
+self(0:builtins.property`*0
+	addr_spec*
 
-token_type
-builtins.str"builtins.strhz310z311z312z313z314*­
-pprint*email._header_value_parser.Terminal.pprint"
-None*T
-selfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminalz310z311z312z313z314*º
-all_defects/email._header_value_parser.Terminal.all_defects"t
-)builtins.list[email.errors.MessageDefect]8
-email.errors.MessageDefect"email.errors.MessageDefect"builtins.list*T
-selfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminal0:builtins.property`z310z311z312z313z314*¿
-pop_trailing_ws3email._header_value_parser.Terminal.pop_trailing_ws"
-None*T
-selfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminalz310z311z312z313z314*Š
-comments,email._header_value_parser.Terminal.comments"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*T
-selfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminal0:builtins.property`z310z311z312z313z314*•
-__getnewargs__2email._header_value_parser.Terminal.__getnewargs__"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*T
-selfJ
-#email._header_value_parser.Terminal"#email._header_value_parser.Terminalz310z311z312z313z314j310j311j312j313j314r{
-as_ew_allowed1email._header_value_parser.Terminal.as_ew_allowed
-builtins.bool"builtins.bool*310*311*312*313*314r…
-ew_combine_allowed6email._header_value_parser.Terminal.ew_combine_allowed
-builtins.bool"builtins.bool*310*311*312*313*314r
-syntactic_break3email._header_value_parser.Terminal.syntactic_break
-builtins.bool"builtins.bool*310*311*312*313*314rs
+self(0:builtins.property`r
 
-token_type.email._header_value_parser.Terminal.token_type
-builtins.str"builtins.str*310*311*312*313*314rÅ
-defects+email._header_value_parser.Terminal.defectst
-)builtins.list[email.errors.MessageDefect]8
-email.errors.MessageDefect"email.errors.MessageDefect"builtins.list*310*311*312*313*314ì
-WhiteSpaceTerminal-email._header_value_parser.WhiteSpaceTerminal"#email._header_value_parser.Terminal*ô
-value3email._header_value_parser.WhiteSpaceTerminal.value"
-builtins.str"builtins.str*h
-self^
--email._header_value_parser.WhiteSpaceTerminal"-email._header_value_parser.WhiteSpaceTerminal0:builtins.property`z310z311z312z313z314*ñ
-startswith_fws<email._header_value_parser.WhiteSpaceTerminal.startswith_fws"
-builtins.bool"builtins.bool*h
-self^
--email._header_value_parser.WhiteSpaceTerminal"-email._header_value_parser.WhiteSpaceTerminalz310z311z312z313z314j310j311j312j313j314ü
-ValueTerminal(email._header_value_parser.ValueTerminal"#email._header_value_parser.Terminal*
-value.email._header_value_parser.ValueTerminal.value"T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal*^
-selfT
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal0:builtins.property`z310z311z312z313z314*â
-startswith_fws7email._header_value_parser.ValueTerminal.startswith_fws"
-builtins.bool"builtins.bool*^
-selfT
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminalz310z311z312z313z314j310j311j312j313j314
-EWWhiteSpaceTerminal/email._header_value_parser.EWWhiteSpaceTerminal"-email._header_value_parser.WhiteSpaceTerminalj310j311j312j313j314u
-_InvalidEwError*email._header_value_parser._InvalidEwError"email.errors.HeaderParseErrorj310j311j312j313j314‚
-quote_string'email._header_value_parser.quote_string"
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314µ
-get_fws"email._header_value_parser.get_fws"Ã
-ATuple[email._header_value_parser.WhiteSpaceTerminal,builtins.str]^
--email._header_value_parser.WhiteSpaceTerminal"-email._header_value_parser.WhiteSpaceTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314²
-get_encoded_word+email._header_value_parser.get_encoded_word"®
-:Tuple[email._header_value_parser.EncodedWord,builtins.str]P
-&email._header_value_parser.EncodedWord"&email._header_value_parser.EncodedWord
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314ç
-get_unstructured+email._header_value_parser.get_unstructured"d
-0email._header_value_parser.UnstructuredTokenList"0email._header_value_parser.UnstructuredTokenList*'
-value
-builtins.str"builtins.strz310z311z312z313z314¿
-get_qp_ctext'email._header_value_parser.get_qp_ctext"Ã
-ATuple[email._header_value_parser.WhiteSpaceTerminal,builtins.str]^
--email._header_value_parser.WhiteSpaceTerminal"-email._header_value_parser.WhiteSpaceTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314°
-get_qcontent'email._header_value_parser.get_qcontent"´
-<Tuple[email._header_value_parser.ValueTerminal,builtins.str]T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314ª
-	get_atext$email._header_value_parser.get_atext"´
-<Tuple[email._header_value_parser.ValueTerminal,builtins.str]T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314Í
-get_bare_quoted_string1email._header_value_parser.get_bare_quoted_string"½
-?Tuple[email._header_value_parser.BareQuotedString,builtins.str]Z
-+email._header_value_parser.BareQuotedString"+email._header_value_parser.BareQuotedString
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314œ
-get_comment&email._header_value_parser.get_comment"¢
-6Tuple[email._header_value_parser.Comment,builtins.str]H
-"email._header_value_parser.Comment""email._header_value_parser.Comment
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314™
-get_cfws#email._header_value_parser.get_cfws"¥
-7Tuple[email._header_value_parser.CFWSList,builtins.str]J
-#email._header_value_parser.CFWSList"#email._header_value_parser.CFWSList
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314·
-get_quoted_string,email._header_value_parser.get_quoted_string"±
-;Tuple[email._header_value_parser.QuotedString,builtins.str]R
-'email._header_value_parser.QuotedString"'email._header_value_parser.QuotedString
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314
-get_atom#email._header_value_parser.get_atom"™
-3Tuple[email._header_value_parser.Atom,builtins.str]B
-email._header_value_parser.Atom"email._header_value_parser.Atom
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314´
-get_dot_atom_text,email._header_value_parser.get_dot_atom_text"®
-:Tuple[email._header_value_parser.DotAtomText,builtins.str]P
-&email._header_value_parser.DotAtomText"&email._header_value_parser.DotAtomText
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314ž
-get_dot_atom'email._header_value_parser.get_dot_atom"¢
-6Tuple[email._header_value_parser.DotAtom,builtins.str]H
-"email._header_value_parser.DotAtom""email._header_value_parser.DotAtom
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314µ
-get_word#email._header_value_parser.get_word"B
-Tuple[Any,builtins.str]
-Any
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314—
+token_type0p
+ObsRoute"$email._header_value_parser.TokenList*.
+domains*
 
-get_phrase%email._header_value_parser.get_phrase"Ÿ
-5Tuple[email._header_value_parser.Phrase,builtins.str]F
-!email._header_value_parser.Phrase"!email._header_value_parser.Phrase
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¨
-get_local_part)email._header_value_parser.get_local_part"¨
-8Tuple[email._header_value_parser.LocalPart,builtins.str]L
-$email._header_value_parser.LocalPart"$email._header_value_parser.LocalPart
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¹
-get_obs_local_part-email._header_value_parser.get_obs_local_part"±
-;Tuple[email._header_value_parser.ObsLocalPart,builtins.str]R
-'email._header_value_parser.ObsLocalPart"'email._header_value_parser.ObsLocalPart
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314ª
-	get_dtext$email._header_value_parser.get_dtext"´
-<Tuple[email._header_value_parser.ValueTerminal,builtins.str]T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¼
-get_domain_literal-email._header_value_parser.get_domain_literal"´
-<Tuple[email._header_value_parser.DomainLiteral,builtins.str]T
-(email._header_value_parser.DomainLiteral"(email._header_value_parser.DomainLiteral
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314—
+self(0:builtins.property`r
 
-get_domain%email._header_value_parser.get_domain"Ÿ
-5Tuple[email._header_value_parser.Domain,builtins.str]F
-!email._header_value_parser.Domain"!email._header_value_parser.Domain
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314£
-get_addr_spec(email._header_value_parser.get_addr_spec"¥
-7Tuple[email._header_value_parser.AddrSpec,builtins.str]J
-#email._header_value_parser.AddrSpec"#email._header_value_parser.AddrSpec
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314£
-get_obs_route(email._header_value_parser.get_obs_route"¥
-7Tuple[email._header_value_parser.ObsRoute,builtins.str]J
-#email._header_value_parser.ObsRoute"#email._header_value_parser.ObsRoute
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¨
-get_angle_addr)email._header_value_parser.get_angle_addr"¨
-8Tuple[email._header_value_parser.AngleAddr,builtins.str]L
-$email._header_value_parser.AngleAddr"$email._header_value_parser.AngleAddr
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314²
-get_display_name+email._header_value_parser.get_display_name"®
-:Tuple[email._header_value_parser.DisplayName,builtins.str]P
-&email._header_value_parser.DisplayName"&email._header_value_parser.DisplayName
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314£
-get_name_addr(email._header_value_parser.get_name_addr"¥
-7Tuple[email._header_value_parser.NameAddr,builtins.str]J
-#email._header_value_parser.NameAddr"#email._header_value_parser.NameAddr
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314œ
-get_mailbox&email._header_value_parser.get_mailbox"¢
-6Tuple[email._header_value_parser.Mailbox,builtins.str]H
-"email._header_value_parser.Mailbox""email._header_value_parser.Mailbox
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314í
-get_invalid_mailbox.email._header_value_parser.get_invalid_mailbox"·
-=Tuple[email._header_value_parser.InvalidMailbox,builtins.str]V
-)email._header_value_parser.InvalidMailbox")email._header_value_parser.InvalidMailbox
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.str**
-endchars
-builtins.str"builtins.strz310z311z312z313z314²
-get_mailbox_list+email._header_value_parser.get_mailbox_list"®
-:Tuple[email._header_value_parser.MailboxList,builtins.str]P
-&email._header_value_parser.MailboxList"&email._header_value_parser.MailboxList
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¨
-get_group_list)email._header_value_parser.get_group_list"¨
-8Tuple[email._header_value_parser.GroupList,builtins.str]L
-$email._header_value_parser.GroupList"$email._header_value_parser.GroupList
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314’
-	get_group$email._header_value_parser.get_group"œ
-4Tuple[email._header_value_parser.Group,builtins.str]D
- email._header_value_parser.Group" email._header_value_parser.Group
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314œ
-get_address&email._header_value_parser.get_address"¢
-6Tuple[email._header_value_parser.Address,builtins.str]H
-"email._header_value_parser.Address""email._header_value_parser.Address
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314²
-get_address_list+email._header_value_parser.get_address_list"®
-:Tuple[email._header_value_parser.AddressList,builtins.str]P
-&email._header_value_parser.AddressList"&email._header_value_parser.AddressList
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¾
-get_no_fold_literal.email._header_value_parser.get_no_fold_literal"´
-<Tuple[email._header_value_parser.NoFoldLiteral,builtins.str]T
-(email._header_value_parser.NoFoldLiteral"(email._header_value_parser.NoFoldLiteral
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314”
+token_type0¶
+Mailbox"$email._header_value_parser.TokenList*3
+display_name*
 
-get_msg_id%email._header_value_parser.get_msg_id"œ
-4Tuple[email._header_value_parser.MsgID,builtins.str]D
- email._header_value_parser.MsgID" email._header_value_parser.MsgID
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314Ï
-parse_message_id+email._header_value_parser.parse_message_id"L
-$email._header_value_parser.MessageID"$email._header_value_parser.MessageID*'
-value
-builtins.str"builtins.strz310z311z312z313z314×
-parse_mime_version-email._header_value_parser.parse_mime_version"P
-&email._header_value_parser.MIMEVersion"&email._header_value_parser.MIMEVersion*'
-value
-builtins.str"builtins.strz310z311z312z313z314Ë
-get_invalid_parameter0email._header_value_parser.get_invalid_parameter"½
-?Tuple[email._header_value_parser.InvalidParameter,builtins.str]Z
-+email._header_value_parser.InvalidParameter"+email._header_value_parser.InvalidParameter
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314ª
-	get_ttext$email._header_value_parser.get_ttext"´
-<Tuple[email._header_value_parser.ValueTerminal,builtins.str]T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314’
-	get_token$email._header_value_parser.get_token"œ
-4Tuple[email._header_value_parser.Token,builtins.str]D
- email._header_value_parser.Token" email._header_value_parser.Token
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314°
-get_attrtext'email._header_value_parser.get_attrtext"´
-<Tuple[email._header_value_parser.ValueTerminal,builtins.str]T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¦
-get_attribute(email._header_value_parser.get_attribute"¨
-8Tuple[email._header_value_parser.Attribute,builtins.str]L
-$email._header_value_parser.Attribute"$email._header_value_parser.Attribute
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314Â
-get_extended_attrtext0email._header_value_parser.get_extended_attrtext"´
-<Tuple[email._header_value_parser.ValueTerminal,builtins.str]T
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¸
-get_extended_attribute1email._header_value_parser.get_extended_attribute"¨
-8Tuple[email._header_value_parser.Attribute,builtins.str]L
-$email._header_value_parser.Attribute"$email._header_value_parser.Attribute
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314œ
-get_section&email._header_value_parser.get_section"¢
-6Tuple[email._header_value_parser.Section,builtins.str]H
-"email._header_value_parser.Section""email._header_value_parser.Section
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314’
-	get_value$email._header_value_parser.get_value"œ
-4Tuple[email._header_value_parser.Value,builtins.str]D
- email._header_value_parser.Value" email._header_value_parser.Value
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314¦
-get_parameter(email._header_value_parser.get_parameter"¨
-8Tuple[email._header_value_parser.Parameter,builtins.str]L
-$email._header_value_parser.Parameter"$email._header_value_parser.Parameter
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314ã
-parse_mime_parameters0email._header_value_parser.parse_mime_parameters"V
-)email._header_value_parser.MimeParameters")email._header_value_parser.MimeParameters*'
-value
-builtins.str"builtins.strz310z311z312z313z314å
-parse_content_type_header4email._header_value_parser.parse_content_type_header"P
-&email._header_value_parser.ContentType"&email._header_value_parser.ContentType*'
-value
-builtins.str"builtins.strz310z311z312z313z314
- parse_content_disposition_header;email._header_value_parser.parse_content_disposition_header"^
--email._header_value_parser.ContentDisposition"-email._header_value_parser.ContentDisposition*'
-value
-builtins.str"builtins.strz310z311z312z313z314—
-&parse_content_transfer_encoding_headerAemail._header_value_parser.parse_content_transfer_encoding_header"h
-2email._header_value_parser.ContentTransferEncoding"2email._header_value_parser.ContentTransferEncoding*'
-value
-builtins.str"builtins.strz310z311z312z313z314*¯
-__annotations__*email._header_value_parser.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ˆ
-WSPemail._header_value_parser.WSPH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*˜
-CFWS_LEADER&email._header_value_parser.CFWS_LEADERH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*’
-SPECIALS#email._header_value_parser.SPECIALSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*”
-	ATOM_ENDS$email._header_value_parser.ATOM_ENDSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*œ
-DOT_ATOM_ENDS(email._header_value_parser.DOT_ATOM_ENDSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*˜
-PHRASE_ENDS&email._header_value_parser.PHRASE_ENDSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*”
-	TSPECIALS$email._header_value_parser.TSPECIALSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*–
+self(0:builtins.property`*1
 
-TOKEN_ENDS%email._header_value_parser.TOKEN_ENDSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*”
-	ASPECIALS$email._header_value_parser.ASPECIALSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*ž
-ATTRIBUTE_ENDS)email._header_value_parser.ATTRIBUTE_ENDSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*°
-EXTENDED_ATTRIBUTE_ENDS2email._header_value_parser.EXTENDED_ATTRIBUTE_ENDSH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314*œ
-rfc2047_matcher*email._header_value_parser.rfc2047_matcherD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*”
-DOTemail._header_value_parser.DOTT
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal*310*311*312*313*314*¨
-ListSeparator(email._header_value_parser.ListSeparatorT
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal*310*311*312*313*314*¶
-RouteComponentMarker/email._header_value_parser.RouteComponentMarkerT
-(email._header_value_parser.ValueTerminal"(email._header_value_parser.ValueTerminal*310*311*312*313*314
+local_part*
+
+self(0:builtins.property`*-
+domain*
+
+self(0:builtins.property`*,
+route*
+
+self(0:builtins.property`*0
+	addr_spec*
+
+self(0:builtins.property`r
+
+token_type0½
+InvalidMailbox"$email._header_value_parser.TokenList*3
+display_name*
+
+self(0:builtins.property`*1
+
+local_part*
+
+self(0:builtins.property`*-
+domain*
+
+self(0:builtins.property`*,
+route*
+
+self(0:builtins.property`*0
+	addr_spec*
+
+self(0:builtins.property`r
+
+token_type0€
+Domain"$email._header_value_parser.TokenList*-
+domain*
+
+self(0:builtins.property`r
+
+token_type0r
+as_ew_allowed0?
+DotAtom"$email._header_value_parser.TokenListr
+
+token_type0V
+DotAtomText"$email._header_value_parser.TokenListr
+
+token_type0r
+as_ew_allowed0X
+NoFoldLiteral"$email._header_value_parser.TokenListr
+
+token_type0r
+as_ew_allowed0ç
+AddrSpec"$email._header_value_parser.TokenList*1
+
+local_part*
+
+self(0:builtins.property`*-
+domain*
+
+self(0:builtins.property`*0
+	addr_spec*
+
+self(0:builtins.property`r
+
+token_type0r
+as_ew_allowed0W
+ObsLocalPart"$email._header_value_parser.TokenListr
+
+token_type0r
+as_ew_allowed0u
+DisplayName"!email._header_value_parser.Phrase*3
+display_name*
+
+self(0:builtins.property`r
+
+token_type0‡
+	LocalPart"$email._header_value_parser.TokenList*1
+
+local_part*
+
+self(0:builtins.property`r
+
+token_type0r
+as_ew_allowed0²
+DomainLiteral"$email._header_value_parser.TokenList*-
+domain*
+
+self(0:builtins.property`*)
+ip*
+
+self(0:builtins.property`r
+
+token_type0r
+as_ew_allowed0Y
+MIMEVersion"$email._header_value_parser.TokenListr
+
+token_type0r	
+major0!r	
+minor0!Ö
+	Parameter"$email._header_value_parser.TokenList*5
+section_number *
+
+self("0:builtins.property`*2
+param_value*
+
+self("0:builtins.property`r
+
+token_type0r
+	sectioned0r
+extended0r
+charset0H
+InvalidParameter"$email._header_value_parser.Parameterr
+
+token_type0x
+	Attribute"$email._header_value_parser.TokenList*5
+stripped_value*
+
+self(#0:builtins.property`r
+
+token_type0K
+Section"$email._header_value_parser.TokenListr
+
+token_type0r
+
+number0!t
+Value"$email._header_value_parser.TokenList*5
+stripped_value*
+
+self($0:builtins.property`r
+
+token_type0Š
+MimeParameters"$email._header_value_parser.TokenList*-
+params&*
+
+self('0:builtins.property`r
+
+token_type0r
+syntactic_break0„
+ParameterizedHeaderValue"$email._header_value_parser.TokenList*-
+params(*
+
+self()0:builtins.property`r
+syntactic_break0€
+ContentType"3email._header_value_parser.ParameterizedHeaderValuer
+
+token_type0r
+as_ew_allowed0r
+maintype0r
+subtype0…
+ContentDisposition"3email._header_value_parser.ParameterizedHeaderValuer
+
+token_type0r
+as_ew_allowed0r
+content_disposition0k
+ContentTransferEncoding"$email._header_value_parser.TokenListr
+
+token_type0r
+as_ew_allowed0r
+cte0V
+HeaderLabel"$email._header_value_parser.TokenListr
+
+token_type0r
+as_ew_allowed0t
+MsgID"$email._header_value_parser.TokenList*"
+fold*
+
+self(**
+policy(	r
+
+token_type0r
+as_ew_allowed0=
+	MessageID" email._header_value_parser.MsgIDr
+
+token_type0H
+InvalidMessageID"$email._header_value_parser.MessageIDr
+
+token_type0>
+Header"$email._header_value_parser.TokenListr
+
+token_type0ì
+Terminal"builtins.str*7
+__new__,*	
+cls(-*
+value(*
+
+token_type(h*
+pprint*
+
+self(+*2
+all_defects*
+
+self(+0:builtins.property`*
+pop_trailing_ws*
+
+self(+*/
+comments*
+
+self(+0:builtins.property`*
+__getnewargs__%*
+
+self(+r
+as_ew_allowed0r
+ew_combine_allowed0r
+syntactic_break0r
+
+token_type0r
+defects0‡
+WhiteSpaceTerminal"#email._header_value_parser.Terminal*,
+value*
+
+self(.0:builtins.property`*
+startswith_fws*
+
+self(.‚
+ValueTerminal"#email._header_value_parser.Terminal*,
+value/*
+
+self(/0:builtins.property`*
+startswith_fws*
+
+self(/E
+EWWhiteSpaceTerminal"-email._header_value_parser.WhiteSpaceTerminal0
+_InvalidEwError"email.errors.HeaderParseError
+quote_string*
+value(
+get_fws0*
+value(!
+get_encoded_word2*
+value(!
+get_unstructured3*
+value(
+get_qp_ctext0*
+value(
+get_qcontent4*
+value(
+	get_atext4*
+value('
+get_bare_quoted_string6*
+value(
+get_comment7*
+value(
+get_cfws9*
+value("
+get_quoted_string:*
+value(
+get_atom<*
+value("
+get_dot_atom_text>*
+value(
+get_dot_atom@*
+value(
+get_wordA*
+value(
+
+get_phraseC*
+value(
+get_local_partD*
+value(#
+get_obs_local_partF*
+value(
+	get_dtext4*
+value(#
+get_domain_literalG*
+value(
+
+get_domainH*
+value(
+get_addr_specI*
+value(
+get_obs_routeJ*
+value(
+get_angle_addrK*
+value(!
+get_display_nameL*
+value(
+get_name_addrM*
+value(
+get_mailboxN*
+value(4
+get_invalid_mailboxO*
+value(*
+endchars(!
+get_mailbox_listP*
+value(
+get_group_listQ*
+value(
+	get_groupR*
+value(
+get_addressS*
+value(!
+get_address_listT*
+value($
+get_no_fold_literalV*
+value(
+
+get_msg_idW*
+value(!
+parse_message_idX*
+value(#
+parse_mime_versionY*
+value(&
+get_invalid_parameter[*
+value(
+	get_ttext4*
+value(
+	get_token]*
+value(
+get_attrtext4*
+value(
+get_attribute^*
+value(&
+get_extended_attrtext4*
+value('
+get_extended_attribute^*
+value(
+get_section`*
+value(
+	get_valuea*
+value(
+get_parameterb*
+value(&
+parse_mime_parameters'*
+value(*
+parse_content_type_headerc*
+value(1
+ parse_content_disposition_headerd*
+value(7
+&parse_content_transfer_encoding_headere*
+value(*
+__annotations__0f*
+WSP0g*
+CFWS_LEADER0g*
+SPECIALS0g*
+	ATOM_ENDS0g*
+DOT_ATOM_ENDS0g*
+PHRASE_ENDS0g*
+	TSPECIALS0g*
+
+TOKEN_ENDS0g*
+	ASPECIALS0g*
+ATTRIBUTE_ENDS0g*
+EXTENDED_ATTRIBUTE_ENDS0g*
+rfc2047_matcher0h*
+DOT0/*
+ListSeparator0/*
+RouteComponentMarker0/22&"$email._header_value_parser.TokenList22"builtins.str2"email.errors.MessageDefect2"builtins.list22"builtins.bool2"builtins.list22"email.policy.Policy222)"'email._header_value_parser.QuotedString2$""email._header_value_parser.Comment2$""email._header_value_parser.Address2"builtins.list22("&email._header_value_parser.AddressList2$""email._header_value_parser.Mailbox2"builtins.list22("&email._header_value_parser.MailboxList2&"$email._header_value_parser.GroupList2"" email._header_value_parser.Group2%"#email._header_value_parser.NameAddr2#"!email._header_value_parser.Domain2"builtins.list2222&"$email._header_value_parser.AngleAddr2%"#email._header_value_parser.ObsRoute2+")email._header_value_parser.InvalidMailbox2%"#email._header_value_parser.AddrSpec2("&email._header_value_parser.DisplayName2&"$email._header_value_parser.LocalPart2*"(email._header_value_parser.DomainLiteral2"builtins.int22 2&"$email._header_value_parser.Parameter2&"$email._header_value_parser.Attribute2"" email._header_value_parser.Value222"typing.Iterator2%2+")email._header_value_parser.MimeParameters2"typing.Iterable2%25"3email._header_value_parser.ParameterizedHeaderValue2"" email._header_value_parser.MsgID2%"#email._header_value_parser.Terminal2V
+(email._header_value_parser.Terminal.Self"#email._header_value_parser.Terminal(2+2"type2,2/"-email._header_value_parser.WhiteSpaceTerminal2*"(email._header_value_parser.ValueTerminal22.2("&email._header_value_parser.EncodedWord22122"0email._header_value_parser.UnstructuredTokenList22/2-"+email._header_value_parser.BareQuotedString225222%"#email._header_value_parser.CFWSList228222!"email._header_value_parser.Atom22;2("&email._header_value_parser.DotAtomText22=2$""email._header_value_parser.DotAtom22?222#"!email._header_value_parser.Phrase22B222)"'email._header_value_parser.ObsLocalPart22E22222222222222222222222222222*"(email._header_value_parser.NoFoldLiteral22U22*2&"$email._header_value_parser.MessageID2("&email._header_value_parser.MIMEVersion2-"+email._header_value_parser.InvalidParameter22Z2"" email._header_value_parser.Token22\22#2$""email._header_value_parser.Section22_22$22"2("&email._header_value_parser.ContentType2/"-email._header_value_parser.ContentDisposition24"2email._header_value_parser.ContentTransferEncoding2"builtins.dict22"builtins.set22"
+re.Pattern2

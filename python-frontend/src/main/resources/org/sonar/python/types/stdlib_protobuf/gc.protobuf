@@ -1,106 +1,49 @@
 
-gc|
-collect
-gc.collect"
-builtins.int"builtins.int*.
+gc
+collect*
 
-generation
-builtins.int"builtins.int z310z311z312z313z3148
-disable
-gc.disable"
-Nonez310z311z312z313z3146
-enable	gc.enable"
-Nonez310z311z312z313z314¿
-	get_countgc.get_count"ã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.intz310z311z312z313z314P
-	get_debuggc.get_debug"
-builtins.int"builtins.intz310z311z312z313z314º
-get_objectsgc.get_objects",
-builtins.list[Any]
-Any"builtins.list*V
+generation (
+disable
 
-generationD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z3146
-freeze	gc.freeze"
-Nonez310z311z312z313z314:
-unfreezegc.unfreeze"
-Nonez310z311z312z313z314^
-get_freeze_countgc.get_freeze_count"
-builtins.int"builtins.intz310z311z312z313z314{
-get_referentsgc.get_referents",
-builtins.list[Any]
-Any"builtins.list*
-objs
-Anyz310z311z312z313z314{
-get_referrersgc.get_referrers",
-builtins.list[Any]
-Any"builtins.list*
-objs
-Anyz310z311z312z313z314Õ
-	get_statsgc.get_stats"ò
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.listz310z311z312z313z314»
-get_thresholdgc.get_threshold"ã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.intz310z311z312z313z314_
+enable
+	get_count
+	get_debug#
+get_objects*
 
-is_trackedgc.is_tracked"
-builtins.bool"builtins.bool*	
-Anyz310z311z312z313z314c
-is_finalizedgc.is_finalized"
-builtins.bool"builtins.bool*	
-Anyz310z311z312z313z314R
-	isenabledgc.isenabled"
-builtins.bool"builtins.boolz310z311z312z313z314\
-	set_debuggc.set_debug"
-None*
-builtins.int"builtins.intz310z311z312z313z314“
-set_thresholdgc.set_threshold"
-None*,
+generation (
 
-threshold0
-builtins.int"builtins.int*.
+freeze
+unfreeze
+get_freeze_count
+get_referents*
 
-threshold1
-builtins.int"builtins.int *.
+objs(
+get_referrers*
 
-threshold2
-builtins.int"builtins.int z310z311z312z313z314*ó
-__annotations__gc.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*{
-DEBUG_COLLECTABLEgc.DEBUG_COLLECTABLE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*m
+objs(
+	get_stats	
+get_threshold
 
-DEBUG_LEAKgc.DEBUG_LEAK7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*s
-DEBUG_SAVEALLgc.DEBUG_SAVEALL7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*o
-DEBUG_STATSgc.DEBUG_STATS7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*
-DEBUG_UNCOLLECTABLEgc.DEBUG_UNCOLLECTABLE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*è
-	callbacksgc.callbacks⁄
-9builtins.list[TypeAlias[CallableType[builtins.function]]]ç
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"gc._CallbackType"builtins.list*310*311*312*313*314*\
-garbage
-gc.garbage,
-builtins.list[Any]
-Any"builtins.list*310*311*312*313*314
+is_tracked
+*(
+is_finalized
+*(
+	isenabled
+
+	set_debug*(K
+set_threshold*
+
+threshold0(*
+
+threshold1 (*
+
+threshold2 (*
+__annotations__0*
+DEBUG_COLLECTABLE0*
+
+DEBUG_LEAK0*
+DEBUG_SAVEALL0*
+DEBUG_STATS0*
+DEBUG_UNCOLLECTABLE0*
+	callbacks0*
+garbage02"builtins.int22222"builtins.list2222"builtins.str2"builtins.dict22"builtins.list22"builtins.bool2	22"builtins.function222"gc._CallbackType22"builtins.list2

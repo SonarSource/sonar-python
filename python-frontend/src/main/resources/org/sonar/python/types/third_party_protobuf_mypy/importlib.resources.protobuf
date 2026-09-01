@@ -1,144 +1,60 @@
 
-importlib.resourcesê
-ResourceReaderimportlib.abc.ResourceReader"builtins.object*ë
-open_resource*importlib.abc.ResourceReader.open_resource"H
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader**
-resource
-builtins.str"builtins.str0:abc.abstractmethod@*Â
-resource_path*importlib.abc.ResourceReader.resource_path"
-builtins.str"builtins.str*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader**
-resource
-builtins.str"builtins.str0:abc.abstractmethod@*ﬂ
-is_resource(importlib.abc.ResourceReader.is_resource"
-builtins.bool"builtins.bool*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader*&
-path
-builtins.str"builtins.str0:abc.abstractmethod@*·
-contents%importlib.abc.ResourceReader.contents"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*F
-self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abc.abstractmethod@@babc.ABCMetaˆ
-open_binaryimportlib.resources.open_binary""
-typing.BinaryIO"typing.BinaryIO*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*“
-resource√
-/TypeAlias[Union[builtins.str,os.PathLike[Any]]]p
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike"importlib.resources.Resource»
-	open_textimportlib.resources.open_text"
-typing.TextIO"typing.TextIO*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*“
-resource√
-/TypeAlias[Union[builtins.str,os.PathLike[Any]]]p
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike"importlib.resources.Resource*,
-encoding
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str Ù
-read_binaryimportlib.resources.read_binary" 
-builtins.bytes"builtins.bytes*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*“
-resource√
-/TypeAlias[Union[builtins.str,os.PathLike[Any]]]p
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike"importlib.resources.Resource∆
-	read_textimportlib.resources.read_text"
-builtins.str"builtins.str*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*“
-resource√
-/TypeAlias[Union[builtins.str,os.PathLike[Any]]]p
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike"importlib.resources.Resource*,
-encoding
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str å
-pathimportlib.resources.path"≈
-Fcontextlib.AbstractContextManager[pathlib.Path,Literal[builtins.bool]]
-pathlib.Path"pathlib.Path:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool"!contextlib.AbstractContextManager*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*“
-resource√
-/TypeAlias[Union[builtins.str,os.PathLike[Any]]]p
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike"importlib.resources.Resource≈
-is_resourceimportlib.resources.is_resource"
-builtins.bool"builtins.bool*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*&
-name
-builtins.str"builtins.str«
-contentsimportlib.resources.contents"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package∞
-as_fileimportlib.resources.as_file"≈
-Fcontextlib.AbstractContextManager[pathlib.Path,Literal[builtins.bool]]
-pathlib.Path"pathlib.Path:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool"!contextlib.AbstractContextManager*@
-path6
-importlib.abc.Traversable"importlib.abc.Traversable©
-filesimportlib.resources.files"6
-importlib.abc.Traversable"importlib.abc.Traversable*Ã
-packageæ
-/TypeAlias[Union[builtins.str,types.ModuleType]]l
-$Union[builtins.str,types.ModuleType]
-builtins.str"builtins.str$
-types.ModuleType"types.ModuleType"importlib.resources.Package*t
-__path__importlib.resources.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*è
-__annotations__#importlib.resources.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*r
-__all__importlib.resources.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+importlib.resourcesœ
+ResourceReaderimportlib.abc.ResourceReader"builtins.object*E
+open_resource*
+
+self(*
+resource(0:abc.abstractmethod@*E
+resource_path*
+
+self(*
+resource(0:abc.abstractmethod@*?
+is_resource*
+
+self(*
+
+path(0:abc.abstractmethod@*0
+contents*
+
+self(0:abc.abstractmethod@@babc.ABCMeta.
+open_binary*
+package(
+*
+resource(N
+	open_text*
+package(
+*
+resource(*
+encoding (*
+errors (.
+read_binary*
+package(
+*
+resource(N
+	read_text*
+package(
+*
+resource(*
+encoding (*
+errors ('
+path*
+package(
+*
+resource(*
+is_resource*
+package(
+*
+
+name(
+contents*
+package(
+
+as_file*
+
+path(
+files*
+package(
+*
+__path__0*
+__annotations__0*
+__all__02"builtins.bytes2"	typing.IO22"importlib.abc.ResourceReader2"builtins.str2"builtins.bool2"typing.Iterator22"typing.BinaryIO2"types.ModuleType222""importlib.resources.Package2	22"os.PathLike2222#"importlib.resources.Resource22"typing.TextIO2"pathlib.Path2	22'"!contextlib.AbstractContextManager22"importlib.abc.Traversable2"builtins.list22"builtins.dict2

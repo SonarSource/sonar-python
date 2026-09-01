@@ -1,378 +1,176 @@
 
-pickletoolsô
-ArgumentDescriptorpickletools.ArgumentDescriptor"builtins.object*∂
-__init__'pickletools.ArgumentDescriptor.__init__"
-None*J
-self@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*&
-name
-builtins.str"builtins.str*#
-n
-builtins.int"builtins.int*ù
-readerê
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pickletools._Reader*%
-doc
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rb
-name#pickletools.ArgumentDescriptor.name
-builtins.str"builtins.str*310*311*312*313*314r\
-n pickletools.ArgumentDescriptor.n
-builtins.int"builtins.int*310*311*312*313*314r€
-reader%pickletools.ArgumentDescriptor.readerê
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pickletools._Reader*310*311*312*313*314r`
-doc"pickletools.ArgumentDescriptor.doc
-builtins.str"builtins.str*310*311*312*313*314Ï
-StackObjectpickletools.StackObject"builtins.object*É
-__init__ pickletools.StackObject.__init__"
-None*<
-self2
-pickletools.StackObject"pickletools.StackObject*&
-name
-builtins.str"builtins.str*§
-obtypeó
-*Union[Type[Any],builtins.tuple[Type[Any]]]
-	Type[Any]
-Any"typeI
-builtins.tuple[Type[Any]]
-	Type[Any]
-Any"type"builtins.tuple*%
-doc
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314r[
-namepickletools.StackObject.name
-builtins.str"builtins.str*310*311*312*313*314r€
-obtypepickletools.StackObject.obtypeó
-*Union[Type[Any],builtins.tuple[Type[Any]]]
-	Type[Any]
-Any"typeI
-builtins.tuple[Type[Any]]
-	Type[Any]
-Any"type"builtins.tuple*310*311*312*313*314rY
-docpickletools.StackObject.doc
-builtins.str"builtins.str*310*311*312*313*314ù
+pickletoolsì
+ArgumentDescriptor"builtins.object*F
+__init__*
 
-OpcodeInfopickletools.OpcodeInfo"builtins.object*≠
-__init__pickletools.OpcodeInfo.__init__"
-None*:
-self0
-pickletools.OpcodeInfo"pickletools.OpcodeInfo*&
-name
-builtins.str"builtins.str*&
-code
-builtins.str"builtins.str*É
-argz
-*Union[pickletools.ArgumentDescriptor,None]@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor
-None*}
-stack_beforek
-&builtins.list[pickletools.StackObject]2
-pickletools.StackObject"pickletools.StackObject"builtins.list*|
-stack_afterk
-&builtins.list[pickletools.StackObject]2
-pickletools.StackObject"pickletools.StackObject"builtins.list*'
-proto
-builtins.int"builtins.int*%
-doc
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rZ
-namepickletools.OpcodeInfo.name
-builtins.str"builtins.str*310*311*312*313*314rZ
-codepickletools.OpcodeInfo.code
-builtins.str"builtins.str*310*311*312*313*314r∂
-argpickletools.OpcodeInfo.argz
-*Union[pickletools.ArgumentDescriptor,None]@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor
-None*310*311*312*313*314rπ
-stack_before#pickletools.OpcodeInfo.stack_beforek
-&builtins.list[pickletools.StackObject]2
-pickletools.StackObject"pickletools.StackObject"builtins.list*310*311*312*313*314r∑
-stack_after"pickletools.OpcodeInfo.stack_afterk
-&builtins.list[pickletools.StackObject]2
-pickletools.StackObject"pickletools.StackObject"builtins.list*310*311*312*313*314r\
-protopickletools.OpcodeInfo.proto
-builtins.int"builtins.int*310*311*312*313*314rX
-docpickletools.OpcodeInfo.doc
-builtins.str"builtins.str*310*311*312*313*314¨
+self(*
 
-read_uint1pickletools.read_uint1"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¨
+name(*
+n(*
+reader(*	
+doc(r
+name0r
+n0r
 
-read_uint2pickletools.read_uint2"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314™
-	read_int4pickletools.read_int4"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¨
+reader0r
+doc0|
+StackObject"builtins.object*=
+__init__*
 
-read_uint4pickletools.read_uint4"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¨
+self(*
 
-read_uint8pickletools.read_uint8"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314›
-read_stringnlpickletools.read_stringnl"f
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*,
-decode
-builtins.bool"builtins.bool *1
-stripquotes
-builtins.bool"builtins.bool z310z311z312z313z314ƒ
-read_stringnl_noescape"pickletools.read_stringnl_noescape"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314Œ
-read_stringnl_noescape_pair'pickletools.read_stringnl_noescape_pair"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314∞
-read_string1pickletools.read_string1"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314∞
-read_string4pickletools.read_string4"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314≤
-read_bytes1pickletools.read_bytes1" 
-builtins.bytes"builtins.bytes*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314≤
-read_bytes4pickletools.read_bytes4" 
-builtins.bytes"builtins.bytes*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314≤
-read_bytes8pickletools.read_bytes8" 
-builtins.bytes"builtins.bytes*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¿
-read_unicodestringnl pickletools.read_unicodestringnl"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314æ
-read_unicodestring1pickletools.read_unicodestring1"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314æ
-read_unicodestring4pickletools.read_unicodestring4"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314æ
-read_unicodestring8pickletools.read_unicodestring8"
-builtins.str"builtins.str*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¿
-read_decimalnl_short pickletools.read_decimalnl_short"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314æ
-read_decimalnl_longpickletools.read_decimalnl_long"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¥
-read_floatnlpickletools.read_floatnl" 
-builtins.float"builtins.float*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314≤
-read_float8pickletools.read_float8" 
-builtins.float"builtins.float*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¨
+name(*
+obtype(*	
+doc(r
+name0r
 
-read_long1pickletools.read_long1"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¨
+obtype0r
+doc0Ì
 
-read_long4pickletools.read_long4"
-builtins.int"builtins.int*O
-fH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314˚
-genopspickletools.genops"◊
-Wtyping.Iterator[Tuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]]Í
-FTuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]0
-pickletools.OpcodeInfo"pickletools.OpcodeInfo&
-Union[Any,None]
-Any
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None"typing.Iterator*È
-pickle‹
-BUnion[builtins.bytes,builtins.bytearray,typing.IO[builtins.bytes]] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¬
-optimizepickletools.optimize" 
-builtins.bytes"builtins.bytes*‰
-p‹
-BUnion[builtins.bytes,builtins.bytearray,typing.IO[builtins.bytes]] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz310z311z312z313z314¡
-dispickletools.dis"
-None*È
-pickle‹
-BUnion[builtins.bytes,builtins.bytearray,typing.IO[builtins.bytes]] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*Ä
-outu
-#Union[typing.IO[builtins.str],None]B
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO
-None *∑
-memo™
-3Union[typing.MutableMapping[builtins.int,Any],None]g
-'typing.MutableMapping[builtins.int,Any]
-builtins.int"builtins.int
-Any"typing.MutableMapping
-None */
-indentlevel
-builtins.int"builtins.int *,
-annotate
-builtins.int"builtins.int z310z311z312z313z314*†
-__annotations__pickletools.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*É
-__all__pickletools.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*ä
-bytes_typespickletools.bytes_typesI
-builtins.tuple[Type[Any]]
-	Type[Any]
-Any"type"builtins.tuple*310*311*312*313*314*a
-UP_TO_NEWLINEpickletools.UP_TO_NEWLINE
-builtins.int"builtins.int*310*311*312*313*314*o
-TAKEN_FROM_ARGUMENT1 pickletools.TAKEN_FROM_ARGUMENT1
-builtins.int"builtins.int*310*311*312*313*314*o
-TAKEN_FROM_ARGUMENT4 pickletools.TAKEN_FROM_ARGUMENT4
-builtins.int"builtins.int*310*311*312*313*314*q
-TAKEN_FROM_ARGUMENT4U!pickletools.TAKEN_FROM_ARGUMENT4U
-builtins.int"builtins.int*310*311*312*313*314*q
-TAKEN_FROM_ARGUMENT8U!pickletools.TAKEN_FROM_ARGUMENT8U
-builtins.int"builtins.int*310*311*312*313*314*u
-uint1pickletools.uint1@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*u
-uint2pickletools.uint2@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*s
-int4pickletools.int4@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*u
-uint4pickletools.uint4@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*u
-uint8pickletools.uint8@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*{
-stringnlpickletools.stringnl@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*ç
-stringnl_noescapepickletools.stringnl_noescape@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*ó
-stringnl_noescape_pair"pickletools.stringnl_noescape_pair@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*y
-string1pickletools.string1@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*y
-string4pickletools.string4@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*w
-bytes1pickletools.bytes1@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*w
-bytes4pickletools.bytes4@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*w
-bytes8pickletools.bytes8@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*â
-unicodestringnlpickletools.unicodestringnl@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*á
-unicodestring1pickletools.unicodestring1@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*á
-unicodestring4pickletools.unicodestring4@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*á
-unicodestring8pickletools.unicodestring8@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*â
-decimalnl_shortpickletools.decimalnl_short@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*á
-decimalnl_longpickletools.decimalnl_long@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*y
-floatnlpickletools.floatnl@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*w
-float8pickletools.float8@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*u
-long1pickletools.long1@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*u
-long4pickletools.long4@
-pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*310*311*312*313*314*g
-pyintpickletools.pyint2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*i
-pylongpickletools.pylong2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*
-pyinteger_or_boolpickletools.pyinteger_or_bool2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*i
-pyboolpickletools.pybool2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*k
-pyfloatpickletools.pyfloat2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*y
-pybytes_or_strpickletools.pybytes_or_str2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*m
-pystringpickletools.pystring2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*k
-pybytespickletools.pybytes2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*o
-	pyunicodepickletools.pyunicode2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*i
-pynonepickletools.pynone2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*k
-pytuplepickletools.pytuple2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*i
-pylistpickletools.pylist2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*i
-pydictpickletools.pydict2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*g
-pysetpickletools.pyset2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*s
-pyfrozensetpickletools.pyfrozenset2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*o
-	anyobjectpickletools.anyobject2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*q
+OpcodeInfo"builtins.object*z
+__init__*
 
-markobjectpickletools.markobject2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*q
+self(*
 
-stackslicepickletools.stackslice2
-pickletools.StackObject"pickletools.StackObject*310*311*312*313*314*°
-opcodespickletools.opcodesh
-%builtins.list[pickletools.OpcodeInfo]0
-pickletools.OpcodeInfo"pickletools.OpcodeInfo"builtins.list*310*311*312*313*314
+name(*
+
+code(*	
+arg(*
+stack_before(*
+stack_after(*
+proto(*	
+doc(r
+name0r
+code0r
+arg0r
+stack_before0r
+stack_after0r	
+proto0r
+doc0
+
+read_uint1*
+f(
+
+read_uint2*
+f(
+	read_int4*
+f(
+
+read_uint4*
+f(
+
+read_uint8*
+f(?
+read_stringnl*
+f(*
+decode (*
+stripquotes (#
+read_stringnl_noescape*
+f((
+read_stringnl_noescape_pair*
+f(
+read_string1*
+f(
+read_string4*
+f(
+read_bytes1*
+f(
+read_bytes4*
+f(
+read_bytes8*
+f(!
+read_unicodestringnl*
+f( 
+read_unicodestring1*
+f( 
+read_unicodestring4*
+f( 
+read_unicodestring8*
+f(!
+read_decimalnl_short*
+f( 
+read_decimalnl_long*
+f(
+read_floatnl*
+f(
+read_float8*
+f(
+
+read_long1*
+f(
+
+read_long4*
+f(
+genops*
+pickle(
+optimize*
+p(W
+dis*
+pickle(*
+out (*
+memo (*
+indentlevel (*
+annotate (*
+__annotations__0*
+__all__0 *
+bytes_types0*
+UP_TO_NEWLINE0*
+TAKEN_FROM_ARGUMENT10*
+TAKEN_FROM_ARGUMENT40*
+TAKEN_FROM_ARGUMENT4U0*
+TAKEN_FROM_ARGUMENT8U0*	
+uint10*	
+uint20*
+int40*	
+uint40*	
+uint80*
+stringnl0*
+stringnl_noescape0*
+stringnl_noescape_pair0*
+string10*
+string40*
+
+bytes10*
+
+bytes40*
+
+bytes80*
+unicodestringnl0*
+unicodestring10*
+unicodestring40*
+unicodestring80*
+decimalnl_short0*
+decimalnl_long0*
+floatnl0*
+
+float80*	
+long10*	
+long40*	
+pyint0*
+
+pylong0*
+pyinteger_or_bool0*
+
+pybool0*
+pyfloat0*
+pybytes_or_str0*
+pystring0*
+pybytes0*
+	pyunicode0*
+
+pynone0*
+pytuple0*
+
+pylist0*
+
+pydict0*	
+pyset0*
+pyfrozenset0*
+	anyobject0*
+
+markobject0*
+
+stackslice0*
+opcodes0!22 "pickletools.ArgumentDescriptor2"builtins.str2"builtins.int2"builtins.function222"pickletools._Reader22"pickletools.StackObject22"type2	2"builtins.tuple2
+22
+2"pickletools.OpcodeInfo222"builtins.list22"builtins.bytes2"	typing.IO2222"builtins.bool2"builtins.float22	22222"typing.Iterator22"builtins.bytearray222"	typing.IO2222"typing.MutableMapping2	222"builtins.dict2	2"builtins.list22"builtins.list2

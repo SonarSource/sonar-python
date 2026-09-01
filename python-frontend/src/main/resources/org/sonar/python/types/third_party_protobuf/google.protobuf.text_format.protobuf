@@ -1,620 +1,308 @@
 
-google.protobuf.text_formatW
-Error!google.protobuf.text_format.Error"builtins.Exceptionj310j311j312j313j314ö
+google.protobuf.text_format
+Error"builtins.Exception¨
 
-ParseError&google.protobuf.text_format.ParseError"!google.protobuf.text_format.Error*µ
-__init__/google.protobuf.text_format.ParseError.__init__"
-None*Z
-selfP
-&google.protobuf.text_format.ParseError"&google.protobuf.text_format.ParseError*S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-lineD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *R
-columnD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*Ù
-GetLine.google.protobuf.text_format.ParseError.GetLine"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*Z
-selfP
-&google.protobuf.text_format.ParseError"&google.protobuf.text_format.ParseErrorz310z311z312z313z314*¯
-	GetColumn0google.protobuf.text_format.ParseError.GetColumn"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*Z
-selfP
-&google.protobuf.text_format.ParseError"&google.protobuf.text_format.ParseErrorz310z311z312z313z314j310j311j312j313j314¬
+ParseError"!google.protobuf.text_format.Error*G
+__init__*
 
-TextWriter&google.protobuf.text_format.TextWriter"builtins.object*Á
-__init__/google.protobuf.text_format.TextWriter.__init__"
-None*Z
-selfP
-&google.protobuf.text_format.TextWriter"&google.protobuf.text_format.TextWriter*+
-as_utf8
-builtins.bool"builtins.boolz310z311z312z313z314*Ô
-write,google.protobuf.text_format.TextWriter.write"
-builtins.int"builtins.int*Z
-selfP
-&google.protobuf.text_format.TextWriter"&google.protobuf.text_format.TextWriter*%
-val
-builtins.str"builtins.strz310z311z312z313z314*Œ
-getvalue/google.protobuf.text_format.TextWriter.getvalue"
-builtins.str"builtins.str*Z
-selfP
-&google.protobuf.text_format.TextWriter"&google.protobuf.text_format.TextWriterz310z311z312z313z314*¥
-close,google.protobuf.text_format.TextWriter.close"
-None*Z
-selfP
-&google.protobuf.text_format.TextWriter"&google.protobuf.text_format.TextWriterz310z311z312z313z314j310j311j312j313j314’$
-_Printer$google.protobuf.text_format._Printer"builtins.object*ç
-__init__-google.protobuf.text_format._Printer.__init__"
-None*V
-selfL
-$google.protobuf.text_format._Printer"$google.protobuf.text_format._Printer*g
-out^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite**
-indent
-builtins.int"builtins.int *-
-as_utf8
-builtins.bool"builtins.bool *1
-as_one_line
-builtins.bool"builtins.bool *C
-use_short_repeated_primitives
-builtins.bool"builtins.bool *5
-pointy_brackets
-builtins.bool"builtins.bool *5
-use_index_order
-builtins.bool"builtins.bool *X
-float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *6
-use_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None *ã
-message_formatterÒ
-6Union[TypeAlias[CallableType[builtins.function]],None]™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter
-None *:
-print_unknown_fields
-builtins.bool"builtins.bool *1
-force_colon
-builtins.bool"builtins.bool z310z311z312z313z314*ç
-PrintMessage1google.protobuf.text_format._Printer.PrintMessage"
-None*V
-selfL
-$google.protobuf.text_format._Printer"$google.protobuf.text_format._Printer*O
-messageB
-google.protobuf.message.Message"google.protobuf.message.Messagez310z311z312z313z314*±
+self(*
+message (*
+line (*
+column (*
+GetLine*
 
-PrintField/google.protobuf.text_format._Printer.PrintField"
-None*V
-selfL
-$google.protobuf.text_format._Printer"$google.protobuf.text_format._Printer*c
-fieldX
-*google.protobuf.descriptor.FieldDescriptor"*google.protobuf.descriptor.FieldDescriptor*
-value
-Anyz310z311z312z313z314*ª
-PrintFieldValue4google.protobuf.text_format._Printer.PrintFieldValue"
-None*V
-selfL
-$google.protobuf.text_format._Printer"$google.protobuf.text_format._Printer*c
-fieldX
-*google.protobuf.descriptor.FieldDescriptor"*google.protobuf.descriptor.FieldDescriptor*
-value
-Anyz310z311z312z313z314j310j311j312j313j314r®
-out(google.protobuf.text_format._Printer.out^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite*310*311*312*313*314rl
-indent+google.protobuf.text_format._Printer.indent
-builtins.int"builtins.int*310*311*312*313*314rp
-as_utf8,google.protobuf.text_format._Printer.as_utf8
-builtins.bool"builtins.bool*310*311*312*313*314rx
-as_one_line0google.protobuf.text_format._Printer.as_one_line
-builtins.bool"builtins.bool*310*311*312*313*314rú
-use_short_repeated_primitivesBgoogle.protobuf.text_format._Printer.use_short_repeated_primitives
-builtins.bool"builtins.bool*310*311*312*313*314rÄ
-pointy_brackets4google.protobuf.text_format._Printer.pointy_brackets
-builtins.bool"builtins.bool*310*311*312*313*314rÄ
-use_index_order4google.protobuf.text_format._Printer.use_index_order
-builtins.bool"builtins.bool*310*311*312*313*314r†
-float_format1google.protobuf.text_format._Printer.float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r¢
-double_format2google.protobuf.text_format._Printer.double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÇ
-use_field_number5google.protobuf.text_format._Printer.use_field_number
-builtins.bool"builtins.bool*310*311*312*313*314rç
-descriptor_pool4google.protobuf.text_format._Printer.descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None*310*311*312*313*314rÿ
-message_formatter6google.protobuf.text_format._Printer.message_formatterÒ
-6Union[TypeAlias[CallableType[builtins.function]],None]™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter
-None*310*311*312*313*314rä
-print_unknown_fields9google.protobuf.text_format._Printer.print_unknown_fields
-builtins.bool"builtins.bool*310*311*312*313*314rx
-force_colon0google.protobuf.text_format._Printer.force_colon
-builtins.bool"builtins.bool*310*311*312*313*314“
-_Parser#google.protobuf.text_format._Parser"builtins.object*™
-__init__,google.protobuf.text_format._Parser.__init__"
-None*T
-selfJ
-#google.protobuf.text_format._Parser"#google.protobuf.text_format._Parser*=
-allow_unknown_extension
-builtins.bool"builtins.bool *8
-allow_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None *9
-allow_unknown_field
-builtins.bool"builtins.bool z310z311z312z313z314*ä
+self(*
+	GetColumn*
 
-ParseLines.google.protobuf.text_format._Parser.ParseLines"á
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*T
-selfJ
-#google.protobuf.text_format._Parser"#google.protobuf.text_format._Parser*∫
-linesÆ
-3typing.Iterable[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"typing.Iterable*ï
-messageá
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Messagez310z311z312z313z314*ä
+self(ô
 
-MergeLines.google.protobuf.text_format._Parser.MergeLines"á
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*T
-selfJ
-#google.protobuf.text_format._Parser"#google.protobuf.text_format._Parser*∫
-linesÆ
-3typing.Iterable[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"typing.Iterable*ï
-messageá
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Messagez310z311z312z313z314j310j311j312j313j314rè
-allow_unknown_extension;google.protobuf.text_format._Parser.allow_unknown_extension
-builtins.bool"builtins.bool*310*311*312*313*314rÖ
-allow_field_number6google.protobuf.text_format._Parser.allow_field_number
-builtins.bool"builtins.bool*310*311*312*313*314rå
-descriptor_pool3google.protobuf.text_format._Parser.descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None*310*311*312*313*314rá
-allow_unknown_field7google.protobuf.text_format._Parser.allow_unknown_field
-builtins.bool"builtins.bool*310*311*312*313*314Æ.
-	Tokenizer%google.protobuf.text_format.Tokenizer"builtins.object*«
-__init__.google.protobuf.text_format.Tokenizer.__init__"
-None*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*Y
-linesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*3
-skip_comments
-builtins.bool"builtins.bool z310z311z312z313z314*¯
-	LookingAt/google.protobuf.text_format.Tokenizer.LookingAt"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*'
-token
-builtins.str"builtins.strz310z311z312z313z314*«
-AtEnd+google.protobuf.text_format.Tokenizer.AtEnd"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*˙
+TextWriter"builtins.object*'
+__init__*
 
-TryConsume0google.protobuf.text_format.Tokenizer.TryConsume"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*'
-token
-builtins.str"builtins.strz310z311z312z313z314*ﬁ
-Consume-google.protobuf.text_format.Tokenizer.Consume"
-None*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*'
-token
-builtins.str"builtins.strz310z311z312z313z314*◊
-ConsumeComment4google.protobuf.text_format.Tokenizer.ConsumeComment"
-builtins.str"builtins.str*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*¿
-ConsumeCommentOrTrailingCommentEgoogle.protobuf.text_format.Tokenizer.ConsumeCommentOrTrailingComment"c
-!Tuple[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.str*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*Â
-TryConsumeIdentifier:google.protobuf.text_format.Tokenizer.TryConsumeIdentifier"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*›
-ConsumeIdentifier7google.protobuf.text_format.Tokenizer.ConsumeIdentifier"
-builtins.str"builtins.str*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*ı
-TryConsumeIdentifierOrNumberBgoogle.protobuf.text_format.Tokenizer.TryConsumeIdentifierOrNumber"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*Ì
-ConsumeIdentifierOrNumber?google.protobuf.text_format.Tokenizer.ConsumeIdentifierOrNumber"
-builtins.str"builtins.str*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*ﬂ
-TryConsumeInteger7google.protobuf.text_format.Tokenizer.TryConsumeInteger"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*◊
-ConsumeInteger4google.protobuf.text_format.Tokenizer.ConsumeInteger"
-builtins.int"builtins.int*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*€
-TryConsumeFloat5google.protobuf.text_format.Tokenizer.TryConsumeFloat"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*◊
-ConsumeFloat2google.protobuf.text_format.Tokenizer.ConsumeFloat" 
-builtins.float"builtins.float*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*”
-ConsumeBool1google.protobuf.text_format.Tokenizer.ConsumeBool"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*Â
-TryConsumeByteString:google.protobuf.text_format.Tokenizer.TryConsumeByteString"
-builtins.bool"builtins.bool*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*’
-ConsumeString3google.protobuf.text_format.Tokenizer.ConsumeString"
-builtins.str"builtins.str*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*·
-ConsumeByteString7google.protobuf.text_format.Tokenizer.ConsumeByteString" 
-builtins.bytes"builtins.bytes*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314*∂
-ConsumeEnum1google.protobuf.text_format.Tokenizer.ConsumeEnum"
-builtins.int"builtins.int*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*c
-fieldX
-*google.protobuf.descriptor.FieldDescriptor"*google.protobuf.descriptor.FieldDescriptorz310z311z312z313z314*Ó
-ParseErrorPreviousToken=google.protobuf.text_format.Tokenizer.ParseErrorPreviousToken"P
-&google.protobuf.text_format.ParseError"&google.protobuf.text_format.ParseError*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*O
-messageB
-google.protobuf.message.Message"google.protobuf.message.Messagez310z311z312z313z314*‘
+self(*
+as_utf8(* 
+write*
 
-ParseError0google.protobuf.text_format.Tokenizer.ParseError"P
-&google.protobuf.text_format.ParseError"&google.protobuf.text_format.ParseError*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizer*O
-messageB
-google.protobuf.message.Message"google.protobuf.message.Messagez310z311z312z313z314*π
-	NextToken/google.protobuf.text_format.Tokenizer.NextToken"
-None*X
-selfN
-%google.protobuf.text_format.Tokenizer"%google.protobuf.text_format.Tokenizerz310z311z312z313z314j310j311j312j313j314rk
-token+google.protobuf.text_format.Tokenizer.token
-builtins.str"builtins.str*310*311*312*313*314∂
+self(*	
+val(*
+getvalue*
 
-MessageToString+google.protobuf.text_format.MessageToString"
-builtins.str"builtins.str*O
-messageB
-google.protobuf.message.Message"google.protobuf.message.Message*-
-as_utf8
-builtins.bool"builtins.bool *1
-as_one_line
-builtins.bool"builtins.bool *C
-use_short_repeated_primitives
-builtins.bool"builtins.bool *5
-pointy_brackets
-builtins.bool"builtins.bool *5
-use_index_order
-builtins.bool"builtins.bool *X
-float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *6
-use_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None **
-indent
-builtins.int"builtins.int *ã
-message_formatterÒ
-6Union[TypeAlias[CallableType[builtins.function]],None]™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter
-None *:
-print_unknown_fields
-builtins.bool"builtins.bool *1
-force_colon
-builtins.bool"builtins.bool z310z311z312z313z314Ò	
-MessageToBytes*google.protobuf.text_format.MessageToBytes" 
-builtins.bytes"builtins.bytes*O
-messageB
-google.protobuf.message.Message"google.protobuf.message.Message*-
-as_utf8
-builtins.bool"builtins.bool *1
-as_one_line
-builtins.bool"builtins.bool *C
-use_short_repeated_primitives
-builtins.bool"builtins.bool *5
-pointy_brackets
-builtins.bool"builtins.bool *5
-use_index_order
-builtins.bool"builtins.bool *X
-float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *6
-use_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None **
-indent
-builtins.int"builtins.int *ƒ
-message_formatter™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter *:
-print_unknown_fields
-builtins.bool"builtins.bool *1
-force_colon
-builtins.bool"builtins.bool z310z311z312z313z314Ö
-PrintMessage(google.protobuf.text_format.PrintMessage"
-None*O
-messageB
-google.protobuf.message.Message"google.protobuf.message.Message*g
-out^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite**
-indent
-builtins.int"builtins.int *-
-as_utf8
-builtins.bool"builtins.bool *1
-as_one_line
-builtins.bool"builtins.bool *C
-use_short_repeated_primitives
-builtins.bool"builtins.bool *5
-pointy_brackets
-builtins.bool"builtins.bool *5
-use_index_order
-builtins.bool"builtins.bool *X
-float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *6
-use_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None *ã
-message_formatterÒ
-6Union[TypeAlias[CallableType[builtins.function]],None]™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter
-None *:
-print_unknown_fields
-builtins.bool"builtins.bool *1
-force_colon
-builtins.bool"builtins.bool z310z311z312z313z314¨	
+self(*
+close*
 
-PrintField&google.protobuf.text_format.PrintField"
-None*c
-fieldX
-*google.protobuf.descriptor.FieldDescriptor"*google.protobuf.descriptor.FieldDescriptor*
-value
-Any*g
-out^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite**
-indent
-builtins.int"builtins.int *-
-as_utf8
-builtins.bool"builtins.bool *1
-as_one_line
-builtins.bool"builtins.bool *C
-use_short_repeated_primitives
-builtins.bool"builtins.bool *5
-pointy_brackets
-builtins.bool"builtins.bool *5
-use_index_order
-builtins.bool"builtins.bool *X
-float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ã
-message_formatterÒ
-6Union[TypeAlias[CallableType[builtins.function]],None]™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter
-None *:
-print_unknown_fields
-builtins.bool"builtins.bool *1
-force_colon
-builtins.bool"builtins.bool z310z311z312z313z314∂	
-PrintFieldValue+google.protobuf.text_format.PrintFieldValue"
-None*c
-fieldX
-*google.protobuf.descriptor.FieldDescriptor"*google.protobuf.descriptor.FieldDescriptor*
-value
-Any*g
-out^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite**
-indent
-builtins.int"builtins.int *-
-as_utf8
-builtins.bool"builtins.bool *1
-as_one_line
-builtins.bool"builtins.bool *C
-use_short_repeated_primitives
-builtins.bool"builtins.bool *5
-pointy_brackets
-builtins.bool"builtins.bool *5
-use_index_order
-builtins.bool"builtins.bool *X
-float_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-double_formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ã
-message_formatterÒ
-6Union[TypeAlias[CallableType[builtins.function]],None]™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"-google.protobuf.text_format._MessageFormatter
-None *:
-print_unknown_fields
-builtins.bool"builtins.bool *1
-force_colon
-builtins.bool"builtins.bool z310z311z312z313z314–
-Parse!google.protobuf.text_format.Parse"á
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*p
-textf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*ï
-messageá
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*=
-allow_unknown_extension
-builtins.bool"builtins.bool *8
-allow_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None *9
-allow_unknown_field
-builtins.bool"builtins.bool z310z311z312z313z314–
-Merge!google.protobuf.text_format.Merge"á
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*p
-textf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*ï
-messageá
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*=
-allow_unknown_extension
-builtins.bool"builtins.bool *8
-allow_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None *9
-allow_unknown_field
-builtins.bool"builtins.bool z310z311z312z313z314•
+self(Æ
+_Printer"builtins.object*‡
+__init__*
 
-MergeLines&google.protobuf.text_format.MergeLines"á
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*∫
-linesÆ
-3typing.Iterable[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"typing.Iterable*ï
-messageá
-google.protobuf.text_format._MB
-google.protobuf.message.Message"google.protobuf.message.Message"google.protobuf.message.Message*=
-allow_unknown_extension
-builtins.bool"builtins.bool *8
-allow_field_number
-builtins.bool"builtins.bool *¬
-descriptor_pool™
-:Union[google.protobuf.descriptor_pool.DescriptorPool,None]`
-.google.protobuf.descriptor_pool.DescriptorPool".google.protobuf.descriptor_pool.DescriptorPool
-None *9
-allow_unknown_field
-builtins.bool"builtins.bool z310z311z312z313z314˜
-ParseInteger(google.protobuf.text_format.ParseInteger"
-builtins.int"builtins.int*&
-text
-builtins.str"builtins.str*/
-	is_signed
-builtins.bool"builtins.bool *-
-is_long
-builtins.bool"builtins.bool z310z311z312z313z314ó
+self(	*	
+out(
+*
+indent (*
+as_utf8 (*
+as_one_line (*%
+use_short_repeated_primitives (*
+pointy_brackets (*
+use_index_order (*
+float_format (*
+double_format (*
+use_field_number (*
+descriptor_pool (*
+message_formatter (*
+print_unknown_fields (*
+force_colon (*+
+PrintMessage*
 
-ParseFloat&google.protobuf.text_format.ParseFloat" 
-builtins.float"builtins.float*&
-text
-builtins.str"builtins.strz310z311z312z313z314ì
-	ParseBool%google.protobuf.text_format.ParseBool"
-builtins.bool"builtins.bool*&
-text
-builtins.str"builtins.strz310z311z312z313z314˜
-	ParseEnum%google.protobuf.text_format.ParseEnum"
-builtins.int"builtins.int*c
-fieldX
-*google.protobuf.descriptor.FieldDescriptor"*google.protobuf.descriptor.FieldDescriptor*'
-value
-builtins.str"builtins.strz310z311z312z313z314*∞
-__annotations__+google.protobuf.text_format.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(	*
+message(*4
+
+PrintField*
+
+self(	*
+field(*
+value(*9
+PrintFieldValue*
+
+self(	*
+field(*
+value(r
+out0
+r
+
+indent0r
+as_utf80r
+as_one_line0r!
+use_short_repeated_primitives0r
+pointy_brackets0r
+use_index_order0r
+float_format0r
+double_format0r
+use_field_number0r
+descriptor_pool0r
+message_formatter0r
+print_unknown_fields0r
+force_colon0˚
+_Parser"builtins.object*ã
+__init__*
+
+self(*
+allow_unknown_extension (*
+allow_field_number (*
+descriptor_pool (*
+allow_unknown_field (*6
+
+ParseLines*
+
+self(*
+lines(*
+message(*6
+
+MergeLines*
+
+self(*
+lines(*
+message(r
+allow_unknown_extension0r
+allow_field_number0r
+descriptor_pool0r
+allow_unknown_field0ï
+	Tokenizer"builtins.object*<
+__init__*
+
+self(*
+lines(*
+skip_comments (*&
+	LookingAt*
+
+self(*
+token(*
+AtEnd*
+
+self(*'
+
+TryConsume*
+
+self(*
+token(*$
+Consume*
+
+self(*
+token(*
+ConsumeComment*
+
+self(*/
+ConsumeCommentOrTrailingComment*
+
+self(*$
+TryConsumeIdentifier*
+
+self(*!
+ConsumeIdentifier*
+
+self(*,
+TryConsumeIdentifierOrNumber*
+
+self(*)
+ConsumeIdentifierOrNumber*
+
+self(*!
+TryConsumeInteger*
+
+self(*
+ConsumeInteger*
+
+self(*
+TryConsumeFloat*
+
+self(*
+ConsumeFloat*
+
+self(*
+ConsumeBool*
+
+self(*$
+TryConsumeByteString*
+
+self(*
+ConsumeString*
+
+self(*!
+ConsumeByteString*
+
+self(*(
+ConsumeEnum*
+
+self(*
+field(*6
+ParseErrorPreviousToken*
+
+self(*
+message(*)
+
+ParseError*
+
+self(*
+message(*
+	NextToken*
+
+self(r	
+token0ﬂ
+MessageToString*
+message(*
+as_utf8 (*
+as_one_line (*%
+use_short_repeated_primitives (*
+pointy_brackets (*
+use_index_order (*
+float_format (*
+double_format (*
+use_field_number (*
+descriptor_pool (*
+indent (*
+message_formatter (*
+print_unknown_fields (*
+force_colon (ﬁ
+MessageToBytes*
+message(*
+as_utf8 (*
+as_one_line (*%
+use_short_repeated_primitives (*
+pointy_brackets (*
+use_index_order (*
+float_format (*
+double_format (*
+use_field_number (*
+descriptor_pool (*
+indent (*
+message_formatter (*
+print_unknown_fields (*
+force_colon (Á
+PrintMessage*
+message(*	
+out(
+*
+indent (*
+as_utf8 (*
+as_one_line (*%
+use_short_repeated_primitives (*
+pointy_brackets (*
+use_index_order (*
+float_format (*
+double_format (*
+use_field_number (*
+descriptor_pool (*
+message_formatter (*
+print_unknown_fields (*
+force_colon (Ω
+
+PrintField*
+field(*
+value(*	
+out(
+*
+indent (*
+as_utf8 (*
+as_one_line (*%
+use_short_repeated_primitives (*
+pointy_brackets (*
+use_index_order (*
+float_format (*
+double_format (*
+message_formatter (*
+print_unknown_fields (*
+force_colon (¬
+PrintFieldValue*
+field(*
+value(*	
+out(
+*
+indent (*
+as_utf8 (*
+as_one_line (*%
+use_short_repeated_primitives (*
+pointy_brackets (*
+use_index_order (*
+float_format (*
+double_format (*
+message_formatter (*
+print_unknown_fields (*
+force_colon (ó
+Parse*
+
+text(*
+message(*
+allow_unknown_extension (*
+allow_field_number (*
+descriptor_pool (*
+allow_unknown_field (ó
+Merge*
+
+text(*
+message(*
+allow_unknown_extension (*
+allow_field_number (*
+descriptor_pool (*
+allow_unknown_field (ù
+
+MergeLines*
+lines(*
+message(*
+allow_unknown_extension (*
+allow_field_number (*
+descriptor_pool (*
+allow_unknown_field (@
+ParseInteger*
+
+text(*
+	is_signed (*
+is_long (
+
+ParseFloat*
+
+text(
+	ParseBool*
+
+text('
+	ParseEnum*
+field(*
+value(*
+__annotations__022("&google.protobuf.text_format.ParseError2"builtins.str222"builtins.int222("&google.protobuf.text_format.TextWriter2"builtins.bool2&"$google.protobuf.text_format._Printer2"_typeshed.SupportsWrite220".google.protobuf.descriptor_pool.DescriptorPool222"builtins.function2224"-google.protobuf.text_format._MessageFormatter2222!"google.protobuf.message.Message2,"*google.protobuf.descriptor.FieldDescriptor22%"#google.protobuf.text_format._Parser2&"google.protobuf.message.Message22"builtins.bytes222"typing.Iterable22'"%google.protobuf.text_format.Tokenizer2"typing.Iterable2222"builtins.float2"builtins.dict2

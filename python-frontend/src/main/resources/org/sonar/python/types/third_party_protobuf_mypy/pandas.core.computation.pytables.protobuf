@@ -1,438 +1,334 @@
 
- pandas.core.computation.pytables» 
-BaseExprVisitor,pandas.core.computation.expr.BaseExprVisitor"ast.NodeVisitor*â
-__init__5pandas.core.computation.expr.BaseExprVisitor.__init__"
-None*f
-self\
-,pandas.core.computation.expr.BaseExprVisitor",pandas.core.computation.expr.BaseExprVisitor*
-env
-Any*
-engine
-Any*
-parser
-Any*
-	preparser
-Any *[
-visit2pandas.core.computation.expr.BaseExprVisitor.visit*
+ pandas.core.computation.pytablesÓ
+
+BaseExprVisitor,pandas.core.computation.expr.BaseExprVisitor"ast.NodeVisitor*R
+__init__*
+
+self(*	
+env(*
+engine(*
+parser(*
+	preparser (*'
+visit*
 self*
 node*
 
-kwargs*i
-visit_Module9pandas.core.computation.expr.BaseExprVisitor.visit_Module*
+kwargs*.
+visit_Module*
 self*
 node*
 
-kwargs*e
+kwargs*,
 
-visit_Expr7pandas.core.computation.expr.BaseExprVisitor.visit_Expr*
+visit_Expr*
 self*
 node*
 
-kwargs*g
-visit_BinOp8pandas.core.computation.expr.BaseExprVisitor.visit_BinOp*
+kwargs*-
+visit_BinOp*
 self*
 node*
 
-kwargs*c
-	visit_Div6pandas.core.computation.expr.BaseExprVisitor.visit_Div*
+kwargs*+
+	visit_Div*
 self*
 node*
 
-kwargs*k
-visit_UnaryOp:pandas.core.computation.expr.BaseExprVisitor.visit_UnaryOp*
+kwargs*/
+visit_UnaryOp*
 self*
 node*
 
-kwargs*e
+kwargs*,
 
-visit_Name7pandas.core.computation.expr.BaseExprVisitor.visit_Name*
+visit_Name*
 self*
 node*
 
-kwargs*u
-visit_NameConstant?pandas.core.computation.expr.BaseExprVisitor.visit_NameConstant*
+kwargs*4
+visit_NameConstant*
 self*
 node*
 
-kwargs*c
-	visit_Num6pandas.core.computation.expr.BaseExprVisitor.visit_Num*
+kwargs*+
+	visit_Num*
 self*
 node*
 
-kwargs*m
-visit_Constant;pandas.core.computation.expr.BaseExprVisitor.visit_Constant*
+kwargs*0
+visit_Constant*
 self*
 node*
 
-kwargs*c
-	visit_Str6pandas.core.computation.expr.BaseExprVisitor.visit_Str*
+kwargs*+
+	visit_Str*
 self*
 node*
 
-kwargs*e
+kwargs*,
 
-visit_List7pandas.core.computation.expr.BaseExprVisitor.visit_List*
+visit_List*
 self*
 node*
 
-kwargs*g
-visit_Index8pandas.core.computation.expr.BaseExprVisitor.visit_Index*
+kwargs*-
+visit_Index*
 self*
 node*
 
-kwargs*o
-visit_Subscript<pandas.core.computation.expr.BaseExprVisitor.visit_Subscript*
+kwargs*1
+visit_Subscript*
 self*
 node*
 
-kwargs*g
-visit_Slice8pandas.core.computation.expr.BaseExprVisitor.visit_Slice*
+kwargs*-
+visit_Slice*
 self*
 node*
 
-kwargs*i
-visit_Assign9pandas.core.computation.expr.BaseExprVisitor.visit_Assign*
+kwargs*.
+visit_Assign*
 self*
 node*
 
-kwargs*o
-visit_Attribute<pandas.core.computation.expr.BaseExprVisitor.visit_Attribute*
+kwargs*1
+visit_Attribute*
 self*
 node*
 
-kwargs*q
+kwargs*8
 
-visit_Call7pandas.core.computation.expr.BaseExprVisitor.visit_Call*
+visit_Call*
 self*
 node*
 
 side *
 
-kwargs*[
-translate_In9pandas.core.computation.expr.BaseExprVisitor.translate_In*
+kwargs* 
+translate_In*
 self*
-op*k
-visit_Compare:pandas.core.computation.expr.BaseExprVisitor.visit_Compare*
+op*/
+visit_Compare*
 self*
 node*
 
-kwargs*i
-visit_BoolOp9pandas.core.computation.expr.BaseExprVisitor.visit_BoolOp*
+kwargs*.
+visit_BoolOp*
 self*
 node*
 
-kwargsro
+kwargsr
 
-const_type7pandas.core.computation.expr.BaseExprVisitor.const_type(
-types.EllipsisType"types.EllipsisTyperm
-	term_type6pandas.core.computation.expr.BaseExprVisitor.term_type(
-types.EllipsisType"types.EllipsisTypero
+const_type0r
+	term_type0r
 
-binary_ops7pandas.core.computation.expr.BaseExprVisitor.binary_ops(
-types.EllipsisType"types.EllipsisTypery
-binary_op_nodes<pandas.core.computation.expr.BaseExprVisitor.binary_op_nodes(
-types.EllipsisType"types.EllipsisTyperÅ
-binary_op_nodes_map@pandas.core.computation.expr.BaseExprVisitor.binary_op_nodes_map(
-types.EllipsisType"types.EllipsisTyperm
-	unary_ops6pandas.core.computation.expr.BaseExprVisitor.unary_ops(
-types.EllipsisType"types.EllipsisTyperw
-unary_op_nodes;pandas.core.computation.expr.BaseExprVisitor.unary_op_nodes(
-types.EllipsisType"types.EllipsisTyper
-unary_op_nodes_map?pandas.core.computation.expr.BaseExprVisitor.unary_op_nodes_map(
-types.EllipsisType"types.EllipsisTyperq
-rewrite_map8pandas.core.computation.expr.BaseExprVisitor.rewrite_map(
-types.EllipsisType"types.EllipsisTypera
-env0pandas.core.computation.expr.BaseExprVisitor.env(
-types.EllipsisType"types.EllipsisTyperg
-engine3pandas.core.computation.expr.BaseExprVisitor.engine(
-types.EllipsisType"types.EllipsisTyperg
-parser3pandas.core.computation.expr.BaseExprVisitor.parser(
-types.EllipsisType"types.EllipsisTyperm
-	preparser6pandas.core.computation.expr.BaseExprVisitor.preparser(
-types.EllipsisType"types.EllipsisTyperk
-assigner5pandas.core.computation.expr.BaseExprVisitor.assigner(
-types.EllipsisType"types.EllipsisTypeÀ
-PyTablesScope.pandas.core.computation.pytables.PyTablesScope"#pandas.core.computation.scope.Scope*¡
-__init__7pandas.core.computation.pytables.PyTablesScope.__init__"
-None*j
-self`
-.pandas.core.computation.pytables.PyTablesScope".pandas.core.computation.pytables.PyTablesScope*'
-level
-builtins.int"builtins.int*
-global_dict
-Any *
+binary_ops0r
+binary_op_nodes0r
+binary_op_nodes_map0r
+	unary_ops0r
+unary_op_nodes0r
+unary_op_nodes_map0r
+rewrite_map0r
+env0r
 
-local_dict
-Any *•
+engine0r
 
-queryablesí
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None r†
+parser0r
+	preparser0r
+assigner0®
+PyTablesScope"#pandas.core.computation.scope.Scope*b
+__init__*
 
-queryables9pandas.core.computation.pytables.PyTablesScope.queryablesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict∫
-Term%pandas.core.computation.pytables.Term" pandas.core.computation.ops.Term*r
-__new__-pandas.core.computation.pytables.Term.__new__*
+self(*
+level(*
+global_dict (*
+
+local_dict (*
+
+queryables (	r
+
+queryables0Ø
+Term" pandas.core.computation.ops.Term*C
+__new__*
 cls*
 name*
 env*
 
 side *
-encoding h* 
-__init__.pandas.core.computation.pytables.Term.__init__"
-None*X
-selfN
-%pandas.core.computation.pytables.Term"%pandas.core.computation.pytables.Term*
-name
-Any*i
-env`
-.pandas.core.computation.pytables.PyTablesScope".pandas.core.computation.pytables.PyTablesScope*
-side
-Any *
-encoding
-Any 2À
-value+pandas.core.computation.pytables.Term.valueW
-value+pandas.core.computation.pytables.Term.value*
-self0:builtins.propertyX`ª
-value+pandas.core.computation.pytables.Term.value"
-None*X
-selfN
-%pandas.core.computation.pytables.Term"%pandas.core.computation.pytables.Term*
-	new_value
-Any0:.setterrZ
-env)pandas.core.computation.pytables.Term.env(
-types.EllipsisType"types.EllipsisTypeµ
-Constant)pandas.core.computation.pytables.Constant"%pandas.core.computation.pytables.Term*÷
-__init__2pandas.core.computation.pytables.Constant.__init__"
-None*`
-selfV
-)pandas.core.computation.pytables.Constant")pandas.core.computation.pytables.Constant*
-name
-Any*i
-env`
-.pandas.core.computation.pytables.PyTablesScope".pandas.core.computation.pytables.PyTablesScope*
-side
-Any *
-encoding
-Any Ã
-BinOp&pandas.core.computation.pytables.BinOp"!pandas.core.computation.ops.BinOp*Î
-__init__/pandas.core.computation.pytables.BinOp.__init__"
-None*Z
-selfP
-&pandas.core.computation.pytables.BinOp"&pandas.core.computation.pytables.BinOp*$
-op
-builtins.str"builtins.str*
-lhs
-Any*
-rhs
-Any*g
+encoding h*O
+__init__*
 
-queryablesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-encoding
-Any*J
-prune,pandas.core.computation.pytables.BinOp.prune*
+self(
+*
+
+name(*	
+env(*
+side (*
+encoding (2f
+value*
+value*
+self0:builtins.propertyX`1
+value*
+
+self(
+*
+	new_value(0:.setterr
+env0Ç
+Constant"%pandas.core.computation.pytables.Term*O
+__init__*
+
+self(*
+
+name(*	
+env(*
+side (*
+encoding (∆
+BinOp"!pandas.core.computation.ops.BinOp*Z
+__init__*
+
+self(*
+op(*	
+lhs(*	
+rhs(*
+
+queryables(*
+encoding(*
+prune*
 self*	
-klass*L
-conform.pandas.core.computation.pytables.BinOp.conform*
+klass*
+conform*
 self*
-rhs*Œ
-is_valid/pandas.core.computation.pytables.BinOp.is_valid"
-builtins.bool"builtins.bool*Z
-selfP
-&pandas.core.computation.pytables.BinOp"&pandas.core.computation.pytables.BinOp0:builtins.property`*‘
-is_in_table2pandas.core.computation.pytables.BinOp.is_in_table"
-builtins.bool"builtins.bool*Z
-selfP
-&pandas.core.computation.pytables.BinOp"&pandas.core.computation.pytables.BinOp0:builtins.property`*T
-kind+pandas.core.computation.pytables.BinOp.kind*
-self0:builtins.property`*T
-meta+pandas.core.computation.pytables.BinOp.meta*
-self0:builtins.property`*\
-metadata/pandas.core.computation.pytables.BinOp.metadata*
-self0:builtins.property`*≈
-generate/pandas.core.computation.pytables.BinOp.generate"
-builtins.str"builtins.str*Z
-selfP
-&pandas.core.computation.pytables.BinOp"&pandas.core.computation.pytables.BinOp*
-v
-Any*ã
-convert_value4pandas.core.computation.pytables.BinOp.convert_value"X
-*pandas.core.computation.pytables.TermValue"*pandas.core.computation.pytables.TermValue*Z
-selfP
-&pandas.core.computation.pytables.BinOp"&pandas.core.computation.pytables.BinOp*
-v
-Any*≠
-convert_values5pandas.core.computation.pytables.BinOp.convert_values"
-None*Z
-selfP
-&pandas.core.computation.pytables.BinOp"&pandas.core.computation.pytables.BinOprM
-op)pandas.core.computation.pytables.BinOp.op
-builtins.str"builtins.strrò
+rhs*/
+is_valid*
 
-queryables1pandas.core.computation.pytables.BinOp.queryablesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictre
-encoding/pandas.core.computation.pytables.BinOp.encoding(
-types.EllipsisType"types.EllipsisTyperg
-	condition0pandas.core.computation.pytables.BinOp.condition(
-types.EllipsisType"types.EllipsisTypeñ
-FilterBinOp,pandas.core.computation.pytables.FilterBinOp"&pandas.core.computation.pytables.BinOp*G
-invert3pandas.core.computation.pytables.FilterBinOp.invert*
-self*G
-format3pandas.core.computation.pytables.FilterBinOp.format*
-self*Ù
-generate_filter_op?pandas.core.computation.pytables.FilterBinOp.generate_filter_op"
-Any*f
-self\
-,pandas.core.computation.pytables.FilterBinOp",pandas.core.computation.pytables.FilterBinOp*,
-invert
-builtins.bool"builtins.bool rß
-filter3pandas.core.computation.pytables.FilterBinOp.filterÁ
->Union[Tuple[Any,Any,pandas.core.indexes.base.Index[Any]],None]ò
-2Tuple[Any,Any,pandas.core.indexes.base.Index[Any]]
-Any
-AnyN
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Index
-None¥
-JointFilterBinOp1pandas.core.computation.pytables.JointFilterBinOp",pandas.core.computation.pytables.FilterBinOp*æ
-format8pandas.core.computation.pytables.JointFilterBinOp.format"
-None*p
-selff
-1pandas.core.computation.pytables.JointFilterBinOp"1pandas.core.computation.pytables.JointFilterBinOp‚
-ConditionBinOp/pandas.core.computation.pytables.ConditionBinOp"&pandas.core.computation.pytables.BinOp*∏
-invert6pandas.core.computation.pytables.ConditionBinOp.invert"
-None*l
-selfb
-/pandas.core.computation.pytables.ConditionBinOp"/pandas.core.computation.pytables.ConditionBinOp*J
-format6pandas.core.computation.pytables.ConditionBinOp.format*
-selfrp
-	condition9pandas.core.computation.pytables.ConditionBinOp.condition(
-types.EllipsisType"types.EllipsisTypeÛ
-JointConditionBinOp4pandas.core.computation.pytables.JointConditionBinOp"/pandas.core.computation.pytables.ConditionBinOpru
-	condition>pandas.core.computation.pytables.JointConditionBinOp.condition(
-types.EllipsisType"types.EllipsisType¶
-UnaryOp(pandas.core.computation.pytables.UnaryOp"#pandas.core.computation.ops.UnaryOp*L
-prune.pandas.core.computation.pytables.UnaryOp.prune*
+self(0:builtins.property`*2
+is_in_table*
+
+self(0:builtins.property`*'
+kind*
+self0:builtins.property`*'
+meta*
+self0:builtins.property`*+
+metadata*
+self0:builtins.property`*!
+generate*
+
+self(*
+v(*&
+convert_value*
+
+self(*
+v(*
+convert_values*
+
+self(r
+op0r
+
+queryables0r
+encoding0r
+	condition0ù
+FilterBinOp"&pandas.core.computation.pytables.BinOp*
+invert*
+self*
+format*
+self*2
+generate_filter_op*
+
+self(*
+invert (r
+
+filter0X
+JointFilterBinOp",pandas.core.computation.pytables.FilterBinOp*
+format*
+
+self(s
+ConditionBinOp"&pandas.core.computation.pytables.BinOp*
+invert*
+
+self(*
+format*
+selfr
+	condition0U
+JointConditionBinOp"/pandas.core.computation.pytables.ConditionBinOpr
+	condition0L
+UnaryOp"#pandas.core.computation.ops.UnaryOp*
+prune*
 self*	
-klass∏
+klass…
+PyTablesExprVisitor",pandas.core.computation.expr.BaseExprVisitor*M
+__init__*
 
-PyTablesExprVisitor4pandas.core.computation.pytables.PyTablesExprVisitor",pandas.core.computation.expr.BaseExprVisitor*ú
-__init__=pandas.core.computation.pytables.PyTablesExprVisitor.__init__"
-None*v
-selfl
-4pandas.core.computation.pytables.PyTablesExprVisitor"4pandas.core.computation.pytables.PyTablesExprVisitor*
-env
-Any*
-engine
-Any*
-parser
-Any*
-kwargs
-Any*s
-visit_UnaryOpBpandas.core.computation.pytables.PyTablesExprVisitor.visit_UnaryOp*
+self(*	
+env(*
+engine(*
+parser(*
+kwargs(*/
+visit_UnaryOp*
 self*
 node*
 
-kwargs*o
-visit_Index@pandas.core.computation.pytables.PyTablesExprVisitor.visit_Index*
+kwargs*-
+visit_Index*
 self*
 node*
 
-kwargs*q
-visit_AssignApandas.core.computation.pytables.PyTablesExprVisitor.visit_Assign*
+kwargs*.
+visit_Assign*
 self*
 node*
 
-kwargs*w
-visit_SubscriptDpandas.core.computation.pytables.PyTablesExprVisitor.visit_Subscript*
+kwargs*1
+visit_Subscript*
 self*
 node*
 
-kwargs*w
-visit_AttributeDpandas.core.computation.pytables.PyTablesExprVisitor.visit_Attribute*
+kwargs*1
+visit_Attribute*
 self*
 node*
 
-kwargs*c
-translate_InApandas.core.computation.pytables.PyTablesExprVisitor.translate_In*
+kwargs* 
+translate_In*
 self*
-oprw
+opr
 
-const_type?pandas.core.computation.pytables.PyTablesExprVisitor.const_type(
-types.EllipsisType"types.EllipsisTyperu
-	term_type>pandas.core.computation.pytables.PyTablesExprVisitor.term_type(
-types.EllipsisType"types.EllipsisTypeÉ	
-PyTablesExpr-pandas.core.computation.pytables.PyTablesExpr"!pandas.core.computation.expr.Expr*º
-__init__6pandas.core.computation.pytables.PyTablesExpr.__init__"
-None*h
-self^
--pandas.core.computation.pytables.PyTablesExpr"-pandas.core.computation.pytables.PyTablesExpr*
-where
-Any*•
+const_type0r
+	term_type0Á
+PyTablesExpr"!pandas.core.computation.expr.Expr*`
+__init__*
 
-queryablesí
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *
-encoding
-Any */
-scope_level
-builtins.int"builtins.int *L
-evaluate6pandas.core.computation.pytables.PyTablesExpr.evaluate*
-selfrl
-encoding6pandas.core.computation.pytables.PyTablesExpr.encoding(
-types.EllipsisType"types.EllipsisTypern
-	condition7pandas.core.computation.pytables.PyTablesExpr.condition(
-types.EllipsisType"types.EllipsisTyperh
-filter4pandas.core.computation.pytables.PyTablesExpr.filter(
-types.EllipsisType"types.EllipsisTyperf
-terms3pandas.core.computation.pytables.PyTablesExpr.terms(
-types.EllipsisType"types.EllipsisTyperd
-expr2pandas.core.computation.pytables.PyTablesExpr.expr(
-types.EllipsisType"types.EllipsisType‹
-	TermValue*pandas.core.computation.pytables.TermValue"builtins.object*Å
-__init__3pandas.core.computation.pytables.TermValue.__init__"
-None*b
-selfX
-*pandas.core.computation.pytables.TermValue"*pandas.core.computation.pytables.TermValue*
-value
-Any*
-	converted
-Any*&
-kind
-builtins.str"builtins.str*ÿ
-tostring3pandas.core.computation.pytables.TermValue.tostring"
-builtins.str"builtins.str*b
-selfX
-*pandas.core.computation.pytables.TermValue"*pandas.core.computation.pytables.TermValue*
-encoding
-Anyrc
-value0pandas.core.computation.pytables.TermValue.value(
-types.EllipsisType"types.EllipsisTyperk
-	converted4pandas.core.computation.pytables.TermValue.converted(
-types.EllipsisType"types.EllipsisTypera
-kind/pandas.core.computation.pytables.TermValue.kind(
-types.EllipsisType"types.EllipsisTypeu
-maybe_expression1pandas.core.computation.pytables.maybe_expression"
-builtins.bool"builtins.bool*
-s
-Any*ú
-__annotations__0pandas.core.computation.pytables.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*&
+self(*
+where(*
+
+queryables (	*
+encoding (*
+scope_level (*
+evaluate*
+selfr
+encoding0r
+	condition0r
+
+filter0r	
+terms0r
+expr0Æ
+	TermValue"builtins.object*B
+__init__*
+
+self(*
+value(*
+	converted(*
+
+kind(*(
+tostring*
+
+self(*
+encoding(r	
+value0r
+	converted0r
+kind0
+maybe_expression*
+s(*
+__annotations__0*&
 exprpandas.core.computation.expr *$
 opspandas.core.computation.ops *)
-_scopepandas.core.computation.scope 
+_scopepandas.core.computation.scope 22.",pandas.core.computation.expr.BaseExprVisitor22"types.EllipsisType20".pandas.core.computation.pytables.PyTablesScope2"builtins.int2"builtins.str2"builtins.dict2222'"%pandas.core.computation.pytables.Term2+")pandas.core.computation.pytables.Constant2("&pandas.core.computation.pytables.BinOp2"builtins.bool2,"*pandas.core.computation.pytables.TermValue2.",pandas.core.computation.pytables.FilterBinOp2#"pandas.core.indexes.base.Index2222223"1pandas.core.computation.pytables.JointFilterBinOp21"/pandas.core.computation.pytables.ConditionBinOp26"4pandas.core.computation.pytables.PyTablesExprVisitor2/"-pandas.core.computation.pytables.PyTablesExpr

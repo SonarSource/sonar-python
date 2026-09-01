@@ -1,1482 +1,559 @@
 
-asyncio.base_eventsÚ
-Serverasyncio.base_events.Server"asyncio.events.AbstractServer*Ê
-__init__#asyncio.base_events.Server.__init__"
-None*B
-self8
-asyncio.base_events.Server"asyncio.base_events.Server*N
-loopD
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*^
-socketsQ
-typing.Iterable[socket.socket]
-socket.socket"socket.socket"typing.Iterable*∏
-protocol_factory°
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"$asyncio.base_events._ProtocolFactory*‰
-ssl_context“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext*)
-backlog
-builtins.int"builtins.int*e
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-Nonez310*›
-__init__#asyncio.base_events.Server.__init__"
-None*B
-self8
-asyncio.base_events.Server"asyncio.base_events.Server*N
-loopD
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*^
-socketsQ
-typing.Iterable[socket.socket]
-socket.socket"socket.socket"typing.Iterable*∏
-protocol_factory°
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"$asyncio.base_events._ProtocolFactory*‰
-ssl_context“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext*)
-backlog
-builtins.int"builtins.int*e
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z311z312z313z314*“
-get_loop#asyncio.base_events.Server.get_loop"D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*B
-self8
-asyncio.base_events.Server"asyncio.base_events.Serverz310z311z312z313z314*∞
+asyncio.base_events÷
+Server"asyncio.events.AbstractServer*è
+__init__*
 
-is_serving%asyncio.base_events.Server.is_serving"
-builtins.bool"builtins.bool*B
-self8
-asyncio.base_events.Server"asyncio.base_events.Serverz310z311z312z313z314*Ë
-start_serving(asyncio.base_events.Server.start_serving"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*B
-self8
-asyncio.base_events.Server"asyncio.base_events.ServerHz310z311z312z313z314*Ë
-serve_forever(asyncio.base_events.Server.serve_forever"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*B
-self8
-asyncio.base_events.Server"asyncio.base_events.ServerHz310z311z312z313z314*Ú
-sockets"asyncio.base_events.Server.sockets"O
-builtins.tuple[socket.socket]
-socket.socket"socket.socket"builtins.tuple*B
-self8
-asyncio.base_events.Server"asyncio.base_events.Server0:builtins.property`z310z311z312z313z314*ê
-close asyncio.base_events.Server.close"
-None*B
-self8
-asyncio.base_events.Server"asyncio.base_events.Serverz310z311z312z313z314*‰
-wait_closed&asyncio.base_events.Server.wait_closed"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*B
-self8
-asyncio.base_events.Server"asyncio.base_events.ServerHz310z311z312z313z314j310j311j312j313j314‚à
-BaseEventLoop!asyncio.base_events.BaseEventLoop" asyncio.events.AbstractEventLoop*±
-run_forever-asyncio.base_events.BaseEventLoop.run_forever"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*“
-run_until_complete4asyncio.base_events.BaseEventLoop.run_until_complete"O
-asyncio.base_events._T"
-builtins.object"builtins.object"builtins.object*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*ÿ
-futureÀ
-TTypeAlias[Union[typing.Generator[Any,None,asyncio._T],typing.Awaitable[asyncio._T]]]ÿ
-IUnion[typing.Generator[Any,None,asyncio._T],typing.Awaitable[asyncio._T]]ë
-%typing.Generator[Any,None,asyncio._T]
-Any
-NoneC
+self(*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Generatoru
-typing.Awaitable[asyncio._T]C
+loop(*
+sockets(*
+protocol_factory(*
+ssl_context(*
+backlog(*
+ssl_handshake_timeout(z310*º
+__init__*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Awaitable"asyncio._AwaitableLikez310z311*∆
-run_until_complete4asyncio.base_events.BaseEventLoop.run_until_complete"O
-asyncio.base_events._T"
-builtins.object"builtins.object"builtins.object*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*«
-future∫
-'TypeAlias[typing.Awaitable[asyncio._T]]u
-typing.Awaitable[asyncio._T]C
+self(*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Awaitable"asyncio._AwaitableLikez312z313z314*£
-stop&asyncio.base_events.BaseEventLoop.stop"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*≈
+loop(*
+sockets(*
+protocol_factory(*
+ssl_context(*
+backlog(*
+ssl_handshake_timeout(*
+ssl_shutdown_timeout (z311z312z313z314*
+get_loop*
 
-is_running,asyncio.base_events.BaseEventLoop.is_running"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*√
-	is_closed+asyncio.base_events.BaseEventLoop.is_closed"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*•
-close'asyncio.base_events.BaseEventLoop.close"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*á
-shutdown_asyncgens4asyncio.base_events.BaseEventLoop.shutdown_asyncgens"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopHz310z311z312z313z314*´
-	call_soon+asyncio.base_events.BaseEventLoop.call_soon".
-asyncio.events.Handle"asyncio.events.Handle*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None z310z311z312z313z314*‰
+self(*
 
-call_later,asyncio.base_events.BaseEventLoop.call_later"8
-asyncio.events.TimerHandle"asyncio.events.TimerHandle*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*+
-delay 
-builtins.float"builtins.float*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None z310z311z312z313z314*›
-call_at)asyncio.base_events.BaseEventLoop.call_at"8
-asyncio.events.TimerHandle"asyncio.events.TimerHandle*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop**
-when 
-builtins.float"builtins.float*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None z310z311z312z313z314*ª
-time&asyncio.base_events.BaseEventLoop.time" 
-builtins.float"builtins.float*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*Î
-create_future/asyncio.base_events.BaseEventLoop.create_future">
-asyncio.futures.Future[Any]
-Any"asyncio.futures.Future*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*€
-create_task-asyncio.base_events.BaseEventLoop.create_task"ë
-*asyncio.tasks.Task[asyncio.base_events._T]O
-asyncio.base_events._T"
-builtins.object"builtins.object"builtins.object"asyncio.tasks.Task*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*Å
-coroˆ
-\TypeAlias[Union[typing.Generator[Any,None,asyncio._T],typing.Coroutine[Any,Any,asyncio._T]]]˚
-QUnion[typing.Generator[Any,None,asyncio._T],typing.Coroutine[Any,Any,asyncio._T]]ë
-%typing.Generator[Any,None,asyncio._T]
-Any
-NoneC
+is_serving	*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Generatorè
-$typing.Coroutine[Any,Any,asyncio._T]
-Any
-AnyC
+self(*
+start_serving*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Coroutine"asyncio._CoroutineLike*.
-name"
-builtins.object"builtins.object z310*≈
-create_task-asyncio.base_events.BaseEventLoop.create_task"ë
-*asyncio.tasks.Task[asyncio.base_events._T]O
-asyncio.base_events._T"
-builtins.object"builtins.object"builtins.object"asyncio.tasks.Task*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*Å
-coroˆ
-\TypeAlias[Union[typing.Generator[Any,None,asyncio._T],typing.Coroutine[Any,Any,asyncio._T]]]˚
-QUnion[typing.Generator[Any,None,asyncio._T],typing.Coroutine[Any,Any,asyncio._T]]ë
-%typing.Generator[Any,None,asyncio._T]
-Any
-NoneC
+self(H*
+serve_forever*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Generatorè
-$typing.Coroutine[Any,Any,asyncio._T]
-Any
-AnyC
+self(H*.
+sockets*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Coroutine"asyncio._CoroutineLike*.
-name"
-builtins.object"builtins.object *h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None z311*∂
-create_task-asyncio.base_events.BaseEventLoop.create_task"ë
-*asyncio.tasks.Task[asyncio.base_events._T]O
-asyncio.base_events._T"
-builtins.object"builtins.object"builtins.object"asyncio.tasks.Task*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*Ë
-coro›
-/TypeAlias[typing.Coroutine[Any,Any,asyncio._T]]è
-$typing.Coroutine[Any,Any,asyncio._T]
-Any
-AnyC
+self(0:builtins.property`*
+close*
 
-asyncio._T"
-builtins.object"builtins.object"builtins.object"typing.Coroutine"asyncio._CoroutineLike*.
-name"
-builtins.object"builtins.object *h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None z312z313z314*ª
-set_task_factory2asyncio.base_events.BaseEventLoop.set_task_factory"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*~
-factoryq
-'Union[asyncio.events._TaskFactory,None]:
-asyncio.events._TaskFactory"asyncio.events._TaskFactory
-Nonez310z311z312z313z314*§
-get_task_factory2asyncio.base_events.BaseEventLoop.get_task_factory"q
-'Union[asyncio.events._TaskFactory,None]:
-asyncio.events._TaskFactory"asyncio.events._TaskFactory
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*¡
-call_soon_threadsafe6asyncio.base_events.BaseEventLoop.call_soon_threadsafe".
-asyncio.events.Handle"asyncio.events.Handle*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None z310z311z312z313z314*Ã
-run_in_executor1asyncio.base_events.BaseEventLoop.run_in_executor"ô
-.asyncio.futures.Future[asyncio.base_events._T]O
-asyncio.base_events._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*
-executor
-Any*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*⁄
-set_default_executor6asyncio.base_events.BaseEventLoop.set_default_executor"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*
-executor
-Anyz310z311z312z313z314*ó
-getaddrinfo-asyncio.base_events.BaseEventLoop.getaddrinfo"ê	
-”typing.Coroutine[Any,Any,builtins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]]
-Any
-Anyì
-πbuiltins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]≈
-™Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]],
-socket.AddressFamily"socket.AddressFamily&
-socket.SocketKind"socket.SocketKind
-builtins.int"builtins.int
-builtins.str"builtins.strÅ
-bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int∂
-:Tuple[builtins.str,builtins.int,builtins.int,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*
-hostu
-'Union[builtins.bytes,builtins.str,None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-None*´
-port†
-4Union[builtins.bytes,builtins.str,builtins.int,None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-builtins.int"builtins.int
-None**
-family
-builtins.int"builtins.int *(
-type
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int Hz310z311z312z313z314*¨
-getnameinfo-asyncio.base_events.BaseEventLoop.getnameinfo"¬
-:typing.Coroutine[Any,Any,Tuple[builtins.str,builtins.str]]
-Any
-Any`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*ê
-sockaddrÅ
-bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int∂
-:Tuple[builtins.str,builtins.int,builtins.int,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int Hz310z311z312z313z314*˛
-	start_tls+asyncio.base_events.BaseEventLoop.start_tls"ö
-6typing.Coroutine[Any,Any,asyncio.transports.Transport]
-Any
-Any<
-asyncio.transports.Transport"asyncio.transports.Transport"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*S
-	transportD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*N
-protocol@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*0
+self(*
+wait_closed*
 
-sslcontext 
-ssl.SSLContext"ssl.SSLContext*1
-server_side
-builtins.bool"builtins.bool *[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None Hz310*ı
-	start_tls+asyncio.base_events.BaseEventLoop.start_tls"ö
-6typing.Coroutine[Any,Any,asyncio.transports.Transport]
-Any
-Any<
-asyncio.transports.Transport"asyncio.transports.Transport"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*S
-	transportD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*N
-protocol@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*0
+self(Hœ7
+BaseEventLoop" asyncio.events.AbstractEventLoop*
+run_forever*
 
-sslcontext 
-ssl.SSLContext"ssl.SSLContext*1
-server_side
-builtins.bool"builtins.bool *[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None Hz311z312z313z314*ó
-connect_accepted_socket9asyncio.base_events.BaseEventLoop.connect_accepted_socket"ê
-\typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]
-Any
-Anyã
-BTuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]<
-asyncio.transports.Transport"asyncio.transports.TransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*(
-sock
-socket.socket"socket.socket*ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None Hz310*é	
-connect_accepted_socket9asyncio.base_events.BaseEventLoop.connect_accepted_socket"ê
-\typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]
-Any
-Anyã
-BTuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]<
-asyncio.transports.Transport"asyncio.transports.TransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*(
-sock
-socket.socket"socket.socket*ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None Hz311z312z313z314*Ô
-sock_sendfile/asyncio.base_events.BaseEventLoop.sock_sendfile"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*R
-fileH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO**
-offset
-builtins.int"builtins.int *Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *W
-fallbackG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None Hz310z311z312z313z314*È
-sendfile*asyncio.base_events.BaseEventLoop.sendfile"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*U
-	transportF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*R
-fileH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO**
-offset
-builtins.int"builtins.int *Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *.
-fallback
-builtins.bool"builtins.bool Hz310z311z312z313z314*
-create_datagram_endpoint:asyncio.base_events.BaseEventLoop.create_datagram_endpoint"∞
-dtyping.Coroutine[Any,Any,Tuple[asyncio.transports.DatagramTransport,asyncio.base_events._ProtocolT]]
-Any
-Any£
-JTuple[asyncio.transports.DatagramTransport,asyncio.base_events._ProtocolT]L
-$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*⁄
+self(*:
+run_until_complete*
 
-local_addr«
-9Union[Tuple[builtins.str,builtins.int],builtins.str,None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *€
-remote_addr«
-9Union[Tuple[builtins.str,builtins.int],builtins.str,None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.str"builtins.str
-None **
-family
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *\
-reuse_addressG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Y
+self(*
+future(z310z311*?
+run_until_complete*
 
-reuse_portG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *^
-allow_broadcastG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *S
-sockG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None Hz310*°
-create_datagram_endpoint:asyncio.base_events.BaseEventLoop.create_datagram_endpoint"∞
-dtyping.Coroutine[Any,Any,Tuple[asyncio.transports.DatagramTransport,asyncio.base_events._ProtocolT]]
-Any
-Any£
-JTuple[asyncio.transports.DatagramTransport,asyncio.base_events._ProtocolT]L
-$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*⁄
+self(*
+future(z312z313z314*
+stop*
 
-local_addr«
-9Union[Tuple[builtins.str,builtins.int],builtins.str,None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *€
-remote_addr«
-9Union[Tuple[builtins.str,builtins.int],builtins.str,None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.str"builtins.str
-None **
-family
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *Y
+self(*
 
-reuse_portG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *^
-allow_broadcastG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *S
-sockG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None Hz311z312z313z314*Œ
-connect_read_pipe3asyncio.base_events.BaseEventLoop.connect_read_pipe"†
-`typing.Coroutine[Any,Any,Tuple[asyncio.transports.ReadTransport,asyncio.base_events._ProtocolT]]
-Any
-Anyó
-FTuple[asyncio.transports.ReadTransport,asyncio.base_events._ProtocolT]D
- asyncio.transports.ReadTransport" asyncio.transports.ReadTransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-pipe
-AnyHz310z311z312z313z314*‘
-connect_write_pipe4asyncio.base_events.BaseEventLoop.connect_write_pipe"§
-atyping.Coroutine[Any,Any,Tuple[asyncio.transports.WriteTransport,asyncio.base_events._ProtocolT]]
-Any
-Anyö
-GTuple[asyncio.transports.WriteTransport,asyncio.base_events._ProtocolT]F
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-pipe
-AnyHz310z311z312z313z314*á
-subprocess_shell2asyncio.base_events.BaseEventLoop.subprocess_shell"∏
-ftyping.Coroutine[Any,Any,Tuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]]
-Any
-Any©
-LTuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]P
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*o
-cmdf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*Ü
-stdiny
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None *á
-stdouty
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None *á
-stderry
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None *T
-universal_newlines:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *G
-shell:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *F
-bufsize7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *x
-textl
-"Union[Literal[builtins.bool],None]:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool
-None *
-kwargs
-AnyHz310z311z312z313z314*√
-subprocess_exec1asyncio.base_events.BaseEventLoop.subprocess_exec"∏
-ftyping.Coroutine[Any,Any,Tuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]]
-Any
-Any©
-LTuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]P
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-program
-Any*
-args
-Any*Ü
-stdiny
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None *á
-stdouty
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None *á
-stderry
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None *T
-universal_newlines:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *G
-shell:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *F
-bufsize7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-encoding
-None *
-errors
-None *
-kwargs
-AnyHz310z311z312z313z314*Ù
+is_running	*
 
-add_reader,asyncio.base_events.BaseEventLoop.add_reader"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*¢
-remove_reader/asyncio.base_events.BaseEventLoop.remove_reader"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLikez310z311z312z313z314*Ù
+self(*
+	is_closed	*
 
-add_writer,asyncio.base_events.BaseEventLoop.add_writer"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*¢
-remove_writer/asyncio.base_events.BaseEventLoop.remove_writer"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*‘
-fdÀ
-2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
-'Union[builtins.int,_typeshed.HasFileno]
-builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLikez310z311z312z313z314*Î
-	sock_recv+asyncio.base_events.BaseEventLoop.sock_recv"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*(
-nbytes
-builtins.int"builtins.intHz310z311z312z313z314*ø
-sock_recv_into0asyncio.base_events.BaseEventLoop.sock_recv_into"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*˜
-bufÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBufferHz310z311z312z313z314*è	
-sock_sendall.asyncio.base_events.BaseEventLoop.sock_sendall"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*Á
-data‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferHz310z311z312z313z314*ã
-sock_connect.asyncio.base_events.BaseEventLoop.sock_connect"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*„
+self(*
+close*
 
-address’
+self(*$
+shutdown_asyncgens*
 
- TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]Ò
-øUnion[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._AddressHz310z311z312z313z314*¥
-sock_accept-asyncio.base_events.BaseEventLoop.sock_accept"ﬁ
-=typing.Coroutine[Any,Any,Tuple[socket.socket,TypeAlias[Any]]]
-Any
-Anyy
-#Tuple[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_socket._RetAddress"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socketHz310z311z312z313z314*‘
-add_signal_handler4asyncio.base_events.BaseEventLoop.add_signal_handler"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*%
-sig
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*Ç
-remove_signal_handler7asyncio.base_events.BaseEventLoop.remove_signal_handler"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*%
-sig
-builtins.int"builtins.intz310z311z312z313z314*ø
-set_exception_handler7asyncio.base_events.BaseEventLoop.set_exception_handler"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*˜
-handlerÈ
-6Union[TypeAlias[CallableType[builtins.function]],None]¢
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"%asyncio.base_events._ExceptionHandler
-Nonez310z311z312z313z314*ß
-get_exception_handler7asyncio.base_events.BaseEventLoop.get_exception_handler"È
-6Union[TypeAlias[CallableType[builtins.function]],None]¢
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"%asyncio.base_events._ExceptionHandler
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*É
-default_exception_handler;asyncio.base_events.BaseEventLoop.default_exception_handler"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*≥
-context•
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"asyncio.base_events._Contextz310z311z312z313z314*˝
-call_exception_handler8asyncio.base_events.BaseEventLoop.call_exception_handler"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*≥
-context•
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"asyncio.base_events._Contextz310z311z312z313z314*√
-	get_debug+asyncio.base_events.BaseEventLoop.get_debug"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopz310z311z312z313z314*⁄
-	set_debug+asyncio.base_events.BaseEventLoop.set_debug"
-None*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*+
-enabled
-builtins.bool"builtins.boolz310z311z312z313z314*ï
-shutdown_default_executor;asyncio.base_events.BaseEventLoop.shutdown_default_executor"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoopHz310z311z312z313z314*‚
-sock_recvfrom/asyncio.base_events.BaseEventLoop.sock_recvfrom"‚
->typing.Coroutine[Any,Any,Tuple[builtins.bytes,TypeAlias[Any]]]
-Any
-Any|
-$Tuple[builtins.bytes,TypeAlias[Any]] 
-builtins.bytes"builtins.bytes0
-TypeAlias[Any]
-Any"_socket._RetAddress"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*)
-bufsize
-builtins.int"builtins.intHz311z312z313z314*ﬂ
-sock_recvfrom_into4asyncio.base_events.BaseEventLoop.sock_recvfrom_into"⁄
-<typing.Coroutine[Any,Any,Tuple[builtins.int,TypeAlias[Any]]]
-Any
-Anyv
-"Tuple[builtins.int,TypeAlias[Any]]
-builtins.int"builtins.int0
-TypeAlias[Any]
-Any"_socket._RetAddress"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*˜
-bufÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer**
-nbytes
-builtins.int"builtins.int Hz311z312z313z314*ä
-sock_sendto-asyncio.base_events.BaseEventLoop.sock_sendto"j
-&typing.Coroutine[Any,Any,builtins.int]
-Any
-Any
-builtins.int"builtins.int"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*(
-sock
-socket.socket"socket.socket*Á
-data‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*„
+self(H*F
+	call_soon*
 
-address’
+self(*
+callback(*
 
- TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]]]Ò
-øUnion[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str‹
-óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÌ
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._AddressHz311z312z313z3142Å
-create_connection3asyncio.base_events.BaseEventLoop.create_connection¨
-create_connection3asyncio.base_events.BaseEventLoop.create_connection"ê
-\typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]
-Any
-Anyã
-BTuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]<
-asyncio.transports.Transport"asyncio.transports.TransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*(
-host
-builtins.str"builtins.str *(
-port
-builtins.int"builtins.int *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext **
-family
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *
-sock
-None *Ø
+args(*
+context (*T
 
-local_addrú
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-happy_eyeballs_delayJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *V
+call_later*
 
-interleaveD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadHXÇ
-create_connection3asyncio.base_events.BaseEventLoop.create_connection"ê
-\typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]
-Any
-Anyã
-BTuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]<
-asyncio.transports.Transport"asyncio.transports.TransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-host
-None *
-port
-None *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext **
-family
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *(
-sock
-socket.socket"socket.socket*
+self(*
+delay(*
+callback(*
 
-local_addr
-None *[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-happy_eyeballs_delayJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *V
+args(*
+context (*P
+call_at*
 
-interleaveD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadHX"3102‡
-create_connection3asyncio.base_events.BaseEventLoop.create_connectionî
-create_connection3asyncio.base_events.BaseEventLoop.create_connection"ê
-\typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]
-Any
-Anyã
-BTuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]<
-asyncio.transports.Transport"asyncio.transports.TransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*(
-host
-builtins.str"builtins.str *(
-port
-builtins.int"builtins.int *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext **
-family
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *
-sock
-None *Ø
+self(*
 
-local_addrú
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-happy_eyeballs_delayJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *V
+when(*
+callback(*
 
-interleaveD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadHXÍ
-create_connection3asyncio.base_events.BaseEventLoop.create_connection"ê
-\typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]
-Any
-Anyã
-BTuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]<
-asyncio.transports.Transport"asyncio.transports.TransportÑ
-asyncio.base_events._ProtocolT@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-host
-None *
-port
-None *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext **
-family
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *(
-sock
-socket.socket"socket.socket*
+args(*
+context (*
+time*
 
-local_addr
-None *[
-server_hostnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-happy_eyeballs_delayJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *V
+self(*
+create_future*
 
-interleaveD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:typing.overloadHX"311"312"313"3142ì
-create_server/asyncio.base_events.BaseEventLoop.create_serverπ
-create_server/asyncio.base_events.BaseEventLoop.create_server"î
-4typing.Coroutine[Any,Any,asyncio.base_events.Server]
-Any
-Any8
-asyncio.base_events.Server"asyncio.base_events.Server"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*∏
-protocol_factory°
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"$asyncio.base_events._ProtocolFactory*ø
-host≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *(
-port
-builtins.int"builtins.int **
-family
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *
-sock
-None *+
-backlog
-builtins.int"builtins.int *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext *\
-reuse_addressG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Y
+self(*:
+create_task *
 
-reuse_portG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *3
-start_serving
-builtins.bool"builtins.bool 0:typing.overloadHXè
+self(*
 
-create_server/asyncio.base_events.BaseEventLoop.create_server"î
-4typing.Coroutine[Any,Any,asyncio.base_events.Server]
-Any
-Any8
-asyncio.base_events.Server"asyncio.base_events.Server"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*∏
-protocol_factory°
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"$asyncio.base_events._ProtocolFactory*
-host
-None *
-port
-None **
-family
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int **
-sock
-socket.socket"socket.socket *+
-backlog
-builtins.int"builtins.int *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext *\
-reuse_addressG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Y
+coro(#*
+name (z310*K
+create_task *
 
-reuse_portG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *3
-start_serving
-builtins.bool"builtins.bool 0:typing.overloadHX"3102Ú
-create_server/asyncio.base_events.BaseEventLoop.create_server°
-create_server/asyncio.base_events.BaseEventLoop.create_server"î
-4typing.Coroutine[Any,Any,asyncio.base_events.Server]
-Any
-Any8
-asyncio.base_events.Server"asyncio.base_events.Server"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*∏
-protocol_factory°
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"$asyncio.base_events._ProtocolFactory*ø
-host≤
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *(
-port
-builtins.int"builtins.int **
-family
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *
-sock
-None *+
-backlog
-builtins.int"builtins.int *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext *\
-reuse_addressG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Y
+self(*
 
-reuse_portG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *3
-start_serving
-builtins.bool"builtins.bool 0:typing.overloadHX˜
+coro(#*
+name (*
+context (z311*U
+create_task *
 
-create_server/asyncio.base_events.BaseEventLoop.create_server"î
-4typing.Coroutine[Any,Any,asyncio.base_events.Server]
-Any
-Any8
-asyncio.base_events.Server"asyncio.base_events.Server"typing.Coroutine*P
-selfF
-!asyncio.base_events.BaseEventLoop"!asyncio.base_events.BaseEventLoop*∏
-protocol_factory°
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"$asyncio.base_events._ProtocolFactory*
-host
-None *
-port
-None **
-family
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int **
-sock
-socket.socket"socket.socket *+
-backlog
-builtins.int"builtins.int *ﬁ
-ssl“
-3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
-(Union[builtins.bool,None,ssl.SSLContext]
-builtins.bool"builtins.bool
-None 
-ssl.SSLContext"ssl.SSLContext"asyncio.base_events._SSLContext *\
-reuse_addressG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Y
+self(*
 
-reuse_portG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *g
-ssl_handshake_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *f
-ssl_shutdown_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *3
-start_serving
-builtins.bool"builtins.bool 0:typing.overloadHX"311"312"313"314j310j311j312j313j314*®
-__annotations__#asyncio.base_events.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*°
-__all__asyncio.base_events.__all__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*310*311*312*313*314
+coro($*
+name (*
+context (z312z313z314*/
+set_task_factory*
+
+self(*
+factory(&* 
+get_task_factory&*
+
+self(*Q
+call_soon_threadsafe*
+
+self(*
+callback(*
+
+args(*
+context (*G
+run_in_executor'*
+
+self(*
+executor(*
+
+func(*
+
+args(*4
+set_default_executor*
+
+self(*
+executor(*q
+getaddrinfo0*
+
+self(*
+
+host(2*
+
+port(3*
+family (*
+type (*
+proto (*
+flags (H*<
+getnameinfo5*
+
+self(*
+sockaddr(-*
+flags (H*†
+	start_tls7*
+
+self(*
+	transport(8*
+protocol(9*
+
+sslcontext(
+*
+server_side (	*
+server_hostname (:*
+ssl_handshake_timeout (Hz310*Õ
+	start_tls7*
+
+self(*
+	transport(8*
+protocol(9*
+
+sslcontext(
+*
+server_side (	*
+server_hostname (:*
+ssl_handshake_timeout (*
+ssl_shutdown_timeout (Hz311z312z313z314*~
+connect_accepted_socket=*
+
+self(*
+protocol_factory(*
+
+sock(*
+ssl (*
+ssl_handshake_timeout (Hz310*´
+connect_accepted_socket=*
+
+self(*
+protocol_factory(*
+
+sock(*
+ssl (*
+ssl_handshake_timeout (*
+ssl_shutdown_timeout (Hz311z312z313z314*h
+sock_sendfile>*
+
+self(*
+
+sock(*
+
+file(?*
+offset (*
+count (@*
+fallback (AH*h
+sendfile>*
+
+self(*
+	transport(B*
+
+file(?*
+offset (*
+count (@*
+fallback (	H*
+create_datagram_endpointE*
+
+self(*
+protocol_factory(*
+
+local_addr (F*
+remote_addr (F*
+family (*
+proto (*
+flags (*
+reuse_address (A*
+
+reuse_port (A*
+allow_broadcast (A*
+sock (GHz310*Ë
+create_datagram_endpointE*
+
+self(*
+protocol_factory(*
+
+local_addr (F*
+remote_addr (F*
+family (*
+proto (*
+flags (*
+
+reuse_port (A*
+allow_broadcast (A*
+sock (GHz311z312z313z314*G
+connect_read_pipeJ*
+
+self(*
+protocol_factory(*
+
+pipe(H*H
+connect_write_pipeL*
+
+self(*
+protocol_factory(*
+
+pipe(H*Ó
+subprocess_shellO*
+
+self(*
+protocol_factory(*	
+cmd(P*
+stdin (R*
+stdout (R*
+stderr (R*
+universal_newlines (S*
+shell (S*
+bufsize (T*
+encoding (*
+errors (*
+text (U*
+kwargs(H*Ô
+subprocess_execO*
+
+self(*
+protocol_factory(*
+program(*
+
+args(*
+stdin (R*
+stdout (R*
+stderr (R*
+universal_newlines (S*
+shell (S*
+bufsize (T*
+encoding (*
+errors (*
+kwargs(H*@
+
+add_reader*
+
+self(*
+fd(X*
+callback(*
+
+args(*'
+remove_reader	*
+
+self(*
+fd(X*@
+
+add_writer*
+
+self(*
+fd(X*
+callback(*
+
+args(*'
+remove_writer	*
+
+self(*
+fd(X*5
+	sock_recvY*
+
+self(*
+
+sock(*
+nbytes(H*7
+sock_recv_into>*
+
+self(*
+
+sock(*	
+buf(aH*6
+sock_sendall*
+
+self(*
+
+sock(*
+
+data(cH*9
+sock_connect*
+
+self(*
+
+sock(*
+address(fH*)
+sock_accepti*
+
+self(*
+
+sock(H*I
+add_signal_handler*
+
+self(*	
+sig(*
+callback(*
+
+args(*0
+remove_signal_handler	*
+
+self(*	
+sig(*4
+set_exception_handler*
+
+self(*
+handler(k*%
+get_exception_handlerk*
+
+self(*8
+default_exception_handler*
+
+self(*
+context(m*5
+call_exception_handler*
+
+self(*
+context(m*
+	get_debug	*
+
+self(*(
+	set_debug*
+
+self(*
+enabled(	*+
+shutdown_default_executor*
+
+self(H*N
+sock_recvfromo*
+
+self(*
+
+sock(*
+bufsize(Hz311z312z313z314*_
+sock_recvfrom_intoq*
+
+self(*
+
+sock(*	
+buf(a*
+nbytes (Hz311z312z313z314*X
+sock_sendto>*
+
+self(*
+
+sock(*
+
+data(c*
+address(fHz311z312z313z3142Ç
+create_connection≥
+create_connection=*
+
+self(*
+protocol_factory(*
+host (**
+port (*
+ssl (*
+family (*
+proto (*
+flags (*
+sock (*
+
+local_addr (r*
+server_hostname (:*
+ssl_handshake_timeout (*
+happy_eyeballs_delay (*
+
+interleave (@0:typing.overloadHX±
+create_connection=*
+
+self(*
+protocol_factory(*
+host (*
+port (*
+ssl (*
+family (*
+proto (*
+flags (*
+
+sock(*
+
+local_addr (*
+server_hostname (:*
+ssl_handshake_timeout (*
+happy_eyeballs_delay (*
+
+interleave (@0:typing.overloadHX"3102Õ
+create_connection—
+create_connection=*
+
+self(*
+protocol_factory(*
+host (**
+port (*
+ssl (*
+family (*
+proto (*
+flags (*
+sock (*
+
+local_addr (r*
+server_hostname (:*
+ssl_handshake_timeout (*
+ssl_shutdown_timeout (*
+happy_eyeballs_delay (*
+
+interleave (@0:typing.overloadHXœ
+create_connection=*
+
+self(*
+protocol_factory(*
+host (*
+port (*
+ssl (*
+family (*
+proto (*
+flags (*
+
+sock(*
+
+local_addr (*
+server_hostname (:*
+ssl_handshake_timeout (*
+ssl_shutdown_timeout (*
+happy_eyeballs_delay (*
+
+interleave (@0:typing.overloadHX"311"312"313"3142¬
+create_serverî
+create_servers*
+
+self(*
+protocol_factory(*
+host (u*
+port (*
+family (*
+flags (*
+sock (*
+backlog (*
+ssl (*
+reuse_address (A*
+
+reuse_port (A*
+ssl_handshake_timeout (*
+start_serving (	0:typing.overloadHXî
+create_servers*
+
+self(*
+protocol_factory(*
+host (*
+port (*
+family (*
+flags (*
+sock (*
+backlog (*
+ssl (*
+reuse_address (A*
+
+reuse_port (A*
+ssl_handshake_timeout (*
+start_serving (	0:typing.overloadHX"3102ç
+create_server≤
+create_servers*
+
+self(*
+protocol_factory(*
+host (u*
+port (*
+family (*
+flags (*
+sock (*
+backlog (*
+ssl (*
+reuse_address (A*
+
+reuse_port (A*
+ssl_handshake_timeout (*
+ssl_shutdown_timeout (*
+start_serving (	0:typing.overloadHX≤
+create_servers*
+
+self(*
+protocol_factory(*
+host (*
+port (*
+family (*
+flags (*
+sock (*
+backlog (*
+ssl (*
+reuse_address (A*
+
+reuse_port (A*
+ssl_handshake_timeout (*
+ssl_shutdown_timeout (*
+start_serving (	0:typing.overloadHX"311"312"313"314*
+__annotations__0l*
+__all__0422"asyncio.base_events.Server2"" asyncio.events.AbstractEventLoop2"socket.socket2"typing.Iterable22"builtins.function222+"$asyncio.base_events._ProtocolFactory22"builtins.bool2"ssl.SSLContext22	
+2&"asyncio.base_events._SSLContext22"builtins.int2"builtins.float2222"typing.Coroutine22"builtins.tuple22#"!asyncio.base_events.BaseEventLoop2"builtins.object2"builtins.object22"typing.Generator22"typing.Awaitable2222"asyncio._AwaitableLike22"asyncio._AwaitableLike22"asyncio.events.Handle2"contextvars.Context222"asyncio.events.TimerHandle2"asyncio.futures.Future22"asyncio.tasks.Task22"typing.Coroutine222!2"asyncio._CoroutineLike2"2"asyncio._CoroutineLike2!2"asyncio.events._TaskFactory22%2"asyncio.futures.Future22"socket.AddressFamily2"socket.SocketKind2"builtins.str22*22*22+,2	2()*-2"builtins.list2.2"typing.Coroutine2/2"builtins.bytes221*221*22**2"typing.Coroutine242"asyncio.transports.Transport2"typing.Coroutine262"" asyncio.transports.BaseTransport2 "asyncio.protocols.BaseProtocol22*2%"asyncio.protocols.BaseProtocol29226;2"typing.Coroutine2<2"typing.Coroutine22"	typing.IO212222	2#"!asyncio.transports.WriteTransport2&"$asyncio.transports.DatagramTransport22C;2"typing.Coroutine2D22+*222"" asyncio.transports.ReadTransport22H;2"typing.Coroutine2I22B;2"typing.Coroutine2K2("&asyncio.transports.SubprocessTransport22M;2"typing.Coroutine2N221*2"	typing.IO222Q2	2	2	222S2"_typeshed.HasFileno22V2#"_typeshed.FileDescriptorLike2W2"typing.Coroutine212"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2Z[\]^_2 "_typeshed.WriteableBuffer2`221a2"_typeshed.ReadableBuffer2b2"builtins.tuple222d*c2"_socket._Address2e2"_socket._RetAddress222g2"typing.Coroutine2h2,"%asyncio.base_events._ExceptionHandler222j2"builtins.dict2*2#"asyncio.base_events._Context2l221g2"typing.Coroutine2n22g2"typing.Coroutine2p22+2"typing.Coroutine22"typing.Sequence2*22*t

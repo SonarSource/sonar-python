@@ -1,570 +1,318 @@
 
-http.cookiejarP
-	LoadErrorhttp.cookiejar.LoadError"builtins.OSErrorj310j311j312j313j314í
-	CookieJarhttp.cookiejar.CookieJar"typing.Iterable*ë
-__init__!http.cookiejar.CookieJar.__init__"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*
-policyq
-'Union[http.cookiejar.CookiePolicy,None]:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicy
-None z310z311z312z313z314*·
-add_cookie_header*http.cookiejar.CookieJar.add_cookie_header"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*°
-extract_cookies(http.cookiejar.CookieJar.extract_cookies"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*B
-response4
-http.client.HTTPResponse"http.client.HTTPResponse*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*‹
+http.cookiejar
+	LoadError"builtins.OSErrorõ
+	CookieJar"typing.Iterable*(
+__init__*
 
-set_policy#http.cookiejar.CookieJar.set_policy"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*F
-policy:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicyz310z311z312z313z314*¸
-make_cookies%http.cookiejar.CookieJar.make_cookies"i
-&typing.Sequence[http.cookiejar.Cookie].
-http.cookiejar.Cookie"http.cookiejar.Cookie"typing.Sequence*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*B
-response4
-http.client.HTTPResponse"http.client.HTTPResponse*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*–
+self(*
+policy (*0
+add_cookie_header*
 
-set_cookie#http.cookiejar.CookieJar.set_cookie"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookiez310z311z312z313z314*õ
-set_cookie_if_ok)http.cookiejar.CookieJar.set_cookie_if_ok"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*Ç
-clearhttp.cookiejar.CookieJar.clear"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJar*R
-domainD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*™
-clear_session_cookies.http.cookiejar.CookieJar.clear_session_cookies"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJarz310z311z312z313z314*™
-clear_expired_cookies.http.cookiejar.CookieJar.clear_expired_cookies"
-None*>
-self4
-http.cookiejar.CookieJar"http.cookiejar.CookieJarz310z311z312z313z314*È
-__iter__!http.cookiejar.CookieJar.__iter__"i
-&typing.Iterator[http.cookiejar.Cookie].
-http.cookiejar.Cookie"http.cookiejar.Cookie"typing.Iterator*64
-http.cookiejar.CookieJar"http.cookiejar.CookieJarz310z311z312z313z314*ö
-__len__ http.cookiejar.CookieJar.__len__"
-builtins.int"builtins.int*64
-http.cookiejar.CookieJar"http.cookiejar.CookieJarz310z311z312z313z314j310j311j312j313j314rí
-non_word_re$http.cookiejar.CookieJar.non_word_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314rå
-quote_re!http.cookiejar.CookieJar.quote_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314rú
-strict_domain_re)http.cookiejar.CookieJar.strict_domain_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314ré
-	domain_re"http.cookiejar.CookieJar.domain_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314rä
-dots_re http.cookiejar.CookieJar.dots_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314rå
-magic_re!http.cookiejar.CookieJar.magic_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314Í
-FileCookieJarhttp.cookiejar.FileCookieJar"http.cookiejar.CookieJar*†
-__init__%http.cookiejar.FileCookieJar.__init__"
-None*F
-self<
-http.cookiejar.FileCookieJar"http.cookiejar.FileCookieJar*œ
-filenameæ
-DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None */
-	delayload
-builtins.bool"builtins.bool *
-policyq
-'Union[http.cookiejar.CookiePolicy,None]:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicy
-None z310z311z312z313z314*÷
-save!http.cookiejar.FileCookieJar.save"
-None*F
-self<
-http.cookiejar.FileCookieJar"http.cookiejar.FileCookieJar*T
-filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *4
-ignore_discard
-builtins.bool"builtins.bool *4
-ignore_expires
-builtins.bool"builtins.bool z310z311z312z313z314*÷
-load!http.cookiejar.FileCookieJar.load"
-None*F
-self<
-http.cookiejar.FileCookieJar"http.cookiejar.FileCookieJar*T
-filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *4
-ignore_discard
-builtins.bool"builtins.bool *4
-ignore_expires
-builtins.bool"builtins.bool z310z311z312z313z314*⁄
-revert#http.cookiejar.FileCookieJar.revert"
-None*F
-self<
-http.cookiejar.FileCookieJar"http.cookiejar.FileCookieJar*T
-filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *4
-ignore_discard
-builtins.bool"builtins.bool *4
-ignore_expires
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rh
-filename%http.cookiejar.FileCookieJar.filename
-builtins.str"builtins.str*310*311*312*313*314rl
-	delayload&http.cookiejar.FileCookieJar.delayload
-builtins.bool"builtins.bool*310*311*312*313*314j
-MozillaCookieJarhttp.cookiejar.MozillaCookieJar"http.cookiejar.FileCookieJarj310j311j312j313j314Ç
-LWPCookieJarhttp.cookiejar.LWPCookieJar"http.cookiejar.FileCookieJar*ù
+self(*
+request(*>
+extract_cookies*
 
-as_lwp_str&http.cookiejar.LWPCookieJar.as_lwp_str"
-builtins.str"builtins.str*D
-self:
-http.cookiejar.LWPCookieJar"http.cookiejar.LWPCookieJar*4
-ignore_discard
-builtins.bool"builtins.bool *4
-ignore_expires
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314ƒ
-CookiePolicyhttp.cookiejar.CookiePolicy"builtins.object*¶
-set_ok"http.cookiejar.CookiePolicy.set_ok"
-builtins.bool"builtins.bool*D
-self:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*¨
-	return_ok%http.cookiejar.CookiePolicy.return_ok"
-builtins.bool"builtins.bool*D
-self:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*®
-domain_return_ok,http.cookiejar.CookiePolicy.domain_return_ok"
-builtins.bool"builtins.bool*D
-self:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicy*(
-domain
-builtins.str"builtins.str*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*¢
-path_return_ok*http.cookiejar.CookiePolicy.path_return_ok"
-builtins.bool"builtins.bool*D
-self:
-http.cookiejar.CookiePolicy"http.cookiejar.CookiePolicy*&
-path
-builtins.str"builtins.str*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314j310j311j312j313j314ri
-netscape$http.cookiejar.CookiePolicy.netscape
-builtins.bool"builtins.bool*310*311*312*313*314rg
-rfc2965#http.cookiejar.CookiePolicy.rfc2965
-builtins.bool"builtins.bool*310*311*312*313*314rq
-hide_cookie2(http.cookiejar.CookiePolicy.hide_cookie2
-builtins.bool"builtins.bool*310*311*312*313*314çD
-DefaultCookiePolicy"http.cookiejar.DefaultCookiePolicy"http.cookiejar.CookiePolicy*ª	
-__init__+http.cookiejar.DefaultCookiePolicy.__init__"
-None*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*ü
-blocked_domainsá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *ü
-allowed_domainsá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *.
-netscape
-builtins.bool"builtins.bool *-
-rfc2965
-builtins.bool"builtins.bool *b
-rfc2109_as_netscapeG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *2
-hide_cookie2
-builtins.bool"builtins.bool *3
-strict_domain
-builtins.bool"builtins.bool *A
-strict_rfc2965_unverifiable
-builtins.bool"builtins.bool *<
-strict_ns_unverifiable
-builtins.bool"builtins.bool *4
-strict_ns_domain
-builtins.int"builtins.int *B
-strict_ns_set_initial_dollar
-builtins.bool"builtins.bool *8
-strict_ns_set_path
-builtins.bool"builtins.bool *f
-secure_protocolsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence z310z311z312z313z314*Ä
-blocked_domains2http.cookiejar.DefaultCookiePolicy.blocked_domains"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicyz310z311z312z313z314*©
-set_blocked_domains6http.cookiejar.DefaultCookiePolicy.set_blocked_domains"
-None*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*c
-blocked_domainsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequencez310z311z312z313z314*Ú
+self(*
+response(*
+request(*(
 
-is_blocked-http.cookiejar.DefaultCookiePolicy.is_blocked"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*(
-domain
-builtins.str"builtins.strz310z311z312z313z314*π
-allowed_domains2http.cookiejar.DefaultCookiePolicy.allowed_domains"Ñ
-(Union[builtins.tuple[builtins.str],None]L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicyz310z311z312z313z314*‰
-set_allowed_domains6http.cookiejar.DefaultCookiePolicy.set_allowed_domains"
-None*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*ù
-allowed_domainsá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-Nonez310z311z312z313z314*˙
-is_not_allowed1http.cookiejar.DefaultCookiePolicy.is_not_allowed"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*(
-domain
-builtins.str"builtins.strz310z311z312z313z314*À
-set_ok_version1http.cookiejar.DefaultCookiePolicy.set_ok_version"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*◊
-set_ok_verifiability7http.cookiejar.DefaultCookiePolicy.set_ok_verifiability"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*≈
-set_ok_name.http.cookiejar.DefaultCookiePolicy.set_ok_name"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*≈
-set_ok_path.http.cookiejar.DefaultCookiePolicy.set_ok_path"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*…
-set_ok_domain0http.cookiejar.DefaultCookiePolicy.set_ok_domain"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*≈
-set_ok_port.http.cookiejar.DefaultCookiePolicy.set_ok_port"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*—
-return_ok_version4http.cookiejar.DefaultCookiePolicy.return_ok_version"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*›
-return_ok_verifiability:http.cookiejar.DefaultCookiePolicy.return_ok_verifiability"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*œ
-return_ok_secure3http.cookiejar.DefaultCookiePolicy.return_ok_secure"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*—
-return_ok_expires4http.cookiejar.DefaultCookiePolicy.return_ok_expires"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*À
-return_ok_port1http.cookiejar.DefaultCookiePolicy.return_ok_port"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314*œ
-return_ok_domain3http.cookiejar.DefaultCookiePolicy.return_ok_domain"
-builtins.bool"builtins.bool*R
-selfH
-"http.cookiejar.DefaultCookiePolicy""http.cookiejar.DefaultCookiePolicy*:
-cookie.
-http.cookiejar.Cookie"http.cookiejar.Cookie*=
-request0
-urllib.request.Request"urllib.request.Requestz310z311z312z313z314j310j311j312j313j314rÜ
-rfc2109_as_netscape6http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape
-builtins.bool"builtins.bool*310*311*312*313*314rz
-strict_domain0http.cookiejar.DefaultCookiePolicy.strict_domain
-builtins.bool"builtins.bool*310*311*312*313*314rñ
-strict_rfc2965_unverifiable>http.cookiejar.DefaultCookiePolicy.strict_rfc2965_unverifiable
-builtins.bool"builtins.bool*310*311*312*313*314rå
-strict_ns_unverifiable9http.cookiejar.DefaultCookiePolicy.strict_ns_unverifiable
-builtins.bool"builtins.bool*310*311*312*313*314r~
-strict_ns_domain3http.cookiejar.DefaultCookiePolicy.strict_ns_domain
-builtins.int"builtins.int*310*311*312*313*314rò
-strict_ns_set_initial_dollar?http.cookiejar.DefaultCookiePolicy.strict_ns_set_initial_dollar
-builtins.bool"builtins.bool*310*311*312*313*314rÑ
-strict_ns_set_path5http.cookiejar.DefaultCookiePolicy.strict_ns_set_path
-builtins.bool"builtins.bool*310*311*312*313*314rÇ
-DomainStrictNoDots5http.cookiejar.DefaultCookiePolicy.DomainStrictNoDots
-builtins.int"builtins.int*310*311*312*313*314rà
-DomainStrictNonDomain8http.cookiejar.DefaultCookiePolicy.DomainStrictNonDomain
-builtins.int"builtins.int*310*311*312*313*314rÇ
-DomainRFC2965Match5http.cookiejar.DefaultCookiePolicy.DomainRFC2965Match
-builtins.int"builtins.int*310*311*312*313*314rx
-DomainLiberal0http.cookiejar.DefaultCookiePolicy.DomainLiberal
-builtins.int"builtins.int*310*311*312*313*314rv
-DomainStrict/http.cookiejar.DefaultCookiePolicy.DomainStrict
-builtins.int"builtins.int*310*311*312*313*314∂$
-Cookiehttp.cookiejar.Cookie"builtins.object*—	
-__init__http.cookiejar.Cookie.__init__"
-None*8
-self.
-http.cookiejar.Cookie"http.cookiejar.Cookie*Q
-versionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*&
-name
-builtins.str"builtins.str*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*2
-port_specified
-builtins.bool"builtins.bool*(
-domain
-builtins.str"builtins.str*4
-domain_specified
-builtins.bool"builtins.bool*6
-domain_initial_dot
-builtins.bool"builtins.bool*&
-path
-builtins.str"builtins.str*2
-path_specified
-builtins.bool"builtins.bool**
-secure
-builtins.bool"builtins.bool*Q
-expiresD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*+
-discard
-builtins.bool"builtins.bool*Q
-commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*U
-comment_urlD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*
-restu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*-
-rfc2109
-builtins.bool"builtins.bool z310z311z312z313z314*›
-has_nonstandard_attr*http.cookiejar.Cookie.has_nonstandard_attr"
-builtins.bool"builtins.bool*8
-self.
-http.cookiejar.Cookie"http.cookiejar.Cookie*&
-name
-builtins.str"builtins.strz310z311z312z313z314*
-set_nonstandard_attr*http.cookiejar.Cookie.set_nonstandard_attr"
-None*8
-self.
-http.cookiejar.Cookie"http.cookiejar.Cookie*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz310z311z312z313z314*Ú
+set_policy*
 
-is_expired http.cookiejar.Cookie.is_expired"
-builtins.bool"builtins.bool*8
-self.
-http.cookiejar.Cookie"http.cookiejar.Cookie*O
-nowD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z3142à
-get_nonstandard_attr*http.cookiejar.Cookie.get_nonstandard_attrˇ
-get_nonstandard_attr*http.cookiejar.Cookie.get_nonstandard_attr"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*8
-self.
-http.cookiejar.Cookie"http.cookiejar.Cookie*&
-name
-builtins.str"builtins.str0:typing.overloadX®
-get_nonstandard_attr*http.cookiejar.Cookie.get_nonstandard_attr"ì
-%Union[builtins.str,http.cookiejar._T]
-builtins.str"builtins.strJ
-http.cookiejar._T"
-builtins.object"builtins.object"builtins.object*8
-self.
-http.cookiejar.Cookie"http.cookiejar.Cookie*&
-name
-builtins.str"builtins.str*W
-defaultJ
-http.cookiejar._T"
-builtins.object"builtins.object"builtins.object0:typing.overloadX"310"311"312"313"314j310j311j312j313j314rá
-versionhttp.cookiejar.Cookie.versionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rY
-namehttp.cookiejar.Cookie.name
-builtins.str"builtins.str*310*311*312*313*314rÉ
-valuehttp.cookiejar.Cookie.valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÅ
-porthttp.cookiejar.Cookie.portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rY
-pathhttp.cookiejar.Cookie.path
-builtins.str"builtins.str*310*311*312*313*314ro
-path_specified$http.cookiejar.Cookie.path_specified
-builtins.bool"builtins.bool*310*311*312*313*314r_
-securehttp.cookiejar.Cookie.secure
-builtins.bool"builtins.bool*310*311*312*313*314rá
-expireshttp.cookiejar.Cookie.expiresD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314ra
-discardhttp.cookiejar.Cookie.discard
-builtins.bool"builtins.bool*310*311*312*313*314rá
-commenthttp.cookiejar.Cookie.commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rè
-comment_url!http.cookiejar.Cookie.comment_urlD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314ra
-rfc2109http.cookiejar.Cookie.rfc2109
-builtins.bool"builtins.bool*310*311*312*313*314ro
-port_specified$http.cookiejar.Cookie.port_specified
-builtins.bool"builtins.bool*310*311*312*313*314r]
-domainhttp.cookiejar.Cookie.domain
-builtins.str"builtins.str*310*311*312*313*314rs
-domain_specified&http.cookiejar.Cookie.domain_specified
-builtins.bool"builtins.bool*310*311*312*313*314rw
-domain_initial_dot(http.cookiejar.Cookie.domain_initial_dot
-builtins.bool"builtins.bool*310*311*312*313*314*£
-__annotations__http.cookiejar.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Ü
-__all__http.cookiejar.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+self(*
+policy(*;
+make_cookies*
+
+self(*
+response(*
+request(*(
+
+set_cookie*
+
+self(*
+cookie(*=
+set_cookie_if_ok*
+
+self(*
+cookie(*
+request(*A
+clear*
+
+self(*
+domain (
+*
+path (
+*
+name (
+*%
+clear_session_cookies*
+
+self(*%
+clear_expired_cookies*
+
+self(*
+__iter__*(*
+__len__*(r
+non_word_re0r
+quote_re0r
+strict_domain_re0r
+	domain_re0r
+dots_re0r
+magic_re0ü
+FileCookieJar"http.cookiejar.CookieJar*M
+__init__*
+
+self(*
+filename (*
+	delayload (*
+policy (*V
+save*
+
+self(*
+filename (
+*
+ignore_discard (*
+ignore_expires (*V
+load*
+
+self(*
+filename (
+*
+ignore_discard (*
+ignore_expires (*X
+revert*
+
+self(*
+filename (
+*
+ignore_discard (*
+ignore_expires (r
+filename0	r
+	delayload00
+MozillaCookieJar"http.cookiejar.FileCookieJarx
+LWPCookieJar"http.cookiejar.FileCookieJar*J
+
+as_lwp_str	*
+
+self(*
+ignore_discard (*
+ignore_expires (≥
+CookiePolicy"builtins.object*3
+set_ok*
+
+self(*
+cookie(*
+request(*6
+	return_ok*
+
+self(*
+cookie(*
+request(*=
+domain_return_ok*
+
+self(*
+domain(	*
+request(*9
+path_return_ok*
+
+self(*
+
+path(	*
+request(r
+netscape0r
+rfc29650r
+hide_cookie20Õ
+DefaultCookiePolicy"http.cookiejar.CookiePolicy*Ú
+__init__*
+
+self(*
+blocked_domains (*
+allowed_domains (*
+netscape (*
+rfc2965 (*
+rfc2109_as_netscape (*
+hide_cookie2 (*
+strict_domain (*#
+strict_rfc2965_unverifiable (*
+strict_ns_unverifiable (*
+strict_ns_domain (*$
+strict_ns_set_initial_dollar (*
+strict_ns_set_path (*
+secure_protocols (*
+blocked_domains*
+
+self(*:
+set_blocked_domains*
+
+self(*
+blocked_domains(*(
+
+is_blocked*
+
+self(*
+domain(	*
+allowed_domains*
+
+self(*:
+set_allowed_domains*
+
+self(*
+allowed_domains(*,
+is_not_allowed*
+
+self(*
+domain(	*;
+set_ok_version*
+
+self(*
+cookie(*
+request(*A
+set_ok_verifiability*
+
+self(*
+cookie(*
+request(*8
+set_ok_name*
+
+self(*
+cookie(*
+request(*8
+set_ok_path*
+
+self(*
+cookie(*
+request(*:
+set_ok_domain*
+
+self(*
+cookie(*
+request(*8
+set_ok_port*
+
+self(*
+cookie(*
+request(*>
+return_ok_version*
+
+self(*
+cookie(*
+request(*D
+return_ok_verifiability*
+
+self(*
+cookie(*
+request(*=
+return_ok_secure*
+
+self(*
+cookie(*
+request(*>
+return_ok_expires*
+
+self(*
+cookie(*
+request(*;
+return_ok_port*
+
+self(*
+cookie(*
+request(*=
+return_ok_domain*
+
+self(*
+cookie(*
+request(r
+rfc2109_as_netscape0r
+strict_domain0r
+strict_rfc2965_unverifiable0r
+strict_ns_unverifiable0r
+strict_ns_domain0r 
+strict_ns_set_initial_dollar0r
+strict_ns_set_path0r
+DomainStrictNoDots0r
+DomainStrictNonDomain0r
+DomainRFC2965Match0r
+DomainLiberal0r
+DomainStrict0Ñ
+Cookie"builtins.object*Ø
+__init__*
+
+self(*
+version(*
+
+name(	*
+value(
+*
+
+port(
+*
+port_specified(*
+domain(	*
+domain_specified(*
+domain_initial_dot(*
+
+path(	*
+path_specified(*
+secure(*
+expires(*
+discard(*
+comment(
+*
+comment_url(
+*
+
+rest(*
+rfc2109 (*0
+has_nonstandard_attr*
+
+self(*
+
+name(	*=
+set_nonstandard_attr*
+
+self(*
+
+name(	*
+value(	*'
+
+is_expired*
+
+self(*
+now (2≥
+get_nonstandard_attrE
+get_nonstandard_attr
+*
+
+self(*
+
+name(	0:typing.overloadXT
+get_nonstandard_attr*
+
+self(*
+
+name(	*
+default(0:typing.overloadXr
+version0r
+name0	r	
+value0
+r
+port0
+r
+path0	r
+path_specified0r
+
+secure0r
+expires0r
+discard0r
+comment0
+r
+comment_url0
+r
+rfc21090r
+port_specified0r
+
+domain0	r
+domain_specified0r
+domain_initial_dot0*
+__annotations__0!*
+__all__0"22"http.cookiejar.CookieJar2"http.cookiejar.CookiePolicy222"urllib.request.Request2"http.client.HTTPResponse2"http.cookiejar.Cookie2"typing.Sequence22"builtins.str22	2"typing.Iterator22"builtins.int2"
+re.Pattern2	2"http.cookiejar.FileCookieJar2"os.PathLike2	22	2"_typeshed.StrPath2222"builtins.bool2"http.cookiejar.LWPCookieJar2$""http.cookiejar.DefaultCookiePolicy2"typing.Sequence2	22222"builtins.tuple2	22222"builtins.dict2		2"builtins.object2"builtins.object222	22"builtins.dict2	 2"builtins.list2	

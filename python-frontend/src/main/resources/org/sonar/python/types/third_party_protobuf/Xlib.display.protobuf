@@ -1,753 +1,406 @@
 
-Xlib.displaym
-_ResourceBaseClassesType%Xlib.display._ResourceBaseClassesType"typing._TypedDictj310j311j312j313j314 
-_BaseDisplayXlib.display._BaseDisplay"builtins.object*Ë
-__init__"Xlib.display._BaseDisplay.__init__"
-None*@
-self6
-Xlib.display._BaseDisplay"Xlib.display._BaseDisplay*S
-displayD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*â
-get_atom"Xlib.display._BaseDisplay.get_atom"
-builtins.int"builtins.int*@
-self6
-Xlib.display._BaseDisplay"Xlib.display._BaseDisplay**
-atomname
-builtins.str"builtins.str*4
-only_if_exists
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314⁄«
-DisplayXlib.display.Display"builtins.object*Ÿ
-__init__Xlib.display.Display.__init__"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*S
-displayD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*®
-get_display_name%Xlib.display.Display.get_display_name"
-builtins.str"builtins.str*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*î
-filenoXlib.display.Display.fileno"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*~
-closeXlib.display.Display.close"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*Ñ
-set_error_handler&Xlib.display.Display.set_error_handler"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*Î
-handler›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-Nonez310z311z312z313z314*~
-flushXlib.display.Display.flush"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*|
-syncXlib.display.Display.sync"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*∞
+Xlib.display-
+_ResourceBaseClassesType"typing._TypedDictå
+_BaseDisplay"builtins.object*)
+__init__*
 
-next_eventXlib.display.Display.next_event"0
-Xlib.protocol.rq.Event"Xlib.protocol.rq.Event*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*§
-pending_events#Xlib.display.Display.pending_events"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*—
-has_extension"Xlib.display.Display.has_extension"
-builtins.bool"builtins.bool*6
-self,
-Xlib.display.Display"Xlib.display.Display*+
-	extension
-builtins.str"builtins.strz310z311z312z313z314*æ
-__getattr__ Xlib.display.Display.__getattr__"$
-types.MethodType"types.MethodType*.,
-Xlib.display.Display"Xlib.display.Display*
-builtins.str"builtins.strz310z311z312z313z314*˚
-screenXlib.display.Display.screen"2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*6
-self,
-Xlib.display.Display"Xlib.display.Display*O
-snoD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*†
-screen_count!Xlib.display.Display.screen_count"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*¨
-get_default_screen'Xlib.display.Display.get_default_screen"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*…
-extension_add_method)Xlib.display.Display.extension_add_method"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*(
-object
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.str*Y
-functionK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*Ω
-extension_add_event(Xlib.display.Display.extension_add_event"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-code
-builtins.int"builtins.int*'
-evt
-builtins.type"builtins.type*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*–
-extension_add_subevent+Xlib.display.Display.extension_add_subevent"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-code
-builtins.int"builtins.int*Q
-subcodeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*a
-evtX
-Type[Xlib.protocol.rq.Event]0
-Xlib.protocol.rq.Event"Xlib.protocol.rq.Event"type*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ñ
-extension_add_error(Xlib.display.Display.extension_add_error"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-code
-builtins.int"builtins.int*R
-errI
-Type[Xlib.error.XError]&
-Xlib.error.XError"Xlib.error.XError"typez310z311z312z313z314*˛
-keycode_to_keysym&Xlib.display.Display.keycode_to_keysym"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*)
-keycode
-builtins.int"builtins.int*'
-index
-builtins.int"builtins.intz310z311z312z313z314*‘
-keysym_to_keycode&Xlib.display.Display.keysym_to_keycode"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*(
-keysym
-builtins.int"builtins.intz310z311z312z313z314*·
-keysym_to_keycodes'Xlib.display.Display.keysym_to_keycodes"¶
-1typing.Iterable[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"typing.Iterable*6
-self,
-Xlib.display.Display"Xlib.display.Display*(
-keysym
-builtins.int"builtins.intz310z311z312z313z314*ﬂ
-refresh_keyboard_mapping-Xlib.display.Display.refresh_keyboard_mapping"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*9
-evt0
-Xlib.protocol.rq.Event"Xlib.protocol.rq.Eventz310z311z312z313z314*Ù
-lookup_string"Xlib.display.Display.lookup_string"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*(
-keysym
-builtins.int"builtins.intz310z311z312z313z314*ç
-rebind_string"Xlib.display.Display.rebind_string"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*(
-keysym
-builtins.int"builtins.int*S
-	newstringD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez310z311z312z313z314*¸
-intern_atom Xlib.display.Display.intern_atom"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-name
-builtins.str"builtins.str*4
-only_if_exists
-builtins.bool"builtins.bool z310z311z312z313z314*ˆ
-get_atomXlib.display.Display.get_atom"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-atom
-builtins.str"builtins.str*4
-only_if_exists
-builtins.bool"builtins.bool z310z311z312z313z314* 
-get_atom_name"Xlib.display.Display.get_atom_name"
-builtins.str"builtins.str*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-atom
-builtins.int"builtins.intz310z311z312z313z314*€
-get_selection_owner(Xlib.display.Display.get_selection_owner"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*+
-	selection
-builtins.int"builtins.intz310z311z312z313z314*≈
+self(*
+display (*@
+get_atom*
 
-send_eventXlib.display.Display.send_event"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*-
-destination
-builtins.int"builtins.int*;
-event0
-Xlib.protocol.rq.Event"Xlib.protocol.rq.Event*.
+self(*
+atomname(*
+only_if_exists (õ$
+Display"builtins.object*)
+__init__*
 
-event_mask
-builtins.int"builtins.int */
-	propagate
-builtins.bool"builtins.bool *Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*®
-ungrab_pointer#Xlib.display.Display.ungrab_pointer"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-time
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*É
-change_active_pointer_grab/Xlib.display.Display.change_active_pointer_grab"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*,
+self(*
+display (* 
+get_display_name*
 
-event_mask
-builtins.int"builtins.int*
-cursor
-Any*&
-time
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*™
-ungrab_keyboard$Xlib.display.Display.ungrab_keyboard"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-time
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ã
-allow_events!Xlib.display.Display.allow_events"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-mode
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*˙
-grab_server Xlib.display.Display.grab_server"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*˛
-ungrab_server"Xlib.display.Display.ungrab_server"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*´
-warp_pointer!Xlib.display.Display.warp_pointer"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*.
+self(*
+fileno*
 
-src_window
-builtins.int"builtins.int *)
-src_x
-builtins.int"builtins.int *)
-src_y
-builtins.int"builtins.int *-
-	src_width
-builtins.int"builtins.int *.
+self(*
+close*
 
-src_height
-builtins.int"builtins.int *Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ä
-set_input_focus$Xlib.display.Display.set_input_focus"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*'
-focus
-builtins.int"builtins.int*+
-	revert_to
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*‘
-get_input_focus$Xlib.display.Display.get_input_focus"J
-#Xlib.protocol.request.GetInputFocus"#Xlib.protocol.request.GetInputFocus*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*§
-query_keymap!Xlib.display.Display.query_keymap" 
-builtins.bytes"builtins.bytes*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*‘
-	open_fontXlib.display.Display.open_font"≠
-AUnion[TypeAlias[Union[Any,Any,Any,Any,Any,Any,Any,Any,Any]],None]€
-5TypeAlias[Union[Any,Any,Any,Any,Any,Any,Any,Any,Any]]
-*Union[Any,Any,Any,Any,Any,Any,Any,Any,Any]
-Any
-Any
-Any
-Any
-Any
-Any
-Any
-Any
-Any"Xlib.display._ResourceBaseClass
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-name
-builtins.str"builtins.strz310z311z312z313z314*ú
+self(*0
+set_error_handler*
 
-list_fontsXlib.display.Display.list_fonts"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-Xlib.display.Display"Xlib.display.Display*¢
-patternî
-,Union[re.Pattern[builtins.str],builtins.str]D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern
-builtins.str"builtins.str*+
-	max_names
-builtins.int"builtins.intz310z311z312z313z314*∏
-list_fonts_with_info)Xlib.display.Display.list_fonts_with_info"R
-'Xlib.protocol.request.ListFontsWithInfo"'Xlib.protocol.request.ListFontsWithInfo*6
-self,
-Xlib.display.Display"Xlib.display.Display*¢
-patternî
-,Union[re.Pattern[builtins.str],builtins.str]D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern
-builtins.str"builtins.str*+
-	max_names
-builtins.int"builtins.intz310z311z312z313z314*ÿ
-set_font_path"Xlib.display.Display.set_font_path"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*X
-pathN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*–
-get_font_path"Xlib.display.Display.get_font_path"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*ø
-query_extension$Xlib.display.Display.query_extension"å
-0Union[Xlib.protocol.request.QueryExtension,None]L
-$Xlib.protocol.request.QueryExtension"$Xlib.protocol.request.QueryExtension
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-name
-builtins.str"builtins.strz310z311z312z313z314*‘
-list_extensions$Xlib.display.Display.list_extensions"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*Â
-change_keyboard_mapping,Xlib.display.Display.change_keyboard_mapping"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*/
-first_keycode
-builtins.int"builtins.int*ü
-keysymsë
-.typing.Sequence[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"typing.Sequence*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*˘
-get_keyboard_mapping)Xlib.display.Display.get_keyboard_mapping"ä
-+builtins.list[builtins.tuple[builtins.int]]L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple"builtins.list*6
-self,
-Xlib.display.Display"Xlib.display.Display*/
-first_keycode
-builtins.int"builtins.int*'
-count
-builtins.int"builtins.intz310z311z312z313z314*¿
-change_keyboard_control,Xlib.display.Display.change_keyboard_control"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*Ë
-get_keyboard_control)Xlib.display.Display.get_keyboard_control"T
-(Xlib.protocol.request.GetKeyboardControl"(Xlib.protocol.request.GetKeyboardControl*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*ô
-bellXlib.display.Display.bell"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*+
-percent
-builtins.int"builtins.int *Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*î
-change_pointer_control+Xlib.display.Display.change_pointer_control"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*™
-accelú
-,Union[Tuple[builtins.int,builtins.int],None]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-None *U
-	thresholdD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*‰
-get_pointer_control(Xlib.display.Display.get_pointer_control"R
-'Xlib.protocol.request.GetPointerControl"'Xlib.protocol.request.GetPointerControl*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*æ
-set_screen_saver%Xlib.display.Display.set_screen_saver"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*)
-timeout
-builtins.int"builtins.int**
-interval
-builtins.int"builtins.int*.
-prefer_blank
-builtins.int"builtins.int*1
-allow_exposures
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ÿ
-get_screen_saver%Xlib.display.Display.get_screen_saver"L
-$Xlib.protocol.request.GetScreenSaver"$Xlib.protocol.request.GetScreenSaver*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*œ
-change_hosts!Xlib.display.Display.change_hosts"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-mode
-builtins.int"builtins.int*-
-host_family
-builtins.int"builtins.int*˘
-hostÓ
-DUnion[typing.Sequence[builtins.int],typing.Sequence[builtins.bytes]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.SequenceT
-typing.Sequence[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Sequence*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¬
+self(*
+handler(*
+flush*
 
-list_hostsXlib.display.Display.list_hosts"B
-Xlib.protocol.request.ListHosts"Xlib.protocol.request.ListHosts*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*∞
-set_access_control'Xlib.display.Display.set_access_control"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-mode
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*≤
-set_close_down_mode(Xlib.display.Display.set_close_down_mode"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-mode
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*∞
-force_screen_saver'Xlib.display.Display.force_screen_saver"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-mode
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*á
-set_pointer_mapping(Xlib.display.Display.set_pointer_mapping"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*W
-mapN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequencez310z311z312z313z314*‹
-get_pointer_mapping(Xlib.display.Display.get_pointer_mapping"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*√
-set_modifier_mapping)Xlib.display.Display.set_modifier_mapping"
-builtins.int"builtins.int*6
-self,
-Xlib.display.Display"Xlib.display.Display*ê
-keycodesÅ
-9TypeAlias[typing.Sequence[typing.Sequence[builtins.int]]]ë
-.typing.Sequence[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"typing.Sequence".Xlib.protocol.rq._ModifierMappingList8Elementsz310z311z312z313z314*¶
-get_modifier_mapping)Xlib.display.Display.get_modifier_mapping"ë
-.typing.Sequence[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"typing.Sequence*6
-self,
-Xlib.display.Display"Xlib.display.Displayz310z311z312z313z314*¸
-no_operation!Xlib.display.Display.no_operation"
-None*6
-self,
-Xlib.display.Display"Xlib.display.Display*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z3142â
-create_resource_object+Xlib.display.Display.create_resource_objectÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÑ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*A
-type7
-Literal[builtins.str]	
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadXÈ
-create_resource_object+Xlib.display.Display.create_resource_object"
-Any*6
-self,
-Xlib.display.Display"Xlib.display.Display*&
-type
-builtins.str"builtins.str*$
-id
-builtins.int"builtins.int0:typing.overloadX"310"311"312"313"314j310j311j312j313j314rx
-displayXlib.display.Display.display6
-Xlib.display._BaseDisplay"Xlib.display._BaseDisplay*310*311*312*313*314rœ
-keysym_translations(Xlib.display.Display.keysym_translationsu
-(builtins.dict[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.dict*310*311*312*313*314rí
+self(*
+sync*
 
-extensionsXlib.display.Display.extensionsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r‚
-class_extension_dicts*Xlib.display.Display.class_extension_dictsÉ
-Jbuiltins.dict[builtins.str,builtins.dict[builtins.str,types.FunctionType]]
-builtins.str"builtins.strá
-.builtins.dict[builtins.str,types.FunctionType]
-builtins.str"builtins.str(
-types.FunctionType"types.FunctionType"builtins.dict"builtins.dict*310*311*312*313*314rû
-display_extension_methods.Xlib.display.Display.display_extension_methods∑
-;builtins.dict[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dict*310*311*312*313*314ré
-extension_event$Xlib.display.Display.extension_event<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapper*310*311*312*313*314*°
-__annotations__Xlib.display.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+
+next_event*
+
+self(*
+pending_events*
+
+self(*.
+has_extension*
+
+self(*
+	extension(*
+__getattr__*(*(*#
+screen*
+
+self(*
+sno (*
+screen_count*
+
+self(*"
+get_default_screen*
+
+self(*N
+extension_add_method*
+
+self(*
+object(*
+
+name(*
+function(	*H
+extension_add_event*
+
+self(*
+
+code(*	
+evt(*
+name (*Z
+extension_add_subevent*
+
+self(*
+
+code(*
+subcode(*	
+evt(*
+name (*:
+extension_add_error*
+
+self(*
+
+code(*	
+err(*=
+keycode_to_keysym*
+
+self(*
+keycode(*
+index(*/
+keysym_to_keycode*
+
+self(*
+keysym(*0
+keysym_to_keycodes*
+
+self(*
+keysym(*3
+refresh_keyboard_mapping*
+
+self(*	
+evt(*+
+lookup_string*
+
+self(*
+keysym(*<
+rebind_string*
+
+self(*
+keysym(*
+	newstring(*?
+intern_atom*
+
+self(*
+
+name(*
+only_if_exists (*<
+get_atom*
+
+self(*
+
+atom(*
+only_if_exists (*)
+get_atom_name*
+
+self(*
+
+atom(*4
+get_selection_owner*
+
+self(*
+	selection(*r
+
+send_event*
+
+self(*
+destination(*
+event(*
+
+event_mask (*
+	propagate (*
+onerror (*;
+ungrab_pointer*
+
+self(*
+
+time(*
+onerror (*g
+change_active_pointer_grab*
+
+self(*
+
+event_mask(*
+cursor(*
+
+time(*
+onerror (*<
+ungrab_keyboard*
+
+self(*
+
+time(*
+onerror (*E
+allow_events*
+
+self(*
+
+mode(*
+
+time(*
+onerror (*,
+grab_server*
+
+self(*
+onerror (*.
+ungrab_server*
+
+self(*
+onerror (*ò
+warp_pointer*
+
+self(*
+x(*
+y(*
+
+src_window (*
+src_x (*
+src_y (*
+	src_width (*
+
+src_height (*
+onerror (*Z
+set_input_focus*
+
+self(*
+focus(*
+	revert_to(*
+
+time(*
+onerror (*
+get_input_focus*
+
+self(*
+query_keymap*
+
+self(*%
+	open_font*
+
+self(*
+
+name(*:
+
+list_fonts*
+
+self(*
+pattern(*
+	max_names(*D
+list_fonts_with_info*
+
+self(*
+pattern(*
+	max_names(*:
+set_font_path*
+
+self(*
+
+path( *
+onerror (*
+get_font_path*
+
+self(*+
+query_extension"*
+
+self(*
+
+name(*
+list_extensions*
+
+self(*\
+change_keyboard_mapping*
+
+self(*
+first_keycode(*
+keysyms($*
+onerror (*F
+get_keyboard_mapping&*
+
+self(*
+first_keycode(*
+count(*D
+change_keyboard_control*
+
+self(*
+onerror (*
+
+keys('*$
+get_keyboard_control(*
+
+self(*6
+bell*
+
+self(*
+percent (*
+onerror (*Y
+change_pointer_control*
+
+self(*
+accel ()*
+	threshold (*
+onerror (*#
+get_pointer_control**
+
+self(*{
+set_screen_saver*
+
+self(*
+timeout(*
+interval(*
+prefer_blank(*
+allow_exposures(*
+onerror (* 
+get_screen_saver+*
+
+self(*X
+change_hosts*
+
+self(*
+
+mode(*
+host_family(*
+
+host(-*
+onerror (*
+
+list_hosts.*
+
+self(*?
+set_access_control*
+
+self(*
+
+mode(*
+onerror (*@
+set_close_down_mode*
+
+self(*
+
+mode(*
+onerror (*?
+force_screen_saver*
+
+self(*
+
+mode(*
+onerror (*.
+set_pointer_mapping*
+
+self(*	
+map(#*#
+get_pointer_mapping/*
+
+self(*4
+set_modifier_mapping*
+
+self(*
+keycodes(0*$
+get_modifier_mapping$*
+
+self(*-
+no_operation*
+
+self(*
+onerror (2÷
+create_resource_objectQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(1*
+id(0:typing.overloadXQ
+create_resource_object*
+
+self(*
+
+type(*
+id(0:typing.overloadXr
+display0r
+keysym_translations02r
+
+extensions0r
+class_extension_dicts05r
+display_extension_methods06r
+extension_event07*
+__annotations__0822"Xlib.display._BaseDisplay2"builtins.str222"builtins.int2"builtins.bool2"Xlib.display.Display2"builtins.function222 "Xlib._typing.ErrorHandler2	22
+2"Xlib.protocol.rq.Event2"types.MethodType2"Xlib.protocol.rq.Struct222"builtins.type2"type22"Xlib.error.XError2"type2222"typing.Iterable222%"#Xlib.protocol.request.GetInputFocus2"builtins.bytes22	2&"Xlib.display._ResourceBaseClass2222"builtins.list22"
+re.Pattern2222)"'Xlib.protocol.request.ListFontsWithInfo2"typing.Sequence22&"$Xlib.protocol.request.QueryExtension22!2"typing.Sequence22"typing.Sequence2#2"builtins.tuple22"builtins.list2%2"builtins.object2*"(Xlib.protocol.request.GetKeyboardControl222)"'Xlib.protocol.request.GetPointerControl2&"$Xlib.protocol.request.GetScreenSaver2"typing.Sequence222#,2!"Xlib.protocol.request.ListHosts2"builtins.list225".Xlib.protocol.rq._ModifierMappingList8Elements2$2	22"builtins.dict22"types.FunctionType2"builtins.dict232"builtins.dict242"builtins.dict2	2"Xlib.protocol.rq.DictWrapper2"builtins.dict2

@@ -1,287 +1,170 @@
 
-serial.tools.miniterm´
-ConsoleBase!serial.tools.miniterm.ConsoleBase"builtins.object*´
-__init__*serial.tools.miniterm.ConsoleBase.__init__"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBasez310z311z312z313z314*•
-setup'serial.tools.miniterm.ConsoleBase.setup"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBasez310z311z312z313z314*©
-cleanup)serial.tools.miniterm.ConsoleBase.cleanup"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBasez310z311z312z313z314*ß
-getkey(serial.tools.miniterm.ConsoleBase.getkey"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBasez310z311z312z313z314*‰
-write_bytes-serial.tools.miniterm.ConsoleBase.write_bytes"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase*1
-byte_string 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Õ
-write'serial.tools.miniterm.ConsoleBase.write"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase*&
-text
-builtins.str"builtins.strz310z311z312z313z314*ß
-cancel(serial.tools.miniterm.ConsoleBase.cancel"
-None*P
-selfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBasez310z311z312z313z314*à
-	__enter__+serial.tools.miniterm.ConsoleBase.__enter__"ó
-&serial.tools.miniterm.ConsoleBase.SelfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase(*öó
-&serial.tools.miniterm.ConsoleBase.SelfF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase(z310z311z312z313z314*Û
-__exit__*serial.tools.miniterm.ConsoleBase.__exit__"
-None*HF
-!serial.tools.miniterm.ConsoleBase"!serial.tools.miniterm.ConsoleBase*&"
-builtins.object"builtins.object*&"
-builtins.object"builtins.objectz310z311z312z313z314j310j311j312j313j314ry
-byte_output-serial.tools.miniterm.ConsoleBase.byte_output"
-typing.BinaryIO"typing.BinaryIO*310*311*312*313*314r≈
-output(serial.tools.miniterm.ConsoleBase.outputx
-(Union[codecs.StreamWriter,typing.TextIO]*
-codecs.StreamWriter"codecs.StreamWriter
-typing.TextIO"typing.TextIO*310*311*312*313*314£
-Consoleserial.tools.miniterm.Console"!serial.tools.miniterm.ConsoleBasej310j311j312j313j314r]
-fd serial.tools.miniterm.Console.fd
-builtins.int"builtins.int*310*311*312*313*314ro
-old!serial.tools.miniterm.Console.old,
-builtins.list[Any]
-Any"builtins.list*310*311*312*313*314rm
-	enc_stdin'serial.tools.miniterm.Console.enc_stdin
-typing.TextIO"typing.TextIO*310*311*312*313*314‚
-	Transformserial.tools.miniterm.Transform"builtins.object*’
-rx"serial.tools.miniterm.Transform.rx"
-builtins.str"builtins.str*L
-selfB
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform*&
-text
-builtins.str"builtins.strz310z311z312z313z314*’
-tx"serial.tools.miniterm.Transform.tx"
-builtins.str"builtins.str*L
-selfB
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform*&
-text
-builtins.str"builtins.strz310z311z312z313z314*Ÿ
-echo$serial.tools.miniterm.Transform.echo"
-builtins.str"builtins.str*L
-selfB
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform*&
-text
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314\
-CRLFserial.tools.miniterm.CRLF"serial.tools.miniterm.Transformj310j311j312j313j314X
-CRserial.tools.miniterm.CR"serial.tools.miniterm.Transformj310j311j312j313j314X
-LFserial.tools.miniterm.LF"serial.tools.miniterm.Transformj310j311j312j313j314æ
+serial.tools.minitermπ
+ConsoleBase"builtins.object*
+__init__*
 
-NoTerminal serial.tools.miniterm.NoTerminal"serial.tools.miniterm.Transformj310j311j312j313j314r”
-REPLACEMENT_MAP0serial.tools.miniterm.NoTerminal.REPLACEMENT_MAPu
-(builtins.dict[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.dict*310*311*312*313*314ø
+self(*
+setup*
 
-NoControls serial.tools.miniterm.NoControls" serial.tools.miniterm.NoTerminalj310j311j312j313j314r”
-REPLACEMENT_MAP0serial.tools.miniterm.NoControls.REPLACEMENT_MAPu
-(builtins.dict[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.dict*310*311*312*313*314f
-	Printableserial.tools.miniterm.Printable"serial.tools.miniterm.Transformj310j311j312j313j314∆
-Colorizeserial.tools.miniterm.Colorize"serial.tools.miniterm.Transformj310j311j312j313j314rp
-input_color*serial.tools.miniterm.Colorize.input_color
-builtins.str"builtins.str*310*311*312*313*314rn
+self(*
+cleanup*
 
-echo_color)serial.tools.miniterm.Colorize.echo_color
-builtins.str"builtins.str*310*311*312*313*314b
-DebugIOserial.tools.miniterm.DebugIO"serial.tools.miniterm.Transformj310j311j312j313j314√3
-Minitermserial.tools.miniterm.Miniterm"builtins.object*£
-__init__'serial.tools.miniterm.Miniterm.__init__"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Miniterm*K
-serial_instance6
-serial.serialposix.Serial"serial.serialposix.Serial**
-echo
-builtins.bool"builtins.bool *'
-eol
-builtins.str"builtins.str *]
-filtersN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable z310z311z312z313z314*ú
-start$serial.tools.miniterm.Miniterm.start"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*ö
-stop#serial.tools.miniterm.Miniterm.stop"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*œ
-join#serial.tools.miniterm.Miniterm.join"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Miniterm*3
-transmit_only
-builtins.bool"builtins.bool z310z311z312z313z314*ú
-close$serial.tools.miniterm.Miniterm.close"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*æ
-update_transformations5serial.tools.miniterm.Miniterm.update_transformations"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*à
-set_rx_encoding.serial.tools.miniterm.Miniterm.set_rx_encoding"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Miniterm**
-encoding
-builtins.str"builtins.str**
-errors
-builtins.str"builtins.str z310z311z312z313z314*à
-set_tx_encoding.serial.tools.miniterm.Miniterm.set_tx_encoding"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Miniterm**
-encoding
-builtins.str"builtins.str**
-errors
-builtins.str"builtins.str z310z311z312z313z314*∂
-dump_port_settings1serial.tools.miniterm.Miniterm.dump_port_settings"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*û
-reader%serial.tools.miniterm.Miniterm.reader"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*û
-writer%serial.tools.miniterm.Miniterm.writer"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*’
-handle_menu_key.serial.tools.miniterm.Miniterm.handle_menu_key"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Miniterm*#
-c
-builtins.str"builtins.strz310z311z312z313z314*®
-upload_file*serial.tools.miniterm.Miniterm.upload_file"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*¨
-change_filter,serial.tools.miniterm.Miniterm.change_filter"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*∞
-change_encoding.serial.tools.miniterm.Miniterm.change_encoding"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*∞
-change_baudrate.serial.tools.miniterm.Miniterm.change_baudrate"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*®
-change_port*serial.tools.miniterm.Miniterm.change_port"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*™
-suspend_port+serial.tools.miniterm.Miniterm.suspend_port"
-None*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314*¿
-get_help_text,serial.tools.miniterm.Miniterm.get_help_text"
-builtins.str"builtins.str*J
-self@
-serial.tools.miniterm.Miniterm"serial.tools.miniterm.Minitermz310z311z312z313z314j310j311j312j313j314rä
-console&serial.tools.miniterm.Miniterm.console>
-serial.tools.miniterm.Console"serial.tools.miniterm.Console*310*311*312*313*314rÄ
-serial%serial.tools.miniterm.Miniterm.serial6
-serial.serialposix.Serial"serial.serialposix.Serial*310*311*312*313*314rd
-echo#serial.tools.miniterm.Miniterm.echo
-builtins.bool"builtins.bool*310*311*312*313*314rb
-raw"serial.tools.miniterm.Miniterm.raw
-builtins.bool"builtins.bool*310*311*312*313*314rv
-input_encoding-serial.tools.miniterm.Miniterm.input_encoding
-builtins.str"builtins.str*310*311*312*313*314rx
-output_encoding.serial.tools.miniterm.Miniterm.output_encoding
-builtins.str"builtins.str*310*311*312*313*314r`
-eol"serial.tools.miniterm.Miniterm.eol
-builtins.str"builtins.str*310*311*312*313*314rö
-filters&serial.tools.miniterm.Miniterm.filtersN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*310*311*312*313*314rv
-exit_character-serial.tools.miniterm.Miniterm.exit_character
-builtins.str"builtins.str*310*311*312*313*314rv
-menu_character-serial.tools.miniterm.Miniterm.menu_character
-builtins.str"builtins.str*310*311*312*313*314rè
-alive$serial.tools.miniterm.Miniterm.aliveG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*310*311*312*313*314r¨
-receiver_thread.serial.tools.miniterm.Miniterm.receiver_threadP
-Union[threading.Thread,None]$
-threading.Thread"threading.Thread
-None*310*311*312*313*314rΩ
+self(*
+getkey*
 
-rx_decoder)serial.tools.miniterm.Miniterm.rx_decoderk
-%Union[codecs.IncrementalDecoder,None]6
-codecs.IncrementalDecoder"codecs.IncrementalDecoder
-None*310*311*312*313*314rΩ
+self(*.
+write_bytes*
 
-tx_decoder)serial.tools.miniterm.Miniterm.tx_decoderk
-%Union[codecs.IncrementalDecoder,None]6
-codecs.IncrementalDecoder"codecs.IncrementalDecoder
-None*310*311*312*313*314rΩ
+self(*
+byte_string(*!
+write*
 
-tx_encoder)serial.tools.miniterm.Miniterm.tx_encoderk
-%Union[codecs.IncrementalEncoder,None]6
-codecs.IncrementalEncoder"codecs.IncrementalEncoder
-None*310*311*312*313*314rÜ
-transmitter_thread1serial.tools.miniterm.Miniterm.transmitter_thread$
-threading.Thread"threading.Thread*310*311*312*313*314rÊ
-tx_transformations1serial.tools.miniterm.Miniterm.tx_transformationsÉ
-.builtins.list[serial.tools.miniterm.Transform]B
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform"builtins.list*310*311*312*313*314rÊ
-rx_transformations1serial.tools.miniterm.Miniterm.rx_transformationsÉ
-.builtins.list[serial.tools.miniterm.Transform]B
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform"builtins.list*310*311*312*313*314ú
-key_description%serial.tools.miniterm.key_description"
-builtins.str"builtins.str*+
-	character
-builtins.str"builtins.strz310z311z312z313z314i
-ask_for_port"serial.tools.miniterm.ask_for_port"
-builtins.str"builtins.strz310z311z312z313z314á
-mainserial.tools.miniterm.main"
-None*X
-default_portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *4
-default_baudrate
-builtins.int"builtins.int *W
-default_rtsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *W
-default_dtrD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*™
-__annotations__%serial.tools.miniterm.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*¡
-EOL_TRANSFORMATIONS)serial.tools.miniterm.EOL_TRANSFORMATIONSÂ
-Abuiltins.dict[builtins.str,Type[serial.tools.miniterm.Transform]]
-builtins.str"builtins.strs
-%Type[serial.tools.miniterm.Transform]B
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform"type"builtins.dict*310*311*312*313*314*π
-TRANSFORMATIONS%serial.tools.miniterm.TRANSFORMATIONSÂ
-Abuiltins.dict[builtins.str,Type[serial.tools.miniterm.Transform]]
-builtins.str"builtins.strs
-%Type[serial.tools.miniterm.Transform]B
-serial.tools.miniterm.Transform"serial.tools.miniterm.Transform"type"builtins.dict*310*311*312*313*314
+self(*
+
+text(*
+cancel*
+
+self(*
+	__enter__*(*
+__exit__*(*(*(r
+byte_output0r
+
+output0
+L
+Console"!serial.tools.miniterm.ConsoleBaser
+fd0r
+old0r
+	enc_stdin0	~
+	Transform"builtins.object*
+rx*
+
+self(*
+
+text(*
+tx*
+
+self(*
+
+text(* 
+echo*
+
+self(*
+
+text('
+CRLF"serial.tools.miniterm.Transform%
+CR"serial.tools.miniterm.Transform%
+LF"serial.tools.miniterm.TransformB
+
+NoTerminal"serial.tools.miniterm.Transformr
+REPLACEMENT_MAP0C
+
+NoControls" serial.tools.miniterm.NoTerminalr
+REPLACEMENT_MAP0,
+	Printable"serial.tools.miniterm.TransformL
+Colorize"serial.tools.miniterm.Transformr
+input_color0r
+
+echo_color0*
+DebugIO"serial.tools.miniterm.Transformî
+Miniterm"builtins.object*[
+__init__*
+
+self(*
+serial_instance(*
+echo (*
+eol (*
+filters (*
+start*
+
+self(*
+stop*
+
+self(*+
+join*
+
+self(*
+transmit_only (*
+close*
+
+self(*&
+update_transformations*
+
+self(*?
+set_rx_encoding*
+
+self(*
+encoding(*
+errors (*?
+set_tx_encoding*
+
+self(*
+encoding(*
+errors (*"
+dump_port_settings*
+
+self(*
+reader*
+
+self(*
+writer*
+
+self(*(
+handle_menu_key*
+
+self(*
+c(*
+upload_file*
+
+self(*
+change_filter*
+
+self(*
+change_encoding*
+
+self(*
+change_baudrate*
+
+self(*
+change_port*
+
+self(*
+suspend_port*
+
+self(*
+get_help_text*
+
+self(r
+console0r
+
+serial0r
+echo0r
+raw0r
+input_encoding0r
+output_encoding0r
+eol0r
+filters0r
+exit_character0r
+menu_character0r	
+alive0r
+receiver_thread0r
+
+rx_decoder0r
+
+tx_decoder0r
+
+tx_encoder0r
+transmitter_thread0r
+tx_transformations0r
+rx_transformations0$
+key_description*
+	character(
+ask_for_portb
+main*
+default_port (*
+default_baudrate (*
+default_rts (*
+default_dtr (*
+__annotations__0*
+EOL_TRANSFORMATIONS0!*
+TRANSFORMATIONS0!22#"!serial.tools.miniterm.ConsoleBase2"builtins.bytes2"builtins.str2R
+&serial.tools.miniterm.ConsoleBase.Self"!serial.tools.miniterm.ConsoleBase(22"builtins.object2"typing.BinaryIO2"codecs.StreamWriter2"typing.TextIO22	2"builtins.int22"builtins.list22!"serial.tools.miniterm.Transform2"builtins.dict22 "serial.tools.miniterm.Miniterm2"serial.serialposix.Serial2"builtins.bool2"typing.Iterable22"serial.tools.miniterm.Console222"threading.Thread222"codecs.IncrementalDecoder222"codecs.IncrementalEncoder222"builtins.list222222"builtins.dict22"type22"builtins.dict2 

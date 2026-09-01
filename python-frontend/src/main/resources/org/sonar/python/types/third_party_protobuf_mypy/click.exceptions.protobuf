@@ -1,231 +1,117 @@
 
-click.exceptions“
-ClickExceptionclick.exceptions.ClickException"builtins.Exception*∑
-__init__(click.exceptions.ClickException.__init__"
-None*L
-selfB
-click.exceptions.ClickException"click.exceptions.ClickException*)
-message
-builtins.str"builtins.str*¨
-format_message.click.exceptions.ClickException.format_message"
-builtins.str"builtins.str*L
-selfB
-click.exceptions.ClickException"click.exceptions.ClickException*ñ
-__str__'click.exceptions.ClickException.__str__"
-builtins.str"builtins.str*DB
-click.exceptions.ClickException"click.exceptions.ClickException*‡
-show$click.exceptions.ClickException.show"
-None*L
-selfB
-click.exceptions.ClickException"click.exceptions.ClickException*Z
-fileN
-Union[typing.IO[Any],None]$
-typing.IO[Any]
-Any"	typing.IO
-None rT
-	exit_code)click.exceptions.ClickException.exit_code
-builtins.int"builtins.intrP
-message'click.exceptions.ClickException.message
-builtins.str"builtins.strÑ
+click.exceptionsæ
+ClickException"builtins.Exception*'
+__init__*
 
-UsageErrorclick.exceptions.UsageError"click.exceptions.ClickException*é
-__init__$click.exceptions.UsageError.__init__"
-None*D
-self:
-click.exceptions.UsageError"click.exceptions.UsageError*)
-message
-builtins.str"builtins.str*a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None *‘
-show click.exceptions.UsageError.show"
-None*D
-self:
-click.exceptions.UsageError"click.exceptions.UsageError*Z
-fileN
-Union[typing.IO[Any],None]$
-typing.IO[Any]
-Any"	typing.IO
-None rP
-	exit_code%click.exceptions.UsageError.exit_code
-builtins.int"builtins.intr~
-ctxclick.exceptions.UsageError.ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Noner~
-cmdclick.exceptions.UsageError.cmdV
-Union[click.core.Command,None](
-click.core.Command"click.core.Command
-Noneÿ
-BadParameterclick.exceptions.BadParameter"click.exceptions.UsageError*◊
-__init__&click.exceptions.BadParameter.__init__"
-None*H
-self>
-click.exceptions.BadParameter"click.exceptions.BadParameter*)
-message
-builtins.str"builtins.str*a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None *i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *V
+self(*
+message(*
+format_message*
 
-param_hintD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¶
-format_message,click.exceptions.BadParameter.format_message"
-builtins.str"builtins.str*H
-self>
-click.exceptions.BadParameter"click.exceptions.BadParameterrä
-param#click.exceptions.BadParameter.param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-Noner|
+self(*
+__str__*(*"
+show*
 
-param_hint(click.exceptions.BadParameter.param_hintD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneì	
-MissingParameter!click.exceptions.MissingParameter"click.exceptions.BadParameter*Â
-__init__*click.exceptions.MissingParameter.__init__"
-None*P
-selfF
-!click.exceptions.MissingParameter"!click.exceptions.MissingParameter*S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None *i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *V
+self(*
+file (r
+	exit_code0r
+message0®
 
-param_hintD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+UsageError"click.exceptions.ClickException*4
+__init__*
 
-param_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *≤
-format_message0click.exceptions.MissingParameter.format_message"
-builtins.str"builtins.str*P
-selfF
-!click.exceptions.MissingParameter"!click.exceptions.MissingParameter*ú
-__str__)click.exceptions.MissingParameter.__str__"
-builtins.str"builtins.str*HF
-!click.exceptions.MissingParameter"!click.exceptions.MissingParameterrÄ
+self(*
+message(*
+ctx (
+*"
+show*
 
-param_type,click.exceptions.MissingParameter.param_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None§
-NoSuchOptionclick.exceptions.NoSuchOption"click.exceptions.UsageError*ç
-__init__&click.exceptions.NoSuchOption.__init__"
-None*H
-self>
-click.exceptions.NoSuchOption"click.exceptions.NoSuchOption*-
-option_name
-builtins.str"builtins.str*S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ù
-possibilitiesá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None *¶
-format_message,click.exceptions.NoSuchOption.format_message"
-builtins.str"builtins.str*H
-self>
-click.exceptions.NoSuchOption"click.exceptions.NoSuchOptionrV
-option_name)click.exceptions.NoSuchOption.option_name
-builtins.str"builtins.strr∆
-possibilities+click.exceptions.NoSuchOption.possibilitiesá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-NoneÙ
-BadOptionUsageclick.exceptions.BadOptionUsage"click.exceptions.UsageError*…
-__init__(click.exceptions.BadOptionUsage.__init__"
-None*L
-selfB
-click.exceptions.BadOptionUsage"click.exceptions.BadOptionUsage*-
-option_name
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str*a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None rX
-option_name+click.exceptions.BadOptionUsage.option_name
-builtins.str"builtins.strR
-BadArgumentUsage!click.exceptions.BadArgumentUsage"click.exceptions.UsageErrorä
-	FileErrorclick.exceptions.FileError"click.exceptions.ClickException*˚
-__init__#click.exceptions.FileError.__init__"
-None*B
-self8
-click.exceptions.FileError"click.exceptions.FileError**
-filename
-builtins.str"builtins.str*P
-hintD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ù
-format_message)click.exceptions.FileError.format_message"
-builtins.str"builtins.str*B
-self8
-click.exceptions.FileError"click.exceptions.FileErrorrS
-ui_filename&click.exceptions.FileError.ui_filename
-builtins.str"builtins.strrM
-filename#click.exceptions.FileError.filename
-builtins.str"builtins.str6
-Abortclick.exceptions.Abort"builtins.RuntimeErrorÄ
-Exitclick.exceptions.Exit"builtins.RuntimeError*ò
-__init__click.exceptions.Exit.__init__"
-None*8
-self.
-click.exceptions.Exit"click.exceptions.Exit*(
-code
-builtins.int"builtins.int rc
-	__slots__click.exceptions.Exit.__slots__5
-Tuple[builtins.str]
-builtins.str"builtins.strrJ
-	exit_codeclick.exceptions.Exit.exit_code
-builtins.int"builtins.int]
-_gettext.gettext"
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str√
-_join_param_hints"click.exceptions._join_param_hints"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*√
+self(*
+file (r
+	exit_code0r
+ctx0
+r
+cmd0ø
+BadParameter"click.exceptions.UsageError*W
+__init__*
 
-param_hint≤
-6Union[typing.Sequence[builtins.str],builtins.str,None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-builtins.str"builtins.str
-None*å
-__annotations__ click.exceptions.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-ttyping 
+self(*
+message(*
+ctx (
+*
+param (*
+
+param_hint (*
+format_message*
+
+self(r	
+param0r
+
+param_hint0·
+MissingParameter"click.exceptions.BadParameter*m
+__init__*
+
+self(*
+message (*
+ctx (
+*
+param (*
+
+param_hint (*
+
+param_type (*
+format_message*
+
+self(*
+__str__*(r
+
+param_type0—
+NoSuchOption"click.exceptions.UsageError*`
+__init__*
+
+self(*
+option_name(*
+message (*
+possibilities (*
+ctx (
+*
+format_message*
+
+self(r
+option_name0r
+possibilities0á
+BadOptionUsage"click.exceptions.UsageError*G
+__init__*
+
+self(*
+option_name(*
+message(*
+ctx (
+r
+option_name0/
+BadArgumentUsage"click.exceptions.UsageError£
+	FileError"click.exceptions.ClickException*6
+__init__*
+
+self(*
+filename(*
+hint (*
+format_message*
+
+self(r
+ui_filename0r
+filename0
+Abort"builtins.RuntimeErrorc
+Exit"builtins.RuntimeError*&
+__init__*
+
+self(*
+code (r
+	__slots__0r
+	exit_code0%
+_gettext.gettext*
+message('
+_join_param_hints*
+
+param_hint(*
+__annotations__0*
+ttyping 22!"click.exceptions.ClickException2"builtins.str22"	typing.IO2222"builtins.int2"click.exceptions.UsageError2"click.core.Context22	2"click.core.Command222"click.exceptions.BadParameter2"click.core.Parameter22222#"!click.exceptions.MissingParameter2"click.exceptions.NoSuchOption2"typing.Sequence2222!"click.exceptions.BadOptionUsage2"click.exceptions.FileError2"click.exceptions.Exit22222"builtins.dict2

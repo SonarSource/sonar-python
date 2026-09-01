@@ -1,365 +1,215 @@
 
-passlib.totpc
-InvalidTokenErrorpasslib.exc.InvalidTokenError"passlib.exc.TokenErrorj310j311j312j313j314g
-MalformedTokenErrorpasslib.exc.MalformedTokenError"passlib.exc.TokenErrorj310j311j312j313j314í
+passlib.totpJ
+InvalidTokenErrorpasslib.exc.InvalidTokenError"passlib.exc.TokenErrorN
+MalformedTokenErrorpasslib.exc.MalformedTokenError"passlib.exc.TokenErrorx
 
-TokenErrorpasslib.exc.TokenError"builtins.ValueError*˜
-__init__passlib.exc.TokenError.__init__"
-None*:
-self0
-passlib.exc.TokenError"passlib.exc.TokenError*f
-msg[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-args
-Any*
-kwds
-Anyz310z311z312z313z314j310j311j312j313j314õ
-UsedTokenErrorpasslib.exc.UsedTokenError"passlib.exc.TokenError*¼
-__init__#passlib.exc.UsedTokenError.__init__"
-None*B
-self8
-passlib.exc.UsedTokenError"passlib.exc.UsedTokenError*
-args
-Any*
-kwds
-Anyz310z311z312z313z314j310j311j312j313j314rW
-expire_time&passlib.exc.UsedTokenError.expire_time
-Any*310*311*312*313*314Ê
+TokenErrorpasslib.exc.TokenError"builtins.ValueError*=
+__init__*
 
-	AppWalletpasslib.totp.AppWallet"builtins.object*È
-__init__passlib.totp.AppWallet.__init__"
-None*:
-self0
-passlib.totp.AppWallet"passlib.totp.AppWallet*j
-secrets[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-default_tag[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-encrypt_cost[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-secrets_path[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*k
-has_secrets"passlib.totp.AppWallet.has_secrets*
-self0:builtins.property`z310z311z312z313z314*[
+self(*
+msg (*
 
-get_secret!passlib.totp.AppWallet.get_secret*
+args(*
+
+kwds(‡
+UsedTokenErrorpasslib.exc.UsedTokenError"passlib.exc.TokenError*0
+__init__*
+
+self(*
+
+args(*
+
+kwds(r
+expire_time0Ò
+	AppWallet"builtins.object*j
+__init__*
+
+self(*
+secrets (*
+default_tag (*
+encrypt_cost (*
+secrets_path (*.
+has_secrets*
+self0:builtins.property`*
+
+get_secret*
 self*
-tagz310z311z312z313z314*]
-encrypt_key"passlib.totp.AppWallet.encrypt_key*
+tag* 
+encrypt_key*
 self*
-keyz310z311z312z313z314*`
-decrypt_key"passlib.totp.AppWallet.decrypt_key*
+key*#
+decrypt_key*
 self*
 
-enckeyz310z311z312z313z314j310j311j312j313j314rd
-	salt_size passlib.totp.AppWallet.salt_size
-builtins.int"builtins.int*310*311*312*313*314rj
-encrypt_cost#passlib.totp.AppWallet.encrypt_cost
-builtins.int"builtins.int*310*311*312*313*314rS
-default_tag"passlib.totp.AppWallet.default_tag
-Any*310*311*312*313*314Û/
-TOTPpasslib.totp.TOTP"builtins.object*¿
-usingpasslib.totp.TOTP.using"
-Any*R
-clsI
-Type[passlib.totp.TOTP]&
-passlib.totp.TOTP"passlib.totp.TOTP"type*i
-digits[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *f
-alg[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-period[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-issuer[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-wallet[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *f
-now[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwds
-Any0:builtins.classmethodpz310z311z312z313z314*b
-newpasslib.totp.TOTP.new*
-cls*
-kwds0:builtins.classmethodpz310z311z312z313z314*ø
-__init__passlib.totp.TOTP.__init__"
-None*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*f
-key[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-format
-builtins.str"builtins.str *)
-new
-builtins.bool"builtins.bool *i
-digits[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *f
-alg[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-size[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-period[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-label[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-issuer[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *-
-changed
-builtins.bool"builtins.bool *
-kwds
-Anyz310z311z312z313z314*^
-hex_keypasslib.totp.TOTP.hex_key*
-self0:builtins.property`z310z311z312z313z314*d
+enckeyr
+	salt_size0r
+encrypt_cost0r
+default_tag0Ñ
+TOTP"builtins.object*”
+using*	
+cls(
+*
+digits (*
+alg (*
+period (*
+issuer (*
+wallet (*
+now (*
 
-base32_keypasslib.totp.TOTP.base32_key*
-self0:builtins.property`z310z311z312z313z314*Ó
-
-pretty_keypasslib.totp.TOTP.pretty_key"
-Any*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP**
-format
-builtins.str"builtins.str *'
-sep
-builtins.str"builtins.str z310z311z312z313z314*x
-normalize_time passlib.totp.TOTP.normalize_time*
+kwds(0:builtins.classmethodp*2
+new*
 cls*
-time0:builtins.classmethodpz310z311z312z313z314*i
-normalize_token!passlib.totp.TOTP.normalize_token*
+kwds0:builtins.classmethodp*¹
+__init__*
+
+self(	*
+key (*
+format (*
+new (*
+digits (*
+alg (*
+size (*
+period (*
+label (*
+issuer (*
+changed (*
+
+kwds(**
+hex_key*
+self0:builtins.property`*-
+
+base32_key*
+self0:builtins.property`*7
+
+pretty_key*
+
+self(	*
+format (*
+sep (*=
+normalize_time*
+cls*
+time0:builtins.classmethodp*-
+normalize_token*
 self_or_cls*	
-tokenz310z311z312z313z314*ã
-generatepasslib.totp.TOTP.generate"
-Any*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*g
-time[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*
-verifypasslib.totp.TOTP.verify*
+token*&
+generate*
+
+self(	*
+time (*L
+verify*
 cls*	
 token*
 
 source*
-kwds0:builtins.classmethodpz310z311z312z313z314*¸
-matchpasslib.totp.TOTP.match"
-Any*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*
-token
-Any*g
-time[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-window
-builtins.int"builtins.int *(
-skew
-builtins.int"builtins.int *o
-last_counter[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*t
-from_sourcepasslib.totp.TOTP.from_source*
+kwds0:builtins.classmethodp*d
+match*
+
+self(	*
+token(*
+time (*
+window (*
+skew (*
+last_counter (*<
+from_source*
 cls*
 
-source0:builtins.classmethodpz310z311z312z313z314*k
-from_uripasslib.totp.TOTP.from_uri*
+source0:builtins.classmethodp*6
+from_uri*
 cls*
-uri0:builtins.classmethodpz310z311z312z313z314*Ë
-to_uripasslib.totp.TOTP.to_uri"
-Any*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*h
-label[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-issuer[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*p
-	from_jsonpasslib.totp.TOTP.from_json*
+uri0:builtins.classmethodp*5
+to_uri*
+
+self(	*
+label (*
+issuer (*:
+	from_json*
 cls*
 
-source0:builtins.classmethodpz310z311z312z313z314*ä
-to_jsonpasslib.totp.TOTP.to_json"
-Any*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*j
-encrypt[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*p
-	from_dictpasslib.totp.TOTP.from_dict*
+source0:builtins.classmethodp*(
+to_json*
+
+self(	*
+encrypt (*:
+	from_dict*
 cls*
 
-source0:builtins.classmethodpz310z311z312z313z314*ä
-to_dictpasslib.totp.TOTP.to_dict"
-Any*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*j
-encrypt[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z3142ï
-keypasslib.totp.TOTP.key?
-keypasslib.totp.TOTP.key*
-self0:builtins.propertyX`w
-keypasslib.totp.TOTP.key"
-None*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*
-value
-Any0:.setter"310"311"312"313"3142¬
-encrypted_keypasslib.totp.TOTP.encrypted_keyS
-encrypted_keypasslib.totp.TOTP.encrypted_key*
-self0:builtins.propertyX`‹
-encrypted_keypasslib.totp.TOTP.encrypted_key"
-None*0
-self&
-passlib.totp.TOTP"passlib.totp.TOTP*
-value
-Any0:.setter"310"311"312"313"314j310j311j312j313j314rm
-min_json_version"passlib.totp.TOTP.min_json_version
-builtins.int"builtins.int*310*311*312*313*314re
-json_versionpasslib.totp.TOTP.json_version
-builtins.int"builtins.int*310*311*312*313*314rD
-walletpasslib.totp.TOTP.wallet
-Any*310*311*312*313*314r>
-nowpasslib.totp.TOTP.now
-Any*310*311*312*313*314rY
-digitspasslib.totp.TOTP.digits
-builtins.int"builtins.int*310*311*312*313*314rS
-algpasslib.totp.TOTP.alg
-builtins.str"builtins.str*310*311*312*313*314rB
-labelpasslib.totp.TOTP.label
-Any*310*311*312*313*314rD
-issuerpasslib.totp.TOTP.issuer
-Any*310*311*312*313*314rY
-periodpasslib.totp.TOTP.period
-builtins.int"builtins.int*310*311*312*313*314r]
-changedpasslib.totp.TOTP.changed
-builtins.bool"builtins.bool*310*311*312*313*314¢
-	TotpTokenpasslib.totp.TotpToken"passlib.utils.SequenceMixin*Ç
-__init__passlib.totp.TotpToken.__init__"
-None*:
-self0
-passlib.totp.TotpToken"passlib.totp.TotpToken*
-totp
-Any*
-token
-Any*
-counter
-Anyz310z311z312z313z314*i
+source0:builtins.classmethodp*(
+to_dict*
 
-start_time!passlib.totp.TotpToken.start_time*
-self0:builtins.property`z310z311z312z313z314*k
-expire_time"passlib.totp.TotpToken.expire_time*
-self0:builtins.property`z310z311z312z313z314*g
-	remaining passlib.totp.TotpToken.remaining*
-self0:builtins.property`z310z311z312z313z314*_
-validpasslib.totp.TotpToken.valid*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rE
-totppasslib.totp.TotpToken.totp
-Any*310*311*312*313*314rG
-tokenpasslib.totp.TotpToken.token
-Any*310*311*312*313*314rK
-counterpasslib.totp.TotpToken.counter
-Any*310*311*312*313*314Ø	
-	TotpMatchpasslib.totp.TotpMatch"passlib.utils.SequenceMixin*ò
-__init__passlib.totp.TotpMatch.__init__"
-None*:
-self0
-passlib.totp.TotpMatch"passlib.totp.TotpMatch*
-totp
-Any*
-counter
-Any*
-time
-Any**
-window
-builtins.int"builtins.int z310z311z312z313z314*u
-expected_counter'passlib.totp.TotpMatch.expected_counter*
-self0:builtins.property`z310z311z312z313z314*c
-skippedpasslib.totp.TotpMatch.skipped*
-self0:builtins.property`z310z311z312z313z314*k
-expire_time"passlib.totp.TotpMatch.expire_time*
-self0:builtins.property`z310z311z312z313z314*o
-cache_seconds$passlib.totp.TotpMatch.cache_seconds*
-self0:builtins.property`z310z311z312z313z314*i
+self(	*
+encrypt (2\
+key(
+key*
+self0:builtins.propertyX`+
+key*
 
-cache_time!passlib.totp.TotpMatch.cache_time*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rE
-totppasslib.totp.TotpMatch.totp
-Any*310*311*312*313*314r`
-counterpasslib.totp.TotpMatch.counter
-builtins.int"builtins.int*310*311*312*313*314rZ
-timepasslib.totp.TotpMatch.time
-builtins.int"builtins.int*310*311*312*313*314r^
-windowpasslib.totp.TotpMatch.window
-builtins.int"builtins.int*310*311*312*313*314*¡
-__annotations__passlib.totp.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(	*
+value(0:.setter2z
+encrypted_key2
+encrypted_key*
+self0:builtins.propertyX`5
+encrypted_key*
+
+self(	*
+value(0:.setterr
+min_json_version0r
+json_version0r
+
+wallet0r
+now0r
+
+digits0r
+alg0r	
+label0r
+
+issuer0r
+
+period0r
+changed0Ã
+	TotpToken"passlib.utils.SequenceMixin*@
+__init__*
+
+self(*
+
+totp(*
+token(*
+counter(*-
+
+start_time*
+self0:builtins.property`*.
+expire_time*
+self0:builtins.property`*,
+	remaining*
+self0:builtins.property`*(
+valid*
+self0:builtins.property`r
+totp0r	
+token0r
+counter0˜
+	TotpMatch"passlib.utils.SequenceMixin*O
+__init__*
+
+self(*
+
+totp(*
+counter(*
+
+time(*
+window (*3
+expected_counter*
+self0:builtins.property`**
+skipped*
+self0:builtins.property`*.
+expire_time*
+self0:builtins.property`*0
+cache_seconds*
+self0:builtins.property`*-
+
+cache_time*
+self0:builtins.property`r
+totp0r
+counter0r
+time0r
+
+window0*
+__annotations__022"passlib.exc.TokenError22"_typeshed.Incomplete2222"passlib.exc.UsedTokenError2"passlib.totp.AppWallet2"builtins.int2"passlib.totp.TOTP2"type2	2"builtins.str2"builtins.bool2"passlib.totp.TotpToken2"passlib.totp.TotpMatch2"builtins.dict2

@@ -1,257 +1,163 @@
 
-braintree.testing_gatewayã
-ErrorResult"braintree.error_result.ErrorResult"builtins.object*Ý
-__init__+braintree.error_result.ErrorResult.__init__"
-None*R
-selfH
-"braintree.error_result.ErrorResult""braintree.error_result.ErrorResult*
-gateway
-Any*
+braintree.testing_gateway¨
+ErrorResult"braintree.error_result.ErrorResult"builtins.object*9
+__init__*
 
-attributes
-Anyz310z311z312z313z314*u
+self(*
+gateway(*
 
-is_success-braintree.error_result.ErrorResult.is_success*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rU
-params)braintree.error_result.ErrorResult.params
-Any*310*311*312*313*314rU
-errors)braintree.error_result.ErrorResult.errors
-Any*310*311*312*313*314rW
-message*braintree.error_result.ErrorResult.message
-Any*310*311*312*313*314ry
-credit_card_verification;braintree.error_result.ErrorResult.credit_card_verification
-Any*310*311*312*313*314r_
-transaction.braintree.error_result.ErrorResult.transaction
-Any*310*311*312*313*314ra
-subscription/braintree.error_result.ErrorResult.subscription
-Any*310*311*312*313*314ri
-merchant_account3braintree.error_result.ErrorResult.merchant_account
-Any*310*311*312*313*314†
-SuccessfulResult,braintree.successful_result.SuccessfulResult"*braintree.attribute_getter.AttributeGetter*
+attributes(*-
 
-is_success7braintree.successful_result.SuccessfulResult.is_success*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314­A
-Transaction!braintree.transaction.Transaction"braintree.resource.Resource*¢
-adjust_authorization6braintree.transaction.Transaction.adjust_authorization*
+is_success*
+self0:builtins.property`r
+
+params0r
+
+errors0r
+message0r
+credit_card_verification0r
+transaction0r
+subscription0r
+merchant_account0›
+SuccessfulResult,braintree.successful_result.SuccessfulResult"*braintree.attribute_getter.AttributeGetter*-
+
+is_success*
+self0:builtins.property`ÿ
+Transaction!braintree.transaction.Transaction"braintree.resource.Resource*Q
+adjust_authorization*
 transaction_id*
 
-amount0:builtins.staticmethodhz310z311z312z313z314*œ
-clone_transaction3braintree.transaction.Transaction.clone_transaction*
+amount0:builtins.staticmethodh*N
+clone_transaction*
 transaction_id*
 
-params0:builtins.staticmethodhz310z311z312z313z314*Š
-cancel_release0braintree.transaction.Transaction.cancel_release*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*Ú
-credit(braintree.transaction.Transaction.credit"
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*v
-find&braintree.transaction.Transaction.find*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*Š
-hold_in_escrow0braintree.transaction.Transaction.hold_in_escrow*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*‚
-refund(braintree.transaction.Transaction.refund"
-Any*
-transaction_id
-Any*t
-amount_or_options[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*Ö
-sale&braintree.transaction.Transaction.sale"
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*q
-search(braintree.transaction.Transaction.search*	
-query0:builtins.staticmethodhz310z311z312z313z314*”
-release_from_escrow5braintree.transaction.Transaction.release_from_escrow*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*€
-submit_for_settlement7braintree.transaction.Transaction.submit_for_settlement"
-Any*
-transaction_id
-Any*i
-amount[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*‡
-update_details0braintree.transaction.Transaction.update_details"
-Any*
-transaction_id
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*v
-void&braintree.transaction.Transaction.void*
-transaction_id0:builtins.staticmethodhz310z311z312z313z314*r
-create(braintree.transaction.Transaction.create*
+params0:builtins.staticmethodh*?
+cancel_release*
+transaction_id0:builtins.staticmethodh*5
+credit*
+params (0:builtins.staticmethodh*5
+find*
+transaction_id0:builtins.staticmethodh*?
+hold_in_escrow*
+transaction_id0:builtins.staticmethodh*V
+refund*
+transaction_id(*
+amount_or_options (0:builtins.staticmethodh*3
+sale*
+params (0:builtins.staticmethodh*.
+search*	
+query0:builtins.staticmethodh*D
+release_from_escrow*
+transaction_id0:builtins.staticmethodh*j
+submit_for_settlement*
+transaction_id(*
+amount (*
+params (0:builtins.staticmethodh*S
+update_details*
+transaction_id(*
+params (0:builtins.staticmethodh*5
+void*
+transaction_id0:builtins.staticmethodh*/
+create*
 
-params0:builtins.staticmethodhz310z311z312z313z314*x
-clone_signature1braintree.transaction.Transaction.clone_signature0:builtins.staticmethodhz310z311z312z313z314*z
-create_signature2braintree.transaction.Transaction.create_signature0:builtins.staticmethodhz310z311z312z313z314*˜
-submit_for_settlement_signatureAbraintree.transaction.Transaction.submit_for_settlement_signature0:builtins.staticmethodhz310z311z312z313z314*Š
-update_details_signature:braintree.transaction.Transaction.update_details_signature0:builtins.staticmethodhz310z311z312z313z314*z
-refund_signature2braintree.transaction.Transaction.refund_signature0:builtins.staticmethodhz310z311z312z313z314*º
-submit_for_partial_settlement?braintree.transaction.Transaction.submit_for_partial_settlement"
-Any*
-transaction_id
-Any*
-amount
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*Ú
-__init__*braintree.transaction.Transaction.__init__"
-None*P
-selfF
-!braintree.transaction.Transaction"!braintree.transaction.Transaction*
-gateway
-Any*
+params0:builtins.staticmethodh*,
+clone_signature0:builtins.staticmethodh*-
+create_signature0:builtins.staticmethodh*<
+submit_for_settlement_signature0:builtins.staticmethodh*5
+update_details_signature0:builtins.staticmethodh*-
+refund_signature0:builtins.staticmethodh*p
+submit_for_partial_settlement*
+transaction_id(*
+amount(*
+params (0:builtins.staticmethodh*9
+__init__*
 
-attributes
-Anyz310z311z312z313z314*Š
-vault_billing_address7braintree.transaction.Transaction.vault_billing_address*
-self0:builtins.property`z310z311z312z313z314*‚
-vault_credit_card3braintree.transaction.Transaction.vault_credit_card*
-self0:builtins.property`z310z311z312z313z314*|
-vault_customer0braintree.transaction.Transaction.vault_customer*
-self0:builtins.property`z310z311z312z313z314*x
-is_disbursed.braintree.transaction.Transaction.is_disbursed*
-self0:builtins.property`z310z311z312z313z314*t
+self(*
+gateway(*
 
-line_items,braintree.transaction.Transaction.line_items*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rT
-amount(braintree.transaction.Transaction.amount
-Any*310*311*312*313*314r\
+attributes(*8
+vault_billing_address*
+self0:builtins.property`*4
+vault_credit_card*
+self0:builtins.property`*1
+vault_customer*
+self0:builtins.property`*/
+is_disbursed*
+self0:builtins.property`*-
 
-tax_amount,braintree.transaction.Transaction.tax_amount
-Any*310*311*312*313*314rf
-discount_amount1braintree.transaction.Transaction.discount_amount
-Any*310*311*312*313*314rf
-shipping_amount1braintree.transaction.Transaction.shipping_amount
-Any*310*311*312*313*314rf
-billing_details1braintree.transaction.Transaction.billing_details
-Any*310*311*312*313*314rn
-credit_card_details5braintree.transaction.Transaction.credit_card_details
-Any*310*311*312*313*314rd
-paypal_details0braintree.transaction.Transaction.paypal_details
-Any*310*311*312*313*314rn
-paypal_here_details5braintree.transaction.Transaction.paypal_here_details
-Any*310*311*312*313*314rr
-local_payment_details7braintree.transaction.Transaction.local_payment_details
-Any*310*311*312*313*314r~
-europe_bank_account_details=braintree.transaction.Transaction.europe_bank_account_details
-Any*310*311*312*313*314rf
-us_bank_account1braintree.transaction.Transaction.us_bank_account
-Any*310*311*312*313*314rj
-apple_pay_details3braintree.transaction.Transaction.apple_pay_details
-Any*310*311*312*313*314rx
-android_pay_card_details:braintree.transaction.Transaction.android_pay_card_details
-Any*310*311*312*313*314rŒ
-"amex_express_checkout_card_detailsDbraintree.transaction.Transaction.amex_express_checkout_card_details
-Any*310*311*312*313*314rr
-venmo_account_details7braintree.transaction.Transaction.venmo_account_details
-Any*310*311*312*313*314r|
-visa_checkout_card_details<braintree.transaction.Transaction.visa_checkout_card_details
-Any*310*311*312*313*314rv
-masterpass_card_details9braintree.transaction.Transaction.masterpass_card_details
-Any*310*311*312*313*314rx
-samsung_pay_card_details:braintree.transaction.Transaction.samsung_pay_card_details
-Any*310*311*312*313*314rv
-sca_exemption_requested9braintree.transaction.Transaction.sca_exemption_requested
-Any*310*311*312*313*314rh
-customer_details2braintree.transaction.Transaction.customer_details
-Any*310*311*312*313*314rh
-shipping_details2braintree.transaction.Transaction.shipping_details
-Any*310*311*312*313*314rV
-add_ons)braintree.transaction.Transaction.add_ons
-Any*310*311*312*313*314rZ
-	discounts+braintree.transaction.Transaction.discounts
-Any*310*311*312*313*314rd
-status_history0braintree.transaction.Transaction.status_history
-Any*310*311*312*313*314rp
-subscription_details6braintree.transaction.Transaction.subscription_details
-Any*310*311*312*313*314r\
+line_items*
+self0:builtins.property`r
 
-descriptor,braintree.transaction.Transaction.descriptor
-Any*310*311*312*313*314rp
-disbursement_details6braintree.transaction.Transaction.disbursement_details
-Any*310*311*312*313*314rX
-disputes*braintree.transaction.Transaction.disputes
-Any*310*311*312*313*314rz
-authorization_adjustments;braintree.transaction.Transaction.authorization_adjustments
-Any*310*311*312*313*314rv
-payment_instrument_type9braintree.transaction.Transaction.payment_instrument_type
-Any*310*311*312*313*314rZ
-	risk_data+braintree.transaction.Transaction.risk_data
-Any*310*311*312*313*314rn
-three_d_secure_info5braintree.transaction.Transaction.three_d_secure_info
-Any*310*311*312*313*314rn
-facilitated_details5braintree.transaction.Transaction.facilitated_details
-Any*310*311*312*313*314rn
-facilitator_details5braintree.transaction.Transaction.facilitator_details
-Any*310*311*312*313*314rt
-network_transaction_id8braintree.transaction.Transaction.network_transaction_id
-Any*310*311*312*313*314¯
-TestingGateway(braintree.testing_gateway.TestingGateway"builtins.object*Ö
-__init__1braintree.testing_gateway.TestingGateway.__init__"
-None*^
-selfT
-(braintree.testing_gateway.TestingGateway"(braintree.testing_gateway.TestingGateway*
-gateway
-Anyz310z311z312z313z314*¥
-make_past_due6braintree.testing_gateway.TestingGateway.make_past_due"
-None*^
-selfT
-(braintree.testing_gateway.TestingGateway"(braintree.testing_gateway.TestingGateway*
-subscription_id
-Any*;
-number_of_days_past_due
-builtins.int"builtins.int z310z311z312z313z314*ñ
-escrow_transaction;braintree.testing_gateway.TestingGateway.escrow_transaction"
-None*^
-selfT
-(braintree.testing_gateway.TestingGateway"(braintree.testing_gateway.TestingGateway*
-transaction_id
-Anyz310z311z312z313z314*ˆ
-settle_transaction;braintree.testing_gateway.TestingGateway.settle_transaction*
+amount0r
+
+tax_amount0r
+discount_amount0r
+shipping_amount0r
+billing_details0r
+credit_card_details0r
+paypal_details0r
+paypal_here_details0r
+local_payment_details0r
+europe_bank_account_details0r
+us_bank_account0r
+apple_pay_details0r
+android_pay_card_details0r&
+"amex_express_checkout_card_details0r
+venmo_account_details0r
+visa_checkout_card_details0r
+masterpass_card_details0r
+samsung_pay_card_details0r
+sca_exemption_requested0r
+customer_details0r
+shipping_details0r
+add_ons0r
+	discounts0r
+status_history0r
+subscription_details0r
+
+descriptor0r
+disbursement_details0r
+disputes0r
+authorization_adjustments0r
+payment_instrument_type0r
+	risk_data0r
+three_d_secure_info0r
+facilitated_details0r
+facilitator_details0r
+network_transaction_id0²
+TestingGateway"builtins.object*'
+__init__*
+
+self(*
+gateway(*U
+make_past_due*
+
+self(*
+subscription_id(*
+number_of_days_past_due (*8
+escrow_transaction*
+
+self(*
+transaction_id(*2
+settle_transaction*
 self*
-transaction_idz310z311z312z313z314* 
-settlement_confirm_transactionGbraintree.testing_gateway.TestingGateway.settlement_confirm_transaction*
+transaction_id*>
+settlement_confirm_transaction*
 self*
-transaction_idz310z311z312z313z314* 
-settlement_decline_transactionGbraintree.testing_gateway.TestingGateway.settlement_decline_transaction*
+transaction_id*>
+settlement_decline_transaction*
 self*
-transaction_idz310z311z312z313z314* 
-settlement_pending_transactionGbraintree.testing_gateway.TestingGateway.settlement_pending_transaction*
+transaction_id*>
+settlement_pending_transaction*
 self*
-transaction_idz310z311z312z313z314*£
-create_3ds_verification@braintree.testing_gateway.TestingGateway.create_3ds_verification*
+transaction_id*H
+create_3ds_verification*
 self*
 merchant_account_id*
 
-paramsz310z311z312z313z314j310j311j312j313j314r]
-gateway0braintree.testing_gateway.TestingGateway.gateway
-Any*310*311*312*313*314r[
-config/braintree.testing_gateway.TestingGateway.config
-Any*310*311*312*313*314*®
-__annotations__)braintree.testing_gateway.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+paramsr
+gateway0r
+
+config0*
+__annotations__0
+22$""braintree.error_result.ErrorResult22"_typeshed.Incomplete2222#"!braintree.transaction.Transaction2*"(braintree.testing_gateway.TestingGateway2"builtins.int2"builtins.str2"builtins.dict2	

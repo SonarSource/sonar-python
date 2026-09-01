@@ -1,481 +1,58 @@
 
- pandas.core.indexes.datetimelikeÙÆ
-DatetimeIndexOpsMixin6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin",pandas.core.indexes.extension.ExtensionIndex*Ü
-freq;pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.freq"í
-2Union[pandas._libs.tslibs.offsets.BaseOffset,None]P
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset
-None*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin0:builtins.property`*Ω
-freqstr>pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.freqstr"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin0:builtins.property`*°
-is_all_datesCpandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.is_all_dates"
-builtins.bool"builtins.bool*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin0:builtins.property`*Ã
-min:pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.min"
-Any*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*
-axis
-Any *,
-skipna
-builtins.bool"builtins.bool *
-args
-Any*
-kwargs
-Any*“
-argmin=pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.argmin"
-Any*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*
-axis
-Any *,
-skipna
-builtins.bool"builtins.bool *
-args
-Any*
-kwargs
-Any*Ã
-max:pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.max"
-Any*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*
-axis
-Any *,
-skipna
-builtins.bool"builtins.bool *
-args
-Any*
-kwargs
-Any*“
-argmax=pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.argmax"
-Any*î
-selfâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*
-axis
-Any *,
-skipna
-builtins.bool"builtins.bool *
-args
-Any*
-kwargs
-Any*Ω
-__rsub__?pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin.__rsub__"^
--pandas.core.indexes.timedeltas.TimedeltaIndex"-pandas.core.indexes.timedeltas.TimedeltaIndex*åâ
-Ipandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*Ä~
-;pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin[Any]
-Any"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixinP°H
-DatetimeTimedeltaMixin7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*∆
-unit<pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin.unit"œ
-iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"pandas._typing.TimeUnit*ñ
-selfã
-Jpandas.core.indexes.datetimelike.DatetimeTimedeltaMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin0:builtins.property`* .
-as_unit?pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin.as_unit"â
-<pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin.Selfã
-Jpandas.core.indexes.datetimelike.DatetimeTimedeltaMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin(*î
-selfâ
-<pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin.Selfã
-Jpandas.core.indexes.datetimelike.DatetimeTimedeltaMixin[pandas._typing.S1]É
-pandas._typing.S1Î
-ÇUnion[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Any],pandas.core.dtypes.dtypes.CategoricalDtype,pandas._libs.tslibs.offsets.BaseOffset]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-datetime.date"datetime.date
-datetime.time"datetime.time
-builtins.bool"builtins.bool
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex≈	
-ÀTypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]‹
-¿Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype¬
-íTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]ê
-áUnion[builtins.str,numpy.dtype[numpy.generic[Any]],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
-builtins.str"builtins.str\
-numpy.dtype[numpy.generic[Any]],
-numpy.generic[Any]
-Any"numpy.generic"numpy.dtype:
-Type[builtins.str]
-builtins.str"builtins.str"typeF
-Type[builtins.complex]$
-builtins.complex"builtins.complex"type=
-Type[builtins.bool]
-builtins.bool"builtins.bool"typeC
-Type[builtins.object]"
-builtins.object"builtins.object"type"pandas._typing.NpDtype"pandas._typing.Dtype&
-datetime.datetime"datetime.datetime(
-datetime.timedelta"datetime.timedeltaF
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.PeriodN
-#pandas._libs.interval.Interval[Any]
-Any"pandas._libs.interval.IntervalX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtypeP
-&pandas._libs.tslibs.offsets.BaseOffset"&pandas._libs.tslibs.offsets.BaseOffset"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin(*⁄
-unitœ
-iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"pandas._typing.TimeUnitP*ú
-__annotations__0pandas.core.indexes.datetimelike.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+ pandas.core.indexes.datetimelike©
+DatetimeIndexOpsMixin",pandas.core.indexes.extension.ExtensionIndex*+
+freq*
+
+self( 0:builtins.property`*.
+freqstr!*
+
+self( 0:builtins.property`*3
+is_all_dates*
+
+self( 0:builtins.property`*K
+min*
+
+self( *
+axis (*
+skipna (*
+
+args(*
+kwargs(*N
+argmin*
+
+self( *
+axis (*
+skipna (*
+
+args(*
+kwargs(*K
+max*
+
+self( *
+axis (*
+skipna (*
+
+args(*
+kwargs(*N
+argmax*
+
+self( *
+axis (*
+skipna (*
+
+args(*
+kwargs(*
+__rsub__"*( *(#P§
+DatetimeTimedeltaMixin"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin*+
+unit&*
+
+self('0:builtins.property`*#
+as_unit(*
+
+self((*
+
+unit(&P*
+__annotations__0)2("&pandas._libs.tslibs.offsets.BaseOffset2222"builtins.str2"builtins.bytes2"datetime.date2"datetime.time2"builtins.bool2"builtins.int2"builtins.float2"builtins.complex2("&pandas.core.dtypes.base.ExtensionDtype22"numpy.generic22"numpy.dtype22"type22"type22"type22"builtins.object2"type22
+22"pandas._typing.NpDtype2222"pandas._typing.Dtype22"datetime.datetime2"datetime.timedelta2#"!pandas._libs.tslibs.period.Period2#"pandas._libs.interval.Interval22,"*pandas.core.dtypes.dtypes.CategoricalDtype22	
+222;"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin2222/"-pandas.core.indexes.timedeltas.TimedeltaIndex2;"6pandas.core.indexes.datetimelike.DatetimeIndexOpsMixin22	222$$$$2"pandas._typing.TimeUnit2%2<"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin22~
+<pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin.Self"7pandas.core.indexes.datetimelike.DatetimeTimedeltaMixin(2'2"builtins.dict2

@@ -1,777 +1,357 @@
 
-pysftpá
-AuthenticationException.paramiko.ssh_exception.AuthenticationException"#paramiko.ssh_exception.SSHExceptionj310j311j312j313j314‰
-ConnectionException%pysftp.exceptions.ConnectionException"builtins.Exception*á
-__init__.pysftp.exceptions.ConnectionException.__init__"
-None*X
-selfN
-%pysftp.exceptions.ConnectionException"%pysftp.exceptions.ConnectionException*&
-host
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314ro
-message-pysftp.exceptions.ConnectionException.message
-builtins.str"builtins.str*310*311*312*313*314ø
-CredentialException%pysftp.exceptions.CredentialException"builtins.Exception*‚
-__init__.pysftp.exceptions.CredentialException.__init__"
-None*X
-selfN
-%pysftp.exceptions.CredentialException"%pysftp.exceptions.CredentialException*)
-message
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314ro
-message-pysftp.exceptions.CredentialException.message
-builtins.str"builtins.str*310*311*312*313*314e
-HostKeysException#pysftp.exceptions.HostKeysException"builtins.Exceptionj310j311j312j313j314ç
-WTCallbackspysftp.helpers.WTCallbacks"builtins.object*ñ
-__init__#pysftp.helpers.WTCallbacks.__init__"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacksz310z311z312z313z314*¿
-file_cb"pysftp.helpers.WTCallbacks.file_cb"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks**
-pathname
-builtins.str"builtins.strz310z311z312z313z314*æ
-dir_cb!pysftp.helpers.WTCallbacks.dir_cb"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks**
-pathname
-builtins.str"builtins.strz310z311z312z313z314*æ
-unk_cb!pysftp.helpers.WTCallbacks.unk_cb"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks**
-pathname
-builtins.str"builtins.strz310z311z312z313z3142Ò
-flist pysftp.helpers.WTCallbacks.flist“
-flist pysftp.helpers.WTCallbacks.flist"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks0:builtins.propertyX`◊
-flist pysftp.helpers.WTCallbacks.flist"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks*S
-valJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list0:.setter"310"311"312"313"3142Ò
-dlist pysftp.helpers.WTCallbacks.dlist“
-dlist pysftp.helpers.WTCallbacks.dlist"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks0:builtins.propertyX`◊
-dlist pysftp.helpers.WTCallbacks.dlist"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks*S
-valJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list0:.setter"310"311"312"313"3142Ò
-ulist pysftp.helpers.WTCallbacks.ulist“
-ulist pysftp.helpers.WTCallbacks.ulist"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks0:builtins.propertyX`◊
-ulist pysftp.helpers.WTCallbacks.ulist"
-None*B
-self8
-pysftp.helpers.WTCallbacks"pysftp.helpers.WTCallbacks*S
-valJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list0:.setter"310"311"312"313"314j310j311j312j313j314ı
-CnOptspysftp.CnOpts"builtins.object*«
-__init__pysftp.CnOpts.__init__"
-None*(
-self
-pysftp.CnOpts"pysftp.CnOpts*V
+pysftpn
+AuthenticationException.paramiko.ssh_exception.AuthenticationException"#paramiko.ssh_exception.SSHExceptionè
+ConnectionException%pysftp.exceptions.ConnectionException"builtins.Exception*0
+__init__*
 
-knownhostsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ω
-get_hostkeypysftp.CnOpts.get_hostkey"(
-paramiko.pkey.PKey"paramiko.pkey.PKey*(
-self
-pysftp.CnOpts"pysftp.CnOpts*&
-host
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rQ
-logpysftp.CnOpts.log
-builtins.bool"builtins.bool*310*311*312*313*314ra
-compressionpysftp.CnOpts.compression
-builtins.bool"builtins.bool*310*311*312*313*314r√
-cipherspysftp.CnOpts.ciphersá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None*310*311*312*313*314r´
-hostkeyspysftp.CnOpts.hostkeysn
-&Union[paramiko.hostkeys.HostKeys,None]8
-paramiko.hostkeys.HostKeys"paramiko.hostkeys.HostKeys
-None*310*311*312*313*314£ù
+self(*
 
-Connectionpysftp.Connection"builtins.object*Ï	
-__init__pysftp.Connection.__init__"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*&
-host
-builtins.str"builtins.str*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ì
-private_keyŸ
-GUnion[builtins.str,paramiko.rsakey.RSAKey,paramiko.agent.AgentKey,None]
-builtins.str"builtins.str0
-paramiko.rsakey.RSAKey"paramiko.rsakey.RSAKey2
-paramiko.agent.AgentKey"paramiko.agent.AgentKey
-None *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *(
-port
-builtins.int"builtins.int *\
-private_key_passD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ó
-ciphersá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *)
-log
-builtins.bool"builtins.bool *U
-cnoptsG
-Union[pysftp.CnOpts,None]
-pysftp.CnOpts"pysftp.CnOpts
-None *Ü
-default_pathÒ
-9Union[TypeAlias[Union[builtins.str,builtins.bytes]],None]ß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path
-None z310z311z312z313z314*ú
-pwdpysftp.Connection.pwd"
-builtins.str"builtins.str*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*–
-getpysftp.Connection.get"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+host(*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*É
-	localpathÒ
-9Union[TypeAlias[Union[builtins.str,builtins.bytes]],None]ß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path
-None *Â
-callback‘
-6Union[TypeAlias[CallableType[builtins.function]],None]ç
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp._Callback
-None *4
-preserve_mtime
-builtins.bool"builtins.bool z310z311z312z313z314*û
-get_dpysftp.Connection.get_d"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∑
-	remotedirß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*∂
-localdirß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*4
-preserve_mtime
-builtins.bool"builtins.bool z310z311z312z313z314*û
-get_rpysftp.Connection.get_r"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∑
-	remotedirß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*∂
-localdirß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*4
-preserve_mtime
-builtins.bool"builtins.bool z310z311z312z313z314*ˇ
-getfopysftp.Connection.getfo"
-builtins.int"builtins.int*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+port(r
+message0Ü
+CredentialException%pysftp.exceptions.CredentialException"builtins.Exception*'
+__init__*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*Q
-floH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*Â
-callback‘
-6Union[TypeAlias[CallableType[builtins.function]],None]ç
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp._Callback
-None z310z311z312z313z314*Ω
-putpysftp.Connection.put"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*0
-self&
-pysftp.Connection"pysftp.Connection*∑
-	localpathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*Ñ
+self(*
+message(r
+message0L
+HostKeysException#pysftp.exceptions.HostKeysException"builtins.Exceptionˇ
+WTCallbackspysftp.helpers.WTCallbacks"builtins.object*
+__init__*
 
-remotepathÒ
-9Union[TypeAlias[Union[builtins.str,builtins.bytes]],None]ß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path
-None *Â
-callback‘
-6Union[TypeAlias[CallableType[builtins.function]],None]ç
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp._Callback
-None *-
-confirm
-builtins.bool"builtins.bool *4
-preserve_mtime
-builtins.bool"builtins.bool z310z311z312z313z314*œ
-put_dpysftp.Connection.put_d"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∑
-	localpathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*∏
+self(*'
+file_cb*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*-
-confirm
-builtins.bool"builtins.bool *4
-preserve_mtime
-builtins.bool"builtins.bool z310z311z312z313z314*œ
-put_rpysftp.Connection.put_r"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∑
-	localpathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*∏
+self(*
+pathname(*&
+dir_cb*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*-
-confirm
-builtins.bool"builtins.bool *4
-preserve_mtime
-builtins.bool"builtins.bool z310z311z312z313z314*”
-putfopysftp.Connection.putfo"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*0
-self&
-pysftp.Connection"pysftp.Connection*Q
-floH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*Ñ
+self(*
+pathname(*&
+unk_cb*
 
-remotepathÒ
-9Union[TypeAlias[Union[builtins.str,builtins.bytes]],None]ß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path
-None *-
-	file_size
-builtins.int"builtins.int *Â
-callback‘
-6Union[TypeAlias[CallableType[builtins.function]],None]ç
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp._Callback
-None *-
-confirm
-builtins.bool"builtins.bool z310z311z312z313z314*Ê
-executepysftp.Connection.execute"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
-self&
-pysftp.Connection"pysftp.Connection*)
-command
-builtins.str"builtins.strz310z311z312z313z314*®
-cdpysftp.Connection.cd"π
-Acontextlib.AbstractContextManager[None,Union[builtins.bool,None]]
-NoneG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None"!contextlib.AbstractContextManager*0
-self&
-pysftp.Connection"pysftp.Connection*Ñ
+self(*
+pathname(2d
+flist.
+flist*
 
-remotepathÒ
-9Union[TypeAlias[Union[builtins.str,builtins.bytes]],None]ß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path
-None z310z311z312z313z314*∞
-chdirpysftp.Connection.chdir"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(0:builtins.propertyX`+
+flist*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*¨
-cwdpysftp.Connection.cwd"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*	
+val(0:.setter2d
+dlist.
+dlist*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*⁄
-chmodpysftp.Connection.chmod"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(0:builtins.propertyX`+
+dlist*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*(
-mode
-builtins.int"builtins.int z310z311z312z313z314*“
-chownpysftp.Connection.chown"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*	
+val(0:.setter2d
+ulist.
+ulist*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*O
-uidD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *O
-gidD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*ã
-getcwdpysftp.Connection.getcwd"
-builtins.str"builtins.str*0
-self&
-pysftp.Connection"pysftp.Connectionz310z311z312z313z314*¯
-listdirpysftp.Connection.listdir"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
-self&
-pysftp.Connection"pysftp.Connection*∫
+self(0:builtins.propertyX`+
+ulist*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path z310z311z312z313z314*¬
-listdir_attrpysftp.Connection.listdir_attr"â
-0builtins.list[paramiko.sftp_attr.SFTPAttributes]F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes"builtins.list*0
-self&
-pysftp.Connection"pysftp.Connection*∫
+self(*	
+val(0:.setter•
+CnOpts"builtins.object*,
+__init__*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path z310z311z312z313z314*⁄
-mkdirpysftp.Connection.mkdir"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*(
-mode
-builtins.int"builtins.int z310z311z312z313z314*Ã
-	normalizepysftp.Connection.normalize"
-builtins.str"builtins.str*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+knownhosts (	*'
+get_hostkey
+*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*∆
-isdirpysftp.Connection.isdir"
-builtins.bool"builtins.bool*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*»
-isfilepysftp.Connection.isfile"
-builtins.bool"builtins.bool*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+host(r
+log0r
+compression0r
+ciphers0r
+hostkeys0œ
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*ﬂ
-makedirspysftp.Connection.makedirs"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∑
-	remotedirß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*(
-mode
-builtins.int"builtins.int z310z311z312z313z314* 
-readlinkpysftp.Connection.readlink"
-builtins.str"builtins.str*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+Connection"builtins.object*…
+__init__*
 
-remotelinkß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*≤
-removepysftp.Connection.remove"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
 
-remotefileß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*≤
-unlinkpysftp.Connection.unlink"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+host(*
+username (	*
+private_key (*
+password (	*
+port (*
+private_key_pass (	*
+ciphers (*
+log (*
+cnopts (*
+default_path (**
+pwd*
 
-remotefileß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*∞
-rmdirpysftp.Connection.rmdir"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(0:builtins.property`*b
+get*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*Ó
-renamepysftp.Connection.rename"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
 
-remote_srcß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*π
-remote_destß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*Ï
-statpysftp.Connection.stat"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+remotepath(*
+	localpath (*
+callback (*
+preserve_mtime (*N
+get_d*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*Ó
-lstatpysftp.Connection.lstat"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
+	remotedir(*
+localdir(*
+preserve_mtime (*N
+get_r*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*u
-closepysftp.Connection.close"
-None*0
-self&
-pysftp.Connection"pysftp.Connectionz310z311z312z313z314*∏
-openpysftp.Connection.open":
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*0
-self&
-pysftp.Connection"pysftp.Connection*π
-remote_fileß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*(
-mode
-builtins.str"builtins.str *+
-bufsize
-builtins.int"builtins.int z310z311z312z313z314*»
-existspysftp.Connection.exists"
-builtins.bool"builtins.bool*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
+	remotedir(*
+localdir(*
+preserve_mtime (*D
+getfo*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314* 
-lexistspysftp.Connection.lexists"
-builtins.bool"builtins.bool*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*
-symlinkpysftp.Connection.symlink"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+remotepath(*	
+flo(*
+callback (*s
+put*
 
-remote_srcß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*π
-remote_destß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Pathz310z311z312z313z314*Ú
-truncatepysftp.Connection.truncate"
-builtins.int"builtins.int*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+self(*
+	localpath(*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*&
-size
-builtins.int"builtins.intz310z311z312z313z314*È
-walktreepysftp.Connection.walktree"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*∏
+remotepath (*
+callback (*
+confirm (*
+preserve_mtime (*a
+put_d*
 
-remotepathß
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"pysftp._Path*©
-	fcallbackô
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp.helpers._PathCallback*©
-	dcallbackô
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp.helpers._PathCallback*©
-	ucallbackô
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp.helpers._PathCallback*-
-recurse
-builtins.bool"builtins.bool z310z311z312z313z314*“
-sftp_clientpysftp.Connection.sftp_client"B
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*ˆ
-active_ciphers pysftp.Connection.active_ciphers"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*˛
-active_compression$pysftp.Connection.active_compression"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*‚
-security_options"pysftp.Connection.security_options"H
-"paramiko.transport.SecurityOptions""paramiko.transport.SecurityOptions*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*ë
-logfilepysftp.Connection.logfile"à
-*Union[builtins.str,Literal[builtins.bool]]
-builtins.str"builtins.str:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*ƒ
-remote_server_key#pysftp.Connection.remote_server_key"(
-paramiko.pkey.PKey"paramiko.pkey.PKey*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.property`z310z311z312z313z314*q
-__del__pysftp.Connection.__del__"
-None*(&
-pysftp.Connection"pysftp.Connectionz310z311z312z313z314*ı
-	__enter__pysftp.Connection.__enter__"W
-pysftp.Connection.Self&
-pysftp.Connection"pysftp.Connection"pysftp.Connection(*YW
-pysftp.Connection.Self&
-pysftp.Connection"pysftp.Connection"pysftp.Connection(z310z311z312z313z314*Ã
-__exit__pysftp.Connection.__exit__"
-None*(&
-pysftp.Connection"pysftp.Connection*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z3142æ
-timeoutpysftp.Connection.timeoutª
-timeoutpysftp.Connection.timeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*0
-self&
-pysftp.Connection"pysftp.Connection0:builtins.propertyX`¿
-timeoutpysftp.Connection.timeout"
-None*0
-self&
-pysftp.Connection"pysftp.Connection*S
-valJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None0:.setter"310"311"312"313"314j310j311j312j313j314o
-S_IMODE_stat.S_IMODE"
-builtins.int"builtins.int*
-builtins.int"builtins.intz310z311z312z313z314√
-cdpysftp.helpers.cd"π
-Acontextlib.AbstractContextManager[None,Union[builtins.bool,None]]
-NoneG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None"!contextlib.AbstractContextManager*U
-	localpathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314`
-known_hostspysftp.helpers.known_hosts"
-builtins.str"builtins.strz310z311z312z313z314Ë
-path_advancepysftp.helpers.path_advance"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*)
-thepath
-builtins.str"builtins.str*'
-sep
-builtins.str"builtins.str z310z311z312z313z314Ë
-path_retreatpysftp.helpers.path_retreat"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*)
-thepath
-builtins.str"builtins.str*'
-sep
-builtins.str"builtins.str z310z311z312z313z314≤
-reparentpysftp.helpers.reparent"
-builtins.str"builtins.str*+
-	newparent
-builtins.str"builtins.str*)
-oldpath
-builtins.str"builtins.strz310z311z312z313z314ç
-st_mode_to_intpysftp.helpers.st_mode_to_int"
-builtins.int"builtins.int*%
-val
-builtins.int"builtins.intz310z311z312z313z314¶
-walktreepysftp.helpers.walktree"
-None*+
-	localpath
-builtins.str"builtins.str*©
-	fcallbackô
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp.helpers._PathCallback*©
-	dcallbackô
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp.helpers._PathCallback*©
-	ucallbackô
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pysftp.helpers._PathCallback*-
-recurse
-builtins.bool"builtins.bool z310z311z312z313z314*Ä
-__path__pysftp.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*õ
-__annotations__pysftp.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+	localpath(*
+
+remotepath(*
+confirm (*
+preserve_mtime (*a
+put_r*
+
+self(*
+	localpath(*
+
+remotepath(*
+confirm (*
+preserve_mtime (*j
+putfo*
+
+self(*	
+flo(*
+
+remotepath (*
+	file_size (*
+callback (*
+confirm (*&
+execute*
+
+self(*
+command(*&
+cd *
+
+self(*
+
+remotepath (*'
+chdir*
+
+self(*
+
+remotepath(*%
+cwd*
+
+self(*
+
+remotepath(*5
+chmod*
+
+self(*
+
+remotepath(*
+mode (*A
+chown*
+
+self(*
+
+remotepath(*
+uid (!*
+gid (!*
+getcwd*
+
+self(*+
+listdir*
+
+self(*
+
+remotepath (*0
+listdir_attr"*
+
+self(*
+
+remotepath (*5
+mkdir*
+
+self(*
+
+remotepath(*
+mode (*+
+	normalize*
+
+self(*
+
+remotepath(*'
+isdir*
+
+self(*
+
+remotepath(*(
+isfile*
+
+self(*
+
+remotepath(*7
+makedirs*
+
+self(*
+	remotedir(*
+mode (**
+readlink*
+
+self(*
+
+remotelink(*(
+remove*
+
+self(*
+
+remotefile(*(
+unlink*
+
+self(*
+
+remotefile(*'
+rmdir*
+
+self(*
+
+remotepath(*;
+rename*
+
+self(*
+
+remote_src(*
+remote_dest(*&
+stat*
+
+self(*
+
+remotepath(*'
+lstat*
+
+self(*
+
+remotepath(*
+close*
+
+self(*F
+open#*
+
+self(*
+remote_file(*
+mode (*
+bufsize (*(
+exists*
+
+self(*
+
+remotepath(*)
+lexists*
+
+self(*
+
+remotepath(*<
+symlink*
+
+self(*
+
+remote_src(*
+remote_dest(*6
+truncate*
+
+self(*
+
+remotepath(*
+
+size(*n
+walktree*
+
+self(*
+
+remotepath(*
+	fcallback($*
+	dcallback($*
+	ucallback($*
+recurse (*2
+sftp_client%*
+
+self(0:builtins.property`*5
+active_ciphers&*
+
+self(0:builtins.property`*9
+active_compression&*
+
+self(0:builtins.property`*7
+security_options'*
+
+self(0:builtins.property`*.
+logfile)*
+
+self(0:builtins.property`*8
+remote_server_key
+*
+
+self(0:builtins.property`*
+__del__*(*
+	__enter__**(**
+__exit__*(*(-*(.*(02j
+timeout0
+timeout2*
+
+self(0:builtins.propertyX`-
+timeout*
+
+self(*	
+val(20:.setter
+S_IMODE_stat.S_IMODE*(,
+cdpysftp.helpers.cd *
+	localpath (	+
+known_hostspysftp.helpers.known_hostsI
+path_advancepysftp.helpers.path_advance3*
+thepath(*
+sep (I
+path_retreatpysftp.helpers.path_retreat3*
+thepath(*
+sep (E
+reparentpysftp.helpers.reparent*
+	newparent(*
+oldpath(<
+st_mode_to_intpysftp.helpers.st_mode_to_int*	
+val(z
+walktreepysftp.helpers.walktree*
+	localpath(*
+	fcallback($*
+	dcallback($*
+	ucallback($*
+recurse (*
+__path__0*
+__annotations__0522'"%pysftp.exceptions.ConnectionException2"builtins.str2"builtins.int2'"%pysftp.exceptions.CredentialException2"pysftp.helpers.WTCallbacks2"builtins.list22"pysftp.CnOpts222"paramiko.pkey.PKey2"builtins.bool2"typing.Sequence2222"paramiko.hostkeys.HostKeys222"pysftp.Connection2"paramiko.rsakey.RSAKey2"paramiko.agent.AgentKey22222"builtins.bytes222"pysftp._Path2222"builtins.function222"pysftp._Callback2222"	typing.IO22#"!paramiko.sftp_attr.SFTPAttributes222'"!contextlib.AbstractContextManager2222"builtins.list22"paramiko.sftp_file.SFTPFile2#"pysftp.helpers._PathCallback22!"paramiko.sftp_client.SFTPClient222$""paramiko.transport.SecurityOptions2	222(22
+pysftp.Connection.Self"pysftp.Connection(22"builtins.BaseException2"type2+22,22+2"types.TracebackType22/2"builtins.float2212"typing.Iterator222"builtins.dict24

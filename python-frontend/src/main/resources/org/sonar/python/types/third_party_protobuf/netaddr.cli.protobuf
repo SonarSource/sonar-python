@@ -1,1391 +1,573 @@
 
-netaddr.cliá
-SubnetSplitter.netaddr.contrib.subnet_splitter.SubnetSplitter"builtins.object*Ş
-__init__7netaddr.contrib.subnet_splitter.SubnetSplitter.__init__"
-None*j
-self`
-.netaddr.contrib.subnet_splitter.SubnetSplitter".netaddr.contrib.subnet_splitter.SubnetSplitter*‰
-	base_cidrù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddrz310z311z312z313z314*µ
-extract_subnet=netaddr.contrib.subnet_splitter.SubnetSplitter.extract_subnet"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*j
-self`
-.netaddr.contrib.subnet_splitter.SubnetSplitter".netaddr.contrib.subnet_splitter.SubnetSplitter*(
-prefix
-builtins.int"builtins.int*Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*¾
-available_subnets@netaddr.contrib.subnet_splitter.SubnetSplitter.available_subnets"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*j
-self`
-.netaddr.contrib.subnet_splitter.SubnetSplitter".netaddr.contrib.subnet_splitter.SubnetSplitterz310z311z312z313z314*š
-remove_subnet<netaddr.contrib.subnet_splitter.SubnetSplitter.remove_subnet"
-None*j
-self`
-.netaddr.contrib.subnet_splitter.SubnetSplitter".netaddr.contrib.subnet_splitter.SubnetSplitter*<
+netaddr.cli
+SubnetSplitter.netaddr.contrib.subnet_splitter.SubnetSplitter"builtins.object*)
+__init__*
 
-ip_network,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetworkz310z311z312z313z314j310j311j312j313j314d
-AddrConversionError netaddr.core.AddrConversionError"builtins.Exceptionj310j311j312j313j314\
-AddrFormatErrornetaddr.core.AddrFormatError"builtins.Exceptionj310j311j312j313j314b
-NotRegisteredErrornetaddr.core.NotRegisteredError"builtins.Exceptionj310j311j312j313j314ìG
-EUInetaddr.eui.EUI"netaddr.eui.BaseIdentifier*Ú
-__init__netaddr.eui.EUI.__init__"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*Ÿ
-addr”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.str*S
-versionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ë
-dialectÛ
-ZUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base],None]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314*œ
-ouinetaddr.eui.EUI.oui""
-netaddr.eui.OUI"netaddr.eui.OUI*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*”
-einetaddr.eui.EUI.ei"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*‡
-is_iabnetaddr.eui.EUI.is_iab"
-builtins.bool"builtins.bool*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUIz310z311z312z313z314*Ç
-iabnetaddr.eui.EUI.iab"M
-Union[netaddr.eui.IAB,None]"
-netaddr.eui.IAB"netaddr.eui.IAB
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*«
-versionnetaddr.eui.EUI.version"¨
-2Union[Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*³
-__setitem__netaddr.eui.EUI.__setitem__"
-None*$"
-netaddr.eui.EUI"netaddr.eui.EUI*
-builtins.int"builtins.int*
-builtins.int"builtins.intz310z311z312z313z314*‰
-__hash__netaddr.eui.EUI.__hash__"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUIz310z311z312z313z314*¥
-__eq__netaddr.eui.EUI.__eq__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*¥
-__ne__netaddr.eui.EUI.__ne__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*™
-__lt__netaddr.eui.EUI.__lt__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*™
-__le__netaddr.eui.EUI.__le__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*™
-__gt__netaddr.eui.EUI.__gt__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*™
-__ge__netaddr.eui.EUI.__ge__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.EUI"netaddr.eui.EUI*—”
-0Union[netaddr.eui.EUI,builtins.int,builtins.str]"
-netaddr.eui.EUI"netaddr.eui.EUI
-builtins.int"builtins.int
-builtins.str"builtins.strz310z311z312z313z314*×
-bitsnetaddr.eui.EUI.bits"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*T
-word_sepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314* 
-packednetaddr.eui.EUI.packed" 
-builtins.bytes"builtins.bytes*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*Ê
-wordsnetaddr.eui.EUI.words"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*–
-binnetaddr.eui.EUI.bin"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*ã
-eui64netaddr.eui.EUI.eui64"O
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(*Y
-selfO
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(z310z311z312z313z314*õ
-modified_eui64netaddr.eui.EUI.modified_eui64"O
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(*Y
-selfO
-netaddr.eui.EUI.Self"
-netaddr.eui.EUI"netaddr.eui.EUI"netaddr.eui.EUI(z310z311z312z313z314*è
-ipv6netaddr.eui.EUI.ipv6",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*ã
-prefixÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndexz310z311*Ì
-ipv6netaddr.eui.EUI.ipv6",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*Â
-prefixµ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndexz312z313z314*§
-ipv6_link_localnetaddr.eui.EUI.ipv6_link_local",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUIz310z311z312z313z314*´
-infonetaddr.eui.EUI.info"8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.property`z310z311z312z313z314*ó
-formatnetaddr.eui.EUI.format"
-builtins.str"builtins.str*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*ë
-dialectÛ
-ZUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base],None]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z3142÷
-valuenetaddr.eui.EUI.valueƒ
-valuenetaddr.eui.EUI.value"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.propertyX`Æ
-valuenetaddr.eui.EUI.value"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*â
-valueÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex0:.setter"310"3112Û
-valuenetaddr.eui.EUI.valueƒ
-valuenetaddr.eui.EUI.value"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.propertyX`¥
-valuenetaddr.eui.EUI.value"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*Á
-valueµ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndex0:.setter"312"313"3142È
-dialectnetaddr.eui.EUI.dialect¸
-dialectnetaddr.eui.EUI.dialect"Ì
-UUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base]]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI0:builtins.propertyX`Ï
-dialectnetaddr.eui.EUI.dialect"
-None*,
-self"
-netaddr.eui.EUI"netaddr.eui.EUI*ç
-valueÛ
-ZUnion[Type[netaddr.strategy.eui48.mac_eui48],Type[netaddr.strategy.eui64.eui64_base],None]v
-&Type[netaddr.strategy.eui48.mac_eui48]D
- netaddr.strategy.eui48.mac_eui48" netaddr.strategy.eui48.mac_eui48"typey
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None0:.setter"310"311"312"313"3142’
-__getitem__netaddr.eui.EUI.__getitem__£
-__getitem__netaddr.eui.EUI.__getitem__"
-builtins.int"builtins.int*$"
-netaddr.eui.EUI"netaddr.eui.EUI*
-builtins.int"builtins.int0:typing.overloadXı
-__getitem__netaddr.eui.EUI.__getitem__"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*$"
-netaddr.eui.EUI"netaddr.eui.EUI*JH
-builtins.slice[Any,Any,Any]
-Any
-Any
-Any"builtins.slice0:typing.overloadX¦
-__getitem__netaddr.eui.EUI.__getitem__"
-/Union[builtins.int,builtins.list[builtins.int]]
-builtins.int"builtins.intJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*$"
-netaddr.eui.EUI"netaddr.eui.EUI*›
-/Union[builtins.int,builtins.slice[Any,Any,Any]]
-builtins.int"builtins.intH
-builtins.slice[Any,Any,Any]
-Any
-Any
-Any"builtins.slice0:typing.overloadX"310"311"312"313"314j310j311j312j313j314³
-IABnetaddr.eui.IAB"netaddr.eui.BaseIdentifier*ê
-split_iab_macnetaddr.eui.IAB.split_iab_mac"`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*L
-clsC
-Type[netaddr.eui.IAB]"
-netaddr.eui.IAB"netaddr.eui.IAB"type*)
-eui_int
-builtins.int"builtins.int*,
-strict
-builtins.bool"builtins.bool 0:builtins.classmethodpz310z311z312z313z314*
-__init__netaddr.eui.IAB.__init__"
-None*,
-self"
-netaddr.eui.IAB"netaddr.eui.IAB*i
-iab`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*,
-strict
-builtins.bool"builtins.bool z310z311z312z313z314*¥
-__eq__netaddr.eui.IAB.__eq__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.IAB"netaddr.eui.IAB*$"
-builtins.object"builtins.objectz310z311z312z313z314*¥
-__ne__netaddr.eui.IAB.__ne__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.IAB"netaddr.eui.IAB*$"
-builtins.object"builtins.objectz310z311z312z313z314*­
-registrationnetaddr.eui.IAB.registration"8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*,
-self"
-netaddr.eui.IAB"netaddr.eui.IABz310z311z312z313z314j310j311j312j313j314r«
-IAB_EUI_VALUESnetaddr.eui.IAB.IAB_EUI_VALUES`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*310*311*312*313*314r¹
-recordnetaddr.eui.IAB.record~
-+builtins.dict[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"builtins.dict*310*311*312*313*314Š
+self(*
+	base_cidr(*;
+extract_subnet	*
 
-OUInetaddr.eui.OUI"netaddr.eui.BaseIdentifier*à
-__init__netaddr.eui.OUI.__init__"
-None*,
-self"
-netaddr.eui.OUI"netaddr.eui.OUI*i
-oui`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.intz310z311z312z313z314*¥
-__eq__netaddr.eui.OUI.__eq__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.OUI"netaddr.eui.OUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*¥
-__ne__netaddr.eui.OUI.__ne__"
-builtins.bool"builtins.bool*$"
-netaddr.eui.OUI"netaddr.eui.OUI*$"
-builtins.object"builtins.objectz310z311z312z313z314*¢
-	reg_countnetaddr.eui.OUI.reg_count"
-builtins.int"builtins.int*,
-self"
-netaddr.eui.OUI"netaddr.eui.OUI0:builtins.property`z310z311z312z313z314*Ø
-registrationnetaddr.eui.OUI.registration"8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*,
-self"
-netaddr.eui.OUI"netaddr.eui.OUI*)
-index
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314r‰
-recordsnetaddr.eui.OUI.recordsË
-:builtins.list[builtins.dict[builtins.str,builtins.object]]~
-+builtins.dict[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"builtins.dict"builtins.list*310*311*312*313*314»K
-	IPAddressnetaddr.ip.IPAddress"netaddr.ip.BaseIP*€
-__init__netaddr.ip.IPAddress.__init__"
-None*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*„
-addrù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*Ç
-version·
-7Union[Literal[builtins.int],Literal[builtins.int],None]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int
-None *)
-flags
-builtins.int"builtins.int z310z311z312z313z314* 
-netmask_bits!netaddr.ip.IPAddress.netmask_bits"
-builtins.int"builtins.int*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314* 
-is_hostmask netaddr.ip.IPAddress.is_hostmask"
-builtins.bool"builtins.bool*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*
+self(*
+prefix(*
+count (
+*!
+available_subnets	*
 
-is_netmasknetaddr.ip.IPAddress.is_netmask"
-builtins.bool"builtins.bool*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*®
-__iadd__netaddr.ip.IPAddress.__iadd__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*®
-__isub__netaddr.ip.IPAddress.__isub__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*¬
-__add__netaddr.ip.IPAddress.__add__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*¬
-__sub__netaddr.ip.IPAddress.__sub__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*®
-__rsub__netaddr.ip.IPAddress.__rsub__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*¾
-keynetaddr.ip.IPAddress.key"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*È
-sort_keynetaddr.ip.IPAddress.sort_key"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*
-__int__netaddr.ip.IPAddress.__int__"
-builtins.int"builtins.int*.,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*
-__long__netaddr.ip.IPAddress.__long__"
-builtins.int"builtins.int*.,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*
-__oct__netaddr.ip.IPAddress.__oct__"
-builtins.str"builtins.str*.,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*
-__hex__netaddr.ip.IPAddress.__hex__"
-builtins.str"builtins.str*.,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*š
-	__index__netaddr.ip.IPAddress.__index__"
-builtins.int"builtins.int*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*
-	__bytes__netaddr.ip.IPAddress.__bytes__" 
-builtins.bytes"builtins.bytes*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*æ
-bitsnetaddr.ip.IPAddress.bits"
-builtins.str"builtins.str*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*T
-word_sepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*¯
-packednetaddr.ip.IPAddress.packed" 
-builtins.bytes"builtins.bytes*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress0:builtins.property`z310z311z312z313z314*Ù
-wordsnetaddr.ip.IPAddress.words"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress0:builtins.property`z310z311z312z313z314*¥
-binnetaddr.ip.IPAddress.bin"
-builtins.str"builtins.str*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress0:builtins.property`z310z311z312z313z314*µ
-reverse_dns netaddr.ip.IPAddress.reverse_dns"
-builtins.str"builtins.str*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress0:builtins.property`z310z311z312z313z314*
-ipv4netaddr.ip.IPAddress.ipv4"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*m
-selfc
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(z310z311z312z313z314*Å
-ipv6netaddr.ip.IPAddress.ipv6"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*m
-selfc
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*5
-ipv4_compatible
-builtins.bool"builtins.bool z310z311z312z313z314*ç
-formatnetaddr.ip.IPAddress.format"
-builtins.str"builtins.str*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*Ğ
-dialectÀ
-4Union[Type[netaddr.strategy.ipv6.ipv6_verbose],None]|
-(Type[netaddr.strategy.ipv6.ipv6_verbose]H
-"netaddr.strategy.ipv6.ipv6_verbose""netaddr.strategy.ipv6.ipv6_verbose"type
-None z310z311z312z313z314*×
-__or__netaddr.ip.IPAddress.__or__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ÙÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndexz310z311*»
-__or__netaddr.ip.IPAddress.__or__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*¸µ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndexz312z313z314*Ù
-__and__netaddr.ip.IPAddress.__and__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ÙÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndexz310z311*½
-__and__netaddr.ip.IPAddress.__and__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*¸µ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndexz312z313z314*Ù
-__xor__netaddr.ip.IPAddress.__xor__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ÙÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndexz310z311*½
-__xor__netaddr.ip.IPAddress.__xor__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*¸µ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndexz312z313z314*²
+self(*/
+remove_subnet*
 
-__lshift__netaddr.ip.IPAddress.__lshift__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*²
+self(*
 
-__rshift__netaddr.ip.IPAddress.__rshift__"c
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*ec
-netaddr.ip.IPAddress.Self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"netaddr.ip.IPAddress(*
-builtins.int"builtins.intz310z311z312z313z314*š
-__bool__netaddr.ip.IPAddress.__bool__"
-builtins.bool"builtins.bool*6
-self,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314j310j311j312j313j314r
-__radd__netaddr.ip.IPAddress.__radd__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314ş9
-	IPNetworknetaddr.ip.IPNetwork"netaddr.ip.BaseIP"netaddr.ip.IPListMixin*‡
-__init__netaddr.ip.IPNetwork.__init__"
-None*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*Ô
-addrÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr*5
-implicit_prefix
-builtins.bool"builtins.bool *Ç
-version·
-7Union[Literal[builtins.int],Literal[builtins.int],None]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int
-None *)
-flags
-builtins.int"builtins.int z310z311z312z313z314*³
-ipnetaddr.ip.IPNetwork.ip",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*½
-networknetaddr.ip.IPNetwork.network",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*ñ
-	broadcastnetaddr.ip.IPNetwork.broadcast"\
- Union[netaddr.ip.IPAddress,None],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress
-None*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*©
-firstnetaddr.ip.IPNetwork.first"
-builtins.int"builtins.int*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*§
-lastnetaddr.ip.IPNetwork.last"
-builtins.int"builtins.int*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*¿
-hostmasknetaddr.ip.IPNetwork.hostmask",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*·
-cidrnetaddr.ip.IPNetwork.cidr",
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.property`z310z311z312z313z314*®
-__iadd__netaddr.ip.IPNetwork.__iadd__"c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*ec
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*
-builtins.int"builtins.intz310z311z312z313z314*®
-__isub__netaddr.ip.IPNetwork.__isub__"c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*ec
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*
-builtins.int"builtins.intz310z311z312z313z314*›
-__contains__!netaddr.ip.IPNetwork.__contains__"
-builtins.bool"builtins.bool*.,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*şû
-‚Union[netaddr.ip.BaseIP,TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIPÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddrz310z311z312z313z314*¾
-keynetaddr.ip.IPNetwork.key"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetworkz310z311z312z313z314*È
-sort_keynetaddr.ip.IPNetwork.sort_key"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetworkz310z311z312z313z314*
-ipv4netaddr.ip.IPNetwork.ipv4"c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*m
-selfc
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(z310z311z312z313z314*Å
-ipv6netaddr.ip.IPNetwork.ipv6"c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*m
-selfc
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*5
-ipv4_compatible
-builtins.bool"builtins.bool z310z311z312z313z314*À
-previousnetaddr.ip.IPNetwork.previous"c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*m
-selfc
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*(
-step
-builtins.int"builtins.int z310z311z312z313z314*¸
-nextnetaddr.ip.IPNetwork.next"c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*m
-selfc
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*(
-step
-builtins.int"builtins.int z310z311z312z313z314*
-supernetnetaddr.ip.IPNetwork.supernet"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*-
-	prefixlen
-builtins.int"builtins.int z310z311z312z313z314*
-subnetnetaddr.ip.IPNetwork.subnet"¢
-*typing.Iterator[netaddr.ip.IPNetwork.Self]c
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork("typing.Iterator*m
-selfc
-netaddr.ip.IPNetwork.Self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(*+
-	prefixlen
-builtins.int"builtins.int*Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *-
-fmt"
-builtins.object"builtins.object z310z311z312z313z314*æ
+ip_network(K
+AddrConversionError netaddr.core.AddrConversionError"builtins.ExceptionC
+AddrFormatErrornetaddr.core.AddrFormatError"builtins.ExceptionI
+NotRegisteredErrornetaddr.core.NotRegisteredError"builtins.Exception¥
+EUInetaddr.eui.EUI"netaddr.eui.BaseIdentifier*F
+__init__*
 
-iter_hostsnetaddr.ip.IPNetwork.iter_hosts"f
-%typing.Iterator[netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"typing.Iterator*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetworkz310z311z312z313z3142…
-	prefixlennetaddr.ip.IPNetwork.prefixlenš
-	prefixlennetaddr.ip.IPNetwork.prefixlen"
-builtins.int"builtins.int*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.propertyX`¡
-	prefixlennetaddr.ip.IPNetwork.prefixlen"
-None*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*'
-value
-builtins.int"builtins.int0:.setter"310"311"312"313"3142è
-netmasknetaddr.ip.IPNetwork.netmask¦
-netmasknetaddr.ip.IPNetwork.netmask",
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork0:builtins.propertyX`ü
-netmasknetaddr.ip.IPNetwork.netmask"
-None*6
-self,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*…
-valueù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr0:.setter"310"311"312"313"314j310j311j312j313j314Õ
-IPRangenetaddr.ip.IPRange"netaddr.ip.BaseIP"netaddr.ip.IPListMixin*·
-__init__netaddr.ip.IPRange.__init__"
-None*2
-self(
-netaddr.ip.IPRange"netaddr.ip.IPRange*…
-startù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*ƒ
-endù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*˜
-__contains__netaddr.ip.IPRange.__contains__"
-builtins.bool"builtins.bool**(
-netaddr.ip.IPRange"netaddr.ip.IPRange*ş
-VUnion[netaddr.ip.BaseIP,TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIPù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddrz310z311z312z313z314*£
-firstnetaddr.ip.IPRange.first"
-builtins.int"builtins.int*2
-self(
-netaddr.ip.IPRange"netaddr.ip.IPRange0:builtins.property`z310z311z312z313z314*¡
-lastnetaddr.ip.IPRange.last"
-builtins.int"builtins.int*2
-self(
-netaddr.ip.IPRange"netaddr.ip.IPRange0:builtins.property`z310z311z312z313z314*¸
-keynetaddr.ip.IPRange.key"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*2
-self(
-netaddr.ip.IPRange"netaddr.ip.IPRangez310z311z312z313z314*Â
-sort_keynetaddr.ip.IPRange.sort_key"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*2
-self(
-netaddr.ip.IPRange"netaddr.ip.IPRangez310z311z312z313z314*Ò
-cidrsnetaddr.ip.IPRange.cidrs"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*2
-self(
-netaddr.ip.IPRange"netaddr.ip.IPRangez310z311z312z313z314j310j311j312j313j314ü
-IPGlobnetaddr.ip.glob.IPGlob"netaddr.ip.IPRange*´
-__init__netaddr.ip.glob.IPGlob.__init__"
-None*:
-self0
-netaddr.ip.glob.IPGlob"netaddr.ip.glob.IPGlob*(
-ipglob
-builtins.str"builtins.strz310z311z312z313z3142õ
-globnetaddr.ip.glob.IPGlob.glob–
-globnetaddr.ip.glob.IPGlob.glob"
-builtins.str"builtins.str*:
-self0
-netaddr.ip.glob.IPGlob"netaddr.ip.glob.IPGlob0:builtins.propertyX`
-globnetaddr.ip.glob.IPGlob.glob"
-None*:
-self0
-netaddr.ip.glob.IPGlob"netaddr.ip.glob.IPGlob*'
-value
-builtins.str"builtins.str0:.setter"310"311"312"313"314j310j311j312j313j314–]
-IPSetnetaddr.ip.sets.IPSet"builtins.object*Â
-__init__netaddr.ip.sets.IPSet.__init__"
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*
-iterableü
-ıUnion[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPRange,netaddr.ip.sets.IPSet,typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]]],None]í
-ñTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPRange,netaddr.ip.sets.IPSet,typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]]]×	
-æUnion[netaddr.ip.IPNetwork,netaddr.ip.IPRange,netaddr.ip.sets.IPSet,typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(
-netaddr.ip.IPRange"netaddr.ip.IPRange.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetá
-¡typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]©
-Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]É
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr(
-netaddr.ip.IPRange"netaddr.ip.IPRange
-builtins.int"builtins.int"typing.Iterable"netaddr.ip.sets._IPIterable
-None *)
-flags
-builtins.int"builtins.int z310z311z312z313z314*…
-compactnetaddr.ip.sets.IPSet.compact"
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*‹
-__hash__netaddr.ip.sets.IPSet.__hash__"
-NoReturn
-*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*ì
-__contains__"netaddr.ip.sets.IPSet.__contains__"
-builtins.bool"builtins.bool*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*ÌÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddrz310z311z312z313z314*
-__bool__netaddr.ip.sets.IPSet.__bool__"
-builtins.bool"builtins.bool*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*İ
-__iter__netaddr.ip.sets.IPSet.__iter__"f
-%typing.Iterator[netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"typing.Iterator*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*å
+self(*
 
-iter_cidrs netaddr.ip.sets.IPSet.iter_cidrs"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*ß
-addnetaddr.ip.sets.IPSet.add"
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*´
-addr©
-Union[netaddr.ip.IPRange,TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],builtins.int](
-netaddr.ip.IPRange"netaddr.ip.IPRangeÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*å
-removenetaddr.ip.sets.IPSet.remove"
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*´
-addr©
-Union[netaddr.ip.IPRange,TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],builtins.int](
-netaddr.ip.IPRange"netaddr.ip.IPRangeÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*¡
-popnetaddr.ip.sets.IPSet.pop",
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*Ü
+addr(*
+version (
+*
+dialect (**
+oui*
 
-isdisjoint netaddr.ip.sets.IPSet.isdisjoint"
-builtins.bool"builtins.bool*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*—
-copynetaddr.ip.sets.IPSet.copy"g
-netaddr.ip.sets.IPSet.Self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet(*q
-selfg
-netaddr.ip.sets.IPSet.Self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet(z310z311z312z313z314*­
-updatenetaddr.ip.sets.IPSet.update"
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*ü
-iterableí
-ñTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPRange,netaddr.ip.sets.IPSet,typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]]]×	
-æUnion[netaddr.ip.IPNetwork,netaddr.ip.IPRange,netaddr.ip.sets.IPSet,typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(
-netaddr.ip.IPRange"netaddr.ip.IPRange.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetá
-¡typing.Iterable[Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]]©
-Union[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]],netaddr.ip.IPRange,builtins.int]É
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr(
-netaddr.ip.IPRange"netaddr.ip.IPRange
-builtins.int"builtins.int"typing.Iterable"netaddr.ip.sets._IPIterable*)
-flags
-builtins.int"builtins.int z310z311z312z313z314*
-clearnetaddr.ip.sets.IPSet.clear"
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*·
-__eq__netaddr.ip.sets.IPSet.__eq__"
-builtins.bool"builtins.bool*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*$"
-builtins.object"builtins.objectz310z311z312z313z314*·
-__ne__netaddr.ip.sets.IPSet.__ne__"
-builtins.bool"builtins.bool*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*$"
-builtins.object"builtins.objectz310z311z312z313z314*Ã
-__lt__netaddr.ip.sets.IPSet.__lt__"
-builtins.bool"builtins.bool*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*Ø
-issubsetnetaddr.ip.sets.IPSet.issubset"
-builtins.bool"builtins.bool*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*Ã
-__gt__netaddr.ip.sets.IPSet.__gt__"
-builtins.bool"builtins.bool*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*Ü
+self(0:builtins.property`*)
+ei*
 
-issuperset netaddr.ip.sets.IPSet.issuperset"
-builtins.bool"builtins.bool*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*Ô
-unionnetaddr.ip.sets.IPSet.union"g
-netaddr.ip.sets.IPSet.Self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet(*q
-selfg
-netaddr.ip.sets.IPSet.Self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet(*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*ğ
-intersection"netaddr.ip.sets.IPSet.intersection".
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*€
-symmetric_difference*netaddr.ip.sets.IPSet.symmetric_difference".
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*ì
+self(0:builtins.property`*
+is_iab*
 
-difference netaddr.ip.sets.IPSet.difference".
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet*9
-other.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*‘
-__len__netaddr.ip.sets.IPSet.__len__"
-builtins.int"builtins.int*0.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*ª
-sizenetaddr.ip.sets.IPSet.size"
-builtins.int"builtins.int*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSet0:builtins.property`z310z311z312z313z314*¥
-iscontiguous"netaddr.ip.sets.IPSet.iscontiguous"
-builtins.bool"builtins.bool*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*Ó
-iprangenetaddr.ip.sets.IPSet.iprange"V
-Union[netaddr.ip.IPRange,None](
-netaddr.ip.IPRange"netaddr.ip.IPRange
-None*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314*é
-iter_ipranges#netaddr.ip.sets.IPSet.iter_ipranges"`
-#typing.Iterator[netaddr.ip.IPRange](
-netaddr.ip.IPRange"netaddr.ip.IPRange"typing.Iterator*8
-self.
-netaddr.ip.sets.IPSet"netaddr.ip.sets.IPSetz310z311z312z313z314j310j311j312j313j314rŒ
-__le__netaddr.ip.sets.IPSet.__le__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rŒ
-__ge__netaddr.ip.sets.IPSet.__ge__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rŒ
-__or__netaddr.ip.sets.IPSet.__or__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r
-__and__netaddr.ip.sets.IPSet.__and__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r
-__xor__netaddr.ip.sets.IPSet.__xor__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r
-__sub__netaddr.ip.sets.IPSet.__sub__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314f
-mac_barenetaddr.strategy.eui48.mac_bare" netaddr.strategy.eui48.mac_eui48j310j311j312j313j314h
-	mac_cisco netaddr.strategy.eui48.mac_cisco" netaddr.strategy.eui48.mac_eui48j310j311j312j313j314ñ
-	mac_eui48 netaddr.strategy.eui48.mac_eui48"builtins.objectj310j311j312j313j314rn
-	word_size*netaddr.strategy.eui48.mac_eui48.word_size
-builtins.int"builtins.int*310*311*312*313*314rn
-	num_words*netaddr.strategy.eui48.mac_eui48.num_words
-builtins.int"builtins.int*310*311*312*313*314rl
-max_word)netaddr.strategy.eui48.mac_eui48.max_word
-builtins.int"builtins.int*310*311*312*313*314rl
-word_sep)netaddr.strategy.eui48.mac_eui48.word_sep
-builtins.str"builtins.str*310*311*312*313*314rl
-word_fmt)netaddr.strategy.eui48.mac_eui48.word_fmt
-builtins.str"builtins.str*310*311*312*313*314rn
-	word_base*netaddr.strategy.eui48.mac_eui48.word_base
-builtins.int"builtins.int*310*311*312*313*314h
-	mac_pgsql netaddr.strategy.eui48.mac_pgsql" netaddr.strategy.eui48.mac_eui48j310j311j312j313j314f
-mac_unixnetaddr.strategy.eui48.mac_unix" netaddr.strategy.eui48.mac_eui48j310j311j312j313j314w
-mac_unix_expanded(netaddr.strategy.eui48.mac_unix_expanded"netaddr.strategy.eui48.mac_unixj310j311j312j313j314k
+self(**
+iab*
 
-eui64_bare!netaddr.strategy.eui64.eui64_bare"!netaddr.strategy.eui64.eui64_basej310j311j312j313j314ù
+self(0:builtins.property`*.
+version*
 
-eui64_base!netaddr.strategy.eui64.eui64_base"builtins.objectj310j311j312j313j314ro
-	word_size+netaddr.strategy.eui64.eui64_base.word_size
-builtins.int"builtins.int*310*311*312*313*314ro
-	num_words+netaddr.strategy.eui64.eui64_base.num_words
-builtins.int"builtins.int*310*311*312*313*314rm
-max_word*netaddr.strategy.eui64.eui64_base.max_word
-builtins.int"builtins.int*310*311*312*313*314rm
-word_sep*netaddr.strategy.eui64.eui64_base.word_sep
-builtins.str"builtins.str*310*311*312*313*314rm
-word_fmt*netaddr.strategy.eui64.eui64_base.word_fmt
-builtins.str"builtins.str*310*311*312*313*314ro
-	word_base+netaddr.strategy.eui64.eui64_base.word_base
-builtins.int"builtins.int*310*311*312*313*314m
-eui64_cisco"netaddr.strategy.eui64.eui64_cisco"!netaddr.strategy.eui64.eui64_basej310j311j312j313j314k
+self(0:builtins.property`*
+__setitem__*(*(*(*
+__hash__*
 
-eui64_unix!netaddr.strategy.eui64.eui64_unix"!netaddr.strategy.eui64.eui64_basej310j311j312j313j314}
-eui64_unix_expanded*netaddr.strategy.eui64.eui64_unix_expanded"!netaddr.strategy.eui64.eui64_unixj310j311j312j313j314¼
-ipv6_compact"netaddr.strategy.ipv6.ipv6_compact"builtins.objectj310j311j312j313j314rn
-word_fmt+netaddr.strategy.ipv6.ipv6_compact.word_fmt
-builtins.str"builtins.str*310*311*312*313*314rn
-compact*netaddr.strategy.ipv6.ipv6_compact.compact
-builtins.bool"builtins.bool*310*311*312*313*314i
-	ipv6_fullnetaddr.strategy.ipv6.ipv6_full""netaddr.strategy.ipv6.ipv6_compactj310j311j312j313j314o
-ipv6_verbose"netaddr.strategy.ipv6.ipv6_verbose""netaddr.strategy.ipv6.ipv6_compactj310j311j312j313j314
-all_matching_cidrsnetaddr.ip.all_matching_cidrs"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*‚
-ipù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*å
-cidrsÙ
-ztyping.Iterable[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]]É
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr"typing.Iterablez310z311z312z313z314Î
-cidr_abbrev_to_verbose!netaddr.ip.cidr_abbrev_to_verbose"
-builtins.str"builtins.str*è
-abbrev_cidrÖ
-FUnion[builtins.str,typing.SupportsInt,typing_extensions.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndexz310z311²
-cidr_abbrev_to_verbose!netaddr.ip.cidr_abbrev_to_verbose"
-builtins.str"builtins.str*Ç
-abbrev_cidrµ
-;Union[builtins.str,typing.SupportsInt,typing.SupportsIndex]
-builtins.str"builtins.str(
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndexz312z313z314×
-cidr_excludenetaddr.ip.cidr_exclude"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*Ö
-targetÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr*×
-excludeÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddrz310z311z312z313z314Û
+self(*
+__eq__*(*(*
+__ne__*(*(*
+__lt__*(*(*
+__le__*(*(*
+__gt__*(*(*
+__ge__*(*(*&
+bits*
 
-cidr_mergenetaddr.ip.cidr_merge"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*¸
-ip_addrs©
-”typing.Iterable[Union[netaddr.ip.IPRange,TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]]]ş
-ƒUnion[netaddr.ip.IPRange,TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]](
-netaddr.ip.IPRange"netaddr.ip.IPRangeÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr"typing.Iterablez310z311z312z313z314Ú
-iprange_to_cidrsnetaddr.ip.iprange_to_cidrs"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*Õ
-startÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr*Ó
-endÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddrz310z311z312z313z314â
-iter_iprangenetaddr.ip.iter_iprange"f
-%typing.Iterator[netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"typing.Iterator*…
-startù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*ƒ
-endù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*¸
-step«
-9Union[typing.SupportsInt,typing_extensions.SupportsIndex](
-typing.SupportsInt"typing.SupportsIntB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex z310z311Æ
-iter_iprangenetaddr.ip.iter_iprange"f
-%typing.Iterator[netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"typing.Iterator*…
-startù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*ƒ
-endù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*—
-stepŠ
-.Union[typing.SupportsInt,typing.SupportsIndex](
-typing.SupportsInt"typing.SupportsInt,
-typing.SupportsIndex"typing.SupportsIndex z312z313z314º
-iter_unique_ipsnetaddr.ip.iter_unique_ips"f
-%typing.Iterator[netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"typing.Iterator*‰
-argsş
-ƒUnion[netaddr.ip.IPRange,TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]](
-netaddr.ip.IPRange"netaddr.ip.IPRangeÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddrz310z311z312z313z314
-largest_matching_cidr netaddr.ip.largest_matching_cidr"\
- Union[netaddr.ip.IPNetwork,None],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork
-None*‚
-ipù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*å
-cidrsÙ
-ztyping.Iterable[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]]É
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr"typing.Iterablez310z311z312z313z314Ÿ
-smallest_matching_cidr!netaddr.ip.smallest_matching_cidr"\
- Union[netaddr.ip.IPNetwork,None],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork
-None*‚
-ipù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*å
-cidrsÙ
-ztyping.Iterable[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]]É
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr"typing.Iterablez310z311z312z313z314Û
-spanning_cidrnetaddr.ip.spanning_cidr",
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork*è
-ip_addrsÙ
-ztyping.Iterable[TypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]]É
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddr"typing.Iterablez310z311z312z313z314º
-cidr_to_globnetaddr.ip.glob.cidr_to_glob"
-builtins.str"builtins.str*Ô
-cidrÉ
-iTypeAlias[Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str]]¾
-^Union[netaddr.ip.IPNetwork,netaddr.ip.IPAddress,Tuple[builtins.int,builtins.int],builtins.str],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPNetworkAddrz310z311z312z313z314Õ
-glob_to_cidrsnetaddr.ip.glob.glob_to_cidrs"b
-#builtins.list[netaddr.ip.IPNetwork],
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork"builtins.list*(
-ipglob
-builtins.str"builtins.strz310z311z312z313z314Ÿ
-glob_to_iprangenetaddr.ip.glob.glob_to_iprange"(
-netaddr.ip.IPRange"netaddr.ip.IPRange*(
-ipglob
-builtins.str"builtins.strz310z311z312z313z314ˆ
-glob_to_iptuplenetaddr.ip.glob.glob_to_iptuple"
-0Tuple[netaddr.ip.IPAddress,netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress,
-netaddr.ip.IPAddress"netaddr.ip.IPAddress*(
-ipglob
-builtins.str"builtins.strz310z311z312z313z314§
-iprange_to_globs netaddr.ip.glob.iprange_to_globs"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*…
-startù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddr*ƒ
-endù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddrz310z311z312z313z314‘
+self(*
+word_sep (*-
+packed*
 
-valid_globnetaddr.ip.glob.valid_glob"
-builtins.bool"builtins.bool*.
-ipglob"
-builtins.object"builtins.objectz310z311z312z313z314ç
-iter_nmap_rangenetaddr.ip.nmap.iter_nmap_range"f
-%typing.Iterator[netaddr.ip.IPAddress],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress"typing.Iterator*2
-nmap_target_spec
-builtins.str"builtins.strz310z311z312z313z314œ
-valid_nmap_range netaddr.ip.nmap.valid_nmap_range"
-builtins.bool"builtins.bool*-
-target_spec
-builtins.str"builtins.strz310z311z312z313z314’
-base85_to_ipv6!netaddr.ip.rfc1924.base85_to_ipv6"
-builtins.str"builtins.str*&
-addr
-builtins.str"builtins.strz310z311z312z313z314ñ
-ipv6_to_base85!netaddr.ip.rfc1924.ipv6_to_base85"
-builtins.str"builtins.str*„
-addrù
-=TypeAlias[Union[netaddr.ip.BaseIP,builtins.int,builtins.str]]š
-2Union[netaddr.ip.BaseIP,builtins.int,builtins.str]&
-netaddr.ip.BaseIP"netaddr.ip.BaseIP
-builtins.int"builtins.int
-builtins.str"builtins.str"netaddr.ip._IPAddressAddrz310z311z312z313z314;
-mainnetaddr.cli.main"
-Nonez310z311z312z313z314* 
-__annotations__netaddr.cli.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Z
-	INET_PTONnetaddr.core.INET_PTON
-builtins.int"builtins.int*310*311*312*313*314*T
-NOHOSTnetaddr.core.NOHOST
-builtins.int"builtins.int*310*311*312*313*314*X
-ZEROFILLnetaddr.core.ZEROFILL
-builtins.int"builtins.int*310*311*312*313*314*J
-Nnetaddr.core.N
-builtins.int"builtins.int*310*311*312*313*314*J
-Pnetaddr.core.P
-builtins.int"builtins.int*310*311*312*313*314*J
-Znetaddr.core.Z
-builtins.int"builtins.int*310*311*312*313*314*†
+self(0:builtins.property`*,
+words*
 
-valid_ipv4netaddr.valid_ipv4K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*†
+self(0:builtins.property`**
+bin*
 
-valid_ipv6netaddr.valid_ipv6K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*„
-	valid_macnetaddr.valid_macK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*ˆ
-valid_eui64netaddr.valid_eui64K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*
-VERSIONnetaddr.VERSIONL
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*310*311*312*313*314*O
-STATUSnetaddr.STATUS
-builtins.str"builtins.str*310*311*312*313*314
+self(0:builtins.property`*
+eui64*
+
+self(*
+modified_eui64*
+
+self(*,
+ipv6*
+
+self(*
+prefix( z310z311*1
+ipv6*
+
+self(*
+prefix("z312z313z314*
+ipv6_link_local*
+
+self(*+
+info#*
+
+self(0:builtins.property`*'
+format*
+
+self(*
+dialect (2p
+value.
+value*
+
+self(0:builtins.propertyX`-
+value*
+
+self(*
+value( 0:.setter"310"3112u
+value.
+value*
+
+self(0:builtins.propertyX`-
+value*
+
+self(*
+value("0:.setter"312"313"3142l
+dialect0
+dialect$*
+
+self(0:builtins.propertyX`/
+dialect*
+
+self(*
+value(0:.setter2—
+__getitem__,
+__getitem__*(*(0:typing.overloadX,
+__getitem__%*(*('0:typing.overloadX,
+__getitem__(*(*()0:typing.overloadX¤
+IABnetaddr.eui.IAB"netaddr.eui.BaseIdentifier*U
+split_iab_mac**	
+cls(+*
+eui_int(*
+strict (0:builtins.classmethodp*3
+__init__*
+
+self(*	
+iab(,*
+strict (*
+__eq__*(*(*
+__ne__*(*(*
+registration#*
+
+self(r
+IAB_EUI_VALUES0*r
+
+record0-ë
+OUInetaddr.eui.OUI"netaddr.eui.BaseIdentifier*#
+__init__*
+
+self(*	
+oui(,*
+__eq__*(*(*
+__ne__*(*(*0
+	reg_count*
+
+self(0:builtins.property`*+
+registration#*
+
+self(*
+index (r
+records0.Ù
+	IPAddressnetaddr.ip.IPAddress"netaddr.ip.BaseIP*D
+__init__*
+
+self(*
+
+addr(*
+version (/*
+flags (*
+netmask_bits*
+
+self(*
+is_hostmask*
+
+self(*
+
+is_netmask*
+
+self(*
+__iadd__0*(0*(*
+__isub__0*(0*(*
+__add__0*(0*(*
+__sub__0*(0*(*
+__rsub__0*(0*(*
+key*
+
+self(*
+sort_key*
+
+self(*
+__int__*(*
+__long__*(*
+__oct__*(*
+__hex__*(*
+	__index__*
+
+self(*
+	__bytes__*
+
+self(*&
+bits*
+
+self(*
+word_sep (*-
+packed*
+
+self(0:builtins.property`*,
+words*
+
+self(0:builtins.property`**
+bin*
+
+self(0:builtins.property`*2
+reverse_dns*
+
+self(0:builtins.property`*
+ipv40*
+
+self(0*-
+ipv60*
+
+self(0*
+ipv4_compatible (*'
+format*
+
+self(*
+dialect (3*
+__or__0*(0*( z310z311*!
+__or__0*(0*("z312z313z314*
+__and__0*(0*( z310z311*"
+__and__0*(0*("z312z313z314*
+__xor__0*(0*( z310z311*"
+__xor__0*(0*("z312z313z314*
+
+__lshift__0*(0*(*
+
+__rshift__0*(0*(*
+__bool__*
+
+self(r
+__radd__05ç
+	IPNetworknetaddr.ip.IPNetwork"netaddr.ip.BaseIP"netaddr.ip.IPListMixin*]
+__init__*
+
+self(*
+
+addr(7*
+implicit_prefix (*
+version (/*
+flags (*)
+ip*
+
+self(0:builtins.property`*.
+network*
+
+self(0:builtins.property`*0
+	broadcast8*
+
+self(0:builtins.property`*,
+first*
+
+self(0:builtins.property`*+
+last*
+
+self(0:builtins.property`*/
+hostmask*
+
+self(0:builtins.property`*+
+cidr*
+
+self(0:builtins.property`*
+__iadd__9*(9*(*
+__isub__9*(9*(*
+__contains__*(*(:*
+key*
+
+self(*
+sort_key*
+
+self(*
+ipv49*
+
+self(9*-
+ipv69*
+
+self(9*
+ipv4_compatible (*&
+previous9*
+
+self(9*
+step (*"
+next9*
+
+self(9*
+step (*+
+supernet	*
+
+self(*
+	prefixlen (*C
+subnet;*
+
+self(9*
+	prefixlen(*
+count (
+*
+fmt (*
+
+iter_hosts<*
+
+self(2r
+	prefixlen2
+	prefixlen*
+
+self(0:builtins.propertyX`1
+	prefixlen*
+
+self(*
+value(0:.setter2l
+netmask0
+netmask*
+
+self(0:builtins.propertyX`/
+netmask*
+
+self(*
+value(0:.setterÄ
+IPRangenetaddr.ip.IPRange"netaddr.ip.BaseIP"netaddr.ip.IPListMixin*?
+__init__*
+
+self(=*
+start(*	
+end(*
+flags (*
+__contains__*(=*(>*,
+first*
+
+self(=0:builtins.property`*+
+last*
+
+self(=0:builtins.property`*
+key*
+
+self(=*
+sort_key*
+
+self(=*
+cidrs	*
+
+self(=Á
+IPGlobnetaddr.ip.glob.IPGlob"netaddr.ip.IPRange*&
+__init__*
+
+self(?*
+ipglob(2c
+glob-
+glob*
+
+self(?0:builtins.propertyX`,
+glob*
+
+self(?*
+value(0:.setter®
+IPSetnetaddr.ip.sets.IPSet"builtins.object*9
+__init__*
+
+self(@*
+iterable (E*
+flags (*
+compact*
+
+self(@*
+__hash__F*
+
+self(@*
+__contains__*(@*(7*
+__bool__*
+
+self(@*
+__iter__<*(@*
+
+iter_cidrs	*
+
+self(@*.
+add*
+
+self(@*
+
+addr(G*
+flags (*1
+remove*
+
+self(@*
+
+addr(G*
+flags (*
+pop*
+
+self(@*'
+
+isdisjoint*
+
+self(@*
+other(@*
+copyH*
+
+self(H*5
+update*
+
+self(@*
+iterable(D*
+flags (*
+clear*
+
+self(@*
+__eq__*(@*(*
+__ne__*(@*(*
+__lt__*(@*(@*%
+issubset*
+
+self(@*
+other(@*
+__gt__*(@*(@*'
+
+issuperset*
+
+self(@*
+other(@*"
+unionH*
+
+self(H*
+other(@*)
+intersection@*
+
+self(@*
+other(@*1
+symmetric_difference@*
+
+self(@*
+other(@*'
+
+difference@*
+
+self(@*
+other(@*
+__len__*(@*+
+size*
+
+self(@0:builtins.property`*
+iscontiguous*
+
+self(@*
+iprangeI*
+
+self(@*
+iter_iprangesJ*
+
+self(@r
+
+__le__05r
+
+__ge__05r
+
+__or__05r
+__and__05r
+__xor__05r
+__sub__05M
+mac_barenetaddr.strategy.eui48.mac_bare" netaddr.strategy.eui48.mac_eui48O
+	mac_cisco netaddr.strategy.eui48.mac_cisco" netaddr.strategy.eui48.mac_eui48•
+	mac_eui48 netaddr.strategy.eui48.mac_eui48"builtins.objectr
+	word_size0r
+	num_words0r
+max_word0r
+word_sep0r
+word_fmt0r
+	word_base0O
+	mac_pgsql netaddr.strategy.eui48.mac_pgsql" netaddr.strategy.eui48.mac_eui48M
+mac_unixnetaddr.strategy.eui48.mac_unix" netaddr.strategy.eui48.mac_eui48^
+mac_unix_expanded(netaddr.strategy.eui48.mac_unix_expanded"netaddr.strategy.eui48.mac_unixR
+
+eui64_bare!netaddr.strategy.eui64.eui64_bare"!netaddr.strategy.eui64.eui64_base—
+
+eui64_base!netaddr.strategy.eui64.eui64_base"builtins.objectr
+	word_size0r
+	num_words0r
+max_word0r
+word_sep0r
+word_fmt0r
+	word_base0T
+eui64_cisco"netaddr.strategy.eui64.eui64_cisco"!netaddr.strategy.eui64.eui64_baseR
+
+eui64_unix!netaddr.strategy.eui64.eui64_unix"!netaddr.strategy.eui64.eui64_based
+eui64_unix_expanded*netaddr.strategy.eui64.eui64_unix_expanded"!netaddr.strategy.eui64.eui64_unix^
+ipv6_compact"netaddr.strategy.ipv6.ipv6_compact"builtins.objectr
+word_fmt0r
+compact0P
+	ipv6_fullnetaddr.strategy.ipv6.ipv6_full""netaddr.strategy.ipv6.ipv6_compactV
+ipv6_verbose"netaddr.strategy.ipv6.ipv6_verbose""netaddr.strategy.ipv6.ipv6_compactL
+all_matching_cidrsnetaddr.ip.all_matching_cidrs	*
+ip(*
+cidrs(KZ
+cidr_abbrev_to_verbose!netaddr.ip.cidr_abbrev_to_verbose*
+abbrev_cidr( z310z311_
+cidr_abbrev_to_verbose!netaddr.ip.cidr_abbrev_to_verbose*
+abbrev_cidr("z312z313z314F
+cidr_excludenetaddr.ip.cidr_exclude	*
+target(7*
+exclude(75
+
+cidr_mergenetaddr.ip.cidr_merge	*
+ip_addrs(MI
+iprange_to_cidrsnetaddr.ip.iprange_to_cidrs	*
+start(7*	
+end(7Y
+iter_iprangenetaddr.ip.iter_iprange<*
+start(*	
+end(*
+step (Nz310z311^
+iter_iprangenetaddr.ip.iter_iprange<*
+start(*	
+end(*
+step (Oz312z313z314;
+iter_unique_ipsnetaddr.ip.iter_unique_ips<*
+
+args(LR
+largest_matching_cidr netaddr.ip.largest_matching_cidrP*
+ip(*
+cidrs(KT
+smallest_matching_cidr!netaddr.ip.smallest_matching_cidrP*
+ip(*
+cidrs(K;
+spanning_cidrnetaddr.ip.spanning_cidr*
+ip_addrs(K:
+cidr_to_globnetaddr.ip.glob.cidr_to_glob*
+
+cidr(7>
+glob_to_cidrsnetaddr.ip.glob.glob_to_cidrs	*
+ipglob(B
+glob_to_iprangenetaddr.ip.glob.glob_to_iprange=*
+ipglob(B
+glob_to_iptuplenetaddr.ip.glob.glob_to_iptupleQ*
+ipglob(N
+iprange_to_globs netaddr.ip.glob.iprange_to_globsR*
+start(*	
+end(8
+
+valid_globnetaddr.ip.glob.valid_glob*
+ipglob(L
+iter_nmap_rangenetaddr.ip.nmap.iter_nmap_range<*
+nmap_target_spec(I
+valid_nmap_range netaddr.ip.nmap.valid_nmap_range*
+target_spec(A
+base85_to_ipv6!netaddr.ip.rfc1924.base85_to_ipv6*
+
+addr(A
+ipv6_to_base85!netaddr.ip.rfc1924.ipv6_to_base85*
+
+addr(
+main*
+__annotations__0S*%
+	INET_PTONnetaddr.core.INET_PTON0*
+NOHOSTnetaddr.core.NOHOST0*#
+ZEROFILLnetaddr.core.ZEROFILL0*
+Nnetaddr.core.N0*
+Pnetaddr.core.P0*
+Znetaddr.core.Z0*"
+
+valid_ipv4netaddr.valid_ipv405*"
+
+valid_ipv6netaddr.valid_ipv605* 
+	valid_macnetaddr.valid_mac05*$
+valid_eui64netaddr.valid_eui6405*
+VERSIONnetaddr.VERSION0*
+STATUSnetaddr.STATUS0220".netaddr.contrib.subnet_splitter.SubnetSplitter2"netaddr.ip.BaseIP2"builtins.int2"builtins.str222 "netaddr.ip._IPAddressAddr22"netaddr.ip.IPNetwork2"builtins.list2222"netaddr.eui.EUI222"" netaddr.strategy.eui48.mac_eui482"type22#"!netaddr.strategy.eui64.eui64_base2"type2222"netaddr.eui.OUI2"builtins.bool2"netaddr.eui.IAB222	2222"builtins.object222"builtins.bytes2"builtins.tuple22.
+netaddr.eui.EUI.Self"netaddr.eui.EUI(22"netaddr.ip.IPAddress2"typing.SupportsInt2!"typing_extensions.SupportsIndex222"typing.SupportsIndex22!2"netaddr.core.DictDotLookup222"builtins.list222"builtins.slice2&&&22%22'222"type2222"builtins.dict22"builtins.list2-2228
+netaddr.ip.IPAddress.Self"netaddr.ip.IPAddress(22$""netaddr.strategy.ipv6.ipv6_verbose2"type212222"builtins.function22422*2 "netaddr.ip._IPNetworkAddr262228
+netaddr.ip.IPNetwork.Self"netaddr.ip.IPNetwork(22272"typing.Iterator292"typing.Iterator22"netaddr.ip.IPRange222"netaddr.ip.glob.IPGlob2"netaddr.ip.sets.IPSet227=2"typing.Iterable2A22=@B2""netaddr.ip.sets._IPIterable2C22D2
+22=72:
+netaddr.ip.sets.IPSet.Self"netaddr.ip.sets.IPSet(2@22=2"typing.Iterator2=2"typing.Iterable2722=72"typing.Iterable2L2222!22222"builtins.list22"builtins.dict2&

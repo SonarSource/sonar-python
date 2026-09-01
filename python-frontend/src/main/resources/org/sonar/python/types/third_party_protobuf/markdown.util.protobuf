@@ -1,169 +1,95 @@
 
-markdown.utilQ
-AtomicStringmarkdown.util.AtomicString"builtins.strj310j311j312j313j314¹
-	Processormarkdown.util.Processor"builtins.object*û
-__init__ markdown.util.Processor.__init__"
-None*<
-self2
-markdown.util.Processor"markdown.util.Processor*l
-mdb
-"Union[markdown.core.Markdown,None]0
-markdown.core.Markdown"markdown.core.Markdown
-None z310z311z312z313z314j310j311j312j313j314rk
-mdmarkdown.util.Processor.md0
-markdown.core.Markdown"markdown.core.Markdown*310*311*312*313*314Ã
-	HtmlStashmarkdown.util.HtmlStash"builtins.object*
-__init__ markdown.util.HtmlStash.__init__"
-None*<
-self2
-markdown.util.HtmlStash"markdown.util.HtmlStashz310z311z312z313z314*Ã
-storemarkdown.util.HtmlStash.store"
-builtins.str"builtins.str*<
-self2
-markdown.util.HtmlStash"markdown.util.HtmlStash*&
-html
-builtins.str"builtins.strz310z311z312z313z314*‡
-resetmarkdown.util.HtmlStash.reset"
-None*<
-self2
-markdown.util.HtmlStash"markdown.util.HtmlStashz310z311z312z313z314*Ö
-get_placeholder'markdown.util.HtmlStash.get_placeholder"
-builtins.str"builtins.str*<
-self2
-markdown.util.HtmlStash"markdown.util.HtmlStash*%
-key
-builtins.int"builtins.intz310z311z312z313z314*à
-	store_tag!markdown.util.HtmlStash.store_tag"
-builtins.str"builtins.str*<
-self2
-markdown.util.HtmlStash"markdown.util.HtmlStash*%
-tag
-builtins.str"builtins.str*7
-attrs,
-builtins.list[Any]
-Any"builtins.list*,
+markdown.util
+AtomicString"builtins.strJ
+	Processor"builtins.object*$
+__init__*
 
-left_index
-builtins.int"builtins.int*-
-right_index
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314rk
-html_counter$markdown.util.HtmlStash.html_counter
-builtins.int"builtins.int*310*311*312*313*314r›
-rawHtmlBlocks%markdown.util.HtmlStash.rawHtmlBlocksJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314ri
-tag_counter#markdown.util.HtmlStash.tag_counter
-builtins.int"builtins.int*310*311*312*313*314rà
-tag_data markdown.util.HtmlStash.tag_data˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*310*311*312*313*314«
-Registrymarkdown.util.Registry"builtins.object*Š
-__init__markdown.util.Registry.__init__"
-None*:
-self0
-markdown.util.Registry"markdown.util.Registryz310z311z312z313z314*Æ
-__contains__#markdown.util.Registry.__contains__"
-builtins.bool"builtins.bool*20
-markdown.util.Registry"markdown.util.Registry*$"
-builtins.object"builtins.objectz310z311z312z313z314*
-__iter__markdown.util.Registry.__iter__"
-Any*20
-markdown.util.Registry"markdown.util.Registryz310z311z312z313z314*”
-__len__markdown.util.Registry.__len__"
-builtins.int"builtins.int*20
-markdown.util.Registry"markdown.util.Registryz310z311z312z313z314*Ú
-get_index_for_name)markdown.util.Registry.get_index_for_name"
-builtins.int"builtins.int*:
-self0
-markdown.util.Registry"markdown.util.Registry*&
-name
-builtins.str"builtins.strz310z311z312z313z314*õ
-registermarkdown.util.Registry.register"
-None*:
-self0
-markdown.util.Registry"markdown.util.Registry*
-item
-Any*&
-name
-builtins.str"builtins.str*.
-priority 
-builtins.float"builtins.floatz310z311z312z313z314*ä
+self(*
 
-deregister!markdown.util.Registry.deregister"
-None*:
-self0
-markdown.util.Registry"markdown.util.Registry*&
-name
-builtins.str"builtins.str*,
-strict
-builtins.bool"builtins.bool z310z311z312z313z3142¯
-__getitem__"markdown.util.Registry.__getitem__ø
-__getitem__"markdown.util.Registry.__getitem__"0
-markdown.util.Registry"markdown.util.Registry*20
-markdown.util.Registry"markdown.util.Registry*JH
-builtins.slice[Any,Any,Any]
-Any
-Any
-Any"builtins.slice0:typing.overloadXç
-__getitem__"markdown.util.Registry.__getitem__"
-Any*20
-markdown.util.Registry"markdown.util.Registry*b`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int0:typing.overloadX"310"311"312"313"314j310j311j312j313j314£
+md (r
+md0¸
+	HtmlStash"builtins.object*
+__init__*
 
-deprecatedmarkdown.util.deprecated"
-Any*)
-message
-builtins.str"builtins.str*.
+self(*!
+store*
 
-stacklevel
-builtins.int"builtins.int z310z311z312z313z314ª
-parseBoolValuemarkdown.util.parseBoolValue"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*-
-value"
-builtins.object"builtins.object*4
-fail_on_errors
-builtins.bool"builtins.bool *3
-preserve_none
-builtins.bool"builtins.bool z310z311z312z313z314‡
-code_escapemarkdown.util.code_escape"
-builtins.str"builtins.str*&
-text
-builtins.str"builtins.strz310z311z312z313z314y
-nearing_recursion_limit%markdown.util.nearing_recursion_limit"
-builtins.bool"builtins.boolz310z311z312z313z314*¢
-__annotations__markdown.util.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*\
-BLOCK_LEVEL_ELEMENTS"markdown.util.BLOCK_LEVEL_ELEMENTS
-Any*310*311*312*313*314*O
-STXmarkdown.util.STX
-builtins.str"builtins.str*310*311*312*313*314*O
-ETXmarkdown.util.ETX
-builtins.str"builtins.str*310*311*312*313*314*f
-INLINE_PLACEHOLDER_PREFIX'markdown.util.INLINE_PLACEHOLDER_PREFIX
-Any*310*311*312*313*314*X
-INLINE_PLACEHOLDER markdown.util.INLINE_PLACEHOLDER
-Any*310*311*312*313*314*›
-INLINE_PLACEHOLDER_RE#markdown.util.INLINE_PLACEHOLDER_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*P
-AMP_SUBSTITUTEmarkdown.util.AMP_SUBSTITUTE
-Any*310*311*312*313*314*T
-HTML_PLACEHOLDERmarkdown.util.HTML_PLACEHOLDER
-Any*310*311*312*313*314*—
-HTML_PLACEHOLDER_RE!markdown.util.HTML_PLACEHOLDER_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*R
-TAG_PLACEHOLDERmarkdown.util.TAG_PLACEHOLDER
-Any*310*311*312*313*314*R
-RTL_BIDI_RANGESmarkdown.util.RTL_BIDI_RANGES
-Any*310*311*312*313*314
+self(*
+
+html(*
+reset*
+
+self(**
+get_placeholder*
+
+self(*	
+key(*V
+	store_tag*
+
+self(*	
+tag(*
+attrs(	*
+
+left_index(*
+right_index(r
+html_counter0r
+rawHtmlBlocks0
+r
+tag_counter0r
+tag_data0‡
+Registry"builtins.object*
+__init__*
+
+self(*
+__contains__*(*(*
+__iter__*(*
+__len__*(*.
+get_index_for_name*
+
+self(*
+
+name(*@
+register*
+
+self(*
+
+item(*
+
+name(*
+priority(*6
+
+deregister*
+
+self(*
+
+name(*
+strict (2i
+__getitem__,
+__getitem__*(*(0:typing.overloadX,
+__getitem__*(*(0:typing.overloadX1
+
+deprecated*
+message(*
+
+stacklevel (N
+parseBoolValue*
+value(*
+fail_on_errors (*
+preserve_none (
+code_escape*
+
+text(
+nearing_recursion_limit*
+__annotations__0*
+BLOCK_LEVEL_ELEMENTS0*
+STX0*
+ETX0*
+INLINE_PLACEHOLDER_PREFIX0*
+INLINE_PLACEHOLDER0*
+INLINE_PLACEHOLDER_RE0*
+AMP_SUBSTITUTE0*
+HTML_PLACEHOLDER0*
+HTML_PLACEHOLDER_RE0*
+TAG_PLACEHOLDER0*
+RTL_BIDI_RANGES022"markdown.util.Processor2"markdown.core.Markdown222"markdown.util.HtmlStash2"builtins.str2"builtins.int22"builtins.list22"builtins.list22"builtins.dict22"builtins.list22"markdown.util.Registry2"builtins.bool2"builtins.object2"builtins.float2"builtins.slice222222"
+re.Pattern2

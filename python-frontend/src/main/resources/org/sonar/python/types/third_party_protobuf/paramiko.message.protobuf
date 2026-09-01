@@ -1,195 +1,128 @@
 
-paramiko.message¥
-_SupportsAsBytes!paramiko.message._SupportsAsBytes"builtins.object*Á
-asbytes)paramiko.message._SupportsAsBytes.asbytes" 
-builtins.bytes"builtins.bytes*P
-selfF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytesz310z311z312z313z314Xj310j311j312j313j314¼:
-Messageparamiko.message.Message"builtins.object*ú
-__init__!paramiko.message.Message.__init__"
-None*>
-self4
-paramiko.message.Message"paramiko.message.Message*w
-contenth
-$Union[typing_extensions.Buffer,None]4
-typing_extensions.Buffer"typing_extensions.Buffer
-None z310z311*ü
-__init__!paramiko.message.Message.__init__"
-None*>
-self4
-paramiko.message.Message"paramiko.message.Message*t
-contente
-#Union[_collections_abc.Buffer,None]2
-_collections_abc.Buffer"_collections_abc.Buffer
-None z312z313z314*ª
-	__bytes__"paramiko.message.Message.__bytes__" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¦
-asbytes paramiko.message.Message.asbytes" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*Œ
-rewindparamiko.message.Message.rewind"
-None*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*²
-get_remainder&paramiko.message.Message.get_remainder" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¬
+paramiko.message>
+_SupportsAsBytes"builtins.object*
+asbytes*
 
-get_so_far#paramiko.message.Message.get_so_far" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*Ï
-	get_bytes"paramiko.message.Message.get_bytes" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Message*#
-n
-builtins.int"builtins.intz310z311z312z313z314*¨
-get_byte!paramiko.message.Message.get_byte" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¬
-get_boolean$paramiko.message.Message.get_boolean"
-builtins.bool"builtins.bool*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*´
-get_adaptive_int)paramiko.message.Message.get_adaptive_int"
-builtins.int"builtins.int*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¢
-get_int paramiko.message.Message.get_int"
-builtins.int"builtins.int*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¦
-	get_int64"paramiko.message.Message.get_int64"
-builtins.int"builtins.int*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¦
-	get_mpint"paramiko.message.Message.get_mpint"
-builtins.int"builtins.int*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¬
+self(X	
+Message"builtins.object*3
+__init__*
 
-get_string#paramiko.message.Message.get_string" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¤
-get_text!paramiko.message.Message.get_text"
-builtins.str"builtins.str*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*¬
+self(*
+content (z310z311*8
+__init__*
 
-get_binary#paramiko.message.Message.get_binary" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*Ò
-get_list!paramiko.message.Message.get_list"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*>
-self4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*ì
-	add_bytes"paramiko.message.Message.add_bytes"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*;
-b4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*ï
-	add_bytes"paramiko.message.Message.add_bytes"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*9
-b2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*ê
-add_byte!paramiko.message.Message.add_byte"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*;
-b4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*í
-add_byte!paramiko.message.Message.add_byte"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*9
-b2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*é
-add_boolean$paramiko.message.Message.add_boolean"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*%
-b
-builtins.bool"builtins.boolz310z311z312z313z314*ß
-add_int paramiko.message.Message.add_int"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*#
-n
-builtins.int"builtins.intz310z311z312z313z314*ñ
-add_adaptive_int)paramiko.message.Message.add_adaptive_int"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*#
-n
-builtins.int"builtins.intz310z311z312z313z314*ã
-	add_int64"paramiko.message.Message.add_int64"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*#
-n
-builtins.int"builtins.intz310z311z312z313z314*ã
-	add_mpint"paramiko.message.Message.add_mpint"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*#
-z
-builtins.int"builtins.intz310z311z312z313z314*ç
+self(*
+content (z312z313z314*
+	__bytes__*
 
-add_string#paramiko.message.Message.add_string"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*³
-s«
-hTypeAlias[Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,typing_extensions.Buffer]]Ÿ
-]Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,typing_extensions.Buffer] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytes4
-typing_extensions.Buffer"typing_extensions.Buffer"paramiko.message._LikeBytesz310z311*è
+self(*
+asbytes*
 
-add_string#paramiko.message.Message.add_string"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*¯
-s§
-gTypeAlias[Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,_collections_abc.Buffer]]œ
-\Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,_collections_abc.Buffer] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytes2
-_collections_abc.Buffer"_collections_abc.Buffer"paramiko.message._LikeBytesz312z313z314*“
-add_list!paramiko.message.Message.add_list"4
-paramiko.message.Message"paramiko.message.Message*>
-self4
-paramiko.message.Message"paramiko.message.Message*U
-lN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterablez310z311z312z313z314*˜
-addparamiko.message.Message.add"
-None*>
-self4
-paramiko.message.Message"paramiko.message.Message*
-seq
-Anyz310z311z312z313z314j310j311j312j313j314rb
-big_int paramiko.message.Message.big_int
-builtins.int"builtins.int*310*311*312*313*314r^
-packetparamiko.message.Message.packet
-_io.BytesIO"_io.BytesIO*310*311*312*313*314r^
-seqnoparamiko.message.Message.seqno
-builtins.int"builtins.int*310*311*312*313*314*¥
-__annotations__ paramiko.message.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+rewind*
+
+self(*
+get_remainder*
+
+self(*
+
+get_so_far*
+
+self(*"
+	get_bytes*
+
+self(*
+n(	*
+get_byte*
+
+self(*
+get_boolean
+*
+
+self(* 
+get_adaptive_int	*
+
+self(*
+get_int	*
+
+self(*
+	get_int64	*
+
+self(*
+	get_mpint	*
+
+self(*
+
+get_string*
+
+self(*
+get_text*
+
+self(*
+
+get_binary*
+
+self(*
+get_list*
+
+self(*,
+	add_bytes*
+
+self(*
+b(z310z311*1
+	add_bytes*
+
+self(*
+b(z312z313z314*+
+add_byte*
+
+self(*
+b(z310z311*0
+add_byte*
+
+self(*
+b(z312z313z314*$
+add_boolean*
+
+self(*
+b(
+* 
+add_int*
+
+self(*
+n(	*)
+add_adaptive_int*
+
+self(*
+n(	*"
+	add_int64*
+
+self(*
+n(	*"
+	add_mpint*
+
+self(*
+z(	*-
+
+add_string*
+
+self(*
+s(z310z311*2
+
+add_string*
+
+self(*
+s(z312z313z314*!
+add_list*
+
+self(*
+l(*
+add*
+
+self(*	
+seq(r
+big_int0	r
+
+packet0r	
+seqno0	*
+__annotations__02"builtins.bytes2#"!paramiko.message._SupportsAsBytes22"paramiko.message.Message2"typing_extensions.Buffer222"_collections_abc.Buffer222"builtins.int2"builtins.bool2"builtins.str2"builtins.list2222""paramiko.message._LikeBytes2222""paramiko.message._LikeBytes22"typing.Iterable222"_io.BytesIO2"builtins.dict2

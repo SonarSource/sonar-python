@@ -1,418 +1,296 @@
 
-boto.exceptionþ
-BotoClientErrorboto.exception.BotoClientError"builtins.Exception*Ê
-__init__'boto.exception.BotoClientError.__init__"
-None*J
-self@
-boto.exception.BotoClientError"boto.exception.BotoClientError*
-reason
-Any*
-args
-Anyz310z311z312z313z314j310j311j312j313j314rQ
-reason%boto.exception.BotoClientError.reason
-Any*310*311*312*313*314f
-SDBPersistenceError"boto.exception.SDBPersistenceError"builtins.Exceptionj310j311j312j313j314z
-StoragePermissionsError&boto.exception.StoragePermissionsError"boto.exception.BotoClientErrorj310j311j312j313j314x
-S3PermissionsError!boto.exception.S3PermissionsError"&boto.exception.StoragePermissionsErrorj310j311j312j313j314x
-GSPermissionsError!boto.exception.GSPermissionsError"&boto.exception.StoragePermissionsErrorj310j311j312j313j314Ç
-BotoServerErrorboto.exception.BotoServerError"builtins.Exception*È
-__init__'boto.exception.BotoServerError.__init__"
-None*J
-self@
-boto.exception.BotoServerError"boto.exception.BotoServerError*
-status
-Any*
-reason
-Any*g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-args
-Anyz310z311z312z313z314*¿
-__getattr__*boto.exception.BotoServerError.__getattr__"
-Any*B@
-boto.exception.BotoServerError"boto.exception.BotoServerError*
-builtins.str"builtins.strz310z311z312z313z314*ä
-__setattr__*boto.exception.BotoServerError.__setattr__"
-None*J
-self@
-boto.exception.BotoServerError"boto.exception.BotoServerError*&
-name
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314*ƒ
-startElement+boto.exception.BotoServerError.startElement*
+boto.exceptione
+BotoClientError"builtins.Exception*2
+__init__*
+
+self(*
+reason(*
+
+args(r
+
+reason0)
+SDBPersistenceError"builtins.Exception9
+StoragePermissionsError"boto.exception.BotoClientError<
+S3PermissionsError"&boto.exception.StoragePermissionsError<
+GSPermissionsError"&boto.exception.StoragePermissionsErrorž
+BotoServerError"builtins.Exception*N
+__init__*
+
+self(*
+status(*
+reason(*
+body (*
+
+args(*
+__getattr__*(*(*4
+__setattr__*
+
+self(*
+
+name(*
+value(*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*
+connection*;
 
-endElement)boto.exception.BotoServerError.endElement*
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rQ
-status%boto.exception.BotoServerError.status
-Any*310*311*312*313*314rQ
-reason%boto.exception.BotoServerError.reason
-Any*310*311*312*313*314rM
-body#boto.exception.BotoServerError.body
-Any*310*311*312*313*314rY
+connectionr
 
-request_id)boto.exception.BotoServerError.request_id
-Any*310*311*312*313*314rY
+status0r
 
-error_code)boto.exception.BotoServerError.error_code
-Any*310*311*312*313*314rh
-message&boto.exception.BotoServerError.message
-builtins.str"builtins.str*310*311*312*313*314rW
-	box_usage(boto.exception.BotoServerError.box_usage
-Any*310*311*312*313*314‹
-ConsoleOutputboto.exception.ConsoleOutput"builtins.object*‡
-__init__%boto.exception.ConsoleOutput.__init__"
-None*F
-self<
-boto.exception.ConsoleOutput"boto.exception.ConsoleOutput*i
-parent[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*
-startElement)boto.exception.ConsoleOutput.startElement*
+reason0r
+body0r
+
+request_id0r
+
+error_code0r
+message0r
+	box_usage0‹
+ConsoleOutput"builtins.object*(
+__init__*
+
+self(*
+parent (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*}
+connection*;
 
-endElement'boto.exception.ConsoleOutput.endElement*
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rO
-parent#boto.exception.ConsoleOutput.parent
-Any*310*311*312*313*314rY
-instance_id(boto.exception.ConsoleOutput.instance_id
-Any*310*311*312*313*314rU
-	timestamp&boto.exception.ConsoleOutput.timestamp
-Any*310*311*312*313*314rQ
-comment$boto.exception.ConsoleOutput.comment
-Any*310*311*312*313*314rO
-output#boto.exception.ConsoleOutput.output
-Any*310*311*312*313*314Œ
-StorageCreateError!boto.exception.StorageCreateError"boto.exception.BotoServerError*¾
-__init__*boto.exception.StorageCreateError.__init__"
-None*P
-selfF
-!boto.exception.StorageCreateError"!boto.exception.StorageCreateError*
-status
-Any*
-reason
-Any*g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*‚
+connectionr
 
-endElement,boto.exception.StorageCreateError.endElement*
+parent0r
+instance_id0r
+	timestamp0r
+comment0r
+
+output0Á
+StorageCreateError"boto.exception.BotoServerError*B
+__init__*
+
+self(	*
+status(*
+reason(*
+body (*;
+
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rT
-bucket(boto.exception.StorageCreateError.bucket
-Any*310*311*312*313*314i
-S3CreateErrorboto.exception.S3CreateError"!boto.exception.StorageCreateErrorj310j311j312j313j314i
-GSCreateErrorboto.exception.GSCreateError"!boto.exception.StorageCreateErrorj310j311j312j313j314l
-StorageCopyErrorboto.exception.StorageCopyError"boto.exception.BotoServerErrorj310j311j312j313j314c
-S3CopyErrorboto.exception.S3CopyError"boto.exception.StorageCopyErrorj310j311j312j313j314c
-GSCopyErrorboto.exception.GSCopyError"boto.exception.StorageCopyErrorj310j311j312j313j314‹
-SQSErrorboto.exception.SQSError"boto.exception.BotoServerError* 
-__init__ boto.exception.SQSError.__init__"
-None*<
-self2
-boto.exception.SQSError"boto.exception.SQSError*
-status
-Any*
-reason
-Any*g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*|
-startElement$boto.exception.SQSError.startElement*
+connectionr
+
+bucket02
+S3CreateError"!boto.exception.StorageCreateError2
+GSCreateError"!boto.exception.StorageCreateError2
+StorageCopyError"boto.exception.BotoServerError.
+S3CopyError"boto.exception.StorageCopyError.
+GSCopyError"boto.exception.StorageCopyError€
+SQSError"boto.exception.BotoServerError*B
+__init__*
+
+self(
+*
+status(*
+reason(*
+body (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*x
+connection*;
 
-endElement"boto.exception.SQSError.endElement*
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rJ
-detailboto.exception.SQSError.detail
-Any*310*311*312*313*314rF
-typeboto.exception.SQSError.type
-Any*310*311*312*313*314‰
-SQSDecodeErrorboto.exception.SQSDecodeError"boto.exception.BotoClientError*Ê
-__init__&boto.exception.SQSDecodeError.__init__"
-None*H
-self>
-boto.exception.SQSDecodeError"boto.exception.SQSDecodeError*
-reason
-Any*
-message
-Anyz310z311z312z313z314j310j311j312j313j314rR
-message%boto.exception.SQSDecodeError.message
-Any*310*311*312*313*314©
-StorageResponseError#boto.exception.StorageResponseError"boto.exception.BotoServerError*Ä
-__init__,boto.exception.StorageResponseError.__init__"
-None*T
-selfJ
-#boto.exception.StorageResponseError"#boto.exception.StorageResponseError*
-status
-Any*
-reason
-Any*g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ˆ
-startElement0boto.exception.StorageResponseError.startElement*
+connectionr
+
+detail0r
+type0t
+SQSDecodeError"boto.exception.BotoClientError*5
+__init__*
+
+self(*
+reason(*
+message(r
+message0„
+StorageResponseError"boto.exception.BotoServerError*B
+__init__*
+
+self(*
+status(*
+reason(*
+body (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*„
+connection*;
 
-endElement.boto.exception.StorageResponseError.endElement*
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rZ
-resource,boto.exception.StorageResponseError.resource
-Any*310*311*312*313*314o
-S3ResponseErrorboto.exception.S3ResponseError"#boto.exception.StorageResponseErrorj310j311j312j313j314o
-GSResponseErrorboto.exception.GSResponseError"#boto.exception.StorageResponseErrorj310j311j312j313j314á
-EC2ResponseErrorboto.exception.EC2ResponseError"boto.exception.BotoServerError*¸
-__init__(boto.exception.EC2ResponseError.__init__"
-None*L
-selfB
-boto.exception.EC2ResponseError"boto.exception.EC2ResponseError*
-status
-Any*
-reason
-Any*g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*„
-startElement,boto.exception.EC2ResponseError.startElement*
+connectionr
+resource06
+S3ResponseError"#boto.exception.StorageResponseError6
+GSResponseError"#boto.exception.StorageResponseErrorŽ
+EC2ResponseError"boto.exception.BotoServerError*B
+__init__*
+
+self(*
+status(*
+reason(*
+body (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*€
+connection*;
 
-endElement*boto.exception.EC2ResponseError.endElement*
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rR
-errors&boto.exception.EC2ResponseError.errors
-Any*310*311*312*313*314rZ
+connectionr
 
-request_id*boto.exception.EC2ResponseError.request_id
-Any*310*311*312*313*314ú
-JSONResponseError boto.exception.JSONResponseError"boto.exception.BotoServerError*Î
-__init__)boto.exception.JSONResponseError.__init__"
-None*N
-selfD
- boto.exception.JSONResponseError" boto.exception.JSONResponseError*
-status
-Any*
-reason
-Any*g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-args
-Anyz310z311z312z313z314j310j311j312j313j314rS
-status'boto.exception.JSONResponseError.status
-Any*310*311*312*313*314rS
-reason'boto.exception.JSONResponseError.reason
-Any*310*311*312*313*314rO
-body%boto.exception.JSONResponseError.body
-Any*310*311*312*313*314ra
-error_message.boto.exception.JSONResponseError.error_message
-Any*310*311*312*313*314r[
+errors0r
 
-error_code+boto.exception.JSONResponseError.error_code
-Any*310*311*312*313*314x
-DynamoDBResponseError$boto.exception.DynamoDBResponseError" boto.exception.JSONResponseErrorj310j311j312j313j314n
-SWFResponseErrorboto.exception.SWFResponseError" boto.exception.JSONResponseErrorj310j311j312j313j314l
-EmrResponseErrorboto.exception.EmrResponseError"boto.exception.BotoServerErrorj310j311j312j313j314Ð
-	_EC2Errorboto.exception._EC2Error"builtins.object*ÿ
-__init__!boto.exception._EC2Error.__init__"
-None*>
-self4
-boto.exception._EC2Error"boto.exception._EC2Error*m
+request_id0È
+JSONResponseError"boto.exception.BotoServerError*N
+__init__*
 
-connection[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*}
-startElement%boto.exception._EC2Error.startElement*
+self(*
+status(*
+reason(*
+body (*
+
+args(r
+
+status0r
+
+reason0r
+body0r
+error_message0r
+
+error_code09
+DynamoDBResponseError" boto.exception.JSONResponseError4
+SWFResponseError" boto.exception.JSONResponseError2
+EmrResponseError"boto.exception.BotoServerErrorù
+	_EC2Error"builtins.object*,
+__init__*
+
+self(*
+
+connection (*=
+startElement*
 self*
 name*	
 attrs*
 
-connectionz310z311z312z313z314*y
+connection*;
 
-endElement#boto.exception._EC2Error.endElement*
+endElement*
 self*
 name*	
 value*
 
-connectionz310z311z312z313z314j310j311j312j313j314rS
+connectionr
 
-connection#boto.exception._EC2Error.connection
-Any*310*311*312*313*314rS
+connection0r
 
-error_code#boto.exception._EC2Error.error_code
-Any*310*311*312*313*314rY
-error_message&boto.exception._EC2Error.error_message
-Any*310*311*312*313*314l
-SDBResponseErrorboto.exception.SDBResponseError"boto.exception.BotoServerErrorj310j311j312j313j314p
-AWSConnectionError!boto.exception.AWSConnectionError"boto.exception.BotoClientErrorj310j311j312j313j314l
-StorageDataErrorboto.exception.StorageDataError"boto.exception.BotoClientErrorj310j311j312j313j314c
-S3DataErrorboto.exception.S3DataError"boto.exception.StorageDataErrorj310j311j312j313j314c
-GSDataErrorboto.exception.GSDataError"boto.exception.StorageDataErrorj310j311j312j313j314î
-InvalidUriErrorboto.exception.InvalidUriError"builtins.Exception*¸
-__init__'boto.exception.InvalidUriError.__init__"
-None*J
-self@
-boto.exception.InvalidUriError"boto.exception.InvalidUriError*
-message
-Anyz310z311z312z313z314j310j311j312j313j314rS
-message&boto.exception.InvalidUriError.message
-Any*310*311*312*313*314î
-InvalidAclErrorboto.exception.InvalidAclError"builtins.Exception*¸
-__init__'boto.exception.InvalidAclError.__init__"
-None*J
-self@
-boto.exception.InvalidAclError"boto.exception.InvalidAclError*
-message
-Anyz310z311z312z313z314j310j311j312j313j314rS
-message&boto.exception.InvalidAclError.message
-Any*310*311*312*313*314ô
-InvalidCorsErrorboto.exception.InvalidCorsError"builtins.Exception*»
-__init__(boto.exception.InvalidCorsError.__init__"
-None*L
-selfB
-boto.exception.InvalidCorsError"boto.exception.InvalidCorsError*
-message
-Anyz310z311z312z313z314j310j311j312j313j314rT
-message'boto.exception.InvalidCorsError.message
-Any*310*311*312*313*314d
-NoAuthHandlerFound!boto.exception.NoAuthHandlerFound"builtins.Exceptionj310j311j312j313j314¶
-InvalidLifecycleConfigError*boto.exception.InvalidLifecycleConfigError"builtins.Exception*Ü
-__init__3boto.exception.InvalidLifecycleConfigError.__init__"
-None*b
-selfX
-*boto.exception.InvalidLifecycleConfigError"*boto.exception.InvalidLifecycleConfigError*
-message
-Anyz310z311z312z313z314j310j311j312j313j314r_
-message2boto.exception.InvalidLifecycleConfigError.message
-Any*310*311*312*313*314ý
-ResumableTransferDisposition+boto.exception.ResumableTransferDisposition"builtins.objectj310j311j312j313j314r{
+error_code0r
+error_message02
+SDBResponseError"boto.exception.BotoServerError4
+AWSConnectionError"boto.exception.BotoClientError2
+StorageDataError"boto.exception.BotoClientError.
+S3DataError"boto.exception.StorageDataError.
+GSDataError"boto.exception.StorageDataError[
+InvalidUriError"builtins.Exception*'
+__init__*
 
-START_OVER6boto.exception.ResumableTransferDisposition.START_OVER
-builtins.str"builtins.str*310*311*312*313*314r‰
-WAIT_BEFORE_RETRY=boto.exception.ResumableTransferDisposition.WAIT_BEFORE_RETRY
-builtins.str"builtins.str*310*311*312*313*314r‰
-ABORT_CUR_PROCESS=boto.exception.ResumableTransferDisposition.ABORT_CUR_PROCESS
-builtins.str"builtins.str*310*311*312*313*314rq
-ABORT1boto.exception.ResumableTransferDisposition.ABORT
-builtins.str"builtins.str*310*311*312*313*314¤
-ResumableUploadException'boto.exception.ResumableUploadException"builtins.Exception*í
-__init__0boto.exception.ResumableUploadException.__init__"
-None*\
-selfR
-'boto.exception.ResumableUploadException"'boto.exception.ResumableUploadException*
-message
-Any*
-disposition
-Anyz310z311z312z313z314j310j311j312j313j314r\
-message/boto.exception.ResumableUploadException.message
-Any*310*311*312*313*314rd
-disposition3boto.exception.ResumableUploadException.disposition
-Any*310*311*312*313*314²
-ResumableDownloadException)boto.exception.ResumableDownloadException"builtins.Exception*ó
-__init__2boto.exception.ResumableDownloadException.__init__"
-None*`
-selfV
-)boto.exception.ResumableDownloadException")boto.exception.ResumableDownloadException*
-message
-Any*
-disposition
-Anyz310z311z312z313z314j310j311j312j313j314r^
-message1boto.exception.ResumableDownloadException.message
-Any*310*311*312*313*314rf
-disposition5boto.exception.ResumableDownloadException.disposition
-Any*310*311*312*313*314ž
-TooManyRecordsException&boto.exception.TooManyRecordsException"builtins.Exception*Ð
-__init__/boto.exception.TooManyRecordsException.__init__"
-None*Z
-selfP
-&boto.exception.TooManyRecordsException"&boto.exception.TooManyRecordsException*
-message
-Anyz310z311z312z313z314j310j311j312j313j314r[
-message.boto.exception.TooManyRecordsException.message
-Any*310*311*312*313*314Õ
-PleaseRetryException#boto.exception.PleaseRetryException"builtins.Exception*´
-__init__,boto.exception.PleaseRetryException.__init__"
-None*T
-selfJ
-#boto.exception.PleaseRetryException"#boto.exception.PleaseRetryException*
-message
-Any*k
-response[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rX
-message+boto.exception.PleaseRetryException.message
-Any*310*311*312*313*314rZ
-response,boto.exception.PleaseRetryException.response
-Any*310*311*312*313*314Å
-InvalidInstanceMetadataError+boto.exception.InvalidInstanceMetadataError"builtins.Exception*Û
-__init__4boto.exception.InvalidInstanceMetadataError.__init__"
-None*d
-selfZ
-+boto.exception.InvalidInstanceMetadataError"+boto.exception.InvalidInstanceMetadataError*
-msg
-Anyz310z311z312z313z314j310j311j312j313j314rm
-MSG/boto.exception.InvalidInstanceMetadataError.MSG
-builtins.str"builtins.str*310*311*312*313*314*£
-__annotations__boto.exception.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+message(r
+message0[
+InvalidAclError"builtins.Exception*'
+__init__*
+
+self(*
+message(r
+message0\
+InvalidCorsError"builtins.Exception*'
+__init__*
+
+self(*
+message(r
+message0(
+NoAuthHandlerFound"builtins.Exceptiong
+InvalidLifecycleConfigError"builtins.Exception*'
+__init__*
+
+self(*
+message(r
+message0x
+ResumableTransferDisposition"builtins.objectr
+
+START_OVER0r
+WAIT_BEFORE_RETRY0r
+ABORT_CUR_PROCESS0r	
+ABORT0ˆ
+ResumableUploadException"builtins.Exception*:
+__init__*
+
+self(*
+message(*
+disposition(r
+message0r
+disposition0Š
+ResumableDownloadException"builtins.Exception*:
+__init__*
+
+self(*
+message(*
+disposition(r
+message0r
+disposition0c
+TooManyRecordsException"builtins.Exception*'
+__init__*
+
+self(*
+message(r
+message0€
+PleaseRetryException"builtins.Exception*9
+__init__*
+
+self(*
+message(*
+response (r
+message0r
+response0`
+InvalidInstanceMetadataError"builtins.Exception*#
+__init__*
+
+self(*	
+msg(r
+MSG0*
+__annotations__022 "boto.exception.BotoClientError22 "boto.exception.BotoServerError2"_typeshed.Incomplete2222"builtins.str2"boto.exception.ConsoleOutput2#"!boto.exception.StorageCreateError2"boto.exception.SQSError2"boto.exception.SQSDecodeError2%"#boto.exception.StorageResponseError2!"boto.exception.EC2ResponseError2"" boto.exception.JSONResponseError2"boto.exception._EC2Error2 "boto.exception.InvalidUriError2 "boto.exception.InvalidAclError2!"boto.exception.InvalidCorsError2,"*boto.exception.InvalidLifecycleConfigError2)"'boto.exception.ResumableUploadException2+")boto.exception.ResumableDownloadException2("&boto.exception.TooManyRecordsException2%"#boto.exception.PleaseRetryException2-"+boto.exception.InvalidInstanceMetadataError2"builtins.dict2

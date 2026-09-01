@@ -1,601 +1,203 @@
 
-lzma‚
-LZMADecompressorlzma.LZMADecompressor"builtins.object*’
-__init__lzma.LZMADecompressor.__init__"
-None*8
-self.
-lzma.LZMADecompressor"lzma.LZMADecompressor*R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-memlimitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None z310z311z312z313z314*½
+lzmað
+LZMADecompressor"builtins.object*K
+__init__*
 
-decompress lzma.LZMADecompressor.decompress" 
-builtins.bytes"builtins.bytes*8
-self.
-lzma.LZMADecompressor"lzma.LZMADecompressor*ç
-dataÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*.
+self(*
+format (*
+memlimit (*
+filters (
+*:
 
-max_length
-builtins.int"builtins.int z310z311z312z313z314*¬
-checklzma.LZMADecompressor.check"
-builtins.int"builtins.int*8
-self.
-lzma.LZMADecompressor"lzma.LZMADecompressor0:builtins.property`z310z311z312z313z314*ª
-eoflzma.LZMADecompressor.eof"
-builtins.bool"builtins.bool*8
-self.
-lzma.LZMADecompressor"lzma.LZMADecompressor0:builtins.property`z310z311z312z313z314*¼
-unused_data!lzma.LZMADecompressor.unused_data" 
-builtins.bytes"builtins.bytes*8
-self.
-lzma.LZMADecompressor"lzma.LZMADecompressor0:builtins.property`z310z311z312z313z314*º
-needs_input!lzma.LZMADecompressor.needs_input"
-builtins.bool"builtins.bool*8
-self.
-lzma.LZMADecompressor"lzma.LZMADecompressor0:builtins.property`z310z311z312z313z3148j310j311j312j313j314
-LZMACompressorlzma.LZMACompressor"builtins.object*µ
-__init__lzma.LZMACompressor.__init__"
-None*4
-self*
-lzma.LZMACompressor"lzma.LZMACompressor*R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *)
-check
-builtins.int"builtins.int *R
-presetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None z310z311z312z313z314*û
-compresslzma.LZMACompressor.compress" 
-builtins.bytes"builtins.bytes*4
-self*
-lzma.LZMACompressor"lzma.LZMACompressor*ßÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz310z311z312z313z314*“
-flushlzma.LZMACompressor.flush" 
-builtins.bytes"builtins.bytes*4
-self*
-lzma.LZMACompressor"lzma.LZMACompressorz310z311z312z313z3148j310j311j312j313j314H
-	LZMAErrorlzma.LZMAError"builtins.Exceptionj310j311j312j313j314²
-LZMAFilelzma.LZMAFile"io.BufferedIOBase"	typing.IO*Ã
-__init__lzma.LZMAFile.__init__"
-None*(
-self
-lzma.LZMAFile"lzma.LZMAFile*ó
-filenameâ
-›Union[TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]],None]µ
-TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]]Œ
-„Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO"lzma._PathOrFile
-None *(
-mode
-builtins.str"builtins.str *R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *)
-check
-builtins.int"builtins.int *R
-presetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None z310z311z312z313z314*Ñ
-	__enter__lzma.LZMAFile.__enter__"G
-lzma.LZMAFile.Self
-lzma.LZMAFile"lzma.LZMAFile"lzma.LZMAFile(*IG
-lzma.LZMAFile.Self
-lzma.LZMAFile"lzma.LZMAFile"lzma.LZMAFile(z310z311z312z313z314*©
-peeklzma.LZMAFile.peek" 
-builtins.bytes"builtins.bytes*(
-self
-lzma.LZMAFile"lzma.LZMAFile*(
-size
-builtins.int"builtins.int z310z311z312z313z314*Ñ
-readlzma.LZMAFile.read" 
-builtins.bytes"builtins.bytes*(
-self
-lzma.LZMAFile"lzma.LZMAFile*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*«
-read1lzma.LZMAFile.read1" 
-builtins.bytes"builtins.bytes*(
-self
-lzma.LZMAFile"lzma.LZMAFile*(
-size
-builtins.int"builtins.int z310z311z312z313z314*Ù
-readlinelzma.LZMAFile.readline" 
-builtins.bytes"builtins.bytes*(
-self
-lzma.LZMAFile"lzma.LZMAFile*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*ç
-writelzma.LZMAFile.write"
-builtins.int"builtins.int*(
-self
-lzma.LZMAFile"lzma.LZMAFile*ç
-dataÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz310z311z312z313z314*Ñ
-seeklzma.LZMAFile.seek"
-builtins.int"builtins.int*(
-self
-lzma.LZMAFile"lzma.LZMAFile*(
-offset
-builtins.int"builtins.int**
-whence
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314Ê
-compresslzma.compress" 
-builtins.bytes"builtins.bytes*ç
-dataÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer**
-format
-builtins.int"builtins.int *)
-check
-builtins.int"builtins.int *R
-presetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None z310z311z312z313z314¥
+decompress*
 
-decompresslzma.decompress" 
-builtins.bytes"builtins.bytes*ç
-dataÜ
-—TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
-ŒUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesí
-vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]Õ
-kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap 
-_ctypes._CData"_ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer**
-format
-builtins.int"builtins.int *T
-memlimitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None z310z311z312z313z314†
-is_check_supportedlzma.is_check_supported"
-builtins.bool"builtins.bool*
-builtins.int"builtins.intz310z311z312z313z314"ãE
-open	lzma.open£
-open	lzma.open"
-lzma.LZMAFile"lzma.LZMAFile*Ä
-filenameµ
-TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]]Œ
-„Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO"lzma._PathOrFile*µ
-mode¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *D
-check7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-preset
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overloadX¹
-open	lzma.open"
-lzma.LZMAFile"lzma.LZMAFile*Ä
-filenameµ
-TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]]Œ
-„Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO"lzma._PathOrFile*ª
-modeŸ
-•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
-ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"lzma._OpenBinaryWritingMode*R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *)
-check
-builtins.int"builtins.int *R
-presetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None *
-encoding
-None *
-errors
-None *
-newline
-None 0:typing.overloadXã
+self(*
 
-open	lzma.open"
-typing.TextIO"typing.TextIO*Å
-filename¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*A
-mode7
-Literal[builtins.str]	
-builtins.str"builtins.str*R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *D
-check7
-Literal[builtins.int]	
-builtins.int"builtins.int *
-preset
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX»
-open	lzma.open"
-typing.TextIO"typing.TextIO*Å
-filename¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*÷
-modeì
-STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]÷
-HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"lzma._OpenTextWritingMode*R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *)
-check
-builtins.int"builtins.int *R
-presetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX°
-open	lzma.open"f
-"Union[lzma.LZMAFile,typing.TextIO]
-lzma.LZMAFile"lzma.LZMAFile
-typing.TextIO"typing.TextIO*Ä
-filenameµ
-TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]]Œ
-„Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.IO[builtins.bytes]]¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO"lzma._PathOrFile*&
-mode
-builtins.str"builtins.str*R
-formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *)
-check
-builtins.int"builtins.int *R
-presetD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Þ
-filtersÎ
-HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]õ
-<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
-1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping"typing.Sequence"lzma._FilterChain
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:typing.overloadX"310"311"312"313"314*™
-__annotations__lzma.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*|
-__all__lzma.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*q
-FORMAT_AUTOlzma.FORMAT_AUTO7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*m
-	FORMAT_XZlzma.FORMAT_XZ7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*s
-FORMAT_ALONElzma.FORMAT_ALONE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*o
+data(*
 
-FORMAT_RAWlzma.FORMAT_RAW7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*o
+max_length (*,
+check*
 
-CHECK_NONElzma.CHECK_NONE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*q
-CHECK_CRC32lzma.CHECK_CRC327
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*q
-CHECK_CRC64lzma.CHECK_CRC647
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*s
-CHECK_SHA256lzma.CHECK_SHA2567
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*s
-CHECK_ID_MAXlzma.CHECK_ID_MAX7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*u
-CHECK_UNKNOWNlzma.CHECK_UNKNOWN7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*X
-FILTER_LZMA1lzma.FILTER_LZMA1
-builtins.int"builtins.int*310*311*312*313*314*s
-FILTER_LZMA2lzma.FILTER_LZMA27
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*s
-FILTER_DELTAlzma.FILTER_DELTA7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*o
+self(0:builtins.property`**
+eof*
 
-FILTER_X86lzma.FILTER_X867
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*q
-FILTER_IA64lzma.FILTER_IA647
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*o
+self(0:builtins.property`*2
+unused_data*
 
-FILTER_ARMlzma.FILTER_ARM7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*y
-FILTER_ARMTHUMBlzma.FILTER_ARMTHUMB7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*s
-FILTER_SPARClzma.FILTER_SPARC7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*w
-FILTER_POWERPClzma.FILTER_POWERPC7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*g
-MF_HC3lzma.MF_HC37
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*g
-MF_HC4lzma.MF_HC47
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*g
-MF_BT2lzma.MF_BT27
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*g
-MF_BT3lzma.MF_BT37
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*g
-MF_BT4lzma.MF_BT47
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*m
-	MODE_FASTlzma.MODE_FAST7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*q
-MODE_NORMALlzma.MODE_NORMAL7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*w
-PRESET_DEFAULTlzma.PRESET_DEFAULT7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*\
-PRESET_EXTREMElzma.PRESET_EXTREME
-builtins.int"builtins.int*310*311*312*313*314
+self(0:builtins.property`*2
+needs_input*
+
+self(0:builtins.property`8²
+LZMACompressor"builtins.object*X
+__init__*
+
+self(*
+format (*
+check (*
+preset (*
+filters (
+*
+compress*
+
+self(*(*
+flush*
+
+self(8
+	LZMAError"builtins.Exception¡
+LZMAFile"io.BufferedIOBase"	typing.IO*x
+__init__*
+
+self(*
+filename ( *
+mode (*
+format (*
+check (*
+preset (*
+filters (
+*
+	__enter__!*(!*"
+peek*
+
+self(*
+size (*"
+read*
+
+self(*
+size (*#
+read1*
+
+self(*
+size (*&
+readline*
+
+self(*
+size (*!
+write*
+
+self(*
+
+data(*2
+seek*
+
+self(*
+offset(*
+whence (X
+compress*
+
+data(*
+format (*
+check (*
+preset (*
+filters (
+M
+
+decompress*
+
+data(*
+format (*
+memlimit (*
+filters (
+
+is_check_supported*("ó
+open®
+open*
+filename(*
+mode (#*
+format (*
+check ($*
+preset (*
+filters (
+*
+encoding (*
+errors (*
+newline (0:typing.overloadX¬
+open*
+filename(*
+
+mode(&*
+format (*
+check (*
+preset (*
+filters (
+*
+encoding (*
+errors (*
+newline (0:typing.overloadX¬
+open'*
+filename(*
+
+mode("*
+format (*
+check ($*
+preset (*
+filters (
+*
+encoding ((*
+errors ((*
+newline ((0:typing.overloadX¬
+open'*
+filename(*
+
+mode(**
+format (*
+check (*
+preset (*
+filters (
+*
+encoding ((*
+errors ((*
+newline ((0:typing.overloadX¬
+open+*
+filename(*
+
+mode(*
+format (*
+check (*
+preset (*
+filters (
+*
+encoding ((*
+errors ((*
+newline ((0:typing.overloadX*
+__annotations__0,*
+__all__0-*
+FORMAT_AUTO0$*
+	FORMAT_XZ0$*
+FORMAT_ALONE0$*
+
+FORMAT_RAW0$*
+
+CHECK_NONE0$*
+CHECK_CRC320$*
+CHECK_CRC640$*
+CHECK_SHA2560$*
+CHECK_ID_MAX0$*
+CHECK_UNKNOWN0$*
+FILTER_LZMA10*
+FILTER_LZMA20$*
+FILTER_DELTA0$*
+
+FILTER_X860$*
+FILTER_IA640$*
+
+FILTER_ARM0$*
+FILTER_ARMTHUMB0$*
+FILTER_SPARC0$*
+FILTER_POWERPC0$*
+
+MF_HC30$*
+
+MF_HC40$*
+
+MF_BT20$*
+
+MF_BT30$*
+
+MF_BT40$*
+	MODE_FAST0$*
+MODE_NORMAL0$*
+PRESET_DEFAULT0$*
+PRESET_EXTREME022"lzma.LZMADecompressor2"builtins.int222"builtins.str22"typing.Mapping22"typing.Sequence22"lzma._FilterChain222	2"builtins.bytes2"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"builtins.bool2"lzma.LZMACompressor2"lzma.LZMAFile2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath22"	typing.IO2222"lzma._PathOrFile2222*
+lzma.LZMAFile.Self"lzma.LZMAFile(22	222""2	22
+2""""""2""lzma._OpenBinaryWritingMode2%2"typing.TextIO2222"""2 "lzma._OpenTextWritingMode2)22'2"builtins.dict22"builtins.list2

@@ -1,273 +1,163 @@
 
 
-gdb.eventsÍ
-ThreadEventgdb.events.ThreadEvent"builtins.objectj310j311j312j313j314r|
-inferior_thread&gdb.events.ThreadEvent.inferior_thread(
-gdb.InferiorThread"gdb.InferiorThread*310*311*312*313*314Z
-ContinueEventgdb.events.ContinueEvent"gdb.events.ThreadEventj310j311j312j313j314Ù
-ContinueEventRegistry gdb.events.ContinueEventRegistry"builtins.object*õ
-connect(gdb.events.ContinueEventRegistry.connect"
-None*N
-selfD
- gdb.events.ContinueEventRegistry" gdb.events.ContinueEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*û
+gdb.events3
+ThreadEvent"builtins.objectr
+inferior_thread0'
+ContinueEvent"gdb.events.ThreadEvente
+ContinueEventRegistry"builtins.object*
+connect*
 
-disconnect+gdb.events.ContinueEventRegistry.disconnect"
-None*N
-selfD
- gdb.events.ContinueEventRegistry" gdb.events.ContinueEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314™
-ExitedEventgdb.events.ExitedEvent"builtins.objectj310j311j312j313j314rd
-	exit_code gdb.events.ExitedEvent.exit_code
-builtins.int"builtins.int*310*311*312*313*314rb
-inferiorgdb.events.ExitedEvent.inferior
-gdb.Inferior"gdb.Inferior*310*311*312*313*314É
-ExitedEventRegistrygdb.events.ExitedEventRegistry"builtins.object*ï
-connect&gdb.events.ExitedEventRegistry.connect"
-None*J
-self@
-gdb.events.ExitedEventRegistry"gdb.events.ExitedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*õ
+self(*(*
 
-disconnect)gdb.events.ExitedEventRegistry.disconnect"
-None*J
-self@
-gdb.events.ExitedEventRegistry"gdb.events.ExitedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314º
-	StopEventgdb.events.StopEvent"gdb.events.ThreadEventj310j311j312j313j314rf
-stop_signal gdb.events.StopEvent.stop_signal
-builtins.str"builtins.str*310*311*312*313*314ó
-BreakpointEventgdb.events.BreakpointEvent"gdb.events.StopEventj310j311j312j313j314r¤
-breakpoints&gdb.events.BreakpointEvent.breakpointsT
-typing.Sequence[gdb.Breakpoint] 
-gdb.Breakpoint"gdb.Breakpoint"typing.Sequence*310*311*312*313*314rn
+disconnect*
 
-breakpoint%gdb.events.BreakpointEvent.breakpoint 
-gdb.Breakpoint"gdb.Breakpoint*310*311*312*313*314¹
-StopEventRegistrygdb.events.StopEventRegistry"builtins.object*é
-connect$gdb.events.StopEventRegistry.connect"
-None*F
-self<
-gdb.events.StopEventRegistry"gdb.events.StopEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*ï
+self(*(;
+ExitedEvent"builtins.objectr
+	exit_code0r
+inferior0c
+ExitedEventRegistry"builtins.object*
+connect*
 
-disconnect'gdb.events.StopEventRegistry.disconnect"
-None*F
-self<
-gdb.events.StopEventRegistry"gdb.events.StopEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314Ã
-NewObjFileEventgdb.events.NewObjFileEvent"builtins.objectj310j311j312j313j314rj
-new_objfile&gdb.events.NewObjFileEvent.new_objfile
-gdb.Objfile"gdb.Objfile*310*311*312*313*314é
-NewObjFileEventRegistry"gdb.events.NewObjFileEventRegistry"builtins.object*û
-connect*gdb.events.NewObjFileEventRegistry.connect"
-None*R
-selfH
-"gdb.events.NewObjFileEventRegistry""gdb.events.NewObjFileEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*
+self(*(*
 
-disconnect-gdb.events.NewObjFileEventRegistry.disconnect"
-None*R
-selfH
-"gdb.events.NewObjFileEventRegistry""gdb.events.NewObjFileEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314Ì
-ClearObjFilesEventgdb.events.ClearObjFilesEvent"builtins.objectj310j311j312j313j314rm
-	progspace'gdb.events.ClearObjFilesEvent.progspace
-gdb.Progspace"gdb.Progspace*310*311*312*313*314
-ClearObjFilesEventRegistry%gdb.events.ClearObjFilesEventRegistry"builtins.object*„
-connect-gdb.events.ClearObjFilesEventRegistry.connect"
-None*X
-selfN
-%gdb.events.ClearObjFilesEventRegistry"%gdb.events.ClearObjFilesEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*Š
+disconnect*
 
-disconnect0gdb.events.ClearObjFilesEventRegistry.disconnect"
-None*X
-selfN
-%gdb.events.ClearObjFilesEventRegistry"%gdb.events.ClearObjFilesEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314[
-InferiorCallEventgdb.events.InferiorCallEvent"builtins.objectj310j311j312j313j314Ä
-InferiorCallPreEventgdb.events.InferiorCallPreEvent"gdb.events.InferiorCallEventj310j311j312j313j314ro
-ptid$gdb.events.InferiorCallPreEvent.ptid(
-gdb.InferiorThread"gdb.InferiorThread*310*311*312*313*314rc
-address'gdb.events.InferiorCallPreEvent.address
-	gdb.Value"	gdb.Value*310*311*312*313*314È
-InferiorCallPostEvent gdb.events.InferiorCallPostEvent"gdb.events.InferiorCallEventj310j311j312j313j314rp
-ptid%gdb.events.InferiorCallPostEvent.ptid(
-gdb.InferiorThread"gdb.InferiorThread*310*311*312*313*314rd
-address(gdb.events.InferiorCallPostEvent.address
-	gdb.Value"	gdb.Value*310*311*312*313*314ù
-InferiorCallEventRegistry$gdb.events.InferiorCallEventRegistry"builtins.object*
-connect,gdb.events.InferiorCallEventRegistry.connect"
-None*V
-selfL
-$gdb.events.InferiorCallEventRegistry"$gdb.events.InferiorCallEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*‡
+self(*(4
+	StopEvent"gdb.events.ThreadEventr
+stop_signal0	H
+BreakpointEvent"gdb.events.StopEventr
+breakpoints0r
 
-disconnect/gdb.events.InferiorCallEventRegistry.disconnect"
-None*V
-selfL
-$gdb.events.InferiorCallEventRegistry"$gdb.events.InferiorCallEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314§
-MemoryChangedEventgdb.events.MemoryChangedEvent"builtins.objectj310j311j312j313j314ra
-address%gdb.events.MemoryChangedEvent.address
-	gdb.Value"	gdb.Value*310*311*312*313*314re
-length$gdb.events.MemoryChangedEvent.length
-builtins.int"builtins.int*310*311*312*313*314
-MemoryChangedEventRegistry%gdb.events.MemoryChangedEventRegistry"builtins.object*„
-connect-gdb.events.MemoryChangedEventRegistry.connect"
-None*X
-selfN
-%gdb.events.MemoryChangedEventRegistry"%gdb.events.MemoryChangedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*Š
+breakpoint0
+a
+StopEventRegistry"builtins.object*
+connect*
 
-disconnect0gdb.events.MemoryChangedEventRegistry.disconnect"
-None*X
-selfN
-%gdb.events.MemoryChangedEventRegistry"%gdb.events.MemoryChangedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314«
-RegisterChangedEventgdb.events.RegisterChangedEvent"builtins.objectj310j311j312j313j314r_
-frame%gdb.events.RegisterChangedEvent.frame
-	gdb.Frame"	gdb.Frame*310*311*312*313*314rg
-regnum&gdb.events.RegisterChangedEvent.regnum
-builtins.str"builtins.str*310*311*312*313*314‘
-RegisterChangedEventRegistry'gdb.events.RegisterChangedEventRegistry"builtins.object*Š
-connect/gdb.events.RegisterChangedEventRegistry.connect"
-None*\
-selfR
-'gdb.events.RegisterChangedEventRegistry"'gdb.events.RegisterChangedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*
+self(*(*
 
-disconnect2gdb.events.RegisterChangedEventRegistry.disconnect"
-None*\
-selfR
-'gdb.events.RegisterChangedEventRegistry"'gdb.events.RegisterChangedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314é
-BreakpointEventRegistry"gdb.events.BreakpointEventRegistry"builtins.object*û
-connect*gdb.events.BreakpointEventRegistry.connect"
-None*R
-selfH
-"gdb.events.BreakpointEventRegistry""gdb.events.BreakpointEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*
+disconnect*
 
-disconnect-gdb.events.BreakpointEventRegistry.disconnect"
-None*R
-selfH
-"gdb.events.BreakpointEventRegistry""gdb.events.BreakpointEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314ù
-BeforePromptEventRegistry$gdb.events.BeforePromptEventRegistry"builtins.object*
-connect,gdb.events.BeforePromptEventRegistry.connect"
-None*V
-selfL
-$gdb.events.BeforePromptEventRegistry"$gdb.events.BeforePromptEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*‡
+self(*(3
+NewObjFileEvent"builtins.objectr
+new_objfile0g
+NewObjFileEventRegistry"builtins.object*
+connect*
 
-disconnect/gdb.events.BeforePromptEventRegistry.disconnect"
-None*V
-selfL
-$gdb.events.BeforePromptEventRegistry"$gdb.events.BeforePromptEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314Â
-NewInferiorEventgdb.events.NewInferiorEvent"builtins.objectj310j311j312j313j314rg
-inferior$gdb.events.NewInferiorEvent.inferior
-gdb.Inferior"gdb.Inferior*310*311*312*313*314ñ
-NewInferiorEventRegistry#gdb.events.NewInferiorEventRegistry"builtins.object*þ
-connect+gdb.events.NewInferiorEventRegistry.connect"
-None*T
-selfJ
-#gdb.events.NewInferiorEventRegistry"#gdb.events.NewInferiorEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*„
+self(*(*
 
-disconnect.gdb.events.NewInferiorEventRegistry.disconnect"
-None*T
-selfJ
-#gdb.events.NewInferiorEventRegistry"#gdb.events.NewInferiorEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314Î
-InferiorDeletedEventgdb.events.InferiorDeletedEvent"builtins.objectj310j311j312j313j314rk
-inferior(gdb.events.InferiorDeletedEvent.inferior
-gdb.Inferior"gdb.Inferior*310*311*312*313*314‘
-InferiorDeletedEventRegistry'gdb.events.InferiorDeletedEventRegistry"builtins.object*Š
-connect/gdb.events.InferiorDeletedEventRegistry.connect"
-None*\
-selfR
-'gdb.events.InferiorDeletedEventRegistry"'gdb.events.InferiorDeletedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*
+disconnect*
 
-disconnect2gdb.events.InferiorDeletedEventRegistry.disconnect"
-None*\
-selfR
-'gdb.events.InferiorDeletedEventRegistry"'gdb.events.InferiorDeletedEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314\
-NewThreadEventgdb.events.NewThreadEvent"gdb.events.ThreadEventj310j311j312j313j314á
-NewThreadEventRegistry!gdb.events.NewThreadEventRegistry"builtins.object*ø
-connect)gdb.events.NewThreadEventRegistry.connect"
-None*P
-selfF
-!gdb.events.NewThreadEventRegistry"!gdb.events.NewThreadEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*þ
+self(*(4
+ClearObjFilesEvent"builtins.objectr
+	progspace0j
+ClearObjFilesEventRegistry"builtins.object*
+connect*
 
-disconnect,gdb.events.NewThreadEventRegistry.disconnect"
-None*P
-selfF
-!gdb.events.NewThreadEventRegistry"!gdb.events.NewThreadEventRegistry*MK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314j310j311j312j313j314*Ÿ
-__annotations__gdb.events.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*v
-contgdb.events.contD
- gdb.events.ContinueEventRegistry" gdb.events.ContinueEventRegistry*310*311*312*313*314*v
-exitedgdb.events.exited@
-gdb.events.ExitedEventRegistry"gdb.events.ExitedEventRegistry*310*311*312*313*314*n
-stopgdb.events.stop<
-gdb.events.StopEventRegistry"gdb.events.StopEventRegistry*310*311*312*313*314*ˆ
-new_objfilegdb.events.new_objfileH
-"gdb.events.NewObjFileEventRegistry""gdb.events.NewObjFileEventRegistry*310*311*312*313*314*”
-clear_objfilesgdb.events.clear_objfilesN
-%gdb.events.ClearObjFilesEventRegistry"%gdb.events.ClearObjFilesEventRegistry*310*311*312*313*314*
-inferior_callgdb.events.inferior_callL
-$gdb.events.InferiorCallEventRegistry"$gdb.events.InferiorCallEventRegistry*310*311*312*313*314*”
-memory_changedgdb.events.memory_changedN
-%gdb.events.MemoryChangedEventRegistry"%gdb.events.MemoryChangedEventRegistry*310*311*312*313*314*œ
-register_changedgdb.events.register_changedR
-'gdb.events.RegisterChangedEventRegistry"'gdb.events.RegisterChangedEventRegistry*310*311*312*313*314*–
-breakpoint_createdgdb.events.breakpoint_createdH
-"gdb.events.BreakpointEventRegistry""gdb.events.BreakpointEventRegistry*310*311*312*313*314*˜
-breakpoint_modifiedgdb.events.breakpoint_modifiedH
-"gdb.events.BreakpointEventRegistry""gdb.events.BreakpointEventRegistry*310*311*312*313*314*–
-breakpoint_deletedgdb.events.breakpoint_deletedH
-"gdb.events.BreakpointEventRegistry""gdb.events.BreakpointEventRegistry*310*311*312*313*314*
-before_promptgdb.events.before_promptL
-$gdb.events.BeforePromptEventRegistry"$gdb.events.BeforePromptEventRegistry*310*311*312*313*314*Œ
-new_inferiorgdb.events.new_inferiorJ
-#gdb.events.NewInferiorEventRegistry"#gdb.events.NewInferiorEventRegistry*310*311*312*313*314*œ
-inferior_deletedgdb.events.inferior_deletedR
-'gdb.events.InferiorDeletedEventRegistry"'gdb.events.InferiorDeletedEventRegistry*310*311*312*313*314*„
+self(*(*
 
-new_threadgdb.events.new_threadF
-!gdb.events.NewThreadEventRegistry"!gdb.events.NewThreadEventRegistry*310*311*312*313*314
+disconnect*
+
+self(*($
+InferiorCallEvent"builtins.objectK
+InferiorCallPreEvent"gdb.events.InferiorCallEventr
+ptid0r
+address0L
+InferiorCallPostEvent"gdb.events.InferiorCallEventr
+ptid0r
+address0i
+InferiorCallEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(>
+MemoryChangedEvent"builtins.objectr
+address0r
+
+length0j
+MemoryChangedEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(>
+RegisterChangedEvent"builtins.objectr	
+frame0r
+
+regnum0	l
+RegisterChangedEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(g
+BreakpointEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(i
+BeforePromptEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(1
+NewInferiorEvent"builtins.objectr
+inferior0h
+NewInferiorEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(5
+InferiorDeletedEvent"builtins.objectr
+inferior0l
+InferiorDeletedEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*((
+NewThreadEvent"gdb.events.ThreadEventf
+NewThreadEventRegistry"builtins.object*
+connect*
+
+self(*(*
+
+disconnect*
+
+self(*(*
+__annotations__0*
+cont0*
+
+exited0*
+stop0*
+new_objfile0*
+clear_objfiles0*
+inferior_call0*
+memory_changed0*
+register_changed0*
+breakpoint_created0*
+breakpoint_modified0*
+breakpoint_deleted0*
+before_prompt0*
+new_inferior0*
+inferior_deleted0*
+
+new_thread02"gdb.InferiorThread22"" gdb.events.ContinueEventRegistry2"builtins.function222"builtins.int2"gdb.Inferior2 "gdb.events.ExitedEventRegistry2"builtins.str2"gdb.Breakpoint2"typing.Sequence2
+2"gdb.events.StopEventRegistry2"gdb.Objfile2$""gdb.events.NewObjFileEventRegistry2"gdb.Progspace2'"%gdb.events.ClearObjFilesEventRegistry2"	gdb.Value2&"$gdb.events.InferiorCallEventRegistry2'"%gdb.events.MemoryChangedEventRegistry2"	gdb.Frame2)"'gdb.events.RegisterChangedEventRegistry2$""gdb.events.BreakpointEventRegistry2&"$gdb.events.BeforePromptEventRegistry2%"#gdb.events.NewInferiorEventRegistry2)"'gdb.events.InferiorDeletedEventRegistry2#"!gdb.events.NewThreadEventRegistry22"builtins.dict2	

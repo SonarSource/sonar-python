@@ -1,590 +1,302 @@
 
-http.client∏
-HTTPMessagehttp.client.HTTPMessage"email.message.Message*¯
-getallmatchingheaders-http.client.HTTPMessage.getallmatchingheaders"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*<
-self2
-http.client.HTTPMessage"http.client.HTTPMessage*&
-name
-builtins.str"builtins.str≤)
-HTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*ˆ
-__init__!http.client.HTTPResponse.__init__"
-None*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*(
-sock
-socket.socket"socket.socket*.
+http.clientW
+HTTPMessage"email.message.Message*1
+getallmatchingheaders*
 
-debuglevel
-builtins.int"builtins.int *R
-methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *O
-urlD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Æ
-peekhttp.client.HTTPResponse.peek" 
-builtins.bytes"builtins.bytes*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*%
-n
-builtins.int"builtins.int *ÿ
-readhttp.client.HTTPResponse.read" 
-builtins.bytes"builtins.bytes*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*O
-amtD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *∞
-read1http.client.HTTPResponse.read1" 
-builtins.bytes"builtins.bytes*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*%
-n
-builtins.int"builtins.int *»
-readinto!http.client.HTTPResponse.readinto"
-builtins.int"builtins.int*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*;
-b4
-typing_extensions.Buffer"typing_extensions.Buffer*∫
-readline!http.client.HTTPResponse.readline" 
-builtins.bytes"builtins.bytes*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*)
-limit
-builtins.int"builtins.int *ñ
+self(*
 
-getheaders#http.client.HTTPResponse.getheaders"¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*ç
-isclosed!http.client.HTTPResponse.isclosed"
-builtins.bool"builtins.bool*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*ª
-__iter__!http.client.HTTPResponse.__iter__"T
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator*64
-http.client.HTTPResponse"http.client.HTTPResponse*õ
-	__enter__"http.client.HTTPResponse.__enter__"s
-http.client.HTTPResponse.Self4
-http.client.HTTPResponse"http.client.HTTPResponse"http.client.HTTPResponse(*us
-http.client.HTTPResponse.Self4
-http.client.HTTPResponse"http.client.HTTPResponse"http.client.HTTPResponse(*»
-__exit__!http.client.HTTPResponse.__exit__"
-None*64
-http.client.HTTPResponse"http.client.HTTPResponse*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*Ì
-infohttp.client.HTTPResponse.info"Ö
-0email.message.Message[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"email.message.Message*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*á
-geturlhttp.client.HTTPResponse.geturl"
-builtins.str"builtins.str*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*â
-getcode http.client.HTTPResponse.getcode"
-builtins.int"builtins.int*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*q
-beginhttp.client.HTTPResponse.begin"
-None*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse2π
-	getheader"http.client.HTTPResponse.getheaderÚ
-	getheader"http.client.HTTPResponse.getheader"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*&
-name
-builtins.str"builtins.str0:typing.overloadXí
-	getheader"http.client.HTTPResponse.getheader"ç
-"Union[builtins.str,http.client._T]
-builtins.str"builtins.strG
-http.client._T"
-builtins.object"builtins.object"builtins.object*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*&
-name
-builtins.str"builtins.str*T
-defaultG
-http.client._T"
-builtins.object"builtins.object"builtins.object0:typing.overloadXrW
-msghttp.client.HTTPResponse.msg2
-http.client.HTTPMessage"http.client.HTTPMessager_
-headers http.client.HTTPResponse.headers2
-http.client.HTTPMessage"http.client.HTTPMessagerI
-version http.client.HTTPResponse.version
-builtins.int"builtins.intrO
+name(»
+HTTPResponse"io.BufferedIOBase"typing.BinaryIO*U
+__init__*
 
-debuglevel#http.client.HTTPResponse.debuglevel
-builtins.int"builtins.intrû
-fphttp.client.HTTPResponse.fp{
--_io.BufferedReader[_io._BufferedReaderStream]6
-_io._BufferedReaderStream"_io._BufferedReaderStream"_io.BufferedReaderrI
-closedhttp.client.HTTPResponse.closed
-builtins.bool"builtins.boolrG
-statushttp.client.HTTPResponse.status
-builtins.int"builtins.intrG
-reasonhttp.client.HTTPResponse.reason
-builtins.str"builtins.strrK
-chunked http.client.HTTPResponse.chunked
-builtins.bool"builtins.boolrw
+self(*
 
-chunk_left#http.client.HTTPResponse.chunk_leftD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonero
-lengthhttp.client.HTTPResponse.lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NonerQ
+sock(*
 
-will_close#http.client.HTTPResponse.will_close
-builtins.bool"builtins.boolrA
-urlhttp.client.HTTPResponse.url
-builtins.str"builtins.str†4
-HTTPConnectionhttp.client.HTTPConnection"builtins.object*∑
-__init__#http.client.HTTPConnection.__init__"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *≥
-source_addressú
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *-
-	blocksize
-builtins.int"builtins.int *¨
-request"http.client.HTTPConnection.request"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*Ï
-bodyﬂ
-îUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str,None]õ
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-builtins.str"builtins.str
-None *∏
-headers®
-atyping.Mapping[builtins.str,TypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]]
-builtins.str"builtins.strî
-DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]Ø
-9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
-encode_chunked
-builtins.bool"builtins.bool *Ø
-getresponse&http.client.HTTPConnection.getresponse"4
-http.client.HTTPResponse"http.client.HTTPResponse*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*≤
-set_debuglevel)http.client.HTTPConnection.set_debuglevel"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*'
-level
-builtins.int"builtins.int* 
+debuglevel (*
+method (*
+url (*
+peek	*
 
-set_tunnel%http.client.HTTPConnection.set_tunnel"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Ã
-headersº
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *{
-connect"http.client.HTTPConnection.connect"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*w
-close http.client.HTTPConnection.close"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*ø
+self(*	
+n (*!
+read	*
 
-putrequest%http.client.HTTPConnection.putrequest"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*/
-	skip_host
-builtins.bool"builtins.bool *:
-skip_accept_encoding
-builtins.bool"builtins.bool *ó
-	putheader$http.client.HTTPConnection.putheader"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*r
-headerf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*°
-valuesî
-DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]Ø
-9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValue*É
+self(*
+amt (
+* 
+read1	*
 
-endheaders%http.client.HTTPConnection.endheaders"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*…
-message_body¥
-áUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],None]õ
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-None *4
-encode_chunked
-builtins.bool"builtins.bool *”
-sendhttp.client.HTTPConnection.send"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*€
-data–
-èUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str]õ
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-builtins.str"builtins.strrO
-	blocksize$http.client.HTTPConnection.blocksize
-builtins.int"builtins.intrO
-	auto_open$http.client.HTTPConnection.auto_open
-builtins.int"builtins.intrQ
+self(*	
+n (*!
+readinto*
 
-debuglevel%http.client.HTTPConnection.debuglevel
-builtins.int"builtins.intrU
-default_port'http.client.HTTPConnection.default_port
-builtins.int"builtins.intrõ
-response_class)http.client.HTTPConnection.response_class^
-Type[http.client.HTTPResponse]4
-http.client.HTTPResponse"http.client.HTTPResponse"typery
-timeout"http.client.HTTPConnection.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-NonerE
-hosthttp.client.HTTPConnection.host
-builtins.str"builtins.strrE
-porthttp.client.HTTPConnection.port
-builtins.int"builtins.intr¢
-sockhttp.client.HTTPConnection.socky
-#Union[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_typeshed.MaybeNoneî	
-HTTPSConnectionhttp.client.HTTPSConnection"http.client.HTTPConnection*°
-__init__$http.client.HTTPSConnection.__init__"
-None*D
-self:
-http.client.HTTPSConnection"http.client.HTTPSConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-key_fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	cert_fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *≥
-source_addressú
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *Y
-contextJ
-Union[ssl.SSLContext,None] 
-ssl.SSLContext"ssl.SSLContext
-None *]
-check_hostnameG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *-
-	blocksize
-builtins.int"builtins.int r£
-sock http.client.HTTPSConnection.socky
-#Union[ssl.SSLSocket,TypeAlias[Any]]
-ssl.SSLSocket"ssl.SSLSocket0
-TypeAlias[Any]
-Any"_typeshed.MaybeNone>
-HTTPExceptionhttp.client.HTTPException"builtins.ExceptionC
-NotConnectedhttp.client.NotConnected"http.client.HTTPException?
+self(*
+b(*'
+readline	*
 
-InvalidURLhttp.client.InvalidURL"http.client.HTTPException˜
-UnknownProtocolhttp.client.UnknownProtocol"http.client.HTTPException*´
-__init__$http.client.UnknownProtocol.__init__"
-None*D
-self:
-http.client.UnknownProtocol"http.client.UnknownProtocol*)
-version
-builtins.str"builtins.strY
-UnknownTransferEncoding#http.client.UnknownTransferEncoding"http.client.HTTPExceptionU
-UnimplementedFileMode!http.client.UnimplementedFileMode"http.client.HTTPExceptionî
-IncompleteReadhttp.client.IncompleteRead"http.client.HTTPException*Ç
-__init__#http.client.IncompleteRead.__init__"
-None*B
-self8
-http.client.IncompleteRead"http.client.IncompleteRead*-
-partial 
-builtins.bytes"builtins.bytes*T
-expectedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None rO
-partial"http.client.IncompleteRead.partial 
-builtins.bytes"builtins.bytesru
-expected#http.client.IncompleteRead.expectedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneY
-ImproperConnectionState#http.client.ImproperConnectionState"http.client.HTTPExceptionW
-CannotSendRequesthttp.client.CannotSendRequest"#http.client.ImproperConnectionStateU
-CannotSendHeaderhttp.client.CannotSendHeader"#http.client.ImproperConnectionStateU
-ResponseNotReadyhttp.client.ResponseNotReady"#http.client.ImproperConnectionStateÍ
-BadStatusLinehttp.client.BadStatusLine"http.client.HTTPException*¢
-__init__"http.client.BadStatusLine.__init__"
-None*@
-self6
-http.client.BadStatusLine"http.client.BadStatusLine*&
-line
-builtins.str"builtins.strÂ
-LineTooLonghttp.client.LineTooLong"http.client.HTTPException*°
-__init__ http.client.LineTooLong.__init__"
-None*<
-self2
-http.client.LineTooLong"http.client.LineTooLong*+
-	line_type
-builtins.str"builtins.strn
-RemoteDisconnectedhttp.client.RemoteDisconnected"builtins.ConnectionResetError"http.client.BadStatusLine"ß
-parse_headershttp.client.parse_headersê
-parse_headershttp.client.parse_headers"Å
-email._policybase._MessageTI
-email.message.Message[Any,Any]
-Any
-Any"email.message.Message"email.message.Message*r
-fpj
-*_typeshed.SupportsReadline[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadline*W
-_classK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:typing.overloadXÁ
-parse_headershttp.client.parse_headers"2
-http.client.HTTPMessage"http.client.HTTPMessage*r
-fpj
-*_typeshed.SupportsReadline[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadline0:typing.overloadX*á
-__annotations__http.client.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-emailemail *j
-__all__http.client.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*@
-	HTTP_PORThttp.client.HTTP_PORT
-builtins.int"builtins.int*B
+self(*
+limit (*
 
-HTTPS_PORThttp.client.HTTPS_PORT
-builtins.int"builtins.int*>
-CONTINUEhttp.client.CONTINUE
-builtins.int"builtins.int*T
-SWITCHING_PROTOCOLShttp.client.SWITCHING_PROTOCOLS
-builtins.int"builtins.int*B
+getheaders*
 
-PROCESSINGhttp.client.PROCESSING
-builtins.int"builtins.int*D
-EARLY_HINTShttp.client.EARLY_HINTS
-builtins.int"builtins.int*2
-OKhttp.client.OK
-builtins.int"builtins.int*<
-CREATEDhttp.client.CREATED
-builtins.int"builtins.int*>
-ACCEPTEDhttp.client.ACCEPTED
-builtins.int"builtins.int*h
-NON_AUTHORITATIVE_INFORMATION)http.client.NON_AUTHORITATIVE_INFORMATION
-builtins.int"builtins.int*B
+self(*
+isclosed*
 
-NO_CONTENThttp.client.NO_CONTENT
-builtins.int"builtins.int*H
-RESET_CONTENThttp.client.RESET_CONTENT
-builtins.int"builtins.int*L
-PARTIAL_CONTENThttp.client.PARTIAL_CONTENT
-builtins.int"builtins.int*F
-MULTI_STATUShttp.client.MULTI_STATUS
-builtins.int"builtins.int*N
-ALREADY_REPORTEDhttp.client.ALREADY_REPORTED
-builtins.int"builtins.int*<
-IM_USEDhttp.client.IM_USED
-builtins.int"builtins.int*N
-MULTIPLE_CHOICEShttp.client.MULTIPLE_CHOICES
-builtins.int"builtins.int*P
-MOVED_PERMANENTLYhttp.client.MOVED_PERMANENTLY
-builtins.int"builtins.int*8
-FOUNDhttp.client.FOUND
-builtins.int"builtins.int*@
-	SEE_OTHERhttp.client.SEE_OTHER
-builtins.int"builtins.int*F
-NOT_MODIFIEDhttp.client.NOT_MODIFIED
-builtins.int"builtins.int*@
-	USE_PROXYhttp.client.USE_PROXY
-builtins.int"builtins.int*R
-TEMPORARY_REDIRECThttp.client.TEMPORARY_REDIRECT
-builtins.int"builtins.int*R
-PERMANENT_REDIRECThttp.client.PERMANENT_REDIRECT
-builtins.int"builtins.int*D
-BAD_REQUESThttp.client.BAD_REQUEST
-builtins.int"builtins.int*F
-UNAUTHORIZEDhttp.client.UNAUTHORIZED
-builtins.int"builtins.int*N
-PAYMENT_REQUIREDhttp.client.PAYMENT_REQUIRED
-builtins.int"builtins.int*@
-	FORBIDDENhttp.client.FORBIDDEN
-builtins.int"builtins.int*@
-	NOT_FOUNDhttp.client.NOT_FOUND
-builtins.int"builtins.int*R
-METHOD_NOT_ALLOWEDhttp.client.METHOD_NOT_ALLOWED
-builtins.int"builtins.int*J
-NOT_ACCEPTABLEhttp.client.NOT_ACCEPTABLE
-builtins.int"builtins.int*h
-PROXY_AUTHENTICATION_REQUIRED)http.client.PROXY_AUTHENTICATION_REQUIRED
-builtins.int"builtins.int*L
-REQUEST_TIMEOUThttp.client.REQUEST_TIMEOUT
-builtins.int"builtins.int*>
-CONFLICThttp.client.CONFLICT
-builtins.int"builtins.int*6
-GONEhttp.client.GONE
-builtins.int"builtins.int*L
-LENGTH_REQUIREDhttp.client.LENGTH_REQUIRED
-builtins.int"builtins.int*T
-PRECONDITION_FAILEDhttp.client.PRECONDITION_FAILED
-builtins.int"builtins.int*^
-REQUEST_ENTITY_TOO_LARGE$http.client.REQUEST_ENTITY_TOO_LARGE
-builtins.int"builtins.int*V
-REQUEST_URI_TOO_LONG http.client.REQUEST_URI_TOO_LONG
-builtins.int"builtins.int*Z
-UNSUPPORTED_MEDIA_TYPE"http.client.UNSUPPORTED_MEDIA_TYPE
-builtins.int"builtins.int*l
-REQUESTED_RANGE_NOT_SATISFIABLE+http.client.REQUESTED_RANGE_NOT_SATISFIABLE
-builtins.int"builtins.int*R
-EXPECTATION_FAILEDhttp.client.EXPECTATION_FAILED
-builtins.int"builtins.int*D
-IM_A_TEAPOThttp.client.IM_A_TEAPOT
-builtins.int"builtins.int*T
-MISDIRECTED_REQUESThttp.client.MISDIRECTED_REQUEST
-builtins.int"builtins.int*V
-UNPROCESSABLE_ENTITY http.client.UNPROCESSABLE_ENTITY
-builtins.int"builtins.int*:
-LOCKEDhttp.client.LOCKED
-builtins.int"builtins.int*P
-FAILED_DEPENDENCYhttp.client.FAILED_DEPENDENCY
-builtins.int"builtins.int*@
-	TOO_EARLYhttp.client.TOO_EARLY
-builtins.int"builtins.int*N
-UPGRADE_REQUIREDhttp.client.UPGRADE_REQUIRED
-builtins.int"builtins.int*X
-PRECONDITION_REQUIRED!http.client.PRECONDITION_REQUIRED
-builtins.int"builtins.int*P
-TOO_MANY_REQUESTShttp.client.TOO_MANY_REQUESTS
-builtins.int"builtins.int*l
-REQUEST_HEADER_FIELDS_TOO_LARGE+http.client.REQUEST_HEADER_FIELDS_TOO_LARGE
-builtins.int"builtins.int*h
-UNAVAILABLE_FOR_LEGAL_REASONS)http.client.UNAVAILABLE_FOR_LEGAL_REASONS
-builtins.int"builtins.int*X
-INTERNAL_SERVER_ERROR!http.client.INTERNAL_SERVER_ERROR
-builtins.int"builtins.int*L
-NOT_IMPLEMENTEDhttp.client.NOT_IMPLEMENTED
-builtins.int"builtins.int*D
-BAD_GATEWAYhttp.client.BAD_GATEWAY
-builtins.int"builtins.int*T
-SERVICE_UNAVAILABLEhttp.client.SERVICE_UNAVAILABLE
-builtins.int"builtins.int*L
-GATEWAY_TIMEOUThttp.client.GATEWAY_TIMEOUT
-builtins.int"builtins.int*b
-HTTP_VERSION_NOT_SUPPORTED&http.client.HTTP_VERSION_NOT_SUPPORTED
-builtins.int"builtins.int*\
-VARIANT_ALSO_NEGOTIATES#http.client.VARIANT_ALSO_NEGOTIATES
-builtins.int"builtins.int*V
-INSUFFICIENT_STORAGE http.client.INSUFFICIENT_STORAGE
-builtins.int"builtins.int*H
-LOOP_DETECTEDhttp.client.LOOP_DETECTED
-builtins.int"builtins.int*F
-NOT_EXTENDEDhttp.client.NOT_EXTENDED
-builtins.int"builtins.int*l
-NETWORK_AUTHENTICATION_REQUIRED+http.client.NETWORK_AUTHENTICATION_REQUIRED
-builtins.int"builtins.int*ô
-	responseshttp.client.responsesu
-(builtins.dict[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.dict
+self(*
+__iter__*(*
+	__enter__*(*
+__exit__*(*(*(*(*
+info*
+
+self(*
+geturl*
+
+self(*
+getcode*
+
+self(*
+begin*
+
+self(2í
+	getheader:
+	getheader*
+
+self(*
+
+name(0:typing.overloadXI
+	getheader*
+
+self(*
+
+name(*
+default(0:typing.overloadXr
+msg0r
+headers0r
+version0r
+
+debuglevel0r
+fp0r
+
+closed0r
+
+status0r
+
+reason0r
+chunked0r
+
+chunk_left0
+r
+
+length0
+r
+
+will_close0r
+url0√
+HTTPConnection"builtins.object*n
+__init__*
+
+self(*
+
+host(*
+port (
+*
+timeout (*
+source_address (!*
+	blocksize (*g
+request*
+
+self(*
+method(*	
+url(*
+body (&*
+headers ()*
+encode_chunked (*
+getresponse*
+
+self(*+
+set_debuglevel*
+
+self(*
+level(*E
+
+set_tunnel*
+
+self(*
+
+host(*
+port (
+*
+headers (+*
+connect*
+
+self(*
+close*
+
+self(*d
+
+putrequest*
+
+self(*
+method(*	
+url(*
+	skip_host (*
+skip_accept_encoding (*5
+	putheader*
+
+self(*
+header(,*
+values((*H
+
+endheaders*
+
+self(*
+message_body (-*
+encode_chunked (* 
+send*
+
+self(*
+
+data(.r
+	blocksize0r
+	auto_open0r
+
+debuglevel0r
+default_port0r
+response_class0/r
+timeout0r
+host0r
+port0r
+sock02ˆ
+HTTPSConnection"http.client.HTTPConnection*º
+__init__*
+
+self(3*
+
+host(*
+port (
+*
+key_file (*
+	cert_file (*
+timeout (*
+source_address (!*
+context (5*
+check_hostname (6*
+	blocksize (r
+sock08#
+HTTPException"builtins.Exception)
+NotConnected"http.client.HTTPException'
+
+InvalidURL"http.client.HTTPExceptionU
+UnknownProtocol"http.client.HTTPException*'
+__init__*
+
+self(9*
+version(4
+UnknownTransferEncoding"http.client.HTTPException2
+UnimplementedFileMode"http.client.HTTPExceptionÅ
+IncompleteRead"http.client.HTTPException*9
+__init__*
+
+self(:*
+partial(	*
+expected (
+r
+partial0	r
+expected0
+4
+ImproperConnectionState"http.client.HTTPException8
+CannotSendRequest"#http.client.ImproperConnectionState7
+CannotSendHeader"#http.client.ImproperConnectionState7
+ResponseNotReady"#http.client.ImproperConnectionStateP
+BadStatusLine"http.client.HTTPException*$
+__init__*
+
+self(;*
+
+line(S
+LineTooLong"http.client.HTTPException*)
+__init__*
+
+self(<*
+	line_type(N
+RemoteDisconnected"builtins.ConnectionResetError"http.client.BadStatusLine"Å
+parse_headers>
+parse_headers>*
+fp(?*
+_class(A0:typing.overloadX0
+parse_headers*
+fp(?0:typing.overloadX*
+__annotations__0B*
+emailemail *
+__all__0*
+	HTTP_PORT0*
+
+HTTPS_PORT0*
+CONTINUE0*
+SWITCHING_PROTOCOLS0*
+
+PROCESSING0*
+EARLY_HINTS0*
+OK0*
+CREATED0*
+ACCEPTED0*!
+NON_AUTHORITATIVE_INFORMATION0*
+
+NO_CONTENT0*
+RESET_CONTENT0*
+PARTIAL_CONTENT0*
+MULTI_STATUS0*
+ALREADY_REPORTED0*
+IM_USED0*
+MULTIPLE_CHOICES0*
+MOVED_PERMANENTLY0*	
+FOUND0*
+	SEE_OTHER0*
+NOT_MODIFIED0*
+	USE_PROXY0*
+TEMPORARY_REDIRECT0*
+PERMANENT_REDIRECT0*
+BAD_REQUEST0*
+UNAUTHORIZED0*
+PAYMENT_REQUIRED0*
+	FORBIDDEN0*
+	NOT_FOUND0*
+METHOD_NOT_ALLOWED0*
+NOT_ACCEPTABLE0*!
+PROXY_AUTHENTICATION_REQUIRED0*
+REQUEST_TIMEOUT0*
+CONFLICT0*
+GONE0*
+LENGTH_REQUIRED0*
+PRECONDITION_FAILED0*
+REQUEST_ENTITY_TOO_LARGE0*
+REQUEST_URI_TOO_LONG0*
+UNSUPPORTED_MEDIA_TYPE0*#
+REQUESTED_RANGE_NOT_SATISFIABLE0*
+EXPECTATION_FAILED0*
+IM_A_TEAPOT0*
+MISDIRECTED_REQUEST0*
+UNPROCESSABLE_ENTITY0*
+
+LOCKED0*
+FAILED_DEPENDENCY0*
+	TOO_EARLY0*
+UPGRADE_REQUIRED0*
+PRECONDITION_REQUIRED0*
+TOO_MANY_REQUESTS0*#
+REQUEST_HEADER_FIELDS_TOO_LARGE0*!
+UNAVAILABLE_FOR_LEGAL_REASONS0*
+INTERNAL_SERVER_ERROR0*
+NOT_IMPLEMENTED0*
+BAD_GATEWAY0*
+SERVICE_UNAVAILABLE0*
+GATEWAY_TIMEOUT0*
+HTTP_VERSION_NOT_SUPPORTED0*
+VARIANT_ALSO_NEGOTIATES0*
+INSUFFICIENT_STORAGE0*
+LOOP_DETECTED0*
+NOT_EXTENDED0*#
+NETWORK_AUTHENTICATION_REQUIRED0*
+	responses0C2"builtins.str2"builtins.list22"http.client.HTTPMessage22"http.client.HTTPResponse2"socket.socket2"builtins.int222"builtins.bytes222"typing_extensions.Buffer222"builtins.list22"builtins.bool2"typing.Iterator2	2@
+http.client.HTTPResponse.Self"http.client.HTTPResponse(22"builtins.BaseException2"type222222"types.TracebackType222"email.message.Message22"builtins.object2"builtins.object2222"_io._BufferedReaderStream2"_io.BufferedReader22"http.client.HTTPConnection2"builtins.float222222 2"_typeshed.SupportsRead2	2"typing.Iterable222"#2"http.client._DataType2$22%222"http.client._HeaderValue2'2"typing.Mapping2(2"typing.Mapping222*22	22%22%2"type222"_typeshed.MaybeNone202212"http.client.HTTPSConnection2"ssl.SSLContext224222"ssl.SSLSocket22712"http.client.UnknownProtocol2"http.client.IncompleteRead2"http.client.BadStatusLine2"http.client.LineTooLong2"email.message.Message2002"email.message.Message2=2"_typeshed.SupportsReadline2	2"builtins.function22@2"builtins.dict202"builtins.dict2

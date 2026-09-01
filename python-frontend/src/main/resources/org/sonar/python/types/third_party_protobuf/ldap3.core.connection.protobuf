@@ -1,683 +1,292 @@
 
-ldap3.core.connection¸±
+ldap3.core.connection˜
 
-Connection ldap3.core.connection.Connection"builtins.object*¸*
-__init__)ldap3.core.connection.Connection.__init__"
-None*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*’
-server»
-ÕUnion[ldap3.core.server.Server,builtins.str,TypeAlias[Union[builtins.set[ldap3.core.server.Server],builtins.list[ldap3.core.server.Server],builtins.tuple[ldap3.core.server.Server],typing.Generator[ldap3.core.server.Server,None,None],_collections_abc.dict_keys[ldap3.core.server.Server,TypeAlias[Any]]]],ldap3.core.pooling.ServerPool]4
-ldap3.core.server.Server"ldap3.core.server.Server
-builtins.str"builtins.strﬂ	
-ÇTypeAlias[Union[builtins.set[ldap3.core.server.Server],builtins.list[ldap3.core.server.Server],builtins.tuple[ldap3.core.server.Server],typing.Generator[ldap3.core.server.Server,None,None],_collections_abc.dict_keys[ldap3.core.server.Server,TypeAlias[Any]]]]Æ
-˜Union[builtins.set[ldap3.core.server.Server],builtins.list[ldap3.core.server.Server],builtins.tuple[ldap3.core.server.Server],typing.Generator[ldap3.core.server.Server,None,None],_collections_abc.dict_keys[ldap3.core.server.Server,TypeAlias[Any]]]l
-&builtins.set[ldap3.core.server.Server]4
-ldap3.core.server.Server"ldap3.core.server.Server"builtins.setn
-'builtins.list[ldap3.core.server.Server]4
-ldap3.core.server.Server"ldap3.core.server.Server"builtins.listp
-(builtins.tuple[ldap3.core.server.Server]4
-ldap3.core.server.Server"ldap3.core.server.Server"builtins.tupleí
-4typing.Generator[ldap3.core.server.Server,None,None]4
-ldap3.core.server.Server"ldap3.core.server.Server
-None
-None"typing.Generator 
-C_collections_abc.dict_keys[ldap3.core.server.Server,TypeAlias[Any]]4
-ldap3.core.server.Server"ldap3.core.server.Server1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"_collections_abc.dict_keys"%ldap3.core.connection._ServerSequence>
-ldap3.core.pooling.ServerPool"ldap3.core.pooling.ServerPool*P
-userD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ß
-	auto_bindï
-tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *+
-version
-builtins.int"builtins.int *Ï
-authentication’
-cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str
-None *π
-client_strategy°
-‚Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *4
-auto_referrals
-builtins.bool"builtins.bool *0
+Connection"builtins.object*¶
+__init__*
 
-auto_range
-builtins.bool"builtins.bool *Z
-sasl_mechanismD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *s
-sasl_credentials[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *1
-check_names
-builtins.bool"builtins.bool *3
-collect_usage
-builtins.bool"builtins.bool */
-	read_only
-builtins.bool"builtins.bool **
-lazy
-builtins.bool"builtins.bool *6
-raise_exceptions
-builtins.bool"builtins.bool *U
-	pool_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	pool_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Y
-pool_lifetimeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *m
+self(*
+server(*
+user (*
+password (*
+	auto_bind (*
+version (*
+authentication (*
+client_strategy (*
+auto_referrals (*
 
-cred_store[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *2
-fast_decoder
-builtins.bool"builtins.bool *r
-receive_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *=
-return_empty_attributes
-builtins.bool"builtins.bool *8
-use_referral_cache
-builtins.bool"builtins.bool *1
-auto_escape
-builtins.bool"builtins.bool *1
-auto_encode
-builtins.bool"builtins.bool *q
-pool_keepalive[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *Z
-source_addressD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-source_portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *s
-source_port_list[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ä
-!repr_with_sensitive_data_strippedBldap3.core.connection.Connection.repr_with_sensitive_data_stripped*
-selfz310z311z312z313z314*i
-usage&ldap3.core.connection.Connection.usage*
-self0:builtins.property`z310z311z312z313z314*ˇ
-	__enter__*ldap3.core.connection.Connection.__enter__"ì
-%ldap3.core.connection.Connection.SelfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection" ldap3.core.connection.Connection(*ñì
-%ldap3.core.connection.Connection.SelfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection" ldap3.core.connection.Connection(z310z311z312z313z314*›
-__exit__)ldap3.core.connection.Connection.__exit__"l
-"Union[Literal[builtins.bool],None]:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool
-None*FD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*ƒ
-bind%ldap3.core.connection.Connection.bind"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*6
-read_server_info
-builtins.bool"builtins.bool *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*˘
-rebind'ldap3.core.connection.Connection.rebind"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*g
-user[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-password[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *q
-authentication[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *q
-sasl_mechanism[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *s
-sasl_credentials[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-read_server_info
-builtins.bool"builtins.bool *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ê
-unbind'ldap3.core.connection.Connection.unbind"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*†
-search'ldap3.core.connection.Connection.search"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*-
-search_base
-builtins.str"builtins.str*/
-search_filter
-builtins.str"builtins.str*å
-search_scope˜
-HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *‚
-dereference_aliases∆
-^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *m
+auto_range (*
+sasl_mechanism (*
+sasl_credentials (*
+check_names (*
+collect_usage (*
+	read_only (*
+lazy (*
+raise_exceptions (*
+	pool_name (*
+	pool_size (*
+pool_lifetime (*
 
-attributes[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *.
+cred_store (*
+fast_decoder (*
+receive_timeout (*
+return_empty_attributes (*
+use_referral_cache (*
+auto_escape (*
+auto_encode (*
+pool_keepalive (*
+source_address (*
+source_port (*
+source_port_list (*-
+!repr_with_sensitive_data_stripped*
+self*(
+usage*
+self0:builtins.property`*
+	__enter__*(*
+__exit__*(*(*(*(!*@
+bind	*
 
-size_limit
-builtins.int"builtins.int *.
+self(*
+read_server_info (*
+controls (*¨
+rebind	*
 
-time_limit
-builtins.int"builtins.int *0
+self(*
+user (*
+password (*
+authentication (*
+sasl_mechanism (*
+sasl_credentials (*
+read_server_info (*
+controls (*(
+unbind	*
 
-types_only
-builtins.bool"builtins.bool *@
-get_operational_attributes
-builtins.bool"builtins.bool *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *V
+self(*
+controls (*—
+search	*
 
-paged_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *7
-paged_criticality
-builtins.bool"builtins.bool *â
-paged_cookieu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *Z
-auto_escapeG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z310z311z312z313z314*œ
-compare(ldap3.core.connection.Connection.compare"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-dn
-Any*
-	attribute
-Any*
-value
-Any*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*˚
-add$ldap3.core.connection.Connection.add"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-dn
-Any*o
-object_class[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+self(*
+search_base(*
+search_filter(*
+search_scope ("*
+dereference_aliases (#*
 
-attributes[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*°
-delete'ldap3.core.connection.Connection.delete"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-dn
-Any*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*∑
-modify'ldap3.core.connection.Connection.modify"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-dn
-Any*
-changes
-Any*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Á
-	modify_dn*ldap3.core.connection.Connection.modify_dn"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-dn
-Any*
-relative_dn
-Any*3
-delete_old_dn
-builtins.bool"builtins.bool *o
-new_superior[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*´
-abandon(ldap3.core.connection.Connection.abandon"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
+attributes (*
 
-message_id
-Any*k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Õ
-extended)ldap3.core.connection.Connection.extended"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-request_name
-Any*–
-request_value∫
->Union[pyasn1.type.base.Asn1Item,typing_extensions.Buffer,None]6
-pyasn1.type.base.Asn1Item"pyasn1.type.base.Asn1Item4
-typing_extensions.Buffer"typing_extensions.Buffer
-None *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *X
-	no_encodeG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z310z311*œ
-extended)ldap3.core.connection.Connection.extended"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-request_name
-Any*Õ
-request_value∑
-=Union[pyasn1.type.base.Asn1Item,_collections_abc.Buffer,None]6
-pyasn1.type.base.Asn1Item"pyasn1.type.base.Asn1Item2
-_collections_abc.Buffer"_collections_abc.Buffer
-None *k
-controls[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *X
-	no_encodeG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z312z313z314*·
-	start_tls*ldap3.core.connection.Connection.start_tls"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*6
-read_server_info
-builtins.bool"builtins.bool z310z311z312z313z314*n
-do_sasl_bind-ldap3.core.connection.Connection.do_sasl_bind*
+size_limit (*
+
+time_limit (*
+
+types_only (*"
+get_operational_attributes (*
+controls (*
+
+paged_size (*
+paged_criticality (*
+paged_cookie (%*
+auto_escape (&*Q
+compare	*
+
+self(*
+dn(	*
+	attribute(	*
+value(	*
+controls (*Y
+add	*
+
+self(*
+dn(	*
+object_class (*
+
+attributes (*
+controls (*2
+delete	*
+
+self(*
+dn(	*
+controls (*A
+modify	*
+
+self(*
+dn(	*
+changes(	*
+controls (*u
+	modify_dn	*
+
+self(*
+dn(	*
+relative_dn(	*
+delete_old_dn (*
+new_superior (*
+controls (*;
+abandon	*
+
+self(*
+
+message_id(	*
+controls (*r
+extended	*
+
+self(*
+request_name(	*
+request_value ()*
+controls (*
+	no_encode (&z310z311*w
+extended	*
+
+self(*
+request_name(	*
+request_value (+*
+controls (*
+	no_encode (&z312z313z314*3
+	start_tls	*
+
+self(*
+read_server_info (*&
+do_sasl_bind*
 self*
-controlsz310z311z312z313z314*n
-do_ntlm_bind-ldap3.core.connection.Connection.do_ntlm_bind*
+controls*&
+do_ntlm_bind*
 self*
-controlsz310z311z312z313z314*æ
-refresh_server_info4ldap3.core.connection.Connection.refresh_server_info"
-None*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connectionz310z311z312z313z314*®
-response_to_ldif1ldap3.core.connection.Connection.response_to_ldif"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*p
-search_result[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+controls*#
+refresh_server_info*
 
-all_base64
-builtins.bool"builtins.bool *q
-line_separator[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+self(*á
+response_to_ldif	*
 
-sort_order[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-stream[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ü
-response_to_json1ldap3.core.connection.Connection.response_to_json"
-Any*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*)
-raw
-builtins.bool"builtins.bool *p
-search_result[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-indent
-builtins.int"builtins.int **
-sort
-builtins.bool"builtins.bool *i
-stream[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *8
-checked_attributes
-builtins.bool"builtins.bool *3
-include_empty
-builtins.bool"builtins.bool z310z311z312z313z314*–
-response_to_file1ldap3.core.connection.Connection.response_to_file"
-None*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-target
-Any*)
-raw
-builtins.bool"builtins.bool **
-indent
-builtins.int"builtins.int **
-sort
-builtins.bool"builtins.bool z310z311z312z313z314*m
-entries(ldap3.core.connection.Connection.entries*
-self0:builtins.property`z310z311z312z313z3142Õ
-stream'ldap3.core.connection.Connection.streamT
-stream'ldap3.core.connection.Connection.stream*
-self0:builtins.propertyX`™
-stream'ldap3.core.connection.Connection.stream"
-None*N
-selfD
- ldap3.core.connection.Connection" ldap3.core.connection.Connection*
-value
-Any0:.setter"310"311"312"313"314j310j311j312j313j314rè
-connection_lock0ldap3.core.connection.Connection.connection_lock1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rp
+self(*
+search_result (*
 
-last_error+ldap3.core.connection.Connection.last_error
-builtins.str"builtins.str*310*311*312*313*314rã
-strategy_type.ldap3.core.connection.Connection.strategy_type1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314ry
-user%ldap3.core.connection.Connection.user1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÅ
-password)ldap3.core.connection.Connection.password1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rç
-authentication/ldap3.core.connection.Connection.authentication1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r
-version(ldap3.core.connection.Connection.version1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rç
-auto_referrals/ldap3.core.connection.Connection.auto_referrals1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r
-request(ldap3.core.connection.Connection.request1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r´
-response)ldap3.core.connection.Connection.response[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None*310*311*312*313*314r}
-result'ldap3.core.connection.Connection.result1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rh
-bound&ldap3.core.connection.Connection.bound
-builtins.bool"builtins.bool*310*311*312*313*314rp
-	listening*ldap3.core.connection.Connection.listening
-builtins.bool"builtins.bool*310*311*312*313*314rj
-closed'ldap3.core.connection.Connection.closed
-builtins.bool"builtins.bool*310*311*312*313*314rÉ
-	auto_bind*ldap3.core.connection.Connection.auto_bind1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rç
-sasl_mechanism/ldap3.core.connection.Connection.sasl_mechanism1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rë
-sasl_credentials1ldap3.core.connection.Connection.sasl_credentials1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r}
-socket'ldap3.core.connection.Connection.socket1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rt
-tls_started,ldap3.core.connection.Connection.tls_started
-builtins.bool"builtins.bool*310*311*312*313*314r~
-sasl_in_progress1ldap3.core.connection.Connection.sasl_in_progress
-builtins.bool"builtins.bool*310*311*312*313*314rÉ
-	read_only*ldap3.core.connection.Connection.read_only1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314ry
-lazy%ldap3.core.connection.Connection.lazy1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÉ
-	pool_name*ldap3.core.connection.Connection.pool_name1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rñ
-	pool_size*ldap3.core.connection.Connection.pool_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rÖ
+all_base64 (*
+line_separator (*
 
-cred_store+ldap3.core.connection.Connection.cred_store1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rã
-pool_lifetime.ldap3.core.connection.Connection.pool_lifetime1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rç
-pool_keepalive/ldap3.core.connection.Connection.pool_keepalive1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rv
-starting_tls-ldap3.core.connection.Connection.starting_tls
-builtins.bool"builtins.bool*310*311*312*313*314rá
-check_names,ldap3.core.connection.Connection.check_names1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rë
-raise_exceptions1ldap3.core.connection.Connection.raise_exceptions1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÖ
+sort_order (*
+stream (*•
+response_to_json	*
 
-auto_range+ldap3.core.connection.Connection.auto_range1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r}
-extend'ldap3.core.connection.Connection.extend1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314râ
-fast_decoder-ldap3.core.connection.Connection.fast_decoder1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rè
-receive_timeout0ldap3.core.connection.Connection.receive_timeout1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rë
-empty_attributes1ldap3.core.connection.Connection.empty_attributes1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rï
-use_referral_cache3ldap3.core.connection.Connection.use_referral_cache1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rá
-auto_escape,ldap3.core.connection.Connection.auto_escape1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rá
-auto_encode,ldap3.core.connection.Connection.auto_encode1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rç
-source_address/ldap3.core.connection.Connection.source_address1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rë
-source_port_list1ldap3.core.connection.Connection.source_port_list1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r±
-server_pool,ldap3.core.connection.Connection.server_pool[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None*310*311*312*313*314r}
-server'ldap3.core.connection.Connection.server1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÅ
-strategy)ldap3.core.connection.Connection.strategy1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314ry
-send%ldap3.core.connection.Connection.send1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314ry
-open%ldap3.core.connection.Connection.open1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314râ
-get_response-ldap3.core.connection.Connection.get_response1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r£
-post_send_single_response:ldap3.core.connection.Connection.post_send_single_response1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rë
-post_send_search1ldap3.core.connection.Connection.post_send_search1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*™
-__annotations__%ldap3.core.connection.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ò
-SASL_AVAILABLE_MECHANISMS/ldap3.core.connection.SASL_AVAILABLE_MECHANISMS1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*à
-CLIENT_STRATEGIES'ldap3.core.connection.CLIENT_STRATEGIES1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314
+self(*
+raw (*
+search_result (*
+indent (*
+sort (*
+stream (*
+checked_attributes (*
+include_empty (*Y
+response_to_file*
+
+self(*
+target(	*
+raw (*
+indent (*
+sort (**
+entries*
+self0:builtins.property`2e
+stream+
+stream*
+self0:builtins.propertyX`.
+stream*
+
+self(*
+value(	0:.setterr
+connection_lock0
+r
+
+last_error0r
+strategy_type0
+r
+user0
+r
+password0
+r
+authentication0
+r
+version0
+r
+auto_referrals0
+r
+request0
+r
+response0r
+
+result0
+r	
+bound0r
+	listening0r
+
+closed0r
+	auto_bind0
+r
+sasl_mechanism0
+r
+sasl_credentials0
+r
+
+socket0
+r
+tls_started0r
+sasl_in_progress0r
+	read_only0
+r
+lazy0
+r
+	pool_name0
+r
+	pool_size0r
+
+cred_store0
+r
+pool_lifetime0
+r
+pool_keepalive0
+r
+starting_tls0r
+check_names0
+r
+raise_exceptions0
+r
+
+auto_range0
+r
+
+extend0
+r
+fast_decoder0
+r
+receive_timeout0
+r
+empty_attributes0
+r
+use_referral_cache0
+r
+auto_escape0
+r
+auto_encode0
+r
+source_address0
+r
+source_port_list0
+r
+server_pool0r
+
+server0
+r
+strategy0
+r
+send0
+r
+open0
+r
+get_response0
+r
+post_send_single_response0
+r
+post_send_search0
+*
+__annotations__0,*
+SASL_AVAILABLE_MECHANISMS0
+*
+CLIENT_STRATEGIES0
+22"" ldap3.core.connection.Connection2"ldap3.core.server.Server2"builtins.str2"builtins.set22"builtins.list22"builtins.tuple22"typing.Generator222"_typeshed.Incomplete2	2 "_collections_abc.dict_keys2
+2	22,"%ldap3.core.connection._ServerSequence22"ldap3.core.pooling.ServerPool22222	22	22"builtins.int2	222
+2"builtins.bool22
+222P
+%ldap3.core.connection.Connection.Self" ldap3.core.connection.Connection(22	2222"builtins.BaseException2"type222222"types.TracebackType22 22222"builtins.bytes22$222"pyasn1.type.base.Asn1Item2"typing_extensions.Buffer22'(2"_collections_abc.Buffer22'*2"builtins.dict2	

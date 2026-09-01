@@ -1,279 +1,161 @@
 
-paramiko.ssh_gss»
+paramiko.ssh_gssª
+_SSH_GSSAuth"builtins.object*B
+__init__*
 
-_SSH_GSSAuthparamiko.ssh_gss._SSH_GSSAuth"builtins.object*ƒ
-__init__&paramiko.ssh_gss._SSH_GSSAuth.__init__"
-None*H
-self>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth*-
-auth_method
-builtins.str"builtins.str*3
-gss_deleg_creds
-builtins.bool"builtins.boolz310z311z312z313z314*Ð
-set_service)paramiko.ssh_gss._SSH_GSSAuth.set_service"
-None*H
-self>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth*)
-service
-builtins.str"builtins.strz310z311z312z313z314*Ó
-set_username*paramiko.ssh_gss._SSH_GSSAuth.set_username"
-None*H
-self>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth**
-username
-builtins.str"builtins.strz310z311z312z313z314*é
-ssh_gss_oids*paramiko.ssh_gss._SSH_GSSAuth.ssh_gss_oids" 
-builtins.bytes"builtins.bytes*H
-self>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth*(
-mode
-builtins.str"builtins.str z310z311z312z313z314*ñ
-ssh_check_mech,paramiko.ssh_gss._SSH_GSSAuth.ssh_check_mech"
-builtins.bool"builtins.bool*H
-self>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth*.
-desired_mech
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rS
-cc_file%paramiko.ssh_gss._SSH_GSSAuth.cc_file
-None*310*311*312*313*314¸
-_SSH_GSSAPI_OLD paramiko.ssh_gss._SSH_GSSAPI_OLD"paramiko.ssh_gss._SSH_GSSAuth*Œ
-__init__)paramiko.ssh_gss._SSH_GSSAPI_OLD.__init__"
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD*-
-auth_method
-builtins.str"builtins.str*3
-gss_deleg_creds
-builtins.bool"builtins.boolz310z311z312z313z314*®
-ssh_init_sec_context5paramiko.ssh_gss._SSH_GSSAPI_OLD.ssh_init_sec_context"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD*(
-target
-builtins.str"builtins.str*X
-desired_mechD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+self(*
+auth_method(*
+gss_deleg_creds(**
+set_service*
 
-recv_tokenD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ž
-ssh_get_mic,paramiko.ssh_gss._SSH_GSSAPI_OLD.ssh_get_mic"
-Any*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD*0
+self(*
+service(*,
+set_username*
 
-session_id 
-builtins.bytes"builtins.bytes*-
-gss_kex
-builtins.bool"builtins.bool z310z311z312z313z314*°
-ssh_accept_sec_context7paramiko.ssh_gss._SSH_GSSAPI_OLD.ssh_accept_sec_context"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD**
-hostname
-builtins.str"builtins.str*,
+self(*
+username(**
+ssh_gss_oids*
 
-recv_token
-builtins.str"builtins.str*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ç
-ssh_check_mic.paramiko.ssh_gss._SSH_GSSAPI_OLD.ssh_check_mic"
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD*+
-	mic_token
-builtins.str"builtins.str*0
+self(*
+mode (*2
+ssh_check_mech*
 
-session_id 
-builtins.bytes"builtins.bytes*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ï
-credentials_delegated6paramiko.ssh_gss._SSH_GSSAPI_OLD.credentials_delegated"
-builtins.bool"builtins.bool*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD0:builtins.property`z310z311z312z313z314*ê
-save_client_creds2paramiko.ssh_gss._SSH_GSSAPI_OLD.save_client_creds"
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_OLD" paramiko.ssh_gss._SSH_GSSAPI_OLD*.
-client_token
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314
-_SSH_GSSAPI_NEW paramiko.ssh_gss._SSH_GSSAPI_NEW"paramiko.ssh_gss._SSH_GSSAuth*Œ
-__init__)paramiko.ssh_gss._SSH_GSSAPI_NEW.__init__"
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW*-
-auth_method
-builtins.str"builtins.str*3
-gss_deleg_creds
-builtins.bool"builtins.boolz310z311z312z313z314*†
-ssh_init_sec_context5paramiko.ssh_gss._SSH_GSSAPI_NEW.ssh_init_sec_context"
-builtins.str"builtins.str*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW*(
-target
-builtins.str"builtins.str*X
-desired_mechD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+self(*
+desired_mech(r
+cc_file0É
+_SSH_GSSAPI_OLD"paramiko.ssh_gss._SSH_GSSAuth*B
+__init__*
 
-recv_tokenD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ž
-ssh_get_mic,paramiko.ssh_gss._SSH_GSSAPI_NEW.ssh_get_mic"
-Any*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW*0
+self(*
+auth_method(*
+gss_deleg_creds(*n
+ssh_init_sec_context*
 
-session_id 
-builtins.bytes"builtins.bytes*-
-gss_kex
-builtins.bool"builtins.bool z310z311z312z313z314*°
-ssh_accept_sec_context7paramiko.ssh_gss._SSH_GSSAPI_NEW.ssh_accept_sec_context"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW**
-hostname
-builtins.str"builtins.str*,
+self(*
+target(*
+desired_mech (*
+username (*
 
-recv_token
-builtins.str"builtins.str*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ç
-ssh_check_mic.paramiko.ssh_gss._SSH_GSSAPI_NEW.ssh_check_mic"
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW*+
-	mic_token
-builtins.str"builtins.str*0
+recv_token (*>
+ssh_get_mic*
 
-session_id 
-builtins.bytes"builtins.bytes*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ï
-credentials_delegated6paramiko.ssh_gss._SSH_GSSAPI_NEW.credentials_delegated"
-builtins.bool"builtins.bool*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW0:builtins.property`z310z311z312z313z314*ê
-save_client_creds2paramiko.ssh_gss._SSH_GSSAPI_NEW.save_client_creds"
-None*N
-selfD
- paramiko.ssh_gss._SSH_GSSAPI_NEW" paramiko.ssh_gss._SSH_GSSAPI_NEW*.
-client_token
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ü
-	_SSH_SSPIparamiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_GSSAuth*ú
-__init__#paramiko.ssh_gss._SSH_SSPI.__init__"
-None*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI*-
-auth_method
-builtins.str"builtins.str*3
-gss_deleg_creds
-builtins.bool"builtins.boolz310z311z312z313z314*ô
-ssh_init_sec_context/paramiko.ssh_gss._SSH_SSPI.ssh_init_sec_context"
-builtins.str"builtins.str*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI*(
-target
-builtins.str"builtins.str*X
-desired_mechD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+self(*
 
-recv_tokenD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ü
-ssh_get_mic&paramiko.ssh_gss._SSH_SSPI.ssh_get_mic"
-Any*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI*0
+session_id(*
+gss_kex (*Z
+ssh_accept_sec_context*
 
-session_id 
-builtins.bytes"builtins.bytes*-
-gss_kex
-builtins.bool"builtins.bool z310z311z312z313z314*ô
-ssh_accept_sec_context1paramiko.ssh_gss._SSH_SSPI.ssh_accept_sec_context"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI**
-hostname
-builtins.str"builtins.str**
-username
-builtins.str"builtins.str*,
+self(*
+hostname(*
 
-recv_token
-builtins.str"builtins.strz310z311z312z313z314*Õ
-ssh_check_mic(paramiko.ssh_gss._SSH_SSPI.ssh_check_mic"
-None*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI*+
-	mic_token
-builtins.str"builtins.str*0
+recv_token(*
+username (*R
+ssh_check_mic*
 
-session_id 
-builtins.bytes"builtins.bytes*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ý
-credentials_delegated0paramiko.ssh_gss._SSH_SSPI.credentials_delegated"
-builtins.bool"builtins.bool*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI0:builtins.property`z310z311z312z313z314*Ø
-save_client_creds,paramiko.ssh_gss._SSH_SSPI.save_client_creds"
-None*B
-self8
-paramiko.ssh_gss._SSH_SSPI"paramiko.ssh_gss._SSH_SSPI*.
-client_token
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314â
-GSSAuthparamiko.ssh_gss.GSSAuth">
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth*-
-auth_method
-builtins.str"builtins.str*5
-gss_deleg_creds
-builtins.bool"builtins.bool z310z311z312z313z314*¥
-__annotations__ paramiko.ssh_gss.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*r
-GSS_AUTH_AVAILABLE#paramiko.ssh_gss.GSS_AUTH_AVAILABLE
-builtins.bool"builtins.bool*310*311*312*313*314*Õ
-GSS_EXCEPTIONSparamiko.ssh_gss.GSS_EXCEPTIONSˆ
-(builtins.tuple[Type[builtins.Exception]]L
-Type[builtins.Exception](
-builtins.Exception"builtins.Exception"type"builtins.tuple*310*311*312*313*314
+self(*
+	mic_token(*
+
+session_id(*
+username (*<
+credentials_delegated*
+
+self(0:builtins.property`*5
+save_client_creds*
+
+self(*
+client_token(É
+_SSH_GSSAPI_NEW"paramiko.ssh_gss._SSH_GSSAuth*B
+__init__*
+
+self(	*
+auth_method(*
+gss_deleg_creds(*n
+ssh_init_sec_context*
+
+self(	*
+target(*
+desired_mech (*
+username (*
+
+recv_token (*>
+ssh_get_mic*
+
+self(	*
+
+session_id(*
+gss_kex (*Z
+ssh_accept_sec_context*
+
+self(	*
+hostname(*
+
+recv_token(*
+username (*R
+ssh_check_mic*
+
+self(	*
+	mic_token(*
+
+session_id(*
+username (*<
+credentials_delegated*
+
+self(	0:builtins.property`*5
+save_client_creds*
+
+self(	*
+client_token(Á
+	_SSH_SSPI"paramiko.ssh_gss._SSH_GSSAuth*B
+__init__*
+
+self(
+*
+auth_method(*
+gss_deleg_creds(*n
+ssh_init_sec_context*
+
+self(
+*
+target(*
+desired_mech (*
+username (*
+
+recv_token (*>
+ssh_get_mic*
+
+self(
+*
+
+session_id(*
+gss_kex (*X
+ssh_accept_sec_context*
+
+self(
+*
+hostname(*
+username(*
+
+recv_token(*R
+ssh_check_mic*
+
+self(
+*
+	mic_token(*
+
+session_id(*
+username (*<
+credentials_delegated*
+
+self(
+0:builtins.property`*5
+save_client_creds*
+
+self(
+*
+client_token(7
+GSSAuth*
+auth_method(*
+gss_deleg_creds (*
+__annotations__0*
+GSS_AUTH_AVAILABLE0*
+GSS_EXCEPTIONS022"paramiko.ssh_gss._SSH_GSSAuth2"builtins.str2"builtins.bool2"builtins.bytes2"" paramiko.ssh_gss._SSH_GSSAPI_OLD2222"" paramiko.ssh_gss._SSH_GSSAPI_NEW2"paramiko.ssh_gss._SSH_SSPI2"builtins.dict22"builtins.Exception2"type22"builtins.tuple2

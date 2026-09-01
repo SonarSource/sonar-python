@@ -1,218 +1,140 @@
 
-waitress.buffersè
-FileBasedBuffer waitress.buffers.FileBasedBuffer"builtins.object*§
-__init__)waitress.buffers.FileBasedBuffer.__init__"
-None*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBuffer*$
-file
-_io.BytesIO"_io.BytesIO*T
-from_bufferA
-Union[_io.BytesIO,None]
-_io.BytesIO"_io.BytesIO
-None z310z311z312z313z314*≤
-__len__(waitress.buffers.FileBasedBuffer.__len__"
-builtins.int"builtins.int*FD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314*ƒ
-__nonzero__,waitress.buffers.FileBasedBuffer.__nonzero__"
-builtins.bool"builtins.bool*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314*⁄
-__bool__)waitress.buffers.FileBasedBuffer.__bool__":
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314*¥
-append'waitress.buffers.FileBasedBuffer.append"
-None*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBuffer*
-s
-Anyz310z311z312z313z314*ê
-get$waitress.buffers.FileBasedBuffer.get" 
-builtins.bytes"builtins.bytes*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBuffer*,
-numbytes
-builtins.int"builtins.int **
-skip
-builtins.bool"builtins.bool z310z311z312z313z314*˝
-skip%waitress.buffers.FileBasedBuffer.skip"
-None*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBuffer**
-numbytes
-builtins.int"builtins.int*/
-allow_prune
-builtins.int"builtins.int z310z311z312z313z314*•
-newfile(waitress.buffers.FileBasedBuffer.newfile"
-Any*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314*¢
-prune&waitress.buffers.FileBasedBuffer.prune"
-None*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314*•
-getfile(waitress.buffers.FileBasedBuffer.getfile"
-Any*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314*¢
-close&waitress.buffers.FileBasedBuffer.close"
-None*N
-selfD
- waitress.buffers.FileBasedBuffer" waitress.buffers.FileBasedBufferz310z311z312z313z314j310j311j312j313j314rh
-remain'waitress.buffers.FileBasedBuffer.remain
-builtins.int"builtins.int*310*311*312*313*314rb
-file%waitress.buffers.FileBasedBuffer.file
-_io.BytesIO"_io.BytesIO*310*311*312*313*314ÿ
-TempfileBasedBuffer$waitress.buffers.TempfileBasedBuffer" waitress.buffers.FileBasedBuffer*ä
-__init__-waitress.buffers.TempfileBasedBuffer.__init__"
-None*V
-selfL
-$waitress.buffers.TempfileBasedBuffer"$waitress.buffers.TempfileBasedBuffer*T
-from_bufferA
-Union[_io.BytesIO,None]
-_io.BytesIO"_io.BytesIO
-None z310z311z312z313z314*“
-newfile,waitress.buffers.TempfileBasedBuffer.newfile"(
-_io.BufferedRandom"_io.BufferedRandom*V
-selfL
-$waitress.buffers.TempfileBasedBuffer"$waitress.buffers.TempfileBasedBufferz310z311z312z313z314j310j311j312j313j314©
-BytesIOBasedBuffer#waitress.buffers.BytesIOBasedBuffer" waitress.buffers.FileBasedBuffer*á
-__init__,waitress.buffers.BytesIOBasedBuffer.__init__"
-None*T
-selfJ
-#waitress.buffers.BytesIOBasedBuffer"#waitress.buffers.BytesIOBasedBuffer*T
-from_bufferA
-Union[_io.BytesIO,None]
-_io.BytesIO"_io.BytesIO
-None z310z311z312z313z314*¡
-newfile+waitress.buffers.BytesIOBasedBuffer.newfile"
-_io.BytesIO"_io.BytesIO*T
-selfJ
-#waitress.buffers.BytesIOBasedBuffer"#waitress.buffers.BytesIOBasedBufferz310z311z312z313z314j310j311j312j313j314re
-file(waitress.buffers.BytesIOBasedBuffer.file
-_io.BytesIO"_io.BytesIO*310*311*312*313*314∫
-ReadOnlyFileBasedBuffer(waitress.buffers.ReadOnlyFileBasedBuffer" waitress.buffers.FileBasedBuffer*ñ
-__init__1waitress.buffers.ReadOnlyFileBasedBuffer.__init__"
-None*^
-selfT
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBuffer*$
-file
-_io.BytesIO"_io.BytesIO*.
+waitress.buffers¨
+FileBasedBuffer"builtins.object*9
+__init__*
 
-block_size
-builtins.int"builtins.int z310z311z312z313z314*§
-prepare0waitress.buffers.ReadOnlyFileBasedBuffer.prepare"
-builtins.int"builtins.int*^
-selfT
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBuffer*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*®
-get,waitress.buffers.ReadOnlyFileBasedBuffer.get" 
-builtins.bytes"builtins.bytes*^
-selfT
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBuffer*,
-numbytes
-builtins.int"builtins.int **
-skip
-builtins.bool"builtins.bool z310z311z312z313z314*Ñ
-__iter__1waitress.buffers.ReadOnlyFileBasedBuffer.__iter__"T
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBuffer*VT
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBufferz310z311z312z313z314*˙
-next-waitress.buffers.ReadOnlyFileBasedBuffer.next"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*^
-selfT
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBufferz310z311z312z313z314*Ã
-append/waitress.buffers.ReadOnlyFileBasedBuffer.append"
-None*^
-selfT
-(waitress.buffers.ReadOnlyFileBasedBuffer"(waitress.buffers.ReadOnlyFileBasedBuffer*
-s
-Anyz310z311z312z313z314j310j311j312j313j314rj
-file-waitress.buffers.ReadOnlyFileBasedBuffer.file
-_io.BytesIO"_io.BytesIO*310*311*312*313*314rx
+self(*
 
-block_size3waitress.buffers.ReadOnlyFileBasedBuffer.block_size
-builtins.int"builtins.int*310*311*312*313*314rp
-remain/waitress.buffers.ReadOnlyFileBasedBuffer.remain
-builtins.int"builtins.int*310*311*312*313*314r£
-__next__1waitress.buffers.ReadOnlyFileBasedBuffer.__next__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314≥
-OverflowableBuffer#waitress.buffers.OverflowableBuffer"builtins.object*›
-__init__,waitress.buffers.OverflowableBuffer.__init__"
-None*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBuffer**
-overflow
-builtins.int"builtins.intz310z311z312z313z314*ª
-__len__+waitress.buffers.OverflowableBuffer.__len__"
-builtins.int"builtins.int*LJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBufferz310z311z312z313z314*Õ
-__nonzero__/waitress.buffers.OverflowableBuffer.__nonzero__"
-builtins.bool"builtins.bool*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBufferz310z311z312z313z314*«
-__bool__,waitress.buffers.OverflowableBuffer.__bool__"
-builtins.bool"builtins.bool*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBufferz310z311z312z313z314*÷
-append*waitress.buffers.OverflowableBuffer.append"
-None*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBuffer*'
-s 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ô
-get'waitress.buffers.OverflowableBuffer.get" 
-builtins.bytes"builtins.bytes*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBuffer*,
-numbytes
-builtins.int"builtins.int **
-skip
-builtins.bool"builtins.bool z310z311z312z313z314*à
-skip(waitress.buffers.OverflowableBuffer.skip"
-None*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBuffer**
-numbytes
-builtins.int"builtins.int*1
-allow_prune
-builtins.bool"builtins.bool z310z311z312z313z314*´
-prune)waitress.buffers.OverflowableBuffer.prune"
-None*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBufferz310z311z312z313z314*¡
-getfile+waitress.buffers.OverflowableBuffer.getfile"
-_io.BytesIO"_io.BytesIO*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBufferz310z311z312z313z314*´
-close)waitress.buffers.OverflowableBuffer.close"
-None*T
-selfJ
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBufferz310z311z312z313z314j310j311j312j313j314ru
+file(*
+from_buffer (*
+__len__*(*
+__nonzero__*
 
-overflowed.waitress.buffers.OverflowableBuffer.overflowed
-builtins.bool"builtins.bool*310*311*312*313*314rú
-buf'waitress.buffers.OverflowableBuffer.bufS
-Union[io.BufferedIOBase,None]&
-io.BufferedIOBase"io.BufferedIOBase
-None*310*311*312*313*314ro
-strbuf*waitress.buffers.OverflowableBuffer.strbuf 
-builtins.bytes"builtins.bytes*310*311*312*313*314ro
-overflow,waitress.buffers.OverflowableBuffer.overflow
-builtins.int"builtins.int*310*311*312*313*314*•
-__annotations__ waitress.buffers.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*`
+self(*
+__bool__*
 
-COPY_BYTESwaitress.buffers.COPY_BYTES
-builtins.int"builtins.int*310*311*312*313*314*d
-STRBUF_LIMITwaitress.buffers.STRBUF_LIMIT
-builtins.int"builtins.int*310*311*312*313*314
+self(*
+append*
+
+self(*
+s(*3
+get	*
+
+self(*
+numbytes (*
+skip (*9
+skip*
+
+self(*
+numbytes(*
+allow_prune (*
+newfile*
+
+self(*
+prune*
+
+self(*
+getfile*
+
+self(*
+close*
+
+self(r
+
+remain0r
+file0
+TempfileBasedBuffer" waitress.buffers.FileBasedBuffer*-
+__init__*
+
+self(
+*
+from_buffer (*
+newfile*
+
+self(
+à
+BytesIOBasedBuffer" waitress.buffers.FileBasedBuffer*-
+__init__*
+
+self(*
+from_buffer (*
+newfile*
+
+self(r
+file0Œ
+ReadOnlyFileBasedBuffer" waitress.buffers.FileBasedBuffer*8
+__init__*
+
+self(*
+
+file(*
+
+block_size (*%
+prepare*
+
+self(*
+size (*3
+get	*
+
+self(*
+numbytes (*
+skip (*
+__iter__*(*
+next*
+
+self(*
+append*
+
+self(*
+s(r
+file0r
+
+block_size0r
+
+remain0r
+__next__0¢
+OverflowableBuffer"builtins.object*(
+__init__*
+
+self(*
+overflow(*
+__len__*(*
+__nonzero__*
+
+self(*
+__bool__*
+
+self(*
+append*
+
+self(*
+s(	*3
+get	*
+
+self(*
+numbytes (*
+skip (*9
+skip*
+
+self(*
+numbytes(*
+allow_prune (*
+prune*
+
+self(*
+getfile*
+
+self(*
+close*
+
+self(r
+
+overflowed0r
+buf0r
+
+strbuf0	r
+overflow0*
+__annotations__0*
+
+COPY_BYTES0*
+STRBUF_LIMIT022"" waitress.buffers.FileBasedBuffer2"_io.BytesIO222"builtins.int2"builtins.bool2	222"builtins.bytes2&"$waitress.buffers.TempfileBasedBuffer2"_io.BufferedRandom2%"#waitress.buffers.BytesIOBasedBuffer2*"(waitress.buffers.ReadOnlyFileBasedBuffer2222	2"builtins.function222%"#waitress.buffers.OverflowableBuffer2"io.BufferedIOBase222"builtins.str2"builtins.dict2

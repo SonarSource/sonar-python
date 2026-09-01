@@ -1,76 +1,42 @@
 
-#oauthlib.openid.connect.core.tokens¹
-	TokenBase(oauthlib.oauth2.rfc6749.tokens.TokenBase"builtins.object*‹
-__call__1oauthlib.oauth2.rfc6749.tokens.TokenBase.__call__"
-None*^
-selfT
-(oauthlib.oauth2.rfc6749.tokens.TokenBase"(oauthlib.oauth2.rfc6749.tokens.TokenBase*
-request
-Any*3
-refresh_token
-builtins.bool"builtins.bool z310z311z312z313z314*æ
-validate_request9oauthlib.oauth2.rfc6749.tokens.TokenBase.validate_request"
-None*^
-selfT
-(oauthlib.oauth2.rfc6749.tokens.TokenBase"(oauthlib.oauth2.rfc6749.tokens.TokenBase*
-request
-Anyz310z311z312z313z314*à
-estimate_type6oauthlib.oauth2.rfc6749.tokens.TokenBase.estimate_type"
-None*^
-selfT
-(oauthlib.oauth2.rfc6749.tokens.TokenBase"(oauthlib.oauth2.rfc6749.tokens.TokenBase*
-request
-Anyz310z311z312z313z314j310j311j312j313j314˜
-JWTToken,oauthlib.openid.connect.core.tokens.JWTToken"(oauthlib.oauth2.rfc6749.tokens.TokenBase*¡
-__init__5oauthlib.openid.connect.core.tokens.JWTToken.__init__"
-None*f
-self\
-,oauthlib.openid.connect.core.tokens.JWTToken",oauthlib.openid.connect.core.tokens.JWTToken*t
-request_validator[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *r
-token_generator[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+#oauthlib.openid.connect.core.tokenså
+	TokenBase(oauthlib.oauth2.rfc6749.tokens.TokenBase"builtins.object*>
+__call__*
 
-expires_in[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *z
-refresh_token_generator[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ž
-create_token9oauthlib.openid.connect.core.tokens.JWTToken.create_token"
-Any*f
-self\
-,oauthlib.openid.connect.core.tokens.JWTToken",oauthlib.openid.connect.core.tokens.JWTToken*
-request
-Any*3
-refresh_token
-builtins.bool"builtins.bool z310z311z312z313z314*
-validate_request=oauthlib.openid.connect.core.tokens.JWTToken.validate_request*
-self*
-requestz310z311z312z313z314*{
-estimate_type:oauthlib.openid.connect.core.tokens.JWTToken.estimate_type*
-self*
-requestz310z311z312z313z314j310j311j312j313j314ru
-request_validator>oauthlib.openid.connect.core.tokens.JWTToken.request_validator
-Any*310*311*312*313*314rq
-token_generator<oauthlib.openid.connect.core.tokens.JWTToken.token_generator
-Any*310*311*312*313*314r
-refresh_token_generatorDoauthlib.openid.connect.core.tokens.JWTToken.refresh_token_generator
-Any*310*311*312*313*314rg
+self(*
+request(*
+refresh_token (*/
+validate_request*
 
-expires_in7oauthlib.openid.connect.core.tokens.JWTToken.expires_in
-Any*310*311*312*313*314*¸
-__annotations__3oauthlib.openid.connect.core.tokens.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+request(*,
+estimate_type*
+
+self(*
+request(¨
+JWTToken"(oauthlib.oauth2.rfc6749.tokens.TokenBase*
+__init__*
+
+self(*
+request_validator (*
+token_generator (*
+
+expires_in (*
+refresh_token_generator (*B
+create_token*
+
+self(*
+request(*
+refresh_token (*)
+validate_request*
+self*
+request*&
+estimate_type*
+self*
+requestr
+request_validator0r
+token_generator0r
+refresh_token_generator0r
+
+expires_in0*
+__annotations__0	22*"(oauthlib.oauth2.rfc6749.tokens.TokenBase22"builtins.bool2.",oauthlib.openid.connect.core.tokens.JWTToken2"_typeshed.Incomplete2222"builtins.str2"builtins.dict2

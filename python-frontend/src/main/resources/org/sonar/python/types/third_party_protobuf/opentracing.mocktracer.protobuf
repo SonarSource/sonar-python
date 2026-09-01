@@ -1,111 +1,54 @@
 
-opentracing.mocktracerÈ
+opentracing.mocktracer®
 
-Propagator,opentracing.mocktracer.propagator.Propagator"builtins.object*ü
-inject3opentracing.mocktracer.propagator.Propagator.inject"
-None*f
-self\
-,opentracing.mocktracer.propagator.Propagator",opentracing.mocktracer.propagator.Propagator*j
-span_contextX
-*opentracing.mocktracer.context.SpanContext"*opentracing.mocktracer.context.SpanContext*F
-carrier9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictz310z311z312z313z314*â
-extract4opentracing.mocktracer.propagator.Propagator.extract"X
-*opentracing.mocktracer.context.SpanContext"*opentracing.mocktracer.context.SpanContext*f
-self\
-,opentracing.mocktracer.propagator.Propagator",opentracing.mocktracer.propagator.Propagator*F
-carrier9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictz310z311z312z313z314j310j311j312j313j314ë
+Propagator,opentracing.mocktracer.propagator.Propagator"builtins.object*9
+inject*
 
-MockTracer(opentracing.mocktracer.tracer.MockTracer"opentracing.tracer.Tracer*ë
-__init__1opentracing.mocktracer.tracer.MockTracer.__init__"
-None*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracer*¨
-scope_manager’
-2Union[opentracing.scope_manager.ScopeManager,None]P
-&opentracing.scope_manager.ScopeManager"&opentracing.scope_manager.ScopeManager
-None z310z311z312z313z314*â
-active_span4opentracing.mocktracer.tracer.MockTracer.active_span"Œ
-0Union[opentracing.mocktracer.span.MockSpan,None]L
-$opentracing.mocktracer.span.MockSpan"$opentracing.mocktracer.span.MockSpan
-None*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracer0:builtins.property`z310z311z312z313z314*î
-register_propagator<opentracing.mocktracer.tracer.MockTracer.register_propagator"
-None*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracer*(
-format
-builtins.str"builtins.str*l
+self(*
+span_context(*
+carrier(*&
+extract*
 
-propagator\
-,opentracing.mocktracer.propagator.Propagator",opentracing.mocktracer.propagator.Propagatorz310z311z312z313z314*×
-finished_spans7opentracing.mocktracer.tracer.MockTracer.finished_spans"’
-3builtins.list[opentracing.mocktracer.span.MockSpan]L
-$opentracing.mocktracer.span.MockSpan"$opentracing.mocktracer.span.MockSpan"builtins.list*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracerz310z311z312z313z314*º
-reset.opentracing.mocktracer.tracer.MockTracer.reset"
-None*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracerz310z311z312z313z314* 
+self(*
+carrier(
 
-start_span3opentracing.mocktracer.tracer.MockTracer.start_span"L
-$opentracing.mocktracer.span.MockSpan"$opentracing.mocktracer.span.MockSpan*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracer*Z
-operation_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *õ
-child_ofä
-LUnion[opentracing.span.Span,opentracing.mocktracer.context.SpanContext,None].
-opentracing.span.Span"opentracing.span.SpanX
-*opentracing.mocktracer.context.SpanContext"*opentracing.mocktracer.context.SpanContext
-None *°
+MockTracer(opentracing.mocktracer.tracer.MockTracer"opentracing.tracer.Tracer*/
+__init__*
 
-references
-bUnion[builtins.list[TypeAlias[Tuple[builtins.str,Union[opentracing.span.SpanContext,None]]]],None]ª
-Vbuiltins.list[TypeAlias[Tuple[builtins.str,Union[opentracing.span.SpanContext,None]]]]À
-GTypeAlias[Tuple[builtins.str,Union[opentracing.span.SpanContext,None]]]Ô
-<Tuple[builtins.str,Union[opentracing.span.SpanContext,None]]
-builtins.str"builtins.strt
-(Union[opentracing.span.SpanContext,None]<
-opentracing.span.SpanContext"opentracing.span.SpanContext
-None"opentracing.tracer.Reference"builtins.list
-None *w
-tagsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict
-None *\
+self(*
+scope_manager (*2
+active_span
+*
 
-start_timeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *8
-ignore_active_span
-builtins.bool"builtins.bool z310z311z312z313z314*€
-extract0opentracing.mocktracer.tracer.MockTracer.extract"X
-*opentracing.mocktracer.context.SpanContext"*opentracing.mocktracer.context.SpanContext*^
-selfT
-(opentracing.mocktracer.tracer.MockTracer"(opentracing.mocktracer.tracer.MockTracer*(
-format
-builtins.str"builtins.str*F
-carrier9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictz310z311z312z313z314j310j311j312j313j314*
-__path__opentracing.mocktracer.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*«
-__annotations__&opentracing.mocktracer.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(0:builtins.property`*C
+register_propagator*
+
+self(*
+format(*
+
+propagator(*
+finished_spans*
+
+self(*
+reset*
+
+self(*–
+
+start_span	*
+
+self(*
+operation_name (*
+child_of (*
+
+references (*
+tags (*
+
+start_time (*
+ignore_active_span (*4
+extract*
+
+self(*
+format(*
+carrier(*
+__path__0*
+__annotations__022.",opentracing.mocktracer.propagator.Propagator2,"*opentracing.mocktracer.context.SpanContext22"builtins.dict22*"(opentracing.mocktracer.tracer.MockTracer2("&opentracing.scope_manager.ScopeManager222&"$opentracing.mocktracer.span.MockSpan22	2"builtins.str2"builtins.list2	222"opentracing.span.Span222"opentracing.span.SpanContext22222#"opentracing.tracer.Reference22"builtins.list222222"builtins.float222"builtins.bool2"builtins.list22"builtins.dict2

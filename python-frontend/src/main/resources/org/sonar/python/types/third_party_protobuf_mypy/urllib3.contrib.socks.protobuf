@@ -1,59 +1,36 @@
 
-urllib3.contrib.socksS
-_TYPE_SOCKS_OPTIONS)urllib3.contrib.socks._TYPE_SOCKS_OPTIONS"typing._TypedDictå
-SOCKSConnection%urllib3.contrib.socks.SOCKSConnection"!urllib3.connection.HTTPConnection*Æ
-__init__.urllib3.contrib.socks.SOCKSConnection.__init__"
-None*X
-selfN
-%urllib3.contrib.socks.SOCKSConnection"%urllib3.contrib.socks.SOCKSConnection*f
-_socks_optionsR
-TypeAlias[TypedDict]
-	TypedDict")urllib3.contrib.socks._TYPE_SOCKS_OPTIONS*
-args
-Any*
-kwargs
-Anyç
-SOCKSHTTPSConnection*urllib3.contrib.socks.SOCKSHTTPSConnection"%urllib3.contrib.socks.SOCKSConnection""urllib3.connection.HTTPSConnection 
-SOCKSHTTPConnectionPool-urllib3.contrib.socks.SOCKSHTTPConnectionPool")urllib3.connectionpool.HTTPConnectionPoolr‘
-ConnectionCls;urllib3.contrib.socks.SOCKSHTTPConnectionPool.ConnectionClsÖ
-+Type[urllib3.contrib.socks.SOCKSConnection]N
-%urllib3.contrib.socks.SOCKSConnection"%urllib3.contrib.socks.SOCKSConnection"type›
-SOCKSHTTPSConnectionPool.urllib3.contrib.socks.SOCKSHTTPSConnectionPool"*urllib3.connectionpool.HTTPSConnectionPoolr‰
-ConnectionCls<urllib3.contrib.socks.SOCKSHTTPSConnectionPool.ConnectionClsî
-0Type[urllib3.contrib.socks.SOCKSHTTPSConnection]X
-*urllib3.contrib.socks.SOCKSHTTPSConnection"*urllib3.contrib.socks.SOCKSHTTPSConnection"typeY
-_ConnectionPoolClasses,urllib3.contrib.socks._ConnectionPoolClasses"typing._TypedDictå
-SOCKSProxyManager'urllib3.contrib.socks.SOCKSProxyManager"urllib3.poolmanager.PoolManager*ú
-__init__0urllib3.contrib.socks.SOCKSProxyManager.__init__"
-None*\
-selfR
-'urllib3.contrib.socks.SOCKSProxyManager"'urllib3.contrib.socks.SOCKSProxyManager*+
-	proxy_url
-builtins.str"builtins.str*T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-	num_pools
-builtins.int"builtins.int *Ã
-headersº
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *
-connection_pool_kw
-AnyrØ
-pool_classes_by_scheme>urllib3.contrib.socks.SOCKSProxyManager.pool_classes_by_schemeU
-TypeAlias[TypedDict]
-	TypedDict",urllib3.contrib.socks._ConnectionPoolClassesr\
-	proxy_url1urllib3.contrib.socks.SOCKSProxyManager.proxy_url
-builtins.str"builtins.str*ë
-__annotations__%urllib3.contrib.socks.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+urllib3.contrib.socks(
+_TYPE_SOCKS_OPTIONS"typing._TypedDict~
+SOCKSConnection"!urllib3.connection.HTTPConnection*H
+__init__*
+
+self(*
+_socks_options(*
+
+args(*
+kwargs(a
+SOCKSHTTPSConnection"%urllib3.contrib.socks.SOCKSConnection""urllib3.connection.HTTPSConnectionW
+SOCKSHTTPConnectionPool")urllib3.connectionpool.HTTPConnectionPoolr
+ConnectionCls0Y
+SOCKSHTTPSConnectionPool"*urllib3.connectionpool.HTTPSConnectionPoolr
+ConnectionCls0+
+_ConnectionPoolClasses"typing._TypedDictÌ
+SOCKSProxyManager"urllib3.poolmanager.PoolManager*ã
+__init__*
+
+self(	*
+	proxy_url(
+*
+username (*
+password (*
+	num_pools (*
+headers (*
+connection_pool_kw(r
+pool_classes_by_scheme0r
+	proxy_url0
+*
+__annotations__022'"%urllib3.contrib.socks.SOCKSConnection220")urllib3.contrib.socks._TYPE_SOCKS_OPTIONS222"type22,"*urllib3.contrib.socks.SOCKSHTTPSConnection2"type22)"'urllib3.contrib.socks.SOCKSProxyManager2"builtins.str22
+2"builtins.int2"typing.Mapping2
+
+2223",urllib3.contrib.socks._ConnectionPoolClasses22"builtins.dict2
+

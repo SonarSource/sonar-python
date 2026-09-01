@@ -1,155 +1,64 @@
 
-base64ö
-	b64encodebase64.b64encode" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Buffer*x
-altcharsh
-$Union[typing_extensions.Buffer,None]4
-typing_extensions.Buffer"typing_extensions.Buffer
-None ¥
-	b64decodebase64.b64decode" 
-builtins.bytes"builtins.bytes*Œ
-s„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*¤
-altchars“
-1Union[builtins.str,typing_extensions.Buffer,None]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer
-None *.
-validate
-builtins.bool"builtins.bool Ž
-standard_b64encodebase64.standard_b64encode" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Bufferà
-standard_b64decodebase64.standard_b64decode" 
-builtins.bytes"builtins.bytes*Œ
-s„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.BufferŒ
-urlsafe_b64encodebase64.urlsafe_b64encode" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.BufferÞ
-urlsafe_b64decodebase64.urlsafe_b64decode" 
-builtins.bytes"builtins.bytes*Œ
-s„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer|
-	b32encodebase64.b32encode" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Buffer¢
-	b32decodebase64.b32decode" 
-builtins.bytes"builtins.bytes*Œ
-s„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*.
-casefold
-builtins.bool"builtins.bool *¡
-map01“
-1Union[builtins.str,typing_extensions.Buffer,None]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer
-None |
-	b16encodebase64.b16encode" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Bufferþ
-	b16decodebase64.b16decode" 
-builtins.bytes"builtins.bytes*Œ
-s„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*.
-casefold
-builtins.bool"builtins.bool ‚
-b32hexencodebase64.b32hexencode" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Buffer„
-b32hexdecodebase64.b32hexdecode" 
-builtins.bytes"builtins.bytes*Œ
-s„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*.
-casefold
-builtins.bool"builtins.bool ³
-	a85encodebase64.a85encode" 
-builtins.bytes"builtins.bytes*;
-b4
-typing_extensions.Buffer"typing_extensions.Buffer*0
+base64(
+	b64encode*
+s(*
+altchars (:
+	b64decode*
+s(*
+altchars (*
+validate (
+standard_b64encode*
+s(
+standard_b64decode*
+s(
+urlsafe_b64encode*
+s(
+urlsafe_b64decode*
+s(
+	b32encode*
+s(7
+	b32decode*
+s(*
+casefold (*
+map01 (
+	b16encode*
+s((
+	b16decode*
+s(*
+casefold (
+b32hexencode*
+s(+
+b32hexdecode*
+s(*
+casefold (W
+	a85encode*
+b(*
 
-foldspaces
-builtins.bool"builtins.bool *+
-wrapcol
-builtins.int"builtins.int *)
-pad
-builtins.bool"builtins.bool *+
-adobe
-builtins.bool"builtins.bool »
-	a85decodebase64.a85decode" 
-builtins.bytes"builtins.bytes*Œ
-b„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*0
+foldspaces (*
+wrapcol (	*
+pad (*
+adobe (N
+	a85decode*
+b(*
 
-foldspaces
-builtins.bool"builtins.bool *+
-adobe
-builtins.bool"builtins.bool *‹
-ignorecharsx
-(Union[builtins.bytearray,builtins.bytes](
-builtins.bytearray"builtins.bytearray 
-builtins.bytes"builtins.bytes §
-	b85encodebase64.b85encode" 
-builtins.bytes"builtins.bytes*;
-b4
-typing_extensions.Buffer"typing_extensions.Buffer*)
-pad
-builtins.bool"builtins.bool Î
-	b85decodebase64.b85decode" 
-builtins.bytes"builtins.bytes*Œ
-b„
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.BufferÌ
-decodebase64.decode"
-None*S
-inputH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*T
-outputH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOÌ
-encodebase64.encode"
-None*S
-inputH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*T
-outputH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO€
-encodebytesbase64.encodebytes" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Buffer€
-decodebytesbase64.decodebytes" 
-builtins.bytes"builtins.bytes*;
-s4
-typing_extensions.Buffer"typing_extensions.Buffer*‚
-__annotations__base64.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*e
-__all__base64.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+foldspaces (*
+adobe (*
+ignorechars (#
+	b85encode*
+b(*
+pad (
+	b85decode*
+b(%
+decode*
+input(*
+output(%
+encode*
+input(*
+output(
+encodebytes*
+s(
+decodebytes*
+s(*
+__annotations__0*
+__all__02"builtins.bytes2"typing_extensions.Buffer2222"builtins.str22222"builtins.bool2"builtins.int2"builtins.bytearray22
+2"	typing.IO222"builtins.dict22"builtins.list2

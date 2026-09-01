@@ -1,134 +1,77 @@
 
-braintree.util.graphql_client¢
-AuthenticationError=braintree.exceptions.authentication_error.AuthenticationError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314Ÿ
-AuthorizationError;braintree.exceptions.authorization_error.AuthorizationError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314‘
-NotFoundError2braintree.exceptions.not_found_error.NotFoundError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314Š
-ServerError-braintree.exceptions.server_error.ServerError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314¯
-ServiceUnavailableErrorFbraintree.exceptions.service_unavailable_error.ServiceUnavailableError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314§
-TooManyRequestsErrorAbraintree.exceptions.too_many_requests_error.TooManyRequestsError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314–
-UnexpectedError5braintree.exceptions.unexpected_error.UnexpectedError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314¦
-UpgradeRequiredError@braintree.exceptions.upgrade_required_error.UpgradeRequiredError"3braintree.exceptions.braintree_error.BraintreeErrorj310j311j312j313j314Ä
-Httpbraintree.util.http.Http"builtins.object*{
-is_error_status(braintree.util.http.Http.is_error_status*
+braintree.util.graphql_client‰
+AuthenticationError=braintree.exceptions.authentication_error.AuthenticationError"3braintree.exceptions.braintree_error.BraintreeError†
+AuthorizationError;braintree.exceptions.authorization_error.AuthorizationError"3braintree.exceptions.braintree_error.BraintreeErrorx
+NotFoundError2braintree.exceptions.not_found_error.NotFoundError"3braintree.exceptions.braintree_error.BraintreeErrorq
+ServerError-braintree.exceptions.server_error.ServerError"3braintree.exceptions.braintree_error.BraintreeError–
+ServiceUnavailableErrorFbraintree.exceptions.service_unavailable_error.ServiceUnavailableError"3braintree.exceptions.braintree_error.BraintreeErrorŽ
+TooManyRequestsErrorAbraintree.exceptions.too_many_requests_error.TooManyRequestsError"3braintree.exceptions.braintree_error.BraintreeError}
+UnexpectedError5braintree.exceptions.unexpected_error.UnexpectedError"3braintree.exceptions.braintree_error.BraintreeError
+UpgradeRequiredError@braintree.exceptions.upgrade_required_error.UpgradeRequiredError"3braintree.exceptions.braintree_error.BraintreeError…
+Httpbraintree.util.http.Http"builtins.object*8
+is_error_status*
 
-status0:builtins.staticmethodhz310z311z312z313z314*’
-raise_exception_from_status4braintree.util.http.Http.raise_exception_from_status"
-None*
-status
-Any*j
-message[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:builtins.staticmethodhz310z311z312z313z314*•
-__init__!braintree.util.http.Http.__init__"
-None*>
-self4
-braintree.util.http.Http"braintree.util.http.Http*
-config
-Any*n
-environment[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*…
-postbraintree.util.http.Http.post"
-Any*>
-self4
-braintree.util.http.Http"braintree.util.http.Http*
-path
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*V
-deletebraintree.util.http.Http.delete*
+status0:builtins.staticmethodh*Y
+raise_exception_from_status*
+status(*
+message (0:builtins.staticmethodh*;
+__init__*
+
+self(*
+config(*
+environment (*0
+post*
+
+self(*
+
+path(*
+params (*
+delete*
 self*
-pathz310z311z312z313z314*P
-getbraintree.util.http.Http.get*
+path*
+get*
 self*
-pathz310z311z312z313z314*ƒ
-putbraintree.util.http.Http.put"
-Any*>
-self4
-braintree.util.http.Http"braintree.util.http.Http*
-path
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*­
-post_multipart'braintree.util.http.Http.post_multipart"
-Any*>
-self4
-braintree.util.http.Http"braintree.util.http.Http*
-path
-Any*
-files
-Any*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*†
-http_do braintree.util.http.Http.http_do*
+path*/
+put*
+
+self(*
+
+path(*
+params (*G
+post_multipart*
+
+self(*
+
+path(*
+files(*
+params (*K
+http_do*
 self*
 	http_verb*
 path*
 headers*
-request_bodyz310z311z312z313z314*¸
-handle_exception)braintree.util.http.Http.handle_exception"
-None*>
-self4
-braintree.util.http.Http"braintree.util.http.Http*
-	exception
-Anyz310z311z312z313z314j310j311j312j313j314rK
-configbraintree.util.http.Http.config
-Any*310*311*312*313*314rU
-environment$braintree.util.http.Http.environment
-Any*310*311*312*313*314‘
+request_body*1
+handle_exception*
 
-GraphQLClient+braintree.util.graphql_client.GraphQLClient"braintree.util.http.Http*Ç
-!raise_exception_for_graphql_errorMbraintree.util.graphql_client.GraphQLClient.raise_exception_for_graphql_error"
-None*
-response
-Any0:builtins.staticmethodhz310z311z312z313z314*¤
-__init__4braintree.util.graphql_client.GraphQLClient.__init__"
-None*d
-selfZ
-+braintree.util.graphql_client.GraphQLClient"+braintree.util.graphql_client.GraphQLClient*i
-config[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-environment[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*¼
-query1braintree.util.graphql_client.GraphQLClient.query"
-Any*d
-selfZ
-+braintree.util.graphql_client.GraphQLClient"+braintree.util.graphql_client.GraphQLClient*
+self(*
+	exception(r
 
-definition
-Any*l
-	variables[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *q
-operation_name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rp
-graphql_headers;braintree.util.graphql_client.GraphQLClient.graphql_headers
-Any*310*311*312*313*314*²
-__annotations__-braintree.util.graphql_client.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+config0r
+environment0£
+GraphQLClient"braintree.util.http.Http*P
+!raise_exception_for_graphql_error*
+response(0:builtins.staticmethodh*=
+__init__*
+
+self(*
+config (*
+environment (*R
+query*
+
+self(*
+
+definition(*
+	variables (*
+operation_name (r
+graphql_headers0*
+__annotations__0222"_typeshed.Incomplete2222"braintree.util.http.Http2-"+braintree.util.graphql_client.GraphQLClient2"builtins.str2"builtins.dict2

@@ -1,1597 +1,966 @@
 
-pyflakes.checker˛
-_FieldsOrderpyflakes.checker._FieldsOrder"builtins.dict*¶
-__missing__)pyflakes.checker._FieldsOrder.__missing__"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*H
-self>
-pyflakes.checker._FieldsOrder"pyflakes.checker._FieldsOrder*;
+pyflakes.checkerL
+_FieldsOrder"builtins.dict*-
+__missing__*
 
-node_class+
-Type[ast.AST]
-ast.AST"ast.AST"typez310z311z312z313z314j310j311j312j313j314˘
-Bindingpyflakes.checker.Binding"builtins.object*˚
-__init__!pyflakes.checker.Binding.__init__"
-None*>
-self4
-pyflakes.checker.Binding"pyflakes.checker.Binding*&
-name
-builtins.str"builtins.str*A
-source5
-Union[ast.AST,None]
-ast.AST"ast.AST
-Nonez310z311z312z313z314*È
-	redefines"pyflakes.checker.Binding.redefines"
-builtins.bool"builtins.bool*>
-self4
-pyflakes.checker.Binding"pyflakes.checker.Binding*?
-other4
-pyflakes.checker.Binding"pyflakes.checker.Bindingz310z311z312z313z314j310j311j312j313j314r\
-namepyflakes.checker.Binding.name
-builtins.str"builtins.str*310*311*312*313*314ry
-sourcepyflakes.checker.Binding.source5
-Union[ast.AST,None]
-ast.AST"ast.AST
-None*310*311*312*313*314rÊ
-usedpyflakes.checker.Binding.used•
-0Union[Literal[builtins.bool],Tuple[Any,ast.AST]]:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool3
-Tuple[Any,ast.AST]
-Any
-ast.AST"ast.AST*310*311*312*313*314\
+self(*
 
-Definitionpyflakes.checker.Definition"pyflakes.checker.Bindingj310j311j312j313j314î
-Builtinpyflakes.checker.Builtin"pyflakes.checker.Definition*∏
-__init__!pyflakes.checker.Builtin.__init__"
-None*>
-self4
-pyflakes.checker.Builtin"pyflakes.checker.Builtin*&
-name
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314_
-UnhandledKeyType!pyflakes.checker.UnhandledKeyType"builtins.objectj310j311j312j313j314¯
-VariableKeypyflakes.checker.VariableKey"builtins.object*º
-__init__%pyflakes.checker.VariableKey.__init__"
-None*F
-self<
-pyflakes.checker.VariableKey"pyflakes.checker.VariableKey*
-item
-ast.Name"ast.Namez310z311z312z313z314*Ã
-__eq__#pyflakes.checker.VariableKey.__eq__"
-builtins.bool"builtins.bool*><
-pyflakes.checker.VariableKey"pyflakes.checker.VariableKey*$"
-builtins.object"builtins.objectz310z311z312z313z314*∞
-__hash__%pyflakes.checker.VariableKey.__hash__"
-builtins.int"builtins.int*F
-self<
-pyflakes.checker.VariableKey"pyflakes.checker.VariableKeyz310z311z312z313z314j310j311j312j313j314r`
-name!pyflakes.checker.VariableKey.name
-builtins.str"builtins.str*310*311*312*313*314Ç
-Importationpyflakes.checker.Importation"pyflakes.checker.Definition*ﬁ
-__init__%pyflakes.checker.Importation.__init__"
-None*F
-self<
-pyflakes.checker.Importation"pyflakes.checker.Importation*&
-name
-builtins.str"builtins.str*A
-source5
-Union[ast.AST,None]
-ast.AST"ast.AST
-None*U
-	full_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*◊
-source_statement-pyflakes.checker.Importation.source_statement"
-builtins.str"builtins.str*F
-self<
-pyflakes.checker.Importation"pyflakes.checker.Importation0:builtins.property`z310z311z312z313z314j310j311j312j313j314rh
-fullName%pyflakes.checker.Importation.fullName
-builtins.str"builtins.str*310*311*312*313*314rz
-	redefined&pyflakes.checker.Importation.redefined,
-builtins.list[Any]
-Any"builtins.list*310*311*312*313*314¢
-SubmoduleImportation%pyflakes.checker.SubmoduleImportation"pyflakes.checker.Importation*´
-__init__.pyflakes.checker.SubmoduleImportation.__init__"
-None*X
-selfN
-%pyflakes.checker.SubmoduleImportation"%pyflakes.checker.SubmoduleImportation*&
-name
-builtins.str"builtins.str*J
-source>
-Union[ast.Import,None]
+node_class(ñ
+Binding"builtins.object*2
+__init__*
 
-ast.Import"
-ast.Import
-Nonez310z311z312z313z314j310j311j312j313j314∏
-ImportationFrom pyflakes.checker.ImportationFrom"pyflakes.checker.Importation*Ò
-__init__)pyflakes.checker.ImportationFrom.__init__"
-None*N
-selfD
- pyflakes.checker.ImportationFrom" pyflakes.checker.ImportationFrom*&
-name
-builtins.str"builtins.str*
-source
-ast.AST"ast.AST*(
-module
-builtins.str"builtins.str*U
-	real_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314j310j311j312j313j314rh
-module'pyflakes.checker.ImportationFrom.module
-builtins.str"builtins.str*310*311*312*313*314rn
-	real_name*pyflakes.checker.ImportationFrom.real_name
-builtins.str"builtins.str*310*311*312*313*314›
-StarImportation pyflakes.checker.StarImportation"pyflakes.checker.Importation*
-__init__)pyflakes.checker.StarImportation.__init__"
-None*N
-selfD
- pyflakes.checker.StarImportation" pyflakes.checker.StarImportation*&
-name
-builtins.str"builtins.str*
-source
-ast.AST"ast.ASTz310z311z312z313z314j310j311j312j313j314˛
-FutureImportation"pyflakes.checker.FutureImportation" pyflakes.checker.ImportationFrom*ä
-__init__+pyflakes.checker.FutureImportation.__init__"
-None*R
-selfH
-"pyflakes.checker.FutureImportation""pyflakes.checker.FutureImportation*&
-name
-builtins.str"builtins.str*
-source
-ast.AST"ast.AST*
-scope
-Anyz310z311z312z313z314j310j311j312j313j314r}
-used'pyflakes.checker.FutureImportation.used3
-Tuple[Any,ast.AST]
-Any
-ast.AST"ast.AST*310*311*312*313*314X
-Argumentpyflakes.checker.Argument"pyflakes.checker.Bindingj310j311j312j313j314\
+self(*
 
-Assignmentpyflakes.checker.Assignment"pyflakes.checker.Bindingj310j311j312j313j314Ì
+name(*
+source(*&
+	redefines	*
 
-Annotationpyflakes.checker.Annotation"pyflakes.checker.Binding*é
-	redefines%pyflakes.checker.Annotation.redefines":
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*D
-self:
-pyflakes.checker.Annotation"pyflakes.checker.Annotation*?
-other4
-pyflakes.checker.Binding"pyflakes.checker.Bindingz310z311z312z313z314j310j311j312j313j314o
-FunctionDefinition#pyflakes.checker.FunctionDefinition"pyflakes.checker.Definitionj310j311j312j313j314i
-ClassDefinition pyflakes.checker.ClassDefinition"pyflakes.checker.Definitionj310j311j312j313j314°
-ExportBindingpyflakes.checker.ExportBinding"pyflakes.checker.Binding*ß
-__init__'pyflakes.checker.ExportBinding.__init__"
-None*J
-self@
-pyflakes.checker.ExportBinding"pyflakes.checker.ExportBinding*&
-name
-builtins.str"builtins.str*
-source
-ast.AST"ast.AST*;
-scope0
-pyflakes.checker.Scope"pyflakes.checker.Scopez310z311z312z313z314j310j311j312j313j314rí
-names$pyflakes.checker.ExportBinding.namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314∑
-Scopepyflakes.checker.Scope"builtins.dictj310j311j312j313j314rn
-importStarred$pyflakes.checker.Scope.importStarred
-builtins.bool"builtins.bool*310*311*312*313*314Z
+self(*
+other(r
+name0r
 
-ClassScopepyflakes.checker.ClassScope"pyflakes.checker.Scopej310j311j312j313j314ö
-FunctionScopepyflakes.checker.FunctionScope"pyflakes.checker.Scope*¢
-__init__'pyflakes.checker.FunctionScope.__init__"
-None*J
-self@
-pyflakes.checker.FunctionScope"pyflakes.checker.FunctionScopez310z311z312z313z314*Ü
-unused_assignments1pyflakes.checker.FunctionScope.unused_assignments"◊
-=typing.Iterator[Tuple[builtins.str,pyflakes.checker.Binding]]Ñ
-,Tuple[builtins.str,pyflakes.checker.Binding]
-builtins.str"builtins.str4
-pyflakes.checker.Binding"pyflakes.checker.Binding"typing.Iterator*J
-self@
-pyflakes.checker.FunctionScope"pyflakes.checker.FunctionScopez310z311z312z313z314*í
-unused_annotations1pyflakes.checker.FunctionScope.unused_annotations"„
-@typing.Iterator[Tuple[builtins.str,pyflakes.checker.Annotation]]ç
-/Tuple[builtins.str,pyflakes.checker.Annotation]
-builtins.str"builtins.str:
-pyflakes.checker.Annotation"pyflakes.checker.Annotation"typing.Iterator*J
-self@
-pyflakes.checker.FunctionScope"pyflakes.checker.FunctionScopez310z311z312z313z314j310j311j312j313j314rp
+source0r
+used0&
 
-usesLocals)pyflakes.checker.FunctionScope.usesLocals
-builtins.bool"builtins.bool*310*311*312*313*314rö
+Definition"pyflakes.checker.BindingL
+Builtin"pyflakes.checker.Definition*$
+__init__*
 
-alwaysUsed)pyflakes.checker.FunctionScope.alwaysUsedH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314rî
-globals&pyflakes.checker.FunctionScope.globalsH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314r[
-returnValue*pyflakes.checker.FunctionScope.returnValue
-Any*310*311*312*313*314rr
-isGenerator*pyflakes.checker.FunctionScope.isGenerator
-builtins.bool"builtins.bool*310*311*312*313*314b
-GeneratorScopepyflakes.checker.GeneratorScope"pyflakes.checker.Scopej310j311j312j313j314\
-ModuleScopepyflakes.checker.ModuleScope"pyflakes.checker.Scopej310j311j312j313j314d
-DoctestScopepyflakes.checker.DoctestScope"pyflakes.checker.ModuleScopej310j311j312j313j314â
-DetectClassScopedMagic'pyflakes.checker.DetectClassScopedMagic"builtins.objectj310j311j312j313j314rõ
-names-pyflakes.checker.DetectClassScopedMagic.namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314Â
-AnnotationState pyflakes.checker.AnnotationState"builtins.objectj310j311j312j313j314r
-NONE%pyflakes.checker.AnnotationState.NONE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314rÉ
-STRING'pyflakes.checker.AnnotationState.STRING7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314r
-BARE%pyflakes.checker.AnnotationState.BARE7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314Ø©
-Checkerpyflakes.checker.Checker"builtins.object*Ì
-__init__!pyflakes.checker.Checker.__init__"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.AST"ast.AST*,
-filename
-builtins.str"builtins.str *ò
-builtinsá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *1
-withDoctest
-builtins.bool"builtins.bool *A
-file_tokens.
-builtins.tuple[Any]
-Any"builtins.tuple z310z311z312z313z314*∆
-deferFunction&pyflakes.checker.Checker.deferFunction"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*©
-callableö
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pyflakes.checker._AnyFunctionz310z311z312z313z314* 
-deferAssignment(pyflakes.checker.Checker.deferAssignment"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*©
-callableö
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pyflakes.checker._AnyFunctionz310z311z312z313z314*¬
-runDeferred$pyflakes.checker.Checker.runDeferred"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*©
-deferredö
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pyflakes.checker._AnyFunctionz310z311z312z313z314*…
-scopepyflakes.checker.Checker.scope"0
-pyflakes.checker.Scope"pyflakes.checker.Scope*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker0:builtins.property`z310z311z312z313z314*ê
-popScope!pyflakes.checker.Checker.popScope"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checkerz310z311z312z313z314*û
-checkDeadScopes(pyflakes.checker.Checker.checkDeadScopes"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checkerz310z311z312z313z314*˛
-	pushScope"pyflakes.checker.Checker.pushScope"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*j
+self(*
 
-scopeClassX
-Type[pyflakes.checker.Scope]0
-pyflakes.checker.Scope"pyflakes.checker.Scope"type z310z311z312z313z314*Ö
-reportpyflakes.checker.Checker.report"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*]
-messageClassK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
+name(#
+UnhandledKeyType"builtins.object|
+VariableKey"builtins.object*$
+__init__*
 
-args *
-kwargs z310z311z312z313z314*∫
-	getParent"pyflakes.checker.Checker.getParent"
-ast.AST"ast.AST*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*à
-getCommonAncestor*pyflakes.checker.Checker.getCommonAncestor"
-ast.AST"ast.AST*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-lnode
-ast.AST"ast.AST*
-rnode
-ast.AST"ast.AST*
-stop
-ast.AST"ast.ASTz310z311z312z313z314*ç
-descendantOf%pyflakes.checker.Checker.descendantOf"
-builtins.bool"builtins.bool*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.AST*!
-	ancestors
-ast.AST"ast.AST*
-stop
-ast.AST"ast.ASTz310z311z312z313z314*„
-getScopeNode%pyflakes.checker.Checker.getScopeNode"5
-Union[ast.AST,None]
-ast.AST"ast.AST
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*
-differentForks'pyflakes.checker.Checker.differentForks"
-builtins.bool"builtins.bool*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-lnode
-ast.AST"ast.AST*
-rnode
-ast.AST"ast.ASTz310z311z312z313z314*Û
+self(*
 
-addBinding#pyflakes.checker.Checker.addBinding"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.AST*?
-value4
-pyflakes.checker.Binding"pyflakes.checker.Bindingz310z311z312z313z314*ÿ
-getNodeHandler'pyflakes.checker.Checker.getNodeHandler"
-Any*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*;
+item(*
+__eq__	*(*(*
+__hash__*
 
-node_class+
-Type[ast.AST]
-ast.AST"ast.AST"typez310z311z312z313z314*⁄
-handleNodeLoad'pyflakes.checker.Checker.handleNodeLoad"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.AST*
-parent
-ast.AST"ast.ASTz310z311z312z313z314*º
-handleNodeStore(pyflakes.checker.Checker.handleNodeStore"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*æ
-handleNodeDelete)pyflakes.checker.Checker.handleNodeDelete"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*‹
-handleChildren'pyflakes.checker.Checker.handleChildren"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.AST"ast.AST*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*ã
-isLiteralTupleUnpacking0pyflakes.checker.Checker.isLiteralTupleUnpacking"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314* 
-isDocstring$pyflakes.checker.Checker.isDocstring"
-builtins.bool"builtins.bool*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*˜
-getDocstring%pyflakes.checker.Checker.getDocstring"»
-8Union[Tuple[builtins.str,builtins.int],Tuple[None,None]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int(
-Tuple[None,None]
-None
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*Í
+self(r
+name0«
+Importation"pyflakes.checker.Definition*E
+__init__*
 
-handleNode#pyflakes.checker.Checker.handleNode"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*?
-node5
-Union[ast.AST,None]
-ast.AST"ast.AST
-None*
-parent
-Anyz310z311z312z313z314*∫
-handleDoctests'pyflakes.checker.Checker.handleDoctests"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*ª
-handleStringAnnotation/pyflakes.checker.Checker.handleStringAnnotation"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*#
-s
-builtins.str"builtins.str*
-node
-ast.AST"ast.AST*,
+self(*
 
-ref_lineno
-builtins.int"builtins.int*0
-ref_col_offset
-builtins.int"builtins.int*j
-erra
-Type[pyflakes.messages.Message]6
-pyflakes.messages.Message"pyflakes.messages.Message"typez310z311z312z313z314*‚
-handleAnnotation)pyflakes.checker.Checker.handleAnnotation"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
+name(*
+source(*
+	full_name (*7
+source_statement*
 
-annotation
-ast.AST"ast.AST*
-node
-ast.AST"ast.ASTz310z311z312z313z314*™
-ignorepyflakes.checker.Checker.ignore"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*“
-DELETEpyflakes.checker.Checker.DELETE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-tree
+self(0:builtins.property`r
+fullName0r
+	redefined0h
+SubmoduleImportation"pyflakes.checker.Importation*2
+__init__*
 
-ast.Delete"
-ast.Delete*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*∆
-FORpyflakes.checker.Checker.FOR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.For"ast.For*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*⁄
-ASYNCFOR!pyflakes.checker.Checker.ASYNCFOR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-tree
-ast.AsyncFor"ast.AsyncFor*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*Œ
-WHILEpyflakes.checker.Checker.WHILE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-tree
-	ast.While"	ast.While*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314* 
-WITHpyflakes.checker.Checker.WITH"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.With"ast.With*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*–
-WITHITEM!pyflakes.checker.Checker.WITHITEM"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.AST"ast.AST*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*ﬁ
-	ASYNCWITH"pyflakes.checker.Checker.ASYNCWITH"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-tree
-ast.AsyncWith"ast.AsyncWith*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*»
-EXPRpyflakes.checker.Checker.EXPR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.AST"ast.AST*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*“
-ASSIGNpyflakes.checker.Checker.ASSIGN"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-tree
+self(*
 
-ast.Assign"
-ast.Assign*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*¶
-PASSpyflakes.checker.Checker.PASS"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*“
-BOOLOPpyflakes.checker.Checker.BOOLOP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-tree
+name(*
+source(ü
+ImportationFrom"pyflakes.checker.Importation*S
+__init__*
 
-ast.BoolOp"
-ast.BoolOp*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*÷
-UNARYOP pyflakes.checker.Checker.UNARYOP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-tree
-ast.UnaryOp"ast.UnaryOp*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*∆
-SETpyflakes.checker.Checker.SET"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-ast.Set"ast.Set*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*ﬁ
-	ATTRIBUTE"pyflakes.checker.Checker.ATTRIBUTE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-tree
-ast.Attribute"ast.Attribute*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*÷
-STARRED pyflakes.checker.Checker.STARRED"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-tree
-ast.Starred"ast.Starred*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*Â
-NAMECONSTANT%pyflakes.checker.Checker.NAMECONSTANT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*.
-tree$
-ast.NameConstant"ast.NameConstant*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313*π
-NAMECONSTANT%pyflakes.checker.Checker.NAMECONSTANT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-tree
-Any*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z314*ﬁ
-	NAMEDEXPR"pyflakes.checker.Checker.NAMEDEXPR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-tree
-ast.NamedExpr"ast.NamedExpr*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*º
-	SUBSCRIPT"pyflakes.checker.Checker.SUBSCRIPT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-node
-ast.Subscript"ast.Subscriptz310z311z312z313z314*®
-CALLpyflakes.checker.Checker.CALL"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Call"ast.Callz310z311z312z313z314*¨
-BINOPpyflakes.checker.Checker.BINOP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.BinOp"	ast.BinOpz310z311z312z313z314*∏
-CONSTANT!pyflakes.checker.Checker.CONSTANT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.Constant"ast.Constantz310z311z312z313z314*ü
-STRpyflakes.checker.Checker.STR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Str"ast.Strz310z311z312z313*Ö
-STRpyflakes.checker.Checker.STR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-Anyz314*Œ
-SLICEpyflakes.checker.Checker.SLICE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-tree
-	ast.Slice"	ast.Slice*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*⁄
-EXTSLICE!pyflakes.checker.Checker.EXTSLICE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-tree
-ast.ExtSlice"ast.ExtSlice*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*Œ
-INDEXpyflakes.checker.Checker.INDEX"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-tree
-	ast.Index"	ast.Index*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*®
-LOADpyflakes.checker.Checker.LOAD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Load"ast.Loadz310z311z312z313z314*¨
-STOREpyflakes.checker.Checker.STORE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Store"	ast.Storez310z311z312z313z314*§
-DELpyflakes.checker.Checker.DEL"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Del"ast.Delz310z311z312z313z314*¥
-AUGLOAD pyflakes.checker.Checker.AUGLOAD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-node
-ast.AugLoad"ast.AugLoadz310z311z312z313z314*∏
-AUGSTORE!pyflakes.checker.Checker.AUGSTORE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.AugStore"ast.AugStorez310z311z312z313z314*¨
-PARAMpyflakes.checker.Checker.PARAM"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Param"	ast.Paramz310z311z312z313z314*§
-ANDpyflakes.checker.Checker.AND"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.And"ast.Andz310z311z312z313z314*†
-ORpyflakes.checker.Checker.OR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Or"ast.Orz310z311z312z313z314*§
-ADDpyflakes.checker.Checker.ADD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Add"ast.Addz310z311z312z313z314*§
-SUBpyflakes.checker.Checker.SUB"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Sub"ast.Subz310z311z312z313z314*®
-MULTpyflakes.checker.Checker.MULT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Mult"ast.Multz310z311z312z313z314*§
-DIVpyflakes.checker.Checker.DIV"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Div"ast.Divz310z311z312z313z314*§
-MODpyflakes.checker.Checker.MOD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Mod"ast.Modz310z311z312z313z314*§
-POWpyflakes.checker.Checker.POW"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Pow"ast.Powz310z311z312z313z314*∞
-LSHIFTpyflakes.checker.Checker.LSHIFT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+self(*
 
-ast.LShift"
-ast.LShiftz310z311z312z313z314*∞
-RSHIFTpyflakes.checker.Checker.RSHIFT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+name(*
+source(*
+module(*
+	real_name (r
 
-ast.RShift"
-ast.RShiftz310z311z312z313z314*¨
-BITORpyflakes.checker.Checker.BITOR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.BitOr"	ast.BitOrz310z311z312z313z314*∞
-BITXORpyflakes.checker.Checker.BITXOR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+module0r
+	real_name0c
+StarImportation"pyflakes.checker.Importation*2
+__init__*
 
-ast.BitXor"
-ast.BitXorz310z311z312z313z314*∞
-BITANDpyflakes.checker.Checker.BITAND"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+self(*
 
-ast.BitAnd"
-ast.BitAndz310z311z312z313z314*∏
-FLOORDIV!pyflakes.checker.Checker.FLOORDIV"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.FloorDiv"ast.FloorDivz310z311z312z313z314*∞
-INVERTpyflakes.checker.Checker.INVERT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+name(*
+source(Ä
+FutureImportation" pyflakes.checker.ImportationFrom*?
+__init__*
 
-ast.Invert"
-ast.Invertz310z311z312z313z314*§
-NOTpyflakes.checker.Checker.NOT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Not"ast.Notz310z311z312z313z314*®
-UADDpyflakes.checker.Checker.UADD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.UAdd"ast.UAddz310z311z312z313z314*®
-USUBpyflakes.checker.Checker.USUB"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.USub"ast.USubz310z311z312z313z314*†
-EQpyflakes.checker.Checker.EQ"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Eq"ast.Eqz310z311z312z313z314*¨
-NOTEQpyflakes.checker.Checker.NOTEQ"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.NotEq"	ast.NotEqz310z311z312z313z314*†
-LTpyflakes.checker.Checker.LT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Lt"ast.Ltz310z311z312z313z314*§
-LTEpyflakes.checker.Checker.LTE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.LtE"ast.LtEz310z311z312z313z314*†
-GTpyflakes.checker.Checker.GT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Gt"ast.Gtz310z311z312z313z314*§
-GTEpyflakes.checker.Checker.GTE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.GtE"ast.GtEz310z311z312z313z314*†
-ISpyflakes.checker.Checker.IS"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Is"ast.Isz310z311z312z313z314*¨
-ISNOTpyflakes.checker.Checker.ISNOT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.IsNot"	ast.IsNotz310z311z312z313z314*†
-INpyflakes.checker.Checker.IN"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.In"ast.Inz310z311z312z313z314*¨
-NOTINpyflakes.checker.Checker.NOTIN"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.NotIn"	ast.NotInz310z311z312z313z314*¥
-MATMULT pyflakes.checker.Checker.MATMULT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-node
-ast.MatMult"ast.MatMultz310z311z312z313z314*¨
-RAISEpyflakes.checker.Checker.RAISE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Raise"	ast.Raisez310z311z312z313z314*Ó
-COMPREHENSION&pyflakes.checker.Checker.COMPREHENSION"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*0
-tree&
-ast.comprehension"ast.comprehension*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*÷
-KEYWORD pyflakes.checker.Checker.KEYWORD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-tree
-ast.keyword"ast.keyword*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*Ú
-FORMATTEDVALUE'pyflakes.checker.Checker.FORMATTEDVALUE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*2
-tree(
-ast.FormattedValue"ast.FormattedValue*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*∞
-	JOINEDSTR"pyflakes.checker.Checker.JOINEDSTR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.AST"ast.ASTz310z311z312z313z314*®
-DICTpyflakes.checker.Checker.DICT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Dict"ast.Dictz310z311z312z313z314*†
-IFpyflakes.checker.Checker.IF"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.If"ast.Ifz310z311z312z313z314*¶
-IFEXPpyflakes.checker.Checker.IFEXP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.If"ast.Ifz310z311z312z313z314*∞
-ASSERTpyflakes.checker.Checker.ASSERT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+self(*
 
-ast.Assert"
-ast.Assertz310z311z312z313z314*∞
-GLOBALpyflakes.checker.Checker.GLOBAL"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+name(*
+source(*
+scope(r
+used0$
+Argument"pyflakes.checker.Binding&
 
-ast.Global"
-ast.Globalz310z311z312z313z314*∏
-NONLOCAL!pyflakes.checker.Checker.NONLOCAL"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.Nonlocal"ast.Nonlocalz310z311z312z313z314*»
-GENERATOREXP%pyflakes.checker.Checker.GENERATOREXP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*.
-node$
-ast.GeneratorExp"ast.GeneratorExpz310z311z312z313z314*∏
-LISTCOMP!pyflakes.checker.Checker.LISTCOMP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.ListComp"ast.ListCompz310z311z312z313z314*∏
-DICTCOMP!pyflakes.checker.Checker.DICTCOMP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.DictComp"ast.DictCompz310z311z312z313z314*¥
-SETCOMP pyflakes.checker.Checker.SETCOMP"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-node
-ast.SetComp"ast.SetCompz310z311z312z313z314*®
-NAMEpyflakes.checker.Checker.NAME"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Name"ast.Namez310z311z312z313z314*∏
-CONTINUE!pyflakes.checker.Checker.CONTINUE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.Continue"ast.Continuez310z311z312z313z314*¨
-BREAKpyflakes.checker.Checker.BREAK"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Break"	ast.Breakz310z311z312z313z314*∞
-RETURNpyflakes.checker.Checker.RETURN"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+Assignment"pyflakes.checker.BindingN
 
-ast.Return"
-ast.Returnz310z311z312z313z314*¨
-YIELDpyflakes.checker.Checker.YIELD"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Yield"	ast.Yieldz310z311z312z313z314*¨
-AWAITpyflakes.checker.Checker.AWAIT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Await"	ast.Awaitz310z311z312z313z314*º
-	YIELDFROM"pyflakes.checker.Checker.YIELDFROM"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-node
-ast.YieldFrom"ast.YieldFromz310z311z312z313z314*ƒ
-FUNCTIONDEF$pyflakes.checker.Checker.FUNCTIONDEF"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*,
-node"
-ast.FunctionDef"ast.FunctionDefz310z311z312z313z314*ÿ
-ASYNCFUNCTIONDEF)pyflakes.checker.Checker.ASYNCFUNCTIONDEF"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*6
-node,
-ast.AsyncFunctionDef"ast.AsyncFunctionDefz310z311z312z313z314*∞
-LAMBDApyflakes.checker.Checker.LAMBDA"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+Annotation"pyflakes.checker.Binding*&
+	redefines
+*
 
-ast.Lambda"
-ast.Lambdaz310z311z312z313z314*º
-	ARGUMENTS"pyflakes.checker.Checker.ARGUMENTS"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-node
-ast.arguments"ast.argumentsz310z311z312z313z314*§
-ARGpyflakes.checker.Checker.ARG"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.arg"ast.argz310z311z312z313z314*∑
-CLASSDEF!pyflakes.checker.Checker.CLASSDEF"
-Any*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*&
-node
-ast.ClassDef"ast.ClassDefz310z311z312z313z314*º
-	AUGASSIGN"pyflakes.checker.Checker.AUGASSIGN"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-node
-ast.AugAssign"ast.AugAssignz310z311z312z313z314*¨
-TUPLEpyflakes.checker.Checker.TUPLE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-node
-	ast.Tuple"	ast.Tuplez310z311z312z313z314*®
-LISTpyflakes.checker.Checker.LIST"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.List"ast.Listz310z311z312z313z314*∞
-IMPORTpyflakes.checker.Checker.IMPORT"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*"
-node
+self(*
+other(1
+FunctionDefinition"pyflakes.checker.Definition.
+ClassDefinition"pyflakes.checker.Definitionu
+ExportBinding"pyflakes.checker.Binding*?
+__init__*
 
-ast.Import"
-ast.Importz310z311z312z313z314*¿
+self(*
 
-IMPORTFROM#pyflakes.checker.Checker.IMPORTFROM"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker**
-node 
-ast.ImportFrom"ast.ImportFromz310z311z312z313z314*§
-TRYpyflakes.checker.Checker.TRY"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*
-node
-ast.Try"ast.Tryz310z311z312z313z314*Ã
-EXCEPTHANDLER&pyflakes.checker.Checker.EXCEPTHANDLER"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*0
-node&
-ast.ExceptHandler"ast.ExceptHandlerz310z311z312z313z314*º
-	ANNASSIGN"pyflakes.checker.Checker.ANNASSIGN"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-node
-ast.AnnAssign"ast.AnnAssignz310z311z312z313z314*¥
-COMPARE pyflakes.checker.Checker.COMPARE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-node
-ast.Compare"ast.Comparez310z311z312z313z314*Œ
-MATCHpyflakes.checker.Checker.MATCH"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker* 
-tree
-	ast.Match"	ast.Match*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*‚
+name(*
+source(*
+scope(r	
+names0)
+Scope"builtins.dictr
+importStarred0	$
 
-MATCH_CASE#pyflakes.checker.Checker.MATCH_CASE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker**
-tree 
-ast.match_case"ast.match_case*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*‚
+ClassScope"pyflakes.checker.Scopeÿ
+FunctionScope"pyflakes.checker.Scope*
+__init__*
 
-MATCHCLASS#pyflakes.checker.Checker.MATCHCLASS"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker**
-tree 
-ast.MatchClass"ast.MatchClass*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*÷
-MATCHOR pyflakes.checker.Checker.MATCHOR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-tree
-ast.MatchOr"ast.MatchOr*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*Ó
-MATCHSEQUENCE&pyflakes.checker.Checker.MATCHSEQUENCE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*0
-tree&
-ast.MatchSequence"ast.MatchSequence*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*Ú
-MATCHSINGLETON'pyflakes.checker.Checker.MATCHSINGLETON"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*2
-tree(
-ast.MatchSingleton"ast.MatchSingleton*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*‚
+self( *"
+unused_assignments"*
 
-MATCHVALUE#pyflakes.checker.Checker.MATCHVALUE"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker**
-tree 
-ast.MatchValue"ast.MatchValue*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType z310z311z312z313z314*¥
-MATCHAS pyflakes.checker.Checker.MATCHAS"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*$
-node
-ast.MatchAs"ast.MatchAsz310z311z312z313z314*»
-MATCHMAPPING%pyflakes.checker.Checker.MATCHMAPPING"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*.
-node$
-ast.MatchMapping"ast.MatchMappingz310z311z312z313z314*º
-	MATCHSTAR"pyflakes.checker.Checker.MATCHSTAR"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*(
-node
-ast.MatchStar"ast.MatchStarz310z311z312z313z3142ﬂ
-futuresAllowed'pyflakes.checker.Checker.futuresAllowed≤
-futuresAllowed'pyflakes.checker.Checker.futuresAllowed"
-builtins.bool"builtins.bool*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker0:builtins.propertyX`’
-futuresAllowed'pyflakes.checker.Checker.futuresAllowed"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*E
-value:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:.setter"310"311"312"313"3142õ
-annotationsFutureEnabled1pyflakes.checker.Checker.annotationsFutureEnabled∆
-annotationsFutureEnabled1pyflakes.checker.Checker.annotationsFutureEnabled"
-builtins.bool"builtins.bool*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker0:builtins.propertyX`È
-annotationsFutureEnabled1pyflakes.checker.Checker.annotationsFutureEnabled"
-None*>
-self4
-pyflakes.checker.Checker"pyflakes.checker.Checker*E
-value:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:.setter"310"311"312"313"314j310j311j312j313j314rf
-	nodeDepth"pyflakes.checker.Checker.nodeDepth
-builtins.int"builtins.int*310*311*312*313*314r·
-offsetpyflakes.checker.Checker.offsetú
-,Union[Tuple[builtins.int,builtins.int],None]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-None*310*311*312*313*314rê
-builtIns!pyflakes.checker.Checker.builtInsH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*310*311*312*313*314rx
+self( *"
+unused_annotations$*
 
-deadScopes#pyflakes.checker.Checker.deadScopes,
-builtins.list[Any]
-Any"builtins.list*310*311*312*313*314rt
-messages!pyflakes.checker.Checker.messages,
-builtins.list[Any]
-Any"builtins.list*310*311*312*313*314rd
-filename!pyflakes.checker.Checker.filename
-builtins.str"builtins.str*310*311*312*313*314rl
-withDoctest$pyflakes.checker.Checker.withDoctest
-builtins.bool"builtins.bool*310*311*312*313*314r¥
+self( r
 
-scopeStack#pyflakes.checker.Checker.scopeStackh
-%builtins.list[pyflakes.checker.Scope]0
-pyflakes.checker.Scope"pyflakes.checker.Scope"builtins.list*310*311*312*313*314rÄ
-exceptHandlers'pyflakes.checker.Checker.exceptHandlers,
-builtins.list[Any]
-Any"builtins.list*310*311*312*313*314rR
-rootpyflakes.checker.Checker.root
-ast.AST"ast.AST*310*311*312*313*314—
-getAlternatives pyflakes.checker.getAlternatives";
-builtins.list[ast.AST]
-ast.AST"ast.AST"builtins.list*F
-n?
-Union[ast.If,ast.Try]
-ast.If"ast.If
-ast.Try"ast.Tryz310z311z312z313z314Ë
-parse_percent_format%pyflakes.checker.parse_percent_format"Í
+usesLocals0	r
 
-Ωbuiltins.tuple[TypeAlias[Tuple[builtins.str,Union[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],builtins.str]],None]]]]ó	
-≠TypeAlias[Tuple[builtins.str,Union[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],builtins.str]],None]]]¡
-¢Tuple[builtins.str,Union[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],builtins.str]],None]]
-builtins.str"builtins.str˘
-éUnion[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],builtins.str]],None]Ÿ
-ÇTypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],builtins.str]]±
-wTuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],builtins.str]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str"pyflakes.checker._FormatType
-None"pyflakes.checker._PercentFormat"builtins.tuple*#
-s
-builtins.str"builtins.strz310z311z312z313z314ˇ
-counterpyflakes.checker.counter"¨
-/builtins.dict[pyflakes.checker._T,builtins.int]L
-pyflakes.checker._T"
-builtins.object"builtins.object"builtins.object
-builtins.int"builtins.int"builtins.dict*ë
-itemsÖ
-$typing.Iterable[pyflakes.checker._T]L
-pyflakes.checker._T"
-builtins.object"builtins.object"builtins.object"typing.Iterablez310z311z312z313z314§
-iter_child_nodes!pyflakes.checker.iter_child_nodes"?
-typing.Iterator[ast.AST]
-ast.AST"ast.AST"typing.Iterator*
-node
-ast.AST"ast.AST*ü
-omití
-@TypeAlias[Union[builtins.str,builtins.tuple[builtins.str],None]]Ø
-5Union[builtins.str,builtins.tuple[builtins.str],None]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple
-None"pyflakes.checker._OmitType *S
-_fields_order>
-pyflakes.checker._FieldsOrder"pyflakes.checker._FieldsOrder z310z311z312z313z314≤
-is_notimplemented_name_node,pyflakes.checker.is_notimplemented_name_node"
-builtins.bool"builtins.bool*,
-node"
-builtins.object"builtins.objectz310z311z312z313z314Ä
-getNodeNamepyflakes.checker.getNodeName"
-builtins.str"builtins.str*
-node
-ast.AST"ast.ASTz310z311z312z313z314Õ
-is_typing_overload#pyflakes.checker.is_typing_overload"
-builtins.bool"builtins.bool*?
-value4
-pyflakes.checker.Binding"pyflakes.checker.Binding*
-scope_stack
-Anyz310z311z312z313z314û
-in_annotationpyflakes.checker.in_annotation"d
-pyflakes.checker._FK
-CallableType[builtins.function]&
-builtins.function"builtins.function*n
-funcd
-pyflakes.checker._FK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314¨
-in_string_annotation%pyflakes.checker.in_string_annotation"d
-pyflakes.checker._FK
-CallableType[builtins.function]&
-builtins.function"builtins.function*n
-funcd
-pyflakes.checker._FK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314"˜
-convert_to_value!pyflakes.checker.convert_to_valueÜ
-convert_to_value!pyflakes.checker.convert_to_value"
-builtins.str"builtins.str*
-item
-ast.Str"ast.Str0:typing.overloadXé
-convert_to_value!pyflakes.checker.convert_to_value" 
-builtins.bytes"builtins.bytes* 
-item
-	ast.Bytes"	ast.Bytes0:typing.overloadXú
-convert_to_value!pyflakes.checker.convert_to_value".
-builtins.tuple[Any]
-Any"builtins.tuple* 
-item
-	ast.Tuple"	ast.Tuple0:typing.overloadXø
-convert_to_value!pyflakes.checker.convert_to_value"
-Any*j
-item`
- Union[ast.Name,ast.NameConstant]
-ast.Name"ast.Name$
-ast.NameConstant"ast.NameConstant0:typing.overloadX∞
-convert_to_value!pyflakes.checker.convert_to_value"F
-!pyflakes.checker.UnhandledKeyType"!pyflakes.checker.UnhandledKeyType*
-item
-ast.AST"ast.AST0:typing.overloadX"310"311"312"313"¢
-convert_to_value!pyflakes.checker.convert_to_value{
-convert_to_value!pyflakes.checker.convert_to_value"
-builtins.str"builtins.str*
-item
-Any0:typing.overloadX
-convert_to_value!pyflakes.checker.convert_to_value" 
-builtins.bytes"builtins.bytes*
-item
-Any0:typing.overloadXú
-convert_to_value!pyflakes.checker.convert_to_value".
-builtins.tuple[Any]
-Any"builtins.tuple* 
-item
-	ast.Tuple"	ast.Tuple0:typing.overloadXï
-convert_to_value!pyflakes.checker.convert_to_value"
-Any*@
-item6
-Union[ast.Name,Any]
-ast.Name"ast.Name
-Any0:typing.overloadX∞
-convert_to_value!pyflakes.checker.convert_to_value"F
-!pyflakes.checker.UnhandledKeyType"!pyflakes.checker.UnhandledKeyType*
-item
-ast.AST"ast.AST0:typing.overloadX"314*•
-__annotations__ pyflakes.checker.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*`
-	PY38_PLUSpyflakes.checker.PY38_PLUS
-builtins.bool"builtins.bool*310*311*312*313*314*V
-PYPYpyflakes.checker.PYPY
-builtins.bool"builtins.bool*310*311*312*313*314*◊
-	FOR_TYPESpyflakes.checker.FOR_TYPESî
-'Tuple[Type[ast.For],Type[ast.AsyncFor]]+
-Type[ast.For]
-ast.For"ast.For"type:
-Type[ast.AsyncFor]
-ast.AsyncFor"ast.AsyncFor"type*310*311*312*313*314*ê
-MAPPING_KEY_REpyflakes.checker.MAPPING_KEY_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*ò
-CONVERSION_FLAG_RE#pyflakes.checker.CONVERSION_FLAG_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*Ñ
-WIDTH_REpyflakes.checker.WIDTH_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*å
-PRECISION_REpyflakes.checker.PRECISION_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*Ü
-	LENGTH_REpyflakes.checker.LENGTH_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*¶
-VALID_CONVERSIONS"pyflakes.checker.VALID_CONVERSIONST
- builtins.frozenset[builtins.str]
-builtins.str"builtins.str"builtins.frozenset*310*311*312*313*314*‘
-TYPING_MODULESpyflakes.checker.TYPING_MODULESá
-Fbuiltins.frozenset[Union[Literal[builtins.str],Literal[builtins.str]]]®
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str"builtins.frozenset*310*311*312*313*314
+alwaysUsed0%r
+globals0%r
+returnValue0r
+isGenerator0	(
+GeneratorScope"pyflakes.checker.Scope%
+ModuleScope"pyflakes.checker.Scope,
+DoctestScope"pyflakes.checker.ModuleScope4
+DetectClassScopedMagic"builtins.objectr	
+names0B
+AnnotationState"builtins.objectr
+NONE0&r
+
+STRING0&r
+BARE0&∞2
+Checker"builtins.object*r
+__init__*
+
+self('*
+
+tree(*
+filename (*
+builtins ()*
+withDoctest (	*
+file_tokens (**-
+deferFunction*
+
+self('*
+callable(-*/
+deferAssignment*
+
+self('*
+callable(-*+
+runDeferred*
+
+self('*
+deferred(-*,
+scope*
+
+self('0:builtins.property`*
+popScope*
+
+self('*
+checkDeadScopes*
+
+self('*-
+	pushScope*
+
+self('*
+
+scopeClass (.*D
+report*
+
+self('*
+messageClass(,*
+
+args(/*
+kwargs(/*%
+	getParent*
+
+self('*
+
+node(*G
+getCommonAncestor*
+
+self('*
+lnode(*
+rnode(*
+
+stop(*E
+descendantOf	*
+
+self('*
+
+node(*
+	ancestors(*
+
+stop(*(
+getScopeNode*
+
+self('*
+
+node(*8
+differentForks	*
+
+self('*
+lnode(*
+rnode(*3
+
+addBinding*
+
+self('*
+
+node(*
+value(*0
+getNodeHandler*
+
+self('*
+
+node_class(*8
+handleNodeLoad*
+
+self('*
+
+node(*
+parent(*+
+handleNodeStore*
+
+self('*
+
+node(*,
+handleNodeDelete*
+
+self('*
+
+node(*8
+handleChildren*
+
+self('*
+
+tree(*
+omit (1*3
+isLiteralTupleUnpacking2*
+
+self('*
+
+node(*'
+isDocstring	*
+
+self('*
+
+node(*(
+getDocstring5*
+
+self('*
+
+node(*4
+
+handleNode*
+
+self('*
+
+node(*
+parent(**
+handleDoctests*
+
+self('*
+
+node(*n
+handleStringAnnotation*
+
+self('*
+s(*
+
+node(*
+
+ref_lineno(*
+ref_col_offset(*	
+err(7*>
+handleAnnotation*
+
+self('*
+
+annotation(*
+
+node(*"
+ignore*
+
+self('*
+
+node(*0
+DELETE*
+
+self('*
+
+tree(8*
+omit (1*-
+FOR*
+
+self('*
+
+tree(9*
+omit (1*2
+ASYNCFOR*
+
+self('*
+
+tree(:*
+omit (1*/
+WHILE*
+
+self('*
+
+tree(;*
+omit (1*.
+WITH*
+
+self('*
+
+tree(<*
+omit (1*2
+WITHITEM*
+
+self('*
+
+tree(*
+omit (1*3
+	ASYNCWITH*
+
+self('*
+
+tree(=*
+omit (1*.
+EXPR*
+
+self('*
+
+tree(*
+omit (1*0
+ASSIGN*
+
+self('*
+
+tree(>*
+omit (1* 
+PASS*
+
+self('*
+
+node(*0
+BOOLOP*
+
+self('*
+
+tree(?*
+omit (1*1
+UNARYOP*
+
+self('*
+
+tree(@*
+omit (1*-
+SET*
+
+self('*
+
+tree(A*
+omit (1*3
+	ATTRIBUTE*
+
+self('*
+
+tree(B*
+omit (1*1
+STARRED*
+
+self('*
+
+tree(C*
+omit (1*J
+NAMECONSTANT*
+
+self('*
+
+tree(D*
+omit (1z310z311z312z313*;
+NAMECONSTANT*
+
+self('*
+
+tree(*
+omit (1z314*3
+	NAMEDEXPR*
+
+self('*
+
+tree(E*
+omit (1*%
+	SUBSCRIPT*
+
+self('*
+
+node(F* 
+CALL*
+
+self('*
+
+node(G*!
+BINOP*
+
+self('*
+
+node(H*$
+CONSTANT*
+
+self('*
+
+node(I*3
+STR*
+
+self('*
+
+node(Jz310z311z312z313*$
+STR*
+
+self('*
+
+node(z314*/
+SLICE*
+
+self('*
+
+tree(K*
+omit (1*2
+EXTSLICE*
+
+self('*
+
+tree(L*
+omit (1*/
+INDEX*
+
+self('*
+
+tree(M*
+omit (1* 
+LOAD*
+
+self('*
+
+node(N*!
+STORE*
+
+self('*
+
+node(O*
+DEL*
+
+self('*
+
+node(P*#
+AUGLOAD*
+
+self('*
+
+node(Q*$
+AUGSTORE*
+
+self('*
+
+node(R*!
+PARAM*
+
+self('*
+
+node(S*
+AND*
+
+self('*
+
+node(T*
+OR*
+
+self('*
+
+node(U*
+ADD*
+
+self('*
+
+node(V*
+SUB*
+
+self('*
+
+node(W* 
+MULT*
+
+self('*
+
+node(X*
+DIV*
+
+self('*
+
+node(Y*
+MOD*
+
+self('*
+
+node(Z*
+POW*
+
+self('*
+
+node([*"
+LSHIFT*
+
+self('*
+
+node(\*"
+RSHIFT*
+
+self('*
+
+node(]*!
+BITOR*
+
+self('*
+
+node(^*"
+BITXOR*
+
+self('*
+
+node(_*"
+BITAND*
+
+self('*
+
+node(`*$
+FLOORDIV*
+
+self('*
+
+node(a*"
+INVERT*
+
+self('*
+
+node(b*
+NOT*
+
+self('*
+
+node(c* 
+UADD*
+
+self('*
+
+node(d* 
+USUB*
+
+self('*
+
+node(e*
+EQ*
+
+self('*
+
+node(f*!
+NOTEQ*
+
+self('*
+
+node(g*
+LT*
+
+self('*
+
+node(h*
+LTE*
+
+self('*
+
+node(i*
+GT*
+
+self('*
+
+node(j*
+GTE*
+
+self('*
+
+node(k*
+IS*
+
+self('*
+
+node(l*!
+ISNOT*
+
+self('*
+
+node(m*
+IN*
+
+self('*
+
+node(n*!
+NOTIN*
+
+self('*
+
+node(o*#
+MATMULT*
+
+self('*
+
+node(p*!
+RAISE*
+
+self('*
+
+node(q*7
+COMPREHENSION*
+
+self('*
+
+tree(r*
+omit (1*1
+KEYWORD*
+
+self('*
+
+tree(s*
+omit (1*8
+FORMATTEDVALUE*
+
+self('*
+
+tree(t*
+omit (1*%
+	JOINEDSTR*
+
+self('*
+
+node(* 
+DICT*
+
+self('*
+
+node(u*
+IF*
+
+self('*
+
+node(v*!
+IFEXP*
+
+self('*
+
+node(v*"
+ASSERT*
+
+self('*
+
+node(w*"
+GLOBAL*
+
+self('*
+
+node(x*$
+NONLOCAL*
+
+self('*
+
+node(y*(
+GENERATOREXP*
+
+self('*
+
+node(z*$
+LISTCOMP*
+
+self('*
+
+node({*$
+DICTCOMP*
+
+self('*
+
+node(|*#
+SETCOMP*
+
+self('*
+
+node(}* 
+NAME*
+
+self('*
+
+node(*$
+CONTINUE*
+
+self('*
+
+node(~*!
+BREAK*
+
+self('*
+
+node(*#
+RETURN*
+
+self('*
+node(Ä*"
+YIELD*
+
+self('*
+node(Å*"
+AWAIT*
+
+self('*
+node(Ç*&
+	YIELDFROM*
+
+self('*
+node(É*(
+FUNCTIONDEF*
+
+self('*
+node(Ñ*-
+ASYNCFUNCTIONDEF*
+
+self('*
+node(Ö*#
+LAMBDA*
+
+self('*
+node(Ü*&
+	ARGUMENTS*
+
+self('*
+node(á* 
+ARG*
+
+self('*
+node(à*%
+CLASSDEF*
+
+self('*
+node(â*&
+	AUGASSIGN*
+
+self('*
+node(ä*"
+TUPLE*
+
+self('*
+node(ã*!
+LIST*
+
+self('*
+node(å*"
+IMPORT*
+
+self('*
+
+node(*'
+
+IMPORTFROM*
+
+self('*
+node(ç* 
+TRY*
+
+self('*
+node(é**
+EXCEPTHANDLER*
+
+self('*
+node(è*&
+	ANNASSIGN*
+
+self('*
+node(ê*$
+COMPARE*
+
+self('*
+node(ë*0
+MATCH*
+
+self('*
+tree(í*
+omit (1*5
+
+MATCH_CASE*
+
+self('*
+tree(ì*
+omit (1*5
+
+MATCHCLASS*
+
+self('*
+tree(î*
+omit (1*2
+MATCHOR*
+
+self('*
+tree(ï*
+omit (1*8
+MATCHSEQUENCE*
+
+self('*
+tree(ñ*
+omit (1*9
+MATCHSINGLETON*
+
+self('*
+tree(ó*
+omit (1*5
+
+MATCHVALUE*
+
+self('*
+tree(ò*
+omit (1*$
+MATCHAS*
+
+self('*
+node(ô*)
+MATCHMAPPING*
+
+self('*
+node(ö*&
+	MATCHSTAR*
+
+self('*
+node(õ2Å
+futuresAllowed7
+futuresAllowed	*
+
+self('0:builtins.propertyX`6
+futuresAllowed*
+
+self('*
+value(
+0:.setter2ü
+annotationsFutureEnabledA
+annotationsFutureEnabled	*
+
+self('0:builtins.propertyX`@
+annotationsFutureEnabled*
+
+self('*
+value(
+0:.setterr
+	nodeDepth0r
+offset0ùr
+builtIns0%r
+
+deadScopes0r
+messages0r
+filename0r
+withDoctest0	r
+
+scopeStack0ûr
+exceptHandlers0r
+root0
+getAlternativesü*
+n(†"
+parse_percent_format¶*
+s(
+counter®*
+items(©F
+iter_child_nodes™*
+
+node(*
+omit (1*
+_fields_order (+
+is_notimplemented_name_node	*
+
+node(
+getNodeName*
+
+node(6
+is_typing_overload	*
+value(*
+scope_stack(
+in_annotation´*
+func(´&
+in_string_annotation´*
+func(´"æ
+convert_to_value5
+convert_to_value*
+
+item(J0:typing.overloadX7
+convert_to_value¨*
+item(≠0:typing.overloadX6
+convert_to_value**
+item(ã0:typing.overloadX6
+convert_to_value*
+item(Æ0:typing.overloadX6
+convert_to_valueØ*
+
+item(0:typing.overloadX"310"311"312"313"Æ
+convert_to_value5
+convert_to_value*
+
+item(0:typing.overloadX6
+convert_to_value¨*
+
+item(0:typing.overloadX6
+convert_to_value**
+item(ã0:typing.overloadX6
+convert_to_value*
+item(∞0:typing.overloadX6
+convert_to_valueØ*
+
+item(0:typing.overloadX"314*
+__annotations__0±*
+	PY38_PLUS0	*
+PYPY0	*
+	FOR_TYPES0¥*
+MAPPING_KEY_RE0µ*
+CONVERSION_FLAG_RE0µ*
+WIDTH_RE0µ*
+PRECISION_RE0µ*
+	LENGTH_RE0µ*
+VALID_CONVERSIONS0∂*
+TYPING_MODULES0π2"builtins.str2"builtins.tuple22"pyflakes.checker._FieldsOrder2	"ast.AST2"type222"pyflakes.checker.Binding222"builtins.bool2	2	22222
+2"pyflakes.checker.Builtin2"pyflakes.checker.VariableKey2
+"ast.Name2"builtins.object2"builtins.int2"pyflakes.checker.Importation222"builtins.list22'"%pyflakes.checker.SubmoduleImportation2"
+ast.Import222"" pyflakes.checker.ImportationFrom2"" pyflakes.checker.StarImportation2$""pyflakes.checker.FutureImportation2"pyflakes.checker.Annotation2 "pyflakes.checker.ExportBinding2"pyflakes.checker.Scope2"builtins.list22 "pyflakes.checker.FunctionScope222"typing.Iterator2!222"typing.Iterator2#2"builtins.set22	22"pyflakes.checker.Checker2"typing.Iterable222(2"builtins.tuple22"builtins.function22+2$"pyflakes.checker._AnyFunction2,2"type22 222!"pyflakes.checker._OmitType2022	222222342"pyflakes.messages.Message2"type262"
+ast.Delete2	"ast.For2"ast.AsyncFor2"	ast.While2
+"ast.With2"ast.AsyncWith2"
+ast.Assign2"
+ast.BoolOp2"ast.UnaryOp2	"ast.Set2"ast.Attribute2"ast.Starred2"ast.NameConstant2"ast.NamedExpr2"ast.Subscript2
+"ast.Call2"	ast.BinOp2"ast.Constant2	"ast.Str2"	ast.Slice2"ast.ExtSlice2"	ast.Index2
+"ast.Load2"	ast.Store2	"ast.Del2"ast.AugLoad2"ast.AugStore2"	ast.Param2	"ast.And2"ast.Or2	"ast.Add2	"ast.Sub2
+"ast.Mult2	"ast.Div2	"ast.Mod2	"ast.Pow2"
+ast.LShift2"
+ast.RShift2"	ast.BitOr2"
+ast.BitXor2"
+ast.BitAnd2"ast.FloorDiv2"
+ast.Invert2	"ast.Not2
+"ast.UAdd2
+"ast.USub2"ast.Eq2"	ast.NotEq2"ast.Lt2	"ast.LtE2"ast.Gt2	"ast.GtE2"ast.Is2"	ast.IsNot2"ast.In2"	ast.NotIn2"ast.MatMult2"	ast.Raise2"ast.comprehension2"ast.keyword2"ast.FormattedValue2
+"ast.Dict2"ast.If2"
+ast.Assert2"
+ast.Global2"ast.Nonlocal2"ast.GeneratorExp2"ast.ListComp2"ast.DictComp2"ast.SetComp2"ast.Continue2"	ast.Break2"
+ast.Return2"	ast.Yield2"	ast.Await2"ast.YieldFrom2"ast.FunctionDef2"ast.AsyncFunctionDef2"
+ast.Lambda2"ast.arguments2	"ast.arg2"ast.ClassDef2"ast.AugAssign2"	ast.Tuple2
+"ast.List2"ast.ImportFrom2	"ast.Try2"ast.ExceptHandler2"ast.AnnAssign2"ast.Compare2"	ast.Match2"ast.match_case2"ast.MatchClass2"ast.MatchOr2"ast.MatchSequence2"ast.MatchSingleton2"ast.MatchValue2"ast.MatchAs2"ast.MatchMapping2"ast.MatchStar2222ú2"builtins.list22"builtins.list222vé2	22$"pyflakes.checker._FormatType2°22¢22£2'"pyflakes.checker._PercentFormat2§2"builtins.tuple2•2"builtins.object22"builtins.dict2ß2"typing.Iterable2ß2"typing.Iterator222,2"builtins.bytes2"	ast.Bytes22D2#"!pyflakes.checker.UnhandledKeyType222"builtins.dict22"type292"type2:22≤≥2"
+re.Pattern22"builtins.frozenset22	222∑∑2"builtins.frozenset2∏

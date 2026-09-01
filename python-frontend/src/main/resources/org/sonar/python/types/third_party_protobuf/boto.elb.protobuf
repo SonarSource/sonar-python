@@ -1,54 +1,38 @@
 
-boto.elb˙%
-ELBConnectionboto.elb.ELBConnection""boto.connection.AWSQueryConnection*Æ
-__init__boto.elb.ELBConnection.__init__"
-None*:
-self0
-boto.elb.ELBConnection"boto.elb.ELBConnection* 
-aws_access_key_id
-Any *$
-aws_secret_access_key
-Any *
-	is_secure
-Any *
-port
-Any *
-proxy
-Any *
+boto.elbé
+ELBConnection""boto.connection.AWSQueryConnection*”
+__init__*
 
-proxy_port
-Any *
+self(*
+aws_access_key_id (*
+aws_secret_access_key (*
+	is_secure (*
+port (*
+proxy (*
 
-proxy_user
-Any *
+proxy_port (*
 
-proxy_pass
-Any *
-debug
-Any *'
-https_connection_factory
-Any *
-region
-Any *
-path
-Any *
-security_token
-Any *
-validate_certs
-Any *
-profile_name
-Any z310z311z312z313z314*Ç
-build_list_params(boto.elb.ELBConnection.build_list_params*
+proxy_user (*
+
+proxy_pass (*
+debug (* 
+https_connection_factory (*
+region (*
+path (*
+security_token (*
+validate_certs (*
+profile_name (*?
+build_list_params*
 self*
 
 params*	
 items*	
-labelz310z311z312z313z314*ì
-get_all_load_balancers-boto.elb.ELBConnection.get_all_load_balancers*
+label*K
+get_all_load_balancers*
 self*
 load_balancer_names *
-marker z310z311z312z313z314*Ÿ
-create_load_balancer+boto.elb.ELBConnection.create_load_balancer*
+marker *ì
+create_load_balancer*
 self*
 name*	
 zones*
@@ -56,122 +40,113 @@ proxy_pass
 subnets *
 security_groups *
 scheme *
-complex_listeners z310z311z312z313z314*Æ
-create_load_balancer_listeners5boto.elb.ELBConnection.create_load_balancer_listeners*
+complex_listeners *^
+create_load_balancer_listeners*
 self*
 name*
 	listeners *
-complex_listeners z310z311z312z313z314*p
-delete_load_balancer+boto.elb.ELBConnection.delete_load_balancer*
+complex_listeners **
+delete_load_balancer*
 self*
-namez310z311z312z313z314*è
-delete_load_balancer_listeners5boto.elb.ELBConnection.delete_load_balancer_listeners*
+name*?
+delete_load_balancer_listeners*
 self*
 name*	
-portsz310z311z312z313z314*ö
-enable_availability_zones0boto.elb.ELBConnection.enable_availability_zones*
+ports*O
+enable_availability_zones*
 self*
 load_balancer_name*
-zones_to_addz310z311z312z313z314*ü
-disable_availability_zones1boto.elb.ELBConnection.disable_availability_zones*
+zones_to_add*S
+disable_availability_zones*
 self*
 load_balancer_name*
-zones_to_removez310z311z312z313z314*ñ
-modify_lb_attribute*boto.elb.ELBConnection.modify_lb_attribute*
+zones_to_remove*Q
+modify_lb_attribute*
 self*
 load_balancer_name*
 	attribute*	
-valuez310z311z312z313z314*Ä
-get_all_lb_attributes,boto.elb.ELBConnection.get_all_lb_attributes*
+value*9
+get_all_lb_attributes*
 self*
-load_balancer_namez310z311z312z313z314*Ö
-get_lb_attribute'boto.elb.ELBConnection.get_lb_attribute*
-self*
-load_balancer_name*
-	attributez310z311z312z313z314*â
-register_instances)boto.elb.ELBConnection.register_instances*
+load_balancer_name*C
+get_lb_attribute*
 self*
 load_balancer_name*
-	instancesz310z311z312z313z314*ç
-deregister_instances+boto.elb.ELBConnection.deregister_instances*
+	attribute*E
+register_instances*
 self*
 load_balancer_name*
-	instancesz310z311z312z313z314*ó
-describe_instance_health/boto.elb.ELBConnection.describe_instance_health*
+	instances*G
+deregister_instances*
+self*
+load_balancer_name*
+	instances*M
+describe_instance_health*
 self*
 load_balancer_name*
-	instances z310z311z312z313z314*Ü
-configure_health_check-boto.elb.ELBConnection.configure_health_check*
+	instances *>
+configure_health_check*
 self*
 name*
-health_checkz310z311z312z313z314*Æ
-set_lb_listener_SSL_certificate6boto.elb.ELBConnection.set_lb_listener_SSL_certificate*
+health_check*]
+set_lb_listener_SSL_certificate*
 self*
 lb_name*
 lb_port*
-ssl_certificate_idz310z311z312z313z314*¨
-#create_app_cookie_stickiness_policy:boto.elb.ELBConnection.create_app_cookie_stickiness_policy*
+ssl_certificate_id*W
+#create_app_cookie_stickiness_policy*
 self*
 name*
 lb_name*
-policy_namez310z311z312z313z314*æ
-"create_lb_cookie_stickiness_policy9boto.elb.ELBConnection.create_lb_cookie_stickiness_policy*
+policy_name*j
+"create_lb_cookie_stickiness_policy*
 self*
 cookie_expiration_period*
 lb_name*
-policy_namez310z311z312z313z314*§
-create_lb_policy'boto.elb.ELBConnection.create_lb_policy*
+policy_name*b
+create_lb_policy*
 self*
 lb_name*
 policy_name*
 policy_type*
-policy_attributesz310z311z312z313z314*|
-delete_lb_policy'boto.elb.ELBConnection.delete_lb_policy*
+policy_attributes*:
+delete_lb_policy*
 self*
 lb_name*
-policy_namez310z311z312z313z314*ú
-set_lb_policies_of_listener2boto.elb.ELBConnection.set_lb_policies_of_listener*
+policy_name*O
+set_lb_policies_of_listener*
 self*
 lb_name*
 lb_port*
-policiesz310z311z312z313z314*Æ
-!set_lb_policies_of_backend_server8boto.elb.ELBConnection.set_lb_policies_of_backend_server*
+policies*[
+!set_lb_policies_of_backend_server*
 self*
 lb_name*
 instance_port*
-policiesz310z311z312z313z314*ì
-apply_security_groups_to_lb2boto.elb.ELBConnection.apply_security_groups_to_lb*
+policies*F
+apply_security_groups_to_lb*
 self*
 name*
-security_groupsz310z311z312z313z314*}
-attach_lb_to_subnets+boto.elb.ELBConnection.attach_lb_to_subnets*
+security_groups*7
+attach_lb_to_subnets*
 self*
 name*
-subnetsz310z311z312z313z314*Å
-detach_lb_from_subnets-boto.elb.ELBConnection.detach_lb_from_subnets*
+subnets*9
+detach_lb_from_subnets*
 self*
 name*
-subnetsz310z311z312z313z314j310j311j312j313j314rQ
+subnetsr
 
-APIVersion!boto.elb.ELBConnection.APIVersion
-Any*310*311*312*313*314r_
-DefaultRegionName(boto.elb.ELBConnection.DefaultRegionName
-Any*310*311*312*313*314rg
-DefaultRegionEndpoint,boto.elb.ELBConnection.DefaultRegionEndpoint
-Any*310*311*312*313*314rI
-regionboto.elb.ELBConnection.region
-Any*310*311*312*313*3144
-regionsboto.elb.regionsz310z311z312z313z314h
-connect_to_regionboto.elb.connect_to_region*
+APIVersion0r
+DefaultRegionName0r
+DefaultRegionEndpoint0r
+
+region0	
+regions3
+connect_to_region*
 region_name*
-	kw_paramsz310z311z312z313z314*Ç
-__path__boto.elb.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*ù
-__annotations__boto.elb.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*C
+	kw_params*
+__path__0*
+__annotations__0*
 
-RegionDataboto.elb.RegionData
-Any*310*311*312*313*314
+RegionData022"boto.elb.ELBConnection22"builtins.str2"builtins.list22"builtins.dict2

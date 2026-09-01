@@ -1,418 +1,231 @@
 
-waitress.wasyncoreR
-ExitNowwaitress.wasyncore.ExitNow"builtins.Exceptionj310j311j312j313j314ùA
+waitress.wasyncore
+ExitNow"builtins.Exception†
 
-dispatcherwaitress.wasyncore.dispatcher"builtins.object*Ã
-__init__&waitress.wasyncore.dispatcher.__init__"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*S
-sockG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None *Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*ô
-add_channel)waitress.wasyncore.dispatcher.add_channel"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*ô
-del_channel)waitress.wasyncore.dispatcher.del_channel"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*ÿ
-create_socket+waitress.wasyncore.dispatcher.create_socket"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher**
-family
-builtins.int"builtins.int *(
-type
-builtins.int"builtins.int z310z311z312z313z314*œ
 
-set_socket(waitress.wasyncore.dispatcher.set_socket"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*(
-sock
-socket.socket"socket.socket*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*«
-set_reuse_addr,waitress.wasyncore.dispatcher.set_reuse_addr"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*µ
-readable&waitress.wasyncore.dispatcher.readable"
-builtins.bool"builtins.bool*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*µ
-writable&waitress.wasyncore.dispatcher.writable"
-builtins.bool"builtins.bool*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*Â
-listen$waitress.wasyncore.dispatcher.listen"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*%
-num
-builtins.int"builtins.intz310z311z312z313z314*ƒ
-bind"waitress.wasyncore.dispatcher.bind"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*j
-addr`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.intz310z311z312z313z314*Œ
-connect%waitress.wasyncore.dispatcher.connect"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*m
-address`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.intz310z311z312z313z314*¡
-accept$waitress.wasyncore.dispatcher.accept"
-AUnion[Tuple[socket.socket,Tuple[builtins.str,builtins.int]],None]»
-5Tuple[socket.socket,Tuple[builtins.str,builtins.int]]
-socket.socket"socket.socket`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*‡
-send"waitress.wasyncore.dispatcher.send"
-builtins.int"builtins.int*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher**
-data 
-builtins.bytes"builtins.bytes*.
-do_close
-builtins.bool"builtins.bool z310z311z312z313z314*Þ
-recv"waitress.wasyncore.dispatcher.recv" 
-builtins.bytes"builtins.bytes*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*-
-buffer_size
-builtins.int"builtins.intz310z311z312z313z314*™
-close#waitress.wasyncore.dispatcher.close"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*À
-log!waitress.wasyncore.dispatcher.log"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*)
-message
-builtins.str"builtins.strz310z311z312z313z314*ô
-log_info&waitress.wasyncore.dispatcher.log_info"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*)
-message
-builtins.str"builtins.str*(
-type
-builtins.str"builtins.str z310z311z312z313z314*±
-handle_read_event/waitress.wasyncore.dispatcher.handle_read_event"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*·
-handle_connect_event2waitress.wasyncore.dispatcher.handle_connect_event"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*³
-handle_write_event0waitress.wasyncore.dispatcher.handle_write_event"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*±
-handle_expt_event/waitress.wasyncore.dispatcher.handle_expt_event"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*§
-handle_error*waitress.wasyncore.dispatcher.handle_error"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*¥
-handle_expt)waitress.wasyncore.dispatcher.handle_expt"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*¥
-handle_read)waitress.wasyncore.dispatcher.handle_read"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*§
-handle_write*waitress.wasyncore.dispatcher.handle_write"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*«
-handle_connect,waitress.wasyncore.dispatcher.handle_connect"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*©
-handle_accept+waitress.wasyncore.dispatcher.handle_accept"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314*ê
-handle_accepted-waitress.wasyncore.dispatcher.handle_accepted"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*(
-sock
-socket.socket"socket.socket*
-addr
-Anyz310z311z312z313z314*§
-handle_close*waitress.wasyncore.dispatcher.handle_close"
-None*H
-self>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314j310j311j312j313j314re
-debug#waitress.wasyncore.dispatcher.debug
-builtins.bool"builtins.bool*310*311*312*313*314rm
-	connected'waitress.wasyncore.dispatcher.connected
-builtins.bool"builtins.bool*310*311*312*313*314rm
-	accepting'waitress.wasyncore.dispatcher.accepting
-builtins.bool"builtins.bool*310*311*312*313*314ro
+dispatcher"builtins.object*3
+__init__*
 
-connecting(waitress.wasyncore.dispatcher.connecting
-builtins.bool"builtins.bool*310*311*312*313*314ri
-closing%waitress.wasyncore.dispatcher.closing
-builtins.bool"builtins.bool*310*311*312*313*314râ
-addr"waitress.wasyncore.dispatcher.addrœ
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None*310*311*312*313*314r“
-ignore_log_types.waitress.wasyncore.dispatcher.ignore_log_types6
-builtins.frozenset[Any]
-Any"builtins.frozenset*310*311*312*313*314ri
-logger$waitress.wasyncore.dispatcher.logger 
-logging.Logger"logging.Logger*310*311*312*313*314rª
-compact_traceback/waitress.wasyncore.dispatcher.compact_tracebackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r
-socket$waitress.wasyncore.dispatcher.socketG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None*310*311*312*313*314r»
-family_and_type-waitress.wasyncore.dispatcher.family_and_type`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*310*311*312*313*314‰
-dispatcher_with_send'waitress.wasyncore.dispatcher_with_send"waitress.wasyncore.dispatcher*á
-__init__0waitress.wasyncore.dispatcher_with_send.__init__"
-None*\
-selfR
-'waitress.wasyncore.dispatcher_with_send"'waitress.wasyncore.dispatcher_with_send*S
-sockG
-Union[socket.socket,None]
-socket.socket"socket.socket
-None *Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*Ç
-initiate_send5waitress.wasyncore.dispatcher_with_send.initiate_send"
-None*\
-selfR
-'waitress.wasyncore.dispatcher_with_send"'waitress.wasyncore.dispatcher_with_sendz310z311z312z313z314*Ó
-writable0waitress.wasyncore.dispatcher_with_send.writable"
-builtins.bool"builtins.bool*\
-selfR
-'waitress.wasyncore.dispatcher_with_send"'waitress.wasyncore.dispatcher_with_sendz310z311z312z313z314*á
-send,waitress.wasyncore.dispatcher_with_send.send"
-None*\
-selfR
-'waitress.wasyncore.dispatcher_with_send"'waitress.wasyncore.dispatcher_with_send**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314r{
+self(*
+sock (*
+map (*(
+add_channel*
 
-out_buffer2waitress.wasyncore.dispatcher_with_send.out_buffer 
-builtins.bytes"builtins.bytes*310*311*312*313*314rª
-handle_write4waitress.wasyncore.dispatcher_with_send.handle_writeK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314§
-file_wrapperwaitress.wasyncore.file_wrapper"builtins.object*É
-__init__(waitress.wasyncore.file_wrapper.__init__"
-None*L
-selfB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapper*"
-fd
-_io.BytesIO"_io.BytesIOz310z311z312z313z314*›
-__del__'waitress.wasyncore.file_wrapper.__del__"
-None*DB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapperz310z311z312z313z314*È
-recv$waitress.wasyncore.file_wrapper.recv" 
-builtins.bytes"builtins.bytes*L
-selfB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapper*
-args
-Anyz310z311z312z313z314*È
-send$waitress.wasyncore.file_wrapper.send" 
-builtins.bytes"builtins.bytes*L
-selfB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapper*
-args
-Anyz310z311z312z313z314*è
+self(*
+map (*(
+del_channel*
 
-getsockopt*waitress.wasyncore.file_wrapper.getsockopt"
-builtins.int"builtins.int*L
-selfB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapper*'
-level
-builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int*U
-buflenG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z310z311z312z313z314*Ÿ
-close%waitress.wasyncore.file_wrapper.close"
-None*L
-selfB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapperz310z311z312z313z314*³
-fileno&waitress.wasyncore.file_wrapper.fileno"
-_io.BytesIO"_io.BytesIO*L
-selfB
-waitress.wasyncore.file_wrapper"waitress.wasyncore.file_wrapperz310z311z312z313z314j310j311j312j313j314r]
-fd"waitress.wasyncore.file_wrapper.fd
-_io.BytesIO"_io.BytesIO*310*311*312*313*314r’
-read$waitress.wasyncore.file_wrapper.readK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314r”
-write%waitress.wasyncore.file_wrapper.writeK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314È
-file_dispatcher"waitress.wasyncore.file_dispatcher"waitress.wasyncore.dispatcher*¡
-__init__+waitress.wasyncore.file_dispatcher.__init__"
-None*R
-selfH
-"waitress.wasyncore.file_dispatcher""waitress.wasyncore.file_dispatcher*"
-fd
-_io.BytesIO"_io.BytesIO*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*Ò
-set_file+waitress.wasyncore.file_dispatcher.set_file"
-None*R
-selfH
-"waitress.wasyncore.file_dispatcher""waitress.wasyncore.file_dispatcher*"
-fd
-_io.BytesIO"_io.BytesIOz310z311z312z313z314j310j311j312j313j314rr
-	connected,waitress.wasyncore.file_dispatcher.connected
-builtins.bool"builtins.bool*310*311*312*313*314rl
-socket)waitress.wasyncore.file_dispatcher.socket
-socket.socket"socket.socket*310*311*312*313*314‹
-readwaitress.wasyncore.read"
-None*G
-obj>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314
-writewaitress.wasyncore.write"
-None*G
-obj>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcherz310z311z312z313z314¾
-	readwritewaitress.wasyncore.readwrite"
-None*G
-obj>
-waitress.wasyncore.dispatcher"waitress.wasyncore.dispatcher*'
-flags
-builtins.int"builtins.intz310z311z312z313z314Â
-pollwaitress.wasyncore.poll"
-None*/
-timeout 
-builtins.float"builtins.float *Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314Ä
-poll2waitress.wasyncore.poll2"
-None*/
-timeout 
-builtins.float"builtins.float *Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314Å
-loopwaitress.wasyncore.loop"
-None*/
-timeout 
-builtins.float"builtins.float *.
-use_poll
-builtins.bool"builtins.bool *Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None *Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314Ø
-compact_traceback$waitress.wasyncore.compact_traceback"ƒ
-oTuple[Tuple[builtins.str,builtins.str,builtins.str],builtins.BaseException,builtins.BaseException,builtins.str]‹
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str0
-builtins.BaseException"builtins.BaseException0
-builtins.BaseException"builtins.BaseException
-builtins.str"builtins.strz310z311z312z313z314Í
-	close_allwaitress.wasyncore.close_all"
-None*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None *0
+self(*
+map (*;
+create_socket*
 
-ignore_all
-builtins.bool"builtins.bool z310z311z312z313z314*§
-__annotations__"waitress.wasyncore.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*4
-compatwaitress.compat *310*311*312*313*314*:
-	utilitieswaitress.utilities *310*311*312*313*314*À
+self(*
+family (*
+type (*3
 
-socket_mapwaitress.wasyncore.socket_mapz
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping*310*311*312*313*314*²
-mapwaitress.wasyncore.mapz
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping*310*311*312*313*314*‡
-poll3waitress.wasyncore.poll3K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314
+set_socket*
+
+self(*
+
+sock(*
+map (*
+set_reuse_addr*
+
+self(*
+readable*
+
+self(*
+writable*
+
+self(*!
+listen*
+
+self(*	
+num(* 
+bind*
+
+self(*
+
+addr(
+*&
+connect*
+
+self(*
+address(
+*
+accept*
+
+self(*2
+send*
+
+self(*
+
+data(*
+do_close (*'
+recv*
+
+self(*
+buffer_size(*
+close*
+
+self(*"
+log*
+
+self(*
+message(	*5
+log_info*
+
+self(*
+message(	*
+type (	*!
+handle_read_event*
+
+self(*$
+handle_connect_event*
+
+self(*"
+handle_write_event*
+
+self(*!
+handle_expt_event*
+
+self(*
+handle_error*
+
+self(*
+handle_expt*
+
+self(*
+handle_read*
+
+self(*
+handle_write*
+
+self(*
+handle_connect*
+
+self(*
+handle_accept*
+
+self(*7
+handle_accepted*
+
+self(*
+
+sock(*
+
+addr(*
+handle_close*
+
+self(r	
+debug0r
+	connected0r
+	accepting0r
+
+connecting0r
+closing0r
+addr0r
+ignore_log_types0r
+
+logger0r
+compact_traceback0r
+
+socket0r
+family_and_type0ç
+dispatcher_with_send"waitress.wasyncore.dispatcher*3
+__init__*
+
+self(*
+sock (*
+map (*
+initiate_send*
+
+self(*
+writable*
+
+self(* 
+send*
+
+self(*
+
+data(r
+
+out_buffer0r
+handle_write0¬
+file_wrapper"builtins.object*"
+__init__*
+
+self(*
+fd(*
+__del__*(* 
+recv*
+
+self(*
+
+args(* 
+send*
+
+self(*
+
+args(*F
+
+getsockopt*
+
+self(*
+level(*
+optname(*
+buflen (*
+close*
+
+self(*
+fileno*
+
+self(r
+fd0r
+read0r	
+write0 
+file_dispatcher"waitress.wasyncore.dispatcher*/
+__init__*
+
+self(*
+fd(*
+map (*"
+set_file*
+
+self(*
+fd(r
+	connected0r
+
+socket0
+read*	
+obj(
+write*	
+obj(%
+	readwrite*	
+obj(*
+flags(&
+poll*
+timeout (*
+map ('
+poll2*
+timeout (*
+map (G
+loop*
+timeout (*
+use_poll (*
+map (*
+count (
+compact_traceback.
+	close_all*
+map (*
+
+ignore_all (*
+__annotations__0*
+compatwaitress.compat *!
+	utilitieswaitress.utilities *
+
+socket_map0*
+map0*	
+poll3022"waitress.wasyncore.dispatcher2"socket.socket222"builtins.int2"typing.Mapping2222"builtins.bool2"builtins.str22	22
+222"builtins.bytes222
+2"builtins.frozenset22"logging.Logger2"builtins.function22222)"'waitress.wasyncore.dispatcher_with_send2!"waitress.wasyncore.file_wrapper2"_io.BytesIO222$""waitress.wasyncore.file_dispatcher2"builtins.float2222			2"builtins.BaseException22	2"builtins.dict2	

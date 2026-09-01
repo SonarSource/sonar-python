@@ -1,189 +1,79 @@
 
-stripe.errorà
-StripeErrorstripe.error.StripeError"builtins.Exception*ù
-__init__!stripe.error.StripeError.__init__"
-None*>
-self4
-stripe.error.StripeError"stripe.error.StripeError*j
-message[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	http_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-http_status[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	json_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-code[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*o
-user_message%stripe.error.StripeError.user_message*
-self0:builtins.property`z310z311z312z313z314*l
-construct_error_object/stripe.error.StripeError.construct_error_object*
-selfz310z311z312z313z314j310j311j312j313j314rQ
-	http_body"stripe.error.StripeError.http_body
-Any*310*311*312*313*314rU
-http_status$stripe.error.StripeError.http_status
-Any*310*311*312*313*314rQ
-	json_body"stripe.error.StripeError.json_body
-Any*310*311*312*313*314rM
-headers stripe.error.StripeError.headers
-Any*310*311*312*313*314rG
-codestripe.error.StripeError.code
-Any*310*311*312*313*314rS
+stripe.error›
+StripeError"builtins.Exception*É
+__init__*
 
-request_id#stripe.error.StripeError.request_id
-Any*310*311*312*313*314rI
-errorstripe.error.StripeError.error
-Any*310*311*312*313*314T
-APIErrorstripe.error.APIError"stripe.error.StripeErrorj310j311j312j313j314€
-APIConnectionErrorstripe.error.APIConnectionError"stripe.error.StripeError*ê
-__init__(stripe.error.APIConnectionError.__init__"
-None*L
-selfB
-stripe.error.APIConnectionError"stripe.error.APIConnectionError*
-message
-Any*l
-	http_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-http_status[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	json_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-code[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *2
-should_retry
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314r^
-should_retry,stripe.error.APIConnectionError.should_retry
-Any*310*311*312*313*314t
-StripeErrorWithParamCode%stripe.error.StripeErrorWithParamCode"stripe.error.StripeErrorj310j311j312j313j314Æ
-	CardErrorstripe.error.CardError"%stripe.error.StripeErrorWithParamCode*ˇ
-__init__stripe.error.CardError.__init__"
-None*:
-self0
-stripe.error.CardError"stripe.error.CardError*
-message
-Any*
-param
-Any*
-code
-Any*l
-	http_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-http_status[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	json_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rG
-paramstripe.error.CardError.param
-Any*310*311*312*313*314d
-IdempotencyErrorstripe.error.IdempotencyError"stripe.error.StripeErrorj310j311j312j313j314¿
-InvalidRequestError stripe.error.InvalidRequestError"%stripe.error.StripeErrorWithParamCode*Û
-__init__)stripe.error.InvalidRequestError.__init__"
-None*N
-selfD
- stripe.error.InvalidRequestError" stripe.error.InvalidRequestError*
-message
-Any*
-param
-Any*g
-code[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	http_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-http_status[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	json_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rQ
-param&stripe.error.InvalidRequestError.param
-Any*310*311*312*313*314j
-AuthenticationError stripe.error.AuthenticationError"stripe.error.StripeErrorj310j311j312j313j314b
-PermissionErrorstripe.error.PermissionError"stripe.error.StripeErrorj310j311j312j313j314`
-RateLimitErrorstripe.error.RateLimitError"stripe.error.StripeErrorj310j311j312j313j314π
-SignatureVerificationError'stripe.error.SignatureVerificationError"stripe.error.StripeError*⁄
-__init__0stripe.error.SignatureVerificationError.__init__"
-None*\
-selfR
-'stripe.error.SignatureVerificationError"'stripe.error.SignatureVerificationError*
-message
-Any*
+self(*
+message (*
+	http_body (*
+http_status (*
+	json_body (*
+headers (*
+code (*/
+user_message*
+self0:builtins.property`*"
+construct_error_object*
+selfr
+	http_body0r
+http_status0r
+	json_body0r
+headers0r
+code0r
 
-sig_header
-Any*l
-	http_body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rb
+request_id0r	
+error0$
+APIError"stripe.error.StripeError⁄
+APIConnectionError"stripe.error.StripeError*ó
+__init__*
 
-sig_header2stripe.error.SignatureVerificationError.sig_header
-Any*310*311*312*313*314*°
-__annotations__stripe.error.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+message(*
+	http_body (*
+http_status (*
+	json_body (*
+headers (*
+code (*
+should_retry (r
+should_retry04
+StripeErrorWithParamCode"stripe.error.StripeErrorÃ
+	CardError"%stripe.error.StripeErrorWithParamCode*å
+__init__*
+
+self(*
+message(*
+param(*
+
+code(*
+	http_body (*
+http_status (*
+	json_body (*
+headers (r	
+param0,
+IdempotencyError"stripe.error.StripeErrorÿ
+InvalidRequestError"%stripe.error.StripeErrorWithParamCode*é
+__init__*
+
+self(	*
+message(*
+param(*
+code (*
+	http_body (*
+http_status (*
+	json_body (*
+headers (r	
+param0/
+AuthenticationError"stripe.error.StripeError+
+PermissionError"stripe.error.StripeError*
+RateLimitError"stripe.error.StripeErrorî
+SignatureVerificationError"stripe.error.StripeError*L
+__init__*
+
+self(
+*
+message(*
+
+sig_header(*
+	http_body (r
+
+sig_header0*
+__annotations__022"stripe.error.StripeError22"_typeshed.Incomplete2222!"stripe.error.APIConnectionError2"builtins.bool2"stripe.error.CardError2"" stripe.error.InvalidRequestError2)"'stripe.error.SignatureVerificationError2"builtins.str2"builtins.dict2

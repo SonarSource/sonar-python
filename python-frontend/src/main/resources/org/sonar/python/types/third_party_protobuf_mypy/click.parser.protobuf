@@ -1,836 +1,386 @@
 
-click.parserÇ
-CoreArgumentclick.core.Argument"click.core.Parameter*¶
-__init__click.core.Argument.__init__"
-None*4
-self*
-click.core.Argument"click.core.Argument*_
-param_declsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*W
-requiredG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-attrs
-Any*©
-human_readable_name'click.core.Argument.human_readable_name"
-builtins.str"builtins.str*4
-self*
-click.core.Argument"click.core.Argument0:builtins.property`*„
-make_metavar click.core.Argument.make_metavar"
-builtins.str"builtins.str*4
-self*
-click.core.Argument"click.core.Argument*¯
-_parse_decls click.core.Argument._parse_decls"¹
-WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*4
-self*
-click.core.Argument"click.core.Argument*Y
-declsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*0
-expose_value
-builtins.bool"builtins.bool*í
-get_usage_pieces$click.core.Argument.get_usage_pieces"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*4
-self*
-click.core.Argument"click.core.Argument*1
-ctx(
-click.core.Context"click.core.Context*»
-get_error_hint"click.core.Argument.get_error_hint"
-builtins.str"builtins.str*4
-self*
-click.core.Argument"click.core.Argument*1
-ctx(
-click.core.Context"click.core.Context*é
-add_to_parser!click.core.Argument.add_to_parser"
-None*4
-self*
-click.core.Argument"click.core.Argument*B
-parser6
-click.parser.OptionParser"click.parser.OptionParser*1
-ctx(
-click.core.Context"click.core.ContextrT
-param_type_name#click.core.Argument.param_type_name
-builtins.str"builtins.str×/
+click.parserÃ
+CoreArgumentclick.core.Argument"click.core.Parameter*J
+__init__*
 
-CoreOptionclick.core.Option"click.core.Parameter*ƒ
-__init__click.core.Option.__init__"
-None*0
-self&
-click.core.Option"click.core.Option*›
-param_decls‡
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *†
-show_defaultr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *q
-promptc
-!Union[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.str *~
-confirmation_promptc
-!Union[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.str *5
-prompt_required
-builtins.bool"builtins.bool *0
+self(*
+param_decls(*
+required (*
+attrs(*:
+human_readable_name*
 
-hide_input
-builtins.bool"builtins.bool *V
-is_flagG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *8
+self(0:builtins.property`*
+make_metavar*
 
-flag_value&
-Union[Any,None]
-Any
-None *.
-multiple
-builtins.bool"builtins.bool *+
-count
-builtins.bool"builtins.bool *8
-allow_from_autoenv
-builtins.bool"builtins.bool *x
-typel
-%Union[click.types.ParamType,Any,None].
-click.types.ParamType"click.types.ParamType
-Any
-None *P
-helpD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-hidden
-builtins.bool"builtins.bool *2
-show_choices
-builtins.bool"builtins.bool *1
-show_envvar
-builtins.bool"builtins.bool *
-attrs
-Any*¹
-to_info_dictclick.core.Option.to_info_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*0
-self&
-click.core.Option"click.core.Option*©
-_parse_declsclick.core.Option._parse_decls"¹
-WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*0
-self&
-click.core.Option"click.core.Option*Y
-declsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*0
-expose_value
-builtins.bool"builtins.bool*ã
-add_to_parserclick.core.Option.add_to_parser"
-None*0
-self&
-click.core.Option"click.core.Option*B
-parser6
-click.parser.OptionParser"click.parser.OptionParser*1
-ctx(
-click.core.Context"click.core.Context*¸
-get_help_record!click.core.Option.get_help_record"œ
-,Union[Tuple[builtins.str,builtins.str],None]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-None*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context*¤
-prompt_for_value"click.core.Option.prompt_for_value"
-Any*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context*é
-resolve_envvar_value&click.core.Option.resolve_envvar_value"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context*Å
-value_from_envvar#click.core.Option.value_from_envvar"&
-Union[Any,None]
-Any
-None*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context* 
-consume_valueclick.core.Option.consume_value"l
-%Tuple[Any,click.core.ParameterSource]
-Any8
-click.core.ParameterSource"click.core.ParameterSource*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context*š
-opts
-1typing.Mapping[builtins.str,click.core.Parameter]
-builtins.str"builtins.str,
-click.core.Parameter"click.core.Parameter"typing.Mapping2°
-get_defaultclick.core.Option.get_default–
-get_defaultclick.core.Option.get_default"&
-Union[Any,None]
-Any
-None*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context*F
-call:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadXè
-get_defaultclick.core.Option.get_default"“
-/Union[Any,CallableType[builtins.function],None]
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*0
-self&
-click.core.Option"click.core.Option*1
-ctx(
-click.core.Context"click.core.Context**
-call
-builtins.bool"builtins.bool 0:typing.overloadXrR
-param_type_name!click.core.Option.param_type_name
-builtins.str"builtins.strrh
-promptclick.core.Option.promptD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner¡
-confirmation_prompt%click.core.Option.confirmation_promptc
-!Union[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.strrT
-prompt_required!click.core.Option.prompt_required
-builtins.bool"builtins.boolrJ
+self(*=
+_parse_decls
+*
 
-hide_inputclick.core.Option.hide_input
-builtins.bool"builtins.boolrB
-hiddenclick.core.Option.hidden
-builtins.bool"builtins.boolrX
-_flag_needs_value#click.core.Option._flag_needs_value
-builtins.bool"builtins.boolr«
-defaultclick.core.Option.default„
-*Union[Any,CallableType[builtins.function]]
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.functionrD
-is_flagclick.core.Option.is_flag
-builtins.bool"builtins.boolrN
-is_bool_flagclick.core.Option.is_bool_flag
-builtins.bool"builtins.boolr3
+self(*
+decls(*
+expose_value(*+
+get_usage_pieces	*
 
-flag_valueclick.core.Option.flag_value
-Anyr@
-countclick.core.Option.count
-builtins.bool"builtins.boolrZ
-allow_from_autoenv$click.core.Option.allow_from_autoenv
-builtins.bool"builtins.boolrd
-helpclick.core.Option.helpD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner¢
-show_defaultclick.core.Option.show_defaultr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-NonerN
-show_choicesclick.core.Option.show_choices
-builtins.bool"builtins.boolrL
-show_envvarclick.core.Option.show_envvar
-builtins.bool"builtins.boolêA
-CoreParameterclick.core.Parameter"builtins.object*“
-__init__click.core.Parameter.__init__"
-None*6
-self,
-click.core.Parameter"click.core.Parameter*›
-param_decls‡
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *x
-typel
-%Union[click.types.ParamType,Any,None].
-click.types.ParamType"click.types.ParamType
-Any
-None *.
-required
-builtins.bool"builtins.bool *£
-default“
-/Union[Any,CallableType[builtins.function],None]
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Q
-nargsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *.
-multiple
-builtins.bool"builtins.bool *S
-metavarD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *2
-expose_value
-builtins.bool"builtins.bool *.
-is_eager
-builtins.bool"builtins.bool *Á
-envvar²
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *
-shell_complete†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Â
-to_info_dict!click.core.Parameter.to_info_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*6
-self,
-click.core.Parameter"click.core.Parameter*w
-__repr__click.core.Parameter.__repr__"
-builtins.str"builtins.str*.,
-click.core.Parameter"click.core.Parameter*²
-_parse_decls!click.core.Parameter._parse_decls"¹
-WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-click.core.Parameter"click.core.Parameter*Y
-declsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*0
-expose_value
-builtins.bool"builtins.bool*¬
-human_readable_name(click.core.Parameter.human_readable_name"
-builtins.str"builtins.str*6
-self,
-click.core.Parameter"click.core.Parameter0:builtins.property`*‡
-make_metavar!click.core.Parameter.make_metavar"
-builtins.str"builtins.str*6
-self,
-click.core.Parameter"click.core.Parameter*ì
-add_to_parser"click.core.Parameter.add_to_parser"
-None*6
-self,
-click.core.Parameter"click.core.Parameter*B
-parser6
-click.parser.OptionParser"click.parser.OptionParser*1
-ctx(
-click.core.Context"click.core.Context*ñ
-consume_value"click.core.Parameter.consume_value"l
-%Tuple[Any,click.core.ParameterSource]
-Any8
-click.core.ParameterSource"click.core.ParameterSource*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*c
-optsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*¿
-type_cast_value$click.core.Parameter.type_cast_value"
-Any*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*
-value
-Any*¥
-value_is_missing%click.core.Parameter.value_is_missing"
-builtins.bool"builtins.bool*6
-self,
-click.core.Parameter"click.core.Parameter*
-value
-Any*»
-process_value"click.core.Parameter.process_value"
-Any*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*
-value
-Any*ò
-resolve_envvar_value)click.core.Parameter.resolve_envvar_value"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*Î
-value_from_envvar&click.core.Parameter.value_from_envvar"&
-Union[Any,None]
-Any
-None*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*æ
-handle_parse_result(click.core.Parameter.handle_parse_result"
-&Tuple[Any,builtins.list[builtins.str]]
-AnyJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*c
-optsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*T
-argsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Á
-get_help_record$click.core.Parameter.get_help_record"œ
-,Union[Tuple[builtins.str,builtins.str],None]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-None*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*ð
-get_usage_pieces%click.core.Parameter.get_usage_pieces"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*¾
-get_error_hint#click.core.Parameter.get_error_hint"
-builtins.str"builtins.str*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*æ
-shell_complete#click.core.Parameter.shell_complete"•
-4builtins.list[click.shell_completion.CompletionItem]N
-%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*,
+self(*	
+ctx(*)
+get_error_hint*
 
-incomplete
-builtins.str"builtins.str2Å
-get_default click.core.Parameter.get_defaultŸ
-get_default click.core.Parameter.get_default"&
-Union[Any,None]
-Any
-None*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context*F
-call:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadXñ
-get_default click.core.Parameter.get_default"“
-/Union[Any,CallableType[builtins.function],None]
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Context**
-call
-builtins.bool"builtins.bool 0:typing.overloadXrU
-param_type_name$click.core.Parameter.param_type_name
-builtins.str"builtins.strrg
-nameclick.core.Parameter.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerm
-optsclick.core.Parameter.optsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listr
-secondary_opts#click.core.Parameter.secondary_optsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrQ
-typeclick.core.Parameter.type.
-click.types.ParamType"click.types.ParamTyperI
-requiredclick.core.Parameter.required
-builtins.bool"builtins.boolr²
-callbackclick.core.Parameter.callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-NonerA
-nargsclick.core.Parameter.nargs
-builtins.int"builtins.intrI
-multipleclick.core.Parameter.multiple
-builtins.bool"builtins.boolrQ
-expose_value!click.core.Parameter.expose_value
-builtins.bool"builtins.boolr½
-defaultclick.core.Parameter.default“
-/Union[Any,CallableType[builtins.function],None]
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function
-NonerI
-is_eagerclick.core.Parameter.is_eager
-builtins.bool"builtins.boolrm
-metavarclick.core.Parameter.metavarD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerÚ
-envvarclick.core.Parameter.envvar²
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-NonerÎ
-_custom_shell_complete+click.core.Parameter._custom_shell_complete†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None‡
-Optionclick.parser.Option"builtins.object*÷
-__init__click.parser.Option.__init__"
-None*4
-self*
-click.parser.Option"click.parser.Option*/
-obj&
-click.core.Option"click.core.Option*X
-optsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*N
-destD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*R
-actionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *)
-nargs
-builtins.int"builtins.int *3
-const&
-Union[Any,None]
-Any
-None *›
-takes_valueclick.parser.Option.takes_value"
-builtins.bool"builtins.bool*4
-self*
-click.parser.Option"click.parser.Option0:builtins.property`*Ò
-processclick.parser.Option.process"
-None*4
-self*
-click.parser.Option"click.parser.Option*'
-value
-builtins.str"builtins.str*A
-state6
-click.parser.ParsingState"click.parser.ParsingStaterz
-_short_optsclick.parser.Option._short_optsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrx
+self(*	
+ctx(*6
+add_to_parser*
 
-_long_optsclick.parser.Option._long_optsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrr
-prefixesclick.parser.Option.prefixesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setrf
-destclick.parser.Option.destD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerB
-actionclick.parser.Option.action
-builtins.str"builtins.strr@
-nargsclick.parser.Option.nargs
-builtins.int"builtins.intrJ
-constclick.parser.Option.const&
-Union[Any,None]
-Any
-NonerF
-objclick.parser.Option.obj&
-click.core.Option"click.core.Optionƒ
-Argumentclick.parser.Argument"builtins.object*ž
-__init__click.parser.Argument.__init__"
-None*8
-self.
-click.parser.Argument"click.parser.Argument*3
-obj*
-click.core.Argument"click.core.Argument*N
-destD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*)
-nargs
-builtins.int"builtins.int *±
-processclick.parser.Argument.process"
-None*8
-self.
-click.parser.Argument"click.parser.Argument*ÿ
-valueó
-BUnion[builtins.str,None,typing.Sequence[Union[builtins.str,None]]]
-builtins.str"builtins.str
-None‚
-)typing.Sequence[Union[builtins.str,None]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"typing.Sequence*A
-state6
-click.parser.ParsingState"click.parser.ParsingStaterh
-destclick.parser.Argument.destD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerB
-nargsclick.parser.Argument.nargs
-builtins.int"builtins.intrL
-objclick.parser.Argument.obj*
-click.core.Argument"click.core.ArgumentŠ
-ParsingStateclick.parser.ParsingState"builtins.object*Ñ
-__init__"click.parser.ParsingState.__init__"
-None*@
-self6
-click.parser.ParsingState"click.parser.ParsingState*U
-rargsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listr
-optsclick.parser.ParsingState.optsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictrt
-largsclick.parser.ParsingState.largsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrt
-rargsclick.parser.ParsingState.rargsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrŒ
-orderclick.parser.ParsingState.orderb
-#builtins.list[click.core.Parameter],
-click.core.Parameter"click.core.Parameter"builtins.listÈ!
-OptionParserclick.parser.OptionParser"builtins.object*Ý
-__init__"click.parser.OptionParser.__init__"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None *
+self(*
+parser(*	
+ctx(r
+param_type_name0ä	
 
-add_option$click.parser.OptionParser.add_option"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*/
-obj&
-click.core.Option"click.core.Option*X
-optsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*N
-destD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*R
-actionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *)
-nargs
-builtins.int"builtins.int *3
-const&
-Union[Any,None]
-Any
-None *²
-add_argument&click.parser.OptionParser.add_argument"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*3
-obj*
-click.core.Argument"click.core.Argument*N
-destD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*)
-nargs
-builtins.int"builtins.int *À
+CoreOptionclick.core.Option"click.core.Parameter*ã
+__init__*
 
-parse_args$click.parser.OptionParser.parse_args"ó
-fTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.str],builtins.list[click.core.Parameter]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listb
-#builtins.list[click.core.Parameter],
-click.core.Parameter"click.core.Parameter"builtins.list*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*T
-argsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Ù
-_process_args_for_args0click.parser.OptionParser._process_args_for_args"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*A
-state6
-click.parser.ParsingState"click.parser.ParsingState*ß
-_process_args_for_options3click.parser.OptionParser._process_args_for_options"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*A
-state6
-click.parser.ParsingState"click.parser.ParsingState*Ì
-_match_long_opt)click.parser.OptionParser._match_long_opt"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*%
-opt
-builtins.str"builtins.str*X
-explicit_valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*A
-state6
-click.parser.ParsingState"click.parser.ParsingState*ô
-_match_short_opt*click.parser.OptionParser._match_short_opt"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*%
-arg
-builtins.str"builtins.str*A
-state6
-click.parser.ParsingState"click.parser.ParsingState*½
-_get_value_from_state/click.parser.OptionParser._get_value_from_state"
-Any*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*-
-option_name
-builtins.str"builtins.str*6
-option*
-click.parser.Option"click.parser.Option*A
-state6
-click.parser.ParsingState"click.parser.ParsingState*î
-_process_opts'click.parser.OptionParser._process_opts"
-None*@
-self6
-click.parser.OptionParser"click.parser.OptionParser*%
-arg
-builtins.str"builtins.str*A
-state6
-click.parser.ParsingState"click.parser.ParsingStater|
-ctxclick.parser.OptionParser.ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonerl
-allow_interspersed_args1click.parser.OptionParser.allow_interspersed_args
-builtins.bool"builtins.boolrj
-ignore_unknown_options0click.parser.OptionParser.ignore_unknown_options
-builtins.bool"builtins.boolr¿
+self(*
+param_decls (*
+show_default (*
+prompt (*
+confirmation_prompt (*
+prompt_required (*
 
-_short_opt$click.parser.OptionParser._short_optŠ
-/builtins.dict[builtins.str,click.parser.Option]
-builtins.str"builtins.str*
-click.parser.Option"click.parser.Option"builtins.dictr½
-	_long_opt#click.parser.OptionParser._long_optŠ
-/builtins.dict[builtins.str,click.parser.Option]
-builtins.str"builtins.str*
-click.parser.Option"click.parser.Option"builtins.dictr‚
-_opt_prefixes'click.parser.OptionParser._opt_prefixesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setr
-_argsclick.parser.OptionParser._argse
-$builtins.list[click.parser.Argument].
-click.parser.Argument"click.parser.Argument"builtins.list]
-_gettext.gettext"
-builtins.str"builtins.str*)
-message
-builtins.str"builtins.str‹
-_unpack_argsclick.parser._unpack_args"¥
-vTuple[typing.Sequence[Union[builtins.str,typing.Sequence[Union[builtins.str,None]],None]],builtins.list[builtins.str]]Ü
-Styping.Sequence[Union[builtins.str,typing.Sequence[Union[builtins.str,None]],None]]ó
-BUnion[builtins.str,typing.Sequence[Union[builtins.str,None]],None]
-builtins.str"builtins.str‚
-)typing.Sequence[Union[builtins.str,None]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"typing.Sequence
-None"typing.SequenceJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*X
-argsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*^
+hide_input (*
+is_flag (*
 
-nargs_specN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence¬
-	split_optclick.parser.split_opt"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*%
-opt
-builtins.str"builtins.strÑ
-normalize_optclick.parser.normalize_opt"
-builtins.str"builtins.str*%
-opt
-builtins.str"builtins.str*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None§
-split_arg_stringclick.parser.split_arg_string"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*(
-string
-builtins.str"builtins.str*ˆ
-__annotations__click.parser.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
+flag_value (*
+multiple (*
+count (*
+allow_from_autoenv (*
+type (*
+help (*
+hidden (*
+show_choices (*
+show_envvar (*
+attrs(*
+to_info_dict*
+
+self(*=
+_parse_decls
+*
+
+self(*
+decls(*
+expose_value(*6
+add_to_parser*
+
+self(*
+parser(*	
+ctx(**
+get_help_record*
+
+self(*	
+ctx(*+
+prompt_for_value*
+
+self(*	
+ctx(*/
+resolve_envvar_value*
+
+self(*	
+ctx(*,
+value_from_envvar*
+
+self(*	
+ctx(*4
+consume_value*
+
+self(*	
+ctx(*
+
+opts(2£
+get_defaultI
+get_default*
+
+self(*	
+ctx(*
+call (0:typing.overloadXI
+get_default*
+
+self(*	
+ctx(*
+call (0:typing.overloadXr
+param_type_name0r
+
+prompt0r
+confirmation_prompt0r
+prompt_required0r
+
+hide_input0r
+
+hidden0r
+_flag_needs_value0r
+default0r
+is_flag0r
+is_bool_flag0r
+
+flag_value0r	
+count0r
+allow_from_autoenv0r
+help0r
+show_default0r
+show_choices0r
+show_envvar0í
+CoreParameterclick.core.Parameter"builtins.object*ò
+__init__*
+
+self(*
+param_decls (*
+type (*
+required (*
+default (*
+callback ( *
+nargs ("*
+multiple (*
+metavar (*
+expose_value (*
+is_eager (*
+envvar (#*
+shell_complete ( *
+to_info_dict*
+
+self(*
+__repr__*(*=
+_parse_decls
+*
+
+self(*
+decls(*
+expose_value(*:
+human_readable_name*
+
+self(0:builtins.property`*
+make_metavar*
+
+self(*6
+add_to_parser*
+
+self(*
+parser(*	
+ctx(*4
+consume_value*
+
+self(*	
+ctx(*
+
+opts($*7
+type_cast_value*
+
+self(*	
+ctx(*
+value(*-
+value_is_missing*
+
+self(*
+value(*5
+process_value*
+
+self(*	
+ctx(*
+value(*/
+resolve_envvar_value*
+
+self(*	
+ctx(*,
+value_from_envvar*
+
+self(*	
+ctx(*F
+handle_parse_result%*
+
+self(*	
+ctx(*
+
+opts($*
+
+args(	**
+get_help_record*
+
+self(*	
+ctx(*+
+get_usage_pieces	*
+
+self(*	
+ctx(*)
+get_error_hint*
+
+self(*	
+ctx(*;
+shell_complete'*
+
+self(*	
+ctx(*
+
+incomplete(2£
+get_defaultI
+get_default*
+
+self(*	
+ctx(*
+call (0:typing.overloadXI
+get_default*
+
+self(*	
+ctx(*
+call (0:typing.overloadXr
+param_type_name0r
+name0r
+opts0	r
+secondary_opts0	r
+type0r
+required0r
+callback0 r	
+nargs0!r
+multiple0r
+expose_value0r
+default0r
+is_eager0r
+metavar0r
+
+envvar0#r
+_custom_shell_complete0 Ï
+Option"builtins.object*i
+__init__*
+
+self((*	
+obj(*
+
+opts(*
+
+dest(*
+action (*
+nargs (!*
+const (*2
+takes_value*
+
+self((0:builtins.property`*1
+process*
+
+self((*
+value(*
+state()r
+_short_opts0	r
+
+_long_opts0	r
+prefixes0*r
+dest0r
+
+action0r	
+nargs0!r	
+const0r
+obj0¬
+Argument"builtins.object*>
+__init__*
+
+self(+*	
+obj(*
+
+dest(*
+nargs (!*1
+process*
+
+self(+*
+value(-*
+state()r
+dest0r	
+nargs0!r
+obj0q
+ParsingState"builtins.object*%
+__init__*
+
+self()*
+rargs(	r
+opts0r	
+largs0	r	
+rargs0	r	
+order0. 
+OptionParser"builtins.object*%
+__init__*
+
+self(*
+ctx (/*k
+
+add_option*
+
+self(*	
+obj(*
+
+opts(*
+
+dest(*
+action (*
+nargs (!*
+const (*B
+add_argument*
+
+self(*	
+obj(*
+
+dest(*
+nargs (!*&
+
+parse_args0*
+
+self(*
+
+args(	*3
+_process_args_for_args*
+
+self(*
+state()*6
+_process_args_for_options*
+
+self(*
+state()*M
+_match_long_opt*
+
+self(*	
+opt(*
+explicit_value(*
+state()*8
+_match_short_opt*
+
+self(*	
+arg(*
+state()*S
+_get_value_from_state*
+
+self(*
+option_name(*
+option((*
+state()*5
+_process_opts*
+
+self(*	
+arg(*
+state()r
+ctx0/r
+allow_interspersed_args0r
+ignore_unknown_options0r
+
+_short_opt01r
+	_long_opt01r
+_opt_prefixes0*r	
+_args02%
+_gettext.gettext*
+message(.
+_unpack_args5*
+
+args(*
+
+nargs_spec(6
+	split_opt*	
+opt('
+normalize_opt*	
+opt(*	
+ctx(/"
+split_arg_string	*
+string(*
+__annotations__0*
 ttyping *
-tetyping_extensions *W
-_flag_needs_valueclick.parser._flag_needs_value"
-builtins.object"builtins.object
+tetyping_extensions *
+_flag_needs_value0722"click.core.Argument2"builtins.str2"typing.Sequence22"builtins.bool222222"builtins.list222		2"click.core.Context2"click.parser.OptionParser2"click.core.Option222222222"click.types.ParamType222"builtins.dict222222"click.core.ParameterSource222"click.core.Parameter2"typing.Mapping22	22"builtins.function222222222"builtins.int22!222"typing.Mapping222	2'"%click.shell_completion.CompletionItem2"builtins.list2&2"click.parser.Option2"click.parser.ParsingState2"builtins.set22"click.parser.Argument2"typing.Sequence222,2"builtins.list22222	.2"builtins.dict2(2"builtins.list2+22,2"typing.Sequence23224	2"typing.Sequence2!2"builtins.object

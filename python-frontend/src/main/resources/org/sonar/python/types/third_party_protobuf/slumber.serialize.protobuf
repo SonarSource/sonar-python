@@ -1,120 +1,56 @@
 
-slumber.serialize
-BaseSerializer slumber.serialize.BaseSerializer"builtins.object*Ì
-get_content_type1slumber.serialize.BaseSerializer.get_content_type"
-builtins.str"builtins.str*N
-selfD
- slumber.serialize.BaseSerializer" slumber.serialize.BaseSerializerz310z311z312z313z314*²
-loads&slumber.serialize.BaseSerializer.loads"
-Any*N
-selfD
- slumber.serialize.BaseSerializer" slumber.serialize.BaseSerializer*
-dataƒ
-@TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray]]£
-5Union[builtins.str,builtins.bytes,builtins.bytearray]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray"slumber.serialize._Dataz310z311z312z313z314*²
-dumps&slumber.serialize.BaseSerializer.dumps"
-Any*N
-selfD
- slumber.serialize.BaseSerializer" slumber.serialize.BaseSerializer*
-dataƒ
-@TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray]]£
-5Union[builtins.str,builtins.bytes,builtins.bytearray]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray"slumber.serialize._Dataz310z311z312z313z314j310j311j312j313j314rÜ
-content_types.slumber.serialize.BaseSerializer.content_types
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*310*311*312*313*314rŠ
-key$slumber.serialize.BaseSerializer.keyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314ø
-JsonSerializer slumber.serialize.JsonSerializer" slumber.serialize.BaseSerializerj310j311j312j313j314r¤
-content_types.slumber.serialize.JsonSerializer.content_typesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rb
-key$slumber.serialize.JsonSerializer.key
-builtins.str"builtins.str*310*311*312*313*314ø
-YamlSerializer slumber.serialize.YamlSerializer" slumber.serialize.BaseSerializerj310j311j312j313j314r¤
-content_types.slumber.serialize.YamlSerializer.content_typesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rb
-key$slumber.serialize.YamlSerializer.key
-builtins.str"builtins.str*310*311*312*313*314™
+slumber.serialize¥
+BaseSerializer"builtins.object* 
+get_content_type*
 
-Serializerslumber.serialize.Serializer"builtins.object*Ú
-__init__%slumber.serialize.Serializer.__init__"
-None*F
-self<
-slumber.serialize.Serializer"slumber.serialize.Serializer*S
-defaultD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *æ
-serializersÒ
-;Union[builtins.list[slumber.serialize.BaseSerializer],None]†
-/builtins.list[slumber.serialize.BaseSerializer]D
- slumber.serialize.BaseSerializer" slumber.serialize.BaseSerializer"builtins.list
-None z310z311z312z313z314*
-get_serializer+slumber.serialize.Serializer.get_serializer"D
- slumber.serialize.BaseSerializer" slumber.serialize.BaseSerializer*F
-self<
-slumber.serialize.Serializer"slumber.serialize.Serializer*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-content_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ú
-loads"slumber.serialize.Serializer.loads"
-Any*F
-self<
-slumber.serialize.Serializer"slumber.serialize.Serializer*
-dataƒ
-@TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray]]£
-5Union[builtins.str,builtins.bytes,builtins.bytearray]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray"slumber.serialize._Data*R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ú
-dumps"slumber.serialize.Serializer.dumps"
-Any*F
-self<
-slumber.serialize.Serializer"slumber.serialize.Serializer*
-dataƒ
-@TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray]]£
-5Union[builtins.str,builtins.bytes,builtins.bytearray]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray"slumber.serialize._Data*R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*”
-get_content_type-slumber.serialize.Serializer.get_content_type"
-builtins.str"builtins.str*F
-self<
-slumber.serialize.Serializer"slumber.serialize.Serializer*R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314j310j311j312j313j314rÙ
-serializers(slumber.serialize.Serializer.serializers†
-/builtins.list[slumber.serialize.BaseSerializer]D
- slumber.serialize.BaseSerializer" slumber.serialize.BaseSerializer"builtins.list*310*311*312*313*314rf
-default$slumber.serialize.Serializer.default
-builtins.str"builtins.str*310*311*312*313*314*¦
-__annotations__!slumber.serialize.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*!
+loads*
+
+self(*
+
+data(*!
+dumps*
+
+self(*
+
+data(r
+content_types0
+r
+key0N
+JsonSerializer" slumber.serialize.BaseSerializerr
+content_types0r
+key0N
+YamlSerializer" slumber.serialize.BaseSerializerr
+content_types0r
+key0×
+
+Serializer"builtins.object*>
+__init__	*
+
+self(*
+default (*
+serializers (*B
+get_serializer*
+
+self(*
+name (*
+content_type (*1
+loads*
+
+self(*
+
+data(*
+format (*1
+dumps*
+
+self(*
+
+data(*
+format (*0
+get_content_type*
+
+self(*
+format (r
+serializers0r
+default0*
+__annotations__02"builtins.str2"" slumber.serialize.BaseSerializer22"builtins.bytes2"builtins.bytearray222"slumber.serialize._Data22"builtins.list2222	22	2"slumber.serialize.Serializer2"builtins.list222	2"builtins.dict2

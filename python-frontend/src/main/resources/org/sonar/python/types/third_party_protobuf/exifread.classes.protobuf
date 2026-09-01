@@ -1,156 +1,96 @@
 
-exifread.classes£
-IfdTagexifread.classes.IfdTag"builtins.object*„
-__init__ exifread.classes.IfdTag.__init__"
-None*<
-self2
-exifread.classes.IfdTag"exifread.classes.IfdTag*+
-	printable
-builtins.str"builtins.str*%
-tag
-builtins.int"builtins.int*,
+exifread.classesï
+IfdTag"builtins.object*|
+__init__*
 
-field_type
-builtins.int"builtins.int*
-values
-Any*.
-field_offset
-builtins.int"builtins.int*.
-field_length
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314re
-	printable!exifread.classes.IfdTag.printable
-builtins.str"builtins.str*310*311*312*313*314rY
-tagexifread.classes.IfdTag.tag
-builtins.int"builtins.int*310*311*312*313*314rg
+self(*
+	printable(*	
+tag(*
 
-field_type"exifread.classes.IfdTag.field_type
-builtins.int"builtins.int*310*311*312*313*314rk
-field_offset$exifread.classes.IfdTag.field_offset
-builtins.int"builtins.int*310*311*312*313*314rk
-field_length$exifread.classes.IfdTag.field_length
-builtins.int"builtins.int*310*311*312*313*314rJ
-valuesexifread.classes.IfdTag.values
-Any*310*311*312*313*314°"
+field_type(*
+values(*
+field_offset(*
+field_length(r
+	printable0r
+tag0r
 
-ExifHeaderexifread.classes.ExifHeader"builtins.object*«
-__init__$exifread.classes.ExifHeader.__init__"
-None*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeader*A
-file_handle0
-exifread._types.Reader"exifread._types.Reader*µ
-endian¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*(
-offset
-builtins.int"builtins.int*-
-	fake_exif
-builtins.bool"builtins.bool**
-strict
-builtins.bool"builtins.bool*+
-debug
-builtins.bool"builtins.bool *.
-detailed
-builtins.bool"builtins.bool *3
-truncate_tags
-builtins.bool"builtins.bool z310z311z312z313z314*¥
-s2nexifread.classes.ExifHeader.s2n"
-builtins.int"builtins.int*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeader*(
-offset
-builtins.int"builtins.int*(
-length
-builtins.int"builtins.int*,
-signed
-builtins.bool"builtins.bool z310z311z312z313z314*û
-n2bexifread.classes.ExifHeader.n2b" 
-builtins.bytes"builtins.bytes*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeader*(
-offset
-builtins.int"builtins.int*(
-length
-builtins.int"builtins.intz310z311z312z313z314*Û
-list_ifd$exifread.classes.ExifHeader.list_ifd"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeaderz310z311z312z313z314*ü
-dump_ifd$exifread.classes.ExifHeader.dump_ifd"
-None*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeader*%
-ifd
-builtins.int"builtins.int**
-ifd_name
-builtins.str"builtins.str*±
-tag_dict 
-eUnion[TypeAlias[builtins.dict[builtins.int,Union[Tuple[builtins.str],Tuple[builtins.str,Any]]]],None]ª
-YTypeAlias[builtins.dict[builtins.int,Union[Tuple[builtins.str],Tuple[builtins.str,Any]]]]±
-Nbuiltins.dict[builtins.int,Union[Tuple[builtins.str],Tuple[builtins.str,Any]]]
-builtins.int"builtins.int±
-2Union[Tuple[builtins.str],Tuple[builtins.str,Any]]5
-Tuple[builtins.str]
-builtins.str"builtins.strB
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"exifread._types.TagDict
-None *,
-relative
-builtins.int"builtins.int *,
-stop_tag
-builtins.str"builtins.str z310z311z312z313z314*â
-extract_tiff_thumbnail2exifread.classes.ExifHeader.extract_tiff_thumbnail"
-None*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeader*+
-	thumb_ifd
-builtins.int"builtins.intz310z311z312z313z314*µ
-extract_jpeg_thumbnail2exifread.classes.ExifHeader.extract_jpeg_thumbnail"
-None*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeaderz310z311z312z313z314*«
-decode_maker_note-exifread.classes.ExifHeader.decode_maker_note"
-None*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeaderz310z311z312z313z314*Ì
-	parse_xmp%exifread.classes.ExifHeader.parse_xmp"
-None*D
-self:
-exifread.classes.ExifHeader"exifread.classes.ExifHeader*/
-	xmp_bytes 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314r
-file_handle'exifread.classes.ExifHeader.file_handle0
-exifread._types.Reader"exifread._types.Reader*310*311*312*313*314rð
-endian"exifread.classes.ExifHeader.endian¨
-2Union[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*310*311*312*313*314rc
-offset"exifread.classes.ExifHeader.offset
-builtins.int"builtins.int*310*311*312*313*314rk
-	fake_exif%exifread.classes.ExifHeader.fake_exif
-builtins.bool"builtins.bool*310*311*312*313*314re
-strict"exifread.classes.ExifHeader.strict
-builtins.bool"builtins.bool*310*311*312*313*314rc
-debug!exifread.classes.ExifHeader.debug
-builtins.bool"builtins.bool*310*311*312*313*314ri
-detailed$exifread.classes.ExifHeader.detailed
-builtins.bool"builtins.bool*310*311*312*313*314rs
-truncate_tags)exifread.classes.ExifHeader.truncate_tags
-builtins.bool"builtins.bool*310*311*312*313*314rš
-tags exifread.classes.ExifHeader.tagsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*¥
-__annotations__ exifread.classes.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*\
-loggerexifread.classes.logger 
-logging.Logger"logging.Logger*310*311*312*313*314
+field_type0r
+field_offset0r
+field_length0r
+
+values0ß
+
+ExifHeader"builtins.object*ž
+__init__*
+
+self(*
+file_handle(*
+endian(	*
+offset(*
+	fake_exif(
+*
+strict(
+*
+debug (
+*
+detailed (
+*
+truncate_tags (
+*?
+s2n*
+
+self(*
+offset(*
+length(*
+signed (
+*/
+n2b*
+
+self(*
+offset(*
+length(*
+list_ifd*
+
+self(*i
+dump_ifd*
+
+self(*	
+ifd(*
+ifd_name(*
+tag_dict (*
+relative (*
+stop_tag (*7
+extract_tiff_thumbnail*
+
+self(*
+	thumb_ifd(*&
+extract_jpeg_thumbnail*
+
+self(*!
+decode_maker_note*
+
+self(**
+	parse_xmp*
+
+self(*
+	xmp_bytes(r
+file_handle0r
+
+endian0	r
+
+offset0r
+	fake_exif0
+r
+
+strict0
+r	
+debug0
+r
+detailed0
+r
+truncate_tags0
+r
+tags0*
+__annotations__0*
+
+logger022"exifread.classes.IfdTag2"builtins.str2"builtins.int22"exifread.classes.ExifHeader2"exifread._types.Reader2	2222"builtins.bool2"builtins.bytes2"builtins.list22222222"builtins.dict22"exifread._types.TagDict2222"builtins.dict22"logging.Logger

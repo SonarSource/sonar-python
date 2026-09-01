@@ -1,141 +1,94 @@
 
-invoke.parser.parser»
-Parserinvoke.parser.parser.Parser"builtins.object*€
-__init__$invoke.parser.parser.Parser.__init__"
-None*D
-self:
-invoke.parser.parser.Parser"invoke.parser.parser.Parser*
-contexts
-Any *
-initial
-Any *4
-ignore_unknown
-builtins.bool"builtins.bool z310z311z312z313z314*a
+invoke.parser.parser¿
+Parser"builtins.object*S
+__init__*
 
-parse_argv&invoke.parser.parser.Parser.parse_argv*
+self(*
+contexts (*
+initial (*
+ignore_unknown (* 
+
+parse_argv*
 self*
-argvz310z311z312z313z314j310j311j312j313j314rP
-initial#invoke.parser.parser.Parser.initial
-Any*310*311*312*313*314rR
-contexts$invoke.parser.parser.Parser.contexts
-Any*310*311*312*313*314r^
-ignore_unknown*invoke.parser.parser.Parser.ignore_unknown
-Any*310*311*312*313*314à
-ParseMachine!invoke.parser.parser.ParseMachine"builtins.object*Ü
-changing_state0invoke.parser.parser.ParseMachine.changing_state"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-from_
-Any*
-to
-Anyz310z311z312z313z314*õ
-__init__*invoke.parser.parser.ParseMachine.__init__"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-initial
-Any*
-contexts
-Any*
-ignore_unknown
-Anyz310z311z312z313z314*Œ
-waiting_for_flag_value8invoke.parser.parser.ParseMachine.waiting_for_flag_value*
-self0:builtins.property`z310z311z312z313z314*»
-handle(invoke.parser.parser.ParseMachine.handle"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-token
-Anyz310z311z312z313z314*Ã
+argvr
+initial0r
+contexts0r
+ignore_unknown0÷
+ParseMachine"builtins.object*5
+changing_state*
 
-store_only,invoke.parser.parser.ParseMachine.store_only"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-token
-Anyz310z311z312z313z314*»
-complete_context2invoke.parser.parser.ParseMachine.complete_context"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachinez310z311z312z313z314*Ð
-switch_to_context3invoke.parser.parser.ParseMachine.switch_to_context"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-name
-Anyz310z311z312z313z314*µ
-complete_flag/invoke.parser.parser.ParseMachine.complete_flag"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachinez310z311z312z313z314*r
-check_ambiguity1invoke.parser.parser.ParseMachine.check_ambiguity*
+self(*
+from_(*
+to(*M
+__init__*
+
+self(*
+initial(*
+contexts(*
+ignore_unknown(*9
+waiting_for_flag_value*
+self0:builtins.property`*#
+handle*
+
+self(*
+token(*'
+
+store_only*
+
+self(*
+token(* 
+complete_context*
+
+self(*-
+switch_to_context*
+
+self(*
+
+name(*
+complete_flag*
+
+self(*&
+check_ambiguity*
 self*	
-valuez310z311z312z313z314*ù
-switch_to_flag0invoke.parser.parser.ParseMachine.switch_to_flag"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-flag
-Any*-
-inverse
-builtins.bool"builtins.bool z310z311z312z313z314*Á
-	see_value+invoke.parser.parser.ParseMachine.see_value"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-value
-Anyz310z311z312z313z314*Ó
-see_positional_arg4invoke.parser.parser.ParseMachine.see_positional_arg"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-value
-Anyz310z311z312z313z314*·
-error'invoke.parser.parser.ParseMachine.error"
-None*P
-selfF
-!invoke.parser.parser.ParseMachine"!invoke.parser.parser.ParseMachine*
-msg
-Anyz310z311z312z313z314j310j311j312j313j314rw
-initial_state/invoke.parser.parser.ParseMachine.initial_state
-builtins.str"builtins.str*310*311*312*313*314rd
-ignore_unknown0invoke.parser.parser.ParseMachine.ignore_unknown
-Any*310*311*312*313*314rV
-initial)invoke.parser.parser.ParseMachine.initial
-Any*310*311*312*313*314rP
-flag&invoke.parser.parser.ParseMachine.flag
-Any*310*311*312*313*314r{
-flag_got_value0invoke.parser.parser.ParseMachine.flag_got_value
-builtins.bool"builtins.bool*310*311*312*313*314rT
-result(invoke.parser.parser.ParseMachine.result
-Any*310*311*312*313*314rX
-contexts*invoke.parser.parser.ParseMachine.contexts
-Any*310*311*312*313*314rV
-context)invoke.parser.parser.ParseMachine.context
-Any*310*311*312*313*314ó
-ParseResult invoke.parser.parser.ParseResult"builtins.list*Ð
-__init__)invoke.parser.parser.ParseResult.__init__"
-None*N
-selfD
- invoke.parser.parser.ParseResult" invoke.parser.parser.ParseResult*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rn
-	remainder*invoke.parser.parser.ParseResult.remainder
-builtins.str"builtins.str*310*311*312*313*314rW
-unparsed)invoke.parser.parser.ParseResult.unparsed
-Any*310*311*312*313*314‰
-is_flaginvoke.parser.parser.is_flag"
-builtins.bool"builtins.bool*'
-value
-builtins.str"builtins.strz310z311z312z313z314“
-is_long_flag!invoke.parser.parser.is_long_flag"
-builtins.bool"builtins.bool*'
-value
-builtins.str"builtins.strz310z311z312z313z314*©
-__annotations__$invoke.parser.parser.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+value*;
+switch_to_flag*
+
+self(*
+
+flag(*
+inverse (*&
+	see_value*
+
+self(*
+value(*/
+see_positional_arg*
+
+self(*
+value(* 
+error*
+
+self(*	
+msg(r
+initial_state0r
+ignore_unknown0r
+initial0r
+flag0r
+flag_got_value0r
+
+result0r
+contexts0r
+context0m
+ParseResult"builtins.list*2
+__init__*
+
+self(*
+
+args(*
+kwargs(r
+	remainder0r
+unparsed0
+is_flag*
+value(
+is_long_flag*
+value(*
+__annotations__022"invoke.parser.parser.Parser22"builtins.bool2#"!invoke.parser.parser.ParseMachine2"builtins.str2"" invoke.parser.parser.ParseResult2"builtins.dict2

@@ -1,115 +1,62 @@
 
-jose.backends.base‡
-Keyjose.backends.base.Key"builtins.object*´
-__init__jose.backends.base.Key.__init__"
-None*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*
-key
-Any*
-	algorithm
-Anyz310z311z312z313z314*Å
-signjose.backends.base.Key.sign" 
-builtins.bytes"builtins.bytes*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*)
-msg 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ò
-verifyjose.backends.base.Key.verify"
-builtins.bool"builtins.bool*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*)
-msg 
-builtins.bytes"builtins.bytes*)
-sig 
-builtins.bytes"builtins.bytesz310z311z312z313z314*¬
+jose.backends.baseË
+Key"builtins.object*4
+__init__*
 
-public_key!jose.backends.base.Key.public_key"k
-jose.backends.base.Key.Self0
-jose.backends.base.Key"jose.backends.base.Key"jose.backends.base.Key(*u
-selfk
-jose.backends.base.Key.Self0
-jose.backends.base.Key"jose.backends.base.Key"jose.backends.base.Key(z310z311z312z313z314*ž
-to_pemjose.backends.base.Key.to_pem" 
-builtins.bytes"builtins.bytes*:
-self0
-jose.backends.base.Key"jose.backends.base.Keyz310z311z312z313z314*×
-to_dictjose.backends.base.Key.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*:
-self0
-jose.backends.base.Key"jose.backends.base.Keyz310z311z312z313z314*£
-encryptjose.backends.base.Key.encrypt"Ó
-?Tuple[builtins.bytes,builtins.bytes,Union[builtins.bytes,None]] 
-builtins.bytes"builtins.bytes 
-builtins.bytes"builtins.bytesJ
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*v
+self(*	
+key(*
+	algorithm(*
+sign*
 
-plain_textf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*U
-aadJ
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None z310z311z312z313z314*È
-decryptjose.backends.base.Key.decrypt" 
-builtins.bytes"builtins.bytes*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*w
-cipher_textf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*
-ivu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *U
-aadJ
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None *U
-tagJ
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None z310z311z312z313z314*Ò
-wrap_keyjose.backends.base.Key.wrap_key" 
-builtins.bytes"builtins.bytes*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*.
-key_data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Ù
+self(*	
+msg(*,
+verify*
 
-unwrap_key!jose.backends.base.Key.unwrap_key" 
-builtins.bytes"builtins.bytes*:
-self0
-jose.backends.base.Key"jose.backends.base.Key*1
-wrapped_key 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314ð
-DIRKeyjose.backends.base.DIRKey"jose.backends.base.Key*¶
-__init__"jose.backends.base.DIRKey.__init__"
-None*@
-self6
-jose.backends.base.DIRKey"jose.backends.base.DIRKey*t
-key_dataf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*+
-	algorithm
-builtins.str"builtins.strz310z311z312z313z314*à
-to_dict!jose.backends.base.DIRKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*@
-self6
-jose.backends.base.DIRKey"jose.backends.base.DIRKeyz310z311z312z313z314j310j311j312j313j314*§
-__annotations__"jose.backends.base.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*	
+msg(*	
+sig(*
+
+public_key*
+
+self(*
+to_pem*
+
+self(*
+to_dict*
+
+self(*6
+encrypt
+*
+
+self(*
+
+plain_text(*
+aad (	*P
+decrypt*
+
+self(*
+cipher_text(*
+
+iv (*
+aad (	*
+tag (	*(
+wrap_key*
+
+self(*
+key_data(*-
+
+unwrap_key*
+
+self(*
+wrapped_key(t
+DIRKey"jose.backends.base.Key*9
+__init__*
+
+self(*
+key_data(*
+	algorithm(*
+to_dict*
+
+self(*
+__annotations__022"jose.backends.base.Key22"builtins.bytes2"builtins.bool2<
+jose.backends.base.Key.Self"jose.backends.base.Key(22"builtins.str2"builtins.dict22222	22222"jose.backends.base.DIRKey

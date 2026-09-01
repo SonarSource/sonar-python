@@ -1,157 +1,107 @@
 
-paramiko.sftp_fileü-
-SFTPFileparamiko.sftp_file.SFTPFile"paramiko.file.BufferedFile*Í
-__init__$paramiko.sftp_file.SFTPFile.__init__"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*L
-sftpB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*∏
-handle´
-hTypeAlias[Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,typing_extensions.Buffer]]ü
-]Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,typing_extensions.Buffer] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytes4
-typing_extensions.Buffer"typing_extensions.Buffer"paramiko.message._LikeBytes*(
-mode
-builtins.str"builtins.str *+
-bufsize
-builtins.int"builtins.int z310z311*Î
-__init__$paramiko.sftp_file.SFTPFile.__init__"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*L
-sftpB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*¥
-handleß
-gTypeAlias[Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,_collections_abc.Buffer]]ú
-\Union[builtins.bytes,builtins.str,paramiko.message._SupportsAsBytes,_collections_abc.Buffer] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strF
-!paramiko.message._SupportsAsBytes"!paramiko.message._SupportsAsBytes2
-_collections_abc.Buffer"_collections_abc.Buffer"paramiko.message._LikeBytes*(
-mode
-builtins.str"builtins.str *+
-bufsize
-builtins.int"builtins.int z312z313z314*è
-__del__#paramiko.sftp_file.SFTPFile.__del__"
-None*<:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFilez310z311z312z313z314*ì
-close!paramiko.sftp_file.SFTPFile.close"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFilez310z311z312z313z314*Ã
+paramiko.sftp_fileü
+SFTPFile"paramiko.file.BufferedFile*[
+__init__*
 
-settimeout&paramiko.sftp_file.SFTPFile.settimeout"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*-
-timeout 
-builtins.float"builtins.floatz310z311z312z313z314*µ
+self(*
 
-gettimeout&paramiko.sftp_file.SFTPFile.gettimeout" 
-builtins.float"builtins.float*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFilez310z311z312z313z314*Õ
-setblocking'paramiko.sftp_file.SFTPFile.setblocking"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*,
-blocking
-builtins.bool"builtins.boolz310z311z312z313z314*Ø
-seekable$paramiko.sftp_file.SFTPFile.seekable"
-builtins.bool"builtins.bool*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFilez310z311z312z313z314*Á
-seek paramiko.sftp_file.SFTPFile.seek"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*(
-offset
-builtins.int"builtins.int**
-whence
-builtins.int"builtins.int z310z311z312z313z314*œ
-stat paramiko.sftp_file.SFTPFile.stat"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFilez310z311z312z313z314*ª
-chmod!paramiko.sftp_file.SFTPFile.chmod"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*&
-mode
-builtins.int"builtins.intz310z311z312z313z314*·
-chown!paramiko.sftp_file.SFTPFile.chown"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*%
-uid
-builtins.int"builtins.int*%
-gid
-builtins.int"builtins.intz310z311z312z313z314*Œ
-utime!paramiko.sftp_file.SFTPFile.utime"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*∏
-times¨
-0Union[Tuple[builtins.float,builtins.float],None]l
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.float
-Nonez310z311z312z313z314*¡
-truncate$paramiko.sftp_file.SFTPFile.truncate"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*&
-size
-builtins.int"builtins.intz310z311z312z313z314*Â
-check!paramiko.sftp_file.SFTPFile.check" 
-builtins.bytes"builtins.bytes*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*0
-hash_algorithm
-builtins.str"builtins.str**
-offset
-builtins.int"builtins.int **
-length
-builtins.int"builtins.int *.
+sftp(*
+handle(	*
+mode (*
+bufsize (
+z310z311*`
+__init__*
 
-block_size
-builtins.int"builtins.int z310z311z312z313z314*‘
-set_pipelined)paramiko.sftp_file.SFTPFile.set_pipelined"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*/
-	pipelined
-builtins.bool"builtins.bool z310z311z312z313z314*
-prefetch$paramiko.sftp_file.SFTPFile.prefetch"
-None*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*U
-	file_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*ï
-readv!paramiko.sftp_file.SFTPFile.readv"T
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator*D
-self:
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*≥
-chunks¶
-1typing.Sequence[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"typing.Sequencez310z311z312z313z314j310j311j312j313j314rw
-MAX_REQUEST_SIZE,paramiko.sftp_file.SFTPFile.MAX_REQUEST_SIZE
-builtins.int"builtins.int*310*311*312*313*314rÖ
-sftp paramiko.sftp_file.SFTPFile.sftpB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*310*311*312*313*314râ
-handle"paramiko.sftp_file.SFTPFile.handleB
-paramiko.sftp_handle.SFTPHandle"paramiko.sftp_handle.SFTPHandle*310*311*312*313*314rk
-	pipelined%paramiko.sftp_file.SFTPFile.pipelined
-builtins.bool"builtins.bool*310*311*312*313*314*ß
-__annotations__"paramiko.sftp_file.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+
+sftp(*
+handle(*
+mode (*
+bufsize (
+z312z313z314*
+__del__*(*
+close*
+
+self(*)
+
+settimeout*
+
+self(*
+timeout(*
+
+gettimeout*
+
+self(*+
+setblocking*
+
+self(*
+blocking(*
+seekable*
+
+self(*2
+seek*
+
+self(*
+offset(
+*
+whence (
+*
+stat*
+
+self(*!
+chmod*
+
+self(*
+
+mode(
+*+
+chown*
+
+self(*	
+uid(
+*	
+gid(
+*"
+utime*
+
+self(*
+times(*$
+truncate*
+
+self(*
+
+size(
+*_
+check*
+
+self(*
+hash_algorithm(*
+offset (
+*
+length (
+*
+
+block_size (
+*0
+set_pipelined*
+
+self(*
+	pipelined (*+
+prefetch*
+
+self(*
+	file_size (*#
+readv*
+
+self(*
+chunks(r
+MAX_REQUEST_SIZE0
+r
+sftp0r
+
+handle0r
+	pipelined0*
+__annotations__022"paramiko.sftp_file.SFTPFile2!"paramiko.sftp_client.SFTPClient2"builtins.bytes2"builtins.str2#"!paramiko.message._SupportsAsBytes2"typing_extensions.Buffer222""paramiko.message._LikeBytes22"builtins.int2"_collections_abc.Buffer222""paramiko.message._LikeBytes22"builtins.float2"builtins.bool2#"!paramiko.sftp_attr.SFTPAttributes222222
+2"typing.Iterator222
+
+2"typing.Sequence22!"paramiko.sftp_handle.SFTPHandle22"builtins.dict2

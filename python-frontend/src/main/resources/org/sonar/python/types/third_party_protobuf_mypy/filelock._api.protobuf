@@ -1,129 +1,64 @@
 
-filelock._api•
-AcquireReturnProxy filelock._api.AcquireReturnProxy"builtins.object*”
-__init__)filelock._api.AcquireReturnProxy.__init__"
-None*N
-selfD
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*B
-lock8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*π
-	__enter__*filelock._api.AcquireReturnProxy.__enter__"8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*FD
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*‡
-__exit__)filelock._api.AcquireReturnProxy.__exit__"
-None*FD
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonerg
-lock%filelock._api.AcquireReturnProxy.lock8
-filelock._api.BaseFileLock"filelock._api.BaseFileLockÙ
-BaseFileLockfilelock._api.BaseFileLock"abc.ABC*Ø
-__init__#filelock._api.BaseFileLock.__init__"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*
-	lock_filep
-$Union[builtins.str,os.PathLike[Any]]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike*/
-timeout 
-builtins.float"builtins.float *™
-	lock_file$filelock._api.BaseFileLock.lock_file"
-builtins.str"builtins.str*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:builtins.property`*ï
-_acquire#filelock._api.BaseFileLock._acquire"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:abc.abstractmethod@*ï
-_release#filelock._api.BaseFileLock._release"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:abc.abstractmethod@*¨
-	is_locked$filelock._api.BaseFileLock.is_locked"
-builtins.bool"builtins.bool*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:builtins.property`*´
-acquire"filelock._api.BaseFileLock.acquire"D
- filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *5
-poll_interval 
-builtins.float"builtins.float *`
-poll_intervallJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *®
-release"filelock._api.BaseFileLock.release"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*+
-force
-builtins.bool"builtins.bool *ß
-	__enter__$filelock._api.BaseFileLock.__enter__"8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*:8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*Œ
-__exit__#filelock._api.BaseFileLock.__exit__"
-None*:8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*s
-__del__"filelock._api.BaseFileLock.__del__"
-None*:8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock2ÿ
-timeout"filelock._api.BaseFileLock.timeout¨
-timeout"filelock._api.BaseFileLock.timeout" 
-builtins.float"builtins.float*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock0:builtins.propertyX`˘
-timeout"filelock._api.BaseFileLock.timeout"
-None*B
-self8
-filelock._api.BaseFileLock"filelock._api.BaseFileLock*q
-valuef
-"Union[builtins.float,builtins.str] 
-builtins.float"builtins.float
-builtins.str"builtins.str0:.setterrQ
+filelock._apiÜ
+AcquireReturnProxy"builtins.object*$
+__init__*
 
-_lock_file%filelock._api.BaseFileLock._lock_file
-builtins.str"builtins.strr
-_lock_file_fd(filelock._api.BaseFileLock._lock_file_fdD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noner]
-_thread_lock'filelock._api.BaseFileLock._thread_lock$
-_thread.LockType"_thread.LockTyperW
-_lock_counter(filelock._api.BaseFileLock._lock_counter
-builtins.int"builtins.intrQ
-_timeout#filelock._api.BaseFileLock._timeout 
-builtins.float"builtins.float*â
-__annotations__filelock._api.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*B
-_LOGGERfilelock._api._LOGGER 
-logging.Logger"logging.Logger*l
-__all__filelock._api.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*
+
+lock(*
+	__enter__*(*
+__exit__*(*(*(*(	r
+lock0¢
+BaseFileLock"abc.ABC*:
+__init__*
+
+self(*
+	lock_file(*
+timeout (*0
+	lock_file
+*
+
+self(0:builtins.property`*0
+_acquire*
+
+self(0:abc.abstractmethod@*0
+_release*
+
+self(0:abc.abstractmethod@*0
+	is_locked*
+
+self(0:builtins.property`*W
+acquire*
+
+self(*
+timeout (*
+poll_interval (*
+poll_intervall (*&
+release*
+
+self(*
+force (*
+	__enter__*(*
+__exit__*(*(*(*(	*
+__del__*(2l
+timeout0
+timeout*
+
+self(0:builtins.propertyX`/
+timeout*
+
+self(*
+value(0:.setterr
+
+_lock_file0
+r
+_lock_file_fd0r
+_thread_lock0r
+_lock_counter0r
+_timeout0*
+__annotations__0*
+_LOGGER0*
+__all__022"" filelock._api.AcquireReturnProxy2"filelock._api.BaseFileLock2"builtins.BaseException2"type222222"types.TracebackType222"builtins.str22"os.PathLike222
+2"builtins.float2"builtins.bool2222
+2"builtins.int222"_thread.LockType2"builtins.dict2
+2"logging.Logger2"builtins.list2

@@ -1,257 +1,179 @@
 
-sqlalchemy.engine.events¢)
-ConnectionEvents)sqlalchemy.engine.events.ConnectionEvents"builtins.object*Í
-before_execute8sqlalchemy.engine.events.ConnectionEvents.before_execute"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-clauseelement
-Any*
-multiparams
-Any*
-params
-Any*
-execution_options
-Anyz310z311z312z313z314*à
-after_execute7sqlalchemy.engine.events.ConnectionEvents.after_execute"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-clauseelement
-Any*
-multiparams
-Any*
-params
-Any*
-execution_options
-Any*
-result
-Anyz310z311z312z313z314*æ
-before_cursor_execute?sqlalchemy.engine.events.ConnectionEvents.before_cursor_execute"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-cursor
-Any*
-	statement
-Any*
+sqlalchemy.engine.events£
+ConnectionEvents"builtins.object*y
+before_execute*
 
-parameters
-Any*
-context
-Any*
-executemany
-Anyz310z311z312z313z314*ä
-after_cursor_execute>sqlalchemy.engine.events.ConnectionEvents.after_cursor_execute"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-cursor
-Any*
-	statement
-Any*
+self(*
 
-parameters
-Any*
-context
-Any*
-executemany
-Anyz310z311z312z313z314*ë
-handle_error6sqlalchemy.engine.events.ConnectionEvents.handle_error"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-exception_context
-Anyz310z311z312z313z314*÷
-engine_connect8sqlalchemy.engine.events.ConnectionEvents.engine_connect"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-branch
-Anyz310z311z312z313z314*™
- set_connection_execution_optionsJsqlalchemy.engine.events.ConnectionEvents.set_connection_execution_options"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-opts
-Anyz310z311z312z313z314*“
-set_engine_execution_optionsFsqlalchemy.engine.events.ConnectionEvents.set_engine_execution_options"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-engine
-Any*
-opts
-Anyz310z311z312z313z314*æ
-engine_disposed9sqlalchemy.engine.events.ConnectionEvents.engine_disposed"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-engine
-Anyz310z311z312z313z314*Ð
-begin/sqlalchemy.engine.events.ConnectionEvents.begin"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Anyz310z311z312z313z314*Ö
-rollback2sqlalchemy.engine.events.ConnectionEvents.rollback"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Anyz310z311z312z313z314*Ò
-commit0sqlalchemy.engine.events.ConnectionEvents.commit"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Anyz310z311z312z313z314*ë
-	savepoint3sqlalchemy.engine.events.ConnectionEvents.savepoint"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-name
-Anyz310z311z312z313z314*“
-rollback_savepoint<sqlalchemy.engine.events.ConnectionEvents.rollback_savepoint"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-name
-Any*
-context
-Anyz310z311z312z313z314*‘
-release_savepoint;sqlalchemy.engine.events.ConnectionEvents.release_savepoint"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-name
-Any*
-context
-Anyz310z311z312z313z314*ô
-begin_twophase8sqlalchemy.engine.events.ConnectionEvents.begin_twophase"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-xid
-Anyz310z311z312z313z314*ø
-prepare_twophase:sqlalchemy.engine.events.ConnectionEvents.prepare_twophase"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-xid
-Anyz310z311z312z313z314*”
-rollback_twophase;sqlalchemy.engine.events.ConnectionEvents.rollback_twophase"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-xid
-Any*
-is_prepared
-Anyz310z311z312z313z314*
-commit_twophase9sqlalchemy.engine.events.ConnectionEvents.commit_twophase"
-None*`
-selfV
-)sqlalchemy.engine.events.ConnectionEvents")sqlalchemy.engine.events.ConnectionEvents*
-conn
-Any*
-xid
-Any*
-is_prepared
-Anyz310z311z312z313z314j310j311j312j313j314•
-DialectEvents&sqlalchemy.engine.events.DialectEvents"builtins.object*•
+conn(*
+clauseelement(*
+multiparams(*
+params(*
+execution_options(*†
+after_execute*
 
-do_connect1sqlalchemy.engine.events.DialectEvents.do_connect"
-None*Z
-selfP
-&sqlalchemy.engine.events.DialectEvents"&sqlalchemy.engine.events.DialectEvents*
-dialect
-Any*
-conn_rec
-Any*
-cargs
-Any*
-cparams
-Anyz310z311z312z313z314*¢
-do_executemany5sqlalchemy.engine.events.DialectEvents.do_executemany"
-None*Z
-selfP
-&sqlalchemy.engine.events.DialectEvents"&sqlalchemy.engine.events.DialectEvents*
-cursor
-Any*
-	statement
-Any*
+self(*
 
-parameters
-Any*
-context
-Anyz310z311z312z313z314*•
-do_execute_no_params;sqlalchemy.engine.events.DialectEvents.do_execute_no_params"
-None*Z
-selfP
-&sqlalchemy.engine.events.DialectEvents"&sqlalchemy.engine.events.DialectEvents*
-cursor
-Any*
-	statement
-Any*
-context
-Anyz310z311z312z313z314*š
+conn(*
+clauseelement(*
+multiparams(*
+params(*
+execution_options(*
+result(*„
+before_cursor_execute*
 
-do_execute1sqlalchemy.engine.events.DialectEvents.do_execute"
-None*Z
-selfP
-&sqlalchemy.engine.events.DialectEvents"&sqlalchemy.engine.events.DialectEvents*
-cursor
-Any*
-	statement
-Any*
+self(*
 
-parameters
-Any*
-context
-Anyz310z311z312z313z314*¿
-do_setinputsizes7sqlalchemy.engine.events.DialectEvents.do_setinputsizes"
-None*Z
-selfP
-&sqlalchemy.engine.events.DialectEvents"&sqlalchemy.engine.events.DialectEvents*
+conn(*
+cursor(*
+	statement(*
 
-inputsizes
-Any*
-cursor
-Any*
-	statement
-Any*
+parameters(*
+context(*
+executemany(*ƒ
+after_cursor_execute*
 
-parameters
-Any*
-context
-Anyz310z311z312z313z314j310j311j312j313j314*­
-__annotations__(sqlalchemy.engine.events.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*4
-eventsqlalchemy.event *310*311*312*313*314
+self(*
+
+conn(*
+cursor(*
+	statement(*
+
+parameters(*
+context(*
+executemany(*5
+handle_error*
+
+self(*
+exception_context(*8
+engine_connect*
+
+self(*
+
+conn(*
+branch(*H
+ set_connection_execution_options*
+
+self(*
+
+conn(*
+
+opts(*F
+set_engine_execution_options*
+
+self(*
+engine(*
+
+opts(*-
+engine_disposed*
+
+self(*
+engine(*!
+begin*
+
+self(*
+
+conn(*$
+rollback*
+
+self(*
+
+conn(*"
+commit*
+
+self(*
+
+conn(*1
+	savepoint*
+
+self(*
+
+conn(*
+
+name(*I
+rollback_savepoint*
+
+self(*
+
+conn(*
+
+name(*
+context(*H
+release_savepoint*
+
+self(*
+
+conn(*
+
+name(*
+context(*5
+begin_twophase*
+
+self(*
+
+conn(*	
+xid(*7
+prepare_twophase*
+
+self(*
+
+conn(*	
+xid(*K
+rollback_twophase*
+
+self(*
+
+conn(*	
+xid(*
+is_prepared(*I
+commit_twophase*
+
+self(*
+
+conn(*	
+xid(*
+is_prepared(û
+DialectEvents"builtins.object*U
+
+do_connect*
+
+self(*
+dialect(*
+conn_rec(*
+cargs(*
+cparams(*^
+do_executemany*
+
+self(*
+cursor(*
+	statement(*
+
+parameters(*
+context(*R
+do_execute_no_params*
+
+self(*
+cursor(*
+	statement(*
+context(*Z
+
+do_execute*
+
+self(*
+cursor(*
+	statement(*
+
+parameters(*
+context(*r
+do_setinputsizes*
+
+self(*
+
+inputsizes(*
+cursor(*
+	statement(*
+
+parameters(*
+context(*
+__annotations__0*
+eventsqlalchemy.event 22+")sqlalchemy.engine.events.ConnectionEvents22("&sqlalchemy.engine.events.DialectEvents2"builtins.str2"builtins.dict2

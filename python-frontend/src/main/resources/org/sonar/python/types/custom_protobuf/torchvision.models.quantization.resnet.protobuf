@@ -1,166 +1,92 @@
 
-&torchvision.models.quantization.resnetÆ
-QuantizableBasicBlock<torchvision.models.quantization.resnet.QuantizableBasicBlock"$torchvision.models.resnet.BasicBlock*Œ
-__init__Etorchvision.models.quantization.resnet.QuantizableBasicBlock.__init__"
-None*†
-self|
-<torchvision.models.quantization.resnet.QuantizableBasicBlock"<torchvision.models.quantization.resnet.QuantizableBasicBlock*
-args
-Any*
-kwargs
-Any*›
-forwardDtorchvision.models.quantization.resnet.QuantizableBasicBlock.forward"
-torch.Tensor"torch.Tensor*†
-self|
-<torchvision.models.quantization.resnet.QuantizableBasicBlock"<torchvision.models.quantization.resnet.QuantizableBasicBlock*#
-x
-torch.Tensor"torch.Tensor*¿
+&torchvision.models.quantization.resnetÍ
+QuantizableBasicBlock"$torchvision.models.resnet.BasicBlock*2
+__init__*
 
-fuse_modelGtorchvision.models.quantization.resnet.QuantizableBasicBlock.fuse_model"
-None*†
-self|
-<torchvision.models.quantization.resnet.QuantizableBasicBlock"<torchvision.models.quantization.resnet.QuantizableBasicBlock*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rZ
-add_reluEtorchvision.models.quantization.resnet.QuantizableBasicBlock.add_relu
-Anyü	
-QuantizableBottleneck<torchvision.models.quantization.resnet.QuantizableBottleneck"$torchvision.models.resnet.Bottleneck*Œ
-__init__Etorchvision.models.quantization.resnet.QuantizableBottleneck.__init__"
-None*†
-self|
-<torchvision.models.quantization.resnet.QuantizableBottleneck"<torchvision.models.quantization.resnet.QuantizableBottleneck*
-args
-Any*
-kwargs
-Any*›
-forwardDtorchvision.models.quantization.resnet.QuantizableBottleneck.forward"
-torch.Tensor"torch.Tensor*†
-self|
-<torchvision.models.quantization.resnet.QuantizableBottleneck"<torchvision.models.quantization.resnet.QuantizableBottleneck*#
-x
-torch.Tensor"torch.Tensor*¿
+self(*
 
-fuse_modelGtorchvision.models.quantization.resnet.QuantizableBottleneck.fuse_model"
-None*†
-self|
-<torchvision.models.quantization.resnet.QuantizableBottleneck"<torchvision.models.quantization.resnet.QuantizableBottleneck*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rd
-skip_add_reluJtorchvision.models.quantization.resnet.QuantizableBottleneck.skip_add_relu
-AnyrT
-relu1Btorchvision.models.quantization.resnet.QuantizableBottleneck.relu1
-AnyrT
-relu2Btorchvision.models.quantization.resnet.QuantizableBottleneck.relu2
-Anyß
-QuantizableResNet8torchvision.models.quantization.resnet.QuantizableResNet" torchvision.models.resnet.ResNet*ÿ
-__init__Atorchvision.models.quantization.resnet.QuantizableResNet.__init__"
-None*~
-selft
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*
-args
-Any*
-kwargs
-Any*Ž
-forward@torchvision.models.quantization.resnet.QuantizableResNet.forward"
-torch.Tensor"torch.Tensor*~
-selft
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*#
-x
-torch.Tensor"torch.Tensor*²
+args(*
+kwargs(* 
+forward*
 
-fuse_modelCtorchvision.models.quantization.resnet.QuantizableResNet.fuse_model"
-None*~
-selft
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rP
-quant>torchvision.models.quantization.resnet.QuantizableResNet.quant
-AnyrT
-dequant@torchvision.models.quantization.resnet.QuantizableResNet.dequant
-AnyÚ
-ResNet18_QuantizedWeights@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights"#torchvision.models._api.WeightsEnumHrv
-IMAGENET1K_FBGEMM_V1Utorchvision.models.quantization.resnet.ResNet18_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyr\
-DEFAULTHtorchvision.models.quantization.resnet.ResNet18_QuantizedWeights.DEFAULT
-AnyÒ
-ResNet50_QuantizedWeights@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights"#torchvision.models._api.WeightsEnumHrv
-IMAGENET1K_FBGEMM_V1Utorchvision.models.quantization.resnet.ResNet50_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrv
-IMAGENET1K_FBGEMM_V2Utorchvision.models.quantization.resnet.ResNet50_QuantizedWeights.IMAGENET1K_FBGEMM_V2
-Anyr\
-DEFAULTHtorchvision.models.quantization.resnet.ResNet50_QuantizedWeights.DEFAULT
-Anyú
-!ResNeXt101_32X8D_QuantizedWeightsHtorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr~
-IMAGENET1K_FBGEMM_V1]torchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyr~
-IMAGENET1K_FBGEMM_V2]torchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights.IMAGENET1K_FBGEMM_V2
-Anyrd
-DEFAULTPtorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights.DEFAULT
-Anyú
-!ResNeXt101_64X4D_QuantizedWeightsHtorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr~
-IMAGENET1K_FBGEMM_V1]torchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrd
-DEFAULTPtorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights.DEFAULT
-AnyŸ
-resnet18/torchvision.models.quantization.resnet.resnet18"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*ö
-weightsæ
-wUnion[torchvision.models.quantization.resnet.ResNet18_QuantizedWeights,torchvision.models.resnet.ResNet18_Weights,None]„
-@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights"@torchvision.models.quantization.resnet.ResNet18_QuantizedWeightsX
-*torchvision.models.resnet.ResNet18_Weights"*torchvision.models.resnet.ResNet18_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-AnyŸ
-resnet50/torchvision.models.quantization.resnet.resnet50"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*ö
-weightsæ
-wUnion[torchvision.models.quantization.resnet.ResNet50_QuantizedWeights,torchvision.models.resnet.ResNet50_Weights,None]„
-@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights"@torchvision.models.quantization.resnet.ResNet50_QuantizedWeightsX
-*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Anyà
-resnext101_32x8d7torchvision.models.quantization.resnet.resnext101_32x8d"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*§
-weights—
-‡Union[torchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights,torchvision.models.resnet.ResNeXt101_32X8D_Weights,None]”
-Htorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights"Htorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeightsh
-2torchvision.models.resnet.ResNeXt101_32X8D_Weights"2torchvision.models.resnet.ResNeXt101_32X8D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Anyà
-resnext101_64x4d7torchvision.models.quantization.resnet.resnext101_64x4d"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*§
-weights—
-‡Union[torchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights,torchvision.models.resnet.ResNeXt101_64X4D_Weights,None]”
-Htorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights"Htorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeightsh
-2torchvision.models.resnet.ResNeXt101_64X4D_Weights"2torchvision.models.resnet.ResNeXt101_64X4D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any*¢
-__annotations__6torchvision.models.quantization.resnet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r
+add_relu0è
+QuantizableBottleneck"$torchvision.models.resnet.Bottleneck*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r
+skip_add_relu0r	
+relu10r	
+relu20Ï
+QuantizableResNet" torchvision.models.resnet.ResNet*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r	
+quant0r
+dequant0i
+ResNet18_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0ƒ
+ResNet50_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+IMAGENET1K_FBGEMM_V20r
+DEFAULT0‹
+!ResNeXt101_32X8D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+IMAGENET1K_FBGEMM_V20r
+DEFAULT0q
+!ResNeXt101_64X4D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0O
+resnet18*
+weights (*
+progress (*
+quantize (*
+kwargs(O
+resnet50*
+weights (*
+progress (*
+quantize (*
+kwargs(W
+resnext101_32x8d*
+weights (*
+progress (*
+quantize (*
+kwargs(W
+resnext101_64x4d*
+weights (*
+progress (*
+quantize (*
+kwargs(*
+__annotations__022>"<torchvision.models.quantization.resnet.QuantizableBasicBlock22"torch.Tensor2"builtins.bool222>"<torchvision.models.quantization.resnet.QuantizableBottleneck2:"8torchvision.models.quantization.resnet.QuantizableResNet2B"@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights2,"*torchvision.models.resnet.ResNet18_Weights22	
+2B"@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights2,"*torchvision.models.resnet.ResNet50_Weights222J"Htorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights24"2torchvision.models.resnet.ResNeXt101_32X8D_Weights222J"Htorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights24"2torchvision.models.resnet.ResNeXt101_64X4D_Weights222"builtins.str2"builtins.dict2

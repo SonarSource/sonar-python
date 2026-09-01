@@ -1,400 +1,212 @@
 
-PIL.ImageFilterJ
-FilterPIL.ImageFilter.Filter"builtins.objectj310j311j312j313j314c
-MultibandFilterPIL.ImageFilter.MultibandFilter"PIL.ImageFilter.Filterj310j311j312j313j314´
-BuiltinFilterPIL.ImageFilter.BuiltinFilter"PIL.ImageFilter.MultibandFilter*É
-filter$PIL.ImageFilter.BuiltinFilter.filter""
-PIL.Image.Image"PIL.Image.Image*H
-self>
-PIL.ImageFilter.BuiltinFilter"PIL.ImageFilter.BuiltinFilter*
-image
-Anyz310z311z312z313z314j310j311j312j313j314¢	
-KernelPIL.ImageFilter.Kernel"PIL.ImageFilter.BuiltinFilter*Ö
-__init__PIL.ImageFilter.Kernel.__init__"
-None*:
-self0
-PIL.ImageFilter.Kernel"PIL.ImageFilter.Kernel*X
-sizeN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*Z
-kernelN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-offset
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314rZ
-namePIL.ImageFilter.Kernel.name
-builtins.str"builtins.str*310*311*312*313*314r’
+PIL.ImageFilter
+Filter"builtins.object)
+MultibandFilter"PIL.ImageFilter.FilterU
+BuiltinFilter"PIL.ImageFilter.MultibandFilter*#
+filter*
 
-filterargs!PIL.ImageFilter.Kernel.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314¥
+self(*
+image(”
+Kernel"PIL.ImageFilter.BuiltinFilter*Q
+__init__*
 
-RankFilterPIL.ImageFilter.RankFilter"PIL.ImageFilter.Filter*æ
-__init__#PIL.ImageFilter.RankFilter.__init__"
-None*B
-self8
-PIL.ImageFilter.RankFilter"PIL.ImageFilter.RankFilter*&
-size
-builtins.int"builtins.int*&
-rank
-builtins.int"builtins.intz310z311z312z313z314*À
-filter!PIL.ImageFilter.RankFilter.filter""
-PIL.Image.Image"PIL.Image.Image*B
-self8
-PIL.ImageFilter.RankFilter"PIL.ImageFilter.RankFilter*
-image
-Anyz310z311z312z313z314j310j311j312j313j314r^
-namePIL.ImageFilter.RankFilter.name
-builtins.str"builtins.str*310*311*312*313*314r^
-sizePIL.ImageFilter.RankFilter.size
-builtins.int"builtins.int*310*311*312*313*314r^
-rankPIL.ImageFilter.RankFilter.rank
-builtins.int"builtins.int*310*311*312*313*314Ð
-MedianFilterPIL.ImageFilter.MedianFilter"PIL.ImageFilter.RankFilter*Æ
-__init__%PIL.ImageFilter.MedianFilter.__init__"
-None*F
-self<
-PIL.ImageFilter.MedianFilter"PIL.ImageFilter.MedianFilter*(
-size
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314r`
-name!PIL.ImageFilter.MedianFilter.name
-builtins.str"builtins.str*310*311*312*313*314r`
-size!PIL.ImageFilter.MedianFilter.size
-builtins.int"builtins.int*310*311*312*313*314r`
-rank!PIL.ImageFilter.MedianFilter.rank
-builtins.int"builtins.int*310*311*312*313*314¸
-	MinFilterPIL.ImageFilter.MinFilter"PIL.ImageFilter.RankFilter*½
-__init__"PIL.ImageFilter.MinFilter.__init__"
-None*@
-self6
-PIL.ImageFilter.MinFilter"PIL.ImageFilter.MinFilter*(
-size
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314r]
-namePIL.ImageFilter.MinFilter.name
-builtins.str"builtins.str*310*311*312*313*314r]
-sizePIL.ImageFilter.MinFilter.size
-builtins.int"builtins.int*310*311*312*313*314r]
-rankPIL.ImageFilter.MinFilter.rank
-builtins.int"builtins.int*310*311*312*313*314¸
-	MaxFilterPIL.ImageFilter.MaxFilter"PIL.ImageFilter.RankFilter*½
-__init__"PIL.ImageFilter.MaxFilter.__init__"
-None*@
-self6
-PIL.ImageFilter.MaxFilter"PIL.ImageFilter.MaxFilter*(
-size
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314r]
-namePIL.ImageFilter.MaxFilter.name
-builtins.str"builtins.str*310*311*312*313*314r]
-sizePIL.ImageFilter.MaxFilter.size
-builtins.int"builtins.int*310*311*312*313*314r]
-rankPIL.ImageFilter.MaxFilter.rank
-builtins.int"builtins.int*310*311*312*313*314Ÿ
+self(*
 
-ModeFilterPIL.ImageFilter.ModeFilter"PIL.ImageFilter.Filter*À
-__init__#PIL.ImageFilter.ModeFilter.__init__"
-None*B
-self8
-PIL.ImageFilter.ModeFilter"PIL.ImageFilter.ModeFilter*(
-size
-builtins.int"builtins.int z310z311z312z313z314*À
-filter!PIL.ImageFilter.ModeFilter.filter""
-PIL.Image.Image"PIL.Image.Image*B
-self8
-PIL.ImageFilter.ModeFilter"PIL.ImageFilter.ModeFilter*
-image
-Anyz310z311z312z313z314j310j311j312j313j314r^
-namePIL.ImageFilter.ModeFilter.name
-builtins.str"builtins.str*310*311*312*313*314r^
-sizePIL.ImageFilter.ModeFilter.size
-builtins.int"builtins.int*310*311*312*313*314Ê
-GaussianBlurPIL.ImageFilter.GaussianBlur"PIL.ImageFilter.MultibandFilter*Ì
-__init__%PIL.ImageFilter.GaussianBlur.__init__"
-None*F
-self<
-PIL.ImageFilter.GaussianBlur"PIL.ImageFilter.GaussianBlur*.
-radius 
-builtins.float"builtins.float z310z311z312z313z314*Æ
-filter#PIL.ImageFilter.GaussianBlur.filter""
-PIL.Image.Image"PIL.Image.Image*F
-self<
-PIL.ImageFilter.GaussianBlur"PIL.ImageFilter.GaussianBlur*
-image
-Anyz310z311z312z313z314j310j311j312j313j314r`
-name!PIL.ImageFilter.GaussianBlur.name
-builtins.str"builtins.str*310*311*312*313*314rh
-radius#PIL.ImageFilter.GaussianBlur.radius 
-builtins.float"builtins.float*310*311*312*313*314–
-BoxBlurPIL.ImageFilter.BoxBlur"PIL.ImageFilter.MultibandFilter*»
-__init__ PIL.ImageFilter.BoxBlur.__init__"
-None*<
-self2
-PIL.ImageFilter.BoxBlur"PIL.ImageFilter.BoxBlur*,
-radius 
-builtins.float"builtins.floatz310z311z312z313z314*·
-filterPIL.ImageFilter.BoxBlur.filter""
-PIL.Image.Image"PIL.Image.Image*<
-self2
-PIL.ImageFilter.BoxBlur"PIL.ImageFilter.BoxBlur*
-image
-Anyz310z311z312z313z314j310j311j312j313j314r[
-namePIL.ImageFilter.BoxBlur.name
-builtins.str"builtins.str*310*311*312*313*314rc
-radiusPIL.ImageFilter.BoxBlur.radius 
-builtins.float"builtins.float*310*311*312*313*314î
-UnsharpMaskPIL.ImageFilter.UnsharpMask"PIL.ImageFilter.MultibandFilter*¥
-__init__$PIL.ImageFilter.UnsharpMask.__init__"
-None*D
-self:
-PIL.ImageFilter.UnsharpMask"PIL.ImageFilter.UnsharpMask*.
-radius 
-builtins.float"builtins.float *+
-percent
-builtins.int"builtins.int *-
-	threshold
-builtins.int"builtins.int z310z311z312z313z314*Ã
-filter"PIL.ImageFilter.UnsharpMask.filter""
-PIL.Image.Image"PIL.Image.Image*D
-self:
-PIL.ImageFilter.UnsharpMask"PIL.ImageFilter.UnsharpMask*
-image
-Anyz310z311z312z313z314j310j311j312j313j314r_
-name PIL.ImageFilter.UnsharpMask.name
-builtins.str"builtins.str*310*311*312*313*314rg
-radius"PIL.ImageFilter.UnsharpMask.radius 
-builtins.float"builtins.float*310*311*312*313*314re
-percent#PIL.ImageFilter.UnsharpMask.percent
-builtins.int"builtins.int*310*311*312*313*314ri
-	threshold%PIL.ImageFilter.UnsharpMask.threshold
-builtins.int"builtins.int*310*311*312*313*314Á
-BLURPIL.ImageFilter.BLUR"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314rX
-namePIL.ImageFilter.BLUR.name
-builtins.str"builtins.str*310*311*312*313*314r
+size(*
+kernel(*
+scale (	*
+offset (r
+name0
+r
 
-filterargsPIL.ImageFilter.BLUR.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314Í
-CONTOURPIL.ImageFilter.CONTOUR"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314r[
-namePIL.ImageFilter.CONTOUR.name
-builtins.str"builtins.str*310*311*312*313*314r“
+filterargs0™
 
-filterargs"PIL.ImageFilter.CONTOUR.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314É
-DETAILPIL.ImageFilter.DETAIL"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314rZ
-namePIL.ImageFilter.DETAIL.name
-builtins.str"builtins.str*310*311*312*313*314r’
+RankFilter"PIL.ImageFilter.Filter*0
+__init__*
 
-filterargs!PIL.ImageFilter.DETAIL.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314á
-EDGE_ENHANCEPIL.ImageFilter.EDGE_ENHANCE"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314r`
-name!PIL.ImageFilter.EDGE_ENHANCE.name
-builtins.str"builtins.str*310*311*312*313*314r˜
+self(*
 
-filterargs'PIL.ImageFilter.EDGE_ENHANCE.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314õ
-EDGE_ENHANCE_MORE!PIL.ImageFilter.EDGE_ENHANCE_MORE"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314re
-name&PIL.ImageFilter.EDGE_ENHANCE_MORE.name
-builtins.str"builtins.str*310*311*312*313*314r
+size(*
 
-filterargs,PIL.ImageFilter.EDGE_ENHANCE_MORE.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314É
-EMBOSSPIL.ImageFilter.EMBOSS"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314rZ
-namePIL.ImageFilter.EMBOSS.name
-builtins.str"builtins.str*310*311*312*313*314r’
+rank(*#
+filter*
 
-filterargs!PIL.ImageFilter.EMBOSS.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314Ù
+self(*
+image(r
+name0
+r
+size0r
+rank0p
+MedianFilter"PIL.ImageFilter.RankFilter*&
+__init__*
 
-FIND_EDGESPIL.ImageFilter.FIND_EDGES"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314r^
-namePIL.ImageFilter.FIND_EDGES.name
-builtins.str"builtins.str*310*311*312*313*314r–
+self(*
+size (r
+name0
+r
+size0r
+rank0m
+	MinFilter"PIL.ImageFilter.RankFilter*&
+__init__*
 
-filterargs%PIL.ImageFilter.FIND_EDGES.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314Í
-SHARPENPIL.ImageFilter.SHARPEN"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314r[
-namePIL.ImageFilter.SHARPEN.name
-builtins.str"builtins.str*310*311*312*313*314r“
+self(*
+size (r
+name0
+r
+size0r
+rank0m
+	MaxFilter"PIL.ImageFilter.RankFilter*&
+__init__*
 
-filterargs"PIL.ImageFilter.SHARPEN.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314É
-SMOOTHPIL.ImageFilter.SMOOTH"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314rZ
-namePIL.ImageFilter.SMOOTH.name
-builtins.str"builtins.str*310*311*312*313*314r’
+self(*
+size (r
+name0
+r
+size0r
+rank0…
 
-filterargs!PIL.ImageFilter.SMOOTH.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314Ý
-SMOOTH_MOREPIL.ImageFilter.SMOOTH_MORE"PIL.ImageFilter.BuiltinFilterj310j311j312j313j314r_
-name PIL.ImageFilter.SMOOTH_MORE.name
-builtins.str"builtins.str*310*311*312*313*314r—
+ModeFilter"PIL.ImageFilter.Filter*&
+__init__*
 
-filterargs&PIL.ImageFilter.SMOOTH_MORE.filterargsÇ
-gTypeAlias[Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]]¼
-\Tuple[typing.Sequence[builtins.int],builtins.int,builtins.int,typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.intN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"PIL.ImageFilter._FilterArgs*310*311*312*313*314ä
+self(*
+size (*#
+filter*
 
-Color3DLUTPIL.ImageFilter.Color3DLUT"PIL.ImageFilter.MultibandFilter*÷
-__init__#PIL.ImageFilter.Color3DLUT.__init__"
-None*B
-self8
-PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT*®
-size£
-1Union[builtins.int,typing.Iterable[builtins.int]]
-builtins.int"builtins.intN
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable*
-table
-Any*,
-channels
-builtins.int"builtins.int *W
-target_modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-Anyz310z311z312z313z314*ù
-generate#PIL.ImageFilter.Color3DLUT.generate"{
-PIL.ImageFilter.Color3DLUT.Self8
-PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT(*¶
-cls¬
-%Type[PIL.ImageFilter.Color3DLUT.Self]{
-PIL.ImageFilter.Color3DLUT.Self8
-PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT("type*ü
-sizeñ
-AUnion[builtins.int,Tuple[builtins.int,builtins.int,builtins.int]]
-builtins.int"builtins.int‹
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-channels
-builtins.int"builtins.int *W
-target_modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:builtins.classmethodpz310z311z312z313z314*™
-	transform$PIL.ImageFilter.Color3DLUT.transform"{
-PIL.ImageFilter.Color3DLUT.Self8
-PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT(*…
-self{
-PIL.ImageFilter.Color3DLUT.Self8
-PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT(*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*2
-with_normals
-builtins.bool"builtins.bool *È
-channels·
-7Union[Literal[builtins.int],Literal[builtins.int],None]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int
-None *n
-target_mode[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*À
-filter!PIL.ImageFilter.Color3DLUT.filter""
-PIL.Image.Image"PIL.Image.Image*B
-self8
-PIL.ImageFilter.Color3DLUT"PIL.ImageFilter.Color3DLUT*
-image
-Anyz310z311z312z313z314j310j311j312j313j314r^
-namePIL.ImageFilter.Color3DLUT.name
-builtins.str"builtins.str*310*311*312*313*314rŒ
-sizePIL.ImageFilter.Color3DLUT.sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*310*311*312*313*314rf
-channels#PIL.ImageFilter.Color3DLUT.channels
-builtins.int"builtins.int*310*311*312*313*314r†
-modePIL.ImageFilter.Color3DLUT.modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rK
-table PIL.ImageFilter.Color3DLUT.table
-Any*310*311*312*313*314*¤
-__annotations__PIL.ImageFilter.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+image(r
+name0
+r
+size0”
+GaussianBlur"PIL.ImageFilter.MultibandFilter*(
+__init__*
+
+self(*
+radius (*#
+filter*
+
+self(*
+image(r
+name0
+r
+
+radius0
+BoxBlur"PIL.ImageFilter.MultibandFilter*&
+__init__*
+
+self(*
+radius(*#
+filter*
+
+self(*
+image(r
+name0
+r
+
+radius0Ó
+UnsharpMask"PIL.ImageFilter.MultibandFilter*L
+__init__*
+
+self(*
+radius (*
+percent (*
+	threshold (*#
+filter*
+
+self(*
+image(r
+name0
+r
+
+radius0r
+percent0r
+	threshold0?
+BLUR"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0B
+CONTOUR"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0A
+DETAIL"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0G
+EDGE_ENHANCE"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0L
+EDGE_ENHANCE_MORE"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0A
+EMBOSS"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0E
+
+FIND_EDGES"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0B
+SHARPEN"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0A
+SMOOTH"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0F
+SMOOTH_MORE"PIL.ImageFilter.BuiltinFilterr
+name0
+r
+
+filterargs0Ï
+
+Color3DLUT"PIL.ImageFilter.MultibandFilter*f
+__init__*
+
+self(*
+
+size(*
+table(*
+channels (*
+target_mode (*
+kwargs(*t
+generate*	
+cls(*
+
+size(*
+callback(*
+channels (*
+target_mode (0:builtins.classmethodp*f
+	transform*
+
+self(*
+callback(*
+with_normals ( *
+channels ("*
+target_mode (	*#
+filter*
+
+self(*
+image(r
+name0
+r
+size0#r
+channels0r
+mode0r	
+table0*
+__annotations__0$2"PIL.Image.Image2"PIL.ImageFilter.BuiltinFilter222"PIL.ImageFilter.Kernel2"builtins.int2"typing.Sequence22"_typeshed.Incomplete2222"builtins.str222""PIL.ImageFilter._FilterArgs22"PIL.ImageFilter.RankFilter2"PIL.ImageFilter.MedianFilter2"PIL.ImageFilter.MinFilter2"PIL.ImageFilter.MaxFilter2"PIL.ImageFilter.ModeFilter2"PIL.ImageFilter.GaussianBlur2"builtins.float2"PIL.ImageFilter.BoxBlur2"PIL.ImageFilter.UnsharpMask2"PIL.ImageFilter.Color3DLUT2"typing.Iterable22222
+2D
+PIL.ImageFilter.Color3DLUT.Self"PIL.ImageFilter.Color3DLUT(22"type222222"builtins.function222"builtins.bool2	222!!2"builtins.list22"builtins.dict2
+

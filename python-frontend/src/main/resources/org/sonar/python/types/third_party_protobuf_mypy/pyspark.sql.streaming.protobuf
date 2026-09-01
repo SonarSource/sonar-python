@@ -1,809 +1,345 @@
 
-pyspark.sql.streamingÇ
-StreamingQuery*pyspark.sql.streaming.query.StreamingQuery"builtins.object*ø
-__init__3pyspark.sql.streaming.query.StreamingQuery.__init__"
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*
-jsq
-Any*Ã
-id-pyspark.sql.streaming.query.StreamingQuery.id"
-builtins.str"builtins.str*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*“
-runId0pyspark.sql.streaming.query.StreamingQuery.runId"
-builtins.str"builtins.str*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*–
-name/pyspark.sql.streaming.query.StreamingQuery.name"
-builtins.str"builtins.str*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*⁄
-isActive3pyspark.sql.streaming.query.StreamingQuery.isActive"
-builtins.bool"builtins.bool*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*—
-awaitTermination;pyspark.sql.streaming.query.StreamingQuery.awaitTermination"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*S
-timeoutD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *è
-status1pyspark.sql.streaming.query.StreamingQuery.status"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*·
-recentProgress9pyspark.sql.streaming.query.StreamingQuery.recentProgress"ò
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*◊
-lastProgress7pyspark.sql.streaming.query.StreamingQuery.lastProgress"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery0:builtins.property`*√
-processAllAvailable>pyspark.sql.streaming.query.StreamingQuery.processAllAvailable"
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*•
-stop/pyspark.sql.streaming.query.StreamingQuery.stop"
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*€
-explain2pyspark.sql.streaming.query.StreamingQuery.explain"
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*.
-extended
-builtins.bool"builtins.bool *Í
-	exception4pyspark.sql.streaming.query.StreamingQuery.exception"¬
-BUnion[pyspark.errors.exceptions.base.StreamingQueryException,None]p
-6pyspark.errors.exceptions.base.StreamingQueryException"6pyspark.errors.exceptions.base.StreamingQueryException
-None*b
-selfX
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQueryr@
-_jsq/pyspark.sql.streaming.query.StreamingQuery._jsq
-Any≈
-StreamingQueryManager1pyspark.sql.streaming.query.StreamingQueryManager"builtins.object*’
-__init__:pyspark.sql.streaming.query.StreamingQueryManager.__init__"
-None*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*
-jsqm
-Any*Ú
-active8pyspark.sql.streaming.query.StreamingQueryManager.active"§
-9builtins.list[pyspark.sql.streaming.query.StreamingQuery]X
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery"builtins.list*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager0:builtins.property`*ı
-get5pyspark.sql.streaming.query.StreamingQueryManager.get"û
-6Union[pyspark.sql.streaming.query.StreamingQuery,None]X
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery
-None*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*$
-id
-builtins.str"builtins.str*Ï
-awaitAnyTerminationEpyspark.sql.streaming.query.StreamingQueryManager.awaitAnyTermination"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*S
-timeoutD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *–
-resetTerminatedApyspark.sql.streaming.query.StreamingQueryManager.resetTerminated"
-None*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*∆
-addListener=pyspark.sql.streaming.query.StreamingQueryManager.addListener"
-None*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*|
-listenern
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*Ã
-removeListener@pyspark.sql.streaming.query.StreamingQueryManager.removeListener"
-None*p
-selff
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*|
-listenern
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListenerrI
-_jsqm7pyspark.sql.streaming.query.StreamingQueryManager._jsqm
-Anyµk
-DataStreamReader1pyspark.sql.streaming.readwriter.DataStreamReader""pyspark.sql.readwriter.OptionUtils*ì
-__init__:pyspark.sql.streaming.readwriter.DataStreamReader.__init__"
-None*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*O
-sparkD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*Ñ
-_df5pyspark.sql.streaming.readwriter.DataStreamReader._df"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*
-jdf
-Any*∆
-format8pyspark.sql.streaming.readwriter.DataStreamReader.format"f
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*(
-source
-builtins.str"builtins.str*º
-schema8pyspark.sql.streaming.readwriter.DataStreamReader.schema"f
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*ù
-schemaê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*ı
-option8pyspark.sql.streaming.readwriter.DataStreamReader.option"f
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*%
-key
-builtins.str"builtins.str*Ø
-value£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType*“
-options9pyspark.sql.streaming.readwriter.DataStreamReader.options"f
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*±
-options£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType*ˇ
-load6pyspark.sql.streaming.readwriter.DataStreamReader.load"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*P
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Æ
-schemaü
-5Union[pyspark.sql.types.StructType,builtins.str,None]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str
-None *±
-options£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType*å
-json6pyspark.sql.streaming.readwriter.DataStreamReader.json"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*&
-path
-builtins.str"builtins.str*Æ
-schemaü
-5Union[pyspark.sql.types.StructType,builtins.str,None]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str
-None *å
-primitivesAsStringr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *à
-prefersDecimalr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *á
-allowCommentsr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ë
-allowUnquotedFieldNamesr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ã
-allowSingleQuotesr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ë
-allowNumericLeadingZeror
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ú
-"allowBackslashEscapingAnyCharacterr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *P
-modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *e
-columnNameOfCorruptRecordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+pyspark.sql.streamingÇ
+StreamingQuery*pyspark.sql.streaming.query.StreamingQuery"builtins.object*#
+__init__*
 
-dateFormatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *[
-timestampFormatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *É
-	multiLiner
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ì
-allowUnquotedControlCharsr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *S
-lineSepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-localeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *å
-dropFieldIfAllNullr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *à
-pathGlobFilterr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ç
-recursiveFileLookupr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ê
-allowNonNumericNumbersr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ë
-orc5pyspark.sql.streaming.readwriter.DataStreamReader.orc"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*&
-path
-builtins.str"builtins.str*Z
-mergeSchemaG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *à
-pathGlobFilterr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ç
-recursiveFileLookupr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *¥
-parquet9pyspark.sql.streaming.readwriter.DataStreamReader.parquet"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*&
-path
-builtins.str"builtins.str*Z
-mergeSchemaG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *à
-pathGlobFilterr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ç
-recursiveFileLookupr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *å
-datetimeRebaseModer
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *â
-int96RebaseModer
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *Ω
-text6pyspark.sql.streaming.readwriter.DataStreamReader.text"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*&
-path
-builtins.str"builtins.str*/
-	wholetext
-builtins.bool"builtins.bool *S
-lineSepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *à
-pathGlobFilterr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ç
-recursiveFileLookupr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *π
-csv5pyspark.sql.streaming.readwriter.DataStreamReader.csv"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*&
-path
-builtins.str"builtins.str*Æ
-schemaü
-5Union[pyspark.sql.types.StructType,builtins.str,None]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str
-None *O
-sepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Q
-quoteD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-escapeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ä
-headerr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *Ö
-inferSchemar
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ë
-ignoreLeadingWhiteSpacer
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *í
-ignoreTrailingWhiteSpacer
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *U
-	nullValueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-nanValueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-positiveInfD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-negativeInfD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+self(*	
+jsq(*)
+id*
 
-dateFormatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *[
-timestampFormatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Å
+self(0:builtins.property`*,
+runId*
 
-maxColumnso
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *à
-maxCharsPerColumno
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *í
-maxMalformedLogPerPartitiono
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *P
-modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *e
-columnNameOfCorruptRecordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *É
-	multiLiner
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ì
-charToEscapeQuoteEscapingr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *á
-enforceSchemar
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *V
+self(0:builtins.property`*+
+name*
 
-emptyValueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-localeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-lineSepD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *à
-pathGlobFilterr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *ç
-recursiveFileLookupr
-&Union[builtins.bool,builtins.str,None]
-builtins.bool"builtins.bool
-builtins.str"builtins.str
-None *b
-unescapedQuoteHandlingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *£
-table7pyspark.sql.streaming.readwriter.DataStreamReader.table"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*+
-	tableName
-builtins.str"builtins.strrO
-_jreader:pyspark.sql.streaming.readwriter.DataStreamReader._jreader
-Anyrà
-_spark8pyspark.sql.streaming.readwriter.DataStreamReader._sparkD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSessionÙQ
-DataStreamWriter1pyspark.sql.streaming.readwriter.DataStreamWriter"builtins.object*é
-__init__:pyspark.sql.streaming.readwriter.DataStreamWriter.__init__"
-None*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*J
-dfB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*ö
-_sq5pyspark.sql.streaming.readwriter.DataStreamWriter._sq"X
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*
-jsq
-Any*“
+self(0:builtins.property`*/
+isActive*
 
-outputMode<pyspark.sql.streaming.readwriter.DataStreamWriter.outputMode"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*,
+self(0:builtins.property`*1
+awaitTermination*
 
-outputMode
-builtins.str"builtins.str*∆
-format8pyspark.sql.streaming.readwriter.DataStreamWriter.format"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*(
-source
-builtins.str"builtins.str*ı
-option8pyspark.sql.streaming.readwriter.DataStreamWriter.option"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*%
-key
-builtins.str"builtins.str*Ø
-value£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType*“
-options9pyspark.sql.streaming.readwriter.DataStreamWriter.options"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*±
-options£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType*œ
-	queryName;pyspark.sql.streaming.readwriter.DataStreamWriter.queryName"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*+
-	queryName
-builtins.str"builtins.str*∆
-_construct_foreach_functionMpyspark.sql.streaming.readwriter.DataStreamWriter._construct_foreach_function"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*Ô
-fÁ
-JUnion[CallableType[builtins.function],pyspark.sql._typing.SupportsProcess]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionJ
-#pyspark.sql._typing.SupportsProcess"#pyspark.sql._typing.SupportsProcess0:builtins.staticmethodh*ˇ
-foreachBatch>pyspark.sql.streaming.readwriter.DataStreamWriter.foreachBatch"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*ÿ
+self(*
+timeout (*-
+status	*
 
-start7pyspark.sql.streaming.readwriter.DataStreamWriter.start"X
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*P
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+self(0:builtins.property`*5
+recentProgress
+*
 
-outputModeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¿
-partitionBy¨
-4Union[builtins.str,builtins.list[builtins.str],None]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *U
-	queryNameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *±
-options£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType*∑
+self(0:builtins.property`*3
+lastProgress*
 
-toTable9pyspark.sql.streaming.readwriter.DataStreamWriter.toTable"X
-*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*+
-	tableName
-builtins.str"builtins.str*R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
+self(0:builtins.property`*#
+processAllAvailable*
 
-outputModeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¿
-partitionBy¨
-4Union[builtins.str,builtins.list[builtins.str],None]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *U
-	queryNameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *±
-options£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType2æ
-partitionBy=pyspark.sql.streaming.readwriter.DataStreamWriter.partitionBy„
-partitionBy=pyspark.sql.streaming.readwriter.DataStreamWriter.partitionBy"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*&
-cols
-builtins.str"builtins.str0:typing.overloadXâ
-partitionBy=pyspark.sql.streaming.readwriter.DataStreamWriter.partitionBy"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*LJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list0:typing.overloadX2ÿ
-trigger9pyspark.sql.streaming.readwriter.DataStreamWriter.triggerÂ
-trigger9pyspark.sql.streaming.readwriter.DataStreamWriter.trigger"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*0
-processingTime
-builtins.str"builtins.str0:typing.overloadX›
-trigger9pyspark.sql.streaming.readwriter.DataStreamWriter.trigger"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*(
-once
-builtins.bool"builtins.bool0:typing.overloadX·
-trigger9pyspark.sql.streaming.readwriter.DataStreamWriter.trigger"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*,
+self(*
+stop*
 
-continuous
-builtins.str"builtins.str0:typing.overloadXÂ
-trigger9pyspark.sql.streaming.readwriter.DataStreamWriter.trigger"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*0
-availableNow
-builtins.bool"builtins.bool0:typing.overloadX2◊
-foreach9pyspark.sql.streaming.readwriter.DataStreamWriter.foreachá
-foreach9pyspark.sql.streaming.readwriter.DataStreamWriter.foreach"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*R
-fK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:typing.overloadXÜ
-foreach9pyspark.sql.streaming.readwriter.DataStreamWriter.foreach"f
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*p
-selff
-1pyspark.sql.streaming.readwriter.DataStreamWriter"1pyspark.sql.streaming.readwriter.DataStreamWriter*Q
-fJ
-#pyspark.sql._typing.SupportsProcess"#pyspark.sql._typing.SupportsProcess0:typing.overloadXrÄ
-_df5pyspark.sql.streaming.readwriter.DataStreamWriter._dfB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFramerà
-_spark8pyspark.sql.streaming.readwriter.DataStreamWriter._sparkD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSessionrM
-_jwrite9pyspark.sql.streaming.readwriter.DataStreamWriter._jwrite
-Any¡
-StreamingQueryListener5pyspark.sql.streaming.listener.StreamingQueryListener"abc.ABC*ˆ
-_set_spark_sessionHpyspark.sql.streaming.listener.StreamingQueryListener._set_spark_session"
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*
-spark
-Any*˝
-spark;pyspark.sql.streaming.listener.StreamingQueryListener.spark"&
-Union[Any,None]
-Any
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener0:builtins.property`*‡
-_init_listener_idGpyspark.sql.streaming.listener.StreamingQueryListener._init_listener_id"
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*„
-onQueryStartedDpyspark.sql.streaming.listener.StreamingQueryListener.onQueryStarted"
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*o
-eventd
-0pyspark.sql.streaming.listener.QueryStartedEvent"0pyspark.sql.streaming.listener.QueryStartedEvent0:abc.abstractmethod@*Á
-onQueryProgressEpyspark.sql.streaming.listener.StreamingQueryListener.onQueryProgress"
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*q
-eventf
-1pyspark.sql.streaming.listener.QueryProgressEvent"1pyspark.sql.streaming.listener.QueryProgressEvent0:abc.abstractmethod@*ø
-onQueryIdleApyspark.sql.streaming.listener.StreamingQueryListener.onQueryIdle"
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*i
-event^
--pyspark.sql.streaming.listener.QueryIdleEvent"-pyspark.sql.streaming.listener.QueryIdleEvent*Ô
-onQueryTerminatedGpyspark.sql.streaming.listener.StreamingQueryListener.onQueryTerminated"
-None*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener*u
-eventj
-3pyspark.sql.streaming.listener.QueryTerminatedEvent"3pyspark.sql.streaming.listener.QueryTerminatedEvent0:abc.abstractmethod@*Ë
+self(*)
+explain*
 
-_jlistener@pyspark.sql.streaming.listener.StreamingQueryListener._jlistener"
-Any*x
-selfn
-5pyspark.sql.streaming.listener.StreamingQueryListener"5pyspark.sql.streaming.listener.StreamingQueryListener0:builtins.property`r]
-_sparkSessionCpyspark.sql.streaming.listener.StreamingQueryListener._sparkSession
-Anyr^
-_id9pyspark.sql.streaming.listener.StreamingQueryListener._id
-builtins.str"builtins.strr]
-_jlistenerobjCpyspark.sql.streaming.listener.StreamingQueryListener._jlistenerobj
-Any*v
-__path__pyspark.sql.streaming.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*ë
-__annotations__%pyspark.sql.streaming.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+extended (*
+	exception*
+
+self(r
+_jsq0é
+StreamingQueryManager1pyspark.sql.streaming.query.StreamingQueryManager"builtins.object*$
+__init__*
+
+self(*
+
+jsqm(*-
+active*
+
+self(0:builtins.property`*
+get*
+
+self(*
+id(*4
+awaitAnyTermination*
+
+self(*
+timeout (*
+resetTerminated*
+
+self(*+
+addListener*
+
+self(*
+listener(*.
+removeListener*
+
+self(*
+listener(r	
+_jsqm0Ù
+DataStreamReader1pyspark.sql.streaming.readwriter.DataStreamReader""pyspark.sql.readwriter.OptionUtils*%
+__init__*
+
+self(*
+spark(*
+_df*
+
+self(*	
+jdf(*$
+format*
+
+self(*
+source(*$
+schema*
+
+self(*
+schema(*.
+option*
+
+self(*	
+key(*
+value(*&
+options*
+
+self(*
+options(*Q
+load*
+
+self(*
+path (*
+format (*
+schema (*
+options(*º
+json*
+
+self(*
+
+path(*
+schema (*
+primitivesAsString (*
+prefersDecimal (*
+allowComments (*
+allowUnquotedFieldNames (*
+allowSingleQuotes (*
+allowNumericLeadingZero (**
+"allowBackslashEscapingAnyCharacter (*
+mode (*!
+columnNameOfCorruptRecord (*
+
+dateFormat (*
+timestampFormat (*
+	multiLine (*!
+allowUnquotedControlChars (*
+lineSep (*
+locale (*
+dropFieldIfAllNull (*
+encoding (*
+pathGlobFilter (*
+recursiveFileLookup (*
+allowNonNumericNumbers (*i
+orc*
+
+self(*
+
+path(*
+mergeSchema (*
+pathGlobFilter (*
+recursiveFileLookup (*¢
+parquet*
+
+self(*
+
+path(*
+mergeSchema (*
+pathGlobFilter (*
+recursiveFileLookup (*
+datetimeRebaseMode (*
+int96RebaseMode (*y
+text*
+
+self(*
+
+path(*
+	wholetext (*
+lineSep (*
+pathGlobFilter (*
+recursiveFileLookup (*æ
+csv*
+
+self(*
+
+path(*
+schema (*
+sep (*
+encoding (*
+quote (*
+escape (*
+comment (*
+header (*
+inferSchema (*
+ignoreLeadingWhiteSpace (* 
+ignoreTrailingWhiteSpace (*
+	nullValue (*
+nanValue (*
+positiveInf (*
+negativeInf (*
+
+dateFormat (*
+timestampFormat (*
+
+maxColumns (*
+maxCharsPerColumn (*#
+maxMalformedLogPerPartition (*
+mode (*!
+columnNameOfCorruptRecord (*
+	multiLine (*!
+charToEscapeQuoteEscaping (*
+enforceSchema (*
+
+emptyValue (*
+locale (*
+lineSep (*
+pathGlobFilter (*
+recursiveFileLookup (*
+unescapedQuoteHandling (*&
+table*
+
+self(*
+	tableName(r
+_jreader0r
+
+_spark0í
+
+DataStreamWriter1pyspark.sql.streaming.readwriter.DataStreamWriter"builtins.object*"
+__init__*
+
+self( *
+df(*
+_sq*
+
+self( *	
+jsq(*,
+
+outputMode *
+
+self( *
+
+outputMode(*$
+format *
+
+self( *
+source(*.
+option *
+
+self( *	
+key(*
+value(*&
+options *
+
+self( *
+options(**
+	queryName *
+
+self( *
+	queryName(*C
+_construct_foreach_function"*
+f($0:builtins.staticmethodh*(
+foreachBatch *
+
+self( *
+
+func("*~
+start*
+
+self( *
+path (*
+format (*
+
+outputMode (*
+partitionBy (&*
+	queryName (*
+options(*É
+toTable*
+
+self( *
+	tableName(*
+format (*
+
+outputMode (*
+partitionBy (&*
+	queryName (*
+options(2Å
+partitionBy<
+partitionBy *
+
+self( *
+
+cols(0:typing.overloadX4
+partitionBy *
+
+self( *(%0:typing.overloadX2â
+triggerB
+trigger *
+
+self( *
+processingTime(0:typing.overloadX8
+trigger *
+
+self( *
+
+once(0:typing.overloadX>
+trigger *
+
+self( *
+
+continuous(0:typing.overloadX@
+trigger *
+
+self( *
+availableNow(0:typing.overloadX2w
+foreach5
+foreach *
+
+self( *
+f("0:typing.overloadX5
+foreach *
+
+self( *
+f(#0:typing.overloadXr
+_df0r
+
+_spark0r
+_jwrite0π
+StreamingQueryListener5pyspark.sql.streaming.listener.StreamingQueryListener"abc.ABC*/
+_set_spark_session*
+
+self(*
+spark(*,
+spark'*
+
+self(0:builtins.property`*!
+_init_listener_id*
+
+self(*C
+onQueryStarted*
+
+self(*
+event((0:abc.abstractmethod@*D
+onQueryProgress*
+
+self(*
+event()0:abc.abstractmethod@*(
+onQueryIdle*
+
+self(*
+event(**F
+onQueryTerminated*
+
+self(*
+event(+0:abc.abstractmethod@*1
+
+_jlistener*
+
+self(0:builtins.property`r
+_sparkSession0r
+_id0r
+_jlistenerobj0*
+__path__0%*
+__annotations__0	22,"*pyspark.sql.streaming.query.StreamingQuery22"builtins.str2"builtins.bool222"builtins.int222"builtins.dict22"builtins.list2	22	28"6pyspark.errors.exceptions.base.StreamingQueryException2223"1pyspark.sql.streaming.query.StreamingQueryManager2"builtins.list22227"5pyspark.sql.streaming.listener.StreamingQueryListener23"1pyspark.sql.streaming.readwriter.DataStreamReader2"" pyspark.sql.session.SparkSession2!"pyspark.sql.dataframe.DataFrame2"pyspark.sql.types.StructType222"builtins.float222$"pyspark._typing.PrimitiveType22220")pyspark.sql._typing.OptionalPrimitiveType22222222223"1pyspark.sql.streaming.readwriter.DataStreamWriter2"builtins.function22!2%"#pyspark.sql._typing.SupportsProcess22"#2"builtins.list222%2222"0pyspark.sql.streaming.listener.QueryStartedEvent23"1pyspark.sql.streaming.listener.QueryProgressEvent2/"-pyspark.sql.streaming.listener.QueryIdleEvent25"3pyspark.sql.streaming.listener.QueryTerminatedEvent

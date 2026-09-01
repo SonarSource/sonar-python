@@ -1,136 +1,80 @@
 
-aws_xray_sdk.core.async_contextÒ
-_Context!aws_xray_sdk.core.context.Context"builtins.object*‡
-__init__*aws_xray_sdk.core.context.Context.__init__"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*3
-context_missing
-builtins.str"builtins.str z310z311z312z313z314*î
-put_segment-aws_xray_sdk.core.context.Context.put_segment"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*a
-segmentT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz310z311z312z313z314*ñ
-end_segment-aws_xray_sdk.core.context.Context.end_segment"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*‚
-end_time—
-íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
-ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
-{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int"time.struct_time
-None z310z311z312z313z314*©
-put_subsegment0aws_xray_sdk.core.context.Context.put_subsegment"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*p
+aws_xray_sdk.core.async_context’
+_Context!aws_xray_sdk.core.context.Context"builtins.object*1
+__init__*
 
-subsegment`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz310z311z312z313z314*õ
-end_subsegment0aws_xray_sdk.core.context.Context.end_subsegment"
-Any*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*‚
-end_time—
-íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
-ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
-{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int"time.struct_time
-None z310z311z312z313z314*i
-get_trace_entity2aws_xray_sdk.core.context.Context.get_trace_entity*
-selfz310z311z312z313z314*ü
-set_trace_entity2aws_xray_sdk.core.context.Context.set_trace_entity"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*b
-trace_entityP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entityz310z311z312z313z314*√
-clear_trace_entities6aws_xray_sdk.core.context.Context.clear_trace_entities"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Contextz310z311z312z313z314*«
-handle_context_missing8aws_xray_sdk.core.context.Context.handle_context_missing"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Contextz310z311z312z313z3142ù
-context_missing1aws_xray_sdk.core.context.Context.context_missingg
-context_missing1aws_xray_sdk.core.context.Context.context_missing*
-self0:builtins.propertyX`‘
-context_missing1aws_xray_sdk.core.context.Context.context_missing"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*'
-value
-builtins.str"builtins.str0:.setter"310"311"312"313"314j310j311j312j313j314˜
-AsyncContext,aws_xray_sdk.core.async_context.AsyncContext"!aws_xray_sdk.core.context.Context*ï
-__init__5aws_xray_sdk.core.async_context.AsyncContext.__init__"
-None*f
-self\
-,aws_xray_sdk.core.async_context.AsyncContext",aws_xray_sdk.core.async_context.AsyncContext*
-args
-Any*g
-loop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-use_task_factory
-builtins.bool"builtins.bool *
-kwargs
-Anyz310z311z312z313z314*‰
-clear_trace_entitiesAaws_xray_sdk.core.async_context.AsyncContext.clear_trace_entities"
-None*f
-self\
-,aws_xray_sdk.core.async_context.AsyncContext",aws_xray_sdk.core.async_context.AsyncContextz310z311z312z313z314j310j311j312j313j314¶	
-TaskLocalStorage0aws_xray_sdk.core.async_context.TaskLocalStorage"builtins.object*¡
-__init__9aws_xray_sdk.core.async_context.TaskLocalStorage.__init__"
-None*n
-selfd
-0aws_xray_sdk.core.async_context.TaskLocalStorage"0aws_xray_sdk.core.async_context.TaskLocalStorage*g
-loop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ö
-__setattr__<aws_xray_sdk.core.async_context.TaskLocalStorage.__setattr__"
-None*n
-selfd
-0aws_xray_sdk.core.async_context.TaskLocalStorage"0aws_xray_sdk.core.async_context.TaskLocalStorage*&
-name
-builtins.str"builtins.str*
-value
-Anyz310z311z312z313z314*ˇ
-__getattribute__Aaws_xray_sdk.core.async_context.TaskLocalStorage.__getattribute__"
-Any*fd
-0aws_xray_sdk.core.async_context.TaskLocalStorage"0aws_xray_sdk.core.async_context.TaskLocalStorage*
-builtins.str"builtins.strz310z311z312z313z314*“
-clear6aws_xray_sdk.core.async_context.TaskLocalStorage.clear"
-None*n
-selfd
-0aws_xray_sdk.core.async_context.TaskLocalStorage"0aws_xray_sdk.core.async_context.TaskLocalStoragez310z311z312z313z314j310j311j312j313j314i
-task_factory,aws_xray_sdk.core.async_context.task_factory*
+self(*
+context_missing (**
+put_segment*
+
+self(*
+segment(*-
+end_segment*
+
+self(*
+end_time (*0
+put_subsegment*
+
+self(*
+
+subsegment(	*0
+end_subsegment
+*
+
+self(*
+end_time (*
+get_trace_entity*
+self*4
+set_trace_entity*
+
+self(*
+trace_entity(*$
+clear_trace_entities*
+
+self(*&
+handle_context_missing*
+
+self(2Ä
+context_missing4
+context_missing*
+self0:builtins.propertyX`7
+context_missing*
+
+self(*
+value(0:.setter≥
+AsyncContext"!aws_xray_sdk.core.context.Context*Z
+__init__*
+
+self(*
+
+args(
+*
+loop (*
+use_task_factory (*
+kwargs(
+*$
+clear_trace_entities*
+
+self(∂
+TaskLocalStorage"builtins.object*&
+__init__*
+
+self(*
+loop (*4
+__setattr__*
+
+self(*
+
+name(*
+value(
+*
+__getattribute__
+*(*(*
+clear*
+
+self("
+task_factory*
 loop*
-coroz310z311z312z313z314*¥
-__annotations__/aws_xray_sdk.core.async_context.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+coro*
+__annotations__022#"!aws_xray_sdk.core.context.Context2"builtins.str2*"(aws_xray_sdk.core.models.segment.Segment2"builtins.int22	2"time.struct_time22220".aws_xray_sdk.core.models.subsegment.Subsegment22("&aws_xray_sdk.core.models.entity.Entity2.",aws_xray_sdk.core.async_context.AsyncContext2"_typeshed.Incomplete2
+222"builtins.bool22"0aws_xray_sdk.core.async_context.TaskLocalStorage2"builtins.dict2

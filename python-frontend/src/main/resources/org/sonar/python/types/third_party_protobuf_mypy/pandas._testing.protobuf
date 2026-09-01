@@ -1,475 +1,197 @@
 
-pandas._testing˛
-assert_almost_equal#pandas._testing.assert_almost_equal"
-None*S
-leftI
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object*T
-rightI
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object*õ
-check_dtypeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *,
-rtol 
-builtins.float"builtins.float *,
-atol 
-builtins.float"builtins.float *
-kwargs
-Anyˇ
-assert_dict_equal!pandas._testing.assert_dict_equal"
-None*C
-left9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*D
-right9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*2
-compare_keys
-builtins.bool"builtins.bool Ê
-assert_index_equal"pandas._testing.assert_index_equal"
-None*X
-leftN
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Index*Y
-rightN
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Index*ï
-exactá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *1
-check_names
-builtins.bool"builtins.bool *1
-check_exact
-builtins.bool"builtins.bool *7
-check_categorical
-builtins.bool"builtins.bool *1
-check_order
-builtins.bool"builtins.bool *,
-rtol 
-builtins.float"builtins.float *,
-atol 
-builtins.float"builtins.float *'
-obj
-builtins.str"builtins.str Æ
-assert_class_equal"pandas._testing.assert_class_equal"
-None*S
-leftI
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object*T
-rightI
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object*ï
-exactá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *'
-obj
-builtins.str"builtins.str Ó
-assert_attr_equal!pandas._testing.assert_attr_equal"
-None*&
-attr
-builtins.str"builtins.str*,
-left"
-builtins.object"builtins.object*-
-right"
-builtins.object"builtins.object*'
-obj
-builtins.str"builtins.str ÿ
-"assert_is_valid_plot_return_object2pandas._testing.assert_is_valid_plot_return_object"
-None*Û
-objsË
-àUnion[pandas.core.series.Series[Any],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],Any,builtins.tuple[Any],builtins.dict[Any,Any]]D
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Seriesû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray
-Any.
-builtins.tuple[Any]
-Any"builtins.tuple9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictè
-assert_is_sorted pandas._testing.assert_is_sorted"
-None*Œ
-seqƒ
-kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
-`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.IndexD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarray"pandas._typing.AnyArrayLikeØ
-assert_categorical_equal(pandas._testing.assert_categorical_equal"
-None*b
-leftX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*c
-rightX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*1
-check_dtype
-builtins.bool"builtins.bool *:
-check_category_order
-builtins.bool"builtins.bool *'
-obj
-builtins.str"builtins.str ⁄
-assert_interval_array_equal+pandas._testing.assert_interval_array_equal"
-None*`
-leftV
-)pandas.core.arrays.interval.IntervalArray")pandas.core.arrays.interval.IntervalArray*a
-rightV
-)pandas.core.arrays.interval.IntervalArray")pandas.core.arrays.interval.IntervalArray*ï
-exactá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *'
-obj
-builtins.str"builtins.str Æ
-assert_period_array_equal)pandas._testing.assert_period_array_equal"
-None*X
-leftN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*Y
-rightN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*'
-obj
-builtins.str"builtins.str œ
-assert_datetime_array_equal+pandas._testing.assert_datetime_array_equal"
-None*b
-leftX
-*pandas.core.arrays.datetimes.DatetimeArray"*pandas.core.arrays.datetimes.DatetimeArray*c
-rightX
-*pandas.core.arrays.datetimes.DatetimeArray"*pandas.core.arrays.datetimes.DatetimeArray*0
+pandas._testingo
+assert_almost_equal*
 
-check_freq
-builtins.bool"builtins.bool Ÿ
-assert_timedelta_array_equal,pandas._testing.assert_timedelta_array_equal"
-None*f
-left\
-,pandas.core.arrays.timedeltas.TimedeltaArray",pandas.core.arrays.timedeltas.TimedeltaArray*g
-right\
-,pandas.core.arrays.timedeltas.TimedeltaArray",pandas.core.arrays.timedeltas.TimedeltaArray*0
+left(*
+right(*
+check_dtype (*
+rtol (*
+atol (*
+kwargs(	D
+assert_dict_equal*
 
-check_freq
-builtins.bool"builtins.bool ä
-assert_numpy_array_equal(pandas._testing.assert_numpy_array_equal"
-None*
-left
-Any*
-right
-Any*0
+left(
+*
+right(
+*
+compare_keys (¡
+assert_index_equal*
 
-strict_nan
-builtins.bool"builtins.bool *õ
-check_dtypeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *S
-err_msgD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None * 
+left(*
+right(*
+exact (*
+check_names (*
+check_exact (*
+check_categorical (*
+check_order (*
+rtol (*
+atol (*
+obj (K
+assert_class_equal*
 
-check_same∑
-7Union[Literal[builtins.str],Literal[builtins.str],None]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str
-None *'
-obj
-builtins.str"builtins.str *˜
-index_values‚
-cUnion[pandas.core.indexes.base.Index[Any],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],None]N
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Indexû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray
-None ﬂ
-assert_extension_array_equal,pandas._testing.assert_extension_array_equal"
-None*Z
-leftP
-&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray*[
-rightP
-&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray*õ
-check_dtypeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *˜
-index_values‚
-cUnion[pandas.core.indexes.base.Index[Any],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],None]N
-#pandas.core.indexes.base.Index[Any]
-Any"pandas.core.indexes.base.Indexû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray
-None *1
-check_exact
-builtins.bool"builtins.bool *,
-rtol 
-builtins.float"builtins.float *,
-atol 
-builtins.float"builtins.float *'
-obj
-builtins.str"builtins.str ô
+left(*
+right(*
+exact (*
+obj (G
+assert_attr_equal*
 
-assert_frame_equal"pandas._testing.assert_frame_equal"
-None*D
-left:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*E
-right:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*õ
-check_dtypeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *†
-check_index_typeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *°
-check_column_typeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *6
-check_frame_type
-builtins.bool"builtins.bool *1
-check_names
-builtins.bool"builtins.bool */
-	by_blocks
-builtins.bool"builtins.bool *1
-check_exact
-builtins.bool"builtins.bool *?
-check_datetimelike_compat
-builtins.bool"builtins.bool *7
-check_categorical
-builtins.bool"builtins.bool *0
+attr(*
 
-check_like
-builtins.bool"builtins.bool *0
+left(*
+right(*
+obj (2
+"assert_is_valid_plot_return_object*
 
-check_freq
-builtins.bool"builtins.bool *1
-check_flags
-builtins.bool"builtins.bool *,
-rtol 
-builtins.float"builtins.float *,
-atol 
-builtins.float"builtins.float *'
-obj
-builtins.str"builtins.str r
-assert_equalpandas._testing.assert_equal"
-None*
-left
-Any*
-right
-Any*
-kwargs
-Anyï
-assert_sp_array_equal%pandas._testing.assert_sp_array_equal"
-None*d
-leftZ
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*e
-rightZ
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray‚
-assert_contains_all#pandas._testing.assert_contains_all"
-None*ç
-iterable
-!typing.Iterable[pandas._typing.T]I
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object"typing.Iterable*ã
-dicÅ
-"typing.Container[pandas._typing.T]I
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object"typing.ContainerÁ
-assert_copypandas._testing.assert_copy"
-None*ä
-iter1
-!typing.Iterable[pandas._typing.T]I
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object"typing.Iterable*ä
-iter2
-!typing.Iterable[pandas._typing.T]I
-pandas._typing.T"
-builtins.object"builtins.object"builtins.object"typing.Iterable*
+objs(
+assert_is_sorted*	
+seq(u
+assert_categorical_equal*
 
-eql_kwargs
-Anyë
-assert_produces_warning'pandas._testing.assert_produces_warning"◊
-Btyping.Generator[builtins.list[warnings.WarningMessage],None,None]k
-&builtins.list[warnings.WarningMessage]2
-warnings.WarningMessage"warnings.WarningMessage"builtins.list
-None
-None"typing.Generator*é
-expected_warningı
-`Union[Type[builtins.Warning],Literal[builtins.bool],builtins.tuple[Type[builtins.Warning]],None]F
-Type[builtins.Warning]$
-builtins.Warning"builtins.Warning"type:
-Literal[builtins.bool]	
-builtins.bool"builtins.boolÄ
-&builtins.tuple[Type[builtins.Warning]]F
-Type[builtins.Warning]$
-builtins.Warning"builtins.Warning"type"builtins.tuple
-None *˙
-filter_levelÂ
-äUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *6
-check_stacklevel
-builtins.bool"builtins.bool *=
-raise_on_extra_warnings
-builtins.bool"builtins.bool *Q
-matchD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:contextlib.contextmanager€
-ensure_cleanpandas._testing.ensure_clean"n
-(typing.Generator[builtins.str,None,None]
-builtins.str"builtins.str
-None
-None"typing.Generator*T
-filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *5
-return_filelike
-builtins.bool"builtins.bool *
-kwargs
-Any0:contextlib.contextmanager"–
-assert_series_equal#pandas._testing.assert_series_equalï
+left(*
+right(*
+check_dtype (*
+check_category_order (*
+obj (T
+assert_interval_array_equal*
 
-assert_series_equal#pandas._testing.assert_series_equal"
-None*N
-leftD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series*O
-rightD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series*õ
-check_dtypeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *†
-check_index_typeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *7
-check_series_type
-builtins.bool"builtins.bool *1
-check_names
-builtins.bool"builtins.bool *1
-check_exact
-builtins.bool"builtins.bool *?
-check_datetimelike_compat
-builtins.bool"builtins.bool *7
-check_categorical
-builtins.bool"builtins.bool *:
-check_category_order
-builtins.bool"builtins.bool *0
+left(*
+right(*
+exact (*
+obj (C
+assert_period_array_equal*
 
-check_freq
-builtins.bool"builtins.bool *1
-check_flags
-builtins.bool"builtins.bool *,
-rtol 
-builtins.float"builtins.float *,
-atol 
-builtins.float"builtins.float *'
-obj
-builtins.str"builtins.str *K
-check_index:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*L
+left(*
+right(*
+obj (L
+assert_datetime_array_equal*
 
-check_like:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX˚	
-assert_series_equal#pandas._testing.assert_series_equal"
-None*N
-leftD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series*O
-rightD
-pandas.core.series.Series[Any]
-Any"pandas.core.series.Series*õ
-check_dtypeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *†
-check_index_typeá
-*Union[builtins.bool,Literal[builtins.str]]
-builtins.bool"builtins.bool7
-Literal[builtins.str]	
-builtins.str"builtins.str *7
-check_series_type
-builtins.bool"builtins.bool *1
-check_names
-builtins.bool"builtins.bool *1
-check_exact
-builtins.bool"builtins.bool *?
-check_datetimelike_compat
-builtins.bool"builtins.bool *7
-check_categorical
-builtins.bool"builtins.bool *:
-check_category_order
-builtins.bool"builtins.bool *0
+left(*
+right(*
 
-check_freq
-builtins.bool"builtins.bool *1
-check_flags
-builtins.bool"builtins.bool *,
-rtol 
-builtins.float"builtins.float *,
-atol 
-builtins.float"builtins.float *'
-obj
-builtins.str"builtins.str *M
-check_index:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *0
+check_freq (M
+assert_timedelta_array_equal*
 
-check_like
-builtins.bool"builtins.bool 0:typing.overloadX*p
-__path__pandas._testing.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*ã
-__annotations__pandas._testing.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*)
-Artistpandas._testing.Artist
-Any*
-npnumpy 
+left(*
+right(*
+
+check_freq (¶
+assert_numpy_array_equal*
+
+left(	*
+right(	*
+
+strict_nan (*
+check_dtype (*
+err_msg (*
+
+check_same (*
+obj (*
+index_values (¢
+assert_extension_array_equal*
+
+left(*
+right(*
+check_dtype (*
+index_values (*
+check_exact (*
+rtol (*
+atol (*
+obj (Ù
+assert_frame_equal*
+
+left(*
+right(*
+check_dtype (*
+check_index_type (*
+check_column_type (*
+check_frame_type (*
+check_names (*
+	by_blocks (*
+check_exact (*!
+check_datetimelike_compat (*
+check_categorical (*
+
+check_like (*
+
+check_freq (*
+check_flags (*
+rtol (*
+atol (*
+obj (7
+assert_equal*
+
+left(	*
+right(	*
+kwargs(	2
+assert_sp_array_equal*
+
+left(*
+right(2
+assert_contains_all*
+iterable(*	
+dic( ;
+assert_copy*
+iter1(*
+iter2(*
+
+eql_kwargs(	≤
+assert_produces_warning#*
+expected_warning ((*
+filter_level ()*
+check_stacklevel (*
+raise_on_extra_warnings (*
+match (0:contextlib.contextmanagerf
+ensure_clean**
+filename (*
+return_filelike (*
+kwargs(	0:contextlib.contextmanager"π
+assert_series_equalé
+assert_series_equal*
+
+left(*
+right(*
+check_dtype (*
+check_index_type (*
+check_series_type (*
+check_names (*
+check_exact (*!
+check_datetimelike_compat (*
+check_categorical (*
+check_category_order (*
+
+check_freq (*
+check_flags (*
+rtol (*
+atol (*
+obj (*
+check_index(&*
+
+check_like (&0:typing.overloadXê
+assert_series_equal*
+
+left(*
+right(*
+check_dtype (*
+check_index_type (*
+check_series_type (*
+check_names (*
+check_exact (*!
+check_datetimelike_compat (*
+check_categorical (*
+check_category_order (*
+
+check_freq (*
+check_flags (*
+rtol (*
+atol (*
+obj (*
+check_index (&*
+
+check_like (0:typing.overloadX*
+__path__0+*
+__annotations__0,*
+
+Artist0	*
+npnumpy 22"builtins.object2"builtins.object22"builtins.bool2"builtins.str2	2222"builtins.float22"builtins.dict2		2#"pandas.core.indexes.base.Index2	2"pandas.core.series.Series2	2"builtins.tuple2	2"numpy.dtype2	2"numpy.ndarray22	2	
+2"numpy.ndarray2		222""pandas._typing.AnyArrayLike22,"*pandas.core.arrays.categorical.Categorical2+")pandas.core.arrays.interval.IntervalArray2'"%pandas.core.arrays.period.PeriodArray2,"*pandas.core.arrays.datetimes.DatetimeArray2.",pandas.core.arrays.timedeltas.TimedeltaArray2222222("&pandas.core.arrays.base.ExtensionArray2"pandas.core.frame.DataFrame2-"+pandas.core.arrays.sparse.array.SparseArray2"typing.Iterable22"typing.Container22"warnings.WarningMessage2"builtins.list2!2"typing.Generator2"2"builtins.Warning2"type2$2	22"builtins.tuple2%22%&'2
+22"typing.Generator22"builtins.list22"builtins.dict2	

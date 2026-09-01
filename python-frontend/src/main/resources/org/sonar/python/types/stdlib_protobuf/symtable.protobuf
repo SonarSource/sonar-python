@@ -1,201 +1,136 @@
 
-symtableê
-SymbolTablesymtable.SymbolTable"builtins.object*»
-__init__symtable.SymbolTable.__init__"
-None*6
-self,
-symtable.SymbolTable"symtable.SymbolTable*
-	raw_table
-Any**
-filename
-builtins.str"builtins.strz310z311z312z313z314*ò
-get_typesymtable.SymbolTable.get_type"
-builtins.str"builtins.str*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*î
-get_idsymtable.SymbolTable.get_id"
-builtins.int"builtins.int*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*ò
-get_namesymtable.SymbolTable.get_name"
-builtins.str"builtins.str*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*ú
+symtableò
+SymbolTable"builtins.object*9
+__init__*
 
-get_linenosymtable.SymbolTable.get_lineno"
-builtins.int"builtins.int*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*¢
-is_optimized!symtable.SymbolTable.is_optimized"
-builtins.bool"builtins.bool*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*ú
-	is_nestedsymtable.SymbolTable.is_nested"
-builtins.bool"builtins.bool*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*¢
-has_children!symtable.SymbolTable.has_children"
-builtins.bool"builtins.bool*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*ö
-get_identifiers$symtable.SymbolTable.get_identifiers"è
-5_collections_abc.dict_keys[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"_collections_abc.dict_keys*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*¬
-lookupsymtable.SymbolTable.lookup""
-symtable.Symbol"symtable.Symbol*6
-self,
-symtable.SymbolTable"symtable.SymbolTable*&
-name
-builtins.str"builtins.strz310z311z312z313z314*’
-get_symbols symtable.SymbolTable.get_symbols"S
-builtins.list[symtable.Symbol]"
-symtable.Symbol"symtable.Symbol"builtins.list*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314*Ê
-get_children!symtable.SymbolTable.get_children"b
-#builtins.list[symtable.SymbolTable],
-symtable.SymbolTable"symtable.SymbolTable"builtins.list*6
-self,
-symtable.SymbolTable"symtable.SymbolTablez310z311z312z313z314j310j311j312j313j314∏
-Functionsymtable.Function"symtable.SymbolTable*À
-get_parameters symtable.Function.get_parameters"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*0
-self&
-symtable.Function"symtable.Functionz310z311z312z313z314*√
+self(*
+	raw_table(*
+filename(*
+get_type*
 
-get_localssymtable.Function.get_locals"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*0
-self&
-symtable.Function"symtable.Functionz310z311z312z313z314*≈
-get_globalssymtable.Function.get_globals"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*0
-self&
-symtable.Function"symtable.Functionz310z311z312z313z314*¡
-	get_freessymtable.Function.get_frees"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*0
-self&
-symtable.Function"symtable.Functionz310z311z312z313z314*…
-get_nonlocalssymtable.Function.get_nonlocals"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*0
-self&
-symtable.Function"symtable.Functionz310z311z312z313z314j310j311j312j313j314Ö
-Classsymtable.Class"symtable.SymbolTable*º
-get_methodssymtable.Class.get_methods"L
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple**
-self 
-symtable.Class"symtable.Classz310z311z312z313z314j310j311j312j313j314Û
-Symbolsymtable.Symbol"builtins.object*∑
-__init__symtable.Symbol.__init__"
-None*,
-self"
-symtable.Symbol"symtable.Symbol*&
-name
-builtins.str"builtins.str*'
-flags
-builtins.int"builtins.int*∫
+self(*
+get_id*
 
-namespacesß
-1Union[typing.Sequence[symtable.SymbolTable],None]f
-%typing.Sequence[symtable.SymbolTable],
-symtable.SymbolTable"symtable.SymbolTable"typing.Sequence
-None *2
-module_scope
-builtins.bool"builtins.bool z310z311z312z313z314*ë
-is_nonlocalsymtable.Symbol.is_nonlocal"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*â
-get_namesymtable.Symbol.get_name"
-builtins.str"builtins.str*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ï
-is_referencedsymtable.Symbol.is_referenced"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ì
-is_parametersymtable.Symbol.is_parameter"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ç
-	is_globalsymtable.Symbol.is_global"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ü
-is_declared_global"symtable.Symbol.is_declared_global"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ã
-is_localsymtable.Symbol.is_local"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ì
-is_annotatedsymtable.Symbol.is_annotated"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*â
-is_freesymtable.Symbol.is_free"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ë
-is_importedsymtable.Symbol.is_imported"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ë
-is_assignedsymtable.Symbol.is_assigned"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ì
-is_namespacesymtable.Symbol.is_namespace"
-builtins.bool"builtins.bool*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*ﬂ
-get_namespacessymtable.Symbol.get_namespaces"f
-%typing.Sequence[symtable.SymbolTable],
-symtable.SymbolTable"symtable.SymbolTable"typing.Sequence*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314*£
-get_namespacesymtable.Symbol.get_namespace",
-symtable.SymbolTable"symtable.SymbolTable*,
-self"
-symtable.Symbol"symtable.Symbolz310z311z312z313z314j310j311j312j313j314—
-SymbolTableFactorysymtable.SymbolTableFactory"builtins.object*Û
-newsymtable.SymbolTableFactory.new",
-symtable.SymbolTable"symtable.SymbolTable*D
-self:
-symtable.SymbolTableFactory"symtable.SymbolTableFactory*
-table
-Any**
-filename
-builtins.str"builtins.strz310z311z312z313z314*˝
-__call__$symtable.SymbolTableFactory.__call__",
-symtable.SymbolTable"symtable.SymbolTable*D
-self:
-symtable.SymbolTableFactory"symtable.SymbolTableFactory*
-table
-Any**
-filename
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ë
-symtablesymtable.symtable",
-symtable.SymbolTable"symtable.SymbolTable*&
-code
-builtins.str"builtins.str**
-filename
-builtins.str"builtins.str*.
-compile_type
-builtins.str"builtins.strz310z311z312z313z314*ù
-__annotations__symtable.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Ä
-__all__symtable.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+self(*
+get_name*
+
+self(*
+
+get_lineno*
+
+self(*
+is_optimized*
+
+self(*
+	is_nested*
+
+self(*
+has_children*
+
+self(*
+get_identifiers*
+
+self(*"
+lookup*
+
+self(*
+
+name(*
+get_symbols	*
+
+self(*
+get_children
+*
+
+self(≥
+Function"symtable.SymbolTable*
+get_parameters*
+
+self(*
+
+get_locals*
+
+self(*
+get_globals*
+
+self(*
+	get_frees*
+
+self(*
+get_nonlocals*
+
+self(:
+Class"symtable.SymbolTable*
+get_methods*
+
+self(ë
+Symbol"builtins.object*[
+__init__*
+
+self(*
+
+name(*
+flags(*
+
+namespaces (*
+module_scope (*
+is_nonlocal*
+
+self(*
+get_name*
+
+self(*
+is_referenced*
+
+self(*
+is_parameter*
+
+self(*
+	is_global*
+
+self(*"
+is_declared_global*
+
+self(*
+is_local*
+
+self(*
+is_annotated*
+
+self(*
+is_free*
+
+self(*
+is_imported*
+
+self(*
+is_assigned*
+
+self(*
+is_namespace*
+
+self(*
+get_namespaces*
+
+self(*
+get_namespace*
+
+self(é
+SymbolTableFactory"builtins.object*0
+new*
+
+self(*
+table(*
+filename(*5
+__call__*
+
+self(*
+table(*
+filename(<
+symtable*
+
+code(*
+filename(*
+compile_type(*
+__annotations__0*
+__all__022"symtable.SymbolTable22"builtins.str2"builtins.int2"builtins.bool2 "_collections_abc.dict_keys22"symtable.Symbol2"builtins.list22"builtins.list22"builtins.tuple22"symtable.Function2"symtable.Class2"typing.Sequence2222"symtable.SymbolTableFactory2"builtins.dict22"builtins.list2

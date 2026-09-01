@@ -1,102 +1,68 @@
 
-netaddr.core\
-AddrFormatErrornetaddr.core.AddrFormatError"builtins.Exceptionj310j311j312j313j314d
-AddrConversionError netaddr.core.AddrConversionError"builtins.Exceptionj310j311j312j313j314b
-NotRegisteredErrornetaddr.core.NotRegisteredError"builtins.Exceptionj310j311j312j313j314˜
+netaddr.core%
+AddrFormatError"builtins.Exception)
+AddrConversionError"builtins.Exception(
+NotRegisteredError"builtins.ExceptionA
 
-Subscribernetaddr.core.Subscriber"builtins.object*Æ
-updatenetaddr.core.Subscriber.update"
-None*<
-self2
-netaddr.core.Subscriber"netaddr.core.Subscriber*;
-data1
-TypeAlias[Any]
-Any"_typeshed.Incompletez310z311z312z313z314j310j311j312j313j314ß
-PrettyPrinternetaddr.core.PrettyPrinter"netaddr.core.Subscriber*±
-__init__#netaddr.core.PrettyPrinter.__init__"
-None*B
-self8
-netaddr.core.PrettyPrinter"netaddr.core.PrettyPrinter*h
-fh^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite */
-	write_eol
-builtins.bool"builtins.bool z310z311z312z313z314*À
-update!netaddr.core.PrettyPrinter.update"
-None*B
-self8
-netaddr.core.PrettyPrinter"netaddr.core.PrettyPrinter*,
-data"
-builtins.object"builtins.objectz310z311z312z313z314j310j311j312j313j314rœ
-fhnetaddr.core.PrettyPrinter.fh^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite*310*311*312*313*314rj
-	write_eol$netaddr.core.PrettyPrinter.write_eol
-builtins.bool"builtins.bool*310*311*312*313*314å
-	Publishernetaddr.core.Publisher"builtins.object*Š
-__init__netaddr.core.Publisher.__init__"
-None*:
-self0
-netaddr.core.Publisher"netaddr.core.Publisherz310z311z312z313z314*Ê
-attachnetaddr.core.Publisher.attach"
-None*:
-self0
-netaddr.core.Publisher"netaddr.core.Publisher*B
+Subscriber"builtins.object*"
+update*
 
-subscriber2
-netaddr.core.Subscriber"netaddr.core.Subscriberz310z311z312z313z314*Ê
-detachnetaddr.core.Publisher.detach"
-None*:
-self0
-netaddr.core.Publisher"netaddr.core.Publisher*B
+self(*
 
-subscriber2
-netaddr.core.Subscriber"netaddr.core.Subscriberz310z311z312z313z314*´
-notifynetaddr.core.Publisher.notify"
-None*:
-self0
-netaddr.core.Publisher"netaddr.core.Publisher*,
-data"
-builtins.object"builtins.objectz310z311z312z313z314j310j311j312j313j314r·
-subscribers"netaddr.core.Publisher.subscribersk
-&builtins.list[netaddr.core.Subscriber]2
-netaddr.core.Subscriber"netaddr.core.Subscriber"builtins.list*310*311*312*313*314¡
-DictDotLookupnetaddr.core.DictDotLookup"builtins.object*¡
-__init__#netaddr.core.DictDotLookup.__init__"
-None*B
-self8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*ˆ
-d€
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingz310z311z312z313z314*Î
-__getitem__&netaddr.core.DictDotLookup.__getitem__""
-builtins.object"builtins.object*:8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookup*
-builtins.str"builtins.strz310z311z312z313z314*Ô
-__iter__#netaddr.core.DictDotLookup.__iter__"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*:8
-netaddr.core.DictDotLookup"netaddr.core.DictDotLookupz310z311z312z313z314j310j311j312j313j314ƒ
-num_bitsnetaddr.core.num_bits"
-builtins.int"builtins.int*)
-int_val
-builtins.int"builtins.intz310z311z312z313z314*¡
-__annotations__netaddr.core.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*p
-BIG_ENDIAN_PLATFORM netaddr.core.BIG_ENDIAN_PLATFORM
-builtins.bool"builtins.bool*310*311*312*313*314*J
-Pnetaddr.core.P
-builtins.int"builtins.int*310*311*312*313*314*Z
-	INET_PTONnetaddr.core.INET_PTON
-builtins.int"builtins.int*310*311*312*313*314*J
-Znetaddr.core.Z
-builtins.int"builtins.int*310*311*312*313*314*X
-ZEROFILLnetaddr.core.ZEROFILL
-builtins.int"builtins.int*310*311*312*313*314*J
-Nnetaddr.core.N
-builtins.int"builtins.int*310*311*312*313*314*T
-NOHOSTnetaddr.core.NOHOST
-builtins.int"builtins.int*310*311*312*313*314
+data(œ
+PrettyPrinter"netaddr.core.Subscriber*7
+__init__*
+
+self(*
+
+fh (*
+	write_eol (*"
+update*
+
+self(*
+
+data(	r
+fh0r
+	write_eol0¿
+	Publisher"builtins.object*
+__init__*
+
+self(
+*(
+attach*
+
+self(
+*
+
+subscriber(*(
+detach*
+
+self(
+*
+
+subscriber(*"
+notify*
+
+self(
+*
+
+data(	r
+subscribers0n
+DictDotLookup"builtins.object*!
+__init__*
+
+self(*
+d(*
+__getitem__	*(*(*
+__iter__*(
+num_bits*
+int_val(*
+__annotations__0*
+BIG_ENDIAN_PLATFORM0*
+P0*
+	INET_PTON0*
+Z0*
+ZEROFILL0*
+N0*
+
+NOHOST022"netaddr.core.Subscriber22"_typeshed.Incomplete22"netaddr.core.PrettyPrinter2"builtins.str2"_typeshed.SupportsWrite22"builtins.bool2"builtins.object2"netaddr.core.Publisher2"builtins.list22"netaddr.core.DictDotLookup2"typing.Mapping2	2"typing.Iterator22"builtins.int2"builtins.dict2

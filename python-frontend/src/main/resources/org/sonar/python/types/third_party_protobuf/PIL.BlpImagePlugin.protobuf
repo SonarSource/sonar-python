@@ -1,78 +1,52 @@
 
-PIL.BlpImagePlugin´
-FormatPIL.BlpImagePlugin.Format"enum.IntEnumHj310j311j312j313j314r]
-JPEGPIL.BlpImagePlugin.Format.JPEG
-builtins.int"builtins.int*310*311*312*313*314§
-EncodingPIL.BlpImagePlugin.Encoding"enum.IntEnumHj310j311j312j313j314ro
-UNCOMPRESSED(PIL.BlpImagePlugin.Encoding.UNCOMPRESSED
-builtins.int"builtins.int*310*311*312*313*314r]
-DXTPIL.BlpImagePlugin.Encoding.DXT
-builtins.int"builtins.int*310*311*312*313*314rÅ
-UNCOMPRESSED_RAW_BGRA1PIL.BlpImagePlugin.Encoding.UNCOMPRESSED_RAW_BGRA
-builtins.int"builtins.int*310*311*312*313*314å
-AlphaEncoding PIL.BlpImagePlugin.AlphaEncoding"enum.IntEnumHj310j311j312j313j314rd
-DXT1%PIL.BlpImagePlugin.AlphaEncoding.DXT1
-builtins.int"builtins.int*310*311*312*313*314rd
-DXT3%PIL.BlpImagePlugin.AlphaEncoding.DXT3
-builtins.int"builtins.int*310*311*312*313*314rd
-DXT5%PIL.BlpImagePlugin.AlphaEncoding.DXT5
-builtins.int"builtins.int*310*311*312*313*314j
-BLPFormatError!PIL.BlpImagePlugin.BLPFormatError"builtins.NotImplementedErrorj310j311j312j313j314Á
-BlpImageFilePIL.BlpImagePlugin.BlpImageFile"PIL.ImageFile.ImageFilej310j311j312j313j314rÇ
-format&PIL.BlpImagePlugin.BlpImageFile.format7
-Literal[builtins.str]	
-builtins.str"builtins.str*310*311*312*313*314r
-format_description2PIL.BlpImagePlugin.BlpImageFile.format_description
-builtins.str"builtins.str*310*311*312*313*314†
-_BLPBaseDecoder"PIL.BlpImagePlugin._BLPBaseDecoder"PIL.ImageFile.PyDecoder*b
-decode)PIL.BlpImagePlugin._BLPBaseDecoder.decode*
+PIL.BlpImagePlugin"
+Format"enum.IntEnumHr
+JPEG0P
+Encoding"enum.IntEnumHr
+UNCOMPRESSED0r
+DXT0r
+UNCOMPRESSED_RAW_BGRA0=
+AlphaEncoding"enum.IntEnumHr
+DXT10r
+DXT30r
+DXT50.
+BLPFormatError"builtins.NotImplementedErrorK
+BlpImageFile"PIL.ImageFile.ImageFiler
+
+format0r
+format_description0U
+_BLPBaseDecoder"PIL.ImageFile.PyDecoder*
+decode*
 self*
 
-bufferz310z311z312z313z314j310j311j312j313j314rS
-magic(PIL.BlpImagePlugin._BLPBaseDecoder.magic
-Any*310*311*312*313*314j
-BLP1DecoderPIL.BlpImagePlugin.BLP1Decoder""PIL.BlpImagePlugin._BLPBaseDecoderj310j311j312j313j314j
-BLP2DecoderPIL.BlpImagePlugin.BLP2Decoder""PIL.BlpImagePlugin._BLPBaseDecoderj310j311j312j313j314Ω
+bufferr	
+magic01
+BLP1Decoder""PIL.BlpImagePlugin._BLPBaseDecoder1
+BLP2Decoder""PIL.BlpImagePlugin._BLPBaseDecoderF
 
-BLPEncoderPIL.BlpImagePlugin.BLPEncoder"PIL.ImageFile.PyEncoder*^
-encode$PIL.BlpImagePlugin.BLPEncoder.encode*
+BLPEncoder"PIL.ImageFile.PyEncoder*
+encode*
 self*
-bufsizez310z311z312z313z314j310j311j312j313j314K
+bufsize
 
-unpack_565PIL.BlpImagePlugin.unpack_565*
-iz310z311z312z313z314è
-decode_dxt1PIL.BlpImagePlugin.decode_dxt1"
-Any*
-data
-Any*+
-alpha
-builtins.bool"builtins.bool z310z311z312z313z314P
-decode_dxt3PIL.BlpImagePlugin.decode_dxt3*
-dataz310z311z312z313z314P
-decode_dxt5PIL.BlpImagePlugin.decode_dxt5*
-dataz310z311z312z313z314*ß
-__annotations__"PIL.BlpImagePlugin.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Æ
-BLP_FORMAT_JPEG"PIL.BlpImagePlugin.BLP_FORMAT_JPEG^
-"Literal[PIL.BlpImagePlugin.Format]	6
-PIL.BlpImagePlugin.Format"PIL.BlpImagePlugin.Format*310*311*312*313*314*»
-BLP_ENCODING_UNCOMPRESSED,PIL.BlpImagePlugin.BLP_ENCODING_UNCOMPRESSEDd
-$Literal[PIL.BlpImagePlugin.Encoding]	:
-PIL.BlpImagePlugin.Encoding"PIL.BlpImagePlugin.Encoding*310*311*312*313*314*∂
-BLP_ENCODING_DXT#PIL.BlpImagePlugin.BLP_ENCODING_DXTd
-$Literal[PIL.BlpImagePlugin.Encoding]	:
-PIL.BlpImagePlugin.Encoding"PIL.BlpImagePlugin.Encoding*310*311*312*313*314*⁄
-"BLP_ENCODING_UNCOMPRESSED_RAW_BGRA5PIL.BlpImagePlugin.BLP_ENCODING_UNCOMPRESSED_RAW_BGRAd
-$Literal[PIL.BlpImagePlugin.Encoding]	:
-PIL.BlpImagePlugin.Encoding"PIL.BlpImagePlugin.Encoding*310*311*312*313*314*”
-BLP_ALPHA_ENCODING_DXT1*PIL.BlpImagePlugin.BLP_ALPHA_ENCODING_DXT1s
-)Literal[PIL.BlpImagePlugin.AlphaEncoding]	D
- PIL.BlpImagePlugin.AlphaEncoding" PIL.BlpImagePlugin.AlphaEncoding*310*311*312*313*314*”
-BLP_ALPHA_ENCODING_DXT3*PIL.BlpImagePlugin.BLP_ALPHA_ENCODING_DXT3s
-)Literal[PIL.BlpImagePlugin.AlphaEncoding]	D
- PIL.BlpImagePlugin.AlphaEncoding" PIL.BlpImagePlugin.AlphaEncoding*310*311*312*313*314*”
-BLP_ALPHA_ENCODING_DXT5*PIL.BlpImagePlugin.BLP_ALPHA_ENCODING_DXT5s
-)Literal[PIL.BlpImagePlugin.AlphaEncoding]	D
- PIL.BlpImagePlugin.AlphaEncoding" PIL.BlpImagePlugin.AlphaEncoding*310*311*312*313*314
+unpack_565*
+i*
+decode_dxt1*
+
+data(*
+alpha (
+decode_dxt3*
+data
+decode_dxt5*
+data*
+__annotations__0*
+BLP_FORMAT_JPEG0*
+BLP_ENCODING_UNCOMPRESSED0
+*
+BLP_ENCODING_DXT0
+*&
+"BLP_ENCODING_UNCOMPRESSED_RAW_BGRA0
+*
+BLP_ALPHA_ENCODING_DXT10*
+BLP_ALPHA_ENCODING_DXT30*
+BLP_ALPHA_ENCODING_DXT502"builtins.int2"builtins.str2	222"builtins.bool2"builtins.dict22"PIL.BlpImagePlugin.Format2	22"PIL.BlpImagePlugin.Encoding2	2	2"" PIL.BlpImagePlugin.AlphaEncoding2	2

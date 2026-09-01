@@ -1,77 +1,36 @@
 
-jose.backends.native«
-HMACKeyjose.backends.native.HMACKey"jose.backends.base.Key*µ
-__init__%jose.backends.native.HMACKey.__init__"
-None*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*é
-keyß
-BUnion[builtins.str,builtins.bytes,builtins.dict[builtins.str,Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*+
-	algorithm
-builtins.str"builtins.strz310z311z312z313z314*
-sign!jose.backends.native.HMACKey.sign" 
-builtins.bytes"builtins.bytes*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*q
-msgh
-$Union[typing_extensions.Buffer,None]4
-typing_extensions.Buffer"typing_extensions.Buffer
-Nonez310z311*’
-sign!jose.backends.native.HMACKey.sign" 
-builtins.bytes"builtins.bytes*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*n
-msge
-#Union[_collections_abc.Buffer,None]2
-_collections_abc.Buffer"_collections_abc.Buffer
-Nonez312z313z314*ƒ
-verify#jose.backends.native.HMACKey.verify"
-builtins.bool"builtins.bool*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*q
-msgh
-$Union[typing_extensions.Buffer,None]4
-typing_extensions.Buffer"typing_extensions.Buffer
-None*o
-sigf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz310z311*…
-verify#jose.backends.native.HMACKey.verify"
-builtins.bool"builtins.bool*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKey*n
-msge
-#Union[_collections_abc.Buffer,None]2
-_collections_abc.Buffer"_collections_abc.Buffer
-None*o
-sigf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz312z313z314*é
-to_dict$jose.backends.native.HMACKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*F
-self<
-jose.backends.native.HMACKey"jose.backends.native.HMACKeyz310z311z312z313z314j310j311j312j313j314r€
-HASHES#jose.backends.native.HMACKey.HASHES·
-;builtins.dict[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dict*310*311*312*313*314rt
-prepared_key)jose.backends.native.HMACKey.prepared_key 
-builtins.bytes"builtins.bytes*310*311*312*313*314¡
-get_random_bytes%jose.backends.native.get_random_bytes" 
-builtins.bytes"builtins.bytes*+
-	num_bytes
-builtins.int"builtins.intz310z311z312z313z314*©
-__annotations__$jose.backends.native.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+jose.backends.nativeÞ
+HMACKey"jose.backends.base.Key*4
+__init__*
+
+self(*	
+key(*
+	algorithm(*)
+sign*
+
+self(*	
+msg(	z310z311*.
+sign*
+
+self(*	
+msg(z312z313z314*6
+verify*
+
+self(*	
+msg(	*	
+sig(z310z311*;
+verify*
+
+self(*	
+msg(*	
+sig(z312z313z314*
+to_dict*
+
+self(r
+
+HASHES0r
+prepared_key0%
+get_random_bytes*
+	num_bytes(*
+__annotations__022"jose.backends.native.HMACKey2"builtins.str2"builtins.bytes22"builtins.dict2222"typing_extensions.Buffer222"_collections_abc.Buffer22
+2"builtins.bool222"builtins.function222"builtins.dict22"builtins.int

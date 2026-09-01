@@ -1,164 +1,86 @@
 
-torchvision.models.convnext¾
-LayerNorm2d'torchvision.models.convnext.LayerNorm2d"(torch.nn.modules.normalization.LayerNorm*Û
-forward/torchvision.models.convnext.LayerNorm2d.forward"
-torch.Tensor"torch.Tensor*\
-selfR
-'torchvision.models.convnext.LayerNorm2d"'torchvision.models.convnext.LayerNorm2d*#
-x
-torch.Tensor"torch.Tensor¶
-CNBlock#torchvision.models.convnext.CNBlock"torch.nn.modules.module.Module*¶
-__init__,torchvision.models.convnext.CNBlock.__init__"
-None*T
-selfJ
-#torchvision.models.convnext.CNBlock"#torchvision.models.convnext.CNBlock*
-dim
-Any*1
-layer_scale 
-builtins.float"builtins.float*;
-stochastic_depth_prob 
-builtins.float"builtins.float*™
+torchvision.models.convnextY
+LayerNorm2d"(torch.nn.modules.normalization.LayerNorm* 
+forward*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Ó
-forward+torchvision.models.convnext.CNBlock.forward"
-torch.Tensor"torch.Tensor*T
-selfJ
-#torchvision.models.convnext.CNBlock"#torchvision.models.convnext.CNBlock*'
-input
-torch.Tensor"torch.Tensorr;
-block)torchvision.models.convnext.CNBlock.block
-AnyrG
-layer_scale/torchvision.models.convnext.CNBlock.layer_scale
-AnyrQ
-stochastic_depth4torchvision.models.convnext.CNBlock.stochastic_depth
-Any¾
-CNBlockConfig)torchvision.models.convnext.CNBlockConfig"*SonarPythonAnalyzerFakeStub.CustomStubBase*â
-__init__2torchvision.models.convnext.CNBlockConfig.__init__"
-None*`
-selfV
-)torchvision.models.convnext.CNBlockConfig")torchvision.models.convnext.CNBlockConfig*0
-input_channels
-builtins.int"builtins.int*V
-out_channelsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*,
+self(*
+x(ê
+CNBlock"torch.nn.modules.module.Module*g
+__init__*
 
-num_layers
-builtins.int"builtins.intrS
-input_channels8torchvision.models.convnext.CNBlockConfig.input_channels
-AnyrO
-out_channels6torchvision.models.convnext.CNBlockConfig.out_channels
-AnyrK
+self(*	
+dim(*
+layer_scale(*
+stochastic_depth_prob(*
 
-num_layers4torchvision.models.convnext.CNBlockConfig.num_layers
-Any¶
+norm_layer (	*$
+forward*
 
-ConvNeXt$torchvision.models.convnext.ConvNeXt"torch.nn.modules.module.Module*À
-__init__-torchvision.models.convnext.ConvNeXt.__init__"
-None*V
-selfL
-$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*µ
-block_setting¡
-8builtins.list[torchvision.models.convnext.CNBlockConfig]V
-)torchvision.models.convnext.CNBlockConfig")torchvision.models.convnext.CNBlockConfig"builtins.list*=
-stochastic_depth_prob 
-builtins.float"builtins.float *3
-layer_scale 
-builtins.float"builtins.float */
-num_classes
-builtins.int"builtins.int *”
-block†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *™
+self(*
+input(r	
+block0r
+layer_scale0r
+stochastic_depth0Ç
+CNBlockConfig"*SonarPythonAnalyzerFakeStub.CustomStubBase*T
+__init__*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-kwargs
-Any*Ò
-forward,torchvision.models.convnext.ConvNeXt.forward"
-torch.Tensor"torch.Tensor*V
-selfL
-$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*#
-x
-torch.Tensor"torch.TensorrB
-features-torchvision.models.convnext.ConvNeXt.features
-Anyr@
-avgpool,torchvision.models.convnext.ConvNeXt.avgpool
-AnyrF
+self(
+*
+input_channels(*
+out_channels(*
 
-classifier/torchvision.models.convnext.ConvNeXt.classifier
-Any›
-ConvNeXt_Tiny_Weights1torchvision.models.convnext.ConvNeXt_Tiny_Weights"#torchvision.models._api.WeightsEnumHrY
-IMAGENET1K_V1?torchvision.models.convnext.ConvNeXt_Tiny_Weights.IMAGENET1K_V1
-AnyrM
-DEFAULT9torchvision.models.convnext.ConvNeXt_Tiny_Weights.DEFAULT
-AnyŸ
-ConvNeXt_Small_Weights2torchvision.models.convnext.ConvNeXt_Small_Weights"#torchvision.models._api.WeightsEnumHrZ
-IMAGENET1K_V1@torchvision.models.convnext.ConvNeXt_Small_Weights.IMAGENET1K_V1
-AnyrN
-DEFAULT:torchvision.models.convnext.ConvNeXt_Small_Weights.DEFAULT
-Any›
-ConvNeXt_Base_Weights1torchvision.models.convnext.ConvNeXt_Base_Weights"#torchvision.models._api.WeightsEnumHrY
-IMAGENET1K_V1?torchvision.models.convnext.ConvNeXt_Base_Weights.IMAGENET1K_V1
-AnyrM
-DEFAULT9torchvision.models.convnext.ConvNeXt_Base_Weights.DEFAULT
-AnyŸ
-ConvNeXt_Large_Weights2torchvision.models.convnext.ConvNeXt_Large_Weights"#torchvision.models._api.WeightsEnumHrZ
-IMAGENET1K_V1@torchvision.models.convnext.ConvNeXt_Large_Weights.IMAGENET1K_V1
-AnyrN
-DEFAULT:torchvision.models.convnext.ConvNeXt_Large_Weights.DEFAULT
-Any“
-convnext_tiny)torchvision.models.convnext.convnext_tiny"L
-$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*Ã
-weights³
-=Union[torchvision.models.convnext.ConvNeXt_Tiny_Weights,None]f
-1torchvision.models.convnext.ConvNeXt_Tiny_Weights"1torchvision.models.convnext.ConvNeXt_Tiny_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any˜
-convnext_small*torchvision.models.convnext.convnext_small"L
-$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*Æ
-weights¶
->Union[torchvision.models.convnext.ConvNeXt_Small_Weights,None]h
-2torchvision.models.convnext.ConvNeXt_Small_Weights"2torchvision.models.convnext.ConvNeXt_Small_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any“
-convnext_base)torchvision.models.convnext.convnext_base"L
-$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*Ã
-weights³
-=Union[torchvision.models.convnext.ConvNeXt_Base_Weights,None]f
-1torchvision.models.convnext.ConvNeXt_Base_Weights"1torchvision.models.convnext.ConvNeXt_Base_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any˜
-convnext_large*torchvision.models.convnext.convnext_large"L
-$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*Æ
-weights¶
->Union[torchvision.models.convnext.ConvNeXt_Large_Weights,None]h
-2torchvision.models.convnext.ConvNeXt_Large_Weights"2torchvision.models.convnext.ConvNeXt_Large_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*—
-__annotations__+torchvision.models.convnext.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+num_layers(r
+input_channels0r
+out_channels0r
+
+num_layers0¡
+ConvNeXt"torch.nn.modules.module.Module*§
+__init__*
+
+self(*
+block_setting(*
+stochastic_depth_prob (*
+layer_scale (*
+num_classes (*
+block (	*
+
+norm_layer (	*
+kwargs(* 
+forward*
+
+self(*
+x(r
+features0r
+avgpool0r
+
+classifier0^
+ConvNeXt_Tiny_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0_
+ConvNeXt_Small_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0^
+ConvNeXt_Base_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0_
+ConvNeXt_Large_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0B
+convnext_tiny*
+weights (*
+progress (*
+kwargs(C
+convnext_small*
+weights (*
+progress (*
+kwargs(B
+convnext_base*
+weights (*
+progress (*
+kwargs(C
+convnext_large*
+weights (*
+progress (*
+kwargs(*
+__annotations__02"torch.Tensor2)"'torchvision.models.convnext.LayerNorm2d22%"#torchvision.models.convnext.CNBlock22"builtins.float2"builtins.function22222+")torchvision.models.convnext.CNBlockConfig2"builtins.int222&"$torchvision.models.convnext.ConvNeXt2"builtins.list2
+23"1torchvision.models.convnext.ConvNeXt_Tiny_Weights222"builtins.bool24"2torchvision.models.convnext.ConvNeXt_Small_Weights2223"1torchvision.models.convnext.ConvNeXt_Base_Weights2224"2torchvision.models.convnext.ConvNeXt_Large_Weights222"builtins.str2"builtins.dict2

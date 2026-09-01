@@ -1,664 +1,384 @@
 
-torchvision.models.quantizationÚ
-QuantizableBasicConv2d@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"(torchvision.models.googlenet.BasicConv2d*ô
-__init__Itorchvision.models.quantization.googlenet.QuantizableBasicConv2d.__init__"
-None*è
-selfÑ
-@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*
-args
-Any*
-kwargs
-Any*®
-forwardHtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.forward"
-torch.Tensor"torch.Tensor*è
-selfÑ
-@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*#
-x
-torch.Tensor"torch.Tensor*Ã
+torchvision.models.quantizationê
+QuantizableBasicConv2d@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"(torchvision.models.googlenet.BasicConv2d*2
+__init__*
 
-fuse_modelKtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.fuse_model"
-None*è
-selfÑ
-@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rV
-reluEtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.relu
-Anyç
-QuantizableInception>torchvision.models.quantization.googlenet.QuantizableInception"&torchvision.models.googlenet.Inception*ì
-__init__Gtorchvision.models.quantization.googlenet.QuantizableInception.__init__"
-None*ã
-selfÄ
->torchvision.models.quantization.googlenet.QuantizableInception">torchvision.models.quantization.googlenet.QuantizableInception*
-args
-Any*
-kwargs
-Any*¢
-forwardFtorchvision.models.quantization.googlenet.QuantizableInception.forward"
-torch.Tensor"torch.Tensor*ã
-selfÄ
->torchvision.models.quantization.googlenet.QuantizableInception">torchvision.models.quantization.googlenet.QuantizableInception*#
-x
-torch.Tensor"torch.TensorrR
-catBtorchvision.models.quantization.googlenet.QuantizableInception.cat
-Any≠
-QuantizableInceptionAuxAtorchvision.models.quantization.googlenet.QuantizableInceptionAux")torchvision.models.googlenet.InceptionAux*ú
-__init__Jtorchvision.models.quantization.googlenet.QuantizableInceptionAux.__init__"
-None*ë
-selfÜ
-Atorchvision.models.quantization.googlenet.QuantizableInceptionAux"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux*
-args
-Any*
-kwargs
-Any*´
-forwardItorchvision.models.quantization.googlenet.QuantizableInceptionAux.forward"
-torch.Tensor"torch.Tensor*ë
-selfÜ
-Atorchvision.models.quantization.googlenet.QuantizableInceptionAux"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux*#
-x
-torch.Tensor"torch.TensorrW
-reluFtorchvision.models.quantization.googlenet.QuantizableInceptionAux.relu
-Anyû
+self(*
 
-QuantizableGoogLeNet>torchvision.models.quantization.googlenet.QuantizableGoogLeNet"&torchvision.models.googlenet.GoogLeNet*ì
-__init__Gtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.__init__"
-None*ã
-selfÄ
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*
-args
-Any*
-kwargs
-Any*ä
-forwardFtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.forward"É
-TypeAlias[Tuple[Any,Any,Any]]1
-Tuple[Any,Any,Any]
-Any
-Any
-Any"-torchvision.models.googlenet.GoogLeNetOutputs*ã
-selfÄ
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*#
-x
-torch.Tensor"torch.Tensor*∆
+args(*
+kwargs(* 
+forward*
 
-fuse_modelItorchvision.models.quantization.googlenet.QuantizableGoogLeNet.fuse_model"
-None*ã
-selfÄ
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rV
-quantDtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.quant
-AnyrZ
-dequantFtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.dequant
-AnyÁ
-GoogLeNet_QuantizedWeightsDtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"#torchvision.models._api.WeightsEnumHrz
-IMAGENET1K_FBGEMM_V1Ytorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyr`
-DEFAULTLtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights.DEFAULT
-Anyô
-QuantizableInceptionA?torchvision.models.quantization.inception.QuantizableInceptionA"'torchvision.models.inception.InceptionA*ñ
-__init__Htorchvision.models.quantization.inception.QuantizableInceptionA.__init__"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionA"?torchvision.models.quantization.inception.QuantizableInceptionA*
-args
-Any*
-kwargs
-Any*•
-forwardGtorchvision.models.quantization.inception.QuantizableInceptionA.forward"
-torch.Tensor"torch.Tensor*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionA"?torchvision.models.quantization.inception.QuantizableInceptionA*#
-x
-torch.Tensor"torch.TensorrU
-myopDtorchvision.models.quantization.inception.QuantizableInceptionA.myop
-Anyô
-QuantizableInceptionB?torchvision.models.quantization.inception.QuantizableInceptionB"'torchvision.models.inception.InceptionB*ñ
-__init__Htorchvision.models.quantization.inception.QuantizableInceptionB.__init__"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionB"?torchvision.models.quantization.inception.QuantizableInceptionB*
-args
-Any*
-kwargs
-Any*•
-forwardGtorchvision.models.quantization.inception.QuantizableInceptionB.forward"
-torch.Tensor"torch.Tensor*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionB"?torchvision.models.quantization.inception.QuantizableInceptionB*#
-x
-torch.Tensor"torch.TensorrU
-myopDtorchvision.models.quantization.inception.QuantizableInceptionB.myop
-Anyô
-QuantizableInceptionC?torchvision.models.quantization.inception.QuantizableInceptionC"'torchvision.models.inception.InceptionC*ñ
-__init__Htorchvision.models.quantization.inception.QuantizableInceptionC.__init__"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionC"?torchvision.models.quantization.inception.QuantizableInceptionC*
-args
-Any*
-kwargs
-Any*•
-forwardGtorchvision.models.quantization.inception.QuantizableInceptionC.forward"
-torch.Tensor"torch.Tensor*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionC"?torchvision.models.quantization.inception.QuantizableInceptionC*#
-x
-torch.Tensor"torch.TensorrU
-myopDtorchvision.models.quantization.inception.QuantizableInceptionC.myop
-Anyô
-QuantizableInceptionD?torchvision.models.quantization.inception.QuantizableInceptionD"'torchvision.models.inception.InceptionD*ñ
-__init__Htorchvision.models.quantization.inception.QuantizableInceptionD.__init__"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionD"?torchvision.models.quantization.inception.QuantizableInceptionD*
-args
-Any*
-kwargs
-Any*•
-forwardGtorchvision.models.quantization.inception.QuantizableInceptionD.forward"
-torch.Tensor"torch.Tensor*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionD"?torchvision.models.quantization.inception.QuantizableInceptionD*#
-x
-torch.Tensor"torch.TensorrU
-myopDtorchvision.models.quantization.inception.QuantizableInceptionD.myop
-AnyÕ
-QuantizableInceptionE?torchvision.models.quantization.inception.QuantizableInceptionE"'torchvision.models.inception.InceptionE*ñ
-__init__Htorchvision.models.quantization.inception.QuantizableInceptionE.__init__"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionE"?torchvision.models.quantization.inception.QuantizableInceptionE*
-args
-Any*
-kwargs
-Any*•
-forwardGtorchvision.models.quantization.inception.QuantizableInceptionE.forward"
-torch.Tensor"torch.Tensor*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInceptionE"?torchvision.models.quantization.inception.QuantizableInceptionE*#
-x
-torch.Tensor"torch.TensorrW
-myop1Etorchvision.models.quantization.inception.QuantizableInceptionE.myop1
-AnyrW
-myop2Etorchvision.models.quantization.inception.QuantizableInceptionE.myop2
-AnyrW
-myop3Etorchvision.models.quantization.inception.QuantizableInceptionE.myop3
-Anyö
+self(*
+x(**
 
-QuantizableInception3?torchvision.models.quantization.inception.QuantizableInception3"'torchvision.models.inception.Inception3*ñ
-__init__Htorchvision.models.quantization.inception.QuantizableInception3.__init__"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInception3"?torchvision.models.quantization.inception.QuantizableInception3*
-args
-Any*
-kwargs
-Any*˚
-forwardGtorchvision.models.quantization.inception.QuantizableInception3.forward"r
-TypeAlias[Tuple[Any,Any]]$
-Tuple[Any,Any]
-Any
-Any"-torchvision.models.inception.InceptionOutputs*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInception3"?torchvision.models.quantization.inception.QuantizableInception3*#
-x
-torch.Tensor"torch.Tensor*…
+fuse_model*
 
-fuse_modelJtorchvision.models.quantization.inception.QuantizableInception3.fuse_model"
-None*ç
-selfÇ
-?torchvision.models.quantization.inception.QuantizableInception3"?torchvision.models.quantization.inception.QuantizableInception3*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rW
-quantEtorchvision.models.quantization.inception.QuantizableInception3.quant
-Anyr[
-dequantGtorchvision.models.quantization.inception.QuantizableInception3.dequant
-AnyÛ
-Inception_V3_QuantizedWeightsGtorchvision.models.quantization.inception.Inception_V3_QuantizedWeights"#torchvision.models._api.WeightsEnumHr}
-IMAGENET1K_FBGEMM_V1\torchvision.models.quantization.inception.Inception_V3_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrc
-DEFAULTOtorchvision.models.quantization.inception.Inception_V3_QuantizedWeights.DEFAULT
-Any”	
-QuantizableInvertedResidualGtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual"/torchvision.models.mobilenetv2.InvertedResidual*Æ
-__init__Ptorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual.__init__"
-None*ù
-selfí
-Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual"Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual*
-args
-Any*
-kwargs
-Any*Ω
-forwardOtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual.forward"
-torch.Tensor"torch.Tensor*ù
-selfí
-Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual"Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual*#
-x
-torch.Tensor"torch.Tensor*·
+self(*
+is_qat (r
+relu0›
+QuantizableInception>torchvision.models.quantization.googlenet.QuantizableInception"&torchvision.models.googlenet.Inception*2
+__init__*
 
-fuse_modelRtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual.fuse_model"
-None*ù
-selfí
-Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual"Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None re
-skip_addPtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual.skip_add
-AnyÏ	
-QuantizableMobileNetV2Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*ü
-__init__Ktorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2.__init__"
-None*ì
-selfà
-Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2"Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2*
-args
-Any*
-kwargs
-Any*Æ
-forwardJtorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2.forward"
-torch.Tensor"torch.Tensor*ì
-selfà
-Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2"Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2*#
-x
-torch.Tensor"torch.Tensor*“
+self(*
 
-fuse_modelMtorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2.fuse_model"
-None*ì
-selfà
-Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2"Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rZ
-quantHtorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2.quant
-Anyr^
-dequantJtorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2.dequant
-Any¸
-MobileNet_V2_QuantizedWeightsItorchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights"#torchvision.models._api.WeightsEnumHrÅ
-IMAGENET1K_QNNPACK_V1_torchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights.IMAGENET1K_QNNPACK_V1
-Anyre
-DEFAULTQtorchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights.DEFAULT
-Any√	
-QuantizableSqueezeExcitationHtorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation"builtins.object*±
-__init__Qtorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation.__init__"
-None*ü
-selfî
-Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation"Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation*
-args
-Any*
-kwargs
-Any*ƒ
-forwardPtorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation.forward"
-torch.Tensor"torch.Tensor*ü
-selfî
-Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation"Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation*'
-input
-torch.Tensor"torch.Tensor*‰
+args(*
+kwargs(* 
+forward*
 
-fuse_modelStorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation.fuse_model"
-None*ü
-selfî
-Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation"Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rf
-skip_mulQtorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation.skip_mul
-AnyÏ	
-QuantizableMobileNetV3Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*ü
-__init__Ktorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3.__init__"
-None*ì
-selfà
-Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3"Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3*
-args
-Any*
-kwargs
-Any*Æ
-forwardJtorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3.forward"
-torch.Tensor"torch.Tensor*ì
-selfà
-Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3"Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3*#
-x
-torch.Tensor"torch.Tensor*“
+self(*
+x(r
+cat0Á
+QuantizableInceptionAuxAtorchvision.models.quantization.googlenet.QuantizableInceptionAux")torchvision.models.googlenet.InceptionAux*2
+__init__*
 
-fuse_modelMtorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3.fuse_model"
-None*ì
-selfà
-Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3"Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rZ
-quantHtorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3.quant
-Anyr^
-dequantJtorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3.dequant
-Anyî
-#MobileNet_V3_Large_QuantizedWeightsOtorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights"#torchvision.models._api.WeightsEnumHrá
-IMAGENET1K_QNNPACK_V1etorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights.IMAGENET1K_QNNPACK_V1
-Anyrk
-DEFAULTWtorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights.DEFAULT
-Any∆
-QuantizableBasicBlock<torchvision.models.quantization.resnet.QuantizableBasicBlock"$torchvision.models.resnet.BasicBlock*å
-__init__Etorchvision.models.quantization.resnet.QuantizableBasicBlock.__init__"
-None*Ü
-self|
-<torchvision.models.quantization.resnet.QuantizableBasicBlock"<torchvision.models.quantization.resnet.QuantizableBasicBlock*
-args
-Any*
-kwargs
-Any*õ
-forwardDtorchvision.models.quantization.resnet.QuantizableBasicBlock.forward"
-torch.Tensor"torch.Tensor*Ü
-self|
-<torchvision.models.quantization.resnet.QuantizableBasicBlock"<torchvision.models.quantization.resnet.QuantizableBasicBlock*#
-x
-torch.Tensor"torch.Tensor*ø
+self(*
 
-fuse_modelGtorchvision.models.quantization.resnet.QuantizableBasicBlock.fuse_model"
-None*Ü
-self|
-<torchvision.models.quantization.resnet.QuantizableBasicBlock"<torchvision.models.quantization.resnet.QuantizableBasicBlock*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rZ
-add_reluEtorchvision.models.quantization.resnet.QuantizableBasicBlock.add_relu
-Any¸	
-QuantizableBottleneck<torchvision.models.quantization.resnet.QuantizableBottleneck"$torchvision.models.resnet.Bottleneck*å
-__init__Etorchvision.models.quantization.resnet.QuantizableBottleneck.__init__"
-None*Ü
-self|
-<torchvision.models.quantization.resnet.QuantizableBottleneck"<torchvision.models.quantization.resnet.QuantizableBottleneck*
-args
-Any*
-kwargs
-Any*õ
-forwardDtorchvision.models.quantization.resnet.QuantizableBottleneck.forward"
-torch.Tensor"torch.Tensor*Ü
-self|
-<torchvision.models.quantization.resnet.QuantizableBottleneck"<torchvision.models.quantization.resnet.QuantizableBottleneck*#
-x
-torch.Tensor"torch.Tensor*ø
+args(*
+kwargs(* 
+forward*
 
-fuse_modelGtorchvision.models.quantization.resnet.QuantizableBottleneck.fuse_model"
-None*Ü
-self|
-<torchvision.models.quantization.resnet.QuantizableBottleneck"<torchvision.models.quantization.resnet.QuantizableBottleneck*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rd
-skip_add_reluJtorchvision.models.quantization.resnet.QuantizableBottleneck.skip_add_relu
-AnyrT
-relu1Btorchvision.models.quantization.resnet.QuantizableBottleneck.relu1
-AnyrT
-relu2Btorchvision.models.quantization.resnet.QuantizableBottleneck.relu2
-Anyﬂ
-QuantizableResNet8torchvision.models.quantization.resnet.QuantizableResNet" torchvision.models.resnet.ResNet*ˇ
-__init__Atorchvision.models.quantization.resnet.QuantizableResNet.__init__"
-None*~
-selft
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*
-args
-Any*
-kwargs
-Any*é
-forward@torchvision.models.quantization.resnet.QuantizableResNet.forward"
-torch.Tensor"torch.Tensor*~
-selft
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*#
-x
-torch.Tensor"torch.Tensor*≤
+self(*
+x(r
+relu0ò
+QuantizableGoogLeNet>torchvision.models.quantization.googlenet.QuantizableGoogLeNet"&torchvision.models.googlenet.GoogLeNet*2
+__init__*
 
-fuse_modelCtorchvision.models.quantization.resnet.QuantizableResNet.fuse_model"
-None*~
-selft
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rP
-quant>torchvision.models.quantization.resnet.QuantizableResNet.quant
-AnyrT
-dequant@torchvision.models.quantization.resnet.QuantizableResNet.dequant
-Any⁄
-ResNet18_QuantizedWeights@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights"#torchvision.models._api.WeightsEnumHrv
-IMAGENET1K_FBGEMM_V1Utorchvision.models.quantization.resnet.ResNet18_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyr\
-DEFAULTHtorchvision.models.quantization.resnet.ResNet18_QuantizedWeights.DEFAULT
-Any“
-ResNet50_QuantizedWeights@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights"#torchvision.models._api.WeightsEnumHrv
-IMAGENET1K_FBGEMM_V1Utorchvision.models.quantization.resnet.ResNet50_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrv
-IMAGENET1K_FBGEMM_V2Utorchvision.models.quantization.resnet.ResNet50_QuantizedWeights.IMAGENET1K_FBGEMM_V2
-Anyr\
-DEFAULTHtorchvision.models.quantization.resnet.ResNet50_QuantizedWeights.DEFAULT
-Any˙
-!ResNeXt101_32X8D_QuantizedWeightsHtorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr~
-IMAGENET1K_FBGEMM_V1]torchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyr~
-IMAGENET1K_FBGEMM_V2]torchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights.IMAGENET1K_FBGEMM_V2
-Anyrd
-DEFAULTPtorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights.DEFAULT
-Any˙
-!ResNeXt101_64X4D_QuantizedWeightsHtorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr~
-IMAGENET1K_FBGEMM_V1]torchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrd
-DEFAULTPtorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights.DEFAULT
-Anyá
+self(	*
 
-QuantizableShuffleNetV2Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*•
-__init__Mtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2.__init__"
-None*ó
-selfå
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*
-args
-Any*
-kwargs
-Any*¥
-forwardLtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2.forward"
-torch.Tensor"torch.Tensor*ó
-selfå
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*#
-x
-torch.Tensor"torch.Tensor*ÿ
+args(*
+kwargs(* 
+forward*
 
-fuse_modelOtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2.fuse_model"
-None*ó
-selfå
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None r\
-quantJtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2.quant
-Anyr`
-dequantLtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2.dequant
-Anyï
-#ShuffleNet_V2_X0_5_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights"#torchvision.models._api.WeightsEnumHrÜ
-IMAGENET1K_FBGEMM_V1etorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrl
-DEFAULTXtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights.DEFAULT
-Anyï
-#ShuffleNet_V2_X1_0_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights"#torchvision.models._api.WeightsEnumHrÜ
-IMAGENET1K_FBGEMM_V1etorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrl
-DEFAULTXtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights.DEFAULT
-Anyï
-#ShuffleNet_V2_X1_5_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights"#torchvision.models._api.WeightsEnumHrÜ
-IMAGENET1K_FBGEMM_V1etorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrl
-DEFAULTXtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights.DEFAULT
-Anyï
-#ShuffleNet_V2_X2_0_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights"#torchvision.models._api.WeightsEnumHrÜ
-IMAGENET1K_FBGEMM_V1etorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyrl
-DEFAULTXtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights.DEFAULT
-Any…
-	googlenet3torchvision.models.quantization.googlenet.googlenet"Ä
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*é
-weights˛
-Union[torchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights,torchvision.models.googlenet.GoogLeNet_Weights,None]å
-Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights`
-.torchvision.models.googlenet.GoogLeNet_Weights".torchvision.models.googlenet.GoogLeNet_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any‰
-inception_v36torchvision.models.quantization.inception.inception_v3"Ç
-?torchvision.models.quantization.inception.QuantizableInception3"?torchvision.models.quantization.inception.QuantizableInception3*°
-weightsë
-ÖUnion[torchvision.models.quantization.inception.Inception_V3_QuantizedWeights,torchvision.models.inception.Inception_V3_Weights,None]í
-Gtorchvision.models.quantization.inception.Inception_V3_QuantizedWeights"Gtorchvision.models.quantization.inception.Inception_V3_QuantizedWeightsf
-1torchvision.models.inception.Inception_V3_Weights"1torchvision.models.inception.Inception_V3_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any¯
-mobilenet_v28torchvision.models.quantization.mobilenetv2.mobilenet_v2"à
-Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2"Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2*≠
-weightsù
-âUnion[torchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights,torchvision.models.mobilenetv2.MobileNet_V2_Weights,None]ñ
-Itorchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights"Itorchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeightsj
-3torchvision.models.mobilenetv2.MobileNet_V2_Weights"3torchvision.models.mobilenetv2.MobileNet_V2_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any®
-mobilenet_v3_large>torchvision.models.quantization.mobilenetv3.mobilenet_v3_large"à
-Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3"Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3*—
-weights¡
-ïUnion[torchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights,torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights,None]¢
-Otorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights"Otorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeightsv
-9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Anyü
-resnet18/torchvision.models.quantization.resnet.resnet18"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*ˆ
-weightsÊ
-wUnion[torchvision.models.quantization.resnet.ResNet18_QuantizedWeights,torchvision.models.resnet.ResNet18_Weights,None]Ñ
-@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights"@torchvision.models.quantization.resnet.ResNet18_QuantizedWeightsX
-*torchvision.models.resnet.ResNet18_Weights"*torchvision.models.resnet.ResNet18_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Anyü
-resnet50/torchvision.models.quantization.resnet.resnet50"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*ˆ
-weightsÊ
-wUnion[torchvision.models.quantization.resnet.ResNet50_QuantizedWeights,torchvision.models.resnet.ResNet50_Weights,None]Ñ
-@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights"@torchvision.models.quantization.resnet.ResNet50_QuantizedWeightsX
-*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any‡
-resnext101_32x8d7torchvision.models.quantization.resnet.resnext101_32x8d"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*ß
-weightsó
-áUnion[torchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights,torchvision.models.resnet.ResNeXt101_32X8D_Weights,None]î
-Htorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights"Htorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeightsh
-2torchvision.models.resnet.ResNeXt101_32X8D_Weights"2torchvision.models.resnet.ResNeXt101_32X8D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any‡
-resnext101_64x4d7torchvision.models.quantization.resnet.resnext101_64x4d"t
-8torchvision.models.quantization.resnet.QuantizableResNet"8torchvision.models.quantization.resnet.QuantizableResNet*ß
-weightsó
-áUnion[torchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights,torchvision.models.resnet.ResNeXt101_64X4D_Weights,None]î
-Htorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights"Htorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeightsh
-2torchvision.models.resnet.ResNeXt101_64X4D_Weights"2torchvision.models.resnet.ResNeXt101_64X4D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any≥
-shufflenet_v2_x0_5?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x0_5"å
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*◊
-weights«
-óUnion[torchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights,torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights,None]§
-Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeightsx
-:torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any≥
-shufflenet_v2_x1_0?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x1_0"å
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*◊
-weights«
-óUnion[torchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights,torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights,None]§
-Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeightsx
-:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any≥
-shufflenet_v2_x1_5?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x1_5"å
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*◊
-weights«
-óUnion[torchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights,torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights,None]§
-Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeightsx
-:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any≥
-shufflenet_v2_x2_0?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x2_0"å
-Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2*◊
-weights«
-óUnion[torchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights,torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights,None]§
-Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeightsx
-:torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any*Ä
-__path__(torchvision.models.quantization.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*õ
-__annotations__/torchvision.models.quantization.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(	*
+x(**
+
+fuse_model*
+
+self(	*
+is_qat (r	
+quant0r
+dequant0∞
+GoogLeNet_QuantizedWeightsDtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0·
+QuantizableInceptionA?torchvision.models.quantization.inception.QuantizableInceptionA"'torchvision.models.inception.InceptionA*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r
+myop0·
+QuantizableInceptionB?torchvision.models.quantization.inception.QuantizableInceptionB"'torchvision.models.inception.InceptionB*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r
+myop0·
+QuantizableInceptionC?torchvision.models.quantization.inception.QuantizableInceptionC"'torchvision.models.inception.InceptionC*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r
+myop0·
+QuantizableInceptionD?torchvision.models.quantization.inception.QuantizableInceptionD"'torchvision.models.inception.InceptionD*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r
+myop0¯
+QuantizableInceptionE?torchvision.models.quantization.inception.QuantizableInceptionE"'torchvision.models.inception.InceptionE*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r	
+myop10r	
+myop20r	
+myop30õ
+QuantizableInception3?torchvision.models.quantization.inception.QuantizableInception3"'torchvision.models.inception.Inception3*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r	
+quant0r
+dequant0∂
+Inception_V3_QuantizedWeightsGtorchvision.models.quantization.inception.Inception_V3_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0ß
+QuantizableInvertedResidualGtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual"/torchvision.models.mobilenetv2.InvertedResidual*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r
+skip_add0¢
+QuantizableMobileNetV2Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r	
+quant0r
+dequant0π
+MobileNet_V2_QuantizedWeightsItorchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_QNNPACK_V10r
+DEFAULT0ç
+QuantizableSqueezeExcitationHtorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation"builtins.object*2
+__init__*
+
+self(*
+
+args(*
+kwargs(*$
+forward*
+
+self(*
+input(**
+
+fuse_model*
+
+self(*
+is_qat (r
+skip_mul0¢
+QuantizableMobileNetV3Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r	
+quant0r
+dequant0≈
+#MobileNet_V3_Large_QuantizedWeightsOtorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_QNNPACK_V10r
+DEFAULT0ã
+QuantizableBasicBlock<torchvision.models.quantization.resnet.QuantizableBasicBlock"$torchvision.models.resnet.BasicBlock*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r
+add_relu0¶
+QuantizableBottleneck<torchvision.models.quantization.resnet.QuantizableBottleneck"$torchvision.models.resnet.Bottleneck*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r
+skip_add_relu0r	
+relu10r	
+relu20â
+QuantizableResNet8torchvision.models.quantization.resnet.QuantizableResNet" torchvision.models.resnet.ResNet*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r	
+quant0r
+dequant0´
+ResNet18_QuantizedWeights@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0≈
+ResNet50_QuantizedWeights@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+IMAGENET1K_FBGEMM_V20r
+DEFAULT0’
+!ResNeXt101_32X8D_QuantizedWeightsHtorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+IMAGENET1K_FBGEMM_V20r
+DEFAULT0ª
+!ResNeXt101_64X4D_QuantizedWeightsHtorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0ß
+QuantizableShuffleNetV2Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r	
+quant0r
+dequant0≈
+#ShuffleNet_V2_X0_5_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0≈
+#ShuffleNet_V2_X1_0_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0≈
+#ShuffleNet_V2_X1_5_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0≈
+#ShuffleNet_V2_X2_0_QuantizedWeightsPtorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0Ö
+	googlenet3torchvision.models.quantization.googlenet.googlenet	*
+weights (*
+progress (*
+quantize (*
+kwargs(ã
+inception_v36torchvision.models.quantization.inception.inception_v3*
+weights (!*
+progress (*
+quantize (*
+kwargs(ç
+mobilenet_v28torchvision.models.quantization.mobilenetv2.mobilenet_v2*
+weights ($*
+progress (*
+quantize (*
+kwargs(ô
+mobilenet_v3_large>torchvision.models.quantization.mobilenetv3.mobilenet_v3_large*
+weights ('*
+progress (*
+quantize (*
+kwargs(Ä
+resnet18/torchvision.models.quantization.resnet.resnet18*
+weights (**
+progress (*
+quantize (*
+kwargs(Ä
+resnet50/torchvision.models.quantization.resnet.resnet50*
+weights (-*
+progress (*
+quantize (*
+kwargs(ê
+resnext101_32x8d7torchvision.models.quantization.resnet.resnext101_32x8d*
+weights (0*
+progress (*
+quantize (*
+kwargs(ê
+resnext101_64x4d7torchvision.models.quantization.resnet.resnext101_64x4d*
+weights (3*
+progress (*
+quantize (*
+kwargs(ö
+shufflenet_v2_x0_5?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x0_5*
+weights (6*
+progress (*
+quantize (*
+kwargs(ö
+shufflenet_v2_x1_0?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x1_0*
+weights (9*
+progress (*
+quantize (*
+kwargs(ö
+shufflenet_v2_x1_5?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x1_5*
+weights (<*
+progress (*
+quantize (*
+kwargs(ö
+shufflenet_v2_x2_0?torchvision.models.quantization.shufflenetv2.shufflenet_v2_x2_0*
+weights (?*
+progress (*
+quantize (*
+kwargs(*
+__path__0A*
+__annotations__0B22B"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d22"torch.Tensor2"builtins.bool222@">torchvision.models.quantization.googlenet.QuantizableInception2C"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux2@">torchvision.models.quantization.googlenet.QuantizableGoogLeNet2224"-torchvision.models.googlenet.GoogLeNetOutputs2
+2A"?torchvision.models.quantization.inception.QuantizableInceptionA2A"?torchvision.models.quantization.inception.QuantizableInceptionB2A"?torchvision.models.quantization.inception.QuantizableInceptionC2A"?torchvision.models.quantization.inception.QuantizableInceptionD2A"?torchvision.models.quantization.inception.QuantizableInceptionE2A"?torchvision.models.quantization.inception.QuantizableInception32224"-torchvision.models.inception.InceptionOutputs22I"Gtorchvision.models.quantization.mobilenetv2.QuantizableInvertedResidual2D"Btorchvision.models.quantization.mobilenetv2.QuantizableMobileNetV22J"Htorchvision.models.quantization.mobilenetv3.QuantizableSqueezeExcitation2D"Btorchvision.models.quantization.mobilenetv3.QuantizableMobileNetV32>"<torchvision.models.quantization.resnet.QuantizableBasicBlock2>"<torchvision.models.quantization.resnet.QuantizableBottleneck2:"8torchvision.models.quantization.resnet.QuantizableResNet2F"Dtorchvision.models.quantization.shufflenetv2.QuantizableShuffleNetV22F"Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights20".torchvision.models.googlenet.GoogLeNet_Weights222I"Gtorchvision.models.quantization.inception.Inception_V3_QuantizedWeights23"1torchvision.models.inception.Inception_V3_Weights22 2K"Itorchvision.models.quantization.mobilenetv2.MobileNet_V2_QuantizedWeights25"3torchvision.models.mobilenetv2.MobileNet_V2_Weights22"#2Q"Otorchvision.models.quantization.mobilenetv3.MobileNet_V3_Large_QuantizedWeights2;"9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights22%&2B"@torchvision.models.quantization.resnet.ResNet18_QuantizedWeights2,"*torchvision.models.resnet.ResNet18_Weights22()2B"@torchvision.models.quantization.resnet.ResNet50_QuantizedWeights2,"*torchvision.models.resnet.ResNet50_Weights22+,2J"Htorchvision.models.quantization.resnet.ResNeXt101_32X8D_QuantizedWeights24"2torchvision.models.resnet.ResNeXt101_32X8D_Weights22./2J"Htorchvision.models.quantization.resnet.ResNeXt101_64X4D_QuantizedWeights24"2torchvision.models.resnet.ResNeXt101_64X4D_Weights22122R"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X0_5_QuantizedWeights2<":torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights22452R"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_0_QuantizedWeights2<":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights22782R"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X1_5_QuantizedWeights2<":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights22:;2R"Ptorchvision.models.quantization.shufflenetv2.ShuffleNet_V2_X2_0_QuantizedWeights2<":torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights22=>2"builtins.str2"builtins.list2@2"builtins.dict2@

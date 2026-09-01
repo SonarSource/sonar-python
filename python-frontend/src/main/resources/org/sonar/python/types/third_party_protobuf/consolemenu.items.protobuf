@@ -1,292 +1,160 @@
 
-consolemenu.items¿
-ExitItem!consolemenu.console_menu.ExitItem"!consolemenu.console_menu.MenuItem*–
-__init__*consolemenu.console_menu.ExitItem.__init__"
-None*P
-selfF
-!consolemenu.console_menu.ExitItem"!consolemenu.console_menu.ExitItem*Ø
-text¢
-3Union[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function *ô
-menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None *U
-	menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Å
-show&consolemenu.console_menu.ExitItem.show"
-builtins.str"builtins.str*P
-selfF
-!consolemenu.console_menu.ExitItem"!consolemenu.console_menu.ExitItem*'
-index
-builtins.int"builtins.int*
-available_width
-None z310z311z312z313z314j310j311j312j313j314©
-MenuItem!consolemenu.console_menu.MenuItem"builtins.object*Å
-__init__*consolemenu.console_menu.MenuItem.__init__"
-None*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItem*≠
-text¢
-3Union[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function*ô
-menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None *1
-should_exit
-builtins.bool"builtins.bool *U
-	menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*‡
-show&consolemenu.console_menu.MenuItem.show"
-builtins.str"builtins.str*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItem*'
-index
-builtins.int"builtins.intz310z311z312z313z314*ß
-set_up(consolemenu.console_menu.MenuItem.set_up"
-None*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItemz310z311z312z313z314*ß
-action(consolemenu.console_menu.MenuItem.action"
-None*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItemz310z311z312z313z314*´
-clean_up*consolemenu.console_menu.MenuItem.clean_up"
-None*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItemz310z311z312z313z314*…
+consolemenu.items’
+ExitItem!consolemenu.console_menu.ExitItem"!consolemenu.console_menu.MenuItem*G
+__init__*
 
-get_return,consolemenu.console_menu.MenuItem.get_return""
-builtins.object"builtins.object*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItemz310z311z312z313z314*ˇ
-__eq__(consolemenu.console_menu.MenuItem.__eq__"
-builtins.bool"builtins.bool*HF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItem*HF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItemz310z311z312z313z314*ø
-get_text*consolemenu.console_menu.MenuItem.get_text"
-builtins.str"builtins.str*P
-selfF
-!consolemenu.console_menu.MenuItem"!consolemenu.console_menu.MenuItemz310z311z312z313z314j310j311j312j313j314re
-text&consolemenu.console_menu.MenuItem.text
-builtins.str"builtins.str*310*311*312*313*314r÷
-menu&consolemenu.console_menu.MenuItem.menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None*310*311*312*313*314ru
-should_exit-consolemenu.console_menu.MenuItem.should_exit
-builtins.bool"builtins.bool*310*311*312*313*314rÖ
-index_item_separator6consolemenu.console_menu.MenuItem.index_item_separator
-builtins.str"builtins.str*310*311*312*313*314ró
-	menu_char+consolemenu.console_menu.MenuItem.menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314ƒ
-CommandItem*consolemenu.items.command_item.CommandItem",consolemenu.items.external_item.ExternalItem*’
-__init__3consolemenu.items.command_item.CommandItem.__init__"
-None*b
-selfX
-*consolemenu.items.command_item.CommandItem"*consolemenu.items.command_item.CommandItem*&
-text
-builtins.str"builtins.str*)
-command
-builtins.str"builtins.str*ì
-	argumentsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ô
-menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None *1
-should_exit
-builtins.bool"builtins.bool *U
-	menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*¬
-action1consolemenu.items.command_item.CommandItem.action"
-None*b
-selfX
-*consolemenu.items.command_item.CommandItem"*consolemenu.items.command_item.CommandItemz310z311z312z313z314*ﬁ
+self(*
+text (*
+menu (*
+	menu_char (	*:
+show*
 
-get_return5consolemenu.items.command_item.CommandItem.get_return"
-builtins.int"builtins.int*b
-selfX
-*consolemenu.items.command_item.CommandItem"*consolemenu.items.command_item.CommandItemz310z311z312z313z314j310j311j312j313j314rt
-command2consolemenu.items.command_item.CommandItem.command
-builtins.str"builtins.str*310*311*312*313*314r¶
-	arguments4consolemenu.items.command_item.CommandItem.argumentsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r§
-exit_status6consolemenu.items.command_item.CommandItem.exit_statusD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314í
-ExternalItem,consolemenu.items.external_item.ExternalItem"!consolemenu.console_menu.MenuItem*»
-set_up3consolemenu.items.external_item.ExternalItem.set_up"
-None*f
-self\
-,consolemenu.items.external_item.ExternalItem",consolemenu.items.external_item.ExternalItemz310z311z312z313z314*Ã
-clean_up5consolemenu.items.external_item.ExternalItem.clean_up"
-None*f
-self\
-,consolemenu.items.external_item.ExternalItem",consolemenu.items.external_item.ExternalItemz310z311z312z313z314j310j311j312j313j314¬
-FunctionItem,consolemenu.items.function_item.FunctionItem",consolemenu.items.external_item.ExternalItem*ä
-__init__5consolemenu.items.function_item.FunctionItem.__init__"
-None*f
-self\
-,consolemenu.items.function_item.FunctionItem",consolemenu.items.function_item.FunctionItem*&
-text
-builtins.str"builtins.str*Y
-functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*l
-args`
- Union[typing.Sequence[Any],None]0
-typing.Sequence[Any]
-Any"typing.Sequence
-None *§
-kwargsï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *ô
-menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None *1
-should_exit
-builtins.bool"builtins.bool *U
-	menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*»
-action3consolemenu.items.function_item.FunctionItem.action"
-None*f
-self\
-,consolemenu.items.function_item.FunctionItem",consolemenu.items.function_item.FunctionItemz310z311z312z313z314*Ã
-clean_up5consolemenu.items.function_item.FunctionItem.clean_up"
-None*f
-self\
-,consolemenu.items.function_item.FunctionItem",consolemenu.items.function_item.FunctionItemz310z311z312z313z314*Ó
+self(*
+index(
+*
+available_width (ü
+MenuItem!consolemenu.console_menu.MenuItem"builtins.object*Z
+__init__*
 
-get_return7consolemenu.items.function_item.FunctionItem.get_return"&
-Union[Any,None]
-Any
-None*f
-self\
-,consolemenu.items.function_item.FunctionItem",consolemenu.items.function_item.FunctionItemz310z311z312z313z314j310j311j312j313j314rß
-function5consolemenu.items.function_item.FunctionItem.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rÑ
-args1consolemenu.items.function_item.FunctionItem.args0
-typing.Sequence[Any]
-Any"typing.Sequence*310*311*312*313*314r±
-kwargs3consolemenu.items.function_item.FunctionItem.kwargsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*310*311*312*313*314rø
-return_value9consolemenu.items.function_item.FunctionItem.return_value[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None*310*311*312*313*314ˇ
-SelectionItem.consolemenu.items.selection_item.SelectionItem"!consolemenu.console_menu.MenuItem*û
-__init__7consolemenu.items.selection_item.SelectionItem.__init__"
-None*j
-self`
-.consolemenu.items.selection_item.SelectionItem".consolemenu.items.selection_item.SelectionItem*≠
-text¢
-3Union[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function*'
-index
-builtins.int"builtins.int*ô
-menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None *U
-	menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Í
+self(*
 
-get_return9consolemenu.items.selection_item.SelectionItem.get_return"
-builtins.int"builtins.int*j
-self`
-.consolemenu.items.selection_item.SelectionItem".consolemenu.items.selection_item.SelectionItemz310z311z312z313z314j310j311j312j313j314rt
-index4consolemenu.items.selection_item.SelectionItem.index
-builtins.int"builtins.int*310*311*312*313*314•
-SubmenuItem*consolemenu.items.submenu_item.SubmenuItem"!consolemenu.console_menu.MenuItem*˜
-__init__3consolemenu.items.submenu_item.SubmenuItem.__init__"
-None*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItem*≠
-text¢
-3Union[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function*Y
-submenuL
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu*ô
-menuå
-0Union[consolemenu.console_menu.ConsoleMenu,None]L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu
-None *1
-should_exit
-builtins.bool"builtins.bool *U
-	menu_charD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*û
-set_menu3consolemenu.items.submenu_item.SubmenuItem.set_menu"
-None*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItem*V
-menuL
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenuz310z311z312z313z314*¬
-set_up1consolemenu.items.submenu_item.SubmenuItem.set_up"
-None*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItemz310z311z312z313z314*¬
-action1consolemenu.items.submenu_item.SubmenuItem.action"
-None*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItemz310z311z312z313z314*∆
-clean_up3consolemenu.items.submenu_item.SubmenuItem.clean_up"
-None*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItemz310z311z312z313z314*‰
+text(*
+menu (*
+should_exit (*
+	menu_char (	*!
+show*
 
-get_return5consolemenu.items.submenu_item.SubmenuItem.get_return""
-builtins.object"builtins.object*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItemz310z311z312z313z314*ê
-get_submenu6consolemenu.items.submenu_item.SubmenuItem.get_submenu"L
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu*b
-selfX
-*consolemenu.items.submenu_item.SubmenuItem"*consolemenu.items.submenu_item.SubmenuItemz310z311z312z313z314j310j311j312j313j314r§
-submenu2consolemenu.items.submenu_item.SubmenuItem.submenuL
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu*310*311*312*313*314rû
-menu/consolemenu.items.submenu_item.SubmenuItem.menuL
-$consolemenu.console_menu.ConsoleMenu"$consolemenu.console_menu.ConsoleMenu*310*311*312*313*314*ã
-__path__consolemenu.items.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*¶
-__annotations__!consolemenu.items.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+index(
+*
+set_up*
+
+self(*
+action*
+
+self(*
+clean_up*
+
+self(*
+
+get_return*
+
+self(*
+__eq__*(*(*
+get_text*
+
+self(r
+text0r
+menu0r
+should_exit0r
+index_item_separator0r
+	menu_char0	∆
+CommandItem*consolemenu.items.command_item.CommandItem",consolemenu.items.external_item.ExternalItem*|
+__init__*
+
+self(*
+
+text(*
+command(*
+	arguments (*
+menu (*
+should_exit (*
+	menu_char (	*
+action*
+
+self(*
+
+get_return
+*
+
+self(r
+command0r
+	arguments0r
+exit_status0ë
+ExternalItem,consolemenu.items.external_item.ExternalItem"!consolemenu.console_menu.MenuItem*
+set_up*
+
+self(*
+clean_up*
+
+self(˘
+FunctionItem,consolemenu.items.function_item.FunctionItem",consolemenu.items.external_item.ExternalItem*à
+__init__*
+
+self(*
+
+text(*
+function(*
+args (*
+kwargs (*
+menu (*
+should_exit (*
+	menu_char (	*
+action*
+
+self(*
+clean_up*
+
+self(*
+
+get_return*
+
+self(r
+function0r
+args0r
+
+kwargs0r
+return_value0›
+SelectionItem.consolemenu.items.selection_item.SelectionItem"!consolemenu.console_menu.MenuItem*R
+__init__*
+
+self(*
+
+text(*
+index(
+*
+menu (*
+	menu_char (	*
+
+get_return
+*
+
+self(r	
+index0
+á
+SubmenuItem*consolemenu.items.submenu_item.SubmenuItem"!consolemenu.console_menu.MenuItem*i
+__init__*
+
+self(*
+
+text(*
+submenu(*
+menu (*
+should_exit (*
+	menu_char (	*$
+set_menu*
+
+self(*
+
+menu(*
+set_up*
+
+self(*
+action*
+
+self(*
+clean_up*
+
+self(*
+
+get_return*
+
+self(*
+get_submenu*
+
+self(r
+submenu0r
+menu0*
+__path__0*
+__annotations__022#"!consolemenu.console_menu.ExitItem2"builtins.str2"builtins.function22222&"$consolemenu.console_menu.ConsoleMenu22222"builtins.int2#"!consolemenu.console_menu.MenuItem2"builtins.bool2"builtins.object2,"*consolemenu.items.command_item.CommandItem2"builtins.list22222
+2.",consolemenu.items.external_item.ExternalItem2.",consolemenu.items.function_item.FunctionItem22"typing.Sequence2222"typing.Mapping222222"_typeshed.Incomplete22220".consolemenu.items.selection_item.SelectionItem2,"*consolemenu.items.submenu_item.SubmenuItem2"builtins.dict2

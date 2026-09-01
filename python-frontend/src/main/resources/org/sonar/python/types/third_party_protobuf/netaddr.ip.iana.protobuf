@@ -1,193 +1,95 @@
 
-netaddr.ip.ianaø	
-SaxRecordParsernetaddr.ip.iana.SaxRecordParser"xml.sax.handler.ContentHandler*ø
-__init__(netaddr.ip.iana.SaxRecordParser.__init__"
-None*L
-selfB
-netaddr.ip.iana.SaxRecordParser"netaddr.ip.iana.SaxRecordParser*ó
-callbackÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z310z311z312z313z314*‰
-startElement,netaddr.ip.iana.SaxRecordParser.startElement"
-None*L
-selfB
-netaddr.ip.iana.SaxRecordParser"netaddr.ip.iana.SaxRecordParser*&
-name
-builtins.str"builtins.str*å
-attrsÄ
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingz310z311z312z313z314*—
+netaddr.ip.ianaÁ
+SaxRecordParser"xml.sax.handler.ContentHandler**
+__init__*
 
-endElement*netaddr.ip.iana.SaxRecordParser.endElement"
-None*L
-selfB
-netaddr.ip.iana.SaxRecordParser"netaddr.ip.iana.SaxRecordParser*&
-name
-builtins.str"builtins.strz310z311z312z313z314*‘
+self(*
+callback (*5
+startElement*
 
-characters*netaddr.ip.iana.SaxRecordParser.characters"
-None*L
-selfB
-netaddr.ip.iana.SaxRecordParser"netaddr.ip.iana.SaxRecordParser*)
-content
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314µ
-XMLRecordParsernetaddr.ip.iana.XMLRecordParser"netaddr.core.Publisher*ê
-__init__(netaddr.ip.iana.XMLRecordParser.__init__"
-None*L
-selfB
-netaddr.ip.iana.XMLRecordParser"netaddr.ip.iana.XMLRecordParser*9
-fh1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*.
-kwargs"
-builtins.object"builtins.objectz310z311z312z313z314*
-process_record.netaddr.ip.iana.XMLRecordParser.process_record"π
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None*L
-selfB
-netaddr.ip.iana.XMLRecordParser"netaddr.ip.iana.XMLRecordParser*ä
-recÄ
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingz310z311z312z313z314*ﬁ
-consume_record.netaddr.ip.iana.XMLRecordParser.consume_record"
-None*L
-selfB
-netaddr.ip.iana.XMLRecordParser"netaddr.ip.iana.XMLRecordParser*+
-rec"
-builtins.object"builtins.objectz310z311z312z313z314*ü
-parse%netaddr.ip.iana.XMLRecordParser.parse"
-None*L
-selfB
-netaddr.ip.iana.XMLRecordParser"netaddr.ip.iana.XMLRecordParserz310z311z312z313z314*¬
-__getattr__+netaddr.ip.iana.XMLRecordParser.__getattr__"
-Any*DB
-netaddr.ip.iana.XMLRecordParser"netaddr.ip.iana.XMLRecordParser*
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rã
-	xmlparser)netaddr.ip.iana.XMLRecordParser.xmlparser:
-xml.sax.xmlreader.XMLReader"xml.sax.xmlreader.XMLReader*310*311*312*313*314rt
-fh"netaddr.ip.iana.XMLRecordParser.fh1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314Å
+self(*
 
-IPv4Parsernetaddr.ip.iana.IPv4Parser"netaddr.ip.iana.XMLRecordParser*ú
-process_record)netaddr.ip.iana.IPv4Parser.process_record"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*B
-self8
-netaddr.ip.iana.IPv4Parser"netaddr.ip.iana.IPv4Parser*ä
-recÄ
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingz310z311z312z313z314j310j311j312j313j314Å
+name(*
+attrs(*&
 
-IPv6Parsernetaddr.ip.iana.IPv6Parser"netaddr.ip.iana.XMLRecordParser*ú
-process_record)netaddr.ip.iana.IPv6Parser.process_record"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*B
-self8
-netaddr.ip.iana.IPv6Parser"netaddr.ip.iana.IPv6Parser*ä
-recÄ
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingz310z311z312z313z314j310j311j312j313j314§
-IPv6UnicastParser!netaddr.ip.iana.IPv6UnicastParser"netaddr.ip.iana.XMLRecordParser*±
-process_record0netaddr.ip.iana.IPv6UnicastParser.process_record"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*P
-selfF
-!netaddr.ip.iana.IPv6UnicastParser"!netaddr.ip.iana.IPv6UnicastParser*ä
-recÄ
-,typing.Mapping[builtins.str,builtins.object]
-builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingz310z311z312z313z314j310j311j312j313j314‹
-MulticastParsernetaddr.ip.iana.MulticastParser"netaddr.ip.iana.XMLRecordParser*Ì
-normalise_addr.netaddr.ip.iana.MulticastParser.normalise_addr"
-builtins.str"builtins.str*L
-selfB
-netaddr.ip.iana.MulticastParser"netaddr.ip.iana.MulticastParser*&
-addr
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ã
-DictUpdaternetaddr.ip.iana.DictUpdater"netaddr.core.Subscriber*Ä
-__init__$netaddr.ip.iana.DictUpdater.__init__"
-None*D
-self:
-netaddr.ip.iana.DictUpdater"netaddr.ip.iana.DictUpdater*ç
-dctÉ
-ttyping.MutableMapping[TypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]],TypeAlias[Any]]¿
-NTypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]]Õ
-CUnion[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(
-netaddr.ip.IPRange"netaddr.ip.IPRange"netaddr.ip.iana._IanaInfoKey1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"typing.MutableMapping*'
-topic
-builtins.str"builtins.str*,
+endElement*
 
-unique_key
-builtins.str"builtins.strz310z311z312z313z314*“
-update"netaddr.ip.iana.DictUpdater.update"
-None*D
-self:
-netaddr.ip.iana.DictUpdater"netaddr.ip.iana.DictUpdater*;
-data1
-TypeAlias[Any]
-Any"_typeshed.Incompletez310z311z312z313z314j310j311j312j313j314r≈
-dctnetaddr.ip.iana.DictUpdater.dctÉ
-ttyping.MutableMapping[TypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]],TypeAlias[Any]]¿
-NTypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]]Õ
-CUnion[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(
-netaddr.ip.IPRange"netaddr.ip.IPRange"netaddr.ip.iana._IanaInfoKey1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"typing.MutableMapping*310*311*312*313*314ra
-topic!netaddr.ip.iana.DictUpdater.topic
-builtins.str"builtins.str*310*311*312*313*314rk
+self(*
 
-unique_key&netaddr.ip.iana.DictUpdater.unique_key
-builtins.str"builtins.str*310*311*312*313*314I
-	load_infonetaddr.ip.iana.load_info"
-Nonez310z311z312z313z314˙
-pprint_infonetaddr.ip.iana.pprint_info"
-None*™
-fhü
-1Union[_typeshed.SupportsWrite[builtins.str],None]^
-%_typeshed.SupportsWrite[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsWrite
-None z310z311z312z313z314π
-querynetaddr.ip.iana.query"ƒ
-Sbuiltins.dict[builtins.str,builtins.list[builtins.dict[builtins.str,builtins.str]]]
-builtins.str"builtins.strø
-7builtins.list[builtins.dict[builtins.str,builtins.str]]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict"builtins.list"builtins.dict*9
-ip_addr,
-netaddr.ip.IPAddress"netaddr.ip.IPAddressz310z311z312z313z314*§
-__annotations__netaddr.ip.iana.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*È
-	IANA_INFOnetaddr.ip.iana.IANA_INFOß
-¢builtins.dict[builtins.str,builtins.dict[TypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]],builtins.dict[builtins.str,builtins.str]]]
-builtins.str"builtins.str“
-Übuiltins.dict[TypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]],builtins.dict[builtins.str,builtins.str]]¿
-NTypeAlias[Union[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange]]Õ
-CUnion[netaddr.ip.IPAddress,netaddr.ip.IPNetwork,netaddr.ip.IPRange],
-netaddr.ip.IPAddress"netaddr.ip.IPAddress,
-netaddr.ip.IPNetwork"netaddr.ip.IPNetwork(
-netaddr.ip.IPRange"netaddr.ip.IPRange"netaddr.ip.iana._IanaInfoKeyu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict"builtins.dict"builtins.dict*310*311*312*313*314
+name(*)
+
+characters*
+
+self(*
+content(¯
+XMLRecordParser"netaddr.core.Publisher*0
+__init__*
+
+self(	*
+fh(*
+kwargs(*)
+process_record*
+
+self(	*	
+rec(*)
+consume_record*
+
+self(	*	
+rec(*
+parse*
+
+self(	*
+__getattr__
+*(	*(r
+	xmlparser0r
+fh0X
+
+IPv4Parser"netaddr.ip.iana.XMLRecordParser*)
+process_record*
+
+self(*	
+rec(X
+
+IPv6Parser"netaddr.ip.iana.XMLRecordParser*)
+process_record*
+
+self(*	
+rec(_
+IPv6UnicastParser"netaddr.ip.iana.XMLRecordParser*)
+process_record*
+
+self(*	
+rec(^
+MulticastParser"netaddr.ip.iana.XMLRecordParser**
+normalise_addr*
+
+self(*
+
+addr(≤
+DictUpdater"netaddr.core.Subscriber*B
+__init__*
+
+self(*	
+dct(*
+topic(*
+
+unique_key(*"
+update*
+
+self(*
+
+data(r
+dct0r	
+topic0r
+
+unique_key0
+	load_info
+pprint_info*
+
+fh (
+query*
+ip_addr(*
+__annotations__0*
+	IANA_INFO0 22!"netaddr.ip.iana.SaxRecordParser2"builtins.function22222"builtins.str2"builtins.object2"typing.Mapping22!"netaddr.ip.iana.XMLRecordParser22"_typeshed.Incomplete2
+2"builtins.dict2222"xml.sax.xmlreader.XMLReader2"netaddr.ip.iana.IPv4Parser2"netaddr.ip.iana.IPv6Parser2#"!netaddr.ip.iana.IPv6UnicastParser2!"netaddr.ip.iana.MulticastParser2"netaddr.ip.iana.DictUpdater2"netaddr.ip.IPAddress2"netaddr.ip.IPNetwork2"netaddr.ip.IPRange222#"netaddr.ip.iana._IanaInfoKey22"typing.MutableMapping22"_typeshed.SupportsWrite2222"builtins.list22"builtins.dict22"builtins.dict2
+2"builtins.dict22"builtins.dict2

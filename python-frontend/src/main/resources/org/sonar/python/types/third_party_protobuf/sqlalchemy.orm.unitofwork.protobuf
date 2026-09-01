@@ -1,344 +1,237 @@
 
-sqlalchemy.orm.unitofwork±
-UOWTransaction(sqlalchemy.orm.unitofwork.UOWTransaction"builtins.object*m
-__init__1sqlalchemy.orm.unitofwork.UOWTransaction.__init__*
+sqlalchemy.orm.unitofworkå
+UOWTransaction"builtins.object*!
+__init__*
 self*
-sessionz310z311z312z313z314*w
-has_work1sqlalchemy.orm.unitofwork.UOWTransaction.has_work*
-self0:builtins.property`z310z311z312z313z314*Å
-was_already_deleted<sqlalchemy.orm.unitofwork.UOWTransaction.was_already_deleted*
+session*+
+has_work*
+self0:builtins.property`**
+was_already_deleted*
 self*	
-statez310z311z312z313z314*o
+state*!
 
-is_deleted3sqlalchemy.orm.unitofwork.UOWTransaction.is_deleted*
+is_deleted*
 self*	
-statez310z311z312z313z314*p
-memo-sqlalchemy.orm.unitofwork.UOWTransaction.memo*
+state*(
+memo*
 self*
 key*
-	callable_z310z311z312z313z314*Ï
-remove_state_actions=sqlalchemy.orm.unitofwork.UOWTransaction.remove_state_actions"
-None*^
-selfT
-(sqlalchemy.orm.unitofwork.UOWTransaction"(sqlalchemy.orm.unitofwork.UOWTransaction*
-state
-Anyz310z311z312z313z314*ù
-get_attribute_history>sqlalchemy.orm.unitofwork.UOWTransaction.get_attribute_history*
+	callable_*1
+remove_state_actions*
+
+self(*
+state(*D
+get_attribute_history*
 self*	
 state*
 key*
-passive z310z311z312z313z314*m
-has_dep0sqlalchemy.orm.unitofwork.UOWTransaction.has_dep*
+passive *"
+has_dep*
 self*
-	processorz310z311z312z313z314*ã
-register_preprocessor>sqlalchemy.orm.unitofwork.UOWTransaction.register_preprocessor"
-None*^
-selfT
-(sqlalchemy.orm.unitofwork.UOWTransaction"(sqlalchemy.orm.unitofwork.UOWTransaction*
-	processor
-Any*
+	processor*H
+register_preprocessor*
 
-fromparent
-Anyz310z311z312z313z314*Õ
-register_object8sqlalchemy.orm.unitofwork.UOWTransaction.register_object"
-Any*^
-selfT
-(sqlalchemy.orm.unitofwork.UOWTransaction"(sqlalchemy.orm.unitofwork.UOWTransaction*
-state
-Any*.
-isdelete
-builtins.bool"builtins.bool *.
-listonly
-builtins.bool"builtins.bool *3
-cancel_delete
-builtins.bool"builtins.bool *l
-	operation[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-prop[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ã
-register_post_update=sqlalchemy.orm.unitofwork.UOWTransaction.register_post_update"
-None*^
-selfT
-(sqlalchemy.orm.unitofwork.UOWTransaction"(sqlalchemy.orm.unitofwork.UOWTransaction*
-state
-Any*
-post_update_cols
-Anyz310z311z312z313z314*è
-filter_states_for_dep>sqlalchemy.orm.unitofwork.UOWTransaction.filter_states_for_dep*
+self(*
+	processor(*
+
+fromparent(*à
+register_object*
+
+self(*
+state(*
+isdelete (*
+listonly (*
+cancel_delete (*
+	operation (*
+prop (*I
+register_post_update*
+
+self(*
+state(*
+post_update_cols(*6
+filter_states_for_dep*
 self*
 dep*
 
-statesz310z311z312z313z314*©
-states_for_mapper_hierarchyDsqlalchemy.orm.unitofwork.UOWTransaction.states_for_mapper_hierarchy"
-None*^
-selfT
-(sqlalchemy.orm.unitofwork.UOWTransaction"(sqlalchemy.orm.unitofwork.UOWTransaction*
-mapper
-Any*
-isdelete
-Any*
-listonly
-Anyz310z311z312z313z314*^
-execute0sqlalchemy.orm.unitofwork.UOWTransaction.execute*
-selfz310z311z312z313z314*‹
-finalize_flush_changes?sqlalchemy.orm.unitofwork.UOWTransaction.finalize_flush_changes"
-None*^
-selfT
-(sqlalchemy.orm.unitofwork.UOWTransaction"(sqlalchemy.orm.unitofwork.UOWTransactionz310z311z312z313z314j310j311j312j313j314r]
-session0sqlalchemy.orm.unitofwork.UOWTransaction.session
-Any*310*311*312*313*314rc
+states*Y
+states_for_mapper_hierarchy*
 
-attributes3sqlalchemy.orm.unitofwork.UOWTransaction.attributes
-Any*310*311*312*313*314rW
-deps-sqlalchemy.orm.unitofwork.UOWTransaction.deps
-Any*310*311*312*313*314r]
-mappers0sqlalchemy.orm.unitofwork.UOWTransaction.mappers
-Any*310*311*312*313*314rm
-presort_actions8sqlalchemy.orm.unitofwork.UOWTransaction.presort_actions
-Any*310*311*312*313*314ro
-postsort_actions9sqlalchemy.orm.unitofwork.UOWTransaction.postsort_actions
-Any*310*311*312*313*314rg
-dependencies5sqlalchemy.orm.unitofwork.UOWTransaction.dependencies
-Any*310*311*312*313*314r[
-states/sqlalchemy.orm.unitofwork.UOWTransaction.states
-Any*310*311*312*313*314rs
-post_update_states;sqlalchemy.orm.unitofwork.UOWTransaction.post_update_states
-Any*310*311*312*313*314n
-IterateMappersMixin-sqlalchemy.orm.unitofwork.IterateMappersMixin"builtins.objectj310j311j312j313j314í
+self(*
+mapper(*
+isdelete(*
+listonly(*
+execute*
+self*&
+finalize_flush_changes*
 
-Preprocess$sqlalchemy.orm.unitofwork.Preprocess"-sqlalchemy.orm.unitofwork.IterateMappersMixin*
-__init__-sqlalchemy.orm.unitofwork.Preprocess.__init__"
-None*V
-selfL
-$sqlalchemy.orm.unitofwork.Preprocess"$sqlalchemy.orm.unitofwork.Preprocess*!
-dependency_processor
-Any*
+self(r
+session0r
 
-fromparent
-Anyz310z311z312z313z314*c
-execute,sqlalchemy.orm.unitofwork.Preprocess.execute*
+attributes0r
+deps0r
+mappers0r
+presort_actions0r
+postsort_actions0r
+dependencies0r
+
+states0r
+post_update_states0&
+IterateMappersMixin"builtins.objectÛ
+
+Preprocess"-sqlalchemy.orm.unitofwork.IterateMappersMixin*F
+__init__*
+
+self(*
+dependency_processor(*
+
+fromparent(*
+execute*
 self*
-uowz310z311z312z313z314j310j311j312j313j314rs
-dependency_processor9sqlalchemy.orm.unitofwork.Preprocess.dependency_processor
-Any*310*311*312*313*314r_
+uowr
+dependency_processor0r
 
-fromparent/sqlalchemy.orm.unitofwork.Preprocess.fromparent
-Any*310*311*312*313*314r]
-	processed.sqlalchemy.orm.unitofwork.Preprocess.processed
-Any*310*311*312*313*314rà
-setup_flush_actions8sqlalchemy.orm.unitofwork.Preprocess.setup_flush_actions
-builtins.bool"builtins.bool*310*311*312*313*314å
-PostSortRec%sqlalchemy.orm.unitofwork.PostSortRec"builtins.object*‹
-__init__.sqlalchemy.orm.unitofwork.PostSortRec.__init__"
-None*X
-selfN
-%sqlalchemy.orm.unitofwork.PostSortRec"%sqlalchemy.orm.unitofwork.PostSortRec*
-uow
-Any*
-args
-Anyz310z311z312z313z314*Ó
-execute_aggregate7sqlalchemy.orm.unitofwork.PostSortRec.execute_aggregate"
-None*X
-selfN
-%sqlalchemy.orm.unitofwork.PostSortRec"%sqlalchemy.orm.unitofwork.PostSortRec*
-uow
-Any*
-recs
-Anyz310z311z312z313z314j310j311j312j313j314r\
-disabled.sqlalchemy.orm.unitofwork.PostSortRec.disabled
-Any*310*311*312*313*314ö	
+fromparent0r
+	processed0r
+setup_flush_actions0ó
+PostSortRec"builtins.object*/
+__init__*
 
-ProcessAll$sqlalchemy.orm.unitofwork.ProcessAll"-sqlalchemy.orm.unitofwork.IterateMappersMixin"%sqlalchemy.orm.unitofwork.PostSortRec*ô
-__init__-sqlalchemy.orm.unitofwork.ProcessAll.__init__"
-None*V
-selfL
-$sqlalchemy.orm.unitofwork.ProcessAll"$sqlalchemy.orm.unitofwork.ProcessAll*
-uow
-Any*!
-dependency_processor
-Any*
-isdelete
-Any*
+self(*	
+uow(*
 
-fromparent
-Anyz310z311z312z313z314*ƒ
-execute,sqlalchemy.orm.unitofwork.ProcessAll.execute"
-None*V
-selfL
-$sqlalchemy.orm.unitofwork.ProcessAll"$sqlalchemy.orm.unitofwork.ProcessAll*
-uow
-Anyz310z311z312z313z314*É
-per_state_flush_actions<sqlalchemy.orm.unitofwork.ProcessAll.per_state_flush_actions*
+args(*8
+execute_aggregate*
+
+self(*	
+uow(*
+
+recs(r
+disabled0›
+
+ProcessAll"-sqlalchemy.orm.unitofwork.IterateMappersMixin"%sqlalchemy.orm.unitofwork.PostSortRec*a
+__init__*
+
+self(	*	
+uow(*
+dependency_processor(*
+isdelete(*
+
+fromparent(*"
+execute*
+
+self(	*	
+uow(*,
+per_state_flush_actions*
 self*
-uowz310z311z312z313z314j310j311j312j313j314rs
-dependency_processor9sqlalchemy.orm.unitofwork.ProcessAll.dependency_processor
-Any*310*311*312*313*314r[
-sort_key-sqlalchemy.orm.unitofwork.ProcessAll.sort_key
-Any*310*311*312*313*314r[
-isdelete-sqlalchemy.orm.unitofwork.ProcessAll.isdelete
-Any*310*311*312*313*314r_
+uowr
+dependency_processor0r
+sort_key0r
+isdelete0r
 
-fromparent/sqlalchemy.orm.unitofwork.ProcessAll.fromparent
-Any*310*311*312*313*314‚
-PostUpdateAll'sqlalchemy.orm.unitofwork.PostUpdateAll"%sqlalchemy.orm.unitofwork.PostSortRec*˚
-__init__0sqlalchemy.orm.unitofwork.PostUpdateAll.__init__"
-None*\
-selfR
-'sqlalchemy.orm.unitofwork.PostUpdateAll"'sqlalchemy.orm.unitofwork.PostUpdateAll*
-uow
-Any*
-mapper
-Any*
-isdelete
-Anyz310z311z312z313z314*Õ
-execute/sqlalchemy.orm.unitofwork.PostUpdateAll.execute"
-None*\
-selfR
-'sqlalchemy.orm.unitofwork.PostUpdateAll"'sqlalchemy.orm.unitofwork.PostUpdateAll*
-uow
-Anyz310z311z312z313z314j310j311j312j313j314rZ
-mapper.sqlalchemy.orm.unitofwork.PostUpdateAll.mapper
-Any*310*311*312*313*314r^
-isdelete0sqlalchemy.orm.unitofwork.PostUpdateAll.isdelete
-Any*310*311*312*313*314r^
-sort_key0sqlalchemy.orm.unitofwork.PostUpdateAll.sort_key
-Any*310*311*312*313*314€
-SaveUpdateAll'sqlalchemy.orm.unitofwork.SaveUpdateAll"%sqlalchemy.orm.unitofwork.PostSortRec*‰
-__init__0sqlalchemy.orm.unitofwork.SaveUpdateAll.__init__"
-None*\
-selfR
-'sqlalchemy.orm.unitofwork.SaveUpdateAll"'sqlalchemy.orm.unitofwork.SaveUpdateAll*
-uow
-Any*
-mapper
-Anyz310z311z312z313z314*Õ
-execute/sqlalchemy.orm.unitofwork.SaveUpdateAll.execute"
-None*\
-selfR
-'sqlalchemy.orm.unitofwork.SaveUpdateAll"'sqlalchemy.orm.unitofwork.SaveUpdateAll*
-uow
-Anyz310z311z312z313z314*Ì
-per_state_flush_actions?sqlalchemy.orm.unitofwork.SaveUpdateAll.per_state_flush_actions"
-None*\
-selfR
-'sqlalchemy.orm.unitofwork.SaveUpdateAll"'sqlalchemy.orm.unitofwork.SaveUpdateAll*
-uow
-Anyz310z311z312z313z314j310j311j312j313j314rZ
-mapper.sqlalchemy.orm.unitofwork.SaveUpdateAll.mapper
-Any*310*311*312*313*314r^
-sort_key0sqlalchemy.orm.unitofwork.SaveUpdateAll.sort_key
-Any*310*311*312*313*314ß
-	DeleteAll#sqlalchemy.orm.unitofwork.DeleteAll"%sqlalchemy.orm.unitofwork.PostSortRec*ÿ
-__init__,sqlalchemy.orm.unitofwork.DeleteAll.__init__"
-None*T
-selfJ
-#sqlalchemy.orm.unitofwork.DeleteAll"#sqlalchemy.orm.unitofwork.DeleteAll*
-uow
-Any*
-mapper
-Anyz310z311z312z313z314*¡
-execute+sqlalchemy.orm.unitofwork.DeleteAll.execute"
-None*T
-selfJ
-#sqlalchemy.orm.unitofwork.DeleteAll"#sqlalchemy.orm.unitofwork.DeleteAll*
-uow
-Anyz310z311z312z313z314*·
-per_state_flush_actions;sqlalchemy.orm.unitofwork.DeleteAll.per_state_flush_actions"
-None*T
-selfJ
-#sqlalchemy.orm.unitofwork.DeleteAll"#sqlalchemy.orm.unitofwork.DeleteAll*
-uow
-Anyz310z311z312z313z314j310j311j312j313j314rV
-mapper*sqlalchemy.orm.unitofwork.DeleteAll.mapper
-Any*310*311*312*313*314rZ
-sort_key,sqlalchemy.orm.unitofwork.DeleteAll.sort_key
-Any*310*311*312*313*314ï
-ProcessState&sqlalchemy.orm.unitofwork.ProcessState"%sqlalchemy.orm.unitofwork.PostSortRec*ö
-__init__/sqlalchemy.orm.unitofwork.ProcessState.__init__"
-None*Z
-selfP
-&sqlalchemy.orm.unitofwork.ProcessState"&sqlalchemy.orm.unitofwork.ProcessState*
-uow
-Any*!
-dependency_processor
-Any*
-isdelete
-Any*
-state
-Anyz310z311z312z313z314*Ò
-execute_aggregate8sqlalchemy.orm.unitofwork.ProcessState.execute_aggregate"
-None*Z
-selfP
-&sqlalchemy.orm.unitofwork.ProcessState"&sqlalchemy.orm.unitofwork.ProcessState*
-uow
-Any*
-recs
-Anyz310z311z312z313z314j310j311j312j313j314ru
-dependency_processor;sqlalchemy.orm.unitofwork.ProcessState.dependency_processor
-Any*310*311*312*313*314r]
-sort_key/sqlalchemy.orm.unitofwork.ProcessState.sort_key
-Any*310*311*312*313*314r]
-isdelete/sqlalchemy.orm.unitofwork.ProcessState.isdelete
-Any*310*311*312*313*314rW
-state,sqlalchemy.orm.unitofwork.ProcessState.state
-Any*310*311*312*313*314Å
-SaveUpdateState)sqlalchemy.orm.unitofwork.SaveUpdateState"%sqlalchemy.orm.unitofwork.PostSortRec*È
-__init__2sqlalchemy.orm.unitofwork.SaveUpdateState.__init__"
-None*`
-selfV
-)sqlalchemy.orm.unitofwork.SaveUpdateState")sqlalchemy.orm.unitofwork.SaveUpdateState*
-uow
-Any*
-state
-Anyz310z311z312z313z314*˙
-execute_aggregate;sqlalchemy.orm.unitofwork.SaveUpdateState.execute_aggregate"
-None*`
-selfV
-)sqlalchemy.orm.unitofwork.SaveUpdateState")sqlalchemy.orm.unitofwork.SaveUpdateState*
-uow
-Any*
-recs
-Anyz310z311z312z313z314j310j311j312j313j314rZ
-state/sqlalchemy.orm.unitofwork.SaveUpdateState.state
-Any*310*311*312*313*314r\
-mapper0sqlalchemy.orm.unitofwork.SaveUpdateState.mapper
-Any*310*311*312*313*314r`
-sort_key2sqlalchemy.orm.unitofwork.SaveUpdateState.sort_key
-Any*310*311*312*313*314’
-DeleteState%sqlalchemy.orm.unitofwork.DeleteState"%sqlalchemy.orm.unitofwork.PostSortRec*›
-__init__.sqlalchemy.orm.unitofwork.DeleteState.__init__"
-None*X
-selfN
-%sqlalchemy.orm.unitofwork.DeleteState"%sqlalchemy.orm.unitofwork.DeleteState*
-uow
-Any*
-state
-Anyz310z311z312z313z314*Ó
-execute_aggregate7sqlalchemy.orm.unitofwork.DeleteState.execute_aggregate"
-None*X
-selfN
-%sqlalchemy.orm.unitofwork.DeleteState"%sqlalchemy.orm.unitofwork.DeleteState*
-uow
-Any*
-recs
-Anyz310z311z312z313z314j310j311j312j313j314rV
-state+sqlalchemy.orm.unitofwork.DeleteState.state
-Any*310*311*312*313*314rX
-mapper,sqlalchemy.orm.unitofwork.DeleteState.mapper
-Any*310*311*312*313*314r\
-sort_key.sqlalchemy.orm.unitofwork.DeleteState.sort_key
-Any*310*311*312*313*314y
-track_cascade_events.sqlalchemy.orm.unitofwork.track_cascade_events*
+fromparent0≈
+PostUpdateAll"%sqlalchemy.orm.unitofwork.PostSortRec*A
+__init__*
+
+self(
+*	
+uow(*
+mapper(*
+isdelete(*"
+execute*
+
+self(
+*	
+uow(r
+
+mapper0r
+isdelete0r
+sort_key0€
+SaveUpdateAll"%sqlalchemy.orm.unitofwork.PostSortRec*1
+__init__*
+
+self(*	
+uow(*
+mapper(*"
+execute*
+
+self(*	
+uow(*2
+per_state_flush_actions*
+
+self(*	
+uow(r
+
+mapper0r
+sort_key0◊
+	DeleteAll"%sqlalchemy.orm.unitofwork.PostSortRec*1
+__init__*
+
+self(*	
+uow(*
+mapper(*"
+execute*
+
+self(*	
+uow(*2
+per_state_flush_actions*
+
+self(*	
+uow(r
+
+mapper0r
+sort_key0é
+ProcessState"%sqlalchemy.orm.unitofwork.PostSortRec*\
+__init__*
+
+self(*	
+uow(*
+dependency_processor(*
+isdelete(*
+state(*8
+execute_aggregate*
+
+self(*	
+uow(*
+
+recs(r
+dependency_processor0r
+sort_key0r
+isdelete0r	
+state0…
+SaveUpdateState"%sqlalchemy.orm.unitofwork.PostSortRec*0
+__init__*
+
+self(*	
+uow(*
+state(*8
+execute_aggregate*
+
+self(*	
+uow(*
+
+recs(r	
+state0r
+
+mapper0r
+sort_key0≈
+DeleteState"%sqlalchemy.orm.unitofwork.PostSortRec*0
+__init__*
+
+self(*	
+uow(*
+state(*8
+execute_aggregate*
+
+self(*	
+uow(*
+
+recs(r	
+state0r
+
+mapper0r
+sort_key00
+track_cascade_events*
 
 descriptor*
-propz310z311z312z313z314*Æ
-__annotations__)sqlalchemy.orm.unitofwork.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+prop*
+__annotations__022*"(sqlalchemy.orm.unitofwork.UOWTransaction22"builtins.bool2"_typeshed.Incomplete2222&"$sqlalchemy.orm.unitofwork.Preprocess2'"%sqlalchemy.orm.unitofwork.PostSortRec2&"$sqlalchemy.orm.unitofwork.ProcessAll2)"'sqlalchemy.orm.unitofwork.PostUpdateAll2)"'sqlalchemy.orm.unitofwork.SaveUpdateAll2%"#sqlalchemy.orm.unitofwork.DeleteAll2("&sqlalchemy.orm.unitofwork.ProcessState2+")sqlalchemy.orm.unitofwork.SaveUpdateState2'"%sqlalchemy.orm.unitofwork.DeleteState2"builtins.str2"builtins.dict2

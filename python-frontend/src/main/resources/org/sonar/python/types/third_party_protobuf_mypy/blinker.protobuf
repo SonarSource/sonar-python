@@ -1,231 +1,120 @@
 
-blinker˙
-NamedSignalblinker.base.NamedSignal"blinker.base.Signal*
-__init__!blinker.base.NamedSignal.__init__"
-None*>
-self4
-blinker.base.NamedSignal"blinker.base.NamedSignal*&
-name
-builtins.str"builtins.str*O
-docD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *É
-__repr__!blinker.base.NamedSignal.__repr__"
-builtins.str"builtins.str*64
-blinker.base.NamedSignal"blinker.base.NamedSignalrC
-nameblinker.base.NamedSignal.name
-builtins.str"builtins.str«
-	Namespaceblinker.base.Namespace"builtins.dict*í
-signalblinker.base.Namespace.signal"4
-blinker.base.NamedSignal"blinker.base.NamedSignal*:
-self0
-blinker.base.Namespace"blinker.base.Namespace*&
-name
-builtins.str"builtins.str*O
-docD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None §.
-Signalblinker.base.Signal"builtins.object*Ω
-receiver_connected&blinker.base.Signal.receiver_connected"*
-blinker.base.Signal"blinker.base.Signal*4
-self*
-blinker.base.Signal"blinker.base.Signal0:functools.cached_property`*√
-receiver_disconnected)blinker.base.Signal.receiver_disconnected"*
-blinker.base.Signal"blinker.base.Signal*4
-self*
-blinker.base.Signal"blinker.base.Signal0:functools.cached_property`*π
-__init__blinker.base.Signal.__init__"
-None*4
-self*
-blinker.base.Signal"blinker.base.Signal*O
-docD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ô
-connectblinker.base.Signal.connect"_
-blinker.base.FK
-CallableType[builtins.function]&
-builtins.function"builtins.function*4
-self*
-blinker.base.Signal"blinker.base.Signal*m
-receiver_
-blinker.base.FK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-sender
-Any **
-weak
-builtins.bool"builtins.bool *Ú
-connect_viablinker.base.Signal.connect_via"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*4
-self*
-blinker.base.Signal"blinker.base.Signal*
-sender
-Any**
-weak
-builtins.bool"builtins.bool *…
-connected_to blinker.base.Signal.connected_to"R
- typing.Generator[None,None,None]
-None
-None
-None"typing.Generator*4
-self*
-blinker.base.Signal"blinker.base.Signal*Y
-receiverK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-sender
-Any 0:contextlib.contextmanager*…
-mutedblinker.base.Signal.muted"R
- typing.Generator[None,None,None]
-None
-None
-None"typing.Generator*4
-self*
-blinker.base.Signal"blinker.base.Signal0:contextlib.contextmanager*É
-sendblinker.base.Signal.send"—
-9builtins.list[Tuple[CallableType[builtins.function],Any]]Ñ
-*Tuple[CallableType[builtins.function],Any]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-Any"builtins.list*,*
-blinker.base.Signal"blinker.base.Signal**&
-Union[Any,None]
-Any
-None *ù
-_async_wrapperÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-kwargs
-Any*å
+blinkerã
+NamedSignalblinker.base.NamedSignal"blinker.base.Signal*1
+__init__*
 
-send_asyncblinker.base.Signal.send_async"Õ
-Styping.Coroutine[Any,Any,builtins.list[Tuple[CallableType[builtins.function],Any]]]
-Any
-Any—
-9builtins.list[Tuple[CallableType[builtins.function],Any]]Ñ
-*Tuple[CallableType[builtins.function],Any]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-Any"builtins.list"typing.Coroutine*,*
-blinker.base.Signal"blinker.base.Signal**&
-Union[Any,None]
-Any
-None *ú
-_sync_wrapperÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-kwargs
-AnyH*•
-has_receivers_for%blinker.base.Signal.has_receivers_for"
-builtins.bool"builtins.bool*4
-self*
-blinker.base.Signal"blinker.base.Signal*
-sender
-Any*∞
-receivers_for!blinker.base.Signal.receivers_for"∞
-;typing.Generator[CallableType[builtins.function],None,None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None
-None"typing.Generator*4
-self*
-blinker.base.Signal"blinker.base.Signal*
-sender
-Any*ﬁ
+self(*
 
-disconnectblinker.base.Signal.disconnect"
-None*4
-self*
-blinker.base.Signal"blinker.base.Signal*Y
-receiverK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-sender
-Any *÷
-_disconnectblinker.base.Signal._disconnect"
-None*4
-self*
-blinker.base.Signal"blinker.base.Signal*3
-receiver_id"
-typing.Hashable"typing.Hashable*1
-	sender_id"
-typing.Hashable"typing.Hashable*¸
-_make_cleanup_receiver*blinker.base.Signal._make_cleanup_receiver"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*4
-self*
-blinker.base.Signal"blinker.base.Signal*3
-receiver_id"
-typing.Hashable"typing.Hashable*ˆ
-_make_cleanup_sender(blinker.base.Signal._make_cleanup_sender"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*4
-self*
-blinker.base.Signal"blinker.base.Signal*1
-	sender_id"
-typing.Hashable"typing.Hashable*Ä
-_cleanup_bookkeeping(blinker.base.Signal._cleanup_bookkeeping"
-None*4
-self*
-blinker.base.Signal"blinker.base.Signal*p
-_clear_state blinker.base.Signal._clear_state"
-None*4
-self*
-blinker.base.Signal"blinker.base.SignalrV
-ANYblinker.base.Signal.ANY6
-blinker._utilities.Symbol"blinker._utilities.Symbolry
-	set_classblinker.base.Signal.set_classM
-Type[builtins.set[Any]]*
-builtins.set[Any]
-Any"builtins.set"typerá
-	receiversblinker.base.Signal.receivers⁄
-pbuiltins.dict[Any,Union[weakref.ReferenceType[CallableType[builtins.function]],CallableType[builtins.function]]]
-AnyÕ
-]Union[weakref.ReferenceType[CallableType[builtins.function]],CallableType[builtins.function]]ú
-6weakref.ReferenceType[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"weakref.ReferenceTypeK
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dictrH
-is_mutedblinker.base.Signal.is_muted
-builtins.bool"builtins.boolrú
-_by_receiver blinker.base.Signal._by_receiverj
-$builtins.dict[Any,builtins.set[Any]]
-Any*
-builtins.set[Any]
-Any"builtins.set"builtins.dictrò
+name(*
+doc (*
+__repr__*(r
+name0c
+	Namespaceblinker.base.Namespace"builtins.dict*/
+signal*
 
-_by_senderblinker.base.Signal._by_senderj
-$builtins.dict[Any,builtins.set[Any]]
-Any*
-builtins.set[Any]
-Any"builtins.set"builtins.dictr∫
-_weak_senders!blinker.base.Signal._weak_sendersÖ
--builtins.dict[Any,weakref.ReferenceType[Any]]
-Any<
-weakref.ReferenceType[Any]
-Any"weakref.ReferenceType"builtins.dict*h
-__path__blinker.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*É
-__annotations__blinker.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*O
-ANYblinker.base.ANY6
-blinker._utilities.Symbol"blinker._utilities.Symbol*e
-default_namespaceblinker.base.default_namespace0
-blinker.base.Namespace"blinker.base.Namespace*_
-signalblinker.base.signal@
-blinker.base._PNamespaceSignal"blinker.base._PNamespaceSignal*f
-__all__blinker.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*
+
+name(*
+doc („
+Signalblinker.base.Signal"builtins.object*A
+receiver_connected*
+
+self(0:functools.cached_property`*D
+receiver_disconnected*
+
+self(0:functools.cached_property`*%
+__init__*
+
+self(*
+doc (*E
+connect	*
+
+self(*
+receiver(	*
+sender (
+*
+weak (*7
+connect_via*
+
+self(*
+sender(
+*
+weak (*Y
+connected_to*
+
+self(*
+receiver(*
+sender (
+0:contextlib.contextmanager*2
+muted*
+
+self(0:contextlib.contextmanager*8
+send*(* (*
+_async_wrapper (*
+kwargs(
+*?
+
+send_async*(* (*
+_sync_wrapper (*
+kwargs(
+H*/
+has_receivers_for*
+
+self(*
+sender(
+*+
+receivers_for*
+
+self(*
+sender(
+*:
+
+disconnect*
+
+self(*
+receiver(*
+sender (
+*?
+_disconnect*
+
+self(*
+receiver_id(*
+	sender_id(*9
+_make_cleanup_receiver*
+
+self(*
+receiver_id(*5
+_make_cleanup_sender*
+
+self(*
+	sender_id(*$
+_cleanup_bookkeeping*
+
+self(*
+_clear_state*
+
+self(r
+ANY0r
+	set_class0r
+	receivers0r
+is_muted0r
+_by_receiver0r
+
+_by_sender0r
+_weak_senders0*
+__path__0*
+__annotations__0*
+ANYblinker.base.ANY0*5
+default_namespaceblinker.base.default_namespace0*
+signalblinker.base.signal0*
+__all__022"blinker.base.NamedSignal2"builtins.str222"blinker.base.Namespace2"blinker.base.Signal2"builtins.function222222"builtins.bool2"typing.Generator222
+2"builtins.list222
+222"typing.Coroutine2
+
+2"typing.Generator22"typing.Hashable2"blinker._utilities.Symbol2"builtins.set2
+2"type22"weakref.ReferenceType2222"builtins.dict2
+2"builtins.dict2
+2"weakref.ReferenceType2
+2"builtins.dict2
+2"builtins.list22"builtins.dict2
+2 "blinker.base._PNamespaceSignal

@@ -1,351 +1,171 @@
 
-asyncio.unix_events·
-AbstractChildWatcher(asyncio.unix_events.AbstractChildWatcher"builtins.object*ˇ
-add_child_handler:asyncio.unix_events.AbstractChildWatcher.add_child_handler"
-None*^
-selfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher*%
-pid
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any0:abc.abstractmethod@z310z311z312z313z314*≠
-remove_child_handler=asyncio.unix_events.AbstractChildWatcher.remove_child_handler"
-builtins.bool"builtins.bool*^
-selfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher*%
-pid
-builtins.int"builtins.int0:abc.abstractmethod@z310z311z312z313z314*Ï
-attach_loop4asyncio.unix_events.AbstractChildWatcher.attach_loop"
-None*^
-selfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher*ã
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None0:abc.abstractmethod@z310z311z312z313z314*“
-close.asyncio.unix_events.AbstractChildWatcher.close"
-None*^
-selfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher0:abc.abstractmethod@z310z311z312z313z314*ﬂ
-	__enter__2asyncio.unix_events.AbstractChildWatcher.__enter__"≥
--asyncio.unix_events.AbstractChildWatcher.SelfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher(*∂≥
--asyncio.unix_events.AbstractChildWatcher.SelfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher(0:abc.abstractmethod@z310z311z312z313z314*©
-__exit__1asyncio.unix_events.AbstractChildWatcher.__exit__"
-None*VT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None0:abc.abstractmethod@z310z311z312z313z314*
-	is_active2asyncio.unix_events.AbstractChildWatcher.is_active"
-builtins.bool"builtins.bool*^
-selfT
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher0:abc.abstractmethod@z310z311z312z313z314j310j311j312j313j314’
-BaseChildWatcher$asyncio.unix_events.BaseChildWatcher"(asyncio.unix_events.AbstractChildWatcher*Æ
-close*asyncio.unix_events.BaseChildWatcher.close"
-None*V
-selfL
-$asyncio.unix_events.BaseChildWatcher"$asyncio.unix_events.BaseChildWatcherz310z311z312z313z314*Ã
-	is_active.asyncio.unix_events.BaseChildWatcher.is_active"
-builtins.bool"builtins.bool*V
-selfL
-$asyncio.unix_events.BaseChildWatcher"$asyncio.unix_events.BaseChildWatcherz310z311z312z313z314*»
-attach_loop0asyncio.unix_events.BaseChildWatcher.attach_loop"
-None*V
-selfL
-$asyncio.unix_events.BaseChildWatcher"$asyncio.unix_events.BaseChildWatcher*ã
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-Nonez310z311z312z313z314@babc.ABCMetaj310j311j312j313j314è
-SafeChildWatcher$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.BaseChildWatcher*£
-	__enter__.asyncio.unix_events.SafeChildWatcher.__enter__"£
-)asyncio.unix_events.SafeChildWatcher.SelfL
-$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher(*¶£
-)asyncio.unix_events.SafeChildWatcher.SelfL
-$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher(z310z311z312z313z314*Ö
-__exit__-asyncio.unix_events.SafeChildWatcher.__exit__"
-None*NL
-$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*€
-add_child_handler6asyncio.unix_events.SafeChildWatcher.add_child_handler"
-None*V
-selfL
-$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher*%
-pid
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*â
-remove_child_handler9asyncio.unix_events.SafeChildWatcher.remove_child_handler"
-builtins.bool"builtins.bool*V
-selfL
-$asyncio.unix_events.SafeChildWatcher"$asyncio.unix_events.SafeChildWatcher*%
-pid
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314è
-FastChildWatcher$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.BaseChildWatcher*£
-	__enter__.asyncio.unix_events.FastChildWatcher.__enter__"£
-)asyncio.unix_events.FastChildWatcher.SelfL
-$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher(*¶£
-)asyncio.unix_events.FastChildWatcher.SelfL
-$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher(z310z311z312z313z314*Ö
-__exit__-asyncio.unix_events.FastChildWatcher.__exit__"
-None*NL
-$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*€
-add_child_handler6asyncio.unix_events.FastChildWatcher.add_child_handler"
-None*V
-selfL
-$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher*%
-pid
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*â
-remove_child_handler9asyncio.unix_events.FastChildWatcher.remove_child_handler"
-builtins.bool"builtins.bool*V
-selfL
-$asyncio.unix_events.FastChildWatcher"$asyncio.unix_events.FastChildWatcher*%
-pid
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314å
-_UnixSelectorEventLoop*asyncio.unix_events._UnixSelectorEventLoop"-asyncio.selector_events.BaseSelectorEventLoopj310j311j312j313j314€
-_UnixDefaultEventLoopPolicy/asyncio.unix_events._UnixDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*≥
-get_child_watcherAasyncio.unix_events._UnixDefaultEventLoopPolicy.get_child_watcher"T
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher*l
-selfb
-/asyncio.unix_events._UnixDefaultEventLoopPolicy"/asyncio.unix_events._UnixDefaultEventLoopPolicyz310z311z312z313z314*ê
-set_child_watcherAasyncio.unix_events._UnixDefaultEventLoopPolicy.set_child_watcher"
-None*l
-selfb
-/asyncio.unix_events._UnixDefaultEventLoopPolicy"/asyncio.unix_events._UnixDefaultEventLoopPolicy*¶
-watcherò
-4Union[asyncio.unix_events.AbstractChildWatcher,None]T
-(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher
-Nonez310z311z312z313z314j310j311j312j313j314ö
-_Warnasyncio.unix_events._Warn"builtins.object*…
-__call__"asyncio.unix_events._Warn.__call__""
-builtins.object"builtins.object*@
-self6
-asyncio.unix_events._Warn"asyncio.unix_events._Warn*)
-message
-builtins.str"builtins.str*à
-categoryx
-"Union[Type[builtins.Warning],None]F
-Type[builtins.Warning]$
-builtins.Warning"builtins.Warning"type
-None *.
+asyncio.unix_events÷
+AbstractChildWatcher"builtins.object*`
+add_child_handler*
 
-stacklevel
-builtins.int"builtins.int *4
-source&
-Union[Any,None]
-Any
-None z310z311z312z313z314Xj310j311j312j313j314Ô
-MultiLoopChildWatcher)asyncio.unix_events.MultiLoopChildWatcher"(asyncio.unix_events.AbstractChildWatcher*€
-	is_active3asyncio.unix_events.MultiLoopChildWatcher.is_active"
-builtins.bool"builtins.bool*`
-selfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcherz310z311z312z313z314*Ω
-close/asyncio.unix_events.MultiLoopChildWatcher.close"
-None*`
-selfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcherz310z311z312z313z314*–
-	__enter__3asyncio.unix_events.MultiLoopChildWatcher.__enter__"∑
-.asyncio.unix_events.MultiLoopChildWatcher.SelfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher(*∫∑
-.asyncio.unix_events.MultiLoopChildWatcher.SelfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher(z310z311z312z313z314*î
-__exit__2asyncio.unix_events.MultiLoopChildWatcher.__exit__"
-None*XV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*Í
-add_child_handler;asyncio.unix_events.MultiLoopChildWatcher.add_child_handler"
-None*`
-selfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher*%
-pid
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*ò
-remove_child_handler>asyncio.unix_events.MultiLoopChildWatcher.remove_child_handler"
-builtins.bool"builtins.bool*`
-selfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher*%
-pid
-builtins.int"builtins.intz310z311z312z313z314*◊
-attach_loop5asyncio.unix_events.MultiLoopChildWatcher.attach_loop"
-None*`
-selfV
-)asyncio.unix_events.MultiLoopChildWatcher")asyncio.unix_events.MultiLoopChildWatcher*ã
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-Nonez310z311z312z313z314j310j311j312j313j314„
-ThreadedChildWatcher(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.AbstractChildWatcher*Ù
-	is_active2asyncio.unix_events.ThreadedChildWatcher.is_active":
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*^
-selfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcherz310z311z312z313z314*∫
-close.asyncio.unix_events.ThreadedChildWatcher.close"
-None*^
-selfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcherz310z311z312z313z314*«
-	__enter__2asyncio.unix_events.ThreadedChildWatcher.__enter__"≥
--asyncio.unix_events.ThreadedChildWatcher.SelfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher(*∂≥
--asyncio.unix_events.ThreadedChildWatcher.SelfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher(z310z311z312z313z314*ë
-__exit__1asyncio.unix_events.ThreadedChildWatcher.__exit__"
-None*VT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*Ú
-__del__0asyncio.unix_events.ThreadedChildWatcher.__del__"
-None*VT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher*:6
-asyncio.unix_events._Warn"asyncio.unix_events._Warn z310z311z312z313z314*Á
-add_child_handler:asyncio.unix_events.ThreadedChildWatcher.add_child_handler"
-None*^
-selfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher*%
-pid
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*ï
-remove_child_handler=asyncio.unix_events.ThreadedChildWatcher.remove_child_handler"
-builtins.bool"builtins.bool*^
-selfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher*%
-pid
-builtins.int"builtins.intz310z311z312z313z314*‘
-attach_loop4asyncio.unix_events.ThreadedChildWatcher.attach_loop"
-None*^
-selfT
-(asyncio.unix_events.ThreadedChildWatcher"(asyncio.unix_events.ThreadedChildWatcher*ã
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-Nonez310z311z312z313z314j310j311j312j313j314˚
-PidfdChildWatcher%asyncio.unix_events.PidfdChildWatcher"(asyncio.unix_events.AbstractChildWatcher*¨
-	__enter__/asyncio.unix_events.PidfdChildWatcher.__enter__"ß
-*asyncio.unix_events.PidfdChildWatcher.SelfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher(*™ß
-*asyncio.unix_events.PidfdChildWatcher.SelfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher(z310z311z312z313z314*à
-__exit__.asyncio.unix_events.PidfdChildWatcher.__exit__"
-None*PN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*œ
-	is_active/asyncio.unix_events.PidfdChildWatcher.is_active"
-builtins.bool"builtins.bool*X
-selfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcherz310z311z312z313z314*±
-close+asyncio.unix_events.PidfdChildWatcher.close"
-None*X
-selfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcherz310z311z312z313z314*À
-attach_loop1asyncio.unix_events.PidfdChildWatcher.attach_loop"
-None*X
-selfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher*ã
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-Nonez310z311z312z313z314*ﬁ
-add_child_handler7asyncio.unix_events.PidfdChildWatcher.add_child_handler"
-None*X
-selfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher*%
-pid
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Anyz310z311z312z313z314*å
-remove_child_handler:asyncio.unix_events.PidfdChildWatcher.remove_child_handler"
-builtins.bool"builtins.bool*X
-selfN
-%asyncio.unix_events.PidfdChildWatcher"%asyncio.unix_events.PidfdChildWatcher*%
-pid
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314*®
-__annotations__#asyncio.unix_events.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*§
-__all__asyncio.unix_events.__all__‚
-nTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str*310*311*312*313*314
+self(*	
+pid(*
+callback(*
+
+args(0:abc.abstractmethod@*G
+remove_child_handler*
+
+self(*	
+pid(0:abc.abstractmethod@*?
+attach_loop*
+
+self(*
+
+loop(	0:abc.abstractmethod@*-
+close*
+
+self(0:abc.abstractmethod@*)
+	__enter__
+*(
+0:abc.abstractmethod@*4
+__exit__*(*(*(*(0:abc.abstractmethod@*1
+	is_active*
+
+self(0:abc.abstractmethod@¶
+BaseChildWatcher"(asyncio.unix_events.AbstractChildWatcher*
+close*
+
+self(*
+	is_active*
+
+self(*'
+attach_loop*
+
+self(*
+
+loop(	@babc.ABCMeta‰
+SafeChildWatcher"$asyncio.unix_events.BaseChildWatcher*
+	__enter__*(*
+__exit__*(*(*(*(*H
+add_child_handler*
+
+self(*	
+pid(*
+callback(*
+
+args(*/
+remove_child_handler*
+
+self(*	
+pid(‰
+FastChildWatcher"$asyncio.unix_events.BaseChildWatcher*
+	__enter__*(*
+__exit__*(*(*(*(*H
+add_child_handler*
+
+self(*	
+pid(*
+callback(*
+
+args(*/
+remove_child_handler*
+
+self(*	
+pid(G
+_UnixSelectorEventLoop"-asyncio.selector_events.BaseSelectorEventLoopù
+_UnixDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*!
+get_child_watcher*
+
+self(*0
+set_child_watcher*
+
+self(*
+watcher(y
+_Warn"builtins.object*]
+__call__*
+
+self(*
+message(*
+category (*
+
+stacklevel (*
+source (X»
+MultiLoopChildWatcher"(asyncio.unix_events.AbstractChildWatcher*
+	is_active*
+
+self(*
+close*
+
+self(*
+	__enter__ *( *
+__exit__*(*(*(*(*H
+add_child_handler*
+
+self(*	
+pid(*
+callback(*
+
+args(*/
+remove_child_handler*
+
+self(*	
+pid(*'
+attach_loop*
+
+self(*
+
+loop(	ﬁ
+ThreadedChildWatcher"(asyncio.unix_events.AbstractChildWatcher*
+	is_active!*
+
+self("*
+close*
+
+self("*
+	__enter__#*(#*
+__exit__*("*(*(*(*
+__del__*("* (*H
+add_child_handler*
+
+self("*	
+pid(*
+callback(*
+
+args(*/
+remove_child_handler*
+
+self("*	
+pid(*'
+attach_loop*
+
+self("*
+
+loop(	ƒ
+PidfdChildWatcher"(asyncio.unix_events.AbstractChildWatcher*
+	__enter__%*(%*
+__exit__*($*(*(*(*
+	is_active*
+
+self($*
+close*
+
+self($*'
+attach_loop*
+
+self($*
+
+loop(	*H
+add_child_handler*
+
+self($*	
+pid(*
+callback(*
+
+args(*/
+remove_child_handler*
+
+self($*	
+pid(*
+__annotations__0&*
+__all__0'22*"(asyncio.unix_events.AbstractChildWatcher2"builtins.int2"builtins.function2222"builtins.bool2"" asyncio.events.AbstractEventLoop222`
+-asyncio.unix_events.AbstractChildWatcher.Self"(asyncio.unix_events.AbstractChildWatcher(22"builtins.BaseException2"type222222"types.TracebackType222&"$asyncio.unix_events.BaseChildWatcher2&"$asyncio.unix_events.SafeChildWatcher2X
+)asyncio.unix_events.SafeChildWatcher.Self"$asyncio.unix_events.SafeChildWatcher(22&"$asyncio.unix_events.FastChildWatcher2X
+)asyncio.unix_events.FastChildWatcher.Self"$asyncio.unix_events.FastChildWatcher(221"/asyncio.unix_events._UnixDefaultEventLoopPolicy222"builtins.object2"asyncio.unix_events._Warn2"builtins.str2"builtins.Warning2"type222222+")asyncio.unix_events.MultiLoopChildWatcher2b
+.asyncio.unix_events.MultiLoopChildWatcher.Self")asyncio.unix_events.MultiLoopChildWatcher(22	22*"(asyncio.unix_events.ThreadedChildWatcher2`
+-asyncio.unix_events.ThreadedChildWatcher.Self"(asyncio.unix_events.ThreadedChildWatcher(2"2'"%asyncio.unix_events.PidfdChildWatcher2Z
+*asyncio.unix_events.PidfdChildWatcher.Self"%asyncio.unix_events.PidfdChildWatcher(2$2"builtins.dict222

@@ -1,296 +1,188 @@
 
-paramiko.server„D
-ServerInterfaceparamiko.server.ServerInterface"builtins.object*¥
-check_channel_request5paramiko.server.ServerInterface.check_channel_request"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*&
-kind
-builtins.str"builtins.str*(
-chanid
-builtins.int"builtins.intz310z311z312z313z314*÷
-get_allowed_auths1paramiko.server.ServerInterface.get_allowed_auths"
-builtins.str"builtins.str*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.strz310z311z312z313z314*ó
-check_auth_none/paramiko.server.ServerInterface.check_auth_none"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.strz310z311z312z313z314*§
-check_auth_password3paramiko.server.ServerInterface.check_auth_password"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.str**
-password
-builtins.str"builtins.strz310z311z312z313z314*°
-check_auth_publickey4paramiko.server.ServerInterface.check_auth_publickey"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.str*1
-key(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314*°
-check_auth_interactive6paramiko.server.ServerInterface.check_auth_interactive"œ
-4Union[builtins.int,paramiko.server.InteractiveQuery]
-builtins.int"builtins.intD
- paramiko.server.InteractiveQuery" paramiko.server.InteractiveQuery*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.str*,
+paramiko.server¨
+ServerInterface"builtins.object*?
+check_channel_request*
 
-submethods
-builtins.str"builtins.strz310z311z312z313z314*Ã
-check_auth_interactive_response?paramiko.server.ServerInterface.check_auth_interactive_response"œ
-4Union[builtins.int,paramiko.server.InteractiveQuery]
-builtins.int"builtins.intD
- paramiko.server.InteractiveQuery" paramiko.server.InteractiveQuery*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*Y
-	responsesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*•
-check_auth_gssapi_with_mic:paramiko.server.ServerInterface.check_auth_gssapi_with_mic"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.str*5
-gss_authenticated
-builtins.int"builtins.int *S
-cc_fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*
-check_auth_gssapi_keyex7paramiko.server.ServerInterface.check_auth_gssapi_keyex"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface**
-username
-builtins.str"builtins.str*5
-gss_authenticated
-builtins.int"builtins.int *S
-cc_fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ï
-enable_auth_gssapi2paramiko.server.ServerInterface.enable_auth_gssapi"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterfacez310z311z312z313z314*°
-check_port_forward_request:paramiko.server.ServerInterface.check_port_forward_request"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*)
-address
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.intz310z311z312z313z314*ž
-cancel_port_forward_request;paramiko.server.ServerInterface.cancel_port_forward_request"
-None*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*)
-address
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.intz310z311z312z313z314*ø
-check_global_request4paramiko.server.ServerInterface.check_global_request"Û
-SUnion[builtins.bool,builtins.tuple[Union[builtins.bool,builtins.int,builtins.str]]]
-builtins.bool"builtins.boolá
->builtins.tuple[Union[builtins.bool,builtins.int,builtins.str]]Ž
-.Union[builtins.bool,builtins.int,builtins.str]
-builtins.bool"builtins.bool
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.tuple*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*&
-kind
-builtins.str"builtins.str*=
-msg4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*©
-check_channel_pty_request9paramiko.server.ServerInterface.check_channel_pty_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel**
-term 
-builtins.bytes"builtins.bytes*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*,
+self(*
 
-pixelwidth
-builtins.int"builtins.int*-
-pixelheight
-builtins.int"builtins.int*+
-modes 
-builtins.bytes"builtins.bytesz310z311z312z313z314*¤
-check_channel_shell_request;paramiko.server.ServerInterface.check_channel_shell_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*Ñ
-check_channel_exec_request:paramiko.server.ServerInterface.check_channel_exec_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*-
-command 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Ô
-check_channel_subsystem_request?paramiko.server.ServerInterface.check_channel_subsystem_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*&
-name
-builtins.str"builtins.strz310z311z312z313z314*ä
-#check_channel_window_change_requestCparamiko.server.ServerInterface.check_channel_window_change_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*,
+kind(*
+chanid(*1
+get_allowed_auths*
 
-pixelwidth
-builtins.int"builtins.int*-
-pixelheight
-builtins.int"builtins.intz310z311z312z313z314*ì
-check_channel_x11_request9paramiko.server.ServerInterface.check_channel_x11_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*5
-single_connection
-builtins.bool"builtins.bool*/
-auth_protocol
-builtins.str"builtins.str*1
-auth_cookie 
-builtins.bytes"builtins.bytes*/
-screen_number
-builtins.int"builtins.intz310z311z312z313z314*´
-#check_channel_forward_agent_requestCparamiko.server.ServerInterface.check_channel_forward_agent_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*ø
-"check_channel_direct_tcpip_requestBparamiko.server.ServerInterface.check_channel_direct_tcpip_request"
-builtins.int"builtins.int*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*(
-chanid
-builtins.int"builtins.int*l
-origin`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*q
-destination`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.intz310z311z312z313z314*ù
-check_channel_env_request9paramiko.server.ServerInterface.check_channel_env_request"
-builtins.bool"builtins.bool*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel**
-name 
-builtins.bytes"builtins.bytes*+
-value 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ê
+self(*
+username(*/
+check_auth_none*
 
-get_banner*paramiko.server.ServerInterface.get_banner"È
-8Tuple[Union[builtins.str,None],Union[builtins.str,None]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*L
-selfB
-paramiko.server.ServerInterface"paramiko.server.ServerInterfacez310z311z312z313z314j310j311j312j313j314‹
+self(*
+username(*C
+check_auth_password*
 
-InteractiveQuery paramiko.server.InteractiveQuery"builtins.object*Ñ
-__init__)paramiko.server.InteractiveQuery.__init__"
-None*N
-selfD
- paramiko.server.InteractiveQuery" paramiko.server.InteractiveQuery*(
-name
-builtins.str"builtins.str *0
-instructions
-builtins.str"builtins.str *Ê
-prompts¼
-5Union[builtins.str,Tuple[builtins.str,builtins.bool]]
-builtins.str"builtins.strc
-!Tuple[builtins.str,builtins.bool]
-builtins.str"builtins.str
-builtins.bool"builtins.boolz310z311z312z313z314*‚
+self(*
+username(*
+password(*?
+check_auth_publickey*
 
-add_prompt+paramiko.server.InteractiveQuery.add_prompt"
-None*N
-selfD
- paramiko.server.InteractiveQuery" paramiko.server.InteractiveQuery*(
-prompt
-builtins.str"builtins.str**
-echo
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rd
-name%paramiko.server.InteractiveQuery.name
-builtins.str"builtins.str*310*311*312*313*314rt
-instructions-paramiko.server.InteractiveQuery.instructions
-builtins.str"builtins.str*310*311*312*313*314rõ
-prompts(paramiko.server.InteractiveQuery.prompts¦
-0builtins.list[Tuple[builtins.str,builtins.bool]]c
-!Tuple[builtins.str,builtins.bool]
-builtins.str"builtins.str
-builtins.bool"builtins.bool"builtins.list*310*311*312*313*314Ú	
-SubsystemHandler paramiko.server.SubsystemHandler"threading.Thread*ã
-__init__)paramiko.server.SubsystemHandler.__init__"
-None*N
-selfD
- paramiko.server.SubsystemHandler" paramiko.server.SubsystemHandler*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*&
-name
-builtins.str"builtins.str*N
-serverB
-paramiko.server.ServerInterface"paramiko.server.ServerInterfacez310z311z312z313z314*æ
+self(*
+username(*	
+key(*H
+check_auth_interactive*
 
-get_server+paramiko.server.SubsystemHandler.get_server"B
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*N
-selfD
- paramiko.server.SubsystemHandler" paramiko.server.SubsystemHandlerz310z311z312z313z314*î
-start_subsystem0paramiko.server.SubsystemHandler.start_subsystem"
-None*N
-selfD
- paramiko.server.SubsystemHandler" paramiko.server.SubsystemHandler*&
-name
-builtins.str"builtins.str*K
-	transport<
-paramiko.transport.Transport"paramiko.transport.Transport*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*¸
-finish_subsystem1paramiko.server.SubsystemHandler.finish_subsystem"
-None*N
-selfD
- paramiko.server.SubsystemHandler" paramiko.server.SubsystemHandlerz310z311z312z313z314j310j311j312j313j314*¤
-__annotations__paramiko.server.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+username(*
+
+submethods(*@
+check_auth_interactive_response*
+
+self(*
+	responses(*f
+check_auth_gssapi_with_mic*
+
+self(*
+username(*
+gss_authenticated (*
+cc_file (	*c
+check_auth_gssapi_keyex*
+
+self(*
+username(*
+gss_authenticated (*
+cc_file (	*"
+enable_auth_gssapi
+*
+
+self(*E
+check_port_forward_request*
+
+self(*
+address(*
+
+port(*F
+cancel_port_forward_request*
+
+self(*
+address(*
+
+port(*;
+check_global_request*
+
+self(*
+
+kind(*	
+msg(*‘
+check_channel_pty_request
+*
+
+self(*
+channel(*
+
+term(*
+width(*
+height(*
+
+pixelwidth(*
+pixelheight(*
+modes(*:
+check_channel_shell_request
+*
+
+self(*
+channel(*H
+check_channel_exec_request
+*
+
+self(*
+channel(*
+command(*J
+check_channel_subsystem_request
+*
+
+self(*
+channel(*
+
+name(*‚
+#check_channel_window_change_request
+*
+
+self(*
+channel(*
+width(*
+height(*
+
+pixelwidth(*
+pixelheight(*Ž
+check_channel_x11_request
+*
+
+self(*
+channel(*
+single_connection(
+*
+auth_protocol(*
+auth_cookie(*
+screen_number(*B
+#check_channel_forward_agent_request
+*
+
+self(*
+channel(*a
+"check_channel_direct_tcpip_request*
+
+self(*
+chanid(*
+origin(*
+destination(*Q
+check_channel_env_request
+*
+
+self(*
+channel(*
+
+name(*
+value(*
+
+get_banner*
+
+self(Ñ
+InteractiveQuery"builtins.object*K
+__init__*
+
+self(*
+name (*
+instructions (*
+prompts(*6
+
+add_prompt*
+
+self(*
+prompt(*
+echo (
+r
+name0r
+instructions0r
+prompts0ò
+SubsystemHandler"threading.Thread*A
+__init__*
+
+self(*
+channel(*
+
+name(*
+server(*
+
+get_server*
+
+self(*K
+start_subsystem*
+
+self(*
+
+name(*
+	transport(*
+channel(* 
+finish_subsystem*
+
+self(*
+__annotations__02"builtins.int2!"paramiko.server.ServerInterface2"builtins.str2"paramiko.pkey.PKey2"" paramiko.server.InteractiveQuery222"builtins.list22222"builtins.bool22
+2"builtins.tuple222
+2"paramiko.message.Message2"paramiko.channel.Channel2"builtins.bytes2222		22
+222"builtins.list22"" paramiko.server.SubsystemHandler2"paramiko.transport.Transport22"builtins.dict2

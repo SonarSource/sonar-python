@@ -1,119 +1,68 @@
 
-requests.authÞ
-AuthBaserequests.auth.AuthBase"builtins.object*
-__call__requests.auth.AuthBase.__call__"B
-requests.models.PreparedRequest"requests.models.PreparedRequest*:
-self0
-requests.auth.AuthBase"requests.auth.AuthBase*I
-rB
-requests.models.PreparedRequest"requests.models.PreparedRequestz310z311z312z313z314j310j311j312j313j314©
-HTTPBasicAuthrequests.auth.HTTPBasicAuth"requests.auth.AuthBase*…
-__init__$requests.auth.HTTPBasicAuth.__init__"
-None*D
-self:
-requests.auth.HTTPBasicAuth"requests.auth.HTTPBasicAuth*t
-usernamef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*t
-passwordf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*Z
-__call__$requests.auth.HTTPBasicAuth.__call__*
+requests.auth>
+AuthBase"builtins.object*!
+__call__*
+
+self(*
+r(š
+HTTPBasicAuth"requests.auth.AuthBase*8
+__init__*
+
+self(*
+username(*
+password(*
+__call__*
 self*
-rz310z311z312z313z314j310j311j312j313j314r±
-username$requests.auth.HTTPBasicAuth.usernamef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*310*311*312*313*314r±
-password$requests.auth.HTTPBasicAuth.passwordf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*310*311*312*313*314¾
-HTTPProxyAuthrequests.auth.HTTPProxyAuth"requests.auth.HTTPBasicAuth*Z
-__call__$requests.auth.HTTPProxyAuth.__call__*
+rr
+username0r
+password0I
+HTTPProxyAuth"requests.auth.HTTPBasicAuth*
+__call__*
 self*
-rz310z311z312z313z314j310j311j312j313j314ú
-HTTPDigestAuthrequests.auth.HTTPDigestAuth"requests.auth.AuthBase*ˆ
-__init__%requests.auth.HTTPDigestAuth.__init__"
-None*F
-self<
-requests.auth.HTTPDigestAuth"requests.auth.HTTPDigestAuth*t
-usernamef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*t
-passwordf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*
-build_digest_header0requests.auth.HTTPDigestAuth.build_digest_header*
+rš
+HTTPDigestAuth"requests.auth.AuthBase*8
+__init__*
+
+self(*
+username(*
+password(*4
+build_digest_header*
 self*
 
 method*
-urlz310z311z312z313z314*u
-handle_redirect,requests.auth.HTTPDigestAuth.handle_redirect*
+url*.
+handle_redirect*
 self*
 r*
 
-kwargsz310z311z312z313z314*k
+kwargs*)
 
-handle_401'requests.auth.HTTPDigestAuth.handle_401*
+handle_401*
 self*
 r*
 
-kwargsz310z311z312z313z314*[
-__call__%requests.auth.HTTPDigestAuth.__call__*
+kwargs*
+__call__*
 self*
-rz310z311z312z313z314*¶
-init_per_thread_state2requests.auth.HTTPDigestAuth.init_per_thread_state"
-None*F
-self<
-requests.auth.HTTPDigestAuth"requests.auth.HTTPDigestAuthz310z311z312z313z314j310j311j312j313j314r²
-username%requests.auth.HTTPDigestAuth.usernamef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*310*311*312*313*314r²
-password%requests.auth.HTTPDigestAuth.passwordf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*310*311*312*313*314rW
+r*%
+init_per_thread_state*
 
-last_nonce'requests.auth.HTTPDigestAuth.last_nonce
-Any*310*311*312*313*314rY
-nonce_count(requests.auth.HTTPDigestAuth.nonce_count
-Any*310*311*312*313*314rK
-chal!requests.auth.HTTPDigestAuth.chal
-Any*310*311*312*313*314rI
-pos requests.auth.HTTPDigestAuth.pos
-Any*310*311*312*313*314r]
-num_401_calls*requests.auth.HTTPDigestAuth.num_401_calls
-Any*310*311*312*313*314Ó
-_basic_auth_strrequests.auth._basic_auth_str"
-builtins.str"builtins.str*t
-usernamef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*t
-passwordf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*¢
-__annotations__requests.auth.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*¤
-extract_cookies_to_jar$requests.auth.extract_cookies_to_jarK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*š
-parse_dict_headerrequests.auth.parse_dict_headerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*˜
-to_native_stringrequests.auth.to_native_stringK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*l
-CONTENT_TYPE_FORM_URLENCODED*requests.auth.CONTENT_TYPE_FORM_URLENCODED
-Any*310*311*312*313*314*b
-CONTENT_TYPE_MULTI_PART%requests.auth.CONTENT_TYPE_MULTI_PART
-Any*310*311*312*313*314
+self(r
+username0r
+password0r
+
+last_nonce0	r
+nonce_count0	r
+chal0	r
+pos0	r
+num_401_calls0	3
+_basic_auth_str*
+username(*
+password(*
+__annotations__0
+*
+extract_cookies_to_jar0*
+parse_dict_header0*
+to_native_string0* 
+CONTENT_TYPE_FORM_URLENCODED0	*
+CONTENT_TYPE_MULTI_PART0	2!"requests.models.PreparedRequest2"requests.auth.AuthBase22"requests.auth.HTTPBasicAuth2"builtins.bytes2"builtins.str222"requests.auth.HTTPDigestAuth22"builtins.dict2	2"builtins.function22

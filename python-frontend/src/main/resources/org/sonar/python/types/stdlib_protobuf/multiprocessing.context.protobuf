@@ -1,760 +1,354 @@
 
-multiprocessing.contextÅ<
-_Poolmultiprocessing.pool.Pool"builtins.object*Þ
-__init__"multiprocessing.pool.Pool.__init__"
-None*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-	processesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *š
-initializer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *@
-initargs0
-typing.Iterable[Any]
-Any"typing.Iterable *\
-maxtasksperchildD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *5
-context&
-Union[Any,None]
-Any
-None z310z311z312z313z314*Ñ
-applymultiprocessing.pool.Pool.apply"P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*<
-args0
-typing.Iterable[Any]
-Any"typing.Iterable *e
-kwdsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping z310z311z312z313z314*÷
-apply_async%multiprocessing.pool.Pool.apply_async"¯
-9multiprocessing.pool.ApplyResult[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object" multiprocessing.pool.ApplyResult*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*<
-args0
-typing.Iterable[Any]
-Any"typing.Iterable *e
-kwdsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping *—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-error_callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z310z311z312z313z314*Ø
-mapmultiprocessing.pool.Pool.map"‰
-&builtins.list[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object"builtins.list*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*œ
-iterable
-(typing.Iterable[multiprocessing.pool._S]P
-multiprocessing.pool._S"
-builtins.object"builtins.object"builtins.object"typing.Iterable*U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*À
-	map_async#multiprocessing.pool.Pool.map_async"«
-7multiprocessing.pool.MapResult[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.pool.MapResult*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*œ
-iterable
-(typing.Iterable[multiprocessing.pool._S]P
-multiprocessing.pool._S"
-builtins.object"builtins.object"builtins.object"typing.Iterable*U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-error_callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z310z311z312z313z314*‚
-imapmultiprocessing.pool.Pool.imap"±
-:multiprocessing.pool.IMapIterator[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object"!multiprocessing.pool.IMapIterator*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*œ
-iterable
-(typing.Iterable[multiprocessing.pool._S]P
-multiprocessing.pool._S"
-builtins.object"builtins.object"builtins.object"typing.Iterable*U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*–
-imap_unordered(multiprocessing.pool.Pool.imap_unordered"±
-:multiprocessing.pool.IMapIterator[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object"!multiprocessing.pool.IMapIterator*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*œ
-iterable
-(typing.Iterable[multiprocessing.pool._S]P
-multiprocessing.pool._S"
-builtins.object"builtins.object"builtins.object"typing.Iterable*U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*»
-starmap!multiprocessing.pool.Pool.starmap"‰
-&builtins.list[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object"builtins.list*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*x
-iterablej
-%typing.Iterable[typing.Iterable[Any]]0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable*U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*ð
-starmap_async'multiprocessing.pool.Pool.starmap_async"ø
-Hmultiprocessing.pool.ApplyResult[builtins.list[multiprocessing.pool._T]]‰
-&builtins.list[multiprocessing.pool._T]P
-multiprocessing.pool._T"
-builtins.object"builtins.object"builtins.object"builtins.list" multiprocessing.pool.ApplyResult*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*x
-iterablej
-%typing.Iterable[typing.Iterable[Any]]0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable*U
-	chunksizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *
-error_callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z310z311z312z313z314*
-closemultiprocessing.pool.Pool.close"
-None*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Poolz310z311z312z313z314*•
-	terminate#multiprocessing.pool.Pool.terminate"
-None*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Poolz310z311z312z313z314*‹
-joinmultiprocessing.pool.Pool.join"
-None*@
-self6
-multiprocessing.pool.Pool"multiprocessing.pool.Poolz310z311z312z313z314*½
-	__enter__#multiprocessing.pool.Pool.__enter__"w
-multiprocessing.pool.Pool.Self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool"multiprocessing.pool.Pool(*yw
-multiprocessing.pool.Pool.Self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool"multiprocessing.pool.Pool(z310z311z312z313z314*ä
-__exit__"multiprocessing.pool.Pool.__exit__"
-None*86
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*“
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314j310j311j312j313j314a
-ProcessError$multiprocessing.context.ProcessError"builtins.Exceptionj310j311j312j313j314w
-BufferTooShort&multiprocessing.context.BufferTooShort"$multiprocessing.context.ProcessErrorj310j311j312j313j314s
-TimeoutError$multiprocessing.context.TimeoutError"$multiprocessing.context.ProcessErrorj310j311j312j313j314
-AuthenticationError+multiprocessing.context.AuthenticationError"$multiprocessing.context.ProcessErrorj310j311j312j313j314Ì¢
-BaseContext#multiprocessing.context.BaseContext"builtins.object*Æ
-current_process3multiprocessing.context.BaseContext.current_process"J
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhz310z311z312z313z314*„
-parent_process2multiprocessing.context.BaseContext.parent_process"‰
-/Union[multiprocessing.process.BaseProcess,None]J
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess
-None0:builtins.staticmethodhz310z311z312z313z314*Œ
-active_children3multiprocessing.context.BaseContext.active_children"
-2builtins.list[multiprocessing.process.BaseProcess]J
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess"builtins.list0:builtins.staticmethodhz310z311z312z313z314*Ç
-	cpu_count-multiprocessing.context.BaseContext.cpu_count"
-builtins.int"builtins.int*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*ó
-Manager+multiprocessing.context.BaseContext.Manager"L
-$multiprocessing.managers.SyncManager"$multiprocessing.managers.SyncManager*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*Æ
-Pipe(multiprocessing.context.BaseContext.Pipe"ö
-RTuple[multiprocessing.connection.Connection,multiprocessing.connection.Connection]N
-%multiprocessing.connection.Connection"%multiprocessing.connection.ConnectionN
-%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*,
-duplex
-builtins.bool"builtins.bool z310z311z312z313z314*
-Barrier+multiprocessing.context.BaseContext.Barrier"J
-#multiprocessing.synchronize.Barrier"#multiprocessing.synchronize.Barrier*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*)
-parties
-builtins.int"builtins.int*•
-action†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*À
-BoundedSemaphore4multiprocessing.context.BaseContext.BoundedSemaphore"\
-,multiprocessing.synchronize.BoundedSemaphore",multiprocessing.synchronize.BoundedSemaphore*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*)
-value
-builtins.int"builtins.int z310z311z312z313z314*Ó
-	Condition-multiprocessing.context.BaseContext.Condition"N
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*×
-lockÊ
-`Union[TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]],None]Ù
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike
-None z310z311z312z313z314*é
-Event)multiprocessing.context.BaseContext.Event"F
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*å
-Lock(multiprocessing.context.BaseContext.Lock"D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.Lock*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*é
-RLock)multiprocessing.context.BaseContext.RLock"F
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*¤
-	Semaphore-multiprocessing.context.BaseContext.Semaphore"N
-%multiprocessing.synchronize.Semaphore"%multiprocessing.synchronize.Semaphore*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*)
-value
-builtins.int"builtins.int z310z311z312z313z314*š
-Queue)multiprocessing.context.BaseContext.Queue"J
-!multiprocessing.queues.Queue[Any]
-Any"multiprocessing.queues.Queue*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*+
-maxsize
-builtins.int"builtins.int z310z311z312z313z314*º
-JoinableQueue1multiprocessing.context.BaseContext.JoinableQueue"Z
-)multiprocessing.queues.JoinableQueue[Any]
-Any"$multiprocessing.queues.JoinableQueue*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*+
-maxsize
-builtins.int"builtins.int z310z311z312z313z314*…
-SimpleQueue/multiprocessing.context.BaseContext.SimpleQueue"V
-'multiprocessing.queues.SimpleQueue[Any]
-Any""multiprocessing.queues.SimpleQueue*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*ë
-Pool(multiprocessing.context.BaseContext.Pool"6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*U
-	processesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *š
-initializer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *@
-initargs0
-typing.Iterable[Any]
-Any"typing.Iterable *\
-maxtasksperchildD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*½
-freeze_support2multiprocessing.context.BaseContext.freeze_support"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*Í
+multiprocessing.contextå
+_Poolmultiprocessing.pool.Pool"builtins.object*}
+__init__*
 
-get_logger.multiprocessing.context.BaseContext.get_logger" 
-logging.Logger"logging.Logger*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*Í
-log_to_stderr1multiprocessing.context.BaseContext.log_to_stderr" 
-logging.Logger"logging.Logger*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*÷
-levelé
-7Union[TypeAlias[Union[builtins.int,builtins.str]],None]¡
-+TypeAlias[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"logging._Level
-None z310z311z312z313z314*Ó
-allow_connection_pickling=multiprocessing.context.BaseContext.allow_connection_pickling"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*ë
-set_executable2multiprocessing.context.BaseContext.set_executable"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*,
+self(*
+	processes (*
+initializer (*
+initargs (	*
+maxtasksperchild (*
+context (
+*=
+apply*
 
-executable
-builtins.str"builtins.strz310z311z312z313z314*«
-set_forkserver_preload:multiprocessing.context.BaseContext.set_forkserver_preload"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*\
-module_namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*À
-set_start_method4multiprocessing.context.BaseContext.set_start_method"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*P
-methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*+
-force
-builtins.bool"builtins.bool z310z311z312z313z314*Á
-_check_available4multiprocessing.context.BaseContext._check_available"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z3142ê
-RawValue,multiprocessing.context.BaseContext.RawValue 
-RawValue,multiprocessing.context.BaseContext.RawValue"Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
-typecode_or_type~
-!Type[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"type*
-args
-Any0:typing.overloadXó
-RawValue,multiprocessing.context.BaseContext.RawValue"
-Any*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*2
-typecode_or_type
-builtins.str"builtins.str*
-args
-Any0:typing.overloadX"310"311"312"313"3142²
-RawArray,multiprocessing.context.BaseContext.RawArrayã
-RawArray,multiprocessing.context.BaseContext.RawArray"Ž
-*_ctypes.Array[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"_ctypes.Array*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
-typecode_or_type~
-!Type[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"type*•
-size_or_initializer|
-(Union[builtins.int,typing.Sequence[Any]]
-builtins.int"builtins.int0
-typing.Sequence[Any]
-Any"typing.Sequence0:typing.overloadXø
-RawArray,multiprocessing.context.BaseContext.RawArray"
-Any*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*2
-typecode_or_type
-builtins.str"builtins.str*•
-size_or_initializer|
-(Union[builtins.int,typing.Sequence[Any]]
-builtins.int"builtins.int0
-typing.Sequence[Any]
-Any"typing.Sequence0:typing.overloadX"310"311"312"313"3142µ
-Value)multiprocessing.context.BaseContext.Valueà
-Value)multiprocessing.context.BaseContext.Value"Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
-typecode_or_type~
-!Type[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"type*
-args
-Any*D
-lock:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX¶
-Value)multiprocessing.context.BaseContext.Value"Î
-Jmultiprocessing.sharedctypes.SynchronizedBase[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"-multiprocessing.sharedctypes.SynchronizedBase*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
-typecode_or_type~
-!Type[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"type*
-args
-Any*›
-lockŽ
-rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]:
-Literal[builtins.bool]	
-builtins.bool"builtins.boolÙ
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXð
-Value)multiprocessing.context.BaseContext.Value"l
-2multiprocessing.sharedctypes.SynchronizedBase[Any]
-Any"-multiprocessing.sharedctypes.SynchronizedBase*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*2
-typecode_or_type
-builtins.str"builtins.str*
-args
-Any*›
-lockŽ
-rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]:
-Literal[builtins.bool]	
-builtins.bool"builtins.boolÙ
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXØ
-Value)multiprocessing.context.BaseContext.Value"
-Any*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*£
-typecode_or_typeŒ
-(Union[builtins.str,Type[_ctypes._CData]]
-builtins.str"builtins.str@
-Type[_ctypes._CData] 
-_ctypes._CData"_ctypes._CData"type*
-args
-Any*ö
-locké
-iUnion[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]
-builtins.bool"builtins.boolÙ
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX"310"311"312"313"3142Í
-Array)multiprocessing.context.BaseContext.Arrayå
-Array)multiprocessing.context.BaseContext.Array"Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
-typecode_or_type~
-!Type[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"type*•
-size_or_initializer|
-(Union[builtins.int,typing.Sequence[Any]]
-builtins.int"builtins.int0
-typing.Sequence[Any]
-Any"typing.Sequence*D
-lock:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX½	
-Array)multiprocessing.context.BaseContext.Array"Ð
-Kmultiprocessing.sharedctypes.SynchronizedArray[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData".multiprocessing.sharedctypes.SynchronizedArray*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
-typecode_or_type~
-!Type[multiprocessing.context._CT]Q
-multiprocessing.context._CT 
-_ctypes._CData"_ctypes._CData"_ctypes._CData"type*•
-size_or_initializer|
-(Union[builtins.int,typing.Sequence[Any]]
-builtins.int"builtins.int0
-typing.Sequence[Any]
-Any"typing.Sequence*›
-lockŽ
-rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]:
-Literal[builtins.bool]	
-builtins.bool"builtins.boolÙ
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX÷
-Array)multiprocessing.context.BaseContext.Array"n
-3multiprocessing.sharedctypes.SynchronizedArray[Any]
-Any".multiprocessing.sharedctypes.SynchronizedArray*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*2
-typecode_or_type
-builtins.str"builtins.str*•
-size_or_initializer|
-(Union[builtins.int,typing.Sequence[Any]]
-builtins.int"builtins.int0
-typing.Sequence[Any]
-Any"typing.Sequence*›
-lockŽ
-rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]:
-Literal[builtins.bool]	
-builtins.bool"builtins.boolÙ
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXÝ
-Array)multiprocessing.context.BaseContext.Array"
-Any*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*£
-typecode_or_typeŒ
-(Union[builtins.str,Type[_ctypes._CData]]
-builtins.str"builtins.str@
-Type[_ctypes._CData] 
-_ctypes._CData"_ctypes._CData"type*•
-size_or_initializer|
-(Union[builtins.int,typing.Sequence[Any]]
-builtins.int"builtins.int0
-typing.Sequence[Any]
-Any"typing.Sequence*ö
-locké
-iUnion[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]
-builtins.bool"builtins.boolÙ
-TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
-IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX"310"311"312"313"3142Ô
-get_context/multiprocessing.context.BaseContext.get_context“
-get_context/multiprocessing.context.BaseContext.get_context"P
-&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*
-method
-None 0:typing.overloadX¼
-get_context/multiprocessing.context.BaseContext.get_context"L
-$multiprocessing.context.SpawnContext"$multiprocessing.context.SpawnContext*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*C
-method7
-Literal[builtins.str]	
-builtins.str"builtins.str0:typing.overloadXº
-get_context/multiprocessing.context.BaseContext.get_context"J
-#multiprocessing.context.ForkContext"#multiprocessing.context.ForkContext*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*C
-method7
-Literal[builtins.str]	
-builtins.str"builtins.str0:typing.overloadXÆ
-get_context/multiprocessing.context.BaseContext.get_context"V
-)multiprocessing.context.ForkServerContext")multiprocessing.context.ForkServerContext*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*C
-method7
-Literal[builtins.str]	
-builtins.str"builtins.str0:typing.overloadXŸ
-get_context/multiprocessing.context.BaseContext.get_context"J
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*(
-method
-builtins.str"builtins.str0:typing.overloadX"310"311"312"313"3142¯
-get_start_method4multiprocessing.context.BaseContext.get_start_methodŸ
-get_start_method4multiprocessing.context.BaseContext.get_start_method"
-builtins.str"builtins.str*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*L
+self(*
 
-allow_none:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX©
-get_start_method4multiprocessing.context.BaseContext.get_start_method"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*.
+func(*
+args (	*
+kwds (*m
+apply_async*
 
-allow_none
-builtins.bool"builtins.bool0:typing.overloadX"310"311"312"313"3142æ
-reducer+multiprocessing.context.BaseContext.reducerÃ
-reducer+multiprocessing.context.BaseContext.reducer"
-builtins.str"builtins.str*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext0:builtins.propertyX`Î
-reducer+multiprocessing.context.BaseContext.reducer"
-None*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*+
-	reduction
-builtins.str"builtins.str0:.setter"310"311"312"313"314j310j311j312j313j314rÞ
-ProcessError0multiprocessing.context.BaseContext.ProcessError‚
-*Type[multiprocessing.context.ProcessError]L
-$multiprocessing.context.ProcessError"$multiprocessing.context.ProcessError"type*310*311*312*313*314rè
-BufferTooShort2multiprocessing.context.BaseContext.BufferTooShortˆ
-,Type[multiprocessing.context.BufferTooShort]P
-&multiprocessing.context.BufferTooShort"&multiprocessing.context.BufferTooShort"type*310*311*312*313*314rÞ
-TimeoutError0multiprocessing.context.BaseContext.TimeoutError‚
-*Type[multiprocessing.context.TimeoutError]L
-$multiprocessing.context.TimeoutError"$multiprocessing.context.TimeoutError"type*310*311*312*313*314r
-AuthenticationError7multiprocessing.context.BaseContext.AuthenticationError—
-1Type[multiprocessing.context.AuthenticationError]Z
-+multiprocessing.context.AuthenticationError"+multiprocessing.context.AuthenticationError"type*310*311*312*313*314ž
-Processmultiprocessing.context.Process"#multiprocessing.process.BaseProcess*“
-_Popen&multiprocessing.context.Process._Popen"P
-&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*[
-process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314r
-_start_method-multiprocessing.context.Process._start_methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314‚	
-DefaultContext&multiprocessing.context.DefaultContext"#multiprocessing.context.BaseContext*“
-__init__/multiprocessing.context.DefaultContext.__init__"
-None*Z
-selfP
-&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*W
-contextJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextz310z311z312z313z314*
-get_start_method7multiprocessing.context.DefaultContext.get_start_method"
-builtins.str"builtins.str*Z
-selfP
-&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*0
+self(*
 
-allow_none
-builtins.bool"builtins.bool z310z311z312z313z314*–
-get_all_start_methods<multiprocessing.context.DefaultContext.get_all_start_methods"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Z
-selfP
-&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContextz310z311z312z313z314j310j311j312j313j314rÇ
-Process.multiprocessing.context.DefaultContext.Processs
-%Type[multiprocessing.context.Process]B
-multiprocessing.context.Process"multiprocessing.context.Process"type*310*311*312*313*314‹
-SpawnProcess$multiprocessing.context.SpawnProcess"#multiprocessing.process.BaseProcess*š
-_Popen+multiprocessing.context.SpawnProcess._Popen"R
-'multiprocessing.popen_spawn_posix.Popen"'multiprocessing.popen_spawn_posix.Popen*[
-process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314rz
-_start_method2multiprocessing.context.SpawnProcess._start_method
-builtins.str"builtins.str*310*311*312*313*314¶
-SpawnContext$multiprocessing.context.SpawnContext"#multiprocessing.context.BaseContextj310j311j312j313j314rj
-_name*multiprocessing.context.SpawnContext._name
-builtins.str"builtins.str*310*311*312*313*314rÕ
-Process,multiprocessing.context.SpawnContext.Process‚
-*Type[multiprocessing.context.SpawnProcess]L
-$multiprocessing.context.SpawnProcess"$multiprocessing.context.SpawnProcess"type*310*311*312*313*314ù
-ForkProcess#multiprocessing.context.ForkProcess"#multiprocessing.process.BaseProcess*‹
-_Popen*multiprocessing.context.ForkProcess._Popen"D
- multiprocessing.popen_fork.Popen" multiprocessing.popen_fork.Popen*[
-process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314ry
-_start_method1multiprocessing.context.ForkProcess._start_method
-builtins.str"builtins.str*310*311*312*313*314
-ForkServerProcess)multiprocessing.context.ForkServerProcess"#multiprocessing.process.BaseProcess*
-_Popen0multiprocessing.context.ForkServerProcess._Popen"P
-&multiprocessing.popen_forkserver.Popen"&multiprocessing.popen_forkserver.Popen*[
-process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314r
-_start_method7multiprocessing.context.ForkServerProcess._start_method
-builtins.str"builtins.str*310*311*312*313*314®
-ForkContext#multiprocessing.context.ForkContext"#multiprocessing.context.BaseContextj310j311j312j313j314ri
-_name)multiprocessing.context.ForkContext._name
-builtins.str"builtins.str*310*311*312*313*314rÐ
-Process+multiprocessing.context.ForkContext.Process
-)Type[multiprocessing.context.ForkProcess]J
-#multiprocessing.context.ForkProcess"#multiprocessing.context.ForkProcess"type*310*311*312*313*314Ù
-ForkServerContext)multiprocessing.context.ForkServerContext"#multiprocessing.context.BaseContextj310j311j312j313j314ro
-_name/multiprocessing.context.ForkServerContext._name
-builtins.str"builtins.str*310*311*312*313*314ré
-Process1multiprocessing.context.ForkServerContext.Process‘
-/Type[multiprocessing.context.ForkServerProcess]V
-)multiprocessing.context.ForkServerProcess")multiprocessing.context.ForkServerProcess"type*310*311*312*313*314
-_force_start_method+multiprocessing.context._force_start_method"
-None*(
-method
-builtins.str"builtins.strz310z311z312z313z314
-get_spawning_popen*multiprocessing.context.get_spawning_popen"&
-Union[Any,None]
-Any
-Nonez310z311z312z313z314w
-set_spawning_popen*multiprocessing.context.set_spawning_popen"
-None*
-popen
-Anyz310z311z312z313z314o
-assert_spawning'multiprocessing.context.assert_spawning"
-None*
-obj
-Anyz310z311z312z313z314*¬
-__annotations__'multiprocessing.context.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*P
-__all__multiprocessing.context.__all__
-Tuple[]*310*311*312*313*314*§
-_default_context(multiprocessing.context._default_contextP
-&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*310*311*312*313*314
+func(*
+args (	*
+kwds (*
+callback (*
+error_callback (*B
+map*
+
+self(*
+
+func(*
+iterable(*
+	chunksize (*r
+	map_async*
+
+self(*
+
+func(*
+iterable(*
+	chunksize (*
+callback (*
+error_callback (*C
+imap*
+
+self(*
+
+func(*
+iterable(*
+	chunksize (*M
+imap_unordered*
+
+self(*
+
+func(*
+iterable(*
+	chunksize (*F
+starmap*
+
+self(*
+
+func(*
+iterable(*
+	chunksize (*v
+starmap_async*
+
+self(*
+
+func(*
+iterable(*
+	chunksize (*
+callback (*
+error_callback (*
+close*
+
+self(*
+	terminate*
+
+self(*
+join*
+
+self(*
+	__enter__*(*
+__exit__*(*(*(*("
+ProcessError"builtins.Exception6
+BufferTooShort"$multiprocessing.context.ProcessError4
+TimeoutError"$multiprocessing.context.ProcessError;
+AuthenticationError"$multiprocessing.context.ProcessErrorÙ
+BaseContext"builtins.object*.
+current_process0:builtins.staticmethodh*-
+parent_process0:builtins.staticmethodh*.
+active_children0:builtins.staticmethodh*
+	cpu_count*
+
+self( *
+Manager!*
+
+self( *$
+Pipe#*
+
+self( *
+duplex ($*G
+Barrier%*
+
+self( *
+parties(*
+action (*
+timeout ('*/
+BoundedSemaphore(*
+
+self( *
+value (*'
+	Condition)*
+
+self( *
+lock (.*
+Event/*
+
+self( *
+Lock**
+
+self( *
+RLock+*
+
+self( *(
+	Semaphore0*
+
+self( *
+value (*&
+Queue1*
+
+self( *
+maxsize (*.
+JoinableQueue2*
+
+self( *
+maxsize (*
+SimpleQueue3*
+
+self( *h
+Pool*
+
+self( *
+	processes (*
+initializer (*
+initargs (	*
+maxtasksperchild (*
+freeze_support*
+
+self( *
+
+get_logger4*
+
+self( *,
+log_to_stderr4*
+
+self( *
+level (7*)
+allow_connection_pickling*
+
+self( *0
+set_executable*
+
+self( *
+
+executable(*:
+set_forkserver_preload*
+
+self( *
+module_names(8*=
+set_start_method*
+
+self( *
+method(9*
+force ($* 
+_check_available*
+
+self( 2°
+RawValueQ
+RawValue;*
+
+self( *
+typecode_or_type(<*
+
+args(0:typing.overloadXQ
+RawValue*
+
+self( *
+typecode_or_type(*
+
+args(0:typing.overloadX2Î
+RawArray`
+RawArray=*
+
+self( *
+typecode_or_type(<*
+size_or_initializer(?0:typing.overloadX`
+RawArray*
+
+self( *
+typecode_or_type(*
+size_or_initializer(?0:typing.overloadX2ý
+ValueZ
+Value;*
+
+self( *
+typecode_or_type(<*
+
+args(*
+
+lock(@0:typing.overloadX\
+ValueA*
+
+self( *
+typecode_or_type(<*
+
+args(*
+lock (B0:typing.overloadX\
+ValueC*
+
+self( *
+typecode_or_type(*
+
+args(*
+lock (B0:typing.overloadX\
+Value*
+
+self( *
+typecode_or_type(E*
+
+args(*
+lock (F0:typing.overloadX2¹
+Arrayi
+Array;*
+
+self( *
+typecode_or_type(<*
+size_or_initializer(?*
+
+lock(@0:typing.overloadXk
+ArrayG*
+
+self( *
+typecode_or_type(<*
+size_or_initializer(?*
+lock (B0:typing.overloadXk
+ArrayH*
+
+self( *
+typecode_or_type(*
+size_or_initializer(?*
+lock (B0:typing.overloadXk
+Array*
+
+self( *
+typecode_or_type(E*
+size_or_initializer(?*
+lock (F0:typing.overloadX2Ï
+get_context@
+get_contextI*
+
+self( *
+method (0:typing.overloadX>
+get_contextJ*
+
+self( *
+method(K0:typing.overloadX>
+get_contextL*
+
+self( *
+method(K0:typing.overloadX>
+get_contextM*
+
+self( *
+method(K0:typing.overloadX>
+get_context *
+
+self( *
+method(0:typing.overloadX2¦
+get_start_methodI
+get_start_method*
+
+self( *
+
+allow_none (@0:typing.overloadXG
+get_start_method9*
+
+self( *
+
+allow_none($0:typing.overloadX2p
+reducer0
+reducer*
+
+self( 0:builtins.propertyX`3
+reducer*
+
+self( *
+	reduction(0:.setterr
+ProcessError0Or
+BufferTooShort0Qr
+TimeoutError0Sr
+AuthenticationError0U{
+Process"#multiprocessing.process.BaseProcess*8
+_PopenI*
+process_obj(0:builtins.staticmethodhr
+_start_method09È
+DefaultContext"#multiprocessing.context.BaseContext*'
+__init__*
+
+self(I*
+context( *4
+get_start_method*
+
+self(I*
+
+allow_none ($*%
+get_all_start_methods8*
+
+self(Ir
+Process0W€
+SpawnProcess"#multiprocessing.process.BaseProcess*8
+_PopenX*
+process_obj(0:builtins.staticmethodhr
+_start_method0K
+SpawnContext"#multiprocessing.context.BaseContextr	
+_name0r
+Process0Z
+ForkProcess"#multiprocessing.process.BaseProcess*8
+_Popen[*
+process_obj(0:builtins.staticmethodhr
+_start_method0…
+ForkServerProcess"#multiprocessing.process.BaseProcess*8
+_Popen\*
+process_obj(0:builtins.staticmethodhr
+_start_method0J
+ForkContext"#multiprocessing.context.BaseContextr	
+_name0r
+Process0^P
+ForkServerContext"#multiprocessing.context.BaseContextr	
+_name0r
+Process0`%
+_force_start_method*
+method(
+get_spawning_popen
+#
+set_spawning_popen*
+popen(
+assert_spawning*	
+obj(*
+__annotations__0a*
+__all__0b*
+_default_context0I22"multiprocessing.pool.Pool2"builtins.int222"builtins.function222222"typing.Iterable2222"builtins.object2"builtins.object22"builtins.str2"typing.Mapping22%" multiprocessing.pool.ApplyResult22"builtins.list22"typing.Iterable22#"multiprocessing.pool.MapResult22&"!multiprocessing.pool.IMapIterator22"typing.Iterable2	2%" multiprocessing.pool.ApplyResult22B
+multiprocessing.pool.Pool.Self"multiprocessing.pool.Pool(22"builtins.BaseException2"type222222"types.TracebackType222%"#multiprocessing.process.BaseProcess222"builtins.list22%"#multiprocessing.context.BaseContext2&"$multiprocessing.managers.SyncManager2'"%multiprocessing.connection.Connection22""2"builtins.bool2%"#multiprocessing.synchronize.Barrier2"builtins.float22&2.",multiprocessing.synchronize.BoundedSemaphore2'"%multiprocessing.synchronize.Condition2"" multiprocessing.synchronize.Lock2#"!multiprocessing.synchronize.RLock22*+2("!multiprocessing.context._LockLike2,22-2#"!multiprocessing.synchronize.Event2'"%multiprocessing.synchronize.Semaphore2!"multiprocessing.queues.Queue22)"$multiprocessing.queues.JoinableQueue22'""multiprocessing.queues.SimpleQueue22"logging.Logger222"logging._Level252262"builtins.list2222"_ctypes._CData2"_ctypes._CData2:2"type2;2"_ctypes.Array2;2"typing.Sequence222>2	2$22"-multiprocessing.sharedctypes.SynchronizedBase2;22@-22"-multiprocessing.sharedctypes.SynchronizedBase22"type2:22D22$-23".multiprocessing.sharedctypes.SynchronizedArray2;23".multiprocessing.sharedctypes.SynchronizedArray22("&multiprocessing.context.DefaultContext2&"$multiprocessing.context.SpawnContext2	22%"#multiprocessing.context.ForkContext2+")multiprocessing.context.ForkServerContext2&"$multiprocessing.context.ProcessError2"type2N2("&multiprocessing.context.BufferTooShort2"type2P2&"$multiprocessing.context.TimeoutError2"type2R2-"+multiprocessing.context.AuthenticationError2"type2T2!"multiprocessing.context.Process2"type2V2)"'multiprocessing.popen_spawn_posix.Popen2&"$multiprocessing.context.SpawnProcess2"type2Y2"" multiprocessing.popen_fork.Popen2("&multiprocessing.popen_forkserver.Popen2%"#multiprocessing.context.ForkProcess2"type2]2+")multiprocessing.context.ForkServerProcess2"type2_2"builtins.dict22

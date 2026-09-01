@@ -1,259 +1,120 @@
 
-paramiko.clientþ	
-_TransportFactory!paramiko.client._TransportFactory"builtins.object*™	
-__call__*paramiko.client._TransportFactory.__call__"<
-paramiko.transport.Transport"paramiko.transport.Transport*P
-selfF
-!paramiko.client._TransportFactory"!paramiko.client._TransportFactory*§¤
-qTypeAlias[Union[builtins.str,TypeAlias[Tuple[builtins.str,builtins.int]],socket.socket,paramiko.channel.Channel]]Œ
-fUnion[builtins.str,TypeAlias[Tuple[builtins.str,builtins.int]],socket.socket,paramiko.channel.Channel]
-builtins.str"builtins.str«
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"paramiko.transport._Addr
-socket.socket"socket.socket4
-paramiko.channel.Channel"paramiko.channel.Channel"paramiko.transport._SocketLike*+
-gss_kex
-builtins.bool"builtins.bool*3
-gss_deleg_creds
-builtins.bool"builtins.bool*«
-disabled_algorithms‘
-FUnion[typing.Mapping[builtins.str,typing.Iterable[builtins.str]],None]º
-:typing.Mapping[builtins.str,typing.Iterable[builtins.str]]
-builtins.str"builtins.strN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable"typing.Mapping
-Nonez310z311z312z313z314Xj310j311j312j313j314¾3
-	SSHClientparamiko.client.SSHClient"#paramiko.util.ClosingContextManager*“
-__init__"paramiko.client.SSHClient.__init__"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClientz310z311z312z313z314*ƒ
-load_system_host_keys/paramiko.client.SSHClient.load_system_host_keys"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient*T
-filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*Ë
-load_host_keys(paramiko.client.SSHClient.load_host_keys"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-filename
-builtins.str"builtins.strz310z311z312z313z314*Ë
-save_host_keys(paramiko.client.SSHClient.save_host_keys"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-filename
-builtins.str"builtins.strz310z311z312z313z314*Í
-get_host_keys'paramiko.client.SSHClient.get_host_keys"8
-paramiko.hostkeys.HostKeys"paramiko.hostkeys.HostKeys*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClientz310z311z312z313z314*É
-set_log_channel)paramiko.client.SSHClient.set_log_channel"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient*&
-name
-builtins.str"builtins.strz310z311z312z313z314*ö
-set_missing_host_key_policy5paramiko.client.SSHClient.set_missing_host_key_policy"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient*º
-policy­
-VUnion[Type[paramiko.client.MissingHostKeyPolicy],paramiko.client.MissingHostKeyPolicy]‚
-*Type[paramiko.client.MissingHostKeyPolicy]L
-$paramiko.client.MissingHostKeyPolicy"$paramiko.client.MissingHostKeyPolicy"typeL
-$paramiko.client.MissingHostKeyPolicy"$paramiko.client.MissingHostKeyPolicyz310z311z312z313z314*‘
-connect!paramiko.client.SSHClient.connect"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-hostname
-builtins.str"builtins.str*(
-port
-builtins.int"builtins.int *T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *b
-pkeyV
-Union[paramiko.pkey.PKey,None](
-paramiko.pkey.PKey"paramiko.pkey.PKey
-None *X
-key_filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *1
-allow_agent
-builtins.bool"builtins.bool *3
-look_for_keys
-builtins.bool"builtins.bool *.
-compress
-builtins.bool"builtins.bool *¿
-sock²
-}Union[TypeAlias[Union[builtins.str,TypeAlias[Tuple[builtins.str,builtins.int]],socket.socket,paramiko.channel.Channel]],None]¤
-qTypeAlias[Union[builtins.str,TypeAlias[Tuple[builtins.str,builtins.int]],socket.socket,paramiko.channel.Channel]]Œ
-fUnion[builtins.str,TypeAlias[Tuple[builtins.str,builtins.int]],socket.socket,paramiko.channel.Channel]
-builtins.str"builtins.str«
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"paramiko.transport._Addr
-socket.socket"socket.socket4
-paramiko.channel.Channel"paramiko.channel.Channel"paramiko.transport._SocketLike
-None *.
-gss_auth
-builtins.bool"builtins.bool *-
-gss_kex
-builtins.bool"builtins.bool *5
-gss_deleg_creds
-builtins.bool"builtins.bool *T
-gss_hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *`
-banner_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *^
-auth_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *3
-gss_trust_dns
-builtins.bool"builtins.bool *V
+paramiko.client…
+_TransportFactory"builtins.object*]
+__call__*
 
-passphraseD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *­
-disabled_algorithms‘
-FUnion[typing.Mapping[builtins.str,typing.Iterable[builtins.str]],None]º
-:typing.Mapping[builtins.str,typing.Iterable[builtins.str]]
-builtins.str"builtins.strN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable"typing.Mapping
-None *
-transport_factoryƒ
--Union[paramiko.client._TransportFactory,None]F
-!paramiko.client._TransportFactory"!paramiko.client._TransportFactory
-None z310z311z312z313z314*
-closeparamiko.client.SSHClient.close"
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClientz310z311z312z313z314*…
-exec_command&paramiko.client.SSHClient.exec_command"¼
-hTuple[paramiko.channel.ChannelStdinFile,paramiko.channel.ChannelFile,paramiko.channel.ChannelStderrFile]F
-!paramiko.channel.ChannelStdinFile"!paramiko.channel.ChannelStdinFile<
-paramiko.channel.ChannelFile"paramiko.channel.ChannelFileH
-"paramiko.channel.ChannelStderrFile""paramiko.channel.ChannelStderrFile*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient*)
-command
-builtins.str"builtins.str*+
-bufsize
-builtins.int"builtins.int *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *-
-get_pty
-builtins.bool"builtins.bool *Ð
-environment¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z310z311z312z313z314*€
-invoke_shell&paramiko.client.SSHClient.invoke_shell"4
-paramiko.channel.Channel"paramiko.channel.Channel*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClient*(
-term
-builtins.str"builtins.str *)
-width
-builtins.int"builtins.int **
-height
-builtins.int"builtins.int *0
-width_pixels
-builtins.int"builtins.int *1
-height_pixels
-builtins.int"builtins.int *Ð
-environment¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z310z311z312z313z314*Ï
-	open_sftp#paramiko.client.SSHClient.open_sftp"B
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClientz310z311z312z313z314*‰
-get_transport'paramiko.client.SSHClient.get_transport"t
-(Union[paramiko.transport.Transport,None]<
-paramiko.transport.Transport"paramiko.transport.Transport
-None*@
-self6
-paramiko.client.SSHClient"paramiko.client.SSHClientz310z311z312z313z314j310j311j312j313j314Ð
-MissingHostKeyPolicy$paramiko.client.MissingHostKeyPolicy"builtins.object*ç
-missing_host_key5paramiko.client.MissingHostKeyPolicy.missing_host_key"
-None*V
-selfL
-$paramiko.client.MissingHostKeyPolicy"$paramiko.client.MissingHostKeyPolicy*B
-client6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-hostname
-builtins.str"builtins.str*1
-key(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314j310j311j312j313j314Â
-AutoAddPolicyparamiko.client.AutoAddPolicy"$paramiko.client.MissingHostKeyPolicy*Ò
-missing_host_key.paramiko.client.AutoAddPolicy.missing_host_key"
-None*H
-self>
-paramiko.client.AutoAddPolicy"paramiko.client.AutoAddPolicy*B
-client6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-hostname
-builtins.str"builtins.str*1
-key(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314j310j311j312j313j314Á
-RejectPolicyparamiko.client.RejectPolicy"$paramiko.client.MissingHostKeyPolicy*Ó
-missing_host_key-paramiko.client.RejectPolicy.missing_host_key"
-NoReturn
-*F
-self<
-paramiko.client.RejectPolicy"paramiko.client.RejectPolicy*B
-client6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-hostname
-builtins.str"builtins.str*1
-key(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314j310j311j312j313j314Â
-WarningPolicyparamiko.client.WarningPolicy"$paramiko.client.MissingHostKeyPolicy*Ò
-missing_host_key.paramiko.client.WarningPolicy.missing_host_key"
-None*H
-self>
-paramiko.client.WarningPolicy"paramiko.client.WarningPolicy*B
-client6
-paramiko.client.SSHClient"paramiko.client.SSHClient**
-hostname
-builtins.str"builtins.str*1
-key(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz310z311z312z313z314j310j311j312j313j314*¤
-__annotations__paramiko.client.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*(
+*
+gss_kex(*
+gss_deleg_creds(*
+disabled_algorithms(Xú
+	SSHClient"#paramiko.util.ClosingContextManager*
+__init__*
+
+self(*7
+load_system_host_keys*
+
+self(*
+filename (*.
+load_host_keys*
+
+self(*
+filename(*.
+save_host_keys*
+
+self(*
+filename(*
+get_host_keys*
+
+self(*+
+set_log_channel*
+
+self(*
+
+name(*9
+set_missing_host_key_policy*
+
+self(*
+policy(*¹
+connect*
+
+self(*
+hostname(*
+port (*
+username (*
+password (*
+pkey (*
+key_filename (*
+timeout (*
+allow_agent (*
+look_for_keys (*
+compress (*
+sock (*
+gss_auth (*
+gss_kex (*
+gss_deleg_creds (*
+gss_host (*
+banner_timeout (*
+auth_timeout (*
+gss_trust_dns (*
+
+passphrase (*
+disabled_algorithms (*
+transport_factory (*
+close*
+
+self(*s
+exec_command*
+
+self(*
+command(*
+bufsize (*
+timeout (*
+get_pty (*
+environment (!*‹
+invoke_shell*
+
+self(*
+term (*
+width (*
+height (*
+width_pixels (*
+height_pixels (*
+environment (!*
+	open_sftp"*
+
+self(*
+get_transport#*
+
+self(r
+MissingHostKeyPolicy"builtins.object*I
+missing_host_key*
+
+self(*
+client(*
+hostname(*	
+key(€
+AutoAddPolicy"$paramiko.client.MissingHostKeyPolicy*I
+missing_host_key*
+
+self($*
+client(*
+hostname(*	
+key(
+RejectPolicy"$paramiko.client.MissingHostKeyPolicy*I
+missing_host_key%*
+
+self(&*
+client(*
+hostname(*	
+key(€
+WarningPolicy"$paramiko.client.MissingHostKeyPolicy*I
+missing_host_key*
+
+self('*
+client(*
+hostname(*	
+key(*
+__annotations__0)2"paramiko.transport.Transport2#"!paramiko.client._TransportFactory2"builtins.str2"builtins.int222"paramiko.transport._Addr22"socket.socket2"paramiko.channel.Channel222%"paramiko.transport._SocketLike2	2"builtins.bool2"typing.Iterable22"typing.Mapping22222"paramiko.client.SSHClient222"paramiko.hostkeys.HostKeys2&"$paramiko.client.MissingHostKeyPolicy2"type2222"paramiko.pkey.PKey222"builtins.float2222
+222#"!paramiko.channel.ChannelStdinFile2"paramiko.channel.ChannelFile2$""paramiko.channel.ChannelStderrFile222"typing.Mapping222 2!"paramiko.sftp_client.SFTPClient222"paramiko.client.AutoAddPolicy2
+2"paramiko.client.RejectPolicy2"paramiko.client.WarningPolicy22"builtins.dict2(

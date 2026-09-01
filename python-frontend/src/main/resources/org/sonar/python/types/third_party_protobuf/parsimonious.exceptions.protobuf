@@ -1,65 +1,41 @@
 
-parsimonious.exceptions∫
+parsimonious.exceptionsÀ
 
+ParseError"parsimonious.utils.StrAndRepr"builtins.Exception*?
+__init__*
 
-ParseError"parsimonious.exceptions.ParseError"parsimonious.utils.StrAndRepr"builtins.Exception*ò
-__init__+parsimonious.exceptions.ParseError.__init__"
-None*R
-selfH
-"parsimonious.exceptions.ParseError""parsimonious.exceptions.ParseError*&
-text
-builtins.str"builtins.str*'
-pos
-builtins.int"builtins.int *ñ
-exprâ
-/Union[parsimonious.expressions.Expression,None]J
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression
-None z310z311z312z313z314*∫
-line'parsimonious.exceptions.ParseError.line"
-builtins.int"builtins.int*R
-selfH
-"parsimonious.exceptions.ParseError""parsimonious.exceptions.ParseErrorz310z311z312z313z314*æ
-column)parsimonious.exceptions.ParseError.column"
-builtins.int"builtins.int*R
-selfH
-"parsimonious.exceptions.ParseError""parsimonious.exceptions.ParseErrorz310z311z312z313z314j310j311j312j313j314rf
-text'parsimonious.exceptions.ParseError.text
-builtins.str"builtins.str*310*311*312*313*314rd
-pos&parsimonious.exceptions.ParseError.pos
-builtins.int"builtins.int*310*311*312*313*314r‘
-expr'parsimonious.exceptions.ParseError.exprâ
-/Union[parsimonious.expressions.Expression,None]J
-#parsimonious.expressions.Expression"#parsimonious.expressions.Expression
-None*310*311*312*313*314}
-LeftRecursionError*parsimonious.exceptions.LeftRecursionError""parsimonious.exceptions.ParseErrorj310j311j312j313j314Å
-IncompleteParseError,parsimonious.exceptions.IncompleteParseError""parsimonious.exceptions.ParseErrorj310j311j312j313j314«
-VisitationError'parsimonious.exceptions.VisitationError"builtins.Exception*ü
-__init__0parsimonious.exceptions.VisitationError.__init__"
-None*\
-selfR
-'parsimonious.exceptions.VisitationError"'parsimonious.exceptions.VisitationError*9
-exc0
-builtins.BaseException"builtins.BaseException*g
-	exc_classX
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type*<
-node2
-parsimonious.nodes.Node"parsimonious.nodes.Nodez310z311z312z313z314j310j311j312j313j314rª
-original_class6parsimonious.exceptions.VisitationError.original_classX
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type*310*311*312*313*314|
+self(*
 
-BadGrammar"parsimonious.exceptions.BadGrammar"parsimonious.utils.StrAndRepr"builtins.Exceptionj310j311j312j313j314¢
-UndefinedLabel&parsimonious.exceptions.UndefinedLabel""parsimonious.exceptions.BadGrammar*è
-__init__/parsimonious.exceptions.UndefinedLabel.__init__"
-None*Z
-selfP
-&parsimonious.exceptions.UndefinedLabel"&parsimonious.exceptions.UndefinedLabel*S
-labelH
-"parsimonious.grammar.LazyReference""parsimonious.grammar.LazyReferencez310z311z312z313z314j310j311j312j313j314rò
-label,parsimonious.exceptions.UndefinedLabel.labelH
-"parsimonious.grammar.LazyReference""parsimonious.grammar.LazyReference*310*311*312*313*314*¨
-__annotations__'parsimonious.exceptions.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+text(*
+pos (*
+expr (*
+line*
+
+self(*
+column*
+
+self(r
+text0r
+pos0r
+expr08
+LeftRecursionError""parsimonious.exceptions.ParseError:
+IncompleteParseError""parsimonious.exceptions.ParseError{
+VisitationError"builtins.Exception*@
+__init__*
+
+self(*	
+exc(*
+	exc_class(	*
+
+node(
+r
+original_class0	?
+
+BadGrammar"parsimonious.utils.StrAndRepr"builtins.Exceptionf
+UndefinedLabel""parsimonious.exceptions.BadGrammar*%
+__init__*
+
+self(*
+label(r	
+label0*
+__annotations__022$""parsimonious.exceptions.ParseError2"builtins.str2"builtins.int2%"#parsimonious.expressions.Expression222)"'parsimonious.exceptions.VisitationError2"builtins.BaseException2"type22"parsimonious.nodes.Node2("&parsimonious.exceptions.UndefinedLabel2$""parsimonious.grammar.LazyReference22"builtins.dict2

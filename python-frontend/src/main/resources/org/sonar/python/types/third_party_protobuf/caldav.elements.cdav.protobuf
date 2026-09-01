@@ -1,137 +1,86 @@
 
-caldav.elements.cdavÔ
-CalendarQuery"caldav.elements.cdav.CalendarQuery" caldav.elements.base.BaseElementj310j311j312j313j314rd
-tag&caldav.elements.cdav.CalendarQuery.tag
-builtins.str"builtins.str*310*311*312*313*314Ô
-FreeBusyQuery"caldav.elements.cdav.FreeBusyQuery" caldav.elements.base.BaseElementj310j311j312j313j314rd
-tag&caldav.elements.cdav.FreeBusyQuery.tag
-builtins.str"builtins.str*310*311*312*313*314Ë
+caldav.elements.cdav:
+CalendarQuery" caldav.elements.base.BaseElementr
+tag0:
+FreeBusyQuery" caldav.elements.base.BaseElementr
+tag07
 
-Mkcalendarcaldav.elements.cdav.Mkcalendar" caldav.elements.base.BaseElementj310j311j312j313j314ra
-tag#caldav.elements.cdav.Mkcalendar.tag
-builtins.str"builtins.str*310*311*312*313*314Ý
-CalendarMultiGet%caldav.elements.cdav.CalendarMultiGet" caldav.elements.base.BaseElementj310j311j312j313j314rg
-tag)caldav.elements.cdav.CalendarMultiGet.tag
-builtins.str"builtins.str*310*311*312*313*314Ý
-ScheduleInboxURL%caldav.elements.cdav.ScheduleInboxURL" caldav.elements.base.BaseElementj310j311j312j313j314rg
-tag)caldav.elements.cdav.ScheduleInboxURL.tag
-builtins.str"builtins.str*310*311*312*313*314à
-ScheduleOutboxURL&caldav.elements.cdav.ScheduleOutboxURL" caldav.elements.base.BaseElementj310j311j312j313j314rh
-tag*caldav.elements.cdav.ScheduleOutboxURL.tag
-builtins.str"builtins.str*310*311*312*313*314¿
-Filtercaldav.elements.cdav.Filter" caldav.elements.base.BaseElementj310j311j312j313j314r]
-tagcaldav.elements.cdav.Filter.tag
-builtins.str"builtins.str*310*311*312*313*314Ð
+Mkcalendar" caldav.elements.base.BaseElementr
+tag0=
+CalendarMultiGet" caldav.elements.base.BaseElementr
+tag0=
+ScheduleInboxURL" caldav.elements.base.BaseElementr
+tag0>
+ScheduleOutboxURL" caldav.elements.base.BaseElementr
+tag03
+Filter" caldav.elements.base.BaseElementr
+tag0<
 
-CompFiltercaldav.elements.cdav.CompFilter"%caldav.elements.base.NamedBaseElementj310j311j312j313j314ra
-tag#caldav.elements.cdav.CompFilter.tag
-builtins.str"builtins.str*310*311*312*313*314Ð
+CompFilter"%caldav.elements.base.NamedBaseElementr
+tag0<
 
-PropFiltercaldav.elements.cdav.PropFilter"%caldav.elements.base.NamedBaseElementj310j311j312j313j314ra
-tag#caldav.elements.cdav.PropFilter.tag
-builtins.str"builtins.str*310*311*312*313*314Ó
-ParamFilter caldav.elements.cdav.ParamFilter"%caldav.elements.base.NamedBaseElementj310j311j312j313j314rb
-tag$caldav.elements.cdav.ParamFilter.tag
-builtins.str"builtins.str*310*311*312*313*314ä
-	TextMatchcaldav.elements.cdav.TextMatch"&caldav.elements.base.ValuedBaseElement*“
-__init__'caldav.elements.cdav.TextMatch.__init__"
-None*J
-self@
-caldav.elements.cdav.TextMatch"caldav.elements.cdav.TextMatch*
-value
-Any*-
-	collation
-builtins.str"builtins.str *,
-negate
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314r`
-tag"caldav.elements.cdav.TextMatch.tag
-builtins.str"builtins.str*310*311*312*313*314¯
-	TimeRangecaldav.elements.cdav.TimeRange" caldav.elements.base.BaseElement*ä
-__init__'caldav.elements.cdav.TimeRange.__init__"
-None*J
-self@
-caldav.elements.cdav.TimeRange"caldav.elements.cdav.TimeRange*`
-startS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None *^
-endS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None z310z311z312z313z314j310j311j312j313j314r`
-tag"caldav.elements.cdav.TimeRange.tag
-builtins.str"builtins.str*310*311*312*313*314Ë
+PropFilter"%caldav.elements.base.NamedBaseElementr
+tag0=
+ParamFilter"%caldav.elements.base.NamedBaseElementr
+tag0†
+	TextMatch"&caldav.elements.base.ValuedBaseElement*H
+__init__*
 
-NotDefinedcaldav.elements.cdav.NotDefined" caldav.elements.base.BaseElementj310j311j312j313j314ra
-tag#caldav.elements.cdav.NotDefined.tag
-builtins.str"builtins.str*310*311*312*313*314Ñ
-CalendarData!caldav.elements.cdav.CalendarData" caldav.elements.base.BaseElementj310j311j312j313j314rc
-tag%caldav.elements.cdav.CalendarData.tag
-builtins.str"builtins.str*310*311*312*313*314›
-Expandcaldav.elements.cdav.Expand" caldav.elements.base.BaseElement*Ù
-__init__$caldav.elements.cdav.Expand.__init__"
-None*D
-self:
-caldav.elements.cdav.Expand"caldav.elements.cdav.Expand*^
-startS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None*^
-endS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None z310z311z312z313z314j310j311j312j313j314r]
-tagcaldav.elements.cdav.Expand.tag
-builtins.str"builtins.str*310*311*312*313*314¾
-Compcaldav.elements.cdav.Comp"%caldav.elements.base.NamedBaseElementj310j311j312j313j314r[
-tagcaldav.elements.cdav.Comp.tag
-builtins.str"builtins.str*310*311*312*313*314ï
-CalendarUserAddressSet+caldav.elements.cdav.CalendarUserAddressSet" caldav.elements.base.BaseElementj310j311j312j313j314rm
-tag/caldav.elements.cdav.CalendarUserAddressSet.tag
-builtins.str"builtins.str*310*311*312*313*314Ý
-CalendarUserType%caldav.elements.cdav.CalendarUserType" caldav.elements.base.BaseElementj310j311j312j313j314rg
-tag)caldav.elements.cdav.CalendarUserType.tag
-builtins.str"builtins.str*310*311*312*313*314Ú
-CalendarHomeSet$caldav.elements.cdav.CalendarHomeSet" caldav.elements.base.BaseElementj310j311j312j313j314rf
-tag(caldav.elements.cdav.CalendarHomeSet.tag
-builtins.str"builtins.str*310*311*312*313*314Å
-Calendarcaldav.elements.cdav.Calendar" caldav.elements.base.BaseElementj310j311j312j313j314r_
-tag!caldav.elements.cdav.Calendar.tag
-builtins.str"builtins.str*310*311*312*313*314ì
-CalendarDescription(caldav.elements.cdav.CalendarDescription"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rj
-tag,caldav.elements.cdav.CalendarDescription.tag
-builtins.str"builtins.str*310*311*312*313*314ã
-CalendarTimeZone%caldav.elements.cdav.CalendarTimeZone"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rg
-tag)caldav.elements.cdav.CalendarTimeZone.tag
-builtins.str"builtins.str*310*311*312*313*314Š
-SupportedCalendarComponentSet2caldav.elements.cdav.SupportedCalendarComponentSet"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rt
-tag6caldav.elements.cdav.SupportedCalendarComponentSet.tag
-builtins.str"builtins.str*310*311*312*313*314ò
-SupportedCalendarData*caldav.elements.cdav.SupportedCalendarData"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rl
-tag.caldav.elements.cdav.SupportedCalendarData.tag
-builtins.str"builtins.str*310*311*312*313*314à
-MaxResourceSize$caldav.elements.cdav.MaxResourceSize"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rf
-tag(caldav.elements.cdav.MaxResourceSize.tag
-builtins.str"builtins.str*310*311*312*313*314Ô
-MinDateTime caldav.elements.cdav.MinDateTime"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rb
-tag$caldav.elements.cdav.MinDateTime.tag
-builtins.str"builtins.str*310*311*312*313*314Ô
-MaxDateTime caldav.elements.cdav.MaxDateTime"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rb
-tag$caldav.elements.cdav.MaxDateTime.tag
-builtins.str"builtins.str*310*311*312*313*314×
-MaxInstances!caldav.elements.cdav.MaxInstances"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rc
-tag%caldav.elements.cdav.MaxInstances.tag
-builtins.str"builtins.str*310*311*312*313*314ø
-MaxAttendeesPerInstance,caldav.elements.cdav.MaxAttendeesPerInstance"&caldav.elements.base.ValuedBaseElementj310j311j312j313j314rn
-tag0caldav.elements.cdav.MaxAttendeesPerInstance.tag
-builtins.str"builtins.str*310*311*312*313*314Â
-Allpropcaldav.elements.cdav.Allprop" caldav.elements.base.BaseElementj310j311j312j313j314r^
-tag caldav.elements.cdav.Allprop.tag
-builtins.str"builtins.str*310*311*312*313*314Î
-ScheduleTag caldav.elements.cdav.ScheduleTag" caldav.elements.base.BaseElementj310j311j312j313j314rb
-tag$caldav.elements.cdav.ScheduleTag.tag
-builtins.str"builtins.str*310*311*312*313*314*©
-__annotations__$caldav.elements.cdav.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+value(*
+	collation (*
+negate (r
+tag0l
+	TimeRange" caldav.elements.base.BaseElement*4
+__init__*
+
+self(*
+start (*
+end (r
+tag07
+
+NotDefined" caldav.elements.base.BaseElementr
+tag09
+CalendarData" caldav.elements.base.BaseElementr
+tag0g
+Expand" caldav.elements.base.BaseElement*2
+__init__*
+
+self(	*
+start(*
+end (r
+tag06
+Comp"%caldav.elements.base.NamedBaseElementr
+tag0C
+CalendarUserAddressSet" caldav.elements.base.BaseElementr
+tag0=
+CalendarUserType" caldav.elements.base.BaseElementr
+tag0<
+CalendarHomeSet" caldav.elements.base.BaseElementr
+tag05
+Calendar" caldav.elements.base.BaseElementr
+tag0F
+CalendarDescription"&caldav.elements.base.ValuedBaseElementr
+tag0C
+CalendarTimeZone"&caldav.elements.base.ValuedBaseElementr
+tag0P
+SupportedCalendarComponentSet"&caldav.elements.base.ValuedBaseElementr
+tag0H
+SupportedCalendarData"&caldav.elements.base.ValuedBaseElementr
+tag0B
+MaxResourceSize"&caldav.elements.base.ValuedBaseElementr
+tag0>
+MinDateTime"&caldav.elements.base.ValuedBaseElementr
+tag0>
+MaxDateTime"&caldav.elements.base.ValuedBaseElementr
+tag0?
+MaxInstances"&caldav.elements.base.ValuedBaseElementr
+tag0J
+MaxAttendeesPerInstance"&caldav.elements.base.ValuedBaseElementr
+tag04
+Allprop" caldav.elements.base.BaseElementr
+tag08
+ScheduleTag" caldav.elements.base.BaseElementr
+tag0*
+__annotations__0
+2"builtins.str22 "caldav.elements.cdav.TextMatch22"builtins.bool2 "caldav.elements.cdav.TimeRange2"datetime.datetime222"caldav.elements.cdav.Expand2"builtins.dict2

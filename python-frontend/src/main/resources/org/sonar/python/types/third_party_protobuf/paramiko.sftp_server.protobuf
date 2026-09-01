@@ -1,70 +1,44 @@
 
-paramiko.sftp_serverµ
+paramiko.sftp_serverâ
 
-SFTPServerparamiko.sftp_server.SFTPServer"paramiko.sftp.BaseSFTP" paramiko.server.SubsystemHandler*ú
-__init__(paramiko.sftp_server.SFTPServer.__init__"
-None*L
-selfB
-paramiko.sftp_server.SFTPServer"paramiko.sftp_server.SFTPServer*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*&
-name
-builtins.str"builtins.str*N
-serverB
-paramiko.server.ServerInterface"paramiko.server.ServerInterface*ê
-sftp_siÇ
-*Type[paramiko.sftp_si.SFTPServerInterface]L
-$paramiko.sftp_si.SFTPServerInterface"$paramiko.sftp_si.SFTPServerInterface"type*
-largs
-Any*
-kwargs
-Anyz310z311z312z313z314*Î
-start_subsystem/paramiko.sftp_server.SFTPServer.start_subsystem"
-None*L
-selfB
-paramiko.sftp_server.SFTPServer"paramiko.sftp_server.SFTPServer*&
-name
-builtins.str"builtins.str*K
-	transport<
-paramiko.transport.Transport"paramiko.transport.Transport*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*µ
-finish_subsystem0paramiko.sftp_server.SFTPServer.finish_subsystem"
-None*L
-selfB
-paramiko.sftp_server.SFTPServer"paramiko.sftp_server.SFTPServerz310z311z312z313z314*µ
-convert_errno-paramiko.sftp_server.SFTPServer.convert_errno"
-builtins.int"builtins.int*#
-e
-builtins.int"builtins.int0:builtins.staticmethodhz310z311z312z313z314*˙
-set_file_attr-paramiko.sftp_server.SFTPServer.set_file_attr"
-None**
-filename
-builtins.str"builtins.str*P
-attrF
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314rk
-logger&paramiko.sftp_server.SFTPServer.logger 
-logging.Logger"logging.Logger*310*311*312*313*314rs
-ultra_debug+paramiko.sftp_server.SFTPServer.ultra_debug
-builtins.bool"builtins.bool*310*311*312*313*314rq
-next_handle+paramiko.sftp_server.SFTPServer.next_handle
-builtins.int"builtins.int*310*311*312*313*314rà
+SFTPServer"paramiko.sftp.BaseSFTP" paramiko.server.SubsystemHandler*k
+__init__*
 
-file_table*paramiko.sftp_server.SFTPServer.file_table¥
-=builtins.dict[builtins.bytes,paramiko.sftp_handle.SFTPHandle] 
-builtins.bytes"builtins.bytesB
-paramiko.sftp_handle.SFTPHandle"paramiko.sftp_handle.SFTPHandle"builtins.dict*310*311*312*313*314rå
-folder_table,paramiko.sftp_server.SFTPServer.folder_table¥
-=builtins.dict[builtins.bytes,paramiko.sftp_handle.SFTPHandle] 
-builtins.bytes"builtins.bytesB
-paramiko.sftp_handle.SFTPHandle"paramiko.sftp_handle.SFTPHandle"builtins.dict*310*311*312*313*314ró
-server&paramiko.sftp_server.SFTPServer.serverL
-$paramiko.sftp_si.SFTPServerInterface"$paramiko.sftp_si.SFTPServerInterface*310*311*312*313*314rØ
-sock$paramiko.sftp_server.SFTPServer.sockh
-$Union[paramiko.channel.Channel,None]4
-paramiko.channel.Channel"paramiko.channel.Channel
-None*310*311*312*313*314*©
-__annotations__$paramiko.sftp_server.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+channel(*
+
+name(*
+server(*
+sftp_si(*
+largs(*
+kwargs(*K
+start_subsystem*
+
+self(*
+
+name(*
+	transport(	*
+channel(* 
+finish_subsystem*
+
+self(*5
+convert_errno
+*
+e(
+0:builtins.staticmethodh*H
+set_file_attr*
+filename(*
+
+attr(0:builtins.staticmethodhr
+
+logger0r
+ultra_debug0r
+next_handle0
+r
+
+file_table0r
+folder_table0r
+
+server0r
+sock0*
+__annotations__022!"paramiko.sftp_server.SFTPServer2"paramiko.channel.Channel2"builtins.str2!"paramiko.server.ServerInterface2&"$paramiko.sftp_si.SFTPServerInterface2"type222"paramiko.transport.Transport2"builtins.int2#"!paramiko.sftp_attr.SFTPAttributes2"logging.Logger2"builtins.bool2"builtins.bytes2!"paramiko.sftp_handle.SFTPHandle2"builtins.dict2222"builtins.dict2

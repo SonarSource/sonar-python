@@ -1,239 +1,106 @@
 
-xxhash‚
-_Hasherxxhash._Hasher"builtins.object*©
-__init__xxhash._Hasher.__init__"
-None**
-self 
-xxhash._Hasher"xxhash._Hasher*£
-input•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType *(
-seed
-builtins.int"builtins.int *ù
-updatexxhash._Hasher.update"
-None**
-self 
-xxhash._Hasher"xxhash._Hasher*¡
-input•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*m
-digestxxhash._Hasher.digest" 
-builtins.bytes"builtins.bytes**
-self 
-xxhash._Hasher"xxhash._Hasher*o
-	hexdigestxxhash._Hasher.hexdigest"
-builtins.str"builtins.str**
-self 
-xxhash._Hasher"xxhash._Hasher*o
-	intdigestxxhash._Hasher.intdigest"
-builtins.int"builtins.int**
-self 
-xxhash._Hasher"xxhash._Hasher*i
-copyxxhash._Hasher.copy" 
-xxhash._Hasher"xxhash._Hasher**
-self 
-xxhash._Hasher"xxhash._Hasher*S
-resetxxhash._Hasher.reset"
-None**
-self 
-xxhash._Hasher"xxhash._Hasher*ˆ
+xxhashå
+_Hasher"builtins.object*5
+__init__*
 
-digestsizexxhash._Hasher.digestsize"
-builtins.int"builtins.int**
-self 
-xxhash._Hasher"xxhash._Hasher0:builtins.property`*Š
-digest_sizexxhash._Hasher.digest_size"
-builtins.int"builtins.int**
-self 
-xxhash._Hasher"xxhash._Hasher0:builtins.property`*ˆ
+self(*
+input (
+*
+seed (*#
+update*
 
-block_sizexxhash._Hasher.block_size"
-builtins.int"builtins.int**
-self 
-xxhash._Hasher"xxhash._Hasher0:builtins.property`*|
-namexxhash._Hasher.name"
-builtins.str"builtins.str**
-self 
-xxhash._Hasher"xxhash._Hasher0:builtins.property`*|
-seedxxhash._Hasher.seed"
-builtins.int"builtins.int**
-self 
-xxhash._Hasher"xxhash._Hasher0:builtins.property`'
-xxh32xxhash.xxh32"xxhash._Hasher8+
-xxh3_64xxhash.xxh3_64"xxhash._Hasher8-
-xxh3_128xxhash.xxh3_128"xxhash._Hasher8’
-xxh32_digestxxhash.xxh32_digest" 
-builtins.bytes"builtins.bytes* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int ”
-xxh32_hexdigestxxhash.xxh32_hexdigest"
-builtins.str"builtins.str* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int ”
-xxh32_intdigestxxhash.xxh32_intdigest"
-builtins.int"builtins.int* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int –
-xxh3_64_digestxxhash.xxh3_64_digest" 
-builtins.bytes"builtins.bytes* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int ˜
-xxh3_64_hexdigestxxhash.xxh3_64_hexdigest"
-builtins.str"builtins.str* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int ˜
-xxh3_64_intdigestxxhash.xxh3_64_intdigest"
-builtins.int"builtins.int* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int ˜
-xxh3_128_digestxxhash.xxh3_128_digest" 
-builtins.bytes"builtins.bytes* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int š
-xxh3_128_hexdigestxxhash.xxh3_128_hexdigest"
-builtins.str"builtins.str* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int š
-xxh3_128_intdigestxxhash.xxh3_128_intdigest"
-builtins.int"builtins.int* 
-args•
-|TypeAlias[Union[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]]ÿ
-qUnion[builtins.str,builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int],array.array[builtins.int]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryviewF
-array.array[builtins.int]
-builtins.int"builtins.int"array.array"xxhash._InputType*(
-seed
-builtins.int"builtins.int *g
-__path__xxhash.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*‚
-__annotations__xxhash.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*7
-VERSIONxxhash.VERSION
-builtins.str"builtins.str*E
-XXHASH_VERSIONxxhash.XXHASH_VERSION
-builtins.str"builtins.str*s
-VERSION_TUPLExxhash.VERSION_TUPLEL
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*}
-algorithms_availablexxhash.algorithms_availableH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*p
-xxh64_digestxxhash.xxh64_digestK
-CallableType[builtins.function]&
-builtins.function"builtins.function*v
-xxh64_hexdigestxxhash.xxh64_hexdigestK
-CallableType[builtins.function]&
-builtins.function"builtins.function*v
-xxh64_intdigestxxhash.xxh64_intdigestK
-CallableType[builtins.function]&
-builtins.function"builtins.function*r
-xxh128_digestxxhash.xxh128_digestK
-CallableType[builtins.function]&
-builtins.function"builtins.function*x
-xxh128_hexdigestxxhash.xxh128_hexdigestK
-CallableType[builtins.function]&
-builtins.function"builtins.function*x
-xxh128_intdigestxxhash.xxh128_intdigestK
-CallableType[builtins.function]&
-builtins.function"builtins.function
+self(*
+input(
+*
+digest*
+
+self(*
+	hexdigest*
+
+self(*
+	intdigest*
+
+self(*
+copy*
+
+self(*
+reset*
+
+self(*1
+
+digestsize*
+
+self(0:builtins.property`*2
+digest_size*
+
+self(0:builtins.property`*1
+
+block_size*
+
+self(0:builtins.property`*+
+name*
+
+self(0:builtins.property`*+
+seed*
+
+self(0:builtins.property`
+xxh32"xxhash._Hasher8
+xxh3_64"xxhash._Hasher8
+xxh3_128"xxhash._Hasher8*
+xxh32_digest*
+
+args(
+*
+seed (-
+xxh32_hexdigest*
+
+args(
+*
+seed (-
+xxh32_intdigest*
+
+args(
+*
+seed (,
+xxh3_64_digest*
+
+args(
+*
+seed (/
+xxh3_64_hexdigest*
+
+args(
+*
+seed (/
+xxh3_64_intdigest*
+
+args(
+*
+seed (-
+xxh3_128_digest*
+
+args(
+*
+seed (0
+xxh3_128_hexdigest*
+
+args(
+*
+seed (0
+xxh3_128_intdigest*
+
+args(
+*
+seed (*
+__path__0*
+__annotations__0*
+VERSION0*
+XXHASH_VERSION0*
+VERSION_TUPLE0*
+algorithms_available0*
+xxh64_digest0*
+xxh64_hexdigest0*
+xxh64_intdigest0*
+xxh128_digest0*
+xxh128_hexdigest0*
+xxh128_intdigest022"xxhash._Hasher2"builtins.str2"builtins.bytes2"builtins.bytearray2"builtins.int2"builtins.memoryview22"array.array22	22"xxhash._InputType2	2"builtins.list222"builtins.dict22"builtins.tuple22"builtins.set22"builtins.function22

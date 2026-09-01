@@ -1,206 +1,130 @@
 
-paramiko.packete
-NeedRekeyException"paramiko.packet.NeedRekeyException"builtins.Exceptionj310j311j312j313j314Û2
+paramiko.packet(
+NeedRekeyException"builtins.Exception≤
 
-Packetizerparamiko.packet.Packetizer"builtins.object*¬
-__init__#paramiko.packet.Packetizer.__init__"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer**
-socket
-socket.socket"socket.socketz310z311z312z313z314*ø
-closed!paramiko.packet.Packetizer.closed"
-builtins.bool"builtins.bool*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer0:builtins.property`z310z311z312z313z314*ø
-set_log"paramiko.packet.Packetizer.set_log"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*)
-log 
-logging.Logger"logging.Loggerz310z311z312z313z314*í
-set_outbound_cipher.paramiko.packet.Packetizer.set_outbound_cipher"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*z
-block_engineh
-2cryptography.hazmat.primitives.ciphers.base.Cipher"2cryptography.hazmat.primitives.ciphers.base.Cipher*,
 
-block_size
-builtins.int"builtins.int*.
+Packetizer"builtins.object*&
+__init__*
 
-mac_engine
-_hashlib.HASH"_hashlib.HASH**
-mac_size
-builtins.int"builtins.int*Ö
-mac_keyx
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*+
-sdctr
-builtins.bool"builtins.bool *)
-etm
-builtins.bool"builtins.bool z310z311z312z313z314*„
-set_inbound_cipher-paramiko.packet.Packetizer.set_inbound_cipher"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*z
-block_engineh
-2cryptography.hazmat.primitives.ciphers.base.Cipher"2cryptography.hazmat.primitives.ciphers.base.Cipher*,
+self(*
+socket(*-
+closed*
 
-block_size
-builtins.int"builtins.int*.
+self(0:builtins.property`*"
+set_log*
 
-mac_engine
-_hashlib.HASH"_hashlib.HASH**
-mac_size
-builtins.int"builtins.int*Ö
-mac_keyx
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*)
-etm
-builtins.bool"builtins.bool z310z311z312z313z314*ä
-set_outbound_compressor2paramiko.packet.Packetizer.set_outbound_compressor"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*T
+self(*	
+log(*ñ
+set_outbound_cipher*
 
-compressorD
- paramiko.compress.ZlibCompressor" paramiko.compress.ZlibCompressorz310z311z312z313z314*å
-set_inbound_compressor1paramiko.packet.Packetizer.set_inbound_compressor"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*X
+self(*
+block_engine(*
 
-compressorH
-"paramiko.compress.ZlibDecompressor""paramiko.compress.ZlibDecompressorz310z311z312z313z314*ê
-close paramiko.packet.Packetizer.close"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*…
-set_hexdump&paramiko.packet.Packetizer.set_hexdump"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*+
-hexdump
-builtins.bool"builtins.boolz310z311z312z313z314*≤
-get_hexdump&paramiko.packet.Packetizer.get_hexdump"
-builtins.bool"builtins.bool*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*∏
-get_mac_size_in*paramiko.packet.Packetizer.get_mac_size_in"
-builtins.int"builtins.int*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*∫
-get_mac_size_out+paramiko.packet.Packetizer.get_mac_size_out"
-builtins.int"builtins.int*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*∞
+block_size(*
 
-need_rekey%paramiko.packet.Packetizer.need_rekey"
-builtins.bool"builtins.bool*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*ß
-set_keepalive(paramiko.packet.Packetizer.set_keepalive"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer**
-interval
-builtins.int"builtins.int*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*ö
+mac_engine(*
+mac_size(*
+mac_key(*
+sdctr (*
+etm (*Ü
+set_inbound_cipher*
 
-read_timer%paramiko.packet.Packetizer.read_timer"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*”
-start_handshake*paramiko.packet.Packetizer.start_handshake"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*-
-timeout 
-builtins.float"builtins.floatz310z311z312z313z314*¬
-handshake_timed_out.paramiko.packet.Packetizer.handshake_timed_out"
-builtins.bool"builtins.bool*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*™
-complete_handshake-paramiko.packet.Packetizer.complete_handshake"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314*Ü
-read_all#paramiko.packet.Packetizer.read_all" 
-builtins.bytes"builtins.bytes*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*#
-n
-builtins.int"builtins.int*1
-check_rekey
-builtins.bool"builtins.bool z310z311z312z313z314*»
-	write_all$paramiko.packet.Packetizer.write_all"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*=
-out4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*À
-	write_all$paramiko.packet.Packetizer.write_all"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*;
-out2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*Ÿ
-readline#paramiko.packet.Packetizer.readline"
-builtins.str"builtins.str*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*-
-timeout 
-builtins.float"builtins.floatz310z311z312z313z314*ﬁ
-send_message'paramiko.packet.Packetizer.send_message"
-None*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*>
-data4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314*õ
-read_message'paramiko.packet.Packetizer.read_message"Ñ
-,Tuple[builtins.int,paramiko.message.Message]
-builtins.int"builtins.int4
-paramiko.message.Message"paramiko.message.Message*B
-self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz310z311z312z313z314j310j311j312j313j314rp
-REKEY_PACKETS(paramiko.packet.Packetizer.REKEY_PACKETS
-builtins.int"builtins.int*310*311*312*313*314rl
-REKEY_BYTES&paramiko.packet.Packetizer.REKEY_BYTES
-builtins.int"builtins.int*310*311*312*313*314rä
-REKEY_PACKETS_OVERFLOW_MAX5paramiko.packet.Packetizer.REKEY_PACKETS_OVERFLOW_MAX
-builtins.int"builtins.int*310*311*312*313*314rÜ
-REKEY_BYTES_OVERFLOW_MAX3paramiko.packet.Packetizer.REKEY_BYTES_OVERFLOW_MAX
-builtins.int"builtins.int*310*311*312*313*314—
-compute_hmacparamiko.packet.compute_hmac" 
-builtins.bytes"builtins.bytes*Å
-keyx
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*A
-message4
-typing_extensions.Buffer"typing_extensions.Buffer*0
-digest_class
-_hashlib.HASH"_hashlib.HASHz310z311‘
-compute_hmacparamiko.packet.compute_hmac" 
-builtins.bytes"builtins.bytes*Å
-keyx
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*?
-message2
-_collections_abc.Buffer"_collections_abc.Buffer*0
-digest_class
-_hashlib.HASH"_hashlib.HASHz312z313z314y
-	first_argparamiko.packet.first_arg"
-Any*/
-e(
-builtins.Exception"builtins.Exceptionz310z311z312z313z314*§
-__annotations__paramiko.packet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+block_engine(*
+
+block_size(*
+
+mac_engine(*
+mac_size(*
+mac_key(*
+etm (*9
+set_outbound_compressor*
+
+self(*
+
+compressor(*8
+set_inbound_compressor*
+
+self(*
+
+compressor(*
+close*
+
+self(**
+set_hexdump*
+
+self(*
+hexdump(*
+get_hexdump*
+
+self(*
+get_mac_size_in*
+
+self(* 
+get_mac_size_out*
+
+self(*
+
+need_rekey*
+
+self(*=
+set_keepalive*
+
+self(*
+interval(*
+callback(*
+
+read_timer*
+
+self(*.
+start_handshake*
+
+self(*
+timeout(*#
+handshake_timed_out*
+
+self(*"
+complete_handshake*
+
+self(*6
+read_all	*
+
+self(*
+n(*
+check_rekey (*.
+	write_all*
+
+self(*	
+out(z310z311*3
+	write_all*
+
+self(*	
+out(z312z313z314*'
+readline*
+
+self(*
+timeout(*(
+send_message*
+
+self(*
+
+data(*
+read_message*
+
+self(r
+REKEY_PACKETS0r
+REKEY_BYTES0r
+REKEY_PACKETS_OVERFLOW_MAX0r
+REKEY_BYTES_OVERFLOW_MAX0H
+compute_hmac	*	
+key(*
+message(*
+digest_class(z310z311M
+compute_hmac	*	
+key(*
+message(*
+digest_class(z312z313z314
+	first_arg*
+e(*
+__annotations__022"paramiko.packet.Packetizer2"socket.socket2"builtins.bool2"logging.Logger24"2cryptography.hazmat.primitives.ciphers.base.Cipher2"builtins.int2"_hashlib.HASH2"builtins.bytes2"builtins.bytearray22	
+2"" paramiko.compress.ZlibCompressor2$""paramiko.compress.ZlibDecompressor2"builtins.function222"builtins.float2"typing_extensions.Buffer2"_collections_abc.Buffer2"builtins.str2"paramiko.message.Message2222"builtins.Exception2"builtins.dict2

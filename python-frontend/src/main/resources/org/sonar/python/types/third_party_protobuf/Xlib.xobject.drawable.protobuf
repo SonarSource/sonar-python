@@ -1,1363 +1,638 @@
 
-Xlib.xobject.drawableóŠ
-DrawableXlib.xobject.drawable.Drawable"Xlib.xobject.resource.Resource*è
-get_geometry+Xlib.xobject.drawable.Drawable.get_geometry"F
-!Xlib.protocol.request.GetGeometry"!Xlib.protocol.request.GetGeometry*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawablez310z311z312z313z314*Ü
-create_pixmap,Xlib.xobject.drawable.Drawable.create_pixmap"<
-Xlib.xobject.drawable.Pixmap"Xlib.xobject.drawable.Pixmap*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*'
-depth
-builtins.int"builtins.intz310z311z312z313z314*þ
-	create_gc(Xlib.xobject.drawable.Drawable.create_gc"4
-Xlib.xobject.fontable.GC"Xlib.xobject.fontable.GC*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*á
-	copy_area(Xlib.xobject.drawable.Drawable.copy_area"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*.
-src_drawable
-builtins.int"builtins.int*'
-src_x
-builtins.int"builtins.int*'
-src_y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*'
-dst_x
-builtins.int"builtins.int*'
-dst_y
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*
+Xlib.xobject.drawableÈ
+Drawable"Xlib.xobject.resource.Resource*
+get_geometry*
 
-copy_plane)Xlib.xobject.drawable.Drawable.copy_plane"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*.
-src_drawable
-builtins.int"builtins.int*'
-src_x
-builtins.int"builtins.int*'
-src_y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*'
-dst_x
-builtins.int"builtins.int*'
-dst_y
-builtins.int"builtins.int*+
-	bit_plane
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314* 
+self(*E
+create_pixmap*
 
-poly_point)Xlib.xobject.drawable.Drawable.poly_point"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*,
+self(*
+width(*
+height(*
+depth(*%
+	create_gc*
 
-coord_mode
-builtins.int"builtins.int*³
-points¦
-1typing.Sequence[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ü
-point$Xlib.xobject.drawable.Drawable.point"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ž
-	poly_line(Xlib.xobject.drawable.Drawable.poly_line"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*,
+self(*
 
-coord_mode
-builtins.int"builtins.int*³
-points¦
-1typing.Sequence[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*È
-line#Xlib.xobject.drawable.Drawable.line"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*$
-x1
-builtins.int"builtins.int*$
-y1
-builtins.int"builtins.int*$
-x2
-builtins.int"builtins.int*$
-y2
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*É
-poly_segment+Xlib.xobject.drawable.Drawable.poly_segment"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*†
-segments÷
-9typing.Sequence[TypeAlias[typing.Sequence[builtins.int]]]¨
-(TypeAlias[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"*Xlib.protocol.structs._Segment4IntSequence"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ñ
-poly_rectangle-Xlib.xobject.drawable.Drawable.poly_rectangle"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*Š
+keys(*—
+	copy_area*
 
-rectanglesù
-9typing.Sequence[TypeAlias[typing.Sequence[builtins.int]]]ª
-(TypeAlias[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence",Xlib.protocol.structs._Rectangle4IntSequence"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*×
-	rectangle(Xlib.xobject.drawable.Drawable.rectangle"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¹
-poly_arc'Xlib.xobject.drawable.Drawable.poly_arc"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*þ
-arcsó
-9typing.Sequence[TypeAlias[typing.Sequence[builtins.int]]]¤
-(TypeAlias[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"&Xlib.protocol.structs._Arc6IntSequence"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ÿ
-arc"Xlib.xobject.drawable.Drawable.arc"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*(
-angle1
-builtins.int"builtins.int*(
-angle2
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ç
-	fill_poly(Xlib.xobject.drawable.Drawable.fill_poly"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*'
-shape
-builtins.int"builtins.int*,
+self(*
+gc(*
+src_drawable(*
+src_x(*
+src_y(*
+width(*
+height(*
+dst_x(*
+dst_y(*
+onerror (*©
 
-coord_mode
-builtins.int"builtins.int*³
-points¦
-1typing.Sequence[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Û
-poly_fill_rectangle2Xlib.xobject.drawable.Drawable.poly_fill_rectangle"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*Š
+copy_plane*
 
-rectanglesù
-9typing.Sequence[TypeAlias[typing.Sequence[builtins.int]]]ª
-(TypeAlias[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence",Xlib.protocol.structs._Rectangle4IntSequence"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*á
-fill_rectangle-Xlib.xobject.drawable.Drawable.fill_rectangle"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ã
-poly_fill_arc,Xlib.xobject.drawable.Drawable.poly_fill_arc"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*þ
-arcsó
-9typing.Sequence[TypeAlias[typing.Sequence[builtins.int]]]¤
-(TypeAlias[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"&Xlib.protocol.structs._Arc6IntSequence"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*©
-fill_arc'Xlib.xobject.drawable.Drawable.fill_arc"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*(
-angle1
-builtins.int"builtins.int*(
-angle2
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Û
-	put_image(Xlib.xobject.drawable.Drawable.put_image"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*(
-format
-builtins.int"builtins.int*'
-depth
-builtins.int"builtins.int**
-left_pad
-builtins.int"builtins.int*‚
-datax
-(Union[builtins.bytes,builtins.bytearray] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*»
-put_pil_image,Xlib.xobject.drawable.Drawable.put_pil_image"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*-
-image"
-PIL.Image.Image"PIL.Image.Image*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ñ
-	get_image(Xlib.xobject.drawable.Drawable.get_image"@
-Xlib.protocol.request.GetImage"Xlib.protocol.request.GetImage*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*(
-format
-builtins.int"builtins.int*,
+self(*
+gc(*
+src_drawable(*
+src_x(*
+src_y(*
+width(*
+height(*
+dst_x(*
+dst_y(*
+	bit_plane(*
+onerror (*U
 
-plane_mask
-builtins.int"builtins.intz310z311z312z313z314*ß
-	draw_text(Xlib.xobject.drawable.Drawable.draw_text"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*Ø
-textÍ
-<builtins.dict[builtins.str,Union[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ã
-	poly_text(Xlib.xobject.drawable.Drawable.poly_text"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*¼
-items°
-Mtyping.Sequence[builtins.dict[builtins.str,Union[builtins.str,builtins.int]]]Í
-<builtins.dict[builtins.str,Union[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*É
-poly_text_16+Xlib.xobject.drawable.Drawable.poly_text_16"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*¼
-items°
-Mtyping.Sequence[builtins.dict[builtins.str,Union[builtins.str,builtins.int]]]Í
-<builtins.dict[builtins.str,Union[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict"typing.Sequence*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*°
+poly_point*
 
-image_text)Xlib.xobject.drawable.Drawable.image_text"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*(
-string
-builtins.str"builtins.str*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¶
-image_text_16,Xlib.xobject.drawable.Drawable.image_text_16"
-None*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*$
-gc
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*(
-string
-builtins.str"builtins.str*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ó
-query_best_size.Xlib.xobject.drawable.Drawable.query_best_size"J
-#Xlib.protocol.request.QueryBestSize"#Xlib.protocol.request.QueryBestSize*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*,
+self(*
+gc(*
 
-item_class
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314r¡
-__drawable__+Xlib.xobject.drawable.Drawable.__drawable__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314üÞ
-WindowXlib.xobject.drawable.Window"Xlib.xobject.drawable.Drawable*Ì
-create_window*Xlib.xobject.drawable.Window.create_window"<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*.
-border_width
-builtins.int"builtins.int*'
-depth
-builtins.int"builtins.int*0
-window_class
-builtins.int"builtins.int **
-visual
-builtins.int"builtins.int *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*Ì
-change_attributes.Xlib.xobject.drawable.Window.change_attributes"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*ö
-get_attributes+Xlib.xobject.drawable.Window.get_attributes"V
-)Xlib.protocol.request.GetWindowAttributes")Xlib.protocol.request.GetWindowAttributes*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*Š
-destroy$Xlib.xobject.drawable.Window.destroy"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¢
-destroy_sub_windows0Xlib.xobject.drawable.Window.destroy_sub_windows"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Â
-change_save_set,Xlib.xobject.drawable.Window.change_save_set"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*&
-mode
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*€
-reparent%Xlib.xobject.drawable.Window.reparent"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*(
-parent
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*‚
-map Xlib.xobject.drawable.Window.map"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*š
-map_sub_windows,Xlib.xobject.drawable.Window.map_sub_windows"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*†
-unmap"Xlib.xobject.drawable.Window.unmap"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ž
-unmap_sub_windows.Xlib.xobject.drawable.Window.unmap_sub_windows"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¼
-	configure&Xlib.xobject.drawable.Window.configure"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*»
-	circulate&Xlib.xobject.drawable.Window.circulate"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*+
-	direction
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*”
-raise_window)Xlib.xobject.drawable.Window.raise_window"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Ú
+coord_mode(*
+points(*
+onerror (*B
+point*
 
-query_tree'Xlib.xobject.drawable.Window.query_tree"B
-Xlib.protocol.request.QueryTree"Xlib.protocol.request.QueryTree*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*Ç
-change_property,Xlib.xobject.drawable.Window.change_property"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window**
-property
-builtins.int"builtins.int*/
-property_type
-builtins.int"builtins.int*(
-format
-builtins.int"builtins.int*ù
-dataî
-DUnion[typing.Sequence[builtins.float],typing.Sequence[builtins.str]]T
-typing.Sequence[builtins.float] 
-builtins.float"builtins.float"typing.SequenceN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*(
-mode
-builtins.int"builtins.int *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*
-change_text_property1Xlib.xobject.drawable.Window.change_text_property"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window**
-property
-builtins.int"builtins.int*/
-property_type
-builtins.int"builtins.int*p
-dataf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*(
-mode
-builtins.int"builtins.int *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Æ
-delete_property,Xlib.xobject.drawable.Window.delete_property"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window**
-property
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ÿ
-get_property)Xlib.xobject.drawable.Window.get_property"ƒ
--Union[Xlib.protocol.request.GetProperty,None]F
-!Xlib.protocol.request.GetProperty"!Xlib.protocol.request.GetProperty
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window**
-property
-builtins.int"builtins.int*/
-property_type
-builtins.int"builtins.int*(
-offset
-builtins.int"builtins.int*(
-length
-builtins.int"builtins.int*,
-delete
-builtins.bool"builtins.bool z310z311z312z313z314*µ
-get_full_property.Xlib.xobject.drawable.Window.get_full_property"ƒ
--Union[Xlib.protocol.request.GetProperty,None]F
-!Xlib.protocol.request.GetProperty"!Xlib.protocol.request.GetProperty
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window**
-property
-builtins.int"builtins.int*/
-property_type
-builtins.int"builtins.int*,
-sizehint
-builtins.int"builtins.int z310z311z312z313z314*
-get_full_text_property3Xlib.xobject.drawable.Window.get_full_text_property"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window**
-property
-builtins.int"builtins.int*1
-property_type
-builtins.int"builtins.int *,
-sizehint
-builtins.int"builtins.int z310z311z312z313z314*ì
-list_properties,Xlib.xobject.drawable.Window.list_properties"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*÷
-set_selection_owner0Xlib.xobject.drawable.Window.set_selection_owner"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*+
-	selection
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*É
-convert_selection.Xlib.xobject.drawable.Window.convert_selection"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*+
-	selection
-builtins.int"builtins.int*(
-target
-builtins.int"builtins.int**
-property
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*®
+self(*
+gc(*
+x(*
+y(*
+onerror (*T
+	poly_line*
 
-send_event'Xlib.xobject.drawable.Window.send_event"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*;
-event0
-Xlib.protocol.rq.Event"Xlib.protocol.rq.Event*.
+self(*
+gc(*
 
-event_mask
-builtins.int"builtins.int */
-	propagate
-builtins.bool"builtins.bool *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ù
-grab_pointer)Xlib.xobject.drawable.Window.grab_pointer"
-builtins.int"builtins.int*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*0
-owner_events
-builtins.bool"builtins.bool*,
+coord_mode(*
+points(*
+onerror (*W
+line*
 
-event_mask
-builtins.int"builtins.int*.
-pointer_mode
-builtins.int"builtins.int*/
-keyboard_mode
-builtins.int"builtins.int*,
+self(*
+gc(*
+x1(*
+y1(*
+x2(*
+y2(*
+onerror (*G
+poly_segment*
 
-confine_to
-builtins.int"builtins.int*(
-cursor
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.intz310z311z312z313z314*‚
-grab_button(Xlib.xobject.drawable.Window.grab_button"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*(
-button
-builtins.int"builtins.int*+
-	modifiers
-builtins.int"builtins.int*0
-owner_events
-builtins.bool"builtins.bool*,
+self(*
+gc(*
+segments(*
+onerror (*K
+poly_rectangle*
 
-event_mask
-builtins.int"builtins.int*.
-pointer_mode
-builtins.int"builtins.int*/
-keyboard_mode
-builtins.int"builtins.int*,
+self(*
+gc(*
 
-confine_to
-builtins.int"builtins.int*(
-cursor
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*í
-ungrab_button*Xlib.xobject.drawable.Window.ungrab_button"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*(
-button
-builtins.int"builtins.int*+
-	modifiers
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*õ
-grab_keyboard*Xlib.xobject.drawable.Window.grab_keyboard"
-builtins.int"builtins.int*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*0
-owner_events
-builtins.bool"builtins.bool*.
-pointer_mode
-builtins.int"builtins.int*/
-keyboard_mode
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.intz310z311z312z313z314*ó
-grab_key%Xlib.xobject.drawable.Window.grab_key"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*%
-key
-builtins.int"builtins.int*+
-	modifiers
-builtins.int"builtins.int*0
-owner_events
-builtins.bool"builtins.bool*.
-pointer_mode
-builtins.int"builtins.int*/
-keyboard_mode
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ä
+rectangles(*
+onerror (*a
+	rectangle*
 
-ungrab_key'Xlib.xobject.drawable.Window.ungrab_key"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*%
-key
-builtins.int"builtins.int*+
-	modifiers
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*æ
-query_pointer*Xlib.xobject.drawable.Window.query_pointer"H
-"Xlib.protocol.request.QueryPointer""Xlib.protocol.request.QueryPointer*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*©
-get_motion_events.Xlib.xobject.drawable.Window.get_motion_events"2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*'
-start
-builtins.int"builtins.int*&
-stop
-builtins.int"builtins.intz310z311z312z313z314*ò
-translate_coords-Xlib.xobject.drawable.Window.translate_coords"N
-%Xlib.protocol.request.TranslateCoords"%Xlib.protocol.request.TranslateCoords*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*,
+self(*
+gc(*
+x(*
+y(*
+width(*
+height(*
+onerror (*?
+poly_arc*
 
-src_window
-builtins.int"builtins.int*'
-src_x
-builtins.int"builtins.int*'
-src_y
-builtins.int"builtins.intz310z311z312z313z314*Ã
-warp_pointer)Xlib.xobject.drawable.Window.warp_pointer"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*.
+self(*
+gc(*
 
-src_window
-builtins.int"builtins.int *)
-src_x
-builtins.int"builtins.int *)
-src_y
-builtins.int"builtins.int *-
-	src_width
-builtins.int"builtins.int *.
+arcs(*
+onerror (*w
+arc*
 
-src_height
-builtins.int"builtins.int *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ï
-set_input_focus,Xlib.xobject.drawable.Window.set_input_focus"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*+
-	revert_to
-builtins.int"builtins.int*&
-time
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*æ
+self(*
+gc(*
+x(*
+y(*
+width(*
+height(*
+angle1(*
+angle2(*
+onerror (*a
+	fill_poly*
 
-clear_area'Xlib.xobject.drawable.Window.clear_area"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*%
-x
-builtins.int"builtins.int *%
-y
-builtins.int"builtins.int *)
-width
-builtins.int"builtins.int **
-height
-builtins.int"builtins.int */
-	exposures
-builtins.bool"builtins.bool *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*µ
-create_colormap,Xlib.xobject.drawable.Window.create_colormap"@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*(
-visual
-builtins.int"builtins.int*'
-alloc
-builtins.int"builtins.intz310z311z312z313z314*µ
-list_installed_colormaps5Xlib.xobject.drawable.Window.list_installed_colormaps"€
--builtins.list[Xlib.xobject.colormap.Colormap]@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap"builtins.list*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*§
-rotate_properties.Xlib.xobject.drawable.Window.rotate_properties"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*^
+self(*
+gc(*
+shape(*
 
-propertiesN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*'
-delta
-builtins.int"builtins.int*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*„
-set_wm_name(Xlib.xobject.drawable.Window.set_wm_name"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*p
-namef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*Þ
-get_wm_name(Xlib.xobject.drawable.Window.get_wm_name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*Ž
-set_wm_icon_name-Xlib.xobject.drawable.Window.set_wm_icon_name"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*p
-namef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*è
-get_wm_icon_name-Xlib.xobject.drawable.Window.get_wm_icon_name"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*ã
-set_wm_class)Xlib.xobject.drawable.Window.set_wm_class"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*&
-inst
-builtins.str"builtins.str*%
-cls
-builtins.str"builtins.str*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¹
-get_wm_class)Xlib.xobject.drawable.Window.get_wm_class"œ
-,Union[Tuple[builtins.str,builtins.str],None]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*î
-set_wm_transient_for1Xlib.xobject.drawable.Window.set_wm_transient_for"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*H
-window<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314* 
-get_wm_transient_for1Xlib.xobject.drawable.Window.get_wm_transient_for"t
-(Union[Xlib.xobject.drawable.Window,None]<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*û
-set_wm_protocols-Xlib.xobject.drawable.Window.set_wm_protocols"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*]
-	protocolsN
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*î
-get_wm_protocols-Xlib.xobject.drawable.Window.get_wm_protocols"J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*¸
-set_wm_colormap_windows4Xlib.xobject.drawable.Window.set_wm_colormap_windows"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*‹
-windows~
--typing.Iterable[Xlib.xobject.drawable.Window]<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window"typing.Iterable*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*°
-get_wm_colormap_windows4Xlib.xobject.drawable.Window.get_wm_colormap_windows"~
--typing.Iterable[Xlib.xobject.drawable.Window]<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window"typing.Iterable*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*˜
-set_wm_client_machine2Xlib.xobject.drawable.Window.set_wm_client_machine"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*p
-namef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ò
-get_wm_client_machine2Xlib.xobject.drawable.Window.get_wm_client_machine"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*¿
-set_wm_normal_hints0Xlib.xobject.drawable.Window.set_wm_normal_hints"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*ì
-hintsÞ
-CUnion[Xlib.protocol.rq.DictWrapper,builtins.dict[builtins.str,Any]]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapperW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*ž
-get_wm_normal_hints0Xlib.xobject.drawable.Window.get_wm_normal_hints"t
-(Union[Xlib.protocol.rq.DictWrapper,None]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapper
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*±
-set_wm_hints)Xlib.xobject.drawable.Window.set_wm_hints"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*ì
-hintsÞ
-CUnion[Xlib.protocol.rq.DictWrapper,builtins.dict[builtins.str,Any]]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapperW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*
-get_wm_hints)Xlib.xobject.drawable.Window.get_wm_hints"t
-(Union[Xlib.protocol.rq.DictWrapper,None]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapper
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*±
-set_wm_state)Xlib.xobject.drawable.Window.set_wm_state"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*ì
-hintsÞ
-CUnion[Xlib.protocol.rq.DictWrapper,builtins.dict[builtins.str,Any]]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapperW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*
-get_wm_state)Xlib.xobject.drawable.Window.get_wm_state"t
-(Union[Xlib.protocol.rq.DictWrapper,None]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapper
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314*¹
-set_wm_icon_size-Xlib.xobject.drawable.Window.set_wm_icon_size"
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*ì
-hintsÞ
-CUnion[Xlib.protocol.rq.DictWrapper,builtins.dict[builtins.str,Any]]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapperW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314*˜
-get_wm_icon_size-Xlib.xobject.drawable.Window.get_wm_icon_size"t
-(Union[Xlib.protocol.rq.DictWrapper,None]<
-Xlib.protocol.rq.DictWrapper"Xlib.protocol.rq.DictWrapper
-None*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz310z311z312z313z314j310j311j312j313j314r›
+coord_mode(*
+points(*
+onerror (*P
+poly_fill_rectangle*
 
-__window__'Xlib.xobject.drawable.Window.__window__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314¿
+self(*
+gc(*
 
-PixmapXlib.xobject.drawable.Pixmap"Xlib.xobject.drawable.Drawable*„
-free!Xlib.xobject.drawable.Pixmap.free"
-None*F
-self<
-Xlib.xobject.drawable.Pixmap"Xlib.xobject.drawable.Pixmap*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¸
-create_cursor*Xlib.xobject.drawable.Pixmap.create_cursor"8
-Xlib.xobject.cursor.Cursor"Xlib.xobject.cursor.Cursor*F
-self<
-Xlib.xobject.drawable.Pixmap"Xlib.xobject.drawable.Pixmap*&
-mask
-builtins.int"builtins.int*µ
+rectangles(*
+onerror (*f
+fill_rectangle*
 
-foreground¤
-(TypeAlias[typing.Iterable[builtins.int]]N
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable"&Xlib.protocol.structs._RGB3IntIterable*µ
+self(*
+gc(*
+x(*
+y(*
+width(*
+height(*
+onerror (*D
+poly_fill_arc*
 
-background¤
-(TypeAlias[typing.Iterable[builtins.int]]N
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable"&Xlib.protocol.structs._RGB3IntIterable*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314r›
+self(*
+gc(*
 
-__pixmap__'Xlib.xobject.drawable.Pixmap.__pixmap__K
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314°
-roundupXlib.xobject.drawable.roundup"
-builtins.int"builtins.int*'
-value
-builtins.int"builtins.int*&
-unit
-builtins.int"builtins.intz310z311z312z313z314*ª
-__annotations__%Xlib.xobject.drawable.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+arcs(*
+onerror (*|
+fill_arc*
+
+self(*
+gc(*
+x(*
+y(*
+width(*
+height(*
+angle1(*
+angle2(*
+onerror (*˜
+	put_image*
+
+self(*
+gc(*
+x(*
+y(*
+width(*
+height(*
+format(*
+depth(*
+left_pad(*
+
+data(*
+onerror (*W
+put_pil_image*
+
+self(*
+gc(*
+x(*
+y(*
+image(*
+onerror (*f
+	get_image*
+
+self(*
+x(*
+y(*
+width(*
+height(*
+format(*
+
+plane_mask(*R
+	draw_text*
+
+self(*
+gc(*
+x(*
+y(*
+
+text(*
+onerror (*S
+	poly_text*
+
+self(*
+gc(*
+x(*
+y(*
+items(*
+onerror (*V
+poly_text_16*
+
+self(*
+gc(*
+x(*
+y(*
+items(*
+onerror (*U
+
+image_text*
+
+self(*
+gc(*
+x(*
+y(*
+string(*
+onerror (*X
+image_text_16*
+
+self(*
+gc(*
+x(*
+y(*
+string(*
+onerror (*L
+query_best_size*
+
+self(*
+
+item_class(*
+width(*
+height(r
+__drawable__0	è"
+Window"Xlib.xobject.drawable.Drawable*®
+create_window*
+
+self(*
+x(*
+y(*
+width(*
+height(*
+border_width(*
+depth(*
+window_class (*
+visual (*
+onerror (*
+
+keys(*>
+change_attributes*
+
+self(*
+onerror (*
+
+keys(*
+get_attributes *
+
+self(*(
+destroy*
+
+self(*
+onerror (*4
+destroy_sub_windows*
+
+self(*
+onerror (*<
+change_save_set*
+
+self(*
+
+mode(*
+onerror (*I
+reparent*
+
+self(*
+parent(*
+x(*
+y(*
+onerror (*$
+map*
+
+self(*
+onerror (*0
+map_sub_windows*
+
+self(*
+onerror (*&
+unmap*
+
+self(*
+onerror (*2
+unmap_sub_windows*
+
+self(*
+onerror (*6
+	configure*
+
+self(*
+onerror (*
+
+keys(*;
+	circulate*
+
+self(*
+	direction(*
+onerror (*-
+raise_window*
+
+self(*
+onerror (*
+
+query_tree!*
+
+self(*}
+change_property*
+
+self(*
+property(*
+property_type(*
+format(*
+
+data(%*
+mode (*
+onerror (*t
+change_text_property*
+
+self(*
+property(*
+property_type(*
+
+data(&*
+mode (*
+onerror (*@
+delete_property*
+
+self(*
+property(*
+onerror (*m
+get_property(*
+
+self(*
+property(*
+property_type(*
+offset(*
+length(*
+delete ()*X
+get_full_property(*
+
+self(*
+property(*
+property_type(*
+sizehint (*_
+get_full_text_property**
+
+self(*
+property(*
+property_type (*
+sizehint (*
+list_properties+*
+
+self(*Q
+set_selection_owner*
+
+self(*
+	selection(*
+
+time(*
+onerror (*m
+convert_selection*
+
+self(*
+	selection(*
+target(*
+property(*
+
+time(*
+onerror (*_
+
+send_event*
+
+self(*
+event(,*
+
+event_mask (*
+	propagate ()*
+onerror (*—
+grab_pointer*
+
+self(*
+owner_events()*
+
+event_mask(*
+pointer_mode(*
+keyboard_mode(*
+
+confine_to(*
+cursor(*
+
+time(*º
+grab_button*
+
+self(*
+button(*
+	modifiers(*
+owner_events()*
+
+event_mask(*
+pointer_mode(*
+keyboard_mode(*
+
+confine_to(*
+cursor(*
+onerror (*M
+ungrab_button*
+
+self(*
+button(*
+	modifiers(*
+onerror (*f
+grab_keyboard*
+
+self(*
+owner_events()*
+pointer_mode(*
+keyboard_mode(*
+
+time(*‚
+grab_key*
+
+self(*	
+key(*
+	modifiers(*
+owner_events()*
+pointer_mode(*
+keyboard_mode(*
+onerror (*G
+
+ungrab_key*
+
+self(*	
+key(*
+	modifiers(*
+onerror (*
+query_pointer-*
+
+self(*:
+get_motion_events.*
+
+self(*
+start(*
+
+stop(*L
+translate_coords/*
+
+self(*
+
+src_window(*
+src_x(*
+src_y(*˜
+warp_pointer*
+
+self(*
+x(*
+y(*
+
+src_window (*
+src_x (*
+src_y (*
+	src_width (*
+
+src_height (*
+onerror (*M
+set_input_focus*
+
+self(*
+	revert_to(*
+
+time(*
+onerror (*s
+
+clear_area*
+
+self(*	
+x (*	
+y (*
+width (*
+height (*
+	exposures ()*
+onerror (*:
+create_colormap0*
+
+self(*
+visual(*
+alloc(*(
+list_installed_colormaps1*
+
+self(*Q
+rotate_properties*
+
+self(*
+
+properties(*
+delta(*
+onerror (*8
+set_wm_name*
+
+self(*
+
+name(&*
+onerror (*
+get_wm_name**
+
+self(*=
+set_wm_icon_name*
+
+self(*
+
+name(&*
+onerror (* 
+get_wm_icon_name**
+
+self(*D
+set_wm_class*
+
+self(*
+
+inst(*	
+cls(*
+onerror (*
+get_wm_class3*
+
+self(*C
+set_wm_transient_for*
+
+self(*
+window(*
+onerror (*$
+get_wm_transient_for4*
+
+self(*B
+set_wm_protocols*
+
+self(*
+	protocols(5*
+onerror (* 
+get_wm_protocols+*
+
+self(*G
+set_wm_colormap_windows*
+
+self(*
+windows(6*
+onerror (*'
+get_wm_colormap_windows6*
+
+self(*B
+set_wm_client_machine*
+
+self(*
+
+name(&*
+onerror (*%
+get_wm_client_machine**
+
+self(*O
+set_wm_normal_hints*
+
+self(*
+hints (:*
+onerror (*
+
+keys(*#
+get_wm_normal_hints;*
+
+self(*H
+set_wm_hints*
+
+self(*
+hints (:*
+onerror (*
+
+keys(*
+get_wm_hints;*
+
+self(*H
+set_wm_state*
+
+self(*
+hints (:*
+onerror (*
+
+keys(*
+get_wm_state;*
+
+self(*L
+set_wm_icon_size*
+
+self(*
+hints (:*
+onerror (*
+
+keys(* 
+get_wm_icon_size;*
+
+self(r
+
+__window__0	À
+Pixmap"Xlib.xobject.drawable.Drawable*%
+free*
+
+self(*
+onerror (*_
+create_cursor<*
+
+self(*
+
+mask(*
+
+foreground(=*
+
+background(=*
+x(*
+y(r
+
+__pixmap__0	$
+roundup*
+value(*
+
+unit(*
+__annotations__092#"!Xlib.protocol.request.GetGeometry2 "Xlib.xobject.drawable.Drawable2"Xlib.xobject.drawable.Pixmap2"builtins.int2"Xlib.xobject.fontable.GC2"builtins.object22"builtins.function222 "Xlib._typing.ErrorHandler2	22
+222"typing.Sequence22"typing.Sequence221"*Xlib.protocol.structs._Segment4IntSequence22"typing.Sequence223",Xlib.protocol.structs._Rectangle4IntSequence22"typing.Sequence22-"&Xlib.protocol.structs._Arc6IntSequence22"typing.Sequence22"builtins.bytes2"builtins.bytearray222"PIL.Image.Image2 "Xlib.protocol.request.GetImage2"builtins.str222"builtins.dict22"typing.Sequence22%"#Xlib.protocol.request.QueryBestSize2"Xlib.xobject.drawable.Window2+")Xlib.protocol.request.GetWindowAttributes2!"Xlib.protocol.request.QueryTree2"builtins.float2"typing.Sequence2"2"typing.Sequence222#$222#"!Xlib.protocol.request.GetProperty22'2"builtins.bool222"builtins.list22"Xlib.protocol.rq.Event2$""Xlib.protocol.request.QueryPointer2"Xlib.protocol.rq.Struct2'"%Xlib.protocol.request.TranslateCoords2 "Xlib.xobject.colormap.Colormap2"builtins.list2022222222"typing.Iterable22"typing.Iterable22"Xlib.protocol.rq.DictWrapper22"builtins.dict2822792272"Xlib.xobject.cursor.Cursor2-"&Xlib.protocol.structs._RGB3IntIterable25

@@ -1,140 +1,62 @@
 
-pyspark.sql.window†
-Windowpyspark.sql.window.Window"builtins.object*—
-partitionBy%pyspark.sql.window.Window.partitionBy">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*à
-colsÕ
-pUnion[TypeAlias[Union[pyspark.sql.column.Column,builtins.str]],builtins.list[pyspark.sql._typing.ColumnOrName_]]è
-8TypeAlias[Union[pyspark.sql.column.Column,builtins.str]]‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str" pyspark.sql._typing.ColumnOrNameó
-0builtins.list[pyspark.sql._typing.ColumnOrName_]¯
-!pyspark.sql._typing.ColumnOrName_‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str"builtins.list0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowh*
-orderBy!pyspark.sql.window.Window.orderBy">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*à
-colsÕ
-pUnion[TypeAlias[Union[pyspark.sql.column.Column,builtins.str]],builtins.list[pyspark.sql._typing.ColumnOrName_]]è
-8TypeAlias[Union[pyspark.sql.column.Column,builtins.str]]‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str" pyspark.sql._typing.ColumnOrNameó
-0builtins.list[pyspark.sql._typing.ColumnOrName_]¯
-!pyspark.sql._typing.ColumnOrName_‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str"builtins.list0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowh*„
-rowsBetween%pyspark.sql.window.Window.rowsBetween">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*'
-start
-builtins.int"builtins.int*%
-end
-builtins.int"builtins.int0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowh*†
-rangeBetween&pyspark.sql.window.Window.rangeBetween">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*'
-start
-builtins.int"builtins.int*%
-end
-builtins.int"builtins.int0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowhrX
-_JAVA_MIN_LONG(pyspark.sql.window.Window._JAVA_MIN_LONG
-builtins.int"builtins.intrX
-_JAVA_MAX_LONG(pyspark.sql.window.Window._JAVA_MAX_LONG
-builtins.int"builtins.intrd
-_PRECEDING_THRESHOLD.pyspark.sql.window.Window._PRECEDING_THRESHOLD
-builtins.int"builtins.intrd
-_FOLLOWING_THRESHOLD.pyspark.sql.window.Window._FOLLOWING_THRESHOLD
-builtins.int"builtins.intr`
-unboundedPreceding,pyspark.sql.window.Window.unboundedPreceding
-builtins.int"builtins.intr`
-unboundedFollowing,pyspark.sql.window.Window.unboundedFollowing
-builtins.int"builtins.intrP
+pyspark.sql.window¾
+Window"builtins.object*[
+partitionBy*
 
-currentRow$pyspark.sql.window.Window.currentRow
-builtins.int"builtins.int²
+cols(0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowh*W
+orderBy*
 
-WindowSpecpyspark.sql.window.WindowSpec"builtins.object*š
-__init__&pyspark.sql.window.WindowSpec.__init__"
-None*H
-self>
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*
-jspec
-Any*Ð
-partitionBy)pyspark.sql.window.WindowSpec.partitionBy">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*H
-self>
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*à
-colsÕ
-pUnion[TypeAlias[Union[pyspark.sql.column.Column,builtins.str]],builtins.list[pyspark.sql._typing.ColumnOrName_]]è
-8TypeAlias[Union[pyspark.sql.column.Column,builtins.str]]‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str" pyspark.sql._typing.ColumnOrNameó
-0builtins.list[pyspark.sql._typing.ColumnOrName_]¯
-!pyspark.sql._typing.ColumnOrName_‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str"builtins.list0:'pyspark.sql.utils.try_remote_windowspec*È
-orderBy%pyspark.sql.window.WindowSpec.orderBy">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*H
-self>
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*à
-colsÕ
-pUnion[TypeAlias[Union[pyspark.sql.column.Column,builtins.str]],builtins.list[pyspark.sql._typing.ColumnOrName_]]è
-8TypeAlias[Union[pyspark.sql.column.Column,builtins.str]]‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str" pyspark.sql._typing.ColumnOrNameó
-0builtins.list[pyspark.sql._typing.ColumnOrName_]¯
-!pyspark.sql._typing.ColumnOrName_‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str"builtins.list0:'pyspark.sql.utils.try_remote_windowspec*½
-rowsBetween)pyspark.sql.window.WindowSpec.rowsBetween">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*H
-self>
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*'
-start
-builtins.int"builtins.int*%
-end
-builtins.int"builtins.int0:'pyspark.sql.utils.try_remote_windowspec*¿
-rangeBetween*pyspark.sql.window.WindowSpec.rangeBetween">
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*H
-self>
-pyspark.sql.window.WindowSpec"pyspark.sql.window.WindowSpec*'
-start
-builtins.int"builtins.int*%
-end
-builtins.int"builtins.int0:'pyspark.sql.utils.try_remote_windowspecr7
-_jspec$pyspark.sql.window.WindowSpec._jspec
-Any³
-_to_java_cols pyspark.sql.window._to_java_cols"
-Any*ö
-colsë
-€builtins.tuple[Union[TypeAlias[Union[pyspark.sql.column.Column,builtins.str]],builtins.list[pyspark.sql._typing.ColumnOrName_]]]Õ
-pUnion[TypeAlias[Union[pyspark.sql.column.Column,builtins.str]],builtins.list[pyspark.sql._typing.ColumnOrName_]]è
-8TypeAlias[Union[pyspark.sql.column.Column,builtins.str]]‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str" pyspark.sql._typing.ColumnOrNameó
-0builtins.list[pyspark.sql._typing.ColumnOrName_]¯
-!pyspark.sql._typing.ColumnOrName_‡
--Union[pyspark.sql.column.Column,builtins.str]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-builtins.str"builtins.str"builtins.list"builtins.tuple+
-_testpyspark.sql.window._test"
-None*Ž
-__annotations__"pyspark.sql.window.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*4
+cols(0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowh*g
+rowsBetween*
+start(	*	
+end(	0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowh*h
+rangeBetween*
+start(	*	
+end(	0:builtins.staticmethod:#pyspark.sql.utils.try_remote_windowhr
+_JAVA_MIN_LONG0	r
+_JAVA_MAX_LONG0	r
+_PRECEDING_THRESHOLD0	r
+_FOLLOWING_THRESHOLD0	r
+unboundedPreceding0	r
+unboundedFollowing0	r
 
-JavaObjectpyspark.sql.window.JavaObject
-Any*.
-JVMViewpyspark.sql.window.JVMView
-Any*q
-__all__pyspark.sql.window.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+currentRow0	µ
+
+WindowSpec"builtins.object*%
+__init__
+*
+
+self(*
+jspec(*R
+partitionBy*
+
+self(*
+
+cols(0:'pyspark.sql.utils.try_remote_windowspec*N
+orderBy*
+
+self(*
+
+cols(0:'pyspark.sql.utils.try_remote_windowspec*^
+rowsBetween*
+
+self(*
+start(	*	
+end(	0:'pyspark.sql.utils.try_remote_windowspec*_
+rangeBetween*
+
+self(*
+start(	*	
+end(	0:'pyspark.sql.utils.try_remote_windowspecr
+
+_jspec0
+_to_java_cols*
+
+cols(	
+_test
+*
+__annotations__0*
+
+JavaObject0*
+JVMView0*
+__all__02"pyspark.sql.window.WindowSpec2"pyspark.sql.column.Column2"builtins.str222'" pyspark.sql._typing.ColumnOrName2222"builtins.list2222"builtins.int222"builtins.tuple22"builtins.dict22"builtins.list2

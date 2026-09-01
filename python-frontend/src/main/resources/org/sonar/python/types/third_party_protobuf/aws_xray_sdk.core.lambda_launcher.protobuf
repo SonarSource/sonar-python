@@ -1,290 +1,195 @@
 
-!aws_xray_sdk.core.lambda_launcher
-Context!aws_xray_sdk.core.context.Context"builtins.object*‡
-__init__*aws_xray_sdk.core.context.Context.__init__"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*3
-context_missing
-builtins.str"builtins.str z310z311z312z313z314*î
-put_segment-aws_xray_sdk.core.context.Context.put_segment"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*a
-segmentT
-(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz310z311z312z313z314*ñ
-end_segment-aws_xray_sdk.core.context.Context.end_segment"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*‚
-end_time—
-íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
-ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
-{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int"time.struct_time
-None z310z311z312z313z314*©
-put_subsegment0aws_xray_sdk.core.context.Context.put_subsegment"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*p
+!aws_xray_sdk.core.lambda_launcher‘
+Context!aws_xray_sdk.core.context.Context"builtins.object*1
+__init__*
 
-subsegment`
-.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz310z311z312z313z314*õ
-end_subsegment0aws_xray_sdk.core.context.Context.end_subsegment"
-Any*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*‚
-end_time—
-íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
-ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
-{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int"time.struct_time
-None z310z311z312z313z314*i
-get_trace_entity2aws_xray_sdk.core.context.Context.get_trace_entity*
-selfz310z311z312z313z314*ü
-set_trace_entity2aws_xray_sdk.core.context.Context.set_trace_entity"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*b
-trace_entityP
-&aws_xray_sdk.core.models.entity.Entity"&aws_xray_sdk.core.models.entity.Entityz310z311z312z313z314*√
-clear_trace_entities6aws_xray_sdk.core.context.Context.clear_trace_entities"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Contextz310z311z312z313z314*«
-handle_context_missing8aws_xray_sdk.core.context.Context.handle_context_missing"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Contextz310z311z312z313z3142ù
-context_missing1aws_xray_sdk.core.context.Context.context_missingg
-context_missing1aws_xray_sdk.core.context.Context.context_missing*
-self0:builtins.propertyX`‘
-context_missing1aws_xray_sdk.core.context.Context.context_missing"
-None*P
-selfF
-!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*'
-value
-builtins.str"builtins.str0:.setter"310"311"312"313"314j310j311j312j313j314™#
-FacadeSegment5aws_xray_sdk.core.models.facade_segment.FacadeSegment"(aws_xray_sdk.core.models.segment.Segment*Ω
-__init__>aws_xray_sdk.core.models.facade_segment.FacadeSegment.__init__"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-name
-Any*
-entityid
-Any*
-traceid
-Any*
-sampled
-Anyz310z311z312z313z314*Œ
-close;aws_xray_sdk.core.models.facade_segment.FacadeSegment.close"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*k
-end_time[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ó
-put_http_metaCaws_xray_sdk.core.models.facade_segment.FacadeSegment.put_http_meta"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-key
-Any*
-value
-Anyz310z311z312z313z314*ô
-put_annotationDaws_xray_sdk.core.models.facade_segment.FacadeSegment.put_annotation"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-key
-Any*
-value
-Anyz310z311z312z313z314*ƒ
-put_metadataBaws_xray_sdk.core.models.facade_segment.FacadeSegment.put_metadata"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-key
-Any*
-value
-Any*-
-	namespace
-builtins.str"builtins.str z310z311z312z313z314*¸
-set_aws=aws_xray_sdk.core.models.facade_segment.FacadeSegment.set_aws"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-aws_meta
-Anyz310z311z312z313z314*˙
-set_user>aws_xray_sdk.core.models.facade_segment.FacadeSegment.set_user"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-user
-Anyz310z311z312z313z314*˘
-add_throttle_flagGaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_throttle_flag"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*Û
-add_fault_flagDaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_fault_flag"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*Û
-add_error_flagDaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_error_flag"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*À
-add_exceptionCaws_xray_sdk.core.models.facade_segment.FacadeSegment.add_exception"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-	exception
-Any*
-stack
-Any*,
-remote
-builtins.bool"builtins.bool z310z311z312z313z314*ì
-apply_status_codeGaws_xray_sdk.core.models.facade_segment.FacadeSegment.apply_status_code"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegment*
-status_code
-Anyz310z311z312z313z314*È
-	serialize?aws_xray_sdk.core.models.facade_segment.FacadeSegment.serialize"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*w
-ready_to_sendCaws_xray_sdk.core.models.facade_segment.FacadeSegment.ready_to_send*
-selfz310z311z312z313z314*È
-	increment?aws_xray_sdk.core.models.facade_segment.FacadeSegment.increment"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314*Å
-decrement_ref_counterKaws_xray_sdk.core.models.facade_segment.FacadeSegment.decrement_ref_counter"
-None*x
-selfn
-5aws_xray_sdk.core.models.facade_segment.FacadeSegment"5aws_xray_sdk.core.models.facade_segment.FacadeSegmentz310z311z312z313z314j310j311j312j313j314rt
-initializingBaws_xray_sdk.core.models.facade_segment.FacadeSegment.initializing
-Any*310*311*312*313*314ı
-TraceHeader1aws_xray_sdk.core.models.trace_header.TraceHeader"builtins.object*˚
-__init__:aws_xray_sdk.core.models.trace_header.TraceHeader.__init__"
-None*p
-selff
-1aws_xray_sdk.core.models.trace_header.TraceHeader"1aws_xray_sdk.core.models.trace_header.TraceHeader*P
-rootD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-parentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
-sampledG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *ü
-dataí
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None z310z311z312z313z314*£
-from_header_strAaws_xray_sdk.core.models.trace_header.TraceHeader.from_header_str"◊
-6aws_xray_sdk.core.models.trace_header.TraceHeader.Selff
-1aws_xray_sdk.core.models.trace_header.TraceHeader"1aws_xray_sdk.core.models.trace_header.TraceHeader"1aws_xray_sdk.core.models.trace_header.TraceHeader(*™
-cls†
-<Type[aws_xray_sdk.core.models.trace_header.TraceHeader.Self]◊
-6aws_xray_sdk.core.models.trace_header.TraceHeader.Selff
-1aws_xray_sdk.core.models.trace_header.TraceHeader"1aws_xray_sdk.core.models.trace_header.TraceHeader"1aws_xray_sdk.core.models.trace_header.TraceHeader("type*
-header
-Any0:builtins.classmethodpz310z311z312z313z314*s
-to_header_str?aws_xray_sdk.core.models.trace_header.TraceHeader.to_header_str*
-selfz310z311z312z313z314*x
-root6aws_xray_sdk.core.models.trace_header.TraceHeader.root*
-self0:builtins.property`z310z311z312z313z314*|
-parent8aws_xray_sdk.core.models.trace_header.TraceHeader.parent*
-self0:builtins.property`z310z311z312z313z314*~
-sampled9aws_xray_sdk.core.models.trace_header.TraceHeader.sampled*
-self0:builtins.property`z310z311z312z313z314*x
-data6aws_xray_sdk.core.models.trace_header.TraceHeader.data*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314Ω
-LambdaContext/aws_xray_sdk.core.lambda_launcher.LambdaContext"!aws_xray_sdk.core.context.Context*’
-__init__8aws_xray_sdk.core.lambda_launcher.LambdaContext.__init__"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContextz310z311z312z313z314*Ò
-put_segment;aws_xray_sdk.core.lambda_launcher.LambdaContext.put_segment"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContext*
-segment
-Anyz310z311z312z313z314*»
-end_segment;aws_xray_sdk.core.lambda_launcher.LambdaContext.end_segment"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContext*k
-end_time[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*˙
-put_subsegment>aws_xray_sdk.core.lambda_launcher.LambdaContext.put_subsegment"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContext*
+self(*
+context_missing (**
+put_segment*
 
-subsegment
-Anyz310z311z312z313z314*w
-get_trace_entity@aws_xray_sdk.core.lambda_launcher.LambdaContext.get_trace_entity*
-selfz310z311z312z313z314*Ò
-handle_context_missingFaws_xray_sdk.core.lambda_launcher.LambdaContext.handle_context_missing"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContextz310z311z312z313z3142Ω
-context_missing?aws_xray_sdk.core.lambda_launcher.LambdaContext.context_missing„
-context_missing?aws_xray_sdk.core.lambda_launcher.LambdaContext.context_missing"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContext0:builtins.propertyX`È
-context_missing?aws_xray_sdk.core.lambda_launcher.LambdaContext.context_missing"
-None*l
-selfb
-/aws_xray_sdk.core.lambda_launcher.LambdaContext"/aws_xray_sdk.core.lambda_launcher.LambdaContext*
-value
-Any0:.setter"310"311"312"313"314j310j311j312j313j314]
-check_in_lambda1aws_xray_sdk.core.lambda_launcher.check_in_lambdaz310z311z312z313z314*∂
-__annotations__1aws_xray_sdk.core.lambda_launcher.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*î
-global_sdk_configaws_xray_sdk.global_sdk_configF
-!aws_xray_sdk.sdk_config.SDKConfig"!aws_xray_sdk.sdk_config.SDKConfig*310*311*312*313*314*g
-log%aws_xray_sdk.core.lambda_launcher.log 
-logging.Logger"logging.Logger*310*311*312*313*314*ã
-LAMBDA_TRACE_HEADER_KEY9aws_xray_sdk.core.lambda_launcher.LAMBDA_TRACE_HEADER_KEY
-builtins.str"builtins.str*310*311*312*313*314*Ö
-LAMBDA_TASK_ROOT_KEY6aws_xray_sdk.core.lambda_launcher.LAMBDA_TASK_ROOT_KEY
-builtins.str"builtins.str*310*311*312*313*314*y
-TOUCH_FILE_DIR0aws_xray_sdk.core.lambda_launcher.TOUCH_FILE_DIR
-builtins.str"builtins.str*310*311*312*313*314*{
-TOUCH_FILE_PATH1aws_xray_sdk.core.lambda_launcher.TOUCH_FILE_PATH
-builtins.str"builtins.str*310*311*312*313*314
+self(*
+segment(*-
+end_segment*
+
+self(*
+end_time (*0
+put_subsegment*
+
+self(*
+
+subsegment(	*0
+end_subsegment
+*
+
+self(*
+end_time (*
+get_trace_entity*
+self*4
+set_trace_entity*
+
+self(*
+trace_entity(*$
+clear_trace_entities*
+
+self(*&
+handle_context_missing*
+
+self(2Ä
+context_missing4
+context_missing*
+self0:builtins.propertyX`7
+context_missing*
+
+self(*
+value(0:.setter‰
+FacadeSegment5aws_xray_sdk.core.models.facade_segment.FacadeSegment"(aws_xray_sdk.core.models.segment.Segment*R
+__init__*
+
+self(*
+
+name(
+*
+entityid(
+*
+traceid(
+*
+sampled(
+*'
+close*
+
+self(*
+end_time (*5
+put_http_meta*
+
+self(*	
+key(
+*
+value(
+*6
+put_annotation*
+
+self(*	
+key(
+*
+value(
+*G
+put_metadata*
+
+self(*	
+key(
+*
+value(
+*
+	namespace (*'
+set_aws*
+
+self(*
+aws_meta(
+*$
+set_user*
+
+self(*
+
+user(
+*!
+add_throttle_flag*
+
+self(*
+add_fault_flag*
+
+self(*
+add_error_flag*
+
+self(*K
+add_exception*
+
+self(*
+	exception(
+*
+stack(
+*
+remote (*4
+apply_status_code*
+
+self(*
+status_code(
+*
+	serialize*
+
+self(*
+ready_to_send*
+self*
+	increment*
+
+self(*%
+decrement_ref_counter*
+
+self(r
+initializing0
+¥
+TraceHeader1aws_xray_sdk.core.models.trace_header.TraceHeader"builtins.object*U
+__init__*
+
+self(*
+root (*
+parent (*
+sampled (*
+data (*F
+from_header_str*	
+cls(*
+header(
+0:builtins.classmethodp*
+to_header_str*
+self*'
+root*
+self0:builtins.property`*)
+parent*
+self0:builtins.property`**
+sampled*
+self0:builtins.property`*'
+data*
+self0:builtins.property`¶
+LambdaContext"!aws_xray_sdk.core.context.Context*
+__init__*
+
+self(**
+put_segment*
+
+self(*
+segment(
+*-
+end_segment*
+
+self(*
+end_time (*0
+put_subsegment*
+
+self(*
+
+subsegment(
+*
+get_trace_entity*
+self*&
+handle_context_missing*
+
+self(2Ñ
+context_missing8
+context_missing*
+
+self(0:builtins.propertyX`7
+context_missing*
+
+self(*
+value(
+0:.setter
+check_in_lambda*
+__annotations__0*5
+global_sdk_configaws_xray_sdk.global_sdk_config0*
+log0*
+LAMBDA_TRACE_HEADER_KEY0*
+LAMBDA_TASK_ROOT_KEY0*
+TOUCH_FILE_DIR0*
+TOUCH_FILE_PATH022#"!aws_xray_sdk.core.context.Context2"builtins.str2*"(aws_xray_sdk.core.models.segment.Segment2"builtins.int22	2"time.struct_time22220".aws_xray_sdk.core.models.subsegment.Subsegment22("&aws_xray_sdk.core.models.entity.Entity27"5aws_xray_sdk.core.models.facade_segment.FacadeSegment2"_typeshed.Incomplete2
+222"builtins.bool23"1aws_xray_sdk.core.models.trace_header.TraceHeader22222"builtins.dict2
+222r
+6aws_xray_sdk.core.models.trace_header.TraceHeader.Self"1aws_xray_sdk.core.models.trace_header.TraceHeader(22"type221"/aws_xray_sdk.core.lambda_launcher.LambdaContext2#"!aws_xray_sdk.sdk_config.SDKConfig2"logging.Logger

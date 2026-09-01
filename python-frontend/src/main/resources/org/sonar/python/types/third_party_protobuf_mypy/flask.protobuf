@@ -1,1447 +1,587 @@
 
-flask˚˘
-Flaskflask.app.Flask"flask.scaffold.Scaffold*“
-__init__flask.app.Flask.__init__"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*-
-import_name
-builtins.str"builtins.str*[
-static_url_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *î
-static_folder
-)Union[builtins.str,os.PathLike[Any],None]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike
-None *W
-static_hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *3
-host_matching
-builtins.bool"builtins.bool *8
-subdomain_matching
-builtins.bool"builtins.bool *ñ
-template_folder
-)Union[builtins.str,os.PathLike[Any],None]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike
-None *Y
-instance_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *>
-instance_relative_config
-builtins.bool"builtins.bool *U
-	root_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *†
-_check_setup_finished%flask.app.Flask._check_setup_finished"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*(
-f_name
-builtins.str"builtins.str*ä
-nameflask.app.Flask.name"
-builtins.str"builtins.str*,
-self"
-flask.app.Flask"flask.app.Flask0:werkzeug.utils.cached_property*í
-loggerflask.app.Flask.logger" 
-logging.Logger"logging.Logger*,
-self"
-flask.app.Flask"flask.app.Flask0:werkzeug.utils.cached_property*¥
-	jinja_envflask.app.Flask.jinja_env"<
-flask.templating.Environment"flask.templating.Environment*,
-self"
-flask.app.Flask"flask.app.Flask0:werkzeug.utils.cached_property*õ
-got_first_request!flask.app.Flask.got_first_request"
-builtins.bool"builtins.bool*,
-self"
-flask.app.Flask"flask.app.Flask0:builtins.property`*Ω
-make_configflask.app.Flask.make_config"*
-flask.config.Config"flask.config.Config*,
-self"
-flask.app.Flask"flask.app.Flask*7
-instance_relative
-builtins.bool"builtins.bool *ñ
-make_aborterflask.app.Flask.make_aborter":
-werkzeug.exceptions.Aborter"werkzeug.exceptions.Aborter*,
-self"
-flask.app.Flask"flask.app.Flask*é
-auto_find_instance_path'flask.app.Flask.auto_find_instance_path"
-builtins.str"builtins.str*,
-self"
-flask.app.Flask"flask.app.Flask*≥
-open_instance_resource&flask.app.Flask.open_instance_resource"m
-typing.IO[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"	typing.IO*,
-self"
-flask.app.Flask"flask.app.Flask**
-resource
-builtins.str"builtins.str*(
-mode
-builtins.str"builtins.str *∞
-create_jinja_environment(flask.app.Flask.create_jinja_environment"<
-flask.templating.Environment"flask.templating.Environment*,
-self"
-flask.app.Flask"flask.app.Flask* 
-create_global_jinja_loader*flask.app.Flask.create_global_jinja_loader"R
-'flask.templating.DispatchingJinjaLoader"'flask.templating.DispatchingJinjaLoader*,
-self"
-flask.app.Flask"flask.app.Flask*º
-select_jinja_autoescape'flask.app.Flask.select_jinja_autoescape"
-builtins.bool"builtins.bool*,
-self"
-flask.app.Flask"flask.app.Flask**
-filename
-builtins.str"builtins.str*¬
-update_template_context'flask.app.Flask.update_template_context"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*F
-context9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*°
-make_shell_context"flask.app.Flask.make_shell_context"9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*,
-self"
-flask.app.Flask"flask.app.Flask*ï
-runflask.app.Flask.run"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*P
-hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-debugG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *1
-load_dotenv
-builtins.bool"builtins.bool *
-options
-Any*ÿ
-test_clientflask.app.Flask.test_client"6
-flask.testing.FlaskClient"flask.testing.FlaskClient*,
-self"
-flask.app.Flask"flask.app.Flask*1
-use_cookies
-builtins.bool"builtins.bool *
-kwargs
-Any*≥
-test_cli_runnerflask.app.Flask.test_cli_runner"<
-flask.testing.FlaskCliRunner"flask.testing.FlaskCliRunner*,
-self"
-flask.app.Flask"flask.app.Flask*
-kwargs
-Any*Ì
-register_blueprint"flask.app.Flask.register_blueprint"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*G
-	blueprint8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*
-options
-Any0:flask.scaffold.setupmethod*ﬁ
-iter_blueprintsflask.app.Flask.iter_blueprints"|
--typing.ValuesView[flask.blueprints.Blueprint]8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint"typing.ValuesView*,
-self"
-flask.app.Flask"flask.app.Flask*€
-add_url_ruleflask.app.Flask.add_url_rule"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*&
-rule
-builtins.str"builtins.str*T
-endpointD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ÿ
-	view_func∆
-]Union[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]],None]ÿ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"flask.typing.RouteCallable
-None *h
-provide_automatic_optionsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-options
-Any0:flask.scaffold.setupmethod*ù
-template_filterflask.app.Flask.template_filter"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*ç
-add_template_filter#flask.app.Flask.add_template_filter"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*®
-f†
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"#flask.typing.TemplateFilterCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*ô
-template_testflask.app.Flask.template_test"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*á
-add_template_test!flask.app.Flask.add_template_test"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*¶
-fû
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"!flask.typing.TemplateTestCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*ù
-template_globalflask.app.Flask.template_global"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*ç
-add_template_global#flask.app.Flask.add_template_global"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*®
-f†
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"#flask.typing.TemplateGlobalCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*í
-teardown_appcontext#flask.app.Flask.teardown_appcontext"ˇ
-flask.app.T_teardown‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*á
-fˇ
-flask.app.T_teardown‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*Å
-shell_context_processor'flask.app.Flask.shell_context_processor"t
-#flask.app.T_shell_context_processorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*{
-ft
-#flask.app.T_shell_context_processorK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*Å
-_find_error_handler#flask.app.Flask._find_error_handler"Â
-6Union[TypeAlias[CallableType[builtins.function]],None]û
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"!flask.typing.ErrorHandlerCallable
-None*,
-self"
-flask.app.Flask"flask.app.Flask*/
-e(
-builtins.Exception"builtins.Exception*©
-handle_http_exception%flask.app.Flask.handle_http_exception"Î
-¡Union[werkzeug.exceptions.HTTPException,TypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]]F
-!werkzeug.exceptions.HTTPException"!werkzeug.exceptions.HTTPException⁄
-òTypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]ò
+flask—"
+Flaskflask.app.Flask"flask.scaffold.Scaffold*à
+__init__*
 
-çUnion[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]ﬂ
-√TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]]¯
-∏Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes,
-builtins.list[Any]
-Any"builtins.listY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingN
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.IteratorT
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator"flask.typing.ResponseValue   õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication" flask.typing.ResponseReturnValue*,
-self"
-flask.app.Flask"flask.app.Flask*M
-eF
-!werkzeug.exceptions.HTTPException"!werkzeug.exceptions.HTTPException*π
-trap_http_exception#flask.app.Flask.trap_http_exception"
-builtins.bool"builtins.bool*,
-self"
-flask.app.Flask"flask.app.Flask*/
-e(
-builtins.Exception"builtins.Exception*ã
-handle_user_exception%flask.app.Flask.handle_user_exception"Î
-¡Union[werkzeug.exceptions.HTTPException,TypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]]F
-!werkzeug.exceptions.HTTPException"!werkzeug.exceptions.HTTPException⁄
-òTypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]ò
+self(*
+import_name(*
+static_url_path (*
+static_folder (*
+static_host (*
+host_matching (*
+subdomain_matching (*
+template_folder (*
+instance_path (* 
+instance_relative_config (*
+	root_path (*3
+_check_setup_finished*
 
-çUnion[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]ﬂ
-√TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]]¯
-∏Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes,
-builtins.list[Any]
-Any"builtins.listY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingN
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.IteratorT
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator"flask.typing.ResponseValue   õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication" flask.typing.ResponseReturnValue*,
-self"
-flask.app.Flask"flask.app.Flask*/
-e(
-builtins.Exception"builtins.Exception*«
-handle_exception flask.app.Flask.handle_exception"2
-flask.wrappers.Response"flask.wrappers.Response*,
-self"
-flask.app.Flask"flask.app.Flask*/
-e(
-builtins.Exception"builtins.Exception*’
-log_exceptionflask.app.Flask.log_exception"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*Ï
-exc_info›
-\Union[Tuple[builtins.type,builtins.BaseException,types.TracebackType],Tuple[None,None,None]]¡
-?Tuple[builtins.type,builtins.BaseException,types.TracebackType]
-builtins.type"builtins.type0
-builtins.BaseException"builtins.BaseException*
-types.TracebackType"types.TracebackType7
-Tuple[None,None,None]
-None
-None
-None*Ω
-raise_routing_exception'flask.app.Flask.raise_routing_exception"
-NoReturn
-*,
-self"
-flask.app.Flask"flask.app.Flask*=
-request0
-flask.wrappers.Request"flask.wrappers.Request*ø
-dispatch_request flask.app.Flask.dispatch_request"⁄
-òTypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]ò
+self(*
+f_name(*6
+name*
 
-çUnion[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]ﬂ
-√TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]]¯
-∏Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes,
-builtins.list[Any]
-Any"builtins.listY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingN
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.IteratorT
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator"flask.typing.ResponseValue   õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication" flask.typing.ResponseReturnValue*,
-self"
-flask.app.Flask"flask.app.Flask*†
-full_dispatch_request%flask.app.Flask.full_dispatch_request"2
-flask.wrappers.Response"flask.wrappers.Response*,
-self"
-flask.app.Flask"flask.app.Flask*«
-finalize_request flask.app.Flask.finalize_request"2
-flask.wrappers.Response"flask.wrappers.Response*,
-self"
-flask.app.Flask"flask.app.Flask*Ù
-rvÎ
-¡Union[TypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]],werkzeug.exceptions.HTTPException]⁄
-òTypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]ò
+self(0:werkzeug.utils.cached_property*8
+logger	*
 
-çUnion[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]ﬂ
-√TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]]¯
-∏Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes,
-builtins.list[Any]
-Any"builtins.listY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingN
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.IteratorT
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator"flask.typing.ResponseValue   õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication" flask.typing.ResponseReturnValueF
-!werkzeug.exceptions.HTTPException"!werkzeug.exceptions.HTTPException*8
-from_error_handler
-builtins.bool"builtins.bool *∞
-make_default_options_response-flask.app.Flask.make_default_options_response"2
-flask.wrappers.Response"flask.wrappers.Response*,
-self"
-flask.app.Flask"flask.app.Flask*˜
-should_ignore_error#flask.app.Flask.should_ignore_error"
-builtins.bool"builtins.bool*,
-self"
-flask.app.Flask"flask.app.Flask*m
-errorb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*¸
-ensure_syncflask.app.Flask.ensure_sync"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*Ä
-async_to_syncflask.app.Flask.async_to_sync"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-self"
-flask.app.Flask"flask.app.Flask*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*à
-url_forflask.app.Flask.url_for"
-builtins.str"builtins.str*,
-self"
-flask.app.Flask"flask.app.Flask**
-endpoint
-builtins.str"builtins.str*S
-_anchorD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-_methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-_schemeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-	_externalG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-values
-Any*Ù
-redirectflask.app.Flask.redirect"J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*,
-self"
-flask.app.Flask"flask.app.Flask**
-location
-builtins.str"builtins.str*(
-code
-builtins.int"builtins.int *ˆ
-make_responseflask.app.Flask.make_response"2
-flask.wrappers.Response"flask.wrappers.Response*,
-self"
-flask.app.Flask"flask.app.Flask*„
-rv⁄
-òTypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]ò
+self(0:werkzeug.utils.cached_property*;
+	jinja_env
+*
 
-çUnion[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]ﬂ
-√TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]]¯
-∏Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes,
-builtins.list[Any]
-Any"builtins.listY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingN
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.IteratorT
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator"flask.typing.ResponseValue   õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication" flask.typing.ResponseReturnValue*÷
-create_url_adapter"flask.app.Flask.create_url_adapter"}
-+Union[werkzeug.routing.map.MapAdapter,None]B
-werkzeug.routing.map.MapAdapter"werkzeug.routing.map.MapAdapter
-None*,
-self"
-flask.app.Flask"flask.app.Flask*o
-requestb
-"Union[flask.wrappers.Request,None]0
-flask.wrappers.Request"flask.wrappers.Request
-None*Â
-inject_url_defaults#flask.app.Flask.inject_url_defaults"
-None*,
-self"
-flask.app.Flask"flask.app.Flask**
-endpoint
-builtins.str"builtins.str*E
-values9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*˙
-handle_url_build_error&flask.app.Flask.handle_url_build_error"
-builtins.str"builtins.str*,
-self"
-flask.app.Flask"flask.app.Flask*[
-errorP
-&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildError**
-endpoint
-builtins.str"builtins.str*c
-valuesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*˘
-preprocess_request"flask.app.Flask.preprocess_request"ê
-§Union[TypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]],None]⁄
-òTypeAlias[Union[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]]ò
+self(0:werkzeug.utils.cached_property*8
+got_first_request*
 
-çUnion[TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]],Unknown,Unknown,Unknown,TypeAlias[CallableType[builtins.function]]]ﬂ
-√TypeAlias[Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]]¯
-∏Union[werkzeug.wrappers.response.Response,builtins.str,builtins.bytes,builtins.list[Any],typing.Mapping[builtins.str,Any],typing.Iterator[builtins.str],typing.Iterator[builtins.bytes]]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes,
-builtins.list[Any]
-Any"builtins.listY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingN
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.IteratorT
-typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator"flask.typing.ResponseValue   õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication" flask.typing.ResponseReturnValue
-None*,
-self"
-flask.app.Flask"flask.app.Flask*ÿ
-process_response flask.app.Flask.process_response"2
-flask.wrappers.Response"flask.wrappers.Response*,
-self"
-flask.app.Flask"flask.app.Flask*@
-response2
-flask.wrappers.Response"flask.wrappers.Response*·
-do_teardown_request#flask.app.Flask.do_teardown_request"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*m
-excb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None *Á
-do_teardown_appcontext&flask.app.Flask.do_teardown_appcontext"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*m
-excb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None *Ü
-app_contextflask.app.Flask.app_context",
-flask.ctx.AppContext"flask.ctx.AppContext*,
-self"
-flask.app.Flask"flask.app.Flask*ﬁ
-request_contextflask.app.Flask.request_context"4
-flask.ctx.RequestContext"flask.ctx.RequestContext*,
-self"
-flask.app.Flask"flask.app.Flask*F
-environ9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*»
-test_request_context$flask.app.Flask.test_request_context"4
-flask.ctx.RequestContext"flask.ctx.RequestContext*,
-self"
-flask.app.Flask"flask.app.Flask*
-args
-Any*
-kwargs
-Any*Ñ
-wsgi_appflask.app.Flask.wsgi_app"
-Any*,
-self"
-flask.app.Flask"flask.app.Flask*F
-environ9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*_
-start_responseK
-CallableType[builtins.function]&
-builtins.function"builtins.function*Ñ
-__call__flask.app.Flask.__call__"
-Any*,
-self"
-flask.app.Flask"flask.app.Flask*F
-environ9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*_
-start_responseK
-CallableType[builtins.function]&
-builtins.function"builtins.function2µ
-debugflask.app.Flask.debugÖ
-debugflask.app.Flask.debug"
-builtins.bool"builtins.bool*,
-self"
-flask.app.Flask"flask.app.Flask0:builtins.propertyX`å
-debugflask.app.Flask.debug"
-None*,
-self"
-flask.app.Flask"flask.app.Flask*)
-value
-builtins.bool"builtins.bool0:.setterro
-request_classflask.app.Flask.request_class?
-CallableType[builtins.type]
-builtins.type"builtins.typerq
-response_classflask.app.Flask.response_class?
-CallableType[builtins.type]
-builtins.type"builtins.typero
-aborter_classflask.app.Flask.aborter_class?
-CallableType[builtins.type]
-builtins.type"builtins.typerw
-jinja_environment!flask.app.Flask.jinja_environment?
-CallableType[builtins.type]
-builtins.type"builtins.typer
-app_ctx_globals_class%flask.app.Flask.app_ctx_globals_class?
-CallableType[builtins.type]
-builtins.type"builtins.typerg
-config_classflask.app.Flask.config_class9
-CallableType[abc.ABCMeta]
-abc.ABCMeta"abc.ABCMetar`
-testingflask.app.Flask.testing<
-flask.config.ConfigAttribute"flask.config.ConfigAttributerf
+self(0:builtins.property`*6
+make_config*
 
-secret_keyflask.app.Flask.secret_key<
-flask.config.ConfigAttribute"flask.config.ConfigAttributerÜ
-permanent_session_lifetime*flask.app.Flask.permanent_session_lifetime<
-flask.config.ConfigAttribute"flask.config.ConfigAttributer≤
-json_provider_class#flask.app.Flask.json_provider_classv
-&Type[flask.json.provider.JSONProvider]D
- flask.json.provider.JSONProvider" flask.json.provider.JSONProvider"typeri
-jinja_optionsflask.app.Flask.jinja_options9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrË
-default_configflask.app.Flask.default_configµ
-Öwerkzeug.datastructures.structures.ImmutableDict[builtins.str,Union[builtins.int,builtins.str,datetime.timedelta,builtins.bool,None]]
-builtins.str"builtins.str⁄
-FUnion[builtins.int,builtins.str,datetime.timedelta,builtins.bool,None]
-builtins.int"builtins.int
-builtins.str"builtins.str(
-datetime.timedelta"datetime.timedelta
-builtins.bool"builtins.bool
-None"0werkzeug.datastructures.structures.ImmutableDictrq
-url_rule_classflask.app.Flask.url_rule_class?
-CallableType[builtins.type]
-builtins.type"builtins.typero
-url_map_classflask.app.Flask.url_map_class?
-CallableType[builtins.type]
-builtins.type"builtins.typer’
-test_client_class!flask.app.Flask.test_client_classú
-+Union[Type[flask.testing.FlaskClient],None]a
-Type[flask.testing.FlaskClient]6
-flask.testing.FlaskClient"flask.testing.FlaskClient"type
-NonerÈ
-test_cli_runner_class%flask.app.Flask.test_cli_runner_class®
-.Union[Type[flask.testing.FlaskCliRunner],None]j
-"Type[flask.testing.FlaskCliRunner]<
-flask.testing.FlaskCliRunner"flask.testing.FlaskCliRunner"type
-Nonerz
-session_interface!flask.app.Flask.session_interfaceB
-flask.sessions.SessionInterface"flask.sessions.SessionInterfacerL
-instance_pathflask.app.Flask.instance_path
-builtins.str"builtins.strrL
-configflask.app.Flask.config*
-flask.config.Config"flask.config.Configr^
-aborterflask.app.Flask.aborter:
-werkzeug.exceptions.Aborter"werkzeug.exceptions.Aborterrb
-jsonflask.app.Flask.jsonD
- flask.json.provider.JSONProvider" flask.json.provider.JSONProviderr”
-url_build_error_handlers(flask.app.Flask.url_build_error_handlerså
-.builtins.list[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.listrò
-teardown_appcontext_funcs)flask.app.Flask.teardown_appcontext_funcsœ
-`builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]€
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"flask.typing.TeardownCallable"builtins.listrª
-shell_context_processors(flask.app.Flask.shell_context_processorsÙ
-9builtins.list[TypeAlias[CallableType[builtins.function]]]ß
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"*flask.typing.ShellContextProcessorCallable"builtins.listr 
+self(*
+instance_relative (*
+make_aborter*
 
-blueprintsflask.app.Flask.blueprintsü
-6builtins.dict[builtins.str,flask.blueprints.Blueprint]
-builtins.str"builtins.str8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint"builtins.dictrc
+self(*'
+auto_find_instance_path*
 
-extensionsflask.app.Flask.extensions9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrX
-url_mapflask.app.Flask.url_map4
-werkzeug.routing.map.Map"werkzeug.routing.map.MaprX
-subdomain_matching"flask.app.Flask.subdomain_matching
-builtins.bool"builtins.boolrX
-_got_first_request"flask.app.Flask._got_first_request
-builtins.bool"builtins.bool¨
-Requestflask.wrappers.Request"!werkzeug.wrappers.request.Request*ÿ
-max_content_length)flask.wrappers.Request.max_content_length"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:builtins.property`*ƒ
-endpointflask.wrappers.Request.endpoint"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:builtins.property`*∆
-	blueprint flask.wrappers.Request.blueprint"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:builtins.property`*Œ
+self(*D
+open_instance_resource*
 
-blueprints!flask.wrappers.Request.blueprints"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:builtins.property`*
-_load_form_data&flask.wrappers.Request._load_form_data"
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request*Ó
-on_json_loading_failed-flask.wrappers.Request.on_json_loading_failed"
-Any*:
-self0
-flask.wrappers.Request"flask.wrappers.Request*`
-eY
-Union[builtins.ValueError,None]*
-builtins.ValueError"builtins.ValueError
-Noner:
-json_module"flask.wrappers.Request.json_module
-Anyrû
-url_ruleflask.wrappers.Request.url_ruleq
-'Union[werkzeug.routing.rules.Rule,None]:
-werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule
-Noner¬
-	view_args flask.wrappers.Request.view_argsí
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-Nonerï
-routing_exception(flask.wrappers.Request.routing_exceptionV
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-NoneÒ
-Responseflask.wrappers.Response"#werkzeug.wrappers.response.Response*≠
-max_cookie_size'flask.wrappers.Response.max_cookie_size"
-builtins.int"builtins.int*<
-self2
-flask.wrappers.Response"flask.wrappers.Response0:builtins.property`rÇ
-default_mimetype(flask.wrappers.Response.default_mimetypeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerr
-autocorrect_location_header3flask.wrappers.Response.autocorrect_location_header
-builtins.bool"builtins.boolÖV
-	Blueprintflask.blueprints.Blueprint"flask.scaffold.Scaffold*ø
-__init__#flask.blueprints.Blueprint.__init__"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*&
-name
-builtins.str"builtins.str*-
-import_name
-builtins.str"builtins.str*î
-static_folder
-)Union[builtins.str,os.PathLike[Any],None]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike
-None *[
-static_url_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ñ
-template_folder
-)Union[builtins.str,os.PathLike[Any],None]
-builtins.str"builtins.str(
-os.PathLike[Any]
-Any"os.PathLike
-None *V
+self(*
+resource(*
+mode (*(
+create_jinja_environment
+*
 
-url_prefixD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	subdomainD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-url_defaultsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict
-None *U
-	root_pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	cli_groupD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *¡
-_check_setup_finished0flask.blueprints.Blueprint._check_setup_finished"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*(
-f_name
-builtins.str"builtins.str*Ó
-record!flask.blueprints.Blueprint.record"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*¯
-record_once&flask.blueprints.Blueprint.record_once"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*Ä
-make_setup_state+flask.blueprints.Blueprint.make_setup_state"L
-$flask.blueprints.BlueprintSetupState"$flask.blueprints.BlueprintSetupState*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*+
-app"
-flask.app.Flask"flask.app.Flask*F
-options9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*8
-first_registration
-builtins.bool"builtins.bool *é
-register_blueprint-flask.blueprints.Blueprint.register_blueprint"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*G
-	blueprint8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*
-options
-Any0:flask.scaffold.setupmethod*Ú
-register#flask.blueprints.Blueprint.register"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*+
-app"
-flask.app.Flask"flask.app.Flask*F
-options9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*¸
-add_url_rule'flask.blueprints.Blueprint.add_url_rule"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*&
-rule
-builtins.str"builtins.str*T
-endpointD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ÿ
-	view_func∆
-]Union[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]],None]ÿ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"flask.typing.RouteCallable
-None *h
-provide_automatic_optionsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-options
-Any0:flask.scaffold.setupmethod*∆
-app_template_filter.flask.blueprints.Blueprint.app_template_filter"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∂
-add_app_template_filter2flask.blueprints.Blueprint.add_app_template_filter"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*®
-f†
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"#flask.typing.TemplateFilterCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*¬
-app_template_test,flask.blueprints.Blueprint.app_template_test"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∞
-add_app_template_test0flask.blueprints.Blueprint.add_app_template_test"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*¶
-fû
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"!flask.typing.TemplateTestCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∆
-app_template_global.flask.blueprints.Blueprint.app_template_global"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*∂
-add_app_template_global2flask.blueprints.Blueprint.add_app_template_global"
-None*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*®
-f†
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"#flask.typing.TemplateGlobalCallable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:flask.scaffold.setupmethod*À
-before_app_request-flask.blueprints.Blueprint.before_app_request"å
-!flask.blueprints.T_before_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*î
-få
-!flask.blueprints.T_before_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*«
-after_app_request,flask.blueprints.Blueprint.after_app_request"ã
- flask.blueprints.T_after_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*ì
-fã
- flask.blueprints.T_after_request‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*√
-teardown_app_request/flask.blueprints.Blueprint.teardown_app_request"Ü
-flask.blueprints.T_teardown‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*é
-fÜ
-flask.blueprints.T_teardown‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*≥
-app_context_processor0flask.blueprints.Blueprint.app_context_processor"~
--flask.blueprints.T_template_context_processorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*Ö
-f~
--flask.blueprints.T_template_context_processorK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*ò
-app_errorhandler+flask.blueprints.Blueprint.app_errorhandler"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*ß
-codeú
-,Union[Type[builtins.Exception],builtins.int]L
-Type[builtins.Exception](
-builtins.Exception"builtins.Exception"type
-builtins.int"builtins.int0:flask.scaffold.setupmethod*µ
-app_url_value_preprocessor5flask.blueprints.Blueprint.app_url_value_preprocessor"z
-)flask.blueprints.T_url_value_preprocessorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*Å
-fz
-)flask.blueprints.T_url_value_preprocessorK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethod*å
-app_url_defaults+flask.blueprints.Blueprint.app_url_defaults"p
-flask.blueprints.T_url_defaultsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint*w
-fp
-flask.blueprints.T_url_defaultsK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:flask.scaffold.setupmethodrg
-_got_registered_once/flask.blueprints.Blueprint._got_registered_once
-builtins.bool"builtins.boolry
+self(**
+create_global_jinja_loader*
 
-url_prefix%flask.blueprints.Blueprint.url_prefixD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerw
-	subdomain$flask.blueprints.Blueprint.subdomainD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner∂
-deferred_functions-flask.blueprints.Blueprint.deferred_functions
-9builtins.list[TypeAlias[CallableType[builtins.function]]]£
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"&flask.blueprints.DeferredSetupFunction"builtins.listrÄ
-url_values_defaults.flask.blueprints.Blueprint.url_values_defaults9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrw
-	cli_group$flask.blueprints.Blueprint.cli_groupD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerƒ
-_blueprints&flask.blueprints.Blueprint._blueprintså
-Gbuiltins.list[Tuple[flask.blueprints.Blueprint,builtins.dict[Any,Any]]]±
-8Tuple[flask.blueprints.Blueprint,builtins.dict[Any,Any]]8
-flask.blueprints.Blueprint"flask.blueprints.Blueprint9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict"builtins.listƒ
-Configflask.config.Config"builtins.dict*í
-__init__flask.config.Config.__init__"
-None*4
-self*
-flask.config.Config"flask.config.Config*+
-	root_path
-builtins.str"builtins.str*{
-defaultsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict
-None *„
-from_envvarflask.config.Config.from_envvar"
-builtins.bool"builtins.bool*4
-self*
-flask.config.Config"flask.config.Config*/
-variable_name
-builtins.str"builtins.str*,
-silent
-builtins.bool"builtins.bool *ñ
-from_prefixed_env%flask.config.Config.from_prefixed_env"
-builtins.bool"builtins.bool*4
-self*
-flask.config.Config"flask.config.Config**
-prefix
-builtins.str"builtins.str *X
-loadsK
-CallableType[builtins.function]&
-builtins.function"builtins.function *ﬁ
-from_pyfileflask.config.Config.from_pyfile"
-builtins.bool"builtins.bool*4
-self*
-flask.config.Config"flask.config.Config**
-filename
-builtins.str"builtins.str*,
-silent
-builtins.bool"builtins.bool *‚
-from_objectflask.config.Config.from_object"
-None*4
-self*
-flask.config.Config"flask.config.Config*r
-obji
-#Union[builtins.object,builtins.str]"
-builtins.object"builtins.object
-builtins.str"builtins.str*›
-	from_fileflask.config.Config.from_file"
-builtins.bool"builtins.bool*4
-self*
-flask.config.Config"flask.config.Config**
-filename
-builtins.str"builtins.str*U
-loadK
-CallableType[builtins.function]&
-builtins.function"builtins.function*,
-silent
-builtins.bool"builtins.bool **
-text
-builtins.bool"builtins.bool *√
-from_mapping flask.config.Config.from_mapping"
-builtins.bool"builtins.bool*4
-self*
-flask.config.Config"flask.config.Config*•
-mappingï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *
-kwargs
-Any*’
-get_namespace!flask.config.Config.get_namespace"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*4
-self*
-flask.config.Config"flask.config.Config*+
-	namespace
-builtins.str"builtins.str*/
-	lowercase
-builtins.bool"builtins.bool *4
-trim_namespace
-builtins.bool"builtins.bool *t
-__repr__flask.config.Config.__repr__"
-builtins.str"builtins.str*,*
-flask.config.Config"flask.config.ConfigrH
-	root_pathflask.config.Config.root_path
-builtins.str"builtins.str˛
-after_this_requestflask.ctx.after_this_request"ﬂ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"!flask.typing.AfterRequestCallable*Á
-fﬂ
-QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]‰
-FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function"!flask.typing.AfterRequestCallableÁ
-copy_current_request_context&flask.ctx.copy_current_request_context"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*R
-fK
-CallableType[builtins.function]&
-builtins.function"builtins.functionL
-has_app_contextflask.ctx.has_app_context"
-builtins.bool"builtins.boolT
-has_request_contextflask.ctx.has_request_context"
-builtins.bool"builtins.boolÖ
-abortflask.helpers.abort"
-NoReturn
-*∞
-code•
-7Union[builtins.int,werkzeug.wrappers.response.Response]
-builtins.int"builtins.intJ
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*
-args
-Any*
-kwargs
-Any
-flashflask.helpers.flash"
-None*)
-message
-builtins.str"builtins.str*,
-category
-builtins.str"builtins.str ¢
-get_flashed_messages"flask.helpers.get_flashed_messages"«
-RUnion[builtins.list[builtins.str],builtins.list[Tuple[builtins.str,builtins.str]]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*5
-with_categories
-builtins.bool"builtins.bool *e
-category_filterN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable •
-get_template_attribute$flask.helpers.get_template_attribute"
-Any*/
-template_name
-builtins.str"builtins.str*+
-	attribute
-builtins.str"builtins.strs
-make_responseflask.helpers.make_response"2
-flask.wrappers.Response"flask.wrappers.Response*
-args
-Anyú
-redirectflask.helpers.redirect"J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response**
-location
-builtins.str"builtins.str*(
-code
-builtins.int"builtins.int *’
-Responseƒ
-5Union[Type[werkzeug.wrappers.response.Response],None]
-)Type[werkzeug.wrappers.response.Response]J
-#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response"type
-None ®
-	send_fileflask.helpers.send_file"2
-flask.wrappers.Response"flask.wrappers.Response*∑
-path_or_file§
-4Union[os.PathLike[Any],builtins.str,typing.BinaryIO](
-os.PathLike[Any]
-Any"os.PathLike
-builtins.str"builtins.str"
-typing.BinaryIO"typing.BinaryIO*T
-mimetypeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *3
-as_attachment
-builtins.bool"builtins.bool *Y
-download_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *1
-conditional
-builtins.bool"builtins.bool *o
-etagc
-!Union[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.str *≈
-last_modifiedØ
-9Union[datetime.datetime,builtins.int,builtins.float,None]&
-datetime.datetime"datetime.datetime
-builtins.int"builtins.int 
-builtins.float"builtins.float
-None *¡
-max_age±
-8Union[None,builtins.int,CallableType[builtins.function]]
-None
-builtins.int"builtins.intK
-CallableType[builtins.function]&
-builtins.function"builtins.function ˛
-send_from_directory!flask.helpers.send_from_directory"2
-flask.wrappers.Response"flask.wrappers.Response*
-	directoryp
-$Union[os.PathLike[Any],builtins.str](
-os.PathLike[Any]
-Any"os.PathLike
-builtins.str"builtins.str*z
-pathp
-$Union[os.PathLike[Any],builtins.str](
-os.PathLike[Any]
-Any"os.PathLike
-builtins.str"builtins.str*
-kwargs
-Any„
-stream_with_context!flask.helpers.stream_with_context"y
-typing.Iterator[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"typing.Iterator*≠
-generator_or_functionë
-EUnion[typing.Iterator[typing.AnyStr],CallableType[builtins.function]]y
-typing.Iterator[typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.object"typing.IteratorK
-CallableType[builtins.function]&
-builtins.function"builtins.functionÿ
-url_forflask.helpers.url_for"
-builtins.str"builtins.str**
-endpoint
-builtins.str"builtins.str*S
-_anchorD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-_methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-_schemeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *X
-	_externalG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *
-values
-Anyy
-jsonifyflask.json.jsonify"2
-flask.wrappers.Response"flask.wrappers.Response*
-args
-Any*
-kwargs
-Any¥
-render_template flask.templating.render_template"
-builtins.str"builtins.str* 
-template_name_or_listÆ
-nUnion[builtins.str,jinja2.environment.Template,builtins.list[Union[builtins.str,jinja2.environment.Template]]]
-builtins.str"builtins.str:
-jinja2.environment.Template"jinja2.environment.Templateﬂ
->builtins.list[Union[builtins.str,jinja2.environment.Template]]ç
-/Union[builtins.str,jinja2.environment.Template]
-builtins.str"builtins.str:
-jinja2.environment.Template"jinja2.environment.Template"builtins.list*
-context
-Anyü
-render_template_string'flask.templating.render_template_string"
-builtins.str"builtins.str*(
-source
-builtins.str"builtins.str*
-context
-AnyÊ
-stream_template flask.templating.stream_template"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator* 
-template_name_or_listÆ
-nUnion[builtins.str,jinja2.environment.Template,builtins.list[Union[builtins.str,jinja2.environment.Template]]]
-builtins.str"builtins.str:
-jinja2.environment.Template"jinja2.environment.Templateﬂ
->builtins.list[Union[builtins.str,jinja2.environment.Template]]ç
-/Union[builtins.str,jinja2.environment.Template]
-builtins.str"builtins.str:
-jinja2.environment.Template"jinja2.environment.Template"builtins.list*
-context
-Any—
-stream_template_string'flask.templating.stream_template_string"N
-typing.Iterator[builtins.str]
-builtins.str"builtins.str"typing.Iterator*(
-source
-builtins.str"builtins.str*
-context
-Any"
-__getattr__flask.__getattr__* *f
-__path__flask.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Å
-__annotations__flask.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
+self(*7
+select_jinja_autoescape*
+
+self(*
+filename(*6
+update_template_context*
+
+self(*
+context(*"
+make_shell_context*
+
+self(*b
+run*
+
+self(*
+host (*
+port (*
+debug (*
+load_dotenv (*
+options(*>
+test_client*
+
+self(*
+use_cookies (*
+kwargs(*-
+test_cli_runner*
+
+self(*
+kwargs(*`
+register_blueprint*
+
+self(*
+	blueprint(*
+options(0:flask.scaffold.setupmethod*
+iter_blueprints*
+
+self(*ù
+add_url_rule*
+
+self(*
+
+rule(*
+endpoint (*
+	view_func (*!
+provide_automatic_options (*
+options(0:flask.scaffold.setupmethod*K
+template_filter*
+
+self(*
+name (0:flask.scaffold.setupmethod*X
+add_template_filter*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*I
+template_test*
+
+self(*
+name (0:flask.scaffold.setupmethod*V
+add_template_test*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*K
+template_global*
+
+self(*
+name (0:flask.scaffold.setupmethod*X
+add_template_global*
+
+self(*
+f( *
+name (0:flask.scaffold.setupmethod*J
+teardown_appcontext!*
+
+self(*
+f(!0:flask.scaffold.setupmethod*N
+shell_context_processor"*
+
+self(*
+f("0:flask.scaffold.setupmethod*,
+_find_error_handler$*
+
+self(*
+e(%*.
+handle_http_exception3*
+
+self(*
+e(&*,
+trap_http_exception*
+
+self(*
+e(%*.
+handle_user_exception3*
+
+self(*
+e(%*)
+handle_exception4*
+
+self(*
+e(%*-
+log_exception*
+
+self(*
+exc_info(:*6
+raise_routing_exception;*
+
+self(*
+request(<* 
+dispatch_request2*
+
+self(*%
+full_dispatch_request4*
+
+self(*F
+finalize_request4*
+
+self(*
+rv(=*
+from_error_handler (*-
+make_default_options_response4*
+
+self(*0
+should_ignore_error*
+
+self(*
+error(>*'
+ensure_sync*
+
+self(*
+
+func(*)
+async_to_sync*
+
+self(*
+
+func(*{
+url_for*
+
+self(*
+endpoint(*
+_anchor (*
+_method (*
+_scheme (*
+	_external (*
+values(*6
+redirect'*
+
+self(*
+location(*
+code (*'
+make_response4*
+
+self(*
+rv(2*1
+create_url_adapter@*
+
+self(*
+request(A*A
+inject_url_defaults*
+
+self(*
+endpoint(*
+values(*Q
+handle_url_build_error*
+
+self(*
+error(B*
+endpoint(*
+values(C*"
+preprocess_requestD*
+
+self(*0
+process_response4*
+
+self(*
+response(4*0
+do_teardown_request*
+
+self(*
+exc (>*3
+do_teardown_appcontext*
+
+self(*
+exc (>*
+app_contextE*
+
+self(*.
+request_contextF*
+
+self(*
+environ(*>
+test_request_contextF*
+
+self(*
+
+args(*
+kwargs(*=
+wsgi_app*
+
+self(*
+environ(*
+start_response(*=
+__call__*
+
+self(*
+environ(*
+start_response(2f
+debug.
+debug*
+
+self(0:builtins.propertyX`-
+debug*
+
+self(*
+value(0:.setterr
+request_class0Gr
+response_class0Gr
+aborter_class0Gr
+jinja_environment0Gr
+app_ctx_globals_class0Gr
+config_class0Ir
+testing0Jr
+
+secret_key0Jr
+permanent_session_lifetime0Jr
+json_provider_class0Lr
+jinja_options0r
+default_config0Or
+url_rule_class0Gr
+url_map_class0Gr
+test_client_class0Qr
+test_cli_runner_class0Sr
+session_interface0Tr
+instance_path0r
+
+config0r
+aborter0r
+json0Kr
+url_build_error_handlers0Ur
+teardown_appcontext_funcs0Wr
+shell_context_processors0Yr
+
+blueprints0Zr
+
+extensions0r
+url_map0[r
+subdomain_matching0r
+_got_first_request0¨
+Requestflask.wrappers.Request"!werkzeug.wrappers.request.Request*9
+max_content_length*
+
+self(<0:builtins.property`*/
+endpoint*
+
+self(<0:builtins.property`*0
+	blueprint*
+
+self(<0:builtins.property`*1
+
+blueprints\*
+
+self(<0:builtins.property`*
+_load_form_data*
+
+self(<*/
+on_json_loading_failed*
+
+self(<*
+e(^r
+json_module0r
+url_rule0`r
+	view_args0ar
+routing_exception0b∑
+Responseflask.wrappers.Response"#werkzeug.wrappers.response.Response*6
+max_cookie_size*
+
+self(40:builtins.property`r
+default_mimetype0r
+autocorrect_location_header0ù
+	Blueprintflask.blueprints.Blueprint"flask.scaffold.Scaffold*„
+__init__*
+
+self(*
+
+name(*
+import_name(*
+static_folder (*
+static_url_path (*
+template_folder (*
+
+url_prefix (*
+	subdomain (*
+url_defaults (c*
+	root_path (*
+	cli_group (*3
+_check_setup_finished*
+
+self(*
+f_name(*@
+record*
+
+self(*
+
+func(0:flask.scaffold.setupmethod*E
+record_once*
+
+self(*
+
+func(0:flask.scaffold.setupmethod*V
+make_setup_stated*
+
+self(*	
+app(*
+options(*
+first_registration (*`
+register_blueprint*
+
+self(*
+	blueprint(*
+options(0:flask.scaffold.setupmethod*2
+register*
+
+self(*	
+app(*
+options(*ù
+add_url_rule*
+
+self(*
+
+rule(*
+endpoint (*
+	view_func (*!
+provide_automatic_options (*
+options(0:flask.scaffold.setupmethod*O
+app_template_filter*
+
+self(*
+name (0:flask.scaffold.setupmethod*\
+add_app_template_filter*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*M
+app_template_test*
+
+self(*
+name (0:flask.scaffold.setupmethod*Z
+add_app_template_test*
+
+self(*
+f(*
+name (0:flask.scaffold.setupmethod*O
+app_template_global*
+
+self(*
+name (0:flask.scaffold.setupmethod*\
+add_app_template_global*
+
+self(*
+f( *
+name (0:flask.scaffold.setupmethod*I
+before_app_request!*
+
+self(*
+f(!0:flask.scaffold.setupmethod*H
+after_app_request!*
+
+self(*
+f(!0:flask.scaffold.setupmethod*K
+teardown_app_request!*
+
+self(*
+f(!0:flask.scaffold.setupmethod*L
+app_context_processor"*
+
+self(*
+f("0:flask.scaffold.setupmethod*J
+app_errorhandler*
+
+self(*
+
+code(f0:flask.scaffold.setupmethod*Q
+app_url_value_preprocessor"*
+
+self(*
+f("0:flask.scaffold.setupmethod*G
+app_url_defaults"*
+
+self(*
+f("0:flask.scaffold.setupmethodr
+_got_registered_once0r
+
+url_prefix0r
+	subdomain0r
+deferred_functions0hr
+url_values_defaults0r
+	cli_group0r
+_blueprints0j‡
+Configflask.config.Config"builtins.dict*;
+__init__*
+
+self(*
+	root_path(*
+defaults (c*@
+from_envvar*
+
+self(*
+variable_name(*
+silent (*@
+from_prefixed_env*
+
+self(*
+prefix (*
+loads (*;
+from_pyfile*
+
+self(*
+filename(*
+silent (*&
+from_object*
+
+self(*	
+obj(k*S
+	from_file*
+
+self(*
+filename(*
+
+load(*
+silent (*
+text (*;
+from_mapping*
+
+self(*
+mapping (l*
+kwargs(*Y
+get_namespaceC*
+
+self(*
+	namespace(*
+	lowercase (*
+trim_namespace (*
+__repr__*(r
+	root_path0=
+after_this_requestflask.ctx.after_this_requestm*
+f(mQ
+copy_current_request_context&flask.ctx.copy_current_request_context*
+f(.
+has_app_contextflask.ctx.has_app_context6
+has_request_contextflask.ctx.has_request_contextD
+abortflask.helpers.abort;*
+
+code(n*
+
+args(*
+kwargs(?
+flashflask.helpers.flash*
+message(*
+category (n
+get_flashed_messages"flask.helpers.get_flashed_messagesq*
+with_categories (*
+category_filter (rf
+get_template_attribute$flask.helpers.get_template_attribute*
+template_name(*
+	attribute(:
+make_responseflask.helpers.make_response4*
+
+args(T
+redirectflask.helpers.redirect'*
+location(*
+code (*
+Response (t≈
+	send_fileflask.helpers.send_file4*
+path_or_file(v*
+mimetype (*
+as_attachment (*
+download_name (*
+conditional (*
+etag (w*
+last_modified (z*
+max_age ({e
+send_from_directory!flask.helpers.send_from_directory4*
+	directory(|*
+
+path(|*
+kwargs(W
+stream_with_context!flask.helpers.stream_with_context}*
+generator_or_function(~Ü
+url_forflask.helpers.url_for*
+endpoint(*
+_anchor (*
+_method (*
+_scheme (*
+	_external (*
+values(9
+jsonifyflask.json.jsonify4*
+
+args(*
+kwargs(b
+render_template flask.templating.render_template*
+template_name_or_list(Ç*
+context(`
+render_template_string'flask.templating.render_template_string*
+source(*
+context(b
+stream_template flask.templating.stream_template+*
+template_name_or_list(Ç*
+context(`
+stream_template_string'flask.templating.stream_template_string+*
+source(*
+context(
+__getattr__* *
+__path__0\*
+__annotations__0C*
 json
-flask.json *L
-current_appflask.globals.current_app"
-flask.app.Flask"flask.app.Flask*J
-gflask.globals.g4
-flask.ctx._AppCtxGlobals"flask.ctx._AppCtxGlobals*R
-requestflask.globals.request0
-flask.wrappers.Request"flask.wrappers.Request*\
-sessionflask.globals.session:
-flask.sessions.SessionMixin"flask.sessions.SessionMixin*j
-appcontext_poppedflask.signals.appcontext_popped4
-blinker.base.NamedSignal"blinker.base.NamedSignal*j
-appcontext_pushedflask.signals.appcontext_pushed4
-blinker.base.NamedSignal"blinker.base.NamedSignal*v
-appcontext_tearing_down%flask.signals.appcontext_tearing_down4
-blinker.base.NamedSignal"blinker.base.NamedSignal*t
-before_render_template$flask.signals.before_render_template4
-blinker.base.NamedSignal"blinker.base.NamedSignal*r
-got_request_exception#flask.signals.got_request_exception4
-blinker.base.NamedSignal"blinker.base.NamedSignal*f
-message_flashedflask.signals.message_flashed4
-blinker.base.NamedSignal"blinker.base.NamedSignal*h
-request_finishedflask.signals.request_finished4
-blinker.base.NamedSignal"blinker.base.NamedSignal*f
-request_startedflask.signals.request_started4
-blinker.base.NamedSignal"blinker.base.NamedSignal*p
-request_tearing_down"flask.signals.request_tearing_down4
-blinker.base.NamedSignal"blinker.base.NamedSignal*j
-template_renderedflask.signals.template_rendered4
-blinker.base.NamedSignal"blinker.base.NamedSignal*>
-__version__flask.__version__
-builtins.str"builtins.str
+flask.json **
+current_appflask.globals.current_app0*
+gflask.globals.g0É*"
+requestflask.globals.request0<*#
+sessionflask.globals.session0Ñ*7
+appcontext_poppedflask.signals.appcontext_popped0Ö*7
+appcontext_pushedflask.signals.appcontext_pushed0Ö*C
+appcontext_tearing_down%flask.signals.appcontext_tearing_down0Ö*A
+before_render_template$flask.signals.before_render_template0Ö*?
+got_request_exception#flask.signals.got_request_exception0Ö*3
+message_flashedflask.signals.message_flashed0Ö*5
+request_finishedflask.signals.request_finished0Ö*3
+request_startedflask.signals.request_started0Ö*=
+request_tearing_down"flask.signals.request_tearing_down0Ö*7
+template_renderedflask.signals.template_rendered0Ö*
+__version__022"flask.app.Flask2"builtins.str2222"os.PathLike2222"builtins.bool2"logging.Logger2"flask.templating.Environment2"flask.config.Config2"werkzeug.exceptions.Aborter2"builtins.object2"builtins.object22"	typing.IO22)"'flask.templating.DispatchingJinjaLoader2"builtins.dict22"builtins.int22222"flask.testing.FlaskClient2"flask.testing.FlaskCliRunner2"flask.blueprints.Blueprint2"typing.ValuesView22"builtins.function22222!"flask.typing.RouteCallable2222*"#flask.typing.TemplateFilterCallable22("!flask.typing.TemplateTestCallable22*"#flask.typing.TemplateGlobalCallable222222("!flask.typing.ErrorHandlerCallable222#2"builtins.Exception2#"!werkzeug.exceptions.HTTPException2%"#werkzeug.wrappers.response.Response2"builtins.bytes2"builtins.list22"typing.Mapping22"typing.Iterator22"typing.Iterator2(22'()*+,2!"flask.typing.ResponseValue2-2 2%"_typeshed.wsgi.WSGIApplication22	2.///02'" flask.typing.ResponseReturnValue2122&22"flask.wrappers.Response2"builtins.type2"builtins.BaseException2"types.TracebackType225672222892
+2"flask.wrappers.Request222&2262!"werkzeug.routing.map.MapAdapter22?22<2("&werkzeug.routing.exceptions.BuildError2"builtins.dict22222"flask.ctx.AppContext2"flask.ctx.RequestContext2252"abc.ABCMeta22H2"flask.config.ConfigAttribute2"" flask.json.provider.JSONProvider2"type2K2"datetime.timedelta2	2M26"0werkzeug.datastructures.structures.ImmutableDict2N2"type222P2"type222R2!"flask.sessions.SessionInterface2"builtins.list22$"flask.typing.TeardownCallable22"builtins.list2V21"*flask.typing.ShellContextProcessorCallable22"builtins.list2X2"builtins.dict22"werkzeug.routing.map.Map2"builtins.list22"builtins.ValueError22]2"werkzeug.routing.rules.Rule22_22C22%222&"$flask.blueprints.BlueprintSetupState2"type2%22e2-"&flask.blueprints.DeferredSetupFunction22"builtins.list2g222"builtins.list2i2222*2("!flask.typing.AfterRequestCallable222'222"builtins.list2o22\p2"typing.Iterable22"type2'22s2"typing.BinaryIO22u222"datetime.datetime2"builtins.float22xy22222"typing.Iterator222}2"jinja2.environment.Template222"builtins.list2Ä22Å2"flask.ctx._AppCtxGlobals2"flask.sessions.SessionMixin2"blinker.base.NamedSignal

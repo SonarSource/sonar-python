@@ -1,2074 +1,1065 @@
 
 
-sqlalchemy›
-DDLsqlalchemy.sql.ddl.DDL"sqlalchemy.sql.ddl.DDLElement*˜
-__init__sqlalchemy.sql.ddl.DDL.__init__"
-None*:
-self0
-sqlalchemy.sql.ddl.DDL"sqlalchemy.sql.ddl.DDL*
-	statement
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rn
-__visit_name__%sqlalchemy.sql.ddl.DDL.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rO
-	statement sqlalchemy.sql.ddl.DDL.statement
-Any*310*311*312*313*314rK
-contextsqlalchemy.sql.ddl.DDL.context
-Any*310*311*312*313*314Á
-CheckConstraint%sqlalchemy.sql.schema.CheckConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraint*Œ
-__init__.sqlalchemy.sql.schema.CheckConstraint.__init__"
-None*X
-selfN
-%sqlalchemy.sql.schema.CheckConstraint"%sqlalchemy.sql.schema.CheckConstraint*
-sqltext
-Any*g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+sqlalchemy∂
+DDLsqlalchemy.sql.ddl.DDL"sqlalchemy.sql.ddl.DDLElement*H
+__init__*
 
-deferrable[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	initially[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-table[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-info[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-_create_rule[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *1
-_autoattach
-builtins.bool"builtins.bool *1
-_type_bound
-builtins.bool"builtins.bool *
-kw
-Anyz310z311z312z313z314*Ç
-is_column_level5sqlalchemy.sql.schema.CheckConstraint.is_column_level*
-self0:builtins.property`z310z311z312z313z314*∞
-copy*sqlalchemy.sql.schema.CheckConstraint.copy"
-Any*X
-selfN
-%sqlalchemy.sql.schema.CheckConstraint"%sqlalchemy.sql.schema.CheckConstraint*o
-target_table[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314r}
-__visit_name__4sqlalchemy.sql.schema.CheckConstraint.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rZ
-sqltext-sqlalchemy.sql.schema.CheckConstraint.sqltext
-Any*310*311*312*313*314·
-Columnsqlalchemy.sql.schema.Column"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem"$sqlalchemy.sql.elements.ColumnClause*ƒ
-__init__%sqlalchemy.sql.schema.Column.__init__"
-None*F
-self<
-sqlalchemy.sql.schema.Column"sqlalchemy.sql.schema.Column*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*d
+self(*
+	statement(*
+context (*
+bind (r
+__visit_name__0r
+	statement0r
+context0ª
+CheckConstraint%sqlalchemy.sql.schema.CheckConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraint*√
+__init__*
 
-references'sqlalchemy.sql.schema.Column.references*
+self(*
+sqltext(*
+name (*
+
+deferrable (*
+	initially (*
+table (*
+info (*
+_create_rule (*
+_autoattach (*
+_type_bound (*
+kw(*2
+is_column_level*
+self0:builtins.property`*4
+copy*
+
+self(*
+target_table (*
+kw(r
+__visit_name__0r
+sqltext0Ÿ
+Columnsqlalchemy.sql.schema.Column"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem"$sqlalchemy.sql.elements.ColumnClause*2
+__init__*
+
+self(	*
+
+args(*
+kwargs(*"
+
+references*
 self*
 
-columnz310z311z312z313z314*¡
-append_foreign_key/sqlalchemy.sql.schema.Column.append_foreign_key"
-None*F
-self<
-sqlalchemy.sql.schema.Column"sqlalchemy.sql.schema.Column*
-fk
-Anyz310z311z312z313z314*T
-copy!sqlalchemy.sql.schema.Column.copy*
+column*,
+append_foreign_key*
+
+self(	*
+fk(*
+copy*
 self*
-kwz310z311z312z313z314j310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.schema.Column.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rt
-inherit_cache*sqlalchemy.sql.schema.Column.inherit_cache
-builtins.bool"builtins.bool*310*311*312*313*314rI
-key sqlalchemy.sql.schema.Column.key
-Any*310*311*312*313*314rY
-primary_key(sqlalchemy.sql.schema.Column.primary_key
-Any*310*311*312*313*314rS
-nullable%sqlalchemy.sql.schema.Column.nullable
-Any*310*311*312*313*314rQ
-default$sqlalchemy.sql.schema.Column.default
-Any*310*311*312*313*314r_
-server_default+sqlalchemy.sql.schema.Column.server_default
-Any*310*311*312*313*314ra
-server_onupdate,sqlalchemy.sql.schema.Column.server_onupdate
-Any*310*311*312*313*314rM
-index"sqlalchemy.sql.schema.Column.index
-Any*310*311*312*313*314rO
-unique#sqlalchemy.sql.schema.Column.unique
-Any*310*311*312*313*314rO
-system#sqlalchemy.sql.schema.Column.system
-Any*310*311*312*313*314rI
-doc sqlalchemy.sql.schema.Column.doc
-Any*310*311*312*313*314rS
-onupdate%sqlalchemy.sql.schema.Column.onupdate
-Any*310*311*312*313*314r]
-autoincrement*sqlalchemy.sql.schema.Column.autoincrement
-Any*310*311*312*313*314rY
-constraints(sqlalchemy.sql.schema.Column.constraints
-Any*310*311*312*313*314r[
-foreign_keys)sqlalchemy.sql.schema.Column.foreign_keys
-Any*310*311*312*313*314rQ
-comment$sqlalchemy.sql.schema.Column.comment
-Any*310*311*312*313*314rS
-computed%sqlalchemy.sql.schema.Column.computed
-Any*310*311*312*313*314rS
-identity%sqlalchemy.sql.schema.Column.identity
-Any*310*311*312*313*314rK
-info!sqlalchemy.sql.schema.Column.info
-Any*310*311*312*313*314È
-ColumnDefault#sqlalchemy.sql.schema.ColumnDefault"&sqlalchemy.sql.schema.DefaultGenerator*ÿ
-__init__,sqlalchemy.sql.schema.ColumnDefault.__init__"
-None*T
-selfJ
-#sqlalchemy.sql.schema.ColumnDefault"#sqlalchemy.sql.schema.ColumnDefault*
-arg
-Any*
-kwargs
-Anyz310z311z312z313z314*í
-is_callable/sqlalchemy.sql.schema.ColumnDefault.is_callable*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*û
-is_clause_element5sqlalchemy.sql.schema.ColumnDefault.is_clause_element*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*é
-	is_scalar-sqlalchemy.sql.schema.ColumnDefault.is_scalar*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314j310j311j312j313j314rP
-arg'sqlalchemy.sql.schema.ColumnDefault.arg
-Any*310*311*312*313*314…
-Computedsqlalchemy.sql.schema.Computed""sqlalchemy.sql.schema.FetchedValue" sqlalchemy.sql.schema.SchemaItem*¶
-__init__'sqlalchemy.sql.schema.Computed.__init__"
-None*J
-self@
-sqlalchemy.sql.schema.Computed"sqlalchemy.sql.schema.Computed*
-sqltext
-Any*l
-	persisted[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*õ
-copy#sqlalchemy.sql.schema.Computed.copy"
-Any*J
-self@
-sqlalchemy.sql.schema.Computed"sqlalchemy.sql.schema.Computed*o
-target_table[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.schema.Computed.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rS
-sqltext&sqlalchemy.sql.schema.Computed.sqltext
-Any*310*311*312*313*314rW
-	persisted(sqlalchemy.sql.schema.Computed.persisted
-Any*310*311*312*313*314rQ
-column%sqlalchemy.sql.schema.Computed.column
-Any*310*311*312*313*314º
+kwr
+__visit_name__0r
+inherit_cache0r
+key0r
+primary_key0r
+nullable0r
+default0r
+server_default0r
+server_onupdate0r	
+index0r
 
-Constraint sqlalchemy.sql.schema.Constraint"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem*î
-__init__)sqlalchemy.sql.schema.Constraint.__init__"
-None*N
-selfD
- sqlalchemy.sql.schema.Constraint" sqlalchemy.sql.schema.Constraint*g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+unique0r
 
-deferrable[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	initially[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-_create_rule[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-info[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *1
-_type_bound
-builtins.bool"builtins.bool *
+system0r
+doc0r
+onupdate0r
+autoincrement0r
+constraints0r
+foreign_keys0r
+comment0r
+computed0r
+identity0r
+info0˙
+ColumnDefault#sqlalchemy.sql.schema.ColumnDefault"&sqlalchemy.sql.schema.DefaultGenerator*1
+__init__*
 
-dialect_kw
-Anyz310z311z312z313z314*i
-table&sqlalchemy.sql.schema.Constraint.table*
-self0:builtins.property`z310z311z312z313z314*X
-copy%sqlalchemy.sql.schema.Constraint.copy*
+self(
+*	
+arg(*
+kwargs(*H
+is_callable*
+self0:-sqlalchemy.util.langhelpers.memoized_property*N
+is_clause_element*
+self0:-sqlalchemy.util.langhelpers.memoized_property*F
+	is_scalar*
+self0:-sqlalchemy.util.langhelpers.memoized_propertyr
+arg0û
+Computedsqlalchemy.sql.schema.Computed""sqlalchemy.sql.schema.FetchedValue" sqlalchemy.sql.schema.SchemaItem*:
+__init__*
+
+self(*
+sqltext(*
+	persisted (*4
+copy*
+
+self(*
+target_table (*
+kw(r
+__visit_name__0r
+sqltext0r
+	persisted0r
+
+column0ô
+
+Constraint sqlalchemy.sql.schema.Constraint"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem*ò
+__init__*
+
+self(*
+name (*
+
+deferrable (*
+	initially (*
+_create_rule (*
+info (*
+_type_bound (*
+
+dialect_kw(*(
+table*
+self0:builtins.property`*
+copy*
 self*
-kwz310z311z312z313z314j310j311j312j313j314rx
-__visit_name__/sqlalchemy.sql.schema.Constraint.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rO
-name%sqlalchemy.sql.schema.Constraint.name
-Any*310*311*312*313*314r[
+kwr
+__visit_name__0r
+name0r
 
-deferrable+sqlalchemy.sql.schema.Constraint.deferrable
-Any*310*311*312*313*314rY
-	initially*sqlalchemy.sql.schema.Constraint.initially
-Any*310*311*312*313*314rO
-info%sqlalchemy.sql.schema.Constraint.info
-Any*310*311*312*313*314∆
-DefaultClause#sqlalchemy.sql.schema.DefaultClause""sqlalchemy.sql.schema.FetchedValue*ß
-__init__,sqlalchemy.sql.schema.DefaultClause.__init__"
-None*T
-selfJ
-#sqlalchemy.sql.schema.DefaultClause"#sqlalchemy.sql.schema.DefaultClause*
-arg
-Any*0
+deferrable0r
+	initially0r
+info0œ
+DefaultClause#sqlalchemy.sql.schema.DefaultClause""sqlalchemy.sql.schema.FetchedValue*K
+__init__*
 
-for_update
-builtins.bool"builtins.bool *0
+self(*	
+arg(*
 
-_reflected
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314ry
-has_argument0sqlalchemy.sql.schema.DefaultClause.has_argument
-builtins.bool"builtins.bool*310*311*312*313*314rP
-arg'sqlalchemy.sql.schema.DefaultClause.arg
-Any*310*311*312*313*314r\
-	reflected-sqlalchemy.sql.schema.DefaultClause.reflected
-Any*310*311*312*313*314¨
-FetchedValue"sqlalchemy.sql.schema.FetchedValue"%sqlalchemy.sql.base.SchemaEventTarget*‡
-__init__+sqlalchemy.sql.schema.FetchedValue.__init__"
-None*R
-selfH
-"sqlalchemy.sql.schema.FetchedValue""sqlalchemy.sql.schema.FetchedValue*0
+for_update (*
 
-for_update
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rÇ
-is_server_default4sqlalchemy.sql.schema.FetchedValue.is_server_default
-builtins.bool"builtins.bool*310*311*312*313*314rr
-	reflected,sqlalchemy.sql.schema.FetchedValue.reflected
-builtins.bool"builtins.bool*310*311*312*313*314rx
-has_argument/sqlalchemy.sql.schema.FetchedValue.has_argument
-builtins.bool"builtins.bool*310*311*312*313*314rÇ
-is_clause_element4sqlalchemy.sql.schema.FetchedValue.is_clause_element
-builtins.bool"builtins.bool*310*311*312*313*314r]
+_reflected (r
+has_argument0r
+arg0r
+	reflected0Ê
+FetchedValue"sqlalchemy.sql.schema.FetchedValue"%sqlalchemy.sql.base.SchemaEventTarget*,
+__init__*
 
-for_update-sqlalchemy.sql.schema.FetchedValue.for_update
-Any*310*311*312*313*314§
+self(*
 
-ForeignKey sqlalchemy.sql.schema.ForeignKey"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem*”	
-__init__)sqlalchemy.sql.schema.ForeignKey.__init__"
-None*N
-selfD
- sqlalchemy.sql.schema.ForeignKey" sqlalchemy.sql.schema.ForeignKey*
-column
-Any*n
-_constraint[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	use_alter
-builtins.bool"builtins.bool *g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-onupdate[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-ondelete[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+for_update (r
+is_server_default0r
+	reflected0r
+has_argument0r
+is_clause_element0r
 
-deferrable[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	initially[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *2
-link_to_name
-builtins.bool"builtins.bool *h
-match[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-info[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *3
-_unresolvable
-builtins.bool"builtins.bool *
+for_update0ï
 
-dialect_kw
-Anyz310z311z312z313z314*õ
-copy%sqlalchemy.sql.schema.ForeignKey.copy"
-Any*N
-selfD
- sqlalchemy.sql.schema.ForeignKey" sqlalchemy.sql.schema.ForeignKey*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314*}
-target_fullname0sqlalchemy.sql.schema.ForeignKey.target_fullname*
-self0:builtins.property`z310z311z312z313z314*g
+ForeignKey sqlalchemy.sql.schema.ForeignKey"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem*É
+__init__*
 
-references+sqlalchemy.sql.schema.ForeignKey.references*
+self(*
+column(*
+_constraint (*
+	use_alter (*
+name (*
+onupdate (*
+ondelete (*
+
+deferrable (*
+	initially (*
+link_to_name (*
+match (*
+info (*
+_unresolvable (*
+
+dialect_kw(*.
+copy*
+
+self(*
+schema (*
+kw(*2
+target_fullname*
+self0:builtins.property`*!
+
+references*
 self*	
-tablez310z311z312z313z314*k
-get_referent-sqlalchemy.sql.schema.ForeignKey.get_referent*
+table*#
+get_referent*
 self*	
-tablez310z311z312z313z314*Ö
-column'sqlalchemy.sql.schema.ForeignKey.column*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314j310j311j312j313j314rx
-__visit_name__/sqlalchemy.sql.schema.ForeignKey.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314r[
+table*C
+column*
+self0:-sqlalchemy.util.langhelpers.memoized_propertyr
+__visit_name__0r
 
-constraint+sqlalchemy.sql.schema.ForeignKey.constraint
-Any*310*311*312*313*314rS
-parent'sqlalchemy.sql.schema.ForeignKey.parent
-Any*310*311*312*313*314rY
-	use_alter*sqlalchemy.sql.schema.ForeignKey.use_alter
-Any*310*311*312*313*314rO
-name%sqlalchemy.sql.schema.ForeignKey.name
-Any*310*311*312*313*314rW
-onupdate)sqlalchemy.sql.schema.ForeignKey.onupdate
-Any*310*311*312*313*314rW
-ondelete)sqlalchemy.sql.schema.ForeignKey.ondelete
-Any*310*311*312*313*314r[
+constraint0r
 
-deferrable+sqlalchemy.sql.schema.ForeignKey.deferrable
-Any*310*311*312*313*314rY
-	initially*sqlalchemy.sql.schema.ForeignKey.initially
-Any*310*311*312*313*314r_
-link_to_name-sqlalchemy.sql.schema.ForeignKey.link_to_name
-Any*310*311*312*313*314rQ
-match&sqlalchemy.sql.schema.ForeignKey.match
-Any*310*311*312*313*314rO
-info%sqlalchemy.sql.schema.ForeignKey.info
-Any*310*311*312*313*314“
-ForeignKeyConstraint*sqlalchemy.sql.schema.ForeignKeyConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraint*–	
-__init__3sqlalchemy.sql.schema.ForeignKeyConstraint.__init__"
-None*b
-selfX
-*sqlalchemy.sql.schema.ForeignKeyConstraint"*sqlalchemy.sql.schema.ForeignKeyConstraint*
-columns
-Any*
+parent0r
+	use_alter0r
+name0r
+onupdate0r
+ondelete0r
 
-refcolumns
-Any*g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-onupdate[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-ondelete[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+deferrable0r
+	initially0r
+link_to_name0r	
+match0r
+info0ê
+ForeignKeyConstraint*sqlalchemy.sql.schema.ForeignKeyConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraint*˘
+__init__*
 
-deferrable[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	initially[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	use_alter
-builtins.bool"builtins.bool *2
-link_to_name
-builtins.bool"builtins.bool *h
-match[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-table[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-info[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+self(*
+columns(*
 
-dialect_kw
-Anyz310z311z312z313z314*Ö
-referred_table9sqlalchemy.sql.schema.ForeignKeyConstraint.referred_table*
-self0:builtins.property`z310z311z312z313z314*
-column_keys6sqlalchemy.sql.schema.ForeignKeyConstraint.column_keys*
-self0:builtins.property`z310z311z312z313z314*™
-copy/sqlalchemy.sql.schema.ForeignKeyConstraint.copy"
-Any*b
-selfX
-*sqlalchemy.sql.schema.ForeignKeyConstraint"*sqlalchemy.sql.schema.ForeignKeyConstraint*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-target_table[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314j310j311j312j313j314rÇ
-__visit_name__9sqlalchemy.sql.schema.ForeignKeyConstraint.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ra
-onupdate3sqlalchemy.sql.schema.ForeignKeyConstraint.onupdate
-Any*310*311*312*313*314ra
-ondelete3sqlalchemy.sql.schema.ForeignKeyConstraint.ondelete
-Any*310*311*312*313*314ri
-link_to_name7sqlalchemy.sql.schema.ForeignKeyConstraint.link_to_name
-Any*310*311*312*313*314rc
-	use_alter4sqlalchemy.sql.schema.ForeignKeyConstraint.use_alter
-Any*310*311*312*313*314r[
-match0sqlalchemy.sql.schema.ForeignKeyConstraint.match
-Any*310*311*312*313*314ra
-elements3sqlalchemy.sql.schema.ForeignKeyConstraint.elements
-Any*310*311*312*313*314r_
-columns2sqlalchemy.sql.schema.ForeignKeyConstraint.columns
-Any*310*311*312*313*314à
-Identitysqlalchemy.sql.schema.Identity"%sqlalchemy.sql.schema.IdentityOptions""sqlalchemy.sql.schema.FetchedValue" sqlalchemy.sql.schema.SchemaItem*ä
+refcolumns(*
+name (*
+onupdate (*
+ondelete (*
 
-__init__'sqlalchemy.sql.schema.Identity.__init__"
-None*J
-self@
-sqlalchemy.sql.schema.Identity"sqlalchemy.sql.schema.Identity*,
-always
-builtins.bool"builtins.bool *j
-on_null[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-start[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	increment[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-minvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-maxvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+deferrable (*
+	initially (*
+	use_alter (*
+link_to_name (*
+match (*
+table (*
+info (*
 
-nominvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+dialect_kw(*1
+referred_table*
+self0:builtins.property`*.
+column_keys*
+self0:builtins.property`*D
+copy*
 
-nomaxvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-cycle[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-cache[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-order[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*V
-copy#sqlalchemy.sql.schema.Identity.copy*
+self(*
+schema (*
+target_table (*
+kw(r
+__visit_name__0r
+onupdate0r
+ondelete0r
+link_to_name0r
+	use_alter0r	
+match0r
+elements0r
+columns0¡
+Identitysqlalchemy.sql.schema.Identity"%sqlalchemy.sql.schema.IdentityOptions""sqlalchemy.sql.schema.FetchedValue" sqlalchemy.sql.schema.SchemaItem*‘
+__init__*
+
+self(*
+always (*
+on_null (*
+start (*
+	increment (*
+minvalue (*
+maxvalue (*
+
+nominvalue (*
+
+nomaxvalue (*
+cycle (*
+cache (*
+order (*
+copy*
 self*
-kwz310z311z312z313z314j310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.schema.Identity.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rQ
-always%sqlalchemy.sql.schema.Identity.always
-Any*310*311*312*313*314rS
-on_null&sqlalchemy.sql.schema.Identity.on_null
-Any*310*311*312*313*314rQ
-column%sqlalchemy.sql.schema.Identity.column
-Any*310*311*312*313*314”
-Indexsqlalchemy.sql.schema.Index"!sqlalchemy.sql.base.DialectKWArgs"+sqlalchemy.sql.schema.ColumnCollectionMixin" sqlalchemy.sql.schema.SchemaItem*◊
-__init__$sqlalchemy.sql.schema.Index.__init__"
-None*D
-self:
-sqlalchemy.sql.schema.Index"sqlalchemy.sql.schema.Index*
-name
-Any*
-expressions
-Any*
-kw
-Anyz310z311z312z313z314*b
-bind sqlalchemy.sql.schema.Index.bind*
-self0:builtins.property`z310z311z312z313z314*Ø
-create"sqlalchemy.sql.schema.Index.create"
-Any*D
-self:
-sqlalchemy.sql.schema.Index"sqlalchemy.sql.schema.Index*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+kwr
+__visit_name__0r
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314*¨
-drop sqlalchemy.sql.schema.Index.drop"
-None*D
-self:
-sqlalchemy.sql.schema.Index"sqlalchemy.sql.schema.Index*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+always0r
+on_null0r
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rs
-__visit_name__*sqlalchemy.sql.schema.Index.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rL
-table!sqlalchemy.sql.schema.Index.table
-Any*310*311*312*313*314rJ
-name sqlalchemy.sql.schema.Index.name
-Any*310*311*312*313*314rN
-unique"sqlalchemy.sql.schema.Index.unique
-Any*310*311*312*313*314rJ
-info sqlalchemy.sql.schema.Index.info
-Any*310*311*312*313*314rX
-expressions'sqlalchemy.sql.schema.Index.expressions
-Any*310*311*312*313*314‰
-MetaDatasqlalchemy.sql.schema.MetaData" sqlalchemy.sql.schema.SchemaItem*∆
-__init__'sqlalchemy.sql.schema.MetaData.__init__"
-None*J
-self@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaData*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-quote_schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *t
-naming_convention[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-info[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*√
-__contains__+sqlalchemy.sql.schema.MetaData.__contains__"
-builtins.bool"builtins.bool*B@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaData*	
-Anyz310z311z312z313z314*V
-is_bound'sqlalchemy.sql.schema.MetaData.is_bound*
-selfz310z311z312z313z314*ú
-clear$sqlalchemy.sql.schema.MetaData.clear"
-None*J
-self@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaDataz310z311z312z313z314*≤
-remove%sqlalchemy.sql.schema.MetaData.remove"
-None*J
-self@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaData*
-table
-Anyz310z311z312z313z314*w
-sorted_tables,sqlalchemy.sql.schema.MetaData.sorted_tables*
-self0:builtins.property`z310z311z312z313z314*…
-reflect&sqlalchemy.sql.schema.MetaData.reflect"
-None*J
-self@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaData*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *+
-views
-builtins.bool"builtins.bool *g
-only[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-extend_existing
-builtins.bool"builtins.bool *6
-autoload_replace
-builtins.bool"builtins.bool *1
-resolve_fks
-builtins.bool"builtins.bool *
-dialect_kwargs
-Anyz310z311z312z313z314*¨
+column0ƒ
+Indexsqlalchemy.sql.schema.Index"!sqlalchemy.sql.base.DialectKWArgs"+sqlalchemy.sql.schema.ColumnCollectionMixin" sqlalchemy.sql.schema.SchemaItem*A
+__init__*
 
-create_all)sqlalchemy.sql.schema.MetaData.create_all"
-None*J
-self@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaData*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-tables[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+self(*
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314*®
-drop_all'sqlalchemy.sql.schema.MetaData.drop_all"
-None*J
-self@
-sqlalchemy.sql.schema.MetaData"sqlalchemy.sql.schema.MetaData*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-tables[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+name(*
+expressions(*
+kw(*'
+bind*
+self0:builtins.property`*8
+create*
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.schema.MetaData.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rQ
-tables%sqlalchemy.sql.schema.MetaData.tables
-Any*310*311*312*313*314rQ
-schema%sqlalchemy.sql.schema.MetaData.schema
-Any*310*311*312*313*314rg
-naming_convention0sqlalchemy.sql.schema.MetaData.naming_convention
-Any*310*311*312*313*314rM
-info#sqlalchemy.sql.schema.MetaData.info
-Any*310*311*312*313*314rM
-bind#sqlalchemy.sql.schema.MetaData.bind
-Any*310*311*312*313*314ò
-PrimaryKeyConstraint*sqlalchemy.sql.schema.PrimaryKeyConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraint*Ì
-__init__3sqlalchemy.sql.schema.PrimaryKeyConstraint.__init__"
-None*b
-selfX
-*sqlalchemy.sql.schema.PrimaryKeyConstraint"*sqlalchemy.sql.schema.PrimaryKeyConstraint*
-columns
-Any*
-kw
-Anyz310z311z312z313z314*ì
-columns_autoinc_first@sqlalchemy.sql.schema.PrimaryKeyConstraint.columns_autoinc_first*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rÇ
-__visit_name__9sqlalchemy.sql.schema.PrimaryKeyConstraint.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ì
-Sequencesqlalchemy.sql.schema.Sequence"%sqlalchemy.sql.schema.IdentityOptions"&sqlalchemy.sql.schema.DefaultGenerator*Ü
-__init__'sqlalchemy.sql.schema.Sequence.__init__"
-None*J
-self@
-sqlalchemy.sql.schema.Sequence"sqlalchemy.sql.schema.Sequence*
-name
-Any*h
-start[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	increment[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-minvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-maxvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+self(*
+bind (*
 
-nominvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
+checkfirst (*6
+drop*
 
-nomaxvalue[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-cycle[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-cache[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-order[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	data_type[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *.
-optional
-builtins.bool"builtins.bool *h
-quote[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-metadata[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-quote_schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+self(*
+bind (*
 
-for_update
-builtins.bool"builtins.bool z310z311z312z313z314*ç
-is_callable*sqlalchemy.sql.schema.Sequence.is_callable*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*ô
-is_clause_element0sqlalchemy.sql.schema.Sequence.is_clause_element*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*Z
+checkfirst (r
+__visit_name__0r	
+table0r
+name0r
 
-next_value)sqlalchemy.sql.schema.Sequence.next_value*
-selfz310z311z312z313z314*e
-bind#sqlalchemy.sql.schema.Sequence.bind*
-self0:builtins.property`z310z311z312z313z314*π
-create%sqlalchemy.sql.schema.Sequence.create"
-None*J
-self@
-sqlalchemy.sql.schema.Sequence"sqlalchemy.sql.schema.Sequence*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+unique0r
+info0r
+expressions0Ö
+MetaDatasqlalchemy.sql.schema.MetaData" sqlalchemy.sql.schema.SchemaItem*u
+__init__*
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314*µ
-drop#sqlalchemy.sql.schema.Sequence.drop"
-None*J
-self@
-sqlalchemy.sql.schema.Sequence"sqlalchemy.sql.schema.Sequence*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+self(*
+bind (*
+schema (*
+quote_schema (*
+naming_convention (*
+info (*
+__contains__*(*(*
+is_bound*
+self*
+clear*
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.schema.Sequence.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rr
-is_sequence*sqlalchemy.sql.schema.Sequence.is_sequence
-builtins.bool"builtins.bool*310*311*312*313*314rM
-name#sqlalchemy.sql.schema.Sequence.name
-Any*310*311*312*313*314rU
-optional'sqlalchemy.sql.schema.Sequence.optional
-Any*310*311*312*313*314rQ
-schema%sqlalchemy.sql.schema.Sequence.schema
-Any*310*311*312*313*314rU
-metadata'sqlalchemy.sql.schema.Sequence.metadata
-Any*310*311*312*313*314rW
-	data_type(sqlalchemy.sql.schema.Sequence.data_type
-Any*310*311*312*313*314ˇ
-Tablesqlalchemy.sql.schema.Table"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem"%sqlalchemy.sql.selectable.TableClause*d
-__new__#sqlalchemy.sql.schema.Table.__new__*
+self(*#
+remove*
+
+self(*
+table(*0
+sorted_tables*
+self0:builtins.property`*∞
+reflect*
+
+self(*
+bind (*
+schema (*
+views (*
+only (*
+extend_existing (*
+autoload_replace (*
+resolve_fks (*
+dialect_kwargs(*L
+
+create_all*
+
+self(*
+bind (*
+tables (*
+
+checkfirst (*J
+drop_all*
+
+self(*
+bind (*
+tables (*
+
+checkfirst (r
+__visit_name__0r
+
+tables0r
+
+schema0r
+naming_convention0r
+info0r
+bind0ı
+PrimaryKeyConstraint*sqlalchemy.sql.schema.PrimaryKeyConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraint*1
+__init__*
+
+self(*
+columns(*
+kw(*8
+columns_autoinc_first*
+self0:builtins.property`r
+__visit_name__0Ó
+Sequencesqlalchemy.sql.schema.Sequence"%sqlalchemy.sql.schema.IdentityOptions"&sqlalchemy.sql.schema.DefaultGenerator*ø
+__init__*
+
+self(*
+
+name(*
+start (*
+	increment (*
+minvalue (*
+maxvalue (*
+
+nominvalue (*
+
+nomaxvalue (*
+cycle (*
+schema (*
+cache (*
+order (*
+	data_type (*
+optional (*
+quote (*
+metadata (*
+quote_schema (*
+
+for_update (*H
+is_callable*
+self0:-sqlalchemy.util.langhelpers.memoized_property*N
+is_clause_element*
+self0:-sqlalchemy.util.langhelpers.memoized_property*
+
+next_value*
+self*'
+bind*
+self0:builtins.property`*8
+create*
+
+self(*
+bind (*
+
+checkfirst (*6
+drop*
+
+self(*
+bind (*
+
+checkfirst (r
+__visit_name__0r
+is_sequence0r
+name0r
+optional0r
+
+schema0r
+metadata0r
+	data_type0∫
+Tablesqlalchemy.sql.schema.Table"!sqlalchemy.sql.base.DialectKWArgs" sqlalchemy.sql.schema.SchemaItem"%sqlalchemy.sql.selectable.TableClause*&
+__new__*
 cls*
 args*
-kwhz310z311z312z313z314*Ω
-__init__$sqlalchemy.sql.schema.Table.__init__"
-None*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*
-args
-Any*
-kw
-Anyz310z311z312z313z314*à
-foreign_key_constraints3sqlalchemy.sql.schema.Table.foreign_key_constraints*
-self0:builtins.property`z310z311z312z313z314*`
-keysqlalchemy.sql.schema.Table.key*
-self0:builtins.property`z310z311z312z313z314*b
-bind sqlalchemy.sql.schema.Table.bind*
-self0:builtins.property`z310z311z312z313z314*√
-add_is_dependent_on/sqlalchemy.sql.schema.Table.add_is_dependent_on"
-None*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*
-table
-Anyz310z311z312z313z314*
-append_column)sqlalchemy.sql.schema.Table.append_column"
-None*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*
-column
-Any*6
-replace_existing
-builtins.bool"builtins.bool z310z311z312z313z314*ƒ
-append_constraint-sqlalchemy.sql.schema.Table.append_constraint"
-None*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*
+kwh*.
+__init__*
 
-constraint
-Anyz310z311z312z313z314*˝
-exists"sqlalchemy.sql.schema.Table.exists"
-Any*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*∞
-create"sqlalchemy.sql.schema.Table.create"
-None*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+self(*
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314*¨
-drop sqlalchemy.sql.schema.Table.drop"
-None*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
+args(*
+kw(*:
+foreign_key_constraints*
+self0:builtins.property`*&
+key*
+self0:builtins.property`*'
+bind*
+self0:builtins.property`*0
+add_is_dependent_on*
 
-checkfirst
-builtins.bool"builtins.bool z310z311z312z313z314*™
+self(*
+table(*E
+append_column*
 
-tometadata&sqlalchemy.sql.schema.Table.tometadata"
-Any*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*
-metadata
-Any*
-schema
-Any *u
-referred_schema_fn[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*¨
-to_metadata'sqlalchemy.sql.schema.Table.to_metadata"
-Any*D
-self:
-sqlalchemy.sql.schema.Table"sqlalchemy.sql.schema.Table*
-metadata
-Any*
-schema
-Any *u
-referred_schema_fn[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rs
-__visit_name__*sqlalchemy.sql.schema.Table.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rX
-constraints'sqlalchemy.sql.schema.Table.constraints
-Any*310*311*312*313*314rP
-indexes#sqlalchemy.sql.schema.Table.indexes
-Any*310*311*312*313*314§
-ThreadLocalMetaData)sqlalchemy.sql.schema.ThreadLocalMetaData"sqlalchemy.sql.schema.MetaData*√
-__init__2sqlalchemy.sql.schema.ThreadLocalMetaData.__init__"
-None*`
-selfV
-)sqlalchemy.sql.schema.ThreadLocalMetaData")sqlalchemy.sql.schema.ThreadLocalMetaDataz310z311z312z313z314*a
-is_bound2sqlalchemy.sql.schema.ThreadLocalMetaData.is_bound*
-selfz310z311z312z313z314*¡
-dispose1sqlalchemy.sql.schema.ThreadLocalMetaData.dispose"
-None*`
-selfV
-)sqlalchemy.sql.schema.ThreadLocalMetaData")sqlalchemy.sql.schema.ThreadLocalMetaDataz310z311z312z313z314j310j311j312j313j314rÅ
-__visit_name__8sqlalchemy.sql.schema.ThreadLocalMetaData.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314r^
-context1sqlalchemy.sql.schema.ThreadLocalMetaData.context
-Any*310*311*312*313*314rX
-bind.sqlalchemy.sql.schema.ThreadLocalMetaData.bind
-Any*310*311*312*313*314Ö
-UniqueConstraint&sqlalchemy.sql.schema.UniqueConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraintj310j311j312j313j314r~
-__visit_name__5sqlalchemy.sql.schema.UniqueConstraint.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ë
-ARRAYsqlalchemy.sql.sqltypes.ARRAY"%sqlalchemy.sql.base.SchemaEventTarget"!sqlalchemy.sql.sqltypes.Indexable"$sqlalchemy.sql.sqltypes.Concatenable""sqlalchemy.sql.type_api.TypeEngine*ä
-__init__&sqlalchemy.sql.sqltypes.ARRAY.__init__"
-None*H
-self>
-sqlalchemy.sql.sqltypes.ARRAY"sqlalchemy.sql.sqltypes.ARRAY*
-	item_type
-Any*.
-as_tuple
-builtins.bool"builtins.bool *m
+self(*
+column(*
+replace_existing (*3
+append_constraint*
 
-dimensions[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *2
-zero_indexes
-builtins.bool"builtins.bool z310z311z312z313z314*l
-hashable&sqlalchemy.sql.sqltypes.ARRAY.hashable*
-self0:builtins.property`z310z311z312z313z314*r
-python_type)sqlalchemy.sql.sqltypes.ARRAY.python_type*
-self0:builtins.property`z310z311z312z313z314*o
-compare_values,sqlalchemy.sql.sqltypes.ARRAY.compare_values*
+self(*
+
+constraint(*$
+exists*
+
+self(*
+bind (*8
+create*
+
+self(*
+bind (*
+
+checkfirst (*6
+drop*
+
+self(*
+bind (*
+
+checkfirst (*d
+
+tometadata*
+
+self(*
+metadata(*
+schema (*
+referred_schema_fn (*
+name (*e
+to_metadata*
+
+self(*
+metadata(*
+schema (*
+referred_schema_fn (*
+name (r
+__visit_name__0r
+constraints0r
+indexes0‘
+ThreadLocalMetaData)sqlalchemy.sql.schema.ThreadLocalMetaData"sqlalchemy.sql.schema.MetaData*
+__init__*
+
+self(*
+is_bound*
+self*
+dispose*
+
+self(r
+__visit_name__0r
+context0r
+bind0Ä
+UniqueConstraint&sqlalchemy.sql.schema.UniqueConstraint"0sqlalchemy.sql.schema.ColumnCollectionConstraintr
+__visit_name__0ì
+ARRAYsqlalchemy.sql.sqltypes.ARRAY"%sqlalchemy.sql.base.SchemaEventTarget"!sqlalchemy.sql.sqltypes.Indexable"$sqlalchemy.sql.sqltypes.Concatenable""sqlalchemy.sql.type_api.TypeEngine*e
+__init__*
+
+self(*
+	item_type(*
+as_tuple (*
+
+dimensions (*
+zero_indexes (*+
+hashable*
+self0:builtins.property`*.
+python_type*
+self0:builtins.property`*(
+compare_values*
 self*
 x*
-yz310z311z312z313z314j310j311j312j313j314ru
-__visit_name__,sqlalchemy.sql.sqltypes.ARRAY.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rs
-zero_indexes*sqlalchemy.sql.sqltypes.ARRAY.zero_indexes
-builtins.bool"builtins.bool*310*311*312*313*314rh
-comparator_factory0sqlalchemy.sql.sqltypes.ARRAY.comparator_factory
-Any*310*311*312*313*314rV
-	item_type'sqlalchemy.sql.sqltypes.ARRAY.item_type
-Any*310*311*312*313*314rT
-as_tuple&sqlalchemy.sql.sqltypes.ARRAY.as_tuple
-Any*310*311*312*313*314rX
+yr
+__visit_name__0r
+zero_indexes0r
+comparator_factory0r
+	item_type0r
+as_tuple0r
 
-dimensions(sqlalchemy.sql.sqltypes.ARRAY.dimensions
-Any*310*311*312*313*314›
-BIGINTsqlalchemy.sql.sqltypes.BIGINT""sqlalchemy.sql.sqltypes.BigIntegerj310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.sqltypes.BIGINT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314⁄
-BINARYsqlalchemy.sql.sqltypes.BINARY"sqlalchemy.sql.sqltypes._Binaryj310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.sqltypes.BINARY.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ÿ
-BLOBsqlalchemy.sql.sqltypes.BLOB"#sqlalchemy.sql.sqltypes.LargeBinaryj310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.BLOB.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314›
-BOOLEANsqlalchemy.sql.sqltypes.BOOLEAN"sqlalchemy.sql.sqltypes.Booleanj310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.BOOLEAN.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314”
-CHARsqlalchemy.sql.sqltypes.CHAR"sqlalchemy.sql.sqltypes.Stringj310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.CHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314—
-CLOBsqlalchemy.sql.sqltypes.CLOB"sqlalchemy.sql.sqltypes.Textj310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.CLOB.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314—
-DATEsqlalchemy.sql.sqltypes.DATE"sqlalchemy.sql.sqltypes.Datej310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.DATE.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314·
-DATETIME sqlalchemy.sql.sqltypes.DATETIME" sqlalchemy.sql.sqltypes.DateTimej310j311j312j313j314rx
-__visit_name__/sqlalchemy.sql.sqltypes.DATETIME.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314›
-DECIMALsqlalchemy.sql.sqltypes.DECIMAL"sqlalchemy.sql.sqltypes.Numericj310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.DECIMAL.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314’
-FLOATsqlalchemy.sql.sqltypes.FLOAT"sqlalchemy.sql.sqltypes.Floatj310j311j312j313j314ru
-__visit_name__,sqlalchemy.sql.sqltypes.FLOAT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314›
-INTEGERsqlalchemy.sql.sqltypes.INTEGER"sqlalchemy.sql.sqltypes.Integerj310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.INTEGER.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314æ
-JSONsqlalchemy.sql.sqltypes.JSON"!sqlalchemy.sql.sqltypes.Indexable""sqlalchemy.sql.type_api.TypeEngine*–
-__init__%sqlalchemy.sql.sqltypes.JSON.__init__"
-None*F
-self<
-sqlalchemy.sql.sqltypes.JSON"sqlalchemy.sql.sqltypes.JSON*2
-none_as_null
-builtins.bool"builtins.bool z310z311z312z313z314*q
-python_type(sqlalchemy.sql.sqltypes.JSON.python_type*
-self0:builtins.property`z310z311z312z313z314*m
-bind_processor+sqlalchemy.sql.sqltypes.JSON.bind_processor*
+dimensions0`
+BIGINTsqlalchemy.sql.sqltypes.BIGINT""sqlalchemy.sql.sqltypes.BigIntegerr
+__visit_name__0]
+BINARYsqlalchemy.sql.sqltypes.BINARY"sqlalchemy.sql.sqltypes._Binaryr
+__visit_name__0]
+BLOBsqlalchemy.sql.sqltypes.BLOB"#sqlalchemy.sql.sqltypes.LargeBinaryr
+__visit_name__0_
+BOOLEANsqlalchemy.sql.sqltypes.BOOLEAN"sqlalchemy.sql.sqltypes.Booleanr
+__visit_name__0X
+CHARsqlalchemy.sql.sqltypes.CHAR"sqlalchemy.sql.sqltypes.Stringr
+__visit_name__0V
+CLOBsqlalchemy.sql.sqltypes.CLOB"sqlalchemy.sql.sqltypes.Textr
+__visit_name__0V
+DATEsqlalchemy.sql.sqltypes.DATE"sqlalchemy.sql.sqltypes.Dater
+__visit_name__0b
+DATETIME sqlalchemy.sql.sqltypes.DATETIME" sqlalchemy.sql.sqltypes.DateTimer
+__visit_name__0_
+DECIMALsqlalchemy.sql.sqltypes.DECIMAL"sqlalchemy.sql.sqltypes.Numericr
+__visit_name__0Y
+FLOATsqlalchemy.sql.sqltypes.FLOAT"sqlalchemy.sql.sqltypes.Floatr
+__visit_name__0_
+INTEGERsqlalchemy.sql.sqltypes.INTEGER"sqlalchemy.sql.sqltypes.Integerr
+__visit_name__0î
+JSONsqlalchemy.sql.sqltypes.JSON"!sqlalchemy.sql.sqltypes.Indexable""sqlalchemy.sql.type_api.TypeEngine*.
+__init__*
+
+self(*
+none_as_null (*.
+python_type*
+self0:builtins.property`*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*~
-result_processor-sqlalchemy.sql.sqltypes.JSON.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z3142ç
-should_evaluate_none1sqlalchemy.sql.sqltypes.JSON.should_evaluate_nonel
-should_evaluate_none1sqlalchemy.sql.sqltypes.JSON.should_evaluate_none*
-self0:builtins.propertyX`∫
-should_evaluate_none1sqlalchemy.sql.sqltypes.JSON.should_evaluate_none"
-None*F
-self<
-sqlalchemy.sql.sqltypes.JSON"sqlalchemy.sql.sqltypes.JSON*
-value
-Any0:.setter"310"311"312"313"314j310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.JSON.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rj
-hashable%sqlalchemy.sql.sqltypes.JSON.hashable
-builtins.bool"builtins.bool*310*311*312*313*314rK
-NULL!sqlalchemy.sql.sqltypes.JSON.NULL
-Any*310*311*312*313*314r[
-none_as_null)sqlalchemy.sql.sqltypes.JSON.none_as_null
-Any*310*311*312*313*314rg
-comparator_factory/sqlalchemy.sql.sqltypes.JSON.comparator_factory
-Any*310*311*312*313*314◊
-NCHARsqlalchemy.sql.sqltypes.NCHAR"sqlalchemy.sql.sqltypes.Unicodej310j311j312j313j314ru
-__visit_name__,sqlalchemy.sql.sqltypes.NCHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314›
-NUMERICsqlalchemy.sql.sqltypes.NUMERIC"sqlalchemy.sql.sqltypes.Numericj310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.NUMERIC.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314‡
-NVARCHAR sqlalchemy.sql.sqltypes.NVARCHAR"sqlalchemy.sql.sqltypes.Unicodej310j311j312j313j314rx
-__visit_name__/sqlalchemy.sql.sqltypes.NVARCHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314“
-REALsqlalchemy.sql.sqltypes.REAL"sqlalchemy.sql.sqltypes.Floatj310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.REAL.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Â
-SMALLINT sqlalchemy.sql.sqltypes.SMALLINT"$sqlalchemy.sql.sqltypes.SmallIntegerj310j311j312j313j314rx
-__visit_name__/sqlalchemy.sql.sqltypes.SMALLINT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314—
-TEXTsqlalchemy.sql.sqltypes.TEXT"sqlalchemy.sql.sqltypes.Textj310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.TEXT.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314—
-TIMEsqlalchemy.sql.sqltypes.TIME"sqlalchemy.sql.sqltypes.Timej310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.TIME.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314¥
-	TIMESTAMP!sqlalchemy.sql.sqltypes.TIMESTAMP" sqlalchemy.sql.sqltypes.DateTime*€
-__init__*sqlalchemy.sql.sqltypes.TIMESTAMP.__init__"
-None*P
-selfF
-!sqlalchemy.sql.sqltypes.TIMESTAMP"!sqlalchemy.sql.sqltypes.TIMESTAMP*.
-timezone
-builtins.bool"builtins.bool z310z311z312z313z314*p
-get_dbapi_type0sqlalchemy.sql.sqltypes.TIMESTAMP.get_dbapi_type*
-self*	
-dbapiz310z311z312z313z314j310j311j312j313j314ry
-__visit_name__0sqlalchemy.sql.sqltypes.TIMESTAMP.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314„
-	VARBINARY!sqlalchemy.sql.sqltypes.VARBINARY"sqlalchemy.sql.sqltypes._Binaryj310j311j312j313j314ry
-__visit_name__0sqlalchemy.sql.sqltypes.VARBINARY.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314‹
-VARCHARsqlalchemy.sql.sqltypes.VARCHAR"sqlalchemy.sql.sqltypes.Stringj310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.VARCHAR.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ê
+coltype2è
+should_evaluate_none9
+should_evaluate_none*
+self0:builtins.propertyX`<
+should_evaluate_none*
 
-BigInteger"sqlalchemy.sql.sqltypes.BigInteger"sqlalchemy.sql.sqltypes.Integerj310j311j312j313j314rz
-__visit_name__1sqlalchemy.sql.sqltypes.BigInteger.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ø
-Booleansqlalchemy.sql.sqltypes.Boolean" sqlalchemy.sql.type_api.Emulated""sqlalchemy.sql.type_api.TypeEngine""sqlalchemy.sql.sqltypes.SchemaType*˝
-__init__(sqlalchemy.sql.sqltypes.Boolean.__init__"
-None*L
-selfB
-sqlalchemy.sql.sqltypes.Boolean"sqlalchemy.sql.sqltypes.Boolean*7
-create_constraint
-builtins.bool"builtins.bool *g
-name[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *4
-_create_events
-builtins.bool"builtins.bool z310z311z312z313z314*t
-python_type+sqlalchemy.sql.sqltypes.Boolean.python_type*
-self0:builtins.property`z310z311z312z313z314*v
-literal_processor1sqlalchemy.sql.sqltypes.Boolean.literal_processor*
+self(*
+value(0:.setterr
+__visit_name__0r
+hashable0r
+NULL0r
+none_as_null0r
+comparator_factory0[
+NCHARsqlalchemy.sql.sqltypes.NCHAR"sqlalchemy.sql.sqltypes.Unicoder
+__visit_name__0_
+NUMERICsqlalchemy.sql.sqltypes.NUMERIC"sqlalchemy.sql.sqltypes.Numericr
+__visit_name__0a
+NVARCHAR sqlalchemy.sql.sqltypes.NVARCHAR"sqlalchemy.sql.sqltypes.Unicoder
+__visit_name__0W
+REALsqlalchemy.sql.sqltypes.REAL"sqlalchemy.sql.sqltypes.Floatr
+__visit_name__0f
+SMALLINT sqlalchemy.sql.sqltypes.SMALLINT"$sqlalchemy.sql.sqltypes.SmallIntegerr
+__visit_name__0V
+TEXTsqlalchemy.sql.sqltypes.TEXT"sqlalchemy.sql.sqltypes.Textr
+__visit_name__0V
+TIMEsqlalchemy.sql.sqltypes.TIME"sqlalchemy.sql.sqltypes.Timer
+__visit_name__0∑
+	TIMESTAMP!sqlalchemy.sql.sqltypes.TIMESTAMP" sqlalchemy.sql.sqltypes.DateTime**
+__init__*
+
+self(*
+timezone (*%
+get_dbapi_type*
+self*	
+dbapir
+__visit_name__0c
+	VARBINARY!sqlalchemy.sql.sqltypes.VARBINARY"sqlalchemy.sql.sqltypes._Binaryr
+__visit_name__0^
+VARCHARsqlalchemy.sql.sqltypes.VARCHAR"sqlalchemy.sql.sqltypes.Stringr
+__visit_name__0e
+
+BigInteger"sqlalchemy.sql.sqltypes.BigInteger"sqlalchemy.sql.sqltypes.Integerr
+__visit_name__0Ì
+Booleansqlalchemy.sql.sqltypes.Boolean" sqlalchemy.sql.type_api.Emulated""sqlalchemy.sql.type_api.TypeEngine""sqlalchemy.sql.sqltypes.SchemaType*Y
+__init__*
+
+self(*
+create_constraint (*
+name (*
+_create_events (*.
+python_type*
+self0:builtins.property`**
+literal_processor*
 self*
-dialectz310z311z312z313z314*p
-bind_processor.sqlalchemy.sql.sqltypes.Boolean.bind_processor*
+dialect*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*Å
-result_processor0sqlalchemy.sql.sqltypes.Boolean.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314j310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.Boolean.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ri
-native&sqlalchemy.sql.sqltypes.Boolean.native
-builtins.bool"builtins.bool*310*311*312*313*314rh
-create_constraint1sqlalchemy.sql.sqltypes.Boolean.create_constraint
-Any*310*311*312*313*314rN
-name$sqlalchemy.sql.sqltypes.Boolean.name
-Any*310*311*312*313*314È
-Datesqlalchemy.sql.sqltypes.Date"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*k
-get_dbapi_type+sqlalchemy.sql.sqltypes.Date.get_dbapi_type*
-self*	
-dbapiz310z311z312z313z314*q
-python_type(sqlalchemy.sql.sqltypes.Date.python_type*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.Date.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314±
-DateTime sqlalchemy.sql.sqltypes.DateTime"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*ÿ
-__init__)sqlalchemy.sql.sqltypes.DateTime.__init__"
-None*N
-selfD
- sqlalchemy.sql.sqltypes.DateTime" sqlalchemy.sql.sqltypes.DateTime*.
-timezone
-builtins.bool"builtins.bool z310z311z312z313z314*o
-get_dbapi_type/sqlalchemy.sql.sqltypes.DateTime.get_dbapi_type*
-self*	
-dbapiz310z311z312z313z314*u
-python_type,sqlalchemy.sql.sqltypes.DateTime.python_type*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rx
-__visit_name__/sqlalchemy.sql.sqltypes.DateTime.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rW
-timezone)sqlalchemy.sql.sqltypes.DateTime.timezone
-Any*310*311*312*313*314ó
-Enumsqlalchemy.sql.sqltypes.Enum" sqlalchemy.sql.type_api.Emulated"sqlalchemy.sql.sqltypes.String""sqlalchemy.sql.sqltypes.SchemaType*¡
-__init__%sqlalchemy.sql.sqltypes.Enum.__init__"
-None*F
-self<
-sqlalchemy.sql.sqltypes.Enum"sqlalchemy.sql.sqltypes.Enum*
-enums
-Any*
-kw
-Anyz310z311z312z313z314*}
-sort_key_function.sqlalchemy.sql.sqltypes.Enum.sort_key_function*
-self0:builtins.property`z310z311z312z313z314*g
-native#sqlalchemy.sql.sqltypes.Enum.native*
-self0:builtins.property`z310z311z312z313z314*’
+coltyper
+__visit_name__0r
 
-as_generic'sqlalchemy.sql.sqltypes.Enum.as_generic"
-Any*F
-self<
-sqlalchemy.sql.sqltypes.Enum"sqlalchemy.sql.sqltypes.Enum*4
-allow_nulltype
-builtins.bool"builtins.bool z310z311z312z313z314*|
-adapt_to_emulated.sqlalchemy.sql.sqltypes.Enum.adapt_to_emulated*
+native0r
+create_constraint0r
+name0Â
+Datesqlalchemy.sql.sqltypes.Date"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*%
+get_dbapi_type*
+self*	
+dbapi*.
+python_type*
+self0:builtins.property`r
+__visit_name__0ß
+DateTime sqlalchemy.sql.sqltypes.DateTime"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine**
+__init__*
+
+self(*
+timezone (*%
+get_dbapi_type*
+self*	
+dbapi*.
+python_type*
+self0:builtins.property`r
+__visit_name__0r
+timezone0±
+Enumsqlalchemy.sql.sqltypes.Enum" sqlalchemy.sql.type_api.Emulated"sqlalchemy.sql.sqltypes.String""sqlalchemy.sql.sqltypes.SchemaType*/
+__init__*
+
+self(*
+enums(*
+kw(*4
+sort_key_function*
+self0:builtins.property`*)
+native*
+self0:builtins.property`*2
+
+as_generic*
+
+self(*
+allow_nulltype (*3
+adapt_to_emulated*
 self*
 impltype*
-kwz310z311z312z313z314*d
-adapt"sqlalchemy.sql.sqltypes.Enum.adapt*
+kw*'
+adapt*
 self*
 impltype*
-kwz310z311z312z313z314*s
-literal_processor.sqlalchemy.sql.sqltypes.Enum.literal_processor*
+kw**
+literal_processor*
 self*
-dialectz310z311z312z313z314*m
-bind_processor+sqlalchemy.sql.sqltypes.Enum.bind_processor*
+dialect*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*~
-result_processor-sqlalchemy.sql.sqltypes.Enum.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314*T
-copy!sqlalchemy.sql.sqltypes.Enum.copy*
+coltype*
+copy*
 self*
-kwz310z311z312z313z314*q
-python_type(sqlalchemy.sql.sqltypes.Enum.python_type*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.Enum.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rg
-comparator_factory/sqlalchemy.sql.sqltypes.Enum.comparator_factory
-Any*310*311*312*313*314Ä	
-Floatsqlalchemy.sql.sqltypes.Float"sqlalchemy.sql.sqltypes.Numeric*∑
-__init__&sqlalchemy.sql.sqltypes.Float.__init__"
-None*H
-self>
-sqlalchemy.sql.sqltypes.Float"sqlalchemy.sql.sqltypes.Float*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool *w
-decimal_return_scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*
-result_processor.sqlalchemy.sql.sqltypes.Float.result_processor*
+kw*.
+python_type*
+self0:builtins.property`r
+__visit_name__0r
+comparator_factory0¥
+Floatsqlalchemy.sql.sqltypes.Float"sqlalchemy.sql.sqltypes.Numeric*\
+__init__*
+
+self(*
+	precision (*
+	asdecimal (*
+decimal_return_scale (*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314j310j311j312j313j314ru
-__visit_name__,sqlalchemy.sql.sqltypes.Float.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rN
-scale#sqlalchemy.sql.sqltypes.Float.scale
-Any*310*311*312*313*314rV
-	precision'sqlalchemy.sql.sqltypes.Float.precision
-Any*310*311*312*313*314rV
-	asdecimal'sqlalchemy.sql.sqltypes.Float.asdecimal
-Any*310*311*312*313*314rl
-decimal_return_scale2sqlalchemy.sql.sqltypes.Float.decimal_return_scale
-Any*310*311*312*313*314
-Integersqlalchemy.sql.sqltypes.Integer"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*n
-get_dbapi_type.sqlalchemy.sql.sqltypes.Integer.get_dbapi_type*
+coltyper
+__visit_name__0r	
+scale0r
+	precision0r
+	asdecimal0r
+decimal_return_scale0ó
+Integersqlalchemy.sql.sqltypes.Integer"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*%
+get_dbapi_type*
 self*	
-dbapiz310z311z312z313z314*t
-python_type+sqlalchemy.sql.sqltypes.Integer.python_type*
-self0:builtins.property`z310z311z312z313z314*v
-literal_processor1sqlalchemy.sql.sqltypes.Integer.literal_processor*
+dbapi*.
+python_type*
+self0:builtins.property`**
+literal_processor*
 self*
-dialectz310z311z312z313z314j310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.Integer.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314†
-Interval sqlalchemy.sql.sqltypes.Interval" sqlalchemy.sql.type_api.Emulated")sqlalchemy.sql.sqltypes._AbstractInterval"%sqlalchemy.sql.type_api.TypeDecorator*Ω
-__init__)sqlalchemy.sql.sqltypes.Interval.__init__"
-None*N
-selfD
- sqlalchemy.sql.sqltypes.Interval" sqlalchemy.sql.sqltypes.Interval*,
-native
-builtins.bool"builtins.bool *s
-second_precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-day_precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*u
-python_type,sqlalchemy.sql.sqltypes.Interval.python_type*
-self0:builtins.property`z310z311z312z313z314*Ä
-adapt_to_emulated2sqlalchemy.sql.sqltypes.Interval.adapt_to_emulated*
+dialectr
+__visit_name__0ô
+Interval sqlalchemy.sql.sqltypes.Interval" sqlalchemy.sql.type_api.Emulated")sqlalchemy.sql.sqltypes._AbstractInterval"%sqlalchemy.sql.type_api.TypeDecorator*Y
+__init__*
+
+self(*
+native (*
+second_precision (*
+day_precision (*.
+python_type*
+self0:builtins.property`*3
+adapt_to_emulated*
 self*
 impltype*
-kwz310z311z312z313z314*q
-bind_processor/sqlalchemy.sql.sqltypes.Interval.bind_processor*
+kw*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*Ç
-result_processor1sqlalchemy.sql.sqltypes.Interval.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314j310j311j312j313j314rO
-impl%sqlalchemy.sql.sqltypes.Interval.impl
-Any*310*311*312*313*314rQ
-epoch&sqlalchemy.sql.sqltypes.Interval.epoch
-Any*310*311*312*313*314rn
-cache_ok)sqlalchemy.sql.sqltypes.Interval.cache_ok
-builtins.bool"builtins.bool*310*311*312*313*314rS
-native'sqlalchemy.sql.sqltypes.Interval.native
-Any*310*311*312*313*314rg
-second_precision1sqlalchemy.sql.sqltypes.Interval.second_precision
-Any*310*311*312*313*314ra
-day_precision.sqlalchemy.sql.sqltypes.Interval.day_precision
-Any*310*311*312*313*314à
-LargeBinary#sqlalchemy.sql.sqltypes.LargeBinary"sqlalchemy.sql.sqltypes._Binary*ú
-__init__,sqlalchemy.sql.sqltypes.LargeBinary.__init__"
-None*T
-selfJ
-#sqlalchemy.sql.sqltypes.LargeBinary"#sqlalchemy.sql.sqltypes.LargeBinary*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314r{
-__visit_name__2sqlalchemy.sql.sqltypes.LargeBinary.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ü
-Numericsqlalchemy.sql.sqltypes.Numeric"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*ß
-__init__(sqlalchemy.sql.sqltypes.Numeric.__init__"
-None*L
-selfB
-sqlalchemy.sql.sqltypes.Numeric"sqlalchemy.sql.sqltypes.Numeric*l
-	precision[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *w
-decimal_return_scale[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None */
-	asdecimal
-builtins.bool"builtins.bool z310z311z312z313z314*n
-get_dbapi_type.sqlalchemy.sql.sqltypes.Numeric.get_dbapi_type*
+coltyper
+impl0r	
+epoch0r
+cache_ok0r
+
+native0r
+second_precision0r
+day_precision0ë
+LargeBinary#sqlalchemy.sql.sqltypes.LargeBinary"sqlalchemy.sql.sqltypes._Binary*(
+__init__*
+
+self( *
+length (r
+__visit_name__0®
+Numericsqlalchemy.sql.sqltypes.Numeric"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*k
+__init__*
+
+self(!*
+	precision (*
+scale (*
+decimal_return_scale (*
+	asdecimal (*%
+get_dbapi_type*
 self*	
-dbapiz310z311z312z313z314*v
-literal_processor1sqlalchemy.sql.sqltypes.Numeric.literal_processor*
+dbapi**
+literal_processor*
 self*
-dialectz310z311z312z313z314*t
-python_type+sqlalchemy.sql.sqltypes.Numeric.python_type*
-self0:builtins.property`z310z311z312z313z314*p
-bind_processor.sqlalchemy.sql.sqltypes.Numeric.bind_processor*
+dialect*.
+python_type*
+self0:builtins.property`*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*Å
-result_processor0sqlalchemy.sql.sqltypes.Numeric.result_processor*
-self*
-dialect*
-coltypez310z311z312z313z314j310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.Numeric.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rX
-	precision)sqlalchemy.sql.sqltypes.Numeric.precision
-Any*310*311*312*313*314rP
-scale%sqlalchemy.sql.sqltypes.Numeric.scale
-Any*310*311*312*313*314rn
-decimal_return_scale4sqlalchemy.sql.sqltypes.Numeric.decimal_return_scale
-Any*310*311*312*313*314rX
-	asdecimal)sqlalchemy.sql.sqltypes.Numeric.asdecimal
-Any*310*311*312*313*314®
-
-PickleType"sqlalchemy.sql.sqltypes.PickleType"%sqlalchemy.sql.type_api.TypeDecorator*ã
-__init__+sqlalchemy.sql.sqltypes.PickleType.__init__"
-None*R
-selfH
-"sqlalchemy.sql.sqltypes.PickleType""sqlalchemy.sql.sqltypes.PickleType*
-protocol
-Any *j
-pickler[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
-
-comparator[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-impl[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*^
-
-__reduce__-sqlalchemy.sql.sqltypes.PickleType.__reduce__*
-selfz310z311z312z313z314*s
-bind_processor1sqlalchemy.sql.sqltypes.PickleType.bind_processor*
-self*
-dialectz310z311z312z313z314*Ñ
-result_processor3sqlalchemy.sql.sqltypes.PickleType.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314*t
-compare_values1sqlalchemy.sql.sqltypes.PickleType.compare_values*
+coltyper
+__visit_name__0r
+	precision0r	
+scale0r
+decimal_return_scale0r
+	asdecimal0ú
+
+PickleType"sqlalchemy.sql.sqltypes.PickleType"%sqlalchemy.sql.type_api.TypeDecorator*]
+__init__*
+
+self("*
+protocol (*
+pickler (*
+
+comparator (*
+impl (*
+
+__reduce__*
+self*'
+bind_processor*
+self*
+dialect*6
+result_processor*
+self*
+dialect*
+coltype*(
+compare_values*
 self*
 x*
-yz310z311z312z313z314j310j311j312j313j314rQ
-impl'sqlalchemy.sql.sqltypes.PickleType.impl
-Any*310*311*312*313*314rp
-cache_ok+sqlalchemy.sql.sqltypes.PickleType.cache_ok
-builtins.bool"builtins.bool*310*311*312*313*314rY
-protocol+sqlalchemy.sql.sqltypes.PickleType.protocol
-Any*310*311*312*313*314rW
-pickler*sqlalchemy.sql.sqltypes.PickleType.pickler
-Any*310*311*312*313*314r]
+yr
+impl0r
+cache_ok0r
+protocol0r
+pickler0r
 
-comparator-sqlalchemy.sql.sqltypes.PickleType.comparator
-Any*310*311*312*313*314Ï
-SmallInteger$sqlalchemy.sql.sqltypes.SmallInteger"sqlalchemy.sql.sqltypes.Integerj310j311j312j313j314r|
-__visit_name__3sqlalchemy.sql.sqltypes.SmallInteger.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ø
-Stringsqlalchemy.sql.sqltypes.String"$sqlalchemy.sql.sqltypes.Concatenable""sqlalchemy.sql.type_api.TypeEngine*ñ
-__init__'sqlalchemy.sql.sqltypes.String.__init__"
-None*J
-self@
-sqlalchemy.sql.sqltypes.String"sqlalchemy.sql.sqltypes.String*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	collation[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-convert_unicode
-builtins.bool"builtins.bool *p
-unicode_error[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *9
-_warn_on_bytestring
-builtins.bool"builtins.bool *5
-_expect_unicode
-builtins.bool"builtins.bool z310z311z312z313z314*u
-literal_processor0sqlalchemy.sql.sqltypes.String.literal_processor*
+comparator0i
+SmallInteger$sqlalchemy.sql.sqltypes.SmallInteger"sqlalchemy.sql.sqltypes.Integerr
+__visit_name__0ˇ
+Stringsqlalchemy.sql.sqltypes.String"$sqlalchemy.sql.sqltypes.Concatenable""sqlalchemy.sql.type_api.TypeEngine*°
+__init__*
+
+self(#*
+length (*
+	collation (*
+convert_unicode (*
+unicode_error (*
+_warn_on_bytestring (*
+_expect_unicode (**
+literal_processor*
 self*
-dialectz310z311z312z313z314*o
-bind_processor-sqlalchemy.sql.sqltypes.String.bind_processor*
+dialect*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*Ä
-result_processor/sqlalchemy.sql.sqltypes.String.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314*s
-python_type*sqlalchemy.sql.sqltypes.String.python_type*
-self0:builtins.property`z310z311z312z313z314*m
-get_dbapi_type-sqlalchemy.sql.sqltypes.String.get_dbapi_type*
+coltype*.
+python_type*
+self0:builtins.property`*%
+get_dbapi_type*
 self*	
-dbapiz310z311z312z313z314j310j311j312j313j314rv
-__visit_name__-sqlalchemy.sql.sqltypes.String.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rc
-RETURNS_UNICODE.sqlalchemy.sql.sqltypes.String.RETURNS_UNICODE
-Any*310*311*312*313*314r_
-RETURNS_BYTES,sqlalchemy.sql.sqltypes.String.RETURNS_BYTES
-Any*310*311*312*313*314rk
-RETURNS_CONDITIONAL2sqlalchemy.sql.sqltypes.String.RETURNS_CONDITIONAL
-Any*310*311*312*313*314rc
-RETURNS_UNKNOWN.sqlalchemy.sql.sqltypes.String.RETURNS_UNKNOWN
-Any*310*311*312*313*314rQ
-length%sqlalchemy.sql.sqltypes.String.length
-Any*310*311*312*313*314rW
-	collation(sqlalchemy.sql.sqltypes.String.collation
-Any*310*311*312*313*314”
-Textsqlalchemy.sql.sqltypes.Text"sqlalchemy.sql.sqltypes.Stringj310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.Text.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ç
-Timesqlalchemy.sql.sqltypes.Time"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine*Ã
-__init__%sqlalchemy.sql.sqltypes.Time.__init__"
-None*F
-self<
-sqlalchemy.sql.sqltypes.Time"sqlalchemy.sql.sqltypes.Time*.
-timezone
-builtins.bool"builtins.bool z310z311z312z313z314*k
-get_dbapi_type+sqlalchemy.sql.sqltypes.Time.get_dbapi_type*
+dbapir
+__visit_name__0r
+RETURNS_UNICODE0r
+RETURNS_BYTES0r
+RETURNS_CONDITIONAL0r
+RETURNS_UNKNOWN0r
+
+length0r
+	collation0X
+Textsqlalchemy.sql.sqltypes.Text"sqlalchemy.sql.sqltypes.Stringr
+__visit_name__0ü
+Timesqlalchemy.sql.sqltypes.Time"0sqlalchemy.sql.sqltypes._LookupExpressionAdapter""sqlalchemy.sql.type_api.TypeEngine**
+__init__*
+
+self($*
+timezone (*%
+get_dbapi_type*
 self*	
-dbapiz310z311z312z313z314*q
-python_type(sqlalchemy.sql.sqltypes.Time.python_type*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314rt
-__visit_name__+sqlalchemy.sql.sqltypes.Time.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rS
-timezone%sqlalchemy.sql.sqltypes.Time.timezone
-Any*310*311*312*313*314Î
-	TupleType!sqlalchemy.sql.sqltypes.TupleType""sqlalchemy.sql.type_api.TypeEngine*ø
-__init__*sqlalchemy.sql.sqltypes.TupleType.__init__"
-None*P
-selfF
-!sqlalchemy.sql.sqltypes.TupleType"!sqlalchemy.sql.sqltypes.TupleType*
-types
-Anyz310z311z312z313z314*Á
-result_processor2sqlalchemy.sql.sqltypes.TupleType.result_processor"
-None*P
-selfF
-!sqlalchemy.sql.sqltypes.TupleType"!sqlalchemy.sql.sqltypes.TupleType*
-dialect
-Any*
-coltype
-Anyz310z311z312z313z314j310j311j312j313j314rR
-types'sqlalchemy.sql.sqltypes.TupleType.types
-Any*310*311*312*313*314ä
-TypeDecorator%sqlalchemy.sql.type_api.TypeDecorator"$sqlalchemy.sql.type_api.ExternalType"%sqlalchemy.sql.base.SchemaEventTarget""sqlalchemy.sql.type_api.TypeEngine*ﬂ
-__init__.sqlalchemy.sql.type_api.TypeDecorator.__init__"
-None*X
-selfN
-%sqlalchemy.sql.type_api.TypeDecorator"%sqlalchemy.sql.type_api.TypeDecorator*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*à
-comparator_factory8sqlalchemy.sql.type_api.TypeDecorator.comparator_factory*
-self0:builtins.property`z310z311z312z313z314*p
-type_engine1sqlalchemy.sql.type_api.TypeDecorator.type_engine*
+dbapi*.
+python_type*
+self0:builtins.property`r
+__visit_name__0r
+timezone0ƒ
+	TupleType!sqlalchemy.sql.sqltypes.TupleType""sqlalchemy.sql.type_api.TypeEngine*%
+__init__*
+
+self(%*
+types(*>
+result_processor*
+
+self(%*
+dialect(*
+coltype(r	
+types0≥
+TypeDecorator%sqlalchemy.sql.type_api.TypeDecorator"$sqlalchemy.sql.type_api.ExternalType"%sqlalchemy.sql.base.SchemaEventTarget""sqlalchemy.sql.type_api.TypeEngine*2
+__init__*
+
+self(&*
+
+args(*
+kwargs(*5
+comparator_factory*
+self0:builtins.property`*$
+type_engine*
 self*
-dialectz310z311z312z313z314*|
-load_dialect_impl7sqlalchemy.sql.type_api.TypeDecorator.load_dialect_impl*
+dialect**
+load_dialect_impl*
 self*
-dialectz310z311z312z313z314*‘
-__getattr__1sqlalchemy.sql.type_api.TypeDecorator.__getattr__"
-Any*PN
-%sqlalchemy.sql.type_api.TypeDecorator"%sqlalchemy.sql.type_api.TypeDecorator*
-builtins.str"builtins.strz310z311z312z313z314*˚
-process_literal_param;sqlalchemy.sql.type_api.TypeDecorator.process_literal_param"
-None*X
-selfN
-%sqlalchemy.sql.type_api.TypeDecorator"%sqlalchemy.sql.type_api.TypeDecorator*
-value
-Any*
-dialect
-Anyz310z311z312z313z314*ı
-process_bind_param8sqlalchemy.sql.type_api.TypeDecorator.process_bind_param"
-None*X
-selfN
-%sqlalchemy.sql.type_api.TypeDecorator"%sqlalchemy.sql.type_api.TypeDecorator*
-value
-Any*
-dialect
-Anyz310z311z312z313z314*˘
-process_result_value:sqlalchemy.sql.type_api.TypeDecorator.process_result_value"
-None*X
-selfN
-%sqlalchemy.sql.type_api.TypeDecorator"%sqlalchemy.sql.type_api.TypeDecorator*
-value
-Any*
-dialect
-Anyz310z311z312z313z314*|
-literal_processor7sqlalchemy.sql.type_api.TypeDecorator.literal_processor*
+dialect*
+__getattr__*(&*(*A
+process_literal_param*
+
+self(&*
+value(*
+dialect(*>
+process_bind_param*
+
+self(&*
+value(*
+dialect(*@
+process_result_value*
+
+self(&*
+value(*
+dialect(**
+literal_processor*
 self*
-dialectz310z311z312z313z314*v
-bind_processor4sqlalchemy.sql.type_api.TypeDecorator.bind_processor*
+dialect*'
+bind_processor*
 self*
-dialectz310z311z312z313z314*á
-result_processor6sqlalchemy.sql.type_api.TypeDecorator.result_processor*
+dialect*6
+result_processor*
 self*
 dialect*
-coltypez310z311z312z313z314*z
-bind_expression5sqlalchemy.sql.type_api.TypeDecorator.bind_expression*
+coltype**
+bind_expression*
 self*
-	bindparamz310z311z312z313z314*{
-column_expression7sqlalchemy.sql.type_api.TypeDecorator.column_expression*
+	bindparam*)
+column_expression*
 self*
 
-columnz310z311z312z313z314*ä
-coerce_compared_value;sqlalchemy.sql.type_api.TypeDecorator.coerce_compared_value*
+column*4
+coerce_compared_value*
 self*
 op*	
-valuez310z311z312z313z314*]
-copy*sqlalchemy.sql.type_api.TypeDecorator.copy*
+value*
+copy*
 self*
-kwz310z311z312z313z314*t
-get_dbapi_type4sqlalchemy.sql.type_api.TypeDecorator.get_dbapi_type*
+kw*%
+get_dbapi_type*
 self*	
-dbapiz310z311z312z313z314*w
-compare_values4sqlalchemy.sql.type_api.TypeDecorator.compare_values*
+dbapi*(
+compare_values*
 self*
 x*
-yz310z311z312z313z314*Ü
-sort_key_function7sqlalchemy.sql.type_api.TypeDecorator.sort_key_function*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314r}
-__visit_name__4sqlalchemy.sql.type_api.TypeDecorator.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rT
-impl*sqlalchemy.sql.type_api.TypeDecorator.impl
-Any*310*311*312*313*314rp
-coerce_to_is_types8sqlalchemy.sql.type_api.TypeDecorator.coerce_to_is_types
-Any*310*311*312*313*314Ñ
-Unicodesqlalchemy.sql.sqltypes.Unicode"sqlalchemy.sql.sqltypes.String*•
-__init__(sqlalchemy.sql.sqltypes.Unicode.__init__"
-None*L
-selfB
-sqlalchemy.sql.sqltypes.Unicode"sqlalchemy.sql.sqltypes.Unicode*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rw
-__visit_name__.sqlalchemy.sql.sqltypes.Unicode.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ö
-UnicodeText#sqlalchemy.sql.sqltypes.UnicodeText"sqlalchemy.sql.sqltypes.Text*±
-__init__,sqlalchemy.sql.sqltypes.UnicodeText.__init__"
-None*T
-selfJ
-#sqlalchemy.sql.sqltypes.UnicodeText"#sqlalchemy.sql.sqltypes.UnicodeText*i
-length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314r{
-__visit_name__2sqlalchemy.sql.sqltypes.UnicodeText.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314Ô
-create_mock_engine)sqlalchemy.engine.mock.create_mock_engine"N
-%sqlalchemy.engine.mock.MockConnection"%sqlalchemy.engine.mock.MockConnection*ú
-urlí
-¶Union[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]],builtins.str]∆
+y*4
+sort_key_function*
+self0:builtins.property`r
+__visit_name__0r
+impl0r
+coerce_to_is_types0ñ
+Unicodesqlalchemy.sql.sqltypes.Unicode"sqlalchemy.sql.sqltypes.String*6
+__init__*
 
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL
-builtins.str"builtins.str*
-executor
-Any*
-kw
-Anyz310z311z312z313z314…
-engine_from_config+sqlalchemy.engine.create.engine_from_config">
-sqlalchemy.engine.base.Engine"sqlalchemy.engine.base.Engine*l
-configurationY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping**
-prefix
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314ê
-inspectsqlalchemy.inspection.inspect"
-Any*
-subject
-Any*.
-raiseerr
-builtins.bool"builtins.bool z310z311z312z313z314ƒ
-betweensqlalchemy.sql.elements.between"
-Any*
-expr
-Any*
-lower_bound
-Any*
-upper_bound
-Any*/
-	symmetric
-builtins.bool"builtins.bool z310z311z312z313z314b
+self('*
+length (*
+kwargs(r
+__visit_name__0ú
+UnicodeText#sqlalchemy.sql.sqltypes.UnicodeText"sqlalchemy.sql.sqltypes.Text*6
+__init__*
+
+self((*
+length (*
+kwargs(r
+__visit_name__0f
+create_mock_engine)sqlalchemy.engine.mock.create_mock_engine)*	
+url(4*
+executor(*
+kw(v
+engine_from_config+sqlalchemy.engine.create.engine_from_config5*
+configuration(6*
+prefix (*
+kwargs(K
+inspectsqlalchemy.inspection.inspect*
+subject(*
+raiseerr (q
+betweensqlalchemy.sql.elements.between*
+
+expr(*
+lower_bound(*
+upper_bound(*
+	symmetric (I
 collatesqlalchemy.sql.elements.collate*
 
 expression*
-	collationz310z311z312z313z314¥
-lambda_stmt"sqlalchemy.sql.lambdas.lambda_stmt"
-Any*
-lmb
-Any*5
-enable_tracking
-builtins.bool"builtins.bool *=
-track_closure_variables
-builtins.bool"builtins.bool *k
-track_on[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *?
-global_track_bound_values
-builtins.bool"builtins.bool *8
-track_bound_values
-builtins.bool"builtins.bool *o
-lambda_cache[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314 
-literalsqlalchemy.sql.elements.literal"
-Any*
-value
-Any*h
-type_[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314◊
-literal_column&sqlalchemy.sql.elements.literal_column"
-Any*
-text
-Any*h
-type_[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314I
+	collationﬂ
+lambda_stmt"sqlalchemy.sql.lambdas.lambda_stmt*	
+lmb(*
+enable_tracking (*
+track_closure_variables (*
+track_on (*!
+global_track_bound_values (*
+track_bound_values (*
+lambda_cache (H
+literalsqlalchemy.sql.elements.literal*
+value(*
+type_ (U
+literal_column&sqlalchemy.sql.elements.literal_column*
+
+text(*
+type_ (0
 not_sqlalchemy.sql.elements.not_*
 
-clausez310z311z312z313z314 
-outparam sqlalchemy.sql.elements.outparam"
-Any*
-key
-Any*h
-type_[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314h
+clauseH
+outparam sqlalchemy.sql.elements.outparam*	
+key(*
+type_ (O
 subquery"sqlalchemy.sql.selectable.subquery*	
 alias*
 args*
 
-kwargsz310z311z312z313z314ö
-textsqlalchemy.sql.expression.text"H
-"sqlalchemy.sql.elements.TextClause""sqlalchemy.sql.elements.TextClause*&
-text
-builtins.str"builtins.str*g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314"“0
-create_engine&sqlalchemy.engine.create.create_engineó
-create_engine&sqlalchemy.engine.create.create_engine"N
-%sqlalchemy.engine.mock.MockConnection"%sqlalchemy.engine.mock.MockConnection*ú
-urlí
-¶Union[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]],builtins.str]∆
+kwargsB
+textsqlalchemy.sql.expression.text7*
 
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL
-builtins.str"builtins.str*E
-strategy7
-Literal[builtins.str]	
-builtins.str"builtins.str*
-kwargs
-Any0:typing.overloadX≤
-create_engine&sqlalchemy.engine.create.create_engine"B
-sqlalchemy.future.engine.Engine"sqlalchemy.future.engine.Engine*ú
-urlí
-¶Union[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]],builtins.str]∆
+text(*
+bind ("¸
+create_engine&sqlalchemy.engine.create.create_enginew
+create_engine&sqlalchemy.engine.create.create_engine)*	
+url(4*
+strategy(8*
+kwargs(0:typing.overloadX¢
+create_engine&sqlalchemy.engine.create.create_engine9*	
+url(4*
+module (*
+enable_from_linting (*
+future(:*
+kwargs(0:typing.overloadX§
+create_engine&sqlalchemy.engine.create.create_engine5*	
+url(4*
+module (*
+enable_from_linting (*
+future (:*
+kwargs(0:typing.overloadX*
+__path__0;*
+__annotations__0<*4
+BLANK_SCHEMA"sqlalchemy.sql.schema.BLANK_SCHEMA0*F
+LABEL_STYLE_DEFAULT-sqlalchemy.sql.selectable.LABEL_STYLE_DEFAULT0*Z
+LABEL_STYLE_DISAMBIGUATE_ONLY7sqlalchemy.sql.selectable.LABEL_STYLE_DISAMBIGUATE_ONLY0*@
+LABEL_STYLE_NONE*sqlalchemy.sql.selectable.LABEL_STYLE_NONE0*\
+LABEL_STYLE_TABLENAME_PLUS_COL8sqlalchemy.sql.selectable.LABEL_STYLE_TABLENAME_PLUS_COL0**
+aliassqlalchemy.sql.expression.alias0*(
+all_sqlalchemy.sql.expression.all_0*(
+and_sqlalchemy.sql.expression.and_0*(
+any_sqlalchemy.sql.expression.any_0*&
+ascsqlalchemy.sql.expression.asc0*2
+	bindparam#sqlalchemy.sql.expression.bindparam0*(
+casesqlalchemy.sql.expression.case0*(
+castsqlalchemy.sql.expression.cast0*,
+column sqlalchemy.sql.expression.column0*,
+delete sqlalchemy.sql.expression.delete0*(
+descsqlalchemy.sql.expression.desc0*0
+distinct"sqlalchemy.sql.expression.distinct0*.
+except_!sqlalchemy.sql.expression.except_0*4
 
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL
-builtins.str"builtins.str*i
-module[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *9
-enable_from_linting
-builtins.bool"builtins.bool *F
-future:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*
-kwargs
-Any0:typing.overloadX∞
-create_engine&sqlalchemy.engine.create.create_engine">
-sqlalchemy.engine.base.Engine"sqlalchemy.engine.base.Engine*ú
-urlí
-¶Union[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]],builtins.str]∆
+except_all$sqlalchemy.sql.expression.except_all0*,
+exists sqlalchemy.sql.expression.exists0*.
+extract!sqlalchemy.sql.expression.extract0**
+falsesqlalchemy.sql.expression.false0*'
+funcsqlalchemy.sql.functions.func0*4
 
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL
-builtins.str"builtins.str*i
-module[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *9
-enable_from_linting
-builtins.bool"builtins.bool *H
-future:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool *
-kwargs
-Any0:typing.overloadX"310"311"312"313"314*Ñ
-__path__sqlalchemy.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*ü
-__annotations__sqlalchemy.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*T
-BLANK_SCHEMA"sqlalchemy.sql.schema.BLANK_SCHEMA
-Any*310*311*312*313*314*f
-LABEL_STYLE_DEFAULT-sqlalchemy.sql.selectable.LABEL_STYLE_DEFAULT
-Any*310*311*312*313*314*z
-LABEL_STYLE_DISAMBIGUATE_ONLY7sqlalchemy.sql.selectable.LABEL_STYLE_DISAMBIGUATE_ONLY
-Any*310*311*312*313*314*`
-LABEL_STYLE_NONE*sqlalchemy.sql.selectable.LABEL_STYLE_NONE
-Any*310*311*312*313*314*|
-LABEL_STYLE_TABLENAME_PLUS_COL8sqlalchemy.sql.selectable.LABEL_STYLE_TABLENAME_PLUS_COL
-Any*310*311*312*313*314*t
-aliassqlalchemy.sql.expression.alias1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-all_sqlalchemy.sql.expression.all_1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-and_sqlalchemy.sql.expression.and_1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-any_sqlalchemy.sql.expression.any_1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*p
-ascsqlalchemy.sql.expression.asc1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*|
-	bindparam#sqlalchemy.sql.expression.bindparam1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-casesqlalchemy.sql.expression.case1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-castsqlalchemy.sql.expression.cast1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-column sqlalchemy.sql.expression.column1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-delete sqlalchemy.sql.expression.delete1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-descsqlalchemy.sql.expression.desc1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*z
-distinct"sqlalchemy.sql.expression.distinct1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*x
-except_!sqlalchemy.sql.expression.except_1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*~
+funcfilter$sqlalchemy.sql.expression.funcfilter0*,
+insert sqlalchemy.sql.expression.insert0*2
+	intersect#sqlalchemy.sql.expression.intersect0*:
+intersect_all'sqlalchemy.sql.expression.intersect_all0*(
+joinsqlalchemy.sql.expression.join0*.
+lateral!sqlalchemy.sql.expression.lateral0*/
+modifier!sqlalchemy.sql.functions.modifier0*(
+nullsqlalchemy.sql.expression.null0*6
+nulls_first%sqlalchemy.sql.expression.nulls_first0*4
 
-except_all$sqlalchemy.sql.expression.except_all1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-exists sqlalchemy.sql.expression.exists1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*x
-extract!sqlalchemy.sql.expression.extract1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*t
-falsesqlalchemy.sql.expression.false1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*q
-funcsqlalchemy.sql.functions.func1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*~
+nulls_last$sqlalchemy.sql.expression.nulls_last0*4
 
-funcfilter$sqlalchemy.sql.expression.funcfilter1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-insert sqlalchemy.sql.expression.insert1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*|
-	intersect#sqlalchemy.sql.expression.intersect1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*Ñ
-intersect_all'sqlalchemy.sql.expression.intersect_all1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-joinsqlalchemy.sql.expression.join1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*x
-lateral!sqlalchemy.sql.expression.lateral1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*y
-modifier!sqlalchemy.sql.functions.modifier1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-nullsqlalchemy.sql.expression.null1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*Ä
-nulls_first%sqlalchemy.sql.expression.nulls_first1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*~
-
-nulls_last$sqlalchemy.sql.expression.nulls_last1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*~
-
-nullsfirst$sqlalchemy.sql.expression.nullsfirst1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*|
-	nullslast#sqlalchemy.sql.expression.nullslast1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*p
-or_sqlalchemy.sql.expression.or_1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*|
-	outerjoin#sqlalchemy.sql.expression.outerjoin1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-oversqlalchemy.sql.expression.over1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-select sqlalchemy.sql.expression.select1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*t
-tablesqlalchemy.sql.expression.table1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*Ä
-tablesample%sqlalchemy.sql.expression.tablesample1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*r
-truesqlalchemy.sql.expression.true1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-tuple_ sqlalchemy.sql.expression.tuple_1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*Ä
-type_coerce%sqlalchemy.sql.expression.type_coerce1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*t
-unionsqlalchemy.sql.expression.union1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*|
-	union_all#sqlalchemy.sql.expression.union_all1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-update sqlalchemy.sql.expression.update1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*v
-values sqlalchemy.sql.expression.values1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*Ç
-within_group&sqlalchemy.sql.expression.within_group1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*\
-__version__sqlalchemy.__version__
-builtins.str"builtins.str*310*311*312*313*314
+nullsfirst$sqlalchemy.sql.expression.nullsfirst0*2
+	nullslast#sqlalchemy.sql.expression.nullslast0*&
+or_sqlalchemy.sql.expression.or_0*2
+	outerjoin#sqlalchemy.sql.expression.outerjoin0*(
+oversqlalchemy.sql.expression.over0*,
+select sqlalchemy.sql.expression.select0**
+tablesqlalchemy.sql.expression.table0*6
+tablesample%sqlalchemy.sql.expression.tablesample0*(
+truesqlalchemy.sql.expression.true0*,
+tuple_ sqlalchemy.sql.expression.tuple_0*6
+type_coerce%sqlalchemy.sql.expression.type_coerce0**
+unionsqlalchemy.sql.expression.union0*2
+	union_all#sqlalchemy.sql.expression.union_all0*,
+update sqlalchemy.sql.expression.update0*,
+values sqlalchemy.sql.expression.values0*8
+within_group&sqlalchemy.sql.expression.within_group0*
+__version__022"sqlalchemy.sql.ddl.DDL22"_typeshed.Incomplete2222"builtins.str2'"%sqlalchemy.sql.schema.CheckConstraint2"builtins.bool2"sqlalchemy.sql.schema.Column2%"#sqlalchemy.sql.schema.ColumnDefault2 "sqlalchemy.sql.schema.Computed2"" sqlalchemy.sql.schema.Constraint2%"#sqlalchemy.sql.schema.DefaultClause2$""sqlalchemy.sql.schema.FetchedValue2"" sqlalchemy.sql.schema.ForeignKey2,"*sqlalchemy.sql.schema.ForeignKeyConstraint2 "sqlalchemy.sql.schema.Identity2"sqlalchemy.sql.schema.Index2 "sqlalchemy.sql.schema.MetaData2,"*sqlalchemy.sql.schema.PrimaryKeyConstraint2 "sqlalchemy.sql.schema.Sequence2"sqlalchemy.sql.schema.Table2+")sqlalchemy.sql.schema.ThreadLocalMetaData2"sqlalchemy.sql.sqltypes.ARRAY2"sqlalchemy.sql.sqltypes.JSON2#"!sqlalchemy.sql.sqltypes.TIMESTAMP2!"sqlalchemy.sql.sqltypes.Boolean2"" sqlalchemy.sql.sqltypes.DateTime2"sqlalchemy.sql.sqltypes.Enum2"sqlalchemy.sql.sqltypes.Float2"" sqlalchemy.sql.sqltypes.Interval2%"#sqlalchemy.sql.sqltypes.LargeBinary2!"sqlalchemy.sql.sqltypes.Numeric2$""sqlalchemy.sql.sqltypes.PickleType2 "sqlalchemy.sql.sqltypes.String2"sqlalchemy.sql.sqltypes.Time2#"!sqlalchemy.sql.sqltypes.TupleType2'"%sqlalchemy.sql.type_api.TypeDecorator2!"sqlalchemy.sql.sqltypes.Unicode2%"#sqlalchemy.sql.sqltypes.UnicodeText2'"%sqlalchemy.engine.mock.MockConnection222"builtins.object22+2"builtins.int22-2"builtins.tuple222/2-"'sqlalchemy.cimmutabledict.immutabledict2022*,*.*12 "sqlalchemy.engine.url.URL222232"sqlalchemy.engine.base.Engine2"typing.Mapping22$""sqlalchemy.sql.elements.TextClause2	22!"sqlalchemy.future.engine.Engine2	22"builtins.list22"builtins.dict2

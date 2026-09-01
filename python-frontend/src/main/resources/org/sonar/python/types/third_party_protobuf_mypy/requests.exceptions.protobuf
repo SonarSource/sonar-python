@@ -1,47 +1,40 @@
 
 requests.exceptionsA
-BaseHTTPErrorurllib3.exceptions.HTTPError"builtins.Exceptionñ
-RequestException$requests.exceptions.RequestException"builtins.OSError*√
-__init__-requests.exceptions.RequestException.__init__"
-None*V
-selfL
-$requests.exceptions.RequestException"$requests.exceptions.RequestException*
-args
-Any*
-kwargs
-AnyrB
-response-requests.exceptions.RequestException.response
-Anyr@
-request,requests.exceptions.RequestException.request
-Any^
-InvalidJSONError$requests.exceptions.InvalidJSONError"$requests.exceptions.RequestException\
-JSONDecodeError#requests.exceptions.JSONDecodeError"$requests.exceptions.InvalidJSONErrorP
-	HTTPErrorrequests.exceptions.HTTPError"$requests.exceptions.RequestException\
-ConnectionError#requests.exceptions.ConnectionError"$requests.exceptions.RequestExceptionQ
+BaseHTTPErrorurllib3.exceptions.HTTPError"builtins.Exceptions
+RequestException"builtins.OSError*2
+__init__*
 
-ProxyErrorrequests.exceptions.ProxyError"#requests.exceptions.ConnectionErrorM
-SSLErrorrequests.exceptions.SSLError"#requests.exceptions.ConnectionErrorL
-Timeoutrequests.exceptions.Timeout"$requests.exceptions.RequestExceptionv
-ConnectTimeout"requests.exceptions.ConnectTimeout"#requests.exceptions.ConnectionError"requests.exceptions.TimeoutK
-ReadTimeoutrequests.exceptions.ReadTimeout"requests.exceptions.TimeoutT
-URLRequiredrequests.exceptions.URLRequired"$requests.exceptions.RequestException^
-TooManyRedirects$requests.exceptions.TooManyRedirects"$requests.exceptions.RequestExceptionm
-MissingSchema!requests.exceptions.MissingSchema"$requests.exceptions.RequestException"builtins.ValueErrorm
-InvalidSchema!requests.exceptions.InvalidSchema"$requests.exceptions.RequestException"builtins.ValueErrorg
+self(*
 
-InvalidURLrequests.exceptions.InvalidURL"$requests.exceptions.RequestException"builtins.ValueErrorm
-InvalidHeader!requests.exceptions.InvalidHeader"$requests.exceptions.RequestException"builtins.ValueErrorV
-InvalidProxyURL#requests.exceptions.InvalidProxyURL"requests.exceptions.InvalidURLf
-ChunkedEncodingError(requests.exceptions.ChunkedEncodingError"$requests.exceptions.RequestExceptionÑ
-ContentDecodingError(requests.exceptions.ContentDecodingError"$requests.exceptions.RequestException"urllib3.exceptions.HTTPErrorx
-StreamConsumedError'requests.exceptions.StreamConsumedError"$requests.exceptions.RequestException"builtins.TypeErrorR
+args(*
+kwargs(r
+response0r
+request08
+InvalidJSONError"$requests.exceptions.RequestException7
+JSONDecodeError"$requests.exceptions.InvalidJSONError1
+	HTTPError"$requests.exceptions.RequestException7
+ConnectionError"$requests.exceptions.RequestException1
 
-RetryErrorrequests.exceptions.RetryError"$requests.exceptions.RequestExceptionh
-UnrewindableBodyError)requests.exceptions.UnrewindableBodyError"$requests.exceptions.RequestExceptionH
-RequestsWarning#requests.exceptions.RequestsWarning"builtins.Warningx
-FileModeWarning#requests.exceptions.FileModeWarning"#requests.exceptions.RequestsWarning"builtins.DeprecationWarningo
-RequestsDependencyWarning-requests.exceptions.RequestsDependencyWarning"#requests.exceptions.RequestsWarning*è
-__annotations__#requests.exceptions.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+ProxyError"#requests.exceptions.ConnectionError/
+SSLError"#requests.exceptions.ConnectionError/
+Timeout"$requests.exceptions.RequestExceptionR
+ConnectTimeout"#requests.exceptions.ConnectionError"requests.exceptions.Timeout*
+ReadTimeout"requests.exceptions.Timeout3
+URLRequired"$requests.exceptions.RequestException8
+TooManyRedirects"$requests.exceptions.RequestExceptionJ
+MissingSchema"$requests.exceptions.RequestException"builtins.ValueErrorJ
+InvalidSchema"$requests.exceptions.RequestException"builtins.ValueErrorG
+
+InvalidURL"$requests.exceptions.RequestException"builtins.ValueErrorJ
+InvalidHeader"$requests.exceptions.RequestException"builtins.ValueError1
+InvalidProxyURL"requests.exceptions.InvalidURL<
+ChunkedEncodingError"$requests.exceptions.RequestExceptionZ
+ContentDecodingError"$requests.exceptions.RequestException"urllib3.exceptions.HTTPErrorO
+StreamConsumedError"$requests.exceptions.RequestException"builtins.TypeError2
+
+RetryError"$requests.exceptions.RequestException=
+UnrewindableBodyError"$requests.exceptions.RequestException#
+RequestsWarning"builtins.WarningS
+FileModeWarning"#requests.exceptions.RequestsWarning"builtins.DeprecationWarning@
+RequestsDependencyWarning"#requests.exceptions.RequestsWarning*
+__annotations__022&"$requests.exceptions.RequestException22"builtins.str2"builtins.dict2

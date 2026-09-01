@@ -1,210 +1,79 @@
 
-flask_cors.coreP
-_Optionsflask_cors.core._Options"typing._TypedDictj310j311j312j313j314ë
-parse_resourcesflask_cors.core.parse_resources"ÿ
-7builtins.list[Tuple[builtins.str,TypeAlias[TypedDict]]]ç
-(Tuple[builtins.str,TypeAlias[TypedDict]]
-builtins.str"builtins.strA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options"builtins.list*Ë
-	resourcesÿ
-{Union[builtins.dict[builtins.str,TypeAlias[TypedDict]],typing.Iterable[builtins.str],builtins.str,re.Pattern[builtins.str]]¢
-0builtins.dict[builtins.str,TypeAlias[TypedDict]]
-builtins.str"builtins.strA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options"builtins.dictN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-builtins.str"builtins.strD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Patternz310z311z312z313z314ì
-get_regexp_pattern"flask_cors.core.get_regexp_pattern"
-builtins.str"builtins.str*°
-regexpî
-,Union[builtins.str,re.Pattern[builtins.str]]
-builtins.str"builtins.strD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Patternz310z311z312z313z314˚
-get_cors_origins flask_cors.core.get_cors_origins"Å
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*N
-optionsA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*X
-request_originD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez310z311z312z313z314ƒ
-get_allow_headers!flask_cors.core.get_allow_headers"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-optionsA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*]
-acl_request_headersD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez310z311z312z313z314ˆ
-get_cors_headers flask_cors.core.get_cors_headers"7
-TypeAlias[Any]
-Any"flask_cors.core._MultiDict*N
-optionsA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*l
-request_headersW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*0
-request_method
-builtins.str"builtins.strz310z311z312z313z314è
-set_cors_headers flask_cors.core.set_cors_headers"2
-flask.wrappers.Response"flask.wrappers.Response*<
-resp2
-flask.wrappers.Response"flask.wrappers.Response*N
-optionsA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Optionsz310z311z312z313z314í
-probably_regexflask_cors.core.probably_regex"
-builtins.bool"builtins.bool*¶
-maybe_regexî
-,Union[builtins.str,re.Pattern[builtins.str]]
-builtins.str"builtins.strD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Patternz310z311z312z313z314~
-re_fixflask_cors.core.re_fix"
-builtins.str"builtins.str*%
-reg
-builtins.str"builtins.strz310z311z312z313z314à
-try_match_anyflask_cors.core.try_match_any"
-builtins.bool"builtins.bool*&
-inst
-builtins.str"builtins.str*ˆ
-patternsÁ
-=typing.Iterable[Union[builtins.str,re.Pattern[builtins.str]]]î
-,Union[builtins.str,re.Pattern[builtins.str]]
-builtins.str"builtins.strD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern"typing.Iterablez310z311z312z313z314∫
-	try_matchflask_cors.core.try_match"
-builtins.bool"builtins.bool*0
-request_origin
-builtins.str"builtins.str*¶
-maybe_regexî
-,Union[builtins.str,re.Pattern[builtins.str]]
-builtins.str"builtins.strD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Patternz310z311z312z313z314æ
-get_cors_options flask_cors.core.get_cors_options"A
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*^
-appInstanceM
-Union[flask.app.Flask,None]"
-flask.app.Flask"flask.app.Flask
-None*L
-dictsA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Optionsz310z311z312z313z314ˆ
-get_app_kwarg_dict"flask_cors.core.get_app_kwarg_dict"A
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*`
-appInstanceM
-Union[flask.app.Flask,None]"
-flask.app.Flask"flask.app.Flask
-None z310z311z312z313z314∏
-flexible_strflask_cors.core.flexible_str"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*+
-obj"
-builtins.object"builtins.objectz310z311z312z313z314Ä
-serialize_option flask_cors.core.serialize_option"
-None*S
-options_dictA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*%
-key
-builtins.str"builtins.str*+
-upper
-builtins.bool"builtins.bool z310z311z312z313z314Õ
-sanitize_regex_param$flask_cors.core.sanitize_regex_param"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*©
-paramù
-/Union[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314ﬂ
-serialize_options!flask_cors.core.serialize_options"A
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*K
-optsA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Optionsz310z311z312z313z314"≈
-ensure_iterableflask_cors.core.ensure_iterableª
-ensure_iterableflask_cors.core.ensure_iterable"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*&
-inst
-builtins.str"builtins.str0:typing.overloadXó
-ensure_iterableflask_cors.core.ensure_iterable"a
-flask_cors.core._IterableT0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable*k
-insta
-flask_cors.core._IterableT0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable0:typing.overloadXü
-ensure_iterableflask_cors.core.ensure_iterable"
-!builtins.list[flask_cors.core._T]K
-flask_cors.core._T"
-builtins.object"builtins.object"builtins.object"builtins.list*U
-instK
-flask_cors.core._T"
-builtins.object"builtins.object"builtins.object0:typing.overloadX"310"311"312"313"314*§
-__annotations__flask_cors.core.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*U
-LOGflask_cors.core.LOG 
-logging.Logger"logging.Logger*310*311*312*313*314*_
+flask_cors.core
+_Options"typing._TypedDict$
+parse_resources*
+	resources(	$
+get_regexp_pattern*
+regexp(
+9
+get_cors_origins*
+options(*
+request_origin(?
+get_allow_headers*
+options(*
+acl_request_headers(P
+get_cors_headers*
+options(*
+request_headers(*
+request_method(/
+set_cors_headers*
 
-ACL_ORIGINflask_cors.core.ACL_ORIGIN
-builtins.str"builtins.str*310*311*312*313*314*a
-ACL_METHODSflask_cors.core.ACL_METHODS
-builtins.str"builtins.str*310*311*312*313*314*m
-ACL_ALLOW_HEADERS!flask_cors.core.ACL_ALLOW_HEADERS
-builtins.str"builtins.str*310*311*312*313*314*o
-ACL_EXPOSE_HEADERS"flask_cors.core.ACL_EXPOSE_HEADERS
-builtins.str"builtins.str*310*311*312*313*314*i
-ACL_CREDENTIALSflask_cors.core.ACL_CREDENTIALS
-builtins.str"builtins.str*310*311*312*313*314*a
-ACL_MAX_AGEflask_cors.core.ACL_MAX_AGE
-builtins.str"builtins.str*310*311*312*313*314*o
-ACL_REQUEST_METHOD"flask_cors.core.ACL_REQUEST_METHOD
-builtins.str"builtins.str*310*311*312*313*314*q
-ACL_REQUEST_HEADERS#flask_cors.core.ACL_REQUEST_HEADERS
-builtins.str"builtins.str*310*311*312*313*314*è
-ALL_METHODSflask_cors.core.ALL_METHODSJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*ï
-CONFIG_OPTIONSflask_cors.core.CONFIG_OPTIONSJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*s
-FLASK_CORS_EVALUATED$flask_cors.core.FLASK_CORS_EVALUATED
-builtins.str"builtins.str*310*311*312*313*314*≥
-RegexObjectflask_cors.core.RegexObjectn
-Type[re.Pattern[builtins.str]]D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern"type*310*311*312*313*314*é
-DEFAULT_OPTIONSflask_cors.core.DEFAULT_OPTIONSA
-TypeAlias[TypedDict]
-	TypedDict"flask_cors.core._Options*310*311*312*313*314
+resp(*
+options(%
+probably_regex*
+maybe_regex(
+
+re_fix*	
+reg(-
+try_match_any*
+
+inst(*
+patterns(6
+	try_match*
+request_origin(*
+maybe_regex(
+4
+get_cors_options*
+appInstance(*
+dicts(+
+get_app_kwarg_dict*
+appInstance (
+flexible_str*	
+obj(B
+serialize_option*
+options_dict(*	
+key(*
+upper (%
+sanitize_regex_param*
+param(!
+serialize_options*
+
+opts("≥
+ensure_iterable4
+ensure_iterable*
+
+inst(0:typing.overloadX4
+ensure_iterable*
+
+inst(0:typing.overloadX4
+ensure_iterable*
+
+inst(0:typing.overloadX*
+__annotations__0*
+LOG0*
+
+ACL_ORIGIN0*
+ACL_METHODS0*
+ACL_ALLOW_HEADERS0*
+ACL_EXPOSE_HEADERS0*
+ACL_CREDENTIALS0*
+ACL_MAX_AGE0*
+ACL_REQUEST_METHOD0*
+ACL_REQUEST_HEADERS0*
+ALL_METHODS0*
+CONFIG_OPTIONS0*
+FLASK_CORS_EVALUATED0*
+RegexObject0*
+DEFAULT_OPTIONS02"builtins.str22"flask_cors.core._Options2222"builtins.list22"builtins.dict22"typing.Iterable22"
+re.Pattern222222"builtins.list22222222!"flask_cors.core._MultiDict22"builtins.dict22"flask.wrappers.Response2"builtins.bool2"typing.Iterable2
+2"flask.app.Flask222"builtins.object222"typing.Iterable22"typing.Iterable22"builtins.object22"builtins.list22"logging.Logger2"type2

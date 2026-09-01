@@ -1,618 +1,340 @@
 
-typed_ast.ast27˚
-NodeVisitortyped_ast.ast27.NodeVisitor"builtins.object*»
-visit!typed_ast.ast27.NodeVisitor.visit"
-Any*D
-self:
-typed_ast.ast27.NodeVisitor"typed_ast.ast27.NodeVisitor*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314*Ÿ
-generic_visit)typed_ast.ast27.NodeVisitor.generic_visit"
-None*D
-self:
-typed_ast.ast27.NodeVisitor"typed_ast.ast27.NodeVisitor*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314j310j311j312j313j314–
-NodeTransformertyped_ast.ast27.NodeTransformer"typed_ast.ast27.NodeVisitor*Â
-generic_visit-typed_ast.ast27.NodeTransformer.generic_visit"
-None*L
-selfB
-typed_ast.ast27.NodeTransformer"typed_ast.ast27.NodeTransformer*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314j310j311j312j313j314ò
-ASTtyped_ast.ast27.AST"builtins.object*©
-__init__typed_ast.ast27.AST.__init__"
-None*4
-self*
-typed_ast.ast27.AST"typed_ast.ast27.AST*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rï
-_attributestyped_ast.ast27.AST._attributesL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*310*311*312*313*314rç
-_fieldstyped_ast.ast27.AST._fieldsL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*310*311*312*313*314H
-modtyped_ast.ast27.mod"typed_ast.ast27.ASTj310j311j312j313j314∂
-Moduletyped_ast.ast27.Module"typed_ast.ast27.modj310j311j312j313j314r†
-bodytyped_ast.ast27.Module.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314r¬
-type_ignores#typed_ast.ast27.Module.type_ignorest
-)builtins.list[typed_ast.ast27.TypeIgnore]8
-typed_ast.ast27.TypeIgnore"typed_ast.ast27.TypeIgnore"builtins.list*310*311*312*313*314Ä
-Interactivetyped_ast.ast27.Interactive"typed_ast.ast27.modj310j311j312j313j314r•
-body typed_ast.ast27.Interactive.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314∆
+typed_ast.ast27l
+NodeVisitor"builtins.object*!
+visit*
 
-Expressiontyped_ast.ast27.Expression"typed_ast.ast27.modj310j311j312j313j314rn
-bodytyped_ast.ast27.Expression.body,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314É
-FunctionTypetyped_ast.ast27.FunctionType"typed_ast.ast27.modj310j311j312j313j314rÆ
-argtypes%typed_ast.ast27.FunctionType.argtypesb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314rv
-returns$typed_ast.ast27.FunctionType.returns,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314Ó
-Suitetyped_ast.ast27.Suite"typed_ast.ast27.modj310j311j312j313j314rü
-bodytyped_ast.ast27.Suite.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314é
-stmttyped_ast.ast27.stmt"typed_ast.ast27.ASTj310j311j312j313j314r\
-linenotyped_ast.ast27.stmt.lineno
-builtins.int"builtins.int*310*311*312*313*314rd
+self(*
 
-col_offsettyped_ast.ast27.stmt.col_offset
-builtins.int"builtins.int*310*311*312*313*314≥
-FunctionDeftyped_ast.ast27.FunctionDef"typed_ast.ast27.stmtj310j311j312j313j314r_
-name typed_ast.ast27.FunctionDef.name
-builtins.str"builtins.str*310*311*312*313*314ry
-args typed_ast.ast27.FunctionDef.args6
-typed_ast.ast27.arguments"typed_ast.ast27.arguments*310*311*312*313*314r•
-body typed_ast.ast27.FunctionDef.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314rπ
-decorator_list*typed_ast.ast27.FunctionDef.decorator_listb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314ró
-type_comment(typed_ast.ast27.FunctionDef.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314∂
-ClassDeftyped_ast.ast27.ClassDef"typed_ast.ast27.stmtj310j311j312j313j314r\
-nametyped_ast.ast27.ClassDef.name
-builtins.str"builtins.str*310*311*312*313*314r§
-basestyped_ast.ast27.ClassDef.basesb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314r¢
-bodytyped_ast.ast27.ClassDef.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314r∂
-decorator_list'typed_ast.ast27.ClassDef.decorator_listb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314Ó
-Returntyped_ast.ast27.Return"typed_ast.ast27.stmtj310j311j312j313j314rú
-valuetyped_ast.ast27.Return.value\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314¯
-Deletetyped_ast.ast27.Delete"typed_ast.ast27.stmtj310j311j312j313j314r¶
-targetstyped_ast.ast27.Delete.targetsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314˚
-Assigntyped_ast.ast27.Assign"typed_ast.ast27.stmtj310j311j312j313j314r¶
-targetstyped_ast.ast27.Assign.targetsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314rl
-valuetyped_ast.ast27.Assign.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rí
-type_comment#typed_ast.ast27.Assign.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314¨
-	AugAssigntyped_ast.ast27.AugAssign"typed_ast.ast27.stmtj310j311j312j313j314rq
-target typed_ast.ast27.AugAssign.target,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rq
-optyped_ast.ast27.AugAssign.op4
-typed_ast.ast27.operator"typed_ast.ast27.operator*310*311*312*313*314ro
-valuetyped_ast.ast27.AugAssign.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314Ë
-Printtyped_ast.ast27.Print"typed_ast.ast27.stmtj310j311j312j313j314rô
-desttyped_ast.ast27.Print.dest\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314r£
-valuestyped_ast.ast27.Print.valuesb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314rW
-nltyped_ast.ast27.Print.nl
-builtins.bool"builtins.bool*310*311*312*313*314ı
-Fortyped_ast.ast27.For"typed_ast.ast27.stmtj310j311j312j313j314rk
-targettyped_ast.ast27.For.target,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rg
-itertyped_ast.ast27.For.iter,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rù
-bodytyped_ast.ast27.For.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314r°
-orelsetyped_ast.ast27.For.orelseb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314rè
-type_comment typed_ast.ast27.For.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314Ä
-Whiletyped_ast.ast27.While"typed_ast.ast27.stmtj310j311j312j313j314ri
-testtyped_ast.ast27.While.test,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rü
-bodytyped_ast.ast27.While.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314r£
-orelsetyped_ast.ast27.While.orelseb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314Ò
-Iftyped_ast.ast27.If"typed_ast.ast27.stmtj310j311j312j313j314rf
-testtyped_ast.ast27.If.test,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rú
-bodytyped_ast.ast27.If.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314r†
-orelsetyped_ast.ast27.If.orelseb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314¶
-Withtyped_ast.ast27.With"typed_ast.ast27.stmtj310j311j312j313j314rx
-context_expr!typed_ast.ast27.With.context_expr,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r™
-optional_vars"typed_ast.ast27.With.optional_vars\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rû
-bodytyped_ast.ast27.With.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314rê
-type_comment!typed_ast.ast27.With.type_commentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314£
-Raisetyped_ast.ast27.Raise"typed_ast.ast27.stmtj310j311j312j313j314rô
-typetyped_ast.ast27.Raise.type\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rô
-insttyped_ast.ast27.Raise.inst\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rõ
-tbacktyped_ast.ast27.Raise.tback\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314Ó
-	TryExcepttyped_ast.ast27.TryExcept"typed_ast.ast27.stmtj310j311j312j313j314r£
-bodytyped_ast.ast27.TryExcept.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314r∆
-handlers"typed_ast.ast27.TryExcept.handlers}
-,builtins.list[typed_ast.ast27.ExceptHandler]>
-typed_ast.ast27.ExceptHandler"typed_ast.ast27.ExceptHandler"builtins.list*310*311*312*313*314rß
-orelse typed_ast.ast27.TryExcept.orelseb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314Ø
+node(*)
+generic_visit*
 
-TryFinallytyped_ast.ast27.TryFinally"typed_ast.ast27.stmtj310j311j312j313j314r§
-bodytyped_ast.ast27.TryFinally.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314rÆ
-	finalbody$typed_ast.ast27.TryFinally.finalbodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314÷
-Asserttyped_ast.ast27.Assert"typed_ast.ast27.stmtj310j311j312j313j314rj
-testtyped_ast.ast27.Assert.test,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rò
-msgtyped_ast.ast27.Assert.msg\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314˜
-Importtyped_ast.ast27.Import"typed_ast.ast27.stmtj310j311j312j313j314r•
-namestyped_ast.ast27.Import.namese
-$builtins.list[typed_ast.ast27.alias].
-typed_ast.ast27.alias"typed_ast.ast27.alias"builtins.list*310*311*312*313*314õ
+self(*
 
-ImportFromtyped_ast.ast27.ImportFrom"typed_ast.ast27.stmtj310j311j312j313j314rä
-module!typed_ast.ast27.ImportFrom.moduleD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r©
-names typed_ast.ast27.ImportFrom.namese
-$builtins.list[typed_ast.ast27.alias].
-typed_ast.ast27.alias"typed_ast.ast27.alias"builtins.list*310*311*312*313*314rà
-level typed_ast.ast27.ImportFrom.levelD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314ı
-Exectyped_ast.ast27.Exec"typed_ast.ast27.stmtj310j311j312j313j314rh
-bodytyped_ast.ast27.Exec.body,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rû
-globalstyped_ast.ast27.Exec.globals\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rú
-localstyped_ast.ast27.Exec.locals\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314‹
-Globaltyped_ast.ast27.Global"typed_ast.ast27.stmtj310j311j312j313j314rä
-namestyped_ast.ast27.Global.namesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314∑
-Exprtyped_ast.ast27.Expr"typed_ast.ast27.stmtj310j311j312j313j314rj
-valuetyped_ast.ast27.Expr.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314K
-Passtyped_ast.ast27.Pass"typed_ast.ast27.stmtj310j311j312j313j314M
-Breaktyped_ast.ast27.Break"typed_ast.ast27.stmtj310j311j312j313j314S
-Continuetyped_ast.ast27.Continue"typed_ast.ast27.stmtj310j311j312j313j314L
-slicetyped_ast.ast27.slice"typed_ast.ast27.ASTj310j311j312j313j314¶
-Slicetyped_ast.ast27.Slice"typed_ast.ast27.slicej310j311j312j313j314rõ
-lowertyped_ast.ast27.Slice.lower\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rõ
-uppertyped_ast.ast27.Slice.upper\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rô
-steptyped_ast.ast27.Slice.step\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314¸
-ExtSlicetyped_ast.ast27.ExtSlice"typed_ast.ast27.slicej310j311j312j313j314r•
-dimstyped_ast.ast27.ExtSlice.dimse
-$builtins.list[typed_ast.ast27.slice].
-typed_ast.ast27.slice"typed_ast.ast27.slice"builtins.list*310*311*312*313*314ª
-Indextyped_ast.ast27.Index"typed_ast.ast27.slicej310j311j312j313j314rk
-valuetyped_ast.ast27.Index.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314T
-Ellipsistyped_ast.ast27.Ellipsis"typed_ast.ast27.slicej310j311j312j313j314é
-exprtyped_ast.ast27.expr"typed_ast.ast27.ASTj310j311j312j313j314r\
-linenotyped_ast.ast27.expr.lineno
-builtins.int"builtins.int*310*311*312*313*314rd
+node(Y
+NodeTransformer"typed_ast.ast27.NodeVisitor*)
+generic_visit*
 
-col_offsettyped_ast.ast27.expr.col_offset
-builtins.int"builtins.int*310*311*312*313*314‚
-BoolOptyped_ast.ast27.BoolOp"typed_ast.ast27.exprj310j311j312j313j314rj
-optyped_ast.ast27.BoolOp.op0
-typed_ast.ast27.boolop"typed_ast.ast27.boolop*310*311*312*313*314r§
-valuestyped_ast.ast27.BoolOp.valuesb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314î
-BinOptyped_ast.ast27.BinOp"typed_ast.ast27.exprj310j311j312j313j314ri
-lefttyped_ast.ast27.BinOp.left,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rm
-optyped_ast.ast27.BinOp.op4
-typed_ast.ast27.operator"typed_ast.ast27.operator*310*311*312*313*314rk
-righttyped_ast.ast27.BinOp.right,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314≥
-UnaryOptyped_ast.ast27.UnaryOp"typed_ast.ast27.exprj310j311j312j313j314rm
-optyped_ast.ast27.UnaryOp.op2
-typed_ast.ast27.unaryop"typed_ast.ast27.unaryop*310*311*312*313*314rq
-operandtyped_ast.ast27.UnaryOp.operand,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314±
-Lambdatyped_ast.ast27.Lambda"typed_ast.ast27.exprj310j311j312j313j314rt
-argstyped_ast.ast27.Lambda.args6
-typed_ast.ast27.arguments"typed_ast.ast27.arguments*310*311*312*313*314rj
-bodytyped_ast.ast27.Lambda.body,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314í
-IfExptyped_ast.ast27.IfExp"typed_ast.ast27.exprj310j311j312j313j314ri
-testtyped_ast.ast27.IfExp.test,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314ri
-bodytyped_ast.ast27.IfExp.body,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rm
-orelsetyped_ast.ast27.IfExp.orelse,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314ë
-Dicttyped_ast.ast27.Dict"typed_ast.ast27.exprj310j311j312j313j314rû
-keystyped_ast.ast27.Dict.keysb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314r¢
-valuestyped_ast.ast27.Dict.valuesb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314È
-Settyped_ast.ast27.Set"typed_ast.ast27.exprj310j311j312j313j314rù
-eltstyped_ast.ast27.Set.eltsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314ã
-ListComptyped_ast.ast27.ListComp"typed_ast.ast27.exprj310j311j312j313j314rj
-elttyped_ast.ast27.ListComp.elt,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r…
+self(*
 
-generators#typed_ast.ast27.ListComp.generators}
-,builtins.list[typed_ast.ast27.comprehension]>
-typed_ast.ast27.comprehension"typed_ast.ast27.comprehension"builtins.list*310*311*312*313*314á
-SetComptyped_ast.ast27.SetComp"typed_ast.ast27.exprj310j311j312j313j314ri
-elttyped_ast.ast27.SetComp.elt,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r»
+node(h
+AST"builtins.object*2
+__init__*
 
-generators"typed_ast.ast27.SetComp.generators}
-,builtins.list[typed_ast.ast27.comprehension]>
-typed_ast.ast27.comprehension"typed_ast.ast27.comprehension"builtins.list*310*311*312*313*314˚
-DictComptyped_ast.ast27.DictComp"typed_ast.ast27.exprj310j311j312j313j314rj
-keytyped_ast.ast27.DictComp.key,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rn
-valuetyped_ast.ast27.DictComp.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r…
+self(*
 
-generators#typed_ast.ast27.DictComp.generators}
-,builtins.list[typed_ast.ast27.comprehension]>
-typed_ast.ast27.comprehension"typed_ast.ast27.comprehension"builtins.list*310*311*312*313*314õ
-GeneratorExptyped_ast.ast27.GeneratorExp"typed_ast.ast27.exprj310j311j312j313j314rn
-elt typed_ast.ast27.GeneratorExp.elt,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rÕ
+args(*
+kwargs(r
+_attributes0r
+_fields0
+mod"typed_ast.ast27.AST9
+Module"typed_ast.ast27.modr
+body0	r
+type_ignores0,
+Interactive"typed_ast.ast27.modr
+body0	+
 
-generators'typed_ast.ast27.GeneratorExp.generators}
-,builtins.list[typed_ast.ast27.comprehension]>
-typed_ast.ast27.comprehension"typed_ast.ast27.comprehension"builtins.list*310*311*312*313*314Î
-Yieldtyped_ast.ast27.Yield"typed_ast.ast27.exprj310j311j312j313j314rõ
-valuetyped_ast.ast27.Yield.value\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314ï
-Comparetyped_ast.ast27.Compare"typed_ast.ast27.exprj310j311j312j313j314rk
-lefttyped_ast.ast27.Compare.left,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r¢
-opstyped_ast.ast27.Compare.opse
-$builtins.list[typed_ast.ast27.cmpop].
-typed_ast.ast27.cmpop"typed_ast.ast27.cmpop"builtins.list*310*311*312*313*314rØ
-comparators#typed_ast.ast27.Compare.comparatorsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314 
-Calltyped_ast.ast27.Call"typed_ast.ast27.exprj310j311j312j313j314rh
-functyped_ast.ast27.Call.func,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rû
-argstyped_ast.ast27.Call.argsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314rØ
-keywordstyped_ast.ast27.Call.keywordsk
-&builtins.list[typed_ast.ast27.keyword]2
-typed_ast.ast27.keyword"typed_ast.ast27.keyword"builtins.list*310*311*312*313*314r†
-starargstyped_ast.ast27.Call.starargs\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rú
-kwargstyped_ast.ast27.Call.kwargs\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314∑
-Reprtyped_ast.ast27.Repr"typed_ast.ast27.exprj310j311j312j313j314rj
-valuetyped_ast.ast27.Repr.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314ü
-Numtyped_ast.ast27.Num"typed_ast.ast27.exprj310j311j312j313j314r”
-ntyped_ast.ast27.Num.nù
-3Union[builtins.int,builtins.float,builtins.complex]
-builtins.int"builtins.int 
-builtins.float"builtins.float$
-builtins.complex"builtins.complex*310*311*312*313*314¿
-Strtyped_ast.ast27.Str"typed_ast.ast27.exprj310j311j312j313j314rõ
-styped_ast.ast27.Str.sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*310*311*312*313*314rW
-kindtyped_ast.ast27.Str.kind
-builtins.str"builtins.str*310*311*312*313*314¢
-	Attributetyped_ast.ast27.Attribute"typed_ast.ast27.exprj310j311j312j313j314ro
-valuetyped_ast.ast27.Attribute.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r]
-attrtyped_ast.ast27.Attribute.attr
-builtins.str"builtins.str*310*311*312*313*314r{
-ctxtyped_ast.ast27.Attribute.ctx<
-typed_ast.ast27.expr_context"typed_ast.ast27.expr_context*310*311*312*313*314∂
-	Subscripttyped_ast.ast27.Subscript"typed_ast.ast27.exprj310j311j312j313j314ro
-valuetyped_ast.ast27.Subscript.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rq
-slicetyped_ast.ast27.Subscript.slice.
-typed_ast.ast27.slice"typed_ast.ast27.slice*310*311*312*313*314r{
-ctxtyped_ast.ast27.Subscript.ctx<
-typed_ast.ast27.expr_context"typed_ast.ast27.expr_context*310*311*312*313*314ô
-Nametyped_ast.ast27.Name"typed_ast.ast27.exprj310j311j312j313j314rT
-idtyped_ast.ast27.Name.id
-builtins.str"builtins.str*310*311*312*313*314rv
-ctxtyped_ast.ast27.Name.ctx<
-typed_ast.ast27.expr_context"typed_ast.ast27.expr_context*310*311*312*313*314‰
-Listtyped_ast.ast27.List"typed_ast.ast27.exprj310j311j312j313j314rû
-eltstyped_ast.ast27.List.eltsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314rv
-ctxtyped_ast.ast27.List.ctx<
-typed_ast.ast27.expr_context"typed_ast.ast27.expr_context*310*311*312*313*314Ë
-Tupletyped_ast.ast27.Tuple"typed_ast.ast27.exprj310j311j312j313j314rü
-eltstyped_ast.ast27.Tuple.eltsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314rw
-ctxtyped_ast.ast27.Tuple.ctx<
-typed_ast.ast27.expr_context"typed_ast.ast27.expr_context*310*311*312*313*314Z
-expr_contexttyped_ast.ast27.expr_context"typed_ast.ast27.ASTj310j311j312j313j314Y
-AugLoadtyped_ast.ast27.AugLoad"typed_ast.ast27.expr_contextj310j311j312j313j314[
-AugStoretyped_ast.ast27.AugStore"typed_ast.ast27.expr_contextj310j311j312j313j314Q
-Deltyped_ast.ast27.Del"typed_ast.ast27.expr_contextj310j311j312j313j314S
-Loadtyped_ast.ast27.Load"typed_ast.ast27.expr_contextj310j311j312j313j314U
-Paramtyped_ast.ast27.Param"typed_ast.ast27.expr_contextj310j311j312j313j314U
-Storetyped_ast.ast27.Store"typed_ast.ast27.expr_contextj310j311j312j313j314N
-booloptyped_ast.ast27.boolop"typed_ast.ast27.ASTj310j311j312j313j314K
-Andtyped_ast.ast27.And"typed_ast.ast27.boolopj310j311j312j313j314I
-Ortyped_ast.ast27.Or"typed_ast.ast27.boolopj310j311j312j313j314R
-operatortyped_ast.ast27.operator"typed_ast.ast27.ASTj310j311j312j313j314M
-Addtyped_ast.ast27.Add"typed_ast.ast27.operatorj310j311j312j313j314S
-BitAndtyped_ast.ast27.BitAnd"typed_ast.ast27.operatorj310j311j312j313j314Q
-BitOrtyped_ast.ast27.BitOr"typed_ast.ast27.operatorj310j311j312j313j314S
-BitXortyped_ast.ast27.BitXor"typed_ast.ast27.operatorj310j311j312j313j314M
-Divtyped_ast.ast27.Div"typed_ast.ast27.operatorj310j311j312j313j314W
-FloorDivtyped_ast.ast27.FloorDiv"typed_ast.ast27.operatorj310j311j312j313j314S
-LShifttyped_ast.ast27.LShift"typed_ast.ast27.operatorj310j311j312j313j314M
-Modtyped_ast.ast27.Mod"typed_ast.ast27.operatorj310j311j312j313j314O
-Multtyped_ast.ast27.Mult"typed_ast.ast27.operatorj310j311j312j313j314M
-Powtyped_ast.ast27.Pow"typed_ast.ast27.operatorj310j311j312j313j314S
-RShifttyped_ast.ast27.RShift"typed_ast.ast27.operatorj310j311j312j313j314M
-Subtyped_ast.ast27.Sub"typed_ast.ast27.operatorj310j311j312j313j314P
-unaryoptyped_ast.ast27.unaryop"typed_ast.ast27.ASTj310j311j312j313j314R
-Inverttyped_ast.ast27.Invert"typed_ast.ast27.unaryopj310j311j312j313j314L
-Nottyped_ast.ast27.Not"typed_ast.ast27.unaryopj310j311j312j313j314N
-UAddtyped_ast.ast27.UAdd"typed_ast.ast27.unaryopj310j311j312j313j314N
-USubtyped_ast.ast27.USub"typed_ast.ast27.unaryopj310j311j312j313j314L
-cmpoptyped_ast.ast27.cmpop"typed_ast.ast27.ASTj310j311j312j313j314H
-Eqtyped_ast.ast27.Eq"typed_ast.ast27.cmpopj310j311j312j313j314H
-Gttyped_ast.ast27.Gt"typed_ast.ast27.cmpopj310j311j312j313j314J
-GtEtyped_ast.ast27.GtE"typed_ast.ast27.cmpopj310j311j312j313j314H
-Intyped_ast.ast27.In"typed_ast.ast27.cmpopj310j311j312j313j314H
-Istyped_ast.ast27.Is"typed_ast.ast27.cmpopj310j311j312j313j314N
-IsNottyped_ast.ast27.IsNot"typed_ast.ast27.cmpopj310j311j312j313j314H
-Lttyped_ast.ast27.Lt"typed_ast.ast27.cmpopj310j311j312j313j314J
-LtEtyped_ast.ast27.LtE"typed_ast.ast27.cmpopj310j311j312j313j314N
-NotEqtyped_ast.ast27.NotEq"typed_ast.ast27.cmpopj310j311j312j313j314N
-NotIntyped_ast.ast27.NotIn"typed_ast.ast27.cmpopj310j311j312j313j314Ó
-comprehensiontyped_ast.ast27.comprehension"typed_ast.ast27.ASTj310j311j312j313j314ru
-target$typed_ast.ast27.comprehension.target,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314rq
-iter"typed_ast.ast27.comprehension.iter,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314r•
-ifs!typed_ast.ast27.comprehension.ifsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314§
-ExceptHandlertyped_ast.ast27.ExceptHandler"typed_ast.ast27.ASTj310j311j312j313j314r°
-type"typed_ast.ast27.ExceptHandler.type\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314r°
-name"typed_ast.ast27.ExceptHandler.name\
- Union[typed_ast.ast27.expr,None],
-typed_ast.ast27.expr"typed_ast.ast27.expr
-None*310*311*312*313*314rß
-body"typed_ast.ast27.ExceptHandler.bodyb
-#builtins.list[typed_ast.ast27.stmt],
-typed_ast.ast27.stmt"typed_ast.ast27.stmt"builtins.list*310*311*312*313*314re
-lineno$typed_ast.ast27.ExceptHandler.lineno
-builtins.int"builtins.int*310*311*312*313*314rm
+Expression"typed_ast.ast27.modr
+body0>
+FunctionType"typed_ast.ast27.modr
+argtypes0r
+returns0&
+Suite"typed_ast.ast27.modr
+body0	7
+stmt"typed_ast.ast27.ASTr
 
-col_offset(typed_ast.ast27.ExceptHandler.col_offset
-builtins.int"builtins.int*310*311*312*313*314í
-	argumentstyped_ast.ast27.arguments"typed_ast.ast27.ASTj310j311j312j313j314r£
-argstyped_ast.ast27.arguments.argsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314râ
-vararg typed_ast.ast27.arguments.varargD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rá
-kwargtyped_ast.ast27.arguments.kwargD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r´
-defaults"typed_ast.ast27.arguments.defaultsb
-#builtins.list[typed_ast.ast27.expr],
-typed_ast.ast27.expr"typed_ast.ast27.expr"builtins.list*310*311*312*313*314r—
-type_comments'typed_ast.ast27.arguments.type_comments~
-'builtins.list[Union[builtins.str,None]]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"builtins.list*310*311*312*313*314ö
-keywordtyped_ast.ast27.keyword"typed_ast.ast27.ASTj310j311j312j313j314rY
-argtyped_ast.ast27.keyword.arg
-builtins.str"builtins.str*310*311*312*313*314rm
-valuetyped_ast.ast27.keyword.value,
-typed_ast.ast27.expr"typed_ast.ast27.expr*310*311*312*313*314Ø
-aliastyped_ast.ast27.alias"typed_ast.ast27.ASTj310j311j312j313j314rY
-nametyped_ast.ast27.alias.name
-builtins.str"builtins.str*310*311*312*313*314rÖ
-asnametyped_ast.ast27.alias.asnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314∫
+lineno0r
 
-TypeIgnoretyped_ast.ast27.TypeIgnore"typed_ast.ast27.ASTj310j311j312j313j314rb
-lineno!typed_ast.ast27.TypeIgnore.lineno
-builtins.int"builtins.int*310*311*312*313*314™
-parsetyped_ast.ast27.parse"*
-typed_ast.ast27.AST"typed_ast.ast27.AST*ë
-sourceÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer*ï
-filenameÑ
-,Union[builtins.str,typing_extensions.Buffer]
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer *(
-mode
-builtins.str"builtins.str z310z311©
-parsetyped_ast.ast27.parse"*
-typed_ast.ast27.AST"typed_ast.ast27.AST*é
-sourceÅ
-+Union[builtins.str,_collections_abc.Buffer]
-builtins.str"builtins.str2
-_collections_abc.Buffer"_collections_abc.Buffer*í
-filenameÅ
-+Union[builtins.str,_collections_abc.Buffer]
-builtins.str"builtins.str2
-_collections_abc.Buffer"_collections_abc.Buffer *(
-mode
-builtins.str"builtins.str z312z313z314Á
-copy_locationtyped_ast.ast27.copy_location"*
-typed_ast.ast27.AST"typed_ast.ast27.AST*8
-new_node*
-typed_ast.ast27.AST"typed_ast.ast27.AST*8
-old_node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314˙
-dumptyped_ast.ast27.dump"
-builtins.str"builtins.str*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.AST*5
-annotate_fields
-builtins.bool"builtins.bool *8
-include_attributes
-builtins.bool"builtins.bool z310z311z312z313z314π
-fix_missing_locations%typed_ast.ast27.fix_missing_locations"*
-typed_ast.ast27.AST"typed_ast.ast27.AST*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314°
-get_docstringtyped_ast.ast27.get_docstring"u
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.AST*+
-clean
-builtins.bool"builtins.bool z310z311z312z313z314÷
-increment_lineno typed_ast.ast27.increment_lineno"*
-typed_ast.ast27.AST"typed_ast.ast27.AST*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.AST*%
-n
-builtins.int"builtins.int z310z311z312z313z314Ë
-iter_child_nodes typed_ast.ast27.iter_child_nodes"c
-$typing.Iterator[typed_ast.ast27.AST]*
-typed_ast.ast27.AST"typed_ast.ast27.AST"typing.Iterator*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314˙
-iter_fieldstyped_ast.ast27.iter_fields"
-(typing.Iterator[Tuple[builtins.str,Any]]B
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Iterator*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314⁄
-literal_evaltyped_ast.ast27.literal_eval"
-Any*â
-node_or_stringu
-'Union[builtins.str,typed_ast.ast27.AST]
-builtins.str"builtins.str*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314–
-walktyped_ast.ast27.walk"c
-$typing.Iterator[typed_ast.ast27.AST]*
-typed_ast.ast27.AST"typed_ast.ast27.AST"typing.Iterator*4
-node*
-typed_ast.ast27.AST"typed_ast.ast27.ASTz310z311z312z313z314*§
-__annotations__typed_ast.ast27.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*e
-PyCF_ONLY_ASTtyped_ast.ast27.PyCF_ONLY_AST
-builtins.int"builtins.int*310*311*312*313*314
+col_offset0g
+FunctionDef"typed_ast.ast27.stmtr
+name0r
+args0r
+body0	r
+decorator_list0r
+type_comment0S
+ClassDef"typed_ast.ast27.stmtr
+name0r	
+bases0r
+body0	r
+decorator_list0)
+Return"typed_ast.ast27.stmtr	
+value0+
+Delete"typed_ast.ast27.stmtr
+targets0H
+Assign"typed_ast.ast27.stmtr
+targets0r	
+value0r
+type_comment0@
+	AugAssign"typed_ast.ast27.stmtr
+
+target0r
+op0r	
+value0;
+Print"typed_ast.ast27.stmtr
+dest0r
+
+values0r
+nl0Y
+For"typed_ast.ast27.stmtr
+
+target0r
+iter0r
+body0	r
+
+orelse0	r
+type_comment0=
+While"typed_ast.ast27.stmtr
+test0r
+body0	r
+
+orelse0	:
+If"typed_ast.ast27.stmtr
+test0r
+body0	r
+
+orelse0	]
+With"typed_ast.ast27.stmtr
+context_expr0r
+optional_vars0r
+body0	r
+type_comment0<
+Raise"typed_ast.ast27.stmtr
+type0r
+inst0r	
+tback0E
+	TryExcept"typed_ast.ast27.stmtr
+body0	r
+handlers0r
+
+orelse0	;
+
+TryFinally"typed_ast.ast27.stmtr
+body0	r
+	finalbody0	1
+Assert"typed_ast.ast27.stmtr
+test0r
+msg0)
+Import"typed_ast.ast27.stmtr	
+names0D
+
+ImportFrom"typed_ast.ast27.stmtr
+
+module0r	
+names0r	
+level0?
+Exec"typed_ast.ast27.stmtr
+body0r
+globals0r
+
+locals0)
+Global"typed_ast.ast27.stmtr	
+names0'
+Expr"typed_ast.ast27.stmtr	
+value0
+Pass"typed_ast.ast27.stmt
+Break"typed_ast.ast27.stmt 
+Continue"typed_ast.ast27.stmt
+slice"typed_ast.ast27.AST>
+Slice"typed_ast.ast27.slicer	
+lower0r	
+upper0r
+step0+
+ExtSlice"typed_ast.ast27.slicer
+dims0)
+Index"typed_ast.ast27.slicer	
+value0!
+Ellipsis"typed_ast.ast27.slice7
+expr"typed_ast.ast27.ASTr
+
+lineno0r
+
+col_offset02
+BoolOp"typed_ast.ast27.exprr
+op0r
+
+values0:
+BinOp"typed_ast.ast27.exprr
+left0r
+op0r	
+right04
+UnaryOp"typed_ast.ast27.exprr
+op0r
+operand02
+Lambda"typed_ast.ast27.exprr
+args0r
+body0=
+IfExp"typed_ast.ast27.exprr
+test0r
+body0r
+
+orelse02
+Dict"typed_ast.ast27.exprr
+keys0r
+
+values0%
+Set"typed_ast.ast27.exprr
+elts09
+ListComp"typed_ast.ast27.exprr
+elt0r
+
+generators08
+SetComp"typed_ast.ast27.exprr
+elt0r
+
+generators0D
+DictComp"typed_ast.ast27.exprr
+key0r	
+value0r
+
+generators0=
+GeneratorExp"typed_ast.ast27.exprr
+elt0r
+
+generators0(
+Yield"typed_ast.ast27.exprr	
+value0C
+Compare"typed_ast.ast27.exprr
+left0r
+ops0!r
+comparators0X
+Call"typed_ast.ast27.exprr
+func0r
+args0r
+keywords0#r
+starargs0r
+
+kwargs0'
+Repr"typed_ast.ast27.exprr	
+value0"
+Num"typed_ast.ast27.exprr
+n0&,
+Str"typed_ast.ast27.exprr
+s0(r
+kind0?
+	Attribute"typed_ast.ast27.exprr	
+value0r
+attr0r
+ctx0)@
+	Subscript"typed_ast.ast27.exprr	
+value0r	
+slice0r
+ctx0)-
+Name"typed_ast.ast27.exprr
+id0r
+ctx0)/
+List"typed_ast.ast27.exprr
+elts0r
+ctx0)0
+Tuple"typed_ast.ast27.exprr
+elts0r
+ctx0)#
+expr_context"typed_ast.ast27.AST'
+AugLoad"typed_ast.ast27.expr_context(
+AugStore"typed_ast.ast27.expr_context#
+Del"typed_ast.ast27.expr_context$
+Load"typed_ast.ast27.expr_context%
+Param"typed_ast.ast27.expr_context%
+Store"typed_ast.ast27.expr_context
+boolop"typed_ast.ast27.AST
+And"typed_ast.ast27.boolop
+Or"typed_ast.ast27.boolop
+operator"typed_ast.ast27.AST
+Add"typed_ast.ast27.operator"
+BitAnd"typed_ast.ast27.operator!
+BitOr"typed_ast.ast27.operator"
+BitXor"typed_ast.ast27.operator
+Div"typed_ast.ast27.operator$
+FloorDiv"typed_ast.ast27.operator"
+LShift"typed_ast.ast27.operator
+Mod"typed_ast.ast27.operator 
+Mult"typed_ast.ast27.operator
+Pow"typed_ast.ast27.operator"
+RShift"typed_ast.ast27.operator
+Sub"typed_ast.ast27.operator
+unaryop"typed_ast.ast27.AST!
+Invert"typed_ast.ast27.unaryop
+Not"typed_ast.ast27.unaryop
+UAdd"typed_ast.ast27.unaryop
+USub"typed_ast.ast27.unaryop
+cmpop"typed_ast.ast27.AST
+Eq"typed_ast.ast27.cmpop
+Gt"typed_ast.ast27.cmpop
+GtE"typed_ast.ast27.cmpop
+In"typed_ast.ast27.cmpop
+Is"typed_ast.ast27.cmpop
+IsNot"typed_ast.ast27.cmpop
+Lt"typed_ast.ast27.cmpop
+LtE"typed_ast.ast27.cmpop
+NotEq"typed_ast.ast27.cmpop
+NotIn"typed_ast.ast27.cmpopC
+comprehension"typed_ast.ast27.ASTr
+
+target0r
+iter0r
+ifs0^
+ExceptHandler"typed_ast.ast27.ASTr
+type0r
+name0r
+body0	r
+
+lineno0r
+
+col_offset0b
+	arguments"typed_ast.ast27.ASTr
+args0r
+
+vararg0r	
+kwarg0r
+defaults0r
+type_comments0*2
+keyword"typed_ast.ast27.ASTr
+arg0r	
+value02
+alias"typed_ast.ast27.ASTr
+name0r
+
+asname0-
+
+TypeIgnore"typed_ast.ast27.ASTr
+
+lineno0A
+parse*
+source(,*
+filename (,*
+mode (z310z311F
+parse*
+source(.*
+filename (.*
+mode (z312z313z3141
+copy_location*
+new_node(*
+old_node(I
+dump*
+
+node(*
+annotate_fields (*
+include_attributes (%
+fix_missing_locations*
+
+node(,
+get_docstring/*
+
+node(*
+clean (+
+increment_lineno*
+
+node(*	
+n ( 
+iter_child_nodes0*
+
+node(
+iter_fields2*
+
+node(&
+literal_eval*
+node_or_string(3
+walk0*
+
+node(*
+__annotations__04*
+PyCF_ONLY_AST022"typed_ast.ast27.NodeVisitor2"typed_ast.ast27.AST22!"typed_ast.ast27.NodeTransformer2"builtins.str2"builtins.tuple22"typed_ast.ast27.stmt2"builtins.list22"typed_ast.ast27.TypeIgnore2"builtins.list2
+2"typed_ast.ast27.expr2"builtins.list22"builtins.int2"typed_ast.ast27.arguments22222"typed_ast.ast27.operator2"builtins.bool2"typed_ast.ast27.ExceptHandler2"builtins.list22"typed_ast.ast27.alias2"builtins.list2222"builtins.list22"typed_ast.ast27.slice2"builtins.list22"typed_ast.ast27.boolop2"typed_ast.ast27.unaryop2"typed_ast.ast27.comprehension2"builtins.list22"typed_ast.ast27.cmpop2"builtins.list2 2"typed_ast.ast27.keyword2"builtins.list2"2"builtins.float2"builtins.complex22$%2"builtins.bytes22'2"typed_ast.ast27.expr_context2"builtins.list22"typing_extensions.Buffer22+2"_collections_abc.Buffer22-22'2"typing.Iterator2222"typing.Iterator21222"builtins.dict2

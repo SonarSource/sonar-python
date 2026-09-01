@@ -1,98 +1,52 @@
 
-Xlib.ext.dpmsf
-DPMSGetVersionXlib.ext.dpms.DPMSGetVersion"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314`
-DPMSCapableXlib.ext.dpms.DPMSCapable"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314h
-DPMSGetTimeoutsXlib.ext.dpms.DPMSGetTimeouts"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314c
-DPMSSetTimeoutsXlib.ext.dpms.DPMSSetTimeouts"Xlib.protocol.rq.Requestj310j311j312j313j314Y
+Xlib.ext.dpms/
+DPMSGetVersion"Xlib.protocol.rq.ReplyRequest,
+DPMSCapable"Xlib.protocol.rq.ReplyRequest0
+DPMSGetTimeouts"Xlib.protocol.rq.ReplyRequest+
+DPMSSetTimeouts"Xlib.protocol.rq.Request&
 
-DPMSEnableXlib.ext.dpms.DPMSEnable"Xlib.protocol.rq.Requestj310j311j312j313j314[
-DPMSDisableXlib.ext.dpms.DPMSDisable"Xlib.protocol.rq.Requestj310j311j312j313j314a
-DPMSForceLevelXlib.ext.dpms.DPMSForceLevel"Xlib.protocol.rq.Requestj310j311j312j313j314Z
-DPMSInfoXlib.ext.dpms.DPMSInfo"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314å
-get_versionXlib.ext.dpms.get_version"<
-Xlib.ext.dpms.DPMSGetVersion"Xlib.ext.dpms.DPMSGetVersion*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314×
-capableXlib.ext.dpms.capable"6
-Xlib.ext.dpms.DPMSCapable"Xlib.ext.dpms.DPMSCapable*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314é
-get_timeoutsXlib.ext.dpms.get_timeouts">
-Xlib.ext.dpms.DPMSGetTimeouts"Xlib.ext.dpms.DPMSGetTimeouts*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314þ
-set_timeoutsXlib.ext.dpms.set_timeouts">
-Xlib.ext.dpms.DPMSSetTimeouts"Xlib.ext.dpms.DPMSSetTimeouts*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*1
-standby_timeout
-builtins.int"builtins.int*1
-suspend_timeout
-builtins.int"builtins.int*-
-off_timeout
-builtins.int"builtins.intz310z311z312z313z314Ó
-enableXlib.ext.dpms.enable"4
-Xlib.ext.dpms.DPMSEnable"Xlib.ext.dpms.DPMSEnable*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314×
-disableXlib.ext.dpms.disable"6
-Xlib.ext.dpms.DPMSDisable"Xlib.ext.dpms.DPMSDisable*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314”
-force_levelXlib.ext.dpms.force_level"<
-Xlib.ext.dpms.DPMSForceLevel"Xlib.ext.dpms.DPMSForceLevel*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*-
-power_level
-builtins.int"builtins.intz310z311z312z313z314Ë
-infoXlib.ext.dpms.info"0
-Xlib.ext.dpms.DPMSInfo"Xlib.ext.dpms.DPMSInfo*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314¤
-initXlib.ext.dpms.init"
-None*6
-disp,
-Xlib.display.Display"Xlib.display.Display*-
-_info"
-builtins.object"builtins.objectz310z311z312z313z314*¢
-__annotations__Xlib.ext.dpms.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*W
-extnameXlib.ext.dpms.extname
-builtins.str"builtins.str*310*311*312*313*314*]
+DPMSEnable"Xlib.protocol.rq.Request'
+DPMSDisable"Xlib.protocol.rq.Request*
+DPMSForceLevel"Xlib.protocol.rq.Request)
+DPMSInfo"Xlib.protocol.rq.ReplyRequest
+get_version*
 
-DPMSModeOnXlib.ext.dpms.DPMSModeOn
-builtins.int"builtins.int*310*311*312*313*314*g
-DPMSModeStandbyXlib.ext.dpms.DPMSModeStandby
-builtins.int"builtins.int*310*311*312*313*314*g
-DPMSModeSuspendXlib.ext.dpms.DPMSModeSuspend
-builtins.int"builtins.int*310*311*312*313*314*_
-DPMSModeOffXlib.ext.dpms.DPMSModeOff
-builtins.int"builtins.int*310*311*312*313*314*
-DPMSPowerLevelXlib.ext.dpms.DPMSPowerLevelÆ
-^Tuple[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314
+self(
+capable*
+
+self(
+get_timeouts*
+
+self(]
+set_timeouts*
+
+self(*
+standby_timeout(*
+suspend_timeout(*
+off_timeout(
+enable	*
+
+self(
+disable
+*
+
+self(.
+force_level*
+
+self(*
+power_level(
+info*
+
+self(!
+init*
+
+disp(*
+_info(*
+__annotations__0*
+extname0*
+
+DPMSModeOn0*
+DPMSModeStandby0*
+DPMSModeSuspend0*
+DPMSModeOff0*
+DPMSPowerLevel02"Xlib.ext.dpms.DPMSGetVersion2"Xlib.display.Display2222"Xlib.ext.dpms.DPMSCapable2"Xlib.ext.dpms.DPMSGetTimeouts2"Xlib.ext.dpms.DPMSSetTimeouts2"builtins.int2"Xlib.ext.dpms.DPMSEnable2"Xlib.ext.dpms.DPMSDisable2"Xlib.ext.dpms.DPMSForceLevel2"Xlib.ext.dpms.DPMSInfo22"builtins.object2"builtins.str2"builtins.dict22	222

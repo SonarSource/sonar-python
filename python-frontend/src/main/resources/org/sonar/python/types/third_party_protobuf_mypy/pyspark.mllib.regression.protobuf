@@ -1,567 +1,230 @@
 
-pyspark.mllib.regressionƒ
-LabeledPoint%pyspark.mllib.regression.LabeledPoint"builtins.object*Ø
-__init__.pyspark.mllib.regression.LabeledPoint.__init__"
-None*X
-selfN
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint*+
-label 
-builtins.float"builtins.float*b
-featuresT
-typing.Iterable[builtins.float] 
-builtins.float"builtins.float"typing.Iterable*°
+pyspark.mllib.regressionÆ
+LabeledPoint"builtins.object*5
+__init__*
 
-__reduce__0pyspark.mllib.regression.LabeledPoint.__reduce__"Ü
-dTuple[Type[pyspark.mllib.regression.LabeledPoint],Tuple[builtins.float,pyspark.mllib.linalg.Vector]]Ö
-+Type[pyspark.mllib.regression.LabeledPoint]N
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"typeì
-1Tuple[builtins.float,pyspark.mllib.linalg.Vector] 
-builtins.float"builtins.float:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*X
-selfN
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint*®
-__str__-pyspark.mllib.regression.LabeledPoint.__str__"
-builtins.str"builtins.str*PN
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint*™
-__repr__.pyspark.mllib.regression.LabeledPoint.__repr__"
-builtins.str"builtins.str*PN
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPointrV
-label+pyspark.mllib.regression.LabeledPoint.label 
-builtins.float"builtins.floatrv
-features.pyspark.mllib.regression.LabeledPoint.features:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vectoré	
-LinearModel$pyspark.mllib.regression.LinearModel"builtins.object*ï
-__init__-pyspark.mllib.regression.LinearModel.__init__"
-None*V
-selfL
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel*G
-weights:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*/
-	intercept 
-builtins.float"builtins.float*‚
-weights,pyspark.mllib.regression.LinearModel.weights":
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*V
-selfL
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel0:builtins.property`*Ã
-	intercept.pyspark.mllib.regression.LinearModel.intercept" 
-builtins.float"builtins.float*V
-selfL
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel0:builtins.property`*ß
-__repr__-pyspark.mllib.regression.LinearModel.__repr__"
-builtins.str"builtins.str*NL
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModelrq
-_coeff+pyspark.mllib.regression.LinearModel._coeff:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vectorr_
+self(*
+label(*
+features(*
 
-_intercept/pyspark.mllib.regression.LinearModel._intercept 
-builtins.float"builtins.float˚
-LinearRegressionModelBase2pyspark.mllib.regression.LinearRegressionModelBase"$pyspark.mllib.regression.LinearModel2Å
-predict:pyspark.mllib.regression.LinearRegressionModelBase.predictﬁ
-predict:pyspark.mllib.regression.LinearRegressionModelBase.predict" 
-builtins.float"builtins.float*r
-selfh
-2pyspark.mllib.regression.LinearRegressionModelBase"2pyspark.mllib.regression.LinearRegressionModelBase*Î
-x„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0:typing.overloadXÿ	
-predict:pyspark.mllib.regression.LinearRegressionModelBase.predict"T
-pyspark.rdd.RDD[builtins.float] 
-builtins.float"builtins.float"pyspark.rdd.RDD*r
-selfh
-2pyspark.mllib.regression.LinearRegressionModelBase"2pyspark.mllib.regression.LinearRegressionModelBase*±
-x©
-Øpyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD0:typing.overloadX8ˆ
-LinearRegressionModel.pyspark.mllib.regression.LinearRegressionModel"2pyspark.mllib.regression.LinearRegressionModelBase*°
-save3pyspark.mllib.regression.LinearRegressionModel.save"
-None*j
-self`
-.pyspark.mllib.regression.LinearRegressionModel".pyspark.mllib.regression.LinearRegressionModel*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0*“
-load3pyspark.mllib.regression.LinearRegressionModel.load"`
-.pyspark.mllib.regression.LinearRegressionModel".pyspark.mllib.regression.LinearRegressionModel*™
-cls†
-4Type[pyspark.mllib.regression.LinearRegressionModel]`
-.pyspark.mllib.regression.LinearRegressionModel".pyspark.mllib.regression.LinearRegressionModel"type*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0:builtins.classmethodp8Í
-LinearRegressionWithSGD0pyspark.mllib.regression.LinearRegressionWithSGD"builtins.object*ã
-train6pyspark.mllib.regression.LinearRegressionWithSGD.train"`
-.pyspark.mllib.regression.LinearRegressionModel".pyspark.mllib.regression.LinearRegressionModel*∞
-cls¶
-6Type[pyspark.mllib.regression.LinearRegressionWithSGD]d
-0pyspark.mllib.regression.LinearRegressionWithSGD"0pyspark.mllib.regression.LinearRegressionWithSGD"type*§
-dataô
-6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*.
+__reduce__*
 
-iterations
-builtins.int"builtins.int *,
-step 
-builtins.float"builtins.float *9
-miniBatchFraction 
-builtins.float"builtins.float *∂
-initialWeightsü
-™Union[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]],None]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike
-None *0
-regParam 
-builtins.float"builtins.float *S
-regTypeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None */
-	intercept
-builtins.bool"builtins.bool *2
-validateData
-builtins.bool"builtins.bool *6
-convergenceTol 
-builtins.float"builtins.float 0:builtins.classmethodp¸
+self(*
+__str__	*(*
+__repr__	*(r	
+label0r
+features0Ë
+LinearModel"builtins.object*8
+__init__*
 
-LassoModel#pyspark.mllib.regression.LassoModel"2pyspark.mllib.regression.LinearRegressionModelBase*Ä
-save(pyspark.mllib.regression.LassoModel.save"
-None*T
-selfJ
-#pyspark.mllib.regression.LassoModel"#pyspark.mllib.regression.LassoModel*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0*è
-load(pyspark.mllib.regression.LassoModel.load"J
-#pyspark.mllib.regression.LassoModel"#pyspark.mllib.regression.LassoModel*à
-cls
-)Type[pyspark.mllib.regression.LassoModel]J
-#pyspark.mllib.regression.LassoModel"#pyspark.mllib.regression.LassoModel"type*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0:builtins.classmethodp8Ω
-LassoWithSGD%pyspark.mllib.regression.LassoWithSGD"builtins.object*Ù
-train+pyspark.mllib.regression.LassoWithSGD.train"J
-#pyspark.mllib.regression.LassoModel"#pyspark.mllib.regression.LassoModel*è
-clsÖ
-+Type[pyspark.mllib.regression.LassoWithSGD]N
-%pyspark.mllib.regression.LassoWithSGD"%pyspark.mllib.regression.LassoWithSGD"type*§
-dataô
-6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*.
+self(
+*
+weights(*
+	intercept(*.
+weights*
 
-iterations
-builtins.int"builtins.int *,
-step 
-builtins.float"builtins.float *0
-regParam 
-builtins.float"builtins.float *9
-miniBatchFraction 
-builtins.float"builtins.float *∂
-initialWeightsü
-™Union[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]],None]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike
-None */
-	intercept
-builtins.bool"builtins.bool *2
-validateData
-builtins.bool"builtins.bool *6
-convergenceTol 
-builtins.float"builtins.float 0:builtins.classmethodpÎ
-RidgeRegressionModel-pyspark.mllib.regression.RidgeRegressionModel"2pyspark.mllib.regression.LinearRegressionModelBase*û
-save2pyspark.mllib.regression.RidgeRegressionModel.save"
-None*h
-self^
--pyspark.mllib.regression.RidgeRegressionModel"-pyspark.mllib.regression.RidgeRegressionModel*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0*Ã
-load2pyspark.mllib.regression.RidgeRegressionModel.load"^
--pyspark.mllib.regression.RidgeRegressionModel"-pyspark.mllib.regression.RidgeRegressionModel*ß
-clsù
-3Type[pyspark.mllib.regression.RidgeRegressionModel]^
--pyspark.mllib.regression.RidgeRegressionModel"-pyspark.mllib.regression.RidgeRegressionModel"type*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0:builtins.classmethodp8ç
-RidgeRegressionWithSGD/pyspark.mllib.regression.RidgeRegressionWithSGD"builtins.object*∞
-train5pyspark.mllib.regression.RidgeRegressionWithSGD.train"^
--pyspark.mllib.regression.RidgeRegressionModel"-pyspark.mllib.regression.RidgeRegressionModel*≠
-cls£
-5Type[pyspark.mllib.regression.RidgeRegressionWithSGD]b
-/pyspark.mllib.regression.RidgeRegressionWithSGD"/pyspark.mllib.regression.RidgeRegressionWithSGD"type*§
-dataô
-6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*.
+self(
+0:builtins.property`*0
+	intercept*
 
-iterations
-builtins.int"builtins.int *,
-step 
-builtins.float"builtins.float *0
-regParam 
-builtins.float"builtins.float *9
-miniBatchFraction 
-builtins.float"builtins.float *∂
-initialWeightsü
-™Union[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]],None]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike
-None */
-	intercept
-builtins.bool"builtins.bool *2
-validateData
-builtins.bool"builtins.bool *6
-convergenceTol 
-builtins.float"builtins.float 0:builtins.classmethodpœ)
-IsotonicRegressionModel0pyspark.mllib.regression.IsotonicRegressionModel"pyspark.mllib.util.Saveable"pyspark.mllib.util.Loader*“
-__init__9pyspark.mllib.regression.IsotonicRegressionModel.__init__"
-None*n
-selfd
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*Ø
+self(
+0:builtins.property`*
+__repr__	*(
+r
 
-boundariesû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*∞
-predictionsû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*,
-isotonic
-builtins.bool"builtins.bool*ß
-save5pyspark.mllib.regression.IsotonicRegressionModel.save"
-None*n
-selfd
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0*ﬁ
-load5pyspark.mllib.regression.IsotonicRegressionModel.load"d
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*∞
-cls¶
-6Type[pyspark.mllib.regression.IsotonicRegressionModel]d
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel"type*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*&
-path
-builtins.str"builtins.str0:builtins.classmethodp2¶
-predict8pyspark.mllib.regression.IsotonicRegressionModel.predictë
-predict8pyspark.mllib.regression.IsotonicRegressionModel.predict"
-numpy.float64"numpy.float64*n
-selfd
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*'
-x 
-builtins.float"builtins.float0:typing.overloadX◊
-predict8pyspark.mllib.regression.IsotonicRegressionModel.predict"û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*n
-selfd
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*Î
-x„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0:typing.overloadX¯
-predict8pyspark.mllib.regression.IsotonicRegressionModel.predict"Q
-pyspark.rdd.RDD[numpy.float64]
-numpy.float64"numpy.float64"pyspark.rdd.RDD*n
-selfd
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*[
-xT
-pyspark.rdd.RDD[builtins.float] 
-builtins.float"builtins.float"pyspark.rdd.RDD0:typing.overloadX˜
+_coeff0r
 
-predict8pyspark.mllib.regression.IsotonicRegressionModel.predict"¯
-Dpyspark.rdd.RDD[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray"pyspark.rdd.RDD*n
-selfd
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*±
-x©
-Øpyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD0:typing.overloadXrÍ
+_intercept0º
+LinearRegressionModelBase"$pyspark.mllib.regression.LinearModel2w
+predict5
+predict*
 
-boundaries;pyspark.mllib.regression.IsotonicRegressionModel.boundariesû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayrÏ
-predictions<pyspark.mllib.regression.IsotonicRegressionModel.predictionsû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayre
-isotonic9pyspark.mllib.regression.IsotonicRegressionModel.isotonic
-builtins.bool"builtins.boolö
-IsotonicRegression+pyspark.mllib.regression.IsotonicRegression"builtins.object*≈
+self(*
+x(0:typing.overloadX5
+predict*
 
-train1pyspark.mllib.regression.IsotonicRegression.train"d
-0pyspark.mllib.regression.IsotonicRegressionModel"0pyspark.mllib.regression.IsotonicRegressionModel*°
-clsó
-1Type[pyspark.mllib.regression.IsotonicRegression]Z
-+pyspark.mllib.regression.IsotonicRegression"+pyspark.mllib.regression.IsotonicRegression"type*¥
-data©
-Øpyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD*.
-isotonic
-builtins.bool"builtins.bool 0:builtins.classmethodpÂ!
-StreamingLinearAlgorithm1pyspark.mllib.regression.StreamingLinearAlgorithm"builtins.object*›
-__init__:pyspark.mllib.regression.StreamingLinearAlgorithm.__init__"
-None*p
-selff
-1pyspark.mllib.regression.StreamingLinearAlgorithm"1pyspark.mllib.regression.StreamingLinearAlgorithm*ò
-modelå
-0Union[pyspark.mllib.regression.LinearModel,None]L
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel
-None*œ
-latestModel=pyspark.mllib.regression.StreamingLinearAlgorithm.latestModel"å
-0Union[pyspark.mllib.regression.LinearModel,None]L
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel
-None*p
-selff
-1pyspark.mllib.regression.StreamingLinearAlgorithm"1pyspark.mllib.regression.StreamingLinearAlgorithm0*⁄
-	_validate;pyspark.mllib.regression.StreamingLinearAlgorithm._validate"
-None*p
-selff
-1pyspark.mllib.regression.StreamingLinearAlgorithm"1pyspark.mllib.regression.StreamingLinearAlgorithm*
-dstream
-Any*í
+self(*
+x(0:typing.overloadX8¿
+LinearRegressionModel"2pyspark.mllib.regression.LinearRegressionModelBase*,
+save*
 
-	predictOn;pyspark.mllib.regression.StreamingLinearAlgorithm.predictOn"x
-1pyspark.streaming.dstream.DStream[builtins.float] 
-builtins.float"builtins.float"!pyspark.streaming.dstream.DStream*p
-selff
-1pyspark.mllib.regression.StreamingLinearAlgorithm"1pyspark.mllib.regression.StreamingLinearAlgorithm*€
-dstreamÕ
-¡pyspark.streaming.dstream.DStream[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"!pyspark.streaming.dstream.DStream*å
-predictOnValuesApyspark.mllib.regression.StreamingLinearAlgorithm.predictOnValues"¶
-Spyspark.streaming.dstream.DStream[Tuple[pyspark.mllib.regression.K,builtins.float]]´
-0Tuple[pyspark.mllib.regression.K,builtins.float]S
-pyspark.mllib.regression.K"
-builtins.object"builtins.object"builtins.object 
-builtins.float"builtins.float"!pyspark.streaming.dstream.DStream*p
-selff
-1pyspark.mllib.regression.StreamingLinearAlgorithm"1pyspark.mllib.regression.StreamingLinearAlgorithm*ö
+self(*
+sc(*
 
-dstreamå
+path(	0*C
+load*	
+cls(*
+sc(*
 
-„pyspark.streaming.dstream.DStream[Tuple[pyspark.mllib.regression.K,TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]]Ä
-¿Tuple[pyspark.mllib.regression.K,TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]S
-pyspark.mllib.regression.K"
-builtins.object"builtins.object"builtins.object„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"!pyspark.streaming.dstream.DStreamr—
-_model8pyspark.mllib.regression.StreamingLinearAlgorithm._modelå
-0Union[pyspark.mllib.regression.LinearModel,None]L
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel
-Noneò
- StreamingLinearRegressionWithSGD9pyspark.mllib.regression.StreamingLinearRegressionWithSGD"1pyspark.mllib.regression.StreamingLinearAlgorithm*≥
-__init__Bpyspark.mllib.regression.StreamingLinearRegressionWithSGD.__init__"
-None*Ä
-selfv
-9pyspark.mllib.regression.StreamingLinearRegressionWithSGD"9pyspark.mllib.regression.StreamingLinearRegressionWithSGD*0
-stepSize 
-builtins.float"builtins.float *1
-numIterations
-builtins.int"builtins.int *9
-miniBatchFraction 
-builtins.float"builtins.float *6
-convergenceTol 
-builtins.float"builtins.float *ÿ
-setInitialWeightsKpyspark.mllib.regression.StreamingLinearRegressionWithSGD.setInitialWeights"v
-9pyspark.mllib.regression.StreamingLinearRegressionWithSGD"9pyspark.mllib.regression.StreamingLinearRegressionWithSGD*Ä
-selfv
-9pyspark.mllib.regression.StreamingLinearRegressionWithSGD"9pyspark.mllib.regression.StreamingLinearRegressionWithSGD*¯
-initialWeights„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0*©
-trainOnApyspark.mllib.regression.StreamingLinearRegressionWithSGD.trainOn"
-None*Ä
-selfv
-9pyspark.mllib.regression.StreamingLinearRegressionWithSGD"9pyspark.mllib.regression.StreamingLinearRegressionWithSGD*À
-dstreamΩ
-Hpyspark.streaming.dstream.DStream[pyspark.mllib.regression.LabeledPoint]N
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"!pyspark.streaming.dstream.DStream08rp
-stepSizeBpyspark.mllib.regression.StreamingLinearRegressionWithSGD.stepSize 
-builtins.float"builtins.floatrv
-numIterationsGpyspark.mllib.regression.StreamingLinearRegressionWithSGD.numIterations
-builtins.int"builtins.intrÇ
-miniBatchFractionKpyspark.mllib.regression.StreamingLinearRegressionWithSGD.miniBatchFraction 
-builtins.float"builtins.floatr|
-convergenceTolHpyspark.mllib.regression.StreamingLinearRegressionWithSGD.convergenceTol 
-builtins.float"builtins.floatrŸ
-_model@pyspark.mllib.regression.StreamingLinearRegressionWithSGD._modelå
-0Union[pyspark.mllib.regression.LinearModel,None]L
-$pyspark.mllib.regression.LinearModel"$pyspark.mllib.regression.LinearModel
-Noneˆ
-_regression_train_wrapper2pyspark.mllib.regression._regression_train_wrapper"T
-pyspark.mllib.regression.LM"
-builtins.object"builtins.object"builtins.object*[
+path(	0:builtins.classmethodp8†
+LinearRegressionWithSGD"builtins.object*Û
+train*	
+cls(*
 
-train_funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*í
+data(*
 
-modelClassÅ
-!Type[pyspark.mllib.regression.LM]T
-pyspark.mllib.regression.LM"
-builtins.object"builtins.object"builtins.object"type*§
-dataô
-6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
-%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*µ
-initial_weightsü
-™Union[TypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]],None]„
-ûTypeAlias[Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]õ
-ìUnion[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray:
-pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listR
-builtins.tuple[builtins.float] 
-builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike
-None1
-_testpyspark.mllib.regression._test"
-None*î
-__annotations__(pyspark.mllib.regression.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-npnumpy *w
-__all__ pyspark.mllib.regression.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+iterations (*
+step (*
+miniBatchFraction (*
+initialWeights (*
+regParam (*
+regType (*
+	intercept (*
+validateData (*
+convergenceTol (0:builtins.classmethodpµ
+
+LassoModel"2pyspark.mllib.regression.LinearRegressionModelBase*,
+save*
+
+self( *
+sc(*
+
+path(	0*C
+load *	
+cls(!*
+sc(*
+
+path(	0:builtins.classmethodp8Ñ
+LassoWithSGD"builtins.object*‚
+train *	
+cls(#*
+
+data(*
+
+iterations (*
+step (*
+regParam (*
+miniBatchFraction (*
+initialWeights (*
+	intercept (*
+validateData (*
+convergenceTol (0:builtins.classmethodpø
+RidgeRegressionModel"2pyspark.mllib.regression.LinearRegressionModelBase*,
+save*
+
+self($*
+sc(*
+
+path(	0*C
+load$*	
+cls(%*
+sc(*
+
+path(	0:builtins.classmethodp8é
+RidgeRegressionWithSGD"builtins.object*‚
+train$*	
+cls('*
+
+data(*
+
+iterations (*
+step (*
+regParam (*
+miniBatchFraction (*
+initialWeights (*
+	intercept (*
+validateData (*
+convergenceTol (0:builtins.classmethodp™
+IsotonicRegressionModel"pyspark.mllib.util.Saveable"pyspark.mllib.util.Loader*M
+__init__*
+
+self((*
+
+boundaries(*
+predictions(*
+isotonic(*,
+save*
+
+self((*
+sc(*
+
+path(	0*C
+load(*	
+cls()*
+sc(*
+
+path(	0:builtins.classmethodp2Â
+predict5
+predict**
+
+self((*
+x(0:typing.overloadX5
+predict*
+
+self((*
+x(0:typing.overloadX5
+predict+*
+
+self((*
+x(0:typing.overloadX5
+predict,*
+
+self((*
+x(0:typing.overloadXr
+
+boundaries0r
+predictions0r
+isotonic0s
+IsotonicRegression"builtins.object*L
+train(*	
+cls(.*
+
+data(*
+isotonic (0:builtins.classmethodpÅ
+StreamingLinearAlgorithm"builtins.object*%
+__init__*
+
+self(/*
+model(0*
+latestModel0*
+
+self(/0*(
+	_validate*
+
+self(/*
+dstream(*(
+	predictOn1*
+
+self(/*
+dstream(2*.
+predictOnValues6*
+
+self(/*
+dstream(8r
+
+_model00ä
+ StreamingLinearRegressionWithSGD"1pyspark.mllib.regression.StreamingLinearAlgorithm*t
+__init__*
+
+self(9*
+stepSize (*
+numIterations (*
+miniBatchFraction (*
+convergenceTol (*9
+setInitialWeights9*
+
+self(9*
+initialWeights(0*(
+trainOn*
+
+self(9*
+dstream(:08r
+stepSize0r
+numIterations0r
+miniBatchFraction0r
+convergenceTol0r
+
+_model00d
+_regression_train_wrapper4*
+
+train_func(<*
+
+modelClass(=*
+
+data(*
+initial_weights(	
+_test*
+__annotations__0>*
+npnumpy *
+__all__0?22'"%pyspark.mllib.regression.LabeledPoint2"builtins.float2"typing.Iterable22"type22"pyspark.mllib.linalg.Vector22222"builtins.str2&"$pyspark.mllib.regression.LinearModel24"2pyspark.mllib.regression.LinearRegressionModelBase22"builtins.tuple22"numpy.dtype22"numpy.ndarray22"builtins.list22"builtins.tuple2222'" pyspark.mllib._typing.VectorLike22"pyspark.rdd.RDD22"pyspark.rdd.RDD220".pyspark.mllib.regression.LinearRegressionModel2"pyspark.context.SparkContext2"type222"0pyspark.mllib.regression.LinearRegressionWithSGD2"type22"pyspark.rdd.RDD22"builtins.int2222	2"builtins.bool2%"#pyspark.mllib.regression.LassoModel2"type2 2'"%pyspark.mllib.regression.LassoWithSGD2"type2"2/"-pyspark.mllib.regression.RidgeRegressionModel2"type2$21"/pyspark.mllib.regression.RidgeRegressionWithSGD2"type2&22"0pyspark.mllib.regression.IsotonicRegressionModel2"type2(2"numpy.float642"pyspark.rdd.RDD2*2"pyspark.rdd.RDD22-"+pyspark.mllib.regression.IsotonicRegression2"type2-23"1pyspark.mllib.regression.StreamingLinearAlgorithm22
+2&"!pyspark.streaming.dstream.DStream22&"!pyspark.streaming.dstream.DStream22"builtins.object2"builtins.object232242&"!pyspark.streaming.dstream.DStream252242&"!pyspark.streaming.dstream.DStream272;"9pyspark.mllib.regression.StreamingLinearRegressionWithSGD2&"!pyspark.streaming.dstream.DStream22"builtins.function22;2"type242"builtins.dict2	2"builtins.list2	

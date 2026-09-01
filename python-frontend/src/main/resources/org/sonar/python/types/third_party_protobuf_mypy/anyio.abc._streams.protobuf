@@ -1,139 +1,67 @@
 
-anyio.abc._streamsÝ
-UnreliableObjectReceiveStream0anyio.abc._streams.UnreliableObjectReceiveStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*ö
-	__aiter__:anyio.abc._streams.UnreliableObjectReceiveStream.__aiter__"Ï
-Ianyio.abc._streams.UnreliableObjectReceiveStream[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"0anyio.abc._streams.UnreliableObjectReceiveStream*Ú
-selfÏ
-Ianyio.abc._streams.UnreliableObjectReceiveStream[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"0anyio.abc._streams.UnreliableObjectReceiveStream*Ò
-	__anext__:anyio.abc._streams.UnreliableObjectReceiveStream.__anext__"©
-1typing.Coroutine[Any,Any,anyio.abc._streams.T_co]
-Any
-AnyP
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine*Ú
-selfÏ
-Ianyio.abc._streams.UnreliableObjectReceiveStream[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"0anyio.abc._streams.UnreliableObjectReceiveStreamH*æ
-receive8anyio.abc._streams.UnreliableObjectReceiveStream.receive"©
-1typing.Coroutine[Any,Any,anyio.abc._streams.T_co]
-Any
-AnyP
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine*Ú
-selfÏ
-Ianyio.abc._streams.UnreliableObjectReceiveStream[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"0anyio.abc._streams.UnreliableObjectReceiveStream0:abc.abstractmethod@HP†
-UnreliableObjectSendStream-anyio.abc._streams.UnreliableObjectSendStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*ã
-send2anyio.abc._streams.UnreliableObjectSendStream.send"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Ü
-selfÑ
-Janyio.abc._streams.UnreliableObjectSendStream[anyio.abc._streams.T_contra]T
-anyio.abc._streams.T_contra"
-builtins.object"builtins.object"builtins.object"-anyio.abc._streams.UnreliableObjectSendStream*^
-itemT
-anyio.abc._streams.T_contra"
-builtins.object"builtins.object"builtins.object0:abc.abstractmethod@HP¦
-UnreliableObjectStream)anyio.abc._streams.UnreliableObjectStream"0anyio.abc._streams.UnreliableObjectReceiveStream"-anyio.abc._streams.UnreliableObjectSendStreamPq
-ObjectReceiveStream&anyio.abc._streams.ObjectReceiveStream"0anyio.abc._streams.UnreliableObjectReceiveStreamPh
-ObjectSendStream#anyio.abc._streams.ObjectSendStream"-anyio.abc._streams.UnreliableObjectSendStreamP‰
-ObjectStreamanyio.abc._streams.ObjectStream"&anyio.abc._streams.ObjectReceiveStream"#anyio.abc._streams.ObjectSendStream")anyio.abc._streams.UnreliableObjectStream*Ý
-send_eof(anyio.abc._streams.ObjectStream.send_eof"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*¼
-self±
-:anyio.abc._streams.ObjectStream[anyio.abc._streams.T_Item]R
-anyio.abc._streams.T_Item"
-builtins.object"builtins.object"builtins.object"anyio.abc._streams.ObjectStream0:abc.abstractmethod@HPÇ
-ByteReceiveStream$anyio.abc._streams.ByteReceiveStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*á
-	__aiter__.anyio.abc._streams.ByteReceiveStream.__aiter__"L
-$anyio.abc._streams.ByteReceiveStream"$anyio.abc._streams.ByteReceiveStream*V
-selfL
-$anyio.abc._streams.ByteReceiveStream"$anyio.abc._streams.ByteReceiveStream*‡
-	__anext__.anyio.abc._streams.ByteReceiveStream.__anext__"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*V
-selfL
-$anyio.abc._streams.ByteReceiveStream"$anyio.abc._streams.ByteReceiveStreamH*Ê
-receive,anyio.abc._streams.ByteReceiveStream.receive"p
-(typing.Coroutine[Any,Any,builtins.bytes]
-Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*V
-selfL
-$anyio.abc._streams.ByteReceiveStream"$anyio.abc._streams.ByteReceiveStream*-
-	max_bytes
-builtins.int"builtins.int 0:abc.abstractmethod@HŸ
-ByteSendStream!anyio.abc._streams.ByteSendStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*–
-send&anyio.abc._streams.ByteSendStream.send"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!anyio.abc._streams.ByteSendStream"!anyio.abc._streams.ByteSendStream**
-item 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@HÝ
+anyio.abc._streamsß
+UnreliableObjectReceiveStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*
+	__aiter__*
 
-ByteStreamanyio.abc._streams.ByteStream"$anyio.abc._streams.ByteReceiveStream"!anyio.abc._streams.ByteSendStream*æ
-send_eof&anyio.abc._streams.ByteStream.send_eof"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*H
-self>
-anyio.abc._streams.ByteStream"anyio.abc._streams.ByteStream0:abc.abstractmethod@H£
-Listeneranyio.abc._streams.Listener""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*¤
-serve!anyio.abc._streams.Listener.serve"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*°
-self¥
-4anyio.abc._streams.Listener[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"anyio.abc._streams.Listener*X
-handlerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*€
+self(*
+	__anext__*
 
-task_groupn
-&Union[anyio.abc._tasks.TaskGroup,None]8
-anyio.abc._tasks.TaskGroup"anyio.abc._tasks.TaskGroup
-None 0:abc.abstractmethod@HP½
-ObjectStreamConnectable*anyio.abc._streams.ObjectStreamConnectable"builtins.object*Ó
-connect2anyio.abc._streams.ObjectStreamConnectable.connect"¨
-Rtyping.Coroutine[Any,Any,anyio.abc._streams.ObjectStream[anyio.abc._streams.T_co]]
-Any
-Any­
-8anyio.abc._streams.ObjectStream[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"anyio.abc._streams.ObjectStream"typing.Coroutine*Î
-selfÃ
-Canyio.abc._streams.ObjectStreamConnectable[anyio.abc._streams.T_co]P
-anyio.abc._streams.T_co"
-builtins.object"builtins.object"builtins.object"*anyio.abc._streams.ObjectStreamConnectable0:abc.abstractmethod@H@Pbabc.ABCMeta¹
-ByteStreamConnectable(anyio.abc._streams.ByteStreamConnectable"builtins.object*Õ
-connect0anyio.abc._streams.ByteStreamConnectable.connect"
-7typing.Coroutine[Any,Any,anyio.abc._streams.ByteStream]
-Any
-Any>
-anyio.abc._streams.ByteStream"anyio.abc._streams.ByteStream"typing.Coroutine*^
-selfT
-(anyio.abc._streams.ByteStreamConnectable"(anyio.abc._streams.ByteStreamConnectable0:abc.abstractmethod@H@babc.ABCMeta*Ž
-__annotations__"anyio.abc._streams.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(H*1
+receive*
+
+self(0:abc.abstractmethod@HP­
+UnreliableObjectSendStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*:
+send*
+
+self(*
+
+item(0:abc.abstractmethod@HP{
+UnreliableObjectStream"0anyio.abc._streams.UnreliableObjectReceiveStream"-anyio.abc._streams.UnreliableObjectSendStreamPI
+ObjectReceiveStream"0anyio.abc._streams.UnreliableObjectReceiveStreamPC
+ObjectSendStream"-anyio.abc._streams.UnreliableObjectSendStreamP¼
+ObjectStream"&anyio.abc._streams.ObjectReceiveStream"#anyio.abc._streams.ObjectSendStream")anyio.abc._streams.UnreliableObjectStream*2
+send_eof*
+
+self(	0:abc.abstractmethod@HPä
+ByteReceiveStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*
+	__aiter__
+*
+
+self(
+*
+	__anext__*
+
+self(
+H*D
+receive*
+
+self(
+*
+	max_bytes (0:abc.abstractmethod@HŸ
+ByteSendStream""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*:
+send*
+
+self(*
+
+item(0:abc.abstractmethod@H‰
+
+ByteStream"$anyio.abc._streams.ByteReceiveStream"!anyio.abc._streams.ByteSendStream*2
+send_eof*
+
+self(0:abc.abstractmethod@H³
+Listener""anyio.abc._resources.AsyncResource"-anyio._core._typedattr.TypedAttributeProvider*R
+serve*
+
+self(*
+handler(*
+
+task_group (0:abc.abstractmethod@HPn
+ObjectStreamConnectable"builtins.object*1
+connect*
+
+self(0:abc.abstractmethod@H@Pbabc.ABCMetaj
+ByteStreamConnectable"builtins.object*1
+connect*
+
+self(0:abc.abstractmethod@H@babc.ABCMeta*
+__annotations__02"builtins.object2"builtins.object225"0anyio.abc._streams.UnreliableObjectReceiveStream222"typing.Coroutine222"typing.Coroutine222"-anyio.abc._streams.UnreliableObjectSendStream22$"anyio.abc._streams.ObjectStream22&"$anyio.abc._streams.ByteReceiveStream2"builtins.bytes2"typing.Coroutine22"builtins.int2#"!anyio.abc._streams.ByteSendStream2"anyio.abc._streams.ByteStream2 "anyio.abc._streams.Listener22"builtins.function222"anyio.abc._tasks.TaskGroup222"typing.Coroutine2	2/"*anyio.abc._streams.ObjectStreamConnectable22"typing.Coroutine22*"(anyio.abc._streams.ByteStreamConnectable2"builtins.str2"builtins.dict2

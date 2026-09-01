@@ -1,131 +1,64 @@
 
-PIL.ImageMorph‹
+PIL.ImageMorphˆ
 
-LutBuilderPIL.ImageMorph.LutBuilder"builtins.object*˝
-__init__"PIL.ImageMorph.LutBuilder.__init__"
-None*@
-self6
-PIL.ImageMorph.LutBuilder"PIL.ImageMorph.LutBuilder*í
-patternsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *S
-op_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*ı
-add_patterns&PIL.ImageMorph.LutBuilder.add_patterns"
-None*@
-self6
-PIL.ImageMorph.LutBuilder"PIL.ImageMorph.LutBuilder*X
-patternsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz310z311z312z313z314*•
-build_default_lut+PIL.ImageMorph.LutBuilder.build_default_lut"
-None*@
-self6
-PIL.ImageMorph.LutBuilder"PIL.ImageMorph.LutBuilderz310z311z312z313z314*±
-get_lut!PIL.ImageMorph.LutBuilder.get_lut"(
-builtins.bytearray"builtins.bytearray*@
-self6
-PIL.ImageMorph.LutBuilder"PIL.ImageMorph.LutBuilderz310z311z312z313z314*µ
-	build_lut#PIL.ImageMorph.LutBuilder.build_lut"(
-builtins.bytearray"builtins.bytearray*@
-self6
-PIL.ImageMorph.LutBuilder"PIL.ImageMorph.LutBuilderz310z311z312z313z314j310j311j312j313j314rì
-patterns"PIL.ImageMorph.LutBuilder.patternsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rg
-lutPIL.ImageMorph.LutBuilder.lut(
-builtins.bytearray"builtins.bytearray*310*311*312*313*314º
-MorphOpPIL.ImageMorph.MorphOp"builtins.object*◊
-__init__PIL.ImageMorph.MorphOp.__init__"
-None*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*a
-lutV
-Union[builtins.bytearray,None](
-builtins.bytearray"builtins.bytearray
-None *S
-op_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *í
-patternsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z310z311z312z313z314*î
-applyPIL.ImageMorph.MorphOp.apply"i
-#Tuple[builtins.int,PIL.Image.Image]
-builtins.int"builtins.int"
-PIL.Image.Image"PIL.Image.Image*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*-
-image"
-PIL.Image.Image"PIL.Image.Imagez310z311z312z313z314*Œ
-matchPIL.ImageMorph.MorphOp.match"¢
-/builtins.list[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*-
-image"
-PIL.Image.Image"PIL.Image.Imagez310z311z312z313z314*ﬁ
-get_on_pixels$PIL.ImageMorph.MorphOp.get_on_pixels"¢
-/builtins.list[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*-
-image"
-PIL.Image.Image"PIL.Image.Imagez310z311z312z313z314*“
-load_lutPIL.ImageMorph.MorphOp.load_lut"
-None*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*≈
-filename∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathz310z311z312z313z314*“
-save_lutPIL.ImageMorph.MorphOp.save_lut"
-None*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*≈
-filename∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathz310z311z312z313z314*ª
-set_lutPIL.ImageMorph.MorphOp.set_lut"
-None*:
-self0
-PIL.ImageMorph.MorphOp"PIL.ImageMorph.MorphOp*1
-lut(
-builtins.bytearray"builtins.bytearrayz310z311z312z313z314j310j311j312j313j314rd
-lutPIL.ImageMorph.MorphOp.lut(
-builtins.bytearray"builtins.bytearray*310*311*312*313*314*£
-__annotations__PIL.ImageMorph.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Z
-LUT_SIZEPIL.ImageMorph.LUT_SIZE
-builtins.int"builtins.int*310*311*312*313*314*ñ
-ROTATION_MATRIXPIL.ImageMorph.ROTATION_MATRIXJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*310*311*312*313*314*í
-MIRROR_MATRIXPIL.ImageMorph.MIRROR_MATRIXJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*310*311*312*313*314
+LutBuilder"builtins.object*;
+__init__*
+
+self(*
+patterns (*
+op_name (*,
+add_patterns*
+
+self(*
+patterns(*!
+build_default_lut*
+
+self(*
+get_lut*
+
+self(*
+	build_lut*
+
+self(r
+patterns0r
+lut0Ÿ
+MorphOp"builtins.object*H
+__init__*
+
+self(*
+lut (	*
+op_name (*
+patterns (*"
+apply*
+
+self(*
+image(*"
+match*
+
+self(*
+image(**
+get_on_pixels*
+
+self(*
+image(*(
+load_lut*
+
+self(*
+filename(*(
+save_lut*
+
+self(*
+filename(*"
+set_lut*
+
+self(*	
+lut(r
+lut0*
+__annotations__0*
+LUT_SIZE0
+*
+ROTATION_MATRIX0*
+MIRROR_MATRIX022"PIL.ImageMorph.LutBuilder2"builtins.str2"builtins.list222222"builtins.bytearray2"PIL.ImageMorph.MorphOp222"builtins.int2"PIL.Image.Image22
+22
+
+2"builtins.list22"builtins.bytes2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath222"builtins.dict22"builtins.list2

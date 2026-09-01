@@ -1,349 +1,245 @@
 
-torchvision.models.resnet‹
+torchvision.models.resnetÒ
 
-BasicBlock$torchvision.models.resnet.BasicBlock"torch.nn.modules.module.Module*Ò
-__init__-torchvision.models.resnet.BasicBlock.__init__"
-None*V
-selfL
-$torchvision.models.resnet.BasicBlock"$torchvision.models.resnet.BasicBlock**
-inplanes
-builtins.int"builtins.int*(
-planes
-builtins.int"builtins.int**
-stride
-builtins.int"builtins.int *Œ
+BasicBlock"torch.nn.modules.module.Module*¤
+__init__*
 
-downsamplez
-*Union[torch.nn.modules.module.Module,None]@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module
-None **
-groups
-builtins.int"builtins.int *.
+self(*
+inplanes(*
+planes(*
+stride (*
 
-base_width
-builtins.int"builtins.int *,
-dilation
-builtins.int"builtins.int *™
+downsample (*
+groups (*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Ò
-forward,torchvision.models.resnet.BasicBlock.forward"
-torch.Tensor"torch.Tensor*V
-selfL
-$torchvision.models.resnet.BasicBlock"$torchvision.models.resnet.BasicBlock*#
-x
-torch.Tensor"torch.TensorrY
-	expansion.torchvision.models.resnet.BasicBlock.expansion
-builtins.int"builtins.intr<
-conv1*torchvision.models.resnet.BasicBlock.conv1
-Anyr8
-bn1(torchvision.models.resnet.BasicBlock.bn1
-Anyr:
-relu)torchvision.models.resnet.BasicBlock.relu
-Anyr<
-conv2*torchvision.models.resnet.BasicBlock.conv2
-Anyr8
-bn2(torchvision.models.resnet.BasicBlock.bn2
-AnyrF
+base_width (*
+dilation (*
 
-downsample/torchvision.models.resnet.BasicBlock.downsample
-Anyr>
-stride+torchvision.models.resnet.BasicBlock.stride
-Anyƒ
+norm_layer (* 
+forward	*
 
-Bottleneck$torchvision.models.resnet.Bottleneck"torch.nn.modules.module.Module*Ò
-__init__-torchvision.models.resnet.Bottleneck.__init__"
-None*V
-selfL
-$torchvision.models.resnet.Bottleneck"$torchvision.models.resnet.Bottleneck**
-inplanes
-builtins.int"builtins.int*(
-planes
-builtins.int"builtins.int**
-stride
-builtins.int"builtins.int *Œ
+self(*
+x(	r
+	expansion0r	
+conv10
+r
+bn10
+r
+relu0
+r	
+conv20
+r
+bn20
+r
 
-downsamplez
-*Union[torch.nn.modules.module.Module,None]@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module
-None **
-groups
-builtins.int"builtins.int *.
+downsample0
+r
 
-base_width
-builtins.int"builtins.int *,
-dilation
-builtins.int"builtins.int *™
+stride0
+æ
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Ò
-forward,torchvision.models.resnet.Bottleneck.forward"
-torch.Tensor"torch.Tensor*V
-selfL
-$torchvision.models.resnet.Bottleneck"$torchvision.models.resnet.Bottleneck*#
-x
-torch.Tensor"torch.TensorrY
-	expansion.torchvision.models.resnet.Bottleneck.expansion
-builtins.int"builtins.intr<
-conv1*torchvision.models.resnet.Bottleneck.conv1
-Anyr8
-bn1(torchvision.models.resnet.Bottleneck.bn1
-Anyr<
-conv2*torchvision.models.resnet.Bottleneck.conv2
-Anyr8
-bn2(torchvision.models.resnet.Bottleneck.bn2
-Anyr<
-conv3*torchvision.models.resnet.Bottleneck.conv3
-Anyr8
-bn3(torchvision.models.resnet.Bottleneck.bn3
-Anyr:
-relu)torchvision.models.resnet.Bottleneck.relu
-AnyrF
+Bottleneck"torch.nn.modules.module.Module*¤
+__init__*
 
-downsample/torchvision.models.resnet.Bottleneck.downsample
-Anyr>
-stride+torchvision.models.resnet.Bottleneck.stride
-Anyý
-ResNet torchvision.models.resnet.ResNet"torch.nn.modules.module.Module*õ
-__init__)torchvision.models.resnet.ResNet.__init__"
-None*N
-selfD
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*ö
-blockê
-\Union[Type[torchvision.models.resnet.BasicBlock],Type[torchvision.models.resnet.Bottleneck]]‚
-*Type[torchvision.models.resnet.BasicBlock]L
-$torchvision.models.resnet.BasicBlock"$torchvision.models.resnet.BasicBlock"type‚
-*Type[torchvision.models.resnet.Bottleneck]L
-$torchvision.models.resnet.Bottleneck"$torchvision.models.resnet.Bottleneck"type*V
-layersJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*/
-num_classes
-builtins.int"builtins.int *8
-zero_init_residual
-builtins.bool"builtins.bool **
-groups
-builtins.int"builtins.int *3
-width_per_group
-builtins.int"builtins.int *ª
-replace_stride_with_dilation…
-(Union[builtins.list[builtins.bool],None]M
-builtins.list[builtins.bool]
-builtins.bool"builtins.bool"builtins.list
-None *™
+self(*
+inplanes(*
+planes(*
+stride (*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Æ
-forward(torchvision.models.resnet.ResNet.forward"
-torch.Tensor"torch.Tensor*N
-selfD
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*#
-x
-torch.Tensor"torch.TensorrS
-inplanes)torchvision.models.resnet.ResNet.inplanes
-builtins.int"builtins.intrS
-dilation)torchvision.models.resnet.ResNet.dilation
-builtins.int"builtins.intr:
-groups'torchvision.models.resnet.ResNet.groups
-AnyrB
+downsample (*
+groups (*
 
-base_width+torchvision.models.resnet.ResNet.base_width
-Anyr8
-conv1&torchvision.models.resnet.ResNet.conv1
-Anyr4
-bn1$torchvision.models.resnet.ResNet.bn1
-Anyr6
-relu%torchvision.models.resnet.ResNet.relu
-Anyr<
-maxpool(torchvision.models.resnet.ResNet.maxpool
-Anyr:
-layer1'torchvision.models.resnet.ResNet.layer1
-Anyr:
-layer2'torchvision.models.resnet.ResNet.layer2
-Anyr:
-layer3'torchvision.models.resnet.ResNet.layer3
-Anyr:
-layer4'torchvision.models.resnet.ResNet.layer4
-Anyr<
-avgpool(torchvision.models.resnet.ResNet.avgpool
-Anyr2
-fc#torchvision.models.resnet.ResNet.fc
-Any
-ResNet18_Weights*torchvision.models.resnet.ResNet18_Weights"#torchvision.models._api.WeightsEnumHrR
-IMAGENET1K_V18torchvision.models.resnet.ResNet18_Weights.IMAGENET1K_V1
-AnyrF
-DEFAULT2torchvision.models.resnet.ResNet18_Weights.DEFAULT
-Any
-ResNet34_Weights*torchvision.models.resnet.ResNet34_Weights"#torchvision.models._api.WeightsEnumHrR
-IMAGENET1K_V18torchvision.models.resnet.ResNet34_Weights.IMAGENET1K_V1
-AnyrF
-DEFAULT2torchvision.models.resnet.ResNet34_Weights.DEFAULT
-AnyÕ
-ResNet50_Weights*torchvision.models.resnet.ResNet50_Weights"#torchvision.models._api.WeightsEnumHrR
-IMAGENET1K_V18torchvision.models.resnet.ResNet50_Weights.IMAGENET1K_V1
-AnyrR
-IMAGENET1K_V28torchvision.models.resnet.ResNet50_Weights.IMAGENET1K_V2
-AnyrF
-DEFAULT2torchvision.models.resnet.ResNet50_Weights.DEFAULT
-AnyÚ
-ResNet101_Weights+torchvision.models.resnet.ResNet101_Weights"#torchvision.models._api.WeightsEnumHrS
-IMAGENET1K_V19torchvision.models.resnet.ResNet101_Weights.IMAGENET1K_V1
-AnyrS
-IMAGENET1K_V29torchvision.models.resnet.ResNet101_Weights.IMAGENET1K_V2
-AnyrG
-DEFAULT3torchvision.models.resnet.ResNet101_Weights.DEFAULT
-AnyÚ
-ResNet152_Weights+torchvision.models.resnet.ResNet152_Weights"#torchvision.models._api.WeightsEnumHrS
-IMAGENET1K_V19torchvision.models.resnet.ResNet152_Weights.IMAGENET1K_V1
-AnyrS
-IMAGENET1K_V29torchvision.models.resnet.ResNet152_Weights.IMAGENET1K_V2
-AnyrG
-DEFAULT3torchvision.models.resnet.ResNet152_Weights.DEFAULT
-Anyø
-ResNeXt50_32X4D_Weights1torchvision.models.resnet.ResNeXt50_32X4D_Weights"#torchvision.models._api.WeightsEnumHrY
-IMAGENET1K_V1?torchvision.models.resnet.ResNeXt50_32X4D_Weights.IMAGENET1K_V1
-AnyrY
-IMAGENET1K_V2?torchvision.models.resnet.ResNeXt50_32X4D_Weights.IMAGENET1K_V2
-AnyrM
-DEFAULT9torchvision.models.resnet.ResNeXt50_32X4D_Weights.DEFAULT
-Anyý
-ResNeXt101_32X8D_Weights2torchvision.models.resnet.ResNeXt101_32X8D_Weights"#torchvision.models._api.WeightsEnumHrZ
-IMAGENET1K_V1@torchvision.models.resnet.ResNeXt101_32X8D_Weights.IMAGENET1K_V1
-AnyrZ
-IMAGENET1K_V2@torchvision.models.resnet.ResNeXt101_32X8D_Weights.IMAGENET1K_V2
-AnyrN
-DEFAULT:torchvision.models.resnet.ResNeXt101_32X8D_Weights.DEFAULT
-Any¡
-ResNeXt101_64X4D_Weights2torchvision.models.resnet.ResNeXt101_64X4D_Weights"#torchvision.models._api.WeightsEnumHrZ
-IMAGENET1K_V1@torchvision.models.resnet.ResNeXt101_64X4D_Weights.IMAGENET1K_V1
-AnyrN
-DEFAULT:torchvision.models.resnet.ResNeXt101_64X4D_Weights.DEFAULT
-Anyø
-Wide_ResNet50_2_Weights1torchvision.models.resnet.Wide_ResNet50_2_Weights"#torchvision.models._api.WeightsEnumHrY
-IMAGENET1K_V1?torchvision.models.resnet.Wide_ResNet50_2_Weights.IMAGENET1K_V1
-AnyrY
-IMAGENET1K_V2?torchvision.models.resnet.Wide_ResNet50_2_Weights.IMAGENET1K_V2
-AnyrM
-DEFAULT9torchvision.models.resnet.Wide_ResNet50_2_Weights.DEFAULT
-Anyý
-Wide_ResNet101_2_Weights2torchvision.models.resnet.Wide_ResNet101_2_Weights"#torchvision.models._api.WeightsEnumHrZ
-IMAGENET1K_V1@torchvision.models.resnet.Wide_ResNet101_2_Weights.IMAGENET1K_V1
-AnyrZ
-IMAGENET1K_V2@torchvision.models.resnet.Wide_ResNet101_2_Weights.IMAGENET1K_V2
-AnyrN
-DEFAULT:torchvision.models.resnet.Wide_ResNet101_2_Weights.DEFAULT
-Anyê
-resnet18"torchvision.models.resnet.resnet18"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*®
-weightsž
-6Union[torchvision.models.resnet.ResNet18_Weights,None]X
-*torchvision.models.resnet.ResNet18_Weights"*torchvision.models.resnet.ResNet18_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyê
-resnet34"torchvision.models.resnet.resnet34"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*®
-weightsž
-6Union[torchvision.models.resnet.ResNet34_Weights,None]X
-*torchvision.models.resnet.ResNet34_Weights"*torchvision.models.resnet.ResNet34_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyê
-resnet50"torchvision.models.resnet.resnet50"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*®
-weightsž
-6Union[torchvision.models.resnet.ResNet50_Weights,None]X
-*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyï
-	resnet101#torchvision.models.resnet.resnet101"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*±
-weights¡
-7Union[torchvision.models.resnet.ResNet101_Weights,None]Z
-+torchvision.models.resnet.ResNet101_Weights"+torchvision.models.resnet.ResNet101_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyï
-	resnet152#torchvision.models.resnet.resnet152"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*±
-weights¡
-7Union[torchvision.models.resnet.ResNet152_Weights,None]Z
-+torchvision.models.resnet.ResNet152_Weights"+torchvision.models.resnet.ResNet152_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any
-resnext50_32x4d)torchvision.models.resnet.resnext50_32x4d"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Ã
-weights³
-=Union[torchvision.models.resnet.ResNeXt50_32X4D_Weights,None]f
-1torchvision.models.resnet.ResNeXt50_32X4D_Weights"1torchvision.models.resnet.ResNeXt50_32X4D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any’
-resnext101_32x8d*torchvision.models.resnet.resnext101_32x8d"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Æ
-weights¶
->Union[torchvision.models.resnet.ResNeXt101_32X8D_Weights,None]h
-2torchvision.models.resnet.ResNeXt101_32X8D_Weights"2torchvision.models.resnet.ResNeXt101_32X8D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any’
-resnext101_64x4d*torchvision.models.resnet.resnext101_64x4d"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Æ
-weights¶
->Union[torchvision.models.resnet.ResNeXt101_64X4D_Weights,None]h
-2torchvision.models.resnet.ResNeXt101_64X4D_Weights"2torchvision.models.resnet.ResNeXt101_64X4D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any
-wide_resnet50_2)torchvision.models.resnet.wide_resnet50_2"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Ã
-weights³
-=Union[torchvision.models.resnet.Wide_ResNet50_2_Weights,None]f
-1torchvision.models.resnet.Wide_ResNet50_2_Weights"1torchvision.models.resnet.Wide_ResNet50_2_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any’
-wide_resnet101_2*torchvision.models.resnet.wide_resnet101_2"D
- torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Æ
-weights¶
->Union[torchvision.models.resnet.Wide_ResNet101_2_Weights,None]h
-2torchvision.models.resnet.Wide_ResNet101_2_Weights"2torchvision.models.resnet.Wide_ResNet101_2_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*•
-__annotations__)torchvision.models.resnet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-nntorch.nn 
+base_width (*
+dilation (*
+
+norm_layer (* 
+forward	*
+
+self(*
+x(	r
+	expansion0r	
+conv10
+r
+bn10
+r	
+conv20
+r
+bn20
+r	
+conv30
+r
+bn30
+r
+relu0
+r
+
+downsample0
+r
+
+stride0
+¼
+ResNet"torch.nn.modules.module.Module*Ç
+__init__*
+
+self(*
+block(*
+layers(*
+num_classes (*
+zero_init_residual (*
+groups (*
+width_per_group (*$
+replace_stride_with_dilation (*
+
+norm_layer (* 
+forward	*
+
+self(*
+x(	r
+inplanes0r
+dilation0r
+
+groups0
+r
+
+base_width0
+r	
+conv10
+r
+bn10
+r
+relu0
+r
+maxpool0
+r
+
+layer10
+r
+
+layer20
+r
+
+layer30
+r
+
+layer40
+r
+avgpool0
+r
+fc0
+Y
+ResNet18_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+DEFAULT0
+Y
+ResNet34_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+DEFAULT0
+l
+ResNet50_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+m
+ResNet101_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+m
+ResNet152_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+s
+ResNeXt50_32X4D_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+t
+ResNeXt101_32X8D_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+a
+ResNeXt101_64X4D_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+DEFAULT0
+s
+Wide_ResNet50_2_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+t
+Wide_ResNet101_2_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10
+r
+IMAGENET1K_V20
+r
+DEFAULT0
+=
+resnet18*
+weights (*
+progress (*
+kwargs(
+=
+resnet34*
+weights (*
+progress (*
+kwargs(
+=
+resnet50*
+weights (*
+progress (*
+kwargs(
+>
+	resnet101*
+weights (*
+progress (*
+kwargs(
+>
+	resnet152*
+weights (*
+progress (*
+kwargs(
+D
+resnext50_32x4d*
+weights (*
+progress (*
+kwargs(
+E
+resnext101_32x8d*
+weights (!*
+progress (*
+kwargs(
+E
+resnext101_64x4d*
+weights (#*
+progress (*
+kwargs(
+D
+wide_resnet50_2*
+weights (%*
+progress (*
+kwargs(
+E
+wide_resnet101_2*
+weights ('*
+progress (*
+kwargs(
+*
+__annotations__0)*
+nntorch.nn 22&"$torchvision.models.resnet.BasicBlock2"builtins.int2 "torch.nn.modules.module.Module222"builtins.function22222"torch.Tensor22&"$torchvision.models.resnet.Bottleneck2"" torchvision.models.resnet.ResNet2"type22"type2222"builtins.list22"builtins.bool2"builtins.list2222,"*torchvision.models.resnet.ResNet18_Weights222,"*torchvision.models.resnet.ResNet34_Weights222,"*torchvision.models.resnet.ResNet50_Weights222-"+torchvision.models.resnet.ResNet101_Weights222-"+torchvision.models.resnet.ResNet152_Weights2223"1torchvision.models.resnet.ResNeXt50_32X4D_Weights2224"2torchvision.models.resnet.ResNeXt101_32X8D_Weights22 24"2torchvision.models.resnet.ResNeXt101_64X4D_Weights22"23"1torchvision.models.resnet.Wide_ResNet50_2_Weights22$24"2torchvision.models.resnet.Wide_ResNet101_2_Weights22&2"builtins.str2"builtins.dict2(

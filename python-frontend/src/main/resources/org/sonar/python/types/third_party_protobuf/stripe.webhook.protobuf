@@ -1,54 +1,25 @@
 
-stripe.webhook»
-Webhookstripe.webhook.Webhook"builtins.object*Ñ
-construct_event&stripe.webhook.Webhook.construct_event"D
- stripe.api_resources.event.Event" stripe.api_resources.event.Event*s
-payloadf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*,
+stripe.webhookµ
+Webhook"builtins.object*Å
+construct_event*
+payload(*
 
-sig_header
-builtins.str"builtins.str*(
-secret
-builtins.str"builtins.str*-
-	tolerance
-builtins.int"builtins.int *S
-api_keyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314rt
-DEFAULT_TOLERANCE(stripe.webhook.Webhook.DEFAULT_TOLERANCE
-builtins.int"builtins.int*310*311*312*313*314ò
-WebhookSignaturestripe.webhook.WebhookSignature"builtins.object*À
-verify_header-stripe.webhook.WebhookSignature.verify_header":
-Literal[builtins.bool]	
-builtins.bool"builtins.bool*|
-clss
-%Type[stripe.webhook.WebhookSignature]B
-stripe.webhook.WebhookSignature"stripe.webhook.WebhookSignature"type*s
-payloadf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*(
-header
-builtins.str"builtins.str*(
-secret
-builtins.str"builtins.str*U
-	toleranceD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:builtins.classmethodpz310z311z312z313z314*Ô
-_compute_signature2stripe.webhook.WebhookSignature._compute_signature"
-builtins.str"builtins.str*)
-payload
-builtins.str"builtins.str*(
-secret
-builtins.str"builtins.str0:builtins.staticmethodhz310z311z312z313z314j310j311j312j313j314ry
-EXPECTED_SCHEME/stripe.webhook.WebhookSignature.EXPECTED_SCHEME
-builtins.str"builtins.str*310*311*312*313*314*£
-__annotations__stripe.webhook.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*0
-errorstripe.error *310*311*312*313*314
+sig_header(*
+secret(*
+	tolerance (*
+api_key (0:builtins.staticmethodhr
+DEFAULT_TOLERANCE0˛
+WebhookSignature"builtins.object*t
+verify_header	*	
+cls(*
+payload(*
+header(*
+secret(*
+	tolerance (0:builtins.classmethodp*N
+_compute_signature*
+payload(*
+secret(0:builtins.staticmethodhr
+EXPECTED_SCHEME0*
+__annotations__0*
+errorstripe.error 2"" stripe.api_resources.event.Event2"builtins.bytes2"builtins.str222"builtins.int2222"builtins.bool2	22!"stripe.webhook.WebhookSignature2"type2
+2222"builtins.dict2

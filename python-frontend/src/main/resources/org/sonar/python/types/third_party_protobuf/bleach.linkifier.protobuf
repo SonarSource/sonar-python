@@ -1,147 +1,73 @@
 
-bleach.linkifierÒ
-Linkerbleach.linkifier.Linker"builtins.object*º
-__init__ bleach.linkifier.Linker.__init__"
-None*<
-self2
-bleach.linkifier.Linker"bleach.linkifier.Linker*‰
-	callbacksx
-+typing.Iterable[bleach.callbacks._Callback]8
-bleach.callbacks._Callback"bleach.callbacks._Callback"typing.Iterable *œ
-	skip_tagsŠ
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None *1
-parse_email
-builtins.bool"builtins.bool *R
-url_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern *T
-email_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern *¢
-recognized_tagsŠ
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None z310z311z312z313z314*Ç
-linkifybleach.linkifier.Linker.linkify"
-builtins.str"builtins.str*<
-self2
-bleach.linkifier.Linker"bleach.linkifier.Linker*&
-text
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ã
-LinkifyFilterbleach.linkifier.LinkifyFilter"bleach.html5lib_shim.Filter*‡
-__init__'bleach.linkifier.LinkifyFilter.__init__"
-None*J
-self@
-bleach.linkifier.LinkifyFilter"bleach.linkifier.LinkifyFilter*
-source
-Any*Ñ
-	callbacks¿
-7Union[typing.Iterable[bleach.callbacks._Callback],None]x
-+typing.Iterable[bleach.callbacks._Callback]8
-bleach.callbacks._Callback"bleach.callbacks._Callback"typing.Iterable
-None *œ
-	skip_tagsŠ
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None *1
-parse_email
-builtins.bool"builtins.bool *R
-url_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern *T
-email_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern z310z311z312z313z314*{
-apply_callbacks.bleach.linkifier.LinkifyFilter.apply_callbacks*
+bleach.linkifierÏ
+Linker"builtins.object*Ž
+__init__*
+
+self(*
+	callbacks (*
+	skip_tags (*
+parse_email (*
+url_re (	*
+email_re (	*
+recognized_tags (*#
+linkify*
+
+self(*
+
+text(Ò
+LinkifyFilter"bleach.html5lib_shim.Filter*ƒ
+__init__*
+
+self(
+*
+source(*
+	callbacks (*
+	skip_tags (*
+parse_email (*
+url_re (	*
+email_re (	*2
+apply_callbacks*
 self*	
 attrs*
 
-is_newz310z311z312z313z314*‚
-extract_character_data5bleach.linkifier.LinkifyFilter.extract_character_data*
+is_new*2
+extract_character_data*
 self*
 
-token_listz310z311z312z313z314*€
-handle_email_addresses5bleach.linkifier.LinkifyFilter.handle_email_addresses*
+token_list*0
+handle_email_addresses*
 self*
-src_iterz310z311z312z313z314*x
-strip_non_url_bits1bleach.linkifier.LinkifyFilter.strip_non_url_bits*
+src_iter*,
+strip_non_url_bits*
 self*
-fragmentz310z311z312z313z314*l
-handle_links+bleach.linkifier.LinkifyFilter.handle_links*
+fragment*&
+handle_links*
 self*
-src_iterz310z311z312z313z314*p
-handle_a_tag+bleach.linkifier.LinkifyFilter.handle_a_tag*
+src_iter**
+handle_a_tag*
 self*
-token_bufferz310z311z312z313z314*q
-extract_entities/bleach.linkifier.LinkifyFilter.extract_entities*
+token_buffer*'
+extract_entities*
 self*	
-tokenz310z311z312z313z314*÷
-__iter__'bleach.linkifier.LinkifyFilter.__iter__"e
-typing.Iterator[TypeAlias[Any]]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"typing.Iterator*B@
-bleach.linkifier.LinkifyFilter"bleach.linkifier.LinkifyFilterz310z311z312z313z314j310j311j312j313j314rÈ
-	callbacks(bleach.linkifier.LinkifyFilter.callbacksx
-+typing.Iterable[bleach.callbacks._Callback]8
-bleach.callbacks._Callback"bleach.callbacks._Callback"typing.Iterable*310*311*312*313*314r 
-	skip_tags(bleach.linkifier.LinkifyFilter.skip_tagsP
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container*310*311*312*313*314rr
-parse_email*bleach.linkifier.LinkifyFilter.parse_email
-builtins.bool"builtins.bool*310*311*312*313*314rŽ
-url_re%bleach.linkifier.LinkifyFilter.url_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314r’
-email_re'bleach.linkifier.LinkifyFilter.email_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314É
-build_url_rebleach.linkifier.build_url_re"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*Z
-tldsN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable *_
-	protocolsN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable z310z311z312z313z314ì
-build_email_rebleach.linkifier.build_email_re"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*Z
-tldsN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable z310z311z312z313z314*¥
-__annotations__ bleach.linkifier.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Æ
-DEFAULT_CALLBACKS"bleach.linkifier.DEFAULT_CALLBACKSt
-)builtins.list[bleach.callbacks._Callback]8
-bleach.callbacks._Callback"bleach.callbacks._Callback"builtins.list*310*311*312*313*314*‚
-TLDSbleach.linkifier.TLDSJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*€
-URL_REbleach.linkifier.URL_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*„
-PROTO_REbleach.linkifier.PROTO_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314*„
-EMAIL_REbleach.linkifier.EMAIL_RED
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*310*311*312*313*314
+token*
+__iter__*(
+r
+	callbacks0r
+	skip_tags0r
+parse_email0r
+
+url_re0	r
+email_re0	1
+build_url_re	*
+tlds (*
+	protocols ( 
+build_email_re	*
+tlds (*
+__annotations__0*
+DEFAULT_CALLBACKS0*
+TLDS0*
+
+URL_RE0	*
+PROTO_RE0	*
+EMAIL_RE0	22"bleach.linkifier.Linker2"bleach.callbacks._Callback2"typing.Iterable22"builtins.str2"typing.Container2222"builtins.bool2"
+re.Pattern22 "bleach.linkifier.LinkifyFilter2222"_typeshed.Incomplete22"typing.Iterator22"typing.Iterable22"builtins.dict22"builtins.list22"builtins.list2

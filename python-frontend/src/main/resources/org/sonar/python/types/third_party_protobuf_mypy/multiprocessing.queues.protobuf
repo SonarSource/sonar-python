@@ -1,159 +1,76 @@
 
-multiprocessing.queues®
-Queuemultiprocessing.queues.Queue"builtins.object*µ
-__init__%multiprocessing.queues.Queue.__init__"
-None*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*+
-maxsize
-builtins.int"builtins.int *
-ctx
-Any *œ
-put multiprocessing.queues.Queue.put"
-None*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*[
-objR
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *º
-get multiprocessing.queues.Queue.get"R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*+
-block
-builtins.bool"builtins.bool *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *Ç
-qsize"multiprocessing.queues.Queue.qsize"
-builtins.int"builtins.int*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*Ñ
-empty"multiprocessing.queues.Queue.empty"
-builtins.bool"builtins.bool*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*Ç
-full!multiprocessing.queues.Queue.full"
-builtins.bool"builtins.bool*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*¬
+multiprocessing.queues¶
+Queue"builtins.object*6
+__init__*
 
-get_nowait'multiprocessing.queues.Queue.get_nowait"R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*’
+self(*
+maxsize (*
+ctx (*>
+put*
 
-put_nowait'multiprocessing.queues.Queue.put_nowait"
-None*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*[
-objR
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object*Ó
-close"multiprocessing.queues.Queue.close"
-None*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*˙
-join_thread(multiprocessing.queues.Queue.join_thread"
-None*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.Queue*à
-cancel_join_thread/multiprocessing.queues.Queue.cancel_join_thread"
-None*∂
-self´
-7multiprocessing.queues.Queue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"multiprocessing.queues.QueuePÌ
-JoinableQueue$multiprocessing.queues.JoinableQueue"multiprocessing.queues.Queue*é
-	task_done.multiprocessing.queues.JoinableQueue.task_done"
-None*∆
-selfª
-?multiprocessing.queues.JoinableQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"$multiprocessing.queues.JoinableQueue*Ñ
-join)multiprocessing.queues.JoinableQueue.join"
-None*∆
-selfª
-?multiprocessing.queues.JoinableQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object"$multiprocessing.queues.JoinableQueueP≤
-SimpleQueue"multiprocessing.queues.SimpleQueue"builtins.object*ö
-__init__+multiprocessing.queues.SimpleQueue.__init__"
-None*¬
-self∑
-=multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object""multiprocessing.queues.SimpleQueue*
-ctx
-Any *Ä
-close(multiprocessing.queues.SimpleQueue.close"
-None*¬
-self∑
-=multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object""multiprocessing.queues.SimpleQueue*ñ
-empty(multiprocessing.queues.SimpleQueue.empty"
-builtins.bool"builtins.bool*¬
-self∑
-=multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object""multiprocessing.queues.SimpleQueue*∆
-get&multiprocessing.queues.SimpleQueue.get"R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object*¬
-self∑
-=multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object""multiprocessing.queues.SimpleQueue*Ÿ
-put&multiprocessing.queues.SimpleQueue.put"
-None*¬
-self∑
-=multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object""multiprocessing.queues.SimpleQueue*[
-objR
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object*ç
-__class_getitem__4multiprocessing.queues.SimpleQueue.__class_getitem__"(
-types.GenericAlias"types.GenericAlias*äá
-CType[multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]]∑
-=multiprocessing.queues.SimpleQueue[multiprocessing.queues._T]R
-multiprocessing.queues._T"
-builtins.object"builtins.object"builtins.object""multiprocessing.queues.SimpleQueue"type*	
-AnypP*í
-__annotations__&multiprocessing.queues.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*u
-__all__multiprocessing.queues.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*	
+obj(*
+block (*
+timeout (	*3
+get*
+
+self(*
+block (*
+timeout (	*
+qsize*
+
+self(*
+empty*
+
+self(*
+full*
+
+self(*
+
+get_nowait*
+
+self(*%
+
+put_nowait*
+
+self(*	
+obj(*
+close*
+
+self(*
+join_thread*
+
+self(*"
+cancel_join_thread*
+
+self(P`
+JoinableQueue"multiprocessing.queues.Queue*
+	task_done*
+
+self(
+*
+join*
+
+self(
+PÀ
+SimpleQueue"builtins.object*%
+__init__*
+
+self(*
+ctx (*
+close*
+
+self(*
+empty*
+
+self(*
+get*
+
+self(*
+put*
+
+self(*	
+obj(*
+__class_getitem__*(*(pP*
+__annotations__0*
+__all__022"builtins.object2"builtins.object22!"multiprocessing.queues.Queue22"builtins.int22"builtins.bool2"builtins.float222)"$multiprocessing.queues.JoinableQueue22'""multiprocessing.queues.SimpleQueue22"types.GenericAlias2"type22"builtins.str2"builtins.dict22"builtins.list2

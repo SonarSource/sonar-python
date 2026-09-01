@@ -1,198 +1,149 @@
 
-+pika.adapters.utils.selector_ioloop_adapter÷
-AbstractSelectorIOLoopBpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop"builtins.object*ü
-READGpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.READ*
-self0:builtins.property:abc.abstractmethod@`z310z311z312z313z314*°
-WRITEHpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.WRITE*
-self0:builtins.property:abc.abstractmethod@`z310z311z312z313z314*°
-ERRORHpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.ERROR*
-self0:builtins.property:abc.abstractmethod@`z310z311z312z313z314*å
-closeHpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.close*
-self0:abc.abstractmethod@z310z311z312z313z314*å
-startHpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.start*
-self0:abc.abstractmethod@z310z311z312z313z314*ä
-stopGpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.stop*
-self0:abc.abstractmethod@z310z311z312z313z314*Ø
++pika.adapters.utils.selector_ioloop_adapterû
+AbstractSelectorIOLoop"builtins.object*=
+READ*
+self0:builtins.property:abc.abstractmethod@`*>
+WRITE*
+self0:builtins.property:abc.abstractmethod@`*>
+ERROR*
+self0:builtins.property:abc.abstractmethod@`*)
+close*
+self0:abc.abstractmethod@*)
+start*
+self0:abc.abstractmethod@*(
+stop*
+self0:abc.abstractmethod@*G
 
-call_laterMpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.call_later*
+call_later*
 self*	
 delay*
-callback0:abc.abstractmethod@z310z311z312z313z314*≤
-remove_timeoutQpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.remove_timeout*
+callback0:abc.abstractmethod@*F
+remove_timeout*
 self*
-timeout_handle0:abc.abstractmethod@z310z311z312z313z314*®
-add_callbackOpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.add_callback*
+timeout_handle0:abc.abstractmethod@*>
+add_callback*
 self*
-callback0:abc.abstractmethod@z310z311z312z313z314*π
-add_handlerNpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.add_handler*
+callback0:abc.abstractmethod@*P
+add_handler*
 self*
 fd*
 handler*
 
-events0:abc.abstractmethod@z310z311z312z313z314*≤
-update_handlerQpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.update_handler*
+events0:abc.abstractmethod@*F
+update_handler*
 self*
 fd*
 
-events0:abc.abstractmethod@z310z311z312z313z314*¶
-remove_handlerQpika.adapters.utils.selector_ioloop_adapter.AbstractSelectorIOLoop.remove_handler*
+events0:abc.abstractmethod@*:
+remove_handler*
 self*
-fd0:abc.abstractmethod@z310z311z312z313z314@babc.ABCMetaj310j311j312j313j314≈
-SelectorIOServicesAdapterEpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"builtins.object*≥
-__init__Npika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.__init__"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*
-native_loop
-Anyz310z311z312z313z314*è
-get_native_ioloopWpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.get_native_ioloop*
-selfz310z311z312z313z314*ì
-closeKpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.close"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapterz310z311z312z313z314*è
-runIpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.run"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapterz310z311z312z313z314*ë
-stopJpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.stop"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapterz310z311z312z313z314*Œ
-add_callback_threadsafe]pika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.add_callback_threadsafe"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*
-callback
-Anyz310z311z312z313z314*ö
+fd0:abc.abstractmethod@@babc.ABCMeta·
+SelectorIOServicesAdapter"builtins.object*+
+__init__*
 
-call_laterPpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.call_later*
+self(*
+native_loop(*
+get_native_ioloop*
+self*
+close*
+
+self(*
+run*
+
+self(*
+stop*
+
+self(*7
+add_callback_threadsafe*
+
+self(*
+callback(*/
+
+call_later*
 self*	
 delay*
-callbackz310z311z312z313z314*ä
-getaddrinfoQpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.getaddrinfo"
-Any*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*
-host
-Any*
-port
-Any*
-on_done
-Any**
-family
-builtins.int"builtins.int *,
-socktype
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int z310z311z312z313z314*»
+callback*Ç
+getaddrinfo*
 
-set_readerPpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.set_reader"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*
-fd
-Any*
-on_readable
-Anyz310z311z312z313z314*è
-remove_readerSpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.remove_reader*
+self(*
+
+host(*
+
+port(*
+on_done(*
+family (*
+socktype (*
+proto (*
+flags (*7
+
+set_reader*
+
+self(*
+fd(*
+on_readable(*!
+remove_reader*
 self*
-fdz310z311z312z313z314*»
+fd*7
 
-set_writerPpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.set_writer"
-None*ô
-selfé
-Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter*
-fd
-Any*
-on_writable
-Anyz310z311z312z313z314*è
-remove_writerSpika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter.remove_writer*
+set_writer*
+
+self(*
+fd(*
+on_writable(*!
+remove_writer*
 self*
-fdz310z311z312z313z314j310j311j312j313j314¡
-_FileDescriptorCallbacksDpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks"builtins.object*Ï
-__init__Mpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks.__init__"
-None*ó
-selfå
-Dpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks"Dpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks*i
-reader[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-writer[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314r°
-readerKpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks.reader1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r°
-writerKpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks.writer1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314¸
-_TimerHandle8pika.adapters.utils.selector_ioloop_adapter._TimerHandle"builtins.object*ò
-__init__Apika.adapters.utils.selector_ioloop_adapter._TimerHandle.__init__"
-None*~
-selft
-8pika.adapters.utils.selector_ioloop_adapter._TimerHandle"8pika.adapters.utils.selector_ioloop_adapter._TimerHandle*
-handle
-Any*
-loop
-Anyz310z311z312z313z314*Ï
-cancel?pika.adapters.utils.selector_ioloop_adapter._TimerHandle.cancel"
-None*~
-selft
-8pika.adapters.utils.selector_ioloop_adapter._TimerHandle"8pika.adapters.utils.selector_ioloop_adapter._TimerHandlez310z311z312z313z314j310j311j312j313j314≠
-_SelectorIOLoopIOHandleCpika.adapters.utils.selector_ioloop_adapter._SelectorIOLoopIOHandle"builtins.object*©
-__init__Lpika.adapters.utils.selector_ioloop_adapter._SelectorIOLoopIOHandle.__init__"
-None*ï
-selfä
-Cpika.adapters.utils.selector_ioloop_adapter._SelectorIOLoopIOHandle"Cpika.adapters.utils.selector_ioloop_adapter._SelectorIOLoopIOHandle*
-subject
-Anyz310z311z312z313z314*w
-cancelJpika.adapters.utils.selector_ioloop_adapter._SelectorIOLoopIOHandle.cancel*
-selfz310z311z312z313z314j310j311j312j313j314∂
+fd}
+_FileDescriptorCallbacks"builtins.object*8
+__init__*
 
-_AddressResolver<pika.adapters.utils.selector_ioloop_adapter._AddressResolver"builtins.object*ß
-__init__Epika.adapters.utils.selector_ioloop_adapter._AddressResolver.__init__"
-None*Ü
-self|
-<pika.adapters.utils.selector_ioloop_adapter._AddressResolver"<pika.adapters.utils.selector_ioloop_adapter._AddressResolver*
-native_loop
-Any*
-host
-Any*
-port
-Any*
-family
-Any*
-socktype
-Any*
-proto
-Any*
-flags
-Any*
-on_done
-Anyz310z311z312z313z314*n
-startBpika.adapters.utils.selector_ioloop_adapter._AddressResolver.start*
-selfz310z311z312z313z314*p
-cancelCpika.adapters.utils.selector_ioloop_adapter._AddressResolver.cancel*
-selfz310z311z312z313z314j310j311j312j313j314ré
-NOT_STARTEDHpika.adapters.utils.selector_ioloop_adapter._AddressResolver.NOT_STARTED
-builtins.int"builtins.int*310*311*312*313*314rÑ
-ACTIVECpika.adapters.utils.selector_ioloop_adapter._AddressResolver.ACTIVE
-builtins.int"builtins.int*310*311*312*313*314rà
-CANCELEDEpika.adapters.utils.selector_ioloop_adapter._AddressResolver.CANCELED
-builtins.int"builtins.int*310*311*312*313*314rä
-	COMPLETEDFpika.adapters.utils.selector_ioloop_adapter._AddressResolver.COMPLETED
-builtins.int"builtins.int*310*311*312*313*314*¿
-__annotations__;pika.adapters.utils.selector_ioloop_adapter.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*à
-LOGGER2pika.adapters.utils.selector_ioloop_adapter.LOGGER1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314
+self(*
+reader (*
+writer (r
+
+reader0r
+
+writer0k
+_TimerHandle"builtins.object*2
+__init__*
+
+self(*
+handle(*
+
+loop(*
+cancel*
+
+self(g
+_SelectorIOLoopIOHandle"builtins.object*'
+__init__*
+
+self(	*
+subject(*
+cancel*
+selfë
+_AddressResolver"builtins.object*ä
+__init__*
+
+self(
+*
+native_loop(*
+
+host(*
+
+port(*
+family(*
+socktype(*
+proto(*
+flags(*
+on_done(*
+start*
+self*
+cancel*
+selfr
+NOT_STARTED0r
+
+ACTIVE0r
+CANCELED0r
+	COMPLETED0*
+__annotations__0*
+
+LOGGER022G"Epika.adapters.utils.selector_ioloop_adapter.SelectorIOServicesAdapter22"builtins.int2F"Dpika.adapters.utils.selector_ioloop_adapter._FileDescriptorCallbacks2"_typeshed.Incomplete2222:"8pika.adapters.utils.selector_ioloop_adapter._TimerHandle2E"Cpika.adapters.utils.selector_ioloop_adapter._SelectorIOLoopIOHandle2>"<pika.adapters.utils.selector_ioloop_adapter._AddressResolver2"builtins.str2"builtins.dict2

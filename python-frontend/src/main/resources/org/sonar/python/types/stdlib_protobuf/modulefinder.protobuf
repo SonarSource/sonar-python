@@ -1,319 +1,161 @@
 
-modulefinder—
-Modulemodulefinder.Module"builtins.object*Í
-__init__modulefinder.Module.__init__"
-None*4
-self*
-modulefinder.Module"modulefinder.Module*&
-name
-builtins.str"builtins.str*P
-fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314j310j311j312j313j314¾G
-ModuleFindermodulefinder.ModuleFinder"builtins.object*ú
-__init__"modulefinder.ModuleFinder.__init__"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*Ž
-path
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *)
-debug
-builtins.int"builtins.int *›
-excludesŠ
-*Union[typing.Container[builtins.str],None]P
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container
-None *Š
-replace_pathsô
-=Union[typing.Sequence[Tuple[builtins.str,builtins.str]],None]¦
-1typing.Sequence[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Sequence
-None z310z311z312z313z314*ì
-msgmodulefinder.ModuleFinder.msg"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*'
-level
-builtins.int"builtins.int*%
-str
-builtins.str"builtins.str*
-args
-Anyz310z311z312z313z314* 
-msginmodulefinder.ModuleFinder.msgin"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*
-args
-Anyz310z311z312z313z314*¢
-msgout modulefinder.ModuleFinder.msgout"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*
-args
-Anyz310z311z312z313z314*Ã
+modulefinder[
+Module"builtins.object*@
+__init__*
 
-run_script$modulefinder.ModuleFinder.run_script"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder**
-pathname
-builtins.str"builtins.strz310z311z312z313z314*Á
-	load_file#modulefinder.ModuleFinder.load_file"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder**
-pathname
-builtins.str"builtins.strz310z311z312z313z314*»
-import_hook%modulefinder.ModuleFinder.import_hook"Y
-Union[modulefinder.Module,None]*
-modulefinder.Module"modulefinder.Module
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*&
-name
-builtins.str"builtins.str*g
-callerY
-Union[modulefinder.Module,None]*
-modulefinder.Module"modulefinder.Module
-None *’
-fromlist
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *)
-level
-builtins.int"builtins.int z310z311z312z313z314*†
-determine_parent*modulefinder.ModuleFinder.determine_parent"Y
-Union[modulefinder.Module,None]*
-modulefinder.Module"modulefinder.Module
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*e
-callerY
-Union[modulefinder.Module,None]*
-modulefinder.Module"modulefinder.Module
-None*)
-level
-builtins.int"builtins.int z310z311z312z313z314*ò
-find_head_package+modulefinder.ModuleFinder.find_head_package"u
-'Tuple[modulefinder.Module,builtins.str]*
-modulefinder.Module"modulefinder.Module
-builtins.str"builtins.str*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*6
-parent*
-modulefinder.Module"modulefinder.Module*&
-name
-builtins.str"builtins.strz310z311z312z313z314*’
-	load_tail#modulefinder.ModuleFinder.load_tail"*
-modulefinder.Module"modulefinder.Module*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*1
-q*
-modulefinder.Module"modulefinder.Module*&
-tail
-builtins.str"builtins.strz310z311z312z313z314*á
-ensure_fromlist)modulefinder.ModuleFinder.ensure_fromlist"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*1
-m*
-modulefinder.Module"modulefinder.Module*\
-fromlistN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*-
-	recursive
-builtins.int"builtins.int z310z311z312z313z314*¢
-find_all_submodules-modulefinder.ModuleFinder.find_all_submodules"N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*1
-m*
-modulefinder.Module"modulefinder.Modulez310z311z312z313z314*ü
-import_module'modulefinder.ModuleFinder.import_module"Y
-Union[modulefinder.Module,None]*
-modulefinder.Module"modulefinder.Module
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder**
-partname
-builtins.str"builtins.str*(
-fqname
-builtins.str"builtins.str*6
-parent*
-modulefinder.Module"modulefinder.Modulez310z311z312z313z314*û
-load_module%modulefinder.ModuleFinder.load_module"*
-modulefinder.Module"modulefinder.Module*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*(
-fqname
-builtins.str"builtins.str*J
-fpB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO**
-pathname
-builtins.str"builtins.str*›
-	file_info‹
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strz310z311z312z313z314*„
-scan_opcodes&modulefinder.ModuleFinder.scan_opcodes"Æ
-8typing.Iterator[Tuple[builtins.str,builtins.tuple[Any]]]y
-'Tuple[builtins.str,builtins.tuple[Any]]
-builtins.str"builtins.str.
-builtins.tuple[Any]
-Any"builtins.tuple"typing.Iterator*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*(
-co 
-types.CodeType"types.CodeTypez310z311z312z313z314*ò
-	scan_code#modulefinder.ModuleFinder.scan_code"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*(
-co 
-types.CodeType"types.CodeType*1
-m*
-modulefinder.Module"modulefinder.Modulez310z311z312z313z314*“
-load_package&modulefinder.ModuleFinder.load_package"*
-modulefinder.Module"modulefinder.Module*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*(
-fqname
-builtins.str"builtins.str**
-pathname
-builtins.str"builtins.strz310z311z312z313z314*ã
+self(*
 
-add_module$modulefinder.ModuleFinder.add_module"*
-modulefinder.Module"modulefinder.Module*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*(
-fqname
-builtins.str"builtins.strz310z311z312z313z314*ƒ
-find_module%modulefinder.ModuleFinder.find_module"
-hTuple[Union[typing.IO[Any],None],Union[builtins.str,None],Tuple[builtins.str,builtins.str,builtins.int]]N
-Union[typing.IO[Any],None]$
-typing.IO[Any]
-Any"	typing.IO
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None‹
--Tuple[builtins.str,builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.int"builtins.int*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*&
-name
-builtins.str"builtins.str*N
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*g
-parentY
-Union[modulefinder.Module,None]*
-modulefinder.Module"modulefinder.Module
-None z310z311z312z313z314*
-report modulefinder.ModuleFinder.report"
-None*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinderz310z311z312z313z314*Û
-any_missing%modulefinder.ModuleFinder.any_missing"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinderz310z311z312z313z314*ø
-any_missing_maybe+modulefinder.ModuleFinder.any_missing_maybe"Ú
->Tuple[builtins.list[builtins.str],builtins.list[builtins.str]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinderz310z311z312z313z314*ï
-replace_paths_in_code/modulefinder.ModuleFinder.replace_paths_in_code" 
-types.CodeType"types.CodeType*@
-self6
-modulefinder.ModuleFinder"modulefinder.ModuleFinder*(
-co 
-types.CodeType"types.CodeTypez310z311z312z313z314j310j311j312j313j314rÒ
-modules!modulefinder.ModuleFinder.modulesŠ
-/builtins.dict[builtins.str,modulefinder.Module]
-builtins.str"builtins.str*
-modulefinder.Module"modulefinder.Module"builtins.dict*310*311*312*313*314r‹
-pathmodulefinder.ModuleFinder.pathJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314r¸
+name(*
+file (*
+path (á
 
-badmodules$modulefinder.ModuleFinder.badmodulesê
-Dbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.int]]
-builtins.str"builtins.stru
-(builtins.dict[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict"builtins.dict*310*311*312*313*314r_
-debugmodulefinder.ModuleFinder.debug
-builtins.int"builtins.int*310*311*312*313*314ra
-indent modulefinder.ModuleFinder.indent
-builtins.int"builtins.int*310*311*312*313*314r™
-excludes"modulefinder.ModuleFinder.excludesP
-typing.Container[builtins.str]
-builtins.str"builtins.str"typing.Container*310*311*312*313*314rú
-replace_paths'modulefinder.ModuleFinder.replace_paths¦
-1typing.Sequence[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Sequence*310*311*312*313*314§
-AddPackagePathmodulefinder.AddPackagePath"
-None*-
-packagename
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.strz310z311z312z313z314¦
-ReplacePackagemodulefinder.ReplacePackage"
-None*)
-oldname
-builtins.str"builtins.str*)
-newname
-builtins.str"builtins.strz310z311z312z313z314*¡
-__annotations__modulefinder.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*H
+ModuleFinder"builtins.object*^
+__init__*
 
-LOAD_CONSTmodulefinder.LOAD_CONST
-builtins.int"builtins.int*310*J
-IMPORT_NAMEmodulefinder.IMPORT_NAME
-builtins.int"builtins.int*310*H
+self(*
+path (*
+debug (*
+excludes (
+*
+replace_paths (*7
+msg*
 
-STORE_NAMEmodulefinder.STORE_NAME
-builtins.int"builtins.int*310*L
-STORE_GLOBALmodulefinder.STORE_GLOBAL
-builtins.int"builtins.int*310*Š
-	STORE_OPSmodulefinder.STORE_OPS`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*310*L
-EXTENDED_ARGmodulefinder.EXTENDED_ARG
-builtins.int"builtins.int*310*û
-packagePathMapmodulefinder.packagePathMap²
-7builtins.dict[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.dict*310*311*312*313*314*Ã
-replacePackageMapmodulefinder.replacePackageMapu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*310*311*312*313*314
+self(*
+level(*	
+str(*
+
+args(*!
+msgin*
+
+self(*
+
+args(*"
+msgout*
+
+self(*
+
+args(**
+
+run_script*
+
+self(*
+pathname(*)
+	load_file*
+
+self(*
+pathname(*X
+import_hook*
+
+self(*
+
+name(*
+caller (*
+fromlist (*
+level (*=
+determine_parent*
+
+self(*
+caller(*
+level (*;
+find_head_package*
+
+self(*
+parent(*
+
+name(*.
+	load_tail*
+
+self(*
+q(*
+
+tail(*K
+ensure_fromlist*
+
+self(*
+m(*
+fromlist(*
+	recursive (*,
+find_all_submodules*
+
+self(*
+m(*I
+import_module*
+
+self(*
+partname(*
+fqname(*
+parent(*T
+load_module*
+
+self(*
+fqname(*
+fp(*
+pathname(*
+	file_info(*&
+scan_opcodes*
+
+self(*
+co(*,
+	scan_code*
+
+self(*
+co(*
+m(*:
+load_package*
+
+self(*
+fqname(*
+pathname(*(
+
+add_module*
+
+self(*
+fqname(*C
+find_module*
+
+self(*
+
+name(*
+
+path(*
+parent (*
+report*
+
+self(*
+any_missing*
+
+self(*!
+any_missing_maybe*
+
+self(*/
+replace_paths_in_code*
+
+self(*
+co(r
+modules0r
+path0r
+
+badmodules0r	
+debug0r
+
+indent0r
+excludes0	r
+replace_paths01
+AddPackagePath*
+packagename(*
+
+path(0
+ReplacePackage*
+oldname(*
+newname(*
+__annotations__0 *
+
+LOAD_CONST*3100*
+IMPORT_NAME*3100*
+
+STORE_NAME*3100*
+STORE_GLOBAL*3100*
+	STORE_OPS*3100!*
+EXTENDED_ARG*3100*
+packagePathMap0"*
+replacePackageMap0#22"modulefinder.Module2"builtins.str222"modulefinder.ModuleFinder2"builtins.list2222"builtins.int2"typing.Container222	222"typing.Sequence222222222"typing.Iterable22"	typing.IO2222"builtins.tuple2222"typing.Iterator22"types.CodeType2"	typing.IO2222222222"builtins.dict22"builtins.dict22"builtins.dict22"builtins.dict2222"builtins.dict22"builtins.dict2

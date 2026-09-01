@@ -1,268 +1,153 @@
 
-smtpdÇ(
-SMTPChannelsmtpd.SMTPChannel"asynchat.async_chat*¬
-max_command_size_limit(smtpd.SMTPChannel.max_command_size_limit"
-builtins.int"builtins.int*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel0:builtins.property`z310z311z312z313z314*˘
-__init__smtpd.SMTPChannel.__init__"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*0
-server$
-smtpd.SMTPServer"smtpd.SMTPServer*(
-conn
-socket.socket"socket.socket*
-addr
-Any*3
-data_size_limit
-builtins.int"builtins.int *Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None *5
-enable_SMTPUTF8
-builtins.bool"builtins.bool *1
-decode_data
-builtins.bool"builtins.bool z310z311z312z313z314*ö
-pushsmtpd.SMTPChannel.push"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-msg
-builtins.str"builtins.strz310z311z312z313z314*¡
-collect_incoming_data'smtpd.SMTPChannel.collect_incoming_data"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ã
-found_terminator"smtpd.SMTPChannel.found_terminator"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannelz310z311z312z313z314*§
-	smtp_HELOsmtpd.SMTPChannel.smtp_HELO"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_NOOPsmtpd.SMTPChannel.smtp_NOOP"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_QUITsmtpd.SMTPChannel.smtp_QUIT"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_MAILsmtpd.SMTPChannel.smtp_MAIL"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_RCPTsmtpd.SMTPChannel.smtp_RCPT"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_RSETsmtpd.SMTPChannel.smtp_RSET"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_DATAsmtpd.SMTPChannel.smtp_DATA"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_EHLOsmtpd.SMTPChannel.smtp_EHLO"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_HELPsmtpd.SMTPChannel.smtp_HELP"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_VRFYsmtpd.SMTPChannel.smtp_VRFY"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314*§
-	smtp_EXPNsmtpd.SMTPChannel.smtp_EXPN"
-None*0
-self&
-smtpd.SMTPChannel"smtpd.SMTPChannel*%
-arg
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314r[
-COMMANDsmtpd.SMTPChannel.COMMAND
-builtins.int"builtins.int*310*311*312*313*314rU
-DATAsmtpd.SMTPChannel.DATA
-builtins.int"builtins.int*310*311*312*313*314r·
-command_size_limits%smtpd.SMTPChannel.command_size_limitsâ
-2collections.defaultdict[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"collections.defaultdict*310*311*312*313*314rk
-smtp_serversmtpd.SMTPChannel.smtp_server$
-smtpd.SMTPServer"smtpd.SMTPServer*310*311*312*313*314rW
-connsmtpd.SMTPChannel.conn
-socket.socket"socket.socket*310*311*312*313*314r@
-addrsmtpd.SMTPChannel.addr
-Any*310*311*312*313*314ró
-received_lines smtpd.SMTPChannel.received_linesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314ra
+smtpdû
+SMTPChannel"asynchat.async_chat*=
+max_command_size_limit*
 
-smtp_statesmtpd.SMTPChannel.smtp_state
-builtins.int"builtins.int*310*311*312*313*314rg
-seen_greetingsmtpd.SMTPChannel.seen_greeting
-builtins.str"builtins.str*310*311*312*313*314r]
-mailfromsmtpd.SMTPChannel.mailfrom
-builtins.str"builtins.str*310*311*312*313*314râ
-rcpttossmtpd.SMTPChannel.rcpttosJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rg
-received_datasmtpd.SMTPChannel.received_data
-builtins.str"builtins.str*310*311*312*313*314rU
-fqdnsmtpd.SMTPChannel.fqdn
-builtins.str"builtins.str*310*311*312*313*314rU
-peersmtpd.SMTPChannel.peer
-builtins.str"builtins.str*310*311*312*313*314rq
-command_size_limit$smtpd.SMTPChannel.command_size_limit
-builtins.int"builtins.int*310*311*312*313*314rk
-data_size_limit!smtpd.SMTPChannel.data_size_limit
-builtins.int"builtins.int*310*311*312*313*314rm
-enable_SMTPUTF8!smtpd.SMTPChannel.enable_SMTPUTF8
-builtins.bool"builtins.bool*310*311*312*313*314ı
+self(0:builtins.property`*í
+__init__*
 
-SMTPServersmtpd.SMTPServer"asyncore.dispatcher*
-__init__smtpd.SMTPServer.__init__"
-None*.
-self$
-smtpd.SMTPServer"smtpd.SMTPServer*±
-	localaddr°
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"smtpd._Address*≤
+self(*
+server(*
 
-remoteaddr°
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"smtpd._Address*3
-data_size_limit
-builtins.int"builtins.int *Ì
-map·
-6Union[TypeAlias[builtins.dict[builtins.int,Any]],None]ö
-*TypeAlias[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"asyncore._MapType
-None *5
-enable_SMTPUTF8
-builtins.bool"builtins.bool *1
-decode_data
-builtins.bool"builtins.bool z310z311z312z313z314*√
-handle_accepted smtpd.SMTPServer.handle_accepted"
-None*.
-self$
-smtpd.SMTPServer"smtpd.SMTPServer*(
-conn
-socket.socket"socket.socket*
-addr
-Anyz310z311z312z313z314*˝
-process_message smtpd.SMTPServer.process_message"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*.
-self$
-smtpd.SMTPServer"smtpd.SMTPServer*¨
-peer°
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"smtpd._Address**
-mailfrom
-builtins.str"builtins.str*W
-rcpttosJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*p
-dataf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rì
-channel_classsmtpd.SMTPServer.channel_classI
-Type[smtpd.SMTPChannel]&
-smtpd.SMTPChannel"smtpd.SMTPChannel"type*310*311*312*313*314rj
-data_size_limit smtpd.SMTPServer.data_size_limit
-builtins.int"builtins.int*310*311*312*313*314rl
-enable_SMTPUTF8 smtpd.SMTPServer.enable_SMTPUTF8
-builtins.bool"builtins.bool*310*311*312*313*314S
-DebuggingServersmtpd.DebuggingServer"smtpd.SMTPServerj310j311j312j313j314Ø
-	PureProxysmtpd.PureProxy"smtpd.SMTPServer*Â
-process_messagesmtpd.PureProxy.process_message"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*,
-self"
-smtpd.PureProxy"smtpd.PureProxy*¨
-peer°
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"smtpd._Address**
-mailfrom
-builtins.str"builtins.str*W
-rcpttosJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*p
-dataf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314ï
-MailmanProxysmtpd.MailmanProxy"smtpd.PureProxy*⁄
-process_message"smtpd.MailmanProxy.process_message"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*2
-self(
-smtpd.MailmanProxy"smtpd.MailmanProxy*¨
-peer°
-+TypeAlias[Tuple[builtins.str,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"smtpd._Address**
-mailfrom
-builtins.str"builtins.str*W
-rcpttosJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*p
-dataf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310j310*ö
-__annotations__smtpd.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*}
-__all__smtpd.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+conn(*
+
+addr(*
+data_size_limit (*
+map (	*
+enable_SMTPUTF8 (
+*
+decode_data (
+*
+push*
+
+self(*	
+msg(*1
+collect_incoming_data*
+
+self(*
+
+data(* 
+found_terminator*
+
+self(*$
+	smtp_HELO*
+
+self(*	
+arg(*$
+	smtp_NOOP*
+
+self(*	
+arg(*$
+	smtp_QUIT*
+
+self(*	
+arg(*$
+	smtp_MAIL*
+
+self(*	
+arg(*$
+	smtp_RCPT*
+
+self(*	
+arg(*$
+	smtp_RSET*
+
+self(*	
+arg(*$
+	smtp_DATA*
+
+self(*	
+arg(*$
+	smtp_EHLO*
+
+self(*	
+arg(*$
+	smtp_HELP*
+
+self(*	
+arg(*$
+	smtp_VRFY*
+
+self(*	
+arg(*$
+	smtp_EXPN*
+
+self(*	
+arg(r
+COMMAND0r
+DATA0r
+command_size_limits0r
+smtp_server0r
+conn0r
+addr0r
+received_lines0r
+
+smtp_state0r
+seen_greeting0r
+mailfrom0r
+rcpttos0r
+received_data0r
+fqdn0r
+peer0r
+command_size_limit0r
+data_size_limit0r
+enable_SMTPUTF80
+è
+
+SMTPServer"asyncore.dispatcher*è
+__init__*
+
+self(*
+	localaddr(*
+
+remoteaddr(*
+data_size_limit (*
+map (	*
+enable_SMTPUTF8 (
+*
+decode_data (
+*7
+handle_accepted*
+
+self(*
+
+conn(*
+
+addr(*d
+process_message*
+
+self(*
+
+peer(*
+mailfrom(*
+rcpttos(*
+
+data(*
+kwargs(r
+channel_class0r
+data_size_limit0r
+enable_SMTPUTF80
+#
+DebuggingServer"smtpd.SMTPServeru
+	PureProxy"smtpd.SMTPServer*V
+process_message*
+
+self(*
+
+peer(*
+mailfrom(*
+rcpttos(*
+
+data(Å
+MailmanProxy"smtpd.PureProxy*[
+process_message*
+
+self(*
+
+peer(*
+mailfrom(*
+rcpttos(*
+
+data(z310j310*
+__annotations__0*
+__all__02"builtins.int2"smtpd.SMTPChannel22"smtpd.SMTPServer2"socket.socket22"builtins.dict22"asyncore._MapType2222"builtins.bool2"builtins.str2"builtins.bytes2"collections.defaultdict22"builtins.list2222"smtpd._Address222222"type22"smtpd.PureProxy2"smtpd.MailmanProxy2"builtins.dict2

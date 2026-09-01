@@ -1,138 +1,96 @@
 
-(aws_xray_sdk.core.sampling.sampling_ruleÌ
-	Reservoir.aws_xray_sdk.core.sampling.reservoir.Reservoir"builtins.object*Ò
-__init__7aws_xray_sdk.core.sampling.reservoir.Reservoir.__init__"
-None*j
-self`
-.aws_xray_sdk.core.sampling.reservoir.Reservoir".aws_xray_sdk.core.sampling.reservoir.Reservoirz310z311z312z313z314*‹
-borrow_or_take=aws_xray_sdk.core.sampling.reservoir.Reservoir.borrow_or_take*
+(aws_xray_sdk.core.sampling.sampling_rule±
+	Reservoir.aws_xray_sdk.core.sampling.reservoir.Reservoir"builtins.object*
+__init__*
+
+self(*3
+borrow_or_take*
 self*
 now*
 
-can_borrowz310z311z312z313z314*“
+can_borrow*B
 
-load_quota9aws_xray_sdk.core.sampling.reservoir.Reservoir.load_quota"
-None*j
-self`
-.aws_xray_sdk.core.sampling.reservoir.Reservoir".aws_xray_sdk.core.sampling.reservoir.Reservoir*
-quota
-Any*
-TTL
-Any*
-interval
-Anyz310z311z312z313z314*w
-quota4aws_xray_sdk.core.sampling.reservoir.Reservoir.quota*
-self0:builtins.property`z310z311z312z313z314*s
-TTL2aws_xray_sdk.core.sampling.reservoir.Reservoir.TTL*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314ñ!
-SamplingRule5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"builtins.object*Û
-__init__>aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.__init__"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule*
-name
-Any*
-priority
-Any*
-rate
-Any*
-reservoir_size
-Any*g
-host[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-method[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-path[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-service[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-service_type[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*y
-match;aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.match*
+load_quota*
+
+self(*
+quota(*	
+TTL(*
+interval(*(
+quota*
+self0:builtins.property`*&
+TTL*
+self0:builtins.property`ß
+SamplingRule"builtins.object*©
+__init__*
+
+self(*
+
+name(*
+priority(*
+
+rate(*
+reservoir_size(*
+host (*
+method (*
+path (*
+service (*
+service_type (*#
+match*
 self*
-sampling_reqz310z311z312z313z314*q
+sampling_req*
 
-is_default@aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.is_default*
-selfz310z311z312z313z314*ƒ
-snapshot_statisticsIaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.snapshot_statistics*
-selfz310z311z312z313z314*ô
-merge;aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.merge"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule*
-rule
-Anyz310z311z312z313z314*u
-ever_matchedBaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.ever_matched*
-selfz310z311z312z313z314*y
-time_to_reportDaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.time_to_report*
-selfz310z311z312z313z314*…
-increment_request_countMaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.increment_request_count"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRulez310z311z312z313z314*ƒ
-increment_borrow_countLaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.increment_borrow_count"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRulez310z311z312z313z314*…
-increment_sampled_countMaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.increment_sampled_count"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRulez310z311z312z313z314*|
-name:aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.name*
-self0:builtins.property`z310z311z312z313z314*„
-priority>aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.priority*
-self0:builtins.property`z310z311z312z313z314*ˆ
+is_default*
+self*
+snapshot_statistics*
+self*!
+merge*
 
-can_borrow@aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.can_borrow*
-self0:builtins.property`z310z311z312z313z314*Ž
-request_countCaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.request_count*
-self0:builtins.property`z310z311z312z313z314*Œ
-borrow_countBaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.borrow_count*
-self0:builtins.property`z310z311z312z313z314*Ž
-sampled_countCaws_xray_sdk.core.sampling.sampling_rule.SamplingRule.sampled_count*
-self0:builtins.property`z310z311z312z313z3142¦
-rate:aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.ratee
-rate:aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.rate*
-self0:builtins.propertyX`á
-rate:aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.rate"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule*
-v
-Any0:.setter"310"311"312"313"3142Ä
-	reservoir?aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.reservoiro
-	reservoir?aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.reservoir*
-self0:builtins.propertyX`ë
-	reservoir?aws_xray_sdk.core.sampling.sampling_rule.SamplingRule.reservoir"
-None*x
-selfn
-5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule*
-v
-Any0:.setter"310"311"312"313"314j310j311j312j313j314Ê
-wildcard_match5aws_xray_sdk.core.utils.search_pattern.wildcard_match"
-Any*
-pattern
-Any*
-text
-Any*6
-case_insensitive
-builtins.bool"builtins.bool z310z311z312z313z314*½
-__annotations__8aws_xray_sdk.core.sampling.sampling_rule.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+
+rule(*
+ever_matched*
+self*
+time_to_report*
+self*'
+increment_request_count*
+
+self(*&
+increment_borrow_count*
+
+self(*'
+increment_sampled_count*
+
+self(*'
+name*
+self0:builtins.property`*+
+priority*
+self0:builtins.property`*-
+
+can_borrow*
+self0:builtins.property`*0
+request_count*
+self0:builtins.property`*/
+borrow_count*
+self0:builtins.property`*0
+sampled_count*
+self0:builtins.property`2[
+rate)
+rate*
+self0:builtins.propertyX`(
+rate*
+
+self(*
+v(0:.setter2j
+	reservoir.
+	reservoir*
+self0:builtins.propertyX`-
+	reservoir*
+
+self(*
+v(0:.setter~
+wildcard_match5aws_xray_sdk.core.utils.search_pattern.wildcard_match*
+pattern(*
+
+text(*
+case_insensitive (*
+__annotations__0	220".aws_xray_sdk.core.sampling.reservoir.Reservoir227"5aws_xray_sdk.core.sampling.sampling_rule.SamplingRule2"_typeshed.Incomplete2222"builtins.bool2"builtins.str2"builtins.dict2

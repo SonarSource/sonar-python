@@ -1,176 +1,98 @@
 
-paramiko.auth_handlerê+
-AuthHandler!paramiko.auth_handler.AuthHandler"builtins.object*ø
-__init__*paramiko.auth_handler.AuthHandler.__init__"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler*K
-	transport<
-paramiko.transport.Transport"paramiko.transport.Transportz310z311z312z313z314*Ñ
-is_authenticated2paramiko.auth_handler.AuthHandler.is_authenticated"
-builtins.bool"builtins.bool*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandlerz310z311z312z313z314*ï
-get_username.paramiko.auth_handler.AuthHandler.get_username"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandlerz310z311z312z313z314*ˆ
-	auth_none+paramiko.auth_handler.AuthHandler.auth_none"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler**
-username
-builtins.str"builtins.str*-
-event"
-threading.Event"threading.Eventz310z311z312z313z314*Å
-auth_publickey0paramiko.auth_handler.AuthHandler.auth_publickey"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler**
-username
-builtins.str"builtins.str*1
-key(
-paramiko.pkey.PKey"paramiko.pkey.PKey*-
-event"
-threading.Event"threading.Eventz310z311z312z313z314*¼
-auth_password/paramiko.auth_handler.AuthHandler.auth_password"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler**
-username
-builtins.str"builtins.str**
-password
-builtins.str"builtins.str*-
-event"
-threading.Event"threading.Eventz310z311z312z313z314*þ
-auth_interactive2paramiko.auth_handler.AuthHandler.auth_interactive"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler**
-username
-builtins.str"builtins.str*µ
-handler§
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"*paramiko.auth_handler._InteractiveCallback*-
-event"
-threading.Event"threading.Event*.
+paramiko.auth_handler˜
+AuthHandler"builtins.object*)
+__init__*
 
-submethods
-builtins.str"builtins.str z310z311z312z313z314*ÿ
-auth_gssapi_with_mic6paramiko.auth_handler.AuthHandler.auth_gssapi_with_mic"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler**
-username
-builtins.str"builtins.str**
-gss_host
-builtins.str"builtins.str*3
-gss_deleg_creds
-builtins.bool"builtins.bool*-
-event"
-threading.Event"threading.Eventz310z311z312z313z314*˜
-auth_gssapi_keyex3paramiko.auth_handler.AuthHandler.auth_gssapi_keyex"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler**
-username
-builtins.str"builtins.str*-
-event"
-threading.Event"threading.Eventz310z311z312z313z314*¥
-abort'paramiko.auth_handler.AuthHandler.abort"
-None*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandlerz310z311z312z313z314*®
-wait_for_response3paramiko.auth_handler.AuthHandler.wait_for_response"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*P
-selfF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler*-
-event"
-threading.Event"threading.Eventz310z311z312z313z314j310j311j312j313j314r
-	transport+paramiko.auth_handler.AuthHandler.transport<
-paramiko.transport.Transport"paramiko.transport.Transport*310*311*312*313*314r•
-username*paramiko.auth_handler.AuthHandler.usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314ry
-authenticated/paramiko.auth_handler.AuthHandler.authenticated
-builtins.bool"builtins.bool*310*311*312*313*314r¢
+self(*
+	transport(* 
+is_authenticated*
 
-auth_event,paramiko.auth_handler.AuthHandler.auth_eventM
-Union[threading.Event,None]"
-threading.Event"threading.Event
-None*310*311*312*313*314rs
-auth_method-paramiko.auth_handler.AuthHandler.auth_method
-builtins.str"builtins.str*310*311*312*313*314r‘
-banner(paramiko.auth_handler.AuthHandler.bannerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r•
-password*paramiko.auth_handler.AuthHandler.passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r­
-private_key-paramiko.auth_handler.AuthHandler.private_keyV
-Union[paramiko.pkey.PKey,None](
-paramiko.pkey.PKey"paramiko.pkey.PKey
-None*310*311*312*313*314rÖ
-interactive_handler5paramiko.auth_handler.AuthHandler.interactive_handlerî
-6Union[TypeAlias[CallableType[builtins.function]],None]§
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"*paramiko.auth_handler._InteractiveCallback
-None*310*311*312*313*314r™
+self(*
+get_username*
 
-submethods,paramiko.auth_handler.AuthHandler.submethodsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rŸ
-auth_username/paramiko.auth_handler.AuthHandler.auth_usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r{
-auth_fail_count1paramiko.auth_handler.AuthHandler.auth_fail_count
-builtins.int"builtins.int*310*311*312*313*314r•
-gss_host*paramiko.auth_handler.AuthHandler.gss_hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314r}
-gss_deleg_creds1paramiko.auth_handler.AuthHandler.gss_deleg_creds
-builtins.bool"builtins.bool*310*311*312*313*314ù
-GssapiWithMicAuthHandler.paramiko.auth_handler.GssapiWithMicAuthHandler"builtins.object*ô
-__init__7paramiko.auth_handler.GssapiWithMicAuthHandler.__init__"
-None*j
-self`
-.paramiko.auth_handler.GssapiWithMicAuthHandler".paramiko.auth_handler.GssapiWithMicAuthHandler*T
-delegateF
-!paramiko.auth_handler.AuthHandler"!paramiko.auth_handler.AuthHandler*J
-sshgss>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuthz310z311z312z313z314*Ì
-abort4paramiko.auth_handler.GssapiWithMicAuthHandler.abort"
-None*j
-self`
-.paramiko.auth_handler.GssapiWithMicAuthHandler".paramiko.auth_handler.GssapiWithMicAuthHandlerz310z311z312z313z314*Ÿ
-	transport8paramiko.auth_handler.GssapiWithMicAuthHandler.transport"<
-paramiko.transport.Transport"paramiko.transport.Transport*j
-self`
-.paramiko.auth_handler.GssapiWithMicAuthHandler".paramiko.auth_handler.GssapiWithMicAuthHandler0:builtins.property`z310z311z312z313z314*‡
-auth_username<paramiko.auth_handler.GssapiWithMicAuthHandler.auth_username"
-builtins.str"builtins.str*j
-self`
-.paramiko.auth_handler.GssapiWithMicAuthHandler".paramiko.auth_handler.GssapiWithMicAuthHandler0:builtins.property`z310z311z312z313z314*ý
-gss_host7paramiko.auth_handler.GssapiWithMicAuthHandler.gss_host"
-builtins.str"builtins.str*j
-self`
-.paramiko.auth_handler.GssapiWithMicAuthHandler".paramiko.auth_handler.GssapiWithMicAuthHandler0:builtins.property`z310z311z312z313z314j310j311j312j313j314rv
-method5paramiko.auth_handler.GssapiWithMicAuthHandler.method
-builtins.str"builtins.str*310*311*312*313*314r˜
-sshgss5paramiko.auth_handler.GssapiWithMicAuthHandler.sshgss>
-paramiko.ssh_gss._SSH_GSSAuth"paramiko.ssh_gss._SSH_GSSAuth*310*311*312*313*314*ª
-__annotations__%paramiko.auth_handler.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*6
+	auth_none*
+
+self(*
+username(*
+event(*F
+auth_publickey*
+
+self(*
+username(*	
+key(*
+event(*J
+auth_password*
+
+self(*
+username(*
+password(*
+event(*`
+auth_interactive*
+
+self(*
+username(*
+handler(*
+event(*
+
+submethods (*h
+auth_gssapi_with_mic*
+
+self(*
+username(*
+gss_host(*
+gss_deleg_creds(*
+event(*>
+auth_gssapi_keyex*
+
+self(*
+username(*
+event(*
+abort*
+
+self(*.
+wait_for_response*
+
+self(*
+event(r
+	transport0r
+username0r
+authenticated0r
+
+auth_event0r
+auth_method0r
+
+banner0r
+password0r
+private_key0r
+interactive_handler0r
+
+submethods0r
+auth_username0r
+auth_fail_count0r
+gss_host0r
+gss_deleg_creds0«
+GssapiWithMicAuthHandler"builtins.object*6
+__init__*
+
+self(*
+delegate(*
+sshgss(*
+abort*
+
+self(*0
+	transport*
+
+self(0:builtins.property`*4
+auth_username*
+
+self(0:builtins.property`*/
+gss_host*
+
+self(0:builtins.property`r
+
+method0r
+
+sshgss0*
+__annotations__022#"!paramiko.auth_handler.AuthHandler2"paramiko.transport.Transport2"builtins.bool2"builtins.str222"threading.Event2"paramiko.pkey.PKey2"builtins.function22	21"*paramiko.auth_handler._InteractiveCallback2
+2"builtins.list22222222"builtins.int20".paramiko.auth_handler.GssapiWithMicAuthHandler2"paramiko.ssh_gss._SSH_GSSAuth22"builtins.dict2

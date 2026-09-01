@@ -1,913 +1,452 @@
 
-anyio._core._synchronization÷
-EventStatistics,anyio._core._synchronization.EventStatistics"builtins.object*‰
-__init__5anyio._core._synchronization.EventStatistics.__init__"
-None*f
-self\
-,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*/
-tasks_waiting
-builtins.int"builtins.int*é
-__mypy-replace;anyio._core._synchronization.EventStatistics.__mypy-replace"
-None*1
-tasks_waiting
-builtins.int"builtins.int 0h8ri
-tasks_waiting:anyio._core._synchronization.EventStatistics.tasks_waiting
-builtins.int"builtins.intr®
-__match_args__;anyio._core._synchronization.EventStatistics.__match_args__Y
-Tuple[Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.strrÛ
-__dataclass_fields__Aanyio._core._synchronization.EventStatistics.__dataclass_fields__ó
-2builtins.dict[builtins.str,dataclasses.Field[Any]]
-builtins.str"builtins.str4
-dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict’
-CapacityLimiterStatistics6anyio._core._synchronization.CapacityLimiterStatistics"builtins.object*œ
-__init__?anyio._core._synchronization.CapacityLimiterStatistics.__init__"
-None*z
-selfp
-6anyio._core._synchronization.CapacityLimiterStatistics"6anyio._core._synchronization.CapacityLimiterStatistics*1
-borrowed_tokens
-builtins.int"builtins.int*2
-total_tokens 
-builtins.float"builtins.float*d
-	borrowersU
-builtins.tuple[builtins.object]"
-builtins.object"builtins.object"builtins.tuple*/
-tasks_waiting
-builtins.int"builtins.int*Î
-__mypy-replaceEanyio._core._synchronization.CapacityLimiterStatistics.__mypy-replace"
-None*3
-borrowed_tokens
-builtins.int"builtins.int *4
-total_tokens 
-builtins.float"builtins.float *f
-	borrowersU
-builtins.tuple[builtins.object]"
-builtins.object"builtins.object"builtins.tuple *1
-tasks_waiting
-builtins.int"builtins.int 0h8rw
-borrowed_tokensFanyio._core._synchronization.CapacityLimiterStatistics.borrowed_tokens
-builtins.int"builtins.intru
-total_tokensCanyio._core._synchronization.CapacityLimiterStatistics.total_tokens 
-builtins.float"builtins.floatr§
-	borrowers@anyio._core._synchronization.CapacityLimiterStatistics.borrowersU
-builtins.tuple[builtins.object]"
-builtins.object"builtins.object"builtins.tuplers
-tasks_waitingDanyio._core._synchronization.CapacityLimiterStatistics.tasks_waiting
-builtins.int"builtins.intr†
-__match_args__Eanyio._core._synchronization.CapacityLimiterStatistics.__match_args__∆
-^Tuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strr˝
-__dataclass_fields__Kanyio._core._synchronization.CapacityLimiterStatistics.__dataclass_fields__ó
-2builtins.dict[builtins.str,dataclasses.Field[Any]]
-builtins.str"builtins.str4
-dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dictÊ
-LockStatistics+anyio._core._synchronization.LockStatistics"builtins.object*í
-__init__4anyio._core._synchronization.LockStatistics.__init__"
-None*d
-selfZ
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics**
-locked
-builtins.bool"builtins.bool*Ç
-ownerw
-)Union[anyio._core._testing.TaskInfo,None]>
-anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
-None*/
-tasks_waiting
-builtins.int"builtins.int*¬
-__mypy-replace:anyio._core._synchronization.LockStatistics.__mypy-replace"
-None*,
-locked
-builtins.bool"builtins.bool *Ñ
-ownerw
-)Union[anyio._core._testing.TaskInfo,None]>
-anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
-None *1
-tasks_waiting
-builtins.int"builtins.int 0h8r\
-locked2anyio._core._synchronization.LockStatistics.locked
-builtins.bool"builtins.boolr≥
-owner1anyio._core._synchronization.LockStatistics.ownerw
-)Union[anyio._core._testing.TaskInfo,None]>
-anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
-Nonerh
-tasks_waiting9anyio._core._synchronization.LockStatistics.tasks_waiting
-builtins.int"builtins.intr∆
-__match_args__:anyio._core._synchronization.LockStatistics.__match_args__˜
-HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strrÚ
-__dataclass_fields__@anyio._core._synchronization.LockStatistics.__dataclass_fields__ó
-2builtins.dict[builtins.str,dataclasses.Field[Any]]
-builtins.str"builtins.str4
-dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict‡
-ConditionStatistics0anyio._core._synchronization.ConditionStatistics"builtins.object*·
-__init__9anyio._core._synchronization.ConditionStatistics.__init__"
-None*n
-selfd
-0anyio._core._synchronization.ConditionStatistics"0anyio._core._synchronization.ConditionStatistics*/
-tasks_waiting
-builtins.int"builtins.int*o
-lock_statisticsZ
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*Ö
-__mypy-replace?anyio._core._synchronization.ConditionStatistics.__mypy-replace"
-None*1
-tasks_waiting
-builtins.int"builtins.int *q
-lock_statisticsZ
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics 0h8rm
-tasks_waiting>anyio._core._synchronization.ConditionStatistics.tasks_waiting
-builtins.int"builtins.intrØ
-lock_statistics@anyio._core._synchronization.ConditionStatistics.lock_statisticsZ
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatisticsr¸
-__match_args__?anyio._core._synchronization.ConditionStatistics.__match_args__®
-2Tuple[Literal[builtins.str],Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.strr˜
-__dataclass_fields__Eanyio._core._synchronization.ConditionStatistics.__dataclass_fields__ó
-2builtins.dict[builtins.str,dataclasses.Field[Any]]
-builtins.str"builtins.str4
-dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict˙
-SemaphoreStatistics0anyio._core._synchronization.SemaphoreStatistics"builtins.object*
-__init__9anyio._core._synchronization.SemaphoreStatistics.__init__"
-None*n
-selfd
-0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*/
-tasks_waiting
-builtins.int"builtins.int*í
-__mypy-replace?anyio._core._synchronization.SemaphoreStatistics.__mypy-replace"
-None*1
-tasks_waiting
-builtins.int"builtins.int 0h8rm
-tasks_waiting>anyio._core._synchronization.SemaphoreStatistics.tasks_waiting
-builtins.int"builtins.intr¨
-__match_args__?anyio._core._synchronization.SemaphoreStatistics.__match_args__Y
-Tuple[Literal[builtins.str]]7
-Literal[builtins.str]	
-builtins.str"builtins.strr˜
-__dataclass_fields__Eanyio._core._synchronization.SemaphoreStatistics.__dataclass_fields__ó
-2builtins.dict[builtins.str,dataclasses.Field[Any]]
-builtins.str"builtins.str4
-dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict∫	
-Event"anyio._core._synchronization.Event"builtins.object*â
-__new__*anyio._core._synchronization.Event.__new__"H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event*Ö
-cls|
-(Type[anyio._core._synchronization.Event]H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event"typeh*ã
-set&anyio._core._synchronization.Event.set"
-None*R
-selfH
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event*ß
-is_set)anyio._core._synchronization.Event.is_set"
-builtins.bool"builtins.bool*R
-selfH
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event*’
-wait'anyio._core._synchronization.Event.wait"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*R
-selfH
-"anyio._core._synchronization.Event""anyio._core._synchronization.EventH*Ì
+anyio._core._synchronization√
+EventStatistics"builtins.object*-
+__init__*
 
-statistics-anyio._core._synchronization.Event.statistics"\
-,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*R
-selfH
-"anyio._core._synchronization.Event""anyio._core._synchronization.Eventrp
-	__slots__,anyio._core._synchronization.Event.__slots__5
-Tuple[builtins.str]
-builtins.str"builtins.str
-EventAdapter)anyio._core._synchronization.EventAdapter""anyio._core._synchronization.Event*¥
-__new__1anyio._core._synchronization.EventAdapter.__new__"V
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter*õ
-clsë
-/Type[anyio._core._synchronization.EventAdapter]V
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter"typeh*™
-__init__2anyio._core._synchronization.EventAdapter.__init__"
-None*`
-selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter*˝
-_event0anyio._core._synchronization.EventAdapter._event"H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event*`
-selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter0:builtins.property`*†
-set-anyio._core._synchronization.EventAdapter.set"
-None*`
-selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter*º
-is_set0anyio._core._synchronization.EventAdapter.is_set"
-builtins.bool"builtins.bool*`
-selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter*Í
-wait.anyio._core._synchronization.EventAdapter.wait"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*`
-selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapterH*Ç
+self(*
+tasks_waiting(*-
+__mypy-replace*
+tasks_waiting (0h8r
+tasks_waiting0r
+__match_args__0r
+__dataclass_fields__0	Å
+CapacityLimiterStatistics"builtins.object*i
+__init__*
 
-statistics4anyio._core._synchronization.EventAdapter.statistics"\
-,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*`
-selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapterr¢
-	__slots__3anyio._core._synchronization.EventAdapter.__slots__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strr’
-_internal_event9anyio._core._synchronization.EventAdapter._internal_eventÜ
-.Union[anyio._core._synchronization.Event,None]H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event
-Noner\
-_is_set1anyio._core._synchronization.EventAdapter._is_set
-builtins.bool"builtins.bool¿
-Lock!anyio._core._synchronization.Lock"builtins.object*∑
-__new__)anyio._core._synchronization.Lock.__new__"F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*Ç
-clsy
-'Type[anyio._core._synchronization.Lock]F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock"type*2
-fast_acquire
-builtins.bool"builtins.bool h*ﬁ
+self(
+*
+borrowed_tokens(*
+total_tokens(*
+	borrowers(*
+tasks_waiting(*o
+__mypy-replace*
+borrowed_tokens (*
+total_tokens (*
+	borrowers (*
+tasks_waiting (0h8r
+borrowed_tokens0r
+total_tokens0r
+	borrowers0r
+tasks_waiting0r
+__match_args__0r
+__dataclass_fields__0	ì
+LockStatistics"builtins.object*H
+__init__*
 
-__aenter__,anyio._core._synchronization.Lock.__aenter__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.LockH*÷
-	__aexit__+anyio._core._synchronization.Lock.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*ü
-exc_typeê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*o
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*e
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneH*ÿ
-acquire)anyio._core._synchronization.Lock.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.LockH*û
-acquire_nowait0anyio._core._synchronization.Lock.acquire_nowait"
-None*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*ê
-release)anyio._core._synchronization.Lock.release"
-None*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*§
-locked(anyio._core._synchronization.Lock.locked"
-builtins.bool"builtins.bool*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*Ë
+self(*
+locked(*
+owner(*
+tasks_waiting(*L
+__mypy-replace*
+locked (*
+owner (*
+tasks_waiting (0h8r
 
-statistics,anyio._core._synchronization.Lock.statistics"Z
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*P
-selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lockro
-	__slots__+anyio._core._synchronization.Lock.__slots__5
-Tuple[builtins.str]
-builtins.str"builtins.str„
-LockAdapter(anyio._core._synchronization.LockAdapter"!anyio._core._synchronization.Lock*‚
-__new__0anyio._core._synchronization.LockAdapter.__new__"T
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*ò
-clsé
-.Type[anyio._core._synchronization.LockAdapter]T
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter"type*2
-fast_acquire
-builtins.bool"builtins.bool h*€
-__init__1anyio._core._synchronization.LockAdapter.__init__"
-None*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*2
-fast_acquire
-builtins.bool"builtins.bool *ˆ
-_lock.anyio._core._synchronization.LockAdapter._lock"F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter0:builtins.property`*Û
+locked0r	
+owner0r
+tasks_waiting0r
+__match_args__0r
+__dataclass_fields__0	å
+ConditionStatistics"builtins.object*D
+__init__*
 
-__aenter__3anyio._core._synchronization.LockAdapter.__aenter__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapterH*Î
-	__aexit__2anyio._core._synchronization.LockAdapter.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*ü
-exc_typeê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*o
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*e
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneH*Ì
-acquire0anyio._core._synchronization.LockAdapter.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapterH*≥
-acquire_nowait7anyio._core._synchronization.LockAdapter.acquire_nowait"
-None*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*•
-release0anyio._core._synchronization.LockAdapter.release"
-None*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*π
-locked/anyio._core._synchronization.LockAdapter.locked"
-builtins.bool"builtins.bool*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*˝
+self(*
+tasks_waiting(*
+lock_statistics(*F
+__mypy-replace*
+tasks_waiting (*
+lock_statistics (0h8r
+tasks_waiting0r
+lock_statistics0r
+__match_args__0r
+__dataclass_fields__0	«
+SemaphoreStatistics"builtins.object*-
+__init__*
 
-statistics3anyio._core._synchronization.LockAdapter.statistics"Z
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*^
-selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapterr°
-	__slots__2anyio._core._synchronization.LockAdapter.__slots__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrœ
-_internal_lock7anyio._core._synchronization.LockAdapter._internal_lockÉ
--Union[anyio._core._synchronization.Lock,None]F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock
-Nonerg
-_fast_acquire6anyio._core._synchronization.LockAdapter._fast_acquire
-builtins.bool"builtins.boolä!
-	Condition&anyio._core._synchronization.Condition"builtins.object*¥
-__init__/anyio._core._synchronization.Condition.__init__"
-None*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*ê
-lockÉ
--Union[anyio._core._synchronization.Lock,None]F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock
-None *Ì
+self(*
+tasks_waiting(*-
+__mypy-replace*
+tasks_waiting (0h8r
+tasks_waiting0r
+__match_args__0r
+__dataclass_fields__0	¢
+Event"builtins.object*
+__new__*	
+cls(h*
+set*
 
-__aenter__1anyio._core._synchronization.Condition.__aenter__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.ConditionH*Â
-	__aexit__0anyio._core._synchronization.Condition.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*ü
-exc_typeê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*o
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*e
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneH*Ø
-_check_acquired6anyio._core._synchronization.Condition._check_acquired"
-None*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*Á
-acquire.anyio._core._synchronization.Condition.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.ConditionH*≠
-acquire_nowait5anyio._core._synchronization.Condition.acquire_nowait"
-None*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*ü
-release.anyio._core._synchronization.Condition.release"
-None*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*≥
-locked-anyio._core._synchronization.Condition.locked"
-builtins.bool"builtins.bool*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*ƒ
-notify-anyio._core._synchronization.Condition.notify"
-None*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*%
-n
-builtins.int"builtins.int *•
+self(*
+is_set*
 
-notify_all1anyio._core._synchronization.Condition.notify_all"
-None*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*·
-wait+anyio._core._synchronization.Condition.wait"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.ConditionH*Ø
-wait_for/anyio._core._synchronization.Condition.wait_for"∑
-8typing.Coroutine[Any,Any,anyio._core._synchronization.T]
-Any
-AnyW
-anyio._core._synchronization.T"
-builtins.object"builtins.object"builtins.object"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*Z
-	predicateK
-CallableType[builtins.function]&
-builtins.function"builtins.functionH*Å
+self(*
+wait*
 
-statistics1anyio._core._synchronization.Condition.statistics"d
-0anyio._core._synchronization.ConditionStatistics"0anyio._core._synchronization.ConditionStatistics*Z
-selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Conditionrˆ
-	__slots__0anyio._core._synchronization.Condition.__slots__∂
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strr∫
-_owner_task2anyio._core._synchronization.Condition._owner_taskw
-)Union[anyio._core._testing.TaskInfo,None]>
-anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
-Noner}
-_lock,anyio._core._synchronization.Condition._lockF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lockr“
-_waiters/anyio._core._synchronization.Condition._waitersî
-5collections.deque[anyio._core._synchronization.Event]H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event"collections.deque”
-	Semaphore&anyio._core._synchronization.Semaphore"builtins.object*ﬁ
-__new__.anyio._core._synchronization.Semaphore.__new__"P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*í
-clsà
-,Type[anyio._core._synchronization.Semaphore]P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore"type*/
-initial_value
-builtins.int"builtins.int*U
-	max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool h*›
-__init__/anyio._core._synchronization.Semaphore.__init__"
-None*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*/
-initial_value
-builtins.int"builtins.int*U
-	max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool *ÿ
+self(H*
 
-__aenter__1anyio._core._synchronization.Semaphore.__aenter__"∏
-@typing.Coroutine[Any,Any,anyio._core._synchronization.Semaphore]
-Any
-AnyP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.SemaphoreH*Â
-	__aexit__0anyio._core._synchronization.Semaphore.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*ü
-exc_typeê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*o
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*e
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneH*Á
-acquire.anyio._core._synchronization.Semaphore.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.SemaphoreH*≠
-acquire_nowait5anyio._core._synchronization.Semaphore.acquire_nowait"
-None*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*ü
-release.anyio._core._synchronization.Semaphore.release"
-None*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*∆
-value,anyio._core._synchronization.Semaphore.value"
-builtins.int"builtins.int*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore0:builtins.property`*ˆ
-	max_value0anyio._core._synchronization.Semaphore.max_value"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore0:builtins.property`*Å
+statistics*
 
-statistics1anyio._core._synchronization.Semaphore.statistics"d
-0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*Z
-selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphorerü
-	__slots__0anyio._core._synchronization.Semaphore.__slots__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strre
-_fast_acquire4anyio._core._synchronization.Semaphore._fast_acquire
-builtins.bool"builtins.bool«
-SemaphoreAdapter-anyio._core._synchronization.SemaphoreAdapter"&anyio._core._synchronization.Semaphore*à
-__new__5anyio._core._synchronization.SemaphoreAdapter.__new__"^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter*ß
-clsù
-3Type[anyio._core._synchronization.SemaphoreAdapter]^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter"type*/
-initial_value
-builtins.int"builtins.int*U
-	max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool h*Ú
-__init__6anyio._core._synchronization.SemaphoreAdapter.__init__"
-None*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter*/
-initial_value
-builtins.int"builtins.int*U
-	max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool *ô
+self(r
+	__slots__0ß
+EventAdapter""anyio._core._synchronization.Event*
+__new__*	
+cls(h*
+__init__*
 
-_semaphore8anyio._core._synchronization.SemaphoreAdapter._semaphore"P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter0:builtins.property`*¸
-acquire5anyio._core._synchronization.SemaphoreAdapter.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapterH*¬
-acquire_nowait<anyio._core._synchronization.SemaphoreAdapter.acquire_nowait"
-None*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter*¥
-release5anyio._core._synchronization.SemaphoreAdapter.release"
-None*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter*€
-value3anyio._core._synchronization.SemaphoreAdapter.value"
-builtins.int"builtins.int*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter0:builtins.property`*ã
-	max_value7anyio._core._synchronization.SemaphoreAdapter.max_value"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter0:builtins.property`*ñ
+self(*-
+_event*
 
-statistics8anyio._core._synchronization.SemaphoreAdapter.statistics"d
-0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*h
-self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapterr“
-	__slots__7anyio._core._synchronization.SemaphoreAdapter.__slots__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrÌ
-_internal_semaphoreAanyio._core._synchronization.SemaphoreAdapter._internal_semaphoreí
-2Union[anyio._core._synchronization.Semaphore,None]P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore
-Nonerl
-_initial_value<anyio._core._synchronization.SemaphoreAdapter._initial_value
-builtins.int"builtins.intrå
+self(0:builtins.property`*
+set*
 
-_max_value8anyio._core._synchronization.SemaphoreAdapter._max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noneƒ!
-CapacityLimiter,anyio._core._synchronization.CapacityLimiter"builtins.object*˙
-__new__4anyio._core._synchronization.CapacityLimiter.__new__"\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*§
-clsö
-2Type[anyio._core._synchronization.CapacityLimiter]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter"type*2
-total_tokens 
-builtins.float"builtins.floath*ˇ
+self(*
+is_set*
 
-__aenter__7anyio._core._synchronization.CapacityLimiter.__aenter__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiterH*˜
-	__aexit__6anyio._core._synchronization.CapacityLimiter.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*ü
-exc_typeê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*o
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*e
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneH*Ï
-borrowed_tokens<anyio._core._synchronization.CapacityLimiter.borrowed_tokens"
-builtins.int"builtins.int*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter0:builtins.property`*Ú
-available_tokens=anyio._core._synchronization.CapacityLimiter.available_tokens" 
-builtins.float"builtins.float*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter0:builtins.property`*ø
-acquire_nowait;anyio._core._synchronization.CapacityLimiter.acquire_nowait"
-None*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*ã
-acquire_on_behalf_of_nowaitHanyio._core._synchronization.CapacityLimiter.acquire_on_behalf_of_nowait"
-None*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*0
-borrower"
-builtins.object"builtins.object*˘
-acquire4anyio._core._synchronization.CapacityLimiter.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiterH*≈
-acquire_on_behalf_ofAanyio._core._synchronization.CapacityLimiter.acquire_on_behalf_of"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*0
-borrower"
-builtins.object"builtins.objectH*±
-release4anyio._core._synchronization.CapacityLimiter.release"
-None*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*˝
-release_on_behalf_ofAanyio._core._synchronization.CapacityLimiter.release_on_behalf_of"
-None*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*0
-borrower"
-builtins.object"builtins.object*ü
+self(*
+wait*
 
-statistics7anyio._core._synchronization.CapacityLimiter.statistics"p
-6anyio._core._synchronization.CapacityLimiterStatistics"6anyio._core._synchronization.CapacityLimiterStatistics*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter2Æ
-total_tokens9anyio._core._synchronization.CapacityLimiter.total_tokensÏ
-total_tokens9anyio._core._synchronization.CapacityLimiter.total_tokens" 
-builtins.float"builtins.float*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter0:builtins.propertyX`Û
-total_tokens9anyio._core._synchronization.CapacityLimiter.total_tokens"
-None*f
-self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*+
-value 
-builtins.float"builtins.float0:.setterrz
-	__slots__6anyio._core._synchronization.CapacityLimiter.__slots__5
-Tuple[builtins.str]
-builtins.str"builtins.strì,
-CapacityLimiterAdapter3anyio._core._synchronization.CapacityLimiterAdapter",anyio._core._synchronization.CapacityLimiter*§
-__new__;anyio._core._synchronization.CapacityLimiterAdapter.__new__"j
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*π
-clsØ
-9Type[anyio._core._synchronization.CapacityLimiterAdapter]j
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter"type*2
-total_tokens 
-builtins.float"builtins.floath*¸
-__init__<anyio._core._synchronization.CapacityLimiterAdapter.__init__"
-None*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*2
-total_tokens 
-builtins.float"builtins.float*≥
-_limiter<anyio._core._synchronization.CapacityLimiterAdapter._limiter"\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter0:builtins.property`*î
+self(H*
 
-__aenter__>anyio._core._synchronization.CapacityLimiterAdapter.__aenter__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapterH*å
-	__aexit__=anyio._core._synchronization.CapacityLimiterAdapter.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*ü
-exc_typeê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*o
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*e
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneH*Å
-borrowed_tokensCanyio._core._synchronization.CapacityLimiterAdapter.borrowed_tokens"
-builtins.int"builtins.int*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter0:builtins.property`*á
-available_tokensDanyio._core._synchronization.CapacityLimiterAdapter.available_tokens" 
-builtins.float"builtins.float*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter0:builtins.property`*‘
-acquire_nowaitBanyio._core._synchronization.CapacityLimiterAdapter.acquire_nowait"
-None*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*†
-acquire_on_behalf_of_nowaitOanyio._core._synchronization.CapacityLimiterAdapter.acquire_on_behalf_of_nowait"
-None*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*0
-borrower"
-builtins.object"builtins.object*é
-acquire;anyio._core._synchronization.CapacityLimiterAdapter.acquire"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapterH*⁄
-acquire_on_behalf_ofHanyio._core._synchronization.CapacityLimiterAdapter.acquire_on_behalf_of"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*0
-borrower"
-builtins.object"builtins.objectH*∆
-release;anyio._core._synchronization.CapacityLimiterAdapter.release"
-None*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*í
-release_on_behalf_ofHanyio._core._synchronization.CapacityLimiterAdapter.release_on_behalf_of"
-None*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*0
-borrower"
-builtins.object"builtins.object*¥
+statistics*
 
-statistics>anyio._core._synchronization.CapacityLimiterAdapter.statistics"p
-6anyio._core._synchronization.CapacityLimiterStatistics"6anyio._core._synchronization.CapacityLimiterStatistics*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter2ﬂ
-total_tokens@anyio._core._synchronization.CapacityLimiterAdapter.total_tokensÅ
-total_tokens@anyio._core._synchronization.CapacityLimiterAdapter.total_tokens" 
-builtins.float"builtins.float*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter0:builtins.propertyX`à
-total_tokens@anyio._core._synchronization.CapacityLimiterAdapter.total_tokens"
-None*t
-selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*+
-value 
-builtins.float"builtins.float0:.setterr¨
-	__slots__=anyio._core._synchronization.CapacityLimiterAdapter.__slots__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrÅ
-_internal_limiterEanyio._core._synchronization.CapacityLimiterAdapter._internal_limiter§
-8Union[anyio._core._synchronization.CapacityLimiter,None]\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
-Nonert
-_total_tokensAanyio._core._synchronization.CapacityLimiterAdapter._total_tokens 
-builtins.float"builtins.float·
+self(r
+	__slots__0r
+_internal_event0r
+_is_set0∆
+Lock"builtins.object*.
+__new__*	
+cls( *
+fast_acquire (h*
 
-ResourceGuard*anyio._core._synchronization.ResourceGuard"builtins.object*Ÿ
-__init__3anyio._core._synchronization.ResourceGuard.__init__"
-None*b
-selfX
-*anyio._core._synchronization.ResourceGuard"*anyio._core._synchronization.ResourceGuard**
-action
-builtins.str"builtins.str *ß
-	__enter__4anyio._core._synchronization.ResourceGuard.__enter__"
-None*ZX
-*anyio._core._synchronization.ResourceGuard"*anyio._core._synchronization.ResourceGuard*˛
-__exit__3anyio._core._synchronization.ResourceGuard.__exit__"
-None*ZX
-*anyio._core._synchronization.ResourceGuard"*anyio._core._synchronization.ResourceGuard*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonerœ
-	__slots__4anyio._core._synchronization.ResourceGuard.__slots__ã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrY
-action1anyio._core._synchronization.ResourceGuard.action
-builtins.str"builtins.strr_
-_guarded3anyio._core._synchronization.ResourceGuard._guarded
-builtins.bool"builtins.bool*ò
-__annotations__,anyio._core._synchronization.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+__aenter__*
+
+self(H*H
+	__aexit__*
+
+self(*
+exc_type(#*
+exc_val($*
+exc_tb(&H*
+acquire*
+
+self(H*
+acquire_nowait*
+
+self(*
+release*
+
+self(*
+locked*
+
+self(*
+
+statistics*
+
+self(r
+	__slots__0‰
+LockAdapter"!anyio._core._synchronization.Lock*.
+__new__'*	
+cls((*
+fast_acquire (h*.
+__init__*
+
+self('*
+fast_acquire (*,
+_lock*
+
+self('0:builtins.property`*
+
+__aenter__*
+
+self('H*H
+	__aexit__*
+
+self('*
+exc_type(#*
+exc_val($*
+exc_tb(&H*
+acquire*
+
+self('H*
+acquire_nowait*
+
+self('*
+release*
+
+self('*
+locked*
+
+self('*
+
+statistics*
+
+self('r
+	__slots__0r
+_internal_lock0)r
+_fast_acquire0í
+	Condition"builtins.object*&
+__init__*
+
+self(**
+lock ()*
+
+__aenter__*
+
+self(*H*H
+	__aexit__*
+
+self(**
+exc_type(#*
+exc_val($*
+exc_tb(&H*
+_check_acquired*
+
+self(**
+acquire*
+
+self(*H*
+acquire_nowait*
+
+self(**
+release*
+
+self(**
+locked*
+
+self(**!
+notify*
+
+self(**	
+n (*
+
+notify_all*
+
+self(**
+wait*
+
+self(*H*+
+wait_for,*
+
+self(**
+	predicate(.H*
+
+statistics*
+
+self(*r
+	__slots__0/r
+_owner_task0r	
+_lock0r
+_waiters00¶
+	Semaphore"builtins.object*V
+__new__1*	
+cls(2*
+initial_value(*
+	max_value (3*
+fast_acquire (h*V
+__init__*
+
+self(1*
+initial_value(*
+	max_value (3*
+fast_acquire (*
+
+__aenter__4*
+
+self(1H*H
+	__aexit__*
+
+self(1*
+exc_type(#*
+exc_val($*
+exc_tb(&H*
+acquire*
+
+self(1H*
+acquire_nowait*
+
+self(1*
+release*
+
+self(1*,
+value*
+
+self(10:builtins.property`*0
+	max_value3*
+
+self(10:builtins.property`*
+
+statistics*
+
+self(1r
+	__slots__0r
+_fast_acquire0π
+SemaphoreAdapter"&anyio._core._synchronization.Semaphore*V
+__new__5*	
+cls(6*
+initial_value(*
+	max_value (3*
+fast_acquire (h*V
+__init__*
+
+self(5*
+initial_value(*
+	max_value (3*
+fast_acquire (*1
+
+_semaphore1*
+
+self(50:builtins.property`*
+acquire*
+
+self(5H*
+acquire_nowait*
+
+self(5*
+release*
+
+self(5*,
+value*
+
+self(50:builtins.property`*0
+	max_value3*
+
+self(50:builtins.property`*
+
+statistics*
+
+self(5r
+	__slots__07r
+_internal_semaphore08r
+_initial_value0r
+
+_max_value03–
+CapacityLimiter"builtins.object*,
+__new__9*	
+cls(:*
+total_tokens(h*
+
+__aenter__*
+
+self(9H*H
+	__aexit__*
+
+self(9*
+exc_type(#*
+exc_val($*
+exc_tb(&H*6
+borrowed_tokens*
+
+self(90:builtins.property`*7
+available_tokens*
+
+self(90:builtins.property`*
+acquire_nowait*
+
+self(9*;
+acquire_on_behalf_of_nowait*
+
+self(9*
+borrower(*
+acquire*
+
+self(9H*6
+acquire_on_behalf_of*
+
+self(9*
+borrower(H*
+release*
+
+self(9*4
+release_on_behalf_of*
+
+self(9*
+borrower(*
+
+statistics
+*
+
+self(92{
+total_tokens5
+total_tokens*
+
+self(90:builtins.propertyX`4
+total_tokens*
+
+self(9*
+value(0:.setterr
+	__slots__0˝
+CapacityLimiterAdapter",anyio._core._synchronization.CapacityLimiter*,
+__new__;*	
+cls(<*
+total_tokens(h*,
+__init__*
+
+self(;*
+total_tokens(*/
+_limiter9*
+
+self(;0:builtins.property`*
+
+__aenter__*
+
+self(;H*H
+	__aexit__*
+
+self(;*
+exc_type(#*
+exc_val($*
+exc_tb(&H*6
+borrowed_tokens*
+
+self(;0:builtins.property`*7
+available_tokens*
+
+self(;0:builtins.property`*
+acquire_nowait*
+
+self(;*;
+acquire_on_behalf_of_nowait*
+
+self(;*
+borrower(*
+acquire*
+
+self(;H*6
+acquire_on_behalf_of*
+
+self(;*
+borrower(H*
+release*
+
+self(;*4
+release_on_behalf_of*
+
+self(;*
+borrower(*
+
+statistics
+*
+
+self(;2{
+total_tokens5
+total_tokens*
+
+self(;0:builtins.propertyX`4
+total_tokens*
+
+self(;*
+value(0:.setterr
+	__slots__0r
+_internal_limiter0=r
+_total_tokens0§
+ResourceGuard"builtins.object*(
+__init__*
+
+self(>*
+action (*
+	__enter__*(>*
+__exit__*(>*(#*($*(&r
+	__slots__07r
+
+action0r
+_guarded0*
+__annotations__0?22.",anyio._core._synchronization.EventStatistics2"builtins.int2"builtins.str2	22222"dataclasses.Field22"builtins.dict228"6anyio._core._synchronization.CapacityLimiterStatistics2"builtins.float2"builtins.object2"builtins.tuple2222-"+anyio._core._synchronization.LockStatistics2"builtins.bool2"anyio._core._testing.TaskInfo222222"0anyio._core._synchronization.ConditionStatistics2222"0anyio._core._synchronization.SemaphoreStatistics2$""anyio._core._synchronization.Event2"type22"typing.Coroutine2222+")anyio._core._synchronization.EventAdapter2"type222222#"!anyio._core._synchronization.Lock2"type22"builtins.BaseException2"type2!22"22!2"types.TracebackType22%2*"(anyio._core._synchronization.LockAdapter2"type2'222("&anyio._core._synchronization.Condition2"builtins.object22"typing.Coroutine2+2"builtins.function22-222"collections.deque22("&anyio._core._synchronization.Semaphore2"type21222"typing.Coroutine212/"-anyio._core._synchronization.SemaphoreAdapter2"type25222212.",anyio._core._synchronization.CapacityLimiter2"type2925"3anyio._core._synchronization.CapacityLimiterAdapter2"type2;2292,"*anyio._core._synchronization.ResourceGuard2"builtins.dict2

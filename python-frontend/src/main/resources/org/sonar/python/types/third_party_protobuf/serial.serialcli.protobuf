@@ -1,492 +1,289 @@
 
-serial.serialcli_
-SerialException!serial.serialutil.SerialException"builtins.OSErrorj310j311j312j313j314~
-SerialTimeoutException(serial.serialutil.SerialTimeoutException"!serial.serialutil.SerialExceptionj310j311j312j313j314£
-PortNotOpenError"serial.serialutil.PortNotOpenError"!serial.serialutil.SerialException*Æ
-__init__+serial.serialutil.PortNotOpenError.__init__"
-None*R
-selfH
-"serial.serialutil.PortNotOpenError""serial.serialutil.PortNotOpenErrorz310z311z312z313z314j310j311j312j313j314É
-Timeoutserial.serialutil.Timeout"builtins.object*√
-__init__"serial.serialutil.Timeout.__init__"
-None*@
-self6
-serial.serialutil.Timeout"serial.serialutil.Timeout*.
-duration 
-builtins.float"builtins.floatz310z311z312z313z314*ß
-expired!serial.serialutil.Timeout.expired"
-builtins.bool"builtins.bool*@
-self6
-serial.serialutil.Timeout"serial.serialutil.Timeoutz310z311z312z313z314*≠
-	time_left#serial.serialutil.Timeout.time_left" 
-builtins.float"builtins.float*@
-self6
-serial.serialutil.Timeout"serial.serialutil.Timeoutz310z311z312z313z314*¡
-restart!serial.serialutil.Timeout.restart"
-None*@
-self6
-serial.serialutil.Timeout"serial.serialutil.Timeout*.
-duration 
-builtins.float"builtins.floatz310z311z312z313z314j310j311j312j313j314rå
-TIMEserial.serialutil.Timeout.TIMEK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rm
-is_infinite%serial.serialutil.Timeout.is_infinite
-builtins.bool"builtins.bool*310*311*312*313*314ru
-is_non_blocking)serial.serialutil.Timeout.is_non_blocking
-builtins.bool"builtins.bool*310*311*312*313*314ri
-duration"serial.serialutil.Timeout.duration 
-builtins.float"builtins.float*310*311*312*313*314ro
-target_time%serial.serialutil.Timeout.target_time 
-builtins.float"builtins.float*310*311*312*313*314üd
+serial.serialcliF
+SerialException!serial.serialutil.SerialException"builtins.OSErrore
+SerialTimeoutException(serial.serialutil.SerialTimeoutException"!serial.serialutil.SerialExceptions
+PortNotOpenError"serial.serialutil.PortNotOpenError"!serial.serialutil.SerialException*
+__init__*
 
-SerialBaseserial.serialutil.SerialBase"io.RawIOBase*≤
-__init__%serial.serialutil.SerialBase.__init__"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*P
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-baudrate
-builtins.int"builtins.int *,
-bytesize
-builtins.int"builtins.int **
-parity
-builtins.str"builtins.str *0
-stopbits 
-builtins.float"builtins.float *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *-
-xonxoff
-builtins.bool"builtins.bool *,
-rtscts
-builtins.bool"builtins.bool *_
-write_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *,
-dsrdtr
-builtins.bool"builtins.bool *d
-inter_byte_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *[
-	exclusiveJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z310z311z312z313z314*Ê
-read!serial.serialutil.SerialBase.read" 
-builtins.bytes"builtins.bytes*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase* 
-builtins.int"builtins.int 0:abc.abstractmethod@z310z311z312z313z314*ì
-write"serial.serialutil.SerialBase.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*64
-typing_extensions.Buffer"typing_extensions.Buffer0:abc.abstractmethod@z310z311*ñ
-write"serial.serialutil.SerialBase.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*42
-_collections_abc.Buffer"_collections_abc.Buffer0:abc.abstractmethod@z312z313z314*Û
-get_settings)serial.serialutil.SerialBase.get_settings"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBasez310z311z312z313z314*à
-apply_settings+serial.serialutil.SerialBase.apply_settings"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*^
-dW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictz310z311z312z313z314*Ÿ
-readinto%serial.serialutil.SerialBase.readinto"
-builtins.int"builtins.int*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*64
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*‹
-readinto%serial.serialutil.SerialBase.readinto"
-builtins.int"builtins.int*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*42
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*“
+self(ã
+Timeoutserial.serialutil.Timeout"builtins.object*(
+__init__*
 
-send_break'serial.serialutil.SerialBase.send_break"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*0
-duration 
-builtins.float"builtins.float z310z311z312z313z314*ﬁ
-read_all%serial.serialutil.SerialBase.read_all"J
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBasez310z311z312z313z314*º
+self(*
+duration(*
+expired*
 
-read_until'serial.serialutil.SerialBase.read_until" 
-builtins.bytes"builtins.bytes*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*0
-expected 
-builtins.bytes"builtins.bytes *P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*í
-iread_until(serial.serialutil.SerialBase.iread_until"t
-*typing.Generator[builtins.bytes,None,None] 
-builtins.bytes"builtins.bytes
-None
-None"typing.Generator*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*0
-expected 
-builtins.bytes"builtins.bytes *P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z3142Ó
-port!serial.serialutil.SerialBase.port–
-port!serial.serialutil.SerialBase.port"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`÷
-port!serial.serialutil.SerialBase.port"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*N
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None0:.setter"310"311"312"313"3142∫
-baudrate%serial.serialutil.SerialBase.baudrate∞
-baudrate%serial.serialutil.SerialBase.baudrate"
-builtins.int"builtins.int*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`∫
-baudrate%serial.serialutil.SerialBase.baudrate"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase**
-baudrate
-builtins.int"builtins.int0:.setter"310"311"312"313"3142∫
-bytesize%serial.serialutil.SerialBase.bytesize∞
-bytesize%serial.serialutil.SerialBase.bytesize"
-builtins.int"builtins.int*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`∫
-bytesize%serial.serialutil.SerialBase.bytesize"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase**
-bytesize
-builtins.int"builtins.int0:.setter"310"311"312"313"3142ó
-	exclusive&serial.serialutil.SerialBase.exclusive›
-	exclusive&serial.serialutil.SerialBase.exclusive"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`Ë
-	exclusive&serial.serialutil.SerialBase.exclusive"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*V
-	exclusiveG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None0:.setter"310"311"312"313"3142¨
-parity#serial.serialutil.SerialBase.parity¨
-parity#serial.serialutil.SerialBase.parity"
-builtins.str"builtins.str*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`¥
-parity#serial.serialutil.SerialBase.parity"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*(
-parity
-builtins.str"builtins.str0:.setter"310"311"312"313"3142¬
-stopbits%serial.serialutil.SerialBase.stopbits¥
-stopbits%serial.serialutil.SerialBase.stopbits" 
-builtins.float"builtins.float*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`æ
-stopbits%serial.serialutil.SerialBase.stopbits"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*.
-stopbits 
-builtins.float"builtins.float0:.setter"310"311"312"313"3142è
-timeout$serial.serialutil.SerialBase.timeout‹
-timeout$serial.serialutil.SerialBase.timeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`Â
-timeout$serial.serialutil.SerialBase.timeout"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*W
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None0:.setter"310"311"312"313"3142≥
-write_timeout*serial.serialutil.SerialBase.write_timeoutË
-write_timeout*serial.serialutil.SerialBase.write_timeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`Ò
-write_timeout*serial.serialutil.SerialBase.write_timeout"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*W
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None0:.setter"310"311"312"313"3142‘
-inter_byte_timeout/serial.serialutil.SerialBase.inter_byte_timeoutÚ
-inter_byte_timeout/serial.serialutil.SerialBase.inter_byte_timeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`˛
-inter_byte_timeout/serial.serialutil.SerialBase.inter_byte_timeout"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*Z
+self(*
+	time_left*
 
-ic_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None0:.setter"310"311"312"313"3142∑
-xonxoff$serial.serialutil.SerialBase.xonxoff∞
-xonxoff$serial.serialutil.SerialBase.xonxoff"
-builtins.bool"builtins.bool*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`π
-xonxoff$serial.serialutil.SerialBase.xonxoff"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*+
-xonxoff
-builtins.bool"builtins.bool0:.setter"310"311"312"313"3142∞
-rtscts#serial.serialutil.SerialBase.rtsctsÆ
-rtscts#serial.serialutil.SerialBase.rtscts"
-builtins.bool"builtins.bool*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`∂
-rtscts#serial.serialutil.SerialBase.rtscts"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase**
-rtscts
-builtins.bool"builtins.bool0:.setter"310"311"312"313"3142€
-dsrdtr#serial.serialutil.SerialBase.dsrdtrÆ
-dsrdtr#serial.serialutil.SerialBase.dsrdtr"
-builtins.bool"builtins.bool*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`·
-dsrdtr#serial.serialutil.SerialBase.dsrdtr"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*U
-dsrdtrG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None 0:.setter"310"311"312"313"3142ù
-rts serial.serialutil.SerialBase.rts®
-rts serial.serialutil.SerialBase.rts"
-builtins.bool"builtins.bool*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`Ø
-rts serial.serialutil.SerialBase.rts"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*)
-value
-builtins.bool"builtins.bool0:.setter"310"311"312"313"3142ù
-dtr serial.serialutil.SerialBase.dtr®
-dtr serial.serialutil.SerialBase.dtr"
-builtins.bool"builtins.bool*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`Ø
-dtr serial.serialutil.SerialBase.dtr"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*)
-value
-builtins.bool"builtins.bool0:.setter"310"311"312"313"3142Â
-break_condition,serial.serialutil.SerialBase.break_condition¿
-break_condition,serial.serialutil.SerialBase.break_condition"
-builtins.bool"builtins.bool*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`«
-break_condition,serial.serialutil.SerialBase.break_condition"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*)
-value
-builtins.bool"builtins.bool0:.setter"310"311"312"313"3142Ò
+self(*'
+restart*
 
-rs485_mode'serial.serialutil.SerialBase.rs485_modeÜ
+self(*
+duration(r
+TIME0r
+is_infinite0r
+is_non_blocking0r
+duration0r
+target_time0ﬁ
 
-rs485_mode'serial.serialutil.SerialBase.rs485_mode"n
-&Union[serial.rs485.RS485Settings,None]8
-serial.rs485.RS485Settings"serial.rs485.RS485Settings
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase0:builtins.propertyX`ó
+SerialBaseserial.serialutil.SerialBase"io.RawIOBase*Ù
+__init__*
 
-rs485_mode'serial.serialutil.SerialBase.rs485_mode"
-None*F
-self<
-serial.serialutil.SerialBase"serial.serialutil.SerialBase*Ç
-rs485_settingsn
-&Union[serial.rs485.RS485Settings,None]8
-serial.rs485.RS485Settings"serial.rs485.RS485Settings
-None0:.setter"310"311"312"313"314j310j311j312j313j314rö
-	BAUDRATES&serial.serialutil.SerialBase.BAUDRATESL
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*310*311*312*313*314rö
-	BYTESIZES&serial.serialutil.SerialBase.BYTESIZESL
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*310*311*312*313*314rò
-PARITIES%serial.serialutil.SerialBase.PARITIESL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*310*311*312*313*314rﬁ
-STOPBITS%serial.serialutil.SerialBase.STOPBITSë
-/Tuple[builtins.int,builtins.float,builtins.int]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.int"builtins.int*310*311*312*313*314rh
-is_open$serial.serialutil.SerialBase.is_open
-builtins.bool"builtins.bool*310*311*312*313*314ré
-portstr$serial.serialutil.SerialBase.portstrD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rà
-name!serial.serialutil.SerialBase.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314‹
-Serialserial.serialcli.Serial"serial.serialutil.SerialBase*Ö
-openserial.serialcli.Serial.open"
-None*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serialz310z311z312z313z314*º
+self(*
+port (
+*
+baudrate (*
+bytesize (*
+parity (	*
+stopbits (*
+timeout (*
+xonxoff (*
+rtscts (*
+write_timeout (*
+dsrdtr (*
+inter_byte_timeout (*
+	exclusive (*2
+read*
 
-in_waiting"serial.serialcli.Serial.in_waiting"
-builtins.int"builtins.int*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial0:builtins.property`z310z311z312z313z314*«
-readserial.serialcli.Serial.read" 
-builtins.bytes"builtins.bytes*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial*(
-size
-builtins.int"builtins.int z310z311z312z313z314*Ï
-writeserial.serialcli.Serial.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial*64
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*Ô
-writeserial.serialcli.Serial.write"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial*42
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*°
-reset_input_buffer*serial.serialcli.Serial.reset_input_buffer"
-None*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serialz310z311z312z313z314*£
-reset_output_buffer+serial.serialcli.Serial.reset_output_buffer"
-None*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serialz310z311z312z313z314*∞
-ctsserial.serialcli.Serial.cts"
-builtins.bool"builtins.bool*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial0:builtins.property`z310z311z312z313z314*∞
-dsrserial.serialcli.Serial.dsr"
-builtins.bool"builtins.bool*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial0:builtins.property`z310z311z312z313z314*Æ
-riserial.serialcli.Serial.ri"
-builtins.bool"builtins.bool*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial0:builtins.property`z310z311z312z313z314*Æ
-cdserial.serialcli.Serial.cd"
-builtins.bool"builtins.bool*<
-self2
-serial.serialcli.Serial"serial.serialcli.Serial0:builtins.property`z310z311z312z313z314j310j311j312j313j314
-as_byte_arrayserial.serialcli.as_byte_array"
-Any*,
-string 
-builtins.bytes"builtins.bytesz310z311z312z313z314*•
-__annotations__ serial.serialcli.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*W
-XONserial.serialutil.XON 
-builtins.bytes"builtins.bytes*310*311*312*313*314*Y
-XOFFserial.serialutil.XOFF 
-builtins.bytes"builtins.bytes*310*311*312*313*314*U
-CRserial.serialutil.CR 
-builtins.bytes"builtins.bytes*310*311*312*313*314*U
-LFserial.serialutil.LF 
-builtins.bytes"builtins.bytes*310*311*312*313*314*c
-PARITY_NONEserial.serialutil.PARITY_NONE
-builtins.str"builtins.str*310*311*312*313*314*c
-PARITY_EVENserial.serialutil.PARITY_EVEN
-builtins.str"builtins.str*310*311*312*313*314*a
+self(* (0:abc.abstractmethod@*;
+write*
 
-PARITY_ODDserial.serialutil.PARITY_ODD
-builtins.str"builtins.str*310*311*312*313*314*c
-PARITY_MARKserial.serialutil.PARITY_MARK
-builtins.str"builtins.str*310*311*312*313*314*e
-PARITY_SPACEserial.serialutil.PARITY_SPACE
-builtins.str"builtins.str*310*311*312*313*314*e
-STOPBITS_ONEserial.serialutil.STOPBITS_ONE
-builtins.int"builtins.int*310*311*312*313*314*
-STOPBITS_ONE_POINT_FIVE)serial.serialutil.STOPBITS_ONE_POINT_FIVE 
-builtins.float"builtins.float*310*311*312*313*314*e
-STOPBITS_TWOserial.serialutil.STOPBITS_TWO
-builtins.int"builtins.int*310*311*312*313*314*]
-FIVEBITSserial.serialutil.FIVEBITS
-builtins.int"builtins.int*310*311*312*313*314*[
-SIXBITSserial.serialutil.SIXBITS
-builtins.int"builtins.int*310*311*312*313*314*_
-	SEVENBITSserial.serialutil.SEVENBITS
-builtins.int"builtins.int*310*311*312*313*314*_
-	EIGHTBITSserial.serialutil.EIGHTBITS
-builtins.int"builtins.int*310*311*312*313*314*æ
-PARITY_NAMESserial.serialutil.PARITY_NAMESu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*310*311*312*313*314*=
-sabserial.serialcli.sab
-Any*310*311*312*313*314
+self(*(0:abc.abstractmethod@z310z311*@
+write*
+
+self(*(0:abc.abstractmethod@z312z313z314*
+get_settings*
+
+self(*'
+apply_settings*
+
+self(*
+d(*&
+readinto*
+
+self(*(z310z311*+
+readinto*
+
+self(*(z312z313z314*,
+
+send_break*
+
+self(*
+duration (*
+read_all*
+
+self(*:
+
+read_until*
+
+self(*
+expected (*
+size (*;
+iread_until*
+
+self(*
+expected (*
+size (2b
+port-
+port
+*
+
+self(0:builtins.propertyX`+
+port*
+
+self(*
+
+port(
+0:.setter2r
+baudrate1
+baudrate*
+
+self(0:builtins.propertyX`3
+baudrate*
+
+self(*
+baudrate(0:.setter2r
+bytesize1
+bytesize*
+
+self(0:builtins.propertyX`3
+bytesize*
+
+self(*
+bytesize(0:.setter2v
+	exclusive2
+	exclusive*
+
+self(0:builtins.propertyX`5
+	exclusive*
+
+self(*
+	exclusive(0:.setter2j
+parity/
+parity	*
+
+self(0:builtins.propertyX`/
+parity*
+
+self(*
+parity(	0:.setter2r
+stopbits1
+stopbits*
+
+self(0:builtins.propertyX`3
+stopbits*
+
+self(*
+stopbits(0:.setter2n
+timeout0
+timeout*
+
+self(0:builtins.propertyX`1
+timeout*
+
+self(*
+timeout(0:.setter2Ä
+write_timeout6
+write_timeout*
+
+self(0:builtins.propertyX`7
+write_timeout*
+
+self(*
+timeout(0:.setter2í
+inter_byte_timeout;
+inter_byte_timeout*
+
+self(0:builtins.propertyX`?
+inter_byte_timeout*
+
+self(*
+
+ic_timeout(0:.setter2n
+xonxoff0
+xonxoff*
+
+self(0:builtins.propertyX`1
+xonxoff*
+
+self(*
+xonxoff(0:.setter2j
+rtscts/
+rtscts*
+
+self(0:builtins.propertyX`/
+rtscts*
+
+self(*
+rtscts(0:.setter2l
+dsrdtr/
+dsrdtr*
+
+self(0:builtins.propertyX`1
+dsrdtr*
+
+self(*
+dsrdtr (0:.setter2`
+rts,
+rts*
+
+self(0:builtins.propertyX`+
+rts*
+
+self(*
+value(0:.setter2`
+dtr,
+dtr*
+
+self(0:builtins.propertyX`+
+dtr*
+
+self(*
+value(0:.setter2Ñ
+break_condition8
+break_condition*
+
+self(0:builtins.propertyX`7
+break_condition*
+
+self(*
+value(0:.setter2~
+
+rs485_mode3
+
+rs485_mode*
+
+self(0:builtins.propertyX`;
+
+rs485_mode*
+
+self(*
+rs485_settings(0:.setterr
+	BAUDRATES0r
+	BYTESIZES0r
+PARITIES0r
+STOPBITS0r
+is_open0r
+portstr0
+r
+name0
+Ÿ
+Serial"serial.serialutil.SerialBase*
+open*
+
+self(*1
+
+in_waiting*
+
+self(0:builtins.property`*"
+read*
+
+self(*
+size (*#
+write*
+
+self(*(z310z311*(
+write*
+
+self(*(z312z313z314*"
+reset_input_buffer*
+
+self(*#
+reset_output_buffer*
+
+self(**
+cts*
+
+self(0:builtins.property`**
+dsr*
+
+self(0:builtins.property`*)
+ri*
+
+self(0:builtins.property`*)
+cd*
+
+self(0:builtins.property`
+as_byte_array*
+string(*
+__annotations__0*
+XONserial.serialutil.XON0* 
+XOFFserial.serialutil.XOFF0*
+CRserial.serialutil.CR0*
+LFserial.serialutil.LF0*.
+PARITY_NONEserial.serialutil.PARITY_NONE0	*.
+PARITY_EVENserial.serialutil.PARITY_EVEN0	*,
+
+PARITY_ODDserial.serialutil.PARITY_ODD0	*.
+PARITY_MARKserial.serialutil.PARITY_MARK0	*0
+PARITY_SPACEserial.serialutil.PARITY_SPACE0	*0
+STOPBITS_ONEserial.serialutil.STOPBITS_ONE0*F
+STOPBITS_ONE_POINT_FIVE)serial.serialutil.STOPBITS_ONE_POINT_FIVE0*0
+STOPBITS_TWOserial.serialutil.STOPBITS_TWO0*(
+FIVEBITSserial.serialutil.FIVEBITS0*&
+SIXBITSserial.serialutil.SIXBITS0**
+	SEVENBITSserial.serialutil.SEVENBITS0**
+	EIGHTBITSserial.serialutil.EIGHTBITS0*0
+PARITY_NAMESserial.serialutil.PARITY_NAMES0*
+sab022$""serial.serialutil.PortNotOpenError2"serial.serialutil.Timeout2"builtins.float2"builtins.bool2"builtins.function222"serial.serialutil.SerialBase2"builtins.str22	2"builtins.int222"builtins.bytes222"typing_extensions.Buffer2"_collections_abc.Buffer22"builtins.dict2	222"typing.Generator2222"serial.rs485.RS485Settings222"builtins.tuple22"builtins.tuple2	222"serial.serialcli.Serial2"builtins.dict2		

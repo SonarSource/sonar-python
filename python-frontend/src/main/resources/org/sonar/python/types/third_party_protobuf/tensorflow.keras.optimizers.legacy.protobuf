@@ -1,348 +1,145 @@
 
-"tensorflow.keras.optimizers.legacy×[
-	Optimizer,tensorflow.keras.optimizers.legacy.Optimizer"*tensorflow.python.trackable.base.Trackable*¨
-__init__5tensorflow.keras.optimizers.legacy.Optimizer.__init__"
-None*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*&
-name
-builtins.str"builtins.str*—
-gradient_aggregatorû
-6TypeAlias[Union[CallableType[builtins.function],None]]†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None"6tensorflow.keras.optimizers.legacy._GradientAggregator *‚
-gradient_transformersä
-GTypeAlias[Union[typing.Iterable[CallableType[builtins.function]],None]]Ý
-<Union[typing.Iterable[CallableType[builtins.function]],None]
-0typing.Iterable[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"typing.Iterable
-None"7tensorflow.keras.optimizers.legacy._GradientTransformer *
-kwargs
-Anyz310z311z312z313z314*Õ
-_create_all_weights@tensorflow.keras.optimizers.legacy.Optimizer._create_all_weights"
-None*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*q
-var_listc
-$typing.Iterable[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"typing.Iterablez310z311z312z313z314*‰
-add_slot5tensorflow.keras.optimizers.legacy.Optimizer.add_slot"*
-tensorflow.Variable"tensorflow.Variable*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*3
-var*
-tensorflow.Variable"tensorflow.Variable*+
-	slot_name
-builtins.str"builtins.str*Å
-initializer±
-^TypeAlias[Union[builtins.str,CallableType[builtins.function],builtins.dict[builtins.str,Any]]]›
-SUnion[builtins.str,CallableType[builtins.function],builtins.dict[builtins.str,Any]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.functionW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"/tensorflow.keras.optimizers.legacy._Initializer *o
-shapeb
-"Union[tensorflow.TensorShape,None]0
-tensorflow.TensorShape"tensorflow.TensorShape
-None z310z311z312z313z314*•
+"tensorflow.keras.optimizers.legacyú	
+	Optimizer"*tensorflow.python.trackable.base.Trackable*n
+__init__*
 
-add_weight7tensorflow.keras.optimizers.legacy.Optimizer.add_weight"*
-tensorflow.Variable"tensorflow.Variable*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*&
-name
-builtins.str"builtins.str*’
-shape†
-RTypeAlias[Union[tensorflow.TensorShape,typing.Iterable[Union[builtins.int,None]]]]‚
-GUnion[tensorflow.TensorShape,typing.Iterable[Union[builtins.int,None]]]0
-tensorflow.TensorShape"tensorflow.TensorShape‚
-)typing.Iterable[Union[builtins.int,None]]D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None"typing.Iterable")tensorflow.keras.optimizers.legacy._Shape*‹
-dtypeý
-;TypeAlias[Union[tensorflow.dtypes.DType,builtins.str,None]]
-0Union[tensorflow.dtypes.DType,builtins.str,None]2
-tensorflow.dtypes.DType"tensorflow.dtypes.DType
-builtins.str"builtins.str
-None")tensorflow.keras.optimizers.legacy._Dtype *Å
-initializer±
-^TypeAlias[Union[builtins.str,CallableType[builtins.function],builtins.dict[builtins.str,Any]]]›
-SUnion[builtins.str,CallableType[builtins.function],builtins.dict[builtins.str,Any]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.functionW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"/tensorflow.keras.optimizers.legacy._Initializer *X
-	trainableG
-Union[None,builtins.bool]
-None
-builtins.bool"builtins.bool *_
-synchronizationH
-"tensorflow.VariableSynchronization""tensorflow.VariableSynchronization *S
-aggregation@
-tensorflow.VariableAggregation"tensorflow.VariableAggregation z310z311z312z313z314*Ý
-apply_gradients<tensorflow.keras.optimizers.legacy.Optimizer.apply_gradients"\
- Union[tensorflow.Operation,None],
-tensorflow.Operation"tensorflow.Operation
-None*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*’
-grads_and_varsý
-htyping.Iterable[Tuple[TypeAlias[Union[tensorflow.Tensor,tensorflow.IndexedSlices]],tensorflow.Variable]]ÿ
-WTuple[TypeAlias[Union[tensorflow.Tensor,tensorflow.IndexedSlices]],tensorflow.Variable]õ
-<TypeAlias[Union[tensorflow.Tensor,tensorflow.IndexedSlices]]“
-1Union[tensorflow.Tensor,tensorflow.IndexedSlices]&
-tensorflow.Tensor"tensorflow.Tensor4
-tensorflow.IndexedSlices"tensorflow.IndexedSlices"tensorflow._aliases.Gradients*
-tensorflow.Variable"tensorflow.Variable"typing.Iterable*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *F
- experimental_aggregate_gradients
-builtins.bool"builtins.bool z310z311z312z313z314*
-from_config8tensorflow.keras.optimizers.legacy.Optimizer.from_config"Ã
-1tensorflow.keras.optimizers.legacy.Optimizer.Self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer(*‘
-cls‡
-7Type[tensorflow.keras.optimizers.legacy.Optimizer.Self]Ã
-1tensorflow.keras.optimizers.legacy.Optimizer.Self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer("type*c
-configW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*Ô
-custom_objects½
-5Union[builtins.dict[builtins.str,builtins.type],None]x
-)builtins.dict[builtins.str,builtins.type]
-builtins.str"builtins.str
-builtins.type"builtins.type"builtins.dict
-None 0:builtins.classmethodpz310z311z312z313z314*·
+self(*
 
-get_config7tensorflow.keras.optimizers.legacy.Optimizer.get_config"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer0:abc.abstractmethod@z310z311z312z313z314*Ð
-get_slot5tensorflow.keras.optimizers.legacy.Optimizer.get_slot"*
-tensorflow.Variable"tensorflow.Variable*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*3
-var*
-tensorflow.Variable"tensorflow.Variable*+
-	slot_name
-builtins.str"builtins.strz310z311z312z313z314*š
-get_slot_names;tensorflow.keras.optimizers.legacy.Optimizer.get_slot_names"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizerz310z311z312z313z314*Â
-get_gradients:tensorflow.keras.optimizers.legacy.Optimizer.get_gradients"Ô
-Kbuiltins.list[TypeAlias[Union[tensorflow.Tensor,tensorflow.IndexedSlices]]]õ
-<TypeAlias[Union[tensorflow.Tensor,tensorflow.IndexedSlices]]“
-1Union[tensorflow.Tensor,tensorflow.IndexedSlices]&
-tensorflow.Tensor"tensorflow.Tensor4
-tensorflow.IndexedSlices"tensorflow.IndexedSlices"tensorflow._aliases.Gradients"builtins.list*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*0
-loss&
-tensorflow.Tensor"tensorflow.Tensor*k
-params_
-"builtins.list[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"builtins.listz310z311z312z313z314*î
-minimize5tensorflow.keras.optimizers.legacy.Optimizer.minimize",
-tensorflow.Operation"tensorflow.Operation*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*¼
-loss±
-8Union[tensorflow.Tensor,CallableType[builtins.function]]&
-tensorflow.Tensor"tensorflow.TensorK
-CallableType[builtins.function]&
-builtins.function"builtins.function*‘
-var_list‚
-mUnion[builtins.list[tensorflow.Variable],builtins.tuple[tensorflow.Variable],CallableType[builtins.function]]_
-"builtins.list[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"builtins.lista
-#builtins.tuple[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"builtins.tupleK
-CallableType[builtins.function]&
-builtins.function"builtins.function*d
-	grad_lossS
-Union[tensorflow.Tensor,None]&
-tensorflow.Tensor"tensorflow.Tensor
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *q
-tapee
-#Union[tensorflow.GradientTape,None]2
-tensorflow.GradientTape"tensorflow.GradientTape
-None z310z311z312z313z314*¥
-	variables6tensorflow.keras.optimizers.legacy.Optimizer.variables"_
-"builtins.list[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"builtins.list*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizerz310z311z312z313z314*¸
-weights4tensorflow.keras.optimizers.legacy.Optimizer.weights"_
-"builtins.list[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"builtins.list*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer0:builtins.property`z310z311z312z313z3142Ò
+name(*
+gradient_aggregator (*
+gradient_transformers (
+*
+kwargs(*3
+_create_all_weights*
 
-iterations7tensorflow.keras.optimizers.legacy.Optimizer.iterationsò
+self(*
+var_list(*X
+add_slot*
 
-iterations7tensorflow.keras.optimizers.legacy.Optimizer.iterations"*
-tensorflow.Variable"tensorflow.Variable*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer0:builtins.propertyX`ü
+self(*	
+var(*
+	slot_name(*
+initializer (*
+shape (*˜
 
-iterations7tensorflow.keras.optimizers.legacy.Optimizer.iterations"
-None*f
-self\
-,tensorflow.keras.optimizers.legacy.Optimizer",tensorflow.keras.optimizers.legacy.Optimizer*8
-variable*
-tensorflow.Variable"tensorflow.Variable0:.setter"310"311"312"313"314j310j311j312j313j314rr
-_name2tensorflow.keras.optimizers.legacy.Optimizer._name
-builtins.str"builtins.str*310*311*312*313*314r»
-_iterations8tensorflow.keras.optimizers.legacy.Optimizer._iterationsY
-Union[tensorflow.Variable,None]*
-tensorflow.Variable"tensorflow.Variable
-None*310*311*312*313*314r»
-_weights5tensorflow.keras.optimizers.legacy.Optimizer._weights_
-"builtins.list[tensorflow.Variable]*
-tensorflow.Variable"tensorflow.Variable"builtins.list*310*311*312*313*314rî
-gradient_aggregator@tensorflow.keras.optimizers.legacy.Optimizer.gradient_aggregatorû
-6TypeAlias[Union[CallableType[builtins.function],None]]†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None"6tensorflow.keras.optimizers.legacy._GradientAggregator*310*311*312*313*314rÛ
-gradient_transformersBtensorflow.keras.optimizers.legacy.Optimizer.gradient_transformersä
-GTypeAlias[Union[typing.Iterable[CallableType[builtins.function]],None]]Ý
-<Union[typing.Iterable[CallableType[builtins.function]],None]
-0typing.Iterable[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"typing.Iterable
-None"7tensorflow.keras.optimizers.legacy._GradientTransformer*310*311*312*313*314rå
-learning_rate:tensorflow.keras.optimizers.legacy.Optimizer.learning_rateþ
-VTypeAlias[Union[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]]]ï
-KUnion[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]] 
-builtins.float"builtins.float&
-tensorflow.Tensor"tensorflow.Tensor
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function"0tensorflow.keras.optimizers.legacy._LearningRate*310*311*312*313*314ß	
-Adam'tensorflow.keras.optimizers.legacy.Adam",tensorflow.keras.optimizers.legacy.Optimizer*Ó
-__init__0tensorflow.keras.optimizers.legacy.Adam.__init__"
-None*\
-selfR
-'tensorflow.keras.optimizers.legacy.Adam"'tensorflow.keras.optimizers.legacy.Adam*”
-learning_rateþ
-VTypeAlias[Union[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]]]ï
-KUnion[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]] 
-builtins.float"builtins.float&
-tensorflow.Tensor"tensorflow.Tensor
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function"0tensorflow.keras.optimizers.legacy._LearningRate *.
-beta_1 
-builtins.float"builtins.float *.
-beta_2 
-builtins.float"builtins.float */
-epsilon 
-builtins.float"builtins.float *-
-amsgrad
-builtins.bool"builtins.bool *(
-name
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314*
+add_weight*
 
-get_config2tensorflow.keras.optimizers.legacy.Adam.get_config"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*\
-selfR
-'tensorflow.keras.optimizers.legacy.Adam"'tensorflow.keras.optimizers.legacy.Adamz310z311z312z313z314j310j311j312j313j314Ì
+self(*
 
-Adagrad*tensorflow.keras.optimizers.legacy.Adagrad",tensorflow.keras.optimizers.legacy.Optimizer*
-__init__3tensorflow.keras.optimizers.legacy.Adagrad.__init__"
-None*b
-selfX
-*tensorflow.keras.optimizers.legacy.Adagrad"*tensorflow.keras.optimizers.legacy.Adagrad*”
-learning_rateþ
-VTypeAlias[Union[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]]]ï
-KUnion[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]] 
-builtins.float"builtins.float&
-tensorflow.Tensor"tensorflow.Tensor
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function"0tensorflow.keras.optimizers.legacy._LearningRate *A
-initial_accumulator_value 
-builtins.float"builtins.float */
-epsilon 
-builtins.float"builtins.float *(
-name
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314*™
+name(*
+shape(*
+dtype (*
+initializer (*
+	trainable (*
+synchronization (*
+aggregation (*m
+apply_gradients *
 
-get_config5tensorflow.keras.optimizers.legacy.Adagrad.get_config"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*b
-selfX
-*tensorflow.keras.optimizers.legacy.Adagrad"*tensorflow.keras.optimizers.legacy.Adagradz310z311z312z313z314j310j311j312j313j314rž
-_initial_accumulator_valueEtensorflow.keras.optimizers.legacy.Adagrad._initial_accumulator_value 
-builtins.float"builtins.float*310*311*312*313*314ù
-SGD&tensorflow.keras.optimizers.legacy.SGD",tensorflow.keras.optimizers.legacy.Optimizer*ò
-__init__/tensorflow.keras.optimizers.legacy.SGD.__init__"
-None*Z
-selfP
-&tensorflow.keras.optimizers.legacy.SGD"&tensorflow.keras.optimizers.legacy.SGD*”
-learning_rateþ
-VTypeAlias[Union[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]]]ï
-KUnion[builtins.float,tensorflow.Tensor,Any,CallableType[builtins.function]] 
-builtins.float"builtins.float&
-tensorflow.Tensor"tensorflow.Tensor
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function"0tensorflow.keras.optimizers.legacy._LearningRate *0
-momentum 
-builtins.float"builtins.float *.
-nesterov
-builtins.bool"builtins.bool *(
-name
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314*
+self(*
+grads_and_vars(&*
+name ('*(
+ experimental_aggregate_gradients (*Z
+from_config(*	
+cls()*
+config(*
+custom_objects (,0:builtins.classmethodp*2
 
-get_config1tensorflow.keras.optimizers.legacy.SGD.get_config"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*Z
-selfP
-&tensorflow.keras.optimizers.legacy.SGD"&tensorflow.keras.optimizers.legacy.SGDz310z311z312z313z314j310j311j312j313j314©
-__getattr__.tensorflow.keras.optimizers.legacy.__getattr__"1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*
-builtins.str"builtins.strz310z311z312z313z314*œ
-__path__+tensorflow.keras.optimizers.legacy.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*·
-__annotations__2tensorflow.keras.optimizers.legacy.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*+
+get_config*
+
+self(0:abc.abstractmethod@*4
+get_slot*
+
+self(*	
+var(*
+	slot_name(*
+get_slot_names-*
+
+self(*7
+get_gradients.*
+
+self(*
+
+loss(!*
+params(/*c
+minimize*
+
+self(*
+
+loss(0*
+var_list(2*
+	grad_loss (3*
+name ('*
+tape (5*
+	variables/*
+
+self(*.
+weights/*
+
+self(0:builtins.property`2x
+
+iterations3
+
+iterations*
+
+self(0:builtins.propertyX`5
+
+iterations*
+
+self(*
+variable(0:.setterr	
+_name0r
+_iterations06r
+_weights0/r
+gradient_aggregator0r
+gradient_transformers0
+r
+learning_rate09à
+Adam",tensorflow.keras.optimizers.legacy.Optimizer*
+__init__*
+
+self(:*
+learning_rate (9*
+beta_1 (7*
+beta_2 (7*
+epsilon (7*
+amsgrad (*
+name (*
+kwargs(*
+
+get_config*
+
+self(:ô
+Adagrad",tensorflow.keras.optimizers.legacy.Optimizer*
+__init__*
+
+self(;*
+learning_rate (9*!
+initial_accumulator_value (7*
+epsilon (7*
+name (*
+kwargs(*
+
+get_config*
+
+self(;r
+_initial_accumulator_value07À
+SGD",tensorflow.keras.optimizers.legacy.Optimizer*o
+__init__*
+
+self(<*
+learning_rate (9*
+momentum (7*
+nesterov (*
+name (*
+kwargs(*
+
+get_config*
+
+self(<
+__getattr__=*(*
+__path__0-*
+__annotations__0*
 tf
-tensorflow *310*311*312*313*314*M
-	schedules%tensorflow.keras.optimizers.schedules *310*311*312*313*314
+tensorflow *4
+	schedules%tensorflow.keras.optimizers.schedules 22.",tensorflow.keras.optimizers.legacy.Optimizer2"builtins.str2"builtins.function22222="6tensorflow.keras.optimizers.legacy._GradientAggregator22"typing.Iterable2222>"7tensorflow.keras.optimizers.legacy._GradientTransformer2	22"tensorflow.Variable2"typing.Iterable22"builtins.dict22226"/tensorflow.keras.optimizers.legacy._Initializer22"tensorflow.TensorShape222"builtins.int222"typing.Iterable22220")tensorflow.keras.optimizers.legacy._Shape22"tensorflow.dtypes.DType2220")tensorflow.keras.optimizers.legacy._Dtype22"builtins.bool222$""tensorflow.VariableSynchronization2 "tensorflow.VariableAggregation2"tensorflow.Operation222"tensorflow.Tensor2"tensorflow.IndexedSlices22!"2$"tensorflow._aliases.Gradients2#22$2"typing.Iterable2%222h
+1tensorflow.keras.optimizers.legacy.Optimizer.Self",tensorflow.keras.optimizers.legacy.Optimizer(22"type2(2"builtins.type2"builtins.dict2*22+2"builtins.list22"builtins.list2$2"builtins.list222!2"builtins.tuple222/122!2"tensorflow.GradientTape224222"builtins.float227!27"0tensorflow.keras.optimizers.legacy._LearningRate282)"'tensorflow.keras.optimizers.legacy.Adam2,"*tensorflow.keras.optimizers.legacy.Adagrad2("&tensorflow.keras.optimizers.legacy.SGD2"_typeshed.Incomplete2

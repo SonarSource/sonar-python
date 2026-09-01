@@ -1,134 +1,79 @@
 
-openpyxl.formula.tokenizerh
-TokenizerError)openpyxl.formula.tokenizer.TokenizerError"builtins.Exceptionj310j311j312j313j314Î
-	Tokenizer$openpyxl.formula.tokenizer.Tokenizer"builtins.object*Ê
-__init__-openpyxl.formula.tokenizer.Tokenizer.__init__"
-None*V
-selfL
-$openpyxl.formula.tokenizer.Tokenizer"$openpyxl.formula.tokenizer.Tokenizer*
-formula
-Anyz310z311z312z313z314*~
-check_scientific_notation>openpyxl.formula.tokenizer.Tokenizer.check_scientific_notation*
-selfz310z311z312z313z314*ã
-assert_empty_token7openpyxl.formula.tokenizer.Tokenizer.assert_empty_token"
-None*V
-selfL
-$openpyxl.formula.tokenizer.Tokenizer"$openpyxl.formula.tokenizer.Tokenizer*
+openpyxl.formula.tokenizer$
+TokenizerError"builtins.Exceptionå
+	Tokenizer"builtins.object*'
+__init__*
 
-can_follow
-Any z310z311z312z313z314*¸
+self(*
+formula(*%
+check_scientific_notation*
+self*6
+assert_empty_token*
 
-save_token/openpyxl.formula.tokenizer.Tokenizer.save_token"
-None*V
-selfL
-$openpyxl.formula.tokenizer.Tokenizer"$openpyxl.formula.tokenizer.Tokenizerz310z311z312z313z314*X
-render+openpyxl.formula.tokenizer.Tokenizer.render*
-selfz310z311z312z313z314j310j311j312j313j314r
-SN_RE*openpyxl.formula.tokenizer.Tokenizer.SN_RE1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r‡
-	WSPACE_RE.openpyxl.formula.tokenizer.Tokenizer.WSPACE_RE1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r‘
-STRING_REGEXES3openpyxl.formula.tokenizer.Tokenizer.STRING_REGEXES1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r‹
-ERROR_CODES0openpyxl.formula.tokenizer.Tokenizer.ERROR_CODES1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rx
-TOKEN_ENDERS1openpyxl.formula.tokenizer.Tokenizer.TOKEN_ENDERS
-builtins.str"builtins.str*310*311*312*313*314rƒ
-formula,openpyxl.formula.tokenizer.Tokenizer.formula1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r
-items*openpyxl.formula.tokenizer.Tokenizer.items1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r‹
-token_stack0openpyxl.formula.tokenizer.Tokenizer.token_stack1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rl
-offset+openpyxl.formula.tokenizer.Tokenizer.offset
-builtins.int"builtins.int*310*311*312*313*314r
-token*openpyxl.formula.tokenizer.Tokenizer.token1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314³
-Token openpyxl.formula.tokenizer.Token"builtins.object*ý
-__init__)openpyxl.formula.tokenizer.Token.__init__"
-None*N
-selfD
- openpyxl.formula.tokenizer.Token" openpyxl.formula.tokenizer.Token*
-value
-Any*
-type_
-Any*+
-subtype
-builtins.str"builtins.str z310z311z312z313z314*„
-make_operand-openpyxl.formula.tokenizer.Token.make_operand*
+self(*
+
+can_follow (*
+
+save_token*
+
+self(*
+render*
+selfr	
+SN_RE0r
+	WSPACE_RE0r
+STRING_REGEXES0r
+ERROR_CODES0r
+TOKEN_ENDERS0r
+formula0r	
+items0r
+token_stack0r
+
+offset0r	
+token0¹
+Token"builtins.object*C
+__init__*
+
+self(*
+value(*
+type_(*
+subtype (*<
+make_operand*
 cls*	
-value0:builtins.classmethodpz310z311z312z313z314*¸
-make_subexp,openpyxl.formula.tokenizer.Token.make_subexp"
-Any*
-clsv
-&Type[openpyxl.formula.tokenizer.Token]D
- openpyxl.formula.tokenizer.Token" openpyxl.formula.tokenizer.Token"type*
-value
-Any**
-func
-builtins.bool"builtins.bool 0:builtins.classmethodpz310z311z312z313z314*\
+value0:builtins.classmethodp*O
+make_subexp*	
+cls(*
+value(*
+func (	0:builtins.classmethodp*
 
-get_closer+openpyxl.formula.tokenizer.Token.get_closer*
-selfz310z311z312z313z314*ˆ
-make_separator/openpyxl.formula.tokenizer.Token.make_separator*
+get_closer*
+self*>
+make_separator*
 cls*	
-value0:builtins.classmethodpz310z311z312z313z314j310j311j312j313j314rj
-LITERAL(openpyxl.formula.tokenizer.Token.LITERAL
-builtins.str"builtins.str*310*311*312*313*314rj
-OPERAND(openpyxl.formula.tokenizer.Token.OPERAND
-builtins.str"builtins.str*310*311*312*313*314rd
-FUNC%openpyxl.formula.tokenizer.Token.FUNC
-builtins.str"builtins.str*310*311*312*313*314rf
-ARRAY&openpyxl.formula.tokenizer.Token.ARRAY
-builtins.str"builtins.str*310*311*312*313*314rf
-PAREN&openpyxl.formula.tokenizer.Token.PAREN
-builtins.str"builtins.str*310*311*312*313*314rb
-SEP$openpyxl.formula.tokenizer.Token.SEP
-builtins.str"builtins.str*310*311*312*313*314rh
-OP_PRE'openpyxl.formula.tokenizer.Token.OP_PRE
-builtins.str"builtins.str*310*311*312*313*314rf
-OP_IN&openpyxl.formula.tokenizer.Token.OP_IN
-builtins.str"builtins.str*310*311*312*313*314rj
-OP_POST(openpyxl.formula.tokenizer.Token.OP_POST
-builtins.str"builtins.str*310*311*312*313*314rh
-WSPACE'openpyxl.formula.tokenizer.Token.WSPACE
-builtins.str"builtins.str*310*311*312*313*314r{
-value&openpyxl.formula.tokenizer.Token.value1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314ry
-type%openpyxl.formula.tokenizer.Token.type1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314r
-subtype(openpyxl.formula.tokenizer.Token.subtype1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rd
-TEXT%openpyxl.formula.tokenizer.Token.TEXT
-builtins.str"builtins.str*310*311*312*313*314rh
-NUMBER'openpyxl.formula.tokenizer.Token.NUMBER
-builtins.str"builtins.str*310*311*312*313*314rj
-LOGICAL(openpyxl.formula.tokenizer.Token.LOGICAL
-builtins.str"builtins.str*310*311*312*313*314rf
-ERROR&openpyxl.formula.tokenizer.Token.ERROR
-builtins.str"builtins.str*310*311*312*313*314rf
-RANGE&openpyxl.formula.tokenizer.Token.RANGE
-builtins.str"builtins.str*310*311*312*313*314rd
-OPEN%openpyxl.formula.tokenizer.Token.OPEN
-builtins.str"builtins.str*310*311*312*313*314rf
-CLOSE&openpyxl.formula.tokenizer.Token.CLOSE
-builtins.str"builtins.str*310*311*312*313*314rb
-ARG$openpyxl.formula.tokenizer.Token.ARG
-builtins.str"builtins.str*310*311*312*313*314rb
-ROW$openpyxl.formula.tokenizer.Token.ROW
-builtins.str"builtins.str*310*311*312*313*314*¯
-__annotations__*openpyxl.formula.tokenizer.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+value0:builtins.classmethodpr
+LITERAL0r
+OPERAND0r
+FUNC0r	
+ARRAY0r	
+PAREN0r
+SEP0r
+
+OP_PRE0r	
+OP_IN0r
+OP_POST0r
+
+WSPACE0r	
+value0r
+type0r
+subtype0r
+TEXT0r
+
+NUMBER0r
+LOGICAL0r	
+ERROR0r	
+RANGE0r
+OPEN0r	
+CLOSE0r
+ARG0r
+ROW0*
+__annotations__0
+22&"$openpyxl.formula.tokenizer.Tokenizer22"_typeshed.Incomplete22"builtins.str2"builtins.int2"" openpyxl.formula.tokenizer.Token2"type22"builtins.bool2"builtins.dict2

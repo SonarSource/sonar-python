@@ -1,337 +1,132 @@
 
-influxdb_client._sync.restˇ	
-RESTResponse'influxdb_client._sync.rest.RESTResponse"	io.IOBase*–
-__init__0influxdb_client._sync.rest.RESTResponse.__init__"
-None*\
-selfR
-'influxdb_client._sync.rest.RESTResponse"'influxdb_client._sync.rest.RESTResponse*
-resp
-Anyz310z311z312z313z314*c
+influxdb_client._sync.rest«
+RESTResponse"	io.IOBase*$
+__init__*
 
-getheaders2influxdb_client._sync.rest.RESTResponse.getheaders*
-selfz310z311z312z313z314*Ω
-	getheader1influxdb_client._sync.rest.RESTResponse.getheader"
-Any*\
-selfR
-'influxdb_client._sync.rest.RESTResponse"'influxdb_client._sync.rest.RESTResponse*
-name
-Any*j
-default[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314j310j311j312j313j314rò
-urllib3_response8influxdb_client._sync.rest.RESTResponse.urllib3_response1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÑ
-status.influxdb_client._sync.rest.RESTResponse.status1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÑ
-reason.influxdb_client._sync.rest.RESTResponse.reason1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rÄ
-data,influxdb_client._sync.rest.RESTResponse.data1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314Ç;
-RESTClientObject+influxdb_client._sync.rest.RESTClientObject"builtins.object*∞
-__init__4influxdb_client._sync.rest.RESTClientObject.__init__"
-None*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-configuration
-Any*.
+self(*
 
-pools_size
-builtins.int"builtins.int *j
-maxsize[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *-
-retries
-builtins.bool"builtins.bool z310z311z312z313z314*È
-request3influxdb_client._sync.rest.RESTClientObject.request"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-method
-Any*
-url
-Any*o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-post_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+resp(*
 
-urlopen_kw
-Anyz310z311z312z313z314*Û
-GET/influxdb_client._sync.rest.RESTClientObject.GET"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+getheaders*
+self*6
+	getheader*
 
-urlopen_kw
-Anyz310z311z312z313z314*ı
-HEAD0influxdb_client._sync.rest.RESTClientObject.HEAD"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+self(*
 
-urlopen_kw
-Anyz310z311z312z313z314*‘
-OPTIONS3influxdb_client._sync.rest.RESTClientObject.OPTIONS"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-post_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+name(*
+default (r
+urllib3_response0r
 
-urlopen_kw
-Anyz310z311z312z313z314*‚
-DELETE2influxdb_client._sync.rest.RESTClientObject.DELETE"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+status0r
 
-urlopen_kw
-Anyz310z311z312z313z314*Œ
-POST0influxdb_client._sync.rest.RESTClientObject.POST"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-post_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+reason0r
+data0°
+RESTClientObject"builtins.object*c
+__init__*
 
-urlopen_kw
-Anyz310z311z312z313z314*Ã
-PUT/influxdb_client._sync.rest.RESTClientObject.PUT"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-post_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+self(*
+configuration(*
 
-urlopen_kw
-Anyz310z311z312z313z314*–
-PATCH1influxdb_client._sync.rest.RESTClientObject.PATCH"
-Any*d
-selfZ
-+influxdb_client._sync.rest.RESTClientObject"+influxdb_client._sync.rest.RESTClientObject*
-url
-Any*j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-query_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *n
-post_params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *6
-_preload_content
-builtins.bool"builtins.bool *s
-_request_timeout[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+pools_size (*
+maxsize (*
+retries (*¿
+request*
 
-urlopen_kw
-Anyz310z311z312z313z314j310j311j312j313j314rñ
-configuration9influxdb_client._sync.rest.RESTClientObject.configuration1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rê
+self(*
+method(*	
+url(*
+query_params (*
+headers (*
+body (*
+post_params (*
+_preload_content (*
+_request_timeout (*
 
-pools_size6influxdb_client._sync.rest.RESTClientObject.pools_size1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rä
-maxsize3influxdb_client._sync.rest.RESTClientObject.maxsize1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rä
-retries3influxdb_client._sync.rest.RESTClientObject.retries1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314rî
-pool_manager8influxdb_client._sync.rest.RESTClientObject.pool_manager1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314*Ø
-__annotations__*influxdb_client._sync.rest.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+urlopen_kw(*ã
+GET*
+
+self(*	
+url(*
+headers (*
+query_params (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(*å
+HEAD*
+
+self(*	
+url(*
+headers (*
+query_params (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(*≤
+OPTIONS*
+
+self(*	
+url(*
+headers (*
+query_params (*
+post_params (*
+body (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(*ú
+DELETE*
+
+self(*	
+url(*
+headers (*
+query_params (*
+body (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(*Ø
+POST*
+
+self(*	
+url(*
+headers (*
+query_params (*
+post_params (*
+body (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(*Æ
+PUT*
+
+self(*	
+url(*
+headers (*
+query_params (*
+post_params (*
+body (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(*∞
+PATCH*
+
+self(*	
+url(*
+headers (*
+query_params (*
+post_params (*
+body (*
+_preload_content (*
+_request_timeout (*
+
+urlopen_kw(r
+configuration0r
+
+pools_size0r
+maxsize0r
+retries0r
+pool_manager0*
+__annotations__0
+22)"'influxdb_client._sync.rest.RESTResponse22"_typeshed.Incomplete2222-"+influxdb_client._sync.rest.RESTClientObject2"builtins.int2"builtins.bool2"builtins.str2"builtins.dict2	

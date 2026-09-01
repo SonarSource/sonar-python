@@ -1,190 +1,92 @@
 
-pyspark.ml.stat¦
-ChiSquareTestpyspark.ml.stat.ChiSquareTest"builtins.object*ä
-test"pyspark.ml.stat.ChiSquareTest.test"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*O
-datasetB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*-
-featuresCol
-builtins.str"builtins.str**
-labelCol
-builtins.str"builtins.str*-
-flatten
-builtins.bool"builtins.bool 0:builtins.staticmethodhì
-Correlationpyspark.ml.stat.Correlation"builtins.object*®
-corr pyspark.ml.stat.Correlation.corr"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*O
-datasetB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*(
-column
-builtins.str"builtins.str**
-method
-builtins.str"builtins.str 0:builtins.staticmethodh»
-KolmogorovSmirnovTest%pyspark.ml.stat.KolmogorovSmirnovTest"builtins.object*é
-test*pyspark.ml.stat.KolmogorovSmirnovTest.test"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*O
-datasetB
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*+
-	sampleCol
-builtins.str"builtins.str**
-distName
-builtins.str"builtins.str*,
-params 
-builtins.float"builtins.float0:builtins.staticmethodh¬!
+pyspark.ml.statˆ
+ChiSquareTest"builtins.object*f
+test*
+dataset(*
+featuresCol(*
+labelCol(*
+flatten (0:builtins.staticmethodhp
+Correlation"builtins.object*P
+corr*
+dataset(*
+column(*
+method (0:builtins.staticmethodh‹
+KolmogorovSmirnovTest"builtins.object*a
+test*
+dataset(*
+	sampleCol(*
+distName(*
+params(0:builtins.staticmethodh¬
 
-Summarizerpyspark.ml.stat.Summarizer"builtins.object*¹
-meanpyspark.ml.stat.Summarizer.mean"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*·
-sumpyspark.ml.stat.Summarizer.sum"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*Á
-variance#pyspark.ml.stat.Summarizer.variance"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*·
-stdpyspark.ml.stat.Summarizer.std"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*»
-count pyspark.ml.stat.Summarizer.count"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*Ç
-numNonZeros&pyspark.ml.stat.Summarizer.numNonZeros"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*·
-maxpyspark.ml.stat.Summarizer.max"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*·
-minpyspark.ml.stat.Summarizer.min"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*½
-normL1!pyspark.ml.stat.Summarizer.normL1"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*½
-normL2!pyspark.ml.stat.Summarizer.normL2"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None 0:builtins.staticmethodh*È
-_check_param'pyspark.ml.stat.Summarizer._check_param"®
-:Tuple[pyspark.sql.column.Column,pyspark.sql.column.Column]6
-pyspark.sql.column.Column"pyspark.sql.column.Column6
-pyspark.sql.column.Column"pyspark.sql.column.Column*G
-featuresCol6
-pyspark.sql.column.Column"pyspark.sql.column.Column*z
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None0:builtins.staticmethodh*ý
-_get_single_metric-pyspark.ml.stat.Summarizer._get_single_metric"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*?
-col6
-pyspark.sql.column.Column"pyspark.sql.column.Column*z
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None*(
-metric
-builtins.str"builtins.str0:builtins.staticmethodh*µ
-metrics"pyspark.ml.stat.Summarizer.metrics"@
-pyspark.ml.stat.SummaryBuilder"pyspark.ml.stat.SummaryBuilder*)
-metrics
-builtins.str"builtins.str0:builtins.staticmethodhù
-SummaryBuilderpyspark.ml.stat.SummaryBuilder"pyspark.ml.wrapper.JavaWrapper*§
-__init__'pyspark.ml.stat.SummaryBuilder.__init__"
-None*J
-self@
-pyspark.ml.stat.SummaryBuilder"pyspark.ml.stat.SummaryBuilder*
-jSummaryBuilder
-Any*ü
-summary&pyspark.ml.stat.SummaryBuilder.summary"6
-pyspark.sql.column.Column"pyspark.sql.column.Column*J
-self@
-pyspark.ml.stat.SummaryBuilder"pyspark.ml.stat.SummaryBuilder*G
-featuresCol6
-pyspark.sql.column.Column"pyspark.sql.column.Column*|
-	weightColk
-%Union[pyspark.sql.column.Column,None]6
-pyspark.sql.column.Column"pyspark.sql.column.Column
-None º
-MultivariateGaussian$pyspark.ml.stat.MultivariateGaussian"builtins.object*š
-__init__-pyspark.ml.stat.MultivariateGaussian.__init__"
-None*V
-selfL
-$pyspark.ml.stat.MultivariateGaussian"$pyspark.ml.stat.MultivariateGaussian*>
-mean4
-pyspark.ml.linalg.Vector"pyspark.ml.linalg.Vector*=
-cov4
-pyspark.ml.linalg.Matrix"pyspark.ml.linalg.Matrixrg
-mean)pyspark.ml.stat.MultivariateGaussian.mean4
-pyspark.ml.linalg.Vector"pyspark.ml.linalg.Vectorre
-cov(pyspark.ml.stat.MultivariateGaussian.cov4
-pyspark.ml.linalg.Matrix"pyspark.ml.linalg.Matrix*‹
-__annotations__pyspark.ml.stat.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*1
+Summarizer"builtins.object*A
+mean*	
+col(*
+	weightCol (0:builtins.staticmethodh*@
+sum*	
+col(*
+	weightCol (0:builtins.staticmethodh*E
+variance*	
+col(*
+	weightCol (0:builtins.staticmethodh*@
+std*	
+col(*
+	weightCol (0:builtins.staticmethodh*B
+count*	
+col(*
+	weightCol (0:builtins.staticmethodh*H
+numNonZeros*	
+col(*
+	weightCol (0:builtins.staticmethodh*@
+max*	
+col(*
+	weightCol (0:builtins.staticmethodh*@
+min*	
+col(*
+	weightCol (0:builtins.staticmethodh*C
+normL1*	
+col(*
+	weightCol (0:builtins.staticmethodh*C
+normL2*	
+col(*
+	weightCol (0:builtins.staticmethodh*O
+_check_param*
+featuresCol(*
+	weightCol(0:builtins.staticmethodh*[
+_get_single_metric*	
+col(*
+	weightCol(*
+metric(0:builtins.staticmethodh*5
+metrics	*
+metrics(0:builtins.staticmethodh 
+SummaryBuilder"pyspark.ml.wrapper.JavaWrapper*/
+__init__*
 
-JavaObjectpyspark.ml.stat.JavaObject
-Any*
-pysparkpyspark *w
-globspyspark.ml.stat.globsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*d
-sparkpyspark.ml.stat.sparkD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*V
-scpyspark.ml.stat.sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*L
-failure_countpyspark.ml.stat.failure_count
-builtins.int"builtins.int*F
+self(	*
+jSummaryBuilder(
+*=
+summary*
 
-test_countpyspark.ml.stat.test_count
-builtins.int"builtins.int
+self(	*
+featuresCol(*
+	weightCol (k
+MultivariateGaussian"builtins.object*/
+__init__*
+
+self(*
+
+mean(*	
+cov(r
+mean0r
+cov0*
+__annotations__0*
+
+JavaObject0
+*
+pysparkpyspark *	
+globs0*	
+spark0*
+sc0*
+failure_count0*
+
+test_count02!"pyspark.sql.dataframe.DataFrame2"builtins.str2"builtins.bool2"builtins.float2"pyspark.sql.column.Column222222 "pyspark.ml.stat.SummaryBuilder22&"$pyspark.ml.stat.MultivariateGaussian2"pyspark.ml.linalg.Vector2"pyspark.ml.linalg.Matrix2"builtins.dict2
+2"" pyspark.sql.session.SparkSession2"pyspark.context.SparkContext2"builtins.int

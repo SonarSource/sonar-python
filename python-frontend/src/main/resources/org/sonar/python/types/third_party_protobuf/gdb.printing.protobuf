@@ -1,86 +1,48 @@
 
-gdb.printing‚	
-PrettyPrintergdb.printing.PrettyPrinter"builtins.object*°
-__init__#gdb.printing.PrettyPrinter.__init__"
-None*B
-self8
-gdb.printing.PrettyPrinter"gdb.printing.PrettyPrinter*&
-name
-builtins.str"builtins.str*‡
-subprintersÃ
-:Union[typing.Iterable[gdb.printing.SubPrettyPrinter],None]Å
-.typing.Iterable[gdb.printing.SubPrettyPrinter]>
-gdb.printing.SubPrettyPrinter"gdb.printing.SubPrettyPrinter"typing.Iterable
-None z310z311z312z313z314*Ö
-__call__#gdb.printing.PrettyPrinter.__call__"V
-Union[gdb._PrettyPrinter,None](
-gdb._PrettyPrinter"gdb._PrettyPrinter
-None*B
-self8
-gdb.printing.PrettyPrinter"gdb.printing.PrettyPrinter*
-val
-	gdb.Value"	gdb.Valuez310z311z312z313z314j310j311j312j313j314r^
-namegdb.printing.PrettyPrinter.name
-builtins.str"builtins.str*310*311*312*313*314rñ
-subprinters&gdb.printing.PrettyPrinter.subprinters≈
-8Union[builtins.list[gdb.printing.SubPrettyPrinter],None]}
-,builtins.list[gdb.printing.SubPrettyPrinter]>
-gdb.printing.SubPrettyPrinter"gdb.printing.SubPrettyPrinter"builtins.list
-None*310*311*312*313*314rf
-enabled"gdb.printing.PrettyPrinter.enabled
-builtins.bool"builtins.bool*310*311*312*313*314Û
-SubPrettyPrintergdb.printing.SubPrettyPrinter"builtins.object*«
-__init__&gdb.printing.SubPrettyPrinter.__init__"
-None*H
-self>
-gdb.printing.SubPrettyPrinter"gdb.printing.SubPrettyPrinter*&
-name
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314ra
-name"gdb.printing.SubPrettyPrinter.name
-builtins.str"builtins.str*310*311*312*313*314ri
-enabled%gdb.printing.SubPrettyPrinter.enabled
-builtins.bool"builtins.bool*310*311*312*313*314ƒ
-RegexpCollectionPrettyPrinter*gdb.printing.RegexpCollectionPrettyPrinter"gdb.printing.PrettyPrinter*Ó
-__init__3gdb.printing.RegexpCollectionPrettyPrinter.__init__"
-None*b
-selfX
-*gdb.printing.RegexpCollectionPrettyPrinter"*gdb.printing.RegexpCollectionPrettyPrinter*&
-name
-builtins.str"builtins.strz310z311z312z313z314*–
-add_printer6gdb.printing.RegexpCollectionPrettyPrinter.add_printer"
-None*b
-selfX
-*gdb.printing.RegexpCollectionPrettyPrinter"*gdb.printing.RegexpCollectionPrettyPrinter*&
-name
-builtins.str"builtins.str*(
-regexp
-builtins.str"builtins.str*Ø
-gen_printerù
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" gdb._PrettyPrinterLookupFunctionz310z311z312z313z314j310j311j312j313j314”
-FlagEnumerationPrinter#gdb.printing.FlagEnumerationPrinter"gdb.printing.PrettyPrinter*ﬁ
-__init__,gdb.printing.FlagEnumerationPrinter.__init__"
-None*T
-selfJ
-#gdb.printing.FlagEnumerationPrinter"#gdb.printing.FlagEnumerationPrinter*+
-	enum_type
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ë
-register_pretty_printer$gdb.printing.register_pretty_printer"
-None*x
-objo
-%Union[gdb.Objfile,gdb.Progspace,None]
-gdb.Objfile"gdb.Objfile
-gdb.Progspace"gdb.Progspace
-None*⁄
-printerÃ
-AUnion[gdb.printing.PrettyPrinter,CallableType[builtins.function]]8
-gdb.printing.PrettyPrinter"gdb.printing.PrettyPrinterK
-CallableType[builtins.function]&
-builtins.function"builtins.function*-
-replace
-builtins.bool"builtins.bool z310z311z312z313z314*°
-__annotations__gdb.printing.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+gdb.printing®
+PrettyPrinter"builtins.object*9
+__init__*
+
+self(*
+
+name(*
+subprinters (*#
+__call__*
+
+self(*	
+val(	r
+name0r
+subprinters0r
+enabled0`
+SubPrettyPrinter"builtins.object*$
+__init__*
+
+self(*
+
+name(r
+name0r
+enabled0´
+RegexpCollectionPrettyPrinter"gdb.printing.PrettyPrinter*$
+__init__*
+
+self(*
+
+name(*H
+add_printer*
+
+self(*
+
+name(*
+regexp(*
+gen_printer(_
+FlagEnumerationPrinter"gdb.printing.PrettyPrinter*)
+__init__*
+
+self(*
+	enum_type(F
+register_pretty_printer*	
+obj(*
+printer(*
+replace (*
+__annotations__022"gdb.printing.PrettyPrinter2"builtins.str2"gdb.printing.SubPrettyPrinter2"typing.Iterable2222"gdb._PrettyPrinter222"	gdb.Value2"builtins.list222
+2"builtins.bool2,"*gdb.printing.RegexpCollectionPrettyPrinter2"builtins.function222'" gdb._PrettyPrinterLookupFunction22%"#gdb.printing.FlagEnumerationPrinter2"gdb.Objfile2"gdb.Progspace222222"builtins.dict2

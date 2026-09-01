@@ -1,107 +1,48 @@
 
-itsdangerous.exc´
-BadDataitsdangerous.exc.BadData"builtins.Exception*¢
-__init__!itsdangerous.exc.BadData.__init__"
-None*>
-self4
-itsdangerous.exc.BadData"itsdangerous.exc.BadData*)
-message
-builtins.str"builtins.str*Å
-__str__ itsdangerous.exc.BadData.__str__"
-builtins.str"builtins.str*64
-itsdangerous.exc.BadData"itsdangerous.exc.BadDatarI
-message itsdangerous.exc.BadData.message
-builtins.str"builtins.strá
-BadSignatureitsdangerous.exc.BadSignature"itsdangerous.exc.BadData*•
-__init__&itsdangerous.exc.BadSignature.__init__"
-None*H
-self>
-itsdangerous.exc.BadSignature"itsdangerous.exc.BadSignature*)
-message
-builtins.str"builtins.str*r
-payloadc
-TypeAlias[Union[Any,None]]&
-Union[Any,None]
-Any
-None"itsdangerous.exc._t_opt_any rï
-payload%itsdangerous.exc.BadSignature.payloadc
-TypeAlias[Union[Any,None]]&
-Union[Any,None]
-Any
-None"itsdangerous.exc._t_opt_anyÑ
-BadTimeSignature!itsdangerous.exc.BadTimeSignature"itsdangerous.exc.BadSignature*ô
-__init__*itsdangerous.exc.BadTimeSignature.__init__"
-None*P
-selfF
-!itsdangerous.exc.BadTimeSignature"!itsdangerous.exc.BadTimeSignature*)
-message
-builtins.str"builtins.str*r
-payloadc
-TypeAlias[Union[Any,None]]&
-Union[Any,None]
-Any
-None"itsdangerous.exc._t_opt_any *f
-date_signedS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None rë
-date_signed-itsdangerous.exc.BadTimeSignature.date_signedS
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-NoneX
-SignatureExpired!itsdangerous.exc.SignatureExpired"!itsdangerous.exc.BadTimeSignatureä
-	BadHeaderitsdangerous.exc.BadHeader"itsdangerous.exc.BadSignature*À
-__init__#itsdangerous.exc.BadHeader.__init__"
-None*B
-self8
-itsdangerous.exc.BadHeader"itsdangerous.exc.BadHeader*)
-message
-builtins.str"builtins.str*r
-payloadc
-TypeAlias[Union[Any,None]]&
-Union[Any,None]
-Any
-None"itsdangerous.exc._t_opt_any *q
-headerc
-TypeAlias[Union[Any,None]]&
-Union[Any,None]
-Any
-None"itsdangerous.exc._t_opt_any *π
-original_error¢
-)TypeAlias[Union[builtins.Exception,None]]V
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-None"itsdangerous.exc._t_opt_exc rê
-header!itsdangerous.exc.BadHeader.headerc
-TypeAlias[Union[Any,None]]&
-Union[Any,None]
-Any
-None"itsdangerous.exc._t_opt_anyr‡
-original_error)itsdangerous.exc.BadHeader.original_error¢
-)TypeAlias[Union[builtins.Exception,None]]V
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-None"itsdangerous.exc._t_opt_excë
+itsdangerous.excd
+BadData"builtins.Exception*'
+__init__*
 
-BadPayloaditsdangerous.exc.BadPayload"itsdangerous.exc.BadData*Á
-__init__$itsdangerous.exc.BadPayload.__init__"
-None*D
-self:
-itsdangerous.exc.BadPayload"itsdangerous.exc.BadPayload*)
-message
-builtins.str"builtins.str*π
-original_error¢
-)TypeAlias[Union[builtins.Exception,None]]V
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-None"itsdangerous.exc._t_opt_exc r·
-original_error*itsdangerous.exc.BadPayload.original_error¢
-)TypeAlias[Union[builtins.Exception,None]]V
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-None"itsdangerous.exc._t_opt_exc*å
-__annotations__ itsdangerous.exc.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-_ttyping 
+self(*
+message(*
+__str__*(r
+message0o
+BadSignature"itsdangerous.exc.BadData*8
+__init__*
+
+self(*
+message(*
+payload (r
+payload0ë
+BadTimeSignature"itsdangerous.exc.BadSignature*M
+__init__*
+
+self(*
+message(*
+payload (*
+date_signed (
+r
+date_signed0
+5
+SignatureExpired"!itsdangerous.exc.BadTimeSignature¨
+	BadHeader"itsdangerous.exc.BadSignature*`
+__init__*
+
+self(*
+message(*
+payload (*
+header (*
+original_error (r
+
+header0r
+original_error0{
+
+BadPayload"itsdangerous.exc.BadData*?
+__init__*
+
+self(*
+message(*
+original_error (r
+original_error0*
+__annotations__0*
+_ttyping 22"itsdangerous.exc.BadData2"builtins.str2"itsdangerous.exc.BadSignature2222""itsdangerous.exc._t_opt_any22#"!itsdangerous.exc.BadTimeSignature2"datetime.datetime22	2"itsdangerous.exc.BadHeader2"builtins.Exception222""itsdangerous.exc._t_opt_exc22"itsdangerous.exc.BadPayload2"builtins.dict2

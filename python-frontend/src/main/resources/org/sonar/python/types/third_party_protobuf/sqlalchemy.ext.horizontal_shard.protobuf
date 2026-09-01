@@ -1,116 +1,56 @@
 
-sqlalchemy.ext.horizontal_shard®
-ShardedQuery,sqlalchemy.ext.horizontal_shard.ShardedQuery"sqlalchemy.orm.query.Query*÷
-__init__5sqlalchemy.ext.horizontal_shard.ShardedQuery.__init__"
-None*è
-selfÝ
-Psqlalchemy.ext.horizontal_shard.ShardedQuery[sqlalchemy.ext.horizontal_shard._T][
-"sqlalchemy.ext.horizontal_shard._T"
-builtins.object"builtins.object"builtins.object",sqlalchemy.ext.horizontal_shard.ShardedQuery*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*t
-	set_shard6sqlalchemy.ext.horizontal_shard.ShardedQuery.set_shard*
+sqlalchemy.ext.horizontal_shard½
+ShardedQuery"sqlalchemy.orm.query.Query*2
+__init__*
+
+self(*
+
+args(*
+kwargs(*#
+	set_shard*
 self*
-shard_idz310z311z312z313z314Pj310j311j312j313j314rg
+shard_idPr
 
-id_chooser7sqlalchemy.ext.horizontal_shard.ShardedQuery.id_chooser
-Any*310*311*312*313*314rm
-query_chooser:sqlalchemy.ext.horizontal_shard.ShardedQuery.query_chooser
-Any*310*311*312*313*314rq
-execute_chooser<sqlalchemy.ext.horizontal_shard.ShardedQuery.execute_chooser
-Any*310*311*312*313*314¯
-ShardedSession.sqlalchemy.ext.horizontal_shard.ShardedSession"sqlalchemy.orm.session.Session*•
-__init__7sqlalchemy.ext.horizontal_shard.ShardedSession.__init__"
-None*j
-self`
-.sqlalchemy.ext.horizontal_shard.ShardedSession".sqlalchemy.ext.horizontal_shard.ShardedSession*
-shard_chooser
-Any*
+id_chooser0r
+query_chooser0r
+execute_chooser0Ž
+ShardedSession"sqlalchemy.orm.session.Session*‰
+__init__*
 
-id_chooser
-Any*r
-execute_chooser[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-shards[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-	query_cls
-Any *
-kwargs
-Anyz310z311z312z313z314*Á
-connection_callableBsqlalchemy.ext.horizontal_shard.ShardedSession.connection_callable"
-Any*j
-self`
-.sqlalchemy.ext.horizontal_shard.ShardedSession".sqlalchemy.ext.horizontal_shard.ShardedSession*i
-mapper[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-instance[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-shard_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*’
-get_bind7sqlalchemy.ext.horizontal_shard.ShardedSession.get_bind"
-Any*j
-self`
-.sqlalchemy.ext.horizontal_shard.ShardedSession".sqlalchemy.ext.horizontal_shard.ShardedSession*i
-mapper[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-shard_id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-instance[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-clause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz310z311z312z313z314*€
+self(*
+shard_chooser(*
 
-bind_shard9sqlalchemy.ext.horizontal_shard.ShardedSession.bind_shard"
-None*j
-self`
-.sqlalchemy.ext.horizontal_shard.ShardedSession".sqlalchemy.ext.horizontal_shard.ShardedSession*
-shard_id
-Any*
-bind
-Anyz310z311z312z313z314j310j311j312j313j314ro
-shard_chooser<sqlalchemy.ext.horizontal_shard.ShardedSession.shard_chooser
-Any*310*311*312*313*314ri
+id_chooser(*
+execute_chooser (*
+shards (*
+	query_cls (*
+kwargs(*e
+connection_callable*
 
-id_chooser9sqlalchemy.ext.horizontal_shard.ShardedSession.id_chooser
-Any*310*311*312*313*314rs
-execute_chooser>sqlalchemy.ext.horizontal_shard.ShardedSession.execute_chooser
-Any*310*311*312*313*314ro
-query_chooser<sqlalchemy.ext.horizontal_shard.ShardedSession.query_chooser
-Any*310*311*312*313*314*´
-__annotations__/sqlalchemy.ext.horizontal_shard.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*
+mapper (*
+instance (*
+shard_id (*
+kwargs(*f
+get_bind*
+
+self(*
+mapper (*
+shard_id (*
+instance (*
+clause (*
+kw(*6
+
+bind_shard*
+
+self(*
+shard_id(*
+
+bind(r
+shard_chooser0r
+
+id_chooser0r
+execute_chooser0r
+query_chooser0*
+__annotations__0
+22"builtins.object2"builtins.object221",sqlalchemy.ext.horizontal_shard.ShardedQuery2220".sqlalchemy.ext.horizontal_shard.ShardedSession2"_typeshed.Incomplete2222"builtins.str2"builtins.dict2	

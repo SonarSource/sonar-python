@@ -1,589 +1,371 @@
 
-sqlalchemy.engine.defaultÓç
-DefaultDialect(sqlalchemy.engine.default.DefaultDialect"$sqlalchemy.engine.interfaces.Dialect*É	
-__init__1sqlalchemy.engine.default.DefaultDialect.__init__"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*5
-convert_unicode
-builtins.bool"builtins.bool *,
-encoding
-builtins.str"builtins.str *m
+sqlalchemy.engine.defaultÂ
+DefaultDialect"$sqlalchemy.engine.interfaces.Dialect*µ
+__init__*
 
-paramstyle[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-dbapi[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *u
-implicit_returning[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *4
-case_sensitive
-builtins.bool"builtins.bool *z
-supports_native_boolean[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *x
-max_identifier_length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-label_length[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-compiler_linting
-Any *9
-server_side_cursors
-builtins.bool"builtins.bool *
-kwargs
-Anyz310z311z312z313z314*ç
-dialect_description<sqlalchemy.engine.default.DefaultDialect.dialect_description*
-self0:builtins.property`z310z311z312z313z314*ß
- supports_sane_rowcount_returningIsqlalchemy.engine.default.DefaultDialect.supports_sane_rowcount_returning*
-self0:builtins.property`z310z311z312z313z314*é
-get_pool_class7sqlalchemy.engine.default.DefaultDialect.get_pool_class*
+self(*
+convert_unicode (*
+encoding (*
+
+paramstyle (*
+dbapi (*
+implicit_returning (*
+case_sensitive (*
+supports_native_boolean (*
+max_identifier_length (*
+label_length (*
+compiler_linting (*
+server_side_cursors (*
+kwargs(*6
+dialect_description*
+self0:builtins.property`*C
+ supports_sane_rowcount_returning*
+self0:builtins.property`*<
+get_pool_class*
 cls*
-url0:builtins.classmethodpz310z311z312z313z314*Ö
-get_dialect_pool_class?sqlalchemy.engine.default.DefaultDialect.get_dialect_pool_class*
+url0:builtins.classmethodp*+
+get_dialect_pool_class*
 self*
-urlz310z311z312z313z314*ß
-load_provisioning:sqlalchemy.engine.default.DefaultDialect.load_provisioning"
-None*ò
-clsé
-.Type[sqlalchemy.engine.default.DefaultDialect]T
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect"type0:builtins.classmethodpz310z311z312z313z314*›
+url*:
+load_provisioning*	
+cls(0:builtins.classmethodp*,
 
-initialize3sqlalchemy.engine.default.DefaultDialect.initialize"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+initialize*
 
-connection
-Anyz310z311z312z313z314*ƒ
+self(*
 
-on_connect3sqlalchemy.engine.default.DefaultDialect.on_connect"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialectz310z311z312z313z314*ñ
-get_default_isolation_levelDsqlalchemy.engine.default.DefaultDialect.get_default_isolation_level*
+connection(*
+
+on_connect*
+
+self(*7
+get_default_isolation_level*
 self*
 
-dbapi_connz310z311z312z313z314*{
-type_descriptor8sqlalchemy.engine.default.DefaultDialect.type_descriptor*
+dbapi_conn*(
+type_descriptor*
 self*
-typeobjz310z311z312z313z314*˜
-	has_index2sqlalchemy.engine.default.DefaultDialect.has_index"
-Any*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+typeobj*_
+	has_index*
 
-connection
-Any*
+self(*
 
-table_name
-Any*
+connection(*
 
-index_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Í
-validate_identifier<sqlalchemy.engine.default.DefaultDialect.validate_identifier"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-ident
-Anyz310z311z312z313z314*v
-connect0sqlalchemy.engine.default.DefaultDialect.connect*
+table_name(*
+
+index_name(*
+schema (*0
+validate_identifier*
+
+self(*
+ident(*+
+connect*
 self*	
 cargs*
-cparamsz310z311z312z313z314*
-create_connect_args<sqlalchemy.engine.default.DefaultDialect.create_connect_args*
+cparams*(
+create_connect_args*
 self*
-urlz310z311z312z313z314*ê
-set_engine_execution_optionsEsqlalchemy.engine.default.DefaultDialect.set_engine_execution_options"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-engine
-Any*
-opts
-Anyz310z311z312z313z314*ú
- set_connection_execution_optionsIsqlalchemy.engine.default.DefaultDialect.set_connection_execution_options"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+url*F
+set_engine_execution_options*
 
-connection
-Any*
-opts
-Anyz310z311z312z313z314*ﬂ
-do_begin1sqlalchemy.engine.default.DefaultDialect.do_begin"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-dbapi_connection
-Anyz310z311z312z313z314*Â
-do_rollback4sqlalchemy.engine.default.DefaultDialect.do_rollback"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-dbapi_connection
-Anyz310z311z312z313z314*·
-	do_commit2sqlalchemy.engine.default.DefaultDialect.do_commit"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-dbapi_connection
-Anyz310z311z312z313z314*ﬂ
-do_close1sqlalchemy.engine.default.DefaultDialect.do_close"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-dbapi_connection
-Anyz310z311z312z313z314*t
-do_ping0sqlalchemy.engine.default.DefaultDialect.do_ping*
+self(*
+engine(*
+
+opts(*N
+ set_connection_execution_options*
+
+self(*
+
+connection(*
+
+opts(*0
+do_begin*
+
+self(*
+dbapi_connection(*3
+do_rollback*
+
+self(*
+dbapi_connection(*1
+	do_commit*
+
+self(*
+dbapi_connection(*0
+do_close*
+
+self(*
+dbapi_connection(*)
+do_ping*
 self*
-dbapi_connectionz310z311z312z313z314*d
+dbapi_connection*
 
-create_xid3sqlalchemy.engine.default.DefaultDialect.create_xid*
-selfz310z311z312z313z314*Ù
-do_savepoint5sqlalchemy.engine.default.DefaultDialect.do_savepoint"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+create_xid*
+self*:
+do_savepoint*
 
-connection
-Any*
-name
-Anyz310z311z312z313z314*å
-do_rollback_to_savepointAsqlalchemy.engine.default.DefaultDialect.do_rollback_to_savepoint"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+self(*
 
-connection
-Any*
-name
-Anyz310z311z312z313z314*Ñ
-do_release_savepoint=sqlalchemy.engine.default.DefaultDialect.do_release_savepoint"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+connection(*
 
-connection
-Any*
-name
-Anyz310z311z312z313z314*˛
-do_executemany7sqlalchemy.engine.default.DefaultDialect.do_executemany"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-cursor
-Any*
-	statement
-Any*
+name(*F
+do_rollback_to_savepoint*
 
-parameters
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ˆ
+self(*
 
-do_execute3sqlalchemy.engine.default.DefaultDialect.do_execute"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-cursor
-Any*
-	statement
-Any*
+connection(*
 
-parameters
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*Ò
-do_execute_no_params=sqlalchemy.engine.default.DefaultDialect.do_execute_no_params"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
-cursor
-Any*
-	statement
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ç
-is_disconnect6sqlalchemy.engine.default.DefaultDialect.is_disconnect*
+name(*B
+do_release_savepoint*
+
+self(*
+
+connection(*
+
+name(*`
+do_executemany*
+
+self(*
+cursor(*
+	statement(*
+
+parameters(*
+context (*\
+
+do_execute*
+
+self(*
+cursor(*
+	statement(*
+
+parameters(*
+context (*T
+do_execute_no_params*
+
+self(*
+cursor(*
+	statement(*
+context (*<
+is_disconnect*
 self*
 e*
 
 connection*
 
-cursorz310z311z312z313z314*Û
-reset_isolation_level>sqlalchemy.engine.default.DefaultDialect.reset_isolation_level"
-None*^
-selfT
-(sqlalchemy.engine.default.DefaultDialect"(sqlalchemy.engine.default.DefaultDialect*
+cursor*7
+reset_isolation_level*
 
-dbapi_conn
-Anyz310z311z312z313z314*v
-normalize_name7sqlalchemy.engine.default.DefaultDialect.normalize_name*
+self(*
+
+dbapi_conn(*$
+normalize_name*
 self*
-namez310z311z312z313z314*z
-denormalize_name9sqlalchemy.engine.default.DefaultDialect.denormalize_name*
+name*&
+denormalize_name*
 self*
-namez310z311z312z313z314*ä
-get_driver_connection>sqlalchemy.engine.default.DefaultDialect.get_driver_connection*
+name*1
+get_driver_connection*
 self*
 
-connectionz310z311z312z313z314j310j311j312j313j314rà
-execution_ctx_cls:sqlalchemy.engine.default.DefaultDialect.execution_ctx_clsù
-3Type[sqlalchemy.engine.interfaces.ExecutionContext]^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext"type*310*311*312*313*314rs
-statement_compiler;sqlalchemy.engine.default.DefaultDialect.statement_compiler
-Any*310*311*312*313*314rg
-ddl_compiler5sqlalchemy.engine.default.DefaultDialect.ddl_compiler
-Any*310*311*312*313*314ri
-type_compiler6sqlalchemy.engine.default.DefaultDialect.type_compiler
-Any*310*311*312*313*314r_
-preparer1sqlalchemy.engine.default.DefaultDialect.preparer
-Any*310*311*312*313*314rÇ
-supports_alter7sqlalchemy.engine.default.DefaultDialect.supports_alter
-builtins.bool"builtins.bool*310*311*312*313*314rà
-supports_comments:sqlalchemy.engine.default.DefaultDialect.supports_comments
-builtins.bool"builtins.bool*310*311*312*313*314rÑ
-inline_comments8sqlalchemy.engine.default.DefaultDialect.inline_comments
-builtins.bool"builtins.bool*310*311*312*313*314rà
-use_setinputsizes:sqlalchemy.engine.default.DefaultDialect.use_setinputsizes
-builtins.bool"builtins.bool*310*311*312*313*314rñ
-supports_statement_cacheAsqlalchemy.engine.default.DefaultDialect.supports_statement_cache
-builtins.bool"builtins.bool*310*311*312*313*314ré
-default_sequence_base>sqlalchemy.engine.default.DefaultDialect.default_sequence_base
-builtins.int"builtins.int*310*311*312*313*314r}
-execute_sequence_format@sqlalchemy.engine.default.DefaultDialect.execute_sequence_format
-Any*310*311*312*313*314rÜ
-supports_schemas9sqlalchemy.engine.default.DefaultDialect.supports_schemas
-builtins.bool"builtins.bool*310*311*312*313*314rÇ
-supports_views7sqlalchemy.engine.default.DefaultDialect.supports_views
-builtins.bool"builtins.bool*310*311*312*313*314rä
-supports_sequences;sqlalchemy.engine.default.DefaultDialect.supports_sequences
-builtins.bool"builtins.bool*310*311*312*313*314rä
-sequences_optional;sqlalchemy.engine.default.DefaultDialect.sequences_optional
-builtins.bool"builtins.bool*310*311*312*313*314r™
-"preexecute_autoincrement_sequencesKsqlalchemy.engine.default.DefaultDialect.preexecute_autoincrement_sequences
-builtins.bool"builtins.bool*310*311*312*313*314rò
-supports_identity_columnsBsqlalchemy.engine.default.DefaultDialect.supports_identity_columns
-builtins.bool"builtins.bool*310*311*312*313*314rå
-postfetch_lastrowid<sqlalchemy.engine.default.DefaultDialect.postfetch_lastrowid
-builtins.bool"builtins.bool*310*311*312*313*314rä
-implicit_returning;sqlalchemy.engine.default.DefaultDialect.implicit_returning
-builtins.bool"builtins.bool*310*311*312*313*314rÇ
-full_returning7sqlalchemy.engine.default.DefaultDialect.full_returning
-builtins.bool"builtins.bool*310*311*312*313*314rû
-insert_executemany_returningEsqlalchemy.engine.default.DefaultDialect.insert_executemany_returning
-builtins.bool"builtins.bool*310*311*312*313*314rä
-cte_follows_insert;sqlalchemy.engine.default.DefaultDialect.cte_follows_insert
-builtins.bool"builtins.bool*310*311*312*313*314ré
-supports_native_enum=sqlalchemy.engine.default.DefaultDialect.supports_native_enum
-builtins.bool"builtins.bool*310*311*312*313*314rî
-supports_native_boolean@sqlalchemy.engine.default.DefaultDialect.supports_native_boolean
-builtins.bool"builtins.bool*310*311*312*313*314r¨
-#non_native_boolean_check_constraintLsqlalchemy.engine.default.DefaultDialect.non_native_boolean_check_constraint
-builtins.bool"builtins.bool*310*311*312*313*314r¢
-supports_simple_order_by_labelGsqlalchemy.engine.default.DefaultDialect.supports_simple_order_by_label
-builtins.bool"builtins.bool*310*311*312*313*314rÑ
-tuple_in_values8sqlalchemy.engine.default.DefaultDialect.tuple_in_values
-builtins.bool"builtins.bool*310*311*312*313*314rÉ
-connection_characteristicsCsqlalchemy.engine.default.DefaultDialect.connection_characteristics
-Any*310*311*312*313*314ru
-engine_config_types<sqlalchemy.engine.default.DefaultDialect.engine_config_types
-Any*310*311*312*313*314rî
-supports_native_decimal@sqlalchemy.engine.default.DefaultDialect.supports_native_decimal
-builtins.bool"builtins.bool*310*311*312*313*314rú
-supports_unicode_statementsDsqlalchemy.engine.default.DefaultDialect.supports_unicode_statements
-builtins.bool"builtins.bool*310*311*312*313*314rí
-supports_unicode_binds?sqlalchemy.engine.default.DefaultDialect.supports_unicode_binds
-builtins.bool"builtins.bool*310*311*312*313*314r}
-returns_unicode_strings@sqlalchemy.engine.default.DefaultDialect.returns_unicode_strings
-Any*310*311*312*313*314rw
-description_encoding=sqlalchemy.engine.default.DefaultDialect.description_encoding
-Any*310*311*312*313*314rl
-name-sqlalchemy.engine.default.DefaultDialect.name
-builtins.str"builtins.str*310*311*312*313*314ré
-max_identifier_length>sqlalchemy.engine.default.DefaultDialect.max_identifier_length
-builtins.int"builtins.int*310*311*312*313*314rm
-isolation_level8sqlalchemy.engine.default.DefaultDialect.isolation_level
-Any*310*311*312*313*314ry
-max_index_name_length>sqlalchemy.engine.default.DefaultDialect.max_index_name_length
-Any*310*311*312*313*314rÉ
-max_constraint_name_lengthCsqlalchemy.engine.default.DefaultDialect.max_constraint_name_length
-Any*310*311*312*313*314rí
-supports_sane_rowcount?sqlalchemy.engine.default.DefaultDialect.supports_sane_rowcount
-builtins.bool"builtins.bool*310*311*312*313*314rû
-supports_sane_multi_rowcountEsqlalchemy.engine.default.DefaultDialect.supports_sane_multi_rowcount
-builtins.bool"builtins.bool*310*311*312*313*314r_
-colspecs1sqlalchemy.engine.default.DefaultDialect.colspecs
-Any*310*311*312*313*314rà
-default_paramstyle;sqlalchemy.engine.default.DefaultDialect.default_paramstyle
-builtins.str"builtins.str*310*311*312*313*314rî
-supports_default_values@sqlalchemy.engine.default.DefaultDialect.supports_default_values
-builtins.bool"builtins.bool*310*311*312*313*314rö
-supports_default_metavalueCsqlalchemy.engine.default.DefaultDialect.supports_default_metavalue
-builtins.bool"builtins.bool*310*311*312*313*314rê
-supports_empty_insert>sqlalchemy.engine.default.DefaultDialect.supports_empty_insert
-builtins.bool"builtins.bool*310*311*312*313*314rú
-supports_multivalues_insertDsqlalchemy.engine.default.DefaultDialect.supports_multivalues_insert
-builtins.bool"builtins.bool*310*311*312*313*314rò
-supports_is_distinct_fromBsqlalchemy.engine.default.DefaultDialect.supports_is_distinct_from
-builtins.bool"builtins.bool*310*311*312*313*314rû
-supports_server_side_cursorsEsqlalchemy.engine.default.DefaultDialect.supports_server_side_cursors
-builtins.bool"builtins.bool*310*311*312*313*314rå
-server_side_cursors<sqlalchemy.engine.default.DefaultDialect.server_side_cursors
-builtins.bool"builtins.bool*310*311*312*313*314rí
-supports_for_update_of?sqlalchemy.engine.default.DefaultDialect.supports_for_update_of
-builtins.bool"builtins.bool*310*311*312*313*314ru
-server_version_info<sqlalchemy.engine.default.DefaultDialect.server_version_info
-Any*310*311*312*313*314ru
-default_schema_name<sqlalchemy.engine.default.DefaultDialect.default_schema_name
-Any*310*311*312*313*314ru
-construct_arguments<sqlalchemy.engine.default.DefaultDialect.construct_arguments
-Any*310*311*312*313*314rî
-requires_name_normalize@sqlalchemy.engine.default.DefaultDialect.requires_name_normalize
-builtins.bool"builtins.bool*310*311*312*313*314rs
-reflection_options;sqlalchemy.engine.default.DefaultDialect.reflection_options
-Any*310*311*312*313*314rç
-dbapi_exception_translation_mapHsqlalchemy.engine.default.DefaultDialect.dbapi_exception_translation_map
-Any*310*311*312*313*314rv
-is_async1sqlalchemy.engine.default.DefaultDialect.is_async
-builtins.bool"builtins.bool*310*311*312*313*314ra
-	CACHE_HIT2sqlalchemy.engine.default.DefaultDialect.CACHE_HIT
-Any*310*311*312*313*314rc
+connectionr
+execution_ctx_cls0
+r
+statement_compiler0r
+ddl_compiler0r
+type_compiler0r
+preparer0r
+supports_alter0r
+supports_comments0r
+inline_comments0r
+use_setinputsizes0r
+supports_statement_cache0r
+default_sequence_base0r
+execute_sequence_format0r
+supports_schemas0r
+supports_views0r
+supports_sequences0r
+sequences_optional0r&
+"preexecute_autoincrement_sequences0r
+supports_identity_columns0r
+postfetch_lastrowid0r
+implicit_returning0r
+full_returning0r 
+insert_executemany_returning0r
+cte_follows_insert0r
+supports_native_enum0r
+supports_native_boolean0r'
+#non_native_boolean_check_constraint0r"
+supports_simple_order_by_label0r
+tuple_in_values0r
+connection_characteristics0r
+engine_config_types0r
+supports_native_decimal0r
+supports_unicode_statements0r
+supports_unicode_binds0r
+returns_unicode_strings0r
+description_encoding0r
+name0r
+max_identifier_length0r
+isolation_level0r
+max_index_name_length0r
+max_constraint_name_length0r
+supports_sane_rowcount0r 
+supports_sane_multi_rowcount0r
+colspecs0r
+default_paramstyle0r
+supports_default_values0r
+supports_default_metavalue0r
+supports_empty_insert0r
+supports_multivalues_insert0r
+supports_is_distinct_from0r 
+supports_server_side_cursors0r
+server_side_cursors0r
+supports_for_update_of0r
+server_version_info0r
+default_schema_name0r
+construct_arguments0r
+requires_name_normalize0r
+reflection_options0r#
+dbapi_exception_translation_map0r
+is_async0r
+	CACHE_HIT0r
 
-CACHE_MISS3sqlalchemy.engine.default.DefaultDialect.CACHE_MISS
-Any*310*311*312*313*314ro
-CACHING_DISABLED9sqlalchemy.engine.default.DefaultDialect.CACHING_DISABLED
-Any*310*311*312*313*314rg
-NO_CACHE_KEY5sqlalchemy.engine.default.DefaultDialect.NO_CACHE_KEY
-Any*310*311*312*313*314rs
-NO_DIALECT_SUPPORT;sqlalchemy.engine.default.DefaultDialect.NO_DIALECT_SUPPORT
-Any*310*311*312*313*314rÄ
-has_terminate6sqlalchemy.engine.default.DefaultDialect.has_terminate
-builtins.bool"builtins.bool*310*311*312*313*314rm
-convert_unicode8sqlalchemy.engine.default.DefaultDialect.convert_unicode
-Any*310*311*312*313*314r_
-encoding1sqlalchemy.engine.default.DefaultDialect.encoding
-Any*310*311*312*313*314rz
+CACHE_MISS0r
+CACHING_DISABLED0r
+NO_CACHE_KEY0r
+NO_DIALECT_SUPPORT0r
+has_terminate0r
+convert_unicode0r
+encoding0r
 
-positional3sqlalchemy.engine.default.DefaultDialect.positional
-builtins.bool"builtins.bool*310*311*312*313*314rY
-dbapi.sqlalchemy.engine.default.DefaultDialect.dbapi
-Any*310*311*312*313*314rc
+positional0r	
+dbapi0r
 
-paramstyle3sqlalchemy.engine.default.DefaultDialect.paramstyle
-Any*310*311*312*313*314ru
-identifier_preparer<sqlalchemy.engine.default.DefaultDialect.identifier_preparer
-Any*310*311*312*313*314rk
-case_sensitive7sqlalchemy.engine.default.DefaultDialect.case_sensitive
-Any*310*311*312*313*314rg
-label_length5sqlalchemy.engine.default.DefaultDialect.label_length
-Any*310*311*312*313*314ro
-compiler_linting9sqlalchemy.engine.default.DefaultDialect.compiler_linting
-Any*310*311*312*313*314r}
-default_isolation_level@sqlalchemy.engine.default.DefaultDialect.default_isolation_level
-Any*310*311*312*313*314È
-_RendersLiteral)sqlalchemy.engine.default._RendersLiteral"builtins.object*Ä
-literal_processor;sqlalchemy.engine.default._RendersLiteral.literal_processor*
+paramstyle0r
+identifier_preparer0r
+case_sensitive0r
+label_length0r
+compiler_linting0r
+default_isolation_level0N
+_RendersLiteral"builtins.object**
+literal_processor*
 self*
-dialectz310z311z312z313z314j310j311j312j313j314ú
-_StrDateTime&sqlalchemy.engine.default._StrDateTime")sqlalchemy.engine.default._RendersLiteral" sqlalchemy.sql.sqltypes.DateTimej310j311j312j313j314ê
-_StrDate"sqlalchemy.engine.default._StrDate")sqlalchemy.engine.default._RendersLiteral"sqlalchemy.sql.sqltypes.Datej310j311j312j313j314ê
-_StrTime"sqlalchemy.engine.default._StrTime")sqlalchemy.engine.default._RendersLiteral"sqlalchemy.sql.sqltypes.Timej310j311j312j313j314õ
-StrCompileDialect+sqlalchemy.engine.default.StrCompileDialect"(sqlalchemy.engine.default.DefaultDialectj310j311j312j313j314rv
-statement_compiler>sqlalchemy.engine.default.StrCompileDialect.statement_compiler
-Any*310*311*312*313*314rj
-ddl_compiler8sqlalchemy.engine.default.StrCompileDialect.ddl_compiler
-Any*310*311*312*313*314rl
-type_compiler9sqlalchemy.engine.default.StrCompileDialect.type_compiler
-Any*310*311*312*313*314rb
-preparer4sqlalchemy.engine.default.StrCompileDialect.preparer
-Any*310*311*312*313*314rô
-supports_statement_cacheDsqlalchemy.engine.default.StrCompileDialect.supports_statement_cache
-builtins.bool"builtins.bool*310*311*312*313*314rõ
-supports_identity_columnsEsqlalchemy.engine.default.StrCompileDialect.supports_identity_columns
-builtins.bool"builtins.bool*310*311*312*313*314rç
-supports_sequences>sqlalchemy.engine.default.StrCompileDialect.supports_sequences
-builtins.bool"builtins.bool*310*311*312*313*314rç
-sequences_optional>sqlalchemy.engine.default.StrCompileDialect.sequences_optional
-builtins.bool"builtins.bool*310*311*312*313*314r≠
-"preexecute_autoincrement_sequencesNsqlalchemy.engine.default.StrCompileDialect.preexecute_autoincrement_sequences
-builtins.bool"builtins.bool*310*311*312*313*314rç
-implicit_returning>sqlalchemy.engine.default.StrCompileDialect.implicit_returning
-builtins.bool"builtins.bool*310*311*312*313*314ró
-supports_native_booleanCsqlalchemy.engine.default.StrCompileDialect.supports_native_boolean
-builtins.bool"builtins.bool*310*311*312*313*314rü
-supports_multivalues_insertGsqlalchemy.engine.default.StrCompileDialect.supports_multivalues_insert
-builtins.bool"builtins.bool*310*311*312*313*314r•
-supports_simple_order_by_labelJsqlalchemy.engine.default.StrCompileDialect.supports_simple_order_by_label
-builtins.bool"builtins.bool*310*311*312*313*314rb
-colspecs4sqlalchemy.engine.default.StrCompileDialect.colspecs
-Any*310*311*312*313*314≤8
-DefaultExecutionContext1sqlalchemy.engine.default.DefaultExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext*∞
-identifier_preparerEsqlalchemy.engine.default.DefaultExecutionContext.identifier_preparer*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*ñ
-engine8sqlalchemy.engine.default.DefaultExecutionContext.engine*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*¶
-postfetch_cols@sqlalchemy.engine.default.DefaultExecutionContext.postfetch_cols*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*§
-prefetch_cols?sqlalchemy.engine.default.DefaultExecutionContext.prefetch_cols*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*ò
-returning_cols@sqlalchemy.engine.default.DefaultExecutionContext.returning_cols"
-None*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContext0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*§
-no_parameters?sqlalchemy.engine.default.DefaultExecutionContext.no_parameters*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*¨
-should_autocommitCsqlalchemy.engine.default.DefaultExecutionContext.should_autocommit*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*Ñ
+dialect[
+_StrDateTime")sqlalchemy.engine.default._RendersLiteral" sqlalchemy.sql.sqltypes.DateTimeS
+_StrDate")sqlalchemy.engine.default._RendersLiteral"sqlalchemy.sql.sqltypes.DateS
+_StrTime")sqlalchemy.engine.default._RendersLiteral"sqlalchemy.sql.sqltypes.Time•
+StrCompileDialect"(sqlalchemy.engine.default.DefaultDialectr
+statement_compiler0r
+ddl_compiler0r
+type_compiler0r
+preparer0r
+supports_statement_cache0r
+supports_identity_columns0r
+supports_sequences0r
+sequences_optional0r&
+"preexecute_autoincrement_sequences0r
+implicit_returning0r
+supports_native_boolean0r
+supports_multivalues_insert0r"
+supports_simple_order_by_label0r
+colspecs0µ
+DefaultExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext*P
+identifier_preparer*
+self0:-sqlalchemy.util.langhelpers.memoized_property*C
+engine*
+self0:-sqlalchemy.util.langhelpers.memoized_property*K
+postfetch_cols*
+self0:-sqlalchemy.util.langhelpers.memoized_property*J
+prefetch_cols*
+self0:-sqlalchemy.util.langhelpers.memoized_property*O
+returning_cols*
 
-connection<sqlalchemy.engine.default.DefaultExecutionContext.connection*
-self0:builtins.property`z310z311z312z313z314*î
-should_autocommit_textHsqlalchemy.engine.default.DefaultExecutionContext.should_autocommit_text*
+self(0:-sqlalchemy.util.langhelpers.memoized_property*J
+no_parameters*
+self0:-sqlalchemy.util.langhelpers.memoized_property*N
+should_autocommit*
+self0:-sqlalchemy.util.langhelpers.memoized_property*-
+
+connection*
+self0:builtins.property`*1
+should_autocommit_text*
 self*
-	statementz310z311z312z313z314*s
-create_cursor?sqlalchemy.engine.default.DefaultExecutionContext.create_cursor*
-selfz310z311z312z313z314*É
-create_default_cursorGsqlalchemy.engine.default.DefaultExecutionContext.create_default_cursor*
-selfz310z311z312z313z314*˝
-create_server_side_cursorKsqlalchemy.engine.default.DefaultExecutionContext.create_server_side_cursor"
-None*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContextz310z311z312z313z314*€
-pre_exec:sqlalchemy.engine.default.DefaultExecutionContext.pre_exec"
-None*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContextz310z311z312z313z314*è
-get_out_parameter_valuesJsqlalchemy.engine.default.DefaultExecutionContext.get_out_parameter_values"
-None*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContext*
-names
-Anyz310z311z312z313z314*›
-	post_exec;sqlalchemy.engine.default.DefaultExecutionContext.post_exec"
-None*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContextz310z311z312z313z314*¶
-get_result_processorFsqlalchemy.engine.default.DefaultExecutionContext.get_result_processor*
+	statement*
+create_cursor*
+self*!
+create_default_cursor*
+self*)
+create_server_side_cursor*
+
+self(*
+pre_exec*
+
+self(*5
+get_out_parameter_values*
+
+self(*
+names(*
+	post_exec*
+
+self(*E
+get_result_processor*
 self*	
 type_*
 colname*
-coltypez310z311z312z313z314*s
-get_lastrowid?sqlalchemy.engine.default.DefaultExecutionContext.get_lastrowid*
-selfz310z311z312z313z314*á
-handle_dbapi_exceptionHsqlalchemy.engine.default.DefaultExecutionContext.handle_dbapi_exception"
-None*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContext*
-e
-Anyz310z311z312z313z314*Ä
-rowcount:sqlalchemy.engine.default.DefaultExecutionContext.rowcount*
-self0:builtins.property`z310z311z312z313z314*Ö
-supports_sane_rowcountHsqlalchemy.engine.default.DefaultExecutionContext.supports_sane_rowcount*
-selfz310z311z312z313z314*ë
-supports_sane_multi_rowcountNsqlalchemy.engine.default.DefaultExecutionContext.supports_sane_multi_rowcount*
-selfz310z311z312z313z314*º
-inserted_primary_key_rowsKsqlalchemy.engine.default.DefaultExecutionContext.inserted_primary_key_rows*
-self0:-sqlalchemy.util.langhelpers.memoized_propertyz310z311z312z313z314*Å
-lastrow_has_defaultsFsqlalchemy.engine.default.DefaultExecutionContext.lastrow_has_defaults*
-selfz310z311z312z313z314*∏
-get_current_parametersHsqlalchemy.engine.default.DefaultExecutionContext.get_current_parameters"
-Any*p
-selff
-1sqlalchemy.engine.default.DefaultExecutionContext"1sqlalchemy.engine.default.DefaultExecutionContext*@
-isolate_multiinsert_groups
-builtins.bool"builtins.bool z310z311z312z313z314*â
-get_insert_defaultDsqlalchemy.engine.default.DefaultExecutionContext.get_insert_default*
+coltype*
+get_lastrowid*
+self*/
+handle_dbapi_exception*
+
+self(*
+e(*+
+rowcount*
+self0:builtins.property`*"
+supports_sane_rowcount*
+self*(
+supports_sane_multi_rowcount*
+self*V
+inserted_primary_key_rows*
+self0:-sqlalchemy.util.langhelpers.memoized_property* 
+lastrow_has_defaults*
+self*J
+get_current_parameters*
+
+self(*"
+isolate_multiinsert_groups (**
+get_insert_default*
 self*
 
-columnz310z311z312z313z314*â
-get_update_defaultDsqlalchemy.engine.default.DefaultExecutionContext.get_update_default*
+column**
+get_update_default*
 self*
 
-columnz310z311z312z313z314j310j311j312j313j314r
-isinsert:sqlalchemy.engine.default.DefaultExecutionContext.isinsert
-builtins.bool"builtins.bool*310*311*312*313*314r
-isupdate:sqlalchemy.engine.default.DefaultExecutionContext.isupdate
-builtins.bool"builtins.bool*310*311*312*313*314r
-isdelete:sqlalchemy.engine.default.DefaultExecutionContext.isdelete
-builtins.bool"builtins.bool*310*311*312*313*314r}
-is_crud9sqlalchemy.engine.default.DefaultExecutionContext.is_crud
-builtins.bool"builtins.bool*310*311*312*313*314r}
-is_text9sqlalchemy.engine.default.DefaultExecutionContext.is_text
-builtins.bool"builtins.bool*310*311*312*313*314ry
-isddl7sqlalchemy.engine.default.DefaultExecutionContext.isddl
-builtins.bool"builtins.bool*310*311*312*313*314rÖ
-executemany=sqlalchemy.engine.default.DefaultExecutionContext.executemany
-builtins.bool"builtins.bool*310*311*312*313*314rh
-compiled:sqlalchemy.engine.default.DefaultExecutionContext.compiled
-Any*310*311*312*313*314rj
-	statement;sqlalchemy.engine.default.DefaultExecutionContext.statement
-Any*310*311*312*313*314rÄ
-result_column_structFsqlalchemy.engine.default.DefaultExecutionContext.result_column_struct
-Any*310*311*312*313*314rÇ
-returned_default_rowsGsqlalchemy.engine.default.DefaultExecutionContext.returned_default_rows
-Any*310*311*312*313*314rz
-execution_optionsCsqlalchemy.engine.default.DefaultExecutionContext.execution_options
-Any*310*311*312*313*314rÜ
-include_set_input_sizesIsqlalchemy.engine.default.DefaultExecutionContext.include_set_input_sizes
-Any*310*311*312*313*314rÜ
-exclude_set_input_sizesIsqlalchemy.engine.default.DefaultExecutionContext.exclude_set_input_sizes
-Any*310*311*312*313*314rÇ
-cursor_fetch_strategyGsqlalchemy.engine.default.DefaultExecutionContext.cursor_fetch_strategy
-Any*310*311*312*313*314rn
-cache_stats=sqlalchemy.engine.default.DefaultExecutionContext.cache_stats
-Any*310*311*312*313*314rz
-invoked_statementCsqlalchemy.engine.default.DefaultExecutionContext.invoked_statement
-Any*310*311*312*313*314rj
-	cache_hit;sqlalchemy.engine.default.DefaultExecutionContext.cache_hit
-Any*310*311*312*313*314r|
-current_parametersDsqlalchemy.engine.default.DefaultExecutionContext.current_parameters
-Any*310*311*312*313*314*Æ
-__annotations__)sqlalchemy.engine.default.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*b
-AUTOCOMMIT_REGEXP+sqlalchemy.engine.default.AUTOCOMMIT_REGEXP
-Any*310*311*312*313*314*j
-SERVER_SIDE_CURSOR_RE/sqlalchemy.engine.default.SERVER_SIDE_CURSOR_RE
-Any*310*311*312*313*314*R
-	CACHE_HIT#sqlalchemy.engine.default.CACHE_HIT
-Any*310*311*312*313*314*T
+columnr
+isinsert0r
+isupdate0r
+isdelete0r
+is_crud0r
+is_text0r	
+isddl0r
+executemany0r
+compiled0r
+	statement0r
+result_column_struct0r
+returned_default_rows0r
+execution_options0r
+include_set_input_sizes0r
+exclude_set_input_sizes0r
+cursor_fetch_strategy0r
+cache_stats0r
+invoked_statement0r
+	cache_hit0r
+current_parameters0*
+__annotations__0*
+AUTOCOMMIT_REGEXP0*
+SERVER_SIDE_CURSOR_RE0*
+	CACHE_HIT0*
 
-CACHE_MISS$sqlalchemy.engine.default.CACHE_MISS
-Any*310*311*312*313*314*`
-CACHING_DISABLED*sqlalchemy.engine.default.CACHING_DISABLED
-Any*310*311*312*313*314*X
-NO_CACHE_KEY&sqlalchemy.engine.default.NO_CACHE_KEY
-Any*310*311*312*313*314*d
-NO_DIALECT_SUPPORT,sqlalchemy.engine.default.NO_DIALECT_SUPPORT
-Any*310*311*312*313*314
+CACHE_MISS0*
+CACHING_DISABLED0*
+NO_CACHE_KEY0*
+NO_DIALECT_SUPPORT022*"(sqlalchemy.engine.default.DefaultDialect2"builtins.bool2"builtins.str22"_typeshed.Incomplete2222"type22/"-sqlalchemy.engine.interfaces.ExecutionContext2"type2	2"builtins.int23"1sqlalchemy.engine.default.DefaultExecutionContext2"builtins.dict2

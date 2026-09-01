@@ -1,367 +1,201 @@
 
-sqlalchemy.ext.asyncio.engine˛
-AsyncConnectable.sqlalchemy.ext.asyncio.engine.AsyncConnectable"builtins.objectj310j311j312j313j314rè
-dispatch7sqlalchemy.ext.asyncio.engine.AsyncConnectable.dispatch1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*310*311*312*313*314–?
-AsyncConnection-sqlalchemy.ext.asyncio.engine.AsyncConnection"+sqlalchemy.ext.asyncio.base.ProxyComparable",sqlalchemy.ext.asyncio.base.StartableContext".sqlalchemy.ext.asyncio.engine.AsyncConnectable*ﬁ
-__init__6sqlalchemy.ext.asyncio.engine.AsyncConnection.__init__"
-None*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-async_engine
-Any*r
-sync_connection[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z310z311z312z313z314*ƒ
-start3sqlalchemy.ext.asyncio.engine.AsyncConnection.start"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*3
-is_ctxmanager
-builtins.bool"builtins.bool Hz310z311z312z313z314*Í
+sqlalchemy.ext.asyncio.engine1
+AsyncConnectable"builtins.objectr
+dispatch0√
+AsyncConnection"+sqlalchemy.ext.asyncio.base.ProxyComparable",sqlalchemy.ext.asyncio.base.StartableContext".sqlalchemy.ext.asyncio.engine.AsyncConnectable*E
+__init__*
 
-connection8sqlalchemy.ext.asyncio.engine.AsyncConnection.connection"
-None*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection0:builtins.property`z310z311z312z313z314*{
-get_raw_connection@sqlalchemy.ext.asyncio.engine.AsyncConnection.get_raw_connection*
-selfHz310z311z312z313z314*t
-info2sqlalchemy.ext.asyncio.engine.AsyncConnection.info*
-self0:builtins.property`z310z311z312z313z314*_
-begin3sqlalchemy.ext.asyncio.engine.AsyncConnection.begin*
-selfz310z311z312z313z314*m
-begin_nested:sqlalchemy.ext.asyncio.engine.AsyncConnection.begin_nested*
-selfz310z311z312z313z314*á
+self(*
+async_engine(*
+sync_connection (*.
+start*
 
-invalidate8sqlalchemy.ext.asyncio.engine.AsyncConnection.invalidate"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*l
-	exception[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None Hz310z311z312z313z314*}
-get_isolation_levelAsqlalchemy.ext.asyncio.engine.AsyncConnection.get_isolation_level*
-selfHz310z311z312z313z314*}
-set_isolation_levelAsqlalchemy.ext.asyncio.engine.AsyncConnection.set_isolation_level*
-selfHz310z311z312z313z314*q
-in_transaction<sqlalchemy.ext.asyncio.engine.AsyncConnection.in_transaction*
-selfz310z311z312z313z314*
-in_nested_transactionCsqlalchemy.ext.asyncio.engine.AsyncConnection.in_nested_transaction*
-selfz310z311z312z313z314*s
-get_transaction=sqlalchemy.ext.asyncio.engine.AsyncConnection.get_transaction*
-selfz310z311z312z313z314*Å
-get_nested_transactionDsqlalchemy.ext.asyncio.engine.AsyncConnection.get_nested_transaction*
-selfz310z311z312z313z314*Ç
-execution_options?sqlalchemy.ext.asyncio.engine.AsyncConnection.execution_options*
+self(*
+is_ctxmanager (H*1
+
+connection*
+
+self(0:builtins.property`* 
+get_raw_connection*
+selfH*'
+info*
+self0:builtins.property`*
+begin*
+self*
+begin_nested*
+self*/
+
+invalidate*
+
+self(*
+	exception (H*!
+get_isolation_level*
+selfH*!
+set_isolation_level*
+selfH*
+in_transaction*
+self*!
+in_nested_transaction*
+self*
+get_transaction*
+self*"
+get_nested_transaction*
+self*(
+execution_options*
 self*
-optHz310z311z312z313z314*ì
-commit4sqlalchemy.ext.asyncio.engine.AsyncConnection.commit"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnectionHz310z311z312z313z314*ó
-rollback6sqlalchemy.ext.asyncio.engine.AsyncConnection.rollback"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnectionHz310z311z312z313z314*ë
-close3sqlalchemy.ext.asyncio.engine.AsyncConnection.close"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnectionHz310z311z312z313z314*Ã
-exec_driver_sql=sqlalchemy.ext.asyncio.engine.AsyncConnection.exec_driver_sql"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-	statement
-Any*m
+optH*
+commit*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None * 
-execution_options
-Any Hz310z311z312z313z314*∫
-stream4sqlalchemy.ext.asyncio.engine.AsyncConnection.stream"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-	statement
-Any*m
+self(H*
+rollback*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None * 
-execution_options
-Any Hz310z311z312z313z314*º
-execute5sqlalchemy.ext.asyncio.engine.AsyncConnection.execute"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-	statement
-Any*m
+self(H*
+close*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None * 
-execution_options
-Any Hz310z311z312z313z314*∫
-scalar4sqlalchemy.ext.asyncio.engine.AsyncConnection.scalar"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-	statement
-Any*m
+self(H*a
+exec_driver_sql*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None * 
-execution_options
-Any Hz310z311z312z313z314*º
-scalars5sqlalchemy.ext.asyncio.engine.AsyncConnection.scalars"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-	statement
-Any*m
+self(*
+	statement(*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None * 
-execution_options
-Any Hz310z311z312z313z314* 
-stream_scalars<sqlalchemy.ext.asyncio.engine.AsyncConnection.stream_scalars"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*
-	statement
-Any*m
+parameters (*
+execution_options (H*X
+stream*
 
-parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None * 
-execution_options
-Any Hz310z311z312z313z314*Ä
-run_sync6sqlalchemy.ext.asyncio.engine.AsyncConnection.run_sync*
+self(*
+	statement(*
+
+parameters (*
+execution_options (H*Y
+execute*
+
+self(*
+	statement(*
+
+parameters (*
+execution_options (H*X
+scalar*
+
+self(*
+	statement(*
+
+parameters (*
+execution_options (H*Y
+scalars*
+
+self(*
+	statement(*
+
+parameters (*
+execution_options (H*`
+stream_scalars*
+
+self(*
+	statement(*
+
+parameters (*
+execution_options (H*/
+run_sync*
 self*
 fn*
 arg*
-kwHz310z311z312z313z314*g
-	__await__7sqlalchemy.ext.asyncio.engine.AsyncConnection.__await__*
-selfz310z311z312z313z314*ë
-	__aexit__7sqlalchemy.ext.asyncio.engine.AsyncConnection.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*h
-self^
--sqlalchemy.ext.asyncio.engine.AsyncConnection"-sqlalchemy.ext.asyncio.engine.AsyncConnection*ú
-type_ê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*m
-valueb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*h
-	tracebackY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneHz310z311z312z313z314*x
-closed4sqlalchemy.ext.asyncio.engine.AsyncConnection.closed*
-self0:builtins.property`z310z311z312z313z314*Ç
-invalidated9sqlalchemy.ext.asyncio.engine.AsyncConnection.invalidated*
-self0:builtins.property`z310z311z312z313z314*ö
-default_isolation_levelEsqlalchemy.ext.asyncio.engine.AsyncConnection.default_isolation_level*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314r`
-engine4sqlalchemy.ext.asyncio.engine.AsyncConnection.engine
-Any*310*311*312*313*314rj
-sync_engine9sqlalchemy.ext.asyncio.engine.AsyncConnection.sync_engine
-Any*310*311*312*313*314rr
-sync_connection=sqlalchemy.ext.asyncio.engine.AsyncConnection.sync_connection
-Any*310*311*312*313*314rb
-dialect5sqlalchemy.ext.asyncio.engine.AsyncConnection.dialect
-Any*310*311*312*313*314£
-AsyncEngine)sqlalchemy.ext.asyncio.engine.AsyncEngine"+sqlalchemy.ext.asyncio.base.ProxyComparable".sqlalchemy.ext.asyncio.engine.AsyncConnectable*›
-__init__2sqlalchemy.ext.asyncio.engine.AsyncEngine.__init__"
-None*`
-selfV
-)sqlalchemy.ext.asyncio.engine.AsyncEngine")sqlalchemy.ext.asyncio.engine.AsyncEngine*
-sync_engine
-Anyz310z311z312z313z314*[
-begin/sqlalchemy.ext.asyncio.engine.AsyncEngine.begin*
-selfz310z311z312z313z314*_
-connect1sqlalchemy.ext.asyncio.engine.AsyncEngine.connect*
-selfz310z311z312z313z314*o
-raw_connection8sqlalchemy.ext.asyncio.engine.AsyncEngine.raw_connection*
-selfHz310z311z312z313z314*|
-execution_options;sqlalchemy.ext.asyncio.engine.AsyncEngine.execution_options*
+kwH*
+	__await__*
+self*F
+	__aexit__*
+
+self(*
+type_(*
+value(*
+	traceback(H*)
+closed*
+self0:builtins.property`*.
+invalidated*
+self0:builtins.property`*:
+default_isolation_level*
+self0:builtins.property`r
+
+engine0r
+sync_engine0r
+sync_connection0r
+dialect0‘
+AsyncEngine"+sqlalchemy.ext.asyncio.base.ProxyComparable".sqlalchemy.ext.asyncio.engine.AsyncConnectable*+
+__init__*
+
+self(*
+sync_engine(*
+begin*
+self*
+connect*
+self*
+raw_connection*
+selfH*&
+execution_options*
 self*
-optz310z311z312z313z314*a
-dispose1sqlalchemy.ext.asyncio.engine.AsyncEngine.dispose*
-selfHz310z311z312z313z314*t
-engine0sqlalchemy.ext.asyncio.engine.AsyncEngine.engine*
-self0:builtins.property`z310z311z312z313z314*p
-name.sqlalchemy.ext.asyncio.engine.AsyncEngine.name*
-self0:builtins.property`z310z311z312z313z314*t
-driver0sqlalchemy.ext.asyncio.engine.AsyncEngine.driver*
-self0:builtins.property`z310z311z312z313z314*€
-clear_compiled_cache>sqlalchemy.ext.asyncio.engine.AsyncEngine.clear_compiled_cache"
-None*`
-selfV
-)sqlalchemy.ext.asyncio.engine.AsyncEngine")sqlalchemy.ext.asyncio.engine.AsyncEnginez310z311z312z313z314*ı
-update_execution_optionsBsqlalchemy.ext.asyncio.engine.AsyncEngine.update_execution_options"
-None*`
-selfV
-)sqlalchemy.ext.asyncio.engine.AsyncEngine")sqlalchemy.ext.asyncio.engine.AsyncEngine*
-opt
-Anyz310z311z312z313z314*{
-get_execution_options?sqlalchemy.ext.asyncio.engine.AsyncEngine.get_execution_options*
-selfz310z311z312z313z314j310j311j312j313j314rf
-sync_engine5sqlalchemy.ext.asyncio.engine.AsyncEngine.sync_engine
-Any*310*311*312*313*314rV
-url-sqlalchemy.ext.asyncio.engine.AsyncEngine.url
-Any*310*311*312*313*314rX
-pool.sqlalchemy.ext.asyncio.engine.AsyncEngine.pool
-Any*310*311*312*313*314r^
-dialect1sqlalchemy.ext.asyncio.engine.AsyncEngine.dialect
-Any*310*311*312*313*314rX
-echo.sqlalchemy.ext.asyncio.engine.AsyncEngine.echo
-Any*310*311*312*313*314≈
-AsyncTransaction.sqlalchemy.ext.asyncio.engine.AsyncTransaction"+sqlalchemy.ext.asyncio.base.ProxyComparable",sqlalchemy.ext.asyncio.base.StartableContext*ô
-__init__7sqlalchemy.ext.asyncio.engine.AsyncTransaction.__init__"
-None*j
-self`
-.sqlalchemy.ext.asyncio.engine.AsyncTransaction".sqlalchemy.ext.asyncio.engine.AsyncTransaction*
+opt*
+dispose*
+selfH*)
+engine*
+self0:builtins.property`*'
+name*
+self0:builtins.property`*)
+driver*
+self0:builtins.property`*$
+clear_compiled_cache*
 
-connection
-Any*,
-nested
-builtins.bool"builtins.bool z310z311z312z313z314*}
-is_valid7sqlalchemy.ext.asyncio.engine.AsyncTransaction.is_valid*
-self0:builtins.property`z310z311z312z313z314*
-	is_active8sqlalchemy.ext.asyncio.engine.AsyncTransaction.is_active*
-self0:builtins.property`z310z311z312z313z314*î
-close4sqlalchemy.ext.asyncio.engine.AsyncTransaction.close"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*j
-self`
-.sqlalchemy.ext.asyncio.engine.AsyncTransaction".sqlalchemy.ext.asyncio.engine.AsyncTransactionHz310z311z312z313z314*ö
-rollback7sqlalchemy.ext.asyncio.engine.AsyncTransaction.rollback"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*j
-self`
-.sqlalchemy.ext.asyncio.engine.AsyncTransaction".sqlalchemy.ext.asyncio.engine.AsyncTransactionHz310z311z312z313z314*ñ
-commit5sqlalchemy.ext.asyncio.engine.AsyncTransaction.commit"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*j
-self`
-.sqlalchemy.ext.asyncio.engine.AsyncTransaction".sqlalchemy.ext.asyncio.engine.AsyncTransactionHz310z311z312z313z314*«
-start4sqlalchemy.ext.asyncio.engine.AsyncTransaction.start"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*j
-self`
-.sqlalchemy.ext.asyncio.engine.AsyncTransaction".sqlalchemy.ext.asyncio.engine.AsyncTransaction*3
-is_ctxmanager
-builtins.bool"builtins.bool Hz310z311z312z313z314*î
-	__aexit__8sqlalchemy.ext.asyncio.engine.AsyncTransaction.__aexit__"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*j
-self`
-.sqlalchemy.ext.asyncio.engine.AsyncTransaction".sqlalchemy.ext.asyncio.engine.AsyncTransaction*ú
-type_ê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*m
-valueb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*h
-	tracebackY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-NoneHz310z311z312z313z314j310j311j312j313j314ri
+self(*3
+update_execution_options*
 
-connection9sqlalchemy.ext.asyncio.engine.AsyncTransaction.connection
-Any*310*311*312*313*314ru
-sync_transaction?sqlalchemy.ext.asyncio.engine.AsyncTransaction.sync_transaction
-Any*310*311*312*313*314ra
-nested5sqlalchemy.ext.asyncio.engine.AsyncTransaction.nested
-Any*310*311*312*313*314‹
-create_async_engine1sqlalchemy.ext.asyncio.engine.create_async_engine"V
-)sqlalchemy.ext.asyncio.engine.AsyncEngine")sqlalchemy.ext.asyncio.engine.AsyncEngine*
-arg
-Any*
-kw
-Anyz310z311z312z313z314†
-async_engine_from_config6sqlalchemy.ext.asyncio.engine.async_engine_from_config"V
-)sqlalchemy.ext.asyncio.engine.AsyncEngine")sqlalchemy.ext.asyncio.engine.AsyncEngine*
-configuration
-Any**
-prefix
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314*≤
-__annotations__-sqlalchemy.ext.asyncio.engine.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*	
+opt(*!
+get_execution_options*
+selfr
+sync_engine0r
+url0r
+pool0r
+dialect0r
+echo0˝
+AsyncTransaction"+sqlalchemy.ext.asyncio.base.ProxyComparable",sqlalchemy.ext.asyncio.base.StartableContext*:
+__init__*
+
+self(*
+
+connection(*
+nested (*+
+is_valid*
+self0:builtins.property`*,
+	is_active*
+self0:builtins.property`*
+close*
+
+self(H*
+rollback*
+
+self(H*
+commit*
+
+self(H*.
+start*
+
+self(*
+is_ctxmanager (H*F
+	__aexit__*
+
+self(*
+type_(*
+value(*
+	traceback(Hr
+
+connection0r
+sync_transaction0r
+
+nested0,
+create_async_engine*	
+arg(*
+kw(O
+async_engine_from_config*
+configuration(*
+prefix (*
+kwargs(*
+__annotations__022"_typeshed.Incomplete222/"-sqlalchemy.ext.asyncio.engine.AsyncConnection222"typing.Coroutine22"builtins.bool2"typing.Coroutine22"builtins.BaseException2"type2	22
+22	2"types.TracebackType222+")sqlalchemy.ext.asyncio.engine.AsyncEngine20".sqlalchemy.ext.asyncio.engine.AsyncTransaction2"builtins.str2"builtins.dict2

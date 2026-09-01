@@ -1,138 +1,88 @@
 
-pandas.core.arrays.periodÐ!
-PeriodArray%pandas.core.arrays.period.PeriodArray"6pandas.core.arrays.datetimelike.DatetimeLikeArrayMixin"+pandas.core.arrays.datetimelike.DatelikeOps*Š
-__init__.pandas.core.arrays.period.PeriodArray.__init__"
-None*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*
-values
-Any*
-freq
-Any *
-dtype
-Any **
-copy
-builtins.bool"builtins.bool *õ
-dtype+pandas.core.arrays.period.PeriodArray.dtype"N
-%pandas.core.dtypes.dtypes.PeriodDtype"%pandas.core.dtypes.dtypes.PeriodDtype*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray0:builtins.property`*Í
-	__array__/pandas.core.arrays.period.PeriodArray.__array__"ž
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*
-dtype
-Any *^
-__arrow_array__5pandas.core.arrays.period.PeriodArray.__arrow_array__*
+pandas.core.arrays.periodè
+PeriodArray"6pandas.core.arrays.datetimelike.DatetimeLikeArrayMixin"+pandas.core.arrays.datetimelike.DatelikeOps*Q
+__init__*
+
+self(*
+values(*
+freq (*
+dtype (*
+copy (*,
+dtype*
+
+self(0:builtins.property`*(
+	__array__*
+
+self(*
+dtype (*'
+__arrow_array__*
 self*
 
-type *Ó
-is_leap_year2pandas.core.arrays.period.PeriodArray.is_leap_year"
-builtins.bool"builtins.bool*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray0:builtins.property`*…
+type *3
+is_leap_year*
 
-start_time0pandas.core.arrays.period.PeriodArray.start_time"T
-(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.Timestamp*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray0:builtins.property`*
-end_time.pandas.core.arrays.period.PeriodArray.end_time"T
-(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.Timestamp*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray0:builtins.property`*í
-to_timestamp2pandas.core.arrays.period.PeriodArray.to_timestamp"T
-(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.Timestamp*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*P
-freqD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *'
-how
-builtins.str"builtins.str *Ó
-asfreq,pandas.core.arrays.period.PeriodArray.asfreq"F
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.Period*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*P
-freqD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *'
-how
-builtins.str"builtins.str *Ù
-astype,pandas.core.arrays.period.PeriodArray.astype"
-Any*X
-selfN
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*
-dtype
-Any**
-copy
-builtins.bool"builtins.bool rl
-__array_priority__8pandas.core.arrays.period.PeriodArray.__array_priority__
-builtins.int"builtins.intrP
-year*pandas.core.arrays.period.PeriodArray.year
-builtins.int"builtins.intrR
-month+pandas.core.arrays.period.PeriodArray.month
-builtins.int"builtins.intrN
-day)pandas.core.arrays.period.PeriodArray.day
-builtins.int"builtins.intrP
-hour*pandas.core.arrays.period.PeriodArray.hour
-builtins.int"builtins.intrT
-minute,pandas.core.arrays.period.PeriodArray.minute
-builtins.int"builtins.intrT
-second,pandas.core.arrays.period.PeriodArray.second
-builtins.int"builtins.intr\
+self(0:builtins.property`*1
 
-weekofyear0pandas.core.arrays.period.PeriodArray.weekofyear
-builtins.int"builtins.intrP
-week*pandas.core.arrays.period.PeriodArray.week
-builtins.int"builtins.intrZ
-	dayofweek/pandas.core.arrays.period.PeriodArray.dayofweek
-builtins.int"builtins.intrV
-weekday-pandas.core.arrays.period.PeriodArray.weekday
-builtins.int"builtins.intrZ
-	dayofyear/pandas.core.arrays.period.PeriodArray.dayofyear
-builtins.int"builtins.intrj
-day_of_year1pandas.core.arrays.period.PeriodArray.day_of_year(
-types.EllipsisType"types.EllipsisTyperV
-quarter-pandas.core.arrays.period.PeriodArray.quarter
-builtins.int"builtins.intrR
-qyear+pandas.core.arrays.period.PeriodArray.qyear
-builtins.int"builtins.intrb
-days_in_month3pandas.core.arrays.period.PeriodArray.days_in_month
-builtins.int"builtins.intr^
-daysinmonth1pandas.core.arrays.period.PeriodArray.daysinmonth
-builtins.int"builtins.int]
-raise_on_incompatible/pandas.core.arrays.period.raise_on_incompatible*
+start_time	*
+
+self(0:builtins.property`*/
+end_time	*
+
+self(0:builtins.property`*7
+to_timestamp	*
+
+self(*
+freq (*
+how (
+*1
+asfreq*
+
+self(*
+freq (*
+how (
+*1
+astype*
+
+self(*
+dtype(*
+copy (r
+__array_priority__0r
+year0r	
+month0r
+day0r
+hour0r
+
+minute0r
+
+second0r
+
+weekofyear0r
+week0r
+	dayofweek0r
+weekday0r
+	dayofyear0r
+day_of_year0r
+quarter0r	
+qyear0r
+days_in_month0r
+daysinmonth0,
+raise_on_incompatible*
 left*	
-rightÒ
-period_array&pandas.core.arrays.period.period_array"N
-%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray*â
-data×
->typing.Sequence[Union[pandas._libs.tslibs.period.Period,None]]ƒ
--Union[pandas._libs.tslibs.period.Period,None]F
-!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.Period
-None"typing.Sequence*¸
-freq«
-9Union[builtins.str,pandas._libs.tslibs.offsets.Tick,None]
-builtins.str"builtins.strD
- pandas._libs.tslibs.offsets.Tick" pandas._libs.tslibs.offsets.Tick
-None **
-copy
-builtins.bool"builtins.bool Y
-validate_dtype_freq-pandas.core.arrays.period.validate_dtype_freq*	
+right8
+period_array*
+
+data(*
+freq (*
+copy (*
+validate_dtype_freq*	
 dtype*
-freqd
-dt64arr_to_periodarr.pandas.core.arrays.period.dt64arr_to_periodarr*
+freq4
+dt64arr_to_periodarr*
 data*
 freq*
-tz *•
-__annotations__)pandas.core.arrays.period.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-npnumpy 
+tz *
+__annotations__0*
+npnumpy 22'"%pandas.core.arrays.period.PeriodArray22"builtins.bool2'"%pandas.core.dtypes.dtypes.PeriodDtype2"builtins.tuple22"numpy.dtype22"numpy.ndarray22*"(pandas._libs.tslibs.timestamps.Timestamp2"builtins.str22
+2#"!pandas._libs.tslibs.period.Period2"builtins.int2"types.EllipsisType222"typing.Sequence22"" pandas._libs.tslibs.offsets.Tick22
+2"builtins.dict2
+

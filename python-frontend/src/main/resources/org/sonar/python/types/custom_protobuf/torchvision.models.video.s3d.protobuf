@@ -1,100 +1,58 @@
 
-torchvision.models.video.s3dö
-TemporalSeparableConv2torchvision.models.video.s3d.TemporalSeparableConv"%torch.nn.modules.container.Sequential*
-__init__;torchvision.models.video.s3d.TemporalSeparableConv.__init__"
-None*r
-selfh
-2torchvision.models.video.s3d.TemporalSeparableConv"2torchvision.models.video.s3d.TemporalSeparableConv*+
-	in_planes
-builtins.int"builtins.int*,
+torchvision.models.video.s3d½
+TemporalSeparableConv"%torch.nn.modules.container.Sequential*}
+__init__*
 
-out_planes
-builtins.int"builtins.int*-
-kernel_size
-builtins.int"builtins.int*(
-stride
-builtins.int"builtins.int*)
-padding
-builtins.int"builtins.int*[
+self(*
+	in_planes(*
 
-norm_layerK
-CallableType[builtins.function]&
-builtins.function"builtins.function½
-SepInceptionBlock3D0torchvision.models.video.s3d.SepInceptionBlock3D"torch.nn.modules.module.Module*Å
-__init__9torchvision.models.video.s3d.SepInceptionBlock3D.__init__"
-None*n
-selfd
-0torchvision.models.video.s3d.SepInceptionBlock3D"0torchvision.models.video.s3d.SepInceptionBlock3D*+
-	in_planes
-builtins.int"builtins.int*(
-b0_out
-builtins.int"builtins.int*(
-b1_mid
-builtins.int"builtins.int*(
-b1_out
-builtins.int"builtins.int*(
-b2_mid
-builtins.int"builtins.int*(
-b2_out
-builtins.int"builtins.int*(
-b3_out
-builtins.int"builtins.int*[
+out_planes(*
+kernel_size(*
+stride(*
+padding(*
 
-norm_layerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*T
-forward8torchvision.models.video.s3d.SepInceptionBlock3D.forward*
+norm_layer(—
+SepInceptionBlock3D"torch.nn.modules.module.Module*
+__init__*
+
+self(*
+	in_planes(*
+b0_out(*
+b1_mid(*
+b1_out(*
+b2_mid(*
+b2_out(*
+b3_out(*
+
+norm_layer(*
+forward*
 self*
-xrL
-branch08torchvision.models.video.s3d.SepInceptionBlock3D.branch0
-AnyrL
-branch18torchvision.models.video.s3d.SepInceptionBlock3D.branch1
-AnyrL
-branch28torchvision.models.video.s3d.SepInceptionBlock3D.branch2
-AnyrL
-branch38torchvision.models.video.s3d.SepInceptionBlock3D.branch3
-Anyß
-S3D torchvision.models.video.s3d.S3D"torch.nn.modules.module.Module*
-__init__)torchvision.models.video.s3d.S3D.__init__"
-None*N
-selfD
- torchvision.models.video.s3d.S3D" torchvision.models.video.s3d.S3D*/
-num_classes
-builtins.int"builtins.int */
-dropout 
-builtins.float"builtins.float *™
+xr
+branch00r
+branch10r
+branch20r
+branch30À
+S3D"torch.nn.modules.module.Module*R
+__init__*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *D
-forward(torchvision.models.video.s3d.S3D.forward*
+self(*
+num_classes (*
+dropout (	*
+
+norm_layer (
+*
+forward*
 self*
-xr>
-features)torchvision.models.video.s3d.S3D.features
-Anyr<
-avgpool(torchvision.models.video.s3d.S3D.avgpool
-AnyrB
+xr
+features0r
+avgpool0r
 
-classifier+torchvision.models.video.s3d.S3D.classifier
-Anyø
-S3D_Weights(torchvision.models.video.s3d.S3D_Weights"#torchvision.models._api.WeightsEnumHrR
-KINETICS400_V17torchvision.models.video.s3d.S3D_Weights.KINETICS400_V1
-AnyrD
-DEFAULT0torchvision.models.video.s3d.S3D_Weights.DEFAULT
-AnyÝ
-s3d torchvision.models.video.s3d.s3d"D
- torchvision.models.video.s3d.S3D" torchvision.models.video.s3d.S3D*¨
-weights˜
-4Union[torchvision.models.video.s3d.S3D_Weights,None]T
-(torchvision.models.video.s3d.S3D_Weights"(torchvision.models.video.s3d.S3D_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*˜
-__annotations__,torchvision.models.video.s3d.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+classifier0U
+S3D_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+DEFAULT08
+s3d*
+weights (*
+progress (*
+kwargs(*
+__annotations__0224"2torchvision.models.video.s3d.TemporalSeparableConv2"builtins.int2"builtins.function2222"0torchvision.models.video.s3d.SepInceptionBlock3D22"" torchvision.models.video.s3d.S3D2"builtins.float222*"(torchvision.models.video.s3d.S3D_Weights222"builtins.bool2"builtins.str2"builtins.dict2

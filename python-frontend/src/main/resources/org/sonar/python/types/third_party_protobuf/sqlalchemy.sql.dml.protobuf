@@ -1,342 +1,190 @@
 
-sqlalchemy.sql.dmlÜ
-DMLStatesqlalchemy.sql.dml.DMLState" sqlalchemy.sql.base.CompileState*Ÿ
-__init__$sqlalchemy.sql.dml.DMLState.__init__"
-None*D
-self:
-sqlalchemy.sql.dml.DMLState"sqlalchemy.sql.dml.DMLState*
-	statement
-Any*
-compiler
-Any*
-kw
-Anyz310z311z312z313z314*l
-	dml_table%sqlalchemy.sql.dml.DMLState.dml_table*
-self0:builtins.property`z310z311z312z313z314*ò
-get_entity_description2sqlalchemy.sql.dml.DMLState.get_entity_description"å
-*builtins.dict[builtins.str,TypeAlias[Any]]
-builtins.str"builtins.str1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"builtins.dict*p
-clsg
-!Type[sqlalchemy.sql.dml.DMLState]:
-sqlalchemy.sql.dml.DMLState"sqlalchemy.sql.dml.DMLState"type*
-	statement
-Any0:builtins.classmethodpz310z311z312z313z314*˚
-!get_returning_column_descriptions=sqlalchemy.sql.dml.DMLState.get_returning_column_descriptions"Ÿ
-9builtins.list[builtins.dict[builtins.str,TypeAlias[Any]]]å
-*builtins.dict[builtins.str,TypeAlias[Any]]
-builtins.str"builtins.str1
-TypeAlias[Any]
-Any"_typeshed.Incomplete"builtins.dict"builtins.list*p
-clsg
-!Type[sqlalchemy.sql.dml.DMLState]:
-sqlalchemy.sql.dml.DMLState"sqlalchemy.sql.dml.DMLState"type*
-	statement
-Any0:builtins.classmethodpz310z311z312z313z314j310j311j312j313j314ri
-isupdate$sqlalchemy.sql.dml.DMLState.isupdate
-builtins.bool"builtins.bool*310*311*312*313*314ri
-isdelete$sqlalchemy.sql.dml.DMLState.isdelete
-builtins.bool"builtins.bool*310*311*312*313*314ri
-isinsert$sqlalchemy.sql.dml.DMLState.isinsert
-builtins.bool"builtins.bool*310*311*312*313*314ƒ
-InsertDMLState!sqlalchemy.sql.dml.InsertDMLState"sqlalchemy.sql.dml.DMLState*Î
-__init__*sqlalchemy.sql.dml.InsertDMLState.__init__"
-None*P
-selfF
-!sqlalchemy.sql.dml.InsertDMLState"!sqlalchemy.sql.dml.InsertDMLState*
-	statement
-Any*
-compiler
-Any*
-kw
-Anyz310z311z312z313z314j310j311j312j313j314ro
-isinsert*sqlalchemy.sql.dml.InsertDMLState.isinsert
-builtins.bool"builtins.bool*310*311*312*313*314rù
-include_table_with_column_exprsAsqlalchemy.sql.dml.InsertDMLState.include_table_with_column_exprs
-builtins.bool"builtins.bool*310*311*312*313*314rZ
-	statement+sqlalchemy.sql.dml.InsertDMLState.statement
-Any*310*311*312*313*314®
-UpdateDMLState!sqlalchemy.sql.dml.UpdateDMLState"sqlalchemy.sql.dml.DMLState*Î
-__init__*sqlalchemy.sql.dml.UpdateDMLState.__init__"
-None*P
-selfF
-!sqlalchemy.sql.dml.UpdateDMLState"!sqlalchemy.sql.dml.UpdateDMLState*
-	statement
-Any*
-compiler
-Any*
-kw
-Anyz310z311z312z313z314j310j311j312j313j314ro
-isupdate*sqlalchemy.sql.dml.UpdateDMLState.isupdate
-builtins.bool"builtins.bool*310*311*312*313*314rù
-include_table_with_column_exprsAsqlalchemy.sql.dml.UpdateDMLState.include_table_with_column_exprs
-builtins.bool"builtins.bool*310*311*312*313*314rZ
-	statement+sqlalchemy.sql.dml.UpdateDMLState.statement
-Any*310*311*312*313*314rb
-is_multitable/sqlalchemy.sql.dml.UpdateDMLState.is_multitable
-Any*310*311*312*313*314§
-DeleteDMLState!sqlalchemy.sql.dml.DeleteDMLState"sqlalchemy.sql.dml.DMLState*Î
-__init__*sqlalchemy.sql.dml.DeleteDMLState.__init__"
-None*P
-selfF
-!sqlalchemy.sql.dml.DeleteDMLState"!sqlalchemy.sql.dml.DeleteDMLState*
-	statement
-Any*
-compiler
-Any*
-kw
-Anyz310z311z312z313z314j310j311j312j313j314ro
-isdelete*sqlalchemy.sql.dml.DeleteDMLState.isdelete
-builtins.bool"builtins.bool*310*311*312*313*314rZ
-	statement+sqlalchemy.sql.dml.DeleteDMLState.statement
-Any*310*311*312*313*314ƒ
+sqlalchemy.sql.dml¯
+DMLState" sqlalchemy.sql.base.CompileState*C
+__init__*
 
-UpdateBasesqlalchemy.sql.dml.UpdateBase"sqlalchemy.sql.roles.DMLRole" sqlalchemy.sql.selectable.HasCTE"#sqlalchemy.sql.base.HasCompileState"!sqlalchemy.sql.base.DialectKWArgs"%sqlalchemy.sql.selectable.HasPrefixes"%sqlalchemy.sql.selectable.ReturnsRows"sqlalchemy.sql.base.Executable"%sqlalchemy.sql.elements.ClauseElement*æ
-params$sqlalchemy.sql.dml.UpdateBase.params"
-None*H
-self>
-sqlalchemy.sql.dml.UpdateBase"sqlalchemy.sql.dml.UpdateBase*
-arg
-Any*
-kw
-Anyz310z311z312z313z314*…
-with_dialect_options2sqlalchemy.sql.dml.UpdateBase.with_dialect_options"
-None*H
-self>
-sqlalchemy.sql.dml.UpdateBase"sqlalchemy.sql.dml.UpdateBase*
-opt
-Anyz310z311z312z313z314*¥
-	returning'sqlalchemy.sql.dml.UpdateBase.returning"
-None*H
-self>
-sqlalchemy.sql.dml.UpdateBase"sqlalchemy.sql.dml.UpdateBase*
-cols
-Anyz310z311z312z313z314*|
-exported_columns.sqlalchemy.sql.dml.UpdateBase.exported_columns*
-self0:builtins.property`z310z311z312z313z314*’
-	with_hint'sqlalchemy.sql.dml.UpdateBase.with_hint"
-None*H
-self>
-sqlalchemy.sql.dml.UpdateBase"sqlalchemy.sql.dml.UpdateBase*
-text
-Any*m
+self(*
+	statement(*
+compiler(*
+kw(*,
+	dml_table*
+self0:builtins.property`*P
+get_entity_description*	
+cls(*
+	statement(0:builtins.classmethodp*[
+!get_returning_column_descriptions*	
+cls(*
+	statement(0:builtins.classmethodpr
+isupdate0	r
+isdelete0	r
+isinsert0	¥
+InsertDMLState"sqlalchemy.sql.dml.DMLState*C
+__init__*
 
-selectable[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *0
-dialect_name
-builtins.str"builtins.str z310z311z312z313z314*Ä
-entity_description0sqlalchemy.sql.dml.UpdateBase.entity_description*
-self0:builtins.property`z310z311z312z313z314*ñ
-returning_column_descriptions;sqlalchemy.sql.dml.UpdateBase.returning_column_descriptions*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314ru
-__visit_name__,sqlalchemy.sql.dml.UpdateBase.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314r}
-named_with_column/sqlalchemy.sql.dml.UpdateBase.named_with_column
-builtins.bool"builtins.bool*310*311*312*313*314rg
-is_dml$sqlalchemy.sql.dml.UpdateBase.is_dml
-builtins.bool"builtins.bool*310*311*312*313*314rL
-bind"sqlalchemy.sql.dml.UpdateBase.bind
-Any*310*311*312*313*314Á
+self(
+*
+	statement(*
+compiler(*
+kw(r
+isinsert0	r#
+include_table_with_column_exprs0	r
+	statement0«
+UpdateDMLState"sqlalchemy.sql.dml.DMLState*C
+__init__*
 
-ValuesBasesqlalchemy.sql.dml.ValuesBase"sqlalchemy.sql.dml.UpdateBase*ﬂ
-__init__&sqlalchemy.sql.dml.ValuesBase.__init__"
-None*H
-self>
-sqlalchemy.sql.dml.ValuesBase"sqlalchemy.sql.dml.ValuesBase*
-table
-Any*
-values
-Any*
-prefixes
-Anyz310z311z312z313z314*√
-values$sqlalchemy.sql.dml.ValuesBase.values"
-None*H
-self>
-sqlalchemy.sql.dml.ValuesBase"sqlalchemy.sql.dml.ValuesBase*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*¿
-return_defaults-sqlalchemy.sql.dml.ValuesBase.return_defaults"
-None*H
-self>
-sqlalchemy.sql.dml.ValuesBase"sqlalchemy.sql.dml.ValuesBase*
-cols
-Anyz310z311z312z313z314j310j311j312j313j314ru
-__visit_name__,sqlalchemy.sql.dml.ValuesBase.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rP
-select$sqlalchemy.sql.dml.ValuesBase.select
-Any*310*311*312*313*314rN
-table#sqlalchemy.sql.dml.ValuesBase.table
-Any*310*311*312*313*314ç
-Insertsqlalchemy.sql.dml.Insert"sqlalchemy.sql.dml.ValuesBase*‘
-__init__"sqlalchemy.sql.dml.Insert.__init__"
-None*@
-self6
-sqlalchemy.sql.dml.Insert"sqlalchemy.sql.dml.Insert*
-table
-Any*i
-values[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-inline
-builtins.bool"builtins.bool *g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-prefixes[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	returning[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-return_defaults
-builtins.bool"builtins.bool *
+self(*
+	statement(*
+compiler(*
+kw(r
+isupdate0	r#
+include_table_with_column_exprs0	r
+	statement0r
+is_multitable0è
+DeleteDMLState"sqlalchemy.sql.dml.DMLState*C
+__init__*
 
-dialect_kw
-Anyz310z311z312z313z314*è
-inline sqlalchemy.sql.dml.Insert.inline"
-None*@
-self6
-sqlalchemy.sql.dml.Insert"sqlalchemy.sql.dml.Insertz310z311z312z313z314*˙
-from_select%sqlalchemy.sql.dml.Insert.from_select"
-None*@
-self6
-sqlalchemy.sql.dml.Insert"sqlalchemy.sql.dml.Insert*
-names
-Any*
-select
-Any*6
-include_defaults
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rq
-__visit_name__(sqlalchemy.sql.dml.Insert.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314rL
-select sqlalchemy.sql.dml.Insert.select
-Any*310*311*312*313*314rù
-#include_insert_from_select_defaults=sqlalchemy.sql.dml.Insert.include_insert_from_select_defaults
-builtins.bool"builtins.bool*310*311*312*313*314ri
-	is_insert#sqlalchemy.sql.dml.Insert.is_insert
-builtins.bool"builtins.bool*310*311*312*313*314’
-DMLWhereBasesqlalchemy.sql.dml.DMLWhereBase"builtins.object*π
-where%sqlalchemy.sql.dml.DMLWhereBase.where"
-None*L
-selfB
-sqlalchemy.sql.dml.DMLWhereBase"sqlalchemy.sql.dml.DMLWhereBase*
-whereclause
-Anyz310z311z312z313z314*a
-filter&sqlalchemy.sql.dml.DMLWhereBase.filter*
+self(*
+	statement(*
+compiler(*
+kw(r
+isdelete0	r
+	statement0Ó
+
+UpdateBase"sqlalchemy.sql.roles.DMLRole" sqlalchemy.sql.selectable.HasCTE"#sqlalchemy.sql.base.HasCompileState"!sqlalchemy.sql.base.DialectKWArgs"%sqlalchemy.sql.selectable.HasPrefixes"%sqlalchemy.sql.selectable.ReturnsRows"sqlalchemy.sql.base.Executable"%sqlalchemy.sql.elements.ClauseElement*+
+params*
+
+self(*	
+arg(*
+kw(*/
+with_dialect_options*
+
+self(*	
+opt(*%
+	returning*
+
+self(*
+
+cols(*3
+exported_columns*
+self0:builtins.property`*O
+	with_hint*
+
+self(*
+
+text(*
+
+selectable (*
+dialect_name (*5
+entity_description*
+self0:builtins.property`*@
+returning_column_descriptions*
+self0:builtins.property`r
+__visit_name__0r
+named_with_column0	r
+
+is_dml0	r
+bind0˙
+
+ValuesBase"sqlalchemy.sql.dml.UpdateBase*C
+__init__*
+
+self(*
+table(*
+values(*
+prefixes(*0
+values*
+
+self(*
+
+args(*
+kwargs(*+
+return_defaults*
+
+self(*
+
+cols(r
+__visit_name__0r
+
+select0r	
+table0è
+Insert"sqlalchemy.sql.dml.ValuesBase*£
+__init__*
+
+self(*
+table(*
+values (*
+inline (	*
+bind (*
+prefixes (*
+	returning (*
+return_defaults (	*
+
+dialect_kw(*
+inline*
+
+self(*P
+from_select*
+
+self(*
+names(*
+select(*
+include_defaults (	r
+__visit_name__0r
+
+select0r'
+#include_insert_from_select_defaults0	r
+	is_insert0	æ
+DMLWhereBase"builtins.object*(
+where*
+
+self(*
+whereclause(* 
+filter*
 self*
-criteriaz310z311z312z313z314*e
-	filter_by)sqlalchemy.sql.dml.DMLWhereBase.filter_by*
+criteria*!
+	filter_by*
 self*
 
-kwargsz310z311z312z313z314*t
-whereclause+sqlalchemy.sql.dml.DMLWhereBase.whereclause*
-self0:builtins.property`z310z311z312z313z314j310j311j312j313j314®
-Updatesqlalchemy.sql.dml.Update"sqlalchemy.sql.dml.DMLWhereBase"sqlalchemy.sql.dml.ValuesBase*Ñ
-__init__"sqlalchemy.sql.dml.Update.__init__"
-None*@
-self6
-sqlalchemy.sql.dml.Update"sqlalchemy.sql.dml.Update*
-table
-Any*n
-whereclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-values[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *,
-inline
-builtins.bool"builtins.bool *g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-prefixes[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	returning[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *5
-return_defaults
-builtins.bool"builtins.bool *>
-preserve_parameter_order
-builtins.bool"builtins.bool *
+kwargs*.
+whereclause*
+self0:builtins.property`å
+Update"sqlalchemy.sql.dml.DMLWhereBase"sqlalchemy.sql.dml.ValuesBase*⁄
+__init__*
 
-dialect_kw
-Anyz310z311z312z313z314*≤
-ordered_values(sqlalchemy.sql.dml.Update.ordered_values"
-None*@
-self6
-sqlalchemy.sql.dml.Update"sqlalchemy.sql.dml.Update*
-args
-Anyz310z311z312z313z314*è
-inline sqlalchemy.sql.dml.Update.inline"
-None*@
-self6
-sqlalchemy.sql.dml.Update"sqlalchemy.sql.dml.Updatez310z311z312z313z314j310j311j312j313j314rq
-__visit_name__(sqlalchemy.sql.dml.Update.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ri
-	is_update#sqlalchemy.sql.dml.Update.is_update
-builtins.bool"builtins.bool*310*311*312*313*314ù
-Deletesqlalchemy.sql.dml.Delete"sqlalchemy.sql.dml.DMLWhereBase"sqlalchemy.sql.dml.UpdateBase*Ù
-__init__"sqlalchemy.sql.dml.Delete.__init__"
-None*@
-self6
-sqlalchemy.sql.dml.Delete"sqlalchemy.sql.dml.Delete*
-table
-Any*n
-whereclause[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-bind[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *l
-	returning[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *k
-prefixes[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
+self(*
+table(*
+whereclause (*
+values (*
+inline (	*
+bind (*
+prefixes (*
+	returning (*
+return_defaults (	* 
+preserve_parameter_order (	*
 
-dialect_kw
-Anyz310z311z312z313z314j310j311j312j313j314rq
-__visit_name__(sqlalchemy.sql.dml.Delete.__visit_name__
-builtins.str"builtins.str*310*311*312*313*314ri
-	is_delete#sqlalchemy.sql.dml.Delete.is_delete
-builtins.bool"builtins.bool*310*311*312*313*314rJ
-tablesqlalchemy.sql.dml.Delete.table
-Any*310*311*312*313*314*ß
-__annotations__"sqlalchemy.sql.dml.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+dialect_kw(**
+ordered_values*
+
+self(*
+
+args(*
+inline*
+
+self(r
+__visit_name__0r
+	is_update0	˜
+Delete"sqlalchemy.sql.dml.DMLWhereBase"sqlalchemy.sql.dml.UpdateBase*
+__init__*
+
+self(*
+table(*
+whereclause (*
+bind (*
+	returning (*
+prefixes (*
+
+dialect_kw(r
+__visit_name__0r
+	is_delete0	r	
+table0*
+__annotations__022"sqlalchemy.sql.dml.DMLState22"builtins.str2"_typeshed.Incomplete22"builtins.dict22"type22"builtins.list22"builtins.bool2#"!sqlalchemy.sql.dml.InsertDMLState2#"!sqlalchemy.sql.dml.UpdateDMLState2#"!sqlalchemy.sql.dml.DeleteDMLState2"sqlalchemy.sql.dml.UpdateBase222"sqlalchemy.sql.dml.ValuesBase2"sqlalchemy.sql.dml.Insert2!"sqlalchemy.sql.dml.DMLWhereBase2"sqlalchemy.sql.dml.Update2"sqlalchemy.sql.dml.Delete2"builtins.dict2

@@ -1,348 +1,171 @@
 
-paramiko.sftp_clientÑd
+paramiko.sftp_clientÍ
 
-SFTPClientparamiko.sftp_client.SFTPClient"paramiko.sftp.BaseSFTP"#paramiko.util.ClosingContextManager*Â
-__init__(paramiko.sftp_client.SFTPClient.__init__"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*>
-sock4
-paramiko.channel.Channel"paramiko.channel.Channelz310z311z312z313z314*î
-from_transport.paramiko.sftp_client.SFTPClient.from_transport"–
-0Union[paramiko.sftp_client.SFTPClient.Self,None]è
-$paramiko.sftp_client.SFTPClient.SelfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient(
-None*–
-cls∆
-*Type[paramiko.sftp_client.SFTPClient.Self]è
-$paramiko.sftp_client.SFTPClient.SelfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient("type*C
-t<
-paramiko.transport.Transport"paramiko.transport.Transport*W
-window_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *[
-max_packet_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:builtins.classmethodpz310z311z312z313z314*ü
-close%paramiko.sftp_client.SFTPClient.close"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClientz310z311z312z313z314*ã
-get_channel+paramiko.sftp_client.SFTPClient.get_channel"h
-$Union[paramiko.channel.Channel,None]4
-paramiko.channel.Channel"paramiko.channel.Channel
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClientz310z311z312z313z314*è
-listdir'paramiko.sftp_client.SFTPClient.listdir"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*(
-path
-builtins.str"builtins.str z310z311z312z313z314*Ÿ
-listdir_attr,paramiko.sftp_client.SFTPClient.listdir_attr"â
-0builtins.list[paramiko.sftp_attr.SFTPAttributes]F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes"builtins.list*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*(
-path
-builtins.str"builtins.str z310z311z312z313z314*ÿ
-listdir_iter,paramiko.sftp_client.SFTPClient.listdir_iter"ç
-2typing.Iterator[paramiko.sftp_attr.SFTPAttributes]F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes"typing.Iterator*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*r
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str */
-read_aheads
-builtins.int"builtins.int z310z311z312z313z314*ú
-open$paramiko.sftp_client.SFTPClient.open":
-paramiko.sftp_file.SFTPFile"paramiko.sftp_file.SFTPFile*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*t
-filenamef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*(
-mode
-builtins.str"builtins.str *+
-bufsize
-builtins.int"builtins.int z310z311z312z313z314*ì
-remove&paramiko.sftp_client.SFTPClient.remove"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*ã
-rename&paramiko.sftp_client.SFTPClient.rename"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*s
-oldpathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*s
-newpathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*ó
-posix_rename,paramiko.sftp_client.SFTPClient.posix_rename"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*s
-oldpathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*s
-newpathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*ª
-mkdir%paramiko.sftp_client.SFTPClient.mkdir"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*(
-mode
-builtins.int"builtins.int z310z311z312z313z314*ë
-rmdir%paramiko.sftp_client.SFTPClient.rmdir"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*Õ
-stat$paramiko.sftp_client.SFTPClient.stat"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*œ
-lstat%paramiko.sftp_client.SFTPClient.lstat"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*â
-symlink'paramiko.sftp_client.SFTPClient.symlink"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*r
-sourcef
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*p
-destf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*π
-chmod%paramiko.sftp_client.SFTPClient.chmod"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*&
-mode
-builtins.int"builtins.intz310z311z312z313z314*ﬂ
-chown%paramiko.sftp_client.SFTPClient.chown"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*%
-uid
-builtins.int"builtins.int*%
-gid
-builtins.int"builtins.intz310z311z312z313z314*Ã
-utime%paramiko.sftp_client.SFTPClient.utime"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*∏
-times¨
-0Union[Tuple[builtins.float,builtins.float],None]l
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.float
-Nonez310z311z312z313z314*ø
-truncate(paramiko.sftp_client.SFTPClient.truncate"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*&
-size
-builtins.int"builtins.intz310z311z312z313z314*”
-readlink(paramiko.sftp_client.SFTPClient.readlink"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*≠
-	normalize)paramiko.sftp_client.SFTPClient.normalize"
-builtins.str"builtins.str*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*p
-pathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz310z311z312z313z314*£
-chdir%paramiko.sftp_client.SFTPClient.chdir"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*Å
-pathu
-'Union[None,builtins.bytes,builtins.str]
-None 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str z310z311z312z313z314*›
-getcwd&paramiko.sftp_client.SFTPClient.getcwd"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClientz310z311z312z313z314*˚
-putfo%paramiko.sftp_client.SFTPClient.putfo"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*P
-flH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*v
+SFTPClient"paramiko.sftp.BaseSFTP"#paramiko.util.ClosingContextManager*$
+__init__*
 
-remotepathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*-
-	file_size
-builtins.int"builtins.int *Û
-callback‚
-6Union[TypeAlias[CallableType[builtins.function]],None]õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"paramiko.sftp_client._Callback
-None *-
-confirm
-builtins.bool"builtins.bool z310z311z312z313z314*ø
-put#paramiko.sftp_client.SFTPClient.put"F
-!paramiko.sftp_attr.SFTPAttributes"!paramiko.sftp_attr.SFTPAttributes*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*∆
-	localpath∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*v
+self(*
 
-remotepathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*Û
-callback‚
-6Union[TypeAlias[CallableType[builtins.function]],None]õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"paramiko.sftp_client._Callback
-None *-
-confirm
-builtins.bool"builtins.bool z310z311z312z313z314*£
-getfo%paramiko.sftp_client.SFTPClient.getfo"
-builtins.int"builtins.int*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*v
+sock(*n
+from_transport*	
+cls(*
+t(*
+window_size (	*
+max_packet_size (	0:builtins.classmethodp*
+close*
 
-remotepathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*P
-flH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*Û
-callback‚
-6Union[TypeAlias[CallableType[builtins.function]],None]õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"paramiko.sftp_client._Callback
-None *.
-prefetch
-builtins.bool"builtins.bool z310z311z312z313z314*Ç
-get#paramiko.sftp_client.SFTPClient.get"
-None*L
-selfB
-paramiko.sftp_client.SFTPClient"paramiko.sftp_client.SFTPClient*v
+self(*
+get_channel
+*
 
-remotepathf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*∆
-	localpath∂
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*Û
-callback‚
-6Union[TypeAlias[CallableType[builtins.function]],None]õ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"paramiko.sftp_client._Callback
-None *.
-prefetch
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314r{
-sock$paramiko.sftp_client.SFTPClient.sock4
-paramiko.channel.Channel"paramiko.channel.Channel*310*311*312*313*314rs
-ultra_debug+paramiko.sftp_client.SFTPClient.ultra_debug
-builtins.bool"builtins.bool*310*311*312*313*314rw
-request_number.paramiko.sftp_client.SFTPClient.request_number
-builtins.int"builtins.int*310*311*312*313*314rk
-logger&paramiko.sftp_client.SFTPClient.logger 
-logging.Logger"logging.Logger*310*311*312*313*314rí
-file$paramiko.sftp_client.SFTPClient.fileK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rñ
-unlink&paramiko.sftp_client.SFTPClient.unlinkK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314[
-SFTPparamiko.sftp_client.SFTP"paramiko.sftp_client.SFTPClientj310j311j312j313j314*©
-__annotations__$paramiko.sftp_client.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*b
-b_slashparamiko.sftp_client.b_slash 
-builtins.bytes"builtins.bytes*310*311*312*313*314
+self(*%
+listdir*
+
+self(*
+path (**
+listdir_attr*
+
+self(*
+path (*?
+listdir_iter*
+
+self(*
+path (*
+read_aheads (*C
+open*
+
+self(*
+filename(*
+mode (*
+bufsize (*"
+remove*
+
+self(*
+
+path(*4
+rename*
+
+self(*
+oldpath(*
+newpath(*:
+posix_rename*
+
+self(*
+oldpath(*
+newpath(*/
+mkdir*
+
+self(*
+
+path(*
+mode (*!
+rmdir*
+
+self(*
+
+path(* 
+stat*
+
+self(*
+
+path(*!
+lstat*
+
+self(*
+
+path(*1
+symlink*
+
+self(*
+source(*
+
+dest(*-
+chmod*
+
+self(*
+
+path(*
+
+mode(*7
+chown*
+
+self(*
+
+path(*	
+uid(*	
+gid(*.
+utime*
+
+self(*
+
+path(*
+times(*0
+truncate*
+
+self(*
+
+path(*
+
+size(*$
+readlink*
+
+self(*
+
+path(*%
+	normalize*
+
+self(*
+
+path(*#
+chdir*
+
+self(*
+path (*
+getcwd*
+
+self(*g
+putfo*
+
+self(*
+fl(*
+
+remotepath(*
+	file_size (*
+callback (*
+confirm (*Y
+put*
+
+self(*
+	localpath(!*
+
+remotepath(*
+callback (*
+confirm (*U
+getfo*
+
+self(*
+
+remotepath(*
+fl(*
+callback (*
+prefetch (*Z
+get*
+
+self(*
+
+remotepath(*
+	localpath(!*
+callback (*
+prefetch (r
+sock0r
+ultra_debug0r
+request_number0r
+
+logger0"r
+file0r
+
+unlink0'
+SFTP"paramiko.sftp_client.SFTPClient*
+__annotations__0$*
+b_slash022!"paramiko.sftp_client.SFTPClient2"paramiko.channel.Channel2N
+$paramiko.sftp_client.SFTPClient.Self"paramiko.sftp_client.SFTPClient(2222"type22"paramiko.transport.Transport2"builtins.int22222"builtins.str2"builtins.list22#"!paramiko.sftp_attr.SFTPAttributes2"builtins.list22"typing.Iterator22"builtins.bytes222"paramiko.sftp_file.SFTPFile2"builtins.float222222222"	typing.IO22"builtins.function222%"paramiko.sftp_client._Callback2222"builtins.bool2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath2 2"logging.Logger22"builtins.dict2#

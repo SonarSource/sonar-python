@@ -1,220 +1,113 @@
 
-pyspark.streaming.contextÌE
-StreamingContext*pyspark.streaming.context.StreamingContext"builtins.object*å
-__init__3pyspark.streaming.context.StreamingContext.__init__"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*N
-sparkContext<
-pyspark.context.SparkContext"pyspark.context.SparkContext*Y
-batchDurationD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-jssc&
-Union[Any,None]
-Any
-None *‹
-_initialize_context>pyspark.streaming.context.StreamingContext._initialize_context"
-Any*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*D
-sc<
-pyspark.context.SparkContext"pyspark.context.SparkContext*R
-durationD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*€
+pyspark.streaming.context´
+StreamingContext"builtins.object*Q
+__init__*
 
-_jduration5pyspark.streaming.context.StreamingContext._jduration"
-Any*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*)
-seconds
-builtins.int"builtins.int*ö
-_ensure_initialized>pyspark.streaming.context.StreamingContext._ensure_initialized"
-None*û
-clsî
-0Type[pyspark.streaming.context.StreamingContext]X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type0:builtins.classmethodp*Ë
-getOrCreate6pyspark.streaming.context.StreamingContext.getOrCreate"X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*û
-clsî
-0Type[pyspark.streaming.context.StreamingContext]X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type*0
-checkpointPath
-builtins.str"builtins.str*Z
-	setupFuncK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:builtins.classmethodp*ù
-	getActive4pyspark.streaming.context.StreamingContext.getActive"û
-6Union[pyspark.streaming.context.StreamingContext,None]X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext
-None*û
-clsî
-0Type[pyspark.streaming.context.StreamingContext]X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type0:builtins.classmethodp*Ù
-getActiveOrCreate<pyspark.streaming.context.StreamingContext.getActiveOrCreate"X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*û
-clsî
-0Type[pyspark.streaming.context.StreamingContext]X
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type*0
-checkpointPath
-builtins.str"builtins.str*Z
-	setupFuncK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:builtins.classmethodp*Ä
-sparkContext7pyspark.streaming.context.StreamingContext.sparkContext"<
-pyspark.context.SparkContext"pyspark.context.SparkContext*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext0:builtins.property`*ß
-start0pyspark.streaming.context.StreamingContext.start"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*í
-awaitTermination;pyspark.streaming.context.StreamingContext.awaitTermination"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*S
-timeoutD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *˙
-awaitTerminationOrTimeoutDpyspark.streaming.context.StreamingContext.awaitTerminationOrTimeout"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*)
-timeout
-builtins.int"builtins.int*ì
-stop/pyspark.streaming.context.StreamingContext.stop"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*6
-stopSparkContext
-builtins.bool"builtins.bool *4
-stopGraceFully
-builtins.bool"builtins.bool *Ÿ
-remember3pyspark.streaming.context.StreamingContext.remember"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext**
-duration
-builtins.int"builtins.int*ﬁ
+self(*
+sparkContext(*
+batchDuration (*
+jssc (*=
+_initialize_context*
 
-checkpoint5pyspark.streaming.context.StreamingContext.checkpoint"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
-	directory
-builtins.str"builtins.str*◊
-socketTextStream;pyspark.streaming.context.StreamingContext.socketTextStream"r
-/pyspark.streaming.dstream.DStream[builtins.str]
-builtins.str"builtins.str"!pyspark.streaming.dstream.DStream*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext**
-hostname
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.int*Z
-storageLevelF
-!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel *–
-textFileStream9pyspark.streaming.context.StreamingContext.textFileStream"r
-/pyspark.streaming.dstream.DStream[builtins.str]
-builtins.str"builtins.str"!pyspark.streaming.dstream.DStream*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
-	directory
-builtins.str"builtins.str*ê
-binaryRecordsStream>pyspark.streaming.context.StreamingContext.binaryRecordsStream"x
-1pyspark.streaming.dstream.DStream[builtins.bytes] 
-builtins.bytes"builtins.bytes"!pyspark.streaming.dstream.DStream*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
-	directory
-builtins.str"builtins.str*.
-recordLength
-builtins.int"builtins.int*≥
-_check_serializers=pyspark.streaming.context.StreamingContext._check_serializers"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*Ô
-rdds‰
-;builtins.list[pyspark.rdd.RDD[pyspark.streaming.context.T]]ï
-,pyspark.rdd.RDD[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list*˙
-queueStream6pyspark.streaming.context.StreamingContext.queueStream"π
->pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*Ô
-rdds‰
-;builtins.list[pyspark.rdd.RDD[pyspark.streaming.context.T]]ï
-,pyspark.rdd.RDD[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list*0
+self(*
+sc(*
+duration(*)
 
-oneAtATime
-builtins.bool"builtins.bool *Ó
-defaultﬁ
-8Union[pyspark.rdd.RDD[pyspark.streaming.context.T],None]ï
-,pyspark.rdd.RDD[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD
-None *Ô
-	transform4pyspark.streaming.context.StreamingContext.transform"π
->pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*´
-dstreamsú
-5builtins.list[pyspark.streaming.dstream.DStream[Any]]T
-&pyspark.streaming.dstream.DStream[Any]
-Any"!pyspark.streaming.dstream.DStream"builtins.list*^
-transformFuncK
-CallableType[builtins.function]&
-builtins.function"builtins.function*§
-union0pyspark.streaming.context.StreamingContext.union"π
->pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*»
-dstreamsπ
->pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
-pyspark.streaming.context.T"
-builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*∫
-addStreamingListener?pyspark.streaming.context.StreamingContext.addStreamingListener"
-None*b
-selfX
-*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*s
-streamingListener\
-,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListenerre
-_transformerSerializerApyspark.streaming.context.StreamingContext._transformerSerializer
-NonerU
-_activeContext9pyspark.streaming.context.StreamingContext._activeContext
-Noners
-_sc.pyspark.streaming.context.StreamingContext._sc<
-pyspark.context.SparkContext"pyspark.context.SparkContextr_
-_jvm/pyspark.streaming.context.StreamingContext._jvm&
-Union[Any,None]
-Any
-NonerB
-_jssc0pyspark.streaming.context.StreamingContext._jssc
-Any*ï
-__annotations__)pyspark.streaming.context.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*=
-java_import%pyspark.streaming.context.java_import
-Any*C
-is_instance_of(pyspark.streaming.context.is_instance_of
-Any*;
+_jduration*
 
-JavaObject$pyspark.streaming.context.JavaObject
-Any*x
-__all__!pyspark.streaming.context.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(*
+seconds(*<
+_ensure_initialized*	
+cls(0:builtins.classmethodp*[
+getOrCreate*	
+cls(*
+checkpointPath(	*
+	setupFunc(0:builtins.classmethodp*2
+	getActive*	
+cls(0:builtins.classmethodp*a
+getActiveOrCreate*	
+cls(*
+checkpointPath(	*
+	setupFunc(0:builtins.classmethodp*3
+sparkContext*
+
+self(0:builtins.property`*
+start*
+
+self(*1
+awaitTermination*
+
+self(*
+timeout (*8
+awaitTerminationOrTimeout*
+
+self(*
+timeout(*F
+stop*
+
+self(*
+stopSparkContext (*
+stopGraceFully (*(
+remember*
+
+self(*
+duration(*+
+
+checkpoint*
+
+self(*
+	directory(	*R
+socketTextStream*
+
+self(*
+hostname(	*
+
+port(*
+storageLevel (*/
+textFileStream*
+
+self(*
+	directory(	*H
+binaryRecordsStream*
+
+self(*
+	directory(	*
+recordLength(*.
+_check_serializers*
+
+self(*
+
+rdds(*L
+queueStream*
+
+self(*
+
+rdds(*
+
+oneAtATime (*
+default (*>
+	transform*
+
+self(*
+dstreams(*
+transformFunc(*%
+union*
+
+self(*
+dstreams(*=
+addStreamingListener*
+
+self(*
+streamingListener(r
+_transformerSerializer0r
+_activeContext0r
+_sc0r
+_jvm0r	
+_jssc0*
+__annotations__0*
+java_import0*
+is_instance_of0*
+
+JavaObject0*
+__all__022,"*pyspark.streaming.context.StreamingContext2"pyspark.context.SparkContext2"builtins.int222222"type22"builtins.str2"builtins.function22
+222"builtins.bool2&"!pyspark.streaming.dstream.DStream2	2#"!pyspark.storagelevel.StorageLevel2"builtins.bytes2&"!pyspark.streaming.dstream.DStream22"builtins.object2"builtins.object22"pyspark.rdd.RDD22"builtins.list22&"!pyspark.streaming.dstream.DStream2222&"!pyspark.streaming.dstream.DStream22"builtins.list22.",pyspark.streaming.listener.StreamingListener2"builtins.dict2	2"builtins.list2	

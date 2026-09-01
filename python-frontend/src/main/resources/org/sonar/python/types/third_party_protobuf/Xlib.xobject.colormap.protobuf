@@ -1,154 +1,82 @@
 
-Xlib.xobject.colormap‡+
-ColormapXlib.xobject.colormap.Colormap"builtins.object*ä
-free#Xlib.xobject.colormap.Colormap.free"
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¢
-copy_colormap_and_free5Xlib.xobject.colormap.Colormap.copy_colormap_and_free"@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap**
-scr_cmap
-builtins.int"builtins.intz310z311z312z313z314*¢
-install_colormap/Xlib.xobject.colormap.Colormap.install_colormap"
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*¶
-uninstall_colormap1Xlib.xobject.colormap.Colormap.uninstall_colormap"
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*‹
-alloc_color*Xlib.xobject.colormap.Colormap.alloc_color"D
- Xlib.protocol.request.AllocColor" Xlib.protocol.request.AllocColor*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*%
-red
-builtins.int"builtins.int*'
-green
-builtins.int"builtins.int*&
-blue
-builtins.int"builtins.intz310z311z312z313z314*À
-alloc_named_color0Xlib.xobject.colormap.Colormap.alloc_named_color"ˆ
-RUnion[Xlib.protocol.request.AllocColor,Xlib.protocol.request.AllocNamedColor,None]D
- Xlib.protocol.request.AllocColor" Xlib.protocol.request.AllocColorN
-%Xlib.protocol.request.AllocNamedColor"%Xlib.protocol.request.AllocNamedColor
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*&
-name
-builtins.str"builtins.strz310z311z312z313z314*˛
-alloc_color_cells0Xlib.xobject.colormap.Colormap.alloc_color_cells"N
-%Xlib.protocol.request.AllocColorCells"%Xlib.protocol.request.AllocColorCells*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*.
+Xlib.xobject.colormap◊
+Colormap"builtins.object*%
+free*
 
-contiguous
-builtins.bool"builtins.bool*(
-colors
-builtins.int"builtins.int*(
-planes
-builtins.int"builtins.intz310z311z312z313z314*–
-alloc_color_planes1Xlib.xobject.colormap.Colormap.alloc_color_planes"P
-&Xlib.protocol.request.AllocColorPlanes"&Xlib.protocol.request.AllocColorPlanes*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*.
+self(*
+onerror (*6
+copy_colormap_and_free*
 
-contiguous
-builtins.bool"builtins.bool*(
-colors
-builtins.int"builtins.int*%
-red
-builtins.int"builtins.int*'
-green
-builtins.int"builtins.int*&
-blue
-builtins.int"builtins.intz310z311z312z313z314*¢
-free_colors*Xlib.xobject.colormap.Colormap.free_colors"
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*Z
-pixelsN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*,
+self(*
+scr_cmap(*1
+install_colormap*
 
-plane_mask
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*ù
-store_colors+Xlib.xobject.colormap.Colormap.store_colors"
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*Ä
-itemsu
-(builtins.dict[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*û
-store_named_color0Xlib.xobject.colormap.Colormap.store_named_color"
-None*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*&
-name
-builtins.str"builtins.str*'
-pixel
-builtins.int"builtins.int*'
-flags
-builtins.int"builtins.int*Ì
-onerror›
-6Union[TypeAlias[CallableType[builtins.function]],None]ñ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314*∞
-query_colors+Xlib.xobject.colormap.Colormap.query_colors"2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*Z
-pixelsN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequencez310z311z312z313z314*ê
-lookup_color+Xlib.xobject.colormap.Colormap.lookup_color"F
-!Xlib.protocol.request.LookupColor"!Xlib.protocol.request.LookupColor*J
-self@
-Xlib.xobject.colormap.Colormap"Xlib.xobject.colormap.Colormap*&
-name
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314r]
-__colormap__+Xlib.xobject.colormap.Colormap.__colormap__
-Any*310*311*312*313*314*™
-__annotations__%Xlib.xobject.colormap.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*¡
-rgb_resXlib.xobject.colormap.rgb_res~
-'builtins.list[re.Pattern[builtins.str]]D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern"builtins.list*310*311*312*313*314
+self(*
+onerror (*3
+uninstall_colormap*
+
+self(*
+onerror (*?
+alloc_color*
+
+self(*	
+red(*
+green(*
+
+blue(*-
+alloc_named_color
+*
+
+self(*
+
+name(*O
+alloc_color_cells*
+
+self(*
+
+contiguous(*
+colors(*
+planes(*f
+alloc_color_planes*
+
+self(*
+
+contiguous(*
+colors(*	
+red(*
+green(*
+
+blue(*L
+free_colors*
+
+self(*
+pixels(*
+
+plane_mask(*
+onerror (*:
+store_colors*
+
+self(*
+items(*
+onerror (*X
+store_named_color*
+
+self(*
+
+name(*
+pixel(*
+flags(*
+onerror (**
+query_colors*
+
+self(*
+pixels(*(
+lookup_color*
+
+self(*
+
+name(r
+__colormap__0*
+__annotations__0*
+rgb_res022 "Xlib.xobject.colormap.Colormap2"builtins.function222 "Xlib._typing.ErrorHandler2222"builtins.int2"" Xlib.protocol.request.AllocColor2'"%Xlib.protocol.request.AllocNamedColor22	2"builtins.str2'"%Xlib.protocol.request.AllocColorCells2"builtins.bool2("&Xlib.protocol.request.AllocColorPlanes2"typing.Sequence22"builtins.dict22"Xlib.protocol.rq.Struct2#"!Xlib.protocol.request.LookupColor22"builtins.dict22"
+re.Pattern22"builtins.list2

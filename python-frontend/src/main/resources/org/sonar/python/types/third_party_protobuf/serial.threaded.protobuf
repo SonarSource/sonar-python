@@ -1,154 +1,95 @@
 
-serial.threadedì
-Protocolserial.threaded.Protocol"builtins.object*Î
-connection_made(serial.threaded.Protocol.connection_made"
-None*>
-self4
-serial.threaded.Protocol"serial.threaded.Protocol*K
-	transport<
-serial.threaded.ReaderThread"serial.threaded.ReaderThreadz310z311z312z313z314*∆
-data_received&serial.threaded.Protocol.data_received"
-None*>
-self4
-serial.threaded.Protocol"serial.threaded.Protocol**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ã
-connection_lost(serial.threaded.Protocol.connection_lost"
-None*>
-self4
-serial.threaded.Protocol"serial.threaded.Protocol*k
-excb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-Nonez310z311z312z313z314j310j311j312j313j314œ
+serial.threaded§
+Protocol"builtins.object*0
+connection_made*
 
-Packetizerserial.threaded.Packetizer"serial.threaded.Protocol*Œ
-handle_packet(serial.threaded.Packetizer.handle_packet"
-None*B
-self8
-serial.threaded.Packetizer"serial.threaded.Packetizer*,
-packet 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314rn
+self(*
+	transport(*)
+data_received*
 
-TERMINATOR%serial.threaded.Packetizer.TERMINATOR 
-builtins.bytes"builtins.bytes*310*311*312*313*314rn
-buffer!serial.threaded.Packetizer.buffer(
-builtins.bytearray"builtins.bytearray*310*311*312*313*314r¿
-	transport$serial.threaded.Packetizer.transportt
-(Union[serial.threaded.ReaderThread,None]<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread
-None*310*311*312*313*314ñ	
-FramedPacketserial.threaded.FramedPacket"serial.threaded.Protocol*‘
-handle_packet*serial.threaded.FramedPacket.handle_packet"
-None*F
-self<
-serial.threaded.FramedPacket"serial.threaded.FramedPacket*,
-packet 
-builtins.bytes"builtins.bytesz310z311z312z313z314*Í
-handle_out_of_packet_data6serial.threaded.FramedPacket.handle_out_of_packet_data"
-None*F
-self<
-serial.threaded.FramedPacket"serial.threaded.FramedPacket**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314rf
-START"serial.threaded.FramedPacket.START 
-builtins.bytes"builtins.bytes*310*311*312*313*314rd
-STOP!serial.threaded.FramedPacket.STOP 
-builtins.bytes"builtins.bytes*310*311*312*313*314rp
-packet#serial.threaded.FramedPacket.packet(
-builtins.bytearray"builtins.bytearray*310*311*312*313*314rl
-	in_packet&serial.threaded.FramedPacket.in_packet
-builtins.bool"builtins.bool*310*311*312*313*314r¬
-	transport&serial.threaded.FramedPacket.transportt
-(Union[serial.threaded.ReaderThread,None]<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread
-None*310*311*312*313*314…
+self(*
 
-LineReaderserial.threaded.LineReader"serial.threaded.Packetizer*ƒ
-handle_line&serial.threaded.LineReader.handle_line"
-None*B
-self8
-serial.threaded.LineReader"serial.threaded.LineReader*&
-line
-builtins.str"builtins.strz310z311z312z313z314*¬
+data(**
+connection_lost*
 
-write_line%serial.threaded.LineReader.write_line"
-None*B
-self8
-serial.threaded.LineReader"serial.threaded.LineReader*&
-text
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rf
-ENCODING#serial.threaded.LineReader.ENCODING
-builtins.str"builtins.str*310*311*312*313*314rv
-UNICODE_HANDLING+serial.threaded.LineReader.UNICODE_HANDLING
-builtins.str"builtins.str*310*311*312*313*314Ω
-ReaderThreadserial.threaded.ReaderThread"threading.Thread*Ã
-__init__%serial.threaded.ReaderThread.__init__"
-None*F
-self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread*K
-serial_instance6
-serial.serialposix.Serial"serial.serialposix.Serial*a
-protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz310z311z312z313z314*î
-stop!serial.threaded.ReaderThread.stop"
-None*F
-self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThreadz310z311z312z313z314*€
-write"serial.threaded.ReaderThread.write"
-builtins.int"builtins.int*F
-self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread*>
-data4
-typing_extensions.Buffer"typing_extensions.Bufferz310z311*ﬁ
-write"serial.threaded.ReaderThread.write"
-builtins.int"builtins.int*F
-self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread*<
-data2
-_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*ñ
-close"serial.threaded.ReaderThread.close"
-None*F
-self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThreadz310z311z312z313z314*›
-connect$serial.threaded.ReaderThread.connect"Å
-ATuple[serial.threaded.ReaderThread.Self,serial.threaded.Protocol]É
-!serial.threaded.ReaderThread.Self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread"serial.threaded.ReaderThread(4
-serial.threaded.Protocol"serial.threaded.Protocol*é
-selfÉ
-!serial.threaded.ReaderThread.Self<
-serial.threaded.ReaderThread"serial.threaded.ReaderThread"serial.threaded.ReaderThread(z310z311z312z313z314*¬
-	__enter__&serial.threaded.ReaderThread.__enter__"4
-serial.threaded.Protocol"serial.threaded.Protocol*><
-serial.threaded.ReaderThread"serial.threaded.ReaderThreadz310z311z312z313z314*Ì
-__exit__%serial.threaded.ReaderThread.__exit__"
-None*><
-serial.threaded.ReaderThread"serial.threaded.ReaderThread*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314j310j311j312j313j314r~
-serial#serial.threaded.ReaderThread.serial6
-serial.serialposix.Serial"serial.serialposix.Serial*310*311*312*313*314rß
-protocol_factory-serial.threaded.ReaderThread.protocol_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314rd
-alive"serial.threaded.ReaderThread.alive
-builtins.bool"builtins.bool*310*311*312*313*314rÄ
-protocol%serial.threaded.ReaderThread.protocol4
-serial.threaded.Protocol"serial.threaded.Protocol*310*311*312*313*314*â
-__path__serial.threaded.__path__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314*§
-__annotations__serial.threaded.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+self(*	
+exc(~
+
+Packetizer"serial.threaded.Protocol*+
+handle_packet*
+
+self(*
+packet(r
+
+TERMINATOR0r
+
+buffer0r
+	transport0	À
+FramedPacket"serial.threaded.Protocol*+
+handle_packet*
+
+self(
+*
+packet(*5
+handle_out_of_packet_data*
+
+self(
+*
+
+data(r	
+START0r
+STOP0r
+
+packet0r
+	in_packet0r
+	transport0	ù
+
+LineReader"serial.threaded.Packetizer*'
+handle_line*
+
+self(*
+
+line(*&
+
+write_line*
+
+self(*
+
+text(r
+ENCODING0r
+UNICODE_HANDLING0˙
+ReaderThread"threading.Thread*G
+__init__*
+
+self(*
+serial_instance(*
+protocol_factory(*
+stop*
+
+self(*+
+write*
+
+self(*
+
+data(z310z311*0
+write*
+
+self(*
+
+data(z312z313z314*
+close*
+
+self(*
+connect*
+
+self(*
+	__enter__*(*
+__exit__*(*(*(*(r
+
+serial0r
+protocol_factory0r	
+alive0r
+protocol0*
+__path__0*
+__annotations__022"serial.threaded.Protocol2"serial.threaded.ReaderThread2"builtins.bytes2"builtins.BaseException222"serial.threaded.Packetizer2"builtins.bytearray222"serial.threaded.FramedPacket2"builtins.bool2"serial.threaded.LineReader2"builtins.str2"serial.serialposix.Serial2"builtins.function222"builtins.int2"typing_extensions.Buffer2"_collections_abc.Buffer2H
+!serial.threaded.ReaderThread.Self"serial.threaded.ReaderThread(2222"type2222"types.TracebackType222"builtins.list222"builtins.dict2

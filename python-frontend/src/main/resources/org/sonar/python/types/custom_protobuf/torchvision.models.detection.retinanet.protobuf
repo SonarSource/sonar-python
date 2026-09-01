@@ -1,366 +1,159 @@
 
-&torchvision.models.detection.retinanetÉ
-RetinaNetHead4torchvision.models.detection.retinanet.RetinaNetHead"torch.nn.modules.module.Module*µ
-__init__=torchvision.models.detection.retinanet.RetinaNetHead.__init__"
-None*v
-selfl
-4torchvision.models.detection.retinanet.RetinaNetHead"4torchvision.models.detection.retinanet.RetinaNetHead*
-in_channels
-Any*
-num_anchors
-Any*
-num_classes
-Any*™
+&torchvision.models.detection.retinanetÊ
+RetinaNetHead"torch.nn.modules.module.Module*e
+__init__*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Ñ
-compute_lossAtorchvision.models.detection.retinanet.RetinaNetHead.compute_loss"u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*v
-selfl
-4torchvision.models.detection.retinanet.RetinaNetHead"4torchvision.models.detection.retinanet.RetinaNetHead*Í
-targets¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*‡
-head_outputsu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*W
-anchorsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*\
-matched_idxsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*‰
-forward<torchvision.models.detection.retinanet.RetinaNetHead.forward"u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*v
-selfl
-4torchvision.models.detection.retinanet.RetinaNetHead"4torchvision.models.detection.retinanet.RetinaNetHead*Q
-xJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.listrh
-classification_headHtorchvision.models.detection.retinanet.RetinaNetHead.classification_head
-Anyr`
-regression_headDtorchvision.models.detection.retinanet.RetinaNetHead.regression_head
-AnyÓ
-RetinaNetClassificationHeadBtorchvision.models.detection.retinanet.RetinaNetClassificationHead"torch.nn.modules.module.Module*œ
-__init__Ktorchvision.models.detection.retinanet.RetinaNetClassificationHead.__init__"
-None*“
-selfˆ
-Btorchvision.models.detection.retinanet.RetinaNetClassificationHead"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead*
-in_channels
-Any*
-num_anchors
-Any*
-num_classes
-Any*9
-prior_probability 
-builtins.float"builtins.float *™
+self(*
+in_channels(*
+num_anchors(*
+num_classes(*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *Ë
-compute_lossOtorchvision.models.detection.retinanet.RetinaNetClassificationHead.compute_loss"
-torch.Tensor"torch.Tensor*“
-selfˆ
-Btorchvision.models.detection.retinanet.RetinaNetClassificationHead"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead*Í
-targets¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*‡
-head_outputsu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*\
-matched_idxsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*Ü
-forwardJtorchvision.models.detection.retinanet.RetinaNetClassificationHead.forward"
-torch.Tensor"torch.Tensor*“
-selfˆ
-Btorchvision.models.detection.retinanet.RetinaNetClassificationHead"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead*Q
-xJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.listrX
-convGtorchvision.models.detection.retinanet.RetinaNetClassificationHead.conv
-Anyrd
+norm_layer (*b
+compute_loss	*
 
-cls_logitsMtorchvision.models.detection.retinanet.RetinaNetClassificationHead.cls_logits
-Anyrf
-num_classesNtorchvision.models.detection.retinanet.RetinaNetClassificationHead.num_classes
-Anyrf
-num_anchorsNtorchvision.models.detection.retinanet.RetinaNetClassificationHead.num_anchors
-Anyrt
-BETWEEN_THRESHOLDSUtorchvision.models.detection.retinanet.RetinaNetClassificationHead.BETWEEN_THRESHOLDS
-Any¥
-RetinaNetRegressionHead>torchvision.models.detection.retinanet.RetinaNetRegressionHead"torch.nn.modules.module.Module*»
-__init__Gtorchvision.models.detection.retinanet.RetinaNetRegressionHead.__init__"
-None*‹
-self€
->torchvision.models.detection.retinanet.RetinaNetRegressionHead">torchvision.models.detection.retinanet.RetinaNetRegressionHead*
-in_channels
-Any*
-num_anchors
-Any*™
+self(*
+targets(
+*
+head_outputs(	*
+anchors(*
+matched_idxs(* 
+forward	*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *˜
-compute_lossKtorchvision.models.detection.retinanet.RetinaNetRegressionHead.compute_loss"
-torch.Tensor"torch.Tensor*‹
-self€
->torchvision.models.detection.retinanet.RetinaNetRegressionHead">torchvision.models.detection.retinanet.RetinaNetRegressionHead*Í
-targets¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*‡
-head_outputsu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*W
-anchorsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*\
-matched_idxsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*Ð
-forwardFtorchvision.models.detection.retinanet.RetinaNetRegressionHead.forward"
-torch.Tensor"torch.Tensor*‹
-self€
->torchvision.models.detection.retinanet.RetinaNetRegressionHead">torchvision.models.detection.retinanet.RetinaNetRegressionHead*Q
-xJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.listrj
-__annotations__Ntorchvision.models.detection.retinanet.RetinaNetRegressionHead.__annotations__
-AnyrT
-convCtorchvision.models.detection.retinanet.RetinaNetRegressionHead.conv
-Anyr\
-bbox_regGtorchvision.models.detection.retinanet.RetinaNetRegressionHead.bbox_reg
-Anyr^
-	box_coderHtorchvision.models.detection.retinanet.RetinaNetRegressionHead.box_coder
-Any¨,
-	RetinaNet0torchvision.models.detection.retinanet.RetinaNet"torch.nn.modules.module.Module*Í
-__init__9torchvision.models.detection.retinanet.RetinaNet.__init__"
-None*n
-selfd
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*
-backbone
-Any*
-num_classes
-Any*,
-min_size
-builtins.int"builtins.int *,
-max_size
-builtins.int"builtins.int *8
+self(*
+x(r
+classification_head0r
+regression_head0‹
+RetinaNetClassificationHead"torch.nn.modules.module.Module*€
+__init__*
 
-image_mean&
-Union[Any,None]
-Any
-None *7
-	image_std&
-Union[Any,None]
-Any
-None *>
-anchor_generator&
-Union[Any,None]
-Any
-None *2
-head&
-Union[Any,None]
-Any
-None *>
-proposal_matcher&
-Union[Any,None]
-Any
-None *4
-score_thresh 
-builtins.float"builtins.float *2
+self(*
+in_channels(*
+num_anchors(*
+num_classes(*
+prior_probability (*
 
-nms_thresh 
-builtins.float"builtins.float *6
-detections_per_img
-builtins.int"builtins.int *5
-fg_iou_thresh 
-builtins.float"builtins.float *5
-bg_iou_thresh 
-builtins.float"builtins.float *3
-topk_candidates
-builtins.int"builtins.int *
-kwargs
-Any*½
-eager_outputs>torchvision.models.detection.retinanet.RetinaNet.eager_outputs"¤
-gTuple[builtins.dict[builtins.str,torch.Tensor],builtins.list[builtins.dict[builtins.str,torch.Tensor]]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*n
-selfd
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*
-lossesu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*Ð
+norm_layer (*S
+compute_loss*
 
-detections¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*ç
-compute_loss=torchvision.models.detection.retinanet.RetinaNet.compute_loss"u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*n
-selfd
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*Í
-targets¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*‡
-head_outputsu
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict*W
-anchorsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*«
-postprocess_detectionsGtorchvision.models.detection.retinanet.RetinaNet.postprocess_detections"¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*n
-selfd
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*Å
-head_outputs²
-7builtins.dict[builtins.str,builtins.list[torch.Tensor]]
-builtins.str"builtins.strJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list"builtins.dict*•
-anchors‡
-*builtins.list[builtins.list[torch.Tensor]]J
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list"builtins.list*µ
-image_shapes¢
-/builtins.list[Tuple[builtins.int,builtins.int]]`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*Ø
-forward8torchvision.models.detection.retinanet.RetinaNet.forward"¤
-gTuple[builtins.dict[builtins.str,torch.Tensor],builtins.list[builtins.dict[builtins.str,torch.Tensor]]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list*n
-selfd
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*V
-imagesJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*£
-targets“
-CUnion[builtins.list[builtins.dict[builtins.str,torch.Tensor]],None]¿
-7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
-(builtins.dict[builtins.str,torch.Tensor]
-builtins.str"builtins.str
-torch.Tensor"torch.Tensor"builtins.dict"builtins.list
-None r\
-__annotations__@torchvision.models.detection.retinanet.RetinaNet.__annotations__
-AnyrN
-backbone9torchvision.models.detection.retinanet.RetinaNet.backbone
-Anyr^
-anchor_generatorAtorchvision.models.detection.retinanet.RetinaNet.anchor_generator
-AnyrF
-head5torchvision.models.detection.retinanet.RetinaNet.head
-Anyr^
-proposal_matcherAtorchvision.models.detection.retinanet.RetinaNet.proposal_matcher
-AnyrP
-	box_coder:torchvision.models.detection.retinanet.RetinaNet.box_coder
-AnyrP
-	transform:torchvision.models.detection.retinanet.RetinaNet.transform
-AnyrV
-score_thresh=torchvision.models.detection.retinanet.RetinaNet.score_thresh
-AnyrR
+self(*
+targets(
+*
+head_outputs(	*
+matched_idxs(* 
+forward*
 
-nms_thresh;torchvision.models.detection.retinanet.RetinaNet.nms_thresh
-Anyrb
-detections_per_imgCtorchvision.models.detection.retinanet.RetinaNet.detections_per_img
-Anyr\
-topk_candidates@torchvision.models.detection.retinanet.RetinaNet.topk_candidates
-AnyÔ
-RetinaNet_ResNet50_FPN_WeightsEtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights"#torchvision.models._api.WeightsEnumHra
-COCO_V1Mtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights.COCO_V1
-Anyra
-DEFAULTMtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights.DEFAULT
-Anyà
-!RetinaNet_ResNet50_FPN_V2_WeightsHtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights"#torchvision.models._api.WeightsEnumHrd
-COCO_V1Ptorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights.COCO_V1
-Anyrd
-DEFAULTPtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights.DEFAULT
-Anyÿ
-retinanet_resnet50_fpn=torchvision.models.detection.retinanet.retinanet_resnet50_fpn"d
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*€
-weightsð
-QUnion[torchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights,None]Ž
-Etorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights"Etorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights
-None *.
-progress
-builtins.bool"builtins.bool *W
-num_classesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *·
-weights_backbonež
-6Union[torchvision.models.resnet.ResNet50_Weights,None]X
-*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
-None *e
-trainable_backbone_layersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *
-kwargs
-AnyŽ
-retinanet_resnet50_fpn_v2@torchvision.models.detection.retinanet.retinanet_resnet50_fpn_v2"d
-0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*‰
-weightsù
-TUnion[torchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights,None]”
-Htorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights"Htorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights
-None *.
-progress
-builtins.bool"builtins.bool *W
-num_classesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *·
-weights_backbonež
-6Union[torchvision.models.resnet.ResNet50_Weights,None]X
-*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
-None *e
-trainable_backbone_layersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *
-kwargs
-Any*¢
-__annotations__6torchvision.models.detection.retinanet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+x(r
+conv0r
+
+cls_logits0r
+num_classes0r
+num_anchors0r
+BETWEEN_THRESHOLDS0Ï
+RetinaNetRegressionHead"torch.nn.modules.module.Module*R
+__init__*
+
+self(*
+in_channels(*
+num_anchors(*
+
+norm_layer (*b
+compute_loss*
+
+self(*
+targets(
+*
+head_outputs(	*
+anchors(*
+matched_idxs(* 
+forward*
+
+self(*
+x(r
+__annotations__0r
+conv0r
+bbox_reg0r
+	box_coder0ý
+	RetinaNet"torch.nn.modules.module.Module*ã
+__init__*
+
+self(*
+backbone(*
+num_classes(*
+min_size (*
+max_size (*
+
+image_mean (*
+	image_std (*
+anchor_generator (*
+head (*
+proposal_matcher (*
+score_thresh (*
+
+nms_thresh (*
+detections_per_img (*
+fg_iou_thresh (*
+bg_iou_thresh (*
+topk_candidates (*
+kwargs(*=
+eager_outputs*
+
+self(*
+losses(	*
+
+detections(
+*N
+compute_loss	*
+
+self(*
+targets(
+*
+head_outputs(	*
+anchors(*]
+postprocess_detections
+*
+
+self(*
+head_outputs(*
+anchors(*
+image_shapes(*6
+forward*
+
+self(*
+images(*
+targets (r
+__annotations__0r
+backbone0r
+anchor_generator0r
+head0r
+proposal_matcher0r
+	box_coder0r
+	transform0r
+score_thresh0r
+
+nms_thresh0r
+detections_per_img0r
+topk_candidates0a
+RetinaNet_ResNet50_FPN_Weights"#torchvision.models._api.WeightsEnumHr
+COCO_V10r
+DEFAULT0d
+!RetinaNet_ResNet50_FPN_V2_Weights"#torchvision.models._api.WeightsEnumHr
+COCO_V10r
+DEFAULT0
+retinanet_resnet50_fpn*
+weights (*
+progress (*
+num_classes (*
+weights_backbone (*!
+trainable_backbone_layers (*
+kwargs( 
+retinanet_resnet50_fpn_v2*
+weights (*
+progress (*
+num_classes (*
+weights_backbone (*!
+trainable_backbone_layers (*
+kwargs(*
+__annotations__0 226"4torchvision.models.detection.retinanet.RetinaNetHead22"builtins.function22222"builtins.str2"torch.Tensor2"builtins.dict22"builtins.list2	2"builtins.list22D"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead2"builtins.float2@">torchvision.models.detection.retinanet.RetinaNetRegressionHead22"0torchvision.models.detection.retinanet.RetinaNet2"builtins.int2222	
+2"builtins.dict22"builtins.list2222"builtins.list222
+2G"Etorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights222"builtins.bool222,"*torchvision.models.resnet.ResNet50_Weights222J"Htorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights222"builtins.dict2

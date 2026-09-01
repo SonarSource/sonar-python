@@ -1,217 +1,111 @@
 
-)torchvision.models.video.swin_transformer«
-ShiftedWindowAttention3dBtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d"torch.nn.modules.module.Module*Ñ
-__init__Ktorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.__init__"
-None*“
-selfˆ
-Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d"Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d*%
-dim
-builtins.int"builtins.int*[
-window_sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*Z
+)torchvision.models.video.swin_transformer¶
+ShiftedWindowAttention3d"torch.nn.modules.module.Module*ª
+__init__*
 
-shift_sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*+
-	num_heads
-builtins.int"builtins.int*.
-qkv_bias
-builtins.bool"builtins.bool */
-	proj_bias
-builtins.bool"builtins.bool *9
-attention_dropout 
-builtins.float"builtins.float */
-dropout 
-builtins.float"builtins.float *­
-#define_relative_position_bias_tableftorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.define_relative_position_bias_table"
-None*“
-selfˆ
-Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d"Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d*£
-define_relative_position_indexatorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.define_relative_position_index"
-None*“
-selfˆ
-Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d"Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d*Œ
-get_relative_position_bias]torchvision.models.video.swin_transformer.ShiftedWindowAttention3d.get_relative_position_bias"
-torch.Tensor"torch.Tensor*“
-selfˆ
-Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d"Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d*[
-window_sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*®
-forwardJtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.forward"
-torch.Tensor"torch.Tensor*“
-selfˆ
-Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d"Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d*#
-x
-torch.Tensor"torch.Tensorrf
-window_sizeNtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.window_size
-Anyrd
+self(*	
+dim(*
+window_size(*
 
-shift_sizeMtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.shift_size
-Anyrb
-	num_headsLtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.num_heads
-Anyrr
-attention_dropoutTtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.attention_dropout
-Anyr^
-dropoutJtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.dropout
-AnyrV
-qkvFtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.qkv
-AnyrX
-projGtorchvision.models.video.swin_transformer.ShiftedWindowAttention3d.proj
-Anyrˆ
-relative_position_bias_table_torchvision.models.video.swin_transformer.ShiftedWindowAttention3d.relative_position_bias_table
-AnyŸ	
-PatchEmbed3d6torchvision.models.video.swin_transformer.PatchEmbed3d"torch.nn.modules.module.Module*©
-__init__?torchvision.models.video.swin_transformer.PatchEmbed3d.__init__"
-None*z
-selfp
-6torchvision.models.video.swin_transformer.PatchEmbed3d"6torchvision.models.video.swin_transformer.PatchEmbed3d*Z
+shift_size(*
+	num_heads(*
+qkv_bias (*
+	proj_bias (*
+attention_dropout (*
+dropout (*3
+#define_relative_position_bias_table*
 
-patch_sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*/
-in_channels
-builtins.int"builtins.int *-
-	embed_dim
-builtins.int"builtins.int *™
+self(*.
+define_relative_position_index*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *ˆ
-forward>torchvision.models.video.swin_transformer.PatchEmbed3d.forward"
-torch.Tensor"torch.Tensor*z
-selfp
-6torchvision.models.video.swin_transformer.PatchEmbed3d"6torchvision.models.video.swin_transformer.PatchEmbed3d*#
-x
-torch.Tensor"torch.Tensorrd
-tuple_patch_sizeGtorchvision.models.video.swin_transformer.PatchEmbed3d.tuple_patch_size
-AnyrL
-proj;torchvision.models.video.swin_transformer.PatchEmbed3d.proj
-AnyrL
-norm;torchvision.models.video.swin_transformer.PatchEmbed3d.norm
-Any¦
-SwinTransformer3d;torchvision.models.video.swin_transformer.SwinTransformer3d"torch.nn.modules.module.Module*¾
-__init__Dtorchvision.models.video.swin_transformer.SwinTransformer3d.__init__"
-None*„
-selfz
-;torchvision.models.video.swin_transformer.SwinTransformer3d";torchvision.models.video.swin_transformer.SwinTransformer3d*Z
+self(*=
+get_relative_position_bias*
 
-patch_sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*+
-	embed_dim
-builtins.int"builtins.int*V
-depthsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*Y
-	num_headsJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*[
-window_sizeJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*1
-	mlp_ratio 
-builtins.float"builtins.float */
-dropout 
-builtins.float"builtins.float *9
-attention_dropout 
-builtins.float"builtins.float *=
-stochastic_depth_prob 
-builtins.float"builtins.float */
-num_classes
-builtins.int"builtins.int *™
+self(*
+window_size(* 
+forward*
 
-norm_layer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *”
-block†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *c
-downsample_layerK
-CallableType[builtins.function]&
-builtins.function"builtins.function *š
-patch_embed†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *˜
-forwardCtorchvision.models.video.swin_transformer.SwinTransformer3d.forward"
-torch.Tensor"torch.Tensor*„
-selfz
-;torchvision.models.video.swin_transformer.SwinTransformer3d";torchvision.models.video.swin_transformer.SwinTransformer3d*#
-x
-torch.Tensor"torch.Tensorr_
-num_classesGtorchvision.models.video.swin_transformer.SwinTransformer3d.num_classes
-Anyr_
-patch_embedGtorchvision.models.video.swin_transformer.SwinTransformer3d.patch_embed
-AnyrY
-pos_dropDtorchvision.models.video.swin_transformer.SwinTransformer3d.pos_drop
-AnyrY
-featuresDtorchvision.models.video.swin_transformer.SwinTransformer3d.features
-Anyra
-num_featuresHtorchvision.models.video.swin_transformer.SwinTransformer3d.num_features
-AnyrQ
-norm@torchvision.models.video.swin_transformer.SwinTransformer3d.norm
-AnyrW
-avgpoolCtorchvision.models.video.swin_transformer.SwinTransformer3d.avgpool
-AnyrQ
-head@torchvision.models.video.swin_transformer.SwinTransformer3d.head
-Any³
-Swin3D_T_Weights:torchvision.models.video.swin_transformer.Swin3D_T_Weights"#torchvision.models._api.WeightsEnumHrd
-KINETICS400_V1Itorchvision.models.video.swin_transformer.Swin3D_T_Weights.KINETICS400_V1
-AnyrV
-DEFAULTBtorchvision.models.video.swin_transformer.Swin3D_T_Weights.DEFAULT
-Any³
-Swin3D_S_Weights:torchvision.models.video.swin_transformer.Swin3D_S_Weights"#torchvision.models._api.WeightsEnumHrd
-KINETICS400_V1Itorchvision.models.video.swin_transformer.Swin3D_S_Weights.KINETICS400_V1
-AnyrV
-DEFAULTBtorchvision.models.video.swin_transformer.Swin3D_S_Weights.DEFAULT
-Any±
-Swin3D_B_Weights:torchvision.models.video.swin_transformer.Swin3D_B_Weights"#torchvision.models._api.WeightsEnumHrd
-KINETICS400_V1Itorchvision.models.video.swin_transformer.Swin3D_B_Weights.KINETICS400_V1
-Anyr|
-KINETICS400_IMAGENET22K_V1Utorchvision.models.video.swin_transformer.Swin3D_B_Weights.KINETICS400_IMAGENET22K_V1
-AnyrV
-DEFAULTBtorchvision.models.video.swin_transformer.Swin3D_B_Weights.DEFAULT
-Anyà
-swin3d_t2torchvision.models.video.swin_transformer.swin3d_t"z
-;torchvision.models.video.swin_transformer.SwinTransformer3d";torchvision.models.video.swin_transformer.SwinTransformer3d*Þ
-weightsÎ
-FUnion[torchvision.models.video.swin_transformer.Swin3D_T_Weights,None]x
-:torchvision.models.video.swin_transformer.Swin3D_T_Weights":torchvision.models.video.swin_transformer.Swin3D_T_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyà
-swin3d_s2torchvision.models.video.swin_transformer.swin3d_s"z
-;torchvision.models.video.swin_transformer.SwinTransformer3d";torchvision.models.video.swin_transformer.SwinTransformer3d*Þ
-weightsÎ
-FUnion[torchvision.models.video.swin_transformer.Swin3D_S_Weights,None]x
-:torchvision.models.video.swin_transformer.Swin3D_S_Weights":torchvision.models.video.swin_transformer.Swin3D_S_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyà
-swin3d_b2torchvision.models.video.swin_transformer.swin3d_b"z
-;torchvision.models.video.swin_transformer.SwinTransformer3d";torchvision.models.video.swin_transformer.SwinTransformer3d*Þ
-weightsÎ
-FUnion[torchvision.models.video.swin_transformer.Swin3D_B_Weights,None]x
-:torchvision.models.video.swin_transformer.Swin3D_B_Weights":torchvision.models.video.swin_transformer.Swin3D_B_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*¥
-__annotations__9torchvision.models.video.swin_transformer.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+x(r
+window_size0r
+
+shift_size0r
+	num_heads0r
+attention_dropout0r
+dropout0r
+qkv0r
+proj0r 
+relative_position_bias_table0â
+PatchEmbed3d"torch.nn.modules.module.Module*f
+__init__*
+
+self(	*
+
+patch_size(*
+in_channels (*
+	embed_dim (*
+
+norm_layer (* 
+forward*
+
+self(	*
+x(r
+tuple_patch_size0r
+proj0r
+norm0û
+SwinTransformer3d"torch.nn.modules.module.Module*²
+__init__*
+
+self(*
+
+patch_size(*
+	embed_dim(*
+depths(*
+	num_heads(*
+window_size(*
+	mlp_ratio (*
+dropout (*
+attention_dropout (*
+stochastic_depth_prob (*
+num_classes (*
+
+norm_layer (*
+block (*
+downsample_layer (*
+patch_embed (* 
+forward*
+
+self(*
+x(r
+num_classes0r
+patch_embed0r
+pos_drop0r
+features0r
+num_features0r
+norm0r
+avgpool0r
+head0Z
+Swin3D_T_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+DEFAULT0Z
+Swin3D_S_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+DEFAULT0z
+Swin3D_B_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+KINETICS400_IMAGENET22K_V10r
+DEFAULT0=
+swin3d_t*
+weights (*
+progress (*
+kwargs(=
+swin3d_s*
+weights (*
+progress (*
+kwargs(=
+swin3d_b*
+weights (*
+progress (*
+kwargs(*
+__annotations__022D"Btorchvision.models.video.swin_transformer.ShiftedWindowAttention3d2"builtins.int2"builtins.list22"builtins.bool2"builtins.float2"torch.Tensor228"6torchvision.models.video.swin_transformer.PatchEmbed3d2"builtins.function22
+222=";torchvision.models.video.swin_transformer.SwinTransformer3d2<":torchvision.models.video.swin_transformer.Swin3D_T_Weights222<":torchvision.models.video.swin_transformer.Swin3D_S_Weights222<":torchvision.models.video.swin_transformer.Swin3D_B_Weights222"builtins.str2"builtins.dict2

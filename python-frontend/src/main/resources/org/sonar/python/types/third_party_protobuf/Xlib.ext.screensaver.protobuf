@@ -1,91 +1,57 @@
 
-Xlib.ext.screensaveri
-QueryVersion!Xlib.ext.screensaver.QueryVersion"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314c
-	QueryInfoXlib.ext.screensaver.QueryInfo"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314b
-SelectInput Xlib.ext.screensaver.SelectInput"Xlib.protocol.rq.Requestj310j311j312j313j314f
-SetAttributes"Xlib.ext.screensaver.SetAttributes"Xlib.protocol.rq.Requestj310j311j312j313j314j
-UnsetAttributes$Xlib.ext.screensaver.UnsetAttributes"Xlib.protocol.rq.Requestj310j311j312j313j314V
-NotifyXlib.ext.screensaver.Notify"Xlib.protocol.rq.Eventj310j311j312j313j314§
-query_version"Xlib.ext.screensaver.query_version"F
-!Xlib.ext.screensaver.QueryVersion"!Xlib.ext.screensaver.QueryVersion*
-self
-Anyz310z311z312z313z314›
+Xlib.ext.screensaver-
+QueryVersion"Xlib.protocol.rq.ReplyRequest*
+	QueryInfo"Xlib.protocol.rq.ReplyRequest'
+SelectInput"Xlib.protocol.rq.Request)
+SetAttributes"Xlib.protocol.rq.Request+
+UnsetAttributes"Xlib.protocol.rq.Request 
+Notify"Xlib.protocol.rq.Event
+query_version*
 
-query_infoXlib.ext.screensaver.query_info"@
-Xlib.ext.screensaver.QueryInfo"Xlib.ext.screensaver.QueryInfo*
-self
-Anyz310z311z312z313z314Ë
-select_input!Xlib.ext.screensaver.select_input"D
- Xlib.ext.screensaver.SelectInput" Xlib.ext.screensaver.SelectInput*
-self
-Any*&
-mask
-builtins.int"builtins.intz310z311z312z313z314Ÿ
-set_attributes#Xlib.ext.screensaver.set_attributes"H
-"Xlib.ext.screensaver.SetAttributes""Xlib.ext.screensaver.SetAttributes*
-self
-Any*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*.
-border_width
-builtins.int"builtins.int*0
-window_class
-builtins.int"builtins.int *)
-depth
-builtins.int"builtins.int **
-visual
-builtins.int"builtins.int *í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None *,
-keys"
-builtins.object"builtins.objectz310z311z312z313z314£
-unset_attributes%Xlib.ext.screensaver.unset_attributes"L
-$Xlib.ext.screensaver.UnsetAttributes"$Xlib.ext.screensaver.UnsetAttributes*
-self
-Any*í
-onerrorÝ
-6Union[TypeAlias[CallableType[builtins.function]],None]–
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"Xlib._typing.ErrorHandler
-None z310z311z312z313z314Ô
-initXlib.ext.screensaver.init"
-None*6
-disp,
-Xlib.display.Display"Xlib.display.Display*V
-infoL
-$Xlib.protocol.request.QueryExtension"$Xlib.protocol.request.QueryExtensionz310z311z312z313z314*©
-__annotations__$Xlib.ext.screensaver.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*^
-extnameXlib.ext.screensaver.extname
-builtins.str"builtins.str*310*311*312*313*314*d
+self(
 
-NotifyMaskXlib.ext.screensaver.NotifyMask
-builtins.int"builtins.int*310*311*312*313*314*b
-	CycleMaskXlib.ext.screensaver.CycleMask
-builtins.int"builtins.int*310*311*312*313*314*`
-StateOffXlib.ext.screensaver.StateOff
-builtins.int"builtins.int*310*311*312*313*314*^
-StateOnXlib.ext.screensaver.StateOn
-builtins.int"builtins.int*310*311*312*313*314*d
+query_info*
 
-StateCycleXlib.ext.screensaver.StateCycle
-builtins.int"builtins.int*310*311*312*313*314*f
-KindBlanked Xlib.ext.screensaver.KindBlanked
-builtins.int"builtins.int*310*311*312*313*314*h
-KindInternal!Xlib.ext.screensaver.KindInternal
-builtins.int"builtins.int*310*311*312*313*314*h
-KindExternal!Xlib.ext.screensaver.KindExternal
-builtins.int"builtins.int*310*311*312*313*314
+self((
+select_input*
+
+self(*
+
+mask(±
+set_attributes*
+
+self(*
+x(*
+y(*
+width(*
+height(*
+border_width(*
+window_class (*
+depth (*
+visual (*
+onerror (*
+
+keys(1
+unset_attributes*
+
+self(*
+onerror ( 
+init
+*
+
+disp(*
+
+info(*
+__annotations__0*
+extname0*
+
+NotifyMask0*
+	CycleMask0*
+StateOff0*
+StateOn0*
+
+StateCycle0*
+KindBlanked0*
+KindInternal0*
+KindExternal02#"!Xlib.ext.screensaver.QueryVersion22 "Xlib.ext.screensaver.QueryInfo2"" Xlib.ext.screensaver.SelectInput2"builtins.int2$""Xlib.ext.screensaver.SetAttributes2"builtins.function222 "Xlib._typing.ErrorHandler2222	
+2"builtins.object2&"$Xlib.ext.screensaver.UnsetAttributes2"Xlib.display.Display2&"$Xlib.protocol.request.QueryExtension2"builtins.str2"builtins.dict2

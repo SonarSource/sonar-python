@@ -1,86 +1,56 @@
 
-jose.backends.rsa_backend¯
-RSAKey jose.backends.rsa_backend.RSAKey"jose.backends.base.Key*“
-__init__)jose.backends.rsa_backend.RSAKey.__init__"
-None*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*
-key
-Any*
-	algorithm
-Anyz310z311z312z313z314*„
-sign%jose.backends.rsa_backend.RSAKey.sign" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*)
-msg 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ê
-verify'jose.backends.rsa_backend.RSAKey.verify"
-builtins.bool"builtins.bool*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*)
-msg 
-builtins.bytes"builtins.bytes*)
-sig 
-builtins.bytes"builtins.bytesz310z311z312z313z314*¿
-	is_public*jose.backends.rsa_backend.RSAKey.is_public"
-builtins.bool"builtins.bool*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKeyz310z311z312z313z314*â
+jose.backends.rsa_backend¨
+RSAKey"jose.backends.base.Key*4
+__init__*
 
-public_key+jose.backends.rsa_backend.RSAKey.public_key"ì
-%jose.backends.rsa_backend.RSAKey.SelfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey(*û
-selfì
-%jose.backends.rsa_backend.RSAKey.SelfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey(z310z311z312z313z314*Ï
-to_pem'jose.backends.rsa_backend.RSAKey.to_pem" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*.
+self(*	
+key(*
+	algorithm(*
+sign*
 
-pem_format
-builtins.str"builtins.str z310z311z312z313z314*ı
-to_dict(jose.backends.rsa_backend.RSAKey.to_dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKeyz310z311z312z313z314*
-wrap_key)jose.backends.rsa_backend.RSAKey.wrap_key" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*.
-key_data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*˜
+self(*	
+msg(*,
+verify*
 
-unwrap_key+jose.backends.rsa_backend.RSAKey.unwrap_key" 
-builtins.bytes"builtins.bytes*N
-selfD
- jose.backends.rsa_backend.RSAKey" jose.backends.rsa_backend.RSAKey*1
-wrapped_key 
-builtins.bytes"builtins.bytesz310z311z312z313z314j310j311j312j313j314rh
-SHA256'jose.backends.rsa_backend.RSAKey.SHA256
-builtins.str"builtins.str*310*311*312*313*314rh
-SHA384'jose.backends.rsa_backend.RSAKey.SHA384
-builtins.str"builtins.str*310*311*312*313*314rh
-SHA512'jose.backends.rsa_backend.RSAKey.SHA512
-builtins.str"builtins.str*310*311*312*313*314rl
-hash_alg)jose.backends.rsa_backend.RSAKey.hash_alg
-builtins.str"builtins.str*310*311*312*313*314ë
-pem_to_spki%jose.backends.rsa_backend.pem_to_spki"
-Any*
-pem
-Any*'
-fmt
-builtins.str"builtins.str z310z311z312z313z314*Æ
-__annotations__)jose.backends.rsa_backend.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ó
-LEGACY_INVALID_PKCS8_RSA_HEADER9jose.backends.rsa_backend.LEGACY_INVALID_PKCS8_RSA_HEADER 
-builtins.bytes"builtins.bytes*310*311*312*313*314*y
-ASN1_SEQUENCE_ID*jose.backends.rsa_backend.ASN1_SEQUENCE_ID 
-builtins.bytes"builtins.bytes*310*311*312*313*314*É
-RSA_ENCRYPTION_ASN1_OID1jose.backends.rsa_backend.RSA_ENCRYPTION_ASN1_OID
-builtins.str"builtins.str*310*311*312*313*314
+self(*	
+msg(*	
+sig(*
+	is_public*
+
+self(*
+
+public_key*
+
+self(**
+to_pem*
+
+self(*
+
+pem_format (*
+to_dict*
+
+self(*(
+wrap_key*
+
+self(*
+key_data(*-
+
+unwrap_key*
+
+self(*
+wrapped_key(r
+
+SHA2560r
+
+SHA3840r
+
+SHA5120r
+hash_alg0'
+pem_to_spki*	
+pem(*
+fmt (*
+__annotations__0*#
+LEGACY_INVALID_PKCS8_RSA_HEADER0*
+ASN1_SEQUENCE_ID0*
+RSA_ENCRYPTION_ASN1_OID022"" jose.backends.rsa_backend.RSAKey22"builtins.bytes2"builtins.bool2P
+%jose.backends.rsa_backend.RSAKey.Self" jose.backends.rsa_backend.RSAKey(22"builtins.str2"builtins.dict2

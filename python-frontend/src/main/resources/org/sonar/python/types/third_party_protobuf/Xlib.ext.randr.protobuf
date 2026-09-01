@@ -1,531 +1,316 @@
 
-Xlib.ext.randr`
-BadRROutputErrorXlib.ext.randr.BadRROutputError"builtins.Exceptionj310j311j312j313j314\
-BadRRCrtcErrorXlib.ext.randr.BadRRCrtcError"builtins.Exceptionj310j311j312j313j314\
-BadRRModeErrorXlib.ext.randr.BadRRModeError"builtins.Exceptionj310j311j312j313j314c
-QueryVersionXlib.ext.randr.QueryVersion"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314q
-_1_0SetScreenConfig"Xlib.ext.randr._1_0SetScreenConfig"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314i
-SetScreenConfigXlib.ext.randr.SetScreenConfig"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314\
-SelectInputXlib.ext.randr.SelectInput"Xlib.protocol.rq.Requestj310j311j312j313j314e
-GetScreenInfoXlib.ext.randr.GetScreenInfo"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314o
-GetScreenSizeRange!Xlib.ext.randr.GetScreenSizeRange"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314`
-SetScreenSizeXlib.ext.randr.SetScreenSize"Xlib.protocol.rq.Requestj310j311j312j313j314o
-GetScreenResources!Xlib.ext.randr.GetScreenResources"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314e
-GetOutputInfoXlib.ext.randr.GetOutputInfo"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314s
-ListOutputProperties#Xlib.ext.randr.ListOutputProperties"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314q
-QueryOutputProperty"Xlib.ext.randr.QueryOutputProperty"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314t
-ConfigureOutputProperty&Xlib.ext.randr.ConfigureOutputProperty"Xlib.protocol.rq.Requestj310j311j312j313j314n
-ChangeOutputProperty#Xlib.ext.randr.ChangeOutputProperty"Xlib.protocol.rq.Requestj310j311j312j313j314n
-DeleteOutputProperty#Xlib.ext.randr.DeleteOutputProperty"Xlib.protocol.rq.Requestj310j311j312j313j314m
-GetOutputProperty Xlib.ext.randr.GetOutputProperty"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314_
+Xlib.ext.randr&
+BadRROutputError"builtins.Exception$
+BadRRCrtcError"builtins.Exception$
+BadRRModeError"builtins.Exception-
+QueryVersion"Xlib.protocol.rq.ReplyRequest4
+_1_0SetScreenConfig"Xlib.protocol.rq.ReplyRequest0
+SetScreenConfig"Xlib.protocol.rq.ReplyRequest'
+SelectInput"Xlib.protocol.rq.Request.
+GetScreenInfo"Xlib.protocol.rq.ReplyRequest3
+GetScreenSizeRange"Xlib.protocol.rq.ReplyRequest)
+SetScreenSize"Xlib.protocol.rq.Request3
+GetScreenResources"Xlib.protocol.rq.ReplyRequest.
+GetOutputInfo"Xlib.protocol.rq.ReplyRequest5
+ListOutputProperties"Xlib.protocol.rq.ReplyRequest4
+QueryOutputProperty"Xlib.protocol.rq.ReplyRequest3
+ConfigureOutputProperty"Xlib.protocol.rq.Request0
+ChangeOutputProperty"Xlib.protocol.rq.Request0
+DeleteOutputProperty"Xlib.protocol.rq.Request2
+GetOutputProperty"Xlib.protocol.rq.ReplyRequest+
 
-CreateModeXlib.ext.randr.CreateMode"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314\
-DestroyModeXlib.ext.randr.DestroyMode"Xlib.protocol.rq.Requestj310j311j312j313j314`
-AddOutputModeXlib.ext.randr.AddOutputMode"Xlib.protocol.rq.Requestj310j311j312j313j314f
-DeleteOutputModeXlib.ext.randr.DeleteOutputMode"Xlib.protocol.rq.Requestj310j311j312j313j314a
-GetCrtcInfoXlib.ext.randr.GetCrtcInfo"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314e
-SetCrtcConfigXlib.ext.randr.SetCrtcConfig"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314k
-GetCrtcGammaSizeXlib.ext.randr.GetCrtcGammaSize"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314c
-GetCrtcGammaXlib.ext.randr.GetCrtcGamma"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314^
-SetCrtcGammaXlib.ext.randr.SetCrtcGamma"Xlib.protocol.rq.Requestj310j311j312j313j314}
-GetScreenResourcesCurrent(Xlib.ext.randr.GetScreenResourcesCurrent"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314f
-SetCrtcTransformXlib.ext.randr.SetCrtcTransform"Xlib.protocol.rq.Requestj310j311j312j313j314k
-GetCrtcTransformXlib.ext.randr.GetCrtcTransform"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314_
+CreateMode"Xlib.protocol.rq.ReplyRequest'
+DestroyMode"Xlib.protocol.rq.Request)
+AddOutputMode"Xlib.protocol.rq.Request,
+DeleteOutputMode"Xlib.protocol.rq.Request,
+GetCrtcInfo"Xlib.protocol.rq.ReplyRequest.
+SetCrtcConfig"Xlib.protocol.rq.ReplyRequest1
+GetCrtcGammaSize"Xlib.protocol.rq.ReplyRequest-
+GetCrtcGamma"Xlib.protocol.rq.ReplyRequest(
+SetCrtcGamma"Xlib.protocol.rq.Request:
+GetScreenResourcesCurrent"Xlib.protocol.rq.ReplyRequest,
+SetCrtcTransform"Xlib.protocol.rq.Request1
+GetCrtcTransform"Xlib.protocol.rq.ReplyRequest+
 
-GetPanningXlib.ext.randr.GetPanning"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314_
+GetPanning"Xlib.protocol.rq.ReplyRequest+
 
-SetPanningXlib.ext.randr.SetPanning"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314f
-SetOutputPrimaryXlib.ext.randr.SetOutputPrimary"Xlib.protocol.rq.Requestj310j311j312j313j314k
-GetOutputPrimaryXlib.ext.randr.GetOutputPrimary"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314a
-GetMonitorsXlib.ext.randr.GetMonitors"Xlib.protocol.rq.ReplyRequestj310j311j312j313j314Z
+SetPanning"Xlib.protocol.rq.ReplyRequest,
+SetOutputPrimary"Xlib.protocol.rq.Request1
+GetOutputPrimary"Xlib.protocol.rq.ReplyRequest,
+GetMonitors"Xlib.protocol.rq.ReplyRequest&
 
-SetMonitorXlib.ext.randr.SetMonitor"Xlib.protocol.rq.Requestj310j311j312j313j314`
-DeleteMonitorXlib.ext.randr.DeleteMonitor"Xlib.protocol.rq.Requestj310j311j312j313j314h
-ScreenChangeNotify!Xlib.ext.randr.ScreenChangeNotify"Xlib.protocol.rq.Eventj310j311j312j313j314d
-CrtcChangeNotifyXlib.ext.randr.CrtcChangeNotify"Xlib.protocol.rq.Eventj310j311j312j313j314h
-OutputChangeNotify!Xlib.ext.randr.OutputChangeNotify"Xlib.protocol.rq.Eventj310j311j312j313j314l
-OutputPropertyNotify#Xlib.ext.randr.OutputPropertyNotify"Xlib.protocol.rq.Eventj310j311j312j313j314è
-query_versionXlib.ext.randr.query_version":
-Xlib.ext.randr.QueryVersion"Xlib.ext.randr.QueryVersion*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Anyz310z311z312z313z314‡
-set_screen_config Xlib.ext.randr.set_screen_config"@
-Xlib.ext.randr.SetScreenConfig"Xlib.ext.randr.SetScreenConfig*
-self
-Any*)
-size_id
-builtins.int"builtins.int**
-rotation
-builtins.int"builtins.int*2
-config_timestamp
-builtins.int"builtins.int*(
-rate
-builtins.int"builtins.int *-
-	timestamp
-builtins.int"builtins.int z310z311z312z313z314¹
-select_inputXlib.ext.randr.select_input"8
-Xlib.ext.randr.SelectInput"Xlib.ext.randr.SelectInput*
-self
-Any*&
-mask
-builtins.int"builtins.intz310z311z312z313z314›
-get_screen_infoXlib.ext.randr.get_screen_info"<
-Xlib.ext.randr.GetScreenInfo"Xlib.ext.randr.GetScreenInfo*
-self
-Anyz310z311z312z313z314±
-get_screen_size_range$Xlib.ext.randr.get_screen_size_range"F
-!Xlib.ext.randr.GetScreenSizeRange"!Xlib.ext.randr.GetScreenSizeRange*
-self
-Anyz310z311z312z313z314³
-set_screen_sizeXlib.ext.randr.set_screen_size"<
-Xlib.ext.randr.SetScreenSize"Xlib.ext.randr.SetScreenSize*
-self
-Any*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*`
-width_in_millimetersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *a
-height_in_millimetersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314¯
-get_screen_resources#Xlib.ext.randr.get_screen_resources"F
-!Xlib.ext.randr.GetScreenResources"!Xlib.ext.randr.GetScreenResources*
-self
-Anyz310z311z312z313z314Ì
-get_output_infoXlib.ext.randr.get_output_info"<
-Xlib.ext.randr.GetOutputInfo"Xlib.ext.randr.GetOutputInfo*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int*2
-config_timestamp
-builtins.int"builtins.intz310z311z312z313z314´
-list_output_properties%Xlib.ext.randr.list_output_properties"J
-#Xlib.ext.randr.ListOutputProperties"#Xlib.ext.randr.ListOutputProperties*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.intz310z311z312z313z314Ü
-query_output_property$Xlib.ext.randr.query_output_property"H
-"Xlib.ext.randr.QueryOutputProperty""Xlib.ext.randr.QueryOutputProperty*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int**
-property
-builtins.int"builtins.intz310z311z312z313z314ì
-configure_output_property(Xlib.ext.randr.configure_output_property"P
-&Xlib.ext.randr.ConfigureOutputProperty"&Xlib.ext.randr.ConfigureOutputProperty*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int**
-property
-builtins.int"builtins.intz310z311z312z313z314­
-change_output_property%Xlib.ext.randr.change_output_property"J
-#Xlib.ext.randr.ChangeOutputProperty"#Xlib.ext.randr.ChangeOutputProperty*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int**
-property
-builtins.int"builtins.int*&
-type
-builtins.int"builtins.int*&
-mode
-builtins.int"builtins.int*ú
-valueî
-DUnion[typing.Sequence[builtins.float],typing.Sequence[builtins.str]]T
-typing.Sequence[builtins.float] 
-builtins.float"builtins.float"typing.SequenceN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequencez310z311z312z313z314à
-delete_output_property%Xlib.ext.randr.delete_output_property"J
-#Xlib.ext.randr.DeleteOutputProperty"#Xlib.ext.randr.DeleteOutputProperty*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int**
-property
-builtins.int"builtins.intz310z311z312z313z314·
-get_output_property"Xlib.ext.randr.get_output_property"D
- Xlib.ext.randr.GetOutputProperty" Xlib.ext.randr.GetOutputProperty*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int**
-property
-builtins.int"builtins.int*&
-type
-builtins.int"builtins.int*-
-long_offset
-builtins.int"builtins.int*-
-long_length
-builtins.int"builtins.int*,
-delete
-builtins.bool"builtins.bool *-
-pending
-builtins.bool"builtins.bool z310z311z312z313z314ë
-create_modeXlib.ext.randr.create_mode"6
-Xlib.ext.randr.CreateMode"Xlib.ext.randr.CreateMode*
-self
-Any*³
-mode¨
-(TypeAlias[typing.Sequence[builtins.int]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence"*Xlib.ext.randr._RandRModeInfo13IntSequence*&
-name
-builtins.str"builtins.strz310z311z312z313z314Œ
-destroy_modeXlib.ext.randr.destroy_mode"8
-Xlib.ext.randr.DestroyMode"Xlib.ext.randr.DestroyMode*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-mode
-builtins.int"builtins.intz310z311z312z313z314À
-add_output_modeXlib.ext.randr.add_output_mode"<
-Xlib.ext.randr.AddOutputMode"Xlib.ext.randr.AddOutputMode*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int*&
-mode
-builtins.int"builtins.intz310z311z312z313z314Ì
-delete_output_mode!Xlib.ext.randr.delete_output_mode"B
-Xlib.ext.randr.DeleteOutputMode"Xlib.ext.randr.DeleteOutputMode*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*(
-output
-builtins.int"builtins.int*&
-mode
-builtins.int"builtins.intz310z311z312z313z314Â
-get_crtc_infoXlib.ext.randr.get_crtc_info"8
-Xlib.ext.randr.GetCrtcInfo"Xlib.ext.randr.GetCrtcInfo*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.int*2
-config_timestamp
-builtins.int"builtins.intz310z311z312z313z314ô
-set_crtc_configXlib.ext.randr.set_crtc_config"<
-Xlib.ext.randr.SetCrtcConfig"Xlib.ext.randr.SetCrtcConfig*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.int*2
-config_timestamp
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.int*#
-y
-builtins.int"builtins.int*&
-mode
-builtins.int"builtins.int**
-rotation
-builtins.int"builtins.int*[
-outputsN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*-
-	timestamp
-builtins.int"builtins.int z310z311z312z313z314¤
-get_crtc_gamma_size"Xlib.ext.randr.get_crtc_gamma_size"B
-Xlib.ext.randr.GetCrtcGammaSize"Xlib.ext.randr.GetCrtcGammaSize*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.intz310z311z312z313z314’
-get_crtc_gammaXlib.ext.randr.get_crtc_gamma":
-Xlib.ext.randr.GetCrtcGamma"Xlib.ext.randr.GetCrtcGamma*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.intz310z311z312z313z314È
-set_crtc_gammaXlib.ext.randr.set_crtc_gamma":
-Xlib.ext.randr.SetCrtcGamma"Xlib.ext.randr.SetCrtcGamma*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.int*&
-size
-builtins.int"builtins.int*W
-redN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*Y
-greenN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*X
-blueN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequencez310z311z312z313z314Í
-get_screen_resources_current+Xlib.ext.randr.get_screen_resources_current"T
-(Xlib.ext.randr.GetScreenResourcesCurrent"(Xlib.ext.randr.GetScreenResourcesCurrent*
-self
-Anyz310z311z312z313z314†
-set_crtc_transform!Xlib.ext.randr.set_crtc_transform"B
-Xlib.ext.randr.SetCrtcTransform"Xlib.ext.randr.SetCrtcTransform*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.int*b
-n_bytes_filterN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequencez310z311z312z313z314¢
-get_crtc_transform!Xlib.ext.randr.get_crtc_transform"B
-Xlib.ext.randr.GetCrtcTransform"Xlib.ext.randr.GetCrtcTransform*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.intz310z311z312z313z314ˆ
-get_panningXlib.ext.randr.get_panning"6
-Xlib.ext.randr.GetPanning"Xlib.ext.randr.GetPanning*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.intz310z311z312z313z314Ñ
-set_panningXlib.ext.randr.set_panning"6
-Xlib.ext.randr.SetPanning"Xlib.ext.randr.SetPanning*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-crtc
-builtins.int"builtins.int*&
-left
-builtins.int"builtins.int*%
-top
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*(
-height
-builtins.int"builtins.int*,
+SetMonitor"Xlib.protocol.rq.Request)
+DeleteMonitor"Xlib.protocol.rq.Request,
+ScreenChangeNotify"Xlib.protocol.rq.Event*
+CrtcChangeNotify"Xlib.protocol.rq.Event,
+OutputChangeNotify"Xlib.protocol.rq.Event.
+OutputPropertyNotify"Xlib.protocol.rq.Event
+query_version*
 
-track_left
-builtins.int"builtins.int*+
-	track_top
-builtins.int"builtins.int*-
-track_width
-builtins.int"builtins.int*.
-track_height
-builtins.int"builtins.int*-
-border_left
-builtins.int"builtins.int*,
+self(y
+set_screen_config*
 
-border_top
-builtins.int"builtins.int*.
-border_width
-builtins.int"builtins.int*/
-border_height
-builtins.int"builtins.int*-
-	timestamp
-builtins.int"builtins.int z310z311z312z313z314Ñ
-set_output_primary!Xlib.ext.randr.set_output_primary"B
-Xlib.ext.randr.SetOutputPrimary"Xlib.ext.randr.SetOutputPrimary*
-self
-Any*(
-output
-builtins.int"builtins.intz310z311z312z313z314§
-get_output_primary!Xlib.ext.randr.get_output_primary"B
-Xlib.ext.randr.GetOutputPrimary"Xlib.ext.randr.GetOutputPrimary*
-self
-Anyz310z311z312z313z314Â
-get_monitorsXlib.ext.randr.get_monitors"8
-Xlib.ext.randr.GetMonitors"Xlib.ext.randr.GetMonitors*
-self
-Any*/
-	is_active
-builtins.bool"builtins.bool z310z311z312z313z314ú
-set_monitorXlib.ext.randr.set_monitor"6
-Xlib.ext.randr.SetMonitor"Xlib.ext.randr.SetMonitor*
-self
-Any*ê
-monitor_info×
-ŽTuple[builtins.int,builtins.bool,builtins.bool,typing.Sequence[builtins.int],builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.bool"builtins.bool
-builtins.bool"builtins.boolN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.intz310z311z312z313z314”
-delete_monitorXlib.ext.randr.delete_monitor"<
-Xlib.ext.randr.DeleteMonitor"Xlib.ext.randr.DeleteMonitor*d
-selfZ
-Union[Xlib.display.Display,Any],
-Xlib.display.Display"Xlib.display.Display
-Any*&
-name
-builtins.str"builtins.strz310z311z312z313z314Î
-initXlib.ext.randr.init"
-None*6
-disp,
-Xlib.display.Display"Xlib.display.Display*V
-infoL
-$Xlib.protocol.request.QueryExtension"$Xlib.protocol.request.QueryExtensionz310z311z312z313z314*£
-__annotations__Xlib.ext.randr.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*X
-extnameXlib.ext.randr.extname
-builtins.str"builtins.str*310*311*312*313*314*r
-RRScreenChangeNotify#Xlib.ext.randr.RRScreenChangeNotify
-builtins.int"builtins.int*310*311*312*313*314*Z
-RRNotifyXlib.ext.randr.RRNotify
-builtins.int"builtins.int*310*311*312*313*314*p
-RRNotify_CrtcChange"Xlib.ext.randr.RRNotify_CrtcChange
-builtins.int"builtins.int*310*311*312*313*314*t
-RRNotify_OutputChange$Xlib.ext.randr.RRNotify_OutputChange
-builtins.int"builtins.int*310*311*312*313*314*x
-RRNotify_OutputProperty&Xlib.ext.randr.RRNotify_OutputProperty
-builtins.int"builtins.int*310*311*312*313*314*z
-RRScreenChangeNotifyMask'Xlib.ext.randr.RRScreenChangeNotifyMask
-builtins.int"builtins.int*310*311*312*313*314*v
-RRCrtcChangeNotifyMask%Xlib.ext.randr.RRCrtcChangeNotifyMask
-builtins.int"builtins.int*310*311*312*313*314*z
-RROutputChangeNotifyMask'Xlib.ext.randr.RROutputChangeNotifyMask
-builtins.int"builtins.int*310*311*312*313*314*~
-RROutputPropertyNotifyMask)Xlib.ext.randr.RROutputPropertyNotifyMask
-builtins.int"builtins.int*310*311*312*313*314*j
-SetConfigSuccessXlib.ext.randr.SetConfigSuccess
-builtins.int"builtins.int*310*311*312*313*314*~
-SetConfigInvalidConfigTime)Xlib.ext.randr.SetConfigInvalidConfigTime
-builtins.int"builtins.int*310*311*312*313*314*r
-SetConfigInvalidTime#Xlib.ext.randr.SetConfigInvalidTime
-builtins.int"builtins.int*310*311*312*313*314*h
-SetConfigFailedXlib.ext.randr.SetConfigFailed
-builtins.int"builtins.int*310*311*312*313*314*Z
-Rotate_0Xlib.ext.randr.Rotate_0
-builtins.int"builtins.int*310*311*312*313*314*\
-	Rotate_90Xlib.ext.randr.Rotate_90
-builtins.int"builtins.int*310*311*312*313*314*^
+self(*
+size_id(*
+rotation(*
+config_timestamp(*
+rate (*
+	timestamp ((
+select_input*
 
-Rotate_180Xlib.ext.randr.Rotate_180
-builtins.int"builtins.int*310*311*312*313*314*^
+self(*
 
-Rotate_270Xlib.ext.randr.Rotate_270
-builtins.int"builtins.int*310*311*312*313*314*\
-	Reflect_XXlib.ext.randr.Reflect_X
-builtins.int"builtins.int*310*311*312*313*314*\
-	Reflect_YXlib.ext.randr.Reflect_Y
-builtins.int"builtins.int*310*311*312*313*314*d
-HSyncPositiveXlib.ext.randr.HSyncPositive
-builtins.int"builtins.int*310*311*312*313*314*d
-HSyncNegativeXlib.ext.randr.HSyncNegative
-builtins.int"builtins.int*310*311*312*313*314*d
-VSyncPositiveXlib.ext.randr.VSyncPositive
-builtins.int"builtins.int*310*311*312*313*314*d
-VSyncNegativeXlib.ext.randr.VSyncNegative
-builtins.int"builtins.int*310*311*312*313*314*\
-	InterlaceXlib.ext.randr.Interlace
-builtins.int"builtins.int*310*311*312*313*314*^
+mask(
+get_screen_info*
 
-DoubleScanXlib.ext.randr.DoubleScan
-builtins.int"builtins.int*310*311*312*313*314*T
-CSyncXlib.ext.randr.CSync
-builtins.int"builtins.int*310*311*312*313*314*d
-CSyncPositiveXlib.ext.randr.CSyncPositive
-builtins.int"builtins.int*310*311*312*313*314*d
-CSyncNegativeXlib.ext.randr.CSyncNegative
-builtins.int"builtins.int*310*311*312*313*314*b
-HSkewPresentXlib.ext.randr.HSkewPresent
-builtins.int"builtins.int*310*311*312*313*314*T
-BCastXlib.ext.randr.BCast
-builtins.int"builtins.int*310*311*312*313*314*f
-PixelMultiplexXlib.ext.randr.PixelMultiplex
-builtins.int"builtins.int*310*311*312*313*314*`
-DoubleClockXlib.ext.randr.DoubleClock
-builtins.int"builtins.int*310*311*312*313*314*f
-ClockDivideBy2Xlib.ext.randr.ClockDivideBy2
-builtins.int"builtins.int*310*311*312*313*314*\
-	ConnectedXlib.ext.randr.Connected
-builtins.int"builtins.int*310*311*312*313*314*b
-DisconnectedXlib.ext.randr.Disconnected
-builtins.int"builtins.int*310*311*312*313*314*l
-UnknownConnection Xlib.ext.randr.UnknownConnection
-builtins.int"builtins.int*310*311*312*313*314*p
-PROPERTY_RANDR_EDID"Xlib.ext.randr.PROPERTY_RANDR_EDID
-builtins.str"builtins.str*310*311*312*313*314*v
-PROPERTY_SIGNAL_FORMAT%Xlib.ext.randr.PROPERTY_SIGNAL_FORMAT
-builtins.str"builtins.str*310*311*312*313*314*~
-PROPERTY_SIGNAL_PROPERTIES)Xlib.ext.randr.PROPERTY_SIGNAL_PROPERTIES
-builtins.str"builtins.str*310*311*312*313*314*x
-PROPERTY_CONNECTOR_TYPE&Xlib.ext.randr.PROPERTY_CONNECTOR_TYPE
-builtins.str"builtins.str*310*311*312*313*314*|
-PROPERTY_CONNECTOR_NUMBER(Xlib.ext.randr.PROPERTY_CONNECTOR_NUMBER
-builtins.str"builtins.str*310*311*312*313*314*€
-PROPERTY_COMPATIBILITY_LIST*Xlib.ext.randr.PROPERTY_COMPATIBILITY_LIST
-builtins.str"builtins.str*310*311*312*313*314*p
-PROPERTY_CLONE_LIST"Xlib.ext.randr.PROPERTY_CLONE_LIST
-builtins.str"builtins.str*310*311*312*313*314*h
-SubPixelUnknownXlib.ext.randr.SubPixelUnknown
-builtins.int"builtins.int*310*311*312*313*314*t
-SubPixelHorizontalRGB$Xlib.ext.randr.SubPixelHorizontalRGB
-builtins.int"builtins.int*310*311*312*313*314*t
-SubPixelHorizontalBGR$Xlib.ext.randr.SubPixelHorizontalBGR
-builtins.int"builtins.int*310*311*312*313*314*p
-SubPixelVerticalRGB"Xlib.ext.randr.SubPixelVerticalRGB
-builtins.int"builtins.int*310*311*312*313*314*p
-SubPixelVerticalBGR"Xlib.ext.randr.SubPixelVerticalBGR
-builtins.int"builtins.int*310*311*312*313*314*b
-SubPixelNoneXlib.ext.randr.SubPixelNone
-builtins.int"builtins.int*310*311*312*313*314*`
-BadRROutputXlib.ext.randr.BadRROutput
-builtins.int"builtins.int*310*311*312*313*314*\
-	BadRRCrtcXlib.ext.randr.BadRRCrtc
-builtins.int"builtins.int*310*311*312*313*314*\
-	BadRRModeXlib.ext.randr.BadRRMode
-builtins.int"builtins.int*310*311*312*313*314*‚
-RandR_ScreenSizes Xlib.ext.randr.RandR_ScreenSizes2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*310*311*312*313*314*|
-RandR_ModeInfoXlib.ext.randr.RandR_ModeInfo2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*310*311*312*313*314*v
-RandR_RatesXlib.ext.randr.RandR_Rates2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*310*311*312*313*314*€
-Render_TransformXlib.ext.randr.Render_Transform2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*310*311*312*313*314*v
-MonitorInfoXlib.ext.randr.MonitorInfo2
-Xlib.protocol.rq.Struct"Xlib.protocol.rq.Struct*310*311*312*313*314
+self(%
+get_screen_size_range	*
+
+self(w
+set_screen_size
+*
+
+self(*
+width(*
+height(*
+width_in_millimeters (*
+height_in_millimeters ($
+get_screen_resources*
+
+self(E
+get_output_info*
+
+self(*
+output(*
+config_timestamp(4
+list_output_properties*
+
+self(*
+output(C
+query_output_property*
+
+self(*
+output(*
+property(G
+configure_output_property*
+
+self(*
+output(*
+property(i
+change_output_property*
+
+self(*
+output(*
+property(*
+
+type(*
+
+mode(*
+value(D
+delete_output_property*
+
+self(*
+output(*
+property(”
+get_output_property*
+
+self(*
+output(*
+property(*
+
+type(*
+long_offset(*
+long_length(*
+delete (*
+pending (3
+create_mode*
+
+self(*
+
+mode(*
+
+name((
+destroy_mode*
+
+self(*
+
+mode(9
+add_output_mode*
+
+self(*
+output(*
+
+mode(<
+delete_output_mode *
+
+self(*
+output(*
+
+mode(A
+get_crtc_info!*
+
+self(*
+
+crtc(*
+config_timestamp(“
+set_crtc_config"*
+
+self(*
+
+crtc(*
+config_timestamp(*
+x(*
+y(*
+
+mode(*
+rotation(*
+outputs(*
+	timestamp (/
+get_crtc_gamma_size#*
+
+self(*
+
+crtc(*
+get_crtc_gamma$*
+
+self(*
+
+crtc(Z
+set_crtc_gamma%*
+
+self(*
+
+crtc(*
+
+size(*	
+red(*
+green(*
+
+blue(,
+get_screen_resources_current&*
+
+self(D
+set_crtc_transform'*
+
+self(*
+
+crtc(*
+n_bytes_filter(.
+get_crtc_transform(*
+
+self(*
+
+crtc('
+get_panning)*
+
+self(*
+
+crtc(„
+set_panning**
+
+self(*
+
+crtc(*
+
+left(*	
+top(*
+width(*
+height(*
+
+track_left(*
+	track_top(*
+track_width(*
+track_height(*
+border_left(*
+
+border_top(*
+border_width(*
+border_height(*
+	timestamp (0
+set_output_primary+*
+
+self(*
+output("
+get_output_primary,*
+
+self(/
+get_monitors-*
+
+self(*
+	is_active (/
+set_monitor.*
+
+self(*
+monitor_info(/*
+delete_monitor0*
+
+self(*
+
+name( 
+init*
+
+disp(*
+
+info(1*
+__annotations__02*
+extname0*
+RRScreenChangeNotify0*
+RRNotify0*
+RRNotify_CrtcChange0*
+RRNotify_OutputChange0*
+RRNotify_OutputProperty0*
+RRScreenChangeNotifyMask0*
+RRCrtcChangeNotifyMask0*
+RROutputChangeNotifyMask0*
+RROutputPropertyNotifyMask0*
+SetConfigSuccess0*
+SetConfigInvalidConfigTime0*
+SetConfigInvalidTime0*
+SetConfigFailed0*
+Rotate_00*
+	Rotate_900*
+
+Rotate_1800*
+
+Rotate_2700*
+	Reflect_X0*
+	Reflect_Y0*
+HSyncPositive0*
+HSyncNegative0*
+VSyncPositive0*
+VSyncNegative0*
+	Interlace0*
+
+DoubleScan0*	
+CSync0*
+CSyncPositive0*
+CSyncNegative0*
+HSkewPresent0*	
+BCast0*
+PixelMultiplex0*
+DoubleClock0*
+ClockDivideBy20*
+	Connected0*
+Disconnected0*
+UnknownConnection0*
+PROPERTY_RANDR_EDID0*
+PROPERTY_SIGNAL_FORMAT0*
+PROPERTY_SIGNAL_PROPERTIES0*
+PROPERTY_CONNECTOR_TYPE0*
+PROPERTY_CONNECTOR_NUMBER0*
+PROPERTY_COMPATIBILITY_LIST0*
+PROPERTY_CLONE_LIST0*
+SubPixelUnknown0*
+SubPixelHorizontalRGB0*
+SubPixelHorizontalBGR0*
+SubPixelVerticalRGB0*
+SubPixelVerticalBGR0*
+SubPixelNone0*
+BadRROutput0*
+	BadRRCrtc0*
+	BadRRMode0*
+RandR_ScreenSizes03*
+RandR_ModeInfo03*
+RandR_Rates03*
+Render_Transform03*
+MonitorInfo032"Xlib.ext.randr.QueryVersion2"Xlib.display.Display2222 "Xlib.ext.randr.SetScreenConfig2"builtins.int2"Xlib.ext.randr.SelectInput2"Xlib.ext.randr.GetScreenInfo2#"!Xlib.ext.randr.GetScreenSizeRange2"Xlib.ext.randr.SetScreenSize2222#"!Xlib.ext.randr.GetScreenResources2"Xlib.ext.randr.GetOutputInfo2%"#Xlib.ext.randr.ListOutputProperties2$""Xlib.ext.randr.QueryOutputProperty2("&Xlib.ext.randr.ConfigureOutputProperty2%"#Xlib.ext.randr.ChangeOutputProperty2"builtins.float2"typing.Sequence22"builtins.str2"typing.Sequence2222%"#Xlib.ext.randr.DeleteOutputProperty2"" Xlib.ext.randr.GetOutputProperty2"builtins.bool2"Xlib.ext.randr.CreateMode2"typing.Sequence221"*Xlib.ext.randr._RandRModeInfo13IntSequence22"Xlib.ext.randr.DestroyMode2"Xlib.ext.randr.AddOutputMode2!"Xlib.ext.randr.DeleteOutputMode2"Xlib.ext.randr.GetCrtcInfo2"Xlib.ext.randr.SetCrtcConfig2!"Xlib.ext.randr.GetCrtcGammaSize2"Xlib.ext.randr.GetCrtcGamma2"Xlib.ext.randr.SetCrtcGamma2*"(Xlib.ext.randr.GetScreenResourcesCurrent2!"Xlib.ext.randr.SetCrtcTransform2!"Xlib.ext.randr.GetCrtcTransform2"Xlib.ext.randr.GetPanning2"Xlib.ext.randr.SetPanning2!"Xlib.ext.randr.SetOutputPrimary2!"Xlib.ext.randr.GetOutputPrimary2"Xlib.ext.randr.GetMonitors2"Xlib.ext.randr.SetMonitor22	2"Xlib.ext.randr.DeleteMonitor2&"$Xlib.protocol.request.QueryExtension2"builtins.dict22"Xlib.protocol.rq.Struct

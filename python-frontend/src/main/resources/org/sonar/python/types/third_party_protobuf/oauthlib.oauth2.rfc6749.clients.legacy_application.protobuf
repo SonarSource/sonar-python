@@ -1,340 +1,156 @@
 
-2oauthlib.oauth2.rfc6749.clients.legacy_applicationÉK
-Client+oauthlib.oauth2.rfc6749.clients.base.Client"builtins.object*ø
-__init__4oauthlib.oauth2.rfc6749.clients.base.Client.__init__"
-None*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-	client_id
-Any*&
-default_token_placement
-Any *.
+2oauthlib.oauth2.rfc6749.clients.legacy_applicationí
+Client+oauthlib.oauth2.rfc6749.clients.base.Client"builtins.object*ë
+__init__*
 
-token_type
-builtins.str"builtins.str *o
-access_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-refresh_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-mac_key[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-mac_algorithm[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scope[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-state[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-redirect_url[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-state_generator
-Any *Y
-code_verifierD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Z
-code_challengeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *a
-code_challenge_methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kwargs
-Anyz310z311z312z313z314*€
-token_types7oauthlib.oauth2.rfc6749.clients.base.Client.token_types*
-self0:builtins.property`z310z311z312z313z314*‡
-prepare_request_uri?oauthlib.oauth2.rfc6749.clients.base.Client.prepare_request_uri"
-None*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*‰
-prepare_request_body@oauthlib.oauth2.rfc6749.clients.base.Client.prepare_request_body"
-None*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*•
-parse_request_uri_responseFoauthlib.oauth2.rfc6749.clients.base.Client.parse_request_uri_response"
-None*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*ë
-	add_token5oauthlib.oauth2.rfc6749.clients.base.Client.add_token"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-uri
-Any*/
-http_method
-builtins.str"builtins.str *g
-body[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-headers[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *r
-token_placement[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*ì
-prepare_authorization_requestIoauthlib.oauth2.rfc6749.clients.base.Client.prepare_authorization_request"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-authorization_url
-Any*h
-state[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-redirect_url[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scope[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*
-prepare_token_requestAoauthlib.oauth2.rfc6749.clients.base.Client.prepare_token_request"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-	token_url
-Any*y
-authorization_response[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *o
-redirect_url[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-state[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-body
-builtins.str"builtins.str *
-kwargs
-Anyz310z311z312z313z314*¥
-prepare_refresh_token_requestIoauthlib.oauth2.rfc6749.clients.base.Client.prepare_refresh_token_request"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-	token_url
-Any*p
-refresh_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *(
-body
-builtins.str"builtins.str *h
-scope[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*Š
- prepare_token_revocation_requestLoauthlib.oauth2.rfc6749.clients.base.Client.prepare_token_revocation_request"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-revocation_url
-Any*
-token
-Any*3
-token_type_hint
-builtins.str"builtins.str *(
-body
-builtins.str"builtins.str *k
-callback[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*€
-parse_request_body_responseGoauthlib.oauth2.rfc6749.clients.base.Client.parse_request_body_response"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-body
-Any*h
-scope[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*û
-prepare_refresh_body@oauthlib.oauth2.rfc6749.clients.base.Client.prepare_refresh_body"
-Any*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*(
-body
-builtins.str"builtins.str *p
-refresh_token[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *h
-scope[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kwargs
-Anyz310z311z312z313z314*Ÿ
-create_code_verifier@oauthlib.oauth2.rfc6749.clients.base.Client.create_code_verifier"
-builtins.str"builtins.str*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*(
-length
-builtins.int"builtins.intz310z311z312z313z314*‹
-create_code_challengeAoauthlib.oauth2.rfc6749.clients.base.Client.create_code_challenge"
-builtins.str"builtins.str*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*/
-code_verifier
-builtins.str"builtins.str*a
-code_challenge_methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z310z311z312z313z314*€
-populate_code_attributesDoauthlib.oauth2.rfc6749.clients.base.Client.populate_code_attributes"
-None*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-response
-Anyz310z311z312z313z314*‚
-populate_token_attributesEoauthlib.oauth2.rfc6749.clients.base.Client.populate_token_attributes"
-None*d
-selfZ
-+oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*
-response
-Anyz310z311z312z313z314j310j311j312j313j314r‰
-refresh_token_key=oauthlib.oauth2.rfc6749.clients.base.Client.refresh_token_key
-builtins.str"builtins.str*310*311*312*313*314rd
-	client_id5oauthlib.oauth2.rfc6749.clients.base.Client.client_id
-Any*310*311*312*313*314r€
-default_token_placementCoauthlib.oauth2.rfc6749.clients.base.Client.default_token_placement
-Any*310*311*312*313*314rf
+self(*
+	client_id(*
+default_token_placement (*
 
-token_type6oauthlib.oauth2.rfc6749.clients.base.Client.token_type
-Any*310*311*312*313*314rj
-access_token8oauthlib.oauth2.rfc6749.clients.base.Client.access_token
-Any*310*311*312*313*314rl
-refresh_token9oauthlib.oauth2.rfc6749.clients.base.Client.refresh_token
-Any*310*311*312*313*314r`
-mac_key3oauthlib.oauth2.rfc6749.clients.base.Client.mac_key
-Any*310*311*312*313*314rl
-mac_algorithm9oauthlib.oauth2.rfc6749.clients.base.Client.mac_algorithm
-Any*310*311*312*313*314r\
-token1oauthlib.oauth2.rfc6749.clients.base.Client.token
-Any*310*311*312*313*314r\
-scope1oauthlib.oauth2.rfc6749.clients.base.Client.scope
-Any*310*311*312*313*314rp
-state_generator;oauthlib.oauth2.rfc6749.clients.base.Client.state_generator
-Any*310*311*312*313*314r\
-state1oauthlib.oauth2.rfc6749.clients.base.Client.state
-Any*310*311*312*313*314rj
-redirect_url8oauthlib.oauth2.rfc6749.clients.base.Client.redirect_url
-Any*310*311*312*313*314rZ
-code0oauthlib.oauth2.rfc6749.clients.base.Client.code
-Any*310*311*312*313*314rf
+token_type (*
+access_token (*
+refresh_token (*
+mac_key (*
+mac_algorithm (*
+token (*
+scope (*
+state (*
+redirect_url (*
+state_generator (*
+code_verifier (*
+code_challenge (*
+code_challenge_method (*
+kwargs(*.
+token_types*
+self0:builtins.property`*=
+prepare_request_uri*
 
-expires_in6oauthlib.oauth2.rfc6749.clients.base.Client.expires_in
-Any*310*311*312*313*314r
-code_verifier9oauthlib.oauth2.rfc6749.clients.base.Client.code_verifier
-builtins.str"builtins.str*310*311*312*313*314rƒ
-code_challenge:oauthlib.oauth2.rfc6749.clients.base.Client.code_challenge
-builtins.str"builtins.str*310*311*312*313*314r‘
-code_challenge_methodAoauthlib.oauth2.rfc6749.clients.base.Client.code_challenge_method
-builtins.str"builtins.str*310*311*312*313*314ò	
-LegacyApplicationClientJoauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient"+oauthlib.oauth2.rfc6749.clients.base.Client*Õ
-__init__Soauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient.__init__"
-None*£
-self˜
-Joauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient"Joauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient*
-	client_id
-Any*
-kwargs
-Anyz310z311z312z313z314*Ï
-prepare_request_body_oauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient.prepare_request_body"
-Any*£
-self˜
-Joauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient"Joauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient*
-username
-Any*
-password
-Any*(
-body
-builtins.str"builtins.str *h
-scope[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *7
-include_client_id
-builtins.bool"builtins.bool *
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rš
+self(*
 
-grant_typeUoauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient.grant_type
-builtins.str"builtins.str*310*311*312*313*314*Ç
-__annotations__Boauthlib.oauth2.rfc6749.clients.legacy_application.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+args(*
+kwargs(*>
+prepare_request_body*
+
+self(*
+
+args(*
+kwargs(*D
+parse_request_uri_response*
+
+self(*
+
+args(*
+kwargs(*
+	add_token*
+
+self(*	
+uri(*
+http_method (*
+body (*
+headers (*
+token_placement (*
+kwargs(*ˆ
+prepare_authorization_request*
+
+self(*
+authorization_url(*
+state (*
+redirect_url (*
+scope (*
+kwargs(*—
+prepare_token_request*
+
+self(*
+	token_url(*
+authorization_response (*
+redirect_url (*
+state (*
+body (*
+kwargs(*€
+prepare_refresh_token_request*
+
+self(*
+	token_url(*
+refresh_token (*
+body (*
+scope (*
+kwargs(*š
+ prepare_token_revocation_request*
+
+self(*
+revocation_url(*
+token(*
+token_type_hint (*
+body (*
+callback (*
+kwargs(*T
+parse_request_body_response*
+
+self(*
+
+body(*
+scope (*
+kwargs(*f
+prepare_refresh_body*
+
+self(*
+body (*
+refresh_token (*
+scope (*
+kwargs(*2
+create_code_verifier*
+
+self(*
+length(*Y
+create_code_challenge*
+
+self(*
+code_verifier(*
+code_challenge_method (*8
+populate_code_attributes*
+
+self(*
+response(*9
+populate_token_attributes*
+
+self(*
+response(r
+refresh_token_key0r
+	client_id0r
+default_token_placement0r
+
+token_type0r
+access_token0r
+refresh_token0r
+mac_key0r
+mac_algorithm0r	
+token0r	
+scope0r
+state_generator0r	
+state0r
+redirect_url0r
+code0r
+
+expires_in0r
+code_verifier0r
+code_challenge0r
+code_challenge_method0œ
+LegacyApplicationClient"+oauthlib.oauth2.rfc6749.clients.base.Client*7
+__init__*
+
+self(	*
+	client_id(*
+kwargs(*Š
+prepare_request_body*
+
+self(	*
+username(*
+password(*
+body (*
+scope (*
+include_client_id (
+*
+kwargs(r
+
+grant_type0*
+__annotations__022-"+oauthlib.oauth2.rfc6749.clients.base.Client22"builtins.str2"_typeshed.Incomplete222222"builtins.int2L"Joauthlib.oauth2.rfc6749.clients.legacy_application.LegacyApplicationClient2"builtins.bool2"builtins.dict2

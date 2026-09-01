@@ -1,446 +1,227 @@
 
-pyaudioÉ
-Streampyaudio.Stream"builtins.object*Ã	
-__init__pyaudio.Stream.__init__"
-None**
-self 
-pyaudio.Stream"pyaudio.Stream*2
+pyaudio×
+Stream"builtins.object*Ê
+__init__*
 
-PA_manager"
-pyaudio.PyAudio"pyaudio.PyAudio*&
-rate
-builtins.int"builtins.int**
-channels
-builtins.int"builtins.int*(
-format
-builtins.int"builtins.int*+
-input
-builtins.bool"builtins.bool *,
-output
-builtins.bool"builtins.bool *^
-input_device_indexD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *_
-output_device_indexD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *5
-frames_per_buffer
-builtins.int"builtins.int *+
-start
-builtins.bool"builtins.bool *‘
-#input_host_api_specific_stream_infof
-Union[TypeAlias[None],None];
-TypeAlias[None]
-None"pyaudio._PaMacCoreStreamInfo
-None *’
-$output_host_api_specific_stream_infof
-Union[TypeAlias[None],None];
-TypeAlias[None]
-None"pyaudio._PaMacCoreStreamInfo
-None *ó
-stream_callbackÛ
-6Union[TypeAlias[CallableType[builtins.function]],None]”
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pyaudio._StreamCallback
-None z310z311z312z313z314*l
-closepyaudio.Stream.close"
-None**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*’
-get_cpu_loadpyaudio.Stream.get_cpu_load" 
-builtins.float"builtins.float**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*œ
-get_input_latency pyaudio.Stream.get_input_latency" 
-builtins.float"builtins.float**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*ž
-get_output_latency!pyaudio.Stream.get_output_latency" 
-builtins.float"builtins.float**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*š
-get_read_available!pyaudio.Stream.get_read_available"
-builtins.int"builtins.int**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*Š
-get_timepyaudio.Stream.get_time" 
-builtins.float"builtins.float**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*œ
-get_write_available"pyaudio.Stream.get_write_available"
-builtins.int"builtins.int**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*Š
-	is_activepyaudio.Stream.is_active"
-builtins.bool"builtins.bool**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*Œ
+self(*
 
-is_stoppedpyaudio.Stream.is_stopped"
-builtins.bool"builtins.bool**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*í
-readpyaudio.Stream.read" 
-builtins.bytes"builtins.bytes**
-self 
-pyaudio.Stream"pyaudio.Stream*,
+PA_manager(*
 
-num_frames
-builtins.int"builtins.int*;
-exception_on_overflow
-builtins.bool"builtins.bool z310z311z312z313z314*z
-start_streampyaudio.Stream.start_stream"
-None**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*x
-stop_streampyaudio.Stream.stop_stream"
-None**
-self 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*°
-writepyaudio.Stream.write"
-None**
-self 
-pyaudio.Stream"pyaudio.Stream*,
-frames 
-builtins.bytes"builtins.bytes*V
+rate(*
+channels(*
+format(*
+input (*
+output (*
+input_device_index (*
+output_device_index (*
+frames_per_buffer (*
+start (*+
+#input_host_api_specific_stream_info (*,
+$output_host_api_specific_stream_info (*
+stream_callback (*
+close*
 
-num_framesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *<
-exception_on_underflow
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314Í7
-PyAudiopyaudio.PyAudio"builtins.object*u
-__init__pyaudio.PyAudio.__init__"
-None*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314*
-closepyaudio.PyAudio.close"
-None*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*,
-stream 
-pyaudio.Stream"pyaudio.Streamz310z311z312z313z314*Æ
-get_default_host_api_info)pyaudio.PyAudio.get_default_host_api_info"¶
-HTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int]]]Ï
-=typing.Mapping[builtins.str,Union[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"typing.Mapping"pyaudio._PaHostApiInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314*
-get_default_input_device_info-pyaudio.PyAudio.get_default_input_device_info"…
-WTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]]
-Ltyping.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]
-builtins.str"builtins.str‘
-/Union[builtins.str,builtins.int,builtins.float]
-builtins.str"builtins.str
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Mapping"pyaudio._PaDeviceInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314*Ÿ
-get_default_output_device_info.pyaudio.PyAudio.get_default_output_device_info"…
-WTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]]
-Ltyping.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]
-builtins.str"builtins.str‘
-/Union[builtins.str,builtins.int,builtins.float]
-builtins.str"builtins.str
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Mapping"pyaudio._PaDeviceInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314*™
-get_device_count pyaudio.PyAudio.get_device_count"
-builtins.int"builtins.int*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314*ž
-(get_device_info_by_host_api_device_index8pyaudio.PyAudio.get_device_info_by_host_api_device_index"…
-WTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]]
-Ltyping.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]
-builtins.str"builtins.str‘
-/Union[builtins.str,builtins.int,builtins.float]
-builtins.str"builtins.str
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Mapping"pyaudio._PaDeviceInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*0
-host_api_index
-builtins.int"builtins.int*7
-host_api_device_index
-builtins.int"builtins.intz310z311z312z313z314*Ã
-get_device_info_by_index(pyaudio.PyAudio.get_device_info_by_index"…
-WTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]]
-Ltyping.Mapping[builtins.str,Union[builtins.str,builtins.int,builtins.float]]
-builtins.str"builtins.str‘
-/Union[builtins.str,builtins.int,builtins.float]
-builtins.str"builtins.str
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Mapping"pyaudio._PaDeviceInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*.
-device_index
-builtins.int"builtins.intz310z311z312z313z314*ü
-get_format_from_width%pyaudio.PyAudio.get_format_from_width"
-builtins.int"builtins.int*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*'
-width
-builtins.int"builtins.int*.
-unsigned
-builtins.bool"builtins.bool z310z311z312z313z314*
-get_host_api_count"pyaudio.PyAudio.get_host_api_count"
-builtins.int"builtins.int*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314*ú
-get_host_api_info_by_index*pyaudio.PyAudio.get_host_api_info_by_index"¶
-HTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int]]]Ï
-=typing.Mapping[builtins.str,Union[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"typing.Mapping"pyaudio._PaHostApiInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*0
-host_api_index
-builtins.int"builtins.intz310z311z312z313z314*÷
-get_host_api_info_by_type)pyaudio.PyAudio.get_host_api_info_by_type"¶
-HTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.int]]]Ï
-=typing.Mapping[builtins.str,Union[builtins.str,builtins.int]]
-builtins.str"builtins.str`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"typing.Mapping"pyaudio._PaHostApiInfo*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*/
-host_api_type
-builtins.int"builtins.intz310z311z312z313z314*Á
-get_sample_sizepyaudio.PyAudio.get_sample_size"
-builtins.int"builtins.int*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*(
-format
-builtins.int"builtins.intz310z311z312z313z314*ì
-is_format_supported#pyaudio.PyAudio.is_format_supported"
-builtins.bool"builtins.bool*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*&
-rate
-builtins.int"builtins.int*X
-input_deviceD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Z
-input_channelsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *X
-input_formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Y
-output_deviceD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *[
-output_channelsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Y
-output_formatD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z310z311z312z313z314*¢	
-openpyaudio.PyAudio.open" 
-pyaudio.Stream"pyaudio.Stream*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudio*&
-rate
-builtins.int"builtins.int**
-channels
-builtins.int"builtins.int*(
-format
-builtins.int"builtins.int*+
-input
-builtins.bool"builtins.bool *,
-output
-builtins.bool"builtins.bool *^
-input_device_indexD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *_
-output_device_indexD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *5
-frames_per_buffer
-builtins.int"builtins.int *+
-start
-builtins.bool"builtins.bool *‘
-#input_host_api_specific_stream_infof
-Union[TypeAlias[None],None];
-TypeAlias[None]
-None"pyaudio._PaMacCoreStreamInfo
-None *’
-$output_host_api_specific_stream_infof
-Union[TypeAlias[None],None];
-TypeAlias[None]
-None"pyaudio._PaMacCoreStreamInfo
-None *ó
-stream_callbackÛ
-6Union[TypeAlias[CallableType[builtins.function]],None]”
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pyaudio._StreamCallback
-None z310z311z312z313z314*w
-	terminatepyaudio.PyAudio.terminate"
-None*,
-self"
-pyaudio.PyAudio"pyaudio.PyAudioz310z311z312z313z314j310j311j312j313j314r{
-Streampyaudio.PyAudio.Stream@
-Type[pyaudio.Stream] 
-pyaudio.Stream"pyaudio.Stream"type*310*311*312*313*314Æ
-get_format_from_widthpyaudio.get_format_from_width"
-builtins.int"builtins.int*'
-width
-builtins.int"builtins.int*.
-unsigned
-builtins.bool"builtins.bool z310z311z312z313z314m
-get_portaudio_versionpyaudio.get_portaudio_version"
-builtins.int"builtins.intz310z311z312z313z314w
-get_portaudio_version_text"pyaudio.get_portaudio_version_text"
-builtins.str"builtins.strz310z311z312z313z314‹
-get_sample_sizepyaudio.get_sample_size"
-builtins.int"builtins.int*(
-format
-builtins.int"builtins.intz310z311z312z313z314*œ
-__annotations__pyaudio.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*]
-__docformat__pyaudio.__docformat__
-builtins.str"builtins.str*310*311*312*313*314*U
-	paFloat32pyaudio.paFloat32
-builtins.int"builtins.int*310*311*312*313*314*Q
-paInt32pyaudio.paInt32
-builtins.int"builtins.int*310*311*312*313*314*Q
-paInt24pyaudio.paInt24
-builtins.int"builtins.int*310*311*312*313*314*Q
-paInt16pyaudio.paInt16
-builtins.int"builtins.int*310*311*312*313*314*O
-paInt8pyaudio.paInt8
-builtins.int"builtins.int*310*311*312*313*314*Q
-paUInt8pyaudio.paUInt8
-builtins.int"builtins.int*310*311*312*313*314*_
-paCustomFormatpyaudio.paCustomFormat
-builtins.int"builtins.int*310*311*312*313*314*a
-paInDevelopmentpyaudio.paInDevelopment
-builtins.int"builtins.int*310*311*312*313*314*]
-paDirectSoundpyaudio.paDirectSound
-builtins.int"builtins.int*310*311*312*313*314*M
-paMMEpyaudio.paMME
-builtins.int"builtins.int*310*311*312*313*314*O
-paASIOpyaudio.paASIO
-builtins.int"builtins.int*310*311*312*313*314*_
-paSoundManagerpyaudio.paSoundManager
-builtins.int"builtins.int*310*311*312*313*314*Y
-paCoreAudiopyaudio.paCoreAudio
-builtins.int"builtins.int*310*311*312*313*314*M
-paOSSpyaudio.paOSS
-builtins.int"builtins.int*310*311*312*313*314*O
-paALSApyaudio.paALSA
-builtins.int"builtins.int*310*311*312*313*314*K
-paALpyaudio.paAL
-builtins.int"builtins.int*310*311*312*313*314*O
-paBeOSpyaudio.paBeOS
-builtins.int"builtins.int*310*311*312*313*314*Q
-paWDMKSpyaudio.paWDMKS
-builtins.int"builtins.int*310*311*312*313*314*O
-paJACKpyaudio.paJACK
-builtins.int"builtins.int*310*311*312*313*314*S
-paWASAPIpyaudio.paWASAPI
-builtins.int"builtins.int*310*311*312*313*314*W
+self(*
+get_cpu_load*
 
-paNoDevicepyaudio.paNoDevice
-builtins.int"builtins.int*310*311*312*313*314*U
-	paNoErrorpyaudio.paNoError
-builtins.int"builtins.int*310*311*312*313*314*c
-paNotInitializedpyaudio.paNotInitialized
-builtins.int"builtins.int*310*311*312*313*314*s
-paUnanticipatedHostError pyaudio.paUnanticipatedHostError
-builtins.int"builtins.int*310*311*312*313*314*m
-paInvalidChannelCountpyaudio.paInvalidChannelCount
-builtins.int"builtins.int*310*311*312*313*314*i
-paInvalidSampleRatepyaudio.paInvalidSampleRate
-builtins.int"builtins.int*310*311*312*313*314*a
-paInvalidDevicepyaudio.paInvalidDevice
-builtins.int"builtins.int*310*311*312*313*314*]
-paInvalidFlagpyaudio.paInvalidFlag
-builtins.int"builtins.int*310*311*312*313*314*w
-paSampleFormatNotSupported"pyaudio.paSampleFormatNotSupported
-builtins.int"builtins.int*310*311*312*313*314*s
-paBadIODeviceCombination pyaudio.paBadIODeviceCombination
-builtins.int"builtins.int*310*311*312*313*314*k
-paInsufficientMemorypyaudio.paInsufficientMemory
-builtins.int"builtins.int*310*311*312*313*314*_
-paBufferTooBigpyaudio.paBufferTooBig
-builtins.int"builtins.int*310*311*312*313*314*c
-paBufferTooSmallpyaudio.paBufferTooSmall
-builtins.int"builtins.int*310*311*312*313*314*_
-paNullCallbackpyaudio.paNullCallback
-builtins.int"builtins.int*310*311*312*313*314*_
-paBadStreamPtrpyaudio.paBadStreamPtr
-builtins.int"builtins.int*310*311*312*313*314*W
+self(*!
+get_input_latency*
 
-paTimedOutpyaudio.paTimedOut
-builtins.int"builtins.int*310*311*312*313*314*a
-paInternalErrorpyaudio.paInternalError
-builtins.int"builtins.int*310*311*312*313*314*i
-paDeviceUnavailablepyaudio.paDeviceUnavailable
-builtins.int"builtins.int*310*311*312*313*314*‘
-'paIncompatibleHostApiSpecificStreamInfo/pyaudio.paIncompatibleHostApiSpecificStreamInfo
-builtins.int"builtins.int*310*311*312*313*314*e
-paStreamIsStoppedpyaudio.paStreamIsStopped
-builtins.int"builtins.int*310*311*312*313*314*k
-paStreamIsNotStoppedpyaudio.paStreamIsNotStopped
-builtins.int"builtins.int*310*311*312*313*314*e
-paInputOverflowedpyaudio.paInputOverflowed
-builtins.int"builtins.int*310*311*312*313*314*i
-paOutputUnderflowedpyaudio.paOutputUnderflowed
-builtins.int"builtins.int*310*311*312*313*314*e
-paHostApiNotFoundpyaudio.paHostApiNotFound
-builtins.int"builtins.int*310*311*312*313*314*c
-paInvalidHostApipyaudio.paInvalidHostApi
-builtins.int"builtins.int*310*311*312*313*314*
-paCanNotReadFromACallbackStream'pyaudio.paCanNotReadFromACallbackStream
-builtins.int"builtins.int*310*311*312*313*314*
-paCanNotWriteToACallbackStream&pyaudio.paCanNotWriteToACallbackStream
-builtins.int"builtins.int*310*311*312*313*314*‡
-"paCanNotReadFromAnOutputOnlyStream*pyaudio.paCanNotReadFromAnOutputOnlyStream
-builtins.int"builtins.int*310*311*312*313*314*ƒ
- paCanNotWriteToAnInputOnlyStream(pyaudio.paCanNotWriteToAnInputOnlyStream
-builtins.int"builtins.int*310*311*312*313*314*y
-paIncompatibleStreamHostApi#pyaudio.paIncompatibleStreamHostApi
-builtins.int"builtins.int*310*311*312*313*314*W
+self(*"
+get_output_latency*
 
-paContinuepyaudio.paContinue
-builtins.int"builtins.int*310*311*312*313*314*W
+self(*"
+get_read_available*
 
-paCompletepyaudio.paComplete
-builtins.int"builtins.int*310*311*312*313*314*Q
-paAbortpyaudio.paAbort
-builtins.int"builtins.int*310*311*312*313*314*c
-paInputUnderflowpyaudio.paInputUnderflow
-builtins.int"builtins.int*310*311*312*313*314*a
-paInputOverflowpyaudio.paInputOverflow
-builtins.int"builtins.int*310*311*312*313*314*e
-paOutputUnderflowpyaudio.paOutputUnderflow
-builtins.int"builtins.int*310*311*312*313*314*c
-paOutputOverflowpyaudio.paOutputOverflow
-builtins.int"builtins.int*310*311*312*313*314*a
-paPrimingOutputpyaudio.paPrimingOutput
-builtins.int"builtins.int*310*311*312*313*314*{
-paFramesPerBufferUnspecified$pyaudio.paFramesPerBufferUnspecified
-builtins.int"builtins.int*310*311*312*313*314
+self(*
+get_time*
+
+self(*#
+get_write_available*
+
+self(*
+	is_active*
+
+self(*
+
+is_stopped*
+
+self(*E
+read*
+
+self(*
+
+num_frames(*
+exception_on_overflow (*
+start_stream*
+
+self(*
+stop_stream*
+
+self(*W
+write*
+
+self(*
+frames(*
+
+num_frames (*
+exception_on_underflow (æ	
+PyAudio"builtins.object*
+__init__*
+
+self(*#
+close*
+
+self(*
+stream(*)
+get_default_host_api_info*
+
+self(*-
+get_default_input_device_info*
+
+self(*.
+get_default_output_device_info*
+
+self(* 
+get_device_count*
+
+self(*k
+(get_device_info_by_host_api_device_index*
+
+self(*
+host_api_index(*
+host_api_device_index(*<
+get_device_info_by_index*
+
+self(*
+device_index(*D
+get_format_from_width*
+
+self(*
+width(*
+unsigned (*"
+get_host_api_count*
+
+self(*@
+get_host_api_info_by_index*
+
+self(*
+host_api_index(*>
+get_host_api_info_by_type*
+
+self(*
+host_api_type(*-
+get_sample_size*
+
+self(*
+format(*º
+is_format_supported*
+
+self(*
+
+rate(*
+input_device (*
+input_channels (*
+input_format (*
+output_device (*
+output_channels (*
+output_format (*´
+open*
+
+self(*
+
+rate(*
+channels(*
+format(*
+input (*
+output (*
+input_device_index (*
+output_device_index (*
+frames_per_buffer (*
+start (*+
+#input_host_api_specific_stream_info (*,
+$output_host_api_specific_stream_info (*
+stream_callback (*
+	terminate*
+
+self(r
+
+Stream08
+get_format_from_width*
+width(*
+unsigned (
+get_portaudio_version
+get_portaudio_version_text!
+get_sample_size*
+format(*
+__annotations__0*
+__docformat__0*
+	paFloat320*
+paInt320*
+paInt240*
+paInt160*
+
+paInt80*
+paUInt80*
+paCustomFormat0*
+paInDevelopment0*
+paDirectSound0*	
+paMME0*
+
+paASIO0*
+paSoundManager0*
+paCoreAudio0*	
+paOSS0*
+
+paALSA0*
+paAL0*
+
+paBeOS0*
+paWDMKS0*
+
+paJACK0*
+paWASAPI0*
+
+paNoDevice0*
+	paNoError0*
+paNotInitialized0*
+paUnanticipatedHostError0*
+paInvalidChannelCount0*
+paInvalidSampleRate0*
+paInvalidDevice0*
+paInvalidFlag0*
+paSampleFormatNotSupported0*
+paBadIODeviceCombination0*
+paInsufficientMemory0*
+paBufferTooBig0*
+paBufferTooSmall0*
+paNullCallback0*
+paBadStreamPtr0*
+
+paTimedOut0*
+paInternalError0*
+paDeviceUnavailable0*+
+'paIncompatibleHostApiSpecificStreamInfo0*
+paStreamIsStopped0*
+paStreamIsNotStopped0*
+paInputOverflowed0*
+paOutputUnderflowed0*
+paHostApiNotFound0*
+paInvalidHostApi0*#
+paCanNotReadFromACallbackStream0*"
+paCanNotWriteToACallbackStream0*&
+"paCanNotReadFromAnOutputOnlyStream0*$
+ paCanNotWriteToAnInputOnlyStream0*
+paIncompatibleStreamHostApi0*
+
+paContinue0*
+
+paComplete0*
+paAbort0*
+paInputUnderflow0*
+paInputOverflow0*
+paOutputUnderflow0*
+paOutputOverflow0*
+paPrimingOutput0* 
+paFramesPerBufferUnspecified022"pyaudio.Stream2"pyaudio.PyAudio2"builtins.int2"builtins.bool222#"pyaudio._PaMacCoreStreamInfo2222"builtins.function22	2"pyaudio._StreamCallback2
+222"builtins.float2"builtins.bytes2"builtins.str222"typing.Mapping22"pyaudio._PaHostApiInfo2222"typing.Mapping22"pyaudio._PaDeviceInfo22"type222"builtins.dict2

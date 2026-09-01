@@ -1,2411 +1,1344 @@
 
-pyspark.sql.connect.plan‘%
-LogicalPlan$pyspark.sql.connect.plan.LogicalPlan"builtins.object*∂
-__init__-pyspark.sql.connect.plan.LogicalPlan.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*ì
-_create_proto_relation;pyspark.sql.connect.plan.LogicalPlan._create_proto_relation"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*∏
-unresolved_attr4pyspark.sql.connect.plan.LogicalPlan.unresolved_attr"l
-4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*)
-colName
-builtins.str"builtins.str*≠
-to_attr_or_expression:pyspark.sql.connect.plan.LogicalPlan.to_attr_or_expression"l
-4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*ö
-colê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Ê
-plan)pyspark.sql.connect.plan.LogicalPlan.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Ë
-command,pyspark.sql.connect.plan.LogicalPlan.command"`
-.pyspark.sql.connect.proto.commands_pb2.Command".pyspark.sql.connect.proto.commands_pb2.Command*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*¶
-_verify,pyspark.sql.connect.plan.LogicalPlan._verify"
-builtins.bool"builtins.bool*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*â
-to_proto-pyspark.sql.connect.plan.LogicalPlan.to_proto"R
-'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*+
-debug
-builtins.bool"builtins.bool *Ô
-_parameters_to_print9pyspark.sql.connect.plan.LogicalPlan._parameters_to_print"Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*i
+pyspark.sql.connect.planí
+LogicalPlan"builtins.object*%
+__init__*
 
-parametersY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*’
-print*pyspark.sql.connect.plan.LogicalPlan.print"
-builtins.str"builtins.str*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan**
-indent
-builtins.int"builtins.int *µ
-_repr_html_0pyspark.sql.connect.plan.LogicalPlan._repr_html_"
-builtins.str"builtins.str*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*·
-_child_print1pyspark.sql.connect.plan.LogicalPlan._child_print"
-builtins.str"builtins.str*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*(
-indent
-builtins.int"builtins.int*µ
-_child_repr0pyspark.sql.connect.plan.LogicalPlan._child_repr"
-builtins.str"builtins.str*V
-selfL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlanrY
-_lock*pyspark.sql.connect.plan.LogicalPlan._lock$
-_thread.LockType"_thread.LockTyper]
-_nextPlanId0pyspark.sql.connect.plan.LogicalPlan._nextPlanId
-builtins.int"builtins.intrS
-INDENT+pyspark.sql.connect.plan.LogicalPlan.INDENT
-builtins.int"builtins.intrƒ
-_child+pyspark.sql.connect.plan.LogicalPlan._childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-NonerW
-_plan_id-pyspark.sql.connect.plan.LogicalPlan._plan_id
-builtins.int"builtins.intŸ
+self(*
+child(*&
+_create_proto_relation*
 
-DataSource#pyspark.sql.connect.plan.DataSource"$pyspark.sql.connect.plan.LogicalPlan*ï
-__init__,pyspark.sql.connect.plan.DataSource.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.DataSource"#pyspark.sql.connect.plan.DataSource*R
-formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-schemaD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ã
-optionsº
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *è
-pathsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *î
+self(*.
+unresolved_attr*
 
-predicatesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *[
-is_streamingG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *„
-plan(pyspark.sql.connect.plan.DataSource.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.DataSource"#pyspark.sql.connect.plan.DataSource*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr|
-_format+pyspark.sql.connect.plan.DataSource._formatD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner|
-_schema+pyspark.sql.connect.plan.DataSource._schemaD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner˜
-_options,pyspark.sql.connect.plan.DataSource._optionsº
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-Noner∏
-_paths*pyspark.sql.connect.plan.DataSource._pathsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-Noner¬
-_predicates/pyspark.sql.connect.plan.DataSource._predicatesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-Nonerã
-_is_streaming1pyspark.sql.connect.plan.DataSource._is_streamingG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None 
-Readpyspark.sql.connect.plan.Read"$pyspark.sql.connect.plan.LogicalPlan*›
-__init__&pyspark.sql.connect.plan.Read.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.Read"pyspark.sql.connect.plan.Read*,
+self(*
+colName(*?
+to_attr_or_expression*
 
-table_name
-builtins.str"builtins.str*…
-optionsπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *[
-is_streamingG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *—
-plan"pyspark.sql.connect.plan.Read.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.Read"pyspark.sql.connect.plan.Read*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*¿
-print#pyspark.sql.connect.plan.Read.print"
-builtins.str"builtins.str*H
-self>
-pyspark.sql.connect.plan.Read"pyspark.sql.connect.plan.Read**
-indent
-builtins.int"builtins.int rT
+self(*	
+col(	*
+session(
+*#
+plan*
 
-table_name(pyspark.sql.connect.plan.Read.table_name
-builtins.str"builtins.strrß
-options%pyspark.sql.connect.plan.Read.optionsu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dictrÖ
-_is_streaming+pyspark.sql.connect.plan.Read._is_streamingG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None™
-LocalRelation&pyspark.sql.connect.plan.LocalRelation"$pyspark.sql.connect.plan.LogicalPlan*®
-__init__/pyspark.sql.connect.plan.LocalRelation.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.LocalRelation"&pyspark.sql.connect.plan.LocalRelation*1
-table&
-Union[Any,None]
-Any
-None*R
-schemaD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-plan+pyspark.sql.connect.plan.LocalRelation.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.LocalRelation"&pyspark.sql.connect.plan.LocalRelation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*≤
-	serialize0pyspark.sql.connect.plan.LocalRelation.serialize" 
-builtins.bytes"builtins.bytes*Z
-selfP
-&pyspark.sql.connect.plan.LocalRelation"&pyspark.sql.connect.plan.LocalRelation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*€
-print,pyspark.sql.connect.plan.LocalRelation.print"
-builtins.str"builtins.str*Z
-selfP
-&pyspark.sql.connect.plan.LocalRelation"&pyspark.sql.connect.plan.LocalRelation**
-indent
-builtins.int"builtins.int *ª
-_repr_html_2pyspark.sql.connect.plan.LocalRelation._repr_html_"
-builtins.str"builtins.str*Z
-selfP
-&pyspark.sql.connect.plan.LocalRelation"&pyspark.sql.connect.plan.LocalRelationr_
-_table-pyspark.sql.connect.plan.LocalRelation._table&
-Union[Any,None]
-Any
-Noner
-_schema.pyspark.sql.connect.plan.LocalRelation._schemaD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None„	
-CachedLocalRelation,pyspark.sql.connect.plan.CachedLocalRelation"$pyspark.sql.connect.plan.LogicalPlan*€
-__init__5pyspark.sql.connect.plan.CachedLocalRelation.__init__"
-None*f
-self\
-,pyspark.sql.connect.plan.CachedLocalRelation",pyspark.sql.connect.plan.CachedLocalRelation*&
-hash
-builtins.str"builtins.str*˛
-plan1pyspark.sql.connect.plan.CachedLocalRelation.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*f
-self\
-,pyspark.sql.connect.plan.CachedLocalRelation",pyspark.sql.connect.plan.CachedLocalRelation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Ì
-print2pyspark.sql.connect.plan.CachedLocalRelation.print"
-builtins.str"builtins.str*f
-self\
-,pyspark.sql.connect.plan.CachedLocalRelation",pyspark.sql.connect.plan.CachedLocalRelation**
-indent
-builtins.int"builtins.int *Õ
-_repr_html_8pyspark.sql.connect.plan.CachedLocalRelation._repr_html_"
-builtins.str"builtins.str*f
-self\
-,pyspark.sql.connect.plan.CachedLocalRelation",pyspark.sql.connect.plan.CachedLocalRelationrY
-_hash2pyspark.sql.connect.plan.CachedLocalRelation._hash
-builtins.str"builtins.strÉ	
+self(*
+session(
+*&
+command*
 
-ShowString#pyspark.sql.connect.plan.ShowString"$pyspark.sql.connect.plan.LogicalPlan*π
-__init__,pyspark.sql.connect.plan.ShowString.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.ShowString"#pyspark.sql.connect.plan.ShowString*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None**
-num_rows
-builtins.int"builtins.int**
-truncate
-builtins.int"builtins.int*,
-vertical
-builtins.bool"builtins.bool*„
-plan(pyspark.sql.connect.plan.ShowString.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.ShowString"#pyspark.sql.connect.plan.ShowString*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrV
-num_rows,pyspark.sql.connect.plan.ShowString.num_rows
-builtins.int"builtins.intrV
-truncate,pyspark.sql.connect.plan.ShowString.truncate
-builtins.int"builtins.intrX
-vertical,pyspark.sql.connect.plan.ShowString.vertical
-builtins.bool"builtins.bool˚
+self(*
+session(
+*&
+_verify*
 
-HtmlString#pyspark.sql.connect.plan.HtmlString"$pyspark.sql.connect.plan.LogicalPlan*ã
-__init__,pyspark.sql.connect.plan.HtmlString.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.HtmlString"#pyspark.sql.connect.plan.HtmlString*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None**
-num_rows
-builtins.int"builtins.int**
-truncate
-builtins.int"builtins.int*„
-plan(pyspark.sql.connect.plan.HtmlString.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.HtmlString"#pyspark.sql.connect.plan.HtmlString*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrV
-num_rows,pyspark.sql.connect.plan.HtmlString.num_rows
-builtins.int"builtins.intrV
-truncate,pyspark.sql.connect.plan.HtmlString.truncate
-builtins.int"builtins.intÕ
-Project pyspark.sql.connect.plan.Project"$pyspark.sql.connect.plan.LogicalPlan*À
-__init__)pyspark.sql.connect.plan.Project.__init__"
-None*N
-selfD
- pyspark.sql.connect.plan.Project" pyspark.sql.connect.plan.Project*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*û
-columnsê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*•
-_verify_expressions4pyspark.sql.connect.plan.Project._verify_expressions"
-None*N
-selfD
- pyspark.sql.connect.plan.Project" pyspark.sql.connect.plan.Project*⁄
-plan%pyspark.sql.connect.plan.Project.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*N
-selfD
- pyspark.sql.connect.plan.Project" pyspark.sql.connect.plan.Project*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrØ
-_columns)pyspark.sql.connect.plan.Project._columns˜
-Dbuiltins.list[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"builtins.listru
-alias&pyspark.sql.connect.plan.Project.aliasD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneâ
-WithColumns$pyspark.sql.connect.plan.WithColumns"$pyspark.sql.connect.plan.LogicalPlan*–
-__init__-pyspark.sql.connect.plan.WithColumns.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.WithColumns"$pyspark.sql.connect.plan.WithColumns*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*_
-columnNamesN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*õ
-columnsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*ò
-metadataá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *Ê
-plan)pyspark.sql.connect.plan.WithColumns.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.WithColumns"$pyspark.sql.connect.plan.WithColumns*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientro
-_columnNames1pyspark.sql.connect.plan.WithColumns._columnNames,
-builtins.list[Any]
-Any"builtins.listrg
-_columns-pyspark.sql.connect.plan.WithColumns._columns,
-builtins.list[Any]
-Any"builtins.listró
-	_metadata.pyspark.sql.connect.plan.WithColumns._metadataZ
-Union[builtins.list[Any],None],
-builtins.list[Any]
-Any"builtins.list
-None∏
-WithWatermark&pyspark.sql.connect.plan.WithWatermark"$pyspark.sql.connect.plan.LogicalPlan*ù
-__init__/pyspark.sql.connect.plan.WithWatermark.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.WithWatermark"&pyspark.sql.connect.plan.WithWatermark*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*,
+self(*
+session(
+*6
+to_proto*
 
-event_time
-builtins.str"builtins.str*1
-delay_threshold
-builtins.str"builtins.str*Ï
-plan+pyspark.sql.connect.plan.WithWatermark.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.WithWatermark"&pyspark.sql.connect.plan.WithWatermark*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr_
-_event_time2pyspark.sql.connect.plan.WithWatermark._event_time
-builtins.str"builtins.strri
-_delay_threshold7pyspark.sql.connect.plan.WithWatermark._delay_threshold
-builtins.str"builtins.stræ
-CachedRemoteRelation-pyspark.sql.connect.plan.CachedRemoteRelation"$pyspark.sql.connect.plan.LogicalPlan*‰
-__init__6pyspark.sql.connect.plan.CachedRemoteRelation.__init__"
-None*h
-self^
--pyspark.sql.connect.plan.CachedRemoteRelation"-pyspark.sql.connect.plan.CachedRemoteRelation*,
+self(*
+session(
+*
+debug (*6
+_parameters_to_print*
 
-relationId
-builtins.str"builtins.str*Å
-plan2pyspark.sql.connect.plan.CachedRemoteRelation.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*h
-self^
--pyspark.sql.connect.plan.CachedRemoteRelation"-pyspark.sql.connect.plan.CachedRemoteRelation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrf
-_relationId9pyspark.sql.connect.plan.CachedRemoteRelation._relationId
-builtins.str"builtins.str›
-Hintpyspark.sql.connect.plan.Hint"$pyspark.sql.connect.plan.LogicalPlan*á
-__init__&pyspark.sql.connect.plan.Hint.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.Hint"pyspark.sql.connect.plan.Hint*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*&
-name
-builtins.str"builtins.str*<
+self(*
 
-parameters,
-builtins.list[Any]
-Any"builtins.list*—
-plan"pyspark.sql.connect.plan.Hint.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.Hint"pyspark.sql.connect.plan.Hint*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrJ
-_name#pyspark.sql.connect.plan.Hint._name
-builtins.str"builtins.strrf
-_parameters)pyspark.sql.connect.plan.Hint._parameters,
-builtins.list[Any]
-Any"builtins.list°
-Filterpyspark.sql.connect.plan.Filter"$pyspark.sql.connect.plan.LogicalPlan*˚
-__init__(pyspark.sql.connect.plan.Filter.__init__"
-None*L
-selfB
-pyspark.sql.connect.plan.Filter"pyspark.sql.connect.plan.Filter*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*R
-filterF
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column*◊
-plan$pyspark.sql.connect.plan.Filter.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*L
-selfB
-pyspark.sql.connect.plan.Filter"pyspark.sql.connect.plan.Filter*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrx
-filter&pyspark.sql.connect.plan.Filter.filterF
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column¡
-Limitpyspark.sql.connect.plan.Limit"$pyspark.sql.connect.plan.LogicalPlan*Õ
-__init__'pyspark.sql.connect.plan.Limit.__init__"
-None*J
-self@
-pyspark.sql.connect.plan.Limit"pyspark.sql.connect.plan.Limit*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*'
-limit
-builtins.int"builtins.int*‘
-plan#pyspark.sql.connect.plan.Limit.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*J
-self@
-pyspark.sql.connect.plan.Limit"pyspark.sql.connect.plan.Limit*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrK
-limit$pyspark.sql.connect.plan.Limit.limit
-builtins.int"builtins.int∏
-Tailpyspark.sql.connect.plan.Tail"$pyspark.sql.connect.plan.LogicalPlan* 
-__init__&pyspark.sql.connect.plan.Tail.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.Tail"pyspark.sql.connect.plan.Tail*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*'
-limit
-builtins.int"builtins.int*—
-plan"pyspark.sql.connect.plan.Tail.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.Tail"pyspark.sql.connect.plan.Tail*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrJ
-limit#pyspark.sql.connect.plan.Tail.limit
-builtins.int"builtins.intœ
-Offsetpyspark.sql.connect.plan.Offset"$pyspark.sql.connect.plan.LogicalPlan*”
-__init__(pyspark.sql.connect.plan.Offset.__init__"
-None*L
-selfB
-pyspark.sql.connect.plan.Offset"pyspark.sql.connect.plan.Offset*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None**
-offset
-builtins.int"builtins.int *◊
-plan$pyspark.sql.connect.plan.Offset.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*L
-selfB
-pyspark.sql.connect.plan.Offset"pyspark.sql.connect.plan.Offset*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrN
-offset&pyspark.sql.connect.plan.Offset.offset
-builtins.int"builtins.int´
-Deduplicate$pyspark.sql.connect.plan.Deduplicate"$pyspark.sql.connect.plan.LogicalPlan*¬
-__init__-pyspark.sql.connect.plan.Deduplicate.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.Deduplicate"$pyspark.sql.connect.plan.Deduplicate*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*9
-all_columns_as_keys
-builtins.bool"builtins.bool *ñ
-column_namesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *6
-within_watermark
-builtins.bool"builtins.bool *Ê
-plan)pyspark.sql.connect.plan.Deduplicate.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.Deduplicate"$pyspark.sql.connect.plan.Deduplicate*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientro
-all_columns_as_keys8pyspark.sql.connect.plan.Deduplicate.all_columns_as_keys
-builtins.bool"builtins.boolr≈
-column_names1pyspark.sql.connect.plan.Deduplicate.column_namesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-Noneri
-within_watermark5pyspark.sql.connect.plan.Deduplicate.within_watermark
-builtins.bool"builtins.boolÛ
-Sortpyspark.sql.connect.plan.Sort"$pyspark.sql.connect.plan.LogicalPlan*Í
-__init__&pyspark.sql.connect.plan.Sort.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.Sort"pyspark.sql.connect.plan.Sort*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*ó
-columnsâ
-0builtins.list[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"builtins.list*-
-	is_global
-builtins.bool"builtins.bool*œ
-_convert_col*pyspark.sql.connect.plan.Sort._convert_col"Ä
->pyspark.sql.connect.proto.expressions_pb2.Expression.SortOrder">pyspark.sql.connect.proto.expressions_pb2.Expression.SortOrder*H
-self>
-pyspark.sql.connect.plan.Sort"pyspark.sql.connect.plan.Sort*O
-colF
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*—
-plan"pyspark.sql.connect.plan.Sort.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.Sort"pyspark.sql.connect.plan.Sort*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrº
-columns%pyspark.sql.connect.plan.Sort.columnsâ
-0builtins.list[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"builtins.listrT
-	is_global'pyspark.sql.connect.plan.Sort.is_global
-builtins.bool"builtins.bool˙	
-Droppyspark.sql.connect.plan.Drop"$pyspark.sql.connect.plan.LogicalPlan*©
-__init__&pyspark.sql.connect.plan.Drop.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.Drop"pyspark.sql.connect.plan.Drop*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*Ö
-columns˜
-Dbuiltins.list[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"builtins.list*—
-plan"pyspark.sql.connect.plan.Drop.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.Drop"pyspark.sql.connect.plan.Drop*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr¨
-_columns&pyspark.sql.connect.plan.Drop._columns˜
-Dbuiltins.list[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"builtins.list¸
-Samplepyspark.sql.connect.plan.Sample"$pyspark.sql.connect.plan.LogicalPlan*Œ
-__init__(pyspark.sql.connect.plan.Sample.__init__"
-None*L
-selfB
-pyspark.sql.connect.plan.Sample"pyspark.sql.connect.plan.Sample*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*1
-lower_bound 
-builtins.float"builtins.float*1
-upper_bound 
-builtins.float"builtins.float*4
-with_replacement
-builtins.bool"builtins.bool*N
-seedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*9
-deterministic_order
-builtins.bool"builtins.bool *◊
-plan$pyspark.sql.connect.plan.Sample.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*L
-selfB
-pyspark.sql.connect.plan.Sample"pyspark.sql.connect.plan.Sample*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr\
-lower_bound+pyspark.sql.connect.plan.Sample.lower_bound 
-builtins.float"builtins.floatr\
-upper_bound+pyspark.sql.connect.plan.Sample.upper_bound 
-builtins.float"builtins.floatrd
-with_replacement0pyspark.sql.connect.plan.Sample.with_replacement
-builtins.bool"builtins.boolrr
-seed$pyspark.sql.connect.plan.Sample.seedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerj
-deterministic_order3pyspark.sql.connect.plan.Sample.deterministic_order
-builtins.bool"builtins.boolï
-	Aggregate"pyspark.sql.connect.plan.Aggregate"$pyspark.sql.connect.plan.LogicalPlan*±
-__init__+pyspark.sql.connect.plan.Aggregate.__init__"
-None*R
-selfH
-"pyspark.sql.connect.plan.Aggregate""pyspark.sql.connect.plan.Aggregate*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*,
+parameters(*%
+print*
 
-group_type
-builtins.str"builtins.str*°
-grouping_colsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*¢
-aggregate_colsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*ì
-	pivot_colÉ
--Union[pyspark.sql.connect.column.Column,None]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-None*r
-pivot_values`
- Union[typing.Sequence[Any],None]0
-typing.Sequence[Any]
-Any"typing.Sequence
-None*‡
-plan'pyspark.sql.connect.plan.Aggregate.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*R
-selfH
-"pyspark.sql.connect.plan.Aggregate""pyspark.sql.connect.plan.Aggregate*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr[
-_group_type.pyspark.sql.connect.plan.Aggregate._group_type
-builtins.str"builtins.strrq
-_grouping_cols1pyspark.sql.connect.plan.Aggregate._grouping_cols,
-builtins.list[Any]
-Any"builtins.listrs
-_aggregate_cols2pyspark.sql.connect.plan.Aggregate._aggregate_cols,
-builtins.list[Any]
-Any"builtins.listr¡
+self(*
+indent (*
+_repr_html_*
 
-_pivot_col-pyspark.sql.connect.plan.Aggregate._pivot_colÉ
--Union[pyspark.sql.connect.column.Column,None]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-Nonerù
-_pivot_values0pyspark.sql.connect.plan.Aggregate._pivot_valuesZ
-Union[builtins.list[Any],None],
-builtins.list[Any]
-Any"builtins.list
-Noneÿ
-Joinpyspark.sql.connect.plan.Join"$pyspark.sql.connect.plan.LogicalPlan*®
-__init__&pyspark.sql.connect.plan.Join.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.Join"pyspark.sql.connect.plan.Join*ó
-leftå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*W
-rightL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*›
-on‘
-áUnion[builtins.str,builtins.list[builtins.str],pyspark.sql.connect.column.Column,builtins.list[pyspark.sql.connect.column.Column],None]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listF
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Columnâ
-0builtins.list[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"builtins.list
-None*M
-howD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*—
-plan"pyspark.sql.connect.plan.Join.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.Join"pyspark.sql.connect.plan.Join*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*¿
-print#pyspark.sql.connect.plan.Join.print"
-builtins.str"builtins.str*H
-self>
-pyspark.sql.connect.plan.Join"pyspark.sql.connect.plan.Join**
-indent
-builtins.int"builtins.int *†
-_repr_html_)pyspark.sql.connect.plan.Join._repr_html_"
-builtins.str"builtins.str*H
-self>
-pyspark.sql.connect.plan.Join"pyspark.sql.connect.plan.Joinrx
-left"pyspark.sql.connect.plan.Join.leftL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlanrz
-right#pyspark.sql.connect.plan.Join.rightL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlanr˝
-on pyspark.sql.connect.plan.Join.on‘
-áUnion[builtins.str,builtins.list[builtins.str],pyspark.sql.connect.column.Column,builtins.list[pyspark.sql.connect.column.Column],None]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listF
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Columnâ
-0builtins.list[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"builtins.list
-NonerØ
-how!pyspark.sql.connect.plan.Join.howÑ
-@pyspark.sql.connect.proto.relations_pb2.Join._JoinType.ValueType"@pyspark.sql.connect.proto.relations_pb2.Join._JoinType.ValueTypeº
-SetOperation%pyspark.sql.connect.plan.SetOperation"$pyspark.sql.connect.plan.LogicalPlan*ò
-__init__.pyspark.sql.connect.plan.SetOperation.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.SetOperation"%pyspark.sql.connect.plan.SetOperation*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*ò
-otherå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*(
-set_op
-builtins.str"builtins.str*,
-is_all
-builtins.bool"builtins.bool *-
-by_name
-builtins.bool"builtins.bool *;
-allow_missing_columns
-builtins.bool"builtins.bool *È
-plan*pyspark.sql.connect.plan.SetOperation.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.SetOperation"%pyspark.sql.connect.plan.SetOperation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*ÿ
-print+pyspark.sql.connect.plan.SetOperation.print"
-builtins.str"builtins.str*X
-selfN
-%pyspark.sql.connect.plan.SetOperation"%pyspark.sql.connect.plan.SetOperation**
-indent
-builtins.int"builtins.int *∏
-_repr_html_1pyspark.sql.connect.plan.SetOperation._repr_html_"
-builtins.str"builtins.str*X
-selfN
-%pyspark.sql.connect.plan.SetOperation"%pyspark.sql.connect.plan.SetOperationr√
-other+pyspark.sql.connect.plan.SetOperation.otherå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-NonerX
-by_name-pyspark.sql.connect.plan.SetOperation.by_name
-builtins.bool"builtins.boolrV
-is_all,pyspark.sql.connect.plan.SetOperation.is_all
-builtins.bool"builtins.boolrT
-set_op,pyspark.sql.connect.plan.SetOperation.set_op
-builtins.str"builtins.strrt
-allow_missing_columns;pyspark.sql.connect.plan.SetOperation.allow_missing_columns
-builtins.bool"builtins.boolú
-Repartition$pyspark.sql.connect.plan.Repartition"$pyspark.sql.connect.plan.LogicalPlan*ï
-__init__-pyspark.sql.connect.plan.Repartition.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.Repartition"$pyspark.sql.connect.plan.Repartition*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*0
-num_partitions
-builtins.int"builtins.int*+
-shuffle
-builtins.bool"builtins.bool*Ê
-plan)pyspark.sql.connect.plan.Repartition.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.Repartition"$pyspark.sql.connect.plan.Repartition*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientre
-_num_partitions4pyspark.sql.connect.plan.Repartition._num_partitions
-builtins.int"builtins.intrY
-_shuffle-pyspark.sql.connect.plan.Repartition._shuffle
-builtins.bool"builtins.boolè
-RepartitionByExpression0pyspark.sql.connect.plan.RepartitionByExpression"$pyspark.sql.connect.plan.LogicalPlan*∏
-__init__9pyspark.sql.connect.plan.RepartitionByExpression.__init__"
-None*n
-selfd
-0pyspark.sql.connect.plan.RepartitionByExpression"0pyspark.sql.connect.plan.RepartitionByExpression*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*X
-num_partitionsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*Å
-columnsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.list*ä
-plan5pyspark.sql.connect.plan.RepartitionByExpression.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*n
-selfd
-0pyspark.sql.connect.plan.RepartitionByExpression"0pyspark.sql.connect.plan.RepartitionByExpression*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientró
-num_partitions?pyspark.sql.connect.plan.RepartitionByExpression.num_partitionsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerπ
-columns8pyspark.sql.connect.plan.RepartitionByExpression.columnsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.listã
-SubqueryAlias&pyspark.sql.connect.plan.SubqueryAlias"$pyspark.sql.connect.plan.LogicalPlan*Â
-__init__/pyspark.sql.connect.plan.SubqueryAlias.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.SubqueryAlias"&pyspark.sql.connect.plan.SubqueryAlias*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*'
-alias
-builtins.str"builtins.str*Ï
-plan+pyspark.sql.connect.plan.SubqueryAlias.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.SubqueryAlias"&pyspark.sql.connect.plan.SubqueryAlias*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrU
-_alias-pyspark.sql.connect.plan.SubqueryAlias._alias
-builtins.str"builtins.str–
-SQLpyspark.sql.connect.plan.SQL"$pyspark.sql.connect.plan.LogicalPlan*è
-__init__%pyspark.sql.connect.plan.SQL.__init__"
-None*F
-self<
-pyspark.sql.connect.plan.SQL"pyspark.sql.connect.plan.SQL*'
-query
-builtins.str"builtins.str*‡
-args”
->Union[builtins.dict[builtins.str,Any],builtins.list[Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict,
-builtins.list[Any]
-Any"builtins.list
-None *Œ
-plan!pyspark.sql.connect.plan.SQL.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*F
-self<
-pyspark.sql.connect.plan.SQL"pyspark.sql.connect.plan.SQL*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*–
-command$pyspark.sql.connect.plan.SQL.command"`
-.pyspark.sql.connect.proto.commands_pb2.Command".pyspark.sql.connect.proto.commands_pb2.Command*F
-self<
-pyspark.sql.connect.plan.SQL"pyspark.sql.connect.plan.SQL*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrK
-_query#pyspark.sql.connect.plan.SQL._query
-builtins.str"builtins.strrÅ
-_args"pyspark.sql.connect.plan.SQL._args”
->Union[builtins.dict[builtins.str,Any],builtins.list[Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict,
-builtins.list[Any]
-Any"builtins.list
-Noneı
-Rangepyspark.sql.connect.plan.Range"$pyspark.sql.connect.plan.LogicalPlan*›
-__init__'pyspark.sql.connect.plan.Range.__init__"
-None*J
-self@
-pyspark.sql.connect.plan.Range"pyspark.sql.connect.plan.Range*'
-start
-builtins.int"builtins.int*%
-end
-builtins.int"builtins.int*&
-step
-builtins.int"builtins.int*Z
-num_partitionsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *‘
-plan#pyspark.sql.connect.plan.Range.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*J
-self@
-pyspark.sql.connect.plan.Range"pyspark.sql.connect.plan.Range*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrM
-_start%pyspark.sql.connect.plan.Range._start
-builtins.int"builtins.intrI
-_end#pyspark.sql.connect.plan.Range._end
-builtins.int"builtins.intrK
-_step$pyspark.sql.connect.plan.Range._step
-builtins.int"builtins.intrá
-_num_partitions.pyspark.sql.connect.plan.Range._num_partitionsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noneô
-ToSchema!pyspark.sql.connect.plan.ToSchema"$pyspark.sql.connect.plan.LogicalPlan*Û
-__init__*pyspark.sql.connect.plan.ToSchema.__init__"
-None*P
-selfF
-!pyspark.sql.connect.plan.ToSchema"!pyspark.sql.connect.plan.ToSchema*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*D
-schema8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType*›
-plan&pyspark.sql.connect.plan.ToSchema.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*P
-selfF
-!pyspark.sql.connect.plan.ToSchema"!pyspark.sql.connect.plan.ToSchema*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrn
-_schema)pyspark.sql.connect.plan.ToSchema._schema8
-pyspark.sql.types.DataType"pyspark.sql.types.DataTypeˆ
-WithColumnsRenamed+pyspark.sql.connect.plan.WithColumnsRenamed"$pyspark.sql.connect.plan.LogicalPlan*“
-__init__4pyspark.sql.connect.plan.WithColumnsRenamed.__init__"
-None*d
-selfZ
-+pyspark.sql.connect.plan.WithColumnsRenamed"+pyspark.sql.connect.plan.WithColumnsRenamed*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*Ñ
-colsMapw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*˚
-plan0pyspark.sql.connect.plan.WithColumnsRenamed.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*d
-selfZ
-+pyspark.sql.connect.plan.WithColumnsRenamed"+pyspark.sql.connect.plan.WithColumnsRenamed*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrπ
-_colsMap4pyspark.sql.connect.plan.WithColumnsRenamed._colsMapw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping’
-Unpivot pyspark.sql.connect.plan.Unpivot"$pyspark.sql.connect.plan.LogicalPlan*Ü
+self(**
+_child_print*
 
-__init__)pyspark.sql.connect.plan.Unpivot.__init__"
-None*N
-selfD
- pyspark.sql.connect.plan.Unpivot" pyspark.sql.connect.plan.Unpivot*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*˝
-idsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.list*Ï
-valuesﬂ
-[Union[builtins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]],None]Û
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.list
-None*6
-variable_column_name
-builtins.str"builtins.str*3
-value_column_name
-builtins.str"builtins.str*ç
-col_to_expr,pyspark.sql.connect.plan.Unpivot.col_to_expr"l
-4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*N
-selfD
- pyspark.sql.connect.plan.Unpivot" pyspark.sql.connect.plan.Unpivot*ö
-colê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*⁄
-plan%pyspark.sql.connect.plan.Unpivot.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*N
-selfD
- pyspark.sql.connect.plan.Unpivot" pyspark.sql.connect.plan.Unpivot*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr°
-ids$pyspark.sql.connect.plan.Unpivot.idsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.listrì
-values'pyspark.sql.connect.plan.Unpivot.valuesﬂ
-[Union[builtins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]],None]Û
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.list
-Nonerk
-variable_column_name5pyspark.sql.connect.plan.Unpivot.variable_column_name
-builtins.str"builtins.strre
-value_column_name2pyspark.sql.connect.plan.Unpivot.value_column_name
-builtins.str"builtins.strÈ
-CollectMetrics'pyspark.sql.connect.plan.CollectMetrics"$pyspark.sql.connect.plan.LogicalPlan*È
-__init__0pyspark.sql.connect.plan.CollectMetrics.__init__"
-None*\
-selfR
-'pyspark.sql.connect.plan.CollectMetrics"'pyspark.sql.connect.plan.CollectMetrics*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*&
-name
-builtins.str"builtins.str*ˇ
-exprsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.list*¢
-col_to_expr3pyspark.sql.connect.plan.CollectMetrics.col_to_expr"l
-4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*\
-selfR
-'pyspark.sql.connect.plan.CollectMetrics"'pyspark.sql.connect.plan.CollectMetrics*ö
-colê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Ô
-plan,pyspark.sql.connect.plan.CollectMetrics.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*\
-selfR
-'pyspark.sql.connect.plan.CollectMetrics"'pyspark.sql.connect.plan.CollectMetrics*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrT
-_name-pyspark.sql.connect.plan.CollectMetrics._name
-builtins.str"builtins.strrÆ
-_exprs.pyspark.sql.connect.plan.CollectMetrics._exprsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.listŒ
-NAFillpyspark.sql.connect.plan.NAFill"$pyspark.sql.connect.plan.LogicalPlan*
-__init__(pyspark.sql.connect.plan.NAFill.__init__"
-None*L
-selfB
-pyspark.sql.connect.plan.NAFill"pyspark.sql.connect.plan.NAFill*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*å
-colsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*8
-values,
-builtins.list[Any]
-Any"builtins.list*ú
-_convert_value.pyspark.sql.connect.plan.NAFill._convert_value"|
-<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal"<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal*L
-selfB
-pyspark.sql.connect.plan.NAFill"pyspark.sql.connect.plan.NAFill*
-v
-Any*◊
-plan$pyspark.sql.connect.plan.NAFill.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*L
-selfB
-pyspark.sql.connect.plan.NAFill"pyspark.sql.connect.plan.NAFill*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr∞
-cols$pyspark.sql.connect.plan.NAFill.colsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-Noner^
-values&pyspark.sql.connect.plan.NAFill.values,
-builtins.list[Any]
-Any"builtins.listı	
-NADroppyspark.sql.connect.plan.NADrop"$pyspark.sql.connect.plan.LogicalPlan*è
-__init__(pyspark.sql.connect.plan.NADrop.__init__"
-None*L
-selfB
-pyspark.sql.connect.plan.NADrop"pyspark.sql.connect.plan.NADrop*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*å
-colsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*W
-min_non_nullsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*◊
-plan$pyspark.sql.connect.plan.NADrop.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*L
-selfB
-pyspark.sql.connect.plan.NADrop"pyspark.sql.connect.plan.NADrop*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr∞
-cols$pyspark.sql.connect.plan.NADrop.colsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-NonerÑ
-min_non_nulls-pyspark.sql.connect.plan.NADrop.min_non_nullsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None∫
-	NAReplace"pyspark.sql.connect.plan.NAReplace"$pyspark.sql.connect.plan.LogicalPlan*å
-__init__+pyspark.sql.connect.plan.NAReplace.__init__"
-None*R
-selfH
-"pyspark.sql.connect.plan.NAReplace""pyspark.sql.connect.plan.NAReplace*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*å
-colsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*K
-replacements9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*æ
-_convert_int_to_float8pyspark.sql.connect.plan.NAReplace._convert_int_to_float"
-Any*R
-selfH
-"pyspark.sql.connect.plan.NAReplace""pyspark.sql.connect.plan.NAReplace*
-v
-Any*‡
-plan'pyspark.sql.connect.plan.NAReplace.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*R
-selfH
-"pyspark.sql.connect.plan.NAReplace""pyspark.sql.connect.plan.NAReplace*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr≥
-cols'pyspark.sql.connect.plan.NAReplace.colsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-Nonerz
-replacements/pyspark.sql.connect.plan.NAReplace.replacements9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict„
-StatSummary$pyspark.sql.connect.plan.StatSummary"$pyspark.sql.connect.plan.LogicalPlan*í
-__init__-pyspark.sql.connect.plan.StatSummary.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.StatSummary"$pyspark.sql.connect.plan.StatSummary*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*Z
+self(*
+indent(*
+_child_repr*
 
-statisticsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Ê
-plan)pyspark.sql.connect.plan.StatSummary.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.StatSummary"$pyspark.sql.connect.plan.StatSummary*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrâ
+self(r	
+_lock0r
+_nextPlanId0r
 
-statistics/pyspark.sql.connect.plan.StatSummary.statisticsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listŸ
-StatDescribe%pyspark.sql.connect.plan.StatDescribe"$pyspark.sql.connect.plan.LogicalPlan*è
-__init__.pyspark.sql.connect.plan.StatDescribe.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.StatDescribe"%pyspark.sql.connect.plan.StatDescribe*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*T
-colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*È
-plan*pyspark.sql.connect.plan.StatDescribe.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.StatDescribe"%pyspark.sql.connect.plan.StatDescribe*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr~
-cols*pyspark.sql.connect.plan.StatDescribe.colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list…
-StatCov pyspark.sql.connect.plan.StatCov"$pyspark.sql.connect.plan.LogicalPlan*˙
-__init__)pyspark.sql.connect.plan.StatCov.__init__"
-None*N
-selfD
- pyspark.sql.connect.plan.StatCov" pyspark.sql.connect.plan.StatCov*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*&
-col1
-builtins.str"builtins.str*&
-col2
-builtins.str"builtins.str*⁄
-plan%pyspark.sql.connect.plan.StatCov.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*N
-selfD
- pyspark.sql.connect.plan.StatCov" pyspark.sql.connect.plan.StatCov*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrM
-_col1&pyspark.sql.connect.plan.StatCov._col1
-builtins.str"builtins.strrM
-_col2&pyspark.sql.connect.plan.StatCov._col2
-builtins.str"builtins.strΩ
-StatApproxQuantile+pyspark.sql.connect.plan.StatApproxQuantile"$pyspark.sql.connect.plan.LogicalPlan*ª
-__init__4pyspark.sql.connect.plan.StatApproxQuantile.__init__"
-None*d
-selfZ
-+pyspark.sql.connect.plan.StatApproxQuantile"+pyspark.sql.connect.plan.StatApproxQuantile*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*T
-colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*c
-probabilitiesP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.list*3
-relativeError 
-builtins.float"builtins.float*˚
-plan0pyspark.sql.connect.plan.StatApproxQuantile.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*d
-selfZ
-+pyspark.sql.connect.plan.StatApproxQuantile"+pyspark.sql.connect.plan.StatApproxQuantile*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrÜ
-_cols1pyspark.sql.connect.plan.StatApproxQuantile._colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrû
-_probabilities:pyspark.sql.connect.plan.StatApproxQuantile._probabilitiesP
-builtins.list[builtins.float] 
-builtins.float"builtins.float"builtins.listrn
-_relativeError:pyspark.sql.connect.plan.StatApproxQuantile._relativeError 
-builtins.float"builtins.float˜
-StatCrosstab%pyspark.sql.connect.plan.StatCrosstab"$pyspark.sql.connect.plan.LogicalPlan*â
-__init__.pyspark.sql.connect.plan.StatCrosstab.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.StatCrosstab"%pyspark.sql.connect.plan.StatCrosstab*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*&
-col1
-builtins.str"builtins.str*&
-col2
-builtins.str"builtins.str*È
-plan*pyspark.sql.connect.plan.StatCrosstab.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.StatCrosstab"%pyspark.sql.connect.plan.StatCrosstab*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrP
-col1*pyspark.sql.connect.plan.StatCrosstab.col1
-builtins.str"builtins.strrP
-col2*pyspark.sql.connect.plan.StatCrosstab.col2
-builtins.str"builtins.strÛ
-StatFreqItems&pyspark.sql.connect.plan.StatFreqItems"$pyspark.sql.connect.plan.LogicalPlan*¡
-__init__/pyspark.sql.connect.plan.StatFreqItems.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.StatFreqItems"&pyspark.sql.connect.plan.StatFreqItems*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*T
-colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*-
-support 
-builtins.float"builtins.float*Ï
-plan+pyspark.sql.connect.plan.StatFreqItems.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.StatFreqItems"&pyspark.sql.connect.plan.StatFreqItems*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrÅ
-_cols,pyspark.sql.connect.plan.StatFreqItems._colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listr]
-_support/pyspark.sql.connect.plan.StatFreqItems._support 
-builtins.float"builtins.floatˆ
-StatSampleBy%pyspark.sql.connect.plan.StatSampleBy"$pyspark.sql.connect.plan.LogicalPlan*î
-__init__.pyspark.sql.connect.plan.StatSampleBy.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.StatSampleBy"%pyspark.sql.connect.plan.StatSampleBy*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*ö
-colê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*l
-	fractions]
-!builtins.dict[Any,builtins.float]
-Any 
-builtins.float"builtins.float"builtins.dict*N
-seedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*È
-plan*pyspark.sql.connect.plan.StatSampleBy.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.StatSampleBy"%pyspark.sql.connect.plan.StatSampleBy*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrz
-_col*pyspark.sql.connect.plan.StatSampleBy._colF
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Columnrù
+INDENT0r
 
-_fractions0pyspark.sql.connect.plan.StatSampleBy._fractions]
-!builtins.dict[Any,builtins.float]
-Any 
-builtins.float"builtins.float"builtins.dictrz
-_seed+pyspark.sql.connect.plan.StatSampleBy._seedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None—
-StatCorr!pyspark.sql.connect.plan.StatCorr"$pyspark.sql.connect.plan.LogicalPlan*ß
-__init__*pyspark.sql.connect.plan.StatCorr.__init__"
-None*P
-selfF
-!pyspark.sql.connect.plan.StatCorr"!pyspark.sql.connect.plan.StatCorr*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*&
-col1
-builtins.str"builtins.str*&
-col2
-builtins.str"builtins.str*(
-method
-builtins.str"builtins.str*›
-plan&pyspark.sql.connect.plan.StatCorr.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*P
-selfF
-!pyspark.sql.connect.plan.StatCorr"!pyspark.sql.connect.plan.StatCorr*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrN
-_col1'pyspark.sql.connect.plan.StatCorr._col1
-builtins.str"builtins.strrN
-_col2'pyspark.sql.connect.plan.StatCorr._col2
-builtins.str"builtins.strrR
-_method)pyspark.sql.connect.plan.StatCorr._method
-builtins.str"builtins.strõ
-ToDFpyspark.sql.connect.plan.ToDF"$pyspark.sql.connect.plan.LogicalPlan*˚
-__init__&pyspark.sql.connect.plan.ToDF.__init__"
-None*H
-self>
-pyspark.sql.connect.plan.ToDF"pyspark.sql.connect.plan.ToDF*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*X
-colsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*—
-plan"pyspark.sql.connect.plan.ToDF.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*H
-self>
-pyspark.sql.connect.plan.ToDF"pyspark.sql.connect.plan.ToDF*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr|
-_cols#pyspark.sql.connect.plan.ToDF._colsN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.SequenceÉ	
+_child0r
+_plan_id0¥
 
-CreateView#pyspark.sql.connect.plan.CreateView"$pyspark.sql.connect.plan.LogicalPlan*∑
-__init__,pyspark.sql.connect.plan.CreateView.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.CreateView"#pyspark.sql.connect.plan.CreateView*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*&
-name
-builtins.str"builtins.str*-
-	is_global
-builtins.bool"builtins.bool*+
-replace
-builtins.bool"builtins.bool*Â
-command+pyspark.sql.connect.plan.CreateView.command"`
-.pyspark.sql.connect.proto.commands_pb2.Command".pyspark.sql.connect.proto.commands_pb2.Command*T
-selfJ
-#pyspark.sql.connect.plan.CreateView"#pyspark.sql.connect.plan.CreateView*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrP
-_name)pyspark.sql.connect.plan.CreateView._name
-builtins.str"builtins.strr\
+DataSource"$pyspark.sql.connect.plan.LogicalPlan*Ç
+__init__*
 
-_is_global.pyspark.sql.connect.plan.CreateView._is_global
-builtins.bool"builtins.boolrX
-_replace,pyspark.sql.connect.plan.CreateView._replace
-builtins.bool"builtins.boolì
-WriteOperation'pyspark.sql.connect.plan.WriteOperation"$pyspark.sql.connect.plan.LogicalPlan*˝
-__init__0pyspark.sql.connect.plan.WriteOperation.__init__"
-None*\
-selfR
-'pyspark.sql.connect.plan.WriteOperation"'pyspark.sql.connect.plan.WriteOperation*W
-childL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*Ò
-command/pyspark.sql.connect.plan.WriteOperation.command"`
-.pyspark.sql.connect.proto.commands_pb2.Command".pyspark.sql.connect.proto.commands_pb2.Command*\
-selfR
-'pyspark.sql.connect.plan.WriteOperation"'pyspark.sql.connect.plan.WriteOperation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*ﬁ
-print-pyspark.sql.connect.plan.WriteOperation.print"
-builtins.str"builtins.str*\
-selfR
-'pyspark.sql.connect.plan.WriteOperation"'pyspark.sql.connect.plan.WriteOperation**
-indent
-builtins.int"builtins.int *æ
-_repr_html_3pyspark.sql.connect.plan.WriteOperation._repr_html_"
-builtins.str"builtins.str*\
-selfR
-'pyspark.sql.connect.plan.WriteOperation"'pyspark.sql.connect.plan.WriteOperationr~
-source.pyspark.sql.connect.plan.WriteOperation.sourceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerz
-path,pyspark.sql.connect.plan.WriteOperation.pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerÜ
+self(*
+format (*
+schema (*
+options (*
+paths (*
 
-table_name2pyspark.sql.connect.plan.WriteOperation.table_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerî
-table_save_method9pyspark.sql.connect.plan.WriteOperation.table_save_methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerz
-mode,pyspark.sql.connect.plan.WriteOperation.modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerä
-	sort_cols1pyspark.sql.connect.plan.WriteOperation.sort_colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.liströ
-partitioning_cols9pyspark.sql.connect.plan.WriteOperation.partitioning_colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listrÊ
-options/pyspark.sql.connect.plan.WriteOperation.options©
-4builtins.dict[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"builtins.dictr`
-num_buckets3pyspark.sql.connect.plan.WriteOperation.num_buckets
-builtins.int"builtins.intré
-bucket_cols3pyspark.sql.connect.plan.WriteOperation.bucket_colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list 
-WriteOperationV2)pyspark.sql.connect.plan.WriteOperationV2"$pyspark.sql.connect.plan.LogicalPlan*±
-__init__2pyspark.sql.connect.plan.WriteOperationV2.__init__"
-None*`
-selfV
-)pyspark.sql.connect.plan.WriteOperationV2")pyspark.sql.connect.plan.WriteOperationV2*W
-childL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*,
+predicates (*
+is_streaming (*#
+plan*
 
-table_name
-builtins.str"builtins.str*®
-col_to_expr5pyspark.sql.connect.plan.WriteOperationV2.col_to_expr"l
-4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*`
-selfV
-)pyspark.sql.connect.plan.WriteOperationV2")pyspark.sql.connect.plan.WriteOperationV2*ö
-colê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*˜
-command1pyspark.sql.connect.plan.WriteOperationV2.command"`
-.pyspark.sql.connect.proto.commands_pb2.Command".pyspark.sql.connect.proto.commands_pb2.Command*`
-selfV
-)pyspark.sql.connect.plan.WriteOperationV2")pyspark.sql.connect.plan.WriteOperationV2*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrà
+self(*
+session(
+r
+_format0r
+_schema0r
+_options0r
 
-table_name4pyspark.sql.connect.plan.WriteOperationV2.table_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerÑ
-provider2pyspark.sql.connect.plan.WriteOperationV2.providerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerÃ
-partitioning_columns>pyspark.sql.connect.plan.WriteOperationV2.partitioning_columnsÛ
-Obuiltins.list[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName"builtins.listrË
-options1pyspark.sql.connect.plan.WriteOperationV2.options©
-4builtins.dict[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"builtins.dictr˙
-table_properties:pyspark.sql.connect.plan.WriteOperationV2.table_properties©
-4builtins.dict[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"builtins.dictr|
-mode.pyspark.sql.connect.plan.WriteOperationV2.modeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerƒ
-overwrite_condition=pyspark.sql.connect.plan.WriteOperationV2.overwrite_conditionÌ
-LUnion[TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]],None]ê
-@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]ü
-5Union[pyspark.sql.connect.column.Column,builtins.str]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
-builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName
-Noneœ
-WriteStreamOperation-pyspark.sql.connect.plan.WriteStreamOperation"$pyspark.sql.connect.plan.LogicalPlan*è
-__init__6pyspark.sql.connect.plan.WriteStreamOperation.__init__"
-None*h
-self^
--pyspark.sql.connect.plan.WriteStreamOperation"-pyspark.sql.connect.plan.WriteStreamOperation*W
-childL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*É
-command5pyspark.sql.connect.plan.WriteStreamOperation.command"`
-.pyspark.sql.connect.proto.commands_pb2.Command".pyspark.sql.connect.proto.commands_pb2.Command*h
-self^
--pyspark.sql.connect.plan.WriteStreamOperation"-pyspark.sql.connect.plan.WriteStreamOperation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr…
-write_op6pyspark.sql.connect.plan.WriteStreamOperation.write_opÑ
-@pyspark.sql.connect.proto.commands_pb2.WriteStreamOperationStart"@pyspark.sql.connect.proto.commands_pb2.WriteStreamOperationStartÄ
-CurrentDatabase(pyspark.sql.connect.plan.CurrentDatabase"$pyspark.sql.connect.plan.LogicalPlan*ß
-__init__1pyspark.sql.connect.plan.CurrentDatabase.__init__"
-None*^
-selfT
-(pyspark.sql.connect.plan.CurrentDatabase"(pyspark.sql.connect.plan.CurrentDatabase*Ú
-plan-pyspark.sql.connect.plan.CurrentDatabase.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*^
-selfT
-(pyspark.sql.connect.plan.CurrentDatabase"(pyspark.sql.connect.plan.CurrentDatabase*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient£
-SetCurrentDatabase+pyspark.sql.connect.plan.SetCurrentDatabase"$pyspark.sql.connect.plan.LogicalPlan*€
-__init__4pyspark.sql.connect.plan.SetCurrentDatabase.__init__"
-None*d
-selfZ
-+pyspark.sql.connect.plan.SetCurrentDatabase"+pyspark.sql.connect.plan.SetCurrentDatabase*)
-db_name
-builtins.str"builtins.str*˚
-plan0pyspark.sql.connect.plan.SetCurrentDatabase.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*d
-selfZ
-+pyspark.sql.connect.plan.SetCurrentDatabase"+pyspark.sql.connect.plan.SetCurrentDatabase*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr^
-_db_name4pyspark.sql.connect.plan.SetCurrentDatabase._db_name
-builtins.str"builtins.str…
-ListDatabases&pyspark.sql.connect.plan.ListDatabases"$pyspark.sql.connect.plan.LogicalPlan*ˆ
-__init__/pyspark.sql.connect.plan.ListDatabases.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.ListDatabases"&pyspark.sql.connect.plan.ListDatabases*S
-patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-plan+pyspark.sql.connect.plan.ListDatabases.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.ListDatabases"&pyspark.sql.connect.plan.ListDatabases*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrÅ
-_pattern/pyspark.sql.connect.plan.ListDatabases._patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneÇ
+_paths0r
+_predicates0r
+_is_streaming0˚
+Read"$pyspark.sql.connect.plan.LogicalPlan*Q
+__init__*
 
-ListTables#pyspark.sql.connect.plan.ListTables"$pyspark.sql.connect.plan.LogicalPlan*¬
-__init__,pyspark.sql.connect.plan.ListTables.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.ListTables"#pyspark.sql.connect.plan.ListTables*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *„
-plan(pyspark.sql.connect.plan.ListTables.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.ListTables"#pyspark.sql.connect.plan.ListTables*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr~
-_db_name,pyspark.sql.connect.plan.ListTables._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner~
-_pattern,pyspark.sql.connect.plan.ListTables._patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None¢
-ListFunctions&pyspark.sql.connect.plan.ListFunctions"$pyspark.sql.connect.plan.LogicalPlan*À
-__init__/pyspark.sql.connect.plan.ListFunctions.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.ListFunctions"&pyspark.sql.connect.plan.ListFunctions*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-plan+pyspark.sql.connect.plan.ListFunctions.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.ListFunctions"&pyspark.sql.connect.plan.ListFunctions*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrÅ
-_db_name/pyspark.sql.connect.plan.ListFunctions._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerÅ
-_pattern/pyspark.sql.connect.plan.ListFunctions._patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None√
-ListColumns$pyspark.sql.connect.plan.ListColumns"$pyspark.sql.connect.plan.LogicalPlan*û
-__init__-pyspark.sql.connect.plan.ListColumns.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.ListColumns"$pyspark.sql.connect.plan.ListColumns*,
+self(*
 
-table_name
-builtins.str"builtins.str*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ê
-plan)pyspark.sql.connect.plan.ListColumns.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.ListColumns"$pyspark.sql.connect.plan.ListColumns*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr]
-_table_name0pyspark.sql.connect.plan.ListColumns._table_name
-builtins.str"builtins.strr
-_db_name-pyspark.sql.connect.plan.ListColumns._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None‰
-GetDatabase$pyspark.sql.connect.plan.GetDatabase"$pyspark.sql.connect.plan.LogicalPlan*∆
-__init__-pyspark.sql.connect.plan.GetDatabase.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.GetDatabase"$pyspark.sql.connect.plan.GetDatabase*)
-db_name
-builtins.str"builtins.str*Ê
-plan)pyspark.sql.connect.plan.GetDatabase.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.GetDatabase"$pyspark.sql.connect.plan.GetDatabase*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrW
-_db_name-pyspark.sql.connect.plan.GetDatabase._db_name
-builtins.str"builtins.str•
-GetTable!pyspark.sql.connect.plan.GetTable"$pyspark.sql.connect.plan.LogicalPlan*ï
-__init__*pyspark.sql.connect.plan.GetTable.__init__"
-None*P
-selfF
-!pyspark.sql.connect.plan.GetTable"!pyspark.sql.connect.plan.GetTable*,
+table_name(*
+options (*
+is_streaming (*#
+plan*
 
-table_name
-builtins.str"builtins.str*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *›
-plan&pyspark.sql.connect.plan.GetTable.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*P
-selfF
-!pyspark.sql.connect.plan.GetTable"!pyspark.sql.connect.plan.GetTable*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrZ
-_table_name-pyspark.sql.connect.plan.GetTable._table_name
-builtins.str"builtins.strr|
-_db_name*pyspark.sql.connect.plan.GetTable._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneÃ
-GetFunction$pyspark.sql.connect.plan.GetFunction"$pyspark.sql.connect.plan.LogicalPlan*°
-__init__-pyspark.sql.connect.plan.GetFunction.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.GetFunction"$pyspark.sql.connect.plan.GetFunction*/
-function_name
-builtins.str"builtins.str*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ê
-plan)pyspark.sql.connect.plan.GetFunction.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.GetFunction"$pyspark.sql.connect.plan.GetFunction*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrc
-_function_name3pyspark.sql.connect.plan.GetFunction._function_name
-builtins.str"builtins.strr
-_db_name-pyspark.sql.connect.plan.GetFunction._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneˇ
-DatabaseExists'pyspark.sql.connect.plan.DatabaseExists"$pyspark.sql.connect.plan.LogicalPlan*œ
-__init__0pyspark.sql.connect.plan.DatabaseExists.__init__"
-None*\
-selfR
-'pyspark.sql.connect.plan.DatabaseExists"'pyspark.sql.connect.plan.DatabaseExists*)
-db_name
-builtins.str"builtins.str*Ô
-plan,pyspark.sql.connect.plan.DatabaseExists.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*\
-selfR
-'pyspark.sql.connect.plan.DatabaseExists"'pyspark.sql.connect.plan.DatabaseExists*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrZ
-_db_name0pyspark.sql.connect.plan.DatabaseExists._db_name
-builtins.str"builtins.str√
-TableExists$pyspark.sql.connect.plan.TableExists"$pyspark.sql.connect.plan.LogicalPlan*û
-__init__-pyspark.sql.connect.plan.TableExists.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.TableExists"$pyspark.sql.connect.plan.TableExists*,
+self(*
+session(
+*%
+print*
 
-table_name
-builtins.str"builtins.str*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ê
-plan)pyspark.sql.connect.plan.TableExists.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.TableExists"$pyspark.sql.connect.plan.TableExists*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr]
-_table_name0pyspark.sql.connect.plan.TableExists._table_name
-builtins.str"builtins.strr
-_db_name-pyspark.sql.connect.plan.TableExists._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneÎ
-FunctionExists'pyspark.sql.connect.plan.FunctionExists"$pyspark.sql.connect.plan.LogicalPlan*™
-__init__0pyspark.sql.connect.plan.FunctionExists.__init__"
-None*\
-selfR
-'pyspark.sql.connect.plan.FunctionExists"'pyspark.sql.connect.plan.FunctionExists*/
-function_name
-builtins.str"builtins.str*S
-db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ô
-plan,pyspark.sql.connect.plan.FunctionExists.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*\
-selfR
-'pyspark.sql.connect.plan.FunctionExists"'pyspark.sql.connect.plan.FunctionExists*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrf
-_function_name6pyspark.sql.connect.plan.FunctionExists._function_name
-builtins.str"builtins.strrÇ
-_db_name0pyspark.sql.connect.plan.FunctionExists._db_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneä
-CreateExternalTable,pyspark.sql.connect.plan.CreateExternalTable"$pyspark.sql.connect.plan.LogicalPlan*‰
-__init__5pyspark.sql.connect.plan.CreateExternalTable.__init__"
-None*f
-self\
-,pyspark.sql.connect.plan.CreateExternalTable",pyspark.sql.connect.plan.CreateExternalTable*,
+self(*
+indent (r
 
-table_name
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.str*R
-sourceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *|
-scheman
-&Union[pyspark.sql.types.DataType,None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType
-None *Ü
-optionsw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping *˛
-plan1pyspark.sql.connect.plan.CreateExternalTable.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*f
-self\
-,pyspark.sql.connect.plan.CreateExternalTable",pyspark.sql.connect.plan.CreateExternalTable*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientre
-_table_name8pyspark.sql.connect.plan.CreateExternalTable._table_name
-builtins.str"builtins.strrY
-_path2pyspark.sql.connect.plan.CreateExternalTable._path
-builtins.str"builtins.strrÖ
-_source4pyspark.sql.connect.plan.CreateExternalTable._sourceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerØ
-_schema4pyspark.sql.connect.plan.CreateExternalTable._scheman
-&Union[pyspark.sql.types.DataType,None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType
-Noner∫
-_options5pyspark.sql.connect.plan.CreateExternalTable._optionsw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MappingÑ
-CreateTable$pyspark.sql.connect.plan.CreateTable"$pyspark.sql.connect.plan.LogicalPlan*•
-__init__-pyspark.sql.connect.plan.CreateTable.__init__"
-None*V
-selfL
-$pyspark.sql.connect.plan.CreateTable"$pyspark.sql.connect.plan.CreateTable*,
+table_name0r
+options0r
+_is_streaming0ò
+LocalRelation"$pyspark.sql.connect.plan.LogicalPlan*5
+__init__*
 
-table_name
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.str*R
-sourceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *|
-scheman
-&Union[pyspark.sql.types.DataType,None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType
-None *Ü
-optionsw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping *Ê
-plan)pyspark.sql.connect.plan.CreateTable.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*V
-selfL
-$pyspark.sql.connect.plan.CreateTable"$pyspark.sql.connect.plan.CreateTable*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr]
-_table_name0pyspark.sql.connect.plan.CreateTable._table_name
-builtins.str"builtins.strrQ
-_path*pyspark.sql.connect.plan.CreateTable._path
-builtins.str"builtins.strr}
-_source,pyspark.sql.connect.plan.CreateTable._sourceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerá
-_description1pyspark.sql.connect.plan.CreateTable._descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerß
-_schema,pyspark.sql.connect.plan.CreateTable._scheman
-&Union[pyspark.sql.types.DataType,None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType
-Noner≤
-_options-pyspark.sql.connect.plan.CreateTable._optionsw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MappingÛ
-DropTempView%pyspark.sql.connect.plan.DropTempView"$pyspark.sql.connect.plan.LogicalPlan*À
-__init__.pyspark.sql.connect.plan.DropTempView.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.DropTempView"%pyspark.sql.connect.plan.DropTempView*+
-	view_name
-builtins.str"builtins.str*È
-plan*pyspark.sql.connect.plan.DropTempView.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.DropTempView"%pyspark.sql.connect.plan.DropTempView*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr\
+self(*
+table(*
+schema (*#
+plan*
 
-_view_name0pyspark.sql.connect.plan.DropTempView._view_name
-builtins.str"builtins.str©
-DropGlobalTempView+pyspark.sql.connect.plan.DropGlobalTempView"$pyspark.sql.connect.plan.LogicalPlan*›
-__init__4pyspark.sql.connect.plan.DropGlobalTempView.__init__"
-None*d
-selfZ
-+pyspark.sql.connect.plan.DropGlobalTempView"+pyspark.sql.connect.plan.DropGlobalTempView*+
-	view_name
-builtins.str"builtins.str*˚
-plan0pyspark.sql.connect.plan.DropGlobalTempView.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*d
-selfZ
-+pyspark.sql.connect.plan.DropGlobalTempView"+pyspark.sql.connect.plan.DropGlobalTempView*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrb
+self(*
+session(
+*(
+	serialize*
 
-_view_name6pyspark.sql.connect.plan.DropGlobalTempView._view_name
-builtins.str"builtins.str£
-RecoverPartitions*pyspark.sql.connect.plan.RecoverPartitions"$pyspark.sql.connect.plan.LogicalPlan*€
-__init__3pyspark.sql.connect.plan.RecoverPartitions.__init__"
-None*b
-selfX
-*pyspark.sql.connect.plan.RecoverPartitions"*pyspark.sql.connect.plan.RecoverPartitions*,
+self(*
+session(
+*%
+print*
 
-table_name
-builtins.str"builtins.str*¯
-plan/pyspark.sql.connect.plan.RecoverPartitions.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*b
-selfX
-*pyspark.sql.connect.plan.RecoverPartitions"*pyspark.sql.connect.plan.RecoverPartitions*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrc
-_table_name6pyspark.sql.connect.plan.RecoverPartitions._table_name
-builtins.str"builtins.str“
-IsCached!pyspark.sql.connect.plan.IsCached"$pyspark.sql.connect.plan.LogicalPlan*¿
-__init__*pyspark.sql.connect.plan.IsCached.__init__"
-None*P
-selfF
-!pyspark.sql.connect.plan.IsCached"!pyspark.sql.connect.plan.IsCached*,
+self(*
+indent (*
+_repr_html_*
 
-table_name
-builtins.str"builtins.str*›
-plan&pyspark.sql.connect.plan.IsCached.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*P
-selfF
-!pyspark.sql.connect.plan.IsCached"!pyspark.sql.connect.plan.IsCached*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrZ
-_table_name-pyspark.sql.connect.plan.IsCached._table_name
-builtins.str"builtins.strÕ
+self(r
 
-CacheTable#pyspark.sql.connect.plan.CacheTable"$pyspark.sql.connect.plan.LogicalPlan*‚
-__init__,pyspark.sql.connect.plan.CacheTable.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.CacheTable"#pyspark.sql.connect.plan.CacheTable*,
+_table0r
+_schema0’
+CachedLocalRelation"$pyspark.sql.connect.plan.LogicalPlan*$
+__init__*
 
-table_name
-builtins.str"builtins.str*ô
-storage_levelÉ
--Union[pyspark.storagelevel.StorageLevel,None]F
-!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel
-None *„
-plan(pyspark.sql.connect.plan.CacheTable.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.CacheTable"#pyspark.sql.connect.plan.CacheTable*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr\
-_table_name/pyspark.sql.connect.plan.CacheTable._table_name
-builtins.str"builtins.strr 
-_storage_level2pyspark.sql.connect.plan.CacheTable._storage_levelÉ
--Union[pyspark.storagelevel.StorageLevel,None]F
-!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel
-Noneˆ
-UncacheTable%pyspark.sql.connect.plan.UncacheTable"$pyspark.sql.connect.plan.LogicalPlan*Ã
-__init__.pyspark.sql.connect.plan.UncacheTable.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.UncacheTable"%pyspark.sql.connect.plan.UncacheTable*,
+self(*
 
-table_name
-builtins.str"builtins.str*È
-plan*pyspark.sql.connect.plan.UncacheTable.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.UncacheTable"%pyspark.sql.connect.plan.UncacheTable*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr^
-_table_name1pyspark.sql.connect.plan.UncacheTable._table_name
-builtins.str"builtins.strÿ
+hash(*#
+plan*
 
-ClearCache#pyspark.sql.connect.plan.ClearCache"$pyspark.sql.connect.plan.LogicalPlan*ò
-__init__,pyspark.sql.connect.plan.ClearCache.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.ClearCache"#pyspark.sql.connect.plan.ClearCache*„
-plan(pyspark.sql.connect.plan.ClearCache.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.ClearCache"#pyspark.sql.connect.plan.ClearCache*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientˆ
-RefreshTable%pyspark.sql.connect.plan.RefreshTable"$pyspark.sql.connect.plan.LogicalPlan*Ã
-__init__.pyspark.sql.connect.plan.RefreshTable.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.RefreshTable"%pyspark.sql.connect.plan.RefreshTable*,
+self(*
+session(
+*%
+print*
 
-table_name
-builtins.str"builtins.str*È
-plan*pyspark.sql.connect.plan.RefreshTable.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.RefreshTable"%pyspark.sql.connect.plan.RefreshTable*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr^
-_table_name1pyspark.sql.connect.plan.RefreshTable._table_name
-builtins.str"builtins.strÌ
-RefreshByPath&pyspark.sql.connect.plan.RefreshByPath"$pyspark.sql.connect.plan.LogicalPlan*…
-__init__/pyspark.sql.connect.plan.RefreshByPath.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.RefreshByPath"&pyspark.sql.connect.plan.RefreshByPath*&
-path
-builtins.str"builtins.str*Ï
-plan+pyspark.sql.connect.plan.RefreshByPath.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.RefreshByPath"&pyspark.sql.connect.plan.RefreshByPath*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrS
-_path,pyspark.sql.connect.plan.RefreshByPath._path
-builtins.str"builtins.str¯
-CurrentCatalog'pyspark.sql.connect.plan.CurrentCatalog"$pyspark.sql.connect.plan.LogicalPlan*§
-__init__0pyspark.sql.connect.plan.CurrentCatalog.__init__"
-None*\
-selfR
-'pyspark.sql.connect.plan.CurrentCatalog"'pyspark.sql.connect.plan.CurrentCatalog*Ô
-plan,pyspark.sql.connect.plan.CurrentCatalog.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*\
-selfR
-'pyspark.sql.connect.plan.CurrentCatalog"'pyspark.sql.connect.plan.CurrentCatalog*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient©
-SetCurrentCatalog*pyspark.sql.connect.plan.SetCurrentCatalog"$pyspark.sql.connect.plan.LogicalPlan*›
-__init__3pyspark.sql.connect.plan.SetCurrentCatalog.__init__"
-None*b
-selfX
-*pyspark.sql.connect.plan.SetCurrentCatalog"*pyspark.sql.connect.plan.SetCurrentCatalog*.
-catalog_name
-builtins.str"builtins.str*¯
-plan/pyspark.sql.connect.plan.SetCurrentCatalog.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*b
-selfX
-*pyspark.sql.connect.plan.SetCurrentCatalog"*pyspark.sql.connect.plan.SetCurrentCatalog*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrg
-_catalog_name8pyspark.sql.connect.plan.SetCurrentCatalog._catalog_name
-builtins.str"builtins.str¿
-ListCatalogs%pyspark.sql.connect.plan.ListCatalogs"$pyspark.sql.connect.plan.LogicalPlan*Û
-__init__.pyspark.sql.connect.plan.ListCatalogs.__init__"
-None*X
-selfN
-%pyspark.sql.connect.plan.ListCatalogs"%pyspark.sql.connect.plan.ListCatalogs*S
-patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-plan*pyspark.sql.connect.plan.ListCatalogs.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*X
-selfN
-%pyspark.sql.connect.plan.ListCatalogs"%pyspark.sql.connect.plan.ListCatalogs*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrÄ
-_pattern.pyspark.sql.connect.plan.ListCatalogs._patternD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneõ
+self(*
+indent (*
+_repr_html_*
 
-MapPartitions&pyspark.sql.connect.plan.MapPartitions"$pyspark.sql.connect.plan.LogicalPlan*¨
-__init__/pyspark.sql.connect.plan.MapPartitions.__init__"
-None*Z
-selfP
-&pyspark.sql.connect.plan.MapPartitions"&pyspark.sql.connect.plan.MapPartitions*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*h
-functionZ
-+pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*T
-colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*.
+self(r	
+_hash0ÿ
 
-is_barrier
-builtins.bool"builtins.bool*Ï
-plan+pyspark.sql.connect.plan.MapPartitions.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Z
-selfP
-&pyspark.sql.connect.plan.MapPartitions"&pyspark.sql.connect.plan.MapPartitions*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr∫
-_func,pyspark.sql.connect.plan.MapPartitions._funcÇ
-?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunctionra
-_is_barrier2pyspark.sql.connect.plan.MapPartitions._is_barrier
-builtins.bool"builtins.boolÒ
+ShowString"$pyspark.sql.connect.plan.LogicalPlan*U
+__init__*
 
-GroupMap!pyspark.sql.connect.plan.GroupMap"$pyspark.sql.connect.plan.LogicalPlan*ë
-__init__*pyspark.sql.connect.plan.GroupMap.__init__"
-None*P
-selfF
-!pyspark.sql.connect.plan.GroupMap"!pyspark.sql.connect.plan.GroupMap*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*°
-grouping_colsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*h
-functionZ
-+pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*T
-colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*›
-plan&pyspark.sql.connect.plan.GroupMap.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*P
-selfF
-!pyspark.sql.connect.plan.GroupMap"!pyspark.sql.connect.plan.GroupMap*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrp
-_grouping_cols0pyspark.sql.connect.plan.GroupMap._grouping_cols,
-builtins.list[Any]
-Any"builtins.listrµ
-_func'pyspark.sql.connect.plan.GroupMap._funcÇ
-?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction¢
+self( *
+child(*
+num_rows(*
+truncate(*
+vertical(*#
+plan*
 
-CoGroupMap#pyspark.sql.connect.plan.CoGroupMap"$pyspark.sql.connect.plan.LogicalPlan*£
-__init__,pyspark.sql.connect.plan.CoGroupMap.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.CoGroupMap"#pyspark.sql.connect.plan.CoGroupMap*ò
-inputå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*ß
-input_grouping_colsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*ò
-otherå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*ß
-other_grouping_colsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*h
-functionZ
-+pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*î
-colsâ
-0builtins.list[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"builtins.list*„
-plan(pyspark.sql.connect.plan.CoGroupMap.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*T
-selfJ
-#pyspark.sql.connect.plan.CoGroupMap"#pyspark.sql.connect.plan.CoGroupMap*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr~
-_input_grouping_cols8pyspark.sql.connect.plan.CoGroupMap._input_grouping_cols,
-builtins.list[Any]
-Any"builtins.listr~
-_other_grouping_cols8pyspark.sql.connect.plan.CoGroupMap._other_grouping_cols,
-builtins.list[Any]
-Any"builtins.listrÇ
-_other*pyspark.sql.connect.plan.CoGroupMap._otherL
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlanr∑
-_func)pyspark.sql.connect.plan.CoGroupMap._funcÇ
-?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunctionı
-ApplyInPandasWithState/pyspark.sql.connect.plan.ApplyInPandasWithState"$pyspark.sql.connect.plan.LogicalPlan*˚
-__init__8pyspark.sql.connect.plan.ApplyInPandasWithState.__init__"
-None*l
-selfb
-/pyspark.sql.connect.plan.ApplyInPandasWithState"/pyspark.sql.connect.plan.ApplyInPandasWithState*ò
-childå
-0Union[pyspark.sql.connect.plan.LogicalPlan,None]L
-$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan
-None*°
-grouping_colsç
-2typing.Sequence[pyspark.sql.connect.column.Column]F
-!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column"typing.Sequence*h
-functionZ
-+pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*/
-output_schema
-builtins.str"builtins.str*.
-state_schema
-builtins.str"builtins.str*-
-output_mode
-builtins.str"builtins.str*.
-timeout_conf
-builtins.str"builtins.str*T
-colsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*á
-plan4pyspark.sql.connect.plan.ApplyInPandasWithState.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*l
-selfb
-/pyspark.sql.connect.plan.ApplyInPandasWithState"/pyspark.sql.connect.plan.ApplyInPandasWithState*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientr~
-_grouping_cols>pyspark.sql.connect.plan.ApplyInPandasWithState._grouping_cols,
-builtins.list[Any]
-Any"builtins.listr√
-_func5pyspark.sql.connect.plan.ApplyInPandasWithState._funcÇ
-?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunctionrn
-_output_schema>pyspark.sql.connect.plan.ApplyInPandasWithState._output_schema
-builtins.str"builtins.strrl
-_state_schema=pyspark.sql.connect.plan.ApplyInPandasWithState._state_schema
-builtins.str"builtins.strrj
-_output_mode<pyspark.sql.connect.plan.ApplyInPandasWithState._output_mode
-builtins.str"builtins.strrl
-_timeout_conf=pyspark.sql.connect.plan.ApplyInPandasWithState._timeout_conf
-builtins.str"builtins.str
+self( *
+session(
+r
+num_rows0r
+truncate0r
+vertical0∫
 
-PythonUDTF#pyspark.sql.connect.plan.PythonUDTF"builtins.object*∫
-__init__,pyspark.sql.connect.plan.PythonUDTF.__init__"
-None*T
-selfJ
-#pyspark.sql.connect.plan.PythonUDTF"#pyspark.sql.connect.plan.PythonUDTF*&
-func
-	Type[Any]
-Any"type*ú
-return_typeä
-.Union[pyspark.sql.types.DataType,builtins.str]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType
-builtins.str"builtins.str*+
-	eval_type
-builtins.int"builtins.int*,
+HtmlString"$pyspark.sql.connect.plan.LogicalPlan*E
+__init__*
 
-python_ver
-builtins.str"builtins.str*Ì
-to_plan+pyspark.sql.connect.plan.PythonUDTF.to_plan"h
-2pyspark.sql.connect.proto.relations_pb2.PythonUDTF"2pyspark.sql.connect.proto.relations_pb2.PythonUDTF*T
-selfJ
-#pyspark.sql.connect.plan.PythonUDTF"#pyspark.sql.connect.plan.PythonUDTF*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*§
-__repr__,pyspark.sql.connect.plan.PythonUDTF.__repr__"
-builtins.str"builtins.str*LJ
-#pyspark.sql.connect.plan.PythonUDTF"#pyspark.sql.connect.plan.PythonUDTFrP
-_func)pyspark.sql.connect.plan.PythonUDTF._func
-	Type[Any]
-Any"typerP
-_name)pyspark.sql.connect.plan.PythonUDTF._name
-builtins.str"builtins.strrz
-_return_type0pyspark.sql.connect.plan.PythonUDTF._return_type8
-pyspark.sql.types.DataType"pyspark.sql.types.DataTyperZ
+self(!*
+child(*
+num_rows(*
+truncate(*#
+plan*
 
-_eval_type.pyspark.sql.connect.plan.PythonUDTF._eval_type
-builtins.int"builtins.intr\
-_python_ver/pyspark.sql.connect.plan.PythonUDTF._python_ver
-builtins.str"builtins.str∂
-$CommonInlineUserDefinedTableFunction=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction"$pyspark.sql.connect.plan.LogicalPlan*‡
-__init__Fpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction.__init__"
-None*à
-self~
-=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction"=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction*/
-function_name
-builtins.str"builtins.str*X
-functionJ
-#pyspark.sql.connect.plan.PythonUDTF"#pyspark.sql.connect.plan.PythonUDTF*1
-deterministic
-builtins.bool"builtins.bool*∏
-	arguments®
-;typing.Sequence[pyspark.sql.connect.expressions.Expression]X
-*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequence*≤
-planBpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*à
-self~
-=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction"=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*ı
-	udtf_planGpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction.udtf_plan"ú
-Lpyspark.sql.connect.proto.relations_pb2.CommonInlineUserDefinedTableFunction"Lpyspark.sql.connect.proto.relations_pb2.CommonInlineUserDefinedTableFunction*à
-self~
-=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction"=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Û
-__repr__Fpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction.__repr__"
-builtins.str"builtins.str*Ä~
-=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction"=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunctionr|
-_function_nameLpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction._function_name
-builtins.str"builtins.strr~
-_deterministicLpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction._deterministic
-builtins.bool"builtins.boolrÅ
+self(!*
+session(
+r
+num_rows0r
+truncate0»
+Project"$pyspark.sql.connect.plan.LogicalPlan*4
+__init__*
 
-_argumentsHpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction._arguments®
-;typing.Sequence[pyspark.sql.connect.expressions.Expression]X
-*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequencer†
-	_functionGpyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction._functionJ
-#pyspark.sql.connect.plan.PythonUDTF"#pyspark.sql.connect.plan.PythonUDTFá
-CachedRelation'pyspark.sql.connect.plan.CachedRelation"$pyspark.sql.connect.plan.LogicalPlan*î
-__init__0pyspark.sql.connect.plan.CachedRelation.__init__"
-None*\
-selfR
-'pyspark.sql.connect.plan.CachedRelation"'pyspark.sql.connect.plan.CachedRelation*n
-pland
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*Ô
-plan,pyspark.sql.connect.plan.CachedRelation.plan"d
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*\
-selfR
-'pyspark.sql.connect.plan.CachedRelation"'pyspark.sql.connect.plan.CachedRelation*u
-sessionh
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrú
-_plan-pyspark.sql.connect.plan.CachedRelation._pland
-0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*î
-__annotations__(pyspark.sql.connect.plan.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict**
-papyspark.sql.connect.plan.pa
-Any*$
-protopyspark.sql.connect.proto 
+self("*
+child(*
+columns(	*#
+_verify_expressions*
+
+self("*#
+plan*
+
+self("*
+session(
+r
+_columns0#r	
+alias0‚
+WithColumns"$pyspark.sql.connect.plan.LogicalPlan*Y
+__init__*
+
+self($*
+child(*
+columnNames(%*
+columns(&*
+metadata ('*#
+plan*
+
+self($*
+session(
+r
+_columnNames0(r
+_columns0(r
+	_metadata0)—
+WithWatermark"$pyspark.sql.connect.plan.LogicalPlan*N
+__init__*
+
+self(**
+child(*
+
+event_time(*
+delay_threshold(*#
+plan*
+
+self(**
+session(
+r
+_event_time0r
+_delay_threshold0û
+CachedRemoteRelation"$pyspark.sql.connect.plan.LogicalPlan**
+__init__*
+
+self(+*
+
+relationId(*#
+plan*
+
+self(+*
+session(
+r
+_relationId0≤
+Hint"$pyspark.sql.connect.plan.LogicalPlan*C
+__init__*
+
+self(,*
+child(*
+
+name(*
+
+parameters((*#
+plan*
+
+self(,*
+session(
+r	
+_name0r
+_parameters0(î
+Filter"$pyspark.sql.connect.plan.LogicalPlan*3
+__init__*
+
+self(-*
+child(*
+filter(*#
+plan*
+
+self(-*
+session(
+r
+
+filter0ë
+Limit"$pyspark.sql.connect.plan.LogicalPlan*2
+__init__*
+
+self(.*
+child(*
+limit(*#
+plan*
+
+self(.*
+session(
+r	
+limit0ê
+Tail"$pyspark.sql.connect.plan.LogicalPlan*2
+__init__*
+
+self(/*
+child(*
+limit(*#
+plan*
+
+self(/*
+session(
+r	
+limit0ñ
+Offset"$pyspark.sql.connect.plan.LogicalPlan*5
+__init__*
+
+self(0*
+child(*
+offset (*#
+plan*
+
+self(0*
+session(
+r
+
+offset0ç
+Deduplicate"$pyspark.sql.connect.plan.LogicalPlan*r
+__init__*
+
+self(1*
+child(*
+all_columns_as_keys (*
+column_names (*
+within_watermark (*#
+plan*
+
+self(1*
+session(
+r
+all_columns_as_keys0r
+column_names0r
+within_watermark0Ï
+Sort"$pyspark.sql.connect.plan.LogicalPlan*E
+__init__*
+
+self(2*
+child(*
+columns(3*
+	is_global(*6
+_convert_col4*
+
+self(2*	
+col(*
+session(
+*#
+plan*
+
+self(2*
+session(
+r
+columns03r
+	is_global0ï
+Drop"$pyspark.sql.connect.plan.LogicalPlan*4
+__init__*
+
+self(5*
+child(*
+columns(#*#
+plan*
+
+self(5*
+session(
+r
+_columns0#Ω
+Sample"$pyspark.sql.connect.plan.LogicalPlan*å
+__init__*
+
+self(6*
+child(*
+lower_bound(7*
+upper_bound(7*
+with_replacement(*
+
+seed(8*
+deterministic_order (*#
+plan*
+
+self(6*
+session(
+r
+lower_bound07r
+upper_bound07r
+with_replacement0r
+seed08r
+deterministic_order0Ω
+	Aggregate"$pyspark.sql.connect.plan.LogicalPlan*á
+__init__*
+
+self(9*
+child(*
+
+group_type(*
+grouping_cols(&*
+aggregate_cols(&*
+	pivot_col(:*
+pivot_values(<*#
+plan*
+
+self(9*
+session(
+r
+_group_type0r
+_grouping_cols0(r
+_aggregate_cols0(r
+
+_pivot_col0:r
+_pivot_values0)É
+Join"$pyspark.sql.connect.plan.LogicalPlan*F
+__init__*
+
+self(=*
+
+left(*
+right(*
+on(>*	
+how(*#
+plan*
+
+self(=*
+session(
+*%
+print*
+
+self(=*
+indent (*
+_repr_html_*
+
+self(=r
+left0r	
+right0r
+on0>r
+how0?Î
+SetOperation"$pyspark.sql.connect.plan.LogicalPlan*Ä
+__init__*
+
+self(@*
+child(*
+other(*
+set_op(*
+is_all (*
+by_name (*
+allow_missing_columns (*#
+plan*
+
+self(@*
+session(
+*%
+print*
+
+self(@*
+indent (*
+_repr_html_*
+
+self(@r	
+other0r
+by_name0r
+
+is_all0r
+
+set_op0r
+allow_missing_columns0«
+Repartition"$pyspark.sql.connect.plan.LogicalPlan*J
+__init__*
+
+self(A*
+child(*
+num_partitions(*
+shuffle(*#
+plan*
+
+self(A*
+session(
+r
+_num_partitions0r
+_shuffle0—
+RepartitionByExpression"$pyspark.sql.connect.plan.LogicalPlan*J
+__init__*
+
+self(B*
+child(*
+num_partitions(8*
+columns(C*#
+plan*
+
+self(B*
+session(
+r
+num_partitions08r
+columns0Cö
+SubqueryAlias"$pyspark.sql.connect.plan.LogicalPlan*2
+__init__*
+
+self(D*
+child(*
+alias(*#
+plan*
+
+self(D*
+session(
+r
+
+_alias0ƒ
+SQL"$pyspark.sql.connect.plan.LogicalPlan*3
+__init__*
+
+self(E*
+query(*
+args (G*#
+plan*
+
+self(E*
+session(
+*&
+command*
+
+self(E*
+session(
+r
+
+_query0r	
+_args0Gﬁ
+Range"$pyspark.sql.connect.plan.LogicalPlan*T
+__init__*
+
+self(H*
+start(*	
+end(*
+
+step(*
+num_partitions (8*#
+plan*
+
+self(H*
+session(
+r
+
+_start0r
+_end0r	
+_step0r
+_num_partitions08ó
+ToSchema"$pyspark.sql.connect.plan.LogicalPlan*3
+__init__*
+
+self(I*
+child(*
+schema(J*#
+plan*
+
+self(I*
+session(
+r
+_schema0J£
+WithColumnsRenamed"$pyspark.sql.connect.plan.LogicalPlan*4
+__init__*
+
+self(K*
+child(*
+colsMap(*#
+plan*
+
+self(K*
+session(
+r
+_colsMap0∆
+Unpivot"$pyspark.sql.connect.plan.LogicalPlan*s
+__init__*
+
+self(L*
+child(*	
+ids(C*
+values(M*
+variable_column_name(*
+value_column_name(*5
+col_to_expr*
+
+self(L*	
+col(	*
+session(
+*#
+plan*
+
+self(L*
+session(
+r
+ids0Cr
+
+values0Mr
+variable_column_name0r
+value_column_name0È
+CollectMetrics"$pyspark.sql.connect.plan.LogicalPlan*>
+__init__*
+
+self(N*
+child(*
+
+name(*
+exprs(C*5
+col_to_expr*
+
+self(N*	
+col(	*
+session(
+*#
+plan*
+
+self(N*
+session(
+r	
+_name0r
+
+_exprs0C”
+NAFill"$pyspark.sql.connect.plan.LogicalPlan*?
+__init__*
+
+self(O*
+child(*
+
+cols(*
+values((*'
+_convert_valueP*
+
+self(O*
+v(*#
+plan*
+
+self(O*
+session(
+r
+cols0r
+
+values0(∏
+NADrop"$pyspark.sql.connect.plan.LogicalPlan*F
+__init__*
+
+self(Q*
+child(*
+
+cols(*
+min_non_nulls(8*#
+plan*
+
+self(Q*
+session(
+r
+cols0r
+min_non_nulls08È
+	NAReplace"$pyspark.sql.connect.plan.LogicalPlan*E
+__init__*
+
+self(R*
+child(*
+
+cols(*
+replacements(S*.
+_convert_int_to_float*
+
+self(R*
+v(*#
+plan*
+
+self(R*
+session(
+r
+cols0r
+replacements0S°
+StatSummary"$pyspark.sql.connect.plan.LogicalPlan*7
+__init__*
+
+self(T*
+child(*
+
+statistics(*#
+plan*
+
+self(T*
+session(
+r
+
+statistics0ñ
+StatDescribe"$pyspark.sql.connect.plan.LogicalPlan*1
+__init__*
+
+self(U*
+child(*
+
+cols(*#
+plan*
+
+self(U*
+session(
+r
+cols0©
+StatCov"$pyspark.sql.connect.plan.LogicalPlan*=
+__init__*
+
+self(V*
+child(*
+
+col1(*
+
+col2(*#
+plan*
+
+self(V*
+session(
+r	
+_col10r	
+_col20Ô
+StatApproxQuantile"$pyspark.sql.connect.plan.LogicalPlan*[
+__init__*
+
+self(W*
+child(*
+
+cols(*
+probabilities(X*
+relativeError(7*#
+plan*
+
+self(W*
+session(
+r	
+_cols0r
+_probabilities0Xr
+_relativeError07¨
+StatCrosstab"$pyspark.sql.connect.plan.LogicalPlan*=
+__init__*
+
+self(Y*
+child(*
+
+col1(*
+
+col2(*#
+plan*
+
+self(Y*
+session(
+r
+col10r
+col20µ
+StatFreqItems"$pyspark.sql.connect.plan.LogicalPlan*@
+__init__*
+
+self(Z*
+child(*
+
+cols(*
+support(7*#
+plan*
+
+self(Z*
+session(
+r	
+_cols0r
+_support07Õ
+StatSampleBy"$pyspark.sql.connect.plan.LogicalPlan*M
+__init__*
+
+self([*
+child(*	
+col(	*
+	fractions(\*
+
+seed(8*#
+plan*
+
+self([*
+session(
+r
+_col0r
+
+_fractions0\r	
+_seed08≈
+StatCorr"$pyspark.sql.connect.plan.LogicalPlan*K
+__init__*
+
+self(]*
+child(*
+
+col1(*
+
+col2(*
+method(*#
+plan*
+
+self(]*
+session(
+r	
+_col10r	
+_col20r
+_method0è
+ToDF"$pyspark.sql.connect.plan.LogicalPlan*1
+__init__*
+
+self(^*
+child(*
+
+cols(%*#
+plan*
+
+self(^*
+session(
+r	
+_cols0%÷
+
+CreateView"$pyspark.sql.connect.plan.LogicalPlan*Q
+__init__*
+
+self(_*
+child(*
+
+name(*
+	is_global(*
+replace(*&
+command*
+
+self(_*
+session(
+r	
+_name0r
+
+_is_global0r
+_replace0Â
+WriteOperation"$pyspark.sql.connect.plan.LogicalPlan*%
+__init__*
+
+self(`*
+child(*&
+command*
+
+self(`*
+session(
+*%
+print*
+
+self(`*
+indent (*
+_repr_html_*
+
+self(`r
+
+source0r
+path0r
+
+table_name0r
+table_save_method0r
+mode0r
+	sort_cols0r
+partitioning_cols0r
+options0ar
+num_buckets0r
+bucket_cols0Œ
+WriteOperationV2"$pyspark.sql.connect.plan.LogicalPlan*7
+__init__*
+
+self(b*
+child(*
+
+table_name(*5
+col_to_expr*
+
+self(b*	
+col(	*
+session(
+*&
+command*
+
+self(b*
+session(
+r
+
+table_name0r
+provider0r
+partitioning_columns0Cr
+options0ar
+table_properties0ar
+mode0r
+overwrite_condition0cô
+WriteStreamOperation"$pyspark.sql.connect.plan.LogicalPlan*%
+__init__*
+
+self(d*
+child(*&
+command*
+
+self(d*
+session(
+r
+write_op0ev
+CurrentDatabase"$pyspark.sql.connect.plan.LogicalPlan*
+__init__*
+
+self(f*#
+plan*
+
+self(f*
+session(
+ñ
+SetCurrentDatabase"$pyspark.sql.connect.plan.LogicalPlan*'
+__init__*
+
+self(g*
+db_name(*#
+plan*
+
+self(g*
+session(
+r
+_db_name0ì
+ListDatabases"$pyspark.sql.connect.plan.LogicalPlan*)
+__init__*
+
+self(h*
+pattern (*#
+plan*
+
+self(h*
+session(
+r
+_pattern0Ø
+
+ListTables"$pyspark.sql.connect.plan.LogicalPlan*:
+__init__*
+
+self(i*
+db_name (*
+pattern (*#
+plan*
+
+self(i*
+session(
+r
+_db_name0r
+_pattern0≤
+ListFunctions"$pyspark.sql.connect.plan.LogicalPlan*:
+__init__*
+
+self(j*
+db_name (*
+pattern (*#
+plan*
+
+self(j*
+session(
+r
+_db_name0r
+_pattern0¥
+ListColumns"$pyspark.sql.connect.plan.LogicalPlan*;
+__init__*
+
+self(k*
+
+table_name(*
+db_name (*#
+plan*
+
+self(k*
+session(
+r
+_table_name0r
+_db_name0è
+GetDatabase"$pyspark.sql.connect.plan.LogicalPlan*'
+__init__*
+
+self(l*
+db_name(*#
+plan*
+
+self(l*
+session(
+r
+_db_name0±
+GetTable"$pyspark.sql.connect.plan.LogicalPlan*;
+__init__*
+
+self(m*
+
+table_name(*
+db_name (*#
+plan*
+
+self(m*
+session(
+r
+_table_name0r
+_db_name0∫
+GetFunction"$pyspark.sql.connect.plan.LogicalPlan*>
+__init__*
+
+self(n*
+function_name(*
+db_name (*#
+plan*
+
+self(n*
+session(
+r
+_function_name0r
+_db_name0í
+DatabaseExists"$pyspark.sql.connect.plan.LogicalPlan*'
+__init__*
+
+self(o*
+db_name(*#
+plan*
+
+self(o*
+session(
+r
+_db_name0¥
+TableExists"$pyspark.sql.connect.plan.LogicalPlan*;
+__init__*
+
+self(p*
+
+table_name(*
+db_name (*#
+plan*
+
+self(p*
+session(
+r
+_table_name0r
+_db_name0Ω
+FunctionExists"$pyspark.sql.connect.plan.LogicalPlan*>
+__init__*
+
+self(q*
+function_name(*
+db_name (*#
+plan*
+
+self(q*
+session(
+r
+_function_name0r
+_db_name0ç
+CreateExternalTable"$pyspark.sql.connect.plan.LogicalPlan*g
+__init__*
+
+self(r*
+
+table_name(*
+
+path(*
+source (*
+schema (s*
+options (*#
+plan*
+
+self(r*
+session(
+r
+_table_name0r	
+_path0r
+_source0r
+_schema0sr
+_options0¨
+CreateTable"$pyspark.sql.connect.plan.LogicalPlan*|
+__init__*
+
+self(t*
+
+table_name(*
+
+path(*
+source (*
+description (*
+schema (s*
+options (*#
+plan*
+
+self(t*
+session(
+r
+_table_name0r	
+_path0r
+_source0r
+_description0r
+_schema0sr
+_options0î
+DropTempView"$pyspark.sql.connect.plan.LogicalPlan*)
+__init__*
+
+self(u*
+	view_name(*#
+plan*
+
+self(u*
+session(
+r
+
+_view_name0ö
+DropGlobalTempView"$pyspark.sql.connect.plan.LogicalPlan*)
+__init__*
+
+self(v*
+	view_name(*#
+plan*
+
+self(v*
+session(
+r
+
+_view_name0õ
+RecoverPartitions"$pyspark.sql.connect.plan.LogicalPlan**
+__init__*
+
+self(w*
+
+table_name(*#
+plan*
+
+self(w*
+session(
+r
+_table_name0í
+IsCached"$pyspark.sql.connect.plan.LogicalPlan**
+__init__*
+
+self(x*
+
+table_name(*#
+plan*
+
+self(x*
+session(
+r
+_table_name0ø
+
+CacheTable"$pyspark.sql.connect.plan.LogicalPlan*A
+__init__*
+
+self(y*
+
+table_name(*
+storage_level ({*#
+plan*
+
+self(y*
+session(
+r
+_table_name0r
+_storage_level0{ñ
+UncacheTable"$pyspark.sql.connect.plan.LogicalPlan**
+__init__*
+
+self(|*
+
+table_name(*#
+plan*
+
+self(|*
+session(
+r
+_table_name0q
+
+ClearCache"$pyspark.sql.connect.plan.LogicalPlan*
+__init__*
+
+self(}*#
+plan*
+
+self(}*
+session(
+ñ
+RefreshTable"$pyspark.sql.connect.plan.LogicalPlan**
+__init__*
+
+self(~*
+
+table_name(*#
+plan*
+
+self(~*
+session(
+r
+_table_name0ã
+RefreshByPath"$pyspark.sql.connect.plan.LogicalPlan*$
+__init__*
+
+self(*
+
+path(*#
+plan*
+
+self(*
+session(
+r	
+_path0w
+CurrentCatalog"$pyspark.sql.connect.plan.LogicalPlan*
+__init__*
+self(Ä*$
+plan*
+self(Ä*
+session(
+°
+SetCurrentCatalog"$pyspark.sql.connect.plan.LogicalPlan*-
+__init__*
+self(Å*
+catalog_name(*$
+plan*
+self(Å*
+session(
+r
+_catalog_name0î
+ListCatalogs"$pyspark.sql.connect.plan.LogicalPlan**
+__init__*
+self(Ç*
+pattern (*$
+plan*
+self(Ç*
+session(
+r
+_pattern0œ
+MapPartitions"$pyspark.sql.connect.plan.LogicalPlan*U
+__init__*
+self(É*
+child(*
+function(Ñ*
+
+cols(*
+
+is_barrier(*$
+plan*
+self(É*
+session(
+r
+
+_func0Ör
+_is_barrier0–
+GroupMap"$pyspark.sql.connect.plan.LogicalPlan*X
+__init__*
+self(Ü*
+child(*
+grouping_cols(&*
+function(Ñ*
+
+cols(*$
+plan*
+self(Ü*
+session(
+r
+_grouping_cols0(r
+
+_func0Ö≠
+
+CoGroupMap"$pyspark.sql.connect.plan.LogicalPlan*Ü
+__init__*
+self(á*
+input(*
+input_grouping_cols(&*
+other(*
+other_grouping_cols(&*
+function(Ñ*
+
+cols(3*$
+plan*
+self(á*
+session(
+r
+_input_grouping_cols0(r
+_other_grouping_cols0(r
+
+_other0r
+
+_func0Ö˚
+ApplyInPandasWithState"$pyspark.sql.connect.plan.LogicalPlan*®
+__init__*
+self(à*
+child(*
+grouping_cols(&*
+function(Ñ*
+output_schema(*
+state_schema(*
+output_mode(*
+timeout_conf(*
+
+cols(*$
+plan*
+self(à*
+session(
+r
+_grouping_cols0(r
+
+_func0Ör
+_output_schema0r
+_state_schema0r
+_output_mode0r
+_timeout_conf0É
+
+PythonUDTF"builtins.object*]
+__init__*
+self(â*
+func(ä*
+return_type(ã*
+	eval_type(*
+
+python_ver(*(
+to_planå*
+self(â*
+session(
+*
+__repr__*(âr
+
+_func0är	
+_name0r
+_return_type0Jr
+
+_eval_type0r
+_python_ver0‚
+$CommonInlineUserDefinedTableFunction"$pyspark.sql.connect.plan.LogicalPlan*f
+__init__*
+self(ç*
+function_name(*
+function(â*
+deterministic(*
+	arguments(è*$
+plan*
+self(ç*
+session(
+**
+	udtf_planê*
+self(ç*
+session(
+*
+__repr__*(çr
+_function_name0r
+_deterministic0r
+
+_arguments0èr
+	_function0âé
+CachedRelation"$pyspark.sql.connect.plan.LogicalPlan*%
+__init__*
+self(ë*
+
+plan(*$
+plan*
+self(ë*
+session(
+r	
+_plan0*
+__annotations__0F*
+pa0*$
+protopyspark.sql.connect.proto 22&"$pyspark.sql.connect.plan.LogicalPlan2222"0pyspark.sql.connect.proto.relations_pb2.Relation26"4pyspark.sql.connect.proto.expressions_pb2.Expression2"builtins.str2#"!pyspark.sql.connect.column.Column222/"(pyspark.sql.connect._typing.ColumnOrName224"2pyspark.sql.connect.client.core.SparkConnectClient20".pyspark.sql.connect.proto.commands_pb2.Command2"builtins.bool2)"'pyspark.sql.connect.proto.base_pb2.Plan22"typing.Mapping22"builtins.int2"_thread.LockType2%"#pyspark.sql.connect.plan.DataSource222"typing.Mapping2222"builtins.list222222"pyspark.sql.connect.plan.Read2"builtins.dict2222("&pyspark.sql.connect.plan.LocalRelation222"builtins.bytes2.",pyspark.sql.connect.plan.CachedLocalRelation2%"#pyspark.sql.connect.plan.ShowString2%"#pyspark.sql.connect.plan.HtmlString2"" pyspark.sql.connect.plan.Project2"builtins.list22&"$pyspark.sql.connect.plan.WithColumns2"typing.Sequence22"typing.Sequence222%2"builtins.list222(2("&pyspark.sql.connect.plan.WithWatermark2/"-pyspark.sql.connect.plan.CachedRemoteRelation2"pyspark.sql.connect.plan.Hint2!"pyspark.sql.connect.plan.Filter2 "pyspark.sql.connect.plan.Limit2"pyspark.sql.connect.plan.Tail2!"pyspark.sql.connect.plan.Offset2&"$pyspark.sql.connect.plan.Deduplicate2"pyspark.sql.connect.plan.Sort2"builtins.list22@">pyspark.sql.connect.proto.expressions_pb2.Expression.SortOrder2"pyspark.sql.connect.plan.Drop2!"pyspark.sql.connect.plan.Sample2"builtins.float222$""pyspark.sql.connect.plan.Aggregate222"typing.Sequence222;2"pyspark.sql.connect.plan.Join2	232B"@pyspark.sql.connect.proto.relations_pb2.Join._JoinType.ValueType2'"%pyspark.sql.connect.plan.SetOperation2&"$pyspark.sql.connect.plan.Repartition22"0pyspark.sql.connect.plan.RepartitionByExpression2"builtins.list2	2("&pyspark.sql.connect.plan.SubqueryAlias2"pyspark.sql.connect.plan.SQL2"builtins.dict222F(2 "pyspark.sql.connect.plan.Range2#"!pyspark.sql.connect.plan.ToSchema2"pyspark.sql.types.DataType2-"+pyspark.sql.connect.plan.WithColumnsRenamed2"" pyspark.sql.connect.plan.Unpivot22C2)"'pyspark.sql.connect.plan.CollectMetrics2!"pyspark.sql.connect.plan.NAFill2>"<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal2!"pyspark.sql.connect.plan.NADrop2$""pyspark.sql.connect.plan.NAReplace2"builtins.dict22&"$pyspark.sql.connect.plan.StatSummary2'"%pyspark.sql.connect.plan.StatDescribe2"" pyspark.sql.connect.plan.StatCov2-"+pyspark.sql.connect.plan.StatApproxQuantile2"builtins.list272'"%pyspark.sql.connect.plan.StatCrosstab2("&pyspark.sql.connect.plan.StatFreqItems2'"%pyspark.sql.connect.plan.StatSampleBy2"builtins.dict272#"!pyspark.sql.connect.plan.StatCorr2"pyspark.sql.connect.plan.ToDF2%"#pyspark.sql.connect.plan.CreateView2)"'pyspark.sql.connect.plan.WriteOperation2"builtins.dict22+")pyspark.sql.connect.plan.WriteOperationV222	2/"-pyspark.sql.connect.plan.WriteStreamOperation2B"@pyspark.sql.connect.proto.commands_pb2.WriteStreamOperationStart2*"(pyspark.sql.connect.plan.CurrentDatabase2-"+pyspark.sql.connect.plan.SetCurrentDatabase2("&pyspark.sql.connect.plan.ListDatabases2%"#pyspark.sql.connect.plan.ListTables2("&pyspark.sql.connect.plan.ListFunctions2&"$pyspark.sql.connect.plan.ListColumns2&"$pyspark.sql.connect.plan.GetDatabase2#"!pyspark.sql.connect.plan.GetTable2&"$pyspark.sql.connect.plan.GetFunction2)"'pyspark.sql.connect.plan.DatabaseExists2&"$pyspark.sql.connect.plan.TableExists2)"'pyspark.sql.connect.plan.FunctionExists2.",pyspark.sql.connect.plan.CreateExternalTable22J2&"$pyspark.sql.connect.plan.CreateTable2'"%pyspark.sql.connect.plan.DropTempView2-"+pyspark.sql.connect.plan.DropGlobalTempView2,"*pyspark.sql.connect.plan.RecoverPartitions2#"!pyspark.sql.connect.plan.IsCached2%"#pyspark.sql.connect.plan.CacheTable2#"!pyspark.storagelevel.StorageLevel22z2'"%pyspark.sql.connect.plan.UncacheTable2%"#pyspark.sql.connect.plan.ClearCache2'"%pyspark.sql.connect.plan.RefreshTable2("&pyspark.sql.connect.plan.RefreshByPath2)"'pyspark.sql.connect.plan.CurrentCatalog2,"*pyspark.sql.connect.plan.SetCurrentCatalog2'"%pyspark.sql.connect.plan.ListCatalogs2("&pyspark.sql.connect.plan.MapPartitions2-"+pyspark.sql.connect.udf.UserDefinedFunction2A"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction2#"!pyspark.sql.connect.plan.GroupMap2%"#pyspark.sql.connect.plan.CoGroupMap21"/pyspark.sql.connect.plan.ApplyInPandasWithState2%"#pyspark.sql.connect.plan.PythonUDTF2"type222J24"2pyspark.sql.connect.proto.relations_pb2.PythonUDTF2?"=pyspark.sql.connect.plan.CommonInlineUserDefinedTableFunction2,"*pyspark.sql.connect.expressions.Expression2"typing.Sequence2é2N"Lpyspark.sql.connect.proto.relations_pb2.CommonInlineUserDefinedTableFunction2)"'pyspark.sql.connect.plan.CachedRelation

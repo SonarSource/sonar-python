@@ -1,215 +1,120 @@
 
-asyncio.transportsª
-BaseTransport asyncio.transports.BaseTransport"builtins.object*µ
-__init__)asyncio.transports.BaseTransport.__init__"
-None*N
-selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*£
-extraï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *⁄
-get_extra_info/asyncio.transports.BaseTransport.get_extra_info"
-Any*N
-selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*&
-name
-builtins.str"builtins.str*
-default
-Any *©
+asyncio.transportsî
+BaseTransport"builtins.object*'
+__init__*
 
-is_closing+asyncio.transports.BaseTransport.is_closing"
-builtins.bool"builtins.bool*N
-selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*â
-close&asyncio.transports.BaseTransport.close"
-None*N
-selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*Á
-set_protocol-asyncio.transports.BaseTransport.set_protocol"
-None*N
-selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*N
-protocol@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*œ
-get_protocol-asyncio.transports.BaseTransport.get_protocol"@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*N
-selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransportrn
-	__slots__*asyncio.transports.BaseTransport.__slots__5
-Tuple[builtins.str]
-builtins.str"builtins.strˇ
-ReadTransport asyncio.transports.ReadTransport" asyncio.transports.BaseTransport*©
+self(*
+extra (*;
+get_extra_info*
 
-is_reading+asyncio.transports.ReadTransport.is_reading"
-builtins.bool"builtins.bool*N
-selfD
- asyncio.transports.ReadTransport" asyncio.transports.ReadTransport*ô
-pause_reading.asyncio.transports.ReadTransport.pause_reading"
-None*N
-selfD
- asyncio.transports.ReadTransport" asyncio.transports.ReadTransport*õ
-resume_reading/asyncio.transports.ReadTransport.resume_reading"
-None*N
-selfD
- asyncio.transports.ReadTransport" asyncio.transports.ReadTransportrD
-	__slots__*asyncio.transports.ReadTransport.__slots__
-Tuple[]Â
-WriteTransport!asyncio.transports.WriteTransport" asyncio.transports.BaseTransport*”
-set_write_buffer_limits9asyncio.transports.WriteTransport.set_write_buffer_limits"
-None*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*P
-highD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *O
-lowD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *¿
-get_write_buffer_size7asyncio.transports.WriteTransport.get_write_buffer_size"
-builtins.int"builtins.int*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*à
-get_write_buffer_limits9asyncio.transports.WriteTransport.get_write_buffer_limits"`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*Â
-write'asyncio.transports.WriteTransport.write"
-None*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*÷
-dataÀ
-AUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[Any]] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray8
-builtins.memoryview[Any]
-Any"builtins.memoryview*ﬂ
+self(*
 
-writelines,asyncio.transports.WriteTransport.writelines"
-None*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*∆
-list_of_data≥
-Rtyping.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview[Any]]]À
-AUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[Any]] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray8
-builtins.memoryview[Any]
-Any"builtins.memoryview"typing.Iterable*î
-	write_eof+asyncio.transports.WriteTransport.write_eof"
-None*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*≤
-can_write_eof/asyncio.transports.WriteTransport.can_write_eof"
-builtins.bool"builtins.bool*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*å
-abort'asyncio.transports.WriteTransport.abort"
-None*P
-selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransportrE
-	__slots__+asyncio.transports.WriteTransport.__slots__
-Tuple[]∞
-	Transportasyncio.transports.Transport" asyncio.transports.ReadTransport"!asyncio.transports.WriteTransportr@
-	__slots__&asyncio.transports.Transport.__slots__
-Tuple[]˚
-DatagramTransport$asyncio.transports.DatagramTransport" asyncio.transports.BaseTransport*ª
-sendto+asyncio.transports.DatagramTransport.sendto"
-None*V
-selfL
-$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransport*˝
-dataÚ
-JUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int]] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayV
-!builtins.memoryview[builtins.int]
-builtins.int"builtins.int"builtins.memoryview*°
-addrî
-WUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer]],None]¨
-KTypeAlias[Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer]]»
-@Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str4
-typing_extensions.Buffer"typing_extensions.Buffer"_socket._Address
-None *ï
-abort*asyncio.transports.DatagramTransport.abort"
-None*V
-selfL
-$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransportrH
-	__slots__.asyncio.transports.DatagramTransport.__slots__
-Tuple[]∫
-SubprocessTransport&asyncio.transports.SubprocessTransport" asyncio.transports.BaseTransport*≥
-get_pid.asyncio.transports.SubprocessTransport.get_pid"
-builtins.int"builtins.int*Z
-selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransport*È
-get_returncode5asyncio.transports.SubprocessTransport.get_returncode"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*Z
-selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransport*‘
-get_pipe_transport9asyncio.transports.SubprocessTransport.get_pipe_transport"Ä
-,Union[asyncio.transports.BaseTransport,None]D
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport
-None*Z
-selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransport*$
-fd
-builtins.int"builtins.int*—
-send_signal2asyncio.transports.SubprocessTransport.send_signal"
-None*Z
-selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransport*(
-signal
-builtins.int"builtins.int*£
-	terminate0asyncio.transports.SubprocessTransport.terminate"
-None*Z
-selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransport*ô
-kill+asyncio.transports.SubprocessTransport.kill"
-None*Z
-selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransportrJ
-	__slots__0asyncio.transports.SubprocessTransport.__slots__
-Tuple[]¢
-_FlowControlMixin$asyncio.transports._FlowControlMixin"asyncio.transports.Transport*—
-__init__-asyncio.transports._FlowControlMixin.__init__"
-None*V
-selfL
-$asyncio.transports._FlowControlMixin"$asyncio.transports._FlowControlMixin*£
-extraï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None rÙ
-	__slots__.asyncio.transports._FlowControlMixin.__slots__∂
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str*é
-__annotations__"asyncio.transports.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*¥
-__all__asyncio.transports.__all__å
-TTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
+name(*
+default (*
+
+is_closing*
+
+self(*
+close*
+
+self(*,
+set_protocol*
+
+self(*
+protocol(*
+get_protocol*
+
+self(r
+	__slots__0	õ
+ReadTransport" asyncio.transports.BaseTransport*
+
+is_reading*
+
+self(
+*
+pause_reading*
+
+self(
+*
+resume_reading*
+
+self(
+r
+	__slots__0˘
+WriteTransport" asyncio.transports.BaseTransport*B
+set_write_buffer_limits*
+
+self(*
+high (*
+low (*%
+get_write_buffer_size*
+
+self(*'
+get_write_buffer_limits*
+
+self(*!
+write*
+
+self(*
+
+data(*.
+
+writelines*
+
+self(*
+list_of_data(*
+	write_eof*
+
+self(*
+can_write_eof*
+
+self(*
+abort*
+
+self(r
+	__slots__0_
+	Transport" asyncio.transports.ReadTransport"!asyncio.transports.WriteTransportr
+	__slots__0ç
+DatagramTransport" asyncio.transports.BaseTransport*0
+sendto*
+
+self(*
+
+data(*
+addr (*
+abort*
+
+self(r
+	__slots__0â
+SubprocessTransport" asyncio.transports.BaseTransport*
+get_pid*
+
+self(*
+get_returncode*
+
+self(*,
+get_pipe_transport*
+
+self(*
+fd(*)
+send_signal*
+
+self(*
+signal(*
+	terminate*
+
+self(*
+kill*
+
+self(r
+	__slots__0w
+_FlowControlMixin"asyncio.transports.Transport*5
+__init__*
+
+self(*
+extra (*
+loop (!r
+	__slots__0"*
+__annotations__0#*
+__all__0$22"" asyncio.transports.BaseTransport2"builtins.str22"typing.Mapping2222"builtins.bool2 "asyncio.protocols.BaseProtocol222"" asyncio.transports.ReadTransport22#"!asyncio.transports.WriteTransport2"builtins.int22222"builtins.bytes2"builtins.bytearray2"builtins.memoryview2222"typing.Iterable22&"$asyncio.transports.DatagramTransport2"builtins.memoryview2222"builtins.tuple22"typing_extensions.Buffer222"_socket._Address2222("&asyncio.transports.SubprocessTransport222&"$asyncio.transports._FlowControlMixin2"" asyncio.events.AbstractEventLoop22 222"builtins.dict22
+2

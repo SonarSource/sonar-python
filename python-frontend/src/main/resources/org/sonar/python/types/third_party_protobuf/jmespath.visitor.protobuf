@@ -1,328 +1,216 @@
 
-jmespath.visitor™
-Optionsjmespath.visitor.Options"builtins.object*π
-__init__!jmespath.visitor.Options.__init__"
-None*>
-self4
-jmespath.visitor.Options"jmespath.visitor.Options*ó
-dict_clsÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *å
-custom_functionst
-(Union[jmespath.functions.Functions,None]<
-jmespath.functions.Functions"jmespath.functions.Functions
-None z310z311z312z313z314j310j311j312j313j314rœ
-dict_cls!jmespath.visitor.Options.dict_clsÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*310*311*312*313*314rÃ
-custom_functions)jmespath.visitor.Options.custom_functionst
-(Union[jmespath.functions.Functions,None]<
-jmespath.functions.Functions"jmespath.functions.Functions
-None*310*311*312*313*314Ô
-_Expressionjmespath.visitor._Expression"builtins.object*ë
-__init__%jmespath.visitor._Expression.__init__"
-None*F
-self<
-jmespath.visitor._Expression"jmespath.visitor._Expression*,
+jmespath.visitorÑ
+Options"builtins.object*D
+__init__*
 
-expression
-builtins.str"builtins.str*E
-interpreter4
-jmespath.visitor.Visitor"jmespath.visitor.Visitorz310z311z312z313z314*å
-visit"jmespath.visitor._Expression.visit"
-Any*F
-self<
-jmespath.visitor._Expression"jmespath.visitor._Expression*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314rl
+self(*
+dict_cls (*
+custom_functions (r
+dict_cls0r
+custom_functions0ª
+_Expression"builtins.object*=
+__init__*
 
-expression'jmespath.visitor._Expression.expression
-builtins.str"builtins.str*310*311*312*313*314rÜ
-interpreter(jmespath.visitor._Expression.interpreter4
-jmespath.visitor.Visitor"jmespath.visitor.Visitor*310*311*312*313*314˚
-Visitorjmespath.visitor.Visitor"builtins.object*ê
-__init__!jmespath.visitor.Visitor.__init__"
-None*>
-self4
-jmespath.visitor.Visitor"jmespath.visitor.Visitorz310z311z312z313z314*Ä
-visitjmespath.visitor.Visitor.visit"
-Any*>
-self4
-jmespath.visitor.Visitor"jmespath.visitor.Visitor*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*ï
-default_visit&jmespath.visitor.Visitor.default_visit"
-NoReturn
-*>
-self4
-jmespath.visitor.Visitor"jmespath.visitor.Visitor*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314S
-	_TreeNodejmespath.visitor._TreeNode"typing._TypedDictj310j311j312j313j314õ:
-TreeInterpreter jmespath.visitor.TreeInterpreter"jmespath.visitor.Visitor*°
-__init__)jmespath.visitor.TreeInterpreter.__init__"
-None*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*w
-optionsh
-$Union[jmespath.visitor.Options,None]4
-jmespath.visitor.Options"jmespath.visitor.Options
-None z310z311z312z313z314*≠
-default_visit.jmespath.visitor.TreeInterpreter.default_visit"
-NoReturn
-*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314*†
-visit_subexpression4jmespath.visitor.TreeInterpreter.visit_subexpression"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*ê
-visit_field,jmespath.visitor.TreeInterpreter.visit_field"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*ö
-visit_comparator1jmespath.visitor.TreeInterpreter.visit_comparator"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*î
-visit_current.jmespath.visitor.TreeInterpreter.visit_current"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*í
-visit_expref-jmespath.visitor.TreeInterpreter.visit_expref"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*¨
-visit_function_expression:jmespath.visitor.TreeInterpreter.visit_function_expression"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*®
-visit_filter_projection8jmespath.visitor.TreeInterpreter.visit_filter_projection"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*î
-visit_flatten.jmespath.visitor.TreeInterpreter.visit_flatten"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*ñ
-visit_identity/jmespath.visitor.TreeInterpreter.visit_identity"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*ê
-visit_index,jmespath.visitor.TreeInterpreter.visit_index"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*¶
-visit_index_expression7jmespath.visitor.TreeInterpreter.visit_index_expression"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*ê
-visit_slice,jmespath.visitor.TreeInterpreter.visit_slice"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*û
-visit_key_val_pair3jmespath.visitor.TreeInterpreter.visit_key_val_pair"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*î
-visit_literal.jmespath.visitor.TreeInterpreter.visit_literal"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*®
-visit_multi_select_dict8jmespath.visitor.TreeInterpreter.visit_multi_select_dict"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*®
-visit_multi_select_list8jmespath.visitor.TreeInterpreter.visit_multi_select_list"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*†
-visit_or_expression4jmespath.visitor.TreeInterpreter.visit_or_expression"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*¢
-visit_and_expression5jmespath.visitor.TreeInterpreter.visit_and_expression"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*¢
-visit_not_expression5jmespath.visitor.TreeInterpreter.visit_not_expression"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*é
+self(*
 
-visit_pipe+jmespath.visitor.TreeInterpreter.visit_pipe"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*ö
-visit_projection1jmespath.visitor.TreeInterpreter.visit_projection"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314*¶
-visit_value_projection7jmespath.visitor.TreeInterpreter.visit_value_projection"
-Any*N
-selfD
- jmespath.visitor.TreeInterpreter" jmespath.visitor.TreeInterpreter*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-value
-Anyz310z311z312z313z314j310j311j312j313j314rñ
-COMPARATOR_FUNC0jmespath.visitor.TreeInterpreter.COMPARATOR_FUNC∑
-;builtins.dict[builtins.str,CallableType[builtins.function]]
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dict*310*311*312*313*314rõ
-MAP_TYPE)jmespath.visitor.TreeInterpreter.MAP_TYPEK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314¡
-GraphvizVisitor jmespath.visitor.GraphvizVisitor"jmespath.visitor.Visitor*®
-__init__)jmespath.visitor.GraphvizVisitor.__init__"
-None*N
-selfD
- jmespath.visitor.GraphvizVisitor" jmespath.visitor.GraphvizVisitorz310z311z312z313z314*≠
-visit&jmespath.visitor.GraphvizVisitor.visit"
-builtins.str"builtins.str*N
-selfD
- jmespath.visitor.GraphvizVisitor" jmespath.visitor.GraphvizVisitor*M
-nodeC
-TypeAlias[TypedDict]
-	TypedDict"jmespath.visitor._TreeNode*
-args
-Any*
-kwargs
-Anyz310z311z312z313z314j310j311j312j313j314*•
-__annotations__ jmespath.visitor.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314
+expression(	*
+interpreter(
+*;
+visit*
+
+self(*
+
+node(*
+
+args(*
+kwargs(r
+
+expression0	r
+interpreter0
+∂
+Visitor"builtins.object*
+__init__*
+
+self(
+*;
+visit*
+
+self(
+*
+
+node(*
+
+args(*
+kwargs(*C
+default_visit*
+
+self(
+*
+
+node(*
+
+args(*
+kwargs(
+	_TreeNode"typing._TypedDictÊ
+TreeInterpreter"jmespath.visitor.Visitor*)
+__init__*
+
+self(*
+options (*C
+default_visit*
+
+self(*
+
+node(*
+
+args(*
+kwargs(*<
+visit_subexpression*
+
+self(*
+
+node(*
+value(*4
+visit_field*
+
+self(*
+
+node(*
+value(*9
+visit_comparator*
+
+self(*
+
+node(*
+value(*6
+visit_current*
+
+self(*
+
+node(*
+value(*5
+visit_expref*
+
+self(*
+
+node(*
+value(*B
+visit_function_expression*
+
+self(*
+
+node(*
+value(*@
+visit_filter_projection*
+
+self(*
+
+node(*
+value(*6
+visit_flatten*
+
+self(*
+
+node(*
+value(*7
+visit_identity*
+
+self(*
+
+node(*
+value(*4
+visit_index*
+
+self(*
+
+node(*
+value(*?
+visit_index_expression*
+
+self(*
+
+node(*
+value(*4
+visit_slice*
+
+self(*
+
+node(*
+value(*;
+visit_key_val_pair*
+
+self(*
+
+node(*
+value(*6
+visit_literal*
+
+self(*
+
+node(*
+value(*@
+visit_multi_select_dict*
+
+self(*
+
+node(*
+value(*@
+visit_multi_select_list*
+
+self(*
+
+node(*
+value(*<
+visit_or_expression*
+
+self(*
+
+node(*
+value(*=
+visit_and_expression*
+
+self(*
+
+node(*
+value(*=
+visit_not_expression*
+
+self(*
+
+node(*
+value(*3
+
+visit_pipe*
+
+self(*
+
+node(*
+value(*9
+visit_projection*
+
+self(*
+
+node(*
+value(*?
+visit_value_projection*
+
+self(*
+
+node(*
+value(r
+COMPARATOR_FUNC0r
+MAP_TYPE0Ç
+GraphvizVisitor"jmespath.visitor.Visitor*
+__init__*
+
+self(*;
+visit	*
+
+self(*
+
+node(*
+
+args(*
+kwargs(*
+__annotations__022"jmespath.visitor.Options2"builtins.function22222"jmespath.functions.Functions222"jmespath.visitor._Expression2"builtins.str2"jmespath.visitor.Visitor222!"jmespath.visitor._TreeNode22
+2"" jmespath.visitor.TreeInterpreter222"builtins.dict2	2"" jmespath.visitor.GraphvizVisitor2"builtins.dict2	

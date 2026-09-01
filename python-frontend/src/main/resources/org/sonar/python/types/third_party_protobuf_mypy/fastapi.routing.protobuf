@@ -1,1977 +1,535 @@
 
-fastapi.routing¢
-Mountstarlette.routing.Mount"starlette.routing.BaseRoute*—
-__init__ starlette.routing.Mount.__init__"
-None*<
-self2
-starlette.routing.Mount"starlette.routing.Mount*&
-path
-builtins.str"builtins.str*ç
-appÛ
-6Union[TypeAlias[CallableType[builtins.function]],None]”
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"starlette.types.ASGIApp
-None *Ò
-routesÃ
-8Union[typing.Sequence[starlette.routing.BaseRoute],None]{
-,typing.Sequence[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"typing.Sequence
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ç
+fastapi.routing÷
+Mountstarlette.routing.Mount"starlette.routing.BaseRoute*c
+__init__*
 
-middlewareÔ
-<Union[typing.Sequence[starlette.middleware.Middleware],None]‡
-0typing.Sequence[starlette.middleware.Middleware]B
-starlette.middleware.Middleware"starlette.middleware.Middleware"typing.Sequence
-None *ö
-routesstarlette.routing.Mount.routes"w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list*<
-self2
-starlette.routing.Mount"starlette.routing.Mount0:builtins.property`*ò
-matchesstarlette.routing.Mount.matches"Â
-QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
-starlette.routing.Match"starlette.routing.Match¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.Scope*<
-self2
-starlette.routing.Mount"starlette.routing.Mount*Â
-scope¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.Scope*ò
-url_path_for$starlette.routing.Mount.url_path_for"D
- starlette.datastructures.URLPath" starlette.datastructures.URLPath*<
-self2
-starlette.routing.Mount"starlette.routing.Mount*
-builtins.str"builtins.str*
-path_params
-Any*Á
-handlestarlette.routing.Mount.handle"N
-typing.Coroutine[Any,Any,None]
-Any
-Any
-None"typing.Coroutine*<
-self2
-starlette.routing.Mount"starlette.routing.Mount*Â
-scope¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.Scope*¢
-receive”
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"starlette.types.Receive*œ
-send‘
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"starlette.types.SendH*‰
-__eq__starlette.routing.Mount.__eq__"
-builtins.bool"builtins.bool*42
-starlette.routing.Mount"starlette.routing.Mount*	
-Any*€
-__repr__ starlette.routing.Mount.__repr__"
-builtins.str"builtins.str*42
-starlette.routing.Mount"starlette.routing.MountrB
-pathstarlette.routing.Mount.path
-builtins.str"builtins.strrÅ
-	_base_app!starlette.routing.Mount._base_app”
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"starlette.types.ASGIAppro
-appstarlette.routing.Mount.appK
-CallableType[builtins.function]&
-builtins.function"builtins.functionrj
-namestarlette.routing.Mount.nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerX
+self(*
 
-path_regex"starlette.routing.Mount.path_regex&
-re.Pattern[Any]
-Any"
-re.PatternrP
-path_format#starlette.routing.Mount.path_format
-builtins.str"builtins.strrý
-param_convertors(starlette.routing.Mount.param_convertors¾
-?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
-builtins.str"builtins.strN
-#starlette.convertors.Convertor[Any]
-Any"starlette.convertors.Convertor"builtins.dictŸ
-APIWebSocketRoute!fastapi.routing.APIWebSocketRoute" starlette.routing.WebSocketRoute*û
-__init__*fastapi.routing.APIWebSocketRoute.__init__"
-None*P
-selfF
-!fastapi.routing.APIWebSocketRoute"!fastapi.routing.APIWebSocketRoute*&
-path
-builtins.str"builtins.str*Y
-endpointK
-CallableType[builtins.function]&
-builtins.function"builtins.function*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *K
-dependency_overrides_provider&
-Union[Any,None]
-Any
-None *
-matches)fastapi.routing.APIWebSocketRoute.matches"Â
-QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
-starlette.routing.Match"starlette.routing.Match¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.Scope*P
-selfF
-!fastapi.routing.APIWebSocketRoute"!fastapi.routing.APIWebSocketRoute*Â
-scope¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.Scoper¨
-dependencies.fastapi.routing.APIWebSocketRoute.dependenciesh
-%builtins.list[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"builtins.listrˆ
-	dependant+fastapi.routing.APIWebSocketRoute.dependantN
-%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.DependantØY
-APIRoutefastapi.routing.APIRoute"starlette.routing.Route*§%
-__init__!fastapi.routing.APIRoute.__init__"
-None*>
-self4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute*&
-path
-builtins.str"builtins.str*Y
-endpointK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+path(*
+app (*
+routes (
+*
+name (*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ö
-methodsæ
-BUnion[builtins.set[builtins.str],builtins.list[builtins.str],None]H
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *²
-response_class›
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"typeV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *K
-dependency_overrides_provider&
-Union[Any,None]
-Any
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *
-generate_unique_id_functionù
-PUnion[CallableType[builtins.function],fastapi.datastructures.DefaultPlaceholder]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *Ì
-get_route_handler*fastapi.routing.APIRoute.get_route_handler"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*>
-self4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute*õ
-matches fastapi.routing.APIRoute.matches"Â
-QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
-starlette.routing.Match"starlette.routing.Match¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.Scope*>
-self4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute*Â
-scope¶
-2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping"starlette.types.ScoperB
-response_model'fastapi.routing.APIRoute.response_model
-Anyrq
-summary fastapi.routing.APIRoute.summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerc
-response_description-fastapi.routing.APIRoute.response_description
-builtins.str"builtins.strrz
+middleware (*-
+routes*
 
-deprecated#fastapi.routing.APIRoute.deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-Noner{
-operation_id%fastapi.routing.APIRoute.operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerõ
-response_model_include/fastapi.routing.APIRoute.response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-Nonerõ
-response_model_exclude/fastapi.routing.APIRoute.response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-Nonerk
-response_model_by_alias0fastapi.routing.APIRoute.response_model_by_alias
-builtins.bool"builtins.boolru
-response_model_exclude_unset5fastapi.routing.APIRoute.response_model_exclude_unset
-builtins.bool"builtins.boolr{
-response_model_exclude_defaults8fastapi.routing.APIRoute.response_model_exclude_defaults
-builtins.bool"builtins.boolrs
-response_model_exclude_none4fastapi.routing.APIRoute.response_model_exclude_none
-builtins.bool"builtins.boolr×
-response_class'fastapi.routing.APIRoute.response_class›
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"typeV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholderr
-dependency_overrides_provider6fastapi.routing.APIRoute.dependency_overrides_provider&
-Union[Any,None]
-Any
-Nonerï
-	callbacks"fastapi.routing.APIRoute.callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-NonerÌ
-openapi_extra&fastapi.routing.APIRoute.openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-NonerÏ
-generate_unique_id_function4fastapi.routing.APIRoute.generate_unique_id_functionù
-PUnion[CallableType[builtins.function],fastapi.datastructures.DefaultPlaceholder]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholderr¾
-tagsfastapi.routing.APIRoute.tags–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.listrÍ
-	responses"fastapi.routing.APIRoute.responses›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dictru
-methods fastapi.routing.APIRoute.methodsH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setrM
-	unique_id"fastapi.routing.APIRoute.unique_id
-builtins.str"builtins.strry
-status_code$fastapi.routing.APIRoute.status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Noners
-response_field'fastapi.routing.APIRoute.response_field8
-pydantic.fields.ModelField"pydantic.fields.ModelFieldrÅ
-secure_cloned_response_field5fastapi.routing.APIRoute.secure_cloned_response_fieldn
-&Union[pydantic.fields.ModelField,None]8
-pydantic.fields.ModelField"pydantic.fields.ModelField
-NonerŸ
-dependencies%fastapi.routing.APIRoute.dependenciesh
-%builtins.list[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"builtins.listrQ
-description$fastapi.routing.APIRoute.description
-builtins.str"builtins.strrµ
-response_fields(fastapi.routing.APIRoute.response_fields÷
-Jbuiltins.dict[Union[builtins.int,builtins.str],pydantic.fields.ModelField]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str8
-pydantic.fields.ModelField"pydantic.fields.ModelField"builtins.dictr
-	dependant"fastapi.routing.APIRoute.dependantN
-%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.Dependantr¡
+self(0:builtins.property`*$
+matches*
 
-body_field#fastapi.routing.APIRoute.body_fieldn
-&Union[pydantic.fields.ModelField,None]8
-pydantic.fields.ModelField"pydantic.fields.ModelField
-Noneï
-	APIRouterfastapi.routing.APIRouter"starlette.routing.Router*¶
-__init__"fastapi.routing.APIRouter.__init__"
-None*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter**
-prefix
-builtins.str"builtins.str *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *ˆ
-default_response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *Ì
-routes½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *6
-redirect_slashes
-builtins.bool"builtins.bool *ë
-defaultÛ
-6Union[TypeAlias[CallableType[builtins.function]],None]”
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"starlette.types.ASGIApp
-None *K
-dependency_overrides_provider&
-Union[Any,None]
-Any
-None *q
-route_class^
-Type[fastapi.routing.APIRoute]4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute"type *ð
+self(*
+scope(*3
+url_path_for*
 
-on_startupÝ
-<Union[typing.Sequence[CallableType[builtins.function]],None]
-0typing.Sequence[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"typing.Sequence
-None *ñ
-on_shutdownÝ
-<Union[typing.Sequence[CallableType[builtins.function]],None]
-0typing.Sequence[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"typing.Sequence
-None *¾
-lifespan­
-sUnion[TypeAlias[Union[TypeAlias[CallableType[builtins.function]],TypeAlias[CallableType[builtins.function]]]],None]©
-gTypeAlias[Union[TypeAlias[CallableType[builtins.function]],TypeAlias[CallableType[builtins.function]]]]¡
-\Union[TypeAlias[CallableType[builtins.function]],TypeAlias[CallableType[builtins.function]]]ž
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"!starlette.types.StatelessLifespan
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function" starlette.types.StatefulLifespan"starlette.types.Lifespan
-None *Y
+self(*(*
+path_params(*@
+handle*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *7
-include_in_schema
-builtins.bool"builtins.bool *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *þ
-routefastapi.routing.APIRouter.route"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*‘
-methods
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *7
-include_in_schema
-builtins.bool"builtins.bool *Ÿ&
-add_api_route'fastapi.routing.APIRouter.add_api_route"
-None*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*Y
-endpointK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+self(*
+scope(*
+receive(*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *ö
-methodsæ
-BUnion[builtins.set[builtins.str],builtins.list[builtins.str],None]H
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *²
-response_class›
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"typeV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *µ
-route_class_override˜
-*Union[Type[fastapi.routing.APIRoute],None]^
-Type[fastapi.routing.APIRoute]4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute"type
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *
-generate_unique_id_functionù
-PUnion[CallableType[builtins.function],fastapi.datastructures.DefaultPlaceholder]K
-CallableType[builtins.function]&
-builtins.function"builtins.functionV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *€!
-	api_route#fastapi.routing.APIRouter.api_route"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+send(H*
+__eq__*(*(*
+__repr__*(r
+path0r
+	_base_app0r
+app0r
+name0r
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *‘
-methods
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *´
-add_api_websocket_route1fastapi.routing.APIRouter.add_api_websocket_route"
-None*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*Y
-endpointK
-CallableType[builtins.function]&
-builtins.function"builtins.function*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *€
-	websocket#fastapi.routing.APIRouter.websocket"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *Å
-websocket_route)fastapi.routing.APIRouter.websocket_route"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *©
-include_router(fastapi.routing.APIRouter.include_router"
-None*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*B
-router6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter**
-prefix
-builtins.str"builtins.str *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *ˆ
-default_response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *Y
+path_regex0r
+path_format0r
+param_convertors0ý
+APIWebSocketRoute" starlette.routing.WebSocketRoute*
+__init__*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *7
-include_in_schema
-builtins.bool"builtins.bool *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *à
-getfastapi.routing.APIRouter.get"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+self(*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *à
-putfastapi.routing.APIRouter.put"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+path(*
+endpoint(*
+name (*
+dependencies ( *%
+dependency_overrides_provider (!*$
+matches*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *â
-postfastapi.routing.APIRouter.post"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+self(*
+scope(r
+dependencies0"r
+	dependant0#ù
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *æ
-delete fastapi.routing.APIRouter.delete"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+APIRoute"starlette.routing.Route*£
+__init__*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *è
-options!fastapi.routing.APIRouter.options"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+self($*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *â
-headfastapi.routing.APIRouter.head"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+path(*
+endpoint(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *ä
-patchfastapi.routing.APIRouter.patch"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+deprecated (/*
+name (*
+methods (2*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (;*%
+dependency_overrides_provider (!*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (>*!
+get_route_handler*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *ä
-tracefastapi.routing.APIRouter.trace"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*&
-path
-builtins.str"builtins.str*
-response_model
-Any *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ì
-tagsß
-8Union[builtins.list[Union[builtins.str,enum.Enum]],None]–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.list
-None *Ä
-dependencies¯
-3Union[typing.Sequence[fastapi.params.Depends],None]l
-'typing.Sequence[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *S
-summaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *8
-response_description
-builtins.str"builtins.str *™
-	responses‡
-[Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dict
-None *Y
+self($*$
+matches*
 
-deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *X
-operation_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *7
-include_in_schema
-builtins.bool"builtins.bool *€
-response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"type *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Ï
-	callbacks½
-6Union[builtins.list[starlette.routing.BaseRoute],None]w
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list
-None *¨
-openapi_extra’
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None *n
-generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function *ë
-on_event"fastapi.routing.APIRouter.on_event"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*@
-self6
-fastapi.routing.APIRouter"fastapi.routing.APIRouter*,
+self($*
+scope(r
+response_model0r
+summary0r
+response_description0r
 
-event_type
-builtins.str"builtins.strrH
-prefix fastapi.routing.APIRouter.prefix
-builtins.str"builtins.strr¿
-tagsfastapi.routing.APIRouter.tags–
-,builtins.list[Union[builtins.str,enum.Enum]]W
-Union[builtins.str,enum.Enum]
-builtins.str"builtins.str
-	enum.Enum"	enum.Enum"builtins.listr 
-dependencies&fastapi.routing.APIRouter.dependenciesh
-%builtins.list[fastapi.params.Depends]0
-fastapi.params.Depends"fastapi.params.Depends"builtins.listr{
+deprecated0/r
+operation_id0r
+response_model_include07r
+response_model_exclude07r
+response_model_by_alias0r 
+response_model_exclude_unset0r#
+response_model_exclude_defaults0r
+response_model_exclude_none0r
+response_class0;r!
+dependency_overrides_provider0!r
+	callbacks0<r
+openapi_extra0=r
+generate_unique_id_function0>r
+tags0)r
+	responses0-r
+methods00r
+	unique_id0r
+status_code0&r
+response_field0?r 
+secure_cloned_response_field0@r
+dependencies0"r
+description0r
+response_fields0Ar
+	dependant0#r
 
-deprecated$fastapi.routing.APIRouter.deprecatedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-Noner`
-include_in_schema+fastapi.routing.APIRouter.include_in_schema
-builtins.bool"builtins.boolrÎ
-	responses#fastapi.routing.APIRouter.responses›
-Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.dictr©
-	callbacks#fastapi.routing.APIRouter.callbacksw
-*builtins.list[starlette.routing.BaseRoute]:
-starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.listr€
-dependency_overrides_provider7fastapi.routing.APIRouter.dependency_overrides_provider&
-Union[Any,None]
-Any
-Noner”
-route_class%fastapi.routing.APIRouter.route_class^
-Type[fastapi.routing.APIRoute]4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute"typer¶
-default_response_class0fastapi.routing.APIRouter.default_response_classj
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"typer¡
-generate_unique_id_function5fastapi.routing.APIRouter.generate_unique_id_functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function€
-_prepare_response_content)fastapi.routing._prepare_response_content"
-Any*
-res
-Any*1
-exclude_unset
-builtins.bool"builtins.bool*6
-exclude_defaults
-builtins.bool"builtins.bool *2
-exclude_none
-builtins.bool"builtins.bool ¡
-serialize_response"fastapi.routing.serialize_response"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*{
-fieldn
-&Union[pydantic.fields.ModelField,None]8
-pydantic.fields.ModelField"pydantic.fields.ModelField
-None *
-response_content
-Any*¹
-include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *¹
-exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *.
-by_alias
-builtins.bool"builtins.bool *3
-exclude_unset
-builtins.bool"builtins.bool *6
-exclude_defaults
-builtins.bool"builtins.bool *2
-exclude_none
-builtins.bool"builtins.bool *2
-is_coroutine
-builtins.bool"builtins.bool H„
-run_endpoint_function%fastapi.routing.run_endpoint_function"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*]
-	dependantN
-%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.Dependant*c
-valuesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*0
-is_coroutine
-builtins.bool"builtins.boolHî
-get_request_handler#fastapi.routing.get_request_handler"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*]
-	dependantN
-%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.Dependant*€
+body_field0@ú9
+	APIRouter"starlette.routing.Router*˜
+__init__*
 
-body_fieldn
-&Union[pydantic.fields.ModelField,None]8
-pydantic.fields.ModelField"pydantic.fields.ModelField
-None *W
-status_codeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *²
-response_class›
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
-"Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response"typeV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *„
-response_fieldn
-&Union[pydantic.fields.ModelField,None]8
-pydantic.fields.ModelField"pydantic.fields.ModelField
-None *È
-response_model_include©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *È
-response_model_exclude©
-„Union[TypeAlias[builtins.set[Union[builtins.int,builtins.str]]],TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]],None]ü
-9TypeAlias[builtins.set[Union[builtins.int,builtins.str]]] 
-.builtins.set[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.set"fastapi.encoders.SetIntStr”
->TypeAlias[builtins.dict[Union[builtins.int,builtins.str],Any]]¯
-3builtins.dict[Union[builtins.int,builtins.str],Any]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str
-Any"builtins.dict"fastapi.encoders.DictIntStrAny
-None *=
-response_model_by_alias
-builtins.bool"builtins.bool *B
-response_model_exclude_unset
-builtins.bool"builtins.bool *E
-response_model_exclude_defaults
-builtins.bool"builtins.bool *A
-response_model_exclude_none
-builtins.bool"builtins.bool *K
-dependency_overrides_provider&
-Union[Any,None]
-Any
-None ¯
-get_websocket_app!fastapi.routing.get_websocket_app"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*]
-	dependantN
-%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.Dependant*K
-dependency_overrides_provider&
-Union[Any,None]
-Any
-None *‹
-__annotations__fastapi.routing.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-emailemail 
+self(B*
+prefix (*
+tags (**
+dependencies ( *
+default_response_class (9*
+	responses (.*
+	callbacks (<*
+routes (<*
+redirect_slashes (*
+default (*%
+dependency_overrides_provider (!*
+route_class (C*
+
+on_startup (E*
+on_shutdown (E*
+lifespan (J*
+
+deprecated (/*
+include_in_schema (*#
+generate_unique_id_function (*[
+route*
+
+self(B*
+
+path(*
+methods (K*
+name (*
+include_in_schema (*Ÿ
+add_api_route*
+
+self(B*
+
+path(*
+endpoint(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+methods (2*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (;*
+name (*
+route_class_override (L*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (>*í
+	api_route*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+methods (K*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*g
+add_api_websocket_route*
+
+self(B*
+
+path(*
+endpoint(*
+name (*
+dependencies ( *I
+	websocket*
+
+self(B*
+
+path(*
+name (*
+dependencies ( *9
+websocket_route*
+
+self(B*
+
+path(*
+name (*ú
+include_router*
+
+self(B*
+router(B*
+prefix (*
+tags (**
+dependencies ( *
+default_response_class (9*
+	responses (.*
+	callbacks (<*
+
+deprecated (/*
+include_in_schema (*#
+generate_unique_id_function (*Ö
+get*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*Ö
+put*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*×
+post*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*Ù
+delete*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*Ú
+options*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*×
+head*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*Ø
+patch*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (*Ø
+trace*
+
+self(B*
+
+path(*
+response_model (*
+status_code (&*
+tags (**
+dependencies ( *
+summary (*
+description (*
+response_description (*
+	responses (.*
+
+deprecated (/*
+operation_id (*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*
+include_in_schema (*
+response_class (9*
+name (*
+	callbacks (<*
+openapi_extra (=*#
+generate_unique_id_function (**
+on_event*
+
+self(B*
+
+event_type(r
+
+prefix0r
+tags0)r
+dependencies0"r
+
+deprecated0/r
+include_in_schema0r
+	responses0-r
+	callbacks0r!
+dependency_overrides_provider0!r
+route_class0Cr
+default_response_class09r
+generate_unique_id_function0m
+_prepare_response_content*	
+res(*
+exclude_unset(*
+exclude_defaults (*
+exclude_none (Ð
+serialize_responseM*
+field (@*
+response_content(*
+include (7*
+exclude (7*
+by_alias (*
+exclude_unset (*
+exclude_defaults (*
+exclude_none (*
+is_coroutine (HN
+run_endpoint_functionM*
+	dependant(#*
+values(,*
+is_coroutine(Hý
+get_request_handler*
+	dependant(#*
+
+body_field (@*
+status_code (&*
+response_class (;*
+response_field (@*
+response_model_include (7*
+response_model_exclude (7*
+response_model_by_alias (*$
+response_model_exclude_unset (*'
+response_model_exclude_defaults (*#
+response_model_exclude_none (*%
+dependency_overrides_provider (!M
+get_websocket_app*
+	dependant(#*%
+dependency_overrides_provider (!*
+__annotations__0,*
+emailemail 22"starlette.routing.Mount2"builtins.str2"builtins.function222"starlette.types.ASGIApp2222"starlette.routing.BaseRoute2"typing.Sequence222	222!"starlette.middleware.Middleware2"typing.Sequence2222"builtins.list22"starlette.routing.Match22"typing.MutableMapping22"starlette.types.Scope2222"" starlette.datastructures.URLPath2"typing.Coroutine22"starlette.types.Receive22"starlette.types.Send22"builtins.bool2"
+re.Pattern22#"starlette.convertors.Convertor22"builtins.dict22#"!fastapi.routing.APIWebSocketRoute2"fastapi.params.Depends2"typing.Sequence222222"builtins.list22'"%fastapi.dependencies.models.Dependant2"fastapi.routing.APIRoute2"builtins.int22%2"	enum.Enum22'2"builtins.list2(22)22%2"builtins.dict22"builtins.dict2+,22-222"builtins.set22"builtins.list222012"builtins.set2+2!"fastapi.encoders.SetIntStr232"builtins.dict2+2%"fastapi.encoders.DictIntStrAny2522462"starlette.responses.Response2"type282+")fastapi.datastructures.DefaultPlaceholder229:2222,22:2"pydantic.fields.ModelField22?2"builtins.dict2+?2"fastapi.routing.APIRouter2"type2$2"typing.Sequence222D2("!starlette.types.StatelessLifespan22'" starlette.types.StatefulLifespan222FG2"starlette.types.Lifespan2H22I22122C2"typing.Coroutine2

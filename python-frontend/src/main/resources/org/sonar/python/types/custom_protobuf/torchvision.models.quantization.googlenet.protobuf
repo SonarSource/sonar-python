@@ -1,117 +1,71 @@
 
-)torchvision.models.quantization.googlenetò
-QuantizableBasicConv2d@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"(torchvision.models.googlenet.BasicConv2d*™
-__init__Itorchvision.models.quantization.googlenet.QuantizableBasicConv2d.__init__"
-None*
-self„
-@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*
-args
-Any*
-kwargs
-Any*¨
-forwardHtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.forward"
-torch.Tensor"torch.Tensor*
-self„
-@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*#
-x
-torch.Tensor"torch.Tensor*Ì
+)torchvision.models.quantization.googlenetÎ
+QuantizableBasicConv2d"(torchvision.models.googlenet.BasicConv2d*2
+__init__*
 
-fuse_modelKtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.fuse_model"
-None*
-self„
-@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rV
-reluEtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.relu
-Any
-QuantizableInception>torchvision.models.quantization.googlenet.QuantizableInception"&torchvision.models.googlenet.Inception*“
-__init__Gtorchvision.models.quantization.googlenet.QuantizableInception.__init__"
-None*‹
-self€
->torchvision.models.quantization.googlenet.QuantizableInception">torchvision.models.quantization.googlenet.QuantizableInception*
-args
-Any*
-kwargs
-Any*¢
-forwardFtorchvision.models.quantization.googlenet.QuantizableInception.forward"
-torch.Tensor"torch.Tensor*‹
-self€
->torchvision.models.quantization.googlenet.QuantizableInception">torchvision.models.quantization.googlenet.QuantizableInception*#
-x
-torch.Tensor"torch.TensorrR
-catBtorchvision.models.quantization.googlenet.QuantizableInception.cat
-Any­
-QuantizableInceptionAuxAtorchvision.models.quantization.googlenet.QuantizableInceptionAux")torchvision.models.googlenet.InceptionAux*œ
-__init__Jtorchvision.models.quantization.googlenet.QuantizableInceptionAux.__init__"
-None*‘
-self†
-Atorchvision.models.quantization.googlenet.QuantizableInceptionAux"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux*
-args
-Any*
-kwargs
-Any*«
-forwardItorchvision.models.quantization.googlenet.QuantizableInceptionAux.forward"
-torch.Tensor"torch.Tensor*‘
-self†
-Atorchvision.models.quantization.googlenet.QuantizableInceptionAux"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux*#
-x
-torch.Tensor"torch.TensorrW
-reluFtorchvision.models.quantization.googlenet.QuantizableInceptionAux.relu
-Anyž
+self(*
 
-QuantizableGoogLeNet>torchvision.models.quantization.googlenet.QuantizableGoogLeNet"&torchvision.models.googlenet.GoogLeNet*“
-__init__Gtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.__init__"
-None*‹
-self€
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*
-args
-Any*
-kwargs
-Any*Š
-forwardFtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.forward"ƒ
-TypeAlias[Tuple[Any,Any,Any]]1
-Tuple[Any,Any,Any]
-Any
-Any
-Any"-torchvision.models.googlenet.GoogLeNetOutputs*‹
-self€
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*#
-x
-torch.Tensor"torch.Tensor*Æ
+args(*
+kwargs(* 
+forward*
 
-fuse_modelItorchvision.models.quantization.googlenet.QuantizableGoogLeNet.fuse_model"
-None*‹
-self€
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*U
-is_qatG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None rV
-quantDtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.quant
-AnyrZ
-dequantFtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.dequant
-Anyç
-GoogLeNet_QuantizedWeightsDtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"#torchvision.models._api.WeightsEnumHrz
-IMAGENET1K_FBGEMM_V1Ytorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights.IMAGENET1K_FBGEMM_V1
-Anyr`
-DEFAULTLtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights.DEFAULT
-AnyÉ
-	googlenet3torchvision.models.quantization.googlenet.googlenet"€
->torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*Ž
-weightsþ
-Union[torchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights,torchvision.models.googlenet.GoogLeNet_Weights,None]Œ
-Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights`
-.torchvision.models.googlenet.GoogLeNet_Weights".torchvision.models.googlenet.GoogLeNet_Weights
-None *.
-progress
-builtins.bool"builtins.bool *.
-quantize
-builtins.bool"builtins.bool *
-kwargs
-Any*¥
-__annotations__9torchvision.models.quantization.googlenet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
+self(*
+x(**
+
+fuse_model*
+
+self(*
+is_qat (r
+relu0
+QuantizableInception"&torchvision.models.googlenet.Inception*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r
+cat0¤
+QuantizableInceptionAux")torchvision.models.googlenet.InceptionAux*2
+__init__*
+
+self(*
+
+args(*
+kwargs(* 
+forward*
+
+self(*
+x(r
+relu0Ø
+QuantizableGoogLeNet"&torchvision.models.googlenet.GoogLeNet*2
+__init__*
+
+self(	*
+
+args(*
+kwargs(* 
+forward*
+
+self(	*
+x(**
+
+fuse_model*
+
+self(	*
+is_qat (r	
+quant0r
+dequant0j
+GoogLeNet_QuantizedWeights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_FBGEMM_V10r
+DEFAULT0P
+	googlenet	*
+weights (*
+progress (*
+quantize (*
+kwargs(*
+__annotations__022B"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d22"torch.Tensor2"builtins.bool222@">torchvision.models.quantization.googlenet.QuantizableInception2C"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux2@">torchvision.models.quantization.googlenet.QuantizableGoogLeNet2224"-torchvision.models.googlenet.GoogLeNetOutputs2
+2F"Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights20".torchvision.models.googlenet.GoogLeNet_Weights222"builtins.str2"builtins.dict2

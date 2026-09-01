@@ -1,685 +1,250 @@
 
-pydantic.networks3
-Partspydantic.networks.Parts"typing._TypedDict;
-	HostPartspydantic.networks.HostParts"typing._TypedDictÙ>
-AnyUrlpydantic.networks.AnyUrl"builtins.str*c
-__new__ pydantic.networks.AnyUrl.__new__*
+pydantic.networks
+Parts"typing._TypedDict
+	HostParts"typing._TypedDictÓ
+AnyUrl"builtins.str*A
+__new__*
 cls*
 url*
 
-kwargs0:typing.no_type_checkh*
-__init__!pydantic.networks.AnyUrl.__init__"
-None*>
-self4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl*%
-url
-builtins.str"builtins.str*(
-scheme
-builtins.str"builtins.str*P
-userD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *O
-tldD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *-
-	host_type
-builtins.str"builtins.str *P
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Q
-queryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-fragmentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *º
-buildpydantic.networks.AnyUrl.build"
-builtins.str"builtins.str*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*(
-scheme
-builtins.str"builtins.str*P
-userD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *P
-pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Q
-queryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-fragmentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *)
-_kwargs
-builtins.str"builtins.str0:builtins.classmethodp*·
-__modify_schema__*pydantic.networks.AnyUrl.__modify_schema__"
-None*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*i
-field_schemaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethodp*Í
-__get_validators__+pydantic.networks.AnyUrl.__get_validators__"†
-QTypeAlias[typing.Generator[TypeAlias[CallableType[builtins.function]],None,None]]‰
-Ftyping.Generator[TypeAlias[CallableType[builtins.function]],None,None]˜
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pydantic.typing.AnyCallable
-None
-None"typing.Generator"#pydantic.networks.CallableGenerator*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type0:builtins.classmethodp*…
-validate!pydantic.networks.AnyUrl.validate"4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*
-value
-Any*C
-field8
-pydantic.fields.ModelField"pydantic.fields.ModelField*D
-config8
-pydantic.config.BaseConfig"pydantic.config.BaseConfig0:builtins.classmethodp*§
+kwargs0:typing.no_type_checkh*¼
+__init__*
 
-_build_url#pydantic.networks.AnyUrl._build_url"4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*G
-m@
-re.Match[builtins.str]
-builtins.str"builtins.str"re.Match*%
-url
-builtins.str"builtins.str*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.classmethodp*ç
+self(*	
+url(*
+scheme(*
+user (*
+password (*
+host (*
+tld (*
+	host_type (*
+port (*
+path (*
+query (*
+fragment (*´
+build*	
+cls(*
+scheme(*
+user (*
+password (*
 
-_match_url#pydantic.networks.AnyUrl._match_url"r
-"Union[re.Match[builtins.str],None]@
-re.Match[builtins.str]
-builtins.str"builtins.str"re.Match
-None*%
-url
-builtins.str"builtins.str0:builtins.staticmethodh*®
-_validate_port'pydantic.networks.AnyUrl._validate_port"
-None*N
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None0:builtins.staticmethodh*€
-validate_parts'pydantic.networks.AnyUrl.validate_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*3
-validate_port
-builtins.bool"builtins.bool 0:builtins.classmethodp*÷
-validate_host&pydantic.networks.AnyUrl.validate_host"í
-GTuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str
-builtins.bool"builtins.bool*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.classmethodp*é
-get_default_parts*pydantic.networks.AnyUrl.get_default_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.staticmethodh*Õ
-apply_default_parts,pydantic.networks.AnyUrl.apply_default_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*g
-cls^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.classmethodp*ƒ
-__repr__!pydantic.networks.AnyUrl.__repr__"
-builtins.str"builtins.str*64
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrlr]
-strip_whitespace)pydantic.networks.AnyUrl.strip_whitespace
-builtins.bool"builtins.boolrO
+host(*
+port (*
+path (*
+query (*
+fragment (*
+_kwargs(0:builtins.classmethodp*N
+__modify_schema__*	
+cls(*
+field_schema(0:builtins.classmethodp*;
+__get_validators__*	
+cls(0:builtins.classmethodp*Y
+validate*	
+cls(*
+value(*
+field(*
+config(0:builtins.classmethodp*T
 
-min_length#pydantic.networks.AnyUrl.min_length
-builtins.int"builtins.intrO
+_build_url*	
+cls(*
+m(*	
+url(*
+parts(0:builtins.classmethodp*4
 
-max_length#pydantic.networks.AnyUrl.max_length
-builtins.int"builtins.intrË
-allowed_schemes(pydantic.networks.AnyUrl.allowed_schemes
-+Union[typing.Collection[builtins.str],None]R
-typing.Collection[builtins.str]
-builtins.str"builtins.str"typing.Collection
-NonerU
-tld_required%pydantic.networks.AnyUrl.tld_required
-builtins.bool"builtins.boolrW
-user_required&pydantic.networks.AnyUrl.user_required
-builtins.bool"builtins.boolrW
-host_required&pydantic.networks.AnyUrl.host_required
-builtins.bool"builtins.boolr
-hidden_parts%pydantic.networks.AnyUrl.hidden_partsH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setrë
-	__slots__"pydantic.networks.AnyUrl.__slots__¹
-ˆTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.strrG
-schemepydantic.networks.AnyUrl.scheme
-builtins.str"builtins.strrk
-userpydantic.networks.AnyUrl.userD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noners
-password!pydantic.networks.AnyUrl.passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerk
-hostpydantic.networks.AnyUrl.hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noneri
-tldpydantic.networks.AnyUrl.tldD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NonerM
-	host_type"pydantic.networks.AnyUrl.host_type
-builtins.str"builtins.strrk
-portpydantic.networks.AnyUrl.portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerk
-pathpydantic.networks.AnyUrl.pathD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonerm
-querypydantic.networks.AnyUrl.queryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noners
-fragment!pydantic.networks.AnyUrl.fragmentD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None’
+_match_url*	
+url(0:builtins.staticmethodh*9
+_validate_port*
 
-AnyHttpUrlpydantic.networks.AnyHttpUrl"pydantic.networks.AnyUrlr‰
-allowed_schemes,pydantic.networks.AnyHttpUrl.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setr@
-	__slots__&pydantic.networks.AnyHttpUrl.__slots__
-Tuple[]Ü
-HttpUrlpydantic.networks.HttpUrl"pydantic.networks.AnyHttpUrl*ê
-get_default_parts+pydantic.networks.HttpUrl.get_default_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.staticmethodhrV
-tld_required&pydantic.networks.HttpUrl.tld_required
-builtins.bool"builtins.boolrP
+port(0:builtins.staticmethodh*[
+validate_parts*	
+cls(*
+parts(*
+validate_port (0:builtins.classmethodp*C
+validate_host*	
+cls(*
+parts(0:builtins.classmethodp*=
+get_default_parts*
+parts(0:builtins.staticmethodh*I
+apply_default_parts*	
+cls(*
+parts(0:builtins.classmethodp*
+__repr__*(r
+strip_whitespace0r
 
-max_length$pydantic.networks.HttpUrl.max_length
-builtins.int"builtins.intr€
-hidden_parts&pydantic.networks.HttpUrl.hidden_partsH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setà
-FileUrlpydantic.networks.FileUrl"pydantic.networks.AnyUrlr†
-allowed_schemes)pydantic.networks.FileUrl.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setrX
-host_required'pydantic.networks.FileUrl.host_required
-builtins.bool"builtins.boolr=
-	__slots__#pydantic.networks.FileUrl.__slots__
-Tuple[]Ë
-MultiHostDsnpydantic.networks.MultiHostDsn"pydantic.networks.AnyUrl*û
-__init__'pydantic.networks.MultiHostDsn.__init__"
-None*J
-self@
-pydantic.networks.MultiHostDsn"pydantic.networks.MultiHostDsn*
-args
-Any*Ç
-hosts¹
-/Union[builtins.list[TypeAlias[TypedDict]],None]z
-#builtins.list[TypeAlias[TypedDict]]D
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.HostParts"builtins.list
-None *
-kwargs
-Any*í
+min_length0r
 
-_match_url)pydantic.networks.MultiHostDsn._match_url"r
-"Union[re.Match[builtins.str],None]@
-re.Match[builtins.str]
-builtins.str"builtins.str"re.Match
-None*%
-url
-builtins.str"builtins.str0:builtins.staticmethodh*˜
-validate_parts-pydantic.networks.MultiHostDsn.validate_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*y
-clsp
-$Type[pydantic.networks.MultiHostDsn]@
-pydantic.networks.MultiHostDsn"pydantic.networks.MultiHostDsn"type*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*3
-validate_port
-builtins.bool"builtins.bool 0:builtins.classmethodp*Ë
+max_length0r
+allowed_schemes0r
+tld_required0r
+user_required0r
+host_required0r
+hidden_parts0r
+	__slots__0r
 
-_build_url)pydantic.networks.MultiHostDsn._build_url"@
-pydantic.networks.MultiHostDsn"pydantic.networks.MultiHostDsn*y
-clsp
-$Type[pydantic.networks.MultiHostDsn]@
-pydantic.networks.MultiHostDsn"pydantic.networks.MultiHostDsn"type*G
-m@
-re.Match[builtins.str]
-builtins.str"builtins.str"re.Match*%
-url
-builtins.str"builtins.str*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.classmethodpr>
-	__slots__(pydantic.networks.MultiHostDsn.__slots__
-Anyré
-hosts$pydantic.networks.MultiHostDsn.hosts¹
-/Union[builtins.list[TypeAlias[TypedDict]],None]z
-#builtins.list[TypeAlias[TypedDict]]D
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.HostParts"builtins.list
-Noneú
-PostgresDsnpydantic.networks.PostgresDsn"pydantic.networks.MultiHostDsnrŠ
-allowed_schemes-pydantic.networks.PostgresDsn.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setr\
-user_required+pydantic.networks.PostgresDsn.user_required
-builtins.bool"builtins.boolrA
-	__slots__'pydantic.networks.PostgresDsn.__slots__
-Tuple[]µ
-CockroachDsnpydantic.networks.CockroachDsn"pydantic.networks.AnyUrlr‹
-allowed_schemes.pydantic.networks.CockroachDsn.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setr]
-user_required,pydantic.networks.CockroachDsn.user_required
-builtins.bool"builtins.bool¡
-AmqpDsnpydantic.networks.AmqpDsn"pydantic.networks.AnyUrlr†
-allowed_schemes)pydantic.networks.AmqpDsn.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setrX
-host_required'pydantic.networks.AmqpDsn.host_required
-builtins.bool"builtins.boolÓ
-RedisDsnpydantic.networks.RedisDsn"pydantic.networks.AnyUrl*ë
-get_default_parts,pydantic.networks.RedisDsn.get_default_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.staticmethodhr>
-	__slots__$pydantic.networks.RedisDsn.__slots__
-Tuple[]r‡
-allowed_schemes*pydantic.networks.RedisDsn.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setrY
-host_required(pydantic.networks.RedisDsn.host_required
-builtins.bool"builtins.bool¸
-MongoDsnpydantic.networks.MongoDsn"pydantic.networks.AnyUrl*ë
-get_default_parts,pydantic.networks.MongoDsn.get_default_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.staticmethodhr‡
-allowed_schemes*pydantic.networks.MongoDsn.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set¸
-KafkaDsnpydantic.networks.KafkaDsn"pydantic.networks.AnyUrl*ë
-get_default_parts,pydantic.networks.KafkaDsn.get_default_parts"@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts*K
-parts@
-TypeAlias[TypedDict]
-	TypedDict"pydantic.networks.Parts0:builtins.staticmethodhr‡
-allowed_schemes*pydantic.networks.KafkaDsn.allowed_schemesH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.setÐ	
-EmailStrpydantic.networks.EmailStr"builtins.str*¿
-__modify_schema__,pydantic.networks.EmailStr.__modify_schema__"
-None*m
-clsd
- Type[pydantic.networks.EmailStr]8
-pydantic.networks.EmailStr"pydantic.networks.EmailStr"type*i
-field_schemaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethodp*Õ
-__get_validators__-pydantic.networks.EmailStr.__get_validators__"†
-QTypeAlias[typing.Generator[TypeAlias[CallableType[builtins.function]],None,None]]‰
-Ftyping.Generator[TypeAlias[CallableType[builtins.function]],None,None]˜
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pydantic.typing.AnyCallable
-None
-None"typing.Generator"#pydantic.networks.CallableGenerator*m
-clsd
- Type[pydantic.networks.EmailStr]8
-pydantic.networks.EmailStr"pydantic.networks.EmailStr"type0:builtins.classmethodp*ÿ
-validate#pydantic.networks.EmailStr.validate"
-builtins.str"builtins.str*m
-clsd
- Type[pydantic.networks.EmailStr]8
-pydantic.networks.EmailStr"pydantic.networks.EmailStr"type*'
-value
-builtins.str"builtins.str0:builtins.classmethodpš
-	NameEmailpydantic.networks.NameEmail"pydantic.utils.Representation*Ñ
-__init__$pydantic.networks.NameEmail.__init__"
-None*D
-self:
-pydantic.networks.NameEmail"pydantic.networks.NameEmail*&
-name
-builtins.str"builtins.str*'
-email
-builtins.str"builtins.str*•
-__eq__"pydantic.networks.NameEmail.__eq__"
-builtins.bool"builtins.bool*<:
-pydantic.networks.NameEmail"pydantic.networks.NameEmail*	
-Any*Ã
-__modify_schema__-pydantic.networks.NameEmail.__modify_schema__"
-None*p
-clsg
-!Type[pydantic.networks.NameEmail]:
-pydantic.networks.NameEmail"pydantic.networks.NameEmail"type*i
-field_schemaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethodp*Ù
-__get_validators__.pydantic.networks.NameEmail.__get_validators__"†
-QTypeAlias[typing.Generator[TypeAlias[CallableType[builtins.function]],None,None]]‰
-Ftyping.Generator[TypeAlias[CallableType[builtins.function]],None,None]˜
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pydantic.typing.AnyCallable
-None
-None"typing.Generator"#pydantic.networks.CallableGenerator*p
-clsg
-!Type[pydantic.networks.NameEmail]:
-pydantic.networks.NameEmail"pydantic.networks.NameEmail"type0:builtins.classmethodp*Œ
-validate$pydantic.networks.NameEmail.validate":
-pydantic.networks.NameEmail"pydantic.networks.NameEmail*p
-clsg
-!Type[pydantic.networks.NameEmail]:
-pydantic.networks.NameEmail"pydantic.networks.NameEmail"type*
-value
-Any0:builtins.classmethodp*Š
-__str__#pydantic.networks.NameEmail.__str__"
-builtins.str"builtins.str*<:
-pydantic.networks.NameEmail"pydantic.networks.NameEmailr”
-	__slots__%pydantic.networks.NameEmail.__slots__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrF
-name pydantic.networks.NameEmail.name
-builtins.str"builtins.strrH
-email!pydantic.networks.NameEmail.email
-builtins.str"builtins.str×
-IPvAnyAddresspydantic.networks.IPvAnyAddress"ipaddress._BaseAddress*Ó
-__modify_schema__1pydantic.networks.IPvAnyAddress.__modify_schema__"
-None*|
-clss
-%Type[pydantic.networks.IPvAnyAddress]B
-pydantic.networks.IPvAnyAddress"pydantic.networks.IPvAnyAddress"type*i
-field_schemaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethodp*é
-__get_validators__2pydantic.networks.IPvAnyAddress.__get_validators__"†
-QTypeAlias[typing.Generator[TypeAlias[CallableType[builtins.function]],None,None]]‰
-Ftyping.Generator[TypeAlias[CallableType[builtins.function]],None,None]˜
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pydantic.typing.AnyCallable
-None
-None"typing.Generator"#pydantic.networks.CallableGenerator*|
-clss
-%Type[pydantic.networks.IPvAnyAddress]B
-pydantic.networks.IPvAnyAddress"pydantic.networks.IPvAnyAddress"type0:builtins.classmethodp*…
-validate(pydantic.networks.IPvAnyAddress.validate"–
-2Union[ipaddress.IPv4Address,ipaddress.IPv6Address].
-ipaddress.IPv4Address"ipaddress.IPv4Address.
-ipaddress.IPv6Address"ipaddress.IPv6Address*|
-clss
-%Type[pydantic.networks.IPvAnyAddress]B
-pydantic.networks.IPvAnyAddress"pydantic.networks.IPvAnyAddress"type*
-value‘
-/Union[builtins.str,builtins.bytes,builtins.int]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int0:builtins.classmethodprC
-	__slots__)pydantic.networks.IPvAnyAddress.__slots__
-Tuple[]ê
-IPvAnyInterface!pydantic.networks.IPvAnyInterface"ipaddress._BaseAddress*Ü
-__modify_schema__3pydantic.networks.IPvAnyInterface.__modify_schema__"
-None*‚
-clsy
-'Type[pydantic.networks.IPvAnyInterface]F
-!pydantic.networks.IPvAnyInterface"!pydantic.networks.IPvAnyInterface"type*i
-field_schemaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethodp*ò
-__get_validators__4pydantic.networks.IPvAnyInterface.__get_validators__"†
-QTypeAlias[typing.Generator[TypeAlias[CallableType[builtins.function]],None,None]]‰
-Ftyping.Generator[TypeAlias[CallableType[builtins.function]],None,None]˜
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pydantic.typing.AnyCallable
-None
-None"typing.Generator"#pydantic.networks.CallableGenerator*‚
-clsy
-'Type[pydantic.networks.IPvAnyInterface]F
-!pydantic.networks.IPvAnyInterface"!pydantic.networks.IPvAnyInterface"type0:builtins.classmethodp*€	
-validate*pydantic.networks.IPvAnyInterface.validate"¢
-6Union[ipaddress.IPv4Interface,ipaddress.IPv6Interface]2
-ipaddress.IPv4Interface"ipaddress.IPv4Interface2
-ipaddress.IPv6Interface"ipaddress.IPv6Interface*‚
-clsy
-'Type[pydantic.networks.IPvAnyInterface]F
-!pydantic.networks.IPvAnyInterface"!pydantic.networks.IPvAnyInterface"type*ƒ
-value÷
-’TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,Tuple[Union[builtins.str,builtins.bytes,builtins.int],Union[builtins.str,builtins.int]]]]¾
-‡Union[builtins.str,builtins.bytes,builtins.int,Tuple[Union[builtins.str,builtins.bytes,builtins.int],Union[builtins.str,builtins.int]]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.intÑ
-WTuple[Union[builtins.str,builtins.bytes,builtins.int],Union[builtins.str,builtins.int]]‘
-/Union[builtins.str,builtins.bytes,builtins.int]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"pydantic.networks.NetworkType0:builtins.classmethodprE
-	__slots__+pydantic.networks.IPvAnyInterface.__slots__
-Tuple[]ø
-IPvAnyNetworkpydantic.networks.IPvAnyNetwork"ipaddress._BaseNetwork*Ó
-__modify_schema__1pydantic.networks.IPvAnyNetwork.__modify_schema__"
-None*|
-clss
-%Type[pydantic.networks.IPvAnyNetwork]B
-pydantic.networks.IPvAnyNetwork"pydantic.networks.IPvAnyNetwork"type*i
-field_schemaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethodp*é
-__get_validators__2pydantic.networks.IPvAnyNetwork.__get_validators__"†
-QTypeAlias[typing.Generator[TypeAlias[CallableType[builtins.function]],None,None]]‰
-Ftyping.Generator[TypeAlias[CallableType[builtins.function]],None,None]˜
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pydantic.typing.AnyCallable
-None
-None"typing.Generator"#pydantic.networks.CallableGenerator*|
-clss
-%Type[pydantic.networks.IPvAnyNetwork]B
-pydantic.networks.IPvAnyNetwork"pydantic.networks.IPvAnyNetwork"type0:builtins.classmethodp*ë
-validate(pydantic.networks.IPvAnyNetwork.validate"–
-2Union[ipaddress.IPv4Network,ipaddress.IPv6Network].
-ipaddress.IPv4Network"ipaddress.IPv4Network.
-ipaddress.IPv6Network"ipaddress.IPv6Network*|
-clss
-%Type[pydantic.networks.IPvAnyNetwork]B
-pydantic.networks.IPvAnyNetwork"pydantic.networks.IPvAnyNetwork"type*ƒ
-value÷
-’TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,Tuple[Union[builtins.str,builtins.bytes,builtins.int],Union[builtins.str,builtins.int]]]]¾
-‡Union[builtins.str,builtins.bytes,builtins.int,Tuple[Union[builtins.str,builtins.bytes,builtins.int],Union[builtins.str,builtins.int]]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.intÑ
-WTuple[Union[builtins.str,builtins.bytes,builtins.int],Union[builtins.str,builtins.int]]‘
-/Union[builtins.str,builtins.bytes,builtins.int]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int`
- Union[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"pydantic.networks.NetworkType0:builtins.classmethodpn
-	url_regexpydantic.networks.url_regex"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern„
-multi_host_url_regex&pydantic.networks.multi_host_url_regex"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern€
-ascii_domain_regex$pydantic.networks.ascii_domain_regex"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern|
-int_domain_regex"pydantic.networks.int_domain_regex"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Patternp
+scheme0r
+user0r
+password0r
+host0r
+tld0r
+	host_type0r
+port0r
+path0r	
+query0r
+fragment0J
 
-host_regexpydantic.networks.host_regex"D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern±
-	stricturlpydantic.networks.stricturl"^
-Type[pydantic.networks.AnyUrl]4
-pydantic.networks.AnyUrl"pydantic.networks.AnyUrl"type*6
-strip_whitespace
-builtins.bool"builtins.bool *.
+AnyHttpUrl"pydantic.networks.AnyUrlr
+allowed_schemes0r
+	__slots__0š
+HttpUrl"pydantic.networks.AnyHttpUrl*=
+get_default_parts*
+parts(0:builtins.staticmethodhr
+tld_required0r
 
-min_length
-builtins.int"builtins.int *.
+max_length0r
+hidden_parts0Z
+FileUrl"pydantic.networks.AnyUrlr
+allowed_schemes0r
+host_required0r
+	__slots__0î
+MultiHostDsn"pydantic.networks.AnyUrl*A
+__init__*
 
-max_length
-builtins.int"builtins.int *2
-tld_required
-builtins.bool"builtins.bool *3
-host_required
-builtins.bool"builtins.bool *¥
-allowed_schemes
-+Union[typing.Collection[builtins.str],None]R
-typing.Collection[builtins.str]
-builtins.str"builtins.str"typing.Collection
-None L
-import_email_validator(pydantic.networks.import_email_validator"
-None½
-validate_email pydantic.networks.validate_email"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.str*
-__annotations__!pydantic.networks.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*=
-email_validator!pydantic.networks.email_validator
-Any*p
-__all__pydantic.networks.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*@
-_url_regex_cache"pydantic.networks._url_regex_cache
-None*V
-_multi_host_url_regex_cache-pydantic.networks._multi_host_url_regex_cache
-None*R
-_ascii_domain_regex_cache+pydantic.networks._ascii_domain_regex_cache
-None*N
-_int_domain_regex_cache)pydantic.networks._int_domain_regex_cache
-None*B
-_host_regex_cache#pydantic.networks._host_regex_cache
-None*J
-_host_regexpydantic.networks._host_regex
-builtins.str"builtins.str*N
-_scheme_regexpydantic.networks._scheme_regex
-builtins.str"builtins.str*T
-_user_info_regex"pydantic.networks._user_info_regex
-builtins.str"builtins.str*J
-_path_regexpydantic.networks._path_regex
-builtins.str"builtins.str*L
-_query_regexpydantic.networks._query_regex
-builtins.str"builtins.str*R
-_fragment_regex!pydantic.networks._fragment_regex
-builtins.str"builtins.str*€
-pretty_email_regex$pydantic.networks.pretty_email_regexD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*T
-MAX_EMAIL_LENGTH"pydantic.networks.MAX_EMAIL_LENGTH
-builtins.int"builtins.int
+self(*
+
+args(*
+hosts (*
+kwargs(*4
+
+_match_url*	
+url(0:builtins.staticmethodh*[
+validate_parts*	
+cls(*
+parts(*
+validate_port (0:builtins.classmethodp*T
+
+_build_url*	
+cls(*
+m(*	
+url(*
+parts(0:builtins.classmethodpr
+	__slots__0r	
+hosts0d
+PostgresDsn"pydantic.networks.MultiHostDsnr
+allowed_schemes0r
+user_required0r
+	__slots__0P
+CockroachDsn"pydantic.networks.AnyUrlr
+allowed_schemes0r
+user_required0K
+AmqpDsn"pydantic.networks.AnyUrlr
+allowed_schemes0r
+host_required0š
+RedisDsn"pydantic.networks.AnyUrl*=
+get_default_parts*
+parts(0:builtins.staticmethodhr
+	__slots__0r
+allowed_schemes0r
+host_required0x
+MongoDsn"pydantic.networks.AnyUrl*=
+get_default_parts*
+parts(0:builtins.staticmethodhr
+allowed_schemes0x
+KafkaDsn"pydantic.networks.AnyUrl*=
+get_default_parts*
+parts(0:builtins.staticmethodhr
+allowed_schemes0å
+EmailStr"builtins.str*N
+__modify_schema__*	
+cls(!*
+field_schema(0:builtins.classmethodp*;
+__get_validators__*	
+cls(!0:builtins.classmethodp*>
+validate*	
+cls(!*
+value(0:builtins.classmethodpó
+	NameEmail"pydantic.utils.Representation*1
+__init__*
+
+self("*
+
+name(*
+email(*
+__eq__*("*(*N
+__modify_schema__*	
+cls(#*
+field_schema(0:builtins.classmethodp*;
+__get_validators__*	
+cls(#0:builtins.classmethodp*>
+validate"*	
+cls(#*
+value(0:builtins.classmethodp*
+__str__*("r
+	__slots__0$r
+name0r	
+email0ƒ
+IPvAnyAddress"ipaddress._BaseAddress*N
+__modify_schema__*	
+cls(&*
+field_schema(0:builtins.classmethodp*;
+__get_validators__*	
+cls(&0:builtins.classmethodp*>
+validate)*	
+cls(&*
+value(+0:builtins.classmethodpr
+	__slots__0…
+IPvAnyInterface"ipaddress._BaseAddress*N
+__modify_schema__*	
+cls(-*
+field_schema(0:builtins.classmethodp*;
+__get_validators__*	
+cls(-0:builtins.classmethodp*>
+validate0*	
+cls(-*
+value(40:builtins.classmethodpr
+	__slots__0ô
+IPvAnyNetwork"ipaddress._BaseNetwork*N
+__modify_schema__*	
+cls(6*
+field_schema(0:builtins.classmethodp*;
+__get_validators__*	
+cls(60:builtins.classmethodp*>
+validate9*	
+cls(6*
+value(40:builtins.classmethodp
+	url_regex:
+multi_host_url_regex:
+ascii_domain_regex:
+int_domain_regex:
+
+host_regex:•
+	stricturl*
+strip_whitespace (*
+
+min_length (*
+
+max_length (*
+tld_required (*
+host_required (*
+allowed_schemes (
+import_email_validator
+validate_email$*
+value(*
+__annotations__0*
+email_validator0*
+__all__0;*
+_url_regex_cache0*
+_multi_host_url_regex_cache0*
+_ascii_domain_regex_cache0*
+_int_domain_regex_cache0*
+_host_regex_cache0*
+_host_regex0*
+_scheme_regex0*
+_user_info_regex0*
+_path_regex0*
+_query_regex0*
+_fragment_regex0*
+pretty_email_regex0:*
+MAX_EMAIL_LENGTH022"pydantic.networks.AnyUrl2"builtins.str222"type222"builtins.dict22"builtins.function222""pydantic.typing.AnyCallable2	2"typing.Generator2
+2*"#pydantic.networks.CallableGenerator22"pydantic.fields.ModelField2"pydantic.config.BaseConfig2"re.Match222"pydantic.networks.Parts2222"builtins.bool222"builtins.int2"typing.Collection2222"builtins.set222
+22 "pydantic.networks.MultiHostDsn2""pydantic.networks.HostParts22"builtins.list2222"type22"pydantic.networks.EmailStr2"type2 2"pydantic.networks.NameEmail2"type2"222!"pydantic.networks.IPvAnyAddress2"type2%2"ipaddress.IPv4Address2"ipaddress.IPv6Address22'(2"builtins.bytes22*2#"!pydantic.networks.IPvAnyInterface2"type2,2"ipaddress.IPv4Interface2"ipaddress.IPv6Interface22./2222+122*22$"pydantic.networks.NetworkType232!"pydantic.networks.IPvAnyNetwork2"type252"ipaddress.IPv4Network2"ipaddress.IPv6Network22782"
+re.Pattern22"builtins.list2

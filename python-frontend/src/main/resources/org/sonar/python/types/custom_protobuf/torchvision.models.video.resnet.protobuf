@@ -1,269 +1,146 @@
 
-torchvision.models.video.resnetÃ
-Conv3DSimple,torchvision.models.video.resnet.Conv3DSimple"torch.nn.modules.conv.Conv3d*æ
-__init__5torchvision.models.video.resnet.Conv3DSimple.__init__"
-None*f
-self\
-,torchvision.models.video.resnet.Conv3DSimple",torchvision.models.video.resnet.Conv3DSimple*+
-	in_planes
-builtins.int"builtins.int*,
+torchvision.models.video.resnet·
+Conv3DSimple"torch.nn.modules.conv.Conv3d*o
+__init__*
 
-out_planes
-builtins.int"builtins.int*U
-	midplanesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None **
-stride
-builtins.int"builtins.int *+
-padding
-builtins.int"builtins.int *Æ
-get_downsample_strideBtorchvision.models.video.resnet.Conv3DSimple.get_downsample_stride"ã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*(
-stride
-builtins.int"builtins.int0:builtins.staticmethodh•
-Conv2Plus1D+torchvision.models.video.resnet.Conv2Plus1D"%torch.nn.modules.container.Sequential*ë
-__init__4torchvision.models.video.resnet.Conv2Plus1D.__init__"
-None*d
-selfZ
-+torchvision.models.video.resnet.Conv2Plus1D"+torchvision.models.video.resnet.Conv2Plus1D*+
-	in_planes
-builtins.int"builtins.int*,
+self(*
+	in_planes(*
 
-out_planes
-builtins.int"builtins.int*+
-	midplanes
-builtins.int"builtins.int**
-stride
-builtins.int"builtins.int *+
-padding
-builtins.int"builtins.int *≠
-get_downsample_strideAtorchvision.models.video.resnet.Conv2Plus1D.get_downsample_stride"ã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*(
-stride
-builtins.int"builtins.int0:builtins.staticmethodh‰
-Conv3DNoTemporal0torchvision.models.video.resnet.Conv3DNoTemporal"torch.nn.modules.conv.Conv3d* 
-__init__9torchvision.models.video.resnet.Conv3DNoTemporal.__init__"
-None*n
-selfd
-0torchvision.models.video.resnet.Conv3DNoTemporal"0torchvision.models.video.resnet.Conv3DNoTemporal*+
-	in_planes
-builtins.int"builtins.int*,
+out_planes(*
+	midplanes (*
+stride (*
+padding (*B
+get_downsample_stride*
+stride(0:builtins.staticmethodhÁ
+Conv2Plus1D"%torch.nn.modules.container.Sequential*m
+__init__*
 
-out_planes
-builtins.int"builtins.int*U
-	midplanesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None **
-stride
-builtins.int"builtins.int *+
-padding
-builtins.int"builtins.int *≤
-get_downsample_strideFtorchvision.models.video.resnet.Conv3DNoTemporal.get_downsample_stride"ã
--Tuple[builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*(
-stride
-builtins.int"builtins.int0:builtins.staticmethodhû
+self(*
+	in_planes(*
 
+out_planes(*
+	midplanes(*
+stride (*
+padding (*B
+get_downsample_stride*
+stride(0:builtins.staticmethodhÂ
+Conv3DNoTemporal"torch.nn.modules.conv.Conv3d*o
+__init__*
 
-BasicBlock*torchvision.models.video.resnet.BasicBlock"torch.nn.modules.module.Module*ù
-__init__3torchvision.models.video.resnet.BasicBlock.__init__"
-None*b
-selfX
-*torchvision.models.video.resnet.BasicBlock"*torchvision.models.video.resnet.BasicBlock**
-inplanes
-builtins.int"builtins.int*(
-planes
-builtins.int"builtins.int*]
-conv_builderK
-CallableType[builtins.function]&
-builtins.function"builtins.function**
-stride
-builtins.int"builtins.int *å
+self(*
+	in_planes(*
 
-downsamplez
-*Union[torch.nn.modules.module.Module,None]@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module
-None *‰
-forward2torchvision.models.video.resnet.BasicBlock.forward"
-torch.Tensor"torch.Tensor*b
-selfX
-*torchvision.models.video.resnet.BasicBlock"*torchvision.models.video.resnet.BasicBlock*#
-x
-torch.Tensor"torch.Tensorr_
-	expansion4torchvision.models.video.resnet.BasicBlock.expansion
-builtins.int"builtins.intrB
-conv10torchvision.models.video.resnet.BasicBlock.conv1
-AnyrB
-conv20torchvision.models.video.resnet.BasicBlock.conv2
-Anyr@
-relu/torchvision.models.video.resnet.BasicBlock.relu
-AnyrL
+out_planes(*
+	midplanes (*
+stride (*
+padding (*B
+get_downsample_stride*
+stride(0:builtins.staticmethodhâ
 
-downsample5torchvision.models.video.resnet.BasicBlock.downsample
-AnyrD
-stride1torchvision.models.video.resnet.BasicBlock.stride
-Any‚
+BasicBlock"torch.nn.modules.module.Module*n
+__init__*
 
+self(*
+inplanes(*
+planes(*
+conv_builder(
+*
+stride (*
 
-Bottleneck*torchvision.models.video.resnet.Bottleneck"torch.nn.modules.module.Module*ù
-__init__3torchvision.models.video.resnet.Bottleneck.__init__"
-None*b
-selfX
-*torchvision.models.video.resnet.Bottleneck"*torchvision.models.video.resnet.Bottleneck**
-inplanes
-builtins.int"builtins.int*(
-planes
-builtins.int"builtins.int*]
-conv_builderK
-CallableType[builtins.function]&
-builtins.function"builtins.function**
-stride
-builtins.int"builtins.int *å
+downsample (* 
+forward*
 
-downsamplez
-*Union[torch.nn.modules.module.Module,None]@
-torch.nn.modules.module.Module"torch.nn.modules.module.Module
-None *‰
-forward2torchvision.models.video.resnet.Bottleneck.forward"
-torch.Tensor"torch.Tensor*b
-selfX
-*torchvision.models.video.resnet.Bottleneck"*torchvision.models.video.resnet.Bottleneck*#
-x
-torch.Tensor"torch.Tensorr_
-	expansion4torchvision.models.video.resnet.Bottleneck.expansion
-builtins.int"builtins.intrB
-conv10torchvision.models.video.resnet.Bottleneck.conv1
-AnyrB
-conv20torchvision.models.video.resnet.Bottleneck.conv2
-AnyrB
-conv30torchvision.models.video.resnet.Bottleneck.conv3
-Anyr@
-relu/torchvision.models.video.resnet.Bottleneck.relu
-AnyrL
+self(*
+x(r
+	expansion0r	
+conv10r	
+conv20r
+relu0r
 
-downsample5torchvision.models.video.resnet.Bottleneck.downsample
-AnyrD
-stride1torchvision.models.video.resnet.Bottleneck.stride
-Anyä
-	BasicStem)torchvision.models.video.resnet.BasicStem"%torch.nn.modules.container.Sequential*™
-__init__2torchvision.models.video.resnet.BasicStem.__init__"
-None*`
-selfV
-)torchvision.models.video.resnet.BasicStem")torchvision.models.video.resnet.BasicStemô
-R2Plus1dStem,torchvision.models.video.resnet.R2Plus1dStem"%torch.nn.modules.container.Sequential*≥
-__init__5torchvision.models.video.resnet.R2Plus1dStem.__init__"
-None*f
-self\
-,torchvision.models.video.resnet.R2Plus1dStem",torchvision.models.video.resnet.R2Plus1dStemÁ
-VideoResNet+torchvision.models.video.resnet.VideoResNet"torch.nn.modules.module.Module*Ÿ
-__init__4torchvision.models.video.resnet.VideoResNet.__init__"
-None*d
-selfZ
-+torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*¶
-blockö
-hUnion[Type[torchvision.models.video.resnet.BasicBlock],Type[torchvision.models.video.resnet.Bottleneck]]î
-0Type[torchvision.models.video.resnet.BasicBlock]X
-*torchvision.models.video.resnet.BasicBlock"*torchvision.models.video.resnet.BasicBlock"typeî
-0Type[torchvision.models.video.resnet.Bottleneck]X
-*torchvision.models.video.resnet.Bottleneck"*torchvision.models.video.resnet.Bottleneck"type*„
-conv_makers—
-≥typing.Sequence[Union[Type[torchvision.models.video.resnet.Conv3DSimple],Type[torchvision.models.video.resnet.Conv3DNoTemporal],Type[torchvision.models.video.resnet.Conv2Plus1D]]]á
-¢Union[Type[torchvision.models.video.resnet.Conv3DSimple],Type[torchvision.models.video.resnet.Conv3DNoTemporal],Type[torchvision.models.video.resnet.Conv2Plus1D]]ö
-2Type[torchvision.models.video.resnet.Conv3DSimple]\
-,torchvision.models.video.resnet.Conv3DSimple",torchvision.models.video.resnet.Conv3DSimple"type¶
-6Type[torchvision.models.video.resnet.Conv3DNoTemporal]d
-0torchvision.models.video.resnet.Conv3DNoTemporal"0torchvision.models.video.resnet.Conv3DNoTemporal"typeó
-1Type[torchvision.models.video.resnet.Conv2Plus1D]Z
-+torchvision.models.video.resnet.Conv2Plus1D"+torchvision.models.video.resnet.Conv2Plus1D"type"typing.Sequence*V
-layersJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*U
-stemK
-CallableType[builtins.function]&
-builtins.function"builtins.function*/
-num_classes
-builtins.int"builtins.int *8
-zero_init_residual
-builtins.bool"builtins.bool *Á
-forward3torchvision.models.video.resnet.VideoResNet.forward"
-torch.Tensor"torch.Tensor*d
-selfZ
-+torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*#
-x
-torch.Tensor"torch.Tensorr^
-inplanes4torchvision.models.video.resnet.VideoResNet.inplanes
-builtins.int"builtins.intrA
-stem0torchvision.models.video.resnet.VideoResNet.stem
-AnyrE
-layer12torchvision.models.video.resnet.VideoResNet.layer1
-AnyrE
-layer22torchvision.models.video.resnet.VideoResNet.layer2
-AnyrE
-layer32torchvision.models.video.resnet.VideoResNet.layer3
-AnyrE
-layer42torchvision.models.video.resnet.VideoResNet.layer4
-AnyrG
-avgpool3torchvision.models.video.resnet.VideoResNet.avgpool
-Anyr=
-fc.torchvision.models.video.resnet.VideoResNet.fc
-Anyç
-R3D_18_Weights.torchvision.models.video.resnet.R3D_18_Weights"#torchvision.models._api.WeightsEnumHrX
-KINETICS400_V1=torchvision.models.video.resnet.R3D_18_Weights.KINETICS400_V1
-AnyrJ
-DEFAULT6torchvision.models.video.resnet.R3D_18_Weights.DEFAULT
-Anyç
-MC3_18_Weights.torchvision.models.video.resnet.MC3_18_Weights"#torchvision.models._api.WeightsEnumHrX
-KINETICS400_V1=torchvision.models.video.resnet.MC3_18_Weights.KINETICS400_V1
-AnyrJ
-DEFAULT6torchvision.models.video.resnet.MC3_18_Weights.DEFAULT
-Any°
-R2Plus1D_18_Weights3torchvision.models.video.resnet.R2Plus1D_18_Weights"#torchvision.models._api.WeightsEnumHr]
-KINETICS400_V1Btorchvision.models.video.resnet.R2Plus1D_18_Weights.KINETICS400_V1
-AnyrO
-DEFAULT;torchvision.models.video.resnet.R2Plus1D_18_Weights.DEFAULT
-Anyé
-r3d_18&torchvision.models.video.resnet.r3d_18"Z
-+torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*∫
-weights™
-:Union[torchvision.models.video.resnet.R3D_18_Weights,None]`
-.torchvision.models.video.resnet.R3D_18_Weights".torchvision.models.video.resnet.R3D_18_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyé
-mc3_18&torchvision.models.video.resnet.mc3_18"Z
-+torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*∫
-weights™
-:Union[torchvision.models.video.resnet.MC3_18_Weights,None]`
-.torchvision.models.video.resnet.MC3_18_Weights".torchvision.models.video.resnet.MC3_18_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyß
-r2plus1d_18+torchvision.models.video.resnet.r2plus1d_18"Z
-+torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*…
-weightsπ
-?Union[torchvision.models.video.resnet.R2Plus1D_18_Weights,None]j
-3torchvision.models.video.resnet.R2Plus1D_18_Weights"3torchvision.models.video.resnet.R2Plus1D_18_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*õ
-__annotations__/torchvision.models.video.resnet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-nntorch.nn 
+downsample0r
+
+stride0î
+
+Bottleneck"torch.nn.modules.module.Module*n
+__init__*
+
+self(*
+inplanes(*
+planes(*
+conv_builder(
+*
+stride (*
+
+downsample (* 
+forward*
+
+self(*
+x(r
+	expansion0r	
+conv10r	
+conv20r	
+conv30r
+relu0r
+
+downsample0r
+
+stride0L
+	BasicStem"%torch.nn.modules.container.Sequential*
+__init__*
+
+self(O
+R2Plus1dStem"%torch.nn.modules.container.Sequential*
+__init__*
+
+self(≤
+VideoResNet"torch.nn.modules.module.Module*É
+__init__*
+
+self(*
+block(*
+conv_makers(*
+layers(*
+
+stem(
+*
+num_classes (*
+zero_init_residual (* 
+forward*
+
+self(*
+x(r
+inplanes0r
+stem0r
+
+layer10r
+
+layer20r
+
+layer30r
+
+layer40r
+avgpool0r
+fc0X
+R3D_18_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+DEFAULT0X
+MC3_18_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+DEFAULT0]
+R2Plus1D_18_Weights"#torchvision.models._api.WeightsEnumHr
+KINETICS400_V10r
+DEFAULT0;
+r3d_18*
+weights (*
+progress (*
+kwargs(;
+mc3_18*
+weights ( *
+progress (*
+kwargs(@
+r2plus1d_18*
+weights ("*
+progress (*
+kwargs(*
+__annotations__0$*
+nntorch.nn 22.",torchvision.models.video.resnet.Conv3DSimple2"builtins.int22222-"+torchvision.models.video.resnet.Conv2Plus1D22"0torchvision.models.video.resnet.Conv3DNoTemporal2,"*torchvision.models.video.resnet.BasicBlock2"builtins.function22	2 "torch.nn.modules.module.Module222"torch.Tensor22,"*torchvision.models.video.resnet.Bottleneck2+")torchvision.models.video.resnet.BasicStem2.",torchvision.models.video.resnet.R2Plus1dStem2-"+torchvision.models.video.resnet.VideoResNet2"type22"type2222"type22"type22"type2222"typing.Sequence22"builtins.list22"builtins.bool20".torchvision.models.video.resnet.R3D_18_Weights2220".torchvision.models.video.resnet.MC3_18_Weights2225"3torchvision.models.video.resnet.R2Plus1D_18_Weights22!2"builtins.str2"builtins.dict2#

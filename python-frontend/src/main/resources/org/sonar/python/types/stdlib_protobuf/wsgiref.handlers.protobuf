@@ -1,339 +1,185 @@
 
-wsgiref.handlers›O
-BaseHandlerwsgiref.handlers.BaseHandler"builtins.object*®
-run wsgiref.handlers.BaseHandler.run"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler*­
-application›
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"_typeshed.wsgi.WSGIApplicationz310*¼
-run wsgiref.handlers.BaseHandler.run"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler*¬
-applicationš
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"wsgiref.types.WSGIApplicationz311z312z313z314*¦
-setup_environ*wsgiref.handlers.BaseHandler.setup_environ"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*ª
-finish_response,wsgiref.handlers.BaseHandler.finish_response"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*´
+wsgiref.handlersˆ
+BaseHandler"builtins.object*+
+run*
 
-get_scheme'wsgiref.handlers.BaseHandler.get_scheme"
-builtins.str"builtins.str*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*°
-set_content_length/wsgiref.handlers.BaseHandler.set_content_length"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*ª
-cleanup_headers,wsgiref.handlers.BaseHandler.cleanup_headers"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*Í
+self(*
+application(z310*:
+run*
 
-start_response+wsgiref.handlers.BaseHandler.start_response"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler*(
-status
-builtins.str"builtins.str*°
-headers¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*‚
-exc_infoñ
-Union[TypeAlias[Union[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]],None]Ò
-TypeAlias[Union[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]]³
-vUnion[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]ý
-YTypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]]Š
-NTuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type0
-builtins.BaseException"builtins.BaseException*
-types.TracebackType"types.TracebackType"_typeshed.ExcInfo7
-Tuple[None,None,None]
-None
-None
-None"_typeshed.OptExcInfo
-None z310z311z312z313z314*¦
-send_preamble*wsgiref.handlers.BaseHandler.send_preamble"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*Â
-write"wsgiref.handlers.BaseHandler.write"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*²
-sendfile%wsgiref.handlers.BaseHandler.sendfile"
-builtins.bool"builtins.bool*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*¨
-finish_content+wsgiref.handlers.BaseHandler.finish_content"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*–
-close"wsgiref.handlers.BaseHandler.close"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*¤
-send_headers)wsgiref.handlers.BaseHandler.send_headers"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*¾
-result_is_file+wsgiref.handlers.BaseHandler.result_is_file"
-builtins.bool"builtins.bool*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*Â
-client_is_modern-wsgiref.handlers.BaseHandler.client_is_modern"
-builtins.bool"builtins.bool*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*Š
-log_exception*wsgiref.handlers.BaseHandler.log_exception"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler*á
-exc_infoÒ
-TypeAlias[Union[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]]³
-vUnion[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]ý
-YTypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]]Š
-NTuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type0
-builtins.BaseException"builtins.BaseException*
-types.TracebackType"types.TracebackType"_typeshed.ExcInfo7
-Tuple[None,None,None]
-None
-None
-None"_typeshed.OptExcInfoz310z311z312z313z314*¤
-handle_error)wsgiref.handlers.BaseHandler.handle_error"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandlerz310z311z312z313z314*â
-error_output)wsgiref.handlers.BaseHandler.error_output"P
-builtins.list[builtins.bytes] 
-builtins.bytes"builtins.bytes"builtins.list*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler*µ
-environ§
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
-start_response<
-_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponsez310*î
-error_output)wsgiref.handlers.BaseHandler.error_output"P
-builtins.list[builtins.bytes] 
-builtins.bytes"builtins.bytes"builtins.list*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler*´
-environ¦
-*TypeAlias[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"wsgiref.types.WSGIEnvironment*N
-start_response:
-wsgiref.types.StartResponse"wsgiref.types.StartResponsez311z312z313z314*Ü
-_write#wsgiref.handlers.BaseHandler._write"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler**
-data 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@z310z311z312z313z314*°
-_flush#wsgiref.handlers.BaseHandler._flush"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler0:abc.abstractmethod@z310z311z312z313z314*Ò
-	get_stdin&wsgiref.handlers.BaseHandler.get_stdin"8
-_typeshed.wsgi.InputStream"_typeshed.wsgi.InputStream*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler0:abc.abstractmethod@z310*ß
-	get_stdin&wsgiref.handlers.BaseHandler.get_stdin"6
-wsgiref.types.InputStream"wsgiref.types.InputStream*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler0:abc.abstractmethod@z311z312z313z314*Ô
+self(*
+application(z311z312z313z314*
+setup_environ*
 
-get_stderr'wsgiref.handlers.BaseHandler.get_stderr"8
-_typeshed.wsgi.ErrorStream"_typeshed.wsgi.ErrorStream*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler0:abc.abstractmethod@z310*á
+self(*
+finish_response*
 
-get_stderr'wsgiref.handlers.BaseHandler.get_stderr"6
-wsgiref.types.ErrorStream"wsgiref.types.ErrorStream*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler0:abc.abstractmethod@z311z312z313z314*¼
-add_cgi_vars)wsgiref.handlers.BaseHandler.add_cgi_vars"
-None*F
-self<
-wsgiref.handlers.BaseHandler"wsgiref.handlers.BaseHandler0:abc.abstractmethod@z310z311z312z313z314j310j311j312j313j314r´
-wsgi_version)wsgiref.handlers.BaseHandler.wsgi_version`
- Tuple[builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int*310*311*312*313*314rz
-wsgi_multithread-wsgiref.handlers.BaseHandler.wsgi_multithread
-builtins.bool"builtins.bool*310*311*312*313*314r|
-wsgi_multiprocess.wsgiref.handlers.BaseHandler.wsgi_multiprocess
-builtins.bool"builtins.bool*310*311*312*313*314rt
-wsgi_run_once*wsgiref.handlers.BaseHandler.wsgi_run_once
-builtins.bool"builtins.bool*310*311*312*313*314rt
-origin_server*wsgiref.handlers.BaseHandler.origin_server
-builtins.bool"builtins.bool*310*311*312*313*314rp
-http_version)wsgiref.handlers.BaseHandler.http_version
-builtins.str"builtins.str*310*311*312*313*314rž
-server_software,wsgiref.handlers.BaseHandler.server_softwareD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*310*311*312*313*314rÖ
+self(*
 
-os_environ'wsgiref.handlers.BaseHandler.os_environ…
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping*310*311*312*313*314r÷
-wsgi_file_wrapper.wsgiref.handlers.BaseHandler.wsgi_file_wrapper˜
-*Union[Type[wsgiref.util.FileWrapper],None]^
-Type[wsgiref.util.FileWrapper]4
-wsgiref.util.FileWrapper"wsgiref.util.FileWrapper"type
-None*310*311*312*313*314r±
-headers_class*wsgiref.handlers.BaseHandler.headers_class[
-Type[wsgiref.headers.Headers]2
-wsgiref.headers.Headers"wsgiref.headers.Headers"type*310*311*312*313*314rž
-traceback_limit,wsgiref.handlers.BaseHandler.traceback_limitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*310*311*312*313*314rp
-error_status)wsgiref.handlers.BaseHandler.error_status
-builtins.str"builtins.str*310*311*312*313*314rù
-error_headers*wsgiref.handlers.BaseHandler.error_headers¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rp
+get_scheme*
 
-error_body'wsgiref.handlers.BaseHandler.error_body 
-builtins.bytes"builtins.bytes*310*311*312*313*314Ö
-SimpleHandlerwsgiref.handlers.SimpleHandler"wsgiref.handlers.BaseHandler*ì
-__init__'wsgiref.handlers.SimpleHandler.__init__"
-None*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandler*C
-stdin8
-_typeshed.wsgi.InputStream"_typeshed.wsgi.InputStream*T
-stdoutH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*D
-stderr8
-_typeshed.wsgi.ErrorStream"_typeshed.wsgi.ErrorStream*“
-environ…
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping*1
-multithread
-builtins.bool"builtins.bool *2
-multiprocess
-builtins.bool"builtins.bool z310*÷
-__init__'wsgiref.handlers.SimpleHandler.__init__"
-None*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandler*A
-stdin6
-wsgiref.types.InputStream"wsgiref.types.InputStream*T
-stdoutH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*B
-stderr6
-wsgiref.types.ErrorStream"wsgiref.types.ErrorStream*“
-environ…
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping*1
-multithread
-builtins.bool"builtins.bool *2
-multiprocess
-builtins.bool"builtins.bool z311z312z313z314*À
-	get_stdin(wsgiref.handlers.SimpleHandler.get_stdin"8
-_typeshed.wsgi.InputStream"_typeshed.wsgi.InputStream*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandlerz310*Í
-	get_stdin(wsgiref.handlers.SimpleHandler.get_stdin"6
-wsgiref.types.InputStream"wsgiref.types.InputStream*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandlerz311z312z313z314*Â
+self(*"
+set_content_length*
 
-get_stderr)wsgiref.handlers.SimpleHandler.get_stderr"8
-_typeshed.wsgi.ErrorStream"_typeshed.wsgi.ErrorStream*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandlerz310*Ï
+self(*
+cleanup_headers*
 
-get_stderr)wsgiref.handlers.SimpleHandler.get_stderr"6
-wsgiref.types.ErrorStream"wsgiref.types.ErrorStream*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandlerz311z312z313z314*ª
-add_cgi_vars+wsgiref.handlers.SimpleHandler.add_cgi_vars"
-None*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandlerz310z311z312z313z314*Ê
-_write%wsgiref.handlers.SimpleHandler._write"
-None*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandler**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*ž
-_flush%wsgiref.handlers.SimpleHandler._flush"
-None*J
-self@
-wsgiref.handlers.SimpleHandler"wsgiref.handlers.SimpleHandlerz310z311z312z313z314j310j311j312j313j314rl
-stdin$wsgiref.handlers.SimpleHandler.stdin8
-_typeshed.wsgi.InputStream"_typeshed.wsgi.InputStream*310ry
-stdin$wsgiref.handlers.SimpleHandler.stdin6
-wsgiref.types.InputStream"wsgiref.types.InputStream*311*312*313*314r’
-stdout%wsgiref.handlers.SimpleHandler.stdoutH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*310*311*312*313*314rn
-stderr%wsgiref.handlers.SimpleHandler.stderr8
-_typeshed.wsgi.ErrorStream"_typeshed.wsgi.ErrorStream*310r{
-stderr%wsgiref.handlers.SimpleHandler.stderr6
-wsgiref.types.ErrorStream"wsgiref.types.ErrorStream*311*312*313*314rÔ
-base_env'wsgiref.handlers.SimpleHandler.base_env…
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping*310*311*312*313*314j
-BaseCGIHandlerwsgiref.handlers.BaseCGIHandler"wsgiref.handlers.SimpleHandlerj310j311j312j313j314ÿ
+self(*M
+start_response*
 
-CGIHandlerwsgiref.handlers.CGIHandler"wsgiref.handlers.BaseCGIHandler*™
-__init__$wsgiref.handlers.CGIHandler.__init__"
-None*D
-self:
-wsgiref.handlers.CGIHandler"wsgiref.handlers.CGIHandlerz310z311z312z313z314j310j311j312j313j314Ž
-IISCGIHandlerwsgiref.handlers.IISCGIHandler"wsgiref.handlers.BaseCGIHandler*¢
-__init__'wsgiref.handlers.IISCGIHandler.__init__"
-None*J
-self@
-wsgiref.handlers.IISCGIHandler"wsgiref.handlers.IISCGIHandlerz310z311z312z313z314j310j311j312j313j314Ç
-format_date_time!wsgiref.handlers.format_date_time"
-builtins.str"builtins.str*Y
-	timestampJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-Nonez310z311z312z313z314½
-read_environwsgiref.handlers.read_environ"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dictz310z311z312z313z314*¥
-__annotations__ wsgiref.handlers.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*ˆ
-__all__wsgiref.handlers.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314
+self(*
+status(*
+headers(	*
+exc_info (*
+send_preamble*
+
+self(*!
+write*
+
+self(*
+
+data(*
+sendfile*
+
+self(*
+finish_content*
+
+self(*
+close*
+
+self(*
+send_headers*
+
+self(*
+result_is_file*
+
+self(* 
+client_is_modern*
+
+self(*-
+log_exception*
+
+self(*
+exc_info(*
+handle_error*
+
+self(*F
+error_output*
+
+self(*
+environ(*
+start_response(z310*U
+error_output*
+
+self(*
+environ(*
+start_response(z311z312z313z314*:
+_write*
+
+self(*
+
+data(0:abc.abstractmethod@*.
+_flush*
+
+self(0:abc.abstractmethod@*6
+	get_stdin*
+
+self(0:abc.abstractmethod@z310*E
+	get_stdin*
+
+self(0:abc.abstractmethod@z311z312z313z314*7
+
+get_stderr*
+
+self(0:abc.abstractmethod@z310*F
+
+get_stderr*
+
+self(0:abc.abstractmethod@z311z312z313z314*4
+add_cgi_vars*
+
+self(0:abc.abstractmethod@r
+wsgi_version0!r
+wsgi_multithread0r
+wsgi_multiprocess0r
+wsgi_run_once0r
+origin_server0r
+http_version0r
+server_software0"r
+
+os_environ0#r
+wsgi_file_wrapper0&r
+headers_class0(r
+traceback_limit0)r
+error_status0r
+error_headers0	r
+
+error_body0¶
+SimpleHandler"wsgiref.handlers.BaseHandler*€
+__init__*
+
+self(**
+stdin(*
+stdout(+*
+stderr(*
+environ(#*
+multithread (*
+multiprocess (z310*
+__init__*
+
+self(**
+stdin(*
+stdout(+*
+stderr(*
+environ(#*
+multithread (*
+multiprocess (z311z312z313z314*
+	get_stdin*
+
+self(*z310*-
+	get_stdin*
+
+self(*z311z312z313z314*
+
+get_stderr*
+
+self(*z310*.
+
+get_stderr*
+
+self(*z311z312z313z314*
+add_cgi_vars*
+
+self(**"
+_write*
+
+self(**
+
+data(*
+_flush*
+
+self(*r
+stdin*3100r
+stdin*311*312*313*3140r
+
+stdout0+r
+stderr*3100r
+stderr*311*312*313*3140r
+base_env0#0
+BaseCGIHandler"wsgiref.handlers.SimpleHandlerG
+
+CGIHandler"wsgiref.handlers.BaseCGIHandler*
+__init__*
+
+self(,J
+IISCGIHandler"wsgiref.handlers.BaseCGIHandler*
+__init__*
+
+self(-%
+format_date_time*
+	timestamp(/
+read_environ0*
+__annotations__0*
+__all__0122"wsgiref.handlers.BaseHandler2"builtins.function222%"_typeshed.wsgi.WSGIApplication22$"wsgiref.types.WSGIApplication22"builtins.str222"builtins.list22"builtins.BaseException2"type2
+2"types.TracebackType22
+2"_typeshed.ExcInfo222222"_typeshed.OptExcInfo2222"builtins.bytes2"builtins.bool2"builtins.list222"builtins.dict22%"_typeshed.wsgi.WSGIEnvironment22"_typeshed.wsgi.StartResponse2$"wsgiref.types.WSGIEnvironment22"wsgiref.types.StartResponse2"_typeshed.wsgi.InputStream2"wsgiref.types.InputStream2"_typeshed.wsgi.ErrorStream2"wsgiref.types.ErrorStream2"builtins.int22  222"typing.MutableMapping22"wsgiref.util.FileWrapper2"type2$22%2"wsgiref.headers.Headers2"type2'22 2 "wsgiref.handlers.SimpleHandler2"	typing.IO22"wsgiref.handlers.CGIHandler2 "wsgiref.handlers.IISCGIHandler2"builtins.float22.2"builtins.dict22"builtins.list2

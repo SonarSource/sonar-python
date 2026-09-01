@@ -1,102 +1,69 @@
 
-*sqlalchemy.dialects.mysql.mariadbconnectorû
-&MySQLExecutionContext_mariadbconnectorQsqlalchemy.dialects.mysql.mariadbconnector.MySQLExecutionContext_mariadbconnector"4sqlalchemy.dialects.mysql.base.MySQLExecutionContext*´
-create_server_side_cursorksqlalchemy.dialects.mysql.mariadbconnector.MySQLExecutionContext_mariadbconnector.create_server_side_cursor*
-selfz310z311z312z313z314*£
-create_default_cursorgsqlalchemy.dialects.mysql.mariadbconnector.MySQLExecutionContext_mariadbconnector.create_default_cursor*
-selfz310z311z312z313z314j310j311j312j313j314≤
-MySQLCompiler_mariadbconnectorIsqlalchemy.dialects.mysql.mariadbconnector.MySQLCompiler_mariadbconnector",sqlalchemy.dialects.mysql.base.MySQLCompilerj310j311j312j313j314º$
-MySQLDialect_mariadbconnectorHsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector"+sqlalchemy.dialects.mysql.base.MySQLDialect*∑
-__init__Qsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.__init__"
-None*ü
-selfî
-Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector"Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector*
-kwargs
-Anyz310z311z312z313z314*ì
-dbapiNsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.dbapi*
-cls0:builtins.classmethodpz310z311z312z313z314*≠
-is_disconnectVsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.is_disconnect*
+*sqlalchemy.dialects.mysql.mariadbconnector®
+&MySQLExecutionContext_mariadbconnector"4sqlalchemy.dialects.mysql.base.MySQLExecutionContext*%
+create_server_side_cursor*
+self*!
+create_default_cursor*
+selfN
+MySQLCompiler_mariadbconnector",sqlalchemy.dialects.mysql.base.MySQLCompilerÖ
+MySQLDialect_mariadbconnector"+sqlalchemy.dialects.mysql.base.MySQLDialect*&
+__init__*
+
+self(*
+kwargs(**
+dbapi*
+cls0:builtins.classmethodp*<
+is_disconnect*
 self*
 e*
 
 connection*
 
-cursorz310z311z312z313z314*ü
-create_connect_args\sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.create_connect_args*
+cursor*(
+create_connect_args*
 self*
-urlz310z311z312z313z314*ﬂ
-do_begin_twophaseZsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.do_begin_twophase"
-None*ü
-selfî
-Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector"Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector*
+url*>
+do_begin_twophase*
 
-connection
-Any*
-xid
-Anyz310z311z312z313z314*„
-do_prepare_twophase\sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.do_prepare_twophase"
-None*ü
-selfî
-Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector"Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector*
+self(*
 
-connection
-Any*
-xid
-Anyz310z311z312z313z314*«
-do_rollback_twophase]sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.do_rollback_twophase"
-None*ü
-selfî
-Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector"Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector*
+connection(*	
+xid(*@
+do_prepare_twophase*
 
-connection
-Any*
-xid
-Any*1
-is_prepared
-builtins.bool"builtins.bool *-
-recover
-builtins.bool"builtins.bool z310z311z312z313z314*√
-do_commit_twophase[sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.do_commit_twophase"
-None*ü
-selfî
-Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector"Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector*
+self(*
 
-connection
-Any*
-xid
-Any*1
-is_prepared
-builtins.bool"builtins.bool *-
-recover
-builtins.bool"builtins.bool z310z311z312z313z314j310j311j312j313j314rê
-driverOsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.driver
-builtins.str"builtins.str*310*311*312*313*314r∂
-supports_statement_cacheasqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.supports_statement_cache
-builtins.bool"builtins.bool*310*311*312*313*314rº
-supports_unicode_statementsdsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.supports_unicode_statements
-builtins.bool"builtins.bool*310*311*312*313*314rî
-encodingQsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.encoding
-builtins.str"builtins.str*310*311*312*313*314r§
-convert_unicodeXsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.convert_unicode
-builtins.bool"builtins.bool*310*311*312*313*314r≤
-supports_sane_rowcount_sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.supports_sane_rowcount
-builtins.bool"builtins.bool*310*311*312*313*314ræ
-supports_sane_multi_rowcountesqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.supports_sane_multi_rowcount
-builtins.bool"builtins.bool*310*311*312*313*314r¥
-supports_native_decimal`sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.supports_native_decimal
-builtins.bool"builtins.bool*310*311*312*313*314r®
-default_paramstyle[sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.default_paramstyle
-builtins.str"builtins.str*310*311*312*313*314rì
-statement_compiler[sqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.statement_compiler
-Any*310*311*312*313*314ræ
-supports_server_side_cursorsesqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.supports_server_side_cursors
-builtins.bool"builtins.bool*310*311*312*313*314rò
+connection(*	
+xid(*g
+do_rollback_twophase*
 
-paramstyleSsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector.paramstyle
-builtins.str"builtins.str*310*311*312*313*314*ø
-__annotations__:sqlalchemy.dialects.mysql.mariadbconnector.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*á
-mariadb_cpy_minimum_versionFsqlalchemy.dialects.mysql.mariadbconnector.mariadb_cpy_minimum_version
-Any*310*311*312*313*314
+self(*
+
+connection(*	
+xid(*
+is_prepared (*
+recover (*e
+do_commit_twophase*
+
+self(*
+
+connection(*	
+xid(*
+is_prepared (*
+recover (r
+
+driver0r
+supports_statement_cache0r
+supports_unicode_statements0r
+encoding0r
+convert_unicode0r
+supports_sane_rowcount0r 
+supports_sane_multi_rowcount0r
+supports_native_decimal0r
+default_paramstyle0r
+statement_compiler0r 
+supports_server_side_cursors0r
+
+paramstyle0*
+__annotations__0*
+mariadb_cpy_minimum_version022J"Hsqlalchemy.dialects.mysql.mariadbconnector.MySQLDialect_mariadbconnector22"builtins.bool2"builtins.str2"builtins.dict2

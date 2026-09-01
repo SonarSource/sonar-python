@@ -1,194 +1,105 @@
 
-torchvision.models.densenetë
-_DenseLayer'torchvision.models.densenet._DenseLayer"torch.nn.modules.module.Module*ù
-__init__0torchvision.models.densenet._DenseLayer.__init__"
-None*\
-selfR
-'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*4
-num_input_features
-builtins.int"builtins.int*-
-growth_rate
-builtins.int"builtins.int*)
-bn_size
-builtins.int"builtins.int*/
-	drop_rate 
-builtins.float"builtins.float*6
-memory_efficient
-builtins.bool"builtins.bool *ñ
-bn_function3torchvision.models.densenet._DenseLayer.bn_function"
-torch.Tensor"torch.Tensor*\
-selfR
-'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*V
-inputsJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*£
-any_requires_grad9torchvision.models.densenet._DenseLayer.any_requires_grad"
-builtins.bool"builtins.bool*\
-selfR
-'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*U
-inputJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.list*≥
-call_checkpoint_bottleneckBtorchvision.models.densenet._DenseLayer.call_checkpoint_bottleneck"
-torch.Tensor"torch.Tensor*\
-selfR
-'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*U
-inputJ
-builtins.list[torch.Tensor]
-torch.Tensor"torch.Tensor"builtins.listr?
-norm1-torchvision.models.densenet._DenseLayer.norm1
-Anyr?
-relu1-torchvision.models.densenet._DenseLayer.relu1
-Anyr?
-conv1-torchvision.models.densenet._DenseLayer.conv1
-Anyr?
-norm2-torchvision.models.densenet._DenseLayer.norm2
-Anyr?
-relu2-torchvision.models.densenet._DenseLayer.relu2
-Anyr?
-conv2-torchvision.models.densenet._DenseLayer.conv2
-AnyrG
-	drop_rate1torchvision.models.densenet._DenseLayer.drop_rate
-AnyrU
-memory_efficient8torchvision.models.densenet._DenseLayer.memory_efficient
-Anyï
-_DenseBlock'torchvision.models.densenet._DenseBlock"%torch.nn.modules.container.ModuleDict*À
-__init__0torchvision.models.densenet._DenseBlock.__init__"
-None*\
-selfR
-'torchvision.models.densenet._DenseBlock"'torchvision.models.densenet._DenseBlock*,
+torchvision.models.densenet©
+_DenseLayer"torch.nn.modules.module.Module*
+__init__*
 
-num_layers
-builtins.int"builtins.int*4
-num_input_features
-builtins.int"builtins.int*)
-bn_size
-builtins.int"builtins.int*-
-growth_rate
-builtins.int"builtins.int*/
-	drop_rate 
-builtins.float"builtins.float*6
-memory_efficient
-builtins.bool"builtins.bool *Á
-forward/torchvision.models.densenet._DenseBlock.forward"
-torch.Tensor"torch.Tensor*\
-selfR
-'torchvision.models.densenet._DenseBlock"'torchvision.models.densenet._DenseBlock*/
-init_features
-torch.Tensor"torch.TensorÌ
-_Transition'torchvision.models.densenet._Transition"%torch.nn.modules.container.Sequential*ë
-__init__0torchvision.models.densenet._Transition.__init__"
-None*\
-selfR
-'torchvision.models.densenet._Transition"'torchvision.models.densenet._Transition*4
-num_input_features
-builtins.int"builtins.int*5
-num_output_features
-builtins.int"builtins.intr=
-norm,torchvision.models.densenet._Transition.norm
-Anyr=
-relu,torchvision.models.densenet._Transition.relu
-Anyr=
-conv,torchvision.models.densenet._Transition.conv
-Anyr=
-pool,torchvision.models.densenet._Transition.pool
-AnyŒ
-DenseNet$torchvision.models.densenet.DenseNet"torch.nn.modules.module.Module*ö
-__init__-torchvision.models.densenet.DenseNet.__init__"
-None*V
-selfL
-$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*/
-growth_rate
-builtins.int"builtins.int *À
-block_config∂
-:Tuple[builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int *5
-num_init_features
-builtins.int"builtins.int *+
-bn_size
-builtins.int"builtins.int *1
-	drop_rate 
-builtins.float"builtins.float */
-num_classes
-builtins.int"builtins.int *6
-memory_efficient
-builtins.bool"builtins.bool *“
-forward,torchvision.models.densenet.DenseNet.forward"
-torch.Tensor"torch.Tensor*V
-selfL
-$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*#
-x
-torch.Tensor"torch.TensorrB
-features-torchvision.models.densenet.DenseNet.features
-AnyrF
+self(*
+num_input_features(*
+growth_rate(*
+bn_size(*
+	drop_rate(*
+memory_efficient (*)
+bn_function*
 
-classifier/torchvision.models.densenet.DenseNet.classifier
-Anyì
-DenseNet121_Weights/torchvision.models.densenet.DenseNet121_Weights"#torchvision.models._api.WeightsEnumHrW
-IMAGENET1K_V1=torchvision.models.densenet.DenseNet121_Weights.IMAGENET1K_V1
-AnyrK
-DEFAULT7torchvision.models.densenet.DenseNet121_Weights.DEFAULT
-Anyì
-DenseNet161_Weights/torchvision.models.densenet.DenseNet161_Weights"#torchvision.models._api.WeightsEnumHrW
-IMAGENET1K_V1=torchvision.models.densenet.DenseNet161_Weights.IMAGENET1K_V1
-AnyrK
-DEFAULT7torchvision.models.densenet.DenseNet161_Weights.DEFAULT
-Anyì
-DenseNet169_Weights/torchvision.models.densenet.DenseNet169_Weights"#torchvision.models._api.WeightsEnumHrW
-IMAGENET1K_V1=torchvision.models.densenet.DenseNet169_Weights.IMAGENET1K_V1
-AnyrK
-DEFAULT7torchvision.models.densenet.DenseNet169_Weights.DEFAULT
-Anyì
-DenseNet201_Weights/torchvision.models.densenet.DenseNet201_Weights"#torchvision.models._api.WeightsEnumHrW
-IMAGENET1K_V1=torchvision.models.densenet.DenseNet201_Weights.IMAGENET1K_V1
-AnyrK
-DEFAULT7torchvision.models.densenet.DenseNet201_Weights.DEFAULT
-Anyâ
-densenet121'torchvision.models.densenet.densenet121"L
-$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
-weights≠
-;Union[torchvision.models.densenet.DenseNet121_Weights,None]b
-/torchvision.models.densenet.DenseNet121_Weights"/torchvision.models.densenet.DenseNet121_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyâ
-densenet161'torchvision.models.densenet.densenet161"L
-$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
-weights≠
-;Union[torchvision.models.densenet.DenseNet161_Weights,None]b
-/torchvision.models.densenet.DenseNet161_Weights"/torchvision.models.densenet.DenseNet161_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyâ
-densenet169'torchvision.models.densenet.densenet169"L
-$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
-weights≠
-;Union[torchvision.models.densenet.DenseNet169_Weights,None]b
-/torchvision.models.densenet.DenseNet169_Weights"/torchvision.models.densenet.DenseNet169_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Anyâ
-densenet201'torchvision.models.densenet.densenet201"L
-$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
-weights≠
-;Union[torchvision.models.densenet.DenseNet201_Weights,None]b
-/torchvision.models.densenet.DenseNet201_Weights"/torchvision.models.densenet.DenseNet201_Weights
-None *.
-progress
-builtins.bool"builtins.bool *
-kwargs
-Any*ó
-__annotations__+torchvision.models.densenet.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-nntorch.nn 
+self(*
+inputs(*.
+any_requires_grad*
+
+self(*
+input(*7
+call_checkpoint_bottleneck*
+
+self(*
+input(r	
+norm10r	
+relu10r	
+conv10r	
+norm20r	
+relu20r	
+conv20r
+	drop_rate0r
+memory_efficient0ˆ
+_DenseBlock"%torch.nn.modules.container.ModuleDict*ë
+__init__*
+
+self(	*
+
+num_layers(*
+num_input_features(*
+bn_size(*
+growth_rate(*
+	drop_rate(*
+memory_efficient (*,
+forward*
+
+self(	*
+init_features(´
+_Transition"%torch.nn.modules.container.Sequential*M
+__init__*
+
+self(
+*
+num_input_features(*
+num_output_features(r
+norm0r
+relu0r
+conv0r
+pool0û
+DenseNet"torch.nn.modules.module.Module*±
+__init__*
+
+self(*
+growth_rate (*
+block_config (*
+num_init_features (*
+bn_size (*
+	drop_rate (*
+num_classes (*
+memory_efficient (* 
+forward*
+
+self(*
+x(r
+features0r
+
+classifier0\
+DenseNet121_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0\
+DenseNet161_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0\
+DenseNet169_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0\
+DenseNet201_Weights"#torchvision.models._api.WeightsEnumHr
+IMAGENET1K_V10r
+DEFAULT0@
+densenet121*
+weights (*
+progress (*
+kwargs(@
+densenet161*
+weights (*
+progress (*
+kwargs(@
+densenet169*
+weights (*
+progress (*
+kwargs(@
+densenet201*
+weights (*
+progress (*
+kwargs(*
+__annotations__0*
+nntorch.nn 22)"'torchvision.models.densenet._DenseLayer2"builtins.int2"builtins.float2"builtins.bool2"torch.Tensor2"builtins.list222)"'torchvision.models.densenet._DenseBlock2)"'torchvision.models.densenet._Transition2&"$torchvision.models.densenet.DenseNet2221"/torchvision.models.densenet.DenseNet121_Weights2221"/torchvision.models.densenet.DenseNet161_Weights2221"/torchvision.models.densenet.DenseNet169_Weights2221"/torchvision.models.densenet.DenseNet201_Weights222"builtins.str2"builtins.dict2

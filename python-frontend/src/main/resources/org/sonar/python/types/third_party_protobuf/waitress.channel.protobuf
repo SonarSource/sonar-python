@@ -1,136 +1,87 @@
 
-waitress.channelf
-ClientDisconnected#waitress.channel.ClientDisconnected"builtins.Exceptionj310j311j312j313j314¨.
-HTTPChannelwaitress.channel.HTTPChannel"builtins.object*Ú
-__init__%waitress.channel.HTTPChannel.__init__"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*L
-server@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*(
-sock
-socket.socket"socket.socket*&
-addr
-builtins.str"builtins.str*M
-adjD
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*²
-writable%waitress.channel.HTTPChannel.writable"
-builtins.bool"builtins.bool*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314*¤
-handle_write)waitress.channel.HTTPChannel.handle_write"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314*²
-readable%waitress.channel.HTTPChannel.readable"
-builtins.bool"builtins.bool*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314*¢
-handle_read(waitress.channel.HTTPChannel.handle_read"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314*Þ
-received%waitress.channel.HTTPChannel.received"
-builtins.bool"builtins.bool*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*¤
-handle_close)waitress.channel.HTTPChannel.handle_close"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314*ñ
-add_channel(waitress.channel.HTTPChannel.add_channel"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*ñ
-del_channel(waitress.channel.HTTPChannel.del_channel"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*Ì
-mapÀ
-6Union[typing.Mapping[builtins.int,socket.socket],None]z
-*typing.Mapping[builtins.int,socket.socket]
-builtins.int"builtins.int
-socket.socket"socket.socket"typing.Mapping
-None z310z311z312z313z314*à
+waitress.channel(
+ClientDisconnected"builtins.ExceptionÏ
+HTTPChannel"builtins.object*V
+__init__*
 
-write_soon'waitress.channel.HTTPChannel.write_soon"
-builtins.int"builtins.int*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannel**
-data 
-builtins.bytes"builtins.bytesz310z311z312z313z314*š
-service$waitress.channel.HTTPChannel.service"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314*˜
-cancel#waitress.channel.HTTPChannel.cancel"
-None*F
-self<
-waitress.channel.HTTPChannel"waitress.channel.HTTPChannelz310z311z312z313z314j310j311j312j313j314r€
+self(*
+server(*
 
-task_class'waitress.channel.HTTPChannel.task_class0
-waitress.task.WSGITask"waitress.task.WSGITask*310*311*312*313*314rŽ
-error_task_class-waitress.channel.HTTPChannel.error_task_class2
-waitress.task.ErrorTask"waitress.task.ErrorTask*310*311*312*313*314rš
-parser_class)waitress.channel.HTTPChannel.parser_classF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParser*310*311*312*313*314r
-request$waitress.channel.HTTPChannel.requestF
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParser*310*311*312*313*314rv
-last_activity*waitress.channel.HTTPChannel.last_activity 
-builtins.float"builtins.float*310*311*312*313*314rn
+sock(*
 
-will_close'waitress.channel.HTTPChannel.will_close
-builtins.bool"builtins.bool*310*311*312*313*314r~
-close_when_flushed/waitress.channel.HTTPChannel.close_when_flushed
-builtins.bool"builtins.bool*310*311*312*313*314rÚ
-requests%waitress.channel.HTTPChannel.requests
-2typing.Sequence[waitress.parser.HTTPRequestParser]F
-!waitress.parser.HTTPRequestParser"!waitress.parser.HTTPRequestParser"typing.Sequence*310*311*312*313*314rt
-sent_continue*waitress.channel.HTTPChannel.sent_continue
-builtins.bool"builtins.bool*310*311*312*313*314rz
-total_outbufs_len.waitress.channel.HTTPChannel.total_outbufs_len
-builtins.int"builtins.int*310*311*312*313*314r€
-current_outbuf_count1waitress.channel.HTTPChannel.current_outbuf_count
-builtins.int"builtins.int*310*311*312*313*314rˆ
-server#waitress.channel.HTTPChannel.server@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*310*311*312*313*314r†
-adj waitress.channel.HTTPChannel.adjD
- waitress.adjustments.Adjustments" waitress.adjustments.Adjustments*310*311*312*313*314rÞ
-outbufs$waitress.channel.HTTPChannel.outbufs“
-4typing.Sequence[waitress.buffers.OverflowableBuffer]J
-#waitress.buffers.OverflowableBuffer"#waitress.buffers.OverflowableBuffer"typing.Sequence*310*311*312*313*314rv
-creation_time*waitress.channel.HTTPChannel.creation_time 
-builtins.float"builtins.float*310*311*312*313*314rn
-sendbuf_len(waitress.channel.HTTPChannel.sendbuf_len
-builtins.int"builtins.int*310*311*312*313*314rh
-	task_lock&waitress.channel.HTTPChannel.task_lock$
-_thread.LockType"_thread.LockType*310*311*312r[
-	task_lock&waitress.channel.HTTPChannel.task_lock
-_thread.lock"_thread.lock*313*314r|
-outbuf_lock(waitress.channel.HTTPChannel.outbuf_lock*
-threading.Condition"threading.Condition*310*311*312*313*314r¤
-addr!waitress.channel.HTTPChannel.addr`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*310*311*312*313*314rl
-	connected&waitress.channel.HTTPChannel.connected
-builtins.bool"builtins.bool*310*311*312*313*314*¥
-__annotations__ waitress.channel.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*:
-	wasyncorewaitress.wasyncore *310*311*312*313*314
+addr(*	
+adj(*
+map (	*
+writable
+*
+
+self(*
+handle_write*
+
+self(*
+readable
+*
+
+self(*
+handle_read*
+
+self(*$
+received
+*
+
+self(*
+
+data(*
+handle_close*
+
+self(*(
+add_channel*
+
+self(*
+map (	*(
+del_channel*
+
+self(*
+map (	*&
+
+write_soon*
+
+self(*
+
+data(*
+service*
+
+self(*
+cancel*
+
+self(r
+
+task_class0r
+error_task_class0r
+parser_class0r
+request0r
+last_activity0r
+
+will_close0
+r
+close_when_flushed0
+r
+requests0r
+sent_continue0
+r
+total_outbufs_len0r
+current_outbuf_count0r
+
+server0r
+adj0r
+outbufs0r
+creation_time0r
+sendbuf_len0r
+	task_lock*310*311*3120r
+	task_lock*313*3140r
+outbuf_lock0r
+addr0r
+	connected0
+*
+__annotations__0*!
+	wasyncorewaitress.wasyncore 22"waitress.channel.HTTPChannel2 "waitress.server.BaseWSGIServer2"socket.socket2"builtins.str2"" waitress.adjustments.Adjustments2"builtins.int2"typing.Mapping2222"builtins.bool2"builtins.bytes2"waitress.task.WSGITask2"waitress.task.ErrorTask2#"!waitress.parser.HTTPRequestParser2"builtins.float2"typing.Sequence22%"#waitress.buffers.OverflowableBuffer2"typing.Sequence22"_thread.LockType2"_thread.lock2"threading.Condition2222"builtins.dict2

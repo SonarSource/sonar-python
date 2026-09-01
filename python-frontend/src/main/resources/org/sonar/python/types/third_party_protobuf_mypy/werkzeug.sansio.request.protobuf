@@ -1,293 +1,162 @@
 
-werkzeug.sansio.requestÔl
-Requestwerkzeug.sansio.request.Request"builtins.object*é
-__init__(werkzeug.sansio.request.Request.__init__"
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request*(
-method
-builtins.str"builtins.str*(
-scheme
-builtins.str"builtins.str*Í
-server›
-8Union[Tuple[builtins.str,Union[builtins.int,None]],None]î
-,Tuple[builtins.str,Union[builtins.int,None]]
-builtins.str"builtins.strD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None
-None*+
-	root_path
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.str*2
-query_string 
-builtins.bytes"builtins.bytes*_
-headersR
-'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers*U
-remote_addrD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*ò
-__repr__(werkzeug.sansio.request.Request.__repr__"
-builtins.str"builtins.str*DB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request*“
-args$werkzeug.sansio.request.Request.args"≥
-Gwerkzeug.datastructures.structures.MultiDict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str",werkzeug.datastructures.structures.MultiDict*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¯
-access_route,werkzeug.sansio.request.Request.access_route"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*ƒ
-	full_path)werkzeug.sansio.request.Request.full_path"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*ª
-	is_secure)werkzeug.sansio.request.Request.is_secure"
-builtins.bool"builtins.bool*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.property`*∏
-url#werkzeug.sansio.request.Request.url"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¬
-base_url(werkzeug.sansio.request.Request.base_url"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¬
-root_url(werkzeug.sansio.request.Request.root_url"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¬
-host_url(werkzeug.sansio.request.Request.host_url"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*∫
-host$werkzeug.sansio.request.Request.host"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*Í
-cookies'werkzeug.sansio.request.Request.cookies"≈
-Pwerkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"5werkzeug.datastructures.structures.ImmutableMultiDict*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*ˆ
-content_length.werkzeug.sansio.request.Request.content_length"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¢
-_parse_content_type3werkzeug.sansio.request.Request._parse_content_type"
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request*∑
-mimetype(werkzeug.sansio.request.Request.mimetype"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.property`*û
-mimetype_params/werkzeug.sansio.request.Request.mimetype_params"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.property`*˛
-pragma&werkzeug.sansio.request.Request.pragma"\
-,werkzeug.datastructures.structures.HeaderSet",werkzeug.datastructures.structures.HeaderSet*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*å
-accept_mimetypes0werkzeug.sansio.request.Request.accept_mimetypes"V
-)werkzeug.datastructures.accept.MIMEAccept")werkzeug.datastructures.accept.MIMEAccept*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*ê
-accept_charsets/werkzeug.sansio.request.Request.accept_charsets"\
-,werkzeug.datastructures.accept.CharsetAccept",werkzeug.datastructures.accept.CharsetAccept*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*Ñ
-accept_encodings0werkzeug.sansio.request.Request.accept_encodings"N
-%werkzeug.datastructures.accept.Accept"%werkzeug.datastructures.accept.Accept*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*î
-accept_languages0werkzeug.sansio.request.Request.accept_languages"^
--werkzeug.datastructures.accept.LanguageAccept"-werkzeug.datastructures.accept.LanguageAccept*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¶
-cache_control-werkzeug.sansio.request.Request.cache_control"v
-9werkzeug.datastructures.cache_control.RequestCacheControl"9werkzeug.datastructures.cache_control.RequestCacheControl*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*Ó
-if_match(werkzeug.sansio.request.Request.if_match"H
-"werkzeug.datastructures.etag.ETags""werkzeug.datastructures.etag.ETags*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*¯
-if_none_match-werkzeug.sansio.request.Request.if_none_match"H
-"werkzeug.datastructures.etag.ETags""werkzeug.datastructures.etag.ETags*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*ã
-if_modified_since1werkzeug.sansio.request.Request.if_modified_since"S
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*è
-if_unmodified_since3werkzeug.sansio.request.Request.if_unmodified_since"S
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*Ù
-if_range(werkzeug.sansio.request.Request.if_range"N
-%werkzeug.datastructures.range.IfRange"%werkzeug.datastructures.range.IfRange*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*™
-range%werkzeug.sansio.request.Request.range"â
-/Union[werkzeug.datastructures.range.Range,None]J
-#werkzeug.datastructures.range.Range"#werkzeug.datastructures.range.Range
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*Ë
+werkzeug.sansio.requestË
+Request"builtins.object*ï
+__init__*
 
-user_agent*werkzeug.sansio.request.Request.user_agent">
-werkzeug.user_agent.UserAgent"werkzeug.user_agent.UserAgent*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*œ
-authorization-werkzeug.sansio.request.Request.authorization"û
-6Union[werkzeug.datastructures.auth.Authorization,None]X
-*werkzeug.datastructures.auth.Authorization"*werkzeug.datastructures.auth.Authorization
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:werkzeug.utils.cached_property*∑
-is_json'werkzeug.sansio.request.Request.is_json"
-builtins.bool"builtins.bool*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.property`2≠
-charset'werkzeug.sansio.request.Request.charset∑
-charset'werkzeug.sansio.request.Request.charset"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.propertyX`æ
-charset'werkzeug.sansio.request.Request.charset"
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request*'
-value
-builtins.str"builtins.str0:.setter2›
-encoding_errors/werkzeug.sansio.request.Request.encoding_errors«
-encoding_errors/werkzeug.sansio.request.Request.encoding_errors"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.propertyX`Œ
-encoding_errors/werkzeug.sansio.request.Request.encoding_errors"
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request*'
-value
-builtins.str"builtins.str0:.setter2≈
-url_charset+werkzeug.sansio.request.Request.url_charsetø
-url_charset+werkzeug.sansio.request.Request.url_charset"
-builtins.str"builtins.str*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request0:builtins.propertyX`∆
-url_charset+werkzeug.sansio.request.Request.url_charset"
-None*L
-selfB
-werkzeug.sansio.request.Request"werkzeug.sansio.request.Request*'
-value
-builtins.str"builtins.str0:.setterrR
-_charset(werkzeug.sansio.request.Request._charset
-builtins.str"builtins.strrb
-_encoding_errors0werkzeug.sansio.request.Request._encoding_errors
-builtins.str"builtins.strrZ
-_url_charset,werkzeug.sansio.request.Request._url_charset
-builtins.str"builtins.strrì
-parameter_storage_class7werkzeug.sansio.request.Request.parameter_storage_classæ
-;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
-5werkzeug.datastructures.structures.MultiDict[Any,Any]
-Any
-Any",werkzeug.datastructures.structures.MultiDict"typerâ
-dict_storage_class2werkzeug.sansio.request.Request.dict_storage_classæ
-;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
-5werkzeug.datastructures.structures.MultiDict[Any,Any]
-Any
-Any",werkzeug.datastructures.structures.MultiDict"typerö
-list_storage_class2werkzeug.sansio.request.Request.list_storage_classP
-Type[builtins.list[Any]],
-builtins.list[Any]
-Any"builtins.list"typer≥
-user_agent_class0werkzeug.sansio.request.Request.user_agent_classm
-#Type[werkzeug.user_agent.UserAgent]>
-werkzeug.user_agent.UserAgent"werkzeug.user_agent.UserAgent"typer¬
-trusted_hosts-werkzeug.sansio.request.Request.trusted_hostsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-Noner™
-content_type,werkzeug.sansio.request.Request.content_typel
-,werkzeug.utils.header_property[builtins.str]
-builtins.str"builtins.str"werkzeug.utils.header_propertyr≤
-content_encoding0werkzeug.sansio.request.Request.content_encodingl
-,werkzeug.utils.header_property[builtins.str]
-builtins.str"builtins.str"werkzeug.utils.header_propertyr®
-content_md5+werkzeug.sansio.request.Request.content_md5l
-,werkzeug.utils.header_property[builtins.str]
-builtins.str"builtins.str"werkzeug.utils.header_propertyr¢
-referrer(werkzeug.sansio.request.Request.referrerl
-,werkzeug.utils.header_property[builtins.str]
-builtins.str"builtins.str"werkzeug.utils.header_propertyr„
-date$werkzeug.sansio.request.Request.date¥
-=werkzeug.utils.header_property[Union[datetime.datetime,None]]S
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None"werkzeug.utils.header_propertyr™
-max_forwards,werkzeug.sansio.request.Request.max_forwardsl
-,werkzeug.utils.header_property[builtins.int]
-builtins.int"builtins.int"werkzeug.utils.header_propertyrû
-origin&werkzeug.sansio.request.Request.originl
-,werkzeug.utils.header_property[builtins.str]
-builtins.str"builtins.str"werkzeug.utils.header_propertyrØ
-access_control_request_headers>werkzeug.sansio.request.Request.access_control_request_headersÃ
-Lwerkzeug.utils.header_property[werkzeug.datastructures.structures.HeaderSet]\
-,werkzeug.datastructures.structures.HeaderSet",werkzeug.datastructures.structures.HeaderSet"werkzeug.utils.header_propertyrÃ
-access_control_request_method=werkzeug.sansio.request.Request.access_control_request_methodl
-,werkzeug.utils.header_property[builtins.str]
-builtins.str"builtins.str"werkzeug.utils.header_propertyrN
-method&werkzeug.sansio.request.Request.method
-builtins.str"builtins.strrN
-scheme&werkzeug.sansio.request.Request.scheme
-builtins.str"builtins.strrê
-server&werkzeug.sansio.request.Request.server›
-8Union[Tuple[builtins.str,Union[builtins.int,None]],None]î
-,Tuple[builtins.str,Union[builtins.int,None]]
-builtins.str"builtins.strD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None
-NonerT
-	root_path)werkzeug.sansio.request.Request.root_path
-builtins.str"builtins.strrJ
-path$werkzeug.sansio.request.Request.path
-builtins.str"builtins.strr^
-query_string,werkzeug.sansio.request.Request.query_string 
-builtins.bytes"builtins.bytesrÜ
-headers'werkzeug.sansio.request.Request.headersR
-'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.HeadersrÄ
-remote_addr+werkzeug.sansio.request.Request.remote_addrD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Noner§
-_parsed_content_type4werkzeug.sansio.request.Request._parsed_content_type’
-<Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]
-builtins.str"builtins.stru
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*ì
-__annotations__'werkzeug.sansio.request.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-ttyping 
+self(*
+method(*
+scheme(*
+server(*
+	root_path(*
+
+path(*
+query_string(*
+headers(	*
+remote_addr(
+*
+__repr__*(*6
+args*
+
+self(0:werkzeug.utils.cached_property*>
+access_route*
+
+self(0:werkzeug.utils.cached_property*;
+	full_path*
+
+self(0:werkzeug.utils.cached_property*0
+	is_secure*
+
+self(0:builtins.property`*5
+url*
+
+self(0:werkzeug.utils.cached_property*:
+base_url*
+
+self(0:werkzeug.utils.cached_property*:
+root_url*
+
+self(0:werkzeug.utils.cached_property*:
+host_url*
+
+self(0:werkzeug.utils.cached_property*6
+host*
+
+self(0:werkzeug.utils.cached_property*9
+cookies*
+
+self(0:werkzeug.utils.cached_property*@
+content_length*
+
+self(0:werkzeug.utils.cached_property*#
+_parse_content_type*
+
+self(*/
+mimetype*
+
+self(0:builtins.property`*6
+mimetype_params*
+
+self(0:builtins.property`*8
+pragma*
+
+self(0:werkzeug.utils.cached_property*B
+accept_mimetypes*
+
+self(0:werkzeug.utils.cached_property*A
+accept_charsets*
+
+self(0:werkzeug.utils.cached_property*B
+accept_encodings*
+
+self(0:werkzeug.utils.cached_property*B
+accept_languages*
+
+self(0:werkzeug.utils.cached_property*?
+cache_control*
+
+self(0:werkzeug.utils.cached_property*:
+if_match*
+
+self(0:werkzeug.utils.cached_property*?
+if_none_match*
+
+self(0:werkzeug.utils.cached_property*C
+if_modified_since*
+
+self(0:werkzeug.utils.cached_property*E
+if_unmodified_since*
+
+self(0:werkzeug.utils.cached_property*:
+if_range*
+
+self(0:werkzeug.utils.cached_property*7
+range*
+
+self(0:werkzeug.utils.cached_property*<
+
+user_agent*
+
+self(0:werkzeug.utils.cached_property*?
+authorization*
+
+self(0:werkzeug.utils.cached_property*.
+is_json*
+
+self(0:builtins.property`2l
+charset0
+charset*
+
+self(0:builtins.propertyX`/
+charset*
+
+self(*
+value(0:.setter2Ñ
+encoding_errors8
+encoding_errors*
+
+self(0:builtins.propertyX`7
+encoding_errors*
+
+self(*
+value(0:.setter2x
+url_charset4
+url_charset*
+
+self(0:builtins.propertyX`3
+url_charset*
+
+self(*
+value(0:.setterr
+_charset0r
+_encoding_errors0r
+_url_charset0r
+parameter_storage_class0!r
+dict_storage_class0!r
+list_storage_class0#r
+user_agent_class0$r
+trusted_hosts0%r
+content_type0&r
+content_encoding0&r
+content_md50&r
+referrer0&r
+date0'r
+max_forwards0(r
+
+origin0&r"
+access_control_request_headers0)r!
+access_control_request_method0&r
+
+method0r
+
+scheme0r
+
+server0r
+	root_path0r
+path0r
+query_string0r
+headers0	r
+remote_addr0
+r
+_parsed_content_type0**
+__annotations__0+*
+ttyping 22!"werkzeug.sansio.request.Request2"builtins.str2"builtins.int2222222"builtins.bytes2)"'werkzeug.datastructures.headers.Headers2222",werkzeug.datastructures.structures.MultiDict22"builtins.list22"builtins.bool2;"5werkzeug.datastructures.structures.ImmutableMultiDict22"builtins.dict22.",werkzeug.datastructures.structures.HeaderSet2+")werkzeug.datastructures.accept.MIMEAccept2.",werkzeug.datastructures.accept.CharsetAccept2'"%werkzeug.datastructures.accept.Accept2/"-werkzeug.datastructures.accept.LanguageAccept2;"9werkzeug.datastructures.cache_control.RequestCacheControl2$""werkzeug.datastructures.etag.ETags2"datetime.datetime222'"%werkzeug.datastructures.range.IfRange2%"#werkzeug.datastructures.range.Range222"werkzeug.user_agent.UserAgent2,"*werkzeug.datastructures.auth.Authorization22222",werkzeug.datastructures.structures.MultiDict22"type2 2"builtins.list22"type2"2"type2222#"werkzeug.utils.header_property22#"werkzeug.utils.header_property22#"werkzeug.utils.header_property22#"werkzeug.utils.header_property2222"builtins.dict2

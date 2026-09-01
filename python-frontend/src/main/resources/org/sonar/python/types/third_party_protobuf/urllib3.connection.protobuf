@@ -1,361 +1,171 @@
 
-urllib3.connectionV
-ConnectionErrorbuiltins.ConnectionError"builtins.OSErrorj310j311j312j313j314¼W
-_HTTPConnectionhttp.client.HTTPConnection"builtins.object*Ð
-__init__#http.client.HTTPConnection.__init__"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *³
-source_addressœ
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *-
-	blocksize
-builtins.int"builtins.int z310z311z312z313z314*¶
-request"http.client.HTTPConnection.request"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*ì
-bodyß
-”Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str,None]›
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]‚
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-builtins.str"builtins.str
-None *¸
-headers¨
-atyping.Mapping[builtins.str,TypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]]
-builtins.str"builtins.str”
-DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]¯
-9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
-encode_chunked
-builtins.bool"builtins.bool z310z311*«
-request"http.client.HTTPConnection.request"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*á
-bodyÔ
-’Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]],builtins.str,None]’
-yTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]]û
-nUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReado
-(typing.Iterable[_collections_abc.Buffer]2
-_collections_abc.Buffer"_collections_abc.Buffer"typing.Iterable2
-_collections_abc.Buffer"_collections_abc.Buffer"http.client._DataType
-builtins.str"builtins.str
-None *³
-headers£
-`typing.Mapping[builtins.str,TypeAlias[Union[_collections_abc.Buffer,builtins.str,builtins.int]]]
-builtins.str"builtins.str
-CTypeAlias[Union[_collections_abc.Buffer,builtins.str,builtins.int]]¬
-8Union[_collections_abc.Buffer,builtins.str,builtins.int]2
-_collections_abc.Buffer"_collections_abc.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
-encode_chunked
-builtins.bool"builtins.bool z312z313z314*È
-getresponse&http.client.HTTPConnection.getresponse"4
-http.client.HTTPResponse"http.client.HTTPResponse*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnectionz310z311z312z313z314*Ë
-set_debuglevel)http.client.HTTPConnection.set_debuglevel"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*'
-level
-builtins.int"builtins.intz310z311z312z313z314*ã
+urllib3.connection=
+ConnectionErrorbuiltins.ConnectionError"builtins.OSError‹
 
-set_tunnel%http.client.HTTPConnection.set_tunnel"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Ì
-headers¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z310z311z312z313z314*”
-connect"http.client.HTTPConnection.connect"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnectionz310z311z312z313z314*
-close http.client.HTTPConnection.close"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnectionz310z311z312z313z314*Ø
+_HTTPConnectionhttp.client.HTTPConnection"builtins.object*n
+__init__*
 
-putrequest%http.client.HTTPConnection.putrequest"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-method
-builtins.str"builtins.str*%
-url
-builtins.str"builtins.str*/
-	skip_host
-builtins.bool"builtins.bool *:
-skip_accept_encoding
-builtins.bool"builtins.bool z310z311z312z313z314*¡
-	putheader$http.client.HTTPConnection.putheader"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*r
-headerf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*¡
-values”
-DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]¯
-9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
-typing_extensions.Buffer"typing_extensions.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValuez310z311*¢
-	putheader$http.client.HTTPConnection.putheader"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*r
-headerf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*
-values
-CTypeAlias[Union[_collections_abc.Buffer,builtins.str,builtins.int]]¬
-8Union[_collections_abc.Buffer,builtins.str,builtins.int]2
-_collections_abc.Buffer"_collections_abc.Buffer
-builtins.str"builtins.str
-builtins.int"builtins.int"http.client._HeaderValuez312z313z314*
+self(*
 
-endheaders%http.client.HTTPConnection.endheaders"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*É
-message_body´
-‡Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],None]›
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]‚
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-None *4
-encode_chunked
-builtins.bool"builtins.bool z310z311*‡
+host(*
+port (*
+timeout (*
+source_address (	*
+	blocksize (*q
+request*
 
-endheaders%http.client.HTTPConnection.endheaders"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*¾
-message_body©
-…Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]],None]’
-yTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]]û
-nUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReado
-(typing.Iterable[_collections_abc.Buffer]2
-_collections_abc.Buffer"_collections_abc.Buffer"typing.Iterable2
-_collections_abc.Buffer"_collections_abc.Buffer"http.client._DataType
-None *4
-encode_chunked
-builtins.bool"builtins.bool z312z313z314*Ý
-sendhttp.client.HTTPConnection.send"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*Û
-dataÐ
-Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str]›
-{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]‚
-pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
-)typing.Iterable[typing_extensions.Buffer]4
-typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
-typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
-builtins.str"builtins.strz310z311*×
-sendhttp.client.HTTPConnection.send"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*Ð
-dataÅ
-Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]],builtins.str]’
-yTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]]û
-nUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]b
-&_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReado
-(typing.Iterable[_collections_abc.Buffer]2
-_collections_abc.Buffer"_collections_abc.Buffer"typing.Iterable2
-_collections_abc.Buffer"_collections_abc.Buffer"http.client._DataType
-builtins.str"builtins.strz312z313z314*
-get_proxy_response_headers5http.client.HTTPConnection.get_proxy_response_headers"e
-#Union[http.client.HTTPMessage,None]2
-http.client.HTTPMessage"http.client.HTTPMessage
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnectionz312z313z314j310j311j312j313j314rh
-	blocksize$http.client.HTTPConnection.blocksize
-builtins.int"builtins.int*310*311*312*313*314rh
-	auto_open$http.client.HTTPConnection.auto_open
-builtins.int"builtins.int*310*311*312*313*314rj
+self(*
+method(*	
+url(*
+body (*
+headers (*
+encode_chunked (z310z311*v
+request*
 
-debuglevel%http.client.HTTPConnection.debuglevel
-builtins.int"builtins.int*310*311*312*313*314rn
-default_port'http.client.HTTPConnection.default_port
-builtins.int"builtins.int*310*311*312*313*314r´
-response_class)http.client.HTTPConnection.response_class^
-Type[http.client.HTTPResponse]4
-http.client.HTTPResponse"http.client.HTTPResponse"type*310*311*312*313*314r’
-timeout"http.client.HTTPConnection.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*310*311*312*313*314r^
-hosthttp.client.HTTPConnection.host
-builtins.str"builtins.str*310*311*312*313*314r^
-porthttp.client.HTTPConnection.port
-builtins.int"builtins.int*310*311*312*313*314r»
-sockhttp.client.HTTPConnection.socky
-#Union[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket0
-TypeAlias[Any]
-Any"_typeshed.MaybeNone*310*311*312*313*314W
-HTTPExceptionhttp.client.HTTPException"builtins.Exceptionj310j311j312j313j314_
-DummyConnection"urllib3.connection.DummyConnection"builtins.objectj310j311j312j313j314—
-HTTPConnection!urllib3.connection.HTTPConnection"http.client.HTTPConnection*Ï
-__init__*urllib3.connection.HTTPConnection.__init__"
-None*P
-selfF
-!urllib3.connection.HTTPConnection"!urllib3.connection.HTTPConnection*
-args
-Any*
-kw
-Anyz310z311z312z313z314*W
-connect)urllib3.connection.HTTPConnection.connect*
-selfz310z311z312z313z314j310j311j312j313j314r`
-default_port.urllib3.connection.HTTPConnection.default_port
-Any*310*311*312*313*314rt
-default_socket_options8urllib3.connection.HTTPConnection.default_socket_options
-Any*310*311*312*313*314r^
-is_verified-urllib3.connection.HTTPConnection.is_verified
-Any*310*311*312*313*314rd
-source_address0urllib3.connection.HTTPConnection.source_address
-Any*310*311*312*313*314rd
-socket_options0urllib3.connection.HTTPConnection.socket_options
-Any*310*311*312*313*314…
-HTTPSConnection"urllib3.connection.HTTPSConnection"!urllib3.connection.HTTPConnection*É
-__init__+urllib3.connection.HTTPSConnection.__init__"
-None*R
-selfH
-"urllib3.connection.HTTPSConnection""urllib3.connection.HTTPSConnection*
-host
-Any*
-port
-Any *
-key_file
-Any *
-	cert_file
-Any *
-strict
-Any *
-timeout
-Any *
-kw
-Anyz310z311z312z313z314*X
-connect*urllib3.connection.HTTPSConnection.connect*
-selfz310z311z312z313z314j310j311j312j313j314ra
-default_port/urllib3.connection.HTTPSConnection.default_port
-Any*310*311*312*313*314rY
-key_file+urllib3.connection.HTTPSConnection.key_file
-Any*310*311*312*313*314r[
-	cert_file,urllib3.connection.HTTPSConnection.cert_file
-Any*310*311*312*313*314rQ
-sock'urllib3.connection.HTTPSConnection.sock
-Any*310*311*312*313*314Æ
-VerifiedHTTPSConnection*urllib3.connection.VerifiedHTTPSConnection""urllib3.connection.HTTPSConnection*Õ
-set_cert3urllib3.connection.VerifiedHTTPSConnection.set_cert*
+self(*
+method(*	
+url(*
+body (*
+headers (*
+encode_chunked (z312z313z314*
+getresponse*
+
+self(*+
+set_debuglevel*
+
+self(*
+level(*E
+
+set_tunnel*
+
+self(*
+
+host(*
+port (*
+headers (*
+connect*
+
+self(*
+close*
+
+self(*d
+
+putrequest*
+
+self(*
+method(*	
+url(*
+	skip_host (*
+skip_accept_encoding (*?
+	putheader*
+
+self(*
+header( *
+values(z310z311*D
+	putheader*
+
+self(*
+header( *
+values(z312z313z314*R
+
+endheaders*
+
+self(*
+message_body (!*
+encode_chunked (z310z311*W
+
+endheaders*
+
+self(*
+message_body ("*
+encode_chunked (z312z313z314**
+send*
+
+self(*
+
+data(#z310z311*/
+send*
+
+self(*
+
+data($z312z313z314*9
+get_proxy_response_headers&*
+
+self(z312z313z314r
+	blocksize0r
+	auto_open0r
+
+debuglevel0r
+default_port0r
+response_class0'r
+timeout0r
+host0r
+port0r
+sock0+>
+HTTPExceptionhttp.client.HTTPException"builtins.Exception"
+DummyConnection"builtins.objectØ
+HTTPConnection"http.client.HTTPConnection*.
+__init__*
+
+self(,*
+
+args()*
+kw()*
+connect*
+selfr
+default_port0)r
+default_socket_options0)r
+is_verified0)r
+source_address0)r
+socket_options0)‡
+HTTPSConnection"!urllib3.connection.HTTPConnection*‚
+__init__*
+
+self(-*
+
+host()*
+port ()*
+key_file ()*
+	cert_file ()*
+strict ()*
+timeout ()*
+kw()*
+connect*
+selfr
+default_port0)r
+key_file0)r
+	cert_file0)r
+sock0)þ
+VerifiedHTTPSConnection""urllib3.connection.HTTPSConnection*‡
+set_cert*
 self*
 key_file *
 	cert_file *
 	cert_reqs *
 ca_certs *
 assert_hostname *
-assert_fingerprint z310z311z312z313z314*`
-connect2urllib3.connection.VerifiedHTTPSConnection.connect*
-selfz310z311z312z313z314j310j311j312j313j314rc
-	cert_reqs4urllib3.connection.VerifiedHTTPSConnection.cert_reqs
-Any*310*311*312*313*314ra
-ca_certs3urllib3.connection.VerifiedHTTPSConnection.ca_certs
-Any*310*311*312*313*314rg
-ssl_version6urllib3.connection.VerifiedHTTPSConnection.ssl_version
-Any*310*311*312*313*314ru
-assert_fingerprint=urllib3.connection.VerifiedHTTPSConnection.assert_fingerprint
-Any*310*311*312*313*314ra
-key_file3urllib3.connection.VerifiedHTTPSConnection.key_file
-Any*310*311*312*313*314rc
-	cert_file4urllib3.connection.VerifiedHTTPSConnection.cert_file
-Any*310*311*312*313*314ro
-assert_hostname:urllib3.connection.VerifiedHTTPSConnection.assert_hostname
-Any*310*311*312*313*314rY
-sock/urllib3.connection.VerifiedHTTPSConnection.sock
-Any*310*311*312*313*314rc
-	auto_open4urllib3.connection.VerifiedHTTPSConnection.auto_open
-Any*310*311*312*313*314rg
-is_verified6urllib3.connection.VerifiedHTTPSConnection.is_verified
-Any*310*311*312*313*314*§
-__annotations__"urllib3.connection.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*™
-match_hostname!urllib3.connection.match_hostnameK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*Ÿ
-resolve_cert_reqs$urllib3.connection.resolve_cert_reqsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*£
-resolve_ssl_version&urllib3.connection.resolve_ssl_versionK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*›
-ssl_wrap_socket"urllib3.connection.ssl_wrap_socketK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*¡
-assert_fingerprint%urllib3.connection.assert_fingerprintK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*@
+assert_fingerprint *
+connect*
+selfr
+	cert_reqs0)r
+ca_certs0)r
+ssl_version0)r
+assert_fingerprint0)r
+key_file0)r
+	cert_file0)r
+assert_hostname0)r
+sock0)r
+	auto_open0)r
+is_verified0)*
+__annotations__0.*
+match_hostname00*
+resolve_cert_reqs00*
+resolve_ssl_version00*
+ssl_wrap_socket00*
+assert_fingerprint00*'
 
-connectionurllib3.util.connection *310*311*312*313*314*U
-port_by_scheme!urllib3.connection.port_by_scheme
-Any*310*311*312*313*314*O
-RECENT_DATEurllib3.connection.RECENT_DATE
-Any*310*311*312*313*314
+connectionurllib3.util.connection *
+port_by_scheme0)*
+RECENT_DATE0)22"http.client.HTTPConnection2"builtins.str2"builtins.int222"builtins.float2222222"builtins.bytes2"_typeshed.SupportsRead2
+2"typing_extensions.Buffer2"typing.Iterable2222"http.client._DataType222222"http.client._HeaderValue22"typing.Mapping22"builtins.bool2"_collections_abc.Buffer2"typing.Iterable2222"http.client._DataType222222"http.client._HeaderValue22"typing.Mapping22"http.client.HTTPResponse2"typing.Mapping22222
+222222222"http.client.HTTPMessage22%2"type22"socket.socket22"_typeshed.MaybeNone2)22(*2#"!urllib3.connection.HTTPConnection2$""urllib3.connection.HTTPSConnection2"builtins.dict2)2"builtins.function22/

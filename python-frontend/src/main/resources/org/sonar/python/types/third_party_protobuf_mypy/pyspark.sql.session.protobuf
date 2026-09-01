@@ -1,539 +1,278 @@
 
-pyspark.sql.session—
-classproperty!pyspark.sql.session.classproperty"builtins.property*â
-__get__)pyspark.sql.session.classproperty.__get__"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*P
-selfF
-!pyspark.sql.session.classproperty"!pyspark.sql.session.classproperty*
-instance
-Any*
-owner
-Any Ö´
-SparkSession pyspark.sql.session.SparkSession"2pyspark.sql.pandas.conversion.SparkConversionMixin*˝
-builder(pyspark.sql.session.SparkSession.builder"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*M
-clsD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:!pyspark.sql.session.classproperty*Ñ
-__init__)pyspark.sql.session.SparkSession.__init__"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*N
-sparkContext<
-pyspark.context.SparkContext"pyspark.context.SparkContext*;
-jsparkSession&
-Union[Any,None]
-Any
-None *f
-optionsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict *©
-_repr_html_,pyspark.sql.session.SparkSession._repr_html_"
-builtins.str"builtins.str*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*°
-_jconf'pyspark.sql.session.SparkSession._jconf"
-Any*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*œ
+pyspark.sql.sessionZ
+classproperty"builtins.property*6
+__get__*
 
-newSession+pyspark.sql.session.SparkSession.newSession"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*ï
-getActiveSession1pyspark.sql.session.SparkSession.getActiveSession"Ä
-,Union[pyspark.sql.session.SparkSession,None]D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession
-None*
-clsv
-&Type[pyspark.sql.session.SparkSession]D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession"type0:builtins.classmethod:0pyspark.sql.utils.try_remote_session_classmethodp*ƒ
-active'pyspark.sql.session.SparkSession.active"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*
-clsv
-&Type[pyspark.sql.session.SparkSession]D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession"type0:builtins.classmethod:0pyspark.sql.utils.try_remote_session_classmethodp*‚
-sparkContext-pyspark.sql.session.SparkSession.sparkContext"<
-pyspark.context.SparkContext"pyspark.context.SparkContext*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*∏
-version(pyspark.sql.session.SparkSession.version"
-builtins.str"builtins.str*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*÷
-conf%pyspark.sql.session.SparkSession.conf"@
-pyspark.sql.conf.RuntimeConfig"pyspark.sql.conf.RuntimeConfig*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*÷
-catalog(pyspark.sql.session.SparkSession.catalog":
-pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*÷
-udf$pyspark.sql.session.SparkSession.udf"B
-pyspark.sql.udf.UDFRegistration"pyspark.sql.udf.UDFRegistration*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*‹
-udtf%pyspark.sql.session.SparkSession.udtf"F
-!pyspark.sql.udtf.UDTFRegistration"!pyspark.sql.udtf.UDTFRegistration*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*¬
-range&pyspark.sql.session.SparkSession.range"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*'
-start
-builtins.int"builtins.int*O
-endD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *(
-step
-builtins.int"builtins.int *Y
-numPartitionsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *©
-_inferSchemaFromList5pyspark.sql.session.SparkSession._inferSchemaFromList"<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*:
-data0
-typing.Iterable[Any]
-Any"typing.Iterable*è
-namesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *˘
-_inferSchema-pyspark.sql.session.SparkSession._inferSchema"<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*9
-rdd0
-pyspark.rdd.RDD[Any]
-Any"pyspark.rdd.RDD*_
-samplingRatioJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *è
-namesÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *á
-_createFromRDD/pyspark.sql.session.SparkSession._createFromRDD"Û
-HTuple[pyspark.rdd.RDD[builtins.tuple[Any]],pyspark.sql.types.StructType]g
-$pyspark.rdd.RDD[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"pyspark.rdd.RDD<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*9
-rdd0
-pyspark.rdd.RDD[Any]
-Any"pyspark.rdd.RDD*„
-schema÷
-BUnion[pyspark.sql.types.DataType,builtins.list[builtins.str],None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataTypeJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*]
-samplingRatioJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*≠
-_createFromLocal1pyspark.sql.session.SparkSession._createFromLocal"Û
-HTuple[pyspark.rdd.RDD[builtins.tuple[Any]],pyspark.sql.types.StructType]g
-$pyspark.rdd.RDD[builtins.tuple[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple"pyspark.rdd.RDD<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*:
-data0
-typing.Iterable[Any]
-Any"typing.Iterable*„
-schema÷
-BUnion[pyspark.sql.types.DataType,builtins.list[builtins.str],None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataTypeJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*∞
-_create_shell_session6pyspark.sql.session.SparkSession._create_shell_session"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.staticmethodh*“
-_getActiveSessionOrCreate:pyspark.sql.session.SparkSession._getActiveSessionOrCreate"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*
-static_conf
-Any0:builtins.staticmethodh*¯
-_create_dataframe2pyspark.sql.session.SparkSession._create_dataframe"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*£
-dataò
-0Union[pyspark.rdd.RDD[Any],typing.Iterable[Any]]0
-pyspark.rdd.RDD[Any]
-Any"pyspark.rdd.RDD0
-typing.Iterable[Any]
-Any"typing.Iterable*„
-schema÷
-BUnion[pyspark.sql.types.DataType,builtins.list[builtins.str],None]8
-pyspark.sql.types.DataType"pyspark.sql.types.DataTypeJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*]
-samplingRatioJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*0
-verifySchema
-builtins.bool"builtins.bool*„
-sql$pyspark.sql.session.SparkSession.sql"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession**
-sqlQuery
-builtins.str"builtins.str*‡
-args”
->Union[builtins.dict[builtins.str,Any],builtins.list[Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict,
-builtins.list[Any]
-Any"builtins.list
-None *
-kwargs
-Any*
-table&pyspark.sql.session.SparkSession.table"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*+
-	tableName
-builtins.str"builtins.str*Ê
-read%pyspark.sql.session.SparkSession.read"P
-&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*à
+self(*
+instance(*
+owner (µ
+SparkSession"2pyspark.sql.pandas.conversion.SparkConversionMixin*;
+builder*	
+cls(0:!pyspark.sql.session.classproperty*T
+__init__*
 
-readStream+pyspark.sql.session.SparkSession.readStream"f
-1pyspark.sql.streaming.readwriter.DataStreamReader"1pyspark.sql.streaming.readwriter.DataStreamReader*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*Ç
-streams(pyspark.sql.session.SparkSession.streams"f
-1pyspark.sql.streaming.query.StreamingQueryManager"1pyspark.sql.streaming.query.StreamingQueryManager*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*á
-stop%pyspark.sql.session.SparkSession.stop"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*≈
-	__enter__*pyspark.sql.session.SparkSession.__enter__"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*FD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*‡
-__exit__)pyspark.sql.session.SparkSession.__exit__"
-None*FD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*ìê
-(Union[Type[builtins.BaseException],None]X
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException"type
-None*db
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*[Y
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*Ç
-client'pyspark.sql.session.SparkSession.client"h
-2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession0:builtins.property`*»
-addArtifacts-pyspark.sql.session.SparkSession.addArtifacts"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*&
-path
-builtins.str"builtins.str*,
-pyfile
-builtins.bool"builtins.bool *-
-archive
-builtins.bool"builtins.bool **
-file
-builtins.bool"builtins.bool *¸
-copyFromLocalToFs2pyspark.sql.session.SparkSession.copyFromLocalToFs"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*,
+self(*
+sparkContext(*
+jsparkSession (*
+options (	*
+_repr_html_*
 
-local_path
-builtins.str"builtins.str*+
-	dest_path
-builtins.str"builtins.str*Ÿ
-interruptAll-pyspark.sql.session.SparkSession.interruptAll"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*Ä
-interruptTag-pyspark.sql.session.SparkSession.interruptTag"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*%
-tag
-builtins.str"builtins.str*é
-interruptOperation3pyspark.sql.session.SparkSession.interruptOperation"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*'
-op_id
-builtins.str"builtins.str*≤
-addTag'pyspark.sql.session.SparkSession.addTag"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*%
-tag
-builtins.str"builtins.str*∏
-	removeTag*pyspark.sql.session.SparkSession.removeTag"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*%
-tag
-builtins.str"builtins.str*Õ
-getTags(pyspark.sql.session.SparkSession.getTags"H
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*ë
-	clearTags*pyspark.sql.session.SparkSession.clearTags"
-None*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession2Œ&
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrameﬂ
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*†
-dataï
-,typing.Iterable[pyspark.sql._typing.RowLike]T
-pyspark.sql._typing.RowLike"
-builtins.object"builtins.object"builtins.object"typing.Iterable*Ï
-schema›
-?Union[builtins.list[builtins.str],builtins.tuple[builtins.str]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple *_
-samplingRatioJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadXﬂ
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*†
-dataï
-,pyspark.rdd.RDD[pyspark.sql._typing.RowLike]T
-pyspark.sql._typing.RowLike"
-builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD*Ï
-schema›
-?Union[builtins.list[builtins.str],builtins.tuple[builtins.str]]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple *_
-samplingRatioJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadX„
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*†
-dataï
-,typing.Iterable[pyspark.sql._typing.RowLike]T
-pyspark.sql._typing.RowLike"
-builtins.object"builtins.object"builtins.object"typing.Iterable*ù
-schemaê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*2
-verifySchema
-builtins.bool"builtins.bool 0:typing.overloadX„
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*†
-dataï
-,pyspark.rdd.RDD[pyspark.sql._typing.RowLike]T
-pyspark.sql._typing.RowLike"
-builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD*ù
-schemaê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*2
-verifySchema
-builtins.bool"builtins.bool 0:typing.overloadXÎ
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*®
-dataù
-0pyspark.rdd.RDD[pyspark.sql._typing.AtomicValue]X
-pyspark.sql._typing.AtomicValue"
-builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD*ù
-schemaê
-0Union[pyspark.sql.types.AtomicType,builtins.str]<
-pyspark.sql.types.AtomicType"pyspark.sql.types.AtomicType
-builtins.str"builtins.str*2
-verifySchema
-builtins.bool"builtins.bool 0:typing.overloadXÎ
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*®
-dataù
-0typing.Iterable[pyspark.sql._typing.AtomicValue]X
-pyspark.sql._typing.AtomicValue"
-builtins.object"builtins.object"builtins.object"typing.Iterable*ù
-schemaê
-0Union[pyspark.sql.types.AtomicType,builtins.str]<
-pyspark.sql.types.AtomicType"pyspark.sql.types.AtomicType
-builtins.str"builtins.str*2
-verifySchema
-builtins.bool"builtins.bool 0:typing.overloadXì
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*D
-data:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*_
-samplingRatioJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None 0:typing.overloadXÜ
-createDataFrame0pyspark.sql.session.SparkSession.createDataFrame"B
-pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*N
-selfD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*D
-data:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ù
-schemaê
-0Union[pyspark.sql.types.StructType,builtins.str]<
-pyspark.sql.types.StructType"pyspark.sql.types.StructType
-builtins.str"builtins.str*2
-verifySchema
-builtins.bool"builtins.bool 0:typing.overloadXr–
-_instantiatedSession5pyspark.sql.session.SparkSession._instantiatedSessionÄ
-,Union[pyspark.sql.session.SparkSession,None]D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession
-Nonerƒ
-_activeSession/pyspark.sql.session.SparkSession._activeSessionÄ
-,Union[pyspark.sql.session.SparkSession,None]D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession
-Nonerà
-addArtifact,pyspark.sql.session.SparkSession.addArtifactK
-CallableType[builtins.function]&
-builtins.function"builtins.functionri
-_sc$pyspark.sql.session.SparkSession._sc<
-pyspark.context.SparkContext"pyspark.context.SparkContextr6
-_jsc%pyspark.sql.session.SparkSession._jsc
-AnyrU
-_jvm%pyspark.sql.session.SparkSession._jvm&
-Union[Any,None]
-Any
-Nonerq
-_conf&pyspark.sql.session.SparkSession._conf@
-pyspark.sql.conf.RuntimeConfig"pyspark.sql.conf.RuntimeConfigrq
-_catalog)pyspark.sql.session.SparkSession._catalog:
-pyspark.sql.catalog.Catalog"pyspark.sql.catalog.CatalogzÚ
-Builder(pyspark.sql.session.SparkSession.Builder"builtins.object*ß
-__init__1pyspark.sql.session.SparkSession.Builder.__init__"
-None*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*√
-_validate_startup_urls?pyspark.sql.session.SparkSession.Builder._validate_startup_urls"
-None*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*ô
-master/pyspark.sql.session.SparkSession.Builder.master"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*(
-master
-builtins.str"builtins.str*ñ
-remote/pyspark.sql.session.SparkSession.Builder.remote"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*%
-url
-builtins.str"builtins.str*ô
-appName0pyspark.sql.session.SparkSession.Builder.appName"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*&
-name
-builtins.str"builtins.str*Ö
-enableHiveSupport:pyspark.sql.session.SparkSession.Builder.enableHiveSupport"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*È
-getOrCreate4pyspark.sql.session.SparkSession.Builder.getOrCreate"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*ﬂ
-create/pyspark.sql.session.SparkSession.Builder.create"D
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder2¢
-config/pyspark.sql.session.SparkSession.Builder.config¿
-config/pyspark.sql.session.SparkSession.Builder.config"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*:
-conf0
-pyspark.conf.SparkConf"pyspark.conf.SparkConf0:typing.overloadXø
-config/pyspark.sql.session.SparkSession.Builder.config"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*%
-key
-builtins.str"builtins.str*
-value
-Any0:typing.overloadX·
-config/pyspark.sql.session.SparkSession.Builder.config"T
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
-selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*⁄
-map–
-{builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]]
-builtins.str"builtins.str£
-_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
-TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
-HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
-=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
-builtins.bool"builtins.bool 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str"pyspark._typing.PrimitiveType
-None")pyspark.sql._typing.OptionalPrimitiveType"builtins.dict0:typing.overloadXrW
-_lock.pyspark.sql.session.SparkSession.Builder._lock
-_thread.RLock"_thread.RLockrñ
-_options1pyspark.sql.session.SparkSession.Builder._optionsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictú
-_monkey_patch_RDD%pyspark.sql.session._monkey_patch_RDD"
-None*V
-sparkSessionD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession,
-_testpyspark.sql.session._test"
-None*è
-__annotations__#pyspark.sql.session.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*5
+self(*-
+_jconf*
 
-JavaObjectpyspark.sql.session.JavaObject
-Any*r
-__all__pyspark.sql.session.__all__J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+self(0:builtins.property`*
+
+newSession*
+
+self(*k
+getActiveSession
+*	
+cls(0:builtins.classmethod:0pyspark.sql.utils.try_remote_session_classmethodp*a
+active*	
+cls(0:builtins.classmethod:0pyspark.sql.utils.try_remote_session_classmethodp*3
+sparkContext*
+
+self(0:builtins.property`*.
+version*
+
+self(0:builtins.property`*+
+conf*
+
+self(0:builtins.property`*.
+catalog*
+
+self(0:builtins.property`**
+udf*
+
+self(0:builtins.property`*+
+udtf*
+
+self(0:builtins.property`*T
+range*
+
+self(*
+start(*
+end (*
+step (*
+numPartitions (*?
+_inferSchemaFromList*
+
+self(*
+
+data(*
+names (*M
+_inferSchema*
+
+self(*	
+rdd(*
+samplingRatio (*
+names (*L
+_createFromRDD*
+
+self(*	
+rdd(*
+schema(*
+samplingRatio(*:
+_createFromLocal*
+
+self(*
+
+data(*
+schema(*4
+_create_shell_session0:builtins.staticmethodh*K
+_getActiveSessionOrCreate*
+static_conf(0:builtins.staticmethodh*d
+_create_dataframe*
+
+self(*
+
+data(*
+schema(*
+samplingRatio(*
+verifySchema( *?
+sql*
+
+self(*
+sqlQuery(*
+args ("*
+kwargs(*&
+table*
+
+self(*
+	tableName(*+
+read#*
+
+self(0:builtins.property`*1
+
+readStream$*
+
+self(0:builtins.property`*.
+streams%*
+
+self(0:builtins.property`*
+stop*
+
+self(*
+	__enter__*(*
+__exit__*(*((*()*(+*-
+client,*
+
+self(0:builtins.property`*W
+addArtifacts*
+
+self(*
+
+path(*
+pyfile ( *
+archive ( *
+file ( *D
+copyFromLocalToFs*
+
+self(*
+
+local_path(*
+	dest_path(*
+interruptAll*
+
+self(*'
+interruptTag*
+
+self(*	
+tag(*/
+interruptOperation*
+
+self(*
+op_id(*!
+addTag*
+
+self(*	
+tag(*$
+	removeTag*
+
+self(*	
+tag(*
+getTags-*
+
+self(*
+	clearTags*
+
+self(2∫
+createDataFrameg
+createDataFrame*
+
+self(*
+
+data(0*
+schema (2*
+samplingRatio (0:typing.overloadXg
+createDataFrame*
+
+self(*
+
+data(3*
+schema (2*
+samplingRatio (0:typing.overloadXd
+createDataFrame*
+
+self(*
+
+data(0*
+schema(4*
+verifySchema ( 0:typing.overloadXd
+createDataFrame*
+
+self(*
+
+data(3*
+schema(4*
+verifySchema ( 0:typing.overloadXd
+createDataFrame*
+
+self(*
+
+data(3*
+schema(6*
+verifySchema ( 0:typing.overloadXd
+createDataFrame*
+
+self(*
+
+data(0*
+schema(6*
+verifySchema ( 0:typing.overloadXW
+createDataFrame*
+
+self(*
+
+data(7*
+samplingRatio (0:typing.overloadXd
+createDataFrame*
+
+self(*
+
+data(7*
+schema(4*
+verifySchema ( 0:typing.overloadXr
+_instantiatedSession0
+r
+_activeSession0
+r
+addArtifact0@r
+_sc0r
+_jsc0r
+_jvm0r	
+_conf0r
+_catalog0z¸
+Builder"builtins.object*
+__init__*
+
+self(*&
+_validate_startup_urls*
+
+self(*$
+master*
+
+self(*
+master(*!
+remote*
+
+self(*	
+url(*#
+appName*
+
+self(*
+
+name(*!
+enableHiveSupport*
+
+self(*
+getOrCreate*
+
+self(*
+create*
+
+self(2æ
+config7
+config*
+
+self(*
+
+conf(80:typing.overloadXC
+config*
+
+self(*	
+key(*
+value(0:typing.overloadX6
+config*
+
+self(*	
+map(=0:typing.overloadXr	
+_lock0>r
+_options0	)
+_monkey_patch_RDD*
+sparkSession(	
+_test*
+__annotations__0	*
+
+JavaObject0*
+__all__02*"(pyspark.sql.session.SparkSession.Builder2#"!pyspark.sql.session.classproperty22"" pyspark.sql.session.SparkSession22"pyspark.context.SparkContext222"builtins.str2"builtins.dict2222"type22 "pyspark.sql.conf.RuntimeConfig2"pyspark.sql.catalog.Catalog2!"pyspark.sql.udf.UDFRegistration2#"!pyspark.sql.udtf.UDTFRegistration2!"pyspark.sql.dataframe.DataFrame2"builtins.int222"pyspark.sql.types.StructType2"typing.Iterable22"builtins.list2222"pyspark.rdd.RDD22"builtins.float222"builtins.tuple22"pyspark.rdd.RDD2222"pyspark.sql.types.DataType22222"builtins.bool2"builtins.list222	!2("&pyspark.sql.readwriter.DataFrameReader23"1pyspark.sql.streaming.readwriter.DataStreamReader23"1pyspark.sql.streaming.query.StreamingQueryManager2"builtins.BaseException2"type2&22'22&2"types.TracebackType22*24"2pyspark.sql.connect.client.core.SparkConnectClient2"builtins.set22"builtins.object2"builtins.object2.2"typing.Iterable2/2"builtins.tuple22212"pyspark.rdd.RDD2/222"pyspark.sql.types.AtomicType2252"pandas.core.frame.DataFrame2"pyspark.conf.SparkConf22 2$"pyspark._typing.PrimitiveType2922:20")pyspark.sql._typing.OptionalPrimitiveType2;2"builtins.dict2<2"_thread.RLock2"builtins.function22?

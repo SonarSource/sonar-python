@@ -1,190 +1,74 @@
 
-pandas.core.indexers¢
-BaseIndexer pandas.core.indexers.BaseIndexer"builtins.object*⁄
-__init__)pandas.core.indexers.BaseIndexer.__init__"
-None*N
-selfD
- pandas.core.indexers.BaseIndexer" pandas.core.indexers.BaseIndexer*Ç
-index_arrayÓ
-?Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],None]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray
-None */
-window_size
-builtins.int"builtins.int *
-kwargs
-Any*Ç
-get_window_bounds2pandas.core.indexers.BaseIndexer.get_window_bounds"¥
-nTuple[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*N
-selfD
- pandas.core.indexers.BaseIndexer" pandas.core.indexers.BaseIndexer*.
+pandas.core.indexers‹
+BaseIndexer"builtins.object*P
+__init__*
 
-num_values
-builtins.int"builtins.int *W
-min_periodsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *U
-centerG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *R
-closedD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None ‡
-VariableOffsetWindowIndexer0pandas.core.indexers.VariableOffsetWindowIndexer" pandas.core.indexers.BaseIndexer*∑
-__init__9pandas.core.indexers.VariableOffsetWindowIndexer.__init__"
-None*n
-selfd
-0pandas.core.indexers.VariableOffsetWindowIndexer"0pandas.core.indexers.VariableOffsetWindowIndexer*Ç
-index_arrayÓ
-?Union[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],None]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray
-None */
-window_size
-builtins.int"builtins.int *
-index
-Any *
-offset
-Any *
-kwargs
-Any*≤
-get_window_boundsBpandas.core.indexers.VariableOffsetWindowIndexer.get_window_bounds"¥
-nTuple[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*n
-selfd
-0pandas.core.indexers.VariableOffsetWindowIndexer"0pandas.core.indexers.VariableOffsetWindowIndexer*.
+self(*
+index_array (*
+window_size (*
+kwargs(*j
+get_window_bounds	*
 
-num_values
-builtins.int"builtins.int *W
-min_periodsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *U
-centerG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *R
-closedD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None ú
-FixedForwardWindowIndexer.pandas.core.indexers.FixedForwardWindowIndexer" pandas.core.indexers.BaseIndexer*¨
-get_window_bounds@pandas.core.indexers.FixedForwardWindowIndexer.get_window_bounds"¥
-nTuple[numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]]]û
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*j
-self`
-.pandas.core.indexers.FixedForwardWindowIndexer".pandas.core.indexers.FixedForwardWindowIndexer*.
+self(*
 
-num_values
-builtins.int"builtins.int *W
-min_periodsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *U
-centerG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *R
-closedD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None s
-is_list_like_indexer)pandas.core.indexers.is_list_like_indexer"
-builtins.bool"builtins.bool*
-key
-Anyâ
-is_scalar_indexer&pandas.core.indexers.is_scalar_indexer"
-builtins.bool"builtins.bool*
-indexer
-Any*
-	arr_value
-Any†
-is_empty_indexer%pandas.core.indexers.is_empty_indexer"
-builtins.bool"builtins.bool*
-indexer
-Any*Æ
-	arr_valueû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarrayå
-check_setitem_lengths*pandas.core.indexers.check_setitem_lengths"
-None*
-indexer
-Any*
-value
-Any*
-values
-Anyó
-validate_indices%pandas.core.indexers.validate_indices"
-None*¨
-indicesû
-3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
-builtins.tuple[Any]
-Any"builtins.tuple(
-numpy.dtype[Any]
-Any"numpy.dtype"numpy.ndarray*#
-n
-builtins.int"builtins.intá
-maybe_convert_indices*pandas.core.indexers.maybe_convert_indices"
-Any*
-indices
-Any*#
-n
-builtins.int"builtins.intÜ
-length_of_indexer&pandas.core.indexers.length_of_indexer"
-builtins.int"builtins.int*
-indexer
-Any*
-target
-Any f
-deprecate_ndim_indexing,pandas.core.indexers.deprecate_ndim_indexing"
-None*
-result
-Any`
-check_array_indexer(pandas.core.indexers.check_array_indexer*
+num_values (*
+min_periods (
+*
+center (*
+closed (ú
+VariableOffsetWindowIndexer" pandas.core.indexers.BaseIndexer*o
+__init__*
+
+self(*
+index_array (*
+window_size (*
+index (*
+offset (*
+kwargs(*j
+get_window_bounds	*
+
+self(*
+
+num_values (*
+min_periods (
+*
+center (*
+closed (©
+FixedForwardWindowIndexer" pandas.core.indexers.BaseIndexer*j
+get_window_bounds	*
+
+self(*
+
+num_values (*
+min_periods (
+*
+center (*
+closed (#
+is_list_like_indexer*	
+key(5
+is_scalar_indexer*
+indexer(*
+	arr_value(4
+is_empty_indexer*
+indexer(*
+	arr_value(C
+check_setitem_lengths*
+indexer(*
+value(*
+values(,
+validate_indices*
+indices(*
+n(1
+maybe_convert_indices*
+indices(*
+n(4
+length_of_indexer*
+indexer(*
+target ()
+deprecate_ndim_indexing*
+result(6
+check_array_indexer*
 arrayArrayLike*
-indexer*ê
-__annotations__$pandas.core.indexers.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*
-npnumpy 
+indexer*
+__annotations__0*
+npnumpy 22"" pandas.core.indexers.BaseIndexer22"builtins.tuple22"numpy.dtype22"numpy.ndarray2222"builtins.int22222"builtins.bool222"builtins.str2222"0pandas.core.indexers.VariableOffsetWindowIndexer20".pandas.core.indexers.FixedForwardWindowIndexer2"builtins.dict2

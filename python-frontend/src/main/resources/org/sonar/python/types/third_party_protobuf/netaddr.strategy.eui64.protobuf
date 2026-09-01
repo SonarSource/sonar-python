@@ -1,156 +1,74 @@
 
-netaddr.strategy.eui64ù
+netaddr.strategy.eui64t
 
-eui64_base!netaddr.strategy.eui64.eui64_base"builtins.objectj310j311j312j313j314ro
-	word_size+netaddr.strategy.eui64.eui64_base.word_size
-builtins.int"builtins.int*310*311*312*313*314ro
-	num_words+netaddr.strategy.eui64.eui64_base.num_words
-builtins.int"builtins.int*310*311*312*313*314rm
-max_word*netaddr.strategy.eui64.eui64_base.max_word
-builtins.int"builtins.int*310*311*312*313*314rm
-word_sep*netaddr.strategy.eui64.eui64_base.word_sep
-builtins.str"builtins.str*310*311*312*313*314rm
-word_fmt*netaddr.strategy.eui64.eui64_base.word_fmt
-builtins.str"builtins.str*310*311*312*313*314ro
-	word_base+netaddr.strategy.eui64.eui64_base.word_base
-builtins.int"builtins.int*310*311*312*313*314k
+eui64_base"builtins.objectr
+	word_size0r
+	num_words0r
+max_word0r
+word_sep0r
+word_fmt0r
+	word_base0/
 
-eui64_unix!netaddr.strategy.eui64.eui64_unix"!netaddr.strategy.eui64.eui64_basej310j311j312j313j314}
-eui64_unix_expanded*netaddr.strategy.eui64.eui64_unix_expanded"!netaddr.strategy.eui64.eui64_unixj310j311j312j313j314m
-eui64_cisco"netaddr.strategy.eui64.eui64_cisco"!netaddr.strategy.eui64.eui64_basej310j311j312j313j314k
+eui64_unix"!netaddr.strategy.eui64.eui64_base8
+eui64_unix_expanded"!netaddr.strategy.eui64.eui64_unix0
+eui64_cisco"!netaddr.strategy.eui64.eui64_base/
 
-eui64_bare!netaddr.strategy.eui64.eui64_bare"!netaddr.strategy.eui64.eui64_basej310j311j312j313j314
-	valid_str netaddr.strategy.eui64.valid_str"
-builtins.bool"builtins.bool*&
-addr
-builtins.str"builtins.strz310z311z312z313z314
+eui64_bare"!netaddr.strategy.eui64.eui64_base
+	valid_str*
 
-str_to_int!netaddr.strategy.eui64.str_to_int"
-builtins.int"builtins.int*&
-addr
-builtins.str"builtins.strz310z311z312z313z314à
+addr(
 
-int_to_str!netaddr.strategy.eui64.int_to_str"
-builtins.str"builtins.str*)
-int_val
-builtins.int"builtins.int*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314›
-int_to_packed$netaddr.strategy.eui64.int_to_packed" 
-builtins.bytes"builtins.bytes*)
-int_val
-builtins.int"builtins.intz310z311z312z313z314
-packed_to_int$netaddr.strategy.eui64.packed_to_int"
-builtins.int"builtins.int*0
+str_to_int*
 
-packed_int 
-builtins.bytes"builtins.bytesz310z311z312z313z314”
-valid_words"netaddr.strategy.eui64.valid_words"
-builtins.bool"builtins.bool*Y
-wordsN
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314”
-int_to_words#netaddr.strategy.eui64.int_to_words"L
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*)
-int_val
-builtins.int"builtins.int*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314”
-words_to_int#netaddr.strategy.eui64.words_to_int"
-builtins.int"builtins.int*Y
-wordsN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314ß
+addr(.
 
-valid_bits!netaddr.strategy.eui64.valid_bits"
-builtins.bool"builtins.bool*&
-bits
-builtins.str"builtins.str*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314ß
-bits_to_int"netaddr.strategy.eui64.bits_to_int"
-builtins.int"builtins.int*&
-bits
-builtins.str"builtins.str*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314â
-int_to_bits"netaddr.strategy.eui64.int_to_bits"
-builtins.str"builtins.str*)
-int_val
-builtins.int"builtins.int*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314à
-	valid_bin netaddr.strategy.eui64.valid_bin"
-builtins.bool"builtins.bool*)
-bin_val
-builtins.str"builtins.str*Ì
-dialect¼
-3Union[Type[netaddr.strategy.eui64.eui64_base],None]y
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type
-None z310z311z312z313z314‘
+int_to_str*
+int_val(*
+dialect ( 
+int_to_packed*
+int_val(#
+packed_to_int*
 
-int_to_bin!netaddr.strategy.eui64.int_to_bin"
-builtins.str"builtins.str*)
-int_val
-builtins.int"builtins.intz310z311z312z313z314‘
+packed_int(-
+valid_words*
+words(	*
+dialect (0
+int_to_words
+*
+int_val(*
+dialect (.
+words_to_int*
+words(*
+dialect (+
 
-bin_to_int!netaddr.strategy.eui64.bin_to_int"
-builtins.int"builtins.int*)
-bin_val
-builtins.str"builtins.strz310z311z312z313z314*«
-__annotations__&netaddr.strategy.eui64.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*}
-AF_EUI64netaddr.strategy.eui64.AF_EUI647
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*w
-widthnetaddr.strategy.eui64.width7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*y
-familynetaddr.strategy.eui64.family7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*ƒ
-family_name"netaddr.strategy.eui64.family_name7
-Literal[builtins.str]	
-builtins.str"builtins.str*310*311*312*313*314*{
-versionnetaddr.strategy.eui64.version7
-Literal[builtins.int]	
-builtins.int"builtins.int*310*311*312*313*314*`
-max_intnetaddr.strategy.eui64.max_int
-builtins.int"builtins.int*310*311*312*313*314*Ù
-DEFAULT_EUI64_DIALECT,netaddr.strategy.eui64.DEFAULT_EUI64_DIALECTy
-'Type[netaddr.strategy.eui64.eui64_base]F
-!netaddr.strategy.eui64.eui64_base"!netaddr.strategy.eui64.eui64_base"type*310*311*312*313*314*Ô
-RE_EUI64_FORMATS'netaddr.strategy.eui64.RE_EUI64_FORMATS~
-'builtins.list[re.Pattern[builtins.str]]D
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern"builtins.list*310*311*312*313*314
+valid_bits*
+
+bits(*
+dialect (,
+bits_to_int*
+
+bits(*
+dialect (/
+int_to_bits*
+int_val(*
+dialect (-
+	valid_bin*
+bin_val(*
+dialect (
+
+int_to_bin*
+int_val(
+
+bin_to_int*
+bin_val(*
+__annotations__0*
+AF_EUI640*	
+width0*
+
+family0*
+family_name0*
+version0*
+max_int0*
+DEFAULT_EUI64_DIALECT0*
+RE_EUI64_FORMATS02"builtins.int2"builtins.str2"builtins.bool2#"!netaddr.strategy.eui64.eui64_base2"type22222"builtins.bytes2"typing.Iterable22"builtins.tuple22"typing.Sequence222"builtins.dict22	22	22"
+re.Pattern22"builtins.list2

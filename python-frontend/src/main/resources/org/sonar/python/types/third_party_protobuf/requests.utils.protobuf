@@ -1,238 +1,104 @@
 
-requests.utilsS
-dict_to_sequencerequests.utils.dict_to_sequence*
-dz310z311z312z313z314E
-	super_lenrequests.utils.super_len*
-oz310z311z312z313z314Ö
-get_netrc_authrequests.utils.get_netrc_auth"œ
-,Union[Tuple[builtins.str,builtins.str],None]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-None*¸
-url®
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.utils._Uri*2
-raise_errors
-builtins.bool"builtins.bool z310z311z312z313z314Q
-guess_filenamerequests.utils.guess_filename*
-objz310z311z312z313z314^
-extract_zipped_paths#requests.utils.extract_zipped_paths*
-pathz310z311z312z313z314³
-atomic_openrequests.utils.atomic_open"¦
-Acontextlib._GeneratorContextManager[_io.BufferedWriter,None,None](
-_io.BufferedWriter"_io.BufferedWriter
-None
-None"#contextlib._GeneratorContextManager*Å
-filename¶
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathz310z311z312z313z314Y
-from_key_val_list requests.utils.from_key_val_list*	
-valuez310z311z312z313z314U
-to_key_val_listrequests.utils.to_key_val_list*	
-valuez310z311z312z313z314Y
-parse_list_header requests.utils.parse_list_header*	
-valuez310z311z312z313z314Y
-parse_dict_header requests.utils.parse_dict_header*	
-valuez310z311z312z313z314¤
-unquote_header_value#requests.utils.unquote_header_value"
-Any*
-value
-Any*1
-is_filename
-builtins.bool"builtins.bool z310z311z312z313z314Z
-dict_from_cookiejar"requests.utils.dict_from_cookiejar*
-cjz310z311z312z313z314o
-add_dict_to_cookiejar$requests.utils.add_dict_to_cookiejar*
-cj*
-cookie_dictz310z311z312z313z314m
-get_encodings_from_content)requests.utils.get_encodings_from_content*
-contentz310z311z312z313z314k
-get_encoding_from_headers(requests.utils.get_encoding_from_headers*
-headersz310z311z312z313z314}
-stream_decode_response_unicode-requests.utils.stream_decode_response_unicode*
-iterator*
-rz310z311z312z313z314´
-iter_slicesrequests.utils.iter_slices"n
-(typing.Generator[builtins.str,None,None]
-builtins.str"builtins.str
-None
-None"typing.Generator*(
-string
-builtins.str"builtins.str*V
-slice_lengthD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonez310z311z312z313z314e
-get_unicode_from_response(requests.utils.get_unicode_from_response*
-rz310z311z312z313z314•
-unquote_unreserved!requests.utils.unquote_unreserved"
-builtins.str"builtins.str*%
-uri
-builtins.str"builtins.strz310z311z312z313z314‡
-requote_urirequests.utils.requote_uri"
-builtins.str"builtins.str*%
-uri
-builtins.str"builtins.strz310z311z312z313z314½
-address_in_network!requests.utils.address_in_network"
-builtins.bool"builtins.bool*$
-ip
-builtins.str"builtins.str*%
-net
-builtins.str"builtins.strz310z311z312z313z314Ž
-dotted_netmaskrequests.utils.dotted_netmask"
-builtins.str"builtins.str*&
-mask
-builtins.int"builtins.intz310z311z312z313z314—
-is_ipv4_addressrequests.utils.is_ipv4_address"
-builtins.bool"builtins.bool*+
-	string_ip
-builtins.str"builtins.strz310z311z312z313z314˜
-is_valid_cidrrequests.utils.is_valid_cidr"
-builtins.bool"builtins.bool*0
-string_network
-builtins.str"builtins.strz310z311z312z313z314ý
-set_environrequests.utils.set_environ"x
-3contextlib._GeneratorContextManager[None,None,None]
-None
-None
-None"#contextlib._GeneratorContextManager**
-env_name
-builtins.str"builtins.str*
-value
-Nonez310z311z312z313z314Ê
-should_bypass_proxies$requests.utils.should_bypass_proxies"
-builtins.bool"builtins.bool*¸
-url®
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.utils._Uri*–
-no_proxy‡
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-Nonez310z311z312z313z314ã
-get_environ_proxies"requests.utils.get_environ_proxies"9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*¸
-url®
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.utils._Uri*˜
-no_proxy‡
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None z310z311z312z313z314…
-select_proxyrequests.utils.select_proxy"
-Any*¸
-url®
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.utils._Uri*{
-proxiesn
-#Union[typing.Mapping[Any,Any],None];
-typing.Mapping[Any,Any]
-Any
-Any"typing.Mapping
-Nonez310z311z312z313z314œ
-resolve_proxiesrequests.utils.resolve_proxies"
-Any*È
-requestº
->Union[requests.models.Request,requests.models.PreparedRequest]2
-requests.models.Request"requests.models.RequestB
-requests.models.PreparedRequest"requests.models.PreparedRequest*Ê
-proxies¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None*/
-	trust_env
-builtins.bool"builtins.bool z310z311z312z313z314˜
-default_user_agent!requests.utils.default_user_agent"
-builtins.str"builtins.str*(
-name
-builtins.str"builtins.str z310z311z312z313z314Ê
-default_headersrequests.utils.default_headers"~
-5requests.structures.CaseInsensitiveDict[builtins.str]
-builtins.str"builtins.str"'requests.structures.CaseInsensitiveDictz310z311z312z313z314»
-parse_header_links!requests.utils.parse_header_links"¿
-7builtins.list[builtins.dict[builtins.str,builtins.str]]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict"builtins.list*'
+requests.utils
+dict_to_sequence*
+d
+	super_len*
+o3
+get_netrc_auth*	
+url(*
+raise_errors (
+guess_filename*
+obj 
+extract_zipped_paths*
+path
+atomic_open
+*
+filename(
+from_key_val_list*	
 value
-builtins.str"builtins.strz310z311z312z313z314R
-guess_json_utfrequests.utils.guess_json_utf*
-dataz310z311z312z313z314u
-prepend_scheme_if_needed'requests.utils.prepend_scheme_if_needed*
+to_key_val_list*	
+value
+parse_list_header*	
+value
+parse_dict_header*	
+value:
+unquote_header_value*
+value(*
+is_filename (
+dict_from_cookiejar*
+cj0
+add_dict_to_cookiejar*
+cj*
+cookie_dict)
+get_encodings_from_content*
+content(
+get_encoding_from_headers*
+headers5
+stream_decode_response_unicode*
+iterator*
+r1
+iter_slices*
+string(*
+slice_length("
+get_unicode_from_response*
+r!
+unquote_unreserved*	
+uri(
+requote_uri*	
+uri(+
+address_in_network*
+ip(*	
+net(
+dotted_netmask*
+
+mask($
+is_ipv4_address*
+	string_ip('
+is_valid_cidr*
+string_network(,
+set_environ*
+env_name(*
+value(4
+should_bypass_proxies*	
+url(*
+no_proxy(4
+get_environ_proxies*	
+url(*
+no_proxy (*
+select_proxy*	
+url(*
+proxies(D
+resolve_proxies*
+request(*
+proxies(*
+	trust_env ($
+default_user_agent*
+name (
+default_headers#
+parse_header_links *
+value(
+guess_json_utf*
+data3
+prepend_scheme_if_needed*
 url*
 
-new_schemez310z311z312z313z314ë
-get_auth_from_url requests.utils.get_auth_from_url"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*¸
-url®
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.utils._Uriz310z311z312z313z314h
-to_native_stringrequests.utils.to_native_string*
+new_scheme 
+get_auth_from_url*	
+url(.
+to_native_string*
 
 string*
-encoding z310z311z312z313z314Š
-urldefragauthrequests.utils.urldefragauth"
-Any*¸
-url®
--TypeAlias[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.utils._Uriz310z311z312z313z314¦
-rewind_bodyrequests.utils.rewind_body"
-None*X
-prepared_requestB
-requests.models.PreparedRequest"requests.models.PreparedRequestz310z311z312z313z314¦
-check_header_validity$requests.utils.check_header_validity"
-None*Ã
-header¶
-"Tuple[typing.AnyStr,typing.AnyStr]F
-typing.AnyStr"
-builtins.object"builtins.object"builtins.objectF
-typing.AnyStr"
-builtins.object"builtins.object"builtins.objectz310z311z312z313z314*£
-__annotations__requests.utils.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*310*311*312*313*314*Ÿ
-cookiejar_from_dict"requests.utils.cookiejar_from_dictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*310*311*312*313*314*¤
-NETRC_FILESrequests.utils.NETRC_FILES`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*310*311*312*313*314*a
-DEFAULT_CA_BUNDLE_PATH%requests.utils.DEFAULT_CA_BUNDLE_PATH
-Any*310*311*312*313*314*½
-DEFAULT_PORTSrequests.utils.DEFAULT_PORTSu
-(builtins.dict[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*310*311*312*313*314*x
-DEFAULT_ACCEPT_ENCODING&requests.utils.DEFAULT_ACCEPT_ENCODING
-builtins.str"builtins.str*310*311*312*313*314*ž
-UNRESERVED_SETrequests.utils.UNRESERVED_SETT
- builtins.frozenset[builtins.str]
-builtins.str"builtins.str"builtins.frozenset*310*311*312*313*314
+encoding 
+urldefragauth*	
+url('
+rewind_body*
+prepared_request('
+check_header_validity*
+header(#*
+__annotations__0$*
+cookiejar_from_dict0&*
+NETRC_FILES0*
+DEFAULT_CA_BUNDLE_PATH0*
+DEFAULT_PORTS0'*
+DEFAULT_ACCEPT_ENCODING0*
+UNRESERVED_SET0(2"builtins.str222222"builtins.bytes222"requests.utils._Uri22"builtins.bool2"_io.BufferedWriter2*"#contextlib._GeneratorContextManager2	2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath222"typing.Generator22"builtins.int222*"#contextlib._GeneratorContextManager22"typing.Iterable2222"builtins.dict22"typing.Mapping2222"requests.models.Request2!"requests.models.PreparedRequest222"typing.Mapping2222,"'requests.structures.CaseInsensitiveDict22"builtins.dict22"builtins.list22"builtins.object2"builtins.object2!22""2"builtins.dict22"builtins.function22%2"builtins.dict22"builtins.frozenset2
