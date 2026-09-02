@@ -12,6 +12,7 @@ delete data they should not have access to, bypass authentication checks, or in 
 <h3>Code examples</h3>
 <p>The following code builds a SQL query by concatenating a value directly into the query string.</p>
 <h4>Noncompliant code example</h4>
+<p>With the Django framework:</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 from django.db import models
 from django.db import connection
@@ -67,6 +68,29 @@ def query_my_user(request, params, value):
             'mycol': "select col from sometable where mycol = %s and othercol = %s"},
         select_params=(someparam, value),
     )
+</pre>
+<h4>Noncompliant code example</h4>
+<p>With the OracleDB driver:</p>
+<p>Both the <code>oracledb</code> and <code>cx_Oracle</code> drivers are supported. The rule covers formatted SQL passed to <code>execute</code>,
+<code>executemany</code>, <code>parse</code>, <code>prepare</code>, <code>fetch_df_all</code>, and <code>fetch_df_batches</code>.</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import oracledb
+
+value = input()
+
+connection = oracledb.connect(user="user", password="password", dsn="database")
+cursor = connection.cursor()
+cursor.execute(f"SELECT * FROM customers WHERE name = '{value}'")  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import oracledb
+
+value = input()
+
+connection = oracledb.connect(user="user", password="password", dsn="database")
+cursor = connection.cursor()
+cursor.execute("SELECT * FROM customers WHERE name = :name", name=value)
 </pre>
 <h2>Resources</h2>
 <h3>Articles &amp; blog posts</h3>
