@@ -391,8 +391,12 @@ SOL_SOCKET_socket.SOL_SOCKET0*
 TCP_KEEPCNT_socket.TCP_KEEPCNT0*"
 
 TCP_MAXSEG_socket.TCP_MAXSEG0*$
-TCP_NODELAY_socket.TCP_NODELAY0*
-has_ipv6_socket.has_ipv60*(
+TCP_NODELAY_socket.TCP_NODELAY0*
+
+SocketType0<8*
+error0H8*
+has_ipv6_socket.has_ipv60*
+timeout0I8*(
 IPV6_DONTFRAG_socket.IPV6_DONTFRAG0*(
 IPV6_HOPLIMIT_socket.IPV6_HOPLIMIT0*&
 IPV6_HOPOPTS_socket.IPV6_HOPOPTS0*&
@@ -724,40 +728,40 @@ SOCK_DGRAM0	*
 SOCK_CLOEXEC0	*
 SOCK_NONBLOCK0	*
 
-MSG_CTRUNC0H*
-MSG_DONTROUTE0H*
-MSG_OOB0H*
-MSG_PEEK0H*
-	MSG_TRUNC0H*
-MSG_WAITALL0H*
-	MSG_BCAST0H*
-	MSG_MCAST0H*
-MSG_ERRQUEUE0H*
-MSG_DONTWAIT0H*
-MSG_EOF0H*
-MSG_EOR0H*
-MSG_NOSIGNAL0H*
-MSG_BTAG0H*
-MSG_CMSG_CLOEXEC0H*
-MSG_CONFIRM0H*
-MSG_ETAG0H*
-MSG_FASTOPEN0H*
-MSG_MORE0H*
-MSG_NOTIFICATION0H*
-AI_ADDRCONFIG0I*
+MSG_CTRUNC0J*
+MSG_DONTROUTE0J*
+MSG_OOB0J*
+MSG_PEEK0J*
+	MSG_TRUNC0J*
+MSG_WAITALL0J*
+	MSG_BCAST0J*
+	MSG_MCAST0J*
+MSG_ERRQUEUE0J*
+MSG_DONTWAIT0J*
+MSG_EOF0J*
+MSG_EOR0J*
+MSG_NOSIGNAL0J*
+MSG_BTAG0J*
+MSG_CMSG_CLOEXEC0J*
+MSG_CONFIRM0J*
+MSG_ETAG0J*
+MSG_FASTOPEN0J*
+MSG_MORE0J*
+MSG_NOTIFICATION0J*
+AI_ADDRCONFIG0K*
 
-AI_ALL0I*
-AI_CANONNAME0I*
-AI_NUMERICHOST0I*
-AI_NUMERICSERV0I*
+AI_ALL0K*
+AI_CANONNAME0K*
+AI_NUMERICHOST0K*
+AI_NUMERICSERV0K*
 
-AI_PASSIVE0I*
-AI_V4MAPPED0I*
+AI_PASSIVE0K*
+AI_V4MAPPED0K*
 
-AI_DEFAULT0I*
-AI_MASK0I*
-AI_V4MAPPED_CFG0I*@
+AI_DEFAULT0K*
+AI_MASK0K*
+AI_V4MAPPED_CFG0K*@
 SO_INCOMING_CPU_socket.SO_INCOMING_CPU*311*312*313*31402"builtins.int2"builtins.bytes2"socket._SendableFile2"builtins.object22"socket.socket2"socket.AddressFamily222"socket.SocketKind22	222*
 socket.socket.Self"socket.socket(222"_socket._RetAddress2222"builtins.bool2"socket.SocketIO2"builtins.str2	2222	2222"io.BufferedRWPair2
 2222"io.BufferedReader222"io.BufferedWriter2"	io.IOBase2"io.TextIOWrapper2	22"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
-2 !"#$%2 "_typeshed.WriteableBuffer2&22'2"_typeshed.ReadableBuffer2(222"typing.SupportsIndex2"builtins.float22,2"builtins.list222..2222222212222"builtins.list242"typing.Iterable2)2"typing.Iterable22"builtins.list222822222"_socket.socket22<222"builtins.tuple222?)2"_socket._Address2@22A2	2	32"builtins.list2C22222"builtins.dict22"socket.MsgFlag2"socket.AddressInfo
+2 !"#$%2 "_typeshed.WriteableBuffer2&22'2"_typeshed.ReadableBuffer2(222"typing.SupportsIndex2"builtins.float22,2"builtins.list222..2222222212222"builtins.list242"typing.Iterable2)2"typing.Iterable22"builtins.list222822222"_socket.socket22<222"builtins.tuple222?)2"_socket._Address2@22A2	2	32"builtins.list2C22222"builtins.dict22"builtins.OSError2"builtins.TimeoutError2"socket.MsgFlag2"socket.AddressInfo

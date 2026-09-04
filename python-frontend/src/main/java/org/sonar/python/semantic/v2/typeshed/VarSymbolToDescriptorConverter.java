@@ -45,11 +45,12 @@ public class VarSymbolToDescriptorConverter {
     SymbolsProtos.Type protoTypeAnnotation = typeTable.resolve(
       varSymbol.getTypeAnnotationId(), varSymbol.hasTypeAnnotation(), varSymbol.getTypeAnnotation());
     var isImportedModule = varSymbol.getIsImportedModule();
+    var isTypeAlias = varSymbol.getIsTypeAlias();
     var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(protoTypeAnnotation, typeTable);
     if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
-      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule, List.of(), List.of());
+      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule, isTypeAlias, List.of(), List.of());
     }
-    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule, List.of(), List.of());
+    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule, isTypeAlias, List.of(), List.of());
   }
 
   private static boolean isTypeAnnotationKnownToBeIncorrect(@Nullable String fullyQualifiedName) {

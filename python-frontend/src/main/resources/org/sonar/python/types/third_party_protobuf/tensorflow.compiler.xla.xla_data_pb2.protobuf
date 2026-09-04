@@ -1010,38 +1010,77 @@ DESCRIPTOR0*
 C1280*	
 TUPLE0*
 OPAQUE_TYPE0*	
-TOKEN0*
+TOKEN0*
+global___PrimitiveType0t8*
 	DIM_DENSE0*
 DIM_COMPRESSED0*
-DIM_SINGLETON0*
+DIM_SINGLETON0*
+global___DimLevelType0u8*
 INVALID0*
 
 WINDOW0*
 FLAG0*
-INTEGER0*!
+INTEGER0*
+global___ProfileType0v8*!
 PROFILE_SOURCE_UNKNOWN_SOURCE0*
 PROFILE_SOURCE_EMBEDDED0*
-PROFILE_SOURCE_REMOTE0*#
+PROFILE_SOURCE_REMOTE0*
+global___ProfileSource0w8*#
 COMPILATION_EVENT_UNKNOWN_EVENT0*'
 #COMPILATION_EVENT_FIRST_COMPILATION0*#
-COMPILATION_EVENT_RECOMPILATION0*
+COMPILATION_EVENT_RECOMPILATION0*
+global___CompilationEvent0x8*
 PADDING_INVALID0*
 PADDING_VALID0*
-PADDING_SAME0*
+PADDING_SAME0*
+global___PaddingType0y8*
 FFT0*
 IFFT0*
 RFFT0*	
-IRFFT0*
+IRFFT0*
+global___FftType0z8*
 RNG_INVALID0	*
 RNG_UNIFORM0	*
 
-RNG_NORMAL0	*
+RNG_NORMAL0	*!
+global___RandomDistribution0{8*
 RNG_DEFAULT0
 *
 RNG_THREE_FRY0
 *
 
 RNG_PHILOX0
-22?"=tensorflow.compiler.xla.xla_data_pb2._PrimitiveType.ValueType2>"<tensorflow.compiler.xla.xla_data_pb2._DimLevelType.ValueType2=";tensorflow.compiler.xla.xla_data_pb2._ProfileType.ValueType2?"=tensorflow.compiler.xla.xla_data_pb2._ProfileSource.ValueType2B"@tensorflow.compiler.xla.xla_data_pb2._CompilationEvent.ValueType2=";tensorflow.compiler.xla.xla_data_pb2._PaddingType.ValueType29"7tensorflow.compiler.xla.xla_data_pb2._FftType.ValueType2D"Btensorflow.compiler.xla.xla_data_pb2._RandomDistribution.ValueType2A"?tensorflow.compiler.xla.xla_data_pb2._RandomAlgorithm.ValueType24"2tensorflow.compiler.xla.xla_data_pb2.PaddingConfig22K"Itensorflow.compiler.xla.xla_data_pb2.PaddingConfig.PaddingConfigDimension2"typing.Iterable2222"builtins.str2	22"builtins.bytes2	2222"builtins.int20".tensorflow.compiler.xla.xla_data_pb2.TileProto2"typing.Iterable22222"0tensorflow.compiler.xla.xla_data_pb2.LayoutProto21"/tensorflow.compiler.xla.xla_data_pb2.ShapeProto2"typing.Iterable2222"typing.Iterable22222222"builtins.bool22222"typing.Iterable222$222"typing.Iterable2!22'22
+*
+global___RandomAlgorithm0|8*
+global___PaddingConfig08*
+global___TileProto08*
+global___LayoutProto08*
+global___ShapeProto08* 
+global___ProgramShapeProto0*8*
+global___ComputationStats0.8*
+global___OpMetadata028*
+global___ExecutionProfile098*
+global___ExecutionHandle0<8*
+global___GlobalDataHandle0=8*
+global___DeviceHandle0>8*
+global___ChannelHandle0?8*$
+global___DeviceAssignmentProto0B8*
+global___LiteralProto0F8*
+global___WindowDimension0M8*
+global___Window0N8*%
+global___GatherDimensionNumbers0Q8*&
+ global___ScatterDimensionNumbers0S8**
+$global___ConvolutionDimensionNumbers0T8*"
+global___DotDimensionNumbers0V8*%
+global___TriangularSolveOptions0W8*
+global___CholeskyOptions0Z8*!
+global___FrontendAttributes0[8*
+global___OpSharding0^8*
+global___ReplicaGroup0h8*
+global___SourceTarget0i8*
+global___PrecisionConfig0j8*#
+global___ParameterReplication0n8*%
+global___WhileLoopBackendConfig0p8*.
+(global___CustomCallOutputOperandAliasing0r822?"=tensorflow.compiler.xla.xla_data_pb2._PrimitiveType.ValueType2>"<tensorflow.compiler.xla.xla_data_pb2._DimLevelType.ValueType2=";tensorflow.compiler.xla.xla_data_pb2._ProfileType.ValueType2?"=tensorflow.compiler.xla.xla_data_pb2._ProfileSource.ValueType2B"@tensorflow.compiler.xla.xla_data_pb2._CompilationEvent.ValueType2=";tensorflow.compiler.xla.xla_data_pb2._PaddingType.ValueType29"7tensorflow.compiler.xla.xla_data_pb2._FftType.ValueType2D"Btensorflow.compiler.xla.xla_data_pb2._RandomDistribution.ValueType2A"?tensorflow.compiler.xla.xla_data_pb2._RandomAlgorithm.ValueType24"2tensorflow.compiler.xla.xla_data_pb2.PaddingConfig22K"Itensorflow.compiler.xla.xla_data_pb2.PaddingConfig.PaddingConfigDimension2"typing.Iterable2222"builtins.str2	22"builtins.bytes2	2222"builtins.int20".tensorflow.compiler.xla.xla_data_pb2.TileProto2"typing.Iterable22222"0tensorflow.compiler.xla.xla_data_pb2.LayoutProto21"/tensorflow.compiler.xla.xla_data_pb2.ShapeProto2"typing.Iterable2222"typing.Iterable22222222"builtins.bool22222"typing.Iterable222$222"typing.Iterable2!22'22
 28"6tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto2"typing.Iterable222+2
-227"5tensorflow.compiler.xla.xla_data_pb2.ComputationStats2"builtins.float22/2221"/tensorflow.compiler.xla.xla_data_pb2.OpMetadata2=";tensorflow.compiler.xla.xla_data_pb2.OpMetadata.ProfileInfo222"typing.Iterable22252232227"5tensorflow.compiler.xla.xla_data_pb2.ExecutionProfile22!2226"4tensorflow.compiler.xla.xla_data_pb2.ExecutionHandle27"5tensorflow.compiler.xla.xla_data_pb2.GlobalDataHandle23"1tensorflow.compiler.xla.xla_data_pb2.DeviceHandle24"2tensorflow.compiler.xla.xla_data_pb2.ChannelHandle2K"Itensorflow.compiler.xla.xla_data_pb2.ChannelHandle._ChannelType.ValueType22@2<":tensorflow.compiler.xla.xla_data_pb2.DeviceAssignmentProto2N"Ltensorflow.compiler.xla.xla_data_pb2.DeviceAssignmentProto.ComputationDevice2"typing.Iterable2C22D23"1tensorflow.compiler.xla.xla_data_pb2.LiteralProto222"typing.Iterable2/22H2"typing.Iterable2F22J2(2$26"4tensorflow.compiler.xla.xla_data_pb2.WindowDimension2-"+tensorflow.compiler.xla.xla_data_pb2.Window2"typing.Iterable2M22O2=";tensorflow.compiler.xla.xla_data_pb2.GatherDimensionNumbers222>"<tensorflow.compiler.xla.xla_data_pb2.ScatterDimensionNumbers2B"@tensorflow.compiler.xla.xla_data_pb2.ConvolutionDimensionNumbers222:"8tensorflow.compiler.xla.xla_data_pb2.DotDimensionNumbers2=";tensorflow.compiler.xla.xla_data_pb2.TriangularSolveOptions2R"Ptensorflow.compiler.xla.xla_data_pb2.TriangularSolveOptions._Transpose.ValueType22X26"4tensorflow.compiler.xla.xla_data_pb2.CholeskyOptions29"7tensorflow.compiler.xla.xla_data_pb2.FrontendAttributes2"typing.Mapping222\21"/tensorflow.compiler.xla.xla_data_pb2.OpSharding2A"?tensorflow.compiler.xla.xla_data_pb2.OpSharding._Type.ValueType22_2"typing.Iterable2^22a2"typing.Iterable2222c2"typing.Iterable2_22e2223"1tensorflow.compiler.xla.xla_data_pb2.ReplicaGroup23"1tensorflow.compiler.xla.xla_data_pb2.SourceTarget26"4tensorflow.compiler.xla.xla_data_pb2.PrecisionConfig2K"Itensorflow.compiler.xla.xla_data_pb2.PrecisionConfig._Precision.ValueType2"typing.Iterable2k22l2;"9tensorflow.compiler.xla.xla_data_pb2.ParameterReplication2L"Jtensorflow.compiler.xla.xla_data_pb2.WhileLoopBackendConfig.KnownTripCount2=";tensorflow.compiler.xla.xla_data_pb2.WhileLoopBackendConfig22o2F"Dtensorflow.compiler.xla.xla_data_pb2.CustomCallOutputOperandAliasing2"builtins.dict2
+227"5tensorflow.compiler.xla.xla_data_pb2.ComputationStats2"builtins.float22/2221"/tensorflow.compiler.xla.xla_data_pb2.OpMetadata2=";tensorflow.compiler.xla.xla_data_pb2.OpMetadata.ProfileInfo222"typing.Iterable22252232227"5tensorflow.compiler.xla.xla_data_pb2.ExecutionProfile22!2226"4tensorflow.compiler.xla.xla_data_pb2.ExecutionHandle27"5tensorflow.compiler.xla.xla_data_pb2.GlobalDataHandle23"1tensorflow.compiler.xla.xla_data_pb2.DeviceHandle24"2tensorflow.compiler.xla.xla_data_pb2.ChannelHandle2K"Itensorflow.compiler.xla.xla_data_pb2.ChannelHandle._ChannelType.ValueType22@2<":tensorflow.compiler.xla.xla_data_pb2.DeviceAssignmentProto2N"Ltensorflow.compiler.xla.xla_data_pb2.DeviceAssignmentProto.ComputationDevice2"typing.Iterable2C22D23"1tensorflow.compiler.xla.xla_data_pb2.LiteralProto222"typing.Iterable2/22H2"typing.Iterable2F22J2(2$26"4tensorflow.compiler.xla.xla_data_pb2.WindowDimension2-"+tensorflow.compiler.xla.xla_data_pb2.Window2"typing.Iterable2M22O2=";tensorflow.compiler.xla.xla_data_pb2.GatherDimensionNumbers222>"<tensorflow.compiler.xla.xla_data_pb2.ScatterDimensionNumbers2B"@tensorflow.compiler.xla.xla_data_pb2.ConvolutionDimensionNumbers222:"8tensorflow.compiler.xla.xla_data_pb2.DotDimensionNumbers2=";tensorflow.compiler.xla.xla_data_pb2.TriangularSolveOptions2R"Ptensorflow.compiler.xla.xla_data_pb2.TriangularSolveOptions._Transpose.ValueType22X26"4tensorflow.compiler.xla.xla_data_pb2.CholeskyOptions29"7tensorflow.compiler.xla.xla_data_pb2.FrontendAttributes2"typing.Mapping222\21"/tensorflow.compiler.xla.xla_data_pb2.OpSharding2A"?tensorflow.compiler.xla.xla_data_pb2.OpSharding._Type.ValueType22_2"typing.Iterable2^22a2"typing.Iterable2222c2"typing.Iterable2_22e2223"1tensorflow.compiler.xla.xla_data_pb2.ReplicaGroup23"1tensorflow.compiler.xla.xla_data_pb2.SourceTarget26"4tensorflow.compiler.xla.xla_data_pb2.PrecisionConfig2K"Itensorflow.compiler.xla.xla_data_pb2.PrecisionConfig._Precision.ValueType2"typing.Iterable2k22l2;"9tensorflow.compiler.xla.xla_data_pb2.ParameterReplication2L"Jtensorflow.compiler.xla.xla_data_pb2.WhileLoopBackendConfig.KnownTripCount2=";tensorflow.compiler.xla.xla_data_pb2.WhileLoopBackendConfig22o2F"Dtensorflow.compiler.xla.xla_data_pb2.CustomCallOutputOperandAliasing2"builtins.dict224"2tensorflow.compiler.xla.xla_data_pb2.PrimitiveType23"1tensorflow.compiler.xla.xla_data_pb2.DimLevelType22"0tensorflow.compiler.xla.xla_data_pb2.ProfileType24"2tensorflow.compiler.xla.xla_data_pb2.ProfileSource27"5tensorflow.compiler.xla.xla_data_pb2.CompilationEvent22"0tensorflow.compiler.xla.xla_data_pb2.PaddingType2.",tensorflow.compiler.xla.xla_data_pb2.FftType29"7tensorflow.compiler.xla.xla_data_pb2.RandomDistribution26"4tensorflow.compiler.xla.xla_data_pb2.RandomAlgorithm

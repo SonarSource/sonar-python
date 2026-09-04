@@ -58,6 +58,40 @@ class VarSymbolToDescriptorConverterTest {
   }
 
   @Test
+  void test_is_type_alias_propagated() {
+    var converter = new VarSymbolToDescriptorConverter();
+
+    // is_type_alias=true must propagate through to VariableDescriptor.isTypeAlias()
+    var aliasSymbol = SymbolsProtos.VarSymbol.newBuilder()
+      .setName("Text")
+      .setFullyQualifiedName("typing.Text")
+      .setTypeAnnotation(SymbolsProtos.Type.newBuilder()
+        .setFullyQualifiedName("builtins.str")
+        .build())
+      .setIsTypeAlias(true)
+      .build();
+
+    var aliasDescriptor = (VariableDescriptor) converter.convert(aliasSymbol);
+    Assertions.assertThat(aliasDescriptor.name()).isEqualTo("Text");
+    Assertions.assertThat(aliasDescriptor.fullyQualifiedName()).isEqualTo("typing.Text");
+    // TypeShedUtils.getTypesNormalizedFqn strips the "builtins." prefix
+    Assertions.assertThat(aliasDescriptor.annotatedType()).isEqualTo("str");
+    Assertions.assertThat(aliasDescriptor.isTypeAlias()).isTrue();
+
+    // is_type_alias=false (default) must NOT set the flag on regular vars
+    var regularSymbol = SymbolsProtos.VarSymbol.newBuilder()
+      .setName("something")
+      .setFullyQualifiedName("module.something")
+      .setTypeAnnotation(SymbolsProtos.Type.newBuilder()
+        .setFullyQualifiedName("builtins.str")
+        .build())
+      .build();
+
+    var regularDescriptor = (VariableDescriptor) converter.convert(regularSymbol);
+    Assertions.assertThat(regularDescriptor.isTypeAlias()).isFalse();
+  }
+
+  @Test
   void test_typed_dict_exception() {
     var converter = new VarSymbolToDescriptorConverter();
     var symbol = SymbolsProtos.VarSymbol.newBuilder()

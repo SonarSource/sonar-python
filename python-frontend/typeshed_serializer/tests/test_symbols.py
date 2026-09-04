@@ -269,6 +269,54 @@ def test_error_when_overloaded_definitions_are_missing():
         assert raised.value.args[0] == 'Overloaded function symbol should contain at least 2 definitions.'
 
 
+def test_type_alias_serialization(fake_module_type_aliases):
+    """TypeAlias nodes must serialize as VarSymbols with the alias's own FQN and the target
+    type as the type annotation — not as the target's FQN as the VarSymbol's FQN."""
+    module_symbol = symbols.ModuleSymbol(fake_module_type_aliases)
+
+    # Only TypeAlias vars (MyText, MyList) should appear — not the TypeVar _T
+    alias_vars = {v.name: v for v in module_symbol.vars if v.name in {"MyText", "MyList"}}
+    assert set(alias_vars.keys()) == {"MyText", "MyList"}
+
+    # VarSymbol.fullname must be the alias's own FQN, not the target's FQN
+    assert alias_vars["MyText"].fullname == "fakemodule_type_aliases.MyText"
+    assert alias_vars["MyList"].fullname == "fakemodule_type_aliases.MyList"
+
+    # type_descriptor must point to the target class
+    assert alias_vars["MyText"].type is not None
+    assert alias_vars["MyText"].type.fully_qualified_name == "builtins.str"
+
+    # Generic alias: target args are preserved via TypeDescriptor.
+    # An implementation that drops _T would have the correct fqn but empty args.
+    assert alias_vars["MyList"].type is not None
+    assert alias_vars["MyList"].type.fully_qualified_name == "builtins.list"
+    assert len(alias_vars["MyList"].type.args) == 1
+
+    # Verify the protobuf output: type_annotation_id must be set (not 0), and
+    # fully_qualified_name must not be overridden (it equals container + "." + name)
+    pb_module = module_symbol.to_proto()
+    pb_vars = {v.name: v for v in pb_module.vars if v.name in {"MyText", "MyList"}}
+
+    assert pb_vars["MyText"].type_annotation_id > 0
+    assert pb_vars["MyText"].fully_qualified_name == ""  # no override needed
+    # is_type_alias=True so the Java v2 side creates a lazy type (class) not an ObjectType (instance)
+    assert pb_vars["MyText"].is_type_alias is True
+
+    assert pb_vars["MyList"].type_annotation_id > 0
+    assert pb_vars["MyList"].fully_qualified_name == ""  # no override needed
+    assert pb_vars["MyList"].is_type_alias is True
+
+    # Resolve the type annotation from the type table
+    type_table = pb_module.type_table
+    text_type = type_table[pb_vars["MyText"].type_annotation_id - 1]
+    assert text_type.fully_qualified_name == "builtins.str"
+
+    list_type = type_table[pb_vars["MyList"].type_annotation_id - 1]
+    assert list_type.fully_qualified_name == "builtins.list"
+    # arg_type_ids must be non-empty — the TypeVar bound is encoded as a type arg
+    assert len(list_type.arg_type_ids) > 0
+
+
 def test_module_with_decorators(fake_module_with_decorators):
     fake_module = symbols.ModuleSymbol(fake_module_with_decorators)
     

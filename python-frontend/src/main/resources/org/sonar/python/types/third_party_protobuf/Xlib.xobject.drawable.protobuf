@@ -494,12 +494,12 @@ clear_area*
 height (*
 	exposures ()*
 onerror (*:
-create_colormap0*
+create_colormap*
 
 self(*
 visual(*
 alloc(*(
-list_installed_colormaps1*
+list_installed_colormaps0*
 
 self(*Q
 rotate_properties*
@@ -534,7 +534,7 @@ properties(*
 inst(*	
 cls(*
 onerror (*
-get_wm_class3*
+get_wm_class2*
 
 self(*C
 set_wm_transient_for*
@@ -542,13 +542,13 @@ properties(*
 self(*
 window(*
 onerror (*$
-get_wm_transient_for4*
+get_wm_transient_for3*
 
 self(*B
 set_wm_protocols*
 
 self(*
-	protocols(5*
+	protocols(4*
 onerror (* 
 get_wm_protocols+*
 
@@ -556,9 +556,9 @@ properties(*
 set_wm_colormap_windows*
 
 self(*
-windows(6*
+windows(5*
 onerror (*'
-get_wm_colormap_windows6*
+get_wm_colormap_windows5*
 
 self(*B
 set_wm_client_machine*
@@ -573,41 +573,41 @@ properties(*
 set_wm_normal_hints*
 
 self(*
-hints (:*
+hints (8*
 onerror (*
 
 keys(*#
-get_wm_normal_hints;*
+get_wm_normal_hints9*
 
 self(*H
 set_wm_hints*
 
 self(*
-hints (:*
+hints (8*
 onerror (*
 
 keys(*
-get_wm_hints;*
+get_wm_hints9*
 
 self(*H
 set_wm_state*
 
 self(*
-hints (:*
+hints (8*
 onerror (*
 
 keys(*
-get_wm_state;*
+get_wm_state9*
 
 self(*L
 set_wm_icon_size*
 
 self(*
-hints (:*
+hints (8*
 onerror (*
 
 keys(* 
-get_wm_icon_size;*
+get_wm_icon_size9*
 
 self(r
 
@@ -617,15 +617,15 @@ __window__0	À
 
 self(*
 onerror (*_
-create_cursor<*
+create_cursor*
 
 self(*
 
 mask(*
 
-foreground(=*
+foreground(:*
 
-background(=*
+background(:*
 x(*
 y(r
 
@@ -634,5 +634,5 @@ __pixmap__0	$
 value(*
 
 unit(*
-__annotations__092#"!Xlib.protocol.request.GetGeometry2 "Xlib.xobject.drawable.Drawable2"Xlib.xobject.drawable.Pixmap2"builtins.int2"Xlib.xobject.fontable.GC2"builtins.object22"builtins.function222 "Xlib._typing.ErrorHandler2	22
-222"typing.Sequence22"typing.Sequence221"*Xlib.protocol.structs._Segment4IntSequence22"typing.Sequence223",Xlib.protocol.structs._Rectangle4IntSequence22"typing.Sequence22-"&Xlib.protocol.structs._Arc6IntSequence22"typing.Sequence22"builtins.bytes2"builtins.bytearray222"PIL.Image.Image2 "Xlib.protocol.request.GetImage2"builtins.str222"builtins.dict22"typing.Sequence22%"#Xlib.protocol.request.QueryBestSize2"Xlib.xobject.drawable.Window2+")Xlib.protocol.request.GetWindowAttributes2!"Xlib.protocol.request.QueryTree2"builtins.float2"typing.Sequence2"2"typing.Sequence222#$222#"!Xlib.protocol.request.GetProperty22'2"builtins.bool222"builtins.list22"Xlib.protocol.rq.Event2$""Xlib.protocol.request.QueryPointer2"Xlib.protocol.rq.Struct2'"%Xlib.protocol.request.TranslateCoords2 "Xlib.xobject.colormap.Colormap2"builtins.list2022222222"typing.Iterable22"typing.Iterable22"Xlib.protocol.rq.DictWrapper22"builtins.dict2822792272"Xlib.xobject.cursor.Cursor2-"&Xlib.protocol.structs._RGB3IntIterable25
+__annotations__072#"!Xlib.protocol.request.GetGeometry2 "Xlib.xobject.drawable.Drawable2"Xlib.xobject.drawable.Pixmap2"builtins.int22"builtins.object22"builtins.function222 "Xlib._typing.ErrorHandler2	22
+222"typing.Sequence22"typing.Sequence221"*Xlib.protocol.structs._Segment4IntSequence22"typing.Sequence223",Xlib.protocol.structs._Rectangle4IntSequence22"typing.Sequence22-"&Xlib.protocol.structs._Arc6IntSequence22"typing.Sequence22"builtins.bytes2"builtins.bytearray222"PIL.Image.Image2 "Xlib.protocol.request.GetImage2"builtins.str222"builtins.dict22"typing.Sequence22%"#Xlib.protocol.request.QueryBestSize2"Xlib.xobject.drawable.Window2+")Xlib.protocol.request.GetWindowAttributes2!"Xlib.protocol.request.QueryTree2"builtins.float2"typing.Sequence2"2"typing.Sequence222#$222#"!Xlib.protocol.request.GetProperty22'2"builtins.bool222"builtins.list22"Xlib.protocol.rq.Event2$""Xlib.protocol.request.QueryPointer2"Xlib.protocol.rq.Struct2'"%Xlib.protocol.request.TranslateCoords2"builtins.list222221222"typing.Iterable22"typing.Iterable22"Xlib.protocol.rq.DictWrapper2"builtins.dict222672262-"&Xlib.protocol.structs._RGB3IntIterable24

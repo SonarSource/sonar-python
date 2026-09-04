@@ -105,14 +105,36 @@
 connection_from_url*	
 url(*
 kw(*
-__annotations__0.*(
+__annotations__0.*
+BaseSSLError0/8*(
 _connectionurllib3.util.connection *$
-urllib3queueurllib3.util.queue *
-port_by_scheme0*
-is_connection_dropped00*
-get_host00*
+urllib3queueurllib3.util.queue *
+ClosedPoolError008*
+ProtocolError018*
+EmptyPoolError028*
+HostChangedError038*
+LocationValueError048*
+MaxRetryError058*
+
+ProxyError068*
+ReadTimeoutError078*
+SSLError088*
+TimeoutError098*
+InsecureRequestWarning0:8*
+CertificateError0;8*
+port_by_scheme0*
+DummyConnection0<8*
+HTTPConnection0"8*
+HTTPSConnection0$8*
+VerifiedHTTPSConnection0=8*
+RequestMethods0>8*
+HTTPResponse0'8*
+is_connection_dropped0@*
+Retry08*
+Timeout08*
+get_host0@*
 
 xrange0*
-log0122'"%urllib3.connectionpool.ConnectionPool2"builtins.str2"builtins.int222Z
+log0A22'"%urllib3.connectionpool.ConnectionPool2"builtins.str2"builtins.int222Z
 *urllib3.connectionpool.ConnectionPool.Self"%urllib3.connectionpool.ConnectionPool(22"builtins.bool2	22"builtins.BaseException2"type2	22
-22	2"types.TracebackType222222"queue.Queue22"type22+")urllib3.connectionpool.HTTPConnectionPool2"urllib3.util.timeout.Timeout2"builtins.float222&"urllib3.connectionpool._Timeout22"typing.Mapping2222"urllib3.util.retry.Retry222&"urllib3.connectionpool._Retries222222"urllib3.util.url.Url22"urllib3.util.Url222 2#"!urllib3.connection.HTTPConnection2"type2"2$""urllib3.connection.HTTPSConnection2"type2$22#%2"urllib3.response.HTTPResponse2"type2'2"urllib3.util.queue.LifoQueue22)2,"*urllib3.connectionpool.HTTPSConnectionPool22222"builtins.dict22"builtins.function22/2"logging.Logger
+22	2"types.TracebackType222222"queue.Queue22"type22+")urllib3.connectionpool.HTTPConnectionPool2"urllib3.util.timeout.Timeout2"builtins.float222&"urllib3.connectionpool._Timeout22"typing.Mapping2222"urllib3.util.retry.Retry222&"urllib3.connectionpool._Retries222222"urllib3.util.url.Url22"urllib3.util.Url222 2#"!urllib3.connection.HTTPConnection2"type2"2$""urllib3.connection.HTTPSConnection2"type2$22#%2"urllib3.response.HTTPResponse2"type2'2"urllib3.util.queue.LifoQueue22)2,"*urllib3.connectionpool.HTTPSConnectionPool22222"builtins.dict22"ssl.SSLError2$""urllib3.exceptions.ClosedPoolError2"" urllib3.exceptions.ProtocolError2#"!urllib3.exceptions.EmptyPoolError2%"#urllib3.exceptions.HostChangedError2'"%urllib3.exceptions.LocationValueError2"" urllib3.exceptions.MaxRetryError2"urllib3.exceptions.ProxyError2%"#urllib3.exceptions.ReadTimeoutError2"urllib3.exceptions.SSLError2!"urllib3.exceptions.TimeoutError2+")urllib3.exceptions.InsecureRequestWarning22"0urllib3.util.ssl_match_hostname.CertificateError2$""urllib3.connection.DummyConnection2,"*urllib3.connection.VerifiedHTTPSConnection2 "urllib3.request.RequestMethods2"builtins.function22?2"logging.Logger

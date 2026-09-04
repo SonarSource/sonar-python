@@ -82,6 +82,14 @@ def fake_module_with_decorators():
 
 
 @pytest.fixture(scope="session")
+def fake_module_type_aliases():
+    modules = {
+        "fakemodule_type_aliases": os.path.join(CURRENT_PATH, "resources/fakemodule_type_aliases.pyi"),
+    }
+    return build_modules(modules).get("fakemodule_type_aliases")
+
+
+@pytest.fixture(scope="session")
 def typeshed_third_parties():
     serializers.THIRD_PARTIES_STUBS = MOCK_THIRD_PARTY_STUBS_LIST
     return TypeshedSerializer(is_third_parties=True).get_merged_modules()

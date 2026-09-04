@@ -425,11 +425,13 @@ class ClassSymbol:
 
 
 class VarSymbol:
-    def __init__(self, name: str, fullname: str, is_imported_module=False, type_descriptor: TypeDescriptor = None):
+    def __init__(self, name: str, fullname: str, is_imported_module=False, type_descriptor: TypeDescriptor = None,
+                 is_type_alias=False):
         self.name = name
         self.fullname = fullname
         self.is_imported_module = is_imported_module
         self.type = type_descriptor
+        self.is_type_alias = is_type_alias
 
     @classmethod
     def from_var(cls, var: mpn.Var, name: str = None):
@@ -455,6 +457,7 @@ class VarSymbol:
             else:
                 pb_var.type_annotation_id = type_table.add(self.type)
         pb_var.is_imported_module = self.is_imported_module
+        pb_var.is_type_alias = self.is_type_alias
         return pb_var
 
 
@@ -494,6 +497,20 @@ class ModuleSymbol:
                 self.classes.append(ClassSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in MODULE_IMPLICIT_VARS:
                 self.vars.append(VarSymbol.from_var(symbol_table_node, name=key))
+            if isinstance(symbol_table_node, mpn.TypeAlias) and isinstance(symbol_table_node.target, mpt.Instance):
+                # Type aliases like `Text = str` or `List = list[_T]` — serialize as a VarSymbol
+                # using the alias's own FQN (e.g. `typing.Text`) and carry the target class through
+                # the type_descriptor so the Java v1 side can look up the alias by its own FQN.
+                # is_type_alias=True signals the Java v2 converter to create a lazy type for the
+                # target class (so it resolves to the class itself, not an instance of the class).
+                # Using the target's FQN as the VarSymbol FQN would: (a) break v1 inference which
+                # looks up symbols by their alias FQN (e.g. typing.List / typing.Text), and
+                # (b) cause duplicate-key collisions when a same-named class symbol already exists
+                # (e.g. annoy.AnnoyIndex aliases annoy.annoylib.Annoy which is also a ClassSymbol).
+                alias_fqn = f"{self.fullname}.{key}"
+                self.vars.append(VarSymbol(key, alias_fqn,
+                                           type_descriptor=TypeDescriptor(symbol_table_node.target),
+                                           is_type_alias=True))
             if isinstance(symbol_table_node, mpn.MypyFile):
                 module_name = symbol_table_node.fullname
                 if module_name != "builtins":

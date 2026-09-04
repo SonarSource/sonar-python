@@ -35,6 +35,13 @@ public class VariableDescriptorToPythonTypeConverter implements DescriptorToPyth
       return ctx.lazyTypesContext().getOrCreateLazyType(fullyQualifiedName);
     }
     String annotatedType = from.annotatedType();
+    if (annotatedType != null && from.isTypeAlias()) {
+      // TypeAlias variables (e.g. typing.Text = str, socket.error = OSError) must resolve to
+      // the aliased class itself, not to an instance of that class. We create a lazy type for
+      // the target FQN so the v2 type system sees the class type (callable) rather than
+      // ObjectType (an instance of the class, which would be non-callable).
+      return ctx.lazyTypesContext().getOrCreateLazyType(annotatedType);
+    }
     if (annotatedType != null) {
       if (SPECIAL_FORM_FQNS.contains(annotatedType) && fullyQualifiedName != null) {
         // Defensive null check on fullyQualifiedName: it should never be null for SpecialForm

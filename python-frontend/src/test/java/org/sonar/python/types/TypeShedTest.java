@@ -348,7 +348,12 @@ class TypeShedTest {
     Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder(tuple(Kind.CLASS, "annoy.annoylib.Annoy"), tuple(Kind.OTHER, "annoy.__annotations__"), tuple(Kind.OTHER, "annoy.__path__"));
+      .containsExactlyInAnyOrder(
+        tuple(Kind.CLASS, "annoy.annoylib.Annoy"),
+        // AnnoyIndex is a TypeAlias for annoy.annoylib.Annoy and is now correctly serialized
+        tuple(Kind.OTHER, "annoy.AnnoyIndex"),
+        tuple(Kind.OTHER, "annoy.__annotations__"),
+        tuple(Kind.OTHER, "annoy.__path__"));
 
     ClassSymbol annoyIndex = (ClassSymbol) deserializedAnnoySymbols.get("annoy.annoylib.Annoy");
     assertThat(annoyIndex.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)

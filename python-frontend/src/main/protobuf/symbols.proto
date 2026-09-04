@@ -105,4 +105,8 @@ message VarSymbol {
   bool is_imported_module = 4;
   repeated string valid_for = 5;
   uint32 type_annotation_id = 6;
+  // True when this VarSymbol represents a TypeAlias (e.g. Text = str, List = list).
+  // The type_annotation points to the aliased class. On the v2 side this must be
+  // resolved as a lazy type (the class itself), not as an ObjectType (an instance).
+  bool is_type_alias = 7;
 }

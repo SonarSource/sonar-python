@@ -26,6 +26,7 @@ import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
+import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,6 +58,46 @@ class VariableDescriptorToPythonTypeConverterTest {
     Assertions.assertThat(converter.convert(ctx, typingExtensionsSelfDescriptor))
       .isInstanceOfSatisfying(SpecialFormType.class,
         specialFormType -> assertThat(specialFormType.fullyQualifiedName()).isEqualTo("typing_extensions.Self"));
+  }
+
+  @Test
+  void testTypeAliasResolvesToLazyType() {
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var converter = new VariableDescriptorToPythonTypeConverter();
+
+    // TypeAlias vars (e.g. typing.Text = str, socket.error = OSError) must produce a LazyType
+    // for the target class, not an ObjectType (an instance). Without this, calling
+    // socket.error(...) would be flagged by S5756 as calling a non-callable instance.
+    VariableDescriptor typeAliasDesc = new VariableDescriptor(
+      "Text", "typing.Text", "builtins.str", false, true, List.of(), List.of()
+    );
+    var ctx = new ConversionContext("typing", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, null);
+
+    PythonType result = converter.convert(ctx, typeAliasDesc);
+
+    assertThat(result)
+      .as("TypeAlias var must produce a LazyType for the target class, not ObjectType (instance)")
+      .isInstanceOfSatisfying(LazyType.class,
+        lazyType -> assertThat(lazyType.importPath()).isEqualTo("builtins.str"));
+  }
+
+  @Test
+  void testNonTypeAliasVariableProducesObjectType() {
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var converter = new VariableDescriptorToPythonTypeConverter();
+
+    // A regular variable with a type annotation must still produce ObjectType (instance semantics).
+    // Regression guard: the is_type_alias branch must not affect non-alias vars.
+    VariableDescriptor regularDesc = new VariableDescriptor(
+      "x", "mod.x", "builtins.str", false, false, List.of(), List.of()
+    );
+    var ctx = new ConversionContext("mod", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, null);
+
+    PythonType result = converter.convert(ctx, regularDesc);
+
+    assertThat(result)
+      .as("Regular variable with a type annotation must remain an ObjectType (instance)")
+      .isInstanceOf(ObjectType.class);
   }
 
   @Test
