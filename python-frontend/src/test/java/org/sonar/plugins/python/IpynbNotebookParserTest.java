@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -123,6 +124,76 @@ class IpynbNotebookParserTest {
   }
 
   @Test
+  void dedentsEveryCodeCellIndependentlyLikeIPython() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_indented_cells.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var result = IpynbNotebookParser.parseNotebook(inputFile).orElseThrow();
+
+    assertThat(result.contents().replace("   \n", "\n")).isEqualTo("""
+      x = 1
+      if x:
+          print(x)
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      y = 2
+      print(y)
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      !pip install foo
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      %pip install bar
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+
+      z = 3
+
+      print(z)
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      value = 42
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""");
+    assertThat(result.contents()).contains("\nz = 3\n   \nprint(z)\n");
+
+    var ast = org.sonar.python.parser.PythonParser.createIPythonParser().parse(result.contents());
+    assertThatCode(() -> new org.sonar.python.tree.IPythonTreeMaker(result.locationMap()).fileInput(ast))
+      .doesNotThrowAnyException();
+
+    // The first cell had a one-column margin, while the second cell had a two-column margin.
+    assertThat(result.locationMap().get(1).column()).isEqualTo(6);
+    assertThat(result.locationMap().get(5).column()).isEqualTo(16);
+    // A tab is one Python indentation character but occupies two escaped JSON characters.
+    assertThat(result.locationMap()).containsEntry(17, new IPythonLocation(45, 7, List.of(), false));
+  }
+
+  @Test
+  void doesNotDedentWhenIndentationIsNotCommonToEveryNonBlankLine() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_indentation_without_common_margin.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var result = IpynbNotebookParser.parseNotebook(inputFile).orElseThrow();
+
+    String contents = result.contents();
+    var parser = org.sonar.python.parser.PythonParser.createIPythonParser();
+    assertThat(contents).startsWith(" if condition:\n  nested()\ntop_level()\n");
+    assertThatThrownBy(() -> parser.parse(contents))
+      .isInstanceOf(RecognitionException.class);
+  }
+
+  @Test
+  void ignoresCrLfBlankLinesWhenDedenting() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_indented_crlf_blank_line.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var result = IpynbNotebookParser.parseNotebook(inputFile).orElseThrow();
+
+    assertThat(result.contents()).startsWith("\r\nfirst = 1\r\n\r\n  \r\nsecond = 2\n");
+    assertThatCode(() -> org.sonar.python.parser.PythonParser.createIPythonParser().parse(result.contents()))
+      .doesNotThrowAnyException();
+  }
+
+  @Test
+  void regularPythonSourceIsNotDedented() {
+    var parser = org.sonar.python.parser.PythonParser.create();
+
+    assertThatThrownBy(() -> parser.parse(" x = 1\n"))
+      .isInstanceOf(RecognitionException.class);
+  }
+
+  @Test
   void testParseNotebookWithEscapedChars() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook_with_escaped_chars.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
@@ -137,15 +208,14 @@ class IpynbNotebookParserTest {
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
 
-    //"source":  "\t \b \f \"\""
+    // "source": "\t \b \f \"\""; dedent removes the leading tab and space.
     assertThat(result.locationMap()).extracting(map -> map.get(1))
-      .isEqualTo(new IPythonLocation(14, 15, mapToColumnMappingList(
+      .isEqualTo(new IPythonLocation(14, 18, mapToColumnMappingList(
           Map.ofEntries(
             Map.entry(0, 1),
             Map.entry(2, 1),
             Map.entry(4, 1),
-            Map.entry(6, 1),
-            Map.entry(7, 1)
+            Map.entry(5, 1)
           )
         ), true));
 

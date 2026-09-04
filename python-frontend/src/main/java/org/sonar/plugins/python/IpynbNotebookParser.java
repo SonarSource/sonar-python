@@ -267,6 +267,7 @@ public class IpynbNotebookParser {
         false);
       cellData.addLineToSource("\n", newLineLocation);
     }
+    cellData = IPythonCellInputTransformer.removeCommonLeadingIndentation(cellData);
     // Account for the last cell delimiter
     cellData.addDelimiterToSource(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER + "\n", tokenLocation.getLineNr(), lastColumn);
     return cellData;
@@ -328,6 +329,7 @@ public class IpynbNotebookParser {
       cellData.addLineToSource("\n", new IPythonLocation(tokenLocation.getLineNr(), column, List.of(new EscapeCharPositionInfo(column, 1)), true));
       offset = offset.plusNewline();
     }
+    cellData = IPythonCellInputTransformer.removeCommonLeadingIndentation(cellData);
     // Account for the last cell delimiter
     cellData.addDelimiterToSource(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER + "\n", tokenLocation.getLineNr(), tokenLocation.getColumnNr() + offset.length() + offset.extraChars());
     return cellData;
