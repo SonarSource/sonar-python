@@ -96,4 +96,21 @@ def f():
 
   foobar[:3:2] == 'fo' # Compliant: This is not a simple step 1 slice, not a prefix, or suffix, so the rule does not apply
   foobar[:3:-2] == 'r' # Same
+  foobar[:3:1.0] == 'foo' # Compliant: Float strides are not simple integer step 1 slices
+  foobar[:3:1e0] == 'foo' # Same
 
+  class MyStr(str): ...
+  mystr = MyStr("foobar")
+  mystr[:3] == 'foo' # Noncompliant {{Use `startswith` here.}}
+  mystr[3:] == 'bar' # Noncompliant {{Use `endswith` here.}}
+
+
+def no_fp_when_both_sides_are_slices():
+  a = "2026-09-03T12:00:00"
+  b = "2026-09-03T14:00:00"
+  if a[:4] == b[:4]:  # OK: both sides are slices, no clear startswith replacement
+    pass
+  if a[5:] == b[5:]:  # OK: both sides are slices
+    pass
+  if a[:3] == b[1:2]:  # OK: conservative handling of comparisons between two slices
+    pass

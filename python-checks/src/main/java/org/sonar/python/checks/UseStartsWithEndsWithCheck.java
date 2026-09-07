@@ -23,17 +23,21 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.tree.NumericLiteralImpl;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPARISON;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SLICE_ITEM;
 
 @Rule(key = "S6659")
 public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
+  private static final TypeMatcher STR_MATCHER = TypeMatchers.isObjectInstanceOf("builtins.str");
+  private static final TypeMatcher NONE_MATCHER = TypeMatchers.isObjectOfType("NoneType");
+
   private static final String USE_STARTSWITH_MESSAGE = "Use `startswith` here.";
   private static final String USE_NOT_STARTSWITH_MESSAGE = "Use `not` and `startswith` here.";
   private static final String USE_ENDSWITH_MESSAGE = "Use `endswith` here.";
@@ -57,16 +61,17 @@ public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    // Either the left or the right operand must be a slice expression.
-    // The other one must be the string we compare it to:
+    // Exactly one operand must be a slice expression.
+    // The other one must be the string we compare it to.
+    // If both sides are slices (e.g. a[:4] == b[:4]), there is no clean startswith/endswith replacement.
     var lhs = comparison.leftOperand();
     var rhs = comparison.rightOperand();
     final SliceExpression sliceExpression;
     final Expression stringExpression;
-    if (lhs.is(Tree.Kind.SLICE_EXPR)) {
+    if (lhs.is(Tree.Kind.SLICE_EXPR) && !rhs.is(Tree.Kind.SLICE_EXPR)) {
       sliceExpression = (SliceExpression) lhs;
       stringExpression = rhs;
-    } else if (rhs.is(Tree.Kind.SLICE_EXPR)) {
+    } else if (rhs.is(Tree.Kind.SLICE_EXPR) && !lhs.is(Tree.Kind.SLICE_EXPR)) {
       sliceExpression = (SliceExpression) rhs;
       stringExpression = lhs;
     } else {
@@ -74,8 +79,8 @@ public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
     }
 
     // To avoid FPs, either the slice expression must slice a string, or the object we compare it to must clearly be a string.
-    if (!stringExpression.type().mustBeOrExtend(BuiltinTypes.STR) &&
-      !sliceExpression.object().type().mustBeOrExtend(BuiltinTypes.STR)) {
+    if (!STR_MATCHER.isTrueFor(stringExpression, ctx) &&
+      !STR_MATCHER.isTrueFor(sliceExpression.object(), ctx)) {
       return;
     }
 
@@ -89,7 +94,7 @@ public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    var sliceType = SliceType.fromSliceItem((SliceItem) sliceItem);
+    var sliceType = SliceType.fromSliceItem((SliceItem) sliceItem, ctx);
 
     var message = selectMessage(sliceType, operatorType);
     if (message == null) {
@@ -114,7 +119,7 @@ public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
     SUFFIX,
     COMPLEX;
 
-    private static SliceType fromSliceItem(SliceItem sliceItem) {
+    private static SliceType fromSliceItem(SliceItem sliceItem, SubscriptionContext ctx) {
       var stride = sliceItem.stride();
       // If the stride is
       // not absent
@@ -122,7 +127,7 @@ public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
       // and not the "1" literal
       // then we don't check the rule.
       if (stride != null &&
-        !stride.type().mustBeOrExtend(BuiltinTypes.NONE_TYPE) &&
+        !NONE_MATCHER.isTrueFor(stride, ctx) &&
         !isIntLiteralEqualTo(stride, 1)) {
         return SliceType.COMPLEX;
       }
@@ -131,31 +136,31 @@ public class UseStartsWithEndsWithCheck extends PythonSubscriptionCheck {
       var upperBound = sliceItem.upperBound();
 
       // Case [x:None:...]
-      if (!isEmptyBound(lowerBound) &&
-        isEmptyBound(upperBound)) {
+      if (!isEmptyBound(lowerBound, ctx) &&
+        isEmptyBound(upperBound, ctx)) {
 
         return SliceType.SUFFIX;
       }
 
       // Case [None:x:...]
-      if (!isEmptyBound(upperBound) &&
-        isEmptyBound(lowerBound)) {
+      if (!isEmptyBound(upperBound, ctx) &&
+        isEmptyBound(lowerBound, ctx)) {
         return SliceType.PREFIX;
       }
 
       return SliceType.COMPLEX;
     }
 
-    private static boolean isEmptyBound(@CheckForNull Expression bound) {
-      return bound == null || bound.type().mustBeOrExtend(BuiltinTypes.NONE_TYPE);
+    private static boolean isEmptyBound(@CheckForNull Expression bound, SubscriptionContext ctx) {
+      return bound == null || NONE_MATCHER.isTrueFor(bound, ctx);
     }
   }
 
   private static boolean isIntLiteralEqualTo(Expression expression, long expected) {
     try {
-      return expression.is(Tree.Kind.NUMERIC_LITERAL)
-        && expression.type().mustBeOrExtend(BuiltinTypes.INT)
-        && ((NumericLiteral) expression).valueAsLong() == expected;
+      return expression instanceof NumericLiteralImpl numericLiteral
+        && numericLiteral.numericKind() == NumericLiteralImpl.NumericKind.INT
+        && numericLiteral.valueAsLong() == expected;
     } catch (NumberFormatException nfe) {
       return false;
     }
