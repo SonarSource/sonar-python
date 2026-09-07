@@ -19,6 +19,7 @@ package org.sonar.python.semantic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -29,6 +30,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.FunctionDescriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -184,6 +186,45 @@ class AmbiguousSymbolTest {
     assertThat(copy).isNotEqualTo(ambiguousSymbol);
     assertThat(copy.alternatives()).doesNotContain(foo, otherFoo);
     assertThat(copy.alternatives()).extracting(Symbol::name, Symbol::fullyQualifiedName).containsExactlyInAnyOrder(tuple("foo", "mod1.foo"), tuple("foo", "mod2.foo"));
+  }
+
+  @Test
+  void copy_without_usages_handles_cycles_through_ambiguous_superclasses() {
+    ClassSymbolImpl firstAlternative = new ClassSymbolImpl("A", "mod.A");
+    ClassSymbolImpl secondAlternative = new ClassSymbolImpl("A", "mod.A");
+    AmbiguousSymbolImpl ambiguousSymbol = (AmbiguousSymbolImpl) AmbiguousSymbolImpl.create(firstAlternative, secondAlternative);
+    SymbolImpl sharedVariable = new SymbolImpl("sharedVariable", "mod.A.sharedVariable");
+    FunctionSymbolImpl sharedFunction = new FunctionSymbolImpl(new FunctionDescriptor.FunctionDescriptorBuilder()
+      .withName("sharedFunction")
+      .withFullyQualifiedName("mod.A.sharedFunction")
+      .build(), "sharedFunction");
+    firstAlternative.addMembers(List.of(sharedVariable, sharedFunction));
+    secondAlternative.addMembers(List.of(sharedVariable, sharedFunction));
+    firstAlternative.addSuperClass(ambiguousSymbol);
+    secondAlternative.addSuperClass(ambiguousSymbol);
+    firstAlternative.addSuperClass(secondAlternative);
+    secondAlternative.addSuperClass(firstAlternative);
+
+    AmbiguousSymbolImpl copy = ambiguousSymbol.copyWithoutUsages();
+
+    assertThat(copy).isNotSameAs(ambiguousSymbol);
+    List<ClassSymbol> copiedAlternatives = copy.alternatives().stream().map(ClassSymbol.class::cast).toList();
+    assertThat(copiedAlternatives).hasSize(2).allSatisfy(alternative -> assertThat(alternative.superClasses())
+      .doesNotContain(firstAlternative, secondAlternative, ambiguousSymbol)
+      .contains(copy)
+      .anySatisfy(superClass -> assertThat(copiedAlternatives).anyMatch(alternativeCopy -> alternativeCopy == superClass)));
+
+    List<Symbol> copiedVariables = copiedAlternatives.stream()
+      .map(alternative -> alternative.resolveMember("sharedVariable").orElseThrow())
+      .toList();
+    assertThat(copiedVariables).hasSize(2).doesNotContain(sharedVariable);
+    assertThat(copiedVariables.get(0)).isSameAs(copiedVariables.get(1));
+
+    List<Symbol> copiedFunctions = copiedAlternatives.stream()
+      .map(alternative -> alternative.resolveMember("sharedFunction").orElseThrow())
+      .toList();
+    assertThat(copiedFunctions).hasSize(2).doesNotContain(sharedFunction);
+    assertThat(copiedFunctions.get(0)).isSameAs(copiedFunctions.get(1));
   }
 
   private Map<String, Symbol> symbols(String... code) {

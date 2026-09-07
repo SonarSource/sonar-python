@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -194,19 +195,29 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public ClassSymbolImpl copyWithoutUsages() {
+    return copyWithoutUsages(new IdentityHashMap<>());
+  }
+
+  @Override
+  ClassSymbolImpl copyWithoutUsages(Map<SymbolImpl, SymbolImpl> copiedSymbols) {
+    SymbolImpl existingCopy = copiedSymbols.get(this);
+    if (existingCopy != null) {
+      return (ClassSymbolImpl) existingCopy;
+    }
     ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), this);
+    copiedSymbols.put(this, copiedClassSymbol);
     if (hasEvaluatedSuperClasses()) {
       for (Symbol superClass : superClasses()) {
         if (superClass == this) {
           copiedClassSymbol.superClasses.add(copiedClassSymbol);
         } else if (superClass.is(Kind.CLASS, Kind.AMBIGUOUS)) {
-          copiedClassSymbol.superClasses.add(((SymbolImpl) superClass).copyWithoutUsages());
+          copiedClassSymbol.superClasses.add(((SymbolImpl) superClass).copyWithoutUsages(copiedSymbols));
         } else {
           copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
         }
       }
     }
-    copiedClassSymbol.addMembers(members.stream().map(m -> ((SymbolImpl) m).copyWithoutUsages()).collect(Collectors.toList()));
+    copiedClassSymbol.addMembers(members.stream().map(m -> ((SymbolImpl) m).copyWithoutUsages(copiedSymbols)).collect(Collectors.toList()));
     if (hasSuperClassWithoutSymbol) {
       copiedClassSymbol.setHasSuperClassWithoutSymbol();
     }

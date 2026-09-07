@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -194,7 +195,17 @@ public class SymbolImpl implements Symbol {
   }
 
   public SymbolImpl copyWithoutUsages() {
-    return copyWithoutUsages(name());
+    return copyWithoutUsages(new IdentityHashMap<>());
+  }
+
+  SymbolImpl copyWithoutUsages(Map<SymbolImpl, SymbolImpl> copiedSymbols) {
+    SymbolImpl existingCopy = copiedSymbols.get(this);
+    if (existingCopy != null) {
+      return existingCopy;
+    }
+    SymbolImpl copiedSymbol = copyWithoutUsages(name());
+    copiedSymbols.put(this, copiedSymbol);
+    return copiedSymbol;
   }
 
   public SymbolImpl copyWithoutUsages(String name) {

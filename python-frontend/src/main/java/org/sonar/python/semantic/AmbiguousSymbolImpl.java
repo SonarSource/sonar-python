@@ -17,8 +17,9 @@
 package org.sonar.python.semantic;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -68,11 +69,24 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
 
   @Override
   public AmbiguousSymbolImpl copyWithoutUsages() {
-    Set<SymbolImpl> copiedAlternativeSymbols = symbols.stream()
+    return copyWithoutUsages(new IdentityHashMap<>());
+  }
+
+  @Override
+  AmbiguousSymbolImpl copyWithoutUsages(Map<SymbolImpl, SymbolImpl> copiedSymbols) {
+    SymbolImpl existingCopy = copiedSymbols.get(this);
+    if (existingCopy != null) {
+      return (AmbiguousSymbolImpl) existingCopy;
+    }
+    Set<Symbol> copiedAlternativeSymbols = new HashSet<>();
+    AmbiguousSymbolImpl copiedSymbol = new AmbiguousSymbolImpl(name(), fullyQualifiedName(), copiedAlternativeSymbols);
+    // Register the incomplete copy before traversing alternatives so cyclic class hierarchies can refer back to it.
+    copiedSymbols.put(this, copiedSymbol);
+    flattenAmbiguousSymbols(symbols).stream()
       .map(SymbolImpl.class::cast)
-      .map(SymbolImpl::copyWithoutUsages)
-      .collect(Collectors.toSet());
-    return ((AmbiguousSymbolImpl) create(Collections.unmodifiableSet(copiedAlternativeSymbols)));
+      .map(symbol -> symbol.copyWithoutUsages(copiedSymbols))
+      .forEach(copiedAlternativeSymbols::add);
+    return copiedSymbol;
   }
 
   @Override

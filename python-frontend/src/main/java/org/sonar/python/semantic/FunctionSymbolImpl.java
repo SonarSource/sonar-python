@@ -19,7 +19,9 @@ package org.sonar.python.semantic;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.CheckForNull;
@@ -188,8 +190,18 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   @Override
   public FunctionSymbolImpl copyWithoutUsages() {
+    return copyWithoutUsages(new IdentityHashMap<>());
+  }
+
+  @Override
+  FunctionSymbolImpl copyWithoutUsages(Map<SymbolImpl, SymbolImpl> copiedSymbols) {
+    SymbolImpl existingCopy = copiedSymbols.get(this);
+    if (existingCopy != null) {
+      return (FunctionSymbolImpl) existingCopy;
+    }
     FunctionSymbolImpl copy = new FunctionSymbolImpl(name(), this);
     copy.setKind(kind());
+    copiedSymbols.put(this, copy);
     return copy;
   }
 

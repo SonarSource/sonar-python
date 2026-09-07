@@ -192,6 +192,18 @@ class FunctionSymbolTest {
   }
 
   @Test
+  void copy_without_usages() {
+    FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) PythonTestUtils.functionSymbol("def foo(param): pass");
+
+    FunctionSymbolImpl copy = functionSymbol.copyWithoutUsages();
+
+    assertThat(copy).isNotSameAs(functionSymbol);
+    assertThat(copy.name()).isEqualTo(functionSymbol.name());
+    assertThat(copy.parameters()).extracting(FunctionSymbol.Parameter::name).containsExactly("param");
+    assertThat(copy.usages()).isEmpty();
+  }
+
+  @Test
   void instance_method() {
     FileInput fileInput = PythonTestUtils.parse(
       "class A:",
