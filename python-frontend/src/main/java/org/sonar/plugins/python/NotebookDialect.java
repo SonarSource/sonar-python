@@ -14,41 +14,9 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.api;
+package org.sonar.plugins.python;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.TokenType;
-
-public enum PythonTokenType implements TokenType {
-  NUMBER,
-  STRING,
-  
-  FSTRING_START,
-  FSTRING_MIDDLE,
-  FSTRING_END,
-
-  TSTRING_START,
-
-  INDENT,
-  DEDENT,
-  NEWLINE,
-  IPYNB_CELL_MAGIC_PREFIX,
-  IPYNB_CELL_MAGIC_BODY,
-  IPYNB_CELL_DELIMITER;
-
-  @Override
-  public String getName() {
-    return name();
-  }
-
-  @Override
-  public String getValue() {
-    return name();
-  }
-
-  @Override
-  public boolean hasToBeSkippedFromAst(AstNode node) {
-    return false;
-  }
-
+public enum NotebookDialect {
+  IPYTHON,
+  DATABRICKS
 }

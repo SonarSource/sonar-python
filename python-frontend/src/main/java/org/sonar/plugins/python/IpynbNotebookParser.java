@@ -31,6 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
+import org.sonar.python.parser.IPythonParserConfiguration;
+import org.sonar.python.parser.IPythonParserConfiguration.OpaqueCellRange;
 
 public class IpynbNotebookParser {
 
@@ -38,6 +40,8 @@ public class IpynbNotebookParser {
 
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
 
+  private static final String DATABRICKS_NOTEBOOK_METADATA_KEY = "application/vnd.databricks.v1+notebook";
+  private static final String DATABRICKS_CELL_METADATA_KEY = "application/vnd.databricks.v1+cell";
   private static final Set<String> ACCEPTED_LANGUAGE = Set.of("python", "ipython");
 
   public static Optional<GeneratedIPythonFile> parseNotebook(PythonInputFile inputFile) {
@@ -57,11 +61,12 @@ public class IpynbNotebookParser {
   private int lastPythonLine = 0;
 
   public Optional<GeneratedIPythonFile> parse() throws IOException {
-    var language = parseLanguage();
+    var metadata = parseMetadata();
+    var language = metadata.language();
     boolean isPythonNotebook = language.map(ACCEPTED_LANGUAGE::contains).orElse(true);
 
     if (isPythonNotebook) {
-      return Optional.of(parseNotebook());
+      return Optional.of(parseNotebook(metadata.dialect()));
     }
 
     if(LOG.isDebugEnabled()){
@@ -72,52 +77,99 @@ public class IpynbNotebookParser {
 
   /**
    * Parses the notebook's top-level metadata to find the language.
-   * Only checks metadata.kernelspec.language and metadata.language_info.name,
-   * ignoring any language fields in cell metadata.
+   * Checks metadata.kernelspec.language, metadata.language_info.name, and the
+   * authoritative Databricks notebook vendor metadata, while ignoring language fields in cell metadata.
    */
   public Optional<String> parseLanguage() throws IOException {
+    return parseMetadata().language();
+  }
+
+  private NotebookMetadata parseMetadata() throws IOException {
     String content = inputFile.wrappedFile().contents();
     JsonFactory factory = new JsonFactory();
-    List<String> foundLanguages = new ArrayList<>();
+    List<String> genericLanguages = new ArrayList<>();
+    List<String> databricksLanguages = new ArrayList<>();
+    boolean hasDatabricksMetadata = false;
+    boolean hasReadTopLevelMetadata = false;
 
     try (JsonParser jParser = factory.createParser(content)) {
-      while (!jParser.isClosed()) {
-        JsonToken jsonToken = jParser.nextToken();
+      JsonToken jsonToken;
+      while (!jParser.isClosed() && (jsonToken = jParser.nextToken()) != null) {
         if (JsonToken.FIELD_NAME.equals(jsonToken) && "metadata".equals(jParser.currentName()) && jParser.getParsingContext().getParent().inRoot()) {
           jParser.nextToken();
-          extractLanguagesFromMetadata(jParser, foundLanguages);
+          hasDatabricksMetadata |= extractTopLevelMetadata(jParser, genericLanguages, databricksLanguages);
+          hasReadTopLevelMetadata = true;
+        } else if (JsonToken.FIELD_NAME.equals(jsonToken) && DATABRICKS_CELL_METADATA_KEY.equals(jParser.currentName()) && isCellMetadataField(jParser)) {
+          hasDatabricksMetadata = true;
+        }
+        // Cell metadata settles the dialect, but later notebook metadata can still override the language.
+        if (hasReadTopLevelMetadata && hasDatabricksMetadata) {
           break;
         }
       }
     }
 
-    // Return an accepted language if found, otherwise the first language found (for rejection), or empty
-    return foundLanguages.stream()
+    // Databricks' namespaced metadata describes the notebook's actual default language and is authoritative
+    // when present. Generic Jupyter metadata remains the fallback for notebooks without that vendor field.
+    Optional<String> language = databricksLanguages.stream()
+      .filter(candidate -> !candidate.isBlank())
+      .findFirst()
+      .or(() -> selectGenericLanguage(genericLanguages));
+    NotebookDialect dialect = hasDatabricksMetadata ? NotebookDialect.DATABRICKS : NotebookDialect.IPYTHON;
+    return new NotebookMetadata(language, dialect);
+  }
+
+  private static Optional<String> selectGenericLanguage(List<String> languages) {
+    // Prefer an accepted language if found; retain an unsupported language so callers can reject the notebook.
+    return languages.stream()
       .filter(ACCEPTED_LANGUAGE::contains)
       .findFirst()
-      .or(() -> foundLanguages.stream().findFirst());
+      .or(() -> languages.stream().findFirst());
+  }
+
+  private static boolean isCellMetadataField(JsonParser parser) {
+    var metadataContext = parser.getParsingContext();
+    var cellContext = metadataContext.getParent();
+    if (cellContext == null || !cellContext.inObject() || !"metadata".equals(cellContext.getCurrentName())) {
+      return false;
+    }
+    var cellsContext = cellContext.getParent();
+    if (cellsContext == null || !cellsContext.inArray()) {
+      return false;
+    }
+    var notebookContext = cellsContext.getParent();
+    return notebookContext != null && notebookContext.inObject() && "cells".equals(notebookContext.getCurrentName())
+      && notebookContext.getParent() != null && notebookContext.getParent().inRoot();
   }
 
   /**
    * Extracts language values from the top-level metadata object.
-   * Looks for kernelspec.language and language_info.name.
+   * Looks for kernelspec.language, language_info.name, and the Databricks vendor language.
    */
-  private static void extractLanguagesFromMetadata(JsonParser jParser, List<String> foundLanguages) throws IOException {
+  private static boolean extractTopLevelMetadata(JsonParser jParser, List<String> genericLanguages, List<String> databricksLanguages) throws IOException {
+    boolean hasDatabricksMetadata = false;
     while (jParser.nextToken() != JsonToken.END_OBJECT) {
       if (JsonToken.FIELD_NAME.equals(jParser.currentToken())) {
         String fieldName = jParser.currentName();
-        if ("kernelspec".equals(fieldName)) {
-          jParser.nextToken();
-          extractFieldFromObject(jParser, "language", foundLanguages);
-        } else if ("language_info".equals(fieldName)) {
-          jParser.nextToken();
-          extractFieldFromObject(jParser, "name", foundLanguages);
-        } else {
-          jParser.nextToken();
-          skipNestedObjects(jParser);
+        jParser.nextToken();
+        switch (fieldName) {
+          case "kernelspec":
+            extractFieldFromObject(jParser, "language", genericLanguages);
+            break;
+          case "language_info":
+            extractFieldFromObject(jParser, "name", genericLanguages);
+            break;
+          case DATABRICKS_NOTEBOOK_METADATA_KEY:
+            hasDatabricksMetadata = true;
+            extractFieldFromObject(jParser, "language", databricksLanguages);
+            break;
+          default:
+            skipNestedObjects(jParser);
+            break;
         }
       }
     }
+    return hasDatabricksMetadata;
   }
 
   /**
@@ -139,28 +191,35 @@ public class IpynbNotebookParser {
   }
 
   public GeneratedIPythonFile parseNotebook() throws IOException {
+    return parseNotebook(parseMetadata().dialect());
+  }
+
+  private GeneratedIPythonFile parseNotebook(NotebookDialect dialect) throws IOException {
     String content = inputFile.wrappedFile().contents();
     boolean isCompressed = content.lines().count() <= 1;
     JsonFactory factory = new JsonFactory();
+    List<OpaqueCellRange> opaqueCellRanges = new ArrayList<>();
     try (JsonParser jParser = factory.createParser(content)) {
-      return parseCells(jParser, isCompressed).map(notebookData -> {
+      return parseCells(jParser, isCompressed, dialect, opaqueCellRanges).map(notebookData -> {
         // Account for EOF token
         JsonLocation location = jParser.currentTokenLocation();
         notebookData.addDefaultLocation(lastPythonLine, location.getLineNr(), location.getColumnNr());
-        return new GeneratedIPythonFile(inputFile.wrappedFile(), notebookData.getAggregatedSource().toString(), notebookData.getLocationMap());
-      }).orElse(new GeneratedIPythonFile(inputFile.wrappedFile(), "", new LinkedHashMap<>()));
+        return new GeneratedIPythonFile(inputFile.wrappedFile(), notebookData.getAggregatedSource().toString(), notebookData.getLocationMap(), dialect,
+          new IPythonParserConfiguration(opaqueCellRanges));
+      }).orElse(new GeneratedIPythonFile(inputFile.wrappedFile(), "", new LinkedHashMap<>(), dialect, IPythonParserConfiguration.empty()));
     }
 
   }
 
-  private Optional<NotebookParsingData> parseCells(JsonParser parser, boolean isCompressed) throws IOException {
+  private Optional<NotebookParsingData> parseCells(JsonParser parser, boolean isCompressed, NotebookDialect dialect, List<OpaqueCellRange> opaqueCellRanges)
+    throws IOException {
     while (!parser.isClosed()) {
       parser.nextToken();
       String fieldName = parser.currentName();
       if ("cells".equals(fieldName)) {
         // consume array start token
         parser.nextToken();
-        Optional<NotebookParsingData> data = parseCellArray(parser, isCompressed);
+        Optional<NotebookParsingData> data = parseCellArray(parser, isCompressed, dialect, opaqueCellRanges);
         parser.close();
         return data;
       }
@@ -168,12 +227,13 @@ public class IpynbNotebookParser {
     return Optional.empty();
   }
 
-  private Optional<NotebookParsingData> parseCellArray(JsonParser jParser, boolean isCompressed) throws IOException {
+  private Optional<NotebookParsingData> parseCellArray(JsonParser jParser, boolean isCompressed, NotebookDialect dialect, List<OpaqueCellRange> opaqueCellRanges)
+    throws IOException {
     List<NotebookParsingData> cellsData = new ArrayList<>();
 
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       if (jParser.currentToken() == JsonToken.START_OBJECT) {
-        processCodeCell(cellsData, jParser, isCompressed);
+        processCodeCell(cellsData, jParser, isCompressed, dialect, opaqueCellRanges);
       }
     }
     Optional<NotebookParsingData> aggregatedNotebookData = cellsData.stream().reduce(NotebookParsingData::combine);
@@ -197,9 +257,11 @@ public class IpynbNotebookParser {
     return false;
   }
 
-  private void processCodeCell(List<NotebookParsingData> accumulator, JsonParser jParser, boolean isCompressed) throws IOException {
+  private void processCodeCell(List<NotebookParsingData> accumulator, JsonParser jParser, boolean isCompressed, NotebookDialect dialect,
+    List<OpaqueCellRange> opaqueCellRanges) throws IOException {
     boolean isCodeCell = false;
     Optional<NotebookParsingData> notebookData = Optional.empty();
+    int cellStartLine = -1;
     while (jParser.nextToken() != JsonToken.END_OBJECT) {
 
       skipNestedObjects(jParser);
@@ -209,30 +271,38 @@ public class IpynbNotebookParser {
       }
 
       if (JsonToken.FIELD_NAME.equals(jParser.currentToken()) && "source".equals(jParser.currentName())) {
-        jParser.nextToken();
-
-        int startLine = 0;
-        if (!accumulator.isEmpty()) {
-          startLine = accumulator.get(accumulator.size() - 1).getAggregatedSourceLine();
-        }
-        switch (jParser.currentToken()) {
-          case START_ARRAY:
-            notebookData = Optional.of(parseSourceArray(startLine, jParser, isCompressed));
-            break;
-          case VALUE_STRING:
-            notebookData = Optional.of(parseSourceMultilineString(startLine, jParser));
-            break;
-          default:
-            throw new IllegalStateException("Unexpected token: " + jParser.currentToken());
-        }
+        var cellSource = parseCellSource(accumulator, jParser, isCompressed);
+        cellStartLine = cellSource.startLine();
+        notebookData = Optional.of(cellSource.data());
       }
     }
 
     if (isCodeCell && notebookData.isPresent()) {
       var data = notebookData.get();
+      String source = data.getAggregatedSource().toString();
+      if (NotebookMagicClassifier.isOpaqueCell(dialect, source)) {
+        opaqueCellRanges.add(new OpaqueCellRange(cellStartLine, data.getAggregatedSourceLine()));
+      }
       lastPythonLine = data.getAggregatedSourceLine();
       accumulator.add(data);
     }
+  }
+
+  private static ParsedCellSource parseCellSource(List<NotebookParsingData> accumulator, JsonParser jParser, boolean isCompressed) throws IOException {
+    jParser.nextToken();
+    int previousSourceEndLine = accumulator.isEmpty() ? 0 : accumulator.get(accumulator.size() - 1).getAggregatedSourceLine();
+    NotebookParsingData data = switch (jParser.currentToken()) {
+      case START_ARRAY -> parseSourceArray(previousSourceEndLine, jParser, isCompressed);
+      case VALUE_STRING -> parseSourceMultilineString(previousSourceEndLine, jParser);
+      default -> throw new IllegalStateException("Unexpected token: " + jParser.currentToken());
+    };
+    return new ParsedCellSource(previousSourceEndLine + 1, data);
+  }
+
+  private record NotebookMetadata(Optional<String> language, NotebookDialect dialect) {
+  }
+
+  private record ParsedCellSource(int startLine, NotebookParsingData data) {
   }
 
   private static NotebookParsingData parseSourceArray(int startLine, JsonParser jParser, boolean isCompressed) throws IOException {

@@ -79,6 +79,7 @@ class IPynbSensorTest {
   private static final String FILE_NO_SONAR_IPYNB = "no_sonar.ipynb";
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/ipynb/").getAbsoluteFile();
+  private final File frontendBaseDir = new File("../python-frontend/src/test/resources/org/sonar/plugins/python/").getAbsoluteFile();
 
   private SensorContextTester context;
 
@@ -149,18 +150,26 @@ class IPynbSensorTest {
   }
 
   private PythonInputFile inputFile(String name) {
-    PythonInputFile inputFile = createInputFile(name);
+    return inputFile(new File(baseDir, name));
+  }
+
+  private PythonInputFile inputFile(File sourceFile) {
+    PythonInputFile inputFile = createInputFile(sourceFile);
     context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 
   private PythonInputFile createInputFile(String name) {
-    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", name)
-      .setModuleBaseDir(baseDir.toPath())
+    return createInputFile(new File(baseDir, name));
+  }
+
+  private PythonInputFile createInputFile(File sourceFile) {
+    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", sourceFile.getName())
+      .setModuleBaseDir(sourceFile.getParentFile().toPath())
       .setCharset(UTF_8)
       .setType(InputFile.Type.MAIN)
       .setLanguage(IPynb.KEY)
-      .initMetadata(TestUtils.fileContent(new File(baseDir, name), UTF_8))
+      .initMetadata(TestUtils.fileContent(sourceFile, UTF_8))
       .setStatus(InputFile.Status.ADDED)
       .build());
   }
@@ -295,6 +304,32 @@ class IPynbSensorTest {
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+  }
+
+  @Test
+  void test_databricks_magics_and_later_python_cell_end_to_end() {
+    context.settings().setProperty("sonar.internal.analysis.failFast", true);
+    activeRules = new ActiveRulesBuilder().build();
+    inputFile(new File(frontendBaseDir, "notebook_databricks_magics.ipynb"));
+
+    var contextSpy = spy(context);
+    notebookSensor().execute(contextSpy);
+
+    assertThat(context.allAnalysisErrors()).isEmpty();
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.IPYNB_DATABRICKS_FOUND.key(), "1");
+  }
+
+  @Test
+  void test_databricks_source_markers_in_metadata_free_ipynb_telemetry() {
+    activeRules = new ActiveRulesBuilder().build();
+    inputFile(new File(frontendBaseDir, "notebook_databricks_source_markers.ipynb"));
+
+    var contextSpy = spy(context);
+    notebookSensor().execute(contextSpy);
+
+    assertThat(context.allAnalysisErrors()).isEmpty();
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.IPYNB_DATABRICKS_FOUND.key(), "1");
   }
 
   @Test

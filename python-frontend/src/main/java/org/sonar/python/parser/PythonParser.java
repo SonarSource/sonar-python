@@ -41,8 +41,12 @@ public final class PythonParser {
   }
 
   public static PythonParser createIPythonParser() {
+    return createIPythonParser(IPythonParserConfiguration.empty());
+  }
+
+  public static PythonParser createIPythonParser(IPythonParserConfiguration configuration) {
     LexerState lexerState = new LexerState();
-    return new PythonParser(new IPythonGrammarBuilder().create(), lexerState, PythonLexer.ipynbLexer(lexerState));
+    return new PythonParser(new IPythonGrammarBuilder().create(), lexerState, PythonLexer.ipynbLexer(lexerState, configuration));
   }
 
   private PythonParser(Grammar grammar, LexerState lexerState, Lexer lexer) {

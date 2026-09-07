@@ -24,6 +24,7 @@ import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.parser.IPythonParserConfiguration;
 
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.and;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.or;
@@ -56,8 +57,13 @@ public final class PythonLexer {
   }
 
   public static Lexer ipynbLexer(LexerState lexerState) {
+    return ipynbLexer(lexerState, IPythonParserConfiguration.empty());
+  }
+
+  public static Lexer ipynbLexer(LexerState lexerState, IPythonParserConfiguration configuration) {
     Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
     builder.withChannel(new IPynbCellDelimiterChannel(lexerState));
+    builder.withChannel(new IPynbCellMagicChannel(configuration.opaqueCellRanges()));
     addCommonChannels(builder, lexerState);
     return builder.build();
   }

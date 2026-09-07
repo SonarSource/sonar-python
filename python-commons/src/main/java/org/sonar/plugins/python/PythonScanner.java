@@ -194,7 +194,10 @@ public class PythonScanner extends Scanner {
   private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile) throws IOException {
     PythonVisitorContext visitorContext;
     try {
-      AstNode astNode = parserSupplier.get().parse(inputFile.contents());
+      PythonParser parser = inputFile instanceof GeneratedIPythonFile generatedIPythonFile
+        ? PythonParser.createIPythonParser(generatedIPythonFile.parserConfiguration())
+        : parserSupplier.get();
+      AstNode astNode = parser.parse(inputFile.contents());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       boolean likelyTestFile = isLikelyTestFile(inputFile, parse);
@@ -261,8 +264,13 @@ public class PythonScanner extends Scanner {
   }
 
   private void searchForDataBricks(PythonVisitorContext visitorContext) {
-    var hasDatabricks = visitorContext.pythonFile().content().lines().anyMatch(
-      line -> DATABRICKS_MAGIC_COMMAND_PATTERN.matcher(line).matches());
+    boolean hasDatabricks = visitorContext.pythonFile() instanceof SonarQubePythonFile.IpynbFile ipynbFile
+      && ipynbFile.pythonInputFile().dialect() == NotebookDialect.DATABRICKS;
+    if (!hasDatabricks) {
+      // Databricks source-format notebooks and metadata-free ipynb conversions retain their # MAGIC/# COMMAND markers.
+      hasDatabricks = visitorContext.pythonFile().content().lines().anyMatch(
+        line -> DATABRICKS_MAGIC_COMMAND_PATTERN.matcher(line).matches());
+    }
     foundDatabricks.compareAndSet(false, hasDatabricks);
   }
 

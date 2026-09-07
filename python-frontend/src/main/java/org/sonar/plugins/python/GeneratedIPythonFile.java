@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.python.IPythonLocation;
+import org.sonar.python.parser.IPythonParserConfiguration;
 
 
 public class GeneratedIPythonFile implements PythonInputFile {
@@ -30,14 +31,33 @@ public class GeneratedIPythonFile implements PythonInputFile {
 
   private Map<Integer, IPythonLocation> locationMap;
 
+  private final NotebookDialect dialect;
+
+  private final IPythonParserConfiguration parserConfiguration;
+
   public GeneratedIPythonFile(InputFile wrappedFile, String pythonContent, Map<Integer, IPythonLocation> locationMap) {
+    this(wrappedFile, pythonContent, locationMap, NotebookDialect.IPYTHON, IPythonParserConfiguration.empty());
+  }
+
+  public GeneratedIPythonFile(InputFile wrappedFile, String pythonContent, Map<Integer, IPythonLocation> locationMap, NotebookDialect dialect,
+    IPythonParserConfiguration parserConfiguration) {
     this.locationMap = locationMap;
     this.wrappedFile = wrappedFile;
     this.pythonContent = pythonContent;
+    this.dialect = dialect;
+    this.parserConfiguration = parserConfiguration;
   }
 
   public Map<Integer, IPythonLocation> locationMap() {
     return locationMap;
+  }
+
+  public NotebookDialect dialect() {
+    return dialect;
+  }
+
+  public IPythonParserConfiguration parserConfiguration() {
+    return parserConfiguration;
   }
 
   @Override

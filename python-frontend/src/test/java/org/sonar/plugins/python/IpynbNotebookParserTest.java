@@ -23,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,6 +41,30 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.plugins.python.NotebookTestUtils.mapToColumnMappingList;
 
 class IpynbNotebookParserTest {
+
+  private static final String DATABRICKS_AGGREGATED_SOURCE = """
+    shared = 41
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    %sql SELECT count(*)
+    FROM events
+    WHERE active = true
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    %run ../core/utils
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    %run
+    ../core/init
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    %sql
+    SELECT 1
+    FROM values
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    %time shared + 1
+    result = shared + 1
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    answer = shared + 1
+    print answer
+    #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+    """.stripTrailing();
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
@@ -422,6 +447,172 @@ class IpynbNotebookParserTest {
     var result = resultOptional.get();
     assertThat(result.locationMap()).isEmpty();
     assertThat(result.contents()).isEmpty();
+  }
+
+  @Test
+  void shouldConfigureDatabricksCellMagicsWithoutRewritingSource() throws IOException {
+    // The pretty fixture has metadata after "cells"; the compressed one has metadata before it.
+    var pretty = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_magics.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+    var compressed = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_magics_compressed.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+
+    assertThat(pretty.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(compressed.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(pretty.contents()).isEqualTo(DATABRICKS_AGGREGATED_SOURCE);
+    assertThat(compressed.contents()).isEqualTo(DATABRICKS_AGGREGATED_SOURCE);
+    assertThat(pretty.contents()).doesNotContain("%%sql", "%%run");
+    assertThat(compressed.contents()).doesNotContain("%%sql", "%%run");
+    assertThat(pretty.parserConfiguration().cellMagicStartLines()).isEqualTo(Set.of(3, 7, 9, 12));
+    assertThat(compressed.parserConfiguration().cellMagicStartLines()).isEqualTo(Set.of(3, 7, 9, 12));
+
+    assertThat(pretty.locationMap()).hasSize(21);
+    assertThat(compressed.locationMap()).hasSize(21);
+    assertThat(pretty.locationMap().get(19).line()).isGreaterThan(1);
+    assertThat(compressed.locationMap().get(19).line()).isEqualTo(1);
+  }
+
+  @Test
+  void shouldConfigureDatabricksMagicsFromMultilineStringSources() throws IOException {
+    var result = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_string_sources.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+
+    assertThat(result.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(result.contents()).isEqualTo("""
+      %python
+      shared = 41
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      %sql SELECT 1
+      FROM values
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      answer = shared + 1
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""");
+    assertThat(result.parserConfiguration().cellMagicStartLines()).containsExactly(4);
+    assertThat(result.locationMap()).hasSize(8);
+    assertThat(result.locationMap().get(7).line()).isEqualTo(25);
+  }
+
+  @Test
+  void shouldNotPromoteSinglePercentMagicsWithoutAnExactDatabricksCommand() {
+    var jupyterSql = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_jupyter_single_percent_sql.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+    var unknownDatabricksMagic = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_unknown_magic.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+    var sqlalchemy = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_sqlalchemy.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+
+    assertThat(jupyterSql.dialect()).isEqualTo(NotebookDialect.IPYTHON);
+    assertThat(unknownDatabricksMagic.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(sqlalchemy.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(jupyterSql.parserConfiguration().cellMagicStartLines()).isEmpty();
+    assertThat(unknownDatabricksMagic.parserConfiguration().cellMagicStartLines()).isEmpty();
+    assertThat(sqlalchemy.parserConfiguration().cellMagicStartLines()).isEmpty();
+  }
+
+  @Test
+  void shouldDetectDatabricksCellMetadataOnlyAtItsExactStructuralLocation() {
+    var cellMetadata = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_cell_metadata.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+    var lookalikeOutsideMetadata = IpynbNotebookParser.parseNotebook(createInputFile(
+      baseDir, "notebook_databricks_cell_metadata_lookalike.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN)).orElseThrow();
+
+    assertThat(cellMetadata.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(cellMetadata.parserConfiguration().cellMagicStartLines()).containsExactly(1);
+    assertThat(lookalikeOutsideMetadata.dialect()).isEqualTo(NotebookDialect.IPYTHON);
+    assertThat(lookalikeOutsideMetadata.parserConfiguration().cellMagicStartLines()).isEmpty();
+  }
+
+  @Test
+  void shouldTrustDatabricksLanguageWhenGenericMetadataConflicts() {
+    var inputFile = createInputFile(baseDir, "notebook_databricks_scala.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    assertThat(IpynbNotebookParser.parseNotebook(inputFile)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).contains("Skipping notebook 'notebook_databricks_scala.ipynb': unsupported language 'scala'");
+  }
+
+  @Test
+  void shouldIgnoreDatabricksCellMetadataInNestedOutput() {
+    var inputFile = inputFileWithContents("""
+      {
+        "cells": [{
+          "cell_type": "code",
+          "metadata": {},
+          "outputs": [{
+            "output_type": "display_data",
+            "data": {"application/json": {
+              "cells": [{"metadata": {"application/vnd.databricks.v1+cell": {}}}]
+            }}
+          }],
+          "source": ["%sql\\nprint('visible Python')\\n"]
+        }],
+        "metadata": {"kernelspec": {"language": "python"}}
+      }
+      """);
+
+    var result = IpynbNotebookParser.parseNotebook(inputFile).orElseThrow();
+
+    assertThat(result.dialect()).isEqualTo(NotebookDialect.IPYTHON);
+    assertThat(result.parserConfiguration().cellMagicStartLines()).isEmpty();
+  }
+
+  @ParameterizedTest
+  @ValueSource(booleans = {true, false})
+  void shouldReadAuthoritativeLanguageBeforeStoppingAtCellMetadata(boolean metadataBeforeCells) {
+    var inputFile = notebookWithCellMetadata(metadataBeforeCells, """
+      {
+        "kernelspec": {"language": "python"},
+        "application/vnd.databricks.v1+notebook": {"language": "scala"}
+      }
+      """);
+
+    assertThat(IpynbNotebookParser.parseNotebook(inputFile)).isEmpty();
+  }
+
+  @ParameterizedTest
+  @ValueSource(booleans = {true, false})
+  void shouldReadFallbackLanguageAfterDatabricksNotebookMetadata(boolean metadataBeforeCells) {
+    var inputFile = notebookWithCellMetadata(metadataBeforeCells, """
+      {
+        "kernelspec": {"language": "scala"},
+        "application/vnd.databricks.v1+notebook": {"language": " "},
+        "language_info": {"name": "python"}
+      }
+      """);
+
+    var result = IpynbNotebookParser.parseNotebook(inputFile).orElseThrow();
+
+    assertThat(result.dialect()).isEqualTo(NotebookDialect.DATABRICKS);
+    assertThat(result.parserConfiguration().cellMagicStartLines()).containsExactly(1);
+  }
+
+  @ParameterizedTest
+  @ValueSource(booleans = {true, false})
+  void shouldRejectUnsupportedFallbackLanguageWithDatabricksCellMetadata(boolean metadataBeforeCells) {
+    var inputFile = notebookWithCellMetadata(metadataBeforeCells, """
+      {"language_info": {"name": "scala"}}
+      """);
+
+    assertThat(IpynbNotebookParser.parseNotebook(inputFile)).isEmpty();
+  }
+
+  private PythonInputFile notebookWithCellMetadata(boolean metadataBeforeCells, String metadata) {
+    String cells = """
+      "cells": [{
+        "cell_type": "code",
+        "metadata": {"application/vnd.databricks.v1+cell": {}},
+        "source": ["%sql\\nSELECT 1\\n"]
+      }]
+      """;
+    String metadataField = "\"metadata\": " + metadata;
+    return inputFileWithContents("{%s, %s}".formatted(
+      metadataBeforeCells ? metadataField : cells, metadataBeforeCells ? cells : metadataField));
+  }
+
+  private PythonInputFile inputFileWithContents(String contents) {
+    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", "metadata.ipynb")
+      .setModuleBaseDir(baseDir.toPath())
+      .setContents(contents)
+      .build());
   }
 
 }
