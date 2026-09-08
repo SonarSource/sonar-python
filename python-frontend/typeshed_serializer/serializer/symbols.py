@@ -40,6 +40,7 @@ MODULE_IMPLICIT_VARS = DEFAULT_EXPORTED_VARS + ["__spec__"]
 SONAR_CUSTOM_BASE_CLASS = "SonarPythonAnalyzerFakeStub.CustomStubBase"
 SELF_TYPE_ID = 0
 SELF_TYPE_SUFFIX = ".Self"
+ELLIPSIS_TYPE_FQNS = {"builtins.ellipsis", "types.EllipsisType"}
 
 
 class ParamKind(Enum):
@@ -435,8 +436,13 @@ class VarSymbol:
 
     @classmethod
     def from_var(cls, var: mpn.Var, name: str = None):
+        is_ellipsis_placeholder = (
+            var.is_inferred
+            and isinstance(var.type, mpt.Instance)
+            and var.type.type.fullname in ELLIPSIS_TYPE_FQNS
+        )
         return cls(var.name if name is None else name, var.fullname,
-                   type_descriptor=TypeDescriptor(var.type) if var.type else None)
+                   type_descriptor=TypeDescriptor(var.type) if var.type and not is_ellipsis_placeholder else None)
 
     def __eq__(self, other):
         return isinstance(other, VarSymbol) and self.to_proto() == other.to_proto()

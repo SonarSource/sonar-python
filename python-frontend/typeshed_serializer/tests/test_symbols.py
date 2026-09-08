@@ -193,6 +193,20 @@ def test_type_table_deduplicates_unknown_types_without_interning_their_arguments
     assert not pb_module.type_table[0].arg_type_ids
 
 
+def test_ellipsis_placeholder_with_builtins_fqn_has_no_type_descriptor():
+    var = mock.Mock(spec=mpn.Var)
+    var.name = "placeholder"
+    var.fullname = "fakemodule.placeholder"
+    var.is_inferred = True
+    var.type = mock.Mock(spec=symbols.mpt.Instance)
+    var.type.args = []
+    var.type.type.fullname = "builtins.ellipsis"
+
+    var_symbol = symbols.VarSymbol.from_var(var)
+
+    assert var_symbol.type is None
+
+
 def test_overloaded_functions(typeshed_stdlib):
     sys_module_symbol = symbols.ModuleSymbol(typeshed_stdlib.files.get("subprocess"))
     overloaded_functions = sys_module_symbol.overloaded_functions
@@ -274,13 +288,14 @@ def test_type_alias_serialization(fake_module_type_aliases):
     type as the type annotation — not as the target's FQN as the VarSymbol's FQN."""
     module_symbol = symbols.ModuleSymbol(fake_module_type_aliases)
 
-    # Only TypeAlias vars (MyText, MyList) should appear — not the TypeVar _T
-    alias_vars = {v.name: v for v in module_symbol.vars if v.name in {"MyText", "MyList"}}
-    assert set(alias_vars.keys()) == {"MyText", "MyList"}
+    # Only TypeAlias vars (MyText, MyList, EllipsisAlias) should appear — not the TypeVar _T
+    alias_vars = {v.name: v for v in module_symbol.vars if v.name in {"MyText", "MyList", "EllipsisAlias"}}
+    assert set(alias_vars.keys()) == {"MyText", "MyList", "EllipsisAlias"}
 
     # VarSymbol.fullname must be the alias's own FQN, not the target's FQN
     assert alias_vars["MyText"].fullname == "fakemodule_type_aliases.MyText"
     assert alias_vars["MyList"].fullname == "fakemodule_type_aliases.MyList"
+    assert alias_vars["EllipsisAlias"].fullname == "fakemodule_type_aliases.EllipsisAlias"
 
     # type_descriptor must point to the target class
     assert alias_vars["MyText"].type is not None
@@ -292,10 +307,13 @@ def test_type_alias_serialization(fake_module_type_aliases):
     assert alias_vars["MyList"].type.fully_qualified_name == "builtins.list"
     assert len(alias_vars["MyList"].type.args) == 1
 
+    assert alias_vars["EllipsisAlias"].type is not None
+    assert alias_vars["EllipsisAlias"].type.fully_qualified_name == "types.EllipsisType"
+
     # Verify the protobuf output: type_annotation_id must be set (not 0), and
     # fully_qualified_name must not be overridden (it equals container + "." + name)
     pb_module = module_symbol.to_proto()
-    pb_vars = {v.name: v for v in pb_module.vars if v.name in {"MyText", "MyList"}}
+    pb_vars = {v.name: v for v in pb_module.vars if v.name in {"MyText", "MyList", "EllipsisAlias", "explicit_ellipsis"}}
 
     assert pb_vars["MyText"].type_annotation_id > 0
     assert pb_vars["MyText"].fully_qualified_name == ""  # no override needed
@@ -306,6 +324,12 @@ def test_type_alias_serialization(fake_module_type_aliases):
     assert pb_vars["MyList"].fully_qualified_name == ""  # no override needed
     assert pb_vars["MyList"].is_type_alias is True
 
+    assert pb_vars["EllipsisAlias"].type_annotation_id > 0
+    assert pb_vars["EllipsisAlias"].is_type_alias is True
+
+    assert pb_vars["explicit_ellipsis"].type_annotation_id > 0
+    assert pb_vars["explicit_ellipsis"].is_type_alias is False
+
     # Resolve the type annotation from the type table
     type_table = pb_module.type_table
     text_type = type_table[pb_vars["MyText"].type_annotation_id - 1]
@@ -315,6 +339,16 @@ def test_type_alias_serialization(fake_module_type_aliases):
     assert list_type.fully_qualified_name == "builtins.list"
     # arg_type_ids must be non-empty — the TypeVar bound is encoded as a type arg
     assert len(list_type.arg_type_ids) > 0
+
+    ellipsis_alias_type = type_table[pb_vars["EllipsisAlias"].type_annotation_id - 1]
+    assert ellipsis_alias_type.fully_qualified_name == "types.EllipsisType"
+
+    explicit_ellipsis_type = type_table[pb_vars["explicit_ellipsis"].type_annotation_id - 1]
+    assert explicit_ellipsis_type.fully_qualified_name == "types.EllipsisType"
+
+    placeholder = next(var for var in pb_module.vars if var.name == "placeholder")
+    assert not placeholder.HasField("type_annotation")
+    assert placeholder.type_annotation_id == 0
 
 
 def test_module_with_decorators(fake_module_with_decorators):

@@ -1,5 +1,5 @@
 
-pandas.core.computation.expr¸
+pandas.core.computation.expr°
 Term pandas.core.computation.ops.Term"builtins.object*C
 __new__*
 cls*
@@ -57,15 +57,16 @@ local_name*
 
 self(*
 	new_value(0:.setterr
-is_local0r
-env0r
-side0r
-encoding0r
-return_type0¤
+is_local0r
+envr
+sider
+
+encodingr
+return_typeš
 Scope#pandas.core.computation.scope.Scope"builtins.object*q
 __init__*
 
-self(*
+self(*
 level(*
 global_dict (*
 
@@ -74,39 +75,38 @@ local_dict (*
 target (*4
 has_resolvers*
 
-self(0:builtins.property`*2
+self(0:builtins.property`*2
 resolve*
 
-self(*	
+self(*	
 key(*
 is_local(*H
 swapkey*
 
-self(*
+self(*
 old_key(*
 new_key(*
 	new_value (*$
 add_tmp*
 
-self(*
+self(*
 value(*-
 ntemps*
 
-self(0:builtins.property`*-
+self(0:builtins.property`*-
 
 full_scope*
-self0:builtins.property`r	
-level0r	
-scope0r
-
-target0r
-	resolvers0r	
-temps0À
+self0:builtins.property`r
+levelr
+scoper
+targetr
+	resolversr
+temps¤
 
 BaseExprVisitor"ast.NodeVisitor*R
 __init__*
 
-self(	*	
+self(*	
 env(*
 engine(*
 parser(*
@@ -219,30 +219,28 @@ visit_Call*
 self*
 node*
 
-kwargsr
+kwargsr
 
-const_type0r
-	term_type0r
+const_typer
+	term_typer
 
-binary_ops0r
-binary_op_nodes0r
-binary_op_nodes_map0r
-	unary_ops0r
-unary_op_nodes0r
-unary_op_nodes_map0r
-rewrite_map0r
-env0r
+binary_opsr
+binary_op_nodesr
+binary_op_nodes_mapr
+	unary_opsr
+unary_op_nodesr
+unary_op_nodes_mapr
+rewrite_mapr
+envr
+enginer
+parserr
+	preparserr
 
-engine0r
-
-parser0r
-	preparser0r
-assigner0•
+assigner•
 PandasExprVisitor",pandas.core.computation.expr.BaseExprVisitor*R
 __init__*
 
-self(
-*	
+self(	*	
 env(*
 engine(*
 parser(*
@@ -250,41 +248,42 @@ binary_ops0r
 PythonExprVisitor",pandas.core.computation.expr.BaseExprVisitor*R
 __init__*
 
-self(*	
+self(
+*	
 env(*
 engine(*
 parser(*
-	preparser (À
+	preparser (¼
 Expr"builtins.object*`
 __init__*
 
-self(*
+self(*
 
 expr(*
 engine (*
 parser (*
-env (*
+env (*
 level (*+
 assigner*
 self0:builtins.property`*
 __call__*
 self*
-__len__*(*
+__len__*(*
 parse*
 self*(
 names*
 self0:builtins.property`r
-env0r
+env0r
 
 engine0r
 
-parser0r
-expr0r	
-terms0
+parser0r
+exprr
+terms
 disallow*	
 nodes
 add_ops*
 
 op_classes*
-__annotations__0*
-intersection022"" pandas.core.computation.ops.Term22"builtins.str2"builtins.bool2"builtins.int2"types.EllipsisType2%"#pandas.core.computation.scope.Scope2.",pandas.core.computation.expr.BaseExprVisitor20".pandas.core.computation.expr.PandasExprVisitor20".pandas.core.computation.expr.PythonExprVisitor2#"!pandas.core.computation.expr.Expr222"builtins.dict2
+__annotations__0*
+intersection22"" pandas.core.computation.ops.Term22"builtins.str2"builtins.bool2"builtins.int2%"#pandas.core.computation.scope.Scope2.",pandas.core.computation.expr.BaseExprVisitor20".pandas.core.computation.expr.PandasExprVisitor20".pandas.core.computation.expr.PythonExprVisitor2#"!pandas.core.computation.expr.Expr222"builtins.dict2

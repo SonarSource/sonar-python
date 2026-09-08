@@ -25,3 +25,7 @@ MyText: TypeAlias = str
 
 # Parameterized alias: MyList = list[_T] — target is an Instance with args
 MyList: TypeAlias = list[_T]
+
+placeholder = ...
+EllipsisAlias = ellipsis
+explicit_ellipsis: EllipsisAlias = ...

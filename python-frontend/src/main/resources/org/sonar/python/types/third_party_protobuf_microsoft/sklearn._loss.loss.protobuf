@@ -139,7 +139,7 @@
 self(*
 y_true(*
 raw_prediction(r
-quantile0»
+quantile0∆
 	LogitLinksklearn._loss.link.LogitLink"sklearn._loss.link.BaseLink*/
 link*
 
@@ -150,96 +150,96 @@
 
 self(*
 raw_prediction('*
-out ()r
-interval_y_pred0*ƒ
+out ()r
+interval_y_pred¬
 LogLinksklearn._loss.link.LogLink"sklearn._loss.link.BaseLink*/
 link*
 
-self(+*
+self(**
 y_pred((*
 out ()*:
 inverse*
 
-self(+*
+self(**
 raw_prediction('*
-out ()r
-interval_y_pred0*§
+out ()r
+interval_y_pred¢
 MultinomialLogit#sklearn._loss.link.MultinomialLogit"sklearn._loss.link.BaseLink*9
 symmetrize_raw_prediction*
 self*
 raw_prediction*/
 link*
 
-self(,*
+self(+*
 y_pred('*
 out ()*:
 inverse*
 
-self(,*
+self(+*
 raw_prediction('*
 out ()r
-is_multiclass0-r
-interval_y_pred0*‹	
+is_multiclass0,r
+interval_y_pred‹	
 BaseLoss"builtins.object*D
 __init__*
 
-self(.*
+self(-*
 closs(*
 
 link(*
-	n_classes (0*(
-in_y_true_range-*
+	n_classes (/*(
+in_y_true_range,*
 
-self(.*
+self(-*
 y('*(
 in_y_pred_range*
 
-self(.*
+self(-*
 y('*t
 loss*
 
-self(.*
+self(-*
 y_true('*
-raw_prediction(4*
+raw_prediction(3*
 sample_weight ()*
 loss_out ()*
-	n_threads (@*ì
-loss_gradientA*
+	n_threads (?*ì
+loss_gradient@*
 
-self(.*
+self(-*
 y_true('*
-raw_prediction(4*
+raw_prediction(3*
 sample_weight ()*
 loss_out ()*
-gradient_out (B*
-	n_threads (@*|
+gradient_out (A*
+	n_threads (?*|
 gradient*
 
-self(.*
+self(-*
 y_true('*
-raw_prediction(4*
+raw_prediction(3*
 sample_weight ()*
-gradient_out (B*
-	n_threads (@*ô
-gradient_hessianA*
+gradient_out (A*
+	n_threads (?*ô
+gradient_hessian@*
 
-self(.*
+self(-*
 y_true('*
-raw_prediction(4*
+raw_prediction(3*
 sample_weight ()*
-gradient_out (B*
-hessian_out (B*
-	n_threads (@*f
+gradient_out (A*
+hessian_out (A*
+	n_threads (?*f
 __call__*
 
-self(.*
+self(-*
 y_true('*
-raw_prediction(4*
+raw_prediction(3*
 sample_weight ()*
-	n_threads (@*G
-fit_intercept_onlyN*
+	n_threads (?*G
+fit_intercept_onlyM*
 
-self(.*
+self(-*
 y_true('*
 sample_weight ()*E
 constant_to_optimal_zero*
@@ -247,92 +247,92 @@
 
 y_true*
 sample_weight *X
-init_gradient_and_hessianA*
+init_gradient_and_hessian@*
 
-self(.*
-	n_samples(@*
-dtype (S*
-order (Ur
-constant_hessian0-r
-approx_hessian0-r
-interval_y_pred0Vr
-interval_y_true0Vr
-link0Wr	
-closs0Xr
-need_update_leaves_values0-r
-differentiable0-r
-is_multiclass0-`
+self(-*
+	n_samples(?*
+dtype (R*
+order (Tr
+constant_hessian0,r
+approx_hessian0,r
+interval_y_pred0Ur
+interval_y_true0Ur
+link0Vr	
+closs0Wr
+need_update_leaves_values0,r
+differentiable0,r
+is_multiclass0,`
 HalfSquaredError"sklearn._loss.loss.BaseLoss*/
 __init__*
 
-self(Y*
+self(X*
 sample_weight (—
 AbsoluteError"sklearn._loss.loss.BaseLoss*/
 __init__*
 
-self(Z*
+self(Y*
 sample_weight (*?
 fit_intercept_only*
 self*
 
 y_true*
 sample_weight r
-differentiable0-r
-need_update_leaves_values0-È
+differentiable0,r
+need_update_leaves_values0,È
 PinballLoss"sklearn._loss.loss.BaseLoss*A
 __init__*
 
-self([*
+self(Z*
 sample_weight (*
 quantile (*G
 fit_intercept_only*
 
-self([*
+self(Z*
 y_true(*
 sample_weight (r
-differentiable0-r
-need_update_leaves_values0-Æ
+differentiable0,r
+need_update_leaves_values0,Æ
 HalfPoissonLoss"sklearn._loss.loss.BaseLoss*/
 __init__*
 
-self(\*
-sample_weight (]*M
+self([*
+sample_weight (\*M
 constant_to_optimal_zero*
 
-self(\*
+self([*
 y_true(*
 sample_weight (¨
 HalfGammaLoss"sklearn._loss.loss.BaseLoss*/
 __init__*
 
-self(^*
+self(]*
 sample_weight (*M
 constant_to_optimal_zero*
 
-self(^*
+self(]*
 y_true(*
 sample_weight (Ω
 HalfTweedieLoss"sklearn._loss.loss.BaseLoss*>
 __init__*
 
-self(_*
+self(^*
 sample_weight (*
 power (*M
 constant_to_optimal_zero*
 
-self(_*
+self(^*
 y_true(*
 sample_weight (v
 HalfTweedieLossIdentity"sklearn._loss.loss.BaseLoss*>
 __init__*
 
-self(`*
+self(_*
 sample_weight (*
 power (‹
 HalfBinomialLoss"sklearn._loss.loss.BaseLoss*/
 __init__*
 
-self(a*
+self(`*
 sample_weight (*E
 constant_to_optimal_zero*
 self*
@@ -341,17 +341,17 @@
 sample_weight *3
 predict_proba*
 
-self(a*
-raw_prediction(4¡
+self(`*
+raw_prediction(3¡
 HalfMultinomialLoss"sklearn._loss.loss.BaseLoss*B
 __init__*
 
-self(b*
+self(a*
 sample_weight (*
-	n_classes (/*(
+	n_classes (.*(
 in_y_true_range*
 
-self(b*
+self(a*
 y('*?
 fit_intercept_only*
 self*
@@ -360,28 +360,28 @@
 sample_weight *3
 predict_proba*
 
-self(b*
-raw_prediction(3*ï
-gradient_probaA*
+self(a*
+raw_prediction(2*ï
+gradient_proba@*
 
-self(b*
+self(a*
 y_true('*
-raw_prediction(3*
+raw_prediction(2*
 sample_weight ()*
-gradient_out (c*
-	proba_out (c*
-	n_threads (@r
-is_multiclass0-ù
-check_scalar%sklearn.utils.validation.check_scalare*
+gradient_out (b*
+	proba_out (b*
+	n_threads (?r
+is_multiclass0,ù
+check_scalar%sklearn.utils.validation.check_scalard*
 x(*
 
-name(C*
-target_type(k*
-min_val (l*
-max_val (l*
-include_boundaries (m*
-__annotations__0n*
+name(B*
+target_type(j*
+min_val (k*
+max_val (k*
+include_boundaries (l*
+__annotations__0m*
 npnumpy *	
 xlogy0*
-_LOSSES0o22<":sklearn.utils._readonly_array_wrapper.ReadonlyArrayWrapper2"builtins.object2"builtins.float2%"#sklearn._loss._loss.CyAbsoluteError222("&sklearn._loss._loss.CyHalfBinomialLoss2%"#sklearn._loss._loss.CyHalfGammaLoss2+")sklearn._loss._loss.CyHalfMultinomialLoss2'"%sklearn._loss._loss.CyHalfPoissonLoss2'"%sklearn._loss._loss.CyHalfTweedieLoss2/"-sklearn._loss._loss.CyHalfTweedieLossIdentity2#"!sklearn._loss._loss.CyPinballLoss22"builtins.tuple22"numpy.dtype22"numpy.ndarray22!"numpy._typing._nbit_base._16Bit2"numpy.floating22"numpy.float1622!"numpy._typing._nbit_base._32Bit2"numpy.floating22"numpy.float3222"numpy.float64222"sklearn._typing.Float2222"sklearn._loss.link.LogitLink2#"!numpy._typing._array_like._Buffer2"numpy.dtype22-"(numpy._typing._array_like._SupportsArray223".numpy._typing._nested_sequence._NestedSequence22"builtins.object223".numpy._typing._nested_sequence._NestedSequence2!22 !"2/"(numpy._typing._array_like._DualArrayLike2#22$2*"#numpy._typing._array_like.ArrayLike2%2 "sklearn._typing.ArrayLike2&22'22'2"types.EllipsisType2"sklearn._loss.link.LogLink2%"#sklearn._loss.link.MultinomialLogit2"builtins.bool2"sklearn._loss.loss.BaseLoss2"builtins.int22/2"pandas.core.frame.DataFrame2212!"sklearn._typing.MatrixLike22223'2 "numpy._typing._nbit_base._8Bit2"numpy.signedinteger252"
-numpy.int8262"numpy.signedinteger22"numpy.int16282"numpy.signedinteger22"numpy.int322:2!"numpy._typing._nbit_base._64Bit2"numpy.signedinteger2<2"numpy.int642=2	2/79;>2"sklearn._typing.Int2?22223'2"builtins.str22C/-2#"sklearn._typing.PythonScalar2D2#"!pandas._libs.tslibs.period.Period2*"(pandas._libs.tslibs.timestamps.Timestamp2*"(pandas._libs.tslibs.timedeltas.Timedelta2#"pandas._libs.interval.Interval222FGHI2#"sklearn._typing.PandasScalar2J22EK2"sklearn._typing.Scalar2L22M2"type22"type22"type22"type22	2OPQR2	2C22TTT2"sklearn._loss.link.Interval2"sklearn._loss.link.BaseLink2$""sklearn._loss._loss.CyLossFunction2%"#sklearn._loss.loss.HalfSquaredError2"" sklearn._loss.loss.AbsoluteError2 "sklearn._loss.loss.PinballLoss2$""sklearn._loss.loss.HalfPoissonLoss222"" sklearn._loss.loss.HalfGammaLoss2$""sklearn._loss.loss.HalfTweedieLoss2,"*sklearn._loss.loss.HalfTweedieLossIdentity2%"#sklearn._loss.loss.HalfBinomialLoss2("&sklearn._loss.loss.HalfMultinomialLoss2232"numbers.Number22d2"numbers.Integral2"type2f2"numbers.Real2"type2h2"builtins.type22gij222	2TTTTT2"builtins.dict2C2"builtins.dict2
+_LOSSES0n22<":sklearn.utils._readonly_array_wrapper.ReadonlyArrayWrapper2"builtins.object2"builtins.float2%"#sklearn._loss._loss.CyAbsoluteError222("&sklearn._loss._loss.CyHalfBinomialLoss2%"#sklearn._loss._loss.CyHalfGammaLoss2+")sklearn._loss._loss.CyHalfMultinomialLoss2'"%sklearn._loss._loss.CyHalfPoissonLoss2'"%sklearn._loss._loss.CyHalfTweedieLoss2/"-sklearn._loss._loss.CyHalfTweedieLossIdentity2#"!sklearn._loss._loss.CyPinballLoss22"builtins.tuple22"numpy.dtype22"numpy.ndarray22!"numpy._typing._nbit_base._16Bit2"numpy.floating22"numpy.float1622!"numpy._typing._nbit_base._32Bit2"numpy.floating22"numpy.float3222"numpy.float64222"sklearn._typing.Float2222"sklearn._loss.link.LogitLink2#"!numpy._typing._array_like._Buffer2"numpy.dtype22-"(numpy._typing._array_like._SupportsArray223".numpy._typing._nested_sequence._NestedSequence22"builtins.object223".numpy._typing._nested_sequence._NestedSequence2!22 !"2/"(numpy._typing._array_like._DualArrayLike2#22$2*"#numpy._typing._array_like.ArrayLike2%2 "sklearn._typing.ArrayLike2&22'22'2"sklearn._loss.link.LogLink2%"#sklearn._loss.link.MultinomialLogit2"builtins.bool2"sklearn._loss.loss.BaseLoss2"builtins.int22.2"pandas.core.frame.DataFrame2202!"sklearn._typing.MatrixLike21222'2 "numpy._typing._nbit_base._8Bit2"numpy.signedinteger242"
+numpy.int8252"numpy.signedinteger22"numpy.int16272"numpy.signedinteger22"numpy.int32292!"numpy._typing._nbit_base._64Bit2"numpy.signedinteger2;2"numpy.int642<2	2.68:=2"sklearn._typing.Int2>22222'2"builtins.str22B.,2#"sklearn._typing.PythonScalar2C2#"!pandas._libs.tslibs.period.Period2*"(pandas._libs.tslibs.timestamps.Timestamp2*"(pandas._libs.tslibs.timedeltas.Timedelta2#"pandas._libs.interval.Interval222EFGH2#"sklearn._typing.PandasScalar2I22DJ2"sklearn._typing.Scalar2K22L2"type22"type22"type22"type22	2NOPQ2	2B22SSS2"sklearn._loss.link.Interval2"sklearn._loss.link.BaseLink2$""sklearn._loss._loss.CyLossFunction2%"#sklearn._loss.loss.HalfSquaredError2"" sklearn._loss.loss.AbsoluteError2 "sklearn._loss.loss.PinballLoss2$""sklearn._loss.loss.HalfPoissonLoss222"" sklearn._loss.loss.HalfGammaLoss2$""sklearn._loss.loss.HalfTweedieLoss2,"*sklearn._loss.loss.HalfTweedieLossIdentity2%"#sklearn._loss.loss.HalfBinomialLoss2("&sklearn._loss.loss.HalfMultinomialLoss2222"numbers.Number22c2"numbers.Integral2"type2e2"numbers.Real2"type2g2"builtins.type22fhi222	2SSSSS2"builtins.dict2B2"builtins.dict2
