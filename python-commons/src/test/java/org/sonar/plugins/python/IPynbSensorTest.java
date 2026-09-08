@@ -159,10 +159,6 @@ class IPynbSensorTest {
     return inputFile;
   }
 
-  private PythonInputFile createInputFile(String name) {
-    return createInputFile(new File(baseDir, name));
-  }
-
   private PythonInputFile createInputFile(File sourceFile) {
     return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", sourceFile.getName())
       .setModuleBaseDir(sourceFile.getParentFile().toPath())
