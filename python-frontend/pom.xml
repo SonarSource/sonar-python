@@ -182,8 +182,10 @@
                 <id>serializer-runner</id>
                 <phase>generate-resources</phase>
                 <configuration>
-                  <executable>python</executable>
+                  <executable>uv</executable>
                   <arguments>
+                      <argument>run</argument>
+                      <argument>python</argument>
                       <argument>runners/serializer_runner.py</argument>
                       <argument>--skip_tests</argument>
                       <argument>${skipTests}</argument>
