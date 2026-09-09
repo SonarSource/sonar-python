@@ -253,15 +253,15 @@ def get_serialize_command_to_run(previous_source_checksum: Optional[str], curren
         # Serializer code has changed - run full serialization
         logger.info('SERIALIZER CODE HAS CHANGED - STARTING FULL TYPESHED SERIALIZATION')
         return [
-            ['uv', 'run', 'python', '-m', 'utils.folder_manager'],
-            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer'],
+            ['uv', 'run', '--frozen', 'python', '-m', 'utils.folder_manager'],
+            ['uv', 'run', '--frozen', 'python', '-m', 'serializer.typeshed_serializer'],
         ]
     elif changed_serializers:
         logger.info(f"STARTING SELECTIVE TYPESHED SERIALIZATION FOR: {','.join(changed_serializers)}")
         serializers_arg = ','.join(changed_serializers)
         return [
-            ['uv', 'run', 'python', '-m', 'utils.folder_manager', serializers_arg],
-            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer', serializers_arg],
+            ['uv', 'run', '--frozen', 'python', '-m', 'utils.folder_manager', serializers_arg],
+            ['uv', 'run', '--frozen', 'python', '-m', 'serializer.typeshed_serializer', serializers_arg],
         ]
     else:
         logger.info('SKIPPING TYPESHED SERIALIZATION')
@@ -295,7 +295,7 @@ def _run_serialize(commands: List[List[str]], full_serialization: bool, changed_
 
 
 def _run_tests(dry_run: bool) -> None:
-    test_cmd = ['uv', 'run', 'python', '-m', 'pytest', 'tests/']
+    test_cmd = ['uv', 'run', '--frozen', 'python', '-m', 'pytest', 'tests/']
     if dry_run:
         logger.info(f'DRY RUN: Would run: {" ".join(test_cmd)}')
     else:
