@@ -173,6 +173,22 @@ def compliant_empty_path():
 def compliant_path_is_not_a_string():
     pass
 
+# --- f-strings ---
+
+piece = "item_id"
+@app.get(f"/items/{piece}/details")
+def compliant_fstring_path():
+    pass
+
+@app.get("/items/" f"{piece}" "/details")
+def compliant_combined_fstring_path():
+    pass
+
+@app.get(f"/items/{{item_id}}/details")
+def known_fn_escaped_fstring_path():
+    # Known FN: the rule skips all f-strings, even if they are escaped and thus aren't actual FPs.
+    pass
+
 # --- starlette route syntax ---
 # FastAPI builts upon starlette.
 # It documents support for "path convert" 

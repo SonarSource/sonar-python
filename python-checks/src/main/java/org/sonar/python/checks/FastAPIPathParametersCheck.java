@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -537,6 +538,7 @@ public class FastAPIPathParametersCheck extends PythonSubscriptionCheck {
 
   private static Optional<String> extractStringValue(Expression expression) {
     return Optional.ofNullable(Expressions.extractStringLiteral(expression))
+      .filter(literal -> literal.stringElements().stream().noneMatch(StringElement::isInterpolated))
       .map(Expressions::unescape);
   }
 
