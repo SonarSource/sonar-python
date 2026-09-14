@@ -71,3 +71,8 @@ class Redefined:
     def m(self): pass
     def M(self): pass
 Redefined = 42
+
+class SameLineFields:
+    def __init__(self):
+        self.f1, self.F1 = 1, 2   # Noncompliant {{Rename field "F1" to prevent any misunderstanding/clash with field "f1" defined on line 77}}
+#                     ^^

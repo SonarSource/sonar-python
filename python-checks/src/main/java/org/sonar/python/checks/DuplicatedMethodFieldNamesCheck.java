@@ -71,11 +71,11 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static class TokenWithTypeInfo {
+  private static class TreeWithTypeInfo {
     private final Tree tree;
     private final String type;
 
-    TokenWithTypeInfo(Tree tree, String type) {
+    TreeWithTypeInfo(Tree tree, String type) {
       this.tree = tree;
       this.type = type;
     }
@@ -88,18 +88,24 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
       return tree.firstToken().line();
     }
 
+    int getColumn() {
+      return tree.firstToken().column();
+    }
+
     String getType() {
       return type;
     }
   }
 
   private static void lookForDuplications(SubscriptionContext ctx, List<Tree> fieldNames, List<Tree> methodNames) {
-    List<TokenWithTypeInfo> allTokensWithInfo = mergeLists(fieldNames, methodNames);
-    allTokensWithInfo.sort(Comparator.comparingInt(TokenWithTypeInfo::getLine));
+    List<TreeWithTypeInfo> allTokensWithInfo = mergeLists(fieldNames, methodNames);
+    allTokensWithInfo.sort(Comparator.comparingInt(TreeWithTypeInfo::getLine)
+      .thenComparingInt(TreeWithTypeInfo::getColumn)
+      .thenComparing(TreeWithTypeInfo::getValue));
     for (int i = 1; i < allTokensWithInfo.size(); i++) {
       for (int j = i - 1; j >= 0; j--) {
-        TokenWithTypeInfo token1 = allTokensWithInfo.get(j);
-        TokenWithTypeInfo token2 = allTokensWithInfo.get(i);
+        TreeWithTypeInfo token1 = allTokensWithInfo.get(j);
+        TreeWithTypeInfo token2 = allTokensWithInfo.get(i);
         if (differOnlyByCapitalization(token1.getValue(), token2.getValue())) {
           ctx.addIssue(token2.tree, getMessage(token1, token2))
             .secondary(token1.tree, "Original");
@@ -113,18 +119,18 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
     return name1.equalsIgnoreCase(name2) && !name1.equals(name2);
   }
 
-  private static List<TokenWithTypeInfo> mergeLists(List<Tree> fieldNames, List<Tree> methodNames) {
-    List<TokenWithTypeInfo> allTokensWithInfo = new LinkedList<>();
+  private static List<TreeWithTypeInfo> mergeLists(List<Tree> fieldNames, List<Tree> methodNames) {
+    List<TreeWithTypeInfo> allTokensWithInfo = new LinkedList<>();
     for (Tree tree : fieldNames) {
-      allTokensWithInfo.add(new TokenWithTypeInfo(tree, "field"));
+      allTokensWithInfo.add(new TreeWithTypeInfo(tree, "field"));
     }
     for (Tree tree : methodNames) {
-      allTokensWithInfo.add(new TokenWithTypeInfo(tree, "method"));
+      allTokensWithInfo.add(new TreeWithTypeInfo(tree, "method"));
     }
     return allTokensWithInfo;
   }
 
-  private static String getMessage(TokenWithTypeInfo token1, TokenWithTypeInfo token2) {
+  private static String getMessage(TreeWithTypeInfo token1, TreeWithTypeInfo token2) {
     return String.format(MESSAGE, token2.getType(), token2.getValue(), token1.getType(), token1.getValue(), token1.getLine());
   }
 
