@@ -1,0 +1,54 @@
+<p>This rule raises an issue when a <code>with</code> statement is nested inside another <code>with</code> and both can be written as a single
+<code>with</code> with multiple context managers.</p>
+<h2>Why is this an issue?</h2>
+<p>A single <code>with</code> statement can open several context managers at once:</p>
+<pre>
+with A() as a, B() as b:
+    use(a, b)
+</pre>
+<p>Nesting a second <code>with</code> only to acquire another context manager adds an indentation level without changing semantics. The combined form
+is the idiomatic style: it keeps related resource setup on one line and makes the shared body easier to read.</p>
+<h3>What is the potential impact?</h3>
+<ul>
+  <li><strong>Extra nesting</strong>: deeper indentation makes control flow harder to scan.</li>
+  <li><strong>Inconsistent style</strong>: mixed nested and multi-context <code>with</code> statements obscure the intended resource lifetime.</li>
+</ul>
+<h3>Exceptions</h3>
+<p>Nested <code>with</code> statements are acceptable when the inner <code>with</code> is not the only statement in the outer body.</p>
+<p>They are also acceptable when a comment between the nested <code>with</code> statements explains why they were not combined, for example because
+Python 3.0 has no multi-item <code>with</code>.</p>
+<h2>How to fix it</h2>
+<p>Rewrite the nested <code>with</code> statements as one <code>with</code> that lists every context manager, separated by commas.</p>
+<p>On Python 3.0, multi-item <code>with</code> is not available. Leave the statements nested and add a comment between them explaining why they were
+not merged.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+with open("a.txt") as a:
+    with open("b.txt") as b:  # Noncompliant
+        process(a, b)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+with open("a.txt") as a, open("b.txt") as b:
+    process(a, b)
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+with open("a.txt") as a:
+    # Add a comment explaining why these with statements are not merged. For example:
+    # These contexts can't be merged as Python 3.0 has no multi-item with
+    with open("b.txt") as b:
+        process(a, b)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-with-statement">The <code>with</code>
+  statement</a></li>
+</ul>
+<h3>External coding guidelines</h3>
+<ul>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/multiple-with-statements/">SIM117 - multiple-with-statements</a></li>
+</ul>
+
