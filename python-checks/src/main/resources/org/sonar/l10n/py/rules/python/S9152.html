@@ -1,0 +1,89 @@
+<p>This rule raises an issue when a <code>@contextmanager</code> generator performs cleanup after <code>yield</code> without guaranteeing that cleanup
+still runs if the generator exits early.</p>
+<h2>Why is this an issue?</h2>
+<p><a href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>@contextmanager</code></a> turns a generator into a
+context manager. The code before <code>yield</code> runs on enter, the <code>with</code> body runs at the <code>yield</code>, and the code after
+<code>yield</code> is meant to clean up on exit.</p>
+<p>If cleanup sits after <code>yield</code> without a <code>try</code>/<code>finally</code> (or a nested <code>with</code>), it does not run when:</p>
+<ul>
+  <li>the <code>with</code> body raises an exception</li>
+  <li>the generator is closed early, for example when a consumer stops iterating before the generator is exhausted</li>
+</ul>
+<p>In those cases, resources such as files, locks, or connections can stay open.</p>
+<pre>
+from contextlib import contextmanager
+
+@contextmanager
+def temporary_file(path):
+    handle = open(path, "w")
+    yield handle
+    handle.close()  # Noncompliant: skipped if the with-block raises
+</pre>
+<p>If statements after <code>yield</code> are not cleanup (for example optional logging that is safe to skip), or cleanup is already guaranteed by a
+nested <code>with</code> or an enclosing <code>try</code>/<code>finally</code> the analyzer failed to see, treat that as a false positive. Marking a
+real resource release as won’t-fix is wrong: exceptions and early generator close can still skip those statements and leak the resource.</p>
+<h3>What is the potential impact?</h3>
+<p>Missed cleanup can leak resources, leave locks held, or leave shared state inconsistent. These failures often show up only under exceptions or
+early generator shutdown, which makes them harder to reproduce.</p>
+<h2>How to fix it</h2>
+<p>Wrap the <code>yield</code> in <code>try</code>/<code>finally</code> so cleanup always runs, or nest resource acquisition in a <code>with</code>
+statement so the inner context manager owns the cleanup.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from contextlib import contextmanager
+
+@contextmanager
+def temporary_file(path):
+    handle = open(path, "w")
+    yield handle
+    handle.close()  # Noncompliant: cleanup after "yield" may be skipped
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from contextlib import contextmanager
+
+@contextmanager
+def temporary_file(path):
+    handle = open(path, "w")
+    try:
+        yield handle
+    finally:
+        handle.close()
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from contextlib import contextmanager
+
+@contextmanager
+def locked_section(lock):
+    lock.acquire()
+    yield
+    lock.release()  # Noncompliant: "release" is skipped on exception
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from contextlib import contextmanager
+
+@contextmanager
+def locked_section(lock):
+    with lock:
+        yield
+</pre>
+<h3>How does this work?</h3>
+<p>When an exception escapes the <code>with</code> body, Python resumes the generator at <code>yield</code> and re-raises there. A
+<code>finally</code> block still runs in that situation, and so does <code>__exit__</code> for a nested <code>with</code>. Plain statements after
+<code>yield</code> do not.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>contextlib.contextmanager</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#context-managers">Context managers</a></li>
+</ul>
+<h3>External coding guidelines</h3>
+<ul>
+  <li>Pylint - <a
+  href="https://pylint.readthedocs.io/en/stable/user_guide/messages/warning/contextmanager-generator-missing-cleanup.html">contextmanager-generator-missing-cleanup / W0135</a></li>
+</ul>
+

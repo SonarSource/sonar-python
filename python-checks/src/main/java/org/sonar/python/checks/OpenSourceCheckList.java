@@ -210,6 +210,7 @@ public class OpenSourceCheckList {
       ConsistentReturnCheck.class,
       ConstantConditionCheck.class,
       ConstantValueDictComprehensionCheck.class,
+      ContextManagerGeneratorCleanupCheck.class,
       ControlFlowInTaskGroupCheck.class,
       CorsCheck.class,
       CorsMiddlewareOrderingCheck.class,

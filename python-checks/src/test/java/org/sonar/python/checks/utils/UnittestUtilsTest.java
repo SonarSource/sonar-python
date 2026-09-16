@@ -361,6 +361,24 @@ class UnittestUtilsTest {
     assertThat(exceptionArguments).containsExactly("Exception", "Exception");
   }
 
+  @Test
+  void test_is_unittest_assertion() {
+    List<Boolean> isAssertion = new ArrayList<>();
+
+    analyzeCallExpressions("""
+      import unittest
+
+      class MyTest(unittest.TestCase):
+        def test_ok(self):
+          self.assertEqual(1, 1)
+          self.assertIn(1, [1])
+          self.assertRaises(Exception, explode)
+          helper()
+      """, (ctx, callExpression) -> isAssertion.add(UnittestUtils.isUnittestAssertion(callExpression.callee(), ctx)));
+
+    assertThat(isAssertion).containsExactly(true, true, true, false);
+  }
+
   private static FileInput parse(String fileName, String code) {
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
     new SymbolTableBuilder("", new TestPythonVisitorRunner.MockPythonFile("", fileName, code)).visitFileInput(fileInput);

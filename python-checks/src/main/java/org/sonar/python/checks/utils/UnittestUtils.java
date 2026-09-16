@@ -113,6 +113,13 @@ public class UnittestUtils {
   private static final Set<String> ALL_METHODS = new HashSet<>();
   private static final Set<String> ALL_ASSERT_METHODS = new HashSet<>();
 
+  /**
+   * Matches any {@code unittest.TestCase} assertion / raise helper ({@link #ASSERTIONS_METHODS}
+   * and {@link #RAISE_METHODS}), using the same {@code isType} FQN pattern as the equality/identity
+   * matchers above.
+   */
+  public static final TypeMatcher UNITTEST_ASSERTION_MATCHER;
+
   static {
     ALL_METHODS.addAll(RUN_METHODS);
     ALL_METHODS.addAll(UTIL_METHODS);
@@ -121,6 +128,8 @@ public class UnittestUtils {
     ALL_METHODS.addAll(RAISE_METHODS);
     ALL_ASSERT_METHODS.addAll(ASSERTIONS_METHODS);
     ALL_ASSERT_METHODS.addAll(RAISE_METHODS);
+    UNITTEST_ASSERTION_MATCHER = TypeMatchers.any(
+      ALL_ASSERT_METHODS.stream().map(name -> TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + name)));
   }
 
   public static Set<String> allMethods() {
@@ -241,6 +250,24 @@ public class UnittestUtils {
 
   public static boolean isUnittestAssertRaises(CallExpression callExpression, SubscriptionContext ctx) {
     return UNITTEST_ASSERT_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx);
+  }
+
+  /**
+   * True when {@code callee} is a {@code unittest.TestCase} assertion (or raise helper).
+   * Prefers {@link #UNITTEST_ASSERTION_MATCHER}; falls back to the established {@code self.assert*}
+   * shape when third-party TestCase types lack stubs (e.g. TensorFlow).
+   */
+  public static boolean isUnittestAssertion(Expression callee, SubscriptionContext ctx) {
+    if (UNITTEST_ASSERTION_MATCHER.isTrueFor(callee, ctx)) {
+      return true;
+    }
+    if (!(callee instanceof QualifiedExpression qualifiedExpression)) {
+      return false;
+    }
+    if (!CheckUtils.isSelf(qualifiedExpression.qualifier())) {
+      return false;
+    }
+    return ALL_ASSERT_METHODS.contains(qualifiedExpression.name().name());
   }
 
   public static boolean hasUnittestAssertRaisesMessageCheck(CallExpression callExpression, SubscriptionContext ctx) {
