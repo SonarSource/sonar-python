@@ -25,6 +25,8 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -172,11 +174,25 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isSimpleExpression(FileInput fileInput) {
-    if (fileInput.statements().statements().size() > 1) {
-      return false;
+    List<Statement> statements = fileInput.statements().statements();
+    if (statements.size() > 1) {
+      return statements.stream().allMatch(CommentedCodeCheck::isBareNameStatement);
     }
-    Statement statement = fileInput.statements().statements().get(0);
+    Statement statement = statements.get(0);
     return statement.is(Tree.Kind.EXPRESSION_STMT) || statement.is(Tree.Kind.ANNOTATED_ASSIGNMENT);
+  }
+
+  private static boolean isBareNameStatement(Statement statement) {
+    if (statement.is(Tree.Kind.EXPRESSION_STMT)) {
+      return ((ExpressionStatement) statement).expressions().stream().allMatch(expression -> expression.is(Tree.Kind.NAME));
+    }
+    if (statement.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      AnnotatedAssignment annotatedAssignment = (AnnotatedAssignment) statement;
+      return annotatedAssignment.assignedValue() == null
+        && annotatedAssignment.variable().is(Tree.Kind.NAME)
+        && annotatedAssignment.annotation().expression().is(Tree.Kind.NAME);
+    }
+    return false;
   }
 
   private static List<List<Trivia>> groupTrivias(Token token) {

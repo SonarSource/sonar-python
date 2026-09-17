@@ -92,6 +92,54 @@ multiline comment
 # IBuildRequestStatus
 # ISlaveStatus
 
+# Ωμέγα
+# λέξη
+
+# москва
+# тверь
+
+# москва
+# тверь, foo
+
+# TODO: cleanup
+# NOTE: temporary
+
+# Noncompliant@+2
+
+# москва
+# тверь, foo()
+
+# Noncompliant@+2
+
+# TODO: cleanup
+# NOTE: temporary = 1
+
+'''
+Ωμέγα
+λέξη
+'''
+
+# Noncompliant@+1
+'''
+Ωμέγα
+λέξη()
+'''
+
+# Noncompliant@+2
+
+# Ωμέγα
+# λέξη()
+
+# Noncompliant@+2
+
+# москва
+# тверь = 1
+
+# Noncompliant@+2
+
+# Ωμέγα
+# import os
+
 # Noncompliant@+2
 
 #     return a
