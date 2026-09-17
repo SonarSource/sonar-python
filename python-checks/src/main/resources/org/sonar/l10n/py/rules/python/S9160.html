@@ -1,0 +1,61 @@
+<p>This rule raises an issue when a file permission <code>mode</code> is passed as a non-octal integer literal to APIs such as
+<code>os.chmod</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>Unix-style permission modes are conventionally written as octal values, for example <code>0o755</code> or <code>0o644</code>. Those digits describe
+user, group, and other permissions in base 8.</p>
+<p>When the same digits are written without the <code>0o</code> prefix, Python treats them as decimal. The resulting mode is therefore not the
+permission set the author usually intends.</p>
+<p>For example, <code>os.chmod(path, 755)</code> applies decimal <code>755</code>, which is octal <code>0o1363</code>, not the common executable mode
+<code>0o755</code>. Similarly, <code>644</code> is not <code>0o644</code>.</p>
+<p>This is a frequent footgun for developers coming from shell <code>chmod 755 file</code> usage, where <code>755</code> is interpreted as octal.</p>
+<p>The same risk applies to other standard-library calls that take a numeric <code>mode</code>, including <code>os.fchmod</code>,
+<code>os.lchmod</code>, <code>os.mkdir</code>, <code>os.makedirs</code>, <code>os.open</code>, <code>os.umask</code>, and <code>pathlib.Path</code>
+methods such as <code>chmod</code>, <code>mkdir</code>, and <code>touch</code>.</p>
+<h3>What is the potential impact?</h3>
+<ul>
+  <li><strong>wrong permissions</strong>: files or directories may be more or less accessible than intended</li>
+  <li><strong>security exposure</strong>: secrets or configuration files can end up readable or writable by unintended users</li>
+  <li><strong>runtime failures</strong>: scripts or services may fail when an expected execute or write bit is missing</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Write permission modes as octal literals with the <code>0o</code> prefix so the value matches the intended Unix mode.</p>
+<p>The literal <code>0</code> is clear on its own and does not need an octal prefix.</p>
+<p>Intentional decimal mode literals are rare. Treat them as won’t-fix only after review confirms the decimal value is deliberate rather than a
+mistaken shell-style octal.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import os
+
+os.chmod("file.txt", 755)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import os
+
+os.chmod("file.txt", 0o755)
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from pathlib import Path
+
+Path("config.ini").chmod(644)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from pathlib import Path
+
+Path("config.ini").chmod(0o644)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/os.html#os.chmod"><code>os.chmod</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path.chmod"><code>pathlib.Path.chmod</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/lexical_analysis.html#integers">Integer literals</a></li>
+</ul>
+<h3>External coding guidelines</h3>
+<ul>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/non-octal-permissions/">RUF064 - Non-octal mode</a></li>
+</ul>
+

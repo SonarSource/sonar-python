@@ -1,0 +1,24 @@
+{
+  "title": "File permission modes should use octal literals",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9160",
+  "sqKey": "S9160",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "SECURITY": "MEDIUM",
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  }
+}
