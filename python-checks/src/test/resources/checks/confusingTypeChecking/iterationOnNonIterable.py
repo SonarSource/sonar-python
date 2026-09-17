@@ -43,6 +43,8 @@ def async_iterable(param1: MyAsyncIterable):
   for x in param1:  # Noncompliant {{Add "async" before "for"; Previous type checks suggest that "param1" has type "MyAsyncIterable" and is an async generator.}}
     ...
 
+  values = [item async for item in param1]
+
 from unittest.mock import Mock, MagicMock
 
 

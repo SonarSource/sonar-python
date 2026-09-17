@@ -170,6 +170,15 @@ def async_iteration():
 
   for a in AsyncIterable(): ... # Noncompliant
 
+  async def async_comprehensions():
+    list_comp = [item async for item in async_generator()]
+    set_comp = {item async for item in async_generator()}
+    dict_comp = {item: item async for item in async_generator()}
+    generator_expr = (item async for item in async_generator())
+
+    non_iterable = 42
+    mixed_comp = [item for item in non_iterable async for _ in async_generator()]  # Noncompliant
+
 def metaclasses():
   """Out of scope: can't be sure the metaclass doesn't add the required method"""
   class MyMetaClassWithoutIter(type): ...

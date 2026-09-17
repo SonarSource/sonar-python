@@ -67,6 +67,9 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
 
   private void checkForComprehension(SubscriptionContext ctx) {
     ComprehensionFor comprehensionFor = (ComprehensionFor) ctx.syntaxNode();
+    if (comprehensionFor.asyncToken() != null) {
+      return;
+    }
     Expression expression = comprehensionFor.iterable();
     Map<LocationInFile, String> secondaries = new HashMap<>();
     if (!isValidIterable(expression, secondaries)) {
