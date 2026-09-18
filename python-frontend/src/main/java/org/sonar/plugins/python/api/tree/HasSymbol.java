@@ -21,6 +21,11 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 
 public interface HasSymbol {
+
+  /**
+   * Use TypeV2 and SymbolV2 instead
+   */
+  @Deprecated(since="5.32")
   @CheckForNull
   Symbol symbol();
 
