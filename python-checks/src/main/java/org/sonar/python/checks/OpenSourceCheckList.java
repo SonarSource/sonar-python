@@ -468,6 +468,7 @@ public class OpenSourceCheckList {
       SetDiscardOverRemoveCheck.class,
       SetDuplicateKeyCheck.class,
       SetUpdateOverForLoopCheck.class,
+      ShallowCopyEnvironCheck.class,
       SideEffectInTfFunctionCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
