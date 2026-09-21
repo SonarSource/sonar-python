@@ -1,0 +1,82 @@
+<p>This rule raises an issue when an object that does not support reverse iteration is passed to the built-in <code>reversed()</code> function.</p>
+<h2>Why is this an issue?</h2>
+<p>The built-in <code>reversed()</code> function returns a reverse iterator over the values of a sequence. For an object to be reversible, it must
+either:</p>
+<ul>
+  <li>implement the <code>__reversed__</code> method, or</li>
+  <li>support the sequence protocol by implementing both <code>__len__</code> and <code>__getitem__</code>.</li>
+</ul>
+<p>Passing an object that satisfies none of these requirements, such as a <code>set</code>, a generator, or a custom class that does not implement the
+required methods, raises a <code>TypeError</code> at runtime and interrupts the program.</p>
+<h2>How to fix it</h2>
+<p>Make sure the argument passed to <code>reversed()</code> supports reverse iteration.</p>
+<ul>
+  <li>Pass a proper sequence such as a <code>list</code>, <code>tuple</code>, <code>str</code>, or <code>range</code>.</li>
+  <li>To reverse the elements of an unordered collection such as a <code>set</code>, convert it to a sequence first, for example with
+  <code>sorted()</code> or <code>list()</code>.</li>
+  <li>For a custom class, implement <code>__reversed__</code>, or both <code>__len__</code> and <code>__getitem__</code>.</li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+for value in reversed({1, 2, 3, 4}):  # Noncompliant: a set does not support reverse iteration
+    print(value)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+for value in reversed([1, 2, 3, 4]):
+    print(value)
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+class Deck:
+    def __init__(self, cards):
+        self._cards = cards
+
+for card in reversed(Deck(["Ace", "King", "Queen"])):  # Noncompliant: "Deck" does not support reverse iteration
+    print(card)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+class Deck:
+    def __init__(self, cards):
+        self._cards = cards
+
+    def __reversed__(self):
+        return reversed(self._cards)
+
+for card in reversed(Deck(["Ace", "King", "Queen"])):
+    print(card)
+</pre>
+<h3>Going the extra mile</h3>
+<p>For a custom class, inheriting from <code>collections.abc.Sequence</code> is a more robust option than implementing the methods directly. Because
+it is an abstract base class, Python refuses to instantiate a subclass until both <code>__len__</code> and <code>__getitem__</code> are defined. In
+return, the class inherits <code>__reversed__</code>, along with other sequence behaviors such as <code>__iter__</code>, <code>__contains__</code>,
+<code>index</code>, and <code>count</code>.</p>
+<pre>
+from collections.abc import Sequence
+
+class Deck(Sequence):
+    def __init__(self, cards):
+        self._cards = cards
+
+    def __getitem__(self, index):
+        return self._cards[index]
+
+    def __len__(self):
+        return len(self._cards)
+
+for card in reversed(Deck(["Ace", "King", "Queen"])):
+    print(card)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functions.html#reversed"><code>reversed</code></a></li>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/reference/datamodel.html#object.__reversed__"><code>object.__reversed__</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/glossary.html#term-sequence">sequence</a></li>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence"><code>collections.abc.Sequence</code></a></li>
+</ul>
+
