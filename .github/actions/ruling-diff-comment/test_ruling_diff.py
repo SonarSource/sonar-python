@@ -46,18 +46,18 @@ class FakeRulingDiffIO:
 
 class ParsePathTest(unittest.TestCase):
     def test_parse_ruling_path(self) -> None:
-        path = "private/its-enterprise/ruling/src/test/resources/expected_ruling/airflow/python-S1066.json"
+        path = "private/its-enterprise/ruling/src/test/resources/expected/airflow/python-S1066.json"
         self.assertEqual(("airflow", "python", "S1066"), core.parse_ruling_path(path))
 
     def test_parse_ruling_path_with_pythonenterprise(self) -> None:
-        path = "private/its-enterprise/ruling/src/test/resources/expected_ruling/specific-rules/pythonenterprise-S7471.json"
+        path = "private/its-enterprise/ruling/src/test/resources/expected/specific-rules/pythonenterprise-S7471.json"
         self.assertEqual(
             ("specific-rules", "pythonenterprise", "S7471"),
             core.parse_ruling_path(path),
         )
 
     def test_parse_ruling_path_with_legacy_key(self) -> None:
-        path = "private/its-enterprise/ruling/src/test/resources/expected_ruling/scikit-learn/python-LineLength.json"
+        path = "private/its-enterprise/ruling/src/test/resources/expected/scikit-learn/python-LineLength.json"
         self.assertEqual(
             ("scikit-learn", "python", "LineLength"),
             core.parse_ruling_path(path),
@@ -65,11 +65,18 @@ class ParsePathTest(unittest.TestCase):
 
     def test_parse_rule_filename_rejects_empty_rule_key(self) -> None:
         with self.assertRaises(ValueError):
+            core.parse_rule_filename(".json")
+
+    def test_parse_rule_filename_rejects_missing_language_prefix(self) -> None:
+        with self.assertRaises(ValueError):
+            core.parse_rule_filename("S100.json")
+
+    def test_parse_rule_filename_rejects_empty_rule_after_dash(self) -> None:
+        with self.assertRaises(ValueError):
             core.parse_rule_filename("python-.json")
 
-    def test_parse_rule_filename_rejects_empty_repository(self) -> None:
-        with self.assertRaises(ValueError):
-            core.parse_rule_filename("-S1066.json")
+    def test_parse_rule_filename_returns_language_and_rule(self) -> None:
+        self.assertEqual(("python", "S100"), core.parse_rule_filename("python-S100.json"))
 
 
 class DiffLogicTest(unittest.TestCase):
@@ -259,7 +266,7 @@ class SnippetRenderingTest(unittest.TestCase):
 class BuildRuleDiffsWithIOTest(unittest.TestCase):
     def test_build_rule_diffs_uses_io_object_and_respects_refs(self) -> None:
         changed_file = (
-            "private/its-enterprise/ruling/src/test/resources/expected_ruling/"
+            "private/its-enterprise/ruling/src/test/resources/expected/"
             "airflow/python-S107.json"
         )
         io_impl = FakeRulingDiffIO(
@@ -289,7 +296,7 @@ class BuildRuleDiffsWithIOTest(unittest.TestCase):
 
     def test_build_rule_diffs_caches_source_loads_per_ref_and_path(self) -> None:
         changed_file = (
-            "private/its-enterprise/ruling/src/test/resources/expected_ruling/"
+            "private/its-enterprise/ruling/src/test/resources/expected/"
             "airflow/python-S107.json"
         )
         io_impl = FakeRulingDiffIO(
@@ -310,7 +317,7 @@ class BuildRuleDiffsWithIOTest(unittest.TestCase):
 
     def test_build_rule_diffs_missing_source_produces_placeholder_snippet(self) -> None:
         changed_file = (
-            "private/its-enterprise/ruling/src/test/resources/expected_ruling/"
+            "private/its-enterprise/ruling/src/test/resources/expected/"
             "airflow/python-S107.json"
         )
         io_impl = FakeRulingDiffIO(

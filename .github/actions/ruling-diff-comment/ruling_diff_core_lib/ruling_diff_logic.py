@@ -21,32 +21,33 @@ def parse_ruling_path(path: str) -> tuple[str, str, str]:
     if not path.startswith(prefix):
         raise ValueError(f"Unexpected ruling path outside expected root: {path}")
     relative_path = path[len(prefix) :]
-    project, filename = parse_ruling_relative_path(relative_path)
-    repository, rule_key = parse_rule_filename(filename)
+    repository, project, rule_key = parse_ruling_relative_path(relative_path)
     return project, repository, rule_key
 
 
-def parse_ruling_relative_path(relative_path: str) -> tuple[str, str]:
+def parse_ruling_relative_path(relative_path: str) -> tuple[str, str, str]:
     parts = PurePosixPath(relative_path).parts
     if len(parts) != 2:
         raise ValueError(
-            f"Expected '<project>/<repo>-<rule>.json' path, got: {relative_path}"
+            f"Expected '<project>/<language>-<rule>.json' path, got: {relative_path}"
         )
-    return parts[0], parts[1]
+    project, filename = parts[0], parts[1]
+    language, rule_key = parse_rule_filename(filename)
+    return language, project, rule_key
 
 
 def parse_rule_filename(filename: str) -> tuple[str, str]:
     if not filename.endswith(".json"):
         raise ValueError(f"Expected json filename, got: {filename}")
-    basename = filename[:-5]
-    if "-" not in basename:
-        raise ValueError(f"Expected '<repo>-<ruleKey>.json', got: {filename}")
-    repository, rule_key = basename.rsplit("-", 1)
-    if not repository:
-        raise ValueError(f"Missing repo in filename: {filename}")
+    stem = filename[:-5]
+    dash_index = stem.find("-")
+    if dash_index <= 0:
+        raise ValueError(f"Expected '<language>-<rule>.json' filename, got: {filename}")
+    language = stem[:dash_index]
+    rule_key = stem[dash_index + 1 :]
     if not rule_key:
         raise ValueError(f"Missing rule key in filename: {filename}")
-    return repository, rule_key
+    return language, rule_key
 
 
 def strip_project_key(key: str) -> str:

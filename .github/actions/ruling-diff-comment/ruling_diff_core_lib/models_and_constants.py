@@ -21,7 +21,7 @@ class RulingDiffIO(Protocol):
         ...
 
 EXPECTED_RULING_ROOT = (
-    "private/its-enterprise/ruling/src/test/resources/expected_ruling"
+    "private/its-enterprise/ruling/src/test/resources/expected"
 )
 COMMENT_MARKER = "<!-- ruling-diff-comment -->"
 COMMENT_SOFT_LIMIT = 60000
@@ -42,6 +42,17 @@ PROJECT_SOURCE_OVERRIDES = {
     "sources_internal_ruling": "private/its-enterprise/sources_internal_ruling",
     "namespace_basic": "private/its-enterprise/sources_internal_namespace_ruling/basic_namespace",
     "namespace_mixed": "private/its-enterprise/sources_internal_namespace_ruling/mixed_namespace",
+    "addInitPy_base": "private/its-enterprise/sources_pr_analysis/addInitPy_base",
+    "addInitPy_pr": "private/its-enterprise/sources_pr_analysis/addInitPy_pr",
+    "baseCommit": "private/its-enterprise/sources_pr_analysis/baseCommit",
+    "changeInImportedModule": "private/its-enterprise/sources_pr_analysis/changeInImportedModule",
+    "changeInPackageInit": "private/its-enterprise/sources_pr_analysis/changeInPackageInit",
+    "changeInParent": "private/its-enterprise/sources_pr_analysis/changeInParent",
+    "changeInRelativeImport": "private/its-enterprise/sources_pr_analysis/changeInRelativeImport",
+    "deletedFile": "private/its-enterprise/sources_pr_analysis/deletedFile",
+    "djangoViewsScenario": "private/its-enterprise/sources_pr_analysis/djangoViewsScenario",
+    "duplication": "private/its-enterprise/sources_pr_analysis/duplication",
+    "newFile": "private/its-enterprise/sources_pr_analysis/newFile",
 }
 
 
