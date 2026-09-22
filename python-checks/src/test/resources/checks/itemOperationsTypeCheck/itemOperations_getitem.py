@@ -201,6 +201,14 @@ def import_path():
 
     path = import_module('importlib').__path__[0]  # OK ref: SONARPY-1339
 
+
+def lxml_fromstring_returns_element():
+  from lxml import etree
+
+  root = etree.fromstring(b"<response><status>ok</status></response>")
+  root[0]  # The custom stub must expose _Element, not _ElementTree.
+
+
 from ctypes import cast
 
 def ctypes_cast(buf, sal):

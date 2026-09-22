@@ -322,6 +322,14 @@ class TypeShedTest {
   }
 
   @Test
+  void lxml_fromstring_returns_element() {
+    Map<String, Symbol> lxmlEtreeSymbols = symbolsForModule("lxml.etree");
+    FunctionSymbol fromstring = (FunctionSymbol) lxmlEtreeSymbols.get("fromstring");
+
+    assertThat(fromstring.annotatedReturnTypeName()).isEqualTo("lxml.etree._Element");
+  }
+
+  @Test
   void package_sqlite3_connect_type_in_ambiguous_symbol() {
     Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
     ClassSymbol connectionSymbol = (ClassSymbol) sqlite3Symbols.get("Connection");

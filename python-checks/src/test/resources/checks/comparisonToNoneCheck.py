@@ -59,3 +59,33 @@ def kwargs_any(*args: Any, **some_dict:Any):
 def kwargs(*some_args: Any, **kwargs: Any):
     if kwargs is not None: ...
     if some_args is not None: ...
+
+def lxml_find():
+    from lxml import etree
+    root = etree.fromstring(b"<response><status>ok</status></response>")
+    handle = root.find(".//handle")
+    assert handle is None
+    if handle is not None:
+        print(handle.text)
+
+def lxml_findtext():
+    from lxml import etree
+    root = etree.fromstring(b"<response><status>ok</status></response>")
+    if root.findtext(".//handle") is None:
+        print("handle is missing")
+    tree = etree.parse("response.xml")
+    if tree.findtext(".//handle") is None:
+        print("handle is missing")
+
+def lxml_tree_find():
+    from lxml import etree
+    tree = etree.parse("response.xml")
+    handle = tree.find(".//handle")
+    if handle is not None:
+        print(handle.text)
+
+def lxml_getroot():
+    from lxml import etree
+    tree = etree.parse("response.xml")
+    if tree.getroot() is None:
+        print("root is missing")
