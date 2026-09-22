@@ -40,6 +40,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.tree.TreeUtils;
 
@@ -54,6 +56,12 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 
 public class CheckUtils {
+  public static final TypeMatcher IS_ENUM_MATCHER = TypeMatchers.any(
+          TypeMatchers.isOrExtendsType("enum.Enum"),
+          TypeMatchers.isOrExtendsType("enum.IntEnum"),
+          TypeMatchers.isOrExtendsType("enum.IntFlag"),
+          TypeMatchers.isOrExtendsType("enum.Flag"),
+          TypeMatchers.isOrExtendsType("enum.StrEnum"));
 
   private CheckUtils() {
 

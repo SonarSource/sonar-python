@@ -185,6 +185,7 @@ public class OpenSourceCheckList {
       BuiltinShadowingAssignmentCheck.class,
       BuiltinGenericsOverTypingModuleCheck.class,
       BusyWaitingInAsyncCheck.class,
+      CachedInstanceMethodCheck.class,
       CancellationScopeNoCheckpointCheck.class,
       CaughtExceptionsCheck.class,
       CancellationReraisedInAsyncCheck.class,

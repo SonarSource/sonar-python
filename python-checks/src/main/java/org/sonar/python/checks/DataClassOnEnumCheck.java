@@ -27,15 +27,13 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
+import static org.sonar.python.checks.utils.CheckUtils.IS_ENUM_MATCHER;
+
 @Rule(key = "S8490")
 public class DataClassOnEnumCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove this \"@dataclass\" decorator; it is incompatible with Enum classes.";
 
-  private static final TypeMatcher IS_ENUM_MATCHER = TypeMatchers.any(
-    TypeMatchers.isOrExtendsType("enum.Enum"),
-    TypeMatchers.isOrExtendsType("enum.IntEnum"),
-    TypeMatchers.isOrExtendsType("enum.IntFlag"));
   private static final TypeMatcher IS_DATACLASS_MATCHER = TypeMatchers.isType("dataclasses.dataclass");
 
   @Override

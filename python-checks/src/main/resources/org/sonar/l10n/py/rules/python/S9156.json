@@ -1,0 +1,24 @@
+{
+  "title": "Instance methods should not be decorated with \"functools.lru_cache\" or \"functools.cache\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "performance",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9156",
+  "sqKey": "S9156",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "EFFICIENT"
+  }
+}

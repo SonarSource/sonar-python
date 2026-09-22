@@ -1,0 +1,67 @@
+<p>This rule raises an issue when an instance method is decorated with <code>functools.lru_cache</code> or <code>functools.cache</code>.</p>
+<h2>Why is this an issue?</h2>
+<p><code>functools.lru_cache</code> and <code>functools.cache</code> store call results in a process-wide cache keyed by the function arguments. On an
+instance method, <code>self</code> is part of that key.</p>
+<p>The cache therefore keeps a strong reference to every instance that was used as a receiver. Those instances — and anything they reference — cannot
+be garbage-collected for as long as the cache entry lives. With an unbounded <code>@cache</code>, or a large <code>@lru_cache(maxsize=…​)</code>,
+memory use grows with the number of distinct instances.</p>
+<p>Caching also couples lifetime of business objects to a global memoization table, which is surprising for typical class designs.</p>
+<h3>What is the potential impact?</h3>
+<ul>
+  <li><strong>Memory leaks</strong>: instances stay alive after callers drop them.</li>
+  <li><strong>Stale results</strong>: mutated instance state may not be reflected when a cached entry is reused (depending on which arguments
+  participate in the key).</li>
+  <li><strong>Hard-to-diagnose growth</strong>: RSS climbs over time in long-running services.</li>
+</ul>
+<h3>Exceptions</h3>
+<p>Do not raise on <code>@staticmethod</code> or <code>@classmethod</code> methods: there is no per-instance <code>self</code> retained by the
+cache.</p>
+<p>Do not raise on methods of <code>enum.Enum</code> subclasses: enum members are singletons, so retaining them is intentional and bounded.</p>
+<h2>How to fix it</h2>
+<p>Move the cache to a free function that takes only the values needed for the computation, then call that function from the method. Alternatively,
+cache on a pure helper that does not close over <code>self</code>, or use an instance-local memo if the lifetime must match the object.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from functools import lru_cache
+
+class Number:
+    def __init__(self, value: int) -&gt; None:
+        self.value = value
+
+    @lru_cache  # Noncompliant: cache retains "self"
+    def squared(self) -&gt; int:
+        return self.value * self.value
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from functools import lru_cache
+
+@lru_cache
+def square(value: int) -&gt; int:
+    return value * value
+
+class Number:
+    def __init__(self, value: int) -&gt; None:
+        self.value = value
+
+    def squared(self) -&gt; int:
+        return square(self.value)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>functools.lru_cache</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functools.html#functools.cache"><code>functools.cache</code></a></li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li>flake8-bugbear - <a
+  href="https://github.com/PyCQA/flake8-bugbear#b019-use-of-functoolslru_cache-or-functoolscache-on-methods-can-lead-to-memory-leaks">B019 - cached
+  instance methods</a></li>
+</ul>
+<h3>External coding guidelines</h3>
+<ul>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/cached-instance-method/">B019 - cached-instance-method</a></li>
+</ul>
+

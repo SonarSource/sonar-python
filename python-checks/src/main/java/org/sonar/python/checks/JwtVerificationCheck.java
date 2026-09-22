@@ -46,10 +46,10 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.utils.CheckUtils.IS_ENUM_MATCHER;
 
 @Rule(key = "S5659")
 public class JwtVerificationCheck extends PythonSubscriptionCheck {
@@ -90,8 +90,6 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
   private static final String ALGORITHMS_KEYWORD = "algorithms";
 
   private static final Set<String> ISSUER_CLAIM_KEY = Set.of("iss");
-
-  private static final TypeMatcher IS_ENUM_MATCHER = TypeMatchers.isOrExtendsType("enum.Enum");
 
   @Override
   public void initialize(Context context) {
