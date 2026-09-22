@@ -640,6 +640,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     scan(assignmentStatement.assignedValue());
     scan(assignmentStatement.lhsExpressions());
 
+    if (assignmentStatement.lhsExpressions().stream().anyMatch(expressionList -> !expressionList.commas().isEmpty())) {
+      return;
+    }
+
     getFirstAssignmentName(assignmentStatement).ifPresent(lhsName -> {
       var assignedValueType = assignmentStatement.assignedValue().typeV2();
       lhsName.typeV2(assignedValueType);

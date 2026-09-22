@@ -1541,7 +1541,6 @@ public class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("Resulting type should not be tuple")
   void unpacking_assignment() {
     assertThat(lastExpression(
       """

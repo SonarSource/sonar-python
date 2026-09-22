@@ -16,7 +16,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -25,18 +24,23 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SLICE_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SLICE_ITEM;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
-
 @Rule(key = "S6663")
 public class IndexMethodCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Make sure this object defines an `__index__` method.";
-  private static final Set<String> ALLOWED_TYPES = Set.of(NONE_TYPE, "slice");
+  private static final TypeMatcher SEQUENCE_MATCHER = TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("typing.Sequence"));
+  private static final TypeMatcher MAPPING_MATCHER = TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("typing.Mapping"));
+  private static final TypeMatcher VALID_INDEX_MATCHER = TypeMatchers.any(
+    TypeMatchers.isObjectOfType("NoneType"),
+    TypeMatchers.isObjectOfType("slice"),
+    TypeMatchers.hasMember("__index__"));
 
   @Override
   public void initialize(Context context) {
@@ -47,33 +51,37 @@ public class IndexMethodCheck extends PythonSubscriptionCheck {
   private static void checkSliceItem(SubscriptionContext ctx, SliceItem sliceItem) {
     SliceExpression sliceExpression = ((SliceExpression) TreeUtils.firstAncestorOfKind(sliceItem, SLICE_EXPR));
     // defensive programming: slice items should always have a SliceExpression parent
-    if (sliceExpression != null && !sliceExpression.object().type().mustBeOrExtend("typing.Sequence")) return;
-    if (!isValidIndex(sliceItem.lowerBound())) {
+    if (sliceExpression != null && !isSequence(sliceExpression.object(), ctx)) return;
+    if (!isValidIndex(sliceItem.lowerBound(), ctx)) {
       ctx.addIssue(sliceItem.lowerBound(), MESSAGE);
     }
-    if (!isValidIndex(sliceItem.upperBound())) {
+    if (!isValidIndex(sliceItem.upperBound(), ctx)) {
       ctx.addIssue(sliceItem.upperBound(), MESSAGE);
     }
-    if (!isValidIndex(sliceItem.stride())) {
+    if (!isValidIndex(sliceItem.stride(), ctx)) {
       ctx.addIssue(sliceItem.stride(), MESSAGE);
     }
   }
 
   private static void checkSubscription(SubscriptionContext ctx, SubscriptionExpression subscriptionExpression) {
-    if (!subscriptionExpression.object().type().mustBeOrExtend("typing.Sequence")) return;
+    if (!isSequence(subscriptionExpression.object(), ctx)) return;
     var expressionList = subscriptionExpression.subscripts();
     if (!expressionList.commas().isEmpty()) {
       // if contains at least a comma, its type is going to be tuple, hence not a valid index
       ctx.addIssue(expressionList, MESSAGE);
     }
     Expression expressionIndex = expressionList.expressions().get(0);
-    if (!isValidIndex(expressionIndex)) {
+    if (!isValidIndex(expressionIndex, ctx)) {
       ctx.addIssue(expressionIndex, MESSAGE);
     }
   }
 
-  private static boolean isValidIndex(@Nullable Expression expressionIndex) {
-    if (expressionIndex == null || ALLOWED_TYPES.stream().anyMatch(t -> expressionIndex.type().canOnlyBe(t))) return true;
-    return expressionIndex.type().canHaveMember("__index__");
+  private static boolean isValidIndex(@Nullable Expression expressionIndex, SubscriptionContext ctx) {
+    return expressionIndex == null
+      || !VALID_INDEX_MATCHER.evaluateFor(expressionIndex, ctx).isFalse();
+  }
+
+  private static boolean isSequence(Expression expression, SubscriptionContext ctx) {
+    return SEQUENCE_MATCHER.isTrueFor(expression, ctx) && !MAPPING_MATCHER.isTrueFor(expression, ctx);
   }
 }
