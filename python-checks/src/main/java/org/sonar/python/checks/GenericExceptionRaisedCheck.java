@@ -22,12 +22,9 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
-import org.sonar.plugins.python.api.tree.Argument;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
@@ -49,15 +46,9 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
     TypeMatchers.isType(BASE_EXCEPTION)
   );
 
-  private final TypeMatcher isObjectOfTypeExceptionOrBaseExceptionMatcher = TypeMatchers.any(
-    TypeMatchers.isObjectOfType(EXCEPTION),
-    TypeMatchers.isObjectOfType(BASE_EXCEPTION)
-  );
-
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.RAISE_STMT, this::checkRaise);
-    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, this::checkFunctionCall);
   }
 
   private void checkRaise(SubscriptionContext ctx) {
@@ -75,20 +66,6 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
       return;
     }
     ctx.addIssue(expression, MESSAGE);
-  }
-
-  private void checkFunctionCall(SubscriptionContext ctx) {
-    CallExpression call = (CallExpression) ctx.syntaxNode();
-    List<Argument> arguments = call.arguments();
-    for (Argument arg : arguments) {
-      if (!(arg instanceof RegularArgument regArg) || regArg.keywordArgument() != null) {
-        continue;
-      }
-      Expression argExpr = regArg.expression();
-      if (isObjectOfTypeExceptionOrBaseExceptionMatcher.isTrueFor(argExpr, ctx) && isExceptionFunctionLocal(argExpr, call)) {
-        ctx.addIssue(argExpr, MESSAGE);
-      }
-    }
   }
 
   private static boolean isExceptionFunctionLocal(Expression expression, Tree contextTree) {

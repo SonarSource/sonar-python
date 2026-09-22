@@ -62,9 +62,24 @@ def handle_exception(e: Exception):
 def intermediate_handle_exception(e: Exception):
     handle_exception(e)
 
-def constructed_exceptions_passed_to_handle_exception_raise():
-    handle_exception(Exception()) # Noncompliant
-    handle_exception(BaseException()) # Noncompliant
+def constructed_exceptions_passed_to_handle_exception():
+    handle_exception(Exception())
+    handle_exception(BaseException())
 
-def is_instance_do_not_raise(e):
-    isInstance(e, Exception)
+def bound_exceptions_passed_to_handle_exception():
+    exception = Exception()
+    handle_exception(exception)
+    try:
+        pass
+    except Exception as caught:
+        handle_exception(caught)
+
+def inspected_or_formatted_exceptions_do_not_raise(error: Exception):
+    captured = error
+    str(captured)
+    isinstance(captured, Exception)
+    isinstance(captured, BaseException)
+
+def raised_bound_exception(error: Exception):
+    captured = error
+    raise captured # Noncompliant
