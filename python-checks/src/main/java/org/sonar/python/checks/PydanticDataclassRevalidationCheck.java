@@ -48,14 +48,13 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.PydanticUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8978")
 public class PydanticDataclassRevalidationCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Explicitly set 'revalidate_instances' in this Pydantic model's configuration.";
-
-  private static final TypeMatcher IS_PYDANTIC_MODEL = TypeMatchers.isOrExtendsType("pydantic.BaseModel");
 
   private static final TypeMatcher IS_CONFIG_DICT = TypeMatchers.isType("pydantic.ConfigDict");
 
@@ -71,7 +70,7 @@ public class PydanticDataclassRevalidationCheck extends PythonSubscriptionCheck 
   private static void checkClassDef(SubscriptionContext ctx) {
     ClassDef classDef = (ClassDef) ctx.syntaxNode();
 
-    if (!IS_PYDANTIC_MODEL.isTrueFor(classDef.name(), ctx)) {
+    if (!PydanticUtils.isPydanticModel(ctx, classDef)) {
       return;
     }
 

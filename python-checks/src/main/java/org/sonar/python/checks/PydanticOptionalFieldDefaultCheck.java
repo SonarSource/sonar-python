@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.PydanticUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8396")
@@ -38,7 +39,6 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Add an explicit default value to this optional field.";
 
-  private static final TypeMatcher IS_PYDANTIC_MODEL = TypeMatchers.isOrExtendsType("pydantic.BaseModel");
   private static final TypeMatcher IS_PYDANTIC_FIELD = TypeMatchers.isType("pydantic.Field");
 
   private static final TypeMatcher IS_TYPING_OPTIONAL = TypeMatchers.isType("typing.Optional");
@@ -51,7 +51,7 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
   private static void checkClassDef(SubscriptionContext ctx) {
     ClassDef classDef = (ClassDef) ctx.syntaxNode();
 
-    if (!IS_PYDANTIC_MODEL.isTrueFor(classDef.name(), ctx)) {
+    if (!PydanticUtils.isPydanticModel(ctx, classDef)) {
       return;
     }
 

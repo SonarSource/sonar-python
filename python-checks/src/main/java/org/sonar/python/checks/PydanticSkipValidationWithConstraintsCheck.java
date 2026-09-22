@@ -36,14 +36,13 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.PydanticUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8971")
 public class PydanticSkipValidationWithConstraintsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove either \"SkipValidation\" or the validation constraints from this annotation.";
-
-  private static final TypeMatcher IS_PYDANTIC_MODEL = TypeMatchers.isOrExtendsType("pydantic.BaseModel");
 
   private static final TypeMatcher IS_TYPING_ANNOTATED = TypeMatchers.any(
     TypeMatchers.isType("typing.Annotated"),
@@ -95,7 +94,7 @@ public class PydanticSkipValidationWithConstraintsCheck extends PythonSubscripti
   private static void checkClassDef(SubscriptionContext ctx) {
     ClassDef classDef = (ClassDef) ctx.syntaxNode();
 
-    if (!IS_PYDANTIC_MODEL.isTrueFor(classDef.name(), ctx)) {
+    if (!PydanticUtils.isPydanticModel(ctx, classDef)) {
       return;
     }
 

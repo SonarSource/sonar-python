@@ -32,15 +32,12 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.PydanticUtils;
 
 @Rule(key = "S8963")
 public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Refactor this Pydantic model to avoid multiple inheritance with conflicting configurations.";
-
-  private static final TypeMatcher IS_PYDANTIC_MODEL = TypeMatchers.isOrExtendsType("pydantic.BaseModel");
 
   @Override
   public void initialize(Context context) {
@@ -50,7 +47,7 @@ public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCh
   private static void checkClassDef(SubscriptionContext ctx) {
     ClassDef classDef = (ClassDef) ctx.syntaxNode();
 
-    if (!IS_PYDANTIC_MODEL.isTrueFor(classDef.name(), ctx)) {
+    if (!PydanticUtils.isPydanticModel(ctx, classDef)) {
       return;
     }
 

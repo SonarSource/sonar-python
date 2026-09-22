@@ -1,4 +1,6 @@
 from typing import SupportsFloat, List, Iterable, Generator, Set, Union, Type, TypedDict
+import pydantic
+from pydantic import PrivateAttr as PydanticPrivateAttr
 from inconsistentTypeHintImported import ClassWithFieldOnly, ClassWithMethodOnly
 
 def assigned_directly():
@@ -123,3 +125,33 @@ def type_dict():
     messages = {1,2,3}
     my_dict: MyCustomDict = dict(user_ids=users, message_ids=messages)  # OK
     return my_dict
+
+
+class PydanticPrivateAttributes(pydantic.BaseModel):
+  _optional_value: str | None = PydanticPrivateAttr(default=None)  # OK
+  _values: list[str] = pydantic.PrivateAttr(default_factory=list)  # OK
+  _parenthesized_value: int = (PydanticPrivateAttr(default=0))  # OK
+  incompatible_value: int | None = "value"  # Noncompliant
+
+  def instance_method(self):
+    optional_value: str | None = PydanticPrivateAttr(default=None)  # Noncompliant
+
+
+class NonPydanticPrivateAttributes:
+  optional_value: str | None = PydanticPrivateAttr(default=None)  # Noncompliant
+  values: list[str] = pydantic.PrivateAttr(default_factory=list)  # Noncompliant
+
+
+def local_function_named_private_attr():
+  def PrivateAttr() -> str:
+    return "value"
+
+  private_attribute: int = PrivateAttr()  # Noncompliant
+
+
+class PrivateAttr:
+  pass
+
+
+private_attribute: int = PrivateAttr()  # Noncompliant
+ordinary_incompatible_assignment: str = 42  # Noncompliant

@@ -39,6 +39,7 @@ import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.PydanticUtils;
 
 /**
  * Detects Pydantic {@code @field_validator} methods that have a code path without an explicit return value.
@@ -61,8 +62,6 @@ public class PydanticFieldValidatorReturnCheck extends PythonSubscriptionCheck {
 
   private static final TypeMatcher FIELD_VALIDATOR_MATCHER = TypeMatchers.any(TypeMatchers.isType("pydantic.functional_validators.field_validator"),
     TypeMatchers.withFQN("pydantic.field_validator"));
-
-  private static final TypeMatcher IS_PYDANTIC_MODEL = TypeMatchers.isOrExtendsType("pydantic.BaseModel");
 
   @Override
   public void initialize(Context context) {
@@ -144,7 +143,7 @@ public class PydanticFieldValidatorReturnCheck extends PythonSubscriptionCheck {
     if (!(parent instanceof ClassDef classDef)) {
       return false;
     }
-    return IS_PYDANTIC_MODEL.isTrueFor(classDef.name(), ctx);
+    return PydanticUtils.isPydanticModel(ctx, classDef);
   }
 
   private static boolean isReturnWithValue(Statement statement) {

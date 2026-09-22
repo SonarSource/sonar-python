@@ -27,6 +27,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.checks.utils.CheckUtils;
+import org.sonar.python.checks.utils.PydanticUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
@@ -49,6 +51,9 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkAnnotatedAssignment(SubscriptionContext ctx, AnnotatedAssignment annotatedAssignment, Expression assignedExpression) {
+    if (isPydanticPrivateAttribute(ctx, annotatedAssignment, assignedExpression)) {
+      return;
+    }
     InferredType inferredType = assignedExpression.type();
     TypeAnnotation annotation = annotatedAssignment.annotation();
     InferredType expectedType = InferredTypes.fromTypeAnnotation(annotation);
@@ -62,6 +67,11 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
       ctx.addIssue(assignedExpression, message)
         .secondary(annotation.expression(), null);
     }
+  }
+
+  private static boolean isPydanticPrivateAttribute(SubscriptionContext ctx, AnnotatedAssignment annotatedAssignment, Expression expression) {
+    var parentClass = CheckUtils.getParentClassDef(annotatedAssignment);
+    return parentClass != null && PydanticUtils.isPydanticModel(ctx, parentClass) && PydanticUtils.isPrivateAttrCall(ctx, expression);
   }
 
   private static String getIssueMessage(Expression variable, InferredType inferredType, InferredType expectedType) {

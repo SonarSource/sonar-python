@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.PydanticUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8389")
@@ -64,8 +65,6 @@ public class FastAPIFileUploadFormCheck extends PythonSubscriptionCheck {
     TypeMatchers.isOrExtendsType("fastapi.datastructures.UploadFile"),
     TypeMatchers.isOrExtendsType("starlette.datastructures.UploadFile")
   );
-
-  private static final TypeMatcher IS_PYDANTIC_MODEL = TypeMatchers.isOrExtendsType("pydantic.BaseModel");
 
   @Override
   public void initialize(Context context) {
@@ -153,14 +152,14 @@ public class FastAPIFileUploadFormCheck extends PythonSubscriptionCheck {
       var firstArg = dependsCall.arguments().get(0);
       if (firstArg instanceof RegularArgument regularArg) {
         Expression argExpr = regularArg.expression();
-        return IS_PYDANTIC_MODEL.isTrueFor(argExpr, ctx);
+        return PydanticUtils.isPydanticModel(ctx, argExpr);
       }
     }
 
     TypeAnnotation annotation = param.typeAnnotation();
     if (annotation != null) {
       Expression annotationExpr = annotation.expression();
-      return IS_PYDANTIC_MODEL.isTrueFor(annotationExpr, ctx);
+      return PydanticUtils.isPydanticModel(ctx, annotationExpr);
     }
 
     return false;
