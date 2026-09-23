@@ -1,0 +1,90 @@
+<p>This rule raises an issue when an object used as a context manager in a with or async with statement does not implement the corresponding context
+manager protocol.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>with</code> statement is used to wrap the execution of a block of code with methods defined by a context manager. When entering a
+<code>with</code> block, Python calls the object’s <code>__enter__</code> method, and when leaving the block, it calls the object’s
+<code>__exit__</code> method. An object can therefore be used in a <code>with</code> statement only if its type implements <strong>both</strong> of
+these methods. Because Python looks these methods up on the object’s type and not on the instance, they must be defined on the class itself or
+inherited from a base class; assigning them as instance attributes does not satisfy the protocol.</p>
+<p>The asynchronous variant <code>async with</code> relies on the asynchronous context manager protocol instead: the object’s type must implement
+<strong>both</strong> <code>__aenter__</code> and <code>__aexit__</code>.</p>
+<p>Using an object that does not implement the required protocol raises a <code>TypeError</code> at runtime and interrupts the program:</p>
+<ul>
+  <li>using an object that lacks <code>__enter__</code> or <code>__exit__</code> in a <code>with</code> statement</li>
+  <li>using an object that lacks <code>__aenter__</code> or <code>__aexit__</code> in an <code>async with</code> statement</li>
+</ul>
+<p>A common mistake is to implement only half of the protocol, for example <code>__enter__</code> without <code>__exit__</code>, or to mix the
+synchronous and asynchronous variants.</p>
+<h2>How to fix it</h2>
+<p>Make sure the object used in the statement implements the protocol matching the statement:</p>
+<ul>
+  <li>For <code>with</code>, implement both <code>__enter__</code> and <code>__exit__</code>, or use an existing context manager.</li>
+  <li>For <code>async with</code>, implement both <code>__aenter__</code> and <code>__aexit__</code>, or use an existing asynchronous context
+  manager.</li>
+</ul>
+<p>The <code>contextlib</code> module also provides helpers, such as the <code>@contextmanager</code> and <code>@asynccontextmanager</code>
+decorators, to build context managers from generator functions.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class Resource:
+    def __enter__(self):
+        return self
+
+with Resource() as r:  # Noncompliant: "Resource" does not implement "__exit__"
+    print(r)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class Resource:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        return False
+
+with Resource() as r:
+    print(r)
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+class Connection:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        return False
+
+async def handle():
+    async with Connection() as c:  # Noncompliant: "Connection" does not implement the asynchronous context manager protocol
+        print(c)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+class Connection:
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        return False
+
+async def handle():
+    async with Connection() as c:
+        print(c)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-with-statement">The <code>with</code>
+  statement</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#context-managers">With Statement Context Managers</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#asynchronous-context-managers">Asynchronous Context
+  Managers</a></li>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>contextlib.contextmanager</code></a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S7515} - "async with" should be used for asynchronous resource management</li>
+</ul>
+

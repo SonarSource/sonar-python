@@ -382,6 +382,7 @@ public class OpenSourceCheckList {
       NestedWithStatementsCheck.class,
       NewStyleClassCheck.class,
       NonCallableCalledCheck.class,
+      NonContextManagerCheck.class,
       NonOctalPermissionModeCheck.class,
       NonStandardCryptographicAlgorithmCheck.class,
       NonStringInAllPropertyCheck.class,
