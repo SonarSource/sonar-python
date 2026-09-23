@@ -318,6 +318,107 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void inheritedGenericTypeNestedTypeVar() {
+    FileInput fileInput = inferTypes(
+      """
+        from typing import Annotated, Callable, TypeVar, TypeVarTuple
+        T = TypeVar('T')
+        class MyClass[T]: ...
+        class Nested(MyClass[list[T]]): ...
+        class Deep(MyClass[dict[str, list[T]]]): ...
+        class Callback(MyClass[Callable[[T], int]]): ...
+        class Fixed(MyClass[list[int]]): ...
+        class MetadataOnly(MyClass[Annotated[int, T]]): ...
+        class Parenthesized(MyClass[(T)]): ...
+        class Union(MyClass[T | int]): ...
+        class Tupled(MyClass[(T, int)]): ...
+        Ts = TypeVarTuple('Ts')
+        class Variadic(MyClass[*Ts]): ...
+        """
+    );
+
+    assertThat(classType(fileInput, 3).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 4).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 5).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 6).isGeneric()).isFalse();
+    assertThat(classType(fileInput, 7).isGeneric()).isFalse();
+    assertThat(classType(fileInput, 8).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 9).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 10).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 12).isGeneric()).isTrue();
+  }
+
+  @Test
+  void inheritedGenericTypeFreeParametersThroughAliases() {
+    FileInput fileInput = inferTypes(
+      """
+        from typing import Callable, ParamSpec, TypeAlias, TypeVar
+        from typing_extensions import TypeVar as ExtensionTypeVar
+        T = TypeVar('T')
+        U = T
+        Alias = list[T]
+        P = ParamSpec('P')
+        ExtensionT = ExtensionTypeVar('ExtensionT')
+        AnnotatedAlias: TypeAlias = list[T]
+        AnnotatedRenamed: TypeAlias = T
+        class MyClass[X]: ...
+        class Renamed(MyClass[U]): ...
+        class Aliased(MyClass[Alias]): ...
+        class Callback(MyClass[Callable[P, int]]): ...
+        class Extension(MyClass[ExtensionT]): ...
+        class AnnotatedAliased(MyClass[AnnotatedAlias]): ...
+        class AnnotatedRenamedClass(MyClass[AnnotatedRenamed]): ...
+        """
+    );
+
+    assertThat(classType(fileInput, 10).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 11).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 12).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 13).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 14).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 15).isGeneric()).isTrue();
+  }
+
+  @Test
+  void inheritedGenericTypeUnknownParametersAreNotGeneric() {
+    FileInput fileInput = inferTypes(
+      """
+        from third_party import Model
+        import third_party_module
+        class MyClass[T]: ...
+        class Imported(MyClass[Model]): ...
+        class Qualified(MyClass[third_party_module.Model]): ...
+        class Undefined(MyClass[U]): ...
+        """
+    );
+
+    assertThat(classType(fileInput, 3).isGeneric()).isFalse();
+    assertThat(classType(fileInput, 4).isGeneric()).isFalse();
+    assertThat(classType(fileInput, 5).isGeneric()).isFalse();
+  }
+
+  @Test
+  void inheritedGenericTypeUsesAliasedImportedTypeVar() {
+    var project = new TestProject()
+      .addModule("type_parameters.py", """
+        from typing import TypeVar
+        T = TypeVar('T')
+        """);
+
+    FileInput fileInput = project.inferTypes("consumer.py", """
+      from type_parameters import T as U
+      class Base[T]: ...
+      class Derived(Base[U]): ...
+      """);
+
+    assertThat(classType(fileInput, 2).isGeneric()).isTrue();
+  }
+
+  private static ClassType classType(FileInput fileInput, int statementIndex) {
+    return (ClassType) ((ClassDef) fileInput.statements().statements().get(statementIndex)).name().typeV2();
+  }
+
+  @Test
   void basicGenericTypeParameter() {
     FileInput fileInput = inferTypes(
       """

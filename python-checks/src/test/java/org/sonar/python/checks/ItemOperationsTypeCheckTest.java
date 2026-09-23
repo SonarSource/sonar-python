@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -28,7 +29,9 @@ class ItemOperationsTypeCheckTest {
 
   @Test
   void test_getitem() {
-    PythonCheckVerifier.verify("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_getitem.py", new ItemOperationsTypeCheck());
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/itemOperationsTypeCheck/itemOperations_getitem.py",
+      "src/test/resources/checks/itemOperationsTypeCheck/importedGeneric.py"), new ItemOperationsTypeCheck());
   }
 
   @Test

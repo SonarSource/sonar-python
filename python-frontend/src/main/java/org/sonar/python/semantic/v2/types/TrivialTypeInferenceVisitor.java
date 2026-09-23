@@ -61,6 +61,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SetLiteral;
@@ -70,8 +71,10 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
@@ -113,6 +116,11 @@ import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
+
+  private static final Set<String> EXTENSION_TYPE_PARAMETER_FACTORIES = Set.of(
+    "typing_extensions.TypeVar",
+    "typing_extensions.TypeVarTuple",
+    "typing_extensions.ParamSpec");
   private static final TypeInferenceMatcher IS_NONE_TYPE = TypeInferenceMatcher.of(
     TypeInferenceMatchers.isObjectOfType(BuiltinTypes.NONE_TYPE));
 
@@ -135,6 +143,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static final String PYTEST_MODULE = "pytest";
   private static final String PYTEST_REQUEST_PARAMETER = "request";
+  private static final Set<String> TYPING_ANNOTATED = Set.of("typing.Annotated", "typing_extensions.Annotated");
 
   private record DeferredTree(Tree tree, Scope scope) {
   }
@@ -385,7 +394,106 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private boolean isParentAGenericClass(RegularArgument regularArgument, PythonType argumentType) {
     return typeChecker.typeCheckBuilder().isGeneric().check(argumentType) == TriBool.TRUE
       && regularArgument.expression() instanceof SubscriptionExpression subscriptionExpression
-      && subscriptionExpression.subscripts().expressions().stream().anyMatch(expression -> expression instanceof Name name && typeVarNames.contains(name.name()));
+      && subscriptionExpression.subscripts().expressions().stream().anyMatch(this::containsTypeVar);
+  }
+
+  private boolean containsTypeVar(Expression expression) {
+    return containsTypeVar(expression, new HashSet<>());
+  }
+
+  private boolean containsTypeVar(Expression expression, Set<SymbolV2> visitedSymbols) {
+    if (expression instanceof Name name) {
+      return typeVarNames.contains(name.name())
+        || isTypeParameter(name.typeV2())
+        || isUnknownMemberOfResolvedModule(name)
+        || containsTypeVarInAssignedValue(name, visitedSymbols);
+    }
+    if (expression instanceof ParenthesizedExpression parenthesizedExpression) {
+      return containsTypeVar(parenthesizedExpression.expression(), visitedSymbols);
+    }
+    if (expression instanceof BinaryExpression binaryExpression && (expression.is(Tree.Kind.BITWISE_OR))) {
+      return containsTypeVar(binaryExpression.leftOperand(), visitedSymbols) || containsTypeVar(binaryExpression.rightOperand(), visitedSymbols);
+    }
+    if (expression instanceof UnpackingExpression unpackingExpression) {
+      return containsTypeVar(unpackingExpression.expression(), visitedSymbols);
+    }
+    if (expression instanceof ListLiteral listLiteral) {
+      return listLiteral.elements().expressions().stream().anyMatch(element -> containsTypeVar(element, visitedSymbols));
+    }
+    if (expression instanceof Tuple tuple) {
+      return tuple.elements().stream().anyMatch(element -> containsTypeVar(element, visitedSymbols));
+    }
+    if (expression instanceof SubscriptionExpression subscriptionExpression) {
+      List<Expression> arguments = subscriptionExpression.subscripts().expressions();
+      return hasType(subscriptionExpression.object(), TYPING_ANNOTATED)
+        ? (!arguments.isEmpty() && containsTypeVar(arguments.get(0), visitedSymbols))
+        : arguments.stream().anyMatch(argument -> containsTypeVar(argument, visitedSymbols));
+    }
+    if (expression instanceof QualifiedExpression qualifiedExpression) {
+      return isTypeParameter(qualifiedExpression.name().typeV2()) || isUnknownMemberOfResolvedModule(qualifiedExpression);
+    }
+    return false;
+  }
+
+  /**
+   * Project-level symbols retain a module member's existence but not the type of an unannotated variable.
+   * Treat that narrow case conservatively: it can be a TypeVar imported from a local module. In contrast,
+   * unresolved imports and unknown members are not evidence of a type parameter.
+   */
+  private boolean isUnknownMemberOfResolvedModule(Name name) {
+    if (!(name.typeV2() instanceof UnknownType)) {
+      return false;
+    }
+    return Optional.ofNullable(name.symbolV2())
+      .flatMap(SymbolV2::getSingleBindingUsage)
+      .filter(usage -> usage.kind() == UsageV2.Kind.IMPORT)
+      .map(UsageV2::tree)
+      .flatMap(TrivialTypeInferenceVisitor::importedName)
+      .filter(importedName -> projectLevelTypeTable.getModuleType(getFromImportModuleFqn(importedName.getKey())) instanceof ModuleType module
+        && module.resolveMember(importedName.getValue()).isPresent())
+      .isPresent();
+  }
+
+  private static Optional<Map.Entry<ImportFrom, String>> importedName(Tree tree) {
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(tree, Tree.Kind.IMPORT_FROM))
+      .filter(ImportFrom.class::isInstance)
+      .map(ImportFrom.class::cast)
+      .flatMap(importFrom -> importFrom.importedNames().stream()
+        .filter(aliasedName -> aliasedName.alias() == tree || aliasedName.dottedName().names().getFirst() == tree)
+        .findFirst()
+        .map(aliasedName -> Map.entry(importFrom, aliasedName.dottedName().names().getFirst().name())));
+  }
+
+  private static boolean isUnknownMemberOfResolvedModule(QualifiedExpression qualifiedExpression) {
+    return qualifiedExpression.name().typeV2() instanceof UnknownType
+      && qualifiedExpression.qualifier().typeV2() instanceof ModuleType module
+      && module.resolveMember(qualifiedExpression.name().name()).isPresent();
+  }
+
+  private boolean containsTypeVarInAssignedValue(Name name, Set<SymbolV2> visitedSymbols) {
+    SymbolV2 symbol = name.symbolV2();
+    if (symbol == null || !visitedSymbols.add(symbol)) {
+      return false;
+    }
+    Tree bindingTree = symbol.getSingleBindingUsage().map(UsageV2::tree).orElse(null);
+    Tree assignmentTree = bindingTree == null ? null : TreeUtils.firstAncestor(bindingTree,
+      tree -> tree.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT));
+    if (assignmentTree instanceof AssignmentStatement assignmentStatement) {
+      return containsTypeVar(assignmentStatement.assignedValue(), visitedSymbols);
+    }
+    if (assignmentTree instanceof AnnotatedAssignment annotatedAssignment) {
+      Expression assignedValue = annotatedAssignment.assignedValue();
+      if (assignedValue != null) {
+        return containsTypeVar(assignedValue, visitedSymbols);
+      }
+    }
+    return false;
+  }
+
+  private static boolean hasType(Expression expression, Set<String> fullyQualifiedNames) {
+    return FullyQualifiedNameHelper.getFullyQualifiedName(expression.typeV2())
+      .filter(fullyQualifiedNames::contains)
+      .isPresent();
   }
 
   private static PythonType getTypeV2FromArgument(RegularArgument regularArgument) {
@@ -683,8 +791,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private void assignPossibleTypeVar(CallExpression callExpression) {
     PythonType pythonType = callExpression.callee().typeV2();
-    TriBool check = typeChecker.typeCheckBuilder().isTypeWithName("typing.TypeVar").check(pythonType);
-    if (check == TriBool.TRUE) {
+    if (isTypeParameter(pythonType)) {
       Tree parent = TreeUtils.firstAncestor(callExpression, t -> t.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.ASSIGNMENT_EXPRESSION));
       Optional<Name> assignedName = Optional.empty();
       if (parent instanceof AssignmentStatement assignmentStatement) {
@@ -698,6 +805,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       }
       assignedName.ifPresent(name -> typeVarNames.add(name.name()));
     }
+  }
+
+  private boolean isTypeParameter(PythonType pythonType) {
+    return typeChecker.typeCheckBuilder().isTypeWithName("typing.TypeVar").check(pythonType) == TriBool.TRUE
+      || typeChecker.typeCheckBuilder().isTypeWithName("typing.TypeVarTuple").check(pythonType) == TriBool.TRUE
+      || typeChecker.typeCheckBuilder().isTypeWithName("typing.ParamSpec").check(pythonType) == TriBool.TRUE
+      || FullyQualifiedNameHelper.getFullyQualifiedName(pythonType)
+        .filter(EXTENSION_TYPE_PARAMETER_FACTORIES::contains)
+        .isPresent();
   }
 
   private static Optional<Name> extractAssignedName(AssignmentExpression assignmentExpression) {

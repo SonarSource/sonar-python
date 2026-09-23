@@ -229,12 +229,24 @@ def mocks():
 
 
 def generic_cases(unknown_type):
+  from typing import Annotated, Literal
+  from importedGeneric import ImportedGeneric
+
   class MyGenericClass[T]: ...
+
+  class TwoParameterGeneric[T, U]: ...
+
+  class ParamSpecGeneric[**P, R]: ...
+
+  class TypeVarTupleGeneric[*Ts, R]: ...
 
   class MyGenericSubType(MyGenericClass[str]): ...
 
   class SomeOtherClass: ...
   SomeOtherClassAlias = SomeOtherClass
+
+  class Namespace:
+    class Type[T]: ...
 
   T = TypeVar('T')
   GenericAlias = MyGenericClass[T]  # OK
@@ -242,6 +254,82 @@ def generic_cases(unknown_type):
   IntLiteralAlias = MyGenericClass[0]  # Noncompliant
   StrAlias = MyGenericClass[str]  # OK
   StrLiteralAlias = MyGenericClass["str"]  # OK
+  ParenthesizedAlias = MyGenericClass[(SomeOtherClass)]  # OK
+  UnionAlias = MyGenericClass[SomeOtherClass | MyGenericSubType]  # OK
+  UnionWithNoneAlias = MyGenericClass[SomeOtherClass | None]  # OK
+  InvalidUnionRightAlias = MyGenericClass[SomeOtherClass | 0]  # Noncompliant
+  InvalidUnionLeftAlias = MyGenericClass[0 | SomeOtherClass]  # Noncompliant
+  InvalidBinaryAlias = MyGenericClass[SomeOtherClass + 0]  # Noncompliant
+  QualifiedAlias = MyGenericClass[Namespace.Type]  # OK
+  ParameterizedQualifiedAlias = MyGenericClass[Namespace.Type[SomeOtherClass]]  # OK
+  ImportedAlias = ImportedGeneric[SomeOtherClass]  # OK
+  LiteralAlias = MyGenericClass[Literal[0]]  # OK
+  AnnotatedAlias = MyGenericClass[Annotated[SomeOtherClass, "metadata"]]  # OK
+  InvalidTwoParameterAlias = TwoParameterGeneric[int, 0]  # Noncompliant
+  NestedUnionAlias = MyGenericClass[MyGenericClass[SomeOtherClass] | MyGenericClass[MyGenericSubType]]  # OK
+  EllipsisAlias = ParamSpecGeneric[..., int]  # OK
+  ParamSpecAlias = ParamSpecGeneric[[int, str], int]  # OK
+  TypeVarTupleAlias = TypeVarTupleGeneric[*Ts, int]  # OK
+  ParameterizedEllipsisAlias = TwoParameterGeneric[str, tuple[int, ...]]  # OK
+  TupleAlias = TwoParameterGeneric[(int, str)]  # OK
+  InvalidTupleAlias = TwoParameterGeneric[(int, 0)]  # Noncompliant
+
+  from typing import Annotated, Callable, Literal, TypeVar, TypeVarTuple
+  from typing import Literal as Lit
+  from typing_extensions import Annotated as ExtAnnotated, Literal as ExtLiteral
+  import typing
+
+  TwoParameterGeneric[Literal[1], str]  # OK
+  TwoParameterGeneric[Literal[-1, 0, 1], str]  # OK
+  TwoParameterGeneric[Annotated[int, 42], str]  # OK
+  TwoParameterGeneric[Annotated[int, object()], str]  # OK
+  TwoParameterGeneric[list[Literal[1]], str]  # OK
+  TwoParameterGeneric[Annotated[Literal[1], 42], str]  # OK
+  TwoParameterGeneric[Lit[1], str]  # OK
+  TwoParameterGeneric[typing.Literal[1], str]  # OK
+  TwoParameterGeneric[ExtLiteral[1], str]  # OK
+  TwoParameterGeneric[ExtAnnotated[int, 42], str]  # OK
+
+  NestedT = TypeVar("NestedT")
+  class Nested(MyGenericClass[list[NestedT]]): ...
+  class Deep(MyGenericClass[dict[str, list[NestedT]]]): ...
+  class Callback(MyGenericClass[Callable[[NestedT], int]]): ...
+  class Fixed(MyGenericClass[list[int]]): ...
+  class MetadataOnly(MyGenericClass[Annotated[int, NestedT]]): ...
+  NestedTs = TypeVarTuple("NestedTs")
+  class Variadic(TypeVarTupleGeneric[*NestedTs, int]): ...
+
+  Nested[int]  # OK
+  Deep[int]  # OK
+  Callback[int]  # OK
+  Fixed[str]  # Noncompliant
+  MetadataOnly[str]  # Noncompliant
+  Variadic[str]  # OK
+
+  from typing import ParamSpec
+  from typing_extensions import TypeVar as ExtTypeVar
+  from importedGeneric import ExportedT
+  import importedGeneric
+
+  CallbackP = ParamSpec("CallbackP")
+  class ParamSpecChild(MyGenericClass[Callable[CallbackP, int]]): ...
+  ParamSpecChild[int]  # OK
+
+  ExtensionT = ExtTypeVar("ExtensionT")
+  class ExtensionChild(MyGenericClass[ExtensionT]): ...
+  ExtensionChild[int]  # OK
+
+  class ImportedTypeVarChild(MyGenericClass[ExportedT]): ...
+  class QualifiedTypeVarChild(MyGenericClass[importedGeneric.ExportedT]): ...
+  ImportedTypeVarChild[int]  # OK
+  QualifiedTypeVarChild[int]  # OK
+
+  RenamedT = NestedT
+  NestedAlias = list[NestedT]
+  class RenamedTypeVarChild(MyGenericClass[RenamedT]): ...
+  class TypeAliasChild(MyGenericClass[NestedAlias]): ...
+  RenamedTypeVarChild[int]  # OK
+  TypeAliasChild[int]  # OK
 
   a = MyGenericClass[int]()
   a = MyGenericClass[SomeOtherClass]()
@@ -252,6 +340,7 @@ def generic_cases(unknown_type):
 
   c = SomeOtherClass()
 
+  SomeOtherClass[SomeOtherClass | MyGenericSubType]  # Noncompliant
   c[0] # Noncompliant
   c[int] # Noncompliant
   c["int"] # Noncompliant
