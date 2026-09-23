@@ -38,7 +38,8 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
   private static final Lock DOWNLOAD_LOCK = new ReentrantLock();
 
   private final AtomicInteger requestOrchestratorKey = new AtomicInteger();
-  private final CountDownLatch isOrchestratorReady = new CountDownLatch(1);
+  private final CountDownLatch orchestratorStartupCompleted = new CountDownLatch(1);
+  private volatile boolean isOrchestratorReady;
 
   ConcurrentOrchestratorExtension(Configuration config, SonarDistribution distribution, @Nullable StartupLogWatcher startupLogWatcher) {
     super(config, distribution, startupLogWatcher);
@@ -47,19 +48,22 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
   @Override
   public void beforeAll(ExtensionContext context) throws InterruptedException {
     if (requestOrchestratorKey.getAndIncrement() == 0) {
-      start();
-
-      prepareOrchestrator();
+      try {
+        start();
+        prepareOrchestrator();
+        isOrchestratorReady = true;
+      } finally {
+        orchestratorStartupCompleted.countDown();
+      }
     } else {
       waitUntilReady();
     }
   }
 
-  private void prepareOrchestrator() {
+  void prepareOrchestrator() {
     DOWNLOAD_LOCK.lock();
     try {
       installSonarScanner();
-      isOrchestratorReady.countDown();
     } finally {
       DOWNLOAD_LOCK.unlock();
     }
@@ -78,7 +82,10 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
   }
 
   public void waitUntilReady() throws InterruptedException {
-    isOrchestratorReady.await();
+    orchestratorStartupCompleted.await();
+    if (!isOrchestratorReady) {
+      throw new IllegalStateException("Previous Orchestrator startup failed");
+    }
   }
 
   public static ConcurrentOrchestratorExtensionBuilder builderEnv() {
