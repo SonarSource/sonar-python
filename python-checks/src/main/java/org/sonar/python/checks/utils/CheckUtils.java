@@ -16,8 +16,10 @@
  */
 package org.sonar.python.checks.utils;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -36,7 +38,9 @@ import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -270,5 +274,29 @@ public class CheckUtils {
     }
 
     return firstParameterName.symbol();
+  }
+
+  private static final Comparator<Tree> BY_POSITION = TreeUtils.getTreeByPositionComparator();
+
+  /**
+   * True if any comment (trivia) within {@code tree} sits at a position matching {@code commentPosition}.
+   */
+  public static boolean hasCommentMatching(Tree tree, Predicate<Token> commentPosition) {
+    return TreeUtils.tokens(tree).stream()
+      .flatMap(token -> token.trivia().stream())
+      .map(Trivia::token)
+      .anyMatch(commentPosition);
+  }
+
+  /**
+   * True if a comment appears within the source span (start, end], which is what a
+   * {@code replaceRange(start, end, ...)} quick fix would delete.
+   */
+  public static boolean hasCommentBetween(Tree tree, Token start, Token end) {
+    return hasCommentMatching(tree, comment -> isAfter(comment, start) && !isAfter(comment, end));
+  }
+
+  private static boolean isAfter(Tree tree, Tree reference) {
+    return tree.firstToken() != null && BY_POSITION.compare(tree, reference) > 0;
   }
 }

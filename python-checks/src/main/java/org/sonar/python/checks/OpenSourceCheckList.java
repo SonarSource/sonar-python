@@ -587,6 +587,7 @@ public class OpenSourceCheckList {
       XfailNoReasonCheck.class,
       XMLParserXXEVulnerableCheck.class,
       XMLSignatureValidationCheck.class,
+      YieldFromDelegationCheck.class,
       DjangoModelFormFieldsCheck.class,
       WebEntryPointDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
