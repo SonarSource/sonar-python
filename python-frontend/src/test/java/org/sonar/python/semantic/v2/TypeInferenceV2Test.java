@@ -62,6 +62,7 @@ import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
@@ -403,15 +404,26 @@ public class TypeInferenceV2Test {
       .addModule("type_parameters.py", """
         from typing import TypeVar
         T = TypeVar('T')
+        """)
+      .addModule("generic_module.py", """
+        class Pipeline[M, S]: ...
         """);
 
     FileInput fileInput = project.inferTypes("consumer.py", """
+      from typing import TYPE_CHECKING
       from type_parameters import T as U
       class Base[T]: ...
       class Derived(Base[U]): ...
+      if TYPE_CHECKING:
+        from generic_module import Pipeline
+      class Consumer[P: Pipeline[int, str]]: ...
       """);
 
-    assertThat(classType(fileInput, 2).isGeneric()).isTrue();
+    assertThat(classType(fileInput, 3).isGeneric()).isTrue();
+    var consumer = (ClassDef) fileInput.statements().statements().get(5);
+    var pipelineSubscription = (SubscriptionExpression) consumer.typeParams().typeParamsList().get(0).typeAnnotation().expression();
+    PythonType pipelineType = pipelineSubscription.object().typeV2();
+    assertThat(pipelineType).isInstanceOfSatisfying(ClassType.class, type -> assertThat(type.isGeneric()).isTrue());
   }
 
   private static ClassType classType(FileInput fileInput, int statementIndex) {

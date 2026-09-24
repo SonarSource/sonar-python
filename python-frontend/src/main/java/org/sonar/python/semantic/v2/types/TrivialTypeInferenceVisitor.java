@@ -338,7 +338,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     ClassType type = buildClassType(classDef);
     ((NameImpl) name).typeV2(type);
 
-    inTypeScope(type, () -> scan(classDef.body()));
+    inTypeScope(type, () -> {
+      scan(classDef.typeParams());
+      scan(classDef.body());
+    });
   }
 
   private ClassType buildClassType(ClassDef classDef) {

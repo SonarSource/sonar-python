@@ -64,6 +64,7 @@ public final class TestsUtils {
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules-example.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-test-rules.xml"))
+      .restoreProfileAtStartup(FileLocation.of("profiles/profile-ipython-test-rules.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"));

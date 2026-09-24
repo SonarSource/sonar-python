@@ -46,6 +46,7 @@ public class NotebookPluginTest {
 
   private static void analyzeProject(String projectKey) {
     ORCHESTRATOR.getServer().provisionProject(projectKey, projectKey);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "ipynb", "ipython-test-rules-profile");
     SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File("projects", projectKey))
       .setProjectKey(projectKey)
@@ -66,7 +67,7 @@ public class NotebookPluginTest {
 
   @Test
   void magic_cells_preserve_python_analysis_and_locations() {
-    // S3457 is active in the default notebook profile. These ranges refer to the original JSON source.
+    // S3457 is active in the notebook test profile. These ranges refer to the original JSON source.
     assertThat(issues(DATABRICKS_PROJECT_KEY))
       .extracting(
         Issues.Issue::getComponent,

@@ -229,8 +229,9 @@ def mocks():
 
 
 def generic_cases(unknown_type):
-  from typing import Annotated, Literal
+  from typing import TYPE_CHECKING, Any, Annotated, Literal, TypeAlias, TypeVar
   from importedGeneric import ImportedGeneric
+  from pydantic import Json
 
   class MyGenericClass[T]: ...
 
@@ -239,6 +240,24 @@ def generic_cases(unknown_type):
   class ParamSpecGeneric[**P, R]: ...
 
   class TypeVarTupleGeneric[*Ts, R]: ...
+
+  class BaseGroupingComponent[
+    ValuesType: str | int | BaseGroupingComponent[Any]
+  ]: ...
+
+  if TYPE_CHECKING:
+    from importedGeneric import Pipeline
+
+  class NestedPipelineView[
+    P1: Pipeline[Any, Any],
+    P2: Pipeline[Any, Any],
+  ]: ...
+
+  JsonType = TypeVar("JsonType")
+  JsonBodyPayload: TypeAlias = Annotated[Json[JsonType], "metadata"]
+
+  class NotGeneric: ...
+  NotGeneric[int]  # Noncompliant
 
   class MyGenericSubType(MyGenericClass[str]): ...
 
