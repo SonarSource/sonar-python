@@ -1,40 +1,86 @@
-<p>This rule raises an issue when a for-loop is used to add all elements from one collection to a set using the <code>add()</code> method.</p>
+<p>This rule raises an issue when several elements are added to the same set through consecutive <code>add()</code> calls, either as a sequence of
+statements or through a for-loop.</p>
 <h2>Why is this an issue?</h2>
-<p>Adding elements to a set one at a time in a loop is unnecessary when the <code>update()</code> method exists:</p>
+<p>Adding elements to a set one at a time is unnecessary when the <code>update()</code> method exists. This happens with a sequence of
+<code>add()</code> statements:</p>
+<pre>
+my_set.add(first)
+my_set.add(second)
+my_set.add(third)
+</pre>
+<p>It also happens when a for-loop adds every element of another collection, which is the same sequence of calls spread over an iteration:</p>
 <pre>
 for element in other_collection:
     my_set.add(element)
 </pre>
 <p>The <code>update()</code> method combines all additions into a single call and avoids the overhead of repeated <code>add()</code> invocations:</p>
 <pre>
-my_set.update(other_collection)  # Single call, more efficient
+my_set.update({first, second, third})
+my_set.update(other_collection)
 </pre>
 <h3>What is the potential impact?</h3>
-<p>Using <code>update()</code> improves readability and removes redundant method call overhead. In loops or performance-critical code, the difference
-can become measurable.</p>
+<p>Grouping the additions makes the intent explicit: the reader sees one operation that grows the set instead of a series of independent statements.
+It also removes redundant call overhead, since the attribute lookup and the method call are resolved once instead of once per element. In hot code or
+when the source collection is large, the difference becomes measurable.</p>
+<h3>Exceptions</h3>
+<p>No issue is raised when other statements are interleaved between the <code>add()</code> calls, or when the body of the loop does more than add the
+loop variable, for example when it filters or transforms the elements:</p>
+<pre>
+for element in other_collection:
+    if element.is_valid():
+        my_set.add(element)
+</pre>
 <h2>How to fix it</h2>
-<p>Replace the for-loop with a single <code>update()</code> call. The method accepts any iterable.</p>
+<p>Group the added elements into a single <code>update()</code> call. For consecutive statements, pass the elements as a set literal. For a loop, pass
+the iterated collection directly, as <code>update()</code> accepts any iterable.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-my_set = {1, 2, 3}
-other_collection = [4, 5, 6]
-
-for element in other_collection:
-    my_set.add(element)  # Noncompliant
+def collect_tags(base_tags, name):
+    tags = set(base_tags)
+    tags.add("archived")  # Noncompliant
+    tags.add("verified")
+    tags.add(name)
+    return tags
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-my_set = {1, 2, 3}
-other_collection = [4, 5, 6]
-
-my_set.update(other_collection)
+def collect_tags(base_tags, name):
+    tags = set(base_tags)
+    tags.update({"archived", "verified", name})
+    return tags
 </pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+def collect_results(results, new_results):
+    for result in new_results:
+        results.add(result)  # Noncompliant
+    return results
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+def collect_results(results, new_results):
+    results.update(new_results)
+    return results
+</pre>
+<h3>How does this work?</h3>
+<p><code>update()</code> iterates over its argument and adds every element to the set, so the result is exactly the same as the individual calls. The
+augmented assignment <code>my_set |= {first, second, third}</code> is equivalent to <code>update()</code> with another set and can be used instead
+when it reads better.</p>
+<h3>Pitfalls</h3>
+<p>Do not confuse <code>update()</code> with <code>add()</code>: <code>my_set.add(other_collection)</code> adds the collection itself as a single
+element, and fails when that collection is not hashable, while <code>update()</code> adds its elements.</p>
+<p>A loop that adds to the set it iterates over only re-adds elements that are already present, so it leaves the set unchanged and there is nothing to
+group. Apart from that case, the fix preserves behavior.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#frozenset.update"><code>set.update()</code> method</a></li>
   <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset">Set Types — <code>set</code>,
   <code>frozenset</code></a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S9409} - "list.extend()" should be used instead of consecutive "append()" calls</li>
 </ul>
 

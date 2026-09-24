@@ -1,0 +1,87 @@
+<p>This rule raises an issue when several elements are added to the same list through consecutive <code>append()</code> calls, either as a sequence of
+statements or through a for-loop.</p>
+<h2>Why is this an issue?</h2>
+<p>Adding elements to a list one at a time is unnecessary when the <code>extend()</code> method exists. This happens with a sequence of
+<code>append()</code> statements:</p>
+<pre>
+my_list.append(first)
+my_list.append(second)
+my_list.append(third)
+</pre>
+<p>It also happens when a for-loop appends every element of another collection, which is the same sequence of calls spread over an iteration:</p>
+<pre>
+for element in other_collection:
+    my_list.append(element)
+</pre>
+<p>The <code>extend()</code> method combines all additions into a single call and avoids the overhead of repeated <code>append()</code>
+invocations:</p>
+<pre>
+my_list.extend([first, second, third])
+my_list.extend(other_collection)
+</pre>
+<h3>What is the potential impact?</h3>
+<p>Grouping the additions makes the intent explicit: the reader sees one operation that grows the list instead of a series of independent statements.
+It also removes redundant call overhead, since the attribute lookup and the method call are resolved once instead of once per element. In hot code or
+when the source collection is large, the difference becomes measurable.</p>
+<h3>Exceptions</h3>
+<p>No issue is raised when other statements are interleaved between the <code>append()</code> calls, or when the body of the loop does more than
+append the loop variable, for example when it filters or transforms the elements:</p>
+<pre>
+for element in other_collection:
+    if element.is_valid():
+        my_list.append(element)
+</pre>
+<h2>How to fix it</h2>
+<p>Group the appended elements into a single <code>extend()</code> call. For consecutive statements, pass the elements as a list literal. For a loop,
+pass the iterated collection directly, as <code>extend()</code> accepts any iterable.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def build_command(base_command, path):
+    command = list(base_command)
+    command.append("--archive")  # Noncompliant
+    command.append("--verbose")
+    command.append(path)
+    return command
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def build_command(base_command, path):
+    command = list(base_command)
+    command.extend(["--archive", "--verbose", path])
+    return command
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+def collect_results(results, new_results):
+    for result in new_results:
+        results.append(result)  # Noncompliant
+    return results
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+def collect_results(results, new_results):
+    results.extend(new_results)
+    return results
+</pre>
+<h3>How does this work?</h3>
+<p><code>extend()</code> iterates over its argument and appends every element to the list, so the result is exactly the same as the individual calls.
+The augmented assignment <code>my_list += [first, second, third]</code> is equivalent to <code>extend()</code> and can be used instead when it reads
+better.</p>
+<h3>Pitfalls</h3>
+<p>Do not confuse <code>extend()</code> with <code>append()</code>: <code>my_list.append(other_collection)</code> adds the collection itself as a
+single element, while <code>extend()</code> adds its elements.</p>
+<p>A loop that appends to the list it iterates over never terminates, while <code>my_list.extend(my_list)</code> simply doubles the list. The fix is
+behavior-preserving in every other case, so make sure the loop you replace iterates over a different collection.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists"><code>list.extend()</code> method</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">Sequence Types —
+  <code>list</code>, <code>tuple</code>, <code>range</code></a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S8502} - "set.update()" should be used instead of consecutive "add()" calls</li>
+</ul>
+

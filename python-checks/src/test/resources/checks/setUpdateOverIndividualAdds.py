@@ -26,6 +26,70 @@ def noncompliant_multiline_receiver():
          ).add(item)
 
 
+def noncompliant_consecutive_adds(first, second):
+    my_set = set()
+    my_set.add(first)  # Noncompliant {{Use "set.update()" instead of consecutive "add()" calls.}}
+#   ^^^^^^^^^^
+    my_set.add(second)
+#   ^^^^^^^^^^< {{This call is part of the same sequence.}}
+    my_set.add("third")
+#   ^^^^^^^^^^< {{This call is part of the same sequence.}}
+    return my_set
+
+
+def noncompliant_consecutive_adds_after_other_statements():
+    my_set = set()
+    print("start")
+    my_set.add(1)  # Noncompliant
+    my_set.add(2)
+    my_set.add(3)
+
+
+def compliant_two_consecutive_adds():
+    my_set = set()
+    my_set.add(1)
+    my_set.add(2)
+
+
+def compliant_adds_interleaved_with_other_statements():
+    my_set = set()
+    my_set.add(1)
+    print("in between")
+    my_set.add(2)
+    print("in between")
+    my_set.add(3)
+
+
+def compliant_adds_on_different_sets():
+    first = set()
+    second = set()
+    third = set()
+    first.add(1)
+    second.add(2)
+    third.add(3)
+
+
+def compliant_adds_referencing_the_set():
+    # Grouping these calls would change the result: each argument observes the previous add
+    my_set = set()
+    my_set.add(len(my_set))
+    my_set.add(len(my_set))
+    my_set.add(len(my_set))
+
+
+async def compliant_async_for_loop(async_iterable):
+    # "update()" only accepts synchronous iterables
+    my_set = set()
+    async for item in async_iterable:
+        my_set.add(item)
+
+
+def compliant_loop_adding_the_iterated_set():
+    my_set = {1, 2, 3}
+    for item in my_set:
+        my_set.add(item)
+
+
 def compliant_tuple_unpacking_loop_var():
     my_set = set()
     pairs = [(1, "a"), (2, "b")]
