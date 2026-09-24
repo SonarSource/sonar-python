@@ -23,9 +23,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.quickfix.TextEditUtils.insertLineBefore;
@@ -56,10 +56,10 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
       }
 
       if (functionDef.body().statements().size() == 1 && functionDef.body().statements().get(0).is(Tree.Kind.PASS_STMT)) {
-        if (TreeUtils.tokens(functionDef).stream().anyMatch(t -> !t.trivia().isEmpty())) {
+        if (CheckUtils.hasCommentOnTokens(TreeUtils.tokens(functionDef))) {
           return;
         }
-        if (hasCommentAbove(functionDef)) {
+        if (CheckUtils.hasCommentOnPreviousToken(functionDef.parent(), functionDef.defKeyword())) {
           return;
         }
         String type = functionDef.isMethodDefinition() ? "method" : "function";
@@ -81,18 +81,5 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
       issue.addQuickFix(PythonQuickFix.newQuickFix("Raise NotImplementedError()",
         insertLineBefore(passStatement, "raise NotImplementedError()")));
     }
-  }
-
-  private static boolean hasCommentAbove(FunctionDef functionDef) {
-    Tree parent = functionDef.parent();
-    List<Token> tokens = TreeUtils.tokens(parent);
-    Token defKeyword = functionDef.defKeyword();
-    int index = tokens.indexOf(defKeyword);
-    if (index == 0) {
-      parent = parent.parent();
-      tokens = TreeUtils.tokens(parent);
-      index = tokens.indexOf(defKeyword);
-    }
-    return index > 0 && !tokens.get(index - 1).trivia().isEmpty();
   }
 }

@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -55,7 +56,7 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
         .orElseThrow(() -> new IllegalStateException(String.format("No newline token in parent of statement list at line %s", statementListTree.firstToken().line())));
       // sublist call is excluding last index and token following last token of statement list (dedent) should be included in the comment verification.
       int to = parentTokens.indexOf(statementListTree.lastToken()) + 2;
-      if (!containsComment(parentTokens.subList(from, to))) {
+      if (!CheckUtils.hasCommentOnTokens(parentTokens.subList(from, to))) {
         var passTreeElement = Optional.of(statementListTree)
           .map(StatementList::statements)
           .map(Collection::stream)
@@ -82,9 +83,5 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
 
       }
     });
-  }
-
-  private static boolean containsComment(List<Token> tokens) {
-    return tokens.stream().anyMatch(t -> !t.trivia().isEmpty());
   }
 }

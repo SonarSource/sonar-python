@@ -19,6 +19,7 @@ package org.sonar.python.checks.utils;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -294,6 +295,38 @@ public class CheckUtils {
    */
   public static boolean hasCommentBetween(Tree tree, Token start, Token end) {
     return hasCommentMatching(tree, comment -> isAfter(comment, start) && !isAfter(comment, end));
+  }
+
+  /**
+   * True if any token in {@code tokens} has attached trivia (same as scanning a precomputed sublist).
+   */
+  public static boolean hasCommentOnTokens(List<Token> tokens) {
+    return tokens.stream().anyMatch(token -> !token.trivia().isEmpty());
+  }
+
+  /**
+   * True if any comment in {@code tree} lies on a line accepted by {@code lineMatches}.
+   */
+  public static boolean hasCommentOnLineMatching(Tree tree, IntPredicate lineMatches) {
+    return hasCommentMatching(tree, comment -> lineMatches.test(comment.line()));
+  }
+
+  /**
+   * True if the token immediately before {@code token} in the flat token list of {@code parent} (walking up
+   * when {@code token} is the first token of the current parent) carries trivia.
+   */
+  public static boolean hasCommentOnPreviousToken(Tree parent, Token token) {
+    List<Token> tokens = TreeUtils.tokens(parent);
+    int index = tokens.indexOf(token);
+    if (index == 0) {
+      parent = parent.parent();
+      if (parent == null) {
+        return false;
+      }
+      tokens = TreeUtils.tokens(parent);
+      index = tokens.indexOf(token);
+    }
+    return index > 0 && !tokens.get(index - 1).trivia().isEmpty();
   }
 
   private static boolean isAfter(Tree tree, Tree reference) {

@@ -26,7 +26,7 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.checks.utils.CheckUtils;
 
 @Rule(key = "S9154")
 public class NestedWithStatementsCheck extends PythonSubscriptionCheck {
@@ -83,13 +83,9 @@ public class NestedWithStatementsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isCombinableNesting(WithStatement outer, WithStatement inner) {
-    return outer.isAsync() == inner.isAsync() && !hasCommentsBetween(outer, inner);
-  }
-
-  private static boolean hasCommentsBetween(WithStatement outer, WithStatement inner) {
-    return TreeUtils.tokens(outer).stream()
-            .flatMap(token -> token.trivia().stream())
-            .map(trivia -> trivia.token().line())
-            .anyMatch(line -> line > outer.colon().line() && line < inner.firstToken().line());
+    int colonLine = outer.colon().line();
+    int innerLine = inner.firstToken().line();
+    return outer.isAsync() == inner.isAsync()
+      && !CheckUtils.hasCommentOnLineMatching(outer, line -> line > colonLine && line < innerLine);
   }
 }

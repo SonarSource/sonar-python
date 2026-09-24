@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_EXPRESSION;
@@ -78,12 +79,8 @@ public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
       || wouldCauseLongLineLength(singleIfChild, enclosingIfStatement)
       || singleIfChild.condition().is(ASSIGNMENT_EXPRESSION)
       || enclosingIfStatement.condition().is(ASSIGNMENT_EXPRESSION)
-      || hasCommentsBetweenEnclosingAndChildIf(singleIfChild, enclosingIfStatement);
-  }
-
-  private static boolean hasCommentsBetweenEnclosingAndChildIf(IfStatement singleIfChild, IfStatement enclosingIfStatement) {
-    return TreeUtils.tokens(enclosingIfStatement).stream()
-      .anyMatch(token -> !token.trivia().isEmpty() && token.trivia().get(0).token().line() < singleIfChild.firstToken().line());
+      || CheckUtils.hasCommentOnLineMatching(enclosingIfStatement,
+        line -> line < singleIfChild.firstToken().line());
   }
 
   private static boolean wouldCauseLongLineLength(IfStatement singleIfChild, IfStatement enclosingIf) {
