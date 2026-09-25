@@ -26,7 +26,7 @@ import org.sonar.plugins.python.api.TriBool;
  */
 @Beta
 public interface PythonType {
-  PythonType UNKNOWN = new UnknownType.UnknownTypeImpl();
+  PythonType UNKNOWN = new UnknownTypeImpl();
 
   @Beta
   default String name() {

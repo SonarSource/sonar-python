@@ -149,7 +149,7 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
     LocationInFile locationInFile = locationForClassOrFunction(symbol);
     if (locationInFile != null) {
       String type = symbol.is(Symbol.Kind.CLASS) ? "Class" : "Function";
-      issue.secondary(locationInFile, String.format("%s definition.", type));
+      issue.secondary(locationInFile, type + " definition.");
     }
   }
 

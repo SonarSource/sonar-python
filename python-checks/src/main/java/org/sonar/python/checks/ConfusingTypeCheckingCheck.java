@@ -142,7 +142,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
       String typeNameString = typeName != null ? String.format("has type \"%s\" and", typeName) : "";
       return isForLoop && isAsyncIterable(expression) ?
         String.format("Add \"async\" before \"for\"; Previous type checks suggest that %s %s is an async generator.", expressionNameString, typeNameString) :
-        String.format("Replace this expression; Previous type checks suggest that %s %s isn't iterable.", expressionNameString, typeNameString);
+        ("Replace this expression; Previous type checks suggest that " + expressionNameString + " " + typeNameString + " isn't iterable.");
     }
 
     @Override

@@ -59,7 +59,7 @@ public abstract class PythonReportSensor implements Sensor {
       processReports(context, reports);
     } catch (Exception e) {
       LOG.warn("Cannot read report '{}', the following exception occurred: {}", reportPath, e.getMessage());
-      analysisWarnings.addUnique(String.format("An error occurred while trying to import %s report(s): '%s'", reportType, reportPath));
+      analysisWarnings.addUnique("An error occurred while trying to import " + reportType + " report(s): '" + reportPath + "'");
     }
   }
 
@@ -74,7 +74,7 @@ public abstract class PythonReportSensor implements Sensor {
         // try absolute path
         File file = new File(reportPath);
         if (!file.exists()) {
-          String formattedMessage = String.format("No report was found for %s using pattern %s", reportPathPropertyKey, reportPath);
+          String formattedMessage = "No report was found for " + reportPathPropertyKey + " using pattern " + reportPath;
           LOG.warn(formattedMessage);
           analysisWarnings.addUnique(formattedMessage);
         } else {

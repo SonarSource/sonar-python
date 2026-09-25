@@ -74,7 +74,7 @@ public class DescriptorUtils {
         Descriptor recreatedDescriptor = recreateDescriptorFromAlias((AliasDescriptor) descriptor);
         return symbolFromDescriptor(recreatedDescriptor, projectLevelSymbolTable, symbolName, createdSymbolsByDescriptor, createdSymbolsByFqn);
       default:
-        throw new IllegalStateException(String.format("Error while creating a Symbol from a Descriptor: Unexpected descriptor kind: %s", descriptor.kind()));
+        throw new IllegalStateException("Error while creating a Symbol from a Descriptor: Unexpected descriptor kind: " + descriptor.kind());
     }
   }
 
@@ -85,7 +85,7 @@ public class DescriptorUtils {
     } else if (originalDescriptor instanceof ClassDescriptor classDescriptor) {
       return recreateClassDescriptor(aliasDescriptor, classDescriptor);
     }
-    throw new IllegalStateException(String.format("Error while recreating a descriptor from an alias: Unexpected alias kind: %s", originalDescriptor.kind()));
+    throw new IllegalStateException("Error while recreating a descriptor from an alias: Unexpected alias kind: " + originalDescriptor.kind());
   }
 
   private static Descriptor recreateFunctionDescriptor(AliasDescriptor aliasDescriptor, FunctionDescriptor originalDescriptor) {

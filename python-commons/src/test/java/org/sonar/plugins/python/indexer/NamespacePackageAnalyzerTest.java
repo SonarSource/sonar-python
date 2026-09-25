@@ -25,7 +25,7 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void empty_project_returns_zero_counts() {
-    ProjectTree emptyTree = new ProjectTree.ProjectTreeFile("/");
+    ProjectTree emptyTree = new ProjectTreeFile("/");
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
 
     NamespacePackageTelemetry result = analyzer.analyze(emptyTree);
@@ -38,8 +38,8 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void root_folder_is_excluded_from_counts() {
-    ProjectTree rootWithPythonFile = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFile("main.py")
+    ProjectTree rootWithPythonFile = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFile("main.py")
     ));
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
 
@@ -51,10 +51,10 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void folder_without_python_files_is_excluded() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("empty_folder", List.of()),
-      new ProjectTree.ProjectTreeFolder("config_folder", List.of(
-        new ProjectTree.ProjectTreeFile("config.json")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("empty_folder", List.of()),
+      new ProjectTreeFolder("config_folder", List.of(
+        new ProjectTreeFile("config.json")
       ))
     ));
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
@@ -67,10 +67,10 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void package_with_init_is_counted() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("mypackage", List.of(
-        new ProjectTree.ProjectTreeFile("__init__.py"),
-        new ProjectTree.ProjectTreeFile("module.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("mypackage", List.of(
+        new ProjectTreeFile("__init__.py"),
+        new ProjectTreeFile("module.py")
       ))
     ));
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
@@ -85,9 +85,9 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void package_without_init_is_counted() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("mypackage", List.of(
-        new ProjectTree.ProjectTreeFile("module.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("mypackage", List.of(
+        new ProjectTreeFile("module.py")
       ))
     ));
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
@@ -102,17 +102,17 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void namespace_package_is_detected_when_folder_appears_multiple_times() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("src1", List.of(
-        new ProjectTree.ProjectTreeFile("main1.py"),
-        new ProjectTree.ProjectTreeFolder("shared", List.of(
-          new ProjectTree.ProjectTreeFile("module1.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("src1", List.of(
+        new ProjectTreeFile("main1.py"),
+        new ProjectTreeFolder("shared", List.of(
+          new ProjectTreeFile("module1.py")
         ))
       )),
-      new ProjectTree.ProjectTreeFolder("src2", List.of(
-        new ProjectTree.ProjectTreeFile("main2.py"),
-        new ProjectTree.ProjectTreeFolder("shared", List.of(
-          new ProjectTree.ProjectTreeFile("module2.py")
+      new ProjectTreeFolder("src2", List.of(
+        new ProjectTreeFile("main2.py"),
+        new ProjectTreeFolder("shared", List.of(
+          new ProjectTreeFile("module2.py")
         ))
       ))
     ));
@@ -126,11 +126,11 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void package_missing_init_detected_when_parent_has_init() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("mypackage", List.of(
-        new ProjectTree.ProjectTreeFile("__init__.py"),
-        new ProjectTree.ProjectTreeFolder("subpackage", List.of(
-          new ProjectTree.ProjectTreeFile("module.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("mypackage", List.of(
+        new ProjectTreeFile("__init__.py"),
+        new ProjectTreeFolder("subpackage", List.of(
+          new ProjectTreeFile("module.py")
         ))
       ))
     ));
@@ -145,11 +145,11 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void package_missing_init_not_detected_when_no_parent_has_init() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("mypackage", List.of(
-        new ProjectTree.ProjectTreeFile("helper.py"),
-        new ProjectTree.ProjectTreeFolder("subpackage", List.of(
-          new ProjectTree.ProjectTreeFile("module.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("mypackage", List.of(
+        new ProjectTreeFile("helper.py"),
+        new ProjectTreeFolder("subpackage", List.of(
+          new ProjectTreeFile("module.py")
         ))
       ))
     ));
@@ -164,31 +164,31 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void complex_project_structure() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("pkg1", List.of(
-        new ProjectTree.ProjectTreeFile("__init__.py"),
-        new ProjectTree.ProjectTreeFile("module1.py"),
-        new ProjectTree.ProjectTreeFolder("sub1", List.of(
-          new ProjectTree.ProjectTreeFile("__init__.py"),
-          new ProjectTree.ProjectTreeFile("module2.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("pkg1", List.of(
+        new ProjectTreeFile("__init__.py"),
+        new ProjectTreeFile("module1.py"),
+        new ProjectTreeFolder("sub1", List.of(
+          new ProjectTreeFile("__init__.py"),
+          new ProjectTreeFile("module2.py")
         )),
-        new ProjectTree.ProjectTreeFolder("sub2", List.of(
-          new ProjectTree.ProjectTreeFile("module3.py")
+        new ProjectTreeFolder("sub2", List.of(
+          new ProjectTreeFile("module3.py")
         ))
       )),
-      new ProjectTree.ProjectTreeFolder("pkg2", List.of(
-        new ProjectTree.ProjectTreeFile("module4.py")
+      new ProjectTreeFolder("pkg2", List.of(
+        new ProjectTreeFile("module4.py")
       )),
-      new ProjectTree.ProjectTreeFolder("src", List.of(
-        new ProjectTree.ProjectTreeFile("main.py"),
-        new ProjectTree.ProjectTreeFolder("shared", List.of(
-          new ProjectTree.ProjectTreeFile("util.py")
+      new ProjectTreeFolder("src", List.of(
+        new ProjectTreeFile("main.py"),
+        new ProjectTreeFolder("shared", List.of(
+          new ProjectTreeFile("util.py")
         ))
       )),
-      new ProjectTree.ProjectTreeFolder("lib", List.of(
-        new ProjectTree.ProjectTreeFile("app.py"),
-        new ProjectTree.ProjectTreeFolder("shared", List.of(
-          new ProjectTree.ProjectTreeFile("helper.py")
+      new ProjectTreeFolder("lib", List.of(
+        new ProjectTreeFile("app.py"),
+        new ProjectTreeFolder("shared", List.of(
+          new ProjectTreeFile("helper.py")
         ))
       ))
     ));
@@ -204,13 +204,13 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void deeply_nested_package_missing_init() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("top", List.of(
-        new ProjectTree.ProjectTreeFile("__init__.py"),
-        new ProjectTree.ProjectTreeFolder("level1", List.of(
-          new ProjectTree.ProjectTreeFile("__init__.py"),
-          new ProjectTree.ProjectTreeFolder("level2", List.of(
-            new ProjectTree.ProjectTreeFile("module.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("top", List.of(
+        new ProjectTreeFile("__init__.py"),
+        new ProjectTreeFolder("level1", List.of(
+          new ProjectTreeFile("__init__.py"),
+          new ProjectTreeFolder("level2", List.of(
+            new ProjectTreeFile("module.py")
           ))
         ))
       ))
@@ -226,9 +226,9 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void init_file_alone_without_other_python_files() {
-    ProjectTree tree = new ProjectTree.ProjectTreeFolder("/", List.of(
-      new ProjectTree.ProjectTreeFolder("pkg", List.of(
-        new ProjectTree.ProjectTreeFile("__init__.py")
+    ProjectTree tree = new ProjectTreeFolder("/", List.of(
+      new ProjectTreeFolder("pkg", List.of(
+        new ProjectTreeFile("__init__.py")
       ))
     ));
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
@@ -241,7 +241,7 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void telemetry_has_null_resolution_info_by_default() {
-    ProjectTree emptyTree = new ProjectTree.ProjectTreeFile("/");
+    ProjectTree emptyTree = new ProjectTreeFile("/");
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
 
     NamespacePackageTelemetry result = analyzer.analyze(emptyTree);
@@ -252,7 +252,7 @@ class NamespacePackageAnalyzerTest {
 
   @Test
   void telemetry_with_resolution_info_can_be_created() {
-    ProjectTree emptyTree = new ProjectTree.ProjectTreeFile("/");
+    ProjectTree emptyTree = new ProjectTreeFile("/");
     NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
     NamespacePackageTelemetry baseTelemetry = analyzer.analyze(emptyTree);
 

@@ -119,7 +119,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
   private static void createQuickFix(PreciseIssue issue, String oppositeOperator, BinaryExpression toUse, UnaryExpression notAncestor) {
     PythonTextEdit replaceEdit = getReplaceEdit(toUse, oppositeOperator, notAncestor);
 
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix(String.format("Use %s instead", oppositeOperator))
+    PythonQuickFix quickFix = PythonQuickFix.newQuickFix("Use " + oppositeOperator + " instead")
       .addTextEdit(replaceEdit)
       .build();
     issue.addQuickFix(quickFix);

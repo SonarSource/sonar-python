@@ -199,7 +199,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     if (complexity == 1) {
       return "+1";
     } else {
-      return String.format("+%s (incl %s for nesting)", complexity, complexity - 1);
+      return "+" + complexity + " (incl " + (complexity - 1) + " for nesting)";
     }
   }
 

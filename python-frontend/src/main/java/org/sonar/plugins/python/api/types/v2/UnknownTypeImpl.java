@@ -14,23 +14,12 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.plugins.python.api.types.v2;
 
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.api.Beta;
 
-public interface HasSymbol {
-
-  /**
-   * Use TypeV2 and SymbolV2 instead
-   *
-   * @deprecated since 5.32, use TypeV2 and SymbolV2 instead
-   */
-  @Deprecated(since="5.32")
-  @CheckForNull
-  Symbol symbol();
-
-  @CheckForNull
-  Usage usage();
+@Beta
+public final class UnknownTypeImpl implements UnknownType {
+  UnknownTypeImpl() {
+  }
 }

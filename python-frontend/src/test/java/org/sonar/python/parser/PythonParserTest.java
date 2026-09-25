@@ -41,7 +41,7 @@ class PythonParserTest {
   }
 
   private static Collection<File> listFiles(String folderName) {
-    File dir = new File(String.format("src/test/resources/parser/%s/", folderName));
+    File dir = new File("src/test/resources/parser/" + folderName + "/");
     return FileUtils.listFiles(dir, new String[]{"py"}, true);
   }
 

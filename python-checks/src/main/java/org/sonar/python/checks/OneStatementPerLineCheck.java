@@ -74,7 +74,7 @@ public class OneStatementPerLineCheck extends PythonSubscriptionCheck {
       .stream()
       .filter(statementsAtLine -> statementsAtLine.getValue().get() > 1)
       .forEach(statementsAtLine -> {
-        String message = String.format("At most one statement is allowed per line, but %s statements were found on this line.", statementsAtLine.getValue());
+        String message = "At most one statement is allowed per line, but " + statementsAtLine.getValue() + " statements were found on this line.";
         int lineNumber = statementsAtLine.getKey();
         subscriptionContext.addLineIssue(message, lineNumber);
       });

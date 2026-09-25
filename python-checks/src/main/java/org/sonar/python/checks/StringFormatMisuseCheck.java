@@ -111,7 +111,7 @@ public class StringFormatMisuseCheck extends AbstractStringFormatCheck {
       .collect(Collectors.joining(", "));
 
     if (!unmatchedPositionals.isEmpty()) {
-      reportIssue(ctx, qualifier, literal, String.format("Provide a value for field(s) with index %s.", unmatchedPositionals));
+      reportIssue(ctx, qualifier, literal, "Provide a value for field(s) with index " + unmatchedPositionals + ".");
     }
   }
 

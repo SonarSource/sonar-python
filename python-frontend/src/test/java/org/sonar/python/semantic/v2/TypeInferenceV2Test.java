@@ -78,6 +78,7 @@ import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
+import org.sonar.plugins.python.api.types.v2.UnknownTypeImpl;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
@@ -296,7 +297,7 @@ public class TypeInferenceV2Test {
     // MyOtherClass can no longer be considered generic (non-generic subclass)
     assertThat(myOtherClassType.isGeneric()).isFalse();
     PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2();
-    assertThat(xType.unwrappedType()).isInstanceOf(UnknownType.UnknownTypeImpl.class);
+    assertThat(xType.unwrappedType()).isInstanceOf(UnknownTypeImpl.class);
   }
 
   @Test

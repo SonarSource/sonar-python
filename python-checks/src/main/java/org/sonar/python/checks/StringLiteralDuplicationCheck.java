@@ -97,10 +97,11 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
       int nbOfOccurrences = occurrences.size();
       if (nbOfOccurrences >= threshold) {
         StringLiteral first = occurrences.get(0);
-        String message = String.format(
-          "Define a constant instead of duplicating this literal %s %s times.",
-          first.firstToken().value(),
-          nbOfOccurrences);
+        String message = "Define a constant instead of duplicating this literal " +
+                  first.firstToken().value() +
+                  " " +
+                  nbOfOccurrences +
+                  " times.";
         PreciseIssue issue = addIssue(first, message).withCost(nbOfOccurrences - 1);
         occurrences.stream()
           .skip(1)

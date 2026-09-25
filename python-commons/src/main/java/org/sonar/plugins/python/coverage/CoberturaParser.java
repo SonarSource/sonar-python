@@ -85,7 +85,7 @@ public class CoberturaParser {
         if (baseDirectory.isDirectory()) {
           baseDirectories.add(baseDirectory);
         } else {
-          String formattedMessage = String.format("Invalid directory path in 'source' element: %s", path);
+          String formattedMessage = "Invalid directory path in 'source' element: " + path;
           LOG.warn(formattedMessage);
           errors.add(formattedMessage);
         }

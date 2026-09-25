@@ -91,7 +91,7 @@ public class BeautifulSoupNoneCheck extends PythonSubscriptionCheck {
   private static String subscriptDescription(SubscriptionExpression se) {
     var subscripts = se.subscripts().expressions();
     if (subscripts.size() == 1 && subscripts.get(0) instanceof StringLiteral str) {
-      return String.format("[%s]", str.trimmedQuotesValue());
+      return "[" + str.trimmedQuotesValue() + "]";
     }
     return "[]";
   }

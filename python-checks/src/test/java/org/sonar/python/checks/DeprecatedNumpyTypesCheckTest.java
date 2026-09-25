@@ -50,7 +50,7 @@ class DeprecatedNumpyTypesCheckTest {
           b = %s%s""", quickFixType, parameter);
 
     PythonQuickFixVerifier.verify(check, failure, fixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, failure, String.format("Replace with %s.", quickFixType));
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, failure, "Replace with " + quickFixType + ".");
   }
   
   private static Stream<Arguments> numpyTypeProvider(){

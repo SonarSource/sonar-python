@@ -22,6 +22,7 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.UnknownTypeImpl;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 
@@ -39,7 +40,7 @@ class HasFQNSatisfyingPredicateTest {
     FunctionType nullFqn = mock(FunctionType.class);
     UnknownType.UnresolvedImportType unresolvedNumpy = mock(UnknownType.UnresolvedImportType.class);
     UnknownType.UnresolvedImportType unresolvedOther = mock(UnknownType.UnresolvedImportType.class);
-    UnknownType.UnknownTypeImpl unknownType = mock(UnknownType.UnknownTypeImpl.class);
+    UnknownTypeImpl unknownType = mock(UnknownTypeImpl.class);
 
     when(numpyZeros.fullyQualifiedName()).thenReturn("numpy.zeros");
     when(numpyRandom.fullyQualifiedName()).thenReturn("numpy.random.randn");

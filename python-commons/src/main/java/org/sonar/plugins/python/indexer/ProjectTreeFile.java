@@ -14,23 +14,37 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.plugins.python.indexer;
 
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
-public interface HasSymbol {
+public final class ProjectTreeFile implements ProjectTree {
+  private final String name;
+  private ProjectTreeFolder parent;
 
-  /**
-   * Use TypeV2 and SymbolV2 instead
-   *
-   * @deprecated since 5.32, use TypeV2 and SymbolV2 instead
-   */
-  @Deprecated(since="5.32")
-  @CheckForNull
-  Symbol symbol();
+  public ProjectTreeFile(String name) {
+    this.name = name;
+    this.parent = null;
+  }
 
-  @CheckForNull
-  Usage usage();
+  @Override
+  public String name() {
+    return name;
+  }
+
+  @Override
+  @Nullable
+  public ProjectTreeFolder parent() {
+    return parent;
+  }
+
+  @Override
+  public Stream<ProjectTreeFolder> allFolders() {
+    return Stream.empty();
+  }
+
+  void setParent(ProjectTreeFolder parent) {
+    this.parent = parent;
+  }
 }

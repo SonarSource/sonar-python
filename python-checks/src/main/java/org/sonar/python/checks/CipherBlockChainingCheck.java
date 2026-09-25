@@ -46,7 +46,7 @@ public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
   static {
     for (String libraryName : asList("Cryptodome", "Crypto")) {
       for (String vulnerableMethodName : asList("AES", "ARC2", "Blowfish", "CAST", "DES", "DES3")) {
-        PYCRYPTO_SENSITIVE_FQNS.add(String.format("%s.Cipher.%s.new", libraryName, vulnerableMethodName));
+        PYCRYPTO_SENSITIVE_FQNS.add(libraryName + ".Cipher." + vulnerableMethodName + ".new");
       }
     }
   }

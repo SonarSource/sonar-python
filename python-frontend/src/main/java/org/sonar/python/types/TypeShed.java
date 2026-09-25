@@ -228,13 +228,10 @@ public class TypeShed {
   }
 
   public static Set<String> stubModules() {
-    Set<String> modules = new HashSet<>();
-    for (Map.Entry<String, Map<String, Symbol>> entry : typeShedSymbols.entrySet()) {
-      if (!entry.getValue().isEmpty()) {
-        modules.add(entry.getKey());
-      }
-    }
-    return modules;
+    return typeShedSymbols.entrySet().stream()
+      .filter(entry -> !entry.getValue().isEmpty())
+      .map(Map.Entry::getKey)
+      .collect(Collectors.toCollection(HashSet::new));
   }
 
   public static String normalizedFqn(String fqn) {

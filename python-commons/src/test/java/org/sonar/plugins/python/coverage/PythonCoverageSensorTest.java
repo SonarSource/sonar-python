@@ -236,11 +236,13 @@ class PythonCoverageSensorTest {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_with_unresolved_absolute_path.xml");
     coverageSensor.execute(context);
 
-    String expectedLogMessage = String.format(
-      "Cannot resolve the file path '%sabsolute%ssources%snot_exist.py' of the coverage report, the file does not exist in all 'source'.",
-      currentFileSeparator,
-      currentFileSeparator,
-      currentFileSeparator);
+    String expectedLogMessage = "Cannot resolve the file path '" +
+      currentFileSeparator +
+      "absolute" +
+      currentFileSeparator +
+      "sources" +
+      currentFileSeparator +
+      "not_exist.py' of the coverage report, the file does not exist in all 'source'.";
     assertThat(logTester.logs(Level.ERROR)).containsExactly(
       expectedLogMessage,
       "Cannot resolve 2 file paths, ignoring coverage measures for those files");

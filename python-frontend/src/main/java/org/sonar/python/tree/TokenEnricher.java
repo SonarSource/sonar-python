@@ -36,7 +36,7 @@ public class TokenEnricher {
     if (!offsetMap.isEmpty()) {
       IPythonLocation location = offsetMap.get(token.getLine());
       if (location == null) {
-        throw new IllegalStateException(String.format("No IPythonLocation found for line %s", token.getLine()));
+        throw new IllegalStateException("No IPythonLocation found for line " + token.getLine());
       }
       List<EscapeCharPositionInfo> escapeCharPositionInfos = location.colOffsets();
       int startCol = token.getColumn();

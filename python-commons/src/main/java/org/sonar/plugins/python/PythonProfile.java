@@ -94,7 +94,7 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
       LOG.info("Getting rules from {}.{} for the category:{}", className, ruleKeysMethodName, rulesCategory);
       return ruleKeys.stream().map(k -> RuleKey.of(repositoryKey, k)).collect(Collectors.toSet());
     } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-      LOG.debug(String.format("[%s], no %s rules added to Sonar way Python profile: %s", e.getClass().getSimpleName(), rulesCategory, e.getMessage()), e);
+      LOG.debug("[" + e.getClass().getSimpleName() + "], no " + rulesCategory + " rules added to Sonar way Python profile: " + e.getMessage(), e);
     }
     return Collections.emptySet();
   }

@@ -73,7 +73,7 @@ public class ConsistentReturnCheck extends PythonSubscriptionCheck {
       if (statement.is(Kind.RETURN_STMT)) {
         ReturnStatement returnStatement = (ReturnStatement) statement;
         boolean hasValue = hasValue(returnStatement);
-        issue.secondary(statement, String.format("Return %s value", hasValue ? "with" : "without"));
+        issue.secondary(statement, "Return " + (hasValue ? "with" : "without") + " value");
       } else if (statement.is(Kind.IF_STMT, Kind.FOR_STMT, Kind.WHILE_STMT)) {
         issue.secondary(statement.firstToken(), "Implicit return without value if the condition is false");
       } else if (statement.is(Kind.MATCH_STMT)) {

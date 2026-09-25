@@ -979,7 +979,7 @@ public class PythonTreeMaker {
     } else if (astNode.is(PythonGrammar.MAPPING_PATTERN)) {
       return mappingPattern(astNode);
     }
-    throw new IllegalStateException(String.format("Pattern %s not recognized.", astNode.getName()));
+    throw new IllegalStateException("Pattern " + astNode.getName() + " not recognized.");
   }
 
   private GroupPattern groupPattern(AstNode groupPattern) {

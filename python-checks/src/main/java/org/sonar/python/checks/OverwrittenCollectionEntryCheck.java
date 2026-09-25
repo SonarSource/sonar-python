@@ -187,9 +187,8 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
         if (TreeUtils.hasDescendant(assignment.assignedValue(), t -> CheckUtils.areEquivalent(firstWrite.collection, t))) {
           return;
         }
-        String message = String.format(
-          "Verify this is the key that was intended; a value has already been saved for it on line %s.",
-          firstWrite.leftBracket.line());
+        String message =
+          "Verify this is the key that was intended; a value has already been saved for it on line "+ firstWrite.leftBracket.line() + ".";
         ctx.addIssue(secondWrite.leftBracket, secondWrite.rightBracket, message)
           .secondary(IssueLocation.preciseLocation(firstWrite.leftBracket, firstWrite.rightBracket, "Original value."));
       }

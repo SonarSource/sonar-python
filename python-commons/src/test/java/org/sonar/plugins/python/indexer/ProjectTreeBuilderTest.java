@@ -37,7 +37,7 @@ class ProjectTreeBuilderTest {
 
     ProjectTree tree = builder.build(List.of());
 
-    assertThat(tree).isInstanceOf(ProjectTree.ProjectTreeFile.class);
+    assertThat(tree).isInstanceOf(ProjectTreeFile.class);
     assertThat(tree.name()).isEqualTo("/");
   }
 
@@ -48,14 +48,14 @@ class ProjectTreeBuilderTest {
     PythonInputFile rootFile = createMockInputFileWithScheme("file:" + rootPath);
 
     ProjectTree tree = builder.build(List.of(rootFile));
-    assertThat(tree).isInstanceOf(ProjectTree.ProjectTreeFolder.class);
-    ProjectTree.ProjectTreeFolder root = (ProjectTree.ProjectTreeFolder) tree;
+    assertThat(tree).isInstanceOf(ProjectTreeFolder.class);
+    ProjectTreeFolder root = (ProjectTreeFolder) tree;
     assertThat(root.name()).isEqualTo("/");
     assertThat(root.children()).hasSize(1);
 
     ProjectTree driveLetterFolder = root.children().get(0);
     assertThat(driveLetterFolder.name()).isEqualTo("c:");
-    assertThat(driveLetterFolder).isInstanceOf(ProjectTree.ProjectTreeFile.class);
+    assertThat(driveLetterFolder).isInstanceOf(ProjectTreeFile.class);
   }
 
   static Stream<String> provideRootPathVariations() {
@@ -71,16 +71,16 @@ class ProjectTreeBuilderTest {
 
     ProjectTree tree = builder.build(List.of(inputFile));
 
-    assertThat(tree).isInstanceOf(ProjectTree.ProjectTreeFolder.class);
-    ProjectTree.ProjectTreeFolder root = (ProjectTree.ProjectTreeFolder) tree;
+    assertThat(tree).isInstanceOf(ProjectTreeFolder.class);
+    ProjectTreeFolder root = (ProjectTreeFolder) tree;
     assertThat(root.name()).isEqualTo("/");
     assertThat(root.children()).hasSize(1);
 
     ProjectTree projectFolder = root.children().get(0);
     assertThat(projectFolder.name()).isEqualTo("project");
-    assertThat(projectFolder).isInstanceOf(ProjectTree.ProjectTreeFolder.class);
+    assertThat(projectFolder).isInstanceOf(ProjectTreeFolder.class);
 
-    ProjectTree.ProjectTreeFolder projectFolderCast = (ProjectTree.ProjectTreeFolder) projectFolder;
+    ProjectTreeFolder projectFolderCast = (ProjectTreeFolder) projectFolder;
     assertThat(projectFolderCast.children()).hasSize(1);
     assertThat(projectFolderCast.children().get(0).name()).isEqualTo("file.py");
   }
@@ -94,8 +94,8 @@ class ProjectTreeBuilderTest {
 
     ProjectTree tree = builder.build(List.of(file1, file2, file3));
 
-    ProjectTree.ProjectTreeFolder root = (ProjectTree.ProjectTreeFolder) tree;
-    ProjectTree.ProjectTreeFolder project = (ProjectTree.ProjectTreeFolder) root.children().get(0);
+    ProjectTreeFolder root = (ProjectTreeFolder) tree;
+    ProjectTreeFolder project = (ProjectTreeFolder) root.children().get(0);
 
     assertThat(project.children()).hasSize(3);
     List<String> fileNames = project.children().stream().map(ProjectTree::name).toList();
@@ -110,8 +110,8 @@ class ProjectTreeBuilderTest {
 
     ProjectTree tree = builder.build(List.of(httpFile, normalFile));
 
-    ProjectTree.ProjectTreeFolder root = (ProjectTree.ProjectTreeFolder) tree;
-    ProjectTree.ProjectTreeFolder project = (ProjectTree.ProjectTreeFolder) root.children().get(0);
+    ProjectTreeFolder root = (ProjectTreeFolder) tree;
+    ProjectTreeFolder project = (ProjectTreeFolder) root.children().get(0);
 
     assertThat(project.children()).hasSize(1);
     assertThat(project.children().get(0).name()).isEqualTo("file.py");
@@ -130,23 +130,23 @@ class ProjectTreeBuilderTest {
 
     ProjectTree tree = builder.build(List.of(relativeFile));
 
-    assertThat(tree).isInstanceOf(ProjectTree.ProjectTreeFolder.class);
-    ProjectTree.ProjectTreeFolder root = (ProjectTree.ProjectTreeFolder) tree;
+    assertThat(tree).isInstanceOf(ProjectTreeFolder.class);
+    ProjectTreeFolder root = (ProjectTreeFolder) tree;
     assertThat(root.name()).isEqualTo("/");
     assertThat(root.children()).hasSize(1);
 
     ProjectTree projectFolder = root.children().get(0);
     assertThat(projectFolder.name()).isEqualTo("project");
-    assertThat(projectFolder).isInstanceOf(ProjectTree.ProjectTreeFolder.class);
+    assertThat(projectFolder).isInstanceOf(ProjectTreeFolder.class);
 
-    ProjectTree.ProjectTreeFolder projectFolderCast = (ProjectTree.ProjectTreeFolder) projectFolder;
+    ProjectTreeFolder projectFolderCast = (ProjectTreeFolder) projectFolder;
     assertThat(projectFolderCast.children()).hasSize(1);
 
     ProjectTree fooFolder = projectFolderCast.children().get(0);
     assertThat(fooFolder.name()).isEqualTo("foo");
-    assertThat(fooFolder).isInstanceOf(ProjectTree.ProjectTreeFolder.class);
+    assertThat(fooFolder).isInstanceOf(ProjectTreeFolder.class);
 
-    ProjectTree.ProjectTreeFolder fooFolderCast = (ProjectTree.ProjectTreeFolder) fooFolder;
+    ProjectTreeFolder fooFolderCast = (ProjectTreeFolder) fooFolder;
     assertThat(fooFolderCast.children()).hasSize(1);
     assertThat(fooFolderCast.children().get(0).name()).isEqualTo("file.py");
   }
@@ -176,18 +176,18 @@ class ProjectTreeBuilderTest {
     ProjectTree tree = builder.build(List.of(file));
 
     // Expecting project -> src -> main -> file.py
-    ProjectTree.ProjectTreeFolder root = (ProjectTree.ProjectTreeFolder) tree;
+    ProjectTreeFolder root = (ProjectTreeFolder) tree;
     assertThat(root.children()).hasSize(1);
 
-    ProjectTree.ProjectTreeFolder project = (ProjectTree.ProjectTreeFolder) root.children().get(0);
+    ProjectTreeFolder project = (ProjectTreeFolder) root.children().get(0);
     assertThat(project.name()).isEqualTo("project");
     assertThat(project.children()).hasSize(1);
 
-    ProjectTree.ProjectTreeFolder src = (ProjectTree.ProjectTreeFolder) project.children().get(0);
+    ProjectTreeFolder src = (ProjectTreeFolder) project.children().get(0);
     assertThat(src.name()).isEqualTo("src");
     assertThat(src.children()).hasSize(1);
 
-    ProjectTree.ProjectTreeFolder main = (ProjectTree.ProjectTreeFolder) src.children().get(0);
+    ProjectTreeFolder main = (ProjectTreeFolder) src.children().get(0);
     assertThat(main.name()).isEqualTo("main");
     assertThat(main.children()).hasSize(1);
 

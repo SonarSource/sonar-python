@@ -73,7 +73,7 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
 
   private static void addIssue(SubscriptionContext ctx, Tree tree, String comparisonKind, boolean result) {
     String resultAsString = result ? "True" : "False";
-    ctx.addIssue(tree, String.format("Remove this %s; it will always be %s.", comparisonKind, resultAsString));
+    ctx.addIssue(tree, "Remove this " + comparisonKind + "; it will always be "+ resultAsString + ".");
   }
 
   private static boolean cannotBeNone(InferredType type) {

@@ -27,7 +27,6 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -59,10 +58,9 @@ public class MultipleInheritanceMROConflictCheck extends PythonSubscriptionCheck
       return;
     }
 
-    List<ClassType> types = new ArrayList<>();
-    for (Expression base : bases) {
-      types.add(resolveClassType(base));
-    }
+    List<ClassType> types = new ArrayList<>(
+            bases.stream().map(MultipleInheritanceMROConflictCheck::resolveClassType).toList()
+    );
 
     int conflictIndex = findAncestorConflictIndex(types);
     if (hasMroConflict(types, conflictIndex)) {
@@ -75,11 +73,13 @@ public class MultipleInheritanceMROConflictCheck extends PythonSubscriptionCheck
 
   private static List<Expression> collectPositionalBases(ArgList argList) {
     List<Expression> bases = new ArrayList<>();
-    for (Argument argument : argList.arguments()) {
-      if (argument instanceof RegularArgument regularArgument && regularArgument.keywordArgument() == null) {
-        bases.add(regularArgument.expression());
-      }
-    }
+    argList.arguments().stream()
+            .filter(argument ->
+                    argument instanceof RegularArgument regularArgument
+                            && regularArgument.keywordArgument() == null
+            )
+            .map(argument -> ((RegularArgument) argument).expression())
+            .forEach(bases::add);
     return bases;
   }
 

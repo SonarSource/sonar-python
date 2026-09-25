@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -95,13 +95,11 @@ public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCh
   }
 
   private static List<Expression> collectSuperClasses(ArgList argList) {
-    List<Expression> superClasses = new ArrayList<>();
-    for (Argument argument : argList.arguments()) {
-      if (argument instanceof RegularArgument regularArgument && regularArgument.keywordArgument() == null) {
-        superClasses.add(regularArgument.expression());
-      }
-    }
-    return superClasses;
+    return new ArrayList<>(
+      argList.arguments().stream()
+        .filter(argument -> argument instanceof RegularArgument regularArgument && regularArgument.keywordArgument() == null)
+        .map(argument -> ((RegularArgument) argument).expression())
+        .toList());
   }
 
   private static void reportIfConflictingConfigs(
@@ -125,13 +123,10 @@ public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCh
     if (!(type instanceof ClassType classType)) {
       return Set.of();
     }
-    Set<ClassType> classesDefiningModelConfig = new HashSet<>();
-    for (ClassType ancestor : classType.mro().orElse(List.of())) {
-      if (definesModelConfigLocally(ancestor)) {
-        classesDefiningModelConfig.add(ancestor);
-      }
-    }
-    return classesDefiningModelConfig;
+    return new HashSet<>(
+      classType.mro().orElse(List.of()).stream()
+        .filter(PydanticMultipleInheritanceConfigCheck::definesModelConfigLocally)
+        .toList());
   }
 
   private static boolean definesModelConfigLocally(ClassType classType) {

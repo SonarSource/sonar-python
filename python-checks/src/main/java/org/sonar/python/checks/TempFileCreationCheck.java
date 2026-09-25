@@ -48,6 +48,6 @@ public class TempFileCreationCheck extends PythonSubscriptionCheck {
     Optional.of(callExpr.callee())
       .filter(callee -> INSECURE_CALLS.isTrueFor(callee, ctx))
       .flatMap(callee -> FullyQualifiedNameHelper.getFullyQualifiedName(callee.typeV2()))
-      .ifPresent(name -> ctx.addIssue(callExpr.callee(), String.format("'%s' is insecure. Use 'tempfile.TemporaryFile' instead", name)));
+      .ifPresent(name -> ctx.addIssue(callExpr.callee(), "'" + name + "' is insecure. Use 'tempfile.TemporaryFile' instead"));
   }
 }

@@ -226,7 +226,7 @@ class MypySensorTest {
     assertThat(issue.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(issue.severity()).isEqualTo(Severity.MAJOR);
     assertThat(issue.ruleId()).isEqualTo(key);
-    assertThat(issue.ruleKey()).hasToString(String.format("external_mypy:%s", key));
+    assertThat(issue.ruleKey()).hasToString("external_mypy:" + key);
 
     assertThat(location.inputComponent().key()).isEqualTo(MYPY_FILE);
     assertThat(location.message())

@@ -21,6 +21,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -120,14 +122,13 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
   }
 
   private static List<TreeWithTypeInfo> mergeLists(List<Tree> fieldNames, List<Tree> methodNames) {
-    List<TreeWithTypeInfo> allTokensWithInfo = new LinkedList<>();
-    for (Tree tree : fieldNames) {
-      allTokensWithInfo.add(new TreeWithTypeInfo(tree, "field"));
-    }
-    for (Tree tree : methodNames) {
-      allTokensWithInfo.add(new TreeWithTypeInfo(tree, "method"));
-    }
-    return allTokensWithInfo;
+    return new LinkedList<>(
+            Stream.concat(
+                  fieldNames.stream().map(tree -> new TreeWithTypeInfo(tree, "field")),
+                  methodNames.stream().map(tree -> new TreeWithTypeInfo(tree, "method"))
+            )
+            .toList()
+    );
   }
 
   private static String getMessage(TreeWithTypeInfo token1, TreeWithTypeInfo token2) {

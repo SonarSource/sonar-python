@@ -74,15 +74,14 @@ public class ProjectTreeBuilder {
   }
 
   private static ProjectTree buildImmutableFolder(FolderNode node) {
-    ArrayList<ProjectTree> children = new ArrayList<>();
-    for (FolderNode childNode : node.children) {
-      children.add(buildImmutableFolder(childNode));
-    }
+    List<ProjectTree> children = node.children.stream()
+      .map(ProjectTreeBuilder::buildImmutableFolder)
+      .toList();
 
     if (children.isEmpty()) {
-      return new ProjectTree.ProjectTreeFile(node.name);
+      return new ProjectTreeFile(node.name);
     } else {
-      return new ProjectTree.ProjectTreeFolder(node.name, List.copyOf(children));
+      return new ProjectTreeFolder(node.name, List.copyOf(children));
     }
   }
 

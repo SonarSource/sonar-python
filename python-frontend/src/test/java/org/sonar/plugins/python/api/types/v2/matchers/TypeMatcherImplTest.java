@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.UnknownTypeImpl;
 import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
@@ -58,7 +59,7 @@ class TypeMatcherImplTest {
   PythonType functionType2 = mock(FunctionType.class);
   PythonType objectType = mock(ObjectType.class);
   PythonType objectType2 = mock(ObjectType.class);
-  PythonType unknownType = mock(UnknownType.UnknownTypeImpl.class);
+  PythonType unknownType = mock(UnknownTypeImpl.class);
   PythonType unionWithFunctionAndUnknown = UnionType.or(Set.of(functionType, unknownType));
   PythonType unionWithObjectAndUnknown = UnionType.or(Set.of(objectType, unknownType));
   PythonType unionWithFunctionAndObject = UnionType.or(Set.of(functionType, objectType));
@@ -80,7 +81,7 @@ class TypeMatcherImplTest {
     functionType2 = mock(FunctionType.class);
     objectType = mock(ObjectType.class);
     objectType2 = mock(ObjectType.class);
-    unknownType = mock(UnknownType.UnknownTypeImpl.class);
+    unknownType = mock(UnknownTypeImpl.class);
     unionWithFunctionAndUnknown = UnionType.or(Set.of(functionType, unknownType));
     unionWithObjectAndUnknown = UnionType.or(Set.of(objectType, unknownType));
     unionWithFunctionAndObject = UnionType.or(Set.of(functionType, objectType));

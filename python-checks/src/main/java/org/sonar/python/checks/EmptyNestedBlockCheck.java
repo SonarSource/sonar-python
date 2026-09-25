@@ -53,7 +53,7 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
       List<Token> parentTokens = TreeUtils.tokens(statementListTree.parent());
       int from = parentTokens.stream().filter(t -> t.type() == PythonTokenType.NEWLINE).findFirst()
         .map(parentTokens::indexOf)
-        .orElseThrow(() -> new IllegalStateException(String.format("No newline token in parent of statement list at line %s", statementListTree.firstToken().line())));
+        .orElseThrow(() -> new IllegalStateException("No newline token in parent of statement list at line " + statementListTree.firstToken().line()));
       // sublist call is excluding last index and token following last token of statement list (dedent) should be included in the comment verification.
       int to = parentTokens.indexOf(statementListTree.lastToken()) + 2;
       if (!CheckUtils.hasCommentOnTokens(parentTokens.subList(from, to))) {

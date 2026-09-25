@@ -24,16 +24,11 @@ import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.TriBool;
 
 @Beta
-public sealed interface UnknownType extends PythonType {
+public sealed interface UnknownType extends PythonType permits UnknownTypeImpl, UnknownType.UnresolvedImportType {
 
   @Override
   default TriBool isCompatibleWith(PythonType another) {
     return TriBool.UNKNOWN;
-  }
-
-  final class UnknownTypeImpl implements UnknownType {
-    UnknownTypeImpl() {
-    }
   }
 
   record UnresolvedImportType(String importPath) implements UnknownType {

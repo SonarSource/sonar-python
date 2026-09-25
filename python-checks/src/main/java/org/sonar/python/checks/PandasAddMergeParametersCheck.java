@@ -74,9 +74,9 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
     String getReplacementText(String fullyQualifiedName) {
       if (DATAFRAME_JOIN_FQN.equals(fullyQualifiedName)) {
-        return String.format("%s=%s", this.keyword, this.defaultValueJoin);
+        return  this.keyword + "=" +  this.defaultValueJoin;
       } else {
-        return String.format("%s=%s", this.keyword, this.defaultValueMerge);
+        return this.keyword + "=" + this.defaultValueMerge;
       }
     }
 
@@ -177,7 +177,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   }
 
   private static String getReplacementText(String fullyQualifiedName, List<Keywords> missingKeywords) {
-    return String.format(", %s", missingKeywords.stream().map(keyword -> keyword.getReplacementText(fullyQualifiedName))
-      .collect(Collectors.joining(", ")));
+    return ", " + missingKeywords.stream().map(keyword -> keyword.getReplacementText(fullyQualifiedName))
+      .collect(Collectors.joining(", "));
   }
 }

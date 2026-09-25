@@ -96,7 +96,7 @@ public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionChec
     if (returnTypes.size() == 1) {
       String annotation = returnTypes.iterator().next();
       PythonQuickFix quickFix = PythonQuickFix.newQuickFix(MandatoryFunctionReturnTypeHintCheck.MESSAGE)
-        .addTextEdit(TextEditUtils.insertAfter(functionDef.rightPar(), String.format(" -> %s", annotation)))
+        .addTextEdit(TextEditUtils.insertAfter(functionDef.rightPar(), " -> " + annotation))
         .build();
       issue.addQuickFix(quickFix);
     }

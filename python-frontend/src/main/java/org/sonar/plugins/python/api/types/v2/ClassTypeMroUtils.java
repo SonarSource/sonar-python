@@ -99,13 +99,12 @@ final class ClassTypeMroUtils {
       return Optional.empty();
     }
 
-    List<ClassType> parentTypes = new ArrayList<>();
-    for (TypeWrapper wrapper : cls.superClasses()) {
-      if (wrapper.type() instanceof ClassType parent) {
-        parentTypes.add(parent);
-      }
-      // Non-ClassType superclass is already filtered out by hasUnresolvedHierarchy()
-    }
+    // Non-ClassType superclasses are already filtered out by hasUnresolvedHierarchy()
+    List<ClassType> parentTypes = cls.superClasses().stream()
+      .map(TypeWrapper::type)
+      .filter(ClassType.class::isInstance)
+      .map(ClassType.class::cast)
+      .toList();
 
     List<List<ClassType>> lists = new ArrayList<>();
     for (ClassType parent : parentTypes) {

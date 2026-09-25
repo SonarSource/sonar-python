@@ -62,7 +62,7 @@ class UnresolvedImportTypeTest {
     var etreeType = ((ModuleType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
     assertThat(etreeType.name()).isEqualTo("xml");
     assertThat(etreeType.resolveSubmodule("etree")).isEmpty();
-    assertThat(etreeType.resolveMember("etree").get()).isInstanceOf(UnknownType.UnknownTypeImpl.class);
+    assertThat(etreeType.resolveMember("etree").get()).isInstanceOf(UnknownTypeImpl.class);
   }
 
   @Test

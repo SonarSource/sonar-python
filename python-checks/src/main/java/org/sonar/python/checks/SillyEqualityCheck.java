@@ -46,6 +46,6 @@ public class SillyEqualityCheck extends SillyEquality {
 
   @Override
   String message(String result) {
-    return String.format("Remove this equality check between incompatible types; it will always return %s.", result);
+    return "Remove this equality check between incompatible types; it will always return " + result + ".";
   }
 }

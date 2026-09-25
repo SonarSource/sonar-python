@@ -62,7 +62,7 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
     if (name != null) {
       return String.format("Fix this call; Previous type checks suggest that \"%s\"%s is not callable.", name, addTypeName(calleeType));
     }
-    return String.format("Fix this call; Previous type checks suggest that this expression%s is not callable.", addTypeName(calleeType));
+    return "Fix this call; Previous type checks suggest that this expression" + addTypeName(calleeType) + " is not callable.";
   }
 
 }

@@ -106,7 +106,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
     } else {
       text = TextEditUtils.insertBefore(parameterName, newName + ", ");
     }
-    return PythonQuickFix.newQuickFix(String.format("Add '%s' as the first argument.", newName))
+    return PythonQuickFix.newQuickFix("Add '" + newName + "' as the first argument.")
       .addTextEdit(text)
       .build();
   }
@@ -128,7 +128,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
   private PythonQuickFix renameTheFirstArgument(Name parameterName) {
     String newName = newName();
 
-    return PythonQuickFix.newQuickFix(String.format("Rename '%s' to '%s'", parameterName.name(), newName))
+    return PythonQuickFix.newQuickFix("Rename '" + parameterName.name() + "' to '" + newName +"'")
       .addTextEdit(TextEditUtils.renameAllUsages(parameterName, newName))
       .build();
   }

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class NamespacePackageAnalyzer {
 
   public NamespacePackageTelemetry analyze(ProjectTree projectTree) {
-    List<ProjectTree.ProjectTreeFolder> foldersWithPythonFiles = projectTree.allFolders()
+    List<ProjectTreeFolder> foldersWithPythonFiles = projectTree.allFolders()
       .filter(folder -> !"/".equals(folder.name()))
       .filter(NamespacePackageAnalyzer::hasPythonFiles)
       .toList();
@@ -34,9 +34,9 @@ public class NamespacePackageAnalyzer {
     int namespacePackagesInRegularPackage = 0;
 
     Map<String, Long> folderNameCounts = foldersWithPythonFiles.stream()
-      .collect(Collectors.groupingBy(ProjectTree.ProjectTreeFolder::name, Collectors.counting()));
+      .collect(Collectors.groupingBy(ProjectTreeFolder::name, Collectors.counting()));
 
-    for (ProjectTree.ProjectTreeFolder folder : foldersWithPythonFiles) {
+    for (ProjectTreeFolder folder : foldersWithPythonFiles) {
       if (hasInitFile(folder)) {
         packagesWithInit++;
       } else {
@@ -62,18 +62,18 @@ public class NamespacePackageAnalyzer {
       null);
   }
 
-  private static boolean hasAnyParentWithInit(ProjectTree.ProjectTreeFolder folder) {
+  private static boolean hasAnyParentWithInit(ProjectTreeFolder folder) {
     return folder.parents().anyMatch(NamespacePackageAnalyzer::hasInitFile);
   }
 
-  private static boolean hasInitFile(ProjectTree.ProjectTreeFolder folder) {
+  private static boolean hasInitFile(ProjectTreeFolder folder) {
     return folder.children().stream()
-      .anyMatch(child -> child instanceof ProjectTree.ProjectTreeFile && "__init__.py".equals(child.name()));
+      .anyMatch(child -> child instanceof ProjectTreeFile && "__init__.py".equals(child.name()));
   }
 
-  private static boolean hasPythonFiles(ProjectTree.ProjectTreeFolder folder) {
+  private static boolean hasPythonFiles(ProjectTreeFolder folder) {
     return folder.children().stream()
-      .anyMatch(child -> child instanceof ProjectTree.ProjectTreeFile && child.name().endsWith(".py"));
+      .anyMatch(child -> child instanceof ProjectTreeFile && child.name().endsWith(".py"));
   }
 }
 

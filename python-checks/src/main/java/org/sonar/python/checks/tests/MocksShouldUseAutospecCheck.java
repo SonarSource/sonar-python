@@ -307,12 +307,11 @@ public class MocksShouldUseAutospecCheck extends PythonSubscriptionCheck {
 
   @CheckForNull
   private static SymbolV2 mockSymbolFromDecorator(FunctionDef functionDef, Decorator decorator, SubscriptionContext ctx) {
-    List<Decorator> patchDecorators = new ArrayList<>();
-    for (Decorator candidate : functionDef.decorators()) {
-      if (isPatchDecorator(candidate, ctx)) {
-        patchDecorators.add(candidate);
-      }
-    }
+    List<Decorator> patchDecorators = new ArrayList<>(
+            functionDef.decorators().stream()
+                    .filter(candidate -> isPatchDecorator(candidate, ctx))
+                    .toList()
+    );
     int indexFromTop = patchDecorators.indexOf(decorator);
     // Bottom decorator maps to the first injected mock parameter.
     int indexFromBottom = patchDecorators.size() - 1 - indexFromTop;

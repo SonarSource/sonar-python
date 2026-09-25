@@ -133,7 +133,7 @@ public class BeautifulSoupDeprecatedNamesCheck extends PythonSubscriptionCheck {
     String modernMethod = DEPRECATED_METHODS.get(methodName);
     if (modernMethod != null) {
       PreciseIssue issue = ctx.addIssue(qualifiedExpr.name(),
-        String.format("Replace the deprecated '%s()' method with '%s()'.", methodName, modernMethod));
+        "Replace the deprecated '"+ methodName +"()' method with '"+ modernMethod +"()'.");
       issue.addQuickFix(PythonQuickFix.newQuickFix(
         "Replace '%s()' with '%s()'".formatted(methodName, modernMethod),
         TextEditUtils.replace(qualifiedExpr.name(), modernMethod)
@@ -176,7 +176,7 @@ public class BeautifulSoupDeprecatedNamesCheck extends PythonSubscriptionCheck {
     Expression qualifier = qualifiedExpr.qualifier();
     if (BS4_MATCHER.isTrueFor(qualifier, ctx)) {
       PreciseIssue issue = ctx.addIssue(qualifiedExpr.name(),
-        String.format("Replace the deprecated '%s' attribute with '%s'.", attrName, modernAttr));
+        "Replace the deprecated '"+ attrName + "' attribute with '" + modernAttr + "'.");
       issue.addQuickFix(PythonQuickFix.newQuickFix(
         "Replace '%s' with '%s'".formatted(attrName, modernAttr),
         TextEditUtils.replace(qualifiedExpr.name(), modernAttr)

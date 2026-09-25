@@ -33,7 +33,7 @@ class FullyQualifiedNameHelperTest {
     UnknownType.UnresolvedImportType unresolvedImport = mock(UnknownType.UnresolvedImportType.class);
     ModuleType module1 = mock(ModuleType.class);
     SpecialFormType specialFormType1 = mock(SpecialFormType.class);
-    UnknownType.UnknownTypeImpl unknownType = mock(UnknownType.UnknownTypeImpl.class);
+    UnknownTypeImpl unknownType = mock(UnknownTypeImpl.class);
 
     when(function1.fullyQualifiedName()).thenReturn("foo.bar.func1");
     when(nullFunctionType.fullyQualifiedName()).thenReturn(null);

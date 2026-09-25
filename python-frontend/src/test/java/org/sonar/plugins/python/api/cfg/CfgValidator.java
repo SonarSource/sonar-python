@@ -104,10 +104,12 @@ public class CfgValidator {
       .filter(blockExpectation -> blockExpectation.matchesBlock(emptyBlock))
       .toList();
     assertThat(matchedExpectations)
-      .withFailMessage(format("Failed to assert empty block succ=%s, pred=%s. Matched expectations: %s",
-        expectedCfg.blockIds(emptyBlock.successors()),
-        expectedCfg.blockIds(emptyBlock.predecessors()),
-        matchedExpectations))
+      .withFailMessage("Failed to assert empty block succ=" +
+        expectedCfg.blockIds(emptyBlock.successors()) +
+        ", pred=" +
+        expectedCfg.blockIds(emptyBlock.predecessors()) +
+        ". Matched expectations: " +
+        matchedExpectations)
       .hasSize(1);
     // remove the expectation we've just asserted so it is not used for another empty block
     expectedCfg.emptyBlockExpectations.removeAll(matchedExpectations);
@@ -123,7 +125,7 @@ public class CfgValidator {
     }
 
     assertThat(actual)
-      .withFailMessage(buildDebugMessage(format("successors actual: %s expected %s", actual, expectedSucc), blockTestId))
+      .withFailMessage(buildDebugMessage("successors actual: " + actual + " expected " + expectedSucc, blockTestId))
       .isEqualTo(expectedSucc);
   }
 

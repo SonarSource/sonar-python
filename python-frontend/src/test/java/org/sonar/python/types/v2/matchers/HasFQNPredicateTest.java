@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.UnknownTypeImpl;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.types.v2.SpecialFormType;
 
@@ -52,7 +53,7 @@ class HasFQNPredicateTest {
     SpecialFormType specialFormType1 = mock(SpecialFormType.class);
     SpecialFormType specialFormType2 = mock(SpecialFormType.class);
 
-    UnknownType.UnknownTypeImpl unknownType = mock(UnknownType.UnknownTypeImpl.class);
+    UnknownTypeImpl unknownType = mock(UnknownTypeImpl.class);
 
     Expression func1Expression = mock(Expression.class);
     when(func1Expression.typeV2()).thenReturn(function1);

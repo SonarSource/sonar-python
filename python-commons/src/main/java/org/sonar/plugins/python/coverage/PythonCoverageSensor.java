@@ -90,7 +90,7 @@ public class PythonCoverageSensor implements Sensor {
       saveMeasures(coverageMeasures, filesCovered);
     } catch (Exception e) {
       LOG.warn("Cannot read coverage report '{}', the following exception occurred: '{}'", report, e.getMessage());
-      analysisWarnings.addUnique(String.format("An error occurred while trying to import the coverage report: '%s'", report));
+      analysisWarnings.addUnique("An error occurred while trying to import the coverage report: '" + report + "'");
     }
   }
 
@@ -129,7 +129,7 @@ public class PythonCoverageSensor implements Sensor {
           parseErrors));
       }
     } catch (EmptyReportException e) {
-      analysisWarnings.addUnique(String.format("The coverage report '%s' has been ignored because it seems to be empty.", report));
+      analysisWarnings.addUnique("The coverage report '" + report + "' has been ignored because it seems to be empty.");
       LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
     } catch (XMLStreamException e) {
       throw new IllegalStateException("Error parsing the report '" + report + "'", e);

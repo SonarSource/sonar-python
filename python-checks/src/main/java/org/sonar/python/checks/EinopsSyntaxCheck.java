@@ -92,7 +92,13 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
     if (!argsToCheck.isEmpty()) {
       var isPlural = argsToCheck.size() > 1;
       var missingParameters = argsToCheck.stream().collect(Collectors.joining(", "));
-      var missingParametersMessage = String.format("the parameter%s %s do%s not appear in the pattern", isPlural ? "s" : "", missingParameters, isPlural ? "" : "es");
+      var missingParametersMessage = "the parameter"
+              + (isPlural ? "s" : "")
+              + " "
+              + missingParameters
+              + " do"
+              + (isPlural ? "" : "es")
+              + " not appear in the pattern";
       ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, missingParametersMessage));
     }
   }

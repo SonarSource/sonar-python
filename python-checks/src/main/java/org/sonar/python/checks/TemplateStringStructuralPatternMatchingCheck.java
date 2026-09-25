@@ -88,13 +88,12 @@ public class TemplateStringStructuralPatternMatchingCheck extends PythonSubscrip
   }
 
   private static List<String> extractIterationVariables(List<Expression> expressions) {
-    List<String> variables = new ArrayList<>();
-    for (Expression expr : expressions) {
-      if (expr instanceof Name name) {
-        variables.add(name.name());
-      }
-    }
-    return variables;
+    return new ArrayList<>(
+      expressions.stream()
+        .filter(Name.class::isInstance)
+        .map(Name.class::cast)
+        .map(Name::name)
+        .toList());
   }
 
   private List<IsInstanceCallAndType> findIsInstanceChecks(List<Statement> statements, List<String> iterationVariables) {
