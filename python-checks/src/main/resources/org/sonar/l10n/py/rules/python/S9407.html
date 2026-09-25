@@ -1,8 +1,8 @@
 <p>This rule raises an issue when a <code>for</code> loop only yields each element of an iterable and could be replaced by a <code>yield from</code>
 statement.</p>
 <h2>Why is this an issue?</h2>
-<p>Introduced by <a href="https://peps.python.org/pep-0380/">PEP 380</a>, the <code>yield from</code> statement delegates the iteration of a generator
-to a sub-iterable.</p>
+<p>Introduced by <a href="https://peps.python.org/pep-0380/">PEP 380</a>, the <code>yield from</code> statement delegates the iteration to another
+iterable.</p>
 <pre>
 def generator():
     yield from range(10)
@@ -13,26 +13,24 @@ benefits:</p>
   <li>It states the intent directly: the generator delegates to another iterable instead of manually relaying its values.</li>
   <li>It removes a loop variable that serves no other purpose.</li>
   <li>It is faster, because the values are relayed by the interpreter instead of going through a Python-level loop.</li>
-  <li>It forwards <code>send()</code>, <code>throw()</code> and <code>close()</code> calls to the sub-generator, and makes its return value available,
-  which a manual loop silently discards.</li>
+  <li>It reaches the sub-generator: <code>send()</code>, <code>throw()</code> and <code>close()</code> are routed into it instead of stopping at the
+  outer generator. Only <code>send()</code> is silently swallowed by a manual loop, but none of the three reach the sub-generator.</li>
+  <li>It makes the sub-generator’s return value available as the value of the <code>yield from</code> expression, where a manual loop discards
+  it.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Replace the <code>for</code> loop with a <code>yield from</code> statement over the same iterable.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-def read_files(paths):
-    for path in paths:
-        with open(path) as file:
-            for line in file:  # Noncompliant: this loop only relays the lines of the file
-                yield line
+def read_events(source):
+    for event in parse_events(source):  # Noncompliant: this loop only relays the parsed events
+        yield event
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-def read_files(paths):
-    for path in paths:
-        with open(path) as file:
-            yield from file
+def read_events(source):
+    yield from parse_events(source)
 </pre>
 <h3>Pitfalls</h3>
 <p><code>yield from</code> is not allowed in asynchronous generators. An <code>async for</code> loop that yields each element cannot be rewritten this
@@ -42,10 +40,17 @@ async def relay(async_iterable):
     async for value in async_iterable:
         yield value
 </pre>
-<p>The two forms are equivalent as long as the sub-iterable is only iterated over. They diverge when it is a generator that the caller drives with
-<code>send()</code> or <code>throw()</code>: the manual loop keeps those calls for itself, while <code>yield from</code> passes them on to the
-sub-generator. The sub-generator’s return value also becomes the value of the <code>yield from</code> expression instead of being discarded. Check how
-the sub-iterable is consumed before rewriting a loop that delegates to a generator.</p>
+<p>The two forms are equivalent as long as the sub-iterable is only iterated over. They diverge once the caller drives the outer generator
+directly:</p>
+<ul>
+  <li><code>send(value)</code> is swallowed by a manual loop, which just resumes and yields the next element. <code>yield from</code> passes the value
+  to the sub-generator.</li>
+  <li><code>throw(exc)</code> raises the exception in the outer generator, where a manual loop lets it propagate to the caller. <code>yield
+  from</code> offers it to the sub-generator first, giving it a chance to handle it.</li>
+  <li><code>close()</code> ends the outer generator in both forms. <code>yield from</code> also closes the sub-generator.</li>
+</ul>
+<p>The sub-generator’s return value also becomes the value of the <code>yield from</code> expression instead of being discarded. Check how the
+sub-iterable is consumed before rewriting a loop that delegates to a generator.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>

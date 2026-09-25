@@ -13,14 +13,10 @@ env["MY_VAR"] = "value"
 </pre>
 <p><code>os.environ.copy()</code> returns an independent <code>dict</code> snapshot. Changes to that dictionary do not affect the process
 environment.</p>
-<p>Relying on <code>copy.copy(os.environ)</code> because you want mutations to update the process environment is an accepted trade-off only after
-explicit review; do not mark it won’t-fix merely to silence the issue. A false positive would mean the analyzer flagged a different copy API (for
-example <code>os.environ.copy()</code>, <code>dict(os.environ)</code>, or <code>copy.deepcopy</code>), which is outside this rule’s scope.</p>
 <h3>What is the potential impact?</h3>
 <ul>
-  <li><strong>unintended environment changes</strong>: code that mutates what it believes is a local copy can alter the real process environment</li>
-  <li><strong>cross-cutting side effects</strong>: later code, child processes, or libraries that read environment variables observe unexpected
-  values</li>
+  <li><strong>unintended environment changes</strong>: code that mutates what it believes is a local copy can alter the real process environment.
+  Later code, child processes, or libraries that read environment variables observe unexpected values</li>
   <li><strong>hard-to-diagnose bugs</strong>: the mutation site and the failure site are often far apart</li>
 </ul>
 <h2>How to fix it</h2>

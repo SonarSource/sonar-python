@@ -2,16 +2,15 @@
 <h2>Why is this an issue?</h2>
 <p><code>functools.lru_cache</code> and <code>functools.cache</code> store call results in a process-wide cache keyed by the function arguments. On an
 instance method, <code>self</code> is part of that key.</p>
-<p>The cache therefore keeps a strong reference to every instance that was used as a receiver. Those instances — and anything they reference — cannot
-be garbage-collected for as long as the cache entry lives. With an unbounded <code>@cache</code>, or a large <code>@lru_cache(maxsize=…​)</code>,
-memory use grows with the number of distinct instances.</p>
-<p>Caching also couples lifetime of business objects to a global memoization table, which is surprising for typical class designs.</p>
+<p>The cache therefore keeps a strong reference to every instance that was used as a receiver. Those instances and anything they reference cannot be
+garbage-collected for as long as the cache entry lives. The instances lifetimes are coupled to a global memoization table. With an unbounded
+<code>@cache</code>, or a large <code>@lru_cache(maxsize=…​)</code>, memory use grows with the number of distinct instances.</p>
+<p>Caching couples the lifetime of business objects to a global memoization table.</p>
 <h3>What is the potential impact?</h3>
 <ul>
   <li><strong>Memory leaks</strong>: instances stay alive after callers drop them.</li>
-  <li><strong>Stale results</strong>: mutated instance state may not be reflected when a cached entry is reused (depending on which arguments
-  participate in the key).</li>
-  <li><strong>Hard-to-diagnose growth</strong>: RSS climbs over time in long-running services.</li>
+  <li><strong>Stale results</strong>: mutated instance state may not be reflected when a cached entry is reused.</li>
+  <li><strong>Hard-to-diagnose memory growth</strong>: Resident Set Size climbs over time in long-running services.</li>
 </ul>
 <h3>Exceptions</h3>
 <p>Do not raise on <code>@staticmethod</code> or <code>@classmethod</code> methods: there is no per-instance <code>self</code> retained by the

@@ -66,7 +66,7 @@ def collect_results(results, new_results):
 <h3>How does this work?</h3>
 <p><code>update()</code> iterates over its argument and adds every element to the set, so the result is exactly the same as the individual calls. The
 augmented assignment <code>my_set |= {first, second, third}</code> is equivalent to <code>update()</code> with another set and can be used instead
-when it reads better.</p>
+when it is more readable.</p>
 <h3>Pitfalls</h3>
 <p>Do not confuse <code>update()</code> with <code>add()</code>: <code>my_set.add(other_collection)</code> adds the collection itself as a single
 element, and fails when that collection is not hashable, while <code>update()</code> adds its elements.</p>
