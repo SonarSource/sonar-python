@@ -16,7 +16,7 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -24,7 +24,10 @@ class ClearTextProtocolsCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/clearTextProtocols.py"), new ClearTextProtocolsCheck());
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/hotspots/clearTextProtocols.py",
+      "src/test/resources/checks/hotspots/clearTextProtocols_httpServerTls.py",
+      "src/test/resources/checks/hotspots/clearTextProtocols_httpServerModuleScope.py"), new ClearTextProtocolsCheck());
   }
 
 }

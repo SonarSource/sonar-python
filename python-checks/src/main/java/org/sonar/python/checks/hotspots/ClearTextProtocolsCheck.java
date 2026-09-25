@@ -26,12 +26,17 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -54,6 +59,13 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final Set<String> SENSITIVE_HTTP_SERVER_CLASSES = Set.of("http.server.HTTPServer", "http.server.ThreadingHTTPServer");
   private static final TypeMatcher STR_METHOD_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(TypeMatchers.isOrExtendsType("builtins.str"));
   private static final TypeMatcher STR_TYPE_MATCHER = TypeMatchers.isType("builtins.str");
+  // Receiver-side check (not isFunctionOwnerSatisfying: serve_forever's *declaring* class is always
+  // socketserver.BaseServer, since it's never overridden - that's the FP this matcher fixes).
+  // isObjectInstanceOf covers an instance receiver (server.serve_forever()); isOrExtendsType covers
+  // the class itself used as the receiver in an unbound-method call (HTTPServer.serve_forever(self)).
+  private static final TypeMatcher HTTP_SERVER_INSTANCE_MATCHER = TypeMatchers.any(
+    SENSITIVE_HTTP_SERVER_CLASSES.stream().flatMap(fqn -> Stream.of(TypeMatchers.isObjectInstanceOf(fqn), TypeMatchers.isOrExtendsType(fqn))).toList());
+  private static final TypeMatcher SSL_CALL_MATCHER = TypeMatchers.withFQNPrefix("ssl.");
   // Methods where the first (non-self) argument is a scheme/prefix used only for identification, not sent over the network
   private static final Set<String> PROTOCOL_IDENTIFICATION_METHODS = Set.of("startswith", "replace", "removeprefix", "removesuffix");
 
@@ -73,6 +85,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       Optional.ofNullable(callExpression.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
         .flatMap(ClearTextProtocolsCheck::isUnsafeLib)
+        .filter(protocol -> !"http".equals(protocol) || isSensitiveUnprotectedHttpServerCall(callExpression, ctx))
         .ifPresent(protocol -> ctx.addIssue(callExpression, message(protocol)));
     });
 
@@ -135,6 +148,94 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .map(HasSymbol::symbol)
       .filter(Objects::nonNull)
       .map(Symbol::fullyQualifiedName);
+  }
+
+  /**
+   * Gates the "http" finding for a direct {@code serve_forever()} call. Two checks not implied by
+   * the FQN match alone (serve_forever is inherited, never overridden, from socketserver.BaseServer):
+   * <ul>
+   *   <li>the receiver must actually be an HTTPServer/ThreadingHTTPServer instance, not merely
+   *   something that happens to inherit serve_forever from the same base class. For an unbound call
+   *   ({@code Cls.serve_forever(self)}), the object that actually serves is the argument, not the
+   *   qualifier {@code Cls} - which may be any ancestor in the MRO (e.g.
+   *   {@code socketserver.TCPServer.serve_forever(self)} on a real HTTPServer subclass). self's type
+   *   isn't reliably resolvable here, so that case falls back to the same structural
+   *   enclosing-class-bases check already used by {@link #checkServerBindCalls} and
+   *   {@link #checkServerCallFromSuper} instead of inferring the argument's type;</li>
+   *   <li>there must be no evidence that the socket was TLS-wrapped in the same scope as the
+   *   server's construction (same permissive, dataflow-free style as the SMTP STARTTLS check above:
+   *   any ssl.* call anywhere in scope suppresses, whether or not it actually secures this server,
+   *   and regardless of call order).</li>
+   * </ul>
+   * Known, accepted limitations: no real dataflow to the specific socket; doesn't cover
+   * construction and TLS setup happening in different methods (e.g. {@code __init__} vs
+   * {@code start()}); no ordering requirement between the wrap and {@code serve_forever()}.
+   */
+  private static boolean isSensitiveUnprotectedHttpServerCall(CallExpression callExpression, SubscriptionContext ctx) {
+    if (!(callExpression.callee() instanceof QualifiedExpression qualifiedExpression)) {
+      return true;
+    }
+    Expression receiver = qualifiedExpression.qualifier();
+    if (HTTP_SERVER_INSTANCE_MATCHER.evaluateFor(receiver, ctx) == TriBool.FALSE
+      && !isParentClassExtendingSensitiveClass(callExpression)) {
+      return false;
+    }
+    return !hasTlsEvidenceInScope(callExpression, receiver, ctx);
+  }
+
+  private static boolean hasTlsEvidenceInScope(CallExpression serveForeverCall, Expression receiver, SubscriptionContext ctx) {
+    Tree anchor = findConstructorCall(receiver).orElse(serveForeverCall);
+    // enclosingScope always finds either the FunctionDef body or the FileInput root - a call
+    // expression is always part of a parsed file, so it never has no scope at all.
+    Tree scope = enclosingScope(anchor);
+    SslCallDetector detector = new SslCallDetector(ctx);
+    scope.accept(detector);
+    return detector.found;
+  }
+
+  private static Optional<Tree> findConstructorCall(Expression receiver) {
+    if (receiver instanceof CallExpression constructorCall) {
+      return Optional.of(constructorCall);
+    }
+    if (receiver instanceof Name name) {
+      return Optional.ofNullable(name.symbolV2())
+        .flatMap(SymbolV2::getSingleBindingUsage)
+        .map(UsageV2::tree)
+        .map(bindingTree -> TreeUtils.firstAncestorOfKind(bindingTree, Tree.Kind.ASSIGNMENT_STMT))
+        .map(AssignmentStatement.class::cast)
+        .map(AssignmentStatement::assignedValue);
+    }
+    return Optional.empty();
+  }
+
+  private static Tree enclosingScope(Tree node) {
+    Tree functionDef = TreeUtils.firstAncestorOfKind(node, Tree.Kind.FUNCDEF);
+    if (functionDef != null) {
+      return ((FunctionDef) functionDef).body();
+    }
+    return TreeUtils.firstAncestorOfClass(node, FileInput.class);
+  }
+
+  private static class SslCallDetector extends BaseTreeVisitor {
+    private final SubscriptionContext ctx;
+    private boolean found = false;
+
+    private SslCallDetector(SubscriptionContext ctx) {
+      this.ctx = ctx;
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      if (SSL_CALL_MATCHER.evaluateFor(callExpression.callee(), ctx) == TriBool.TRUE) {
+        found = true;
+      }
+      super.visitCallExpression(callExpression);
+    }
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      // Nested function bodies are a different scope; they aren't executed just by being defined.
+    }
   }
 
   private static void handleAssignmentStatement(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
