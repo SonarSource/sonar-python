@@ -21,13 +21,14 @@ import java.util.Arrays;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
 
@@ -35,7 +36,10 @@ import org.sonar.python.quickfix.TextEditUtils;
 public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return \"NotImplemented\" instead of raising \"NotImplementedError\"";
-  private static final String NOT_IMPLEMENTED_ERROR = "NotImplementedError";
+  private static final TypeMatcher IS_NOT_IMPLEMENTED_ERROR = TypeMatchers.any(
+    TypeMatchers.isType("builtins.NotImplementedError"),
+    TypeMatchers.isObjectOfType("builtins.NotImplementedError")
+  );
 
   private static final List<String> OPERATOR_METHODS = Arrays.asList(
     "__lt__",
@@ -90,7 +94,12 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
   public static final String QUICK_FIX_MESSAGE = "Replace the raised exception with return NotImplemented";
 
   private static class RaiseNotImplementedErrorVisitor extends BaseTreeVisitor {
+    private final SubscriptionContext context;
     private List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
+
+    private RaiseNotImplementedErrorVisitor(SubscriptionContext context) {
+      this.context = context;
+    }
 
     @Override
     public void visitRaiseStatement(RaiseStatement pyRaiseStatementTree) {
@@ -100,13 +109,8 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
       }
 
       Expression raisedException = pyRaiseStatementTree.expressions().get(0);
-      if (raisedException.type().canOnlyBe(NOT_IMPLEMENTED_ERROR)) {
+      if (IS_NOT_IMPLEMENTED_ERROR.isTrueFor(raisedException, context)) {
         nonCompliantRaises.add(pyRaiseStatementTree);
-      } else if (raisedException instanceof HasSymbol hasSymbol) {
-        Symbol symbol = hasSymbol.symbol();
-        if (symbol != null && NOT_IMPLEMENTED_ERROR.equals(symbol.fullyQualifiedName())) {
-          nonCompliantRaises.add(pyRaiseStatementTree);
-        }
       }
     }
   }
@@ -119,7 +123,7 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
         return;
       }
 
-      RaiseNotImplementedErrorVisitor visitor = new RaiseNotImplementedErrorVisitor();
+      RaiseNotImplementedErrorVisitor visitor = new RaiseNotImplementedErrorVisitor(ctx);
       functionDef.accept(visitor);
 
       for (RaiseStatement notImplementedErrorRaise : visitor.nonCompliantRaises) {

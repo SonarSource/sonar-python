@@ -53,6 +53,16 @@ class OtherRaises(object):
     def __add__(self, other):
         raise ValueError()
 
+
+class LocalNotImplementedError(NotImplementedError):
+    pass
+
+
+class LocalSubclassRaise(object):
+    def __add__(self, other):
+        raise LocalNotImplementedError()
+
+
 def foo(a, b):
     raise NotImplementedError()
 
