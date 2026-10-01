@@ -172,6 +172,32 @@ public class ClassTypeTest {
     );
     ClassType classA = classTypes.get("a.A");
     assertThat(classA.resolveMember("foo")).isEmpty();
+    assertThat(classA.hasUnresolvedHierarchy()).isFalse();
+    assertThat(classA.instancesHaveMember("foo")).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void recursive_inheritance_with_metaclass_has_unknown_members() {
+    var classTypes = multiFilesClassTypes(Map.ofEntries(
+        Map.entry(
+          "a.py",
+          """
+            from b import B
+            class Meta: ...
+            class A(B, metaclass=Meta): ...
+            """
+        ),
+        Map.entry(
+          "b.py",
+          """
+            from a import A
+            class B(A): ...
+            """
+        )
+      )
+    );
+    ClassType classA = classTypes.get("a.A");
+    assertThat(classA.instancesHaveMember("foo")).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test

@@ -175,9 +175,16 @@ public final class ClassType implements PythonType {
   }
 
   public boolean hasUnresolvedHierarchy() {
+    return hasUnresolvedHierarchy(new HashSet<>());
+  }
+
+  private boolean hasUnresolvedHierarchy(Set<ClassType> visited) {
+    if (!visited.add(this)) {
+      return false;
+    }
     return superClasses().stream().anyMatch(s -> {
         if (s.type() instanceof ClassType parentClassType) {
-          return parentClassType.hasUnresolvedHierarchy();
+          return parentClassType.hasUnresolvedHierarchy(visited);
         }
         return true;
       }
@@ -249,13 +256,20 @@ public final class ClassType implements PythonType {
   }
 
   public boolean hasMetaClass() {
+    return hasMetaClass(new HashSet<>());
+  }
+
+  private boolean hasMetaClass(Set<ClassType> visited) {
+    if (!visited.add(this)) {
+      return false;
+    }
     return !this.metaClasses.isEmpty() ||
       this.superClasses()
         .stream()
         .map(TypeWrapper::type)
         .filter(ClassType.class::isInstance)
         .map(ClassType.class::cast)
-        .anyMatch(ClassType::hasMetaClass);
+        .anyMatch(classType -> classType.hasMetaClass(visited));
   }
 
   public TriBool instancesHaveMember(String memberName) {
