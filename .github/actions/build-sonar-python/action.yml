@@ -8,7 +8,7 @@ runs:
       uses: ./.github/actions/config-sonar-python
 
     - name: Build public and private modules
-      uses: SonarSource/ci-github-actions/build-maven@v1
+      uses: SonarSource/ci-github-actions/build-maven@v2
       id: build
       with:
         maven-args: '-DskipTests=true -Dsonar.skip=true'

@@ -11,10 +11,10 @@ runs:
   steps:
     - name: Configure public Maven project
       id: config-maven
-      uses: SonarSource/ci-github-actions/config-maven@v1
+      uses: SonarSource/ci-github-actions/config-maven@v2
 
     - name: Configure Private Maven project
-      uses: SonarSource/ci-github-actions/config-maven@v1
+      uses: SonarSource/ci-github-actions/config-maven@v2
       with:
         working-directory: private
       env:
