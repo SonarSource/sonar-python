@@ -319,7 +319,7 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitStringElement(StringElement tree) {
-    if (tree.isInterpolated()) {
+    if (tree.isInterpolated() || tree.isTemplate()) {
       scan(tree.formattedExpressions());
     }
   }

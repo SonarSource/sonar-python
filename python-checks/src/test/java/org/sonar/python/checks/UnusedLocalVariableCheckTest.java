@@ -16,19 +16,37 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.types.TypeShed;
 
 class UnusedLocalVariableCheckTest {
 
+  /** Restores the default Python version configuration. */
+  @AfterEach
+  void resetPythonVersion() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+  }
 
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariable.py", new UnusedLocalVariableCheck());
+  }
+
+  /** Verifies template-string replacement fields count as variable reads. */
+  @Test
+  void templateString() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_314));
+    PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariableTemplateString.py", new UnusedLocalVariableCheck());
   }
 
   @Test

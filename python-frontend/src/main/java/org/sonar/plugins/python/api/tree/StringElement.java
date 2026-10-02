@@ -41,8 +41,8 @@ public interface StringElement extends Tree {
 
   boolean isTemplate();
   /**
-   * @return Formatted expressions of an f-string.
-   * Empty list if the string element is not an f-string.
+   * @return Formatted expressions of an f-string or template string.
+   * Empty list if the string element has no replacement fields.
    */
   List<FormattedExpression> formattedExpressions();
 }

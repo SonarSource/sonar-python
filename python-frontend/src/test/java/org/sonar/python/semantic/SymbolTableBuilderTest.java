@@ -72,7 +72,7 @@ class SymbolTableBuilderTest {
   void global_variable() {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
     List<String> topLevelFunctions = Arrays.asList("function_with_local", "function_with_free_variable", "function_with_rebound_variable",
-      "ref_in_interpolated", "print_var", "function_with_global_var", "func_wrapping_class", "function_with_unused_import",
+      "ref_in_interpolated", "ref_in_template_string", "print_var", "function_with_global_var", "func_wrapping_class", "function_with_unused_import",
       "function_with_nonlocal_var", "symbols_in_comp", "scope_of_comprehension", "for_comp_with_no_name_var",
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
@@ -505,6 +505,14 @@ class SymbolTableBuilderTest {
   @Test
   void interpolated_string() {
     FunctionDef functionTree = functionTreesByName.get("ref_in_interpolated");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
+    assertThat(symbolByName.get("p1").usages()).hasSize(2);
+  }
+
+  @Test
+  void template_string() {
+    FunctionDef functionTree = functionTreesByName.get("ref_in_template_string");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
     assertThat(symbolByName.get("p1").usages()).hasSize(2);
