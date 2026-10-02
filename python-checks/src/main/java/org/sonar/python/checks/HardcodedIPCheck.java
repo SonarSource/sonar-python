@@ -24,6 +24,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -44,6 +45,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   private static final String IPV6_ALONE = ("(?<ipv6>(" + IPV6_NO_PREFIX_COMPRESSION + "|" + IPV6_PREFIX_COMPRESSION + ")??(:?" + IPV4_ALONE + ")?" + ")");
   private static final String IPV6_URL = "([^\\d.]*/)?\\[" + IPV6_ALONE + "]((:\\d{1,5})?(?!\\d|\\.))(/.*)?";
 
+  private static final Pattern IPV4_ALONE_REGEX = Pattern.compile(IPV4_ALONE);
   private static final Pattern IPV4_URL_REGEX = Pattern.compile("([^\\d.]*/)?" + IPV4_ALONE + "((:\\d{1,5})?(?!\\d|\\.))(/.*)?");
   private static final List<Pattern> IPV6_REGEX_LIST = Arrays.asList(
     Pattern.compile(IPV6_ALONE),
@@ -72,10 +74,10 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
         return;
       }
       StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
-      if (isMultilineString(stringLiteral) || isVersionLiteral(stringLiteral)) {
+      String content = Expressions.unescape(stringLiteral);
+      if (isMultilineString(stringLiteral) || isVersionLiteral(stringLiteral, content)) {
         return;
       }
-      String content = Expressions.unescape(stringLiteral);
       Matcher matcher = IPV4_URL_REGEX.matcher(content);
       if (matcher.matches()) {
         String ip = matcher.group("ipv4");
@@ -97,7 +99,10 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isVersionLiteral(StringLiteral stringLiteral) {
+  private static boolean isVersionLiteral(StringLiteral stringLiteral, String content) {
+    if (!IPV4_ALONE_REGEX.matcher(content).matches()) {
+      return false;
+    }
     Expression assignedValue = stringLiteral;
     while (assignedValue.parent() instanceof ParenthesizedExpression parenthesizedExpression) {
       assignedValue = parenthesizedExpression;
@@ -105,6 +110,9 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
     Tree parent = assignedValue.parent();
     if (parent instanceof AssignmentStatement assignment) {
       return assignment.assignedValue() == assignedValue && hasVersionName(assignment);
+    }
+    if (parent instanceof AssignmentExpression assignment) {
+      return assignment.expression() == assignedValue && isVersionName(assignment.lhsName());
     }
     return parent instanceof AnnotatedAssignment assignment
       && assignment.assignedValue() == assignedValue
@@ -120,7 +128,32 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isVersionName(Expression expression) {
-    return Expressions.removeParentheses(expression) instanceof Name name && "__version__".equals(name.name());
+    return Expressions.removeParentheses(expression) instanceof Name name
+      && containsVersionWord(name.name());
+  }
+
+  private static boolean containsVersionWord(String identifier) {
+    int wordStart = 0;
+    for (int index = 1; index < identifier.length(); index++) {
+      if (isIdentifierWordBoundary(identifier, index)) {
+        if ("version".equalsIgnoreCase(identifier.substring(wordStart, index))) {
+          return true;
+        }
+        wordStart = index;
+      }
+    }
+    return "version".equalsIgnoreCase(identifier.substring(wordStart));
+  }
+
+  private static boolean isIdentifierWordBoundary(String identifier, int index) {
+    char previous = identifier.charAt(index - 1);
+    char current = identifier.charAt(index);
+    return previous == '_'
+      || current == '_'
+      || Character.isDigit(previous) != Character.isDigit(current)
+      || (Character.isLowerCase(previous) && Character.isUpperCase(current))
+      || (Character.isUpperCase(previous) && Character.isUpperCase(current)
+        && index + 1 < identifier.length() && Character.isLowerCase(identifier.charAt(index + 1)));
   }
 
   private static boolean isMultilineString(StringLiteral pyStringLiteralTree) {

@@ -26,8 +26,19 @@ __version__ = "26.8.0.1" # Compliant
 __version__ = ("26.8.0.1") # Compliant
 __version__: str = "26.8.0.1" # Compliant
 (__version__) = "26.8.0.1" # Compliant
-version = "26.8.0.1" # Noncompliant
-VERSION = "26.8.0.1" # Noncompliant
+version = "26.8.0.1" # Compliant
+APP_VERSION = "26.8.0.1" # Compliant
+apiVersion = "26.8.0.1" # Compliant
+APIVersion = "26.8.0.1" # Compliant
+version2 = "26.8.0.1" # Compliant
+if (apiVersion := "26.8.0.1"):
+    pass
+version_url = "http://192.168.0.1/admin.html" # Noncompliant
+version_with_port = "1.2.3.4:80" # Noncompliant
+version_ipv6 = "1080:0:0:0:8:800:200C:417A" # Noncompliant
+conversion = "26.8.0.1" # Noncompliant
+subversion = "26.8.0.1" # Noncompliant
+host = "26.8.0.1" # Noncompliant
 __version__ = version = "26.8.0.1" # Noncompliant
 metadata.__version__ = "26.8.0.1" # Noncompliant
 versions["__version__"] = "26.8.0.1" # Noncompliant
