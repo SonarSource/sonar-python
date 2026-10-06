@@ -190,6 +190,16 @@
                       <argument>--fail_fast</argument>
                       <argument>${failStubGenerationFast}</argument>
                   </arguments>
+                  <!--
+                    uv authenticates the "repox" index declared in typeshed_serializer/pyproject.toml via
+                    UV_INDEX_REPOX_USERNAME/PASSWORD. It does not read pip.conf, so the Artifactory reader
+                    credentials that config-maven already exports for the job must be re-exposed under the
+                    names uv expects, or every cache-cold package install 401s against sonarsource-pypi.
+                  -->
+                  <environmentVariables>
+                    <UV_INDEX_REPOX_USERNAME>${env.ARTIFACTORY_USERNAME}</UV_INDEX_REPOX_USERNAME>
+                    <UV_INDEX_REPOX_PASSWORD>${env.ARTIFACTORY_ACCESS_TOKEN}</UV_INDEX_REPOX_PASSWORD>
+                  </environmentVariables>
                   <useMavenLogger>true</useMavenLogger>
                 </configuration>
                 <goals>
