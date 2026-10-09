@@ -180,12 +180,13 @@ class IPynbSensorTest {
 
     PythonInputFile inputFile = inputFile(FILE_1);
     activeRules = new ActiveRulesBuilder().build();
-    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.14"));
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.15"));
     PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
 
     sensor(pythonIndexer).execute(context);
 
-    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.MAX_SUPPORTED_VERSION);
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_315);
+    assertThat(ProjectPythonVersion.currentSemanticVersions()).containsExactly(PythonVersionUtils.SemanticVersion.V_315);
   }
 
   @Test

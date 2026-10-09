@@ -16,9 +16,14 @@
  */
 package org.sonar.plugins.python.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -29,6 +34,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_313;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_314;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_315;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 
@@ -46,7 +52,8 @@ public class PythonVersionUtils {
     V_311(3, 11),
     V_312(3, 12),
     V_313(3, 13),
-    V_314(3, 14);
+    V_314(3, 14),
+    V_315(3, 15);
 
     private final int major;
     private final int minor;
@@ -90,14 +97,16 @@ public class PythonVersionUtils {
   /**
    * Python versions for which serialized semantic-model data is available.
    * These values are internal analysis targets and are distinct from configured source-version compatibility.
-   * Values must be declared from oldest to newest so that the supported range can be derived from their order.
+   * Active targets are configured in org/sonar/python/python-semantic-versions.json, shared with the serializer.
+   * Values must be declared from oldest to newest.
    */
   public enum SemanticVersion {
     V_310(3, 10),
     V_311(3, 11),
     V_312(3, 12),
     V_313(3, 13),
-    V_314(3, 14);
+    V_314(3, 14),
+    V_315(3, 15);
 
     private final int major;
     private final int minor;
@@ -120,9 +129,27 @@ public class PythonVersionUtils {
     }
   }
 
+  private static final Set<SemanticVersion> SUPPORTED_SEMANTIC_VERSIONS = loadSupportedSemanticVersions(
+    PythonVersionUtils.class.getResourceAsStream("/org/sonar/python/python-semantic-versions.json"));
+
+  static Set<SemanticVersion> loadSupportedSemanticVersions(InputStream input) {
+    try (var resource = Objects.requireNonNull(input, "Missing python-semantic-versions.json")) {
+      Set<SemanticVersion> versions = EnumSet.noneOf(SemanticVersion.class);
+      for (String version : new ObjectMapper().readValue(resource, String[].class)) {
+        versions.add(SemanticVersion.valueOf("V_" + version.replace(".", "")));
+      }
+      if (versions.isEmpty()) {
+        throw new IllegalStateException("No semantic versions configured");
+      }
+      return Collections.unmodifiableSet(versions);
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot load semantic versions", e);
+    }
+  }
+
   private static final Version MIN_RECOGNIZED_SOURCE_VERSION = V_38;
   private static final Version MIN_SUPPORTED_SOURCE_VERSION = V_310;
-  public static final Version MAX_SUPPORTED_VERSION = V_314;
+  public static final Version MAX_SUPPORTED_VERSION = V_315;
 
   private static final Map<String, Version> STRING_VERSION_MAP = Map.ofEntries(
     Map.entry("3.0", MIN_RECOGNIZED_SOURCE_VERSION),
@@ -139,7 +166,8 @@ public class PythonVersionUtils {
     Map.entry("3.11", V_311),
     Map.entry("3.12", V_312),
     Map.entry("3.13", V_313),
-    Map.entry("3.14", V_314));
+    Map.entry("3.14", V_314),
+    Map.entry("3.15", V_315));
   private static final Logger LOG = LoggerFactory.getLogger(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
@@ -219,32 +247,28 @@ public class PythonVersionUtils {
    * Returns all versions for which serialized semantic-model data is available.
    */
   public static Set<SemanticVersion> allSupportedSemanticVersions() {
-    return EnumSet.allOf(SemanticVersion.class);
+    return EnumSet.copyOf(SUPPORTED_SEMANTIC_VERSIONS);
   }
 
   /**
    * Returns the oldest version for which serialized semantic-model data is available.
    */
   public static SemanticVersion minSupportedSemanticVersion() {
-    return SemanticVersion.values()[0];
+    return Collections.min(SUPPORTED_SEMANTIC_VERSIONS);
   }
 
   /**
    * Returns the newest version for which serialized semantic-model data is available.
    */
   public static SemanticVersion maxSupportedSemanticVersion() {
-    SemanticVersion[] versions = SemanticVersion.values();
-    return versions[versions.length - 1];
+    return Collections.max(SUPPORTED_SEMANTIC_VERSIONS);
   }
 
   private static SemanticVersion toSupportedSemanticVersion(Version sourcePythonVersion) {
-    return switch (sourcePythonVersion) {
-      case V_38, V_39, V_310 -> minSupportedSemanticVersion();
-      case V_311 -> SemanticVersion.V_311;
-      case V_312 -> SemanticVersion.V_312;
-      case V_313 -> SemanticVersion.V_313;
-      case V_314 -> SemanticVersion.V_314;
-    };
+    return SUPPORTED_SEMANTIC_VERSIONS.stream()
+      .filter(version -> sourcePythonVersion.compare(version.major, version.minor) >= 0)
+      .reduce((older, newer) -> newer)
+      .orElse(minSupportedSemanticVersion());
   }
 
   private static boolean guessPythonVersion(Set<Version> pythonVersions, String versionValue) {

@@ -964,20 +964,22 @@ class PythonSensorTest {
 
     sensor().execute(context);
     assertThat(PythonSensor.UNSET_VERSION_WARNING)
-      .contains("Python versions 3.10 through 3.14");
+      .contains("Python versions 3.10 through 3.15");
     assertThat(logTester.logs(Level.WARN)).contains(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(1)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
 
-  @Test
-  void test_python_version_parameter_no_warning() {
+  @ParameterizedTest
+  @CsvSource({"3.14, V_314, V_314", "3.15, V_315, V_315"})
+  void test_python_version_parameter_no_warning(String configuredVersion, PythonVersionUtils.Version sourceVersion, PythonVersionUtils.SemanticVersion semanticVersion) {
     context.fileSystem().add(inputFile(FILE_1).wrappedFile());
 
     activeRules = new ActiveRulesBuilder().build();
 
-    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.14"));
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", configuredVersion));
     sensor().execute(context);
-    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.MAX_SUPPORTED_VERSION);
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(sourceVersion);
+    assertThat(ProjectPythonVersion.currentSemanticVersions()).containsExactly(semanticVersion);
     assertThat(logTester.logs(Level.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
@@ -1052,7 +1054,8 @@ class PythonSensorTest {
   void test_python_version_unknown_upper() {
     setup_typing_concise_rule("3.4569");
 
-    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.MAX_SUPPORTED_VERSION);
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_315);
+    assertThat(ProjectPythonVersion.currentSemanticVersions()).containsExactly(PythonVersionUtils.SemanticVersion.V_315);
     assertThat(context.allIssues()).hasSize(1);
   }
 

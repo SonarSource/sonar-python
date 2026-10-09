@@ -15,10 +15,12 @@
 # along with this program; if not, see https://sonarsource.com/license/ssal/
 #
 
+import json
 import os
 import logging
 import sys
 from abc import abstractmethod, ABC
+from pathlib import Path
 
 
 from mypy import options, build
@@ -38,7 +40,14 @@ CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 IMPORTER_FILE_NAME = "../resources/importer/sonar_third_party_libs.py"
 IMPORTER_FQN = "sonar_third_party_libs"
-SUPPORTED_PYTHON_VERSIONS = ((3, 10), (3, 11), (3, 12), (3, 13), (3, 14))
+SEMANTIC_VERSIONS_FILE = (
+    Path(__file__).resolve().parents[2]
+    / "src/main/resources/org/sonar/python/python-semantic-versions.json"
+)
+SUPPORTED_PYTHON_VERSIONS = tuple(
+    tuple(map(int, version.split(".")))
+    for version in json.loads(SEMANTIC_VERSIONS_FILE.read_text(encoding="utf-8"))
+)
 DEFAULT_PYTHON_VERSION = SUPPORTED_PYTHON_VERSIONS[0]
 
 

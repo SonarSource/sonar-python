@@ -16,6 +16,10 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -26,6 +30,7 @@ import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
@@ -33,6 +38,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_313;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_314;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_315;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 
@@ -41,8 +47,51 @@ class PythonVersionUtilsTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  private static final List<PythonVersionUtils.Version> supportedVersions = List.of(V_310, V_311, V_312, V_313, V_314);
-  private static final List<PythonVersionUtils.Version> recognizedVersions = List.of(V_38, V_39, V_310, V_311, V_312, V_313, V_314);
+  private static final List<PythonVersionUtils.Version> supportedVersions = List.of(V_310, V_311, V_312, V_313, V_314, V_315);
+  private static final List<PythonVersionUtils.Version> recognizedVersions = List.of(V_38, V_39, V_310, V_311, V_312, V_313, V_314, V_315);
+
+  @Test
+  void semantic_versions_are_loaded_from_configuration() {
+    var versions = PythonVersionUtils.loadSupportedSemanticVersions(semanticVersionsResource("[\"3.10\", \"3.15\"]"));
+    assertThat(versions).containsExactly(PythonVersionUtils.SemanticVersion.V_310, PythonVersionUtils.SemanticVersion.V_315);
+    assertThatThrownBy(versions::clear).isInstanceOf(UnsupportedOperationException.class);
+  }
+
+  @Test
+  void missing_semantic_versions_configuration_is_rejected() {
+    assertThatThrownBy(() -> PythonVersionUtils.loadSupportedSemanticVersions(null))
+      .isInstanceOf(NullPointerException.class)
+      .hasMessage("Missing python-semantic-versions.json");
+  }
+
+  @Test
+  void empty_semantic_versions_configuration_is_rejected() {
+    var resource = semanticVersionsResource("[]");
+    assertThatThrownBy(() -> PythonVersionUtils.loadSupportedSemanticVersions(resource))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessage("No semantic versions configured");
+  }
+
+  @Test
+  void malformed_semantic_versions_configuration_preserves_the_cause() {
+    var resource = semanticVersionsResource("[");
+    assertThatThrownBy(() -> PythonVersionUtils.loadSupportedSemanticVersions(resource))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessage("Cannot load semantic versions")
+      .hasCauseInstanceOf(IOException.class);
+  }
+
+  @Test
+  void unrecognized_semantic_version_is_rejected() {
+    var resource = semanticVersionsResource("[\"3.16\"]");
+    assertThatThrownBy(() -> PythonVersionUtils.loadSupportedSemanticVersions(resource))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessageContaining("V_316");
+  }
+
+  private static InputStream semanticVersionsResource(String json) {
+    return new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+  }
 
   @Test
   void supportedVersions() {
@@ -51,6 +100,14 @@ class PythonVersionUtilsTest {
     assertThat(PythonVersionUtils.fromString("3")).hasSameElementsAs(supportedVersions);
     assertThat(PythonVersionUtils.fromString("3.10, 3.12, 3.14")).containsExactlyInAnyOrder(V_310, V_312, V_314);
     assertThat(PythonVersionUtils.fromString("3.10")).containsExactlyInAnyOrder(V_310);
+  }
+
+  @Test
+  void python_315_selects_source_and_semantic_version() {
+    assertThat(PythonVersionUtils.fromString("3.15")).containsExactly(V_315);
+    assertThat(PythonVersionUtils.toSupportedSemanticVersions(PythonVersionUtils.fromString("3.15")))
+      .containsExactly(PythonVersionUtils.SemanticVersion.V_315);
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
   @Test
@@ -79,10 +136,11 @@ class PythonVersionUtilsTest {
       PythonVersionUtils.SemanticVersion.V_311,
       PythonVersionUtils.SemanticVersion.V_312,
       PythonVersionUtils.SemanticVersion.V_313,
-      PythonVersionUtils.SemanticVersion.V_314);
+      PythonVersionUtils.SemanticVersion.V_314,
+      PythonVersionUtils.SemanticVersion.V_315);
     assertThat(PythonVersionUtils.allSupportedSemanticVersions())
       .extracting(PythonVersionUtils.SemanticVersion::serializedValue)
-      .containsExactly("310", "311", "312", "313", "314");
+      .containsExactly("310", "311", "312", "313", "314", "315");
   }
 
   @Test
@@ -91,8 +149,8 @@ class PythonVersionUtilsTest {
       .isEqualTo(PythonVersionUtils.SemanticVersion.V_310)
       .hasToString("3.10");
     assertThat(PythonVersionUtils.maxSupportedSemanticVersion())
-      .isEqualTo(PythonVersionUtils.SemanticVersion.V_314)
-      .hasToString("3.14");
+      .isEqualTo(PythonVersionUtils.SemanticVersion.V_315)
+      .hasToString("3.15");
   }
 
   @Test
@@ -104,12 +162,12 @@ class PythonVersionUtilsTest {
 
   @Test
   void version_out_of_range() {
-    assertThat(PythonVersionUtils.fromString("4")).containsExactlyInAnyOrder(V_314);
-    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 4. Python version has been set to 3.14.");
+    assertThat(PythonVersionUtils.fromString("4")).containsExactlyInAnyOrder(V_315);
+    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 4. Python version has been set to 3.15.");
     assertThat(PythonVersionUtils.fromString("1")).containsExactly(V_38);
     assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 1. Support for Python versions prior to 3 is deprecated.");
-    assertThat(PythonVersionUtils.fromString("3.15")).containsExactlyInAnyOrder(V_314);
-    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.15. Python version has been set to 3.14.");
+    assertThat(PythonVersionUtils.fromString("3.16")).containsExactlyInAnyOrder(V_315);
+    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.16. Python version has been set to 3.15.");
     assertThat(PythonVersionUtils.fromString("3.12")).containsExactlyInAnyOrder(V_312);
   }
 
@@ -119,12 +177,15 @@ class PythonVersionUtilsTest {
     assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.9.1. Python version has been set to 3.9.");
     assertThat(PythonVersionUtils.fromString("3.11.1")).containsExactlyInAnyOrder(V_311);
     assertThat(PythonVersionUtils.fromString("3.12.1")).containsExactlyInAnyOrder(V_312);
+    assertThat(PythonVersionUtils.fromString("3.15.1")).containsExactly(V_315);
   }
 
   @Test
   void comparison_specifiers() {
-    assertThat(PythonVersionUtils.fromString(">=3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314);
-    assertThat(PythonVersionUtils.fromString(">3.10")).containsExactly(V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString(">=3.15")).containsExactly(V_315);
+    assertThat(PythonVersionUtils.fromString(">=3.14,<3.16")).containsExactly(V_314, V_315);
+    assertThat(PythonVersionUtils.fromString(">=3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314, V_315);
+    assertThat(PythonVersionUtils.fromString(">3.10")).containsExactly(V_311, V_312, V_313, V_314, V_315);
     assertThat(PythonVersionUtils.fromString(">=3,<=3.10")).containsExactly(V_38, V_39, V_310);
     assertThat(PythonVersionUtils.fromString(">=3,<3.10")).containsExactly(V_38, V_39);
     assertThat(PythonVersionUtils.fromString(">=3.10.1,<3.12.4")).containsExactly(V_310, V_311);
@@ -136,27 +197,29 @@ class PythonVersionUtilsTest {
   @Test
   void equality_and_exclusion_specifiers() {
     assertThat(PythonVersionUtils.fromString("==3.11")).containsExactly(V_311);
+    assertThat(PythonVersionUtils.fromString("==3.15.*")).containsExactly(V_315);
+    assertThat(PythonVersionUtils.fromString("!=3.15")).containsExactly(V_38, V_39, V_310, V_311, V_312, V_313, V_314);
     assertThat(PythonVersionUtils.fromString("==3.*")).hasSameElementsAs(recognizedVersions);
     assertThat(PythonVersionUtils.fromString("==3.11.*")).containsExactly(V_311);
     assertThat(PythonVersionUtils.fromString("==3.11.4")).containsExactly(V_311);
-    assertThat(PythonVersionUtils.fromString("!=3.11")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314);
-    assertThat(PythonVersionUtils.fromString(">=3,!=3.11")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314);
-    assertThat(PythonVersionUtils.fromString(">=3,!=3.11.*")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString("!=3.11")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314, V_315);
+    assertThat(PythonVersionUtils.fromString(">=3,!=3.11")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314, V_315);
+    assertThat(PythonVersionUtils.fromString(">=3,!=3.11.*")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314, V_315);
   }
 
   @Test
   void compatible_and_poetry_specifiers() {
-    assertThat(PythonVersionUtils.fromString("~=3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString("~=3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314, V_315);
     assertThat(PythonVersionUtils.fromString("~=3.10.1")).containsExactly(V_310);
-    assertThat(PythonVersionUtils.fromString("^3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314);
-    assertThat(PythonVersionUtils.fromString("^3.10.1")).containsExactly(V_310, V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString("^3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314, V_315);
+    assertThat(PythonVersionUtils.fromString("^3.10.1")).containsExactly(V_310, V_311, V_312, V_313, V_314, V_315);
   }
 
   @Test
   void ranges_without_supported_versions_fall_back_to_all_versions() {
-    assertThat(PythonVersionUtils.fromString(">=3.15")).hasSameElementsAs(supportedVersions);
+    assertThat(PythonVersionUtils.fromString(">=3.16")).hasSameElementsAs(supportedVersions);
     assertThat(logTester.logs(Level.WARN))
-      .contains("No supported Python version matches version range >=3.15. Analysis will target all supported Python versions.");
+      .contains("No supported Python version matches version range >=3.16. Analysis will target all supported Python versions.");
 
     assertThat(PythonVersionUtils.fromString(">=3,<3.8")).hasSameElementsAs(supportedVersions);
     assertThat(logTester.logs(Level.WARN))
@@ -201,6 +264,8 @@ class PythonVersionUtilsTest {
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39, V_310), V_39));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_312, V_310), V_39));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_314), V_314));
+    assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_315), V_315));
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_314, V_315), V_315));
   }
   
 }

@@ -91,7 +91,11 @@ def fetch_resource_file_names(folder_name: str, file_extension: str) -> list[str
 
 
 def fetch_config_file_names() -> list[str]:
-    return [os.path.join(CURRENT_PATH, '../pyproject.toml'), os.path.join(CURRENT_PATH, '../uv.lock')]
+    return [
+        os.path.join(CURRENT_PATH, '../pyproject.toml'),
+        os.path.join(CURRENT_PATH, '../uv.lock'),
+        os.path.join(CURRENT_PATH, '../../src/main/resources/org/sonar/python/python-semantic-versions.json'),
+    ]
 
 def fetch_source_file_names(folder_path: str) -> list[str]:
     filenames = fetch_python_file_names(folder_path)

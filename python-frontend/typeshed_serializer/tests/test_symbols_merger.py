@@ -74,7 +74,7 @@ EXPECTED_MERGED_MODULES = {
 def test_build_multiple_python_version(typeshed_stdlib):
     serializers.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
     model_by_version = TypeshedSerializer().build_for_every_python_version()
-    assert set(model_by_version.keys()) == {'310', '311', '312', '313', '314'}
+    assert set(model_by_version.keys()) == {'310', '311', '312', '313', '314', '315'}
 
 
 def test_merge_multiple_python_versions(typeshed_stdlib):

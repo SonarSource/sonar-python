@@ -244,7 +244,7 @@ public class PythonExtensions {
       .index(12)
       .name("Python versions")
       .description("Comma-separated list of Python versions or version specifiers this project is compatible with. "
-        + "Semantic information is available for versions 3.10 through 3.14. "
+        + "Semantic information is available for versions 3.10 through 3.15. "
         + "Version-sensitive rules still honor explicitly configured older Python versions using 3.10 type information.")
       .multiValues(true)
       .category(PYTHON_CATEGORY)

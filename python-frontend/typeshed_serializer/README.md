@@ -6,6 +6,11 @@ in `python-frontend/src/main/protobuf` directory, run: ```protoc -I=. --python_o
 
 ## Run the serializer
 
+Semantic model targets are configured in
+`../src/main/resources/org/sonar/python/python-semantic-versions.json`, read by both the
+serializer and Java analyzer. Keep the versions ordered from oldest to newest.
+Adding a target also requires its Java `SemanticVersion` constant and regenerated descriptors.
+
 ```bash
 uv run python runners/serializer_runner.py
 ```

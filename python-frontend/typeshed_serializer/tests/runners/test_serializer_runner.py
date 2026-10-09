@@ -119,9 +119,10 @@ class RunnerTest(unittest.TestCase):
 
     def test_fetch_config_file_names(self):
         fns = runner.fetch_config_file_names()
-        self.assertEqual(len(fns), 2)
+        self.assertEqual(len(fns), 3)
         self.assertTrue(fns[0].endswith('pyproject.toml'))
         self.assertTrue(fns[1].endswith('uv.lock'))
+        self.assertTrue(fns[2].endswith('python-semantic-versions.json'))
 
     def test_fetch_source_file_names(self):
         folder = "test"
