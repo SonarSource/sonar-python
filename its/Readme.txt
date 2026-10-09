@@ -12,4 +12,4 @@ To run the "ruling" tests, you also need to execute the following commands:
 
 Then, you can run:
 * cd its/plugin
-* mvn test -Dsonar.runtimeVersion=LATEST_RELEASE
+* mvn test -Dsonar.runtimeVersion=DEV
