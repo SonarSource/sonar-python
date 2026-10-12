@@ -8,14 +8,14 @@ import pytest
 
 def test_api_key():
     old_key = os.environ.get('API_KEY')
-    os.environ['API_KEY'] = 'test_key'  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    os.environ['API_KEY'] = 'test_key'  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^^^^^^^^^^^
     result = get_api_configuration()
     assert result['key'] == 'test_key'
     if old_key:
-        os.environ['API_KEY'] = old_key  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+        os.environ['API_KEY'] = old_key  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
     else:
-        del os.environ['API_KEY']  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+        del os.environ['API_KEY']  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 
 
 def test_api_key_compliant(monkeypatch):
@@ -26,10 +26,10 @@ def test_api_key_compliant(monkeypatch):
 
 def test_feature_flag():
     old_value = myapp.config.ENABLE_FEATURE
-    myapp.config.ENABLE_FEATURE = True  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    myapp.config.ENABLE_FEATURE = True  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     assert myapp.is_feature_enabled()
-    myapp.config.ENABLE_FEATURE = old_value  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    myapp.config.ENABLE_FEATURE = old_value  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 
 
 def test_feature_flag_compliant(monkeypatch):
@@ -75,14 +75,14 @@ def test_nested_helper():
 
 
 def test_parenthesized_environ():
-    (os.environ)['API_KEY'] = 'test_key'  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    (os.environ)['API_KEY'] = 'test_key'  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^
 
 
 def test_multiple_delete():
-    os.environ['A'] = '1'  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
-    os.environ['B'] = '2'  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
-    del os.environ['A']  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    os.environ['A'] = '1'  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
+    os.environ['B'] = '2'  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
+    del os.environ['A']  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 
 
 @pytest.fixture
@@ -129,17 +129,17 @@ class TestApp:
         del os.environ['SETUP']
 
 def test_sys_path_insert():
-    sys.path.insert(0, '/tmp/test')  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    sys.path.insert(0, '/tmp/test')  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 def test_sys_path_subscription():
-    sys.path[0] = '/tmp/test'  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    sys.path[0] = '/tmp/test'  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^
 
 
 def test_module_attribute_subscription_chain():
-    myapp.config.SETTINGS['key'].value = 'value'  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    myapp.config.SETTINGS['key'].value = 'value'  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -218,5 +218,5 @@ def test_local_dataframe_nested_flags():
 
 
 def test_module_attr_still_detected():
-    myapp.config.ENABLE_FEATURE = True  # Noncompliant {{Use the "monkeypatch" fixture for temporary modifications instead of manually modifying global state.}}
+    myapp.config.ENABLE_FEATURE = True  # Noncompliant {{Use the "monkeypatch" fixture to modify this global state, otherwise it must be restored manually.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^

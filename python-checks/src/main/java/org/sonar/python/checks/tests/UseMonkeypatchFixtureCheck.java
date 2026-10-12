@@ -43,7 +43,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S8997")
 public class UseMonkeypatchFixtureCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Use the \"monkeypatch\" fixture for temporary modifications instead of manually modifying global state.";
+  private static final String MESSAGE = "Use the \"monkeypatch\" fixture to modify this global state, otherwise it must be restored manually.";
   private static final TypeMatcher ENVIRON_MATCHER = TypeMatchers.isType("os.environ");
   private static final TypeMatcher PYTEST_FIXTURE_MATCHER = TypeMatchers.withFQN("pytest.fixture");
   private static final TypeMatcher SYS_PATH_LIST_MUTATION_CALL =
