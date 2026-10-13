@@ -53,10 +53,10 @@ class ChildDataclassWithViolation:
 
 
 def outer_function():
-    # FN: type inference resolves `@dataclass` to Unknown when the decorated class is nested in a function
+    # Dataclass identity is also resolved for classes nested in a function.
     @dataclass
     class InnerDataclass:
-        value = 10
+        value = 10  # Noncompliant
         name: str = ""
 
 

@@ -132,3 +132,98 @@ def type_symbols_try_except():
 def http_status_enum():
    from http import HTTPStatus
    HTTPStatus.OK + 1  # OK
+
+
+from typing import final
+from typing_extensions import final as other_final
+from importedDecorators import ImportedBase
+
+mark = final
+
+@mark
+class Aliased:
+    pass
+
+Aliased() + Aliased()  # Noncompliant
+
+
+def outer():
+    local_mark = final
+    @local_mark
+    class Nested:
+        pass
+    Nested() + Nested()  # Noncompliant
+
+
+@(final if condition else other_final)
+class KnownUnion:
+    pass
+
+KnownUnion() + KnownUnion()  # Noncompliant
+
+
+def custom(cls):
+    cls.__add__ = lambda self, other: 42
+    return cls
+
+
+@(final if condition else custom)
+class MixedUnion:
+    pass
+
+MixedUnion() + MixedUnion()
+
+
+@final
+class Child(ImportedBase):
+    pass
+
+Child() + Child()
+
+
+@unknown_factory()
+class Factory:
+    pass
+
+Factory() + Factory()
+
+
+def decorated_union(condition):
+    value = Aliased() if condition else MixedUnion()
+    value + value
+
+
+def plain_function():
+    pass
+
+plain_function + 1  # FN: the existing V1 operand inference treats function values as Any.
+
+
+def nested_invalid_operation():
+    MixedUnion() + ("text" + 1)  # Noncompliant
+
+
+class UnknownBaseChild(unknown_base):
+    pass
+
+UnknownBaseChild() + UnknownBaseChild()
+
+
+class Plain:
+    pass
+
+
+def binary_operations_without_v2_information():
+    # V1 knows this is object, but V2 has no type for __getstate__'s result.
+    state = Plain.__getstate__(Plain())
+    state + 1  # Noncompliant
+    1 + state  # Noncompliant
+    state * state  # Noncompliant
+
+    # Missing V2 information on one side must not bypass the other side's decorators.
+    state + MixedUnion()
+    MixedUnion() + state
+    state + Child()
+    Child() + state
+    state + UnknownBaseChild()
+    UnknownBaseChild() + state

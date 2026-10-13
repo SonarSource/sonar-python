@@ -23,6 +23,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -43,8 +44,11 @@ import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -53,12 +57,14 @@ import static org.sonar.python.types.InferredTypes.typeClassLocation;
 @Rule(key = "S5644")
 public class ItemOperationsTypeCheck extends ItemOperationsType {
 
+  private static final TypeMatcher KNOWN_DECORATOR_EFFECTS = InternalTypeMatchers.hasKnownClassDecoratorEffectsInHierarchy();
+
   private static final Set<String> TYPING_LITERAL = Set.of("typing.Literal", "typing_extensions.Literal");
   private static final Set<String> TYPING_ANNOTATED = Set.of("typing.Annotated", "typing_extensions.Annotated");
 
   @Override
   public boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
-    Map<LocationInFile, String> secondaries) {
+    Map<LocationInFile, String> secondaries, SubscriptionContext context) {
 
     if (subscriptionObject.is(Tree.Kind.GENERATOR_EXPR)) {
       return false;
@@ -75,8 +81,14 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
         return true;
       }
       if (symbol.is(FUNCTION, CLASS)) {
-        return isValidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod);
+        return isValidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod, context);
       }
+    }
+
+    // Preserve the existing V1 check when V2 has no type information at all.
+    if (!(subscriptionObject.typeV2() instanceof UnknownType)
+      && !KNOWN_DECORATOR_EFFECTS.isTrueFor(subscriptionObject, context)) {
+      return true;
     }
 
     InferredType type = subscriptionObject.type();
@@ -87,10 +99,11 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
   }
 
   private static boolean isValidSubscriptionSymbol(Symbol symbol, Expression subscriptionObject, Map<LocationInFile, String> secondaries, String requiredMethod,
-    @Nullable String classRequiredMethod) {
+    @Nullable String classRequiredMethod, SubscriptionContext context) {
     LocationInFile locationInFile = symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation();
     secondaries.put(locationInFile, SECONDARY_MESSAGE.formatted(symbol.name()));
     return isSubscriptionInClassArg(subscriptionObject) 
+      || (symbol.is(CLASS) && !KNOWN_DECORATOR_EFFECTS.isTrueFor(subscriptionObject, context))
       || canHaveMethod(symbol, requiredMethod, classRequiredMethod) 
       || isValidGenericUsage(symbol, subscriptionObject, requiredMethod);
   }
@@ -207,7 +220,6 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     }
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     return classSymbol.canHaveMember(requiredMethod)
-      || (classRequiredMethod != null && classSymbol.canHaveMember(classRequiredMethod))
-      || classSymbol.hasDecorators();
+      || (classRequiredMethod != null && classSymbol.canHaveMember(classRequiredMethod));
   }
 }

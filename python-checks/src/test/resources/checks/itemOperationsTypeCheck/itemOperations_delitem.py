@@ -189,3 +189,13 @@ def get_state_fp():
     some_class = SomeClass()
     state = SomeClass.__getstate__(some_class)  # __getstate__ usually returns a dict but is annotated to return 'object' in Typeshed
     del state["foo"]  # Noncompliant
+
+
+def class_preserving_decorator_operations():
+    from typing import final
+
+    @final
+    class FinalClass:
+        pass
+
+    del FinalClass[0]  # Noncompliant

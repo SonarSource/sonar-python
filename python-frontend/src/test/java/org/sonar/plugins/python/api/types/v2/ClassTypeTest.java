@@ -1162,4 +1162,21 @@ public class ClassTypeTest {
 
     return result;
   }
+
+  @Test
+  void decorator_metadata_distinguishes_unknown_types_from_unavailable_lists() {
+    var plain = new ClassType("Plain", "mod.Plain");
+    assertThat(plain.hasDecorators()).isFalse();
+    assertThat(plain.decorators()).isEmpty();
+    var legacy = new ClassTypeBuilder("Legacy", "mod.Legacy").withHasDecorators(true).build();
+    assertThat(legacy.hasDecorators()).isTrue();
+    assertThat(legacy.decorators()).isEmpty();
+    var decorated = new ClassTypeBuilder("C", "mod.C")
+      .withDecorators(List.of(new DecoratorInfo(TypeWrapper.UNKNOWN_TYPE_WRAPPER)))
+      .withHasDecorators(false).build();
+    assertThat(decorated.hasDecorators()).isTrue();
+    assertThat(decorated.decorators()).hasSize(1);
+    assertThat(decorated.decorators().get(0).expressionType().type()).isEqualTo(PythonType.UNKNOWN);
+  }
+
 }

@@ -18,6 +18,8 @@ package org.sonar.python.index;
 
 
 import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
@@ -250,4 +252,19 @@ class ClassDescriptorTest {
     assertThat(classType.definitionLocation()).contains(classDescriptor.definitionLocation());
     return classDescriptor;
   }
+
+  @Test
+  void descriptor_decorator_metadata_distinguishes_unknown_entries_from_legacy_data() {
+    var legacy = new ClassDescriptor.ClassDescriptorBuilder().withName("Legacy").withFullyQualifiedName("mod.Legacy")
+      .withHasDecorators(true).build();
+    assertThat(legacy.hasDecorators()).isTrue();
+    assertThat(legacy.decorators()).isEmpty();
+    var decorator = new DecoratorDescriptor(List.of(DecoratorDescriptor.TypeReference.UNKNOWN), Optional.empty());
+    var unknown = new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("mod.C")
+      .withDecorators(List.of(decorator)).withHasDecorators(false).build();
+    assertThat(unknown.hasDecorators()).isTrue();
+    assertThat(unknown.decorators()).hasSize(1);
+    assertDescriptorToProtobuf(unknown);
+  }
+
 }

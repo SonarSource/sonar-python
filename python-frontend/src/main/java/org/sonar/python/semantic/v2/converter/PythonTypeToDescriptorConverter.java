@@ -205,6 +205,7 @@ public class PythonTypeToDescriptorConverter {
       .withMembers(memberDescriptors)
       .withAttributes(attributeDescriptors)
       .withHasDecorators(type.hasDecorators())
+      .withDecorators(type.decorators().stream().map(DecoratorDescriptorConverter::toDescriptor).toList())
       .withDefinitionLocation(type.definitionLocation().orElse(null))
       .withHasSuperClassWithoutDescriptor(hasSuperClassWithoutDescriptor)
       .withHasMetaClass(type.hasMetaClass())

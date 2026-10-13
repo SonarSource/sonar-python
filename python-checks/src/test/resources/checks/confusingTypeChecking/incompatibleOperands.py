@@ -1,4 +1,5 @@
-from typing import List
+from __future__ import annotations
+from typing import List, final
 class A: ...
 
 def custom(param1: A, param2: A):
@@ -27,3 +28,35 @@ class MockExtention(Mock):
 def custom_mock(extended_mock: MockExtention):
   extended_mock + 3  # Ok
   -extended_mock
+
+
+def add_operations(cls):
+    cls.__add__ = lambda self, other: 42
+    cls.__neg__ = lambda self: 42
+    return cls
+
+
+@add_operations
+class Decorated:
+    def run(self: Decorated):
+        self + self
+        -self
+
+
+class Child(Decorated):
+    def run(self: Child):
+        self + self
+        -self
+
+
+@final
+class Marked:
+    def run(self: Marked):
+        self + self  # Noncompliant
+        -self  # Noncompliant
+
+
+class Plain:
+    def run(self: Plain):
+        self + self  # Noncompliant
+        -self  # Noncompliant

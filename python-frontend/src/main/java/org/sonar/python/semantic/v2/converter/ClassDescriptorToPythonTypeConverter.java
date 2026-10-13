@@ -31,6 +31,7 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
     var typeBuilder = new ClassTypeBuilder(from.name(), from.fullyQualifiedName())
       .withIsGeneric(from.supportsGenerics())
       .withHasDecorators(from.hasDecorators())
+      .withDecorators(from.decorators().stream().map(decorator -> DecoratorDescriptorConverter.toType(ctx, decorator)).toList())
       .withDefinitionLocation(from.definitionLocation());
 
     from.superClasses().stream()
@@ -42,6 +43,9 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
       })
       .map(TypeWrapper::of)
       .forEach(typeBuilder::addSuperClass);
+    if (from.hasSuperClassWithoutDescriptor()) {
+      typeBuilder.addSuperClass(PythonType.UNKNOWN);
+    }
 
     List<PythonType> attributes = from.attributes().stream()
       .map(ctx::convert)

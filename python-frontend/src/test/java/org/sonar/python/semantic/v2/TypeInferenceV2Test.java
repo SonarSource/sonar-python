@@ -67,6 +67,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
@@ -5681,4 +5682,143 @@ public class TypeInferenceV2Test {
     FunctionType functionType = (FunctionType) memberType;
     assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.O.target");
   }
+
+  @ParameterizedTest
+  @MethodSource("classDecoratorAliases")
+  void class_decorator_types_are_completed_after_enclosing_scope_inference(String code) {
+    ClassDef definition = PythonTestUtils.getLastDescendant(inferTypes(code), t -> t.is(Tree.Kind.CLASSDEF));
+    var type = (ClassType) definition.name().typeV2();
+    assertThat(type.decorators()).hasSize(1);
+    var decorator = type.decorators().get(0);
+    assertThat(decorator.calleeType()).isEmpty();
+    assertThat(decorator.expressionType().type()).isInstanceOfSatisfying(FunctionType.class,
+      function -> assertThat(function.fullyQualifiedName()).isEqualTo("typing.final"));
+  }
+
+  static Stream<String> classDecoratorAliases() {
+    return Stream.of(
+      "from typing import final as mark\n@mark\nclass C: pass",
+      "import typing as markers\n@markers.final\nclass C: pass",
+      "from typing import final\nmark = final\n@mark\nclass C: pass",
+      "from typing import final\nmark = unknown\nmark = final\n@mark\nclass C: pass",
+      "from typing import final\nmark = final\n@mark\nclass C: pass\nmark = unknown",
+      "from typing import final\ndef outer():\n    mark = final\n    @mark\n    class C: pass",
+      "from typing import final\ndef outer():\n    mark = unknown\n    mark = final\n    @mark\n    class C: pass",
+      "from typing import final\ntry:\n    mark = final\nexcept Exception:\n    mark = final\n@mark\nclass C: pass"
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("repeatedDefinitionDecorators")
+  void decorators_resolve_repeated_definitions_in_the_enclosing_scope(String code) {
+    var root = inferTypes(code);
+    var expressions = PythonTestUtils.<Name>getAllDescendant(root,
+      t -> t instanceof Name name && name.name().equals("deco") && t.parent().is(Tree.Kind.DECORATOR));
+    assertThat(expressions).hasSize(1);
+    var expressionType = expressions.get(0).typeV2();
+    var definitions = PythonTestUtils.<FunctionDef>getAllDescendant(root,
+      t -> t instanceof FunctionDef function && function.name().name().equals("deco"));
+    assertThat(expressionType).isInstanceOfSatisfying(UnionType.class,
+      union -> assertThat(union.candidates()).containsExactlyInAnyOrderElementsOf(
+        definitions.stream().map(function -> function.name().typeV2()).toList()));
+    var classes = PythonTestUtils.<ClassDef>getAllDescendant(root, t -> t.is(Tree.Kind.CLASSDEF));
+    for (ClassDef definition : classes) {
+      assertThat(((ClassType) definition.name().typeV2()).decorators().get(0).expressionType().type()).isEqualTo(expressionType);
+    }
+  }
+
+  static Stream<String> repeatedDefinitionDecorators() {
+    String definitions = """
+      try:
+          def deco(cls): return cls
+      except Exception:
+          def deco(cls): return cls
+      @deco
+      """;
+    return Stream.of("class C: pass", "def decorated(): pass")
+      .flatMap(definition -> {
+        String code = definitions + definition;
+        return Stream.of(code, "def outer():\n" + code.indent(4));
+      });
+  }
+
+  @Test
+  void class_decorators_preserve_unknown_entries_order_and_factory_callees() {
+    ClassDef definition = PythonTestUtils.getLastDescendant(inferTypes("""
+      from typing import final
+      from dataclasses import dataclass as factory
+      @final
+      @unresolved
+      @factory(slots=True)
+      @unknown_factory()
+      class C: pass
+      """), t -> t.is(Tree.Kind.CLASSDEF));
+    var type = (ClassType) definition.name().typeV2();
+    assertThat(type.decorators()).hasSize(4);
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(type.decorators().get(0).expressionType().type())).contains("typing.final");
+    assertThat(type.decorators().get(1).expressionType().type()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(type.decorators().get(1).calleeType()).isEmpty();
+    var factory = type.decorators().get(2);
+    assertThat(factory.calleeType()).isPresent();
+    assertThat(factory.calleeType().orElseThrow().type()).isSameAs(PROJECT_LEVEL_TYPE_TABLE.getType("dataclasses.dataclass"));
+    assertThat(factory.expressionType().type()).isEqualTo(definition.decorators().get(2).expression().typeV2());
+    assertThat(type.decorators().get(3).calleeType()).isPresent();
+    assertThat(type.decorators().get(3).calleeType().orElseThrow().type()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @ParameterizedTest
+  @MethodSource("unionClassDecorators")
+  void class_decorator_expression_unions_are_preserved(String code) {
+    ClassDef definition = PythonTestUtils.getLastDescendant(inferTypes(code), t -> t.is(Tree.Kind.CLASSDEF));
+    var decorators = ((ClassType) definition.name().typeV2()).decorators();
+    assertThat(decorators).hasSize(1);
+    assertThat(decorators.get(0).expressionType().type()).isInstanceOfSatisfying(UnionType.class,
+      union -> assertThat(union.candidates().stream().map(FullyQualifiedNameHelper::getFullyQualifiedName))
+        .containsExactlyInAnyOrder(Optional.of("typing.final"), Optional.of("typing_extensions.final")));
+  }
+
+  static Stream<String> unionClassDecorators() {
+    String imports = "from typing import final\nfrom typing_extensions import final as other\n";
+    return Stream.of(
+      imports + "@(final if condition else other)\nclass C: pass",
+      imports + "if condition:\n    mark = final\nelse:\n    mark = other\n@mark\nclass C: pass"
+    );
+  }
+
+  @Test
+  void shadowed_class_decorator_uses_the_local_callable() {
+    ClassDef definition = PythonTestUtils.getLastDescendant(inferTypes("""
+      from typing import final
+      def custom(cls): return cls
+      final = custom
+      @final
+      class C: pass
+      """), t -> t.is(Tree.Kind.CLASSDEF));
+    var decorator = ((ClassType) definition.name().typeV2()).decorators().get(0);
+    assertThat(decorator.expressionType().type()).isInstanceOfSatisfying(FunctionType.class,
+      function -> assertThat(function.fullyQualifiedName()).endsWith(".custom"));
+  }
+
+
+  @Test
+  void class_decorators_preserve_callable_instance_types() {
+    var root = inferTypes("""
+      class Marker:
+          def __call__(self, cls): return cls
+      marker = Marker()
+      @marker
+      class C: pass
+      @Marker()
+      class D: pass
+      """);
+    List<ClassDef> definitions = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.CLASSDEF));
+    var direct = ((ClassType) definitions.get(1).name().typeV2()).decorators().get(0);
+    assertThat(direct.expressionType().type()).isInstanceOfSatisfying(ObjectType.class,
+      instance -> assertThat(instance.type()).isEqualTo(definitions.get(0).name().typeV2()));
+    assertThat(direct.calleeType()).isEmpty();
+    var constructed = ((ClassType) definitions.get(2).name().typeV2()).decorators().get(0);
+    assertThat(constructed.expressionType().type()).isInstanceOf(ObjectType.class);
+    assertThat(constructed.calleeType().orElseThrow().type()).isEqualTo(definitions.get(0).name().typeV2());
+  }
+
 }

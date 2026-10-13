@@ -31,7 +31,8 @@ class ItemOperationsTypeCheckTest {
   void test_getitem() {
     PythonCheckVerifier.verify(List.of(
       "src/test/resources/checks/itemOperationsTypeCheck/itemOperations_getitem.py",
-      "src/test/resources/checks/itemOperationsTypeCheck/importedGeneric.py"), new ItemOperationsTypeCheck());
+      "src/test/resources/checks/itemOperationsTypeCheck/importedGeneric.py",
+      "src/test/resources/checks/classDecorators/importedDecorators.py"), new ItemOperationsTypeCheck());
   }
 
   @Test
@@ -39,4 +40,17 @@ class ItemOperationsTypeCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_setitem.py", new ItemOperationsTypeCheck());
   }
 
+  @Test
+  void instance_decorator_effects_on_item_operations() {
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/classDecorators/instanceItems.py",
+      "src/test/resources/checks/classDecorators/importedDecorators.py"), new ItemOperationsTypeCheck());
+  }
+
+  @Test
+  void project_function_marker_remains_conservative() {
+    PythonCheckVerifier.verifyNoIssue(List.of(
+      "src/test/resources/checks/classDecoratorFunctionImpostor/usage.py",
+      "src/test/resources/checks/classDecoratorFunctionImpostor/typing.py"), new ItemOperationsTypeCheck());
+  }
 }

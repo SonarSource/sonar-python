@@ -29,17 +29,23 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol.Parameter;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.AMBIGUOUS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.python.types.InferredTypes.typeSymbols;
 
 public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
+
+  private static final TypeMatcher KNOWN_DECORATOR_EFFECTS = InternalTypeMatchers.hasKnownClassDecoratorEffectsInHierarchy();
 
   private static final Map<String, String> UNARY_SPECIAL_METHODS_BY_OPERATOR = new HashMap<>();
   static {
@@ -105,8 +111,19 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
         // SONARPY-1666 We should only exclude types that represent ctypes
         return;
       }
-      checkOperands(binaryExpression.operator(), leftType, rightType);
+      if (canCheckBinaryOperand(binaryExpression.leftOperand(), leftType)
+        && canCheckBinaryOperand(binaryExpression.rightOperand(), rightType)) {
+        checkOperands(binaryExpression.operator(), leftType, rightType);
+      }
       super.visitBinaryExpression(binaryExpression);
+    }
+
+    private boolean canCheckBinaryOperand(Expression operand, InferredType type) {
+      if (operand.typeV2() instanceof UnknownType) {
+        // Preserve the V1 check, including its decorator guard, when V2 has no type information.
+        return typeSymbols(type).stream().noneMatch(ClassSymbol::hasDecorators);
+      }
+      return KNOWN_DECORATOR_EFFECTS.isTrueFor(operand, context);
     }
 
     @Override
@@ -114,16 +131,16 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
       InferredType type = unaryExpression.expression().type();
       Token operator = unaryExpression.operator();
       String memberName = UNARY_SPECIAL_METHODS_BY_OPERATOR.get(operator.value());
-      if (memberName != null && resolveMethod(type, memberName).isAbsent()) {
+      if (memberName != null
+        && (unaryExpression.expression().typeV2() instanceof UnknownType
+          || KNOWN_DECORATOR_EFFECTS.isTrueFor(unaryExpression.expression(), context))
+        && resolveMethod(type, memberName).isAbsent()) {
         context.addIssue(operator, message(operator));
       }
       super.visitUnaryExpression(unaryExpression);
     }
 
     private void checkOperands(Token operator, InferredType left, InferredType right) {
-      if (typeSymbols(left).stream().anyMatch(ClassSymbol::hasDecorators) || typeSymbols(right).stream().anyMatch(ClassSymbol::hasDecorators)) {
-        return;
-      }
       SpecialMethodNames specialMethodNames = BINARY_SPECIAL_METHODS_BY_OPERATOR.get(operator.value());
       if (specialMethodNames == null) {
         return;

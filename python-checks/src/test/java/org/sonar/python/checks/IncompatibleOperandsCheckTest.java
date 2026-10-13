@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -28,7 +29,22 @@ class IncompatibleOperandsCheckTest {
 
   @Test
   void test_arithmetic() {
-    PythonCheckVerifier.verify("src/test/resources/checks/incompatibleOperands/arithmetic.py", new IncompatibleOperandsCheck());
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/incompatibleOperands/arithmetic.py",
+      "src/test/resources/checks/classDecorators/importedDecorators.py"), new IncompatibleOperandsCheck());
   }
 
+  @Test
+  void instance_decorator_effects_on_unary_operations() {
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/classDecorators/instanceUnary.py",
+      "src/test/resources/checks/classDecorators/importedDecorators.py"), new IncompatibleOperandsCheck());
+  }
+
+  @Test
+  void project_function_marker_remains_conservative() {
+    PythonCheckVerifier.verifyNoIssue(List.of(
+      "src/test/resources/checks/classDecoratorFunctionImpostor/usage.py",
+      "src/test/resources/checks/classDecoratorFunctionImpostor/typing.py"), new IncompatibleOperandsCheck());
+  }
 }

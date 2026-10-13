@@ -176,3 +176,13 @@ def mocks():
     def custom_mock():
         extended_mock = ExtendedMock()
         extended_mock[42] = 42
+
+
+def class_preserving_decorator_operations():
+    from typing import final
+
+    @final
+    class FinalClass:
+        pass
+
+    FinalClass[0] = 1  # Noncompliant

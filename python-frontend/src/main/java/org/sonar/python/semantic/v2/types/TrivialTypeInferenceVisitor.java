@@ -333,6 +333,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitClassDef(ClassDef classDef) {
+    scan(classDef.decorators());
     scan(classDef.args());
     Name name = classDef.name();
     ClassType type = buildClassType(classDef);
@@ -348,7 +349,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     Name className = classDef.name();
     String fullyQualifiedName = currentScopeFullyQualifiedName() + "." + classDef.name().name();
     ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder(className.name(), fullyQualifiedName)
-      .withHasDecorators(!classDef.decorators().isEmpty())
+      .withDecorators(ClassDecoratorTypes.deferred(classDef))
       .withDefinitionLocation(locationInFile(className, fileId));
     resolveTypeHierarchy(classDef, classTypeBuilder);
     if (classDef.typeParams() != null) {

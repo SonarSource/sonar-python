@@ -17,7 +17,10 @@
 package org.sonar.python.semantic.v2.types;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -39,8 +42,24 @@ public abstract class Propagation {
   }
 
 
+  /** Returns the enclosing evaluation scope of a name in an attached AST. */
+  @Nonnull
   Tree scopeTree(Name name) {
-    return TreeUtils.firstAncestor(name, t ->  t.is(Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF));
+    return scopeTree(name, null);
+  }
+
+  @Nonnull
+  static Tree scopeTree(Name name, @Nullable Tree excludedDefinition) {
+    Tree start = name;
+    Tree ancestor = TreeUtils.firstAncestor(name, t -> t.is(Tree.Kind.DECORATOR, Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF));
+    if (ancestor != null && ancestor.is(Tree.Kind.DECORATOR)) {
+      // Decorators are evaluated in the scope enclosing the decorated definition.
+      start = Objects.requireNonNull(TreeUtils.firstAncestor(ancestor, t -> t.is(Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF)),
+        "A decorator must belong to a function or class definition");
+    }
+    return Objects.requireNonNull(TreeUtils.firstAncestor(start,
+      t -> !t.equals(excludedDefinition) && t.is(Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF)),
+      "A name must have an enclosing evaluation scope");
   }
 
   boolean areDependenciesReady(Set<SymbolV2> initializedVars) {

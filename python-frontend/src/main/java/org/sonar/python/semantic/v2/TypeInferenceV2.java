@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.types.AstBasedTypeInference;
+import org.sonar.python.semantic.v2.types.ClassDecoratorTypes;
 import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
@@ -111,7 +112,9 @@ public class TypeInferenceV2 {
     this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
     fileInput.accept(trivialTypeInferenceVisitor);
     trivialTypeInferenceVisitor.processDeferredTrees();
-    return inferTypesAndMemberAccessSymbols(fileInput);
+    var result = inferTypesAndMemberAccessSymbols(fileInput);
+    ClassDecoratorTypes.completeScope(fileInput);
+    return result;
   }
 
   private Map<SymbolV2, Set<PythonType>> inferTypesAndMemberAccessSymbols(FileInput fileInput) {
@@ -142,6 +145,7 @@ public class TypeInferenceV2 {
       parameterNames,
       () -> ControlFlowGraph.build(functionDef, pythonFile)
     );
+    ClassDecoratorTypes.completeScope(functionDef.body());
   }
 
 

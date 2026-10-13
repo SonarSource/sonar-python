@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.python.index.ClassDescriptor;
+import org.sonar.python.index.DecoratorProtobuf;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
@@ -80,6 +81,7 @@ public class ClassSymbolToDescriptorConverter {
       .withMetaclassFQN(metaclassName)
       .withHasMetaClass(classSymbol.getHasMetaclass())
       .withHasDecorators(classSymbol.getHasDecorators())
+      .withDecorators(DecoratorProtobuf.fromProtobuf(classSymbol))
       .withSupportsGenerics(classSymbol.getIsGeneric())
       .withMembers(members)
       .build();

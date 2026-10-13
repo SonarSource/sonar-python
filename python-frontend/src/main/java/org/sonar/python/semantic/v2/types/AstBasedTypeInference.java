@@ -174,7 +174,7 @@ public class AstBasedTypeInference {
     }
 
     private boolean isInSameScope(Propagation propagation, Name n, Tree scopeTree) {
-      return Optional.ofNullable(propagation.scopeTree(n)).filter(scopeTree::equals).isPresent();
+      return scopeTree.equals(propagation.scopeTree(n));
     }
   }
 

@@ -43,6 +43,7 @@ public final class ClassType implements PythonType {
   private final List<TypeWrapper> superClasses;
   private final List<PythonType> metaClasses;
   private final boolean hasDecorators;
+  private final List<DecoratorInfo> decorators;
   private final boolean isGeneric;
   private final LocationInFile locationInFile;
 
@@ -56,13 +57,28 @@ public final class ClassType implements PythonType {
     boolean hasDecorators,
     boolean isGeneric,
     @Nullable LocationInFile locationInFile) {
+    this(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, isGeneric, locationInFile, List.of());
+  }
+
+  public ClassType(
+    String name,
+    String fullyQualifiedName,
+    Set<Member> members,
+    List<PythonType> attributes,
+    List<TypeWrapper> superClasses,
+    List<PythonType> metaClasses,
+    boolean hasDecorators,
+    boolean isGeneric,
+    @Nullable LocationInFile locationInFile,
+    List<DecoratorInfo> decorators) {
+    this.decorators = List.copyOf(decorators);
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.members = members;
     this.attributes = attributes;
     this.superClasses = superClasses;
     this.metaClasses = metaClasses;
-    this.hasDecorators = hasDecorators;
+    this.hasDecorators = hasDecorators || !decorators.isEmpty();
     this.isGeneric = isGeneric;
     this.locationInFile = locationInFile;
   }
@@ -325,6 +341,15 @@ public final class ClassType implements PythonType {
 
   public List<PythonType> metaClasses() {
     return metaClasses;
+  }
+
+  /**
+   * One entry per decorator, in source order (application order is reversed).
+   * Unresolved expressions retain an entry with an unknown type. An empty list on
+   * a decorated class means metadata is unavailable, e.g. for legacy descriptors.
+   */
+  public List<DecoratorInfo> decorators() {
+    return decorators;
   }
 
   public boolean hasDecorators() {

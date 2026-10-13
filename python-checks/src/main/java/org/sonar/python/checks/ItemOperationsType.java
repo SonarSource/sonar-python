@@ -51,18 +51,18 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
     Map<LocationInFile, String> secondaries = new HashMap<>();
     Expression subscriptionObject = subscriptionExpression.object();
     if (isWithinDelStatement(subscriptionExpression)) {
-      if (!isValidSubscription(subscriptionObject, "__delitem__", null, secondaries)) {
+      if (!isValidSubscription(subscriptionObject, "__delitem__", null, secondaries, ctx)) {
         reportIssue(subscriptionExpression, subscriptionObject, "__delitem__", ctx, secondaries);
       }
       return;
     }
     if (isWithinAssignment(subscriptionExpression)) {
-      if (!isValidSubscription(subscriptionObject, "__setitem__", null, secondaries)) {
+      if (!isValidSubscription(subscriptionObject, "__setitem__", null, secondaries, ctx)) {
         reportIssue(subscriptionExpression, subscriptionObject, "__setitem__", ctx, secondaries);
       }
       return;
     }
-    if (!isValidSubscription(subscriptionObject, "__getitem__", "__class_getitem__", secondaries)) {
+    if (!isValidSubscription(subscriptionObject, "__getitem__", "__class_getitem__", secondaries, ctx)) {
       reportIssue(subscriptionExpression, subscriptionObject, "__getitem__", ctx, secondaries);
     }
   }
@@ -97,7 +97,8 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
     secondaries.keySet().stream().filter(Objects::nonNull).forEach(location -> preciseIssue.secondary(location, secondaries.get(location)));
   }
 
-  public abstract boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod, Map<LocationInFile, String> secondaries);
+  public abstract boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
+    Map<LocationInFile, String> secondaries, SubscriptionContext context);
 
   public abstract String message(@Nullable String name, String missingMethod);
 }

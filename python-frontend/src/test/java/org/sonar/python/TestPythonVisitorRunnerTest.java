@@ -31,6 +31,8 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -45,6 +47,23 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class TestPythonVisitorRunnerTest {
+
+  @Test
+  void file_and_mock_contexts_preserve_class_decorator_metadata() throws IOException {
+    var file = new File("src/test/resources/semantic/decorator_context.py");
+    var mockFile = new TestPythonVisitorRunner.MockPythonFile("", file.getName(), Files.readString(file.toPath()));
+    var contexts = List.of(TestPythonVisitorRunner.createContext(file),
+      TestPythonVisitorRunner.createContext(mockFile, null, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache()));
+
+    for (var context : contexts) {
+      List<ClassDef> definitions = PythonTestUtils.getAllDescendant(context.rootTree(), tree -> tree.is(Tree.Kind.CLASSDEF));
+      assertThat(definitions).hasSize(2).allSatisfy(definition -> {
+        var type = (ClassType) definition.name().typeV2();
+        assertThat(type.decorators()).singleElement().satisfies(decorator ->
+          assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(decorator.expressionType().type())).contains("typing.final"));
+      });
+    }
+  }
 
   @Test
   void both_context_overloads_build_v1_symbols_before_inference() throws IOException {

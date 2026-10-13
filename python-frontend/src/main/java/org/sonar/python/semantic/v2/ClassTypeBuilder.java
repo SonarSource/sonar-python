@@ -24,6 +24,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.DecoratorInfo;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -37,17 +38,23 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   List<TypeWrapper> superClasses = new ArrayList<>();
   List<PythonType> metaClasses = new ArrayList<>();
   boolean hasDecorators = false;
+  List<DecoratorInfo> decorators = List.of();
   boolean isGeneric = false;
   LocationInFile definitionLocation;
 
   @Override
   public ClassType build() {
-    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, isGeneric, definitionLocation);
+    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, isGeneric, definitionLocation, decorators);
   }
 
   public ClassTypeBuilder(String name, String fullyQualifiedName) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
+  }
+
+  public ClassTypeBuilder withDecorators(List<DecoratorInfo> decorators) {
+    this.decorators = List.copyOf(decorators);
+    return this;
   }
 
   public ClassTypeBuilder withHasDecorators(boolean hasDecorators) {

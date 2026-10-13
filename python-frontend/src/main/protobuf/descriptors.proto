@@ -46,6 +46,9 @@ message ClassDescriptor {
     DescriptorList members = 14;
     DescriptorList attributes = 15;
     DescriptorList metaClasses = 16;
+    // One entry per decorator, including unresolved expressions and calls.
+    // Empty list with hasDecorators=true also covers legacy serialized data.
+    repeated DecoratorInfo decorators = 17;
 }
 
 message ParameterDescriptor {

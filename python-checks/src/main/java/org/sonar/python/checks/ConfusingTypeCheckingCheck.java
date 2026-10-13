@@ -87,7 +87,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
 
     @Override
     public boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
-                                       Map<LocationInFile, String> secondaries) {
+                                       Map<LocationInFile, String> secondaries, SubscriptionContext context) {
 
       InferredType type = subscriptionObject.type();
       String typeName = InferredTypes.typeName(type);

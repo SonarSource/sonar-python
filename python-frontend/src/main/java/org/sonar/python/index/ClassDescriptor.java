@@ -34,6 +34,7 @@ public class ClassDescriptor implements Descriptor {
   private final Set<Descriptor> members;
   private final List<Descriptor> attributes;
   private final boolean hasDecorators;
+  private final List<DecoratorDescriptor> decorators;
   private final LocationInFile definitionLocation;
   private final boolean hasSuperClassWithoutDescriptor;
   private final boolean hasMetaClass;
@@ -44,14 +45,15 @@ public class ClassDescriptor implements Descriptor {
 
   private ClassDescriptor(String name, String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
     List<Descriptor> attributes, boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor,
-    boolean hasMetaClass, @Nullable String metaclassFQN, List<Descriptor> metaClasses, boolean supportsGenerics, boolean isSelf) {
+    boolean hasMetaClass, @Nullable String metaclassFQN, List<Descriptor> metaClasses, boolean supportsGenerics, boolean isSelf, List<DecoratorDescriptor> decorators) {
 
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.superClasses = superClasses;
     this.members = members;
     this.attributes = attributes;
-    this.hasDecorators = hasDecorators;
+    this.hasDecorators = hasDecorators || !decorators.isEmpty();
+    this.decorators = List.copyOf(decorators);
     this.definitionLocation = definitionLocation;
     this.hasSuperClassWithoutDescriptor = hasSuperClassWithoutDescriptor;
     this.hasMetaClass = hasMetaClass;
@@ -87,6 +89,11 @@ public class ClassDescriptor implements Descriptor {
 
   public List<Descriptor> attributes() {
     return attributes;
+  }
+
+  /** One entry per decorator, in source order, including unknown expressions. */
+  public List<DecoratorDescriptor> decorators() {
+    return decorators;
   }
 
   public boolean hasDecorators() {
@@ -131,6 +138,7 @@ public class ClassDescriptor implements Descriptor {
     private Set<Descriptor> members = new HashSet<>();
     private List<Descriptor> attributes = new ArrayList<>();
     private boolean hasDecorators = false;
+    private List<DecoratorDescriptor> decorators = List.of();
     private LocationInFile definitionLocation = null;
     private boolean hasSuperClassWithoutDescriptor = false;
     private boolean hasMetaClass = false;
@@ -161,6 +169,11 @@ public class ClassDescriptor implements Descriptor {
 
     public ClassDescriptorBuilder withAttributes(List<Descriptor> attributes) {
       this.attributes = attributes;
+      return this;
+    }
+
+    public ClassDescriptorBuilder withDecorators(List<DecoratorDescriptor> decorators) {
+      this.decorators = List.copyOf(decorators);
       return this;
     }
 
@@ -206,7 +219,7 @@ public class ClassDescriptor implements Descriptor {
 
     public ClassDescriptor build() {
       return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, attributes, hasDecorators, definitionLocation,
-        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, metaClasses, supportsGenerics, isSelf);
+        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, metaClasses, supportsGenerics, isSelf, decorators);
     }
   }
 }

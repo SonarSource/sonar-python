@@ -117,6 +117,7 @@ public class DescriptorUtils {
       .withHasSuperClassWithoutDescriptor(originalDescriptor.hasSuperClassWithoutDescriptor())
       .withMetaclassFQN(originalDescriptor.metaclassFQN())
       .withHasDecorators(originalDescriptor.hasDecorators())
+      .withDecorators(originalDescriptor.decorators())
       .withSupportsGenerics(originalDescriptor.supportsGenerics())
       .build();
   }

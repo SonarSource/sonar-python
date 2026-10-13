@@ -370,3 +370,62 @@ def generic_cases(unknown_type):
     
     def loader(self):
       pass
+
+
+from typing import final
+from typing_extensions import final as other_final
+from importedDecorators import ImportedBase
+
+mark = final
+
+@mark
+class Aliased:
+    pass
+
+Aliased[0]  # Noncompliant
+
+
+def outer():
+    local_mark = final
+    @local_mark
+    class Nested:
+        pass
+    Nested[0]  # Noncompliant
+
+
+@(final if condition else other_final)
+class KnownUnion:
+    pass
+
+KnownUnion[0]  # Noncompliant
+
+
+def custom(cls):
+    cls.__class_getitem__ = classmethod(lambda cls, key: 42)
+    return cls
+
+
+@(final if condition else custom)
+class MixedUnion:
+    pass
+
+MixedUnion[0]
+
+
+@final
+class Child(ImportedBase):
+    pass
+
+Child[0]
+
+
+@unknown_factory()
+class Factory:
+    pass
+
+Factory[0]
+
+
+def decorated_union(condition):
+    value = Aliased if condition else MixedUnion
+    value[0]

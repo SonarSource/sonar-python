@@ -423,7 +423,15 @@ class SymbolUtilsTest {
   void getFirstAlternativeIfEqualArgumentNamesTest() {
     var file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       """
-        class MyClass(dict):
+        from typing import overload
+
+        class Base:
+          @overload
+          def get(self, key): ...
+          @overload
+          def get(self, key, default): ...
+
+        class MyClass(Base):
           def get(self, key): ...
 
         def foo1(a, b, c): ...
@@ -431,8 +439,11 @@ class SymbolUtilsTest {
         def bar(b, c, a): ...
         def qix(c, a, b): ...
         """);
-    FunctionSymbol getMethod = (FunctionSymbol) descendantFunction(file, "get").name().symbol();
+    FunctionDef getFunction = getLastDescendant(file, tree -> tree instanceof FunctionDef function && function.name().name().equals("get"));
+    FunctionSymbol getMethod = (FunctionSymbol) getFunction.name().symbol();
     List<FunctionSymbol> overriddenMethods = SymbolUtils.getOverriddenMethods(getMethod);
+    // Use controlled overloads so this utility test is independent of Typeshed's dict.get signatures.
+    assertThat(overriddenMethods).hasSize(2);
     assertThat(isEqualParameterCountAndNames(overriddenMethods)).isFalse();
     assertThat(getFirstAlternativeIfEqualArgumentNames(overriddenMethods)).isEmpty();
 

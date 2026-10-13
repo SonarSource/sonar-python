@@ -387,6 +387,8 @@ class ClassSymbol:
             if isinstance(class_def.metaclass, mpn.NameExpr) or isinstance(class_def.metaclass, mpn.MemberExpr):
                 self.metaclass_name = class_def.metaclass.fullname
         self.has_decorators = len(class_def.decorators) > 0
+        # Preserve each decorator value and, for calls, its separate factory identity.
+        self.decorators = [class_decorator_info(decorator) for decorator in class_def.decorators]
 
     def __eq__(self, other):
         if not isinstance(other, ClassSymbol):
@@ -398,7 +400,8 @@ class ClassSymbol:
                 and self.is_generic == other.is_generic
                 and self.is_protocol == other.is_protocol
                 and self.metaclass_name == other.metaclass_name
-                and self.has_decorators == other.has_decorators)
+                and self.has_decorators == other.has_decorators
+                and self.decorators == other.decorators)
 
     def to_proto(self, type_table: TypeTable = None, container_fqn=None) -> symbols_pb2.ClassSymbol:
         pb_class = symbols_pb2.ClassSymbol()
@@ -408,6 +411,7 @@ class ClassSymbol:
             pb_class.fully_qualified_name = fqn_override
         pb_class.super_classes.extend(self.super_classes)
         pb_class.has_decorators = self.has_decorators
+        pb_class.decorators.extend(self.decorators)
         pb_class.has_metaclass = self.has_metaclass
         pb_class.is_enum = self.is_enum
         pb_class.is_generic = self.is_generic
@@ -578,6 +582,7 @@ class MergedClassSymbol:
             pb_class.fully_qualified_name = fqn_override
         pb_class.super_classes.extend(self.class_symbol.super_classes)
         pb_class.has_decorators = self.class_symbol.has_decorators
+        pb_class.decorators.extend(self.class_symbol.decorators)
         pb_class.has_metaclass = self.class_symbol.has_metaclass
         pb_class.is_enum = self.class_symbol.is_enum
         pb_class.is_generic = self.class_symbol.is_generic
@@ -647,6 +652,59 @@ def symbol_fqn_override(name, fullname, container_fqn=None):
     if container_fqn is not None and fullname == f"{container_fqn}.{name}":
         return None
     return fullname
+
+
+def _decorator_type_references(type_):
+    if isinstance(type_, mpt.Instance):
+        return [(type_.type.fullname, True)]
+    if isinstance(type_, mpt.UnionType):
+        return [ref for item in type_.items for ref in _decorator_type_references(item)]
+    if isinstance(type_, mpt.CallableType):
+        definition = type_.definition
+        if isinstance(definition, mpn.Decorator):
+            definition = definition.func
+        if isinstance(definition, mpn.FuncDef):
+            return [(definition.fullname, False)]
+    if isinstance(type_, mpt.Overloaded):
+        return [ref for item in type_.items for ref in _decorator_type_references(item)]
+    return [(None, False)]
+
+
+def _decorator_expression_references(expression):
+    if isinstance(expression, mpn.ConditionalExpr):
+        return (_decorator_expression_references(expression.if_expr)
+                + _decorator_expression_references(expression.else_expr))
+    if isinstance(expression, (mpn.NameExpr, mpn.MemberExpr)):
+        node = expression.node
+        if isinstance(node, (mpn.FuncDef, mpn.Decorator, mpn.OverloadedFuncDef, mpn.TypeInfo)):
+            return [(node.fullname, False)]
+        if isinstance(node, mpn.Var):
+            return _decorator_type_references(node.type)
+    if isinstance(expression, mpn.CallExpr):
+        callee = expression.callee
+        node = getattr(callee, "node", None)
+        if isinstance(node, mpn.TypeInfo):
+            return [(node.fullname, True)]
+        type_ = node.func.type if isinstance(node, mpn.Decorator) else getattr(node, "type", None)
+        if isinstance(type_, mpt.CallableType):
+            return _decorator_type_references(type_.ret_type)
+        if isinstance(type_, mpt.Overloaded):
+            return [ref for item in type_.items for ref in _decorator_type_references(item.ret_type)]
+    return [(None, False)]
+
+
+def class_decorator_info(expression):
+    """Flat semantic references, never the expression AST or full callable signatures."""
+    def references(items):
+        return [symbols_pb2.DecoratorTypeReference(fully_qualified_name=name, is_instance=instance)
+                if name else symbols_pb2.DecoratorTypeReference()
+                for name, instance in sorted(set(items), key=lambda item: (item[0] or "", item[1]))]
+
+    result = symbols_pb2.DecoratorInfo(expression_types=references(_decorator_expression_references(expression)))
+    if isinstance(expression, mpn.CallExpr):
+        result.has_callee = True
+        result.callee_types.extend(references(_decorator_expression_references(expression.callee)))
+    return result
 
 
 def get_decorator_name(dec: mpn.Node):
