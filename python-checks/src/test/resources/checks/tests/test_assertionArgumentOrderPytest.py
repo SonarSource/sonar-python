@@ -8,27 +8,29 @@ def value():
     return 41 + 1
 
 
+# "actual first" is used 6 times and "expected first" 5 times, so the latter deviates from the file convention
 def test_pytest_assertions():
     assert 42 == value()
-#   Noncompliant@-1 {{Unify assertion argument order in this file; both "actual first" and "expected first" conventions are used.}}
+#   Noncompliant@-1 {{Swap these 2 operands so the actual value comes first, to match the rest of this file.}}
 #          ^^^^^^^^^^^^^@-1
-#          ^^^^^^^^^^^^^@-2< {{Expected value first.}}
-    assert EXPECTED_COUNT == value()
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert pytest.approx(EXPECTED_PI) == value()
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
+#          ^^@-2< {{Expected value.}}
+#                ^^^^^^^@-3< {{Actual value.}}
+    assert EXPECTED_COUNT == value()  # Noncompliant
+    assert pytest.approx(EXPECTED_PI) == value()  # Noncompliant
+    assert 42 == pytest.approx(value())
+#   Noncompliant@-1
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
+#          ^^@-2< {{Expected value.}}
+#                              ^^^^^^^@-3< {{Actual value.}}
+    assert 42 == pytest.approx(other=value())  # Noncompliant
 
     assert value() == 42
-#          ^^^^^^^^^^^^^< {{Actual value first.}}
     assert value() == EXPECTED_COUNT
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
     assert value() == pytest.approx(EXPECTED_PI)
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
+    assert value() == None
+    assert value() == "ok"
+    assert value() == 3.14
     assert value() == value()
     assert 42 == EXPECTED_COUNT
     assert value()
     assert 42 != value()
-    assert 42 == pytest.approx(value())
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert 42 == pytest.approx(other=value())
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}

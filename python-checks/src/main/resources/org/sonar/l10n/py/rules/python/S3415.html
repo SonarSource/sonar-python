@@ -1,5 +1,4 @@
-<p>This rule raises an issue when a test file mixes both assertion argument-order conventions: some assertions put the actual value first, and others
-put the expected value first.</p>
+<p>This rule raises an issue on each assertion whose argument order deviates from the convention used by the rest of the test file.</p>
 <h2>Why is this an issue?</h2>
 <p>Assertions check that the code under test produces the expected results. When you write an equality assertion, one operand is the value from the
 code under test (the <strong>actual</strong> value) and the other is what you expect (the <strong>expected</strong> value).</p>
@@ -15,11 +14,12 @@ code under test (the <strong>actual</strong> value) and the other is what you ex
 <p>This rule does not enforce that framework default. It does not raise when a file consistently uses a different order, including when every
 assertion puts the expected value first. It raises only when the same file mixes both orders: readers must then re-interpret each assertion, and
 failure messages become harder to scan.</p>
-<p>The rule reports at most one issue per file. The primary location is the first assertion whose order can be determined. Two data flows group every
-order-determinable assertion in the file: one for actual-first usages and one for expected-first usages.</p>
-<p>A true positive is a file that mixes both orders among assertions whose operands can be classified. Using an order other than the framework’s
+<p>When a file mixes both orders, the order used by the most assertions becomes the file convention, and the rule raises one issue on each assertion
+that deviates from it. If both orders are used equally often, the rule takes the framework default of putting the actual value first as the
+convention, so it reports the assertions that put the expected value first.</p>
+<p>A true positive is an assertion that deviates from the file convention in a file that mixes both orders. Using an order other than the framework’s
 documented default is fine as long as the file is consistent. Mid-migration inconsistency is still a true positive; finish unifying or temporarily
-suppress the issue until the file is consistent. A false positive would mean the analyzer misclassified an operand (for example, treating a
+suppress the issues until the file is consistent. A false positive would mean the analyzer misclassified an operand (for example, treating a
 non-constant expression as expected, or the reverse), so the reported "mix" is not real.</p>
 <h3>What is the potential impact?</h3>
 <p>Mixing conventions does not change whether tests pass or fail. It does make failures harder to read and slows down reviews, because each assertion
@@ -27,10 +27,9 @@ must be interpreted individually instead of following one file-wide pattern.</p>
 <p>For example, if one test writes <code>self.assertEqual(runner.exit_code, 0)</code> and another in the same file writes <code>self.assertEqual(0,
 runner.exit_code)</code>, both may be correct in isolation, but the file no longer has a single readable convention.</p>
 <h2>How to fix it</h2>
-<p>Unify the file so every order-determinable assertion follows the same convention. Prefer picking one convention for the whole file and swapping the
-operands of the assertions that use the other convention.</p>
-<p>Quick fixes can rewrite every mismatched assertion in the file in either direction: put all expected values second (actual first), or put all
-actual values second (expected first).</p>
+<p>Swap the operands of the reported assertion so it follows the same convention as the rest of the file. Alternatively, if you prefer the order used
+by the reported assertion, swap the other assertions instead so the whole file settles on that order.</p>
+<p>A quick fix is available to swap the two operands of the reported assertion.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -39,7 +38,7 @@ import unittest
 class TestRunner(unittest.TestCase):
     def test_exit_code(self):
         runner = Runner()
-        self.assertEqual(0, runner.exit_code)  # Noncompliant; file mixes both orders
+        self.assertEqual(0, runner.exit_code)  # Noncompliant; the rest of the file puts the actual value first
         self.assertEqual(runner.name, "ok")
 </pre>
 <h4>Compliant solution</h4>
@@ -60,7 +59,7 @@ EXPECTED_PI = 3.14
 
 def test_calculation():
     result = perform_calculation()
-    assert 3.14 == result  # Noncompliant; file mixes both orders
+    assert 3.14 == result  # Noncompliant; the rest of the file puts the actual value first
     assert result == pytest.approx(EXPECTED_PI)
 </pre>
 <h4>Compliant solution</h4>
@@ -82,7 +81,7 @@ EXPECTED_EXIT_CODE = 0
 
 def test_exit_code():
     runner = Runner()
-    assert_that(EXPECTED_EXIT_CODE).is_equal_to(runner.exit_code)  # Noncompliant; file mixes both orders
+    assert_that(EXPECTED_EXIT_CODE).is_equal_to(runner.exit_code)  # Noncompliant; the rest of the file puts the actual value first
     assert_that(runner.name).is_equal_to("ok")
 </pre>
 <h4>Compliant solution</h4>

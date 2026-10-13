@@ -18,10 +18,8 @@ package org.sonar.python.checks.tests;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -48,18 +46,34 @@ import static org.sonar.python.checks.utils.UnittestUtils.PYTEST_APPROX_MATCHER;
 
 @Rule(key = "S3415")
 public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Unify assertion argument order in this file; both \"actual first\" and \"expected first\" conventions are used.";
-  private static final String ACTUAL_FIRST_FLOW = "Actual value first";
-  private static final String EXPECTED_FIRST_FLOW = "Expected value first";
-  private static final String ACTUAL_FIRST_LOCATION_MESSAGE = "Actual value first.";
-  private static final String EXPECTED_FIRST_LOCATION_MESSAGE = "Expected value first.";
-  private static final String PUT_EXPECTED_SECOND_QF = "Put all expected values second";
-  private static final String PUT_ACTUAL_SECOND_QF = "Put all actual values second";
+  private static final String MESSAGE = "Swap these 2 %s so the %s comes first, to match the rest of this file.";
+  private static final String EXPECTED_SECONDARY_MESSAGE = "Expected value.";
+  private static final String ACTUAL_SECONDARY_MESSAGE = "Actual value.";
   private static final String PYTEST_APPROX_EXPECTED_ARGUMENT_NAME = "expected";
 
   private enum Convention {
-    ACTUAL_FIRST,
-    EXPECTED_FIRST
+    ACTUAL_FIRST("actual value"),
+    EXPECTED_FIRST("expected value");
+
+    private final String label;
+
+    Convention(String label) {
+      this.label = label;
+    }
+  }
+
+  private enum Framework {
+    UNITTEST("arguments", "Swap the actual and expected arguments"),
+    PYTEST("operands", "Swap the actual and expected operands"),
+    ASSERTPY("values", "Swap the actual and expected values");
+
+    private final String operandsLabel;
+    private final String quickFixMessage;
+
+    Framework(String operandsLabel, String quickFixMessage) {
+      this.operandsLabel = operandsLabel;
+      this.quickFixMessage = quickFixMessage;
+    }
   }
 
   private final List<OrderableAssertion> assertions = new ArrayList<>();
@@ -67,7 +81,10 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
 
   private record OrderableAssertion(
     Tree primaryLocation,
+    Framework framework,
     Convention convention,
+    Expression actual,
+    Expression expected,
     List<PythonTextEdit> swapEdits) {
   }
 
@@ -95,12 +112,13 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    OrderableAssertion primary = assertions.get(0);
-    PythonCheck.PreciseIssue issue = subscriptionContext.addIssue(primary.primaryLocation(), MESSAGE);
-    issue.addFlow(ACTUAL_FIRST_FLOW, toFlowLocations(actualFirst, ACTUAL_FIRST_LOCATION_MESSAGE));
-    issue.addFlow(EXPECTED_FIRST_FLOW, toFlowLocations(expectedFirst, EXPECTED_FIRST_LOCATION_MESSAGE));
-    createUnifyQuickFix(PUT_EXPECTED_SECOND_QF, expectedFirst).ifPresent(issue::addQuickFix);
-    createUnifyQuickFix(PUT_ACTUAL_SECOND_QF, actualFirst).ifPresent(issue::addQuickFix);
+    // On a tie, the framework default (actual value first) is considered to be the file convention.
+    boolean expectedFirstIsDominant = expectedFirst.size() > actualFirst.size();
+    List<OrderableAssertion> dominant = expectedFirstIsDominant ? expectedFirst : actualFirst;
+    List<OrderableAssertion> deviating = expectedFirstIsDominant ? actualFirst : expectedFirst;
+
+    Convention fileConvention = dominant.get(0).convention();
+    deviating.forEach(assertion -> raiseIssue(assertion, fileConvention));
   }
 
   @Override
@@ -108,12 +126,22 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     return CheckScope.TESTS;
   }
 
+  private void raiseIssue(OrderableAssertion assertion, Convention fileConvention) {
+    String message = MESSAGE.formatted(assertion.framework().operandsLabel, fileConvention.label);
+    PythonCheck.PreciseIssue issue = subscriptionContext.addIssue(assertion.primaryLocation(), message);
+    issue.secondary(assertion.expected(), EXPECTED_SECONDARY_MESSAGE);
+    issue.secondary(assertion.actual(), ACTUAL_SECONDARY_MESSAGE);
+    if (!assertion.swapEdits().isEmpty()) {
+      issue.addQuickFix(PythonQuickFix.newQuickFix(assertion.framework().quickFixMessage).addTextEdit(assertion.swapEdits()).build());
+    }
+  }
+
   private void checkUnittestAssertion(SubscriptionContext ctx, CallExpression callExpression) {
     AssertionArguments arguments = UnittestUtils.unittestAssertionArguments(callExpression, ctx);
     if (arguments == null) {
       return;
     }
-    classifyAndCollect(callExpression, arguments.actual(), arguments.expected(), ctx);
+    classifyAndCollect(callExpression, Framework.UNITTEST, arguments.actual(), arguments.expected(), ctx);
   }
 
   private void checkPytestAssertion(SubscriptionContext ctx, AssertStatement assertStatement) {
@@ -135,8 +163,10 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     }
 
     Convention convention = leftExpected ? Convention.EXPECTED_FIRST : Convention.ACTUAL_FIRST;
+    Expression expected = unwrapPytestApproxArgument(leftExpected ? left : right, ctx);
+    Expression actual = unwrapPytestApproxArgument(leftExpected ? right : left, ctx);
     List<PythonTextEdit> swapEdits = createPytestSwapEdits(binaryExpression, convention, ctx);
-    assertions.add(new OrderableAssertion(condition, convention, swapEdits));
+    assertions.add(new OrderableAssertion(condition, Framework.PYTEST, convention, actual, expected, swapEdits));
   }
 
   private void checkAssertpyAssertion(SubscriptionContext ctx, CallExpression callExpression) {
@@ -144,33 +174,20 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     if (arguments == null) {
       return;
     }
-    classifyAndCollect(callExpression, arguments.actual(), arguments.expected(), ctx);
+    classifyAndCollect(callExpression, Framework.ASSERTPY, arguments.actual(), arguments.expected(), ctx);
   }
 
-  private void classifyAndCollect(Tree primaryLocation, Expression firstPosition, Expression secondPosition, SubscriptionContext ctx) {
+  private void classifyAndCollect(Tree primaryLocation, Framework framework, Expression firstPosition, Expression secondPosition, SubscriptionContext ctx) {
     boolean firstExpected = isExpectedValue(firstPosition, ctx);
     boolean secondExpected = isExpectedValue(secondPosition, ctx);
     if (firstExpected == secondExpected) {
       return;
     }
     Convention convention = firstExpected ? Convention.EXPECTED_FIRST : Convention.ACTUAL_FIRST;
-    assertions.add(new OrderableAssertion(primaryLocation, convention, createSwapEdits(firstPosition, secondPosition, ctx)));
-  }
-
-  private static List<IssueLocation> toFlowLocations(List<OrderableAssertion> group, String message) {
-    return group.stream()
-      .map(assertion -> IssueLocation.preciseLocation(assertion.primaryLocation(), message))
-      .toList();
-  }
-
-  private static Optional<PythonQuickFix> createUnifyQuickFix(String description, List<OrderableAssertion> toSwap) {
-    // Only offer a unify fix when every assertion in the group can be edited; otherwise applying a
-    // partial fix would leave the file still mixing conventions.
-    if (toSwap.stream().anyMatch(assertion -> assertion.swapEdits().isEmpty())) {
-      return Optional.empty();
-    }
-    List<PythonTextEdit> edits = toSwap.stream().flatMap(assertion -> assertion.swapEdits().stream()).toList();
-    return Optional.of(PythonQuickFix.newQuickFix(description).addTextEdit(edits).build());
+    Expression expected = firstExpected ? firstPosition : secondPosition;
+    Expression actual = firstExpected ? secondPosition : firstPosition;
+    assertions.add(new OrderableAssertion(primaryLocation, framework, convention, actual, expected,
+      createSwapEdits(firstPosition, secondPosition, ctx)));
   }
 
   private static List<PythonTextEdit> createSwapEdits(Expression leftExpression, Expression rightExpression, SubscriptionContext ctx) {
@@ -302,5 +319,14 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     }
     RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, callExpression.arguments());
     return expectedArg != null && isExpectedValue(expectedArg.expression(), ctx);
+  }
+
+  private static Expression unwrapPytestApproxArgument(Expression expression, SubscriptionContext ctx) {
+    CallExpression approxCall = asPytestApproxCall(expression, ctx);
+    if (approxCall == null) {
+      return expression;
+    }
+    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxCall.arguments());
+    return expectedArg != null ? expectedArg.expression() : expression;
   }
 }

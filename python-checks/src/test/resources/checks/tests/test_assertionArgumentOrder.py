@@ -15,25 +15,23 @@ def value():
 
 
 class TestUnittestAssertions(unittest.TestCase):
+    # "actual first" is used 5 times and "expected first" 4 times, so the latter deviates from the file convention
     def test_swapped_equality_arguments(self):
         self.assertEqual(42, value())
-#       Noncompliant@-1 {{Unify assertion argument order in this file; both "actual first" and "expected first" conventions are used.}}
+#       Noncompliant@-1 {{Swap these 2 arguments so the actual value comes first, to match the rest of this file.}}
 #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-2< {{Expected value first.}}
-        self.assertEqual(first=EXPECTED_COUNT, second=value())
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-        self.assertIs(None, value())
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-        self.assertAlmostEqual(EXPECTED_PI, value())
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
+#                        ^^@-2< {{Expected value.}}
+#                            ^^^^^^^@-3< {{Actual value.}}
+        self.assertEqual(first=EXPECTED_COUNT, second=value())  # Noncompliant
+        self.assertIs(None, value())  # Noncompliant
+        self.assertAlmostEqual(EXPECTED_PI, value())  # Noncompliant
 
         self.assertEqual(value(), 42)
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
-        self.assertEqual(value(), value())
+        self.assertEqual(value(), EXPECTED_COUNT)
         self.assertIs(value(), None)
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
         self.assertAlmostEqual(value(), EXPECTED_PI)
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
+        self.assertEqual(first=value(), second=42)
+        self.assertEqual(value(), value())
         self.assertEqual(value())
         self.assertEqual(second=EXPECTED_COUNT)
         self.assertTrue(value())
@@ -70,56 +68,6 @@ class TestUnittestAssertions(unittest.TestCase):
 class Helper:
     def test_not_a_unittest_test_case(self):
         self.assertEqual(value(), 42)
-
-
-def test_pytest_assertions():
-    assert 42 == value()
-#          ^^^^^^^^^^^^^< {{Expected value first.}}
-    assert EXPECTED_COUNT == value()
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert pytest.approx(EXPECTED_PI) == value()
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-
-    assert value() == 42
-#          ^^^^^^^^^^^^^< {{Actual value first.}}
-    assert value() == EXPECTED_COUNT
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
-    assert value() == pytest.approx(EXPECTED_PI)
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
-    assert value() == value()
-    assert 42 == EXPECTED_COUNT
-    assert value()
-    assert 42 != value()
-    assert 42 == pytest.approx(value())
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert 42 == pytest.approx(other=value())
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-
-
-def test_assertpy_assertions():
-    assert_that(42).is_equal_to(value())
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert_that(EXPECTED_COUNT).is_equal_to(value())
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert_that(42).described_as("count").is_equal_to(value())
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-    assert_that(EXPECTED_COUNT).described_as("count").snapshot("baseline").is_equal_to(value())
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Expected value first.}}
-
-    assert_that(value()).is_equal_to(42)
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
-    assert_that(value()).is_equal_to(EXPECTED_COUNT)
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
-    assert_that(value()).described_as("count").snapshot("baseline").is_equal_to(42)
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Actual value first.}}
-    assert_that(value()).is_equal_to(value())
-    assert_that(42).is_equal_to(EXPECTED_COUNT)
-    assert_that(value()).is_equal_to()
-    assert_that().is_equal_to(value())
-    assert_that(value()).is_not_equal_to(42)
-    builder.is_equal_to(42)
-    factory().is_equal_to(42)
-    other_call(value()).is_equal_to(42)
 
 
 def helper_assertions():
