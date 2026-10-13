@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class ImportFromImpl extends SimpleStatement implements ImportFrom {
+  private Token lazyKeyword;
   private final Token fromKeyword;
   private final List<Token> dottedPrefixForModule;
   private final DottedName moduleName;
@@ -52,6 +53,16 @@ public class ImportFromImpl extends SimpleStatement implements ImportFrom {
     this.wildcard = wildcard;
     this.isWildcardImport = wildcard != null;
     this.separators = separators;
+  }
+
+  @CheckForNull
+  @Override
+  public Token lazyKeyword() {
+    return lazyKeyword;
+  }
+
+  void setLazyKeyword(@CheckForNull Token lazyKeyword) {
+    this.lazyKeyword = lazyKeyword;
   }
 
   @Override
@@ -119,7 +130,8 @@ public class ImportFromImpl extends SimpleStatement implements ImportFrom {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(fromKeyword), dottedPrefixForModule, Arrays.asList(moduleName, importKeyword), aliasedImportNames,
+    return Stream.of(Collections.singletonList(lazyKeyword), Collections.singletonList(fromKeyword), dottedPrefixForModule,
+      Arrays.asList(moduleName, importKeyword), aliasedImportNames,
       Collections.singletonList(wildcard), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

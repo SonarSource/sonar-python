@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -122,13 +123,14 @@ public class TypeInferenceV2Test {
 
   static PythonFile pythonFile = pythonFile("mod");
 
-  @Test
-  void testTypeshedImports() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testTypeshedImports(String importPrefix) {
     FileInput root = inferTypes("""
-      import cryptography.hazmat.primitives.asymmetric
-      import datetime
+      %simport cryptography.hazmat.primitives.asymmetric
+      %simport datetime
       a = datetime.date(year=2023, month=12, day=1)
-      """);
+      """.formatted(importPrefix, importPrefix));
 
     var importName = (ImportName) root.statements().statements().get(0);
     var importedNames = importName.modules().get(0).dottedName().names();
@@ -446,11 +448,12 @@ public class TypeInferenceV2Test {
     assertThat(xType.unwrappedType()).isEqualTo(myOtherClassType);
   }
 
-  @Test
-  void testUnresolvedImports() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testUnresolvedImports(String importPrefix) {
     FileInput root = inferTypes("""
-      import something.unknown
-      """);
+      %simport something.unknown
+      """.formatted(importPrefix));
 
     var importName = (ImportName) root.statements().statements().get(0);
     var importedNames = importName.modules().get(0).dottedName().names();
@@ -483,13 +486,14 @@ public class TypeInferenceV2Test {
       .isEqualTo("unknown.Parent");
   }
 
-  @Test
-  void testUnresolvedImportTypePropagationInsideFunctions() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testUnresolvedImportTypePropagationInsideFunctions(String importPrefix) {
     var fileInput = inferTypes("""
-      from a import b
+      %sfrom a import b
       def function():
         f(b)
-      """);
+      """.formatted(importPrefix));
     var functionDef = (FunctionDef) fileInput.statements().statements().get(1);
     var funcCall = ((ExpressionStatement) functionDef.body().statements().get(0)).expressions().get(0);
     var arg = ((RegularArgument) ((CallExpression) funcCall).arguments().get(0));
@@ -498,51 +502,53 @@ public class TypeInferenceV2Test {
     assertThat(argType).isInstanceOfSatisfying(UnresolvedImportType.class, a -> assertThat(a.importPath()).isEqualTo("a.b"));
   }
 
-  @Test
-  void testRelativeImport() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testRelativeImport(String importPrefix) {
     FileInput fileInput = inferTypes("""
-      from . import module
+      %sfrom . import module
       module
-      """);
+      """.formatted(importPrefix));
 
     PythonType pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
     assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("my_package.module");
 
     fileInput = inferTypes("""
-      from .. import module
+      %sfrom .. import module
       module
-      """);
+      """.formatted(importPrefix));
     pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
     assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("module");
 
     fileInput = inferTypes("""
-      from .hello import module
+      %sfrom .hello import module
       module
-      """);
+      """.formatted(importPrefix));
     pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
     assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("my_package.hello.module");
 
     fileInput = inferTypes("""
-      from ..second_hello import module
+      %sfrom ..second_hello import module
       module
-      """);
+      """.formatted(importPrefix));
     pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
     assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("second_hello.module");
   }
 
-  @Test
-  void testProjectLevelSymbolTableImports() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testProjectLevelSymbolTableImports(String importPrefix) {
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(
       Map.of("something.known", Collections.singleton(new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("something.known.C").build()), "something",
         Set.of())));
 
     var root = inferTypes("""
-      import something.known
-      """, projectLevelTypeTable);
+      %simport something.known
+      """.formatted(importPrefix), projectLevelTypeTable);
 
     var importName = (ImportName) root.statements().statements().get(0);
     var importedNames = importName.modules().get(0).dottedName().names();
@@ -564,11 +570,12 @@ public class TypeInferenceV2Test {
     ;
   }
 
-  @Test
-  void testImportWithAlias() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testImportWithAlias(String importPrefix) {
     FileInput root = inferTypes("""
-      import datetime as d
-      """);
+      %simport datetime as d
+      """.formatted(importPrefix));
 
     var importName = (ImportName) root.statements().statements().get(0);
     var aliasedName = importName.modules().get(0);
@@ -585,11 +592,12 @@ public class TypeInferenceV2Test {
       .isEqualTo("datetime");
   }
 
-  @Test
-  void testImportFrom() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testImportFrom(String importPrefix) {
     FileInput root = inferTypes("""
-      from datetime import date
-      """);
+      %sfrom datetime import date
+      """.formatted(importPrefix));
 
     var importFrom = (ImportFrom) root.statements().statements().get(0);
     var type = importFrom.importedNames().get(0).dottedName().names().get(0).typeV2();
@@ -600,11 +608,12 @@ public class TypeInferenceV2Test {
       .isEqualTo("date");
   }
 
-  @Test
-  void testImportFromWithAlias() {
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void testImportFromWithAlias(String importPrefix) {
     FileInput root = inferTypes("""
-      from datetime import date as d
-      """);
+      %sfrom datetime import date as d
+      """.formatted(importPrefix));
 
     var importFrom = (ImportFrom) root.statements().statements().get(0);
     var type1 = importFrom.importedNames().get(0).dottedName().names().get(0).typeV2();
@@ -617,6 +626,61 @@ public class TypeInferenceV2Test {
       .isInstanceOf(ClassType.class)
       .extracting(PythonType::name)
       .isEqualTo("date");
+  }
+
+  @ParameterizedTest
+  @MethodSource("lazyImportUsages")
+  void lazyImportsResolveUsagesAndCallResults(String importStatement, String reference, String arguments,
+    PythonType expectedType, PythonType expectedResultType) {
+    var tuple = (TupleImpl) lastExpression("""
+      %s
+      def consumer():
+        result = %s(%s)
+        (%s, result)
+      """.formatted(importStatement, reference, arguments, reference));
+
+    assertThat(tuple.elements().get(0).typeV2())
+      .isInstanceOfAny(ClassType.class, FunctionType.class)
+      .isEqualTo(expectedType);
+    assertThat(tuple.elements().get(1).typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(expectedResultType);
+  }
+
+  static Stream<Arguments> lazyImportUsages() {
+    var dateType = PROJECT_LEVEL_TYPE_TABLE.getType("datetime.date");
+    var timeType = PROJECT_LEVEL_TYPE_TABLE.getType("time.time");
+    return Stream.of(
+      Arguments.argumentSet("module", "lazy import datetime", "datetime.date", "2023, 12, 1", dateType, dateType),
+      Arguments.argumentSet("module alias", "lazy import datetime as dt", "dt.date", "2023, 12, 1", dateType, dateType),
+      Arguments.argumentSet("class", "lazy from datetime import date", "date", "2023, 12, 1", dateType, dateType),
+      Arguments.argumentSet("class alias", "lazy from datetime import (date as Date)", "Date", "2023, 12, 1", dateType, dateType),
+      Arguments.argumentSet("function", "lazy from time import time", "time", "", timeType, FLOAT_TYPE),
+      Arguments.argumentSet("function alias", "lazy from time import time as now", "now", "", timeType, FLOAT_TYPE));
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"", "lazy "})
+  void relativeImportsResolveProjectTypes(String importPrefix) {
+    var project = new TestProject()
+      .addModule("pkg/__init__.py", "")
+      .addModule("pkg/models.py", "class Model: pass");
+    var fileInput = project.inferTypes("pkg/consumer.py", """
+      %simport pkg.models as models
+      %sfrom .models import Model as Imported
+      (models.Model, Imported, Imported())
+      """.formatted(importPrefix, importPrefix));
+    var tuple = (TupleImpl) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0);
+    var modelType = project.projectLevelTypeTable().getType("pkg.models.Model");
+
+    assertThat(modelType).isInstanceOf(ClassType.class);
+    assertThat(tuple.elements().get(0).typeV2()).isEqualTo(modelType);
+    assertThat(tuple.elements().get(1).typeV2()).isEqualTo(modelType);
+    assertThat(tuple.elements().get(2).typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(modelType);
   }
 
   @Test

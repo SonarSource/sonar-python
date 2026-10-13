@@ -36,4 +36,36 @@ class ImportStatementTest extends RuleTest {
     assertThat(p).matches("import sys");
   }
 
+  @Test
+  void lazyImports() {
+    setRootRule(PythonGrammar.FILE_INPUT);
+
+    assertThat(p).matches("lazy import json\n");
+    assertThat(p).matches("lazy from pathlib import Path\n");
+    assertThat(p).matches("lazy from ..package import name as alias\n");
+    assertThat(p).matches("lazy = 42\nlazy()\n");
+    assertThat(p).matches("if TYPE_CHECKING:\n  lazy import json\n");
+    // Ordinary module references, not imports from the special absolute __future__ module.
+    assertThat(p).matches("lazy from __future__.something import name\n");
+    assertThat(p).matches("lazy from __future__.something import (name as alias)\n");
+    assertThat(p).matches("lazy from .__future__ import annotations\n");
+    assertThat(p).matches("lazy from __future__x import name\n");
+    assertThat(p).matches("import json; lazy import pathlib\n");
+    assertThat(p).matches("lazy import json; lazy import pathlib\n");
+    // Lazy star imports and absolute future imports are invalid Python syntax,
+    // intentionally parsed so that analysis can continue.
+    assertThat(p).matches("lazy from package import *\n");
+    assertThat(p).matches("lazy from __future__ import annotations\n");
+    assertThat(p).matches("lazy from __future__ import (annotations as alias)\n");
+  }
+
+  @Test
+  void lazyImportsInIPython() {
+    setRootRule(PythonGrammar.FILE_INPUT);
+
+    assertThat(ip).matches("lazy import json\n");
+    assertThat(ip).matches("lazy from pathlib import Path\n");
+    assertThat(ip).matches("lazy = 42\nlazy()\n");
+  }
+
 }

@@ -708,6 +708,27 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  void lazyImportStatement() {
+    setRootRule(PythonGrammar.FILE_INPUT);
+
+    FileInput fileInput = parse("lazy import foo as bar\n", treeMaker::fileInput);
+    ImportName importName = (ImportName) fileInput.statements().statements().get(0);
+    assertThat(importName.lazyKeyword().value()).isEqualTo("lazy");
+    assertThat(importName.importKeyword().value()).isEqualTo("import");
+    assertThat(importName.modules().get(0).alias().name()).isEqualTo("bar");
+    assertThat(importName.children()).containsSubsequence(importName.lazyKeyword(), importName.importKeyword(), importName.modules().get(0));
+
+    fileInput = parse("lazy from ..foo import f as g\n", treeMaker::fileInput);
+    ImportFrom importFrom = (ImportFrom) fileInput.statements().statements().get(0);
+    assertThat(importFrom.lazyKeyword().value()).isEqualTo("lazy");
+    assertThat(importFrom.dottedPrefixForModule()).hasSize(2);
+    assertThat(importFrom.module().names().get(0).name()).isEqualTo("foo");
+    assertThat(importFrom.importedNames().get(0).alias().name()).isEqualTo("g");
+    assertThat(importFrom.children()).containsSubsequence(importFrom.lazyKeyword(), importFrom.fromKeyword(), importFrom.dottedPrefixForModule().get(0),
+      importFrom.dottedPrefixForModule().get(1), importFrom.module(), importFrom.importKeyword(), importFrom.importedNames().get(0));
+  }
+
+  @Test
   void globalStatement() {
     setRootRule(PythonGrammar.GLOBAL_STMT);
     AstNode astNode = p.parse("global foo");

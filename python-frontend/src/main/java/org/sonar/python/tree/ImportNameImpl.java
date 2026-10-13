@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class ImportNameImpl extends SimpleStatement implements ImportName {
 
+  private Token lazyKeyword;
   private final Token importKeyword;
   private final List<AliasedName> aliasedNames;
   private final Separators separators;
@@ -38,6 +39,16 @@ public class ImportNameImpl extends SimpleStatement implements ImportName {
     this.importKeyword = importKeyword;
     this.aliasedNames = aliasedNames;
     this.separators = separators;
+  }
+
+  @CheckForNull
+  @Override
+  public Token lazyKeyword() {
+    return lazyKeyword;
+  }
+
+  void setLazyKeyword(@CheckForNull Token lazyKeyword) {
+    this.lazyKeyword = lazyKeyword;
   }
 
   @Override
@@ -68,7 +79,7 @@ public class ImportNameImpl extends SimpleStatement implements ImportName {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(importKeyword), aliasedNames, separators.elements())
+    return Stream.of(Collections.singletonList(lazyKeyword), Collections.singletonList(importKeyword), aliasedNames, separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -251,14 +251,18 @@ public class PythonGrammarBuilder {
     b.rule(RAISE_STMT).is("raise", b.optional(EXPRESSION, b.optional(b.firstOf(b.sequence("from", EXPRESSION), b.sequence(",", EXPRESSION, b.optional(",", EXPRESSION))))));
     b.rule(BREAK_STMT).is("break");
     b.rule(CONTINUE_STMT).is("continue");
-    b.rule(IMPORT_STMT).is(b.firstOf(IMPORT_NAME, IMPORT_FROM));
-    b.rule(IMPORT_NAME).is("import", DOTTED_AS_NAMES);
+    b.rule(IMPORT_STMT).is(b.firstOf(LAZY_IMPORT_STMT, IMPORT_NAME, IMPORT_FROM));
+    b.rule(LAZY_IMPORT_STMT).is("lazy", b.firstOf(
+      b.sequence(PythonKeyword.IMPORT, DOTTED_AS_NAMES),
+      b.sequence("from", b.firstOf(b.sequence(b.zeroOrMore("."), DOTTED_NAME), b.oneOrMore(".")),
+        PythonKeyword.IMPORT, b.firstOf("*", b.sequence("(", IMPORT_AS_NAMES, ")"), IMPORT_AS_NAMES))));
+    b.rule(IMPORT_NAME).is(PythonKeyword.IMPORT, DOTTED_AS_NAMES);
     b.rule(IMPORT_FROM).is(
       "from",
       b.firstOf(
         b.sequence(b.zeroOrMore("."), DOTTED_NAME),
         b.oneOrMore(".")),
-      "import",
+      PythonKeyword.IMPORT,
       b.firstOf("*", b.sequence("(", IMPORT_AS_NAMES, ")"), IMPORT_AS_NAMES));
     b.rule(IMPORT_AS_NAME).is(NAME, b.optional("as", NAME));
     b.rule(DOTTED_AS_NAME).is(DOTTED_NAME, b.optional("as", NAME));
@@ -275,6 +279,7 @@ public class PythonGrammarBuilder {
       TYPE_ALIAS_STMT,
       PRINT_STMT,
       EXEC_STMT,
+      IMPORT_STMT,
       EXPRESSION_STMT,
       ASSERT_STMT,
       PASS_STMT,
@@ -284,7 +289,6 @@ public class PythonGrammarBuilder {
       RAISE_STMT,
       BREAK_STMT,
       CONTINUE_STMT,
-      IMPORT_STMT,
       GLOBAL_STMT,
       NONLOCAL_STMT));
   }

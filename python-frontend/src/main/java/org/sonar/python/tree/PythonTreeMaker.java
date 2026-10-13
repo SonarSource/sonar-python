@@ -419,23 +419,27 @@ public class PythonTreeMaker {
     AstNode astNode = statementWithSeparator.statement();
     Separators separators = statementWithSeparator.separator();
     AstNode importStmt = astNode.getFirstChild();
-    if (importStmt.is(PythonGrammar.IMPORT_NAME)) {
-      return importName(importStmt, separators);
+    boolean isLazyImport = importStmt.is(PythonGrammar.LAZY_IMPORT_STMT);
+    @Nullable Token lazyKeyword = isLazyImport ? toPyToken(importStmt.getTokens().get(0)) : null;
+    if (importStmt.is(PythonGrammar.IMPORT_NAME) || importStmt.getFirstChild(PythonKeyword.FROM) == null) {
+      return importName(lazyKeyword, importStmt, separators);
     }
-    return importFromStatement(importStmt, separators);
+    return importFromStatement(lazyKeyword, importStmt, separators);
   }
 
-  private ImportName importName(AstNode astNode, Separators separators) {
+  private ImportName importName(@Nullable Token lazyKeyword, AstNode astNode, Separators separators) {
     Token importKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.IMPORT).getToken());
     List<AliasedName> aliasedNames = astNode
       .getFirstChild(PythonGrammar.DOTTED_AS_NAMES)
       .getChildren(PythonGrammar.DOTTED_AS_NAME).stream()
       .map(this::aliasedName)
       .toList();
-    return new ImportNameImpl(importKeyword, aliasedNames, separators);
+    ImportNameImpl importName = new ImportNameImpl(importKeyword, aliasedNames, separators);
+    importName.setLazyKeyword(lazyKeyword);
+    return importName;
   }
 
-  private ImportFrom importFromStatement(AstNode astNode, Separators separators) {
+  private ImportFrom importFromStatement(@Nullable Token lazyKeyword, AstNode astNode, Separators separators) {
     Token importKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.IMPORT).getToken());
     Token fromKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.FROM).getToken());
     List<Token> dottedPrefixForModule = punctuators(astNode, PythonPunctuator.DOT);
@@ -457,7 +461,9 @@ public class PythonTreeMaker {
     if (isWildcardImport) {
       wildcard = toPyToken(astNode.getFirstChild(PythonPunctuator.MUL).getToken());
     }
-    return new ImportFromImpl(fromKeyword, dottedPrefixForModule, moduleName, importKeyword, aliasedImportNames, wildcard, separators);
+    ImportFromImpl importFrom = new ImportFromImpl(fromKeyword, dottedPrefixForModule, moduleName, importKeyword, aliasedImportNames, wildcard, separators);
+    importFrom.setLazyKeyword(lazyKeyword);
+    return importFrom;
   }
 
   private AliasedName aliasedName(AstNode astNode) {

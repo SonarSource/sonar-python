@@ -17,6 +17,7 @@
 package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
+import javax.annotation.CheckForNull;
 
 /**
  * Import statement
@@ -28,6 +29,9 @@ import java.util.List;
  * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-import-stmt
  */
 public interface ImportName extends ImportStatement {
+  @CheckForNull
+  Token lazyKeyword();
+
   Token importKeyword();
 
   List<AliasedName> modules();

@@ -112,6 +112,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   CONTINUE_STMT,
 
   IMPORT_STMT,
+  LAZY_IMPORT_STMT,
   IMPORT_NAME,
   IMPORT_FROM,
   IMPORT_AS_NAME,

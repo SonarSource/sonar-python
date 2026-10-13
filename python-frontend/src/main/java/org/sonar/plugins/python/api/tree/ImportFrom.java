@@ -29,6 +29,9 @@ import javax.annotation.CheckForNull;
  * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-import-stmt
  */
 public interface ImportFrom extends ImportStatement {
+  @CheckForNull
+  Token lazyKeyword();
+
   Token fromKeyword();
 
   @CheckForNull

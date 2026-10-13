@@ -100,6 +100,7 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
       DYNAMIC_OBJECT_INFO_STATEMENT,
       PRINT_STMT,
       EXEC_STMT,
+      IMPORT_STMT,
       EXPRESSION_STMT,
       ASSERT_STMT,
       PASS_STMT,
@@ -109,7 +110,6 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
       RAISE_STMT,
       BREAK_STMT,
       CONTINUE_STMT,
-      IMPORT_STMT,
       GLOBAL_STMT,
       NONLOCAL_STMT,
       LINE_MAGIC_STATEMENT));
