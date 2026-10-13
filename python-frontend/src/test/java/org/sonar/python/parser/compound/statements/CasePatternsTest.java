@@ -54,15 +54,39 @@ class CasePatternsTest extends RuleTest {
   @Test
   void signed_numbers() {
     assertThat(p)
+      .matches("3")
       .matches("-3")
-      .notMatches("+3");
+      .matches("+3")
+      .matches("+ 3.14")
+      .matches("+0xFF")
+      .matches("+42j")
+      .notMatches("++3")
+      .notMatches("+-3")
+      .notMatches("-+3")
+      .notMatches("+value")
+      .notMatches("+True")
+      .notMatches("+(3)");
   }
 
   @Test
   void complex_numbers() {
     assertThat(p)
       .matches("3 + 4j")
+      .matches("+3 + 4j")
+      .matches("+3 - 4j")
+      .matches("-3 + 4j")
+      .notMatches("+3 + +4j")
+      .notMatches("+3 - -4j")
       .matches("42j");
+  }
+
+  @Test
+  void signed_numbers_in_nested_patterns() {
+    assertThat(p)
+      .matches("[+3, +4.5]")
+      .matches("{+3: value, +4 - 5j: other}")
+      .matches("+3 | -3")
+      .matches("+3 as value");
   }
 
   @Test

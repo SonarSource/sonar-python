@@ -384,7 +384,7 @@ public class PythonGrammarBuilder {
 
     b.rule(SIGNED_NUMBER).is(b.firstOf(
       NUMBER,
-      b.sequence("-", NUMBER)));
+      b.sequence(b.firstOf("+", "-"), NUMBER)));
 
     b.rule(WILDCARD_PATTERN).is("_");
     b.rule(GROUP_PATTERN).is("(", PATTERN, ")");

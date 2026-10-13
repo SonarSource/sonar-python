@@ -19,6 +19,8 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;
@@ -47,6 +49,7 @@ import org.sonar.plugins.python.api.tree.WildcardPattern;
 import org.sonar.plugins.python.api.tree.ValuePattern;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
+import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -131,10 +134,75 @@ class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertLiteralPattern(pattern("case \"foo\": ..."), Kind.STRING_LITERAL_PATTERN, "\"foo\"");
     assertLiteralPattern(pattern("case \"foo\" \"bar\": ..."), Kind.STRING_LITERAL_PATTERN, "\"foo\"\"bar\"");
     assertLiteralPattern(pattern("case -42: ..."), Kind.NUMERIC_LITERAL_PATTERN, "-42");
+    assertLiteralPattern(pattern("case +42: ..."), Kind.NUMERIC_LITERAL_PATTERN, "+42");
+    assertLiteralPattern(pattern("case +3.14: ..."), Kind.NUMERIC_LITERAL_PATTERN, "+3.14");
+    assertLiteralPattern(pattern("case +42j: ..."), Kind.NUMERIC_LITERAL_PATTERN, "+42j");
     assertLiteralPattern(pattern("case 3 + 5j: ..."), Kind.NUMERIC_LITERAL_PATTERN, "3+5j");
+    assertLiteralPattern(pattern("case +3 + 5j: ..."), Kind.NUMERIC_LITERAL_PATTERN, "+3+5j");
+    assertLiteralPattern(pattern("case +3 - 5j: ..."), Kind.NUMERIC_LITERAL_PATTERN, "+3-5j");
     assertLiteralPattern(pattern("case None: ..."), Kind.NONE_LITERAL_PATTERN, "None");
     assertLiteralPattern(pattern("case True: ..."), Kind.BOOLEAN_LITERAL_PATTERN, "True");
     assertLiteralPattern(pattern("case False: ..."), Kind.BOOLEAN_LITERAL_PATTERN, "False");
+  }
+
+  @Test
+  void unary_plus_literal_tokens() {
+    LiteralPattern literal = pattern("case + 42: ...");
+    assertLiteralPattern(literal, Kind.NUMERIC_LITERAL_PATTERN, "+42");
+    assertThat(literal.children()).extracting(Tree::getKind).containsExactly(Kind.TOKEN, Kind.TOKEN);
+    assertThat(literal.children()).extracting(t -> ((Token) t).value()).containsExactly("+", "42");
+    assertThat(literal.firstToken().line()).isEqualTo(1);
+    assertThat(literal.firstToken().column()).isEqualTo(5);
+    assertThat(literal.lastToken().column()).isEqualTo(7);
+
+    literal = pattern("case + 3 - 5j: ...");
+    assertLiteralPattern(literal, Kind.NUMERIC_LITERAL_PATTERN, "+3-5j");
+    assertThat(literal.children()).extracting(t -> ((Token) t).value()).containsExactly("+", "3", "-", "5j");
+    assertThat(literal.firstToken().column()).isEqualTo(5);
+    assertThat(literal.lastToken().column()).isEqualTo(11);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"+1 + 2", "+1j + 2j", "+1j + 2", "+1 + 2.5", "-1 + 2", "1 + 2", "1j - 2j"})
+  void recoverable_numeric_operand_mistakes_preserve_patterns_and_the_rest_of_the_file(String value) {
+    // Invalid Python syntax: compound numeric patterns require a real part followed by an imaginary part.
+    // Preserve the AST so that a future rule can report the mistake without losing analysis of the file.
+    for (boolean notebook : new boolean[] {false, true}) {
+      for (boolean mappingKey : new boolean[] {false, true}) {
+        String sourcePattern = mappingKey ? "{" + value + ": captured}" : value;
+        var parser = notebook ? PythonParser.createIPythonParser() : PythonParser.create();
+        PythonTreeMaker maker = notebook ? new IPythonTreeMaker() : new PythonTreeMaker();
+        var file = maker.fileInput(parser.parse("match value:\n  case " + sourcePattern + ": pass\nsentinel\n"));
+        assertThat(file.statements().statements()).hasSize(2);
+        assertThat(file.statements().statements().get(1).firstToken().value()).isEqualTo("sentinel");
+        var match = (MatchStatement) file.statements().statements().get(0);
+        var casePattern = match.caseBlocks().get(0).pattern();
+        LiteralPattern literal = mappingKey
+          ? (LiteralPattern) ((KeyValuePattern) ((MappingPattern) casePattern).elements().get(0)).key()
+          : (LiteralPattern) casePattern;
+        assertLiteralPattern(literal, Kind.NUMERIC_LITERAL_PATTERN, value.replace(" ", ""));
+        assertThat(literal.parent()).isNotNull();
+        assertThat(literal.children()).allMatch(child -> child.is(Kind.TOKEN));
+        assertThat(literal.firstToken().line()).isEqualTo(2);
+      }
+    }
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"+1 + 2j", "-1 - 2J", "0xFF + 2j", "+1.5 - 2.5j", "+42j", "+0xFF"})
+  void valid_numeric_patterns(String value) {
+    assertLiteralPattern(pattern("case " + value + ": ..."), Kind.NUMERIC_LITERAL_PATTERN, value.replace(" ", ""));
+    MappingPattern mapping = pattern("case {" + value + ": captured}: ...");
+    assertThat(mapping.elements()).hasSize(1);
+  }
+
+  @Test
+  void unary_plus_mapping_key() {
+    MappingPattern mappingPattern = pattern("case {+42: value}: ...");
+    KeyValuePattern keyValuePattern = (KeyValuePattern) mappingPattern.elements().get(0);
+    LiteralPattern key = (LiteralPattern) keyValuePattern.key();
+    assertLiteralPattern(key, Kind.NUMERIC_LITERAL_PATTERN, "+42");
+    assertThat(key.children()).extracting(t -> ((Token) t).value()).containsExactly("+", "42");
   }
 
   @Test
