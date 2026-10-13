@@ -19,6 +19,34 @@ makes your test suite a better specification of expected behavior.</p>
   <li><strong>Maintenance burden</strong>: Other developers (or future you) will struggle to understand what the test is verifying.</li>
   <li><strong>Reduced confidence</strong>: Passing tests don’t guarantee that the specific behavior you intended to test is working correctly.</li>
 </ul>
+<h3>Exceptions</h3>
+<p>The rule does not flag the following patterns even when they appear inside the exception-testing block (<code>pytest.raises()</code> or
+<code>assertRaises()</code>), because they are not considered separate invocations under test:</p>
+<ul>
+  <li><strong>No-argument constructor used as a chain receiver</strong>: <code>ClassName().method()</code> counts as a single invocation — the no-arg
+  constructor merely creates the receiver object and is unlikely to raise.</li>
+  <li><strong>Imported call used as an argument</strong>: <code>do_work(json.dumps({"key": "value"}))</code> counts as a single invocation — the
+  imported call is treated as setup data, not the expression under test.</li>
+  <li><strong>Callable-resolver helpers</strong> (<code>getattr</code>, <code>operator.attrgetter</code>, <code>operator.methodcaller</code>,
+  <code>functools.partial</code>): only the final resulting call is counted.</li>
+</ul>
+<pre>
+import json
+import pytest
+
+def test_check_rejects_dangerous_command():
+    with pytest.raises(SecurityError):  # Compliant — SomePolicy() is the receiver, not under test
+        SomePolicy().check(args)
+
+def test_do_work_rejects_json_string():
+    with pytest.raises(InvalidPayloadError):  # Compliant — json.dumps() is imported setup data
+        do_work(json.dumps({"key": "value"}))
+
+def test_process_by_name_rejects_invalid_input():
+    item = get_item()
+    with pytest.raises(InvalidInputError):  # Compliant — getattr() resolves the callable, process() is under test
+        getattr(item, "process")(invalid_input)
+</pre>
 <h2>How to fix it in pytest</h2>
 <p>When using pytest’s <code>pytest.raises()</code> context manager, extract intermediate method calls into separate variables before the assertion.
 This ensures only the final method call that you want to test is inside the exception-testing block.</p>

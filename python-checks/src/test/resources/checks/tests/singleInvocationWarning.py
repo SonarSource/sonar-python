@@ -1,8 +1,12 @@
 import copy
+import functools
+import json
+import operator
 import uuid
 import warnings
 from pathlib import Path
 from uuid import UUID, uuid4
+from warnings import warn
 
 import numpy as np
 import pytest
@@ -312,6 +316,70 @@ def test_non_warns_with_statement():
 def test_pytest_raises_is_out_of_scope():
     with pytest.raises(ValueError):
         get_item().process()
+
+
+# FN: warn() is imported — skipped from count even though it emits the warning before do_work() is called
+def test_pytest_with_imported_warning_function_argument():
+    with pytest.warns(UserWarning):
+        do_work(warn("setup warning", UserWarning))
+
+
+def test_pytest_with_imported_module_warning_function_argument():
+    with pytest.warns(UserWarning):
+        do_work(warnings.warn("setup warning", UserWarning))
+
+
+# Imported call in a class-base argument list is NOT excluded: RegularArgument's ArgList parent
+# is ClassDef, not CallExpression, so the "imported argument to a call" exemption does not apply.
+def test_pytest_with_imported_call_as_class_base():
+    with pytest.warns(UserWarning):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        class C(json.loads("data")):
+#                    ^^^^^^^^^^^^^< {{Invocation possibly emitting a warning.}}
+            pass
+        do_work()
+#       ^^^^^^^^^< {{Invocation possibly emitting a warning.}}
+
+
+def test_pytest_with_deep_qualified_argument():
+    with pytest.warns(UserWarning):
+        do_work(json.decoder.JSONDecodeError("msg", "doc", 0))
+
+
+def test_pytest_with_constructor_chain_receiver():
+    with pytest.warns(UserWarning):
+        Item().process()
+
+
+def test_pytest_with_getattr_pattern():
+    item = Item()
+    with pytest.warns(UserWarning):
+        getattr(item, "process")()
+
+
+def test_pytest_with_attrgetter_pattern():
+    item = Item()
+    with pytest.warns(UserWarning):
+        operator.attrgetter("process")(item)()
+
+
+def test_pytest_with_methodcaller_pattern():
+    item = Item()
+    with pytest.warns(UserWarning):
+        operator.methodcaller("process")(item)
+
+
+def test_pytest_with_partial_pattern():
+    with pytest.warns(UserWarning):
+        functools.partial(do_work, "value")()
+
+
+def test_pytest_with_non_resolver_callee():
+    with pytest.warns(UserWarning):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        do_work(config)(value)
+#       ^^^^^^^^^^^^^^^< {{Invocation possibly emitting a warning.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^@-1< {{Invocation possibly emitting a warning.}}
 
 
 def test_pytest_with_nested_lambda_definition():

@@ -27,6 +27,29 @@ your test suite a better specification of expected behavior.</p>
   <li><strong>Maintenance burden</strong>: Other developers (or future you) will struggle to understand what the test is verifying.</li>
   <li><strong>Reduced confidence</strong>: Passing tests do not guarantee that the specific behavior you intended to test is working correctly.</li>
 </ul>
+<h3>Exceptions</h3>
+<p>The rule does not flag the following patterns even when they appear inside the <code>pytest.warns()</code> block, because they are not considered
+separate invocations under test:</p>
+<ul>
+  <li><strong>No-argument constructor used as a chain receiver</strong>: <code>ClassName().method()</code> counts as a single invocation — the no-arg
+  constructor merely creates the receiver object and is unlikely to emit a warning.</li>
+  <li><strong>Imported call used as an argument</strong>: <code>do_work(some_lib.build_config())</code> counts as a single invocation — the imported
+  call is treated as setup data, not the expression under test.</li>
+  <li><strong>Callable-resolver helpers</strong> (<code>getattr</code>, <code>operator.attrgetter</code>, <code>operator.methodcaller</code>,
+  <code>functools.partial</code>): only the final resulting call is counted.</li>
+</ul>
+<pre>
+import pytest
+import some_lib
+
+def test_process_item():
+    with pytest.warns(DeprecationWarning):  # Compliant — SomeClass() is the receiver, not under test
+        SomeClass().process()
+
+def test_process_with_config():
+    with pytest.warns(UserWarning):  # Compliant — some_lib.build_config() is imported setup data
+        do_work(some_lib.build_config())
+</pre>
 <h2>How to fix it</h2>
 <p>When using pytest’s <code>pytest.warns()</code> context manager, extract intermediate method calls into separate variables before the assertion,
 and move setup outside the <code>with</code> block. This ensures only the final method call that you want to test is inside the warning-testing

@@ -1,6 +1,10 @@
 import copy
+import functools
+import json
+import operator
 import unittest
 import uuid
+from json import loads
 from pathlib import Path
 from uuid import UUID, uuid4
 
@@ -326,6 +330,87 @@ def test_non_raise_with_statement():
         get_item().process()
 
 
+# FN: imported functions used as arguments are skipped from the count even when they raise.
+# loads("invalid") raises json.JSONDecodeError (a ValueError subclass) before do_work() is called.
+def test_pytest_with_imported_raising_function_argument():
+    with pytest.raises(ValueError):
+        do_work(loads("invalid"))
+
+
+def test_pytest_with_imported_module_raising_function_argument():
+    with pytest.raises(ValueError):
+        do_work(json.loads("invalid"))
+
+
+# Imported call in a class-base argument list is NOT excluded: RegularArgument's ArgList parent
+# is ClassDef, not CallExpression, so the "imported argument to a call" exemption does not apply.
+def test_pytest_with_imported_call_as_class_base():
+    with pytest.raises(ValueError):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        class C(loads("data")):
+#               ^^^^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
+            pass
+        do_work()
+#       ^^^^^^^^^< {{Invocation possibly throwing an exception.}}
+
+
+def test_pytest_with_deep_qualified_argument():
+    with pytest.raises(ValueError):
+        do_work(json.decoder.JSONDecodeError("msg", "doc", 0))
+
+
+def test_pytest_direct_lambda_with_imported_raising_function():
+    pytest.raises(ValueError, lambda: do_work(loads("invalid")))
+
+
+def test_pytest_with_constructor_chain_receiver():
+    with pytest.raises(ValueError):
+        Item().process()
+
+
+def test_pytest_with_constructor_chain_receiver_with_args():
+    with pytest.raises(ValueError):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Item(1).process()
+#       ^^^^^^^< {{Invocation possibly throwing an exception.}}
+#               ^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+
+
+def test_pytest_direct_lambda_with_constructor_chain():
+    pytest.raises(ValueError, lambda: Item().process())
+
+
+def test_pytest_with_getattr_pattern():
+    item = Item()
+    with pytest.raises(ValueError):
+        getattr(item, "process")()
+
+
+def test_pytest_with_attrgetter_pattern():
+    item = Item()
+    with pytest.raises(ValueError):
+        operator.attrgetter("process")(item)()
+
+
+def test_pytest_with_methodcaller_pattern():
+    item = Item()
+    with pytest.raises(ValueError):
+        operator.methodcaller("process")(item)
+
+
+def test_pytest_with_partial_pattern():
+    with pytest.raises(ValueError):
+        functools.partial(do_work, "value")()
+
+
+def test_pytest_with_non_resolver_callee():
+    with pytest.raises(ValueError):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        do_work(config)(value)
+#       ^^^^^^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+
+
 def test_pytest_with_nested_lambda_definition():
     with pytest.raises(ValueError):
         do_work(lambda value: get_item().process())
@@ -396,6 +481,10 @@ class TestCase(unittest.TestCase):
 #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #                                             ^^^^^^^^^^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 #                                                     ^^^^^^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
+
+    # FN: loads() is imported — skipped from count even though it raises before do_work() is called
+    def test_unittest_lambda_with_imported_raising_function(self):
+        self.assertRaises(ValueError, lambda: do_work(loads("invalid")))
 
     def test_unittest_invalid_raise_method(self):
         self.assertRaisesRandom(ValueError, lambda: do_work(get_item()))
