@@ -39,7 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public final class TestsUtils {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
-  private static final String DEFAULT_SQ_VERSION = "DEV";
+  private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
   public static final ConcurrentOrchestratorExtension dynamicOrchestrator = makeDynamicOrchestrator();
 
