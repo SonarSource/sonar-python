@@ -40,7 +40,10 @@ def typeshed_stdlib():
     with mock.patch('serializer.serializers.CURRENT_PATH', CURRENT_PATH):
         serializers.STDLIB_PATH = "resources/mock_stdlib"
         serializers.CURRENT_PATH = CURRENT_PATH
-        build_result, _ = serializers.walk_typeshed_stdlib()
+        opt = get_options()
+        # Accept both the mock library modules (such as abc) and real dependencies.
+        opt.abs_custom_typeshed_dir = os.path.dirname(CURRENT_PATH)
+        build_result, _ = serializers.walk_typeshed_stdlib(opt)
     return build_result
 
 

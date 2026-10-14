@@ -32,6 +32,7 @@ STDLIB_PATH = "../resources/typeshed/stdlib"
 STUBS_PATH = "../resources/typeshed/stubs"
 SKLEARN_STUBS_PATH = "../resources/python-type-stubs/stubs"
 CURRENT_PATH = os.path.dirname(__file__)
+TYPESHED_PATH = os.path.abspath(os.path.join(CURRENT_PATH, "../resources/typeshed"))
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
 CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
@@ -47,6 +48,10 @@ def get_options(python_version=DEFAULT_PYTHON_VERSION):
     opt.incremental = False
     opt.python_version = python_version
     opt.platform = "linux"
+    # Use the checked-out stubs for imported dependencies as well as explicit sources.
+    # The direct build API also needs the normalized path for library-shadow checks.
+    opt.custom_typeshed_dir = TYPESHED_PATH
+    opt.abs_custom_typeshed_dir = TYPESHED_PATH
     return opt
 
 
@@ -101,7 +106,8 @@ def get_sources(relative_path: str, file_filter = do_nothing_file_filter):
             if not file_filter(root, file, file_path, fq_module_name):
                 continue
 
-            source = build.BuildSource(file_path, module=fq_module_name)
+            # Make sibling modules discoverable before mypy builds the import graph.
+            source = build.BuildSource(file_path, module=fq_module_name, base_dir=os.path.abspath(path))
             source_list.append(source)
             source_paths.add(source.path)
     return source_list, source_paths
