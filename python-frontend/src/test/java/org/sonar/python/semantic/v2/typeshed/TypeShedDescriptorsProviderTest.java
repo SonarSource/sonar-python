@@ -18,6 +18,8 @@ package org.sonar.python.semantic.v2.typeshed;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -137,6 +139,30 @@ class TypeShedDescriptorsProviderTest {
 
     var imaplibSymbols = provider.descriptorsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
+  }
+
+  @Test
+  void publicStdlibClasses() {
+    var publicClasses = Map.of(
+      "io", "io.BytesIO",
+      "email.policy", "email.policy.Policy",
+      "ssl", "ssl.SSLContext",
+      "hashlib", "hashlib._Hash",
+      "ctypes", "ctypes.BigEndianStructure",
+      "asyncio", "asyncio.tasks.Task",
+      "contextvars", "contextvars.Context",
+      "queue", "queue.SimpleQueue",
+      "sqlite3", "sqlite3.dbapi2.Connection",
+      "struct", "struct.Struct");
+    for (var versions : List.of(Set.of(PythonVersionUtils.Version.V_310), PythonVersionUtils.allVersions())) {
+      var provider = new TypeShedDescriptorsProvider(Set.of(), versions);
+      publicClasses.forEach((moduleName, classFqn) -> {
+        String className = classFqn.substring(classFqn.lastIndexOf('.') + 1);
+        var descriptor = provider.descriptorsForModule(moduleName).get(className);
+        assertThat(descriptor).as(classFqn).isInstanceOf(ClassDescriptor.class);
+        assertThat(descriptor.fullyQualifiedName()).isEqualTo(classFqn);
+      });
+    }
   }
 
   @Test

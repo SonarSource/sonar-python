@@ -16,11 +16,44 @@
 #
 
 from itertools import permutations
+from pathlib import Path
 
 from mypy import build
 
-from serializer.serializers import get_options, get_sources
+from serializer.serializers import TYPESHED_PATH, get_options, get_sources
 from serializer.symbols import ModuleSymbol
+
+
+def test_stdlib_dependencies_use_pinned_typeshed():
+    # These public APIs are defined in the pin itself. Newer bundled Typeshed
+    # moves their definitions into internal modules absent from this checkout.
+    classes_by_module = {
+        "io": "BytesIO",
+        "email.policy": "Policy",
+        "ssl": "SSLContext",
+        "hashlib": "_Hash",
+        "ctypes": "BigEndianStructure",
+        "asyncio": "Task",
+        "contextvars": "Context",
+        "queue": "SimpleQueue",
+        "sqlite3": "Connection",
+        "struct": "Struct",
+    }
+    probe = build.BuildSource(
+        None, "stdlib_probe", "\n".join(f"import {module}" for module in classes_by_module)
+    )
+    result = build.build([probe], get_options())
+    stdlib = Path(TYPESHED_PATH) / "stdlib"
+    for module, class_name in classes_by_module.items():
+        source = result.files[module]
+        assert Path(source.path).is_relative_to(stdlib), (module, source.path)
+        serialized = ModuleSymbol(source).to_proto()
+        assert class_name in {cls.name for cls in serialized.classes}
+    # Imported stdlib dependencies must follow the same pin, including builtins
+    # and helper modules such as _typeshed and typing_extensions.
+    for module, source in result.files.items():
+        if module != "stdlib_probe":
+            assert Path(source.path).is_relative_to(stdlib), (module, source.path)
 
 
 def test_circular_imports_preserve_types_in_every_source_order(tmp_path):

@@ -20,6 +20,7 @@ import com.google.protobuf.TextFormat;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -140,6 +141,30 @@ class TypeShedTest {
     Map<String, Symbol> imaplibSymbols = symbolsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
     assertThat(imaplibSymbols.values()).allMatch(s -> s.usages().isEmpty());
+  }
+
+  @Test
+  void public_stdlib_classes() {
+    var publicClasses = Map.of(
+      "io", "io.BytesIO",
+      "email.policy", "email.policy.Policy",
+      "ssl", "ssl.SSLContext",
+      "hashlib", "hashlib._Hash",
+      "ctypes", "ctypes.BigEndianStructure",
+      "asyncio", "asyncio.tasks.Task",
+      "contextvars", "contextvars.Context",
+      "queue", "queue.SimpleQueue",
+      "sqlite3", "sqlite3.dbapi2.Connection",
+      "struct", "struct.Struct");
+    for (var versions : List.of(Set.of(PythonVersionUtils.Version.V_310), PythonVersionUtils.allVersions())) {
+      setPythonVersions(versions);
+      publicClasses.forEach((moduleName, classFqn) -> {
+        String className = classFqn.substring(classFqn.lastIndexOf('.') + 1);
+        Symbol symbol = symbolsForModule(moduleName).get(className);
+        assertThat(symbol).as(classFqn).isInstanceOf(ClassSymbol.class);
+        assertThat(symbol.fullyQualifiedName()).isEqualTo(classFqn);
+      });
+    }
   }
 
   @Test
