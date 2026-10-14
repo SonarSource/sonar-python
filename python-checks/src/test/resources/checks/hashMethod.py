@@ -42,3 +42,9 @@ def dictionary_keys():
 
 def some_func():
     return "foo"
+
+
+def comprehension_keys(items):
+    result = {[]: item for item in items}  # FN: this rule only checks dictionary and set displays
+    # Nested dictionary displays are still checked.
+    result = {item: {[]: item} for item in items}  # Noncompliant

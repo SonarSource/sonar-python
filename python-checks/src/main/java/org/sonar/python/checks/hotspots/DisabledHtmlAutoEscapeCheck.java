@@ -61,7 +61,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
   }
 
   private void checkKeyValuePair(SubscriptionContext ctx, KeyValuePair keyValue) {
-    if (!"settings.py".equals(ctx.pythonFile().fileName())) {
+    if (!keyValue.parent().is(Kind.DICTIONARY_LITERAL) || !"settings.py".equals(ctx.pythonFile().fileName())) {
       return;
     }
     if (isStringLiteral(keyValue.key(), AUTO_ESCAPE) && Expressions.isFalsy(keyValue.value())) {

@@ -17,24 +17,52 @@
 package org.sonar.plugins.python.api.tree;
 
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
 /**
  * Dictionary Comprehension
  * <pre>
- *  { {@link #keyExpression()} : {@link #valueExpression()} {@link #comprehensionFor()} }
+ *  { {@link #resultElement()} {@link #comprehensionFor()} }
  * </pre>
  *
- * Example: <pre> { key:value for i in list } </pre>
+ * Examples: <pre> { key:value for i in items }
+ * { **mapping for mapping in mappings } </pre>
  *
  * See https://docs.python.org/3/reference/expressions.html#grammar-token-dict-comprehension
  */
 public interface DictCompExpression extends Expression {
 
+  /**
+   * The non-null comprehension head: either a {@link KeyValuePair}, or an
+   * {@link UnpackingExpression} whose star token is {@code **}.
+   * The element's parent is this comprehension. For a key/value head, the key,
+   * colon and value are children of the {@code KeyValuePair}.
+   */
+  DictionaryLiteralElement resultElement();
+
+  /**
+   * Returns null for a mapping-unpacking comprehension.
+   * @deprecated Use {@link #resultElement()} and {@link KeyValuePair#key()}.
+   */
+  @Deprecated(since = "5.33")
+  @CheckForNull
   Expression keyExpression();
 
+  /**
+   * Returns null for a mapping-unpacking comprehension.
+   * @deprecated Use {@link #resultElement()} and {@link KeyValuePair#colon()}.
+   */
+  @Deprecated(since = "5.33")
+  @CheckForNull
   Token colonToken();
 
+  /**
+   * Returns null for a mapping-unpacking comprehension.
+   * @deprecated Use {@link #resultElement()} and {@link KeyValuePair#value()}.
+   */
+  @Deprecated(since = "5.33")
+  @CheckForNull
   Expression valueExpression();
 
   ComprehensionFor comprehensionFor();

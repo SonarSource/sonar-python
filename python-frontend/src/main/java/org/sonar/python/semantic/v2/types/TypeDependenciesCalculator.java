@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
@@ -66,7 +67,9 @@ public class TypeDependenciesCalculator {
     } else if (expression instanceof ComprehensionExpression e) {
       return List.of(e.resultExpression());
     } else if (expression instanceof DictCompExpression e) {
-      return List.of(e.keyExpression(), e.valueExpression());
+      return e.resultElement() instanceof KeyValuePair pair
+        ? List.of(pair.key(), pair.value())
+        : List.of((UnpackingExpression) e.resultElement());
     } else if (expression instanceof Tuple e) {
       return new ArrayList<>(e.elements());
     } else if (expression instanceof YieldExpression e) {

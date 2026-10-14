@@ -82,6 +82,7 @@ public class PythonGrammarBuilder {
     b.rule(LAMBDEF_NOCOND).is("lambda", b.optional(VARARGSLIST), ":", TEST_NOCOND);
 
     b.rule(STAR_EXPR).is("*", EXPR);
+    b.rule(GENERATOR_STAR_EXPR).is("*", EXPRESSION);
     b.rule(EXPR).is(XOR_EXPR, b.zeroOrMore("|", XOR_EXPR));
 
     // https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
@@ -117,7 +118,7 @@ public class PythonGrammarBuilder {
       "await")).skipIfOneChild();
 
     b.rule(ATOM).is(b.firstOf(
-      b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
+      b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, b.sequence(GENERATOR_STAR_EXPR, COMP_FOR), TESTLIST_COMP)), ")"),
       b.sequence("[", b.optional(TESTLIST_COMP), "]"),
       b.sequence("{", b.optional(DICTORSETMAKER), "}"),
       b.sequence("`", EXPRESSION, b.zeroOrMore(",", EXPRESSION), "`"),
@@ -140,6 +141,7 @@ public class PythonGrammarBuilder {
     b.rule(EXPRLIST).is(b.firstOf(EXPR, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPR, STAR_EXPR)), b.optional(","));
     b.rule(EXPRESSIONS).is(EXPRESSION, b.zeroOrMore(",", EXPRESSION), b.optional(","));
     b.rule(DICTORSETMAKER).is(b.firstOf(
+      b.sequence("**", EXPRESSION, COMP_FOR),
       b.sequence(
         b.firstOf(b.sequence(EXPRESSION, ":", EXPRESSION), b.sequence("**", EXPR)),
         b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(EXPRESSION, ":", EXPRESSION), b.sequence("**", EXPR))), b.optional(",")))),
@@ -147,6 +149,7 @@ public class PythonGrammarBuilder {
 
     b.rule(ARGLIST).is(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","));
     b.rule(ARGUMENT).is(b.firstOf(
+      b.sequence(GENERATOR_STAR_EXPR, COMP_FOR),
       b.sequence("*", EXPRESSION),
       b.sequence("**", EXPRESSION),
       b.sequence(EXPRESSION, PythonPunctuator.WALRUS_OPERATOR, EXPRESSION),

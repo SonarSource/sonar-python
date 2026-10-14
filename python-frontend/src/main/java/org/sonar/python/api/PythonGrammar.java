@@ -50,6 +50,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   EXPRLIST,
   EXPR,
   STAR_EXPR,
+  GENERATOR_STAR_EXPR,
 
   TESTLIST_STAR_EXPR,
 

@@ -380,8 +380,10 @@ class BaseTreeVisitorTest extends RuleTest {
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
 
-    verify(visitor).visitBinaryExpression((BinaryExpression) expr.keyExpression());
-    verify(visitor).visitBinaryExpression((BinaryExpression) expr.valueExpression());
+    KeyValuePair pair = (KeyValuePair) expr.resultElement();
+    verify(visitor).visitKeyValuePair(pair);
+    verify(visitor).visitBinaryExpression((BinaryExpression) pair.key());
+    verify(visitor).visitBinaryExpression((BinaryExpression) pair.value());
     verify(visitor).visitComprehensionFor(expr.comprehensionFor());
   }
 

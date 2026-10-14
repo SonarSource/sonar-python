@@ -39,3 +39,7 @@ def async_case():
 
     iterable_pairs = aiter(async_pair_generator())
     dict_comp = {k: v async for k, v in iterable_pairs}
+
+def mapping_unpacking(mappings):
+    result = {**mapping for mapping in mappings}  # Compliant: dict(mappings) would have different semantics
+    result = {**mapping async for mapping in mappings}

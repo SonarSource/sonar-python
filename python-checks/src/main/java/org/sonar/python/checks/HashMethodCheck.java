@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolImpl;
 
+import static org.sonar.plugins.python.api.tree.Tree.Kind.DICTIONARY_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.KEY_VALUE_PAIR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SET_LITERAL;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
@@ -37,7 +38,13 @@ public class HashMethodCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(SET_LITERAL, ctx -> ((SetLiteral) ctx.syntaxNode()).elements().forEach(elem -> checkHashMethod(elem, ctx)));
-    context.registerSyntaxNodeConsumer(KEY_VALUE_PAIR, ctx -> checkHashMethod(((KeyValuePair) ctx.syntaxNode()).key(), ctx));
+    context.registerSyntaxNodeConsumer(KEY_VALUE_PAIR, ctx -> {
+      KeyValuePair pair = (KeyValuePair) ctx.syntaxNode();
+      // Keep this rule restricted to dictionary displays when comprehension heads are also key/value pairs.
+      if (pair.parent().is(DICTIONARY_LITERAL)) {
+        checkHashMethod(pair.key(), ctx);
+      }
+    });
   }
 
   /**

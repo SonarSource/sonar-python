@@ -23,6 +23,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -47,22 +48,23 @@ public class ConstantValueDictComprehensionCheck extends PythonSubscriptionCheck
   }
 
   private static boolean isConstantValueDictComprehension(DictCompExpression dictComprehension) {
-    if (!(dictComprehension.keyExpression() instanceof Name)
+    if (!(dictComprehension.resultElement() instanceof KeyValuePair pair)
+        || !(pair.key() instanceof Name)
         || dictComprehension.comprehensionFor().nestedClause() != null) {
       return false;
     }
 
-    if (dictComprehension.valueExpression() instanceof Name valueName) {
+    if (pair.value() instanceof Name valueName) {
       var valueSymbol = valueName.symbolV2();
       return valueSymbol == null || !valueSymbol
         .usages()
         .stream()
         .map(UsageV2::tree)
         .allMatch(ut -> TreeUtils.firstAncestor(ut, dictComprehension::equals) != null);
-    } else if (dictComprehension.valueExpression() instanceof StringLiteral stringLiteral) {
+    } else if (pair.value() instanceof StringLiteral stringLiteral) {
       return stringLiteral.stringElements().stream().map(StringElement::formattedExpressions).allMatch(List::isEmpty);
     } else {
-      return dictComprehension.valueExpression().is(Tree.Kind.NONE, Tree.Kind.NUMERIC_LITERAL, Tree.Kind.BOOLEAN_LITERAL_PATTERN);
+      return pair.value().is(Tree.Kind.NONE, Tree.Kind.NUMERIC_LITERAL, Tree.Kind.BOOLEAN_LITERAL_PATTERN);
     }
   }
 }

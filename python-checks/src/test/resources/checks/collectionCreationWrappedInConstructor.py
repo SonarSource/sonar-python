@@ -28,6 +28,12 @@ def test_tuple():
     t8 = tuple({x:x for x in [1,2]}) # Noncompliant {{Replace this dict comprehension by a generator.}}
     #          ^^^^^^^^^^^^^^^^^^^^
 
+    mappings = [{"a": 1}, {"a": 2, "b": 3}]
+    merged_keys = tuple({**mapping for mapping in mappings}) # Compliant: merging preserves unique keys
+    filtered_keys = tuple({**mapping for mapping in mappings if mapping}) # Compliant
+    conditional_keys = tuple({**left if flag else right for left, right in pairs}) # Compliant
+    flattened_values = tuple([*chunk for chunk in chunks]) # Noncompliant {{Replace this list comprehension by a generator.}}
+
 def test_list():
     l = list(x * 2 for x in [1,2,3]) # Compliant
 
@@ -85,3 +91,5 @@ def test_dict():
     d6 = dict([(x,x**2) for x in [1,2]]) # Noncompliant {{Replace this dict constructor call by a dict literal.}}
 
     d7 = dict({(x,x**2) for x in [1,2,3,1]}) # Compliant, could make sense to remove duplicates before creating a dict
+
+    d8 = dict({**mapping for mapping in mappings}) # Noncompliant {{Remove the redundant dict constructor call.}}

@@ -28,3 +28,7 @@ TEMPLATES = [
         'OPTIONS': { 'autoescape': foo() }
     }
 ]
+
+# Preserve dictionary-display-only handling when comprehensions also expose key/value pair nodes.
+options = {'autoescape': False for template in templates}
+options = {template: {'autoescape': False} for template in templates}  # Noncompliant

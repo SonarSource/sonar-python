@@ -25,3 +25,7 @@ def case4(columns_to_save):
     some_v = "v"
     some_dict = {"a": "1", "b": "2"}
     one_more = {k: f"{some_v}" for k, v in some_dict} # FN
+
+def mapping_unpacking(mappings):
+    result = {**mapping for mapping in mappings}  # Compliant: no key/value head
+    result = {**mapping async for mapping in mappings}

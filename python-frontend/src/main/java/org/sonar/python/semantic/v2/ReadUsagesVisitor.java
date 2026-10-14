@@ -91,8 +91,7 @@ public class ReadUsagesVisitor extends ScopeVisitor {
   @Override
   public void visitDictCompExpression(DictCompExpression tree) {
     enterScope(tree);
-    scan(tree.keyExpression());
-    scan(tree.valueExpression());
+    scan(tree.resultElement());
     ComprehensionFor comprehensionFor = tree.comprehensionFor();
     scan(comprehensionFor.loopExpression());
     leaveScope();

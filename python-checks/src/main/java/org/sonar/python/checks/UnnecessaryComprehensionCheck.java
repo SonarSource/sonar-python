@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -71,8 +72,11 @@ public class UnnecessaryComprehensionCheck extends PythonSubscriptionCheck {
 
   private static void checkDictComprehensionExpression(SubscriptionContext ctx) {
     var comprehension = (DictCompExpression) ctx.syntaxNode();
-    var keyExpression = comprehension.keyExpression();
-    var valueExpression = comprehension.valueExpression();
+    if (!(comprehension.resultElement() instanceof KeyValuePair pair)) {
+      return;
+    }
+    var keyExpression = pair.key();
+    var valueExpression = pair.value();
     var loopExpressions = Optional.of(comprehension)
       .map(DictCompExpression::comprehensionFor)
       .filter(comprehensionFor -> Objects.isNull(comprehensionFor.nestedClause()) && comprehensionFor.asyncToken() == null)

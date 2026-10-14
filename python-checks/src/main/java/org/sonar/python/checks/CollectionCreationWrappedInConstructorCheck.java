@@ -26,7 +26,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -150,7 +152,8 @@ public class CollectionCreationWrappedInConstructorCheck extends PythonSubscript
       ctx.addIssue(regularArgument, "Replace this list comprehension by a generator.");
     } else if (regularArgument.expression().is(Kind.SET_COMPREHENSION)) {
       ctx.addIssue(regularArgument, "Replace this set comprehension by a generator.");
-    } else if (regularArgument.expression().is(Kind.DICT_COMPREHENSION)) {
+    } else if (regularArgument.expression() instanceof DictCompExpression dictComprehension
+      && dictComprehension.resultElement() instanceof KeyValuePair) {
       ctx.addIssue(regularArgument, "Replace this dict comprehension by a generator.");
     }
   }

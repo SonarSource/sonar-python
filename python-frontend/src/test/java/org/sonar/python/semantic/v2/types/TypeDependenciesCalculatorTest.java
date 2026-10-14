@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -140,7 +141,8 @@ class TypeDependenciesCalculatorTest {
   void dictCompExpression() {
     var expr = (DictCompExpression) lastExpression("{k: v for k, v in items}");
     var dependencies = calculator.getTypeDependencies(expr);
-    assertThat(dependencies).containsExactly(expr.keyExpression(), expr.valueExpression());
+    var pair = (KeyValuePair) expr.resultElement();
+    assertThat(dependencies).containsExactly(pair.key(), pair.value());
   }
 
   @Test

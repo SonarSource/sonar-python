@@ -24,3 +24,5 @@ my_dict = {key_from_another_module: value.upper() for value in data} # Compliant
 my_dict = {f"{value}_str": value.upper() for value in data} # Compliant
 
 my_dict = {f"{key_literal}_str": value.upper() for value in data} # FN : interpolated string is constant
+
+my_dict = {**mapping for mapping in mappings} # Compliant

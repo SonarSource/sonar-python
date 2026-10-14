@@ -21,6 +21,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -34,7 +35,10 @@ public class DictionaryStaticKeyCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.DICT_COMPREHENSION, ctx -> {
       DictCompExpression dictCompExpression = (DictCompExpression) ctx.syntaxNode();
-      Expression keyExpression = dictCompExpression.keyExpression();
+      if (!(dictCompExpression.resultElement() instanceof KeyValuePair pair)) {
+        return;
+      }
+      Expression keyExpression = pair.key();
       if (isLiteralDictKey(keyExpression) || isAssignedFromLiteralDictKey(keyExpression)) {
         ctx.addIssue(keyExpression, "Don't use a static key in a dictionary comprehension.");
       }

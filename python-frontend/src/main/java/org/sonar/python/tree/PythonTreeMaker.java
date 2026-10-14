@@ -98,6 +98,7 @@ import org.sonar.plugins.python.api.tree.TypeAliasStatement;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.TypeParam;
 import org.sonar.plugins.python.api.tree.TypeParams;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
@@ -1255,7 +1256,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.FACTOR, PythonGrammar.NOT_TEST)) {
       return new UnaryExpressionImpl(toPyToken(astNode.getFirstChild().getToken()), expression(astNode.getLastChild()));
     }
-    if (astNode.is(PythonGrammar.STAR_EXPR)) {
+    if (astNode.is(PythonGrammar.STAR_EXPR, PythonGrammar.GENERATOR_STAR_EXPR)) {
       return new UnpackingExpressionImpl(toPyToken(astNode.getToken()), expression(astNode.getLastChild()));
     }
     if (astNode.is(PythonKeyword.NONE)) {
@@ -1328,15 +1329,20 @@ public class PythonTreeMaker {
     }
     AstNode compForNode = dictOrSetMaker.getFirstChild(PythonGrammar.COMP_FOR);
     if (compForNode != null) {
-      ComprehensionFor compFor = compFor(compForNode);
+      AstNode unpackingStar = dictOrSetMaker.getFirstChild(PythonPunctuator.MUL_MUL);
+      if (unpackingStar != null) {
+        UnpackingExpression unpacking = new UnpackingExpressionImpl(toPyToken(unpackingStar.getToken()), expression(unpackingStar.getNextSibling()));
+        return new DictCompExpressionImpl(lCurlyBrace, unpacking, compFor(compForNode), rCurlyBrace);
+      }
       AstNode colon = dictOrSetMaker.getFirstChild(PythonPunctuator.COLON);
       if (colon != null) {
         Expression keyExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.EXPRESSION));
         Expression valueExpression = expression(dictOrSetMaker.getLastChild(PythonGrammar.EXPRESSION));
-        return new DictCompExpressionImpl(lCurlyBrace, keyExpression, toPyToken(colon.getToken()), valueExpression, compFor, rCurlyBrace);
+        KeyValuePairImpl pair = new KeyValuePairImpl(keyExpression, toPyToken(colon.getToken()), valueExpression);
+        return new DictCompExpressionImpl(lCurlyBrace, pair, compFor(compForNode), rCurlyBrace);
       } else {
         Expression resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.STAR_NAMED_EXPRESSION));
-        return new ComprehensionExpressionImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor, rCurlyBrace);
+        return new ComprehensionExpressionImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor(compForNode), rCurlyBrace);
       }
     }
     List<Token> commas = punctuators(dictOrSetMaker, PythonPunctuator.COMMA);
@@ -1369,6 +1375,11 @@ public class PythonTreeMaker {
       return new ParenthesizedExpressionImpl(lPar, expression(yieldNode), rPar);
     }
 
+    AstNode generatorHead = atom.getFirstChild(PythonGrammar.GENERATOR_STAR_EXPR);
+    if (generatorHead != null) {
+      return new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, lPar, expression(generatorHead), compFor(atom.getFirstChild(PythonGrammar.COMP_FOR)), rPar);
+    }
+
     AstNode testListComp = atom.getFirstChild(PythonGrammar.TESTLIST_COMP);
     if (testListComp == null) {
       return new TupleImpl(lPar, Collections.emptyList(), Collections.emptyList(), rPar);
@@ -1376,7 +1387,8 @@ public class PythonTreeMaker {
 
     AstNode compFor = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
     if (compFor != null) {
-      return new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, lPar, expression(testListComp.getFirstChild()), compFor(compFor), rPar);
+      Expression resultExpression = expression(testListComp.getFirstChild());
+      return new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, lPar, resultExpression, compFor(compFor), rPar);
     }
     ExpressionList expressionList = expressionList(testListComp);
     List<AstNode> commas = testListComp.getChildren(PythonPunctuator.COMMA);

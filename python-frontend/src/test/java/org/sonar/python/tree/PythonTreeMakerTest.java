@@ -2618,11 +2618,12 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.firstToken().value()).isEqualTo("{");
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.DICT_COMPREHENSION);
-    assertThat(comprehension.colonToken().value()).isEqualTo(":");
-    assertThat(comprehension.keyExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
-    assertThat(comprehension.valueExpression().getKind()).isEqualTo(Tree.Kind.PLUS);
+    KeyValuePair pair = (KeyValuePair) comprehension.resultElement();
+    assertThat(pair.colon().value()).isEqualTo(":");
+    assertThat(pair.key().getKind()).isEqualTo(Tree.Kind.MINUS);
+    assertThat(pair.value().getKind()).isEqualTo(Tree.Kind.PLUS);
     assertThat(comprehension.comprehensionFor().loopExpression().getKind()).isEqualTo(Tree.Kind.TUPLE);
-    assertThat(comprehension.children()).hasSize(6);
+    assertThat(comprehension.children()).containsExactly(comprehension.firstToken(), pair, comprehension.comprehensionFor(), comprehension.lastToken());
     assertThat(comprehension.firstToken().value()).isEqualTo("{");
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
   }

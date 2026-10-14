@@ -18,16 +18,18 @@ package org.sonar.python.tree;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -35,9 +37,7 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 public class DictCompExpressionImpl extends PyTree implements DictCompExpression {
 
   private final Token openingBrace;
-  private final Expression keyExpression;
-  private final Token colon;
-  private final Expression valueExpression;
+  private final DictionaryLiteralElement resultElement;
   private final ComprehensionFor comprehensionFor;
   private final Token closingBrace;
   private Set<Symbol> symbols = new HashSet<>();
@@ -45,27 +45,48 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
                                 ComprehensionFor compFor, Token closingBrace) {
+    this(openingBrace, new KeyValuePairImpl(keyExpression, colon, valueExpression), compFor, closingBrace);
+  }
+
+  public DictCompExpressionImpl(Token openingBrace, UnpackingExpression unpackingExpression, ComprehensionFor compFor, Token closingBrace) {
+    this(openingBrace, (DictionaryLiteralElement) unpackingExpression, compFor, closingBrace);
+  }
+
+  public DictCompExpressionImpl(Token openingBrace, DictionaryLiteralElement resultElement, ComprehensionFor compFor, Token closingBrace) {
     this.openingBrace = openingBrace;
-    this.keyExpression = keyExpression;
-    this.colon = colon;
-    this.valueExpression = valueExpression;
+    if (!(resultElement instanceof KeyValuePair)
+      && !(resultElement instanceof UnpackingExpression unpacking && "**".equals(unpacking.starToken().value()))) {
+      throw new IllegalArgumentException("A dictionary comprehension head must be a key/value pair or a mapping unpacking expression");
+    }
+    this.resultElement = resultElement;
     this.comprehensionFor = compFor;
     this.closingBrace = closingBrace;
   }
 
   @Override
+  public DictionaryLiteralElement resultElement() {
+    return resultElement;
+  }
+
+  @Override
+  @Deprecated(since = "5.33")
+  @CheckForNull
   public Expression keyExpression() {
-    return keyExpression;
+    return resultElement instanceof KeyValuePair pair ? pair.key() : null;
   }
 
   @Override
+  @Deprecated(since = "5.33")
+  @CheckForNull
   public Token colonToken() {
-    return colon;
+    return resultElement instanceof KeyValuePair pair ? pair.colon() : null;
   }
 
   @Override
+  @Deprecated(since = "5.33")
+  @CheckForNull
   public Expression valueExpression() {
-    return valueExpression;
+    return resultElement instanceof KeyValuePair pair ? pair.value() : null;
   }
 
   @Override
@@ -85,7 +106,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(openingBrace, keyExpression, colon, valueExpression, comprehensionFor, closingBrace).filter(Objects::nonNull).toList();
+    return List.of(openingBrace, resultElement, comprehensionFor, closingBrace);
   }
 
   @Override
