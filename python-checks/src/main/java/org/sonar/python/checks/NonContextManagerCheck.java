@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -26,6 +27,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
@@ -38,9 +40,6 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Change this expression to a context manager (implementing \"__enter__\" and \"__exit__\").";
   private static final String ASYNC_MESSAGE = "Change this expression to an asynchronous context manager (implementing \"__aenter__\" and \"__aexit__\").";
 
-  // Matched by simple name so back-ported copies are covered too.
-  private static final String CONTEXT_MANAGER_DECORATOR = "contextmanager";
-  private static final String ASYNC_CONTEXT_MANAGER_DECORATOR = "asynccontextmanager";
   private static final TypeMatcher SYNC_PROTOCOL = TypeMatchers.all(TypeMatchers.hasMember("__enter__"), TypeMatchers.hasMember("__exit__"));
   private static final TypeMatcher ASYNC_PROTOCOL = TypeMatchers.all(TypeMatchers.hasMember("__aenter__"), TypeMatchers.hasMember("__aexit__"));
   private static final TypeMatcher IS_CONTEXT_MANAGER = TypeMatchers.any(SYNC_PROTOCOL, InternalTypeMatchers.isAnyTypeInUnionSatisfying(SYNC_PROTOCOL));
@@ -50,6 +49,10 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
           TypeMatchers.isObjectInstanceOf("typing.Coroutine"),
           TypeMatchers.isObjectInstanceOf("typing.AsyncGenerator"),
           TypeMatchers.isObjectInstanceOf("typing.AsyncIterator"));
+
+  // Builtin decorators that keep the wrapped function's return type and therefore cannot turn a generator into a context manager.
+  private static final Set<String> SIGNATURE_PRESERVING_DECORATORS = Set.of(
+    "staticmethod", "classmethod", "abstractmethod", "property", "overload", "cache", "final", "override");
 
   @Override
   public void initialize(Context context) {
@@ -68,11 +71,11 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
 
     if (isAsync) {
       if (isDefinitelyNot(IS_ASYNC_CONTEXT_MANAGER, contextManager, ctx)
-        && !isUnmodeledContextManager(contextManager, ASYNC_CONTEXT_MANAGER_DECORATOR, IS_ASYNC_GENERATOR, ctx)) {
+        && !isUnmodeledContextManager(contextManager, true, ctx)) {
         ctx.addIssue(contextManager, ASYNC_MESSAGE);
       }
     } else if (isDefinitelyNot(IS_CONTEXT_MANAGER, contextManager, ctx)
-      && !isUnmodeledContextManager(contextManager, CONTEXT_MANAGER_DECORATOR, IS_GENERATOR, ctx)
+      && !isUnmodeledContextManager(contextManager, false, ctx)
       && !isReportedByAsyncWithCheck(item, contextManager, ctx)) {
       ctx.addIssue(contextManager, MESSAGE);
     }
@@ -82,18 +85,20 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
     return matcher.evaluateFor(expression, ctx) == TriBool.FALSE;
   }
 
-  // @contextmanager is not modeled by inference: detect it via the decorator on direct calls, else trust the generator type.
-  private static boolean isUnmodeledContextManager(Expression expression, String decoratorName, TypeMatcher generatorMatcher, SubscriptionContext ctx) {
+  // @contextmanager is not modeled by inference. On a direct call we trust any unrecognized decorator; on a stored value we lose the decorator and fall back to the generator type.
+  private static boolean isUnmodeledContextManager(Expression expression, boolean isAsync, SubscriptionContext ctx) {
     if (expression instanceof CallExpression call && call.callee().typeV2() instanceof FunctionType functionType) {
-      return isDecoratedWith(functionType, decoratorName);
+      return hasUnknownDecorator(functionType);
     }
+    TypeMatcher generatorMatcher = isAsync ? IS_ASYNC_GENERATOR : IS_GENERATOR;
     return generatorMatcher.evaluateFor(expression, ctx) == TriBool.TRUE;
   }
 
-  private static boolean isDecoratedWith(FunctionType functionType, String decoratorName) {
+  private static boolean hasUnknownDecorator(FunctionType functionType) {
     return functionType.decorators().stream()
       .map(TypeWrapper::type)
-      .anyMatch(type -> type instanceof FunctionType decorator && decoratorName.equals(decorator.name()));
+      .map(PythonType::name)
+      .anyMatch(name -> !SIGNATURE_PRESERVING_DECORATORS.contains(name));
   }
 
   // An async context manager used with a plain "with" inside an async function is reported by S7515, so skip it here.

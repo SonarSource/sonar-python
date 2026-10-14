@@ -351,3 +351,81 @@ class DatabaseHelper:
     async def run_async(self):
         async with self.async_session_scope() as session:  # Compliant
             print(session)
+
+
+# ----- Functions decorated with an unrecognized decorator are trusted on direct calls -----
+# A decorator we cannot recognize as signature-preserving (e.g. @contextmanager, @asynccontextmanager, OpenTelemetry's
+# "@_agnosticcontextmanager", or any custom wrapper) may turn the function into a (possibly async) context manager. Because the
+# decorator can change the return type and even the sync/async-ness, we cannot infer anything from the wrapped function and do
+# not report it. Signature-preserving decorators (@staticmethod, @classmethod, ...) and undecorated functions (see
+# "annotated_gen" above) are still reported.
+def agnosticcontextmanager(func):
+    def helper(*args, **kwargs):
+        ...
+    return helper
+
+
+def agnosticasynccontextmanager(func):
+    def helper(*args, **kwargs):
+        ...
+    return helper
+
+
+def retry(func):
+    return func
+
+
+@agnosticcontextmanager
+def custom_cm() -> Generator[int, None, None]:
+    yield 1
+
+
+@some_unknown_module.traced  # decorator resolved from an unresolved import
+def imported_decorated_cm() -> Iterator[int]:
+    yield 1
+
+
+@agnosticcontextmanager
+def not_a_generator() -> int:  # unknown decorator; the "-> int" return is irrelevant, it may still produce a context manager
+    return 1
+
+
+@retry
+async def fetch() -> int:  # unknown decorator can map an async function to a (sync) context manager
+    return 1
+
+
+class TracingHelper:
+    @agnosticcontextmanager
+    def start_span(self, module, name) -> Iterator[int]:
+        yield 1
+
+    @agnosticasynccontextmanager
+    async def start_span_async(self, module, name) -> AsyncGenerator[int, None]:
+        yield 1
+
+    @staticmethod
+    def static_gen() -> Iterator[int]:  # signature-preserving decorator: still a raw generator
+        yield 1
+
+
+def custom_decorator_factories():
+    with custom_cm() as value:  # Compliant: custom decorator wrapping @contextmanager
+        print(value)
+    with imported_decorated_cm():  # Compliant: decorator from an unresolved import
+        pass
+    with not_a_generator():  # Compliant: unknown decorator may produce a context manager regardless of the return type
+        pass
+    helper = TracingHelper()
+    with helper.start_span("mod", "name"):  # Compliant: custom decorator on a method accessed via a variable
+        pass
+    with TracingHelper.static_gen():  # Noncompliant
+        pass
+
+
+async def custom_decorator_async_factories():
+    helper = TracingHelper()
+    async with helper.start_span_async("mod", "name"):  # Compliant: custom async decorator on a method
+        pass
+    async with fetch():  # Compliant: unknown decorator may turn the async function into a context manager
+        pass
