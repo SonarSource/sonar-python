@@ -1,11 +1,14 @@
 
-signalÙ
+signalò
 Signals"enum.IntEnumHr
 SIGABRT0r
 
+SIGEMT0r
+
 SIGFPE0r
 
-SIGILL0r
+SIGILL0r
+SIGINFO0r
 
 SIGINT0r
 SIGSEGV0r
@@ -96,13 +99,17 @@
 
 sigpending
 sigwait*
-sigset(
-sigtimedwait*(*(
-sigwaitinfo*(
+sigset(-
+sigtimedwait*
+sigset(*
+timeout(
+sigwaitinfo*
+sigset(
 	strsignal*(
 valid_signals
-raise_signal*(2
-set_wakeup_fd*(*
+raise_signal*(8
+set_wakeup_fd*
+fd(*
 warn_on_full_buffer ()
 pidfd_send_signal*(*(* (* (*
 __annotations__0*
@@ -111,9 +118,12 @@ sigpending
 SIG_IGN0*
 SIGABRT0*
 
+SIGEMT0*
+
 SIGFPE0*
 
-SIGILL0*
+SIGILL0*
+SIGINFO0*
 
 SIGINT0*
 SIGSEGV0*

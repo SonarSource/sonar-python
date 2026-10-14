@@ -1,138 +1,155 @@
 
-+sklearn.inspection._plot.partial_dependenceÚ
++sklearn.inspection._plot.partial_dependenceæ
 chainitertools.chain"typing.Iterator*)
-__new__*	
-cls(*
-	iterables(h*
-__next__*
+__init__*
 
-self(*
-__iter__*(*3
-from_iterable*(*(	0:builtins.classmethodp*
+self(*
+	iterables(*
+__next__*
+
+self(*
+__iter__*(*:
+from_iterable*	
+cls(*(	0:builtins.classmethodp*&
 __class_getitem__
-*(*(p8Pf
+*	
+cls(*(pPÛ
+GridSpecFromSubplotSpec+matplotlib.gridspec.GridSpecFromSubplotSpec" matplotlib.gridspec.GridSpecBase*“
+__init__*
+
+self(*
+nrows(*
+ncols(*
+subplot_spec(*
+wspace (*
+hspace (*
+height_ratios (*
+width_ratios (*2
+get_subplot_params*
+
+self(*
+figure (*'
+get_topmost_subplotspec*
+
+self(f
 Parallelsklearn.utils.parallel.Parallel"builtins.object*(
-__call__*
+__call__*
 
-self(*
-iterable(¥
+self(*
+iterable("¥
 PartialDependenceDisplay"builtins.object*Ð
-__init__*
+__init__*
 
-self(*
+self(#*
 
-pd_results(*
-features(*
-feature_names(*
+pd_results('*
+features(+*
+feature_names(-*
 
-target_idx(-*
-deciles(.*
-pdp_lim (0*
-kind (4*
-	subsample (6*
-random_state (8*
-is_categorical (C*Ò
-from_estimator*	
-cls(D*
-	estimator(E*
-X(H*
-features(P*
-categorical_features (Q*
-feature_names (C*
-target (R*
-response_method (S*
-n_cols (-*
-grid_resolution (-*
-percentiles (T*
-method (*
-n_jobs (R*
-verbose (-*
-line_kw (U*
-ice_lines_kw (U*
+target_idx(;*
+deciles(<*
+pdp_lim (>*
+kind (B*
+	subsample (C*
+random_state (E*
+is_categorical (G*Ò
+from_estimator#*	
+cls(H*
+	estimator(I*
+X(L*
+features(T*
+categorical_features (U*
+feature_names (G*
+target (V*
+response_method (W*
+n_cols (;*
+grid_resolution (;*
+percentiles (X*
+method (,*
+n_jobs (V*
+verbose (;*
+line_kw (Y*
+ice_lines_kw (Y*
 
-pd_line_kw (U*
+pd_line_kw (Y*
 
-contour_kw (U*
+contour_kw (Y*
 
-ax (W*
-kind (S*
-centered (X*
-	subsample (6*
-random_state (80:builtins.classmethodp*Æ
-plot*
+ax (\*
+kind (W*
+centered (]*
+	subsample (C*
+random_state (E0:builtins.classmethodp*Æ
+plot#*
 
-self(*
+self(#*
 
-ax (W*
-n_cols (-*
-line_kw (U*
-ice_lines_kw (U*
+ax (\*
+n_cols (;*
+line_kw (Y*
+ice_lines_kw (Y*
 
-pd_line_kw (U*
+pd_line_kw (Y*
 
-contour_kw (U*
-bar_kw (U*
+contour_kw (Y*
+bar_kw (Y*
 
-heatmap_kw (U*
-pdp_lim (U*
-centered (Xr
-figure_0r
-	heatmaps_0r	
-bars_0r
-	contours_0r
-deciles_hlines_0r
-deciles_vlines_0r
+heatmap_kw (Y*
+pdp_lim (Y*
+centered (]r
+figure_0r
+	heatmaps_0r	
+bars_0r
+	contours_0r
+deciles_hlines_0r
+deciles_vlines_0r
 
-lines_0r	
-axes_0r
-bounding_ax_0Y<
-is_regressorsklearn.base.is_regressorX*
-	estimator(EÁ
+lines_0r	
+axes_0r
+bounding_ax_0^<
+is_regressorsklearn.base.is_regressor]*
+	estimator(IÁ
 check_array$sklearn.utils.validation.check_array*
 array(*
-accept_sparse ([*
-accept_large_sparse (X*
-dtype (^*
-order (_*
-copy (X*
-force_all_finite (`*
-	ensure_2d (X*
-allow_nd (X*
-ensure_min_samples (-*
-ensure_min_features (-*
-	estimator (a*
+accept_sparse (`*
+accept_large_sparse (]*
+dtype (c*
+order (d*
+copy (]*
+force_all_finite (e*
+	ensure_2d (]*
+allow_nd (]*
+ensure_min_samples (;*
+ensure_min_features (;*
+	estimator (f*
 
-input_name (W
-check_matplotlib_support&sklearn.utils.check_matplotlib_support*
-caller_name(O
-check_random_state+sklearn.utils.validation.check_random_state7*
+input_name (,W
+check_matplotlib_support&sklearn.utils.check_matplotlib_support*
+caller_name(,O
+check_random_state+sklearn.utils.validation.check_random_stateD*
 
-seed(b;
-delayedsklearn.utils.parallel.delayede*
-function(d•
-partial_dependence9sklearn.inspection._partial_dependence.partial_dependence*
-	estimator(E*
-X(H*
-features(i*
-categorical_features (Q*
-feature_names (C*
-response_method (S*
-percentiles (T*
-grid_resolution (-*
-method (S*
-kind (S"m
+seed(g;
+delayedsklearn.utils.parallel.delayedj*
+function(i•
+partial_dependence9sklearn.inspection._partial_dependence.partial_dependence$*
+	estimator(I*
+X(L*
+features(n*
+categorical_features (U*
+feature_names (G*
+response_method (W*
+percentiles (X*
+grid_resolution (;*
+method (W*
+kind (W"m
 ceil	math.ceil,
-ceil	math.ceil*(j0:typing.overloadX,
-ceil	math.ceil*(n0:typing.overloadX*
-__annotations__0o*
-npnumpy *
-Axes0*
-
-Figure0*
-GridSpecFromSubplotSpec0*
+ceil	math.ceil*(o0:typing.overloadX,
+ceil	math.ceil*(s0:typing.overloadX*
+__annotations__0t*
+npnumpy *
 
 sparse0*
 
-mquantiles02"builtins.object2"builtins.object22"itertools.chain22.
-itertools.chain.Self"itertools.chain(22"type22"typing.Iterable222"type22"typing.Iterable22"types.GenericAlias2"type22"builtins.tuple22"numpy.dtype22"numpy.ndarray22!"sklearn.utils.parallel.Parallel2"typing.Iterable22"typing.Iterator22222F"Dsklearn.inspection._plot.partial_dependence.PartialDependenceDisplay2"sklearn.utils._bunch.Bunch2"builtins.list22"typing.Sequence2222"builtins.int2"typing.Sequence2222"typing.Sequence2222"builtins.str2"typing.Sequence22 "numpy._typing._nbit_base._8Bit2"numpy.signedinteger2 2"
-numpy.int82!2!"numpy._typing._nbit_base._16Bit2"numpy.signedinteger2#2"numpy.int162$2!"numpy._typing._nbit_base._32Bit2"numpy.signedinteger2&2"numpy.int322'2!"numpy._typing._nbit_base._64Bit2"numpy.signedinteger2)2"numpy.int642*2	2"%(+2"sklearn._typing.Int2,2"builtins.dict22"typing.Mapping222/2	2221112"typing.Sequence222	2311112"builtins.float2252!"numpy.random.mtrand.RandomState227-2#"!numpy._typing._array_like._Buffer2"numpy.dtype22-"(numpy._typing._array_like._SupportsArray2:23".numpy._typing._nested_sequence._NestedSequence2;23".numpy._typing._nested_sequence._NestedSequence222;<=2/"(numpy._typing._array_like._DualArrayLike2>229?2*"#numpy._typing._array_like.ArrayLike2@2 "sklearn._typing.ArrayLike2A22B2"type22"sklearn.base.BaseEstimator2"pandas.core.frame.DataFrame22F2!"sklearn._typing.MatrixLike2G2222I2"builtins.list2J222"typing.Sequence2L22M2"typing.Sequence2N22KO22HB22-2211112"builtins.tuple2522.2"typing.Sequence222V2"builtins.bool222"builtins.list22	2IZX2"builtins.type2"typing.Sequence2\2	2]11\221122X22E22-72"builtins.function22c22d22222"typing.Sequence2g22fhI2"math._SupportsCeil22"typing.SupportsFloat2"typing.SupportsIndex22kl2!"math._SupportsFloatOrIndex2m2"builtins.dict2
+mquantiles022"builtins.object2"builtins.object22"itertools.chain22"typing.Iterable22.
+itertools.chain.Self"itertools.chain(222"type22"typing.Iterable22"types.GenericAlias2"type22-"+matplotlib.gridspec.GridSpecFromSubplotSpec2"builtins.int2!"matplotlib.gridspec.SubplotSpec2"builtins.float2#"!numpy._typing._array_like._Buffer2"numpy.dtype22"numpy.dtype22-"(numpy._typing._array_like._SupportsArray223".numpy._typing._nested_sequence._NestedSequence223".numpy._typing._nested_sequence._NestedSequence2222/"(numpy._typing._array_like._DualArrayLike2222*"#numpy._typing._array_like.ArrayLike22#"matplotlib._typing.ArrayLike22!"matplotlib.figure.SubplotParams2"matplotlib.figure.Figure2"builtins.tuple22"numpy.ndarray22!"sklearn.utils.parallel.Parallel2"typing.Iterable22"typing.Iterator222 !2F"Dsklearn.inspection._plot.partial_dependence.PartialDependenceDisplay2"sklearn.utils._bunch.Bunch2"builtins.list2$2"typing.Sequence2$22%&2"typing.Sequence2222"typing.Sequence2)22(*2"builtins.str2"typing.Sequence2,2 "numpy._typing._nbit_base._8Bit2"numpy.signedinteger2.2"
+numpy.int82/2!"numpy._typing._nbit_base._16Bit2"numpy.signedinteger212"numpy.int16222!"numpy._typing._nbit_base._32Bit2"numpy.signedinteger242"numpy.int32252!"numpy._typing._nbit_base._64Bit2"numpy.signedinteger272"numpy.int64282	203692"sklearn._typing.Int2:2"builtins.dict22"typing.Mapping222=,2	2,22???2"typing.Sequence2@2	2A????222!"numpy.random.mtrand.RandomState22D;2 "sklearn._typing.ArrayLike222F2"type2#2"sklearn.base.BaseEstimator2"pandas.core.frame.DataFrame22J2!"sklearn._typing.MatrixLike2K22,,22,M2"builtins.list2N22,2"typing.Sequence2P22,Q2"typing.Sequence2R22OS22LF22;22????2"builtins.tuple222<2"matplotlib.axes._axes.Axes2"typing.Sequence2Z22[Z2"builtins.bool22Z2"builtins.list2,2	2-M_,]2"builtins.type2"typing.Sequence2a2	2b??a22??22,]22,I22;D2"builtins.function22h22i2222,2"typing.Sequence2l22kmM)2"math._SupportsCeil22"typing.SupportsFloat2!"typing_extensions.SupportsIndex22pq2!"math._SupportsFloatOrIndex2r2"builtins.dict2,

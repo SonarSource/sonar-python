@@ -1,7 +1,7 @@
 
-_socket-
-gaierrorsocket.gaierror"builtins.OSError)
-herrorsocket.herror"builtins.OSError¦
+_socket
+herror"builtins.OSError
+gaierror"builtins.OSErrorÆ
 socket"builtins.object*-
 family*
 
@@ -21,88 +21,128 @@
 family (*
 type (*
 proto (*
-fileno (*
-bind*(*(*
+fileno (*
+bind*
+
+self(*(*
 close*
 
-self(*
-connect*(*(*
+self(*
+connect*
 
-connect_ex*(*(*
+self(*(*
+
+connect_ex*
+
+self(*(*
 detach*
 
 self(*
 fileno*
 
 self(*
-getpeername*
+getpeername*
 
 self(*
-getsockname*
+getsockname*
 
 self(*
-getblocking*
+getblocking*
 
 self(*
 
 gettimeout*
 
-self(*
-listen*(* (*
-recv*(*(* (*
-recvfrom*(*(* (*
-recvmsg*(*(* (* (*$
-recvmsg_into*(*(* (* (*J
-recvfrom_into*
+self(*
+listen*
+
+self(* (*
+recv*
+
+self(*(* (*"
+recvfrom*
+
+self(*(* (*'
+recvmsg*
+
+self(*(* (* (*,
+recvmsg_into*
+
+self(*( * (* (*J
+recvfrom_into!*
 
 self(*
-buffer(*
+buffer(*
 nbytes (*
 flags (*F
 	recv_into*
 
 self(*
-buffer(*
+buffer(*
 nbytes (*
-flags (*
-send*(*(* (*
-sendall*(*(* (*%
-sendmsg*(*(* (* (* (*a
+flags (*
+send*
+
+self(*(* (*!
+sendall*
+
+self(*(* (*-
+sendmsg*
+
+self(*("* (%* (* (&*a
 sendmsg_afalg*
 
 self(*
-msg (*
+msg ("*
 op(*
 
 iv (*
 assoclen (*
-flags (*
-setblocking*(*(*
+flags (*
+setblocking*
 
-settimeout*(*(*
-shutdown*(*(2r
+self(*(*
 
-getsockopt/
+settimeout*
 
-getsockopt*(*(*(0:typing.overloadX3
+self(*(*
+shutdown*
 
-getsockopt*(*(*(*(0:typing.overloadX2f
-sendto+
-sendto*(*(*(0:typing.overloadX/
-sendto*(*(*(*(0:typing.overloadX2z
+self(*(2‚
 
-setsockopt3
+getsockopt7
 
-setsockopt*(*(*(*(0:typing.overloadX7
+getsockopt*
 
-setsockopt*(*(*(*(*(0:typing.overloadX8
+self(*(*(0:typing.overloadX;
+
+getsockopt*
+
+self(*(*(*(0:typing.overloadX2v
+sendto3
+sendto*
+
+self(*(*(0:typing.overloadX7
+sendto*
+
+self(*(*(*(0:typing.overloadX2Š
+
+setsockopt;
+
+setsockopt*
+
+self(*(*(*('0:typing.overloadX?
+
+setsockopt*
+
+self(*(*(*(*(0:typing.overloadX
 close*(
 dup*(c
-getaddrinfo#*
+getaddrinfo,*
 
-host($*
+host(-*
 
-port(%*
+port(.*
 family (*
 type (*
 proto (*
@@ -110,13 +150,13 @@ setsockopt*(*(*(*(*(0:typing.overloadX8
 gethostbyname
 *(
 
-gethostbyname_ex'*(
+gethostbyname_ex0*(
 
 gethostname
 
-gethostbyaddr'*(
+gethostbyaddr0*(
 
-getnameinfo(*(!*(
+getnameinfo1*(**(
 getprotobyname*(
 
 getservbyname*(
@@ -129,14 +169,14 @@ setsockopt*(*(*(*(*(0:typing.overloadX8
 ntohs*(
 htonl*(
 htons*(
-	inet_aton*(
+	inet_aton*(
 
 	inet_ntoa
-*(
-	inet_pton*(*(
+*(
+	inet_pton*(*(
 
 	inet_ntop
-*(*(
+*(*(
 getdefaulttimeout
 setdefaulttimeout*(
 sethostname*(
@@ -145,19 +185,17 @@ setsockopt*(*(*(*(*(0:typing.overloadX8
 
 CMSG_SPACE*( 
 
-socketpair)* (* (* (
-if_nameindex+
+socketpair2* (* (* (
+if_nameindex4
 if_nametoindex*(
 
 if_indextoname
 *(*
-__annotations__0,*
-error0-8*
-timeout0.8*
-AF_UNIX0*
+__annotations__05*	
+_FD08*
+has_ipv60*
 AF_INET0*
-AF_INET60*
-	AF_UNSPEC0*
+AF_INET60*
 SOCK_STREAM0*
 
 SOCK_DGRAM0*
@@ -165,98 +203,63 @@ SOCK_DGRAM0*
 SOCK_RDM0*
 SOCK_SEQPACKET0*
 SOCK_CLOEXEC0*
-SOCK_NONBLOCK0*
-SO_ACCEPTCONN0*
-SO_BROADCAST0*
-SO_DEBUG0*
-SO_DONTROUTE0*
-SO_ERROR0*
-SO_KEEPALIVE0*
-	SO_LINGER0*
-SO_OOBINLINE0*
-	SO_RCVBUF0*
-SO_RCVLOWAT0*
-SO_RCVTIMEO0*
-SO_REUSEADDR0*
-	SO_SNDBUF0*
-SO_SNDLOWAT0*
-SO_SNDTIMEO0*
-SO_TYPE0*
-SO_REUSEPORT0*
-SO_BINDTODEVICE0*
-	SO_DOMAIN0*
-SO_MARK0*
-SO_PASSCRED0*
+SOCK_NONBLOCK0*
+AF_APPLETALK0*
+	AF_DECnet0*
 
-SO_PASSSEC0*
-SO_PEERCRED0*
+AF_IPX0*
 
-SO_PEERSEC0*
-SO_PRIORITY0*
-SO_PROTOCOL0*
-	SOMAXCONN0*
+AF_SNA0*
+	AF_UNSPEC0*
+AF_ROUTE0*
+	AF_SYSTEM0*
+AF_UNIX0*
+AF_IRDA0*
+AF_AAL50*
 
-MSG_CTRUNC0*
-MSG_DONTROUTE0*
-MSG_OOB0*
-MSG_PEEK0*
-	MSG_TRUNC0*
-MSG_WAITALL0*
-MSG_DONTWAIT0*
-MSG_EOR0*
-MSG_NOSIGNAL0*
-MSG_ERRQUEUE0*
-MSG_CMSG_CLOEXEC0*
-MSG_CONFIRM0*
-MSG_FASTOPEN0*
-MSG_MORE0*
+AF_ASH0*
+	AF_ATMPVC0*
+	AF_ATMSVC0*
+AF_AX250*
+	AF_BRIDGE0*
+	AF_ECONET0*
 
-SOL_IP0*
+AF_KEY0*
 
-SOL_SOCKET0*
-SOL_TCP0*
-SOL_UDP0*
-	SOL_ATALK0*
-SOL_AX250*
-SOL_HCI0*
-SOL_IPX0*
+AF_LLC0*
 
-SOL_NETROM0*
-SOL_ROSE0*
+AF_NETBEUI0*
+	AF_NETROM0*
+AF_PPPOX0*
+AF_ROSE0*
+AF_SECURITY0*
 
-SCM_RIGHTS0*
-SCM_CREDENTIALS0*
-IPPROTO_ICMP0*
+AF_WANPIPE0*
 
-IPPROTO_IP0*
-IPPROTO_RAW0*
-IPPROTO_TCP0*
-IPPROTO_UDP0*
+AF_X250*
+	SOMAXCONN0*
+AI_ADDRCONFIG0*
 
-IPPROTO_AH0*
-IPPROTO_DSTOPTS0*
-IPPROTO_EGP0*
-IPPROTO_ESP0*
-IPPROTO_FRAGMENT0*
-IPPROTO_HOPOPTS0*
-IPPROTO_ICMPV60*
-IPPROTO_IDP0*
-IPPROTO_IGMP0*
-IPPROTO_IPV60*
-IPPROTO_NONE0*
-IPPROTO_PIM0*
-IPPROTO_PUP0*
-IPPROTO_ROUTING0*
-IPPROTO_SCTP0*
-IPPROTO_GRE0*
-IPPROTO_IPIP0*
-IPPROTO_RSVP0*
+AI_ALL0*
+AI_CANONNAME0*
+AI_NUMERICHOST0*
+AI_NUMERICSERV0*
 
-IPPROTO_TP0*
-IPPROTO_UDPLITE0*
-IPPROTO_MPTCP0*
-IPPORT_RESERVED0*
-IPPORT_USERRESERVED0*
+AI_PASSIVE0*
+AI_V4MAPPED0*
+	EAI_AGAIN0*
+EAI_BADFLAGS0*
+EAI_FAIL0*
+
+EAI_FAMILY0*
+
+EAI_MEMORY0*
+
+EAI_NODATA0*
+
+EAI_NONAME0*
+EAI_SERVICE0*
+EAI_SOCKTYPE0*
 INADDR_ALLHOSTS_GROUP0*
 
 INADDR_ANY0*
@@ -264,30 +267,44 @@ INADDR_ANY0*
 INADDR_LOOPBACK0*
 INADDR_MAX_LOCAL_GROUP0*
 INADDR_NONE0*
-INADDR_UNSPEC_GROUP0*
-IP_ADD_MEMBERSHIP0*
-IP_DROP_MEMBERSHIP0*
+INADDR_UNSPEC_GROUP0*
+IPPORT_RESERVED0*
+IPPORT_USERRESERVED0*
 
-IP_HDRINCL0*
-IP_MULTICAST_IF0*
-IP_MULTICAST_LOOP0*
-IP_MULTICAST_TTL0*
+IPPROTO_AH0*
+IPPROTO_DSTOPTS0*
+IPPROTO_EGP0*
+IPPROTO_ESP0*
+IPPROTO_FRAGMENT0*
+IPPROTO_GGP0*
+IPPROTO_HOPOPTS0*
+IPPROTO_ICMPV60*
+IPPROTO_IDP0*
+IPPROTO_IGMP0*
+IPPROTO_IPV40*
+IPPROTO_IPV60*
+IPPROTO_MAX0*
 
-IP_OPTIONS0*
+IPPROTO_ND0*
+IPPROTO_NONE0*
+IPPROTO_PIM0*
+IPPROTO_PUP0*
+IPPROTO_ROUTING0*
+IPPROTO_SCTP0*
+IPPROTO_CBT0*
+IPPROTO_ICLFXBM0*
+IPPROTO_IGP0*
+IPPROTO_L2TP0*
+IPPROTO_PGM0*
+IPPROTO_RDP0*
 
-IP_RECVTOS0*
+IPPROTO_ST0*
+IPPROTO_ICMP0*
 
-IP_TOS0*
-
-IP_TTL0*
-IP_DEFAULT_MULTICAST_LOOP0*
-IP_DEFAULT_MULTICAST_TTL0*
-IP_MAX_MEMBERSHIPS0*
-IP_RECVOPTS0*
-IP_RECVRETOPTS0*
-
-IP_RETOPTS0*
-IP_TRANSPARENT0*
+IPPROTO_IP0*
+IPPROTO_RAW0*
+IPPROTO_TCP0*
+IPPROTO_UDP0*
 IPV6_CHECKSUM0*
 IPV6_JOIN_GROUP0*
 IPV6_LEAVE_GROUP0*
@@ -305,42 +322,30 @@ IP_RETOPTS0*
 IPV6_RECVRTHDR0*
 
 IPV6_RTHDR0*
-IPV6_RTHDR_TYPE_00*
-IPV6_DSTOPTS0*
-IPV6_NEXTHOP0*
-IPV6_PATHMTU0*
-IPV6_RECVDSTOPTS0*
-IPV6_RECVHOPLIMIT0*
-IPV6_RECVHOPOPTS0*
-IPV6_RECVPATHMTU0*
-IPV6_RECVPKTINFO0*
-IPV6_RTHDRDSTOPTS0*
-	EAI_AGAIN0*
-EAI_BADFLAGS0*
-EAI_FAIL0*
+IP_ADD_MEMBERSHIP0*
+IP_DROP_MEMBERSHIP0*
 
-EAI_FAMILY0*
+IP_HDRINCL0*
+IP_MULTICAST_IF0*
+IP_MULTICAST_LOOP0*
+IP_MULTICAST_TTL0*
 
-EAI_MEMORY0*
+IP_OPTIONS0*
+IP_RECVDSTADDR0*
 
-EAI_NODATA0*
+IP_RECVTOS0*
 
-EAI_NONAME0*
-EAI_SERVICE0*
-EAI_SOCKTYPE0*
-EAI_ADDRFAMILY0*
-EAI_OVERFLOW0*
+IP_TOS0*
 
-EAI_SYSTEM0*
-AI_ADDRCONFIG0*
+IP_TTL0*
 
-AI_ALL0*
-AI_CANONNAME0*
-AI_NUMERICHOST0*
-AI_NUMERICSERV0*
-
-AI_PASSIVE0*
-AI_V4MAPPED0*
+MSG_CTRUNC0*
+MSG_DONTROUTE0*
+MSG_ERRQUEUE0*
+MSG_OOB0*
+MSG_PEEK0*
+	MSG_TRUNC0*
+MSG_WAITALL0*
 NI_DGRAM0*
 
 NI_MAXHOST0*
@@ -349,16 +354,117 @@ NI_MAXSERV0*
 NI_NAMEREQD0*
 	NI_NOFQDN0*
 NI_NUMERICHOST0*
-NI_NUMERICSERV0*
+NI_NUMERICSERV0*
+SHUT_RD0*
+	SHUT_RDWR0*
+SHUT_WR0*
+
+SOL_IP0*
+
+SOL_SOCKET0*
+SOL_TCP0*
+SOL_UDP0*
+SO_ACCEPTCONN0*
+SO_BROADCAST0*
+SO_DEBUG0*
+SO_DONTROUTE0*
+SO_ERROR0*
+SO_KEEPALIVE0*
+	SO_LINGER0*
+SO_OOBINLINE0*
+	SO_RCVBUF0*
+SO_RCVLOWAT0*
+SO_RCVTIMEO0*
+SO_REUSEADDR0*
+	SO_SNDBUF0*
+SO_SNDLOWAT0*
+SO_SNDTIMEO0*
+SO_TYPE0*
+SO_USELOOPBACK0*
 TCP_FASTOPEN0*
 TCP_KEEPCNT0*
-TCP_KEEPINTVL0*
+TCP_KEEPINTVL0*
+TCP_KEEPIDLE0*
 
 TCP_MAXSEG0*
 TCP_NODELAY0*
-TCP_NOTSENT_LOWAT0*
-TCP_KEEPIDLE0*
-TCP_CONGESTION0*
+TCP_NOTSENT_LOWAT0*
+	MSG_BCAST0*
+	MSG_MCAST0*
+SO_EXCLUSIVEADDRUSE0*
+
+AI_DEFAULT0*
+AI_MASK0*
+AI_V4MAPPED_CFG0*
+EAI_ADDRFAMILY0*
+EAI_BADHINTS0*
+EAI_MAX0*
+EAI_OVERFLOW0*
+EAI_PROTOCOL0*
+
+EAI_SYSTEM0*
+IPPROTO_EON0*
+IPPROTO_GRE0*
+IPPROTO_HELLO0*
+IPPROTO_IPCOMP0*
+IPPROTO_IPIP0*
+IPPROTO_RSVP0*
+
+IPPROTO_TP0*
+IPPROTO_XTP0*
+IPV6_RTHDR_TYPE_00*
+IP_DEFAULT_MULTICAST_LOOP0*
+IP_DEFAULT_MULTICAST_TTL0*
+IP_MAX_MEMBERSHIPS0*
+IP_RECVOPTS0*
+IP_RECVRETOPTS0*
+
+IP_RETOPTS0*
+LOCAL_PEERCRED0*
+MSG_DONTWAIT0*
+MSG_EOF0*
+MSG_EOR0*
+MSG_NOSIGNAL0*
+	SCM_CREDS0*
+
+SCM_RIGHTS0*
+SO_REUSEPORT0*
+IPV6_DSTOPTS0*
+IPV6_NEXTHOP0*
+IPV6_PATHMTU0*
+IPV6_RECVDSTOPTS0*
+IPV6_RECVHOPLIMIT0*
+IPV6_RECVHOPOPTS0*
+IPV6_RECVPATHMTU0*
+IPV6_RECVPKTINFO0*
+IPV6_RTHDRDSTOPTS0*
+IPV6_USE_MIN_MTU0*
+IPPROTO_BIP0*
+IPPROTO_MOBILE0*
+IPPROTO_VRRP0*
+IPX_TYPE0*
+IP_TRANSPARENT0*
+MSG_BTAG0*
+MSG_CMSG_CLOEXEC0*
+MSG_CONFIRM0*
+MSG_ETAG0*
+MSG_FASTOPEN0*
+MSG_MORE0*
+MSG_NOTIFICATION0*
+SCM_CREDENTIALS0*
+	SOL_ATALK0*
+SOL_AX250*
+SOL_HCI0*
+SOL_IPX0*
+
+SOL_NETROM0*
+SOL_ROSE0*
+SO_BINDTODEVICE0*
+SO_MARK0*
+SO_PASSCRED0*
+SO_PEERCRED0*
+SO_PRIORITY0*
+	SO_SETFIB0*
 TCP_CORK0*
 TCP_DEFER_ACCEPT0*
 TCP_INFO0*
@@ -366,7 +472,6 @@ TCP_MAXSEG0*
 TCP_QUICKACK0*
 
 TCP_SYNCNT0*
-TCP_USER_TIMEOUT0*
 TCP_WINDOW_CLAMP0*
 
 AF_CAN0*
@@ -378,13 +483,13 @@ TCP_SYNCNT0*
 CAN_EFF_MASK0*
 CAN_ERR_FLAG0*
 CAN_ERR_MASK0*
-CAN_RAW0*
+CAN_RAW0*
+CAN_RAW_ERR_FILTER0*
 CAN_RAW_FILTER0*
 CAN_RAW_LOOPBACK0*
 CAN_RAW_RECV_OWN_MSGS0*
 CAN_RTR_FLAG0*
-CAN_SFF_MASK0*
-CAN_RAW_ERR_FILTER0*
+CAN_SFF_MASK0*
 CAN_BCM0*
 CAN_BCM_TX_SETUP0*
 CAN_BCM_TX_DELETE0*
@@ -397,7 +502,8 @@ TCP_SYNCNT0*
 CAN_BCM_TX_EXPIRED0*
 CAN_BCM_RX_STATUS0*
 CAN_BCM_RX_TIMEOUT0*
-CAN_BCM_RX_CHANGED0*
+CAN_BCM_RX_CHANGED0*
+CAN_RAW_FD_FRAMES0*
 CAN_BCM_SETTIMER0*
 CAN_BCM_STARTTIMER0*
 CAN_BCM_TX_COUNTEVT0*
@@ -409,11 +515,10 @@ TCP_SYNCNT0*
 CAN_BCM_RX_ANNOUNCE_RESUME0*
 CAN_BCM_TX_RESET_MULTI_IDX0*
 CAN_BCM_RX_RTR_FRAME0*
-CAN_BCM_CAN_FD_FRAME0*
-CAN_RAW_FD_FRAMES0*
-CAN_RAW_JOIN_FILTERS0*
+CAN_BCM_CAN_FD_FRAME0*
 	CAN_ISOTP0*
-	CAN_J19390*
+	CAN_J19390*
+CAN_RAW_JOIN_FILTERS0*
 J1939_MAX_UNICAST_ADDR0*
 J1939_IDLE_ADDR0*
 J1939_NO_ADDR0*
@@ -436,7 +541,8 @@ TCP_SYNCNT0*
 J1939_NLA_BYTES_ACKED0*
 J1939_EE_INFO_NONE0*
 J1939_EE_INFO_TX_ABORT0*
-J1939_FILTER_MAX0*
+J1939_FILTER_MAX0*
+IPPROTO_MPTCP0*
 	AF_PACKET0*
 	PF_PACKET0*
 PACKET_BROADCAST0*
@@ -455,7 +561,8 @@ TCP_SYNCNT0*
 RDS_CMSG_RDMA_ARGS0*
 RDS_CMSG_RDMA_DEST0*
 RDS_CMSG_RDMA_MAP0*
-RDS_CMSG_RDMA_STATUS0*
+RDS_CMSG_RDMA_STATUS0*
+RDS_CMSG_RDMA_UPDATE0*
 RDS_CONG_MONITOR0*
 RDS_FREE_MR0*
 
@@ -517,67 +624,63 @@ ALG_SET_OP0*
 SO_VM_SOCKETS_BUFFER_MAX_SIZE0*
 SO_VM_SOCKETS_BUFFER_SIZE0*!
 SO_VM_SOCKETS_BUFFER_MIN_SIZE0*
-VM_SOCKETS_INVALID_VERSION0*
-has_ipv60*
+VM_SOCKETS_INVALID_VERSION0*
+AF_LINK0*
+	SO_DOMAIN0*
+
+SO_PASSSEC0*
+
+SO_PEERSEC0*
+SO_PROTOCOL0*
+TCP_CONGESTION0*
+TCP_USER_TIMEOUT0*
 
 AF_QIPCRTR0*
 
-AF_NETLINK0*
+AF_NETLINK0*
+NETLINK_ARPD0*
 NETLINK_CRYPTO0*
 NETLINK_DNRTMSG0*
 NETLINK_FIREWALL0*
 NETLINK_IP6_FW0*
-NETLINK_NFLOG0*
-NETLINK_ROUTE0*
-NETLINK_USERSOCK0*
-NETLINK_XFRM0*
-UDPLITE_RECV_CSCOV0*
-UDPLITE_SEND_CSCOV0*
-SHUT_RD0*
-	SHUT_RDWR0*
-SHUT_WR0*
-AF_APPLETALK0*
-	AF_DECnet0*
+NETLINK_NFLOG0*
+NETLINK_ROUTE60*
+NETLINK_ROUTE0*
+NETLINK_SKIP0*
+NETLINK_TAPBASE0*
+NETLINK_TCPDIAG0*
+NETLINK_USERSOCK0*
 
-AF_IPX0*
+NETLINK_W10*
+NETLINK_XFRM0*
+AF_BLUETOOTH0*
 
-AF_SNA0*
-AF_ROUTE0*
-AF_IRDA0*
+BDADDR_ANY0
+*
+BDADDR_LOCAL0
+*
+BTPROTO_RFCOMM0*
+BTPROTO_HCI0*
+BTPROTO_L2CAP0*
+BTPROTO_SCO0*
 
-AF_ASH0*
-	AF_ATMPVC0*
-	AF_ATMSVC0*
-AF_AX250*
-	AF_BRIDGE0*
-	AF_ECONET0*
+HCI_FILTER0*
+HCI_TIME_STAMP0*
+HCI_DATA_DIR0*
+error068*
+timeout078*
 
-AF_KEY0*
-
-AF_LLC0*
-
-AF_NETBEUI0*
-	AF_NETROM0*
-AF_PPPOX0*
-AF_ROSE0*
-AF_SECURITY0*
-
-AF_WANPIPE0*
-
-AF_X250*
-IPX_TYPE0*
-
-SocketType08*
-CAPI0/2"builtins.int2"_socket.socket2"builtins.float2222"typing.SupportsIndex2222"builtins.tuple22"builtins.str2"typing_extensions.Buffer22	
-2"_socket._Address22"_socket._RetAddress22"builtins.bool2"builtins.bytes22222"_socket._CMSG22"builtins.list222222"typing.Iterable222222"_socket._CMSGArg22"typing.Iterable2222222
+SocketType082"builtins.int2"_socket.socket2"builtins.float2222"typing.SupportsIndex2222"builtins.tuple22"builtins.str2"builtins.bytes2"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer222	
+2"_socket._Address22"_socket._RetAddress22"builtins.bool22222"_socket._CMSG22"builtins.list222222"typing.Iterable2222"typing.Iterable2222"_socket._CMSGArg2#2"typing.Iterable2$222222
 22
-2222 2	2
-!2"builtins.list2"22
-22
+22()2	2
+*2"builtins.list2+22
+22
 2"builtins.list2
 22
-&&22
+//22
 
 2222
-2"builtins.list2*2"builtins.dict2
-2"builtins.OSError2"builtins.TimeoutError2"typing_extensions.CapsuleType
+2"builtins.list232"builtins.dict2
+2"builtins.OSError2"builtins.TimeoutError

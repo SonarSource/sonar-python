@@ -1,5 +1,5 @@
 
-urllib.requestÏ
+urllib.request—
 	HTTPErrorurllib.error.HTTPError"urllib.error.URLError"urllib.response.addinfourl*-
 reason*
 
@@ -22,20 +22,17 @@
 
 self(*
 headers(0:.setterr
-code0r
-msg0r
-hdrs0r
-fp0‰
+code0‰
 Request"builtins.object*Å
 __init__*
 
 self(	*	
 url(*
-data (*
-headers (*
-origin_req_host (*
-unverifiable (*
-method (*
+data (*
+headers (*
+origin_req_host (*
+unverifiable (*
+method (*
 
 get_method*
 
@@ -52,7 +49,7 @@ add_header*
 key(*	
 val(*-
 
-has_header*
+has_header*
 
 self(	*
 header_name(*0
@@ -70,10 +67,10 @@ has_header*
 host(*
 
 type(*
-header_items*
+header_items*
 
 self(	*
-	has_proxy*
+	has_proxy*
 
 self(	2ï
 full_url1
@@ -90,156 +87,156 @@ has_header*
 
 get_headerB
 
-get_header*
+get_header*
 
 self(	*
 header_name(0:typing.overloadXQ
 
-get_header*
+get_header *
 
 self(	*
 header_name(*
-default(0:typing.overloadXr
+default(0:typing.overloadXr
 type0r
 host0r
 origin_req_host0r
 selector0r
-data0r
-headers0r
-unredirected_hdrs0r
-unverifiable0r
+data0r
+headers0r
+unredirected_hdrs0!r
+unverifiable0r
 
-method0r
-timeout0Ë
+method0r
+timeout0#Ë
 OpenerDirector"builtins.object**
 add_handler*
 
-self(*
-handler(*B
-open*
+self($*
+handler(%*B
+open&*
 
-self(*
-fullurl(*
-data (*
-timeout (*.
-error*
+self($*
+fullurl('*
+data (*
+timeout (#*.
+error&*
 
-self(*
+self($*
 proto(*
 
-args(*
+args(*
 close*
 
-self(r
+self($r
 
-addheaders0í
+addheaders0í
 BaseHandler"builtins.object*(
 
 add_parent*
 
-self(*
-parent(*
+self(%*
+parent($*
 close*
 
-self(*
-__lt__*(*(r
+self(%*
+__lt__*(%*(r
 handler_order0r
 
-parent0ë
+parent0$ë
 HTTPDefaultErrorHandler"urllib.request.BaseHandler*Z
 http_error_default*
 
-self(*	
+self((*	
 req(	*
 fp(*
 
 code(*	
 msg(*
 
-hdrs( º
+hdrs()º
 HTTPRedirectHandler"urllib.request.BaseHandler*i
-redirect_request!*
+redirect_request**
 
-self("*	
+self(+*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( *
+headers()*
 newurl(*Y
-http_error_301#*
+http_error_301,*
 
-self("*	
+self(+*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( *Y
-http_error_302#*
+headers()*Y
+http_error_302,*
 
-self("*	
+self(+*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( *Y
-http_error_303#*
+headers()*Y
+http_error_303,*
 
-self("*	
+self(+*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( *Y
-http_error_307#*
+headers()*Y
+http_error_307,*
 
-self("*	
+self(+*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( r
+headers()r
 max_redirections0r
 max_repeats0r
 inf_msg0≈
 HTTPCookieProcessor"urllib.request.BaseHandler*+
 __init__*
 
-self($*
-	cookiejar (&*+
+self(-*
+	cookiejar (/*+
 http_request	*
 
-self($*
+self(-*
 request(	*<
-http_response'*
+http_response0*
 
-self($*
+self(-*
 request(	*
-response('*,
+response(0*,
 https_request	*
 
-self($*
+self(-*
 request(	*=
-https_response'*
+https_response0*
 
-self($*
+self(-*
 request(	*
-response('r
-	cookiejar0%ï
+response(0r
+	cookiejar0.ï
 ProxyHandler"urllib.request.BaseHandler*)
 __init__*
 
-self((*
-proxies ()*>
+self(1*
+proxies (2*>
 
-proxy_open#*
+proxy_open,*
 
-self((*	
+self(1*	
 req(	*
 proxy(*
 
@@ -247,269 +244,273 @@ proxy_open#*
 HTTPPasswordMgr"builtins.object*N
 add_password*
 
-self(**
+self(3*
 realm(*	
-uri(,*
+uri(5*
 
 user(*
 passwd(*>
-find_user_password-*
+find_user_password6*
 
-self(**
+self(3*
 realm(*
 authuri(*1
-	is_suburi*
+	is_suburi*
 
-self(**
+self(3*
 
 base(*
 
 test(*;
 
-reduce_uri*
+reduce_uri*
 
-self(**	
+self(3*	
 uri(*
-default_port (—
+default_port (—
 HTTPPasswordMgrWithDefaultRealm"urllib.request.HTTPPasswordMgr*N
 add_password*
 
-self(.*
-realm(*	
-uri(,*
+self(7*
+realm(*	
+uri(5*
 
 user(*
 passwd(*>
-find_user_password-*
+find_user_password6*
 
-self(.*
-realm(*
+self(7*
+realm(*
 authuri(¥
 HTTPPasswordMgrWithPriorAuth".urllib.request.HTTPPasswordMgrWithDefaultRealm*h
 add_password*
 
-self(/*
-realm(*	
-uri(,*
+self(8*
+realm(*	
+uri(5*
 
 user(*
 passwd(*
-is_authenticated (*I
+is_authenticated (*I
 update_authenticated*
 
-self(/*	
-uri(,*
-is_authenticated (*/
-is_authenticated0*
+self(8*	
+uri(5*
+is_authenticated (*/
+is_authenticated*
 
-self(/*
+self(8*
 authuri(
 AbstractBasicAuthHandler"builtins.object*.
 __init__*
 
-self(1*
-password_mgr (2*Z
+self(9*
+password_mgr (:*Z
 http_error_auth_reqed*
 
-self(1*
+self(9*
 authreq(*
 
 host(*	
 req(	*
-headers( *'
+headers()*'
 http_request	*
 
-self(1*	
+self(9*	
 req(	*8
-http_response'*
+http_response0*
 
-self(1*	
+self(9*	
 req(	*
-response('*(
+response(0*(
 https_request	*
 
-self(1*	
+self(9*	
 req(	*9
-https_response'*
+https_response0*
 
-self(1*	
+self(9*	
 req(	*
-response('*I
-retry_http_basic_auth#*
+response(0*I
+retry_http_basic_auth,*
 
-self(1*
+self(9*
 
 host(*	
 req(	*
 realm(r
-rx03r
+rx0;r
 
-passwd0*r
-add_password05«
+passwd03r
+add_password0=«
 HTTPBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler"urllib.request.BaseHandler*Y
-http_error_401#*
+http_error_401,*
 
-self(6*	
+self(>*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( r
+headers()r
 auth_header0»
 ProxyBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler"urllib.request.BaseHandler*Y
-http_error_407#*
+http_error_407,*
 
-self(7*	
+self(?*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( r
+headers()r
 auth_header0Ï
 AbstractDigestAuthHandler"builtins.object*(
 __init__*
 
-self(8*
-passwd (2*!
+self(@*
+passwd (:*!
 reset_retry_count*
 
-self(8*^
+self(@*^
 http_error_auth_reqed*
 
-self(8*
+self(@*
 auth_header(*
 
 host(*	
 req(	*
-headers( *=
-retry_http_digest_auth#*
+headers()*=
+retry_http_digest_auth,*
 
-self(8*	
+self(@*	
 req(	*
 
 auth(*'
 
 get_cnonce*
 
-self(8*
+self(@*
 nonce(*8
-get_authorization*
+get_authorization*
 
-self(8*	
+self(@*	
 req(	*
 
-chal(9*4
-get_algorithm_impls:*
+chal(A*4
+get_algorithm_implsB*
 
-self(8*
+self(@*
 	algorithm(*9
-get_entity_digest*
+get_entity_digest*
 
-self(8*
+self(@*
 
-data(;*
+data(C*
 
-chal(9…
+chal(A…
 HTTPDigestAuthHandler"urllib.request.BaseHandler"(urllib.request.AbstractDigestAuthHandler*Y
-http_error_401#*
+http_error_401,*
 
-self(<*	
+self(D*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( r
+headers()r
 auth_header0 
 ProxyDigestAuthHandler"urllib.request.BaseHandler"(urllib.request.AbstractDigestAuthHandler*Y
-http_error_407#*
+http_error_407,*
 
-self(=*	
+self(E*	
 req(	*
 fp(*
 
 code(*	
 msg(*
-headers( r
-auth_header0é
-_HTTPConnectionProtocol"builtins.object*^
-__call__>*(?*(*
-port (@*
-timeout (*
-source_address (B*
-	blocksize (8Xâ
+headers()r
+auth_header0ú
+_HTTPConnectionProtocol"builtins.object*n
+__call__F*
+
+self(G*
+
+host(*
+port (H*
+timeout ("*
+source_address (J*
+	blocksize (Xâ
 AbstractHTTPHandler"urllib.request.BaseHandler*,
 __init__*
 
-self(C*
+self(K*
 
 debuglevel (*0
 set_http_debuglevel*
 
-self(C*
+self(K*
 level(**
 do_request_	*
 
-self(C*
+self(K*
 request(	*J
-do_open'*
+do_open0*
 
-self(C*
+self(K*
 
-http_class(?*	
+http_class(G*	
 req(	*
-http_conn_args(Ñ
+http_conn_args(Ñ
 HTTPHandler""urllib.request.AbstractHTTPHandler*$
-	http_open'*
+	http_open0*
 
-self(D*	
+self(L*	
 req(	*+
 http_request	*
 
-self(D*
+self(L*
 request(	ﬁ
 HTTPSHandler""urllib.request.AbstractHTTPHandler*U
 __init__*
 
-self(E*
+self(M*
 
 debuglevel (*
-context (G*
-check_hostname (0*%
+context (O*
+check_hostname (P*%
 
-https_open'*
+https_open0*
 
-self(E*	
+self(M*	
 req(	*,
 https_request	*
 
-self(E*
+self(M*
 request(	°
 FileHandler"urllib.request.BaseHandler*$
-	file_openH*
+	file_openQ*
 
-self(I*	
+self(R*	
 req(	*
-	get_namesJ*
+	get_namesS*
 
-self(I**
-open_local_fileH*
+self(R**
+open_local_fileQ*
 
-self(I*	
+self(R*	
 req(	r	
-names0KO
+names0TO
 DataHandler"urllib.request.BaseHandler*$
-	data_openH*
+	data_openQ*
 
-self(L*	
+self(U*	
 req(	Œ
 
 ftpwrapper"builtins.object*{
 __init__*
 
-self(M*
+self(V*
 
 user(*
 passwd(*
@@ -519,42 +520,42 @@ ftpwrapper"builtins.object*{
 port(*
 
 dirs(*
-timeout (*
+timeout (#*
 
-persistent (*
+persistent (*
 close*
 
-self(M*
+self(V*
 endtransfer*
 
-self(M*
+self(V*
 
 file_close*
 
-self(M*
+self(V*
 init*
 
-self(M*
+self(V*
 
 real_close*
 
-self(M*0
-retrfileO*
+self(V*0
+retrfileX*
 
-self(M*
+self(V*
 
 file(*
 
 type(∑
 
 FTPHandler"urllib.request.BaseHandler*#
-ftp_openH*
+ftp_openQ*
 
-self(P*	
+self(Y*	
 req(	*h
-connect_ftpM*
+connect_ftpV*
 
-self(P*
+self(Y*
 
 user(*
 passwd(*
@@ -564,279 +565,277 @@ FTPHandler"urllib.request.BaseHandler*#
 port(*
 
 dirs(*
-timeout(±
+timeout("±
 CacheFTPHandler"urllib.request.FTPHandler*#
 
 setTimeout*
 
-self(Q*
-t(*$
+self(Z*
+t("*$
 setMaxConns*
 
-self(Q*
+self(Z*
 m(*
 check_cache*
 
-self(Q*
+self(Z*
 clear_cache*
 
-self(QU
+self(ZU
 UnknownHandler"urllib.request.BaseHandler*'
-unknown_openR*
+unknown_open[*
 
-self(S*	
+self(\*	
 req(	≠
 HTTPErrorProcessor"urllib.request.BaseHandler*<
-http_response*
+http_response&*
 
-self(T*
+self(]*
 request(	*
-response('*=
-https_response*
+response(0*=
+https_response&*
 
-self(T*
+self(]*
 request(	*
-response('√
+response(0∞
 	URLopener"builtins.object*5
 __init__*
 
-self(U*
-proxies ()*
+self(^*
+proxies (2*
 
 x509(*1
-open*
+open&*
 
-self(U*
+self(^*
 fullurl(*
-data (;*9
-open_unknown*
+data (C*9
+open_unknown&*
 
-self(U*
+self(^*
 fullurl(*
-data (;*W
-retrieveW*
+data (C*W
+retrieve`*
 
-self(U*	
+self(^*	
 url(*
-filename (*
+filename (*
 
-reporthook (X*
-data (;*%
+reporthook (a*
+data (C*%
 	addheader*
 
-self(U*
+self(^*
 
-args(*
+args(*
 cleanup*
 
-self(U*
+self(^*
 close*
 
-self(U*i
+self(^*i
 
-http_error*
+http_error&*
 
-self(U*	
+self(^*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (Y*c
-http_error_default*
+headers()*
+data (b*c
+http_error_default&*
 
-self(U*	
+self(^*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *2
-	open_dataH*
+headers()*2
+	open_dataQ*
 
-self(U*	
+self(^*	
 url(*
-data (;*$
-	open_fileH*
+data (C*$
+	open_fileQ*
 
-self(U*	
+self(^*	
 url(*#
-open_ftpH*
+open_ftpQ*
 
-self(U*	
+self(^*	
 url(*2
-	open_http*
+	open_http&*
 
-self(U*	
+self(^*	
 url(*
-data (;*3
+data (C*3
 
-open_https*
+open_https&*
 
-self(U*	
+self(^*	
 url(*
-data (;**
-open_local_fileH*
+data (C**
+open_local_fileQ*
 
-self(U*	
+self(^*	
 url(*L
 open_unknown_proxy*
 
-self(U*
+self(^*
 proxy(*
 fullurl(*
-data (;*
-__del__*(U8r
-version0á
+data (Cr
+version0Ö
 FancyURLopener"urllib.request.URLopener*;
-prompt_user_passwd*
+prompt_user_passwd*
 
-self(Z*
+self(c*
 
 host(*
 realm(*M
-get_user_passwd*
+get_user_passwd*
 
-self(Z*
+self(c*
 
 host(*
 realm(*
 clear_cache (*m
-http_error_301[*
+http_error_301d*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (;*m
-http_error_302[*
+headers()*
+data (C*m
+http_error_302d*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (;*m
-http_error_303[*
+headers()*
+data (C*m
+http_error_303d*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (;*m
-http_error_307[*
+headers()*
+data (C*m
+http_error_307d*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (;*|
-http_error_401#*
+headers()*
+data (C*|
+http_error_401,*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (;*
-retry (*|
-http_error_407#*
+headers()*
+data (C*
+retry (*|
+http_error_407,*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
-data (;*
-retry (*c
-http_error_defaultH*
+headers()*
+data (C*
+retry (*c
+http_error_defaultQ*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *n
-redirect_internal#*
+headers()*n
+redirect_internal,*
 
-self(Z*	
+self(c*	
 url(*
 fp(*
 errcode(*
 errmsg(*
-headers( *
+headers()*
 
-data(;*K
-retry_http_basic_auth#*
+data(C*K
+retry_http_basic_auth,*
 
-self(Z*	
+self(c*	
 url(*
 realm(*
-data (;*L
-retry_https_basic_auth#*
+data (C*L
+retry_https_basic_auth,*
 
-self(Z*	
+self(c*	
 url(*
 realm(*
-data (;*Q
-retry_proxy_http_basic_auth#*
+data (C*Q
+retry_proxy_http_basic_auth,*
 
-self(Z*	
+self(c*	
 url(*
 realm(*
-data (;*R
-retry_proxy_https_basic_auth#*
+data (C*R
+retry_proxy_https_basic_auth,*
 
-self(Z*	
+self(c*	
 url(*
 realm(*
-data (;8y
-urlopen*	
-url(*
-data (\*
-timeout (*
-cafile (*
-capath (*
-	cadefault (*
-context (G 
+data (Cy
+urlopen&*	
+url('*
+data (e*
+timeout (#*
+cafile (*
+capath (*
+	cadefault (*
+context (O 
 install_opener*
-opener( 
-build_opener*
-handlers(] 
+opener($ 
+build_opener$*
+handlers(f 
 url2pathname*
 pathname( 
 pathname2url*
 pathname(
 
-getproxies
-getproxies_environment
-parse_http_list^*
+getproxies!
+parse_http_listg*
 s(
-parse_keqv_list*
-l(^-
-proxy_bypass*
+parse_keqv_list!*
+l(g-
+proxy_bypass*
 
 host(*
-proxies (_N
-urlretrieve`*	
+proxies (hN
+urlretrievei*	
 url(*
-filename (e*
+filename (n*
 
-reporthook (X*
-data (
+reporthook (a*
+data (
 
 urlcleanup*
-__annotations__0f*
-__all__0^2"builtins.str2"urllib.error.HTTPError22"builtins.int2"email.message.Message22"builtins.bytes2"	typing.IO2222"urllib.request.Request2"typing_extensions.Buffer2"_typeshed.SupportsRead22"typing.Iterable222
-2"urllib.request._DataType22"typing.MutableMapping2222"builtins.bool222"builtins.list22"builtins.object2"builtins.object2222"builtins.dict22"builtins.float222"urllib.request.OpenerDirector2"urllib.request.BaseHandler22!"urllib.request._UrlopenRet222	2("&urllib.request.HTTPDefaultErrorHandler2"http.client.HTTPMessage22	2$""urllib.request.HTTPRedirectHandler222$""urllib.request.HTTPCookieProcessor2"http.cookiejar.CookieJar22%2"http.client.HTTPResponse2"urllib.request.ProxyHandler222 "urllib.request.HTTPPasswordMgr2"typing.Sequence222+2220".urllib.request.HTTPPasswordMgrWithDefaultRealm2-"+urllib.request.HTTPPasswordMgrWithPriorAuth222)"'urllib.request.AbstractBasicAuthHandler22*2"
-re.Pattern22"builtins.function2242%"#urllib.request.HTTPBasicAuthHandler2&"$urllib.request.ProxyBasicAuthHandler2*"(urllib.request.AbstractDigestAuthHandler2"typing.Mapping2225522
-2&"$urllib.request.HTTPDigestAuthHandler2'"%urllib.request.ProxyDigestAuthHandler2"http.client.HTTPConnection2("&urllib.request._HTTPConnectionProtocol222222A2$""urllib.request.AbstractHTTPHandler2"urllib.request.HTTPHandler2"urllib.request.HTTPSHandler2"ssl.SSLContext22F2"urllib.response.addinfourl2"urllib.request.FileHandler2"builtins.tuple222J2"urllib.request.DataHandler2"urllib.request.ftpwrapper2"urllib.response.addclosehook22N@2"urllib.request.FTPHandler2 "urllib.request.CacheFTPHandler2
-2"urllib.request.UnknownHandler2#"!urllib.request.HTTPErrorProcessor2"urllib.request.URLopener2222V225222"urllib.request.FancyURLopener22H222252"builtins.list222922 2"os.PathLike22"os.PathLike222ab2"_typeshed.StrOrBytesPath2c22d2"builtins.dict2
+__annotations__0o*
+__all__0g2"builtins.str2"urllib.error.HTTPError22"builtins.int2"email.message.Message2"builtins.bytes2"	typing.IO2222"urllib.request.Request2"builtins.bytearray2"builtins.memoryview22"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2
+2 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"_typeshed.SupportsRead22"typing.Iterable2222"urllib.request._DataType22"typing.MutableMapping2222"builtins.bool222"builtins.list22"builtins.object2"builtins.object2222"builtins.dict22"builtins.float22"2"urllib.request.OpenerDirector2"urllib.request.BaseHandler2!"urllib.request._UrlopenRet222	2("&urllib.request.HTTPDefaultErrorHandler2"http.client.HTTPMessage22	2$""urllib.request.HTTPRedirectHandler22&2$""urllib.request.HTTPCookieProcessor2"http.cookiejar.CookieJar22.2"http.client.HTTPResponse2"urllib.request.ProxyHandler22!2 "urllib.request.HTTPPasswordMgr2"typing.Sequence22242220".urllib.request.HTTPPasswordMgrWithDefaultRealm2-"+urllib.request.HTTPPasswordMgrWithPriorAuth2)"'urllib.request.AbstractBasicAuthHandler2232"
+re.Pattern22"builtins.function22<2%"#urllib.request.HTTPBasicAuthHandler2&"$urllib.request.ProxyBasicAuthHandler2*"(urllib.request.AbstractDigestAuthHandler2"typing.Mapping222==222&"$urllib.request.HTTPDigestAuthHandler2'"%urllib.request.ProxyDigestAuthHandler2"http.client.HTTPConnection2("&urllib.request._HTTPConnectionProtocol222222I2$""urllib.request.AbstractHTTPHandler2"urllib.request.HTTPHandler2"urllib.request.HTTPSHandler2"ssl.SSLContext22N222"urllib.response.addinfourl2"urllib.request.FileHandler2"builtins.tuple222S2"urllib.request.DataHandler2"urllib.request.ftpwrapper2"urllib.response.addclosehook22W2"urllib.request.FTPHandler2 "urllib.request.CacheFTPHandler2
+2"urllib.request.UnknownHandler2#"!urllib.request.HTTPErrorProcessor2"urllib.request.URLopener2222_22=222"urllib.request.FancyURLopener22&Q2222%=2"builtins.list222A22)2"os.PathLike22"os.PathLike222jk2"_typeshed.StrOrBytesPath2l22m2"builtins.dict2

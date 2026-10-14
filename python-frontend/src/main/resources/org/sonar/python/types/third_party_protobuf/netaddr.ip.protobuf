@@ -60,7 +60,7 @@ is_private*
 value*
 
 self(*
-value(0:.setterÃ
+value(0:.setterº
 	IPAddress"netaddr.ip.BaseIP*D
 __init__*
 
@@ -126,13 +126,10 @@ is_netmask*
 format*
 
 self(*
-dialect (*
-__or__*(*(z310z311*!
-__or__*(*(z312z313z314*
-__and__*(*(z310z311*"
-__and__*(*(z312z313z314*
-__xor__*(*(z310z311*"
-__xor__*(*(z312z313z314*
+dialect (*
+__or__*(*(*
+__and__*(*(*
+__xor__*(*(*
 
 __lshift__*(*(*
 
@@ -140,189 +137,179 @@ __rshift__*(*(*
 __bool__*
 
 self(r
-__radd__0ï
+__radd__0¼
 IPListMixin"builtins.object*
-__iter__*(*+
+__iter__*(*+
 size*
 
-self(0:builtins.property`*
-__len__*(*
-__contains__*(*(*
-__bool__ *
+self(0:builtins.property`*
+__len__*(*
+__contains__*(*(*
+__bool__*
 
-self(2¡
+self(2—
 __getitem__,
-__getitem__*(*(0:typing.overloadX,
-__getitem__*(*("0:typing.overloadX,
-__getitem__#*(*($0:typing.overloadX"310"3112¦
-__getitem__,
-__getitem__*(*(0:typing.overloadX,
-__getitem__*(*("0:typing.overloadX,
-__getitem__#*(*(%0:typing.overloadX"312"313"314Ñ
+__getitem__*(*(0:typing.overloadX,
+__getitem__*(*(0:typing.overloadX,
+__getitem__ *(*(!0:typing.overloadXÑ
 	IPNetwork"netaddr.ip.BaseIP"netaddr.ip.IPListMixin*]
 __init__*
 
-self(&*
+self("*
 
-addr()*
+addr(%*
 implicit_prefix (*
 version (*
 flags (*)
 ip*
 
-self(&0:builtins.property`*.
+self("0:builtins.property`*.
 network*
 
-self(&0:builtins.property`*0
-	broadcast**
+self("0:builtins.property`*0
+	broadcast&*
 
-self(&0:builtins.property`*,
+self("0:builtins.property`*,
 first*
 
-self(&0:builtins.property`*+
+self("0:builtins.property`*+
 last*
 
-self(&0:builtins.property`*/
+self("0:builtins.property`*/
 hostmask*
 
-self(&0:builtins.property`*+
-cidr&*
+self("0:builtins.property`*+
+cidr"*
 
-self(&0:builtins.property`*
-__iadd__+*(+*(*
-__isub__+*(+*(*
-__contains__*(&*(,*
+self("0:builtins.property`*
+__iadd__'*('*(*
+__isub__'*('*(*
+__contains__*("*((*
 key*
 
-self(&*
+self("*
 sort_key*
 
-self(&*
-ipv4+*
+self("*
+ipv4'*
 
-self(+*-
-ipv6+*
+self('*-
+ipv6'*
 
-self(+*
+self('*
 ipv4_compatible (*&
-previous+*
+previous'*
 
-self(+*
+self('*
 step (*"
-next+*
+next'*
 
-self(+*
+self('*
 step (*+
-supernet-*
+supernet)*
 
-self(&*
+self("*
 	prefixlen (*C
-subnet.*
+subnet**
 
-self(+*
+self('*
 	prefixlen(*
 count (
 *
 fmt (*
 
-iter_hosts*
+iter_hosts*
 
-self(&2r
+self("2r
 	prefixlen2
 	prefixlen*
 
-self(&0:builtins.propertyX`1
+self("0:builtins.propertyX`1
 	prefixlen*
 
-self(&*
+self("*
 value(0:.setter2l
 netmask0
 netmask*
 
-self(&0:builtins.propertyX`/
+self("0:builtins.propertyX`/
 netmask*
 
-self(&*
+self("*
 value(0:.setter°
 IPRange"netaddr.ip.BaseIP"netaddr.ip.IPListMixin*?
 __init__*
 
-self(/*
+self(+*
 start(*	
 end(*
 flags (*
-__contains__*(/*(*,
+__contains__*(+*(*,
 first*
 
-self(/0:builtins.property`*+
+self(+0:builtins.property`*+
 last*
 
-self(/0:builtins.property`*
+self(+0:builtins.property`*
 key*
 
-self(/*
+self(+*
 sort_key*
 
-self(/*
-cidrs-*
+self(+*
+cidrs)*
 
-self(/V
-parse_ip_network'*
-module(0*
+self(+V
+parse_ip_network#*
+module(-*
 
-addr(1*
+addr(.*
 implicit_prefix (*
 flags (
-iter_unique_ips*
+iter_unique_ips*
 
-args(27
+args(/-
 cidr_abbrev_to_verbose*
-abbrev_cidr(z310z311<
-cidr_abbrev_to_verbose*
-abbrev_cidr(z312z313z314
+abbrev_cidr(
 
-cidr_merge-*
-ip_addrs(3-
-cidr_exclude-*
-target()*
-exclude()/
-cidr_partition4*
-target()*
-exclude()!
-spanning_cidr&*
-ip_addrs(5@
-iter_iprange*
+cidr_merge)*
+ip_addrs(0-
+cidr_exclude)*
+target(%*
+exclude(%/
+cidr_partition1*
+target(%*
+exclude(%!
+spanning_cidr"*
+ip_addrs(26
+iter_iprange*
 start(*	
 end(*
-step (6z310z311E
-iter_iprange*
-start(*	
-end(*
-step (7z312z313z314,
-iprange_to_cidrs-*
-start()*	
-end()1
-smallest_matching_cidr8*
+step (3,
+iprange_to_cidrs)*
+start(%*	
+end(%1
+smallest_matching_cidr4*
 ip(*
-cidrs(50
-largest_matching_cidr8*
+cidrs(20
+largest_matching_cidr4*
 ip(*
-cidrs(5-
-all_matching_cidrs-*
+cidrs(2-
+all_matching_cidrs)*
 ip(*
-cidrs(5*
-__path__09*
-__annotations__0:*
-IPV4_LOOPBACK0&*
-IPV4_PRIVATE0<*
-IPV4_LINK_LOCAL0&*
-IPV4_MULTICAST0&*
-	IPV4_6TO40&*
-IPV4_RESERVED0<*
+cidrs(2*
+__path__05*
+__annotations__06*
+IPV4_LOOPBACK0"*
+IPV4_PRIVATE08*
+IPV4_LINK_LOCAL0"*
+IPV4_MULTICAST0"*
+	IPV4_6TO40"*
+IPV4_RESERVED08*
 IPV6_LOOPBACK0*
-IPV6_PRIVATE0=*
-IPV6_LINK_LOCAL0&*
-IPV6_MULTICAST0&*
-IPV6_RESERVED0=22"netaddr.ip.BaseIP2"builtins.int2"builtins.tuple22"builtins.bool2"builtins.object2"netaddr.core.DictDotLookup2	222222"netaddr.ip.IPAddress2"builtins.str222 "netaddr.ip._IPAddressAddr22228
-netaddr.ip.IPAddress.Self"netaddr.ip.IPAddress(22"builtins.bytes222$""netaddr.strategy.ipv6.ipv6_verbose2"type2222"typing.SupportsInt2!"typing_extensions.SupportsIndex222"typing.SupportsIndex222"builtins.function222"typing.Iterator22"netaddr.ip.IPListMixin222	222"builtins.slice2!!!2222"22"2"netaddr.ip.IPNetwork2222&'2 "netaddr.ip._IPNetworkAddr2(2228
-netaddr.ip.IPNetwork.Self"netaddr.ip.IPNetwork(2&22)2"builtins.list2&2"typing.Iterator2+2"netaddr.ip.IPRange2"_typeshed.Incomplete2!22'22/)2"typing.Iterable2222---2"typing.Iterable2)222222&2"builtins.list22"builtins.dict2!22&/2"builtins.tuple2;2"builtins.tuple2&
+IPV6_PRIVATE09*
+IPV6_LINK_LOCAL0"*
+IPV6_MULTICAST0"*
+IPV6_RESERVED0922"netaddr.ip.BaseIP2"builtins.int2"builtins.tuple22"builtins.bool2"builtins.object2"netaddr.core.DictDotLookup2	222222"netaddr.ip.IPAddress2"builtins.str222 "netaddr.ip._IPAddressAddr22228
+netaddr.ip.IPAddress.Self"netaddr.ip.IPAddress(22"builtins.bytes222$""netaddr.strategy.ipv6.ipv6_verbose2"type2222"typing.SupportsInt2!"typing_extensions.SupportsIndex222"builtins.function222"typing.Iterator22"netaddr.ip.IPListMixin222	22"builtins.slice22222"netaddr.ip.IPNetwork2222"#2 "netaddr.ip._IPNetworkAddr2$2228
+netaddr.ip.IPNetwork.Self"netaddr.ip.IPNetwork(2"22%2"builtins.list2"2"typing.Iterator2'2"netaddr.ip.IPRange22"_typeshed.Incomplete2,22#22+%2"typing.Iterable2/22)))2"typing.Iterable2%2222"2"builtins.list22"builtins.dict2,22"+2"builtins.tuple272"builtins.tuple2"

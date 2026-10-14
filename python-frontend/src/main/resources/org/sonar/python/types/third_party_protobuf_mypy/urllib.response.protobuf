@@ -1,60 +1,112 @@
 
-urllib.response¼
-addbase"tempfile._TemporaryFileWrapper*"
+urllib.responseý
+addbase"typing.BinaryIO*"
 __init__*
 
 self(*
-fp(*
-__exit__*(*(*(*(
-*
-write*
+fp(*
+	__enter__*(*
+__exit__*(*(*(	*(*
+__iter__*(*
+__next__*
+
+self(*
+close*
+
+self(*
+fileno*
+
+self(*
+flush*
+
+self(*
+isatty*
+
+self(*
+read*
+
+self(*	
+n (*
+readable*
+
+self(*'
+readline*
+
+self(*
+limit (*'
+	readlines*
+
+self(*
+hint (*2
+seek*
+
+self(*
+offset(*
+whence (*
+seekable*
+
+self(*
+tell*
+
+self(*&
+truncate*
+
+self(*
+size (*
+writable*
+
+self(*
+write*
 
 self(*
-s(*'
+s(*'
 
 writelines*
 
 self(*
-lines(r
+lines(r
 fp0‰
 addclosehook"urllib.response.addbase*C
 __init__*
 
-self(*
+self(*
 fp(*
-	closehook(*
-hookargs(r
-	closehook0r
-hookargs0x
+	closehook(*
+hookargs(r
+	closehook0r
+hookargs0x
 addinfo"urllib.response.addbase*1
 __init__*
 
-self(*
+self( *
 fp(*
-headers(*
-info*
+headers(!*
+info!*
 
-self(r
-headers0ä
+self( r
+headers0!ä
 
 addinfourl"urllib.response.addinfo*-
-status*
+status*
 
-self(0:builtins.property`*J
+self("0:builtins.property`*J
 __init__*
 
-self(*
+self("*
 fp(*
-headers(*	
-url(*
-code (*
-geturl*
+headers(!*	
+url(#*
+code (*
+geturl#*
 
-self(*
-getcode*
+self("*
+getcode*
 
-self(r
-url0r
-code0*
-__annotations__0*
-__all__022"urllib.response.addbase2"builtins.bytes2"	typing.IO22"builtins.BaseException2"type222222"types.TracebackType22	2"builtins.int2"typing_extensions.Buffer2"typing.Iterable22"urllib.response.addclosehook2"builtins.function2222"builtins.tuple22"urllib.response.addinfo2"builtins.str2"email.message.Message2222"urllib.response.addinfourl2"builtins.dict22"builtins.list2
+self("r
+url0#r
+code0*
+__annotations__0$*
+__all__0%22"urllib.response.addbase2"builtins.bytes2"	typing.IO22>
+urllib.response.addbase.Self"urllib.response.addbase(22"builtins.BaseException2"type222222"types.TracebackType22
+2"builtins.int2"builtins.bool2"builtins.list2222"builtins.bytearray2"builtins.memoryview22"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"typing.Iterable22"urllib.response.addclosehook2"builtins.function222"builtins.tuple22"urllib.response.addinfo2"email.message.Message2"urllib.response.addinfourl2"builtins.str2"builtins.dict2#2"builtins.list2#

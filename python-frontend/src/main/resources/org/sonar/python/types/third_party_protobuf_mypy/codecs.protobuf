@@ -1,432 +1,437 @@
 
-codecsf
-_WritableStream"builtins.object*
-write*(*(*
-seek*(*(*(*
+codecst
+_WritableStream"builtins.object*
+write*
+
+self(*(*
+seek*
+
+self(*(*(*
 close*
 
-self(8Xg
-_ReadableStream"builtins.object*
-read*(* (*
-seek*(*(*(*
+self(Xu
+_ReadableStream"builtins.object*
+read*
+
+self(* (*
+seek*
+
+self(*(*(*
 close*
 
-self(8X=
-_Stream"codecs._WritableStream"codecs._ReadableStream8X;
-_Encoder"builtins.object*
-__call__*(*(* (8X;
-_Decoder"builtins.object*
-__call__	*(
-*(* (8X@
-_StreamReader"builtins.object*
-__call__*(*(* (8X@
-_StreamWriter"builtins.object*
-__call__*(*(* (8XT
+self(X;
+_Stream"codecs._WritableStream"codecs._ReadableStreamXT
+_Encoder"builtins.object*5
+__call__*
+
+self(*
+input(*
+errors (XT
+_Decoder"builtins.object*5
+__call__	*
+
+self(
+*
+input(*
+errors (XZ
+_StreamReader"builtins.object*6
+__call__*
+
+self(*
+stream(*
+errors (XZ
+_StreamWriter"builtins.object*6
+__call__*
+
+self(*
+stream(*
+errors (XR
 _IncrementalEncoder"builtins.object*(
-__call__*
+__call__*
 
-self(*
-errors (8XT
+self(*
+errors (XR
 _IncrementalDecoder"builtins.object*(
-__call__*
+__call__*
 
-self(*
-errors (8X\
-_BufferedIncrementalDecoder"builtins.object*(
-__call__*
-
-self(*
-errors (8X¿
+self(*
+errors (Xß
 	CodecInfo"builtins.tuple*-
 encode*
 
-self(0:builtins.property`*-
+self(0:builtins.property`*-
 decode
 *
 
-self(0:builtins.property`*3
-streamreader*
+self(0:builtins.property`*3
+streamreader*
 
-self(0:builtins.property`*3
-streamwriter*
+self(0:builtins.property`*3
+streamwriter*
 
-self(0:builtins.property`*9
-incrementalencoder*
+self(0:builtins.property`*9
+incrementalencoder*
 
-self(0:builtins.property`*9
-incrementaldecoder*
+self(0:builtins.property`*9
+incrementaldecoder*
 
-self(0:builtins.property`*¡
-__new__*	
-cls(*
+self(0:builtins.property`*¡
+__new__*	
+cls(*
 encode(*
 decode(
 *
-streamreader (*
-streamwriter (*
-incrementalencoder (*
-incrementaldecoder (*
-name (*
-_is_text_encoding ( h8r
-_is_text_encoding0r
+streamreader (*
+streamwriter (*
+incrementalencoder (*
+incrementaldecoder (*
+name (*
+_is_text_encoding (hr
 name0Ç
 Codec"builtins.object*3
 encode*
 
-self(!*
+self(*
 input(*
 errors (*3
 decode	*
 
-self(!*
+self(*
 input(*
 errors (ˇ
 IncrementalEncoder"builtins.object*(
-__init__*
+__init__*
 
-self(*
+self(*
 errors (*J
 encode*
 
-self(*
+self(*
 input(*
-final (0:abc.abstractmethod@*
-reset*
+final (0:abc.abstractmethod@*
+reset*
 
-self(*
-getstate"*
+self(*
+getstate*
 
-self(*%
-setstate*
+self(*%
+setstate*
 
-self(*
-state("r
+self(*
+state(r
 
 errors0ˇ
 IncrementalDecoder"builtins.object*(
-__init__*
+__init__*
 
-self(*
+self(*
 errors (*J
 decode*
 
-self(*
-input(*
-final (0:abc.abstractmethod@*
-reset*
+self(*
+input(**
+final (0:abc.abstractmethod@*
+reset*
 
-self(*
+self(*
 getstate*
 
-self(*%
-setstate*
+self(*%
+setstate*
 
-self(*
+self(*
 state(r
 
 errors0Å
 BufferedIncrementalEncoder"codecs.IncrementalEncoder*(
-__init__*
+__init__*
 
-self(#*
+self(+*
 errors (*^
 _buffer_encode*
 
-self(#*
+self(+*
 input(*
 errors(*
-final(0:abc.abstractmethod@*2
+final(0:abc.abstractmethod@*2
 encode*
 
-self(#*
+self(+*
 input(*
-final (r
+final (r
 
 buffer0Å
 BufferedIncrementalDecoder"codecs.IncrementalDecoder*(
-__init__*
+__init__*
 
-self(*
+self(,*
 errors (*^
 _buffer_decode	*
 
-self(*
-input(*
+self(,*
+input(**
 errors(*
-final(0:abc.abstractmethod@*2
+final(0:abc.abstractmethod@*2
 decode*
 
-self(*
-input(*
-final (r
+self(,*
+input(**
+final (r
 
-buffer0‘
+buffer0†
 StreamWriter"codecs.Codec*6
-__init__*
+__init__*
 
-self(*
+self(*
 stream(*
 errors (*#
-write*
+write*
 
-self(*
+self(*
 object(*&
 
-writelines*
+writelines*
 
-self(*
+self(*
 
-list($*
-reset*
+list(-*
+reset*
 
-self(*2
-seek*
-
-self(*
-offset(*
-whence (*
-	__enter__%*(%*
-__exit__*(*((*()*(+*
-__getattr__,*(*(* (.r
+self(*
+	__enter__.*(.*
+__exit__*(*(1*(2*(4*
+__getattr__"*(*(* (6r
 
 stream0r
 
-errors0Ü
+errors0æ
 StreamReader"codecs.Codec*6
-__init__*
+__init__*
 
-self(*
+self(*
 stream(*
 errors (*D
 read*
 
-self(*
+self(*
 size (*
 chars (*
-	firstline (*8
+	firstline (*8
 readline*
 
-self(*
-size (/*
-keepends (*=
-	readlines0*
+self(*
+size (7*
+keepends (*=
+	readlines8*
 
-self(*
-sizehint (/*
-keepends (*
-reset*
+self(*
+sizehint (7*
+keepends (*
+reset*
 
-self(*2
-seek*
-
-self(*
-offset(*
-whence (*
-	__enter__1*(1*
-__exit__*(*((*()*(+*
-__iter__1*(1*
+self(*
+	__enter__9*(9*
+__exit__*(*(1*(2*(4*
+__iter__9*(9*
 __next__*
 
-self(*
-__getattr__,*(*(* (.r
+self(*
+__getattr__"*(*(* (6r
 
 stream0r
 
-errors0r
-charbuffertype02Ú
+errors0Ú
 StreamReaderWriter"typing.TextIO*R
-__init__*
+__init__*
 
-self(3*
-stream(4*
-Reader(*
-Writer(*
+self(:*
+stream(;*
+Reader(*
+Writer(*
 errors (*"
 read*
 
-self(3*
+self(:*
 size (*&
 readline*
 
-self(3*
-size (/*+
-	readlines0*
+self(:*
+size (7*+
+	readlines8*
 
-self(3*
-sizehint (/*
+self(:*
+sizehint (7*
 __next__*
 
-self(3*
-__iter__5*(5*!
-write*
+self(:*
+__iter__<*(<*!
+write*
 
-self(3*
+self(:*
 
 data(*&
 
-writelines*
+writelines*
 
-self(3*
+self(:*
 
-list($*
-reset*
+list(-*
+reset*
 
-self(3*2
-seek*
+self(:*2
+seek*
 
-self(3*
+self(:*
 offset(*
 whence (*
-	__enter__5*(5*
-__exit__*(3*((*()*(+*
-__getattr__,*(3*(*
-close*
+	__enter__<*(<*
+__exit__*(:*(1*(2*(4*
+__getattr__"*(:*(*
+close*
 
-self(3*
+self(:*
 fileno*
 
-self(3*
-flush*
+self(:*
+flush*
 
-self(3*
-isatty*
+self(:*
+isatty*
 
-self(3*
-readable*
+self(:*
+readable*
 
-self(3*&
+self(:*&
 truncate*
 
-self(3*
-size (/*
-seekable*
+self(:*
+size (7*
+seekable*
 
-self(3*
+self(:*
 tell*
 
-self(3*
-writable*
+self(:*
+writable*
 
-self(3r
+self(:r
 
-stream04•
+stream0;ˇ
 StreamRecoder"typing.BinaryIO*n
-__init__*
+__init__*
 
-self(6*
-stream(4*
+self(=*
+stream(;*
 encode(*
 decode(
 *
-Reader(*
-Writer(*
+Reader(*
+Writer(*
 errors (*"
 read*
 
-self(6*
+self(=*
 size (*&
 readline*
 
-self(6*
-size (/*+
-	readlines7*
+self(=*
+size (7*+
+	readlines>*
 
-self(6*
-sizehint (/*
+self(=*
+sizehint (7*
 __next__*
 
-self(6*
-__iter__8*(8*!
-write*
+self(=*
+__iter__?*(?*!
+write*
 
-self(6*
+self(=*
 
 data(*&
 
-writelines*
+writelines*
 
-self(6*
+self(=*
 
-list(9*
-reset*
+list(@*
+reset*
 
-self(6*
-__getattr__,*(6*(*
-	__enter__8*(8*
-__exit__*(6*((*()*(+*2
-seek*
+self(=*
+__getattr__"*(=*(*
+	__enter__?*(?*
+__exit__*(=*(1*(2*(4*2
+seek*
 
-self(6*
+self(=*
 offset(*
 whence (*
-close*
+close*
 
-self(6*
+self(=*
 fileno*
 
-self(6*
-flush*
+self(=*
+flush*
 
-self(6*
-isatty*
+self(=*
+isatty*
 
-self(6*
-readable*
+self(=*
+readable*
 
-self(6*&
+self(=*&
 truncate*
 
-self(6*
-size (/*
-seekable*
+self(=*
+size (7*
+seekable*
 
-self(6*
+self(=*
 tell*
 
-self(6*
-writable*
+self(=*
+writable*
 
-self(6r
-data_encoding0r
-file_encoding0"
-register_codecs.register*(:&
+self(="
+register_codecs.register*(A&
 
-unregister_codecs.unregister*(:2
-register_error_codecs.register_error*(*(;*
-lookup_error_codecs.lookup_error;*(
-lookup_codecs.lookup<*(,
-charmap_build_codecs.charmap_build@*(0
-ascii_decode_codecs.ascii_decode	*(* (0
-ascii_encode_codecs.ascii_encode*(* (:
-charmap_decode_codecs.charmap_decode	*(* (* (A:
-charmap_encode_codecs.charmap_encode*(* (* (A2
-escape_decode_codecs.escape_decode	*(B* (2
-escape_encode_codecs.escape_encode*(* (4
-latin_1_decode_codecs.latin_1_decode	*(* (4
-latin_1_encode_codecs.latin_1_encode*(* (P
-raw_unicode_escape_decode!_codecs.raw_unicode_escape_decode	*(B* (* (J
-raw_unicode_escape_encode!_codecs.raw_unicode_escape_encode*(* (:
-readbuffer_encode_codecs.readbuffer_encode*(B* (H
-unicode_escape_decode_codecs.unicode_escape_decode	*(B* (* (B
-unicode_escape_encode_codecs.unicode_escape_encode*(* (>
-utf_16_be_decode_codecs.utf_16_be_decode	*(* (* (8
-utf_16_be_encode_codecs.utf_16_be_encode*(* (8
-utf_16_decode_codecs.utf_16_decode	*(* (* (8
-utf_16_encode_codecs.utf_16_encode*(* (* (D
-utf_16_ex_decode_codecs.utf_16_ex_decodeC*(* (* (* (>
-utf_16_le_decode_codecs.utf_16_le_decode	*(* (* (8
-utf_16_le_encode_codecs.utf_16_le_encode*(* (>
-utf_32_be_decode_codecs.utf_32_be_decode	*(* (* (8
-utf_32_be_encode_codecs.utf_32_be_encode*(* (8
-utf_32_decode_codecs.utf_32_decode	*(* (* (8
-utf_32_encode_codecs.utf_32_encode*(* (* (D
-utf_32_ex_decode_codecs.utf_32_ex_decodeC*(* (* (* (>
-utf_32_le_decode_codecs.utf_32_le_decode	*(* (* (8
-utf_32_le_encode_codecs.utf_32_le_encode*(* (6
-utf_7_decode_codecs.utf_7_decode	*(* (* (0
-utf_7_encode_codecs.utf_7_encode*(* (6
-utf_8_decode_codecs.utf_8_decode	*(* (* (0
-utf_8_encode_codecs.utf_8_encode*(* (
+unregister_codecs.unregister*(A2
+register_error_codecs.register_error*(*(B*
+lookup_error_codecs.lookup_errorB*(
+lookup_codecs.lookupC*(,
+charmap_build_codecs.charmap_buildG*(0
+ascii_decode_codecs.ascii_decode	*(** (0
+ascii_encode_codecs.ascii_encode*(* (:
+charmap_decode_codecs.charmap_decode	*(** (* (H:
+charmap_encode_codecs.charmap_encode*(* (* (H2
+escape_decode_codecs.escape_decode	*(I* (2
+escape_encode_codecs.escape_encode*(* (4
+latin_1_decode_codecs.latin_1_decode	*(** (4
+latin_1_encode_codecs.latin_1_encode*(* (P
+raw_unicode_escape_decode!_codecs.raw_unicode_escape_decode	*(I* (* (J
+raw_unicode_escape_encode!_codecs.raw_unicode_escape_encode*(* (:
+readbuffer_encode_codecs.readbuffer_encode*(I* (H
+unicode_escape_decode_codecs.unicode_escape_decode	*(I* (* (B
+unicode_escape_encode_codecs.unicode_escape_encode*(* (>
+utf_16_be_decode_codecs.utf_16_be_decode	*(** (* (8
+utf_16_be_encode_codecs.utf_16_be_encode*(* (8
+utf_16_decode_codecs.utf_16_decode	*(** (* (8
+utf_16_encode_codecs.utf_16_encode*(* (* (D
+utf_16_ex_decode_codecs.utf_16_ex_decodeJ*(** (* (* (>
+utf_16_le_decode_codecs.utf_16_le_decode	*(** (* (8
+utf_16_le_encode_codecs.utf_16_le_encode*(* (>
+utf_32_be_decode_codecs.utf_32_be_decode	*(** (* (8
+utf_32_be_encode_codecs.utf_32_be_encode*(* (8
+utf_32_decode_codecs.utf_32_decode	*(** (* (8
+utf_32_encode_codecs.utf_32_encode*(* (* (D
+utf_32_ex_decode_codecs.utf_32_ex_decodeJ*(** (* (* (>
+utf_32_le_decode_codecs.utf_32_le_decode	*(** (* (8
+utf_32_le_encode_codecs.utf_32_le_encode*(* (6
+utf_7_decode_codecs.utf_7_decode	*(** (* (0
+utf_7_encode_codecs.utf_7_encode*(* (6
+utf_8_decode_codecs.utf_8_decode	*(** (* (0
+utf_8_encode_codecs.utf_8_encode*(* (
 
 getencoder*
 encoding(
@@ -434,48 +439,56 @@ getencoder*
 getdecoder
 *
 encoding()
-getincrementalencoder*
+getincrementalencoder*
+encoding()
+getincrementaldecoder*
 encoding(
-	getreader*
+	getreader*
 encoding(
-	getwriter*
+	getwriter*
 encoding([
-open3*
+open:*
 filename(*
 mode (*
-encoding (*
+encoding (*
 errors (*
 	buffering (W
-EncodedFile6*
+EncodedFile=*
 
-file(4*
+file(;*
 data_encoding(*
-file_encoding (*
+file_encoding (*
 errors (>
 
-iterencodeD*
-iterator($*
+iterencodeK*
+iterator(-*
 encoding(*
 errors (>
 
-iterdecodeE*
-iterator(9*
+iterdecodeL*
+iterator(@*
 encoding(*
-errors (
-strict_errorsG*(H
-replace_errorsG*(H
-ignore_errorsG*(H 
-xmlcharrefreplace_errorsG*(H
-backslashreplace_errorsG*(H
-namereplace_errorsG*(H"Æ
+errors ("
+strict_errorsN*
+	exception(O#
+replace_errorsN*
+	exception(O"
+ignore_errorsN*
+	exception(O-
+xmlcharrefreplace_errorsN*
+	exception(O,
+backslashreplace_errorsN*
+	exception(O'
+namereplace_errorsN*
+	exception(O"Æ
 encode_codecs.encodeZ
 encode_codecs.encode*	
-obj(*
-encoding(K*
+obj(**
+encoding(R*
 errors (0:typing.overloadXZ
 encode_codecs.encode*	
 obj(*
-encoding(M*
+encoding(T*
 errors (0:typing.overloadX\
 encode_codecs.encode*	
 obj(*
@@ -483,51 +496,47 @@ iterdecodeE*
 errors (0:typing.overloadX"Ê
 decode_codecs.decodeZ
 decode_codecs.decode*	
-obj(*
-encoding(K*
+obj(**
+encoding(R*
 errors (0:typing.overloadXZ
 decode_codecs.decode*	
 obj(*
-encoding(M*
+encoding(T*
 errors (0:typing.overloadXZ
 decode_codecs.decode*	
 obj(*
-encoding(N*
+encoding(U*
 errors (0:typing.overloadXZ
 decode_codecs.decode*	
 obj(*
-encoding(L*
+encoding(S*
 errors (0:typing.overloadX\
 decode_codecs.decode*	
-obj(*
+obj(**
 encoding (*
-errors (0:typing.overloadX"ó
-getincrementaldecoder>
-getincrementaldecoder*
-encoding(P0:typing.overloadX>
-getincrementaldecoder*
-encoding(0:typing.overloadX*
-__annotations__0Q*
-__all__00*
-BOM32_BE0*
-BOM32_LE0*
-BOM64_BE0*
-BOM64_LE0*
-BOM0S*
+errors (0:typing.overloadX*
+__annotations__0V*
+__all__08*
+BOM32_BE0W*
+BOM32_LE0W*
+BOM64_BE0W*
+BOM64_LE0W*
+BOM0X*
 
-BOM_BE0*
+BOM_BE0W*
 
-BOM_LE0*
-BOM_UTF80*
-	BOM_UTF160S*
-BOM_UTF16_BE0*
-BOM_UTF16_LE0*
-	BOM_UTF320S*
-BOM_UTF32_BE0*
-BOM_UTF32_LE02"builtins.object2"codecs._WritableStream2"builtins.bytes2"builtins.int2"codecs._ReadableStream222"codecs._Encoder2"builtins.str222"codecs._Decoder2"typing_extensions.Buffer2"codecs.StreamReader2"codecs._StreamReader2"codecs.StreamWriter2"codecs._StreamWriter2"codecs.IncrementalEncoder2"codecs._IncrementalEncoder2"codecs.IncrementalDecoder2"codecs._IncrementalDecoder2#"!codecs.BufferedIncrementalDecoder2$""codecs._BufferedIncrementalDecoder22
-2
-codecs.CodecInfo.Self(22"type2222222222222"builtins.bool222"codecs.Codec222#"!codecs.BufferedIncrementalEncoder2"typing.Iterable226
-codecs.StreamWriter.Self"codecs.StreamWriter(22"builtins.BaseException2"type2&22'22&2"types.TracebackType22*22"builtins.function22-222"builtins.list226
-codecs.StreamReader.Self"codecs.StreamReader(22"builtins.type2"codecs.StreamReaderWriter2"codecs._Stream2B
-codecs.StreamReaderWriter.Self"codecs.StreamReaderWriter(232"codecs.StreamRecoder2"builtins.list228
-codecs.StreamRecoder.Self"codecs.StreamRecoder(262"typing.Iterable22"_codecs._SearchFunction2.2"_codecs._Handler2.2"codecs.CodecInfo22"builtins.dict22"_codecs._EncodingMap22=>2"_codecs._CharMap2?22@22222"typing.Generator22"typing.Generator22222F2"builtins.UnicodeError2	222IIIIIIIIIIIIIIII2$"_codecs._BytesToBytesEncoding2J22II2 "_codecs._StrToStrEncoding2L22IIII22IIIIIIIIIIII2"codecs._BufferedEncoding2O2"builtins.dict2,2	222RR
+BOM_LE0W*
+BOM_UTF80W*
+	BOM_UTF160X*
+BOM_UTF16_BE0W*
+BOM_UTF16_LE0W*
+	BOM_UTF320X*
+BOM_UTF32_BE0W*
+BOM_UTF32_LE0W2"builtins.object2"codecs._WritableStream2"builtins.bytes2"builtins.int2"codecs._ReadableStream222"codecs._Encoder2"builtins.str222"codecs._Decoder2"codecs.StreamReader2"codecs._StreamReader2"codecs.StreamWriter2"codecs._StreamWriter2"codecs.IncrementalEncoder2"codecs._IncrementalEncoder2"codecs.IncrementalDecoder2"codecs._IncrementalDecoder22
+2
+codecs.CodecInfo.Self(22"type2222222222222"builtins.bool222"codecs.Codec222"builtins.bytearray2"builtins.memoryview22"array.array2"2"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2 !#$%&2 "_typeshed.WriteableBuffer2'22(2"_typeshed.ReadableBuffer2)2#"!codecs.BufferedIncrementalEncoder2#"!codecs.BufferedIncrementalDecoder2"typing.Iterable226
+codecs.StreamWriter.Self"codecs.StreamWriter(22"builtins.BaseException2"type2/22022/2"types.TracebackType2232"builtins.function225222"builtins.list226
+codecs.StreamReader.Self"codecs.StreamReader(22"codecs.StreamReaderWriter2"codecs._Stream2B
+codecs.StreamReaderWriter.Self"codecs.StreamReaderWriter(2:2"codecs.StreamRecoder2"builtins.list228
+codecs.StreamRecoder.Self"codecs.StreamRecoder(2=2"typing.Iterable22"_codecs._SearchFunction262"_codecs._Handler262"codecs.CodecInfo22"builtins.dict22"_codecs._EncodingMap22DE2"_codecs._CharMap2F22G22*222"typing.Generator22"typing.Generator22222M2"builtins.UnicodeError2	222PPPPPPPPPPPPPPPP2$"_codecs._BytesToBytesEncoding2Q22PP2 "_codecs._StrToStrEncoding2S22PPPP2"builtins.dict2"2	222WW

@@ -3,7 +3,7 @@
 
 QueueEmpty"builtins.Exception
 	QueueFull"builtins.Exception‘
-Queue"asyncio.mixins._LoopBoundMixin*)
+Queue"builtins.object*)
 __init__*
 
 self(*
@@ -59,8 +59,11 @@ get_nowait*
 self(H*
 	task_done*
 
-self(*
-__class_getitem__*(*(pP'
+self(*.
+__class_getitem__*	
+cls(*
+
+type(pP'
 PriorityQueue"asyncio.queues.QueueP#
 	LifoQueue"asyncio.queues.QueueP*
 __annotations__0*

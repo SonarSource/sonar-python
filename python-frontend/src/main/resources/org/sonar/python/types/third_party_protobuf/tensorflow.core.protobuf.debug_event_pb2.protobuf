@@ -1,7 +1,7 @@
 
 (tensorflow.core.protobuf.debug_event_pb2#
-_TensorDebugMode"builtins.objectÂ
-_TensorDebugModeEnumTypeWrapper"builtins.typer
+_TensorDebugMode"builtins.object¢
+_TensorDebugModeEnumTypeWrapper";google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"builtins.typer
 
 DESCRIPTOR0r
 UNSPECIFIED0r
@@ -13,10 +13,10 @@ DESCRIPTOR0r
 FULL_NUMERICS0r
 FULL_TENSOR0r
 REDUCE_INF_NAN_THREE_SLOTS0ò
-TensorDebugMode"9tensorflow.core.protobuf.debug_event_pb2._TensorDebugMode@bHtensorflow.core.protobuf.debug_event_pb2._TensorDebugModeEnumTypeWrapperì
+TensorDebugMode"9tensorflow.core.protobuf.debug_event_pb2._TensorDebugMode@bHtensorflow.core.protobuf.debug_event_pb2._TensorDebugModeEnumTypeWrapper£
 
 
-DebugEvent"builtins.object*5
+DebugEvent"google.protobuf.message.Message*5
 debug_metadata*
 
 self(0:builtins.property`*2
@@ -73,7 +73,7 @@ WhichOneof!*
 self(*
 oneof_group("8r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 WALL_TIME_FIELD_NUMBER0r
 STEP_FIELD_NUMBER0r
 DEBUG_METADATA_FIELD_NUMBER0r
@@ -87,8 +87,8 @@ DESCRIPTOR0r
 DEBUGGED_DEVICE_FIELD_NUMBER0r
 	wall_time0r
 step0r
-graph_id0·
-DebugMetadata"builtins.object*`
+graph_id0Ò
+DebugMetadata"google.protobuf.message.Message*`
 __init__*
 
 self(*
@@ -100,18 +100,18 @@ ClearField*
 
 self(*
 
-field_name(#8r
+field_name($8r
 
-DESCRIPTOR0r#
+DESCRIPTOR0#r#
 TENSORFLOW_VERSION_FIELD_NUMBER0r
 FILE_VERSION_FIELD_NUMBER0r
 TFDBG_RUN_ID_FIELD_NUMBER0r
 tensorflow_version0r
 file_version0r
-tfdbg_run_id0»
+tfdbg_run_id0ÿ
 
-SourceFile"builtins.object*,
-lines*
+SourceFile"google.protobuf.message.Message*,
+lines%*
 
 self(0:builtins.property`*M
 __init__*
@@ -119,22 +119,22 @@ SourceFile"builtins.object*,
 self(*
 	file_path (*
 	host_name (*
-lines (%*,
+lines ('*,
 
 ClearField*
 
 self(*
 
-field_name(#8r
+field_name($8r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 FILE_PATH_FIELD_NUMBER0r
 HOST_NAME_FIELD_NUMBER0r
 LINES_FIELD_NUMBER0r
 	file_path0r
-	host_name0ø
-StackFrameWithId"builtins.object*4
-file_line_col*
+	host_name0œ
+StackFrameWithId"google.protobuf.message.Message*4
+file_line_col(*
 
 self(0:builtins.property`*;
 __init__*
@@ -142,7 +142,7 @@ DESCRIPTOR0r
 self(*
 
 id (*
-file_line_col (&**
+file_line_col ()**
 HasField*
 
 self(*
@@ -153,40 +153,40 @@ ClearField*
 
 self(*
 
-field_name('8r
+field_name(*8r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 ID_FIELD_NUMBER0r
 FILE_LINE_COL_FIELD_NUMBER0r
-id0™
-CodeLocation"builtins.object*6
-stack_frame_ids*
+id0∫
+CodeLocation"google.protobuf.message.Message*6
+stack_frame_ids%*
 
-self((0:builtins.property`*D
+self(+0:builtins.property`*D
 __init__*
 
-self((*
+self(+*
 	host_name (*
-stack_frame_ids (%*,
+stack_frame_ids ('*,
 
 ClearField*
 
-self((*
+self(+*
 
-field_name('8r
+field_name(*8r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 HOST_NAME_FIELD_NUMBER0r 
 STACK_FRAME_IDS_FIELD_NUMBER0r
-	host_name0Í
-GraphOpCreation"builtins.object*2
-input_names*
+	host_name0˙
+GraphOpCreation"google.protobuf.message.Message*2
+input_names%*
 
 self(0:builtins.property`*4
-code_location(*
+code_location+*
 
 self(0:builtins.property`*8
-output_tensor_ids*
+output_tensor_ids,*
 
 self(0:builtins.property`*—
 __init__*
@@ -198,10 +198,10 @@ DESCRIPTOR0r
 graph_name (*
 graph_id (*
 device_name (*
-input_names (%*
+input_names ('*
 num_outputs (*
-code_location ()*
-output_tensor_ids (+**
+code_location (-*
+output_tensor_ids (/**
 HasField*
 
 self(*
@@ -212,9 +212,9 @@ ClearField*
 
 self(*
 
-field_name(,8r
+field_name(08r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 OP_TYPE_FIELD_NUMBER0r
 OP_NAME_FIELD_NUMBER0r
 GRAPH_NAME_FIELD_NUMBER0r
@@ -230,9 +230,9 @@ DESCRIPTOR0r
 graph_name0r
 graph_id0r
 device_name0r
-num_outputs0˛
-DebuggedGraph"builtins.object*7
-instrumented_ops*
+num_outputs0é
+DebuggedGraph"google.protobuf.message.Message*7
+instrumented_ops%*
 
 self(0:builtins.property`*Æ
 __init__*
@@ -241,18 +241,18 @@ graph_name0r
 graph_id (*
 
 graph_name (*
-instrumented_ops (%*
-original_graph_def (-*
-instrumented_graph_def (-*
+instrumented_ops ('*
+original_graph_def (1*
+instrumented_graph_def (1*
 outer_context_id (*,
 
 ClearField*
 
 self(*
 
-field_name(.8r
+field_name(28r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 GRAPH_ID_FIELD_NUMBER0r
 GRAPH_NAME_FIELD_NUMBER0r!
 INSTRUMENTED_OPS_FIELD_NUMBER0r#
@@ -264,8 +264,8 @@ DESCRIPTOR0r
 graph_name0r
 original_graph_def0r
 instrumented_graph_def0r
-outer_context_id0˝
-DebuggedDevice"builtins.object*@
+outer_context_id0ç
+DebuggedDevice"google.protobuf.message.Message*@
 __init__*
 
 self(*
@@ -276,27 +276,27 @@ ClearField*
 
 self(*
 
-field_name('8r
+field_name(*8r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 DEVICE_NAME_FIELD_NUMBER0r
 DEVICE_ID_FIELD_NUMBER0r
 device_name0r
-	device_id0á
-	Execution"builtins.object*7
-input_tensor_ids*
+	device_id0ó
+	Execution"google.protobuf.message.Message*7
+input_tensor_ids,*
 
 self(	0:builtins.property`*8
-output_tensor_ids*
+output_tensor_ids,*
 
 self(	0:builtins.property`*4
-tensor_protos*
+tensor_protos4*
 
 self(	0:builtins.property`*4
-code_location(*
+code_location+*
 
 self(	0:builtins.property`*?
-output_tensor_device_ids*
+output_tensor_device_ids,*
 
 self(	0:builtins.property`*
 __init__*
@@ -305,12 +305,12 @@ DESCRIPTOR0r
 op_type (*
 num_outputs (*
 graph_id (*
-input_tensor_ids (+*
-output_tensor_ids (+*
-tensor_debug_mode (/*
-tensor_protos (1*
-code_location ()* 
-output_tensor_device_ids (+**
+input_tensor_ids (/*
+output_tensor_ids (/*
+tensor_debug_mode (5*
+tensor_protos (7*
+code_location (-* 
+output_tensor_device_ids (/**
 HasField*
 
 self(	*
@@ -321,9 +321,9 @@ ClearField*
 
 self(	*
 
-field_name(,8r
+field_name(08r
 
-DESCRIPTOR0r
+DESCRIPTOR0#r
 OP_TYPE_FIELD_NUMBER0r
 NUM_OUTPUTS_FIELD_NUMBER0r
 GRAPH_ID_FIELD_NUMBER0r!
@@ -336,9 +336,9 @@ DESCRIPTOR0r
 op_type0r
 num_outputs0r
 graph_id0r
-tensor_debug_mode0Ä
-GraphExecutionTrace"builtins.object*3
-tensor_proto*
+tensor_debug_mode0ê
+GraphExecutionTrace"google.protobuf.message.Message*3
+tensor_proto3*
 
 self(
 0:builtins.property`*û
@@ -349,8 +349,8 @@ DESCRIPTOR0r
 tfdbg_context_id (*
 op_name (*
 output_slot (*
-tensor_debug_mode (/*
-tensor_proto (&*
+tensor_debug_mode (5*
+tensor_proto (8*
 device_name (**
 HasField*
 
@@ -364,9 +364,9 @@ ClearField*
 self(
 *
 
-field_name(.8r
+field_name(28r
 
-DESCRIPTOR0r!
+DESCRIPTOR0#r!
 TFDBG_CONTEXT_ID_FIELD_NUMBER0r
 OP_NAME_FIELD_NUMBER0r
 OUTPUT_SLOT_FIELD_NUMBER0r"
@@ -378,15 +378,14 @@ DESCRIPTOR0r!
 output_slot0r
 tensor_debug_mode0r
 device_name0*
-__annotations__02*
-collectionscollections *
-
-google0*
+__annotations__0:*
+collectionscollections *
+googlegoogle *
 
 tensorflow
 tensorflow *
 
-DESCRIPTOR0*
+DESCRIPTOR0;*
 UNSPECIFIED0*
 	NO_TENSOR0*
 CURT_HEALTH0*
@@ -396,18 +395,18 @@ DESCRIPTOR0*
 FULL_NUMERICS0*
 FULL_TENSOR0*
 REDUCE_INF_NAN_THREE_SLOTS0*
-global___TensorDebugMode038*
+global___TensorDebugMode0<8*
 global___DebugEvent08*
 global___DebugMetadata08*
 global___SourceFile08*
 global___StackFrameWithId08*
-global___CodeLocation0(8*
+global___CodeLocation0+8*
 global___GraphOpCreation08*
 global___DebuggedGraph08*
 global___DebuggedDevice08*
 global___Execution0	8*"
 global___GraphExecutionTrace0
-822E"Ctensorflow.core.protobuf.debug_event_pb2._TensorDebugMode.ValueType28"6tensorflow.core.protobuf.debug_event_pb2.DebugMetadata25"3tensorflow.core.protobuf.debug_event_pb2.DebugEvent25"3tensorflow.core.protobuf.debug_event_pb2.SourceFile2;"9tensorflow.core.protobuf.debug_event_pb2.StackFrameWithId2:"8tensorflow.core.protobuf.debug_event_pb2.GraphOpCreation28"6tensorflow.core.protobuf.debug_event_pb2.DebuggedGraph24"2tensorflow.core.protobuf.debug_event_pb2.Execution2>"<tensorflow.core.protobuf.debug_event_pb2.GraphExecutionTrace29"7tensorflow.core.protobuf.debug_event_pb2.DebuggedDevice22"builtins.float222"builtins.int22222222222222	22
+82+")google.protobuf.descriptor.EnumDescriptor2E"Ctensorflow.core.protobuf.debug_event_pb2._TensorDebugMode.ValueType28"6tensorflow.core.protobuf.debug_event_pb2.DebugMetadata25"3tensorflow.core.protobuf.debug_event_pb2.DebugEvent25"3tensorflow.core.protobuf.debug_event_pb2.SourceFile2;"9tensorflow.core.protobuf.debug_event_pb2.StackFrameWithId2:"8tensorflow.core.protobuf.debug_event_pb2.GraphOpCreation28"6tensorflow.core.protobuf.debug_event_pb2.DebuggedGraph24"2tensorflow.core.protobuf.debug_event_pb2.Execution2>"<tensorflow.core.protobuf.debug_event_pb2.GraphExecutionTrace29"7tensorflow.core.protobuf.debug_event_pb2.DebuggedDevice22"builtins.float222"builtins.int22222222222222	22
 2"builtins.str22222"builtins.bool2	22"builtins.bytes2	2222222
-222
-22"typing.Iterable222$222227"5tensorflow.core.protobuf.debug_event_pb2.CodeLocation22(2"typing.Iterable222*222222222"typing.Iterable22202"builtins.dict22:"8tensorflow.core.protobuf.debug_event_pb2.TensorDebugMode
+222'"%google.protobuf.descriptor.Descriptor2
+22E"@google.protobuf.internal.containers.RepeatedScalarFieldContainer22"typing.Iterable222&2J"Htensorflow.core.protobuf.graph_debug_info_pb2.GraphDebugInfo.FileLineCol22(2227"5tensorflow.core.protobuf.debug_event_pb2.CodeLocation2E"@google.protobuf.internal.containers.RepeatedScalarFieldContainer222+2"typing.Iterable222.22222222"0tensorflow.core.framework.tensor_pb2.TensorProto2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer23222"typing.Iterable2322622322"builtins.dict292+")google.protobuf.descriptor.FileDescriptor2:"8tensorflow.core.protobuf.debug_event_pb2.TensorDebugMode

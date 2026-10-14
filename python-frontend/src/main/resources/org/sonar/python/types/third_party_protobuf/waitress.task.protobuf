@@ -1,5 +1,5 @@
 
-waitress.taskÕ
+waitress.task²
 ThreadedTaskDispatcher"builtins.object*:
 start_new_thread*
 
@@ -32,25 +32,24 @@ stop_count0r
 logger0r
 queue_logger0r
 threads0r	
-queue0	r
-lock*310*311*3120
-r
-lock*313*3140r
-queue_cv0r
-thread_exit_cv0Ò
+queue0	r
+lock0
+r
+queue_cv0r
+thread_exit_cv0Ò
 Task"builtins.object*6
 __init__*
 
 self(*
-channel(*
-request(*
+channel(*
+request(*
 service*
 
 self(*/
 has_body*
 
 self(0:builtins.property`*%
-build_response_header*
+build_response_header*
 
 self(*,
 remove_content_length_header*
@@ -66,14 +65,14 @@ r
 
 self(*
 
-data(r
+data(r
 close_on_finish0r
 
-status0r
+status0r
 wrote_header0r
 
 start_time0r
-content_length0r
+content_length0r
 content_bytes_written0r
 logged_write_excess0r
 logged_write_no_body0r
@@ -81,34 +80,34 @@ start_time0r
 chunked_response0r
 
 logger0r
-channel0r
-request0r
-response_headers0r
-version0{
+channel0r
+request0r
+response_headers0r
+version0{
 	ErrorTask"waitress.task.Task*
 execute*
 
-self(r
+self(r
 complete0r
 
-status0r
+status0r
 close_on_finish0r
 content_length0¾
 WSGITask"waitress.task.Task*
 execute*
 
-self(*
+self(*
 get_environment*
 
-self(r
-environ0r
-response_headers0r
+self(r
+environ0r
+response_headers0r
 complete0r
 
-status0r
+status0r
 content_length0r
 close_on_finish0*
-__annotations__0*
-rename_headers0*
+__annotations__0*
+rename_headers0*
 
-hop_by_hop022&"$waitress.task.ThreadedTaskDispatcher22"builtins.int2"waitress.task.Task2"builtins.bool2"logging.Logger2"builtins.set22"collections.deque22"_thread.LockType2"_thread.lock2"threading.Condition2"waitress.channel.HTTPChannel2"waitress.utilities.Error2"builtins.bytes2"builtins.str22222"typing.Sequence22"waitress.task.ErrorTask2"waitress.task.WSGITask2"_typeshed.Incomplete2222"builtins.dict22"typing.Mapping22"builtins.frozenset2
+hop_by_hop022&"$waitress.task.ThreadedTaskDispatcher22"builtins.int2"waitress.task.Task2"builtins.bool2"logging.Logger2"builtins.set22"collections.deque22"threading.Lock2"threading.Condition2"waitress.channel.HTTPChannel2"waitress.utilities.Error2"builtins.bytes2"builtins.str22222"typing.Sequence22"waitress.task.ErrorTask2"waitress.task.WSGITask2"_typeshed.Incomplete2222"builtins.dict22"typing.Mapping22"builtins.frozenset2

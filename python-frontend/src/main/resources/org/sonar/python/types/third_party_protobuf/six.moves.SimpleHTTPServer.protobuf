@@ -66,8 +66,7 @@ send_error*
 date_time_string*
 
 self(*
-	timestamp (
-*$
+	timestamp (	*$
 log_date_time_string*
 
 self(*
@@ -77,128 +76,86 @@ send_error*
 parse_request*
 
 self(r
-client_address0r
+client_address0
+r
 close_connection0r
 requestline0r
 command0r
 path0r
 request_version0r
-headers0r
+headers0r
 server_version0r
 sys_version0r
 error_message_format0r
 error_content_type0r
 protocol_version0r
-MessageClass0r
-	responses0r
+MessageClass0r
+	responses0r
 default_request_version0r
-weekdayname0r
-	monthname0ç
+weekdayname0r
+	monthname0˛
 SimpleHTTPRequestHandler$http.server.SimpleHTTPRequestHandler""http.server.BaseHTTPRequestHandler*^
 __init__*
 
-self(*
-request(*
-client_address(*
-server(*
-	directory (*
+self(*
+request(*
+client_address(*
+server(*
+	directory (*
 do_GET*
 
-self(*
+self(*
 do_HEAD*
 
-self(*
-	send_head *
+self(*
+	send_head*
 
-self(**
-list_directory!*
+self(**
+list_directory*
 
-self(*
+self(*
 
-path(**
+path(**
 translate_path*
 
-self(*
+self(*
 
 path(*8
 copyfile*
 
-self(*
-source($*
+self(*
+source("*
 
-outputfile(%*&
+outputfile(#*&
 
 guess_type*
 
-self(*
+self(*
 
-path(r
-extensions_map0&r
-	directory0r
-index_pages*312*313*3140'ò
-CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*&
+path(r
+extensions_map0$r
+index_pages*312*313*3140%†
+CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*
 do_POST*
 
-self((z310z311z312*%
+self(&*
 is_cgi*
 
-self((z310z311z312*8
+self(&*)
 is_executable*
 
-self((*
+self(&*
 
-path(z310z311z312*4
+path(*%
 	is_python*
 
-self((*
+self(&*
 
-path(z310z311z312*&
+path(*
 run_cgi*
 
-self((z310z311z312j310j311j312r"
-cgi_directories*310*311*3120)r
-	have_fork*310*311*3120Ú
-CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*!
-do_POST*
-
-self((z313z314* 
-is_cgi*
-
-self((z313z314*3
-is_executable*
-
-self((*
-
-path(z313z314*/
-	is_python*
-
-self((*
-
-path(z313z314*!
-run_cgi*
-
-self((z313z3148j313j314r
-cgi_directories*313*3140)r
-	have_fork*313*3140ˇ
-HTTPSServerhttp.server.HTTPSServer"http.server.HTTPServer*¥
-__init__*
-
-self(+*
-server_address(/*
-RequestHandlerClass(1*
-bind_and_activate (*
-certfile(4*
-keyfile (5*
-password (8*
-alpn_protocols (:z314*$
-server_activate*
-
-self(*z314j314r
-ssl*3140;r
-certfile*31404r
-keyfile*31405r
-password*31408r
-alpn_protocols*31409s
-ThreadingHTTPSServer http.server.ThreadingHTTPSServer"socketserver.ThreadingMixIn"http.server.HTTPSServerj314*
-__annotations__0<2"builtins.str2"builtins.int22$""http.server.BaseHTTPRequestHandler2"builtins.bool222222"builtins.float22	222"email.message.Message22"builtins.type222"typing.Mapping22"typing.Sequence22"typing.Sequence22&"$http.server.SimpleHTTPRequestHandler2"socket.socket2"builtins.bytes22222 "socketserver._RequestType22"_socket._RetAddress22"socketserver.BaseServer2"os.PathLike2222"_typeshed.StrPath2222"_io.BytesIO2"typing.BinaryIO22222"builtins.object2"builtins.object2"2"_typeshed.SupportsRead2#2"_typeshed.SupportsWrite2#2"builtins.dict22"builtins.tuple22#"!http.server.CGIHTTPRequestHandler2"builtins.list22"http.server.HTTPSServer2>
-http.server.HTTPSServer.Self"http.server.HTTPSServer(2*2"builtins.bytearray22,22-2""socketserver._AfInetAddress2.2"builtins.function2202"os.PathLike22222"_typeshed.StrOrBytesPath23224221,2"_ssl._PasswordType262272"typing.Iterable22292"http.server._SSLModule2"builtins.dict2
+self(&r
+cgi_directories0'r
+	have_fork0*
+__annotations__0(2"builtins.str2"builtins.int22$""http.server.BaseHTTPRequestHandler2"builtins.bool2222222222"email.message.Message2"builtins.type222"typing.Mapping22"typing.Sequence22"typing.Sequence22&"$http.server.SimpleHTTPRequestHandler2"socket.socket2"builtins.bytes22222 "socketserver._RequestType22"_socket._RetAddress22"socketserver.BaseServer2"
+io.BytesIO2"typing.BinaryIO22222"os.PathLike2222"_typeshed.StrPath22"builtins.object2"builtins.object2 2"_typeshed.SupportsRead2!2"_typeshed.SupportsWrite2!2"builtins.dict22"builtins.tuple22#"!http.server.CGIHTTPRequestHandler2"builtins.list22"builtins.dict2

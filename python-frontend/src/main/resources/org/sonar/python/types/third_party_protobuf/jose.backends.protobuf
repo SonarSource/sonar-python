@@ -181,75 +181,66 @@ public_key*
 CURVE_NAMES0r
 hash_alg0r	
 curve0r
-prepared_key0Ç
+prepared_key0Å
 NativeHMACKeyjose.backends.native.HMACKey"jose.backends.base.Key*4
 __init__*
 
 self(*	
 key(*
-	algorithm(*)
+	algorithm(*
 sign*
 
 self(*	
-msg(z310z311*.
-sign*
-
-self(*	
-msg(z312z313z314*6
+msg(*,
 verify*
 
 self(*	
-msg(*	
-sig(z310z311*;
-verify*
-
-self(*	
-msg(*	
-sig(z312z313z314*
+msg(*	
+sig(*
 to_dict*
 
 self(r
 
-HASHES0r
+HASHES0 r
 prepared_key0’
 BackendRSAKey jose.backends.rsa_backend.RSAKey"jose.backends.base.Key*4
 __init__*
 
-self(*	
+self(!*	
 key(*
 	algorithm(*
 sign*
 
-self(*	
+self(!*	
 msg(*,
 verify*
 
-self(*	
+self(!*	
 msg(*	
 sig(*
 	is_public*
 
-self(*
+self(!*
 
-public_key*
+public_key"*
 
-self(**
+self("**
 to_pem*
 
-self(*
+self(!*
 
 pem_format (*
 to_dict*
 
-self(*(
+self(!*(
 wrap_key*
 
-self(*
+self(!*
 key_data(*-
 
 unwrap_key*
 
-self(*
+self(!*
 wrapped_key(r
 
 SHA2560r
@@ -258,14 +249,15 @@ unwrap_key*
 
 SHA5120r
 hash_alg0*
-__path__0*
+__path__0#*
 __annotations__0*
 
-AESKey0*
-HMACKey0!*
+AESKey0%*
+HMACKey0(*
 
-RSAKey0$*	
-ECKey0'*
+RSAKey0+*	
+ECKey0.*
 get_random_bytes022"jose.backends.base.DIRKey2"builtins.str2"builtins.bytes2222"builtins.dict227"5jose.backends.cryptography_backend.CryptographyAESKey2"_typeshed.Incomplete222	26"4jose.backends.cryptography_backend.CryptographyECKey28"6jose.backends.cryptography_backend.CryptographyHMACKey27"5jose.backends.cryptography_backend.CryptographyRSAKey2("&jose.backends.ecdsa_backend.ECDSAECKey2"builtins.bool2\
-+jose.backends.ecdsa_backend.ECDSAECKey.Self"&jose.backends.ecdsa_backend.ECDSAECKey(22"builtins.function222"jose.backends.native.HMACKey222"typing_extensions.Buffer222"_collections_abc.Buffer222"builtins.dict22"" jose.backends.rsa_backend.RSAKey2P
-%jose.backends.rsa_backend.RSAKey.Self" jose.backends.rsa_backend.RSAKey(22"builtins.list22"type2222"type22"type222 2"type22"type222"#2"type22"type222%&
++jose.backends.ecdsa_backend.ECDSAECKey.Self"&jose.backends.ecdsa_backend.ECDSAECKey(22"builtins.function222"jose.backends.native.HMACKey222"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer2222"builtins.dict22"" jose.backends.rsa_backend.RSAKey2P
+%jose.backends.rsa_backend.RSAKey.Self" jose.backends.rsa_backend.RSAKey(2!2"builtins.list22"type222$2"type22"type222&'2"type22"type2!22)*2"type22"type222,-

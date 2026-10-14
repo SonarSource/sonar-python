@@ -1,6 +1,6 @@
 
-1tensorflow.core.framework.graph_transfer_info_pb2ÿ
-GraphTransferNodeInput"builtins.object*>
+1tensorflow.core.framework.graph_transfer_info_pb2
+GraphTransferNodeInput"google.protobuf.message.Message*>
 __init__*
 
 self(*
@@ -18,8 +18,8 @@ r
 NODE_ID_FIELD_NUMBER0r
 OUTPUT_PORT_FIELD_NUMBER0r
 node_id0r
-output_port0²
-GraphTransferNodeInfo"builtins.object*œ
+output_port0Â
+GraphTransferNodeInfo"google.protobuf.message.Message*œ
 __init__*
 
 self(*
@@ -54,26 +54,25 @@ r
 
 padding_id0r
 input_count0r
-output_count0¤
-GraphTransferConstNodeInfo"builtins.object*,
-shape
-*
+output_count0´
+GraphTransferConstNodeInfo"google.protobuf.message.Message*,
+shape*
 
-self(0:builtins.property`*c
+self(0:builtins.property`*c
 __init__*
 
-self(*
+self(*
 name (*
 node_id (*
-shape (*
-data (*
-dtype (*,
+shape (*
+data (*
+dtype (*,
 
 ClearField*
 
-self(*
+self(*
 
-field_name(8r
+field_name(8r
 
 DESCRIPTOR0
 r
@@ -85,42 +84,18 @@ r
 name0r
 node_id0r
 data0r	
-dtype0
-£
-GraphTransferNodeInputInfo"builtins.object*1
+dtype0³
+GraphTransferNodeInputInfo"google.protobuf.message.Message*1
 
-node_input
-*
+node_input*
 
-self(0:builtins.property`*=
-__init__*
-
-self(*
-node_id (*
-
-node_input (*,
-
-ClearField*
-
-self(*
-
-field_name(	8r
-
-DESCRIPTOR0
-r
-NODE_ID_FIELD_NUMBER0r
-NODE_INPUT_FIELD_NUMBER0r
-node_id0­
-GraphTransferNodeOutputInfo"builtins.object*4
-max_byte_size
-*
-
-self(0:builtins.property`*@
+self(0:builtins.property`*=
 __init__*
 
 self(*
-node_id (*
-max_byte_size (*,
+node_id (*
+
+node_input (*,
 
 ClearField*
 
@@ -130,52 +105,46 @@ field_name(	8r
 
 DESCRIPTOR0
 r
-NODE_ID_FIELD_NUMBER0r
-MAX_BYTE_SIZE_FIELD_NUMBER0r
-node_id0Â
-GraphTransferGraphInputNodeInfo"builtins.object*,
-shape
-*
+NODE_ID_FIELD_NUMBER0r
+NODE_INPUT_FIELD_NUMBER0r
+node_id0½
+GraphTransferNodeOutputInfo"google.protobuf.message.Message*4
+max_byte_size*
 
-self(0:builtins.property`*D
+self(0:builtins.property`*@
 __init__*
 
-self(*
-name (*
-shape (*
-dtype (*,
-
-ClearField*
-
-self(*
-
-field_name(8r
-
-DESCRIPTOR0
-r
-NAME_FIELD_NUMBER0r
-SHAPE_FIELD_NUMBER0r
-DTYPE_FIELD_NUMBER0r
-name0r	
-dtype0
-Ã
- GraphTransferGraphOutputNodeInfo"builtins.object*,
-shape
-*
-
-self(0:builtins.property`*D
-__init__*
-
-self(*
-name (*
-shape (*
-dtype (*,
+self(*
+node_id (*
+max_byte_size (*,
 
 ClearField*
 
 self(*
 
-field_name(8r
+field_name(	8r
+
+DESCRIPTOR0
+r
+NODE_ID_FIELD_NUMBER0r
+MAX_BYTE_SIZE_FIELD_NUMBER0r
+node_id0Ò
+GraphTransferGraphInputNodeInfo"google.protobuf.message.Message*,
+shape*
+
+self(0:builtins.property`*D
+__init__*
+
+self(*
+name (*
+shape (*
+dtype (*,
+
+ClearField*
+
+self(*
+
+field_name(8r
 
 DESCRIPTOR0
 r
@@ -183,54 +152,71 @@ r
 SHAPE_FIELD_NUMBER0r
 DTYPE_FIELD_NUMBER0r
 name0r	
-dtype0
-£
-GraphTransferInfo"builtins.object*0
-	node_info
-*
+dtype0Ó
+ GraphTransferGraphOutputNodeInfo"google.protobuf.message.Message*,
+shape*
 
-self(0:builtins.property`*6
-const_node_info
-*
-
-self(0:builtins.property`*6
-node_input_info
-*
-
-self(0:builtins.property`*7
-node_output_info
-*
-
-self(0:builtins.property`*<
-graph_input_node_info
-*
-
-self(0:builtins.property`*=
-graph_output_node_info
-*
-
-self(0:builtins.property`*Ë
+self(0:builtins.property`*D
 __init__*
 
-self(*
-	node_info (*
-const_node_info (*
-node_input_info (!*
-node_output_info (#*
-graph_input_node_info (%*
-graph_output_node_info ('*
-destination ()*,
+self(*
+name (*
+shape (*
+dtype (*,
 
 ClearField*
 
-self(*
+self(*
+
+field_name(8r
+
+DESCRIPTOR0
+r
+NAME_FIELD_NUMBER0r
+SHAPE_FIELD_NUMBER0r
+DTYPE_FIELD_NUMBER0r
+name0r	
+dtype0³
+GraphTransferInfo"google.protobuf.message.Message*0
+	node_info*
+
+self(0:builtins.property`*6
+const_node_info *
+
+self(0:builtins.property`*6
+node_input_info!*
+
+self(0:builtins.property`*7
+node_output_info"*
+
+self(0:builtins.property`*<
+graph_input_node_info#*
+
+self(0:builtins.property`*=
+graph_output_node_info$*
+
+self(0:builtins.property`*Ë
+__init__*
+
+self(*
+	node_info (&*
+const_node_info ((*
+node_input_info (**
+node_output_info (,*
+graph_input_node_info (.*
+graph_output_node_info (0*
+destination (2*,
+
+ClearField*
+
+self(*
 
 field_name(8r
 
 DESCRIPTOR0
 r
-NOP0(r
-HEXAGON0(r
+NOP01r
+HEXAGON01r
 NODE_INFO_FIELD_NUMBER0r 
 CONST_NODE_INFO_FIELD_NUMBER0r 
 NODE_INPUT_INFO_FIELD_NUMBER0r!
@@ -238,26 +224,22 @@ r
 "GRAPH_INPUT_NODE_INFO_FIELD_NUMBER0r'
 #GRAPH_OUTPUT_NODE_INFO_FIELD_NUMBER0r
 DESTINATION_FIELD_NUMBER0r
-destination0(*
-__annotations__0**
-collectionscollections *
-
-google0
-*
+destination01*
+__annotations__04*
+collectionscollections *
+googlegoogle *
 
 tensorflow
 tensorflow *
 
-DESCRIPTOR0
-*%
+DESCRIPTOR05*%
 global___GraphTransferNodeInput08*$
 global___GraphTransferNodeInfo08*)
-#global___GraphTransferConstNodeInfo08*)
-#global___GraphTransferNodeInputInfo08**
-$global___GraphTransferNodeOutputInfo08*.
-(global___GraphTransferGraphInputNodeInfo08*/
-)global___GraphTransferGraphOutputNodeInfo08* 
-global___GraphTransferInfo0822J"Htensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeInput2"builtins.int222"builtins.str2	22"builtins.bytes2	22222I"Gtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeInfo22222N"Ltensorflow.core.framework.graph_transfer_info_pb2.GraphTransferConstNodeInfo2"typing.Iterable2222222
-22
-2N"Ltensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeInputInfo2"typing.Iterable2222O"Mtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeOutputInfo2S"Qtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferGraphInputNodeInfo2
-22T"Rtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferGraphOutputNodeInfo2E"Ctensorflow.core.framework.graph_transfer_info_pb2.GraphTransferInfo2"typing.Iterable2222"typing.Iterable2222"typing.Iterable222 2"typing.Iterable222"2"typing.Iterable222$2"typing.Iterable222&2\"Ztensorflow.core.framework.graph_transfer_info_pb2.GraphTransferInfo._Destination.ValueType22(2"builtins.dict2
+#global___GraphTransferConstNodeInfo08*)
+#global___GraphTransferNodeInputInfo08**
+$global___GraphTransferNodeOutputInfo08*.
+(global___GraphTransferGraphInputNodeInfo08*/
+)global___GraphTransferGraphOutputNodeInfo08* 
+global___GraphTransferInfo0822J"Htensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeInput2"builtins.int222"builtins.str2	22"builtins.bytes2	2222'"%google.protobuf.descriptor.Descriptor2I"Gtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeInfo22222E"@google.protobuf.internal.containers.RepeatedScalarFieldContainer22N"Ltensorflow.core.framework.graph_transfer_info_pb2.GraphTransferConstNodeInfo2"typing.Iterable2222229"7tensorflow.core.framework.types_pb2._DataType.ValueType2222
+2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22N"Ltensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeInputInfo2"typing.Iterable2222O"Mtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferNodeOutputInfo2S"Qtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferGraphInputNodeInfo2
+22T"Rtensorflow.core.framework.graph_transfer_info_pb2.GraphTransferGraphOutputNodeInfo2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22E"Ctensorflow.core.framework.graph_transfer_info_pb2.GraphTransferInfo2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22"typing.Iterable222%2"typing.Iterable222'2"typing.Iterable222)2"typing.Iterable222+2"typing.Iterable222-2"typing.Iterable222/2\"Ztensorflow.core.framework.graph_transfer_info_pb2.GraphTransferInfo._Destination.ValueType22122"builtins.dict232+")google.protobuf.descriptor.FileDescriptor

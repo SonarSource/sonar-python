@@ -34,38 +34,61 @@
 	tm_gmtoff*
 
 self(0:builtins.property`8r
-__match_args__0d
+__match_args__0b
 
-_ClockInfo"builtins.object8Xr
+_ClockInfo"builtins.objectXr
 
 adjustable0r
 implementation0r
 	monotonic0r
 
-resolution0
-asctime* (	
-ctime* (
-gmtime* (
-	localtime* (
-mktime*(	
+resolution0
+asctime*	
+t (	
+ctime*
+secs (
+gmtime*
+secs (
+	localtime*
+secs (
+mktime*
+t(	
 sleep
-*(
-strftime*(* (	
-strptime*(* (
+*
+
+secs(%
+strftime*
+format(*	
+t (	*
+strptime*
+string(*
+format (
 time	
 tzset
-
-get_clock_info*(
+
+get_clock_info*
+
+name(
 	monotonic
 perf_counter
-process_time
-clock_getres*(
-clock_gettime*(
+process_time
+clock_getres*
+clk_id(
+clock_gettime*
+clk_id(+
 clock_settime
-*(*(
-clock_gettime_ns*(
-clock_settime_ns*(*(
-pthread_getcpuclockid*(
+*
+clk_id(*
+
+time($
+clock_gettime_ns*
+clock_id(0
+clock_settime_ns*
+clock_id(*
+
+time(*
+pthread_getcpuclockid*
+	thread_id(
 monotonic_ns
 perf_counter_ns
 process_time_ns

@@ -1,1181 +1,454 @@
 
-_astQ
-ASTast.AST"builtins.objectr
-__match_args__0r
-_attributes0r
-_fields0
-Addast.Add"ast.operator
-Andast.And"
-ast.boolopÍ
-	AnnAssignast.AnnAssign"ast.stmt2¸
-__init__v
-__init__*
+_astŒ
+AST"builtins.object*2
+__init__*
 
-self(*
-target(	*
+self(*
 
-annotation(
-*
-value(*
-simple(*
-kwargs(0:typing.overloadXx
-__init__*
+args(*
+kwargs(r
+__match_args__0r
+_attributes0r
+_fields0r
 
-self(*
-target(	*
+lineno0r
 
-annotation(
-*
-value (*
-simple(*
-kwargs(0:typing.overloadXr
-__match_args__0r
+col_offset0r
 
-target0	r
+end_lineno0r
+end_col_offset0r
+type_comment0	
+mod"_ast.AST
+type_ignore"_ast.AST;
 
-annotation0
-r	
-value0r
-
-simple0Ü
-Assert
-ast.Assert"ast.stmt*?
-__init__*
-
-self(*
-
-test(
-*
-msg (*
-kwargs(r
-__match_args__0r
-test0
+TypeIgnore"_ast.type_ignorer
+__match_args__0
 r
-msg0∂
-Assign
-ast.Assign"ast.stmt*X
-__init__*
+tag0G
+FunctionType"_ast.modr
+__match_args__0
+r
+argtypes0r
+returns0B
+Module"_ast.modr
+__match_args__0
+r
+body0r
+type_ignores05
+Interactive"_ast.modr
+__match_args__0r
+body04
 
-self(*
-targets(*
-value(
-*
-type_comment (*
-kwargs(r
-__match_args__0r
-targets0r	
-value0
-r
-type_comment0Ê
-AsyncForast.AsyncFor"ast.stmt*p
-__init__*
-
-self(*
-target(
-*
-
-iter(
-*
-
-body(*
-orelse(*
-type_comment (*
-kwargs(r
+Expression"_ast.modr
+__match_args__0r
+body0
+stmt"_ast.ASTk
+FunctionDef"	_ast.stmtr
+__match_args__0r
+name0r
+args0r
+body0r
+decorator_list0r
+returns0p
+AsyncFunctionDef"	_ast.stmtr
+__match_args__0r
+name0r
+args0r
+body0r
+decorator_list0r
+returns0j
+ClassDef"	_ast.stmtr
+__match_args__0r
+name0r	
+bases0r
+keywords0r
+body0r
+decorator_list02
+Return"	_ast.stmtr
+__match_args__0r	
+value04
+Delete"	_ast.stmtr
+__match_args__0r
+targets0?
+Assign"	_ast.stmtr
+__match_args__0r
+targets0r	
+value0I
+	AugAssign"	_ast.stmtr
 __match_args__0r
 
-target0
+target0r
+op0r	
+value0]
+	AnnAssign"	_ast.stmtr
+__match_args__0r
+
+target0r
+
+annotation0r	
+value0r
+
+simple0P
+For"	_ast.stmtr
+__match_args__0r
+
+target0r
+iter0r
+body0r
+
+orelse0U
+AsyncFor"	_ast.stmtr
+__match_args__0r
+
+target0r
+iter0r
+body0r
+
+orelse0F
+While"	_ast.stmtr
+__match_args__0r
+test0r
+body0r
+
+orelse0C
+If"	_ast.stmtr
+__match_args__0r
+test0r
+body0r
+
+orelse0:
+With"	_ast.stmtr
+__match_args__0r	
+items0 r
+body0?
+	AsyncWith"	_ast.stmtr
+__match_args__0r	
+items0 r
+body0:
+Raise"	_ast.stmtr
+__match_args__0
+r
+exc0r	
+cause0W
+Try"	_ast.stmtr
+__match_args__0r
+body0r
+handlers0"r
+
+orelse0r
+	finalbody0:
+Assert"	_ast.stmtr
+__match_args__0
 r
-iter0
-r
-body0r
+test0r
+msg02
+Import"	_ast.stmtr
+__match_args__0r	
+names0$M
 
-orelse0r
-type_comment0°
-AsyncFunctionDefast.AsyncFunctionDef"ast.stmt*á
-__init__*
+ImportFrom"	_ast.stmtr
+__match_args__0r
 
-self(*
-
-name(*
-
-args(*
-
-body(*
-decorator_list(*
-returns (*
-type_comment (*
-kwargs(r
-__match_args__0r
-name0r
-args0r
-body0r
-decorator_list0r
-returns0r
-type_comment0∂
-	AsyncWithast.AsyncWith"ast.stmt*U
-__init__*
-
-self(*
-items(*
-
-body(*
-type_comment (*
-kwargs(r
-__match_args__0r	
-items0r
-body0r
-type_comment0§
-	Attributeast.Attribute"ast.expr*L
-__init__*
-
-self(*
-value(
-*
-
-attr(*
-ctx (*
-kwargs(r
-__match_args__0r	
-value0
-r
-attr0r
-ctx0§
-	AugAssignast.AugAssign"ast.stmt*K
-__init__*
-
-self( *
-target(	*
-op(!*
-value(
-*
-kwargs(r
-__match_args__0r
-
-target0	r
-op0!r	
-value0
-p
-Await	ast.Await"ast.expr*3
-__init__*
-
-self("*
-value(
-*
-kwargs(r
-__match_args__0#r	
-value0
-ò
-BinOp	ast.BinOp"ast.expr*I
-__init__*
-
-self($*
-
-left(
-*
-op(!*
-right(
-*
-kwargs(r
-__match_args__0r
-left0
+module0	r	
+names0$r	
+level02
+Global"	_ast.stmtr
+__match_args__0r	
+names0%4
+Nonlocal"	_ast.stmtr
+__match_args__0r	
+names0%0
+Expr"	_ast.stmtr
+__match_args__0r	
+value0
+Pass"	_ast.stmt
+Break"	_ast.stmt
+Continue"	_ast.stmt
+expr"_ast.AST;
+BoolOp"	_ast.exprr
+__match_args__0
 r
-op0!r	
-right0
-"
-BitAnd
-ast.BitAnd"ast.operator 
-BitOr	ast.BitOr"ast.operator"
-BitXor
-ast.BitXor"ast.operatorÜ
-BoolOp
-ast.BoolOp"ast.expr*>
-__init__*
-
-self(%*
-op(&*
-values(*
-kwargs(r
-__match_args__0r
 op0&r
 
-values0
-Break	ast.Break"ast.stmt†
-Callast.Call"ast.expr*N
-__init__*
-
-self('*
-
-func(
-*
-
-args(*
-keywords()*
-kwargs(r
-__match_args__0r
-func0
-r
-args0r
-keywords0)Í
-ClassDefast.ClassDef"ast.stmt*q
-__init__*
-
-self(**
-
-name(*
-bases(*
-keywords()*
-
-body(*
-decorator_list(*
-kwargs(r
+values0C
+BinOp"	_ast.exprr
 __match_args__0r
-name0r	
-bases0r
-keywords0)r
-body0r
-decorator_list0™
-Compareast.Compare"ast.expr*P
-__init__*
+left0r
+op0r	
+right0=
+UnaryOp"	_ast.exprr
+__match_args__0
+r
+op0'r
+operand0;
+Lambda"	_ast.exprr
+__match_args__0
+r
+args0r
+body0F
+IfExp"	_ast.exprr
+__match_args__0r
+test0r
+body0r
 
-self(+*
+orelse0;
+Dict"	_ast.exprr
+__match_args__0
+r
+keys0(r
 
-left(
-*	
-ops(-*
-comparators(*
-kwargs(r
-__match_args__0r
-left0
+values0.
+Set"	_ast.exprr
+__match_args__0r
+elts0B
+ListComp"	_ast.exprr
+__match_args__0
 r
-ops0-r
-comparators0∆
-Constantast.Constant"ast.expr*A
-__init__*
+elt0r
 
-self(.*
-value(5*
-kind (*
-kwargs(2Z
-n*
-n5*
+generators0*A
+SetComp"	_ast.exprr
+__match_args__0
+r
+elt0r
 
-self(.0:builtins.propertyX`)
-n*
+generators0*M
+DictComp"	_ast.exprr
+__match_args__0r
+key0r	
+value0r
 
-self(.*
-value(50:.setter2Z
-s*
-s5*
+generators0*F
+GeneratorExp"	_ast.exprr
+__match_args__0
+r
+elt0r
 
-self(.0:builtins.propertyX`)
-s*
+generators0*1
+Await"	_ast.exprr
+__match_args__0r	
+value01
+Yield"	_ast.exprr
+__match_args__0r	
+value05
+	YieldFrom"	_ast.exprr
+__match_args__0r	
+value0L
+Compare"	_ast.exprr
+__match_args__0r
+left0r
+ops0,r
+comparators0G
+Call"	_ast.exprr
+__match_args__0r
+func0r
+args0r
+keywords0[
+FormattedValue"	_ast.exprr
+__match_args__0r	
+value0r
 
-self(.*
-value(50:.setterr
-__match_args__0r	
-value05r
-kind0"
-Continueast.Continue"ast.stmt 
-Delast.Del"ast.expr_contextv
-Delete
-ast.Delete"ast.stmt*5
-__init__*
+conversion0r
+format_spec06
+	JoinedStr"	_ast.exprr
+__match_args__0r
 
-self(6*
-targets(*
-kwargs(r
-__match_args__0#r
-targets0Ü
-Dictast.Dict"ast.expr*@
-__init__*
-
-self(7*
-
-keys(8*
-values(*
-kwargs(r
-__match_args__0r
-keys08r
-
-values0¨
-DictCompast.DictComp"ast.expr*P
-__init__*
-
-self(9*	
-key(
-*
-value(
-*
-
-generators(;*
-kwargs(r
-__match_args__0r
-key0
+values0L
+Constant"	_ast.exprr
+__match_args__0
 r	
-value0
-r
-
-generators0;
-Divast.Div"ast.operator
-Eqast.Eq"	ast.cmpop∫
-ExceptHandlerast.ExceptHandler"ast.excepthandler2–
-__init___
-__init__*
-
-self(<*
-
-type(*
-
-name(*
-
-body(*
-kwargs(0:typing.overloadXc
-__init__*
-
-self(<*
-type (*
-name (*
-
-body(*
-kwargs(0:typing.overloadXr
-__match_args__0r
-type0r
-name0r
-body0n
-Exprast.Expr"ast.stmt*3
-__init__*
-
-self(=*
-value(
-*
-kwargs(r
-__match_args__0#r	
-value0
-i
-
-Expressionast.Expression"ast.mod*$
-__init__*
-
-self(>*
-
-body(
-r
-__match_args__0#r
-body0
-&
-FloorDivast.FloorDiv"ast.operator‹
-Forast.For"ast.stmt*p
-__init__*
-
-self(?*
-target(
-*
-
-iter(
-*
-
-body(*
-orelse(*
-type_comment (*
-kwargs(r
-__match_args__0r
-
-target0
-r
-iter0
-r
-body0r
-
-orelse0r
-type_comment0 
-FormattedValueast.FormattedValue"ast.expr*Z
-__init__*
-
-self(@*
-value(
-*
-
-conversion(*
-format_spec (*
-kwargs(r
-__match_args__0r	
-value0
-r
-
-conversion0r
-format_spec0ó
-FunctionDefast.FunctionDef"ast.stmt*á
-__init__*
-
-self(A*
-
-name(*
-
-args(*
-
-body(*
-decorator_list(*
-returns (*
-type_comment (*
-kwargs(r
-__match_args__0r
-name0r
-args0r
-body0r
-decorator_list0r
-returns0r
-type_comment0ë
-FunctionTypeast.FunctionType"ast.mod*7
-__init__*
-
-self(B*
-argtypes(*
-returns(
-r
-__match_args__0r
-argtypes0r
-returns0
-ú
-GeneratorExpast.GeneratorExp"ast.expr*C
-__init__*
-
-self(C*	
-elt(
-*
-
-generators(;*
-kwargs(r
-__match_args__0r
-elt0
-r
-
-generators0;r
-Global
-ast.Global"ast.stmt*3
-__init__*
-
-self(D*
-names(E*
-kwargs(r
-__match_args__0#r	
-names0E
-Gtast.Gt"	ast.cmpop
-GtEast.GtE"	ast.cmpopò
-Ifast.If"ast.stmt*L
-__init__*
-
-self(F*
-
-test(
-*
-
-body(*
-orelse(*
-kwargs(r
-__match_args__0r
-test0
-r
-body0r
-
-orelse0û
-IfExp	ast.IfExp"ast.expr*L
-__init__*
-
-self(G*
-
-test(
-*
-
-body(
-*
-orelse(
-*
-kwargs(r
-__match_args__0r
-test0
-r
-body0
+value0r
+kind0	r
+s0r
+n0/A
+	NamedExpr"	_ast.exprr
+__match_args__0
 r
 
-orelse0
-r
-Import
-ast.Import"ast.stmt*3
-__init__*
-
-self(H*
-names(J*
-kwargs(r
-__match_args__0#r	
-names0Jµ
-
-ImportFromast.ImportFrom"ast.stmt2÷
-__init__c
-__init__*
-
-self(K*
-module(*
-names(J*
-level(*
-kwargs(0:typing.overloadXe
-__init__*
-
-self(K*
-module (*
-names(J*
-level(*
-kwargs(0:typing.overloadXr
-__match_args__0r
-
-module0r	
-names0Jr	
-level0
-Inast.In"	ast.cmpopk
-Interactiveast.Interactive"ast.mod*$
-__init__*
-
-self(L*
-
-body(r
-__match_args__0#r
-body0!
-Invert
-ast.Invert"ast.unaryop
-Isast.Is"	ast.cmpop
-IsNot	ast.IsNot"	ast.cmpopz
-	JoinedStrast.JoinedStr"ast.expr*4
-__init__*
-
-self(M*
-values(*
-kwargs(r
-__match_args__0#r
-
-values0Ü
-Lambda
-ast.Lambda"ast.expr*>
-__init__*
-
-self(N*
-
-args(*
-
-body(
-*
-kwargs(r
-__match_args__0r
-args0r
-body0
-Ç
-Listast.List"ast.expr*?
-__init__*
-
-self(O*
-
-elts(*
-ctx (*
-kwargs(r
-__match_args__0r
-elts0r
-ctx0î
-ListCompast.ListComp"ast.expr*C
-__init__*
-
-self(P*	
-elt(
-*
-
-generators(;*
-kwargs(r
-__match_args__0r
-elt0
-r
-
-generators0;"
-Loadast.Load"ast.expr_context"
-LShift
-ast.LShift"ast.operator
-Ltast.Lt"	ast.cmpop
-LtEast.LtE"	ast.cmpop$
-MatMultast.MatMult"ast.operator
-Modast.Mod"ast.operatorá
-Module
-ast.Module"ast.mod*8
-__init__*
-
-self(Q*
-
-body(*
-type_ignores(Sr
-__match_args__0r
-body0r
-type_ignores0S
-Multast.Mult"ast.operator~
-Nameast.Name"ast.expr*=
-__init__*
-
-self(*
-id(*
-ctx (*
-kwargs(r
-__match_args__0r
-id0r
-ctx0í
-	NamedExprast.NamedExpr"ast.expr*A
-__init__*
-
-self(T*
-target(*
-value(
-*
-kwargs(r
-__match_args__0r
-
-target0r	
-value0
-v
-Nonlocalast.Nonlocal"ast.stmt*3
-__init__*
-
-self(U*
-names(E*
-kwargs(r
-__match_args__0#r	
-names0E
-Notast.Not"ast.unaryop
-NotEq	ast.NotEq"	ast.cmpop
-NotIn	ast.NotIn"	ast.cmpop
-Orast.Or"
-ast.boolop
-Passast.Pass"ast.stmt
-Powast.Pow"ast.operatorà
-Raise	ast.Raise"ast.stmt*B
-__init__*
-
-self(V*
-exc (*
-cause (*
-kwargs(r
-__match_args__0r
-exc0r	
-cause0t
-Return
-ast.Return"ast.stmt*5
-__init__*
-
-self(W*
-value (*
-kwargs(r
-__match_args__0#r	
-value0"
-RShift
-ast.RShift"ast.operatorj
-Setast.Set"ast.expr*2
-__init__*
-
-self(X*
-
-elts(*
-kwargs(r
-__match_args__0#r
-elts0í
-SetCompast.SetComp"ast.expr*C
-__init__*
-
-self(Y*	
-elt(
-*
-
-generators(;*
-kwargs(r
-__match_args__0r
-elt0
-r
-
-generators0;§
-Slice	ast.Slice"ast.expr*R
-__init__*
-
-self(Z*
-lower (*
-upper (*
-step (*
-kwargs(r
-__match_args__0r	
-lower0r	
-upper0r
-step0ä
-Starredast.Starred"ast.expr*@
-__init__*
-
-self([*
-value(
-*
-ctx (*
-kwargs(r
-__match_args__0r	
-value0
-r
-ctx0$
-Store	ast.Store"ast.expr_context
-Subast.Sub"ast.operator¶
-	Subscriptast.Subscript"ast.expr*M
-__init__*
-
-self(*
-value(
-*
-slice(
-*
-ctx (*
-kwargs(r
-__match_args__0r	
-value0
+target0r	
+value0H
+	Attribute"	_ast.exprr
+__match_args__0r	
+value0r
+attr0r
+ctx00F
+Slice"	_ast.exprr
+__match_args__0r	
+lower0r	
+upper0r
+step0I
+	Subscript"	_ast.exprr
+__match_args__0r	
+value0r	
+slice0r
+ctx00<
+Starred"	_ast.exprr
+__match_args__0
 r	
-slice0
-r
-ctx0¬
-Tryast.Try"ast.stmt*a
-__init__*
-
-self(\*
-
-body(*
-handlers(]*
-orelse(*
-	finalbody(*
-kwargs(r
-__match_args__0r
-body0r
-handlers0]r
-
-orelse0r
-	finalbody0é
-Tuple	ast.Tuple"ast.expr*?
-__init__*
-
-self(^*
-
-elts(*
-ctx (*
-kwargs(r
-__match_args__0r
-elts0r
-ctx0r
-dims0â
-
-TypeIgnoreast.TypeIgnore"ast.type_ignore*1
-__init__*
-
-self(R*
-lineno(*	
-tag(r
-__match_args__0r
-
-lineno0r
-tag0
-UAddast.UAdd"ast.unaryopä
-UnaryOpast.UnaryOp"ast.expr*?
-__init__*
-
-self(_*
-op(`*
-operand(
-*
-kwargs(r
-__match_args__0r
-op0`r
-operand0
-
-USubast.USub"ast.unaryopû
-While	ast.While"ast.stmt*L
-__init__*
-
-self(a*
-
-test(
-*
-
-body(*
-orelse(*
-kwargs(r
-__match_args__0r
-test0
+value0r
+ctx006
+Name"	_ast.exprr
+__match_args__0
+r
+id0r
+ctx008
+List"	_ast.exprr
+__match_args__0
 r
-body0r
-
-orelse0¨
-Withast.With"ast.stmt*U
-__init__*
-
-self(b*
-items(*
-
-body(*
-type_comment (*
-kwargs(r
-__match_args__0r	
-items0r
-body0r
-type_comment0r
-Yield	ast.Yield"ast.expr*5
-__init__*
-
-self(c*
-value (*
-kwargs(r
-__match_args__0#r	
-value0x
-	YieldFromast.YieldFrom"ast.expr*3
-__init__*
-
-self(d*
-value(
-*
-kwargs(r
-__match_args__0#r	
-value0
-…
-alias	ast.alias"ast.AST*B
-__init__*
-
-self(I*
-
-name(*
-asname (*
-kwargs(r
-name0r
-
-asname0r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0er
-end_col_offset0er
-__match_args__0Û
-argast.arg"ast.AST*[
-__init__*
-
-self(f*	
-arg(*
-
-annotation (*
-type_comment (*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0er
-end_col_offset0er
-__match_args__0r
-arg0r
-
-annotation0r
-type_comment0à
-	argumentsast.arguments"ast.AST2Ì
-__init__ú
-__init__*
-
-self(*
-posonlyargs(g*
-
-args(g*
-vararg(h*
-
-kwonlyargs(g*
-kw_defaults(8*
-kwarg(h*
-defaults(0:typing.overloadXû
-__init__*
-
-self(*
-posonlyargs(g*
-
-args(g*
-vararg(h*
-
-kwonlyargs(g*
-kw_defaults(8*
-kwarg (h*
-defaults(0:typing.overloadX†
-__init__*
-
-self(*
-posonlyargs(g*
-
-args(g*
-vararg (h*
-
-kwonlyargs(g*
-kw_defaults(8*
-kwarg (h*
-defaults(0:typing.overloadXr
-__match_args__0ir
-posonlyargs0gr
-args0gr
-
-vararg0hr
-
-kwonlyargs0gr
-kw_defaults08r	
-kwarg0hr
-defaults0
-boolop
-ast.boolop"ast.AST
-cmpop	ast.cmpop"ast.ASTª
-comprehensionast.comprehension"ast.AST*M
-__init__*
-
-self(:*
-target(
-*
-
-iter(
-*	
-ifs(*
-is_async(r
-__match_args__0r
-
-target0
+elts0r
+ctx00C
+Tuple"	_ast.exprr
+__match_args__0
 r
-iter0
+elts0r
+ctx00r
+dims0
+expr_context"_ast.AST
+Del"_ast.expr_context
+Load"_ast.expr_context
+Store"_ast.expr_context
+boolop"_ast.AST
+And"_ast.boolop
+Or"_ast.boolop
+operator"_ast.AST
+Add"_ast.operator
+BitAnd"_ast.operator
+BitOr"_ast.operator
+BitXor"_ast.operator
+Div"_ast.operator
+FloorDiv"_ast.operator
+LShift"_ast.operator
+Mod"_ast.operator
+Mult"_ast.operator
+MatMult"_ast.operator
+Pow"_ast.operator
+RShift"_ast.operator
+Sub"_ast.operator
+unaryop"_ast.AST
+Invert"_ast.unaryop
+Not"_ast.unaryop
+UAdd"_ast.unaryop
+USub"_ast.unaryop
+cmpop"_ast.AST
+Eq"
+_ast.cmpop
+Gt"
+_ast.cmpop
+GtE"
+_ast.cmpop
+In"
+_ast.cmpop
+Is"
+_ast.cmpop
+IsNot"
+_ast.cmpop
+Lt"
+_ast.cmpop
+LtE"
+_ast.cmpop
+NotEq"
+_ast.cmpop
+NotIn"
+_ast.cmpopZ
+comprehension"_ast.ASTr
+__match_args__0r
+
+target0r
+iter0r
+ifs0r
+is_async0
+excepthandler"_ast.ASTU
+ExceptHandler"_ast.excepthandlerr
+__match_args__0r
+type0r
+name0	r
+body0ä
+	arguments"_ast.ASTr
+__match_args__01r
+posonlyargs03r
+args03r
+
+vararg04r
+
+kwonlyargs03r
+kw_defaults0(r	
+kwarg04r
+defaults0<
+arg"_ast.ASTr
+__match_args__0r
+arg0r
+
+annotation0;
+keyword"_ast.ASTr
+__match_args__0
 r
-ifs0r
-is_async0ì
-excepthandlerast.excepthandler"ast.AST*&
-__init__*
+arg0	r	
+value0;
+alias"_ast.ASTr
+__match_args__0
+r
+name0r
 
-self(j*
-kwargs(r
+asname0	M
+withitem"_ast.ASTr
+__match_args__0
+r
+context_expr0r
+optional_vars0>
+Match"	_ast.stmtr
+__match_args__0
+r
+subject0r	
+cases06
+pattern"_ast.ASTL
 
-lineno0r
+match_case"_ast.ASTr
+__match_args__0r
+pattern07r	
+guard0r
+body09
 
-col_offset0r
+MatchValue"_ast.patternr
+__match_args__0r	
+value0=
+MatchSingleton"_ast.patternr
+__match_args__0r	
+value0:?
+MatchSequence"_ast.patternr
+__match_args__0r
+patterns0;7
+	MatchStar"_ast.patternr
+__match_args__0r
+name0	R
+MatchMapping"_ast.patternr
+__match_args__0r
+keys0r
+patterns0;r
+rest0	f
 
-end_lineno0er
-end_col_offset0eÅ
-exprast.expr"ast.AST*&
-__init__*
-
-self(
-*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0er
-end_col_offset0e)
-expr_contextast.expr_context"ast.AST¿
-keywordast.keyword"ast.AST2∂
-__init__S
-__init__*
-
-self((*	
-arg(*
-value(
-*
-kwargs(0:typing.overloadXU
-__init__*
-
-self((*
-arg (*
-value(
-*
-kwargs(0:typing.overloadXr
-
-lineno0r
-
-col_offset0r
-
-end_lineno0er
-end_col_offset0er
-__match_args__0r
-arg0r	
-value0
-
-modast.mod"ast.AST!
-operatorast.operator"ast.ASTÅ
-stmtast.stmt"ast.AST*&
-__init__*
-
-self(*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0er
-end_col_offset0e'
-type_ignoreast.type_ignore"ast.AST
-unaryopast.unaryop"ast.ASTü
-withitemast.withitem"ast.AST*C
-__init__*
-
-self(*
-context_expr(
-*
-optional_vars (r
-__match_args__0r
-context_expr0
-r
-optional_vars0å
-Match	ast.Match"ast.stmt*B
-__init__*
-
-self(k*
-subject(
-*
-cases(m*
-kwargs(r
-__match_args__0r
-subject0
-r	
-cases0mï
-MatchAsast.MatchAs"ast.pattern*E
-__init__*
-
-self(n*
-pattern (p*
-name (*
-kwargs(r
-__match_args__0r
-pattern0pr
-name0›
-
-MatchClassast.MatchClass"ast.pattern*f
-__init__*
-
-self(q*	
-cls(
-*
-patterns(r*
-	kwd_attrs(E*
-kwd_patterns(r*
-kwargs(r
-__match_args__0r
-cls0
-r
-patterns0rr
-	kwd_attrs0Er
-kwd_patterns0rµ
-MatchMappingast.MatchMapping"ast.pattern*P
-__init__*
-
-self(s*
-
-keys(*
-patterns(r*
-rest (*
-kwargs(r
-__match_args__0r
-keys0r
-patterns0rr
-rest0}
-MatchOrast.MatchOr"ast.pattern*6
-__init__*
-
-self(t*
-patterns(r*
-kwargs(r
-__match_args__0#r
-patterns0râ
-MatchSequenceast.MatchSequence"ast.pattern*6
-__init__*
-
-self(u*
-patterns(r*
-kwargs(r
-__match_args__0#r
-patterns0rÖ
-MatchSingletonast.MatchSingleton"ast.pattern*3
-__init__*
-
-self(v*
-value(w*
-kwargs(r
-__match_args__0#r	
-value0w{
-	MatchStarast.MatchStar"ast.pattern*4
-__init__*
-
-self(x*
-name (*
-kwargs(r
-__match_args__0#r
-name0}
-
-MatchValueast.MatchValue"ast.pattern*3
-__init__*
-
-self(y*
-value(
-*
-kwargs(r
-__match_args__0#r	
-value0
-ò
-
-match_caseast.match_case"ast.AST2∫
-__init__U
-__init__*
-
-self(l*
-pattern(o*
-guard(*
-
-body(0:typing.overloadXW
-__init__*
-
-self(l*
-pattern(o*
-guard (*
-
-body(0:typing.overloadXr
-__match_args__0r
-pattern0or	
-guard0r
-body0á
-patternast.pattern"ast.AST*&
-__init__*
-
-self(o*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0*
-__annotations__0{*
-PyCF_ALLOW_TOP_LEVEL_AWAIT0*
-PyCF_ONLY_AST0*
-PyCF_TYPE_COMMENTS022"builtins.str2"builtins.tuple222"ast.AnnAssign2
-"ast.Name2"ast.Attribute2"ast.Subscript222
-"ast.expr22
-2"builtins.int2222"
-ast.Assert222"
-ast.Assign2"builtins.list2
-22222"ast.AsyncFor2
-"ast.stmt2"builtins.list22	22"ast.AsyncFunctionDef2"ast.arguments2
-22"ast.AsyncWith2"ast.withitem2"builtins.list22"ast.expr_context2"ast.AugAssign2"ast.operator2"	ast.Await222"	ast.BinOp2"
-ast.BoolOp2"
-ast.boolop2
-"ast.Call2"ast.keyword2"builtins.list2(2"ast.ClassDef2"ast.Compare2"	ast.cmpop2"builtins.list2,2"ast.Constant2"builtins.bytes2"builtins.bool2"builtins.float2"builtins.complex2"types.EllipsisType22/01232"ast._ConstantValue242"
-ast.Delete2
-"ast.Dict2"builtins.list22"ast.DictComp2"ast.comprehension2"builtins.list2:2"ast.ExceptHandler2
-"ast.Expr2"ast.Expression2	"ast.For2"ast.FormattedValue2"ast.FunctionDef2"ast.FunctionType2"ast.GeneratorExp2"
-ast.Global2"builtins.list22"ast.If2"	ast.IfExp2"
-ast.Import2"	ast.alias2"builtins.list2I2"ast.ImportFrom2"ast.Interactive2"ast.JoinedStr2"
-ast.Lambda2
-"ast.List2"ast.ListComp2"
-ast.Module2"ast.TypeIgnore2"builtins.list2R2"ast.NamedExpr2"ast.Nonlocal2"	ast.Raise2"
-ast.Return2	"ast.Set2"ast.SetComp2"	ast.Slice2"ast.Starred2	"ast.Try2"builtins.list2<2"	ast.Tuple2"ast.UnaryOp2"ast.unaryop2"	ast.While2
-"ast.With2"	ast.Yield2"ast.YieldFrom222	"ast.arg2"builtins.list2f22f222"ast.excepthandler2"	ast.Match2"ast.match_case2"builtins.list2l2"ast.MatchAs2"ast.pattern22o2"ast.MatchClass2"builtins.list2o2"ast.MatchMapping2"ast.MatchOr2"ast.MatchSequence2"ast.MatchSingleton2202"ast.MatchStar2"ast.MatchValue22"builtins.dict2z
+MatchClass"_ast.patternr
+__match_args__0r
+cls0r
+patterns0;r
+	kwd_attrs0%r
+kwd_patterns0;B
+MatchAs"_ast.patternr
+__match_args__0
+r
+pattern0<r
+name0	9
+MatchOr"_ast.patternr
+__match_args__0r
+patterns0;*
+__annotations__0=*
+PyCF_ONLY_AST0>*
+PyCF_TYPE_COMMENTS0>*
+PyCF_ALLOW_TOP_LEVEL_AWAIT0>*
+_Identifier08*
+_Slice08*
+_Pattern07822
+"_ast.AST222"builtins.str2"builtins.tuple22"builtins.int2222222"	_ast.expr2"builtins.list22"	_ast.stmt2"builtins.list22"_ast.TypeIgnore2"builtins.list2222
+22"_ast.arguments222	22"_ast.keyword2"builtins.list2222"	_ast.Name2"_ast.Attribute2"_ast.Subscript222"_ast.operator222"_ast.withitem2"builtins.list22"_ast.ExceptHandler2"builtins.list2!2"
+_ast.alias2"builtins.list2#2"builtins.list22"_ast.boolop2"_ast.unaryop2"builtins.list22"_ast.comprehension2"builtins.list2)2"
+_ast.cmpop2"builtins.list2+2"builtins.float2"builtins.complex22-.2"_ast.expr_context222
+"_ast.arg2"builtins.list222222"_ast.match_case2"builtins.list252"_ast.pattern2"builtins.bool2	2822992"builtins.list272272"builtins.dict22	2

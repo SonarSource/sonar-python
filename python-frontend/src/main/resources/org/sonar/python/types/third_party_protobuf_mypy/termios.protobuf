@@ -1,290 +1,305 @@
 
 termios
 error"builtins.Exception
-	tcgetattr*(
-	tcsetattr*(*(*(
-tcsendbreak*(*(
-tcdrain*(
-tcflush*(*(
-tcflow*(*(*
-__annotations__0*
-_AttrReturn08*
-B00*
-B1100*
-B1152000*	
-B12000*
-B1340*
-B1500*	
-B18000*
+	tcgetattr*(
+	tcsetattr*(*(*(
+tcsendbreak*(*(
+tcdrain*(
+tcflush*(*(
+tcflow*(*(*
+__annotations__0*
+_Attr08*
+B00*
+B10000000*
+B1100*
+B1152000*
+B11520000*	
+B12000*
+B1340*
+B1500*
+B15000000*	
+B18000*
 
-B192000*
-B2000*
-B2304000*	
-B24000*
-B3000*
+B192000*
+B2000*
+B20000000*
+B2304000*	
+B24000*
+B25000000*
+B3000*
+B30000000*
+B35000000*
 
-B384000*	
-B48000*
-B500*
+B384000*
+B40000000*
+B4608000*	
+B48000*
+B500*
+B5000000*
 
-B576000*
-B6000*
-B750*	
-B96000*
+B576000*
+B5760000*
+B6000*
+B750*
+B9216000*	
+B96000*
 
-BRKINT0*
-BS00*
-BS10*	
-BSDLY0*
+BRKINT0*
+BS00*
+BS10*	
+BSDLY0*	
+CBAUD0*
+CBAUDEX0*
+CDEL0*
 
-CDSUSP0*
-CEOF0*
-CEOL0*
-CEOT0*
+CDSUSP0*
+CEOF0*
+CEOL0*	
+CEOL20*
+CEOT0*
 
-CERASE0*
+CERASE0*
+CESC0*
 
-CFLUSH0*	
-CINTR0*	
-CKILL0*
+CFLUSH0*
 
-CLNEXT0*
+CIBAUD0*	
+CINTR0*	
+CKILL0*
 
-CLOCAL0*	
-CQUIT0*
-CR00*
-CR10*
-CR20*
-CR30*	
-CRDLY0*	
-CREAD0*
+CLNEXT0*
 
-CRPRNT0*
-CRTSCTS0*
-CS50*
-CS60*
-CS70*
-CS80*	
-CSIZE0*
+CLOCAL0*
+CNUL0*
 
-CSTART0*	
-CSTOP0*
+COMMON0*	
+CQUIT0*
+CR00*
+CR10*
+CR20*
+CR30*	
+CRDLY0*	
+CREAD0*
 
-CSTOPB0*	
-CSUSP0*
-CWERASE0*
-ECHO0*
-ECHOCTL0*	
-ECHOE0*	
-ECHOK0*
+CRPRNT0*
+CRTSCTS0*
+CS50*
+CS60*
+CS70*
+CS80*	
+CSIZE0*
 
-ECHOKE0*
+CSTART0*	
+CSTOP0*
 
-ECHONL0*
-ECHOPRT0*
-EXTA0*
-EXTB0*
-FF00*
-FF10*	
-FFDLY0*
-FIOASYNC0*
-FIOCLEX0*
-FIONBIO0*
-FIONCLEX0*
-FIONREAD0*
+CSTOPB0*	
+CSUSP0*
 
-FLUSHO0*	
-HUPCL0*
+CSWTCH0*
+CWERASE0*
+ECHO0*
+ECHOCTL0*	
+ECHOE0*	
+ECHOK0*
 
-ICANON0*	
-ICRNL0*
+ECHOKE0*
 
-IEXTEN0*
+ECHONL0*
+ECHOPRT0*
+EXTA0*
+EXTB0*
+FF00*
+FF10*	
+FFDLY0*
+FIOASYNC0*
+FIOCLEX0*
+FIONBIO0*
+FIONCLEX0*
+FIONREAD0*
 
-IGNBRK0*	
-IGNCR0*
+FLUSHO0*	
+HUPCL0*
+IBSHIFT0*
 
-IGNPAR0*
-IMAXBEL0*	
-INLCR0*	
-INPCK0*
-ISIG0*
+ICANON0*	
+ICRNL0*
 
-ISTRIP0*	
-IXANY0*	
-IXOFF0*
-IXON0*
-NCCS0*
-NL00*
-NL10*	
-NLDLY0*
+IEXTEN0*
 
-NOFLSH0*	
-OCRNL0*	
-OFDEL0*	
-OFILL0*	
-ONLCR0*
+IGNBRK0*	
+IGNCR0*
 
-ONLRET0*	
-ONOCR0*	
-OPOST0*
+IGNPAR0*
+IMAXBEL0*
+	INIT_C_CC0*	
+INLCR0*	
+INPCK0*
+IOCSIZE_MASK0*
+IOCSIZE_SHIFT0*
+ISIG0*
 
-PARENB0*
+ISTRIP0*	
+IUCLC0*	
+IXANY0*	
+IXOFF0*
+IXON0*
+N_MOUSE0*	
+N_PPP0*
 
-PARMRK0*
+N_SLIP0*
+N_STRIP0*	
+N_TTY0*
+NCC0*
+NCCS0*
+NL00*
+NL10*	
+NLDLY0*
 
-PARODD0*
+NOFLSH0*
 
-PENDIN0*
-TAB00*
-TAB10*
-TAB20*
-TAB30*
+NSWTCH0*	
+OCRNL0*	
+OFDEL0*	
+OFILL0*	
+OLCUC0*	
+ONLCR0*
 
-TABDLY0*
-TCIFLUSH0*
+ONLRET0*	
+ONOCR0*	
+OPOST0*
 
-TCIOFF0*
-	TCIOFLUSH0*	
-TCION0*
-TCOFLUSH0*
+PARENB0*
 
-TCOOFF0*	
-TCOON0*
-	TCSADRAIN0*
-	TCSAFLUSH0*
-TCSANOW0*
-TIOCCONS0*
-TIOCEXCL0*
-TIOCGETD0*
-	TIOCGPGRP0*
+PARMRK0*
 
-TIOCGWINSZ0*
-	TIOCM_CAR0*
-TIOCM_CD0*
-	TIOCM_CTS0*
-	TIOCM_DSR0*
-	TIOCM_DTR0*
-TIOCM_LE0*
-TIOCM_RI0*
-	TIOCM_RNG0*
-	TIOCM_RTS0*
-TIOCM_SR0*
-TIOCM_ST0*
-TIOCMBIC0*
-TIOCMBIS0*
-TIOCMGET0*
-TIOCMSET0*
-	TIOCNOTTY0*
-TIOCNXCL0*
-TIOCOUTQ0*
-TIOCPKT_DATA0*
-TIOCPKT_DOSTOP0*
-TIOCPKT_FLUSHREAD0*
-TIOCPKT_FLUSHWRITE0*
-TIOCPKT_NOSTOP0*
-TIOCPKT_START0*
-TIOCPKT_STOP0*
-TIOCPKT0*
-	TIOCSCTTY0*
-TIOCSETD0*
-	TIOCSPGRP0*
-TIOCSTI0*
+PARODD0*
 
-TIOCSWINSZ0*
+PENDIN0*
+TAB00*
+TAB10*
+TAB20*
+TAB30*
 
-TOSTOP0*
-VDISCARD0*
-VEOF0*
-VEOL0*	
-VEOL20*
+TABDLY0*
 
-VERASE0*	
-VINTR0*	
-VKILL0*
+TCFLSH0*
 
-VLNEXT0*
-VMIN0*	
-VQUIT0*
-VREPRINT0*
+TCGETA0*
 
-VSTART0*	
-VSTOP0*	
-VSUSP0*
-VT00*
-VT10*	
-VTDLY0*	
-VTIME0*
-VWERASE0*
-B11520000*
-B5760000*	
-CBAUD0*
-CBAUDEX0*
+TCGETS0*
+TCIFLUSH0*
 
-CIBAUD0*
-IOCSIZE_MASK0*
-IOCSIZE_SHIFT0*	
-IUCLC0*
-N_MOUSE0*	
-N_PPP0*
+TCIOFF0*
+	TCIOFLUSH0*	
+TCION0*
+TCOFLUSH0*
 
-N_SLIP0*
-N_STRIP0*	
-N_TTY0*
-NCC0*	
-OLCUC0*
+TCOOFF0*	
+TCOON0*
+	TCSADRAIN0*
+	TCSAFLUSH0*
+TCSANOW0*
+TCSASOFT0*
 
-TCFLSH0*
+TCSBRK0*
+TCSBRKP0*
 
-TCGETA0*
+TCSETA0*
+TCSETAF0*
+TCSETAW0*
 
-TCGETS0*
+TCSETS0*
+TCSETSF0*
+TCSETSW0*
 
-TCSBRK0*
-TCSBRKP0*
+TCXONC0*
+TIOCCONS0*
+TIOCEXCL0*
+TIOCGETD0*
+TIOCGICOUNT0*
+TIOCGLCKTRMIOS0*
+	TIOCGPGRP0*
+TIOCGSERIAL0*
+	TIOCGSIZE0*
+TIOCGSOFTCAR0*
 
-TCSETA0*
-TCSETAF0*
-TCSETAW0*
+TIOCGWINSZ0*
+TIOCINQ0*
+	TIOCLINUX0*
+	TIOCM_CAR0*
+TIOCM_CD0*
+	TIOCM_CTS0*
+	TIOCM_DSR0*
+	TIOCM_DTR0*
+TIOCM_LE0*
+TIOCM_RI0*
+	TIOCM_RNG0*
+	TIOCM_RTS0*
+TIOCM_SR0*
+TIOCM_ST0*
+TIOCMBIC0*
+TIOCMBIS0*
+TIOCMGET0*
 
-TCSETS0*
-TCSETSF0*
-TCSETSW0*
+TIOCMIWAIT0*
+TIOCMSET0*
+	TIOCNOTTY0*
+TIOCNXCL0*
+TIOCOUTQ0*
+TIOCPKT_DATA0*
+TIOCPKT_DOSTOP0*
+TIOCPKT_FLUSHREAD0*
+TIOCPKT_FLUSHWRITE0*
+TIOCPKT_NOSTOP0*
+TIOCPKT_START0*
+TIOCPKT_STOP0*
+TIOCPKT0*
+	TIOCSCTTY0*
+TIOCSER_TEMT0*
+TIOCSERCONFIG0*
+TIOCSERGETLSR0*
+TIOCSERGETMULTI0*
+TIOCSERGSTRUCT0*
+TIOCSERGWILD0*
+TIOCSERSETMULTI0*
+TIOCSERSWILD0*
+TIOCSETD0*
+TIOCSLCKTRMIOS0*
+	TIOCSPGRP0*
+TIOCSSERIAL0*
+	TIOCSSIZE0*
+TIOCSSOFTCAR0*
+TIOCSTI0*
 
-TCXONC0*
-TIOCGICOUNT0*
-TIOCGLCKTRMIOS0*
-TIOCGSERIAL0*
-TIOCGSOFTCAR0*
-TIOCINQ0*
-	TIOCLINUX0*
+TIOCSWINSZ0*
+TIOCTTYGSTRUCT0*
 
-TIOCMIWAIT0*
-TIOCTTYGSTRUCT0*
-TIOCSER_TEMT0*
-TIOCSERCONFIG0*
-TIOCSERGETLSR0*
-TIOCSERGETMULTI0*
-TIOCSERGSTRUCT0*
-TIOCSERGWILD0*
-TIOCSERSETMULTI0*
-TIOCSERSWILD0*
-TIOCSLCKTRMIOS0*
-TIOCSSERIAL0*
-TIOCSSOFTCAR0*	
-VSWTC0*
+TOSTOP0*
+VDISCARD0*
+VEOF0*
+VEOL0*	
+VEOL20*
 
-VSWTCH0*	
-XCASE0*	
-XTABS0*
-B10000000*
-B15000000*
-B20000000*
-B25000000*
-B30000000*
-B35000000*
-B40000000*
-B4608000*
-B5000000*
-B921600022"builtins.list22"termios._AttrReturn22"builtins.int2"_typeshed.HasFileno222#"_typeshed.FileDescriptorLike222"builtins.bytes22	2"builtins.list2
-222"builtins.list22"builtins.list2	222"builtins.list22"builtins.list2222"builtins.list2222"termios._Attr22"builtins.str2"builtins.dict2
+VERASE0*	
+VINTR0*	
+VKILL0*
+
+VLNEXT0*
+VMIN0*	
+VQUIT0*
+VREPRINT0*
+
+VSTART0*	
+VSTOP0*	
+VSUSP0*	
+VSWTC0*
+
+VSWTCH0*
+VT00*
+VT10*	
+VTDLY0*	
+VTIME0*
+VWERASE0*	
+XCASE0*	
+XTABS022"builtins.list22"builtins.int2"_typeshed.HasFileno222#"_typeshed.FileDescriptorLike222"builtins.bytes222"builtins.list2	22
+2"builtins.list22"termios._Attr22"builtins.str2"builtins.dict2

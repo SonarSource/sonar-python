@@ -1,5 +1,5 @@
 
-pathlib¯	
+pathlibš	
 PurePath"os.PathLike*,
 parts*
 
@@ -28,19 +28,21 @@
 __new__*	
 cls(*
 
-args(	h*
-__hash__
-*
-
-self(*
+args(	h*
+__eq__
+*(*(*
 
 __fspath__*
 
 self(*
-__lt__*(*(*
-__le__*(*(*
-__gt__*(*(*
-__ge__*(*(*
+__lt__
+*(*(*
+__le__
+*(*(*
+__gt__
+*(*(*
+__ge__
+*(*(*
 __truediv__*(*(	*
 __rtruediv__*(*(	*
 	__bytes__*
@@ -52,17 +54,21 @@ __fspath__*
 as_uri*
 
 self(*
-is_absolute*
+is_absolute
+*
 
 self(*
-is_reserved*
+is_reserved
+*
 
 self(*+
-is_relative_to*
+is_relative_to
+*
 
 self(*
 other(	*)
-match*
+match
+*
 
 self(*
 path_pattern(*(
@@ -97,260 +103,254 @@ __fspath__*
 __class_getitem__*	
 cls(*
 
-type(pr
-	__slots__00
-PurePosixPath"pathlib.PurePathr
-	__slots__02
-PureWindowsPath"pathlib.PurePathr
-	__slots__0µ
+type(p!
+PurePosixPath"pathlib.PurePath#
+PureWindowsPath"pathlib.PurePath¤
 Path"pathlib.PurePath*2
-__new__*	
-cls(*
+__new__*	
+cls(*
 
 args(	*
-kwargs(h*,
-cwd*	
-cls(0:builtins.classmethodp*-
-stat*
+kwargs(h*
+	__enter__*(*
+__exit__*(*(*(*(*,
+cwd*	
+cls(0:builtins.classmethodp*-
+stat*
 
-self(*
-follow_symlinks (*:
-chmod*
+self(*
+follow_symlinks (
+*:
+chmod*
 
-self(*
+self(*
 
-mode(
-*
-follow_symlinks (*
-	__enter__*(*
-__exit__*(*(*(*( *
-is_dir*
+mode(*
+follow_symlinks (
+*
+exists
+*
 
-self(*
-is_file*
+self(*#
+glob*
 
-self(*;
-	read_text*
-
-self(*
-encoding (!*
-errors (!*#
-glob"*
-
-self(*
-pattern(*$
-rglob"*
-
-self(*
+self(*
 pattern(*
-exists*
+is_dir
+*
 
-self(*
+self(*
+is_file
+*
 
-is_symlink*
+self(*
 
-self(*
-	is_socket*
+is_symlink
+*
 
-self(*
-is_fifo*
+self(*
+	is_socket
+*
 
-self(*
-is_block_device*
+self(*
+is_fifo
+*
 
-self(*
-is_char_device*
+self(*
+is_block_device
+*
 
-self(*
-iterdir"*
+self(*
+is_char_device
+*
 
-self(*"
-lchmod*
+self(*
+iterdir*
 
-self(*
+self(*"
+lchmod*
 
-mode(
+self(*
+
+mode(*
+lstat*
+
+self(*F
+mkdir*
+
+self(*
+mode (*
+parents (
+*
+exist_ok (
 *
-lstat*
-
-self(*F
-mkdir*
-
-self(*
-mode (
-*
-parents (*
-exist_ok (*
 owner*
 
-self(*
+self(*
 group*
 
-self(*
-is_mount*
+self(*
+is_mount
+*
 
-self(*
-readlink*
+self(*
+readlink*
 
-self(*$
-rename*
+self(*$
+rename*
 
-self(*
-target(	*%
-replace*
+self(*
+target( *%
+replace*
 
-self(*
-target(	*'
-resolve*
+self(*
+target( *'
+resolve*
 
-self(*
-strict (*
-rmdir*
+self(*
+strict (
+*$
+rglob*
 
-self(*E
+self(*
+pattern(*
+rmdir*
 
-symlink_to*
+self(*E
 
-self(*
-target(%*
-target_is_directory (*)
-hardlink_to*
+symlink_to*
 
-self(*
-target(%*5
-touch*
+self(*
+target(#*
+target_is_directory (
+*)
+hardlink_to*
 
-self(*
-mode (
-*
-exist_ok (**
-unlink*
+self(*
+target(#*5
+touch*
 
-self(*
+self(*
+mode (*
+exist_ok (
+**
+unlink*
 
-missing_ok (*-
-home*	
-cls(0:builtins.classmethodp*
-absolute*
+self(*
 
-self(*
+missing_ok (
+*-
+home*	
+cls(0:builtins.classmethodp*
+absolute*
 
-expanduser*
+self(*
 
-self(*
+expanduser*
+
+self(*
 
 read_bytes*
 
-self(**
-samefile*
+self(*;
+	read_text*
 
-self(*
+self(*
+encoding ($*
+errors ($**
+samefile
+*
+
+self(*
 
 other_path(	*'
-write_bytes
-*
+write_bytes*
 
-self(*
+self(*
 
-data(&*Y
+data(.*Y
 
-write_text
-*
+write_text*
 
-self(*
+self(*
 
 data(*
-encoding (!*
-errors (!*
-newline (!*'
-link_to*
+encoding ($*
+errors ($*
+newline ($*%
+link_to*
 
-self(*
-target(%02ñ
+self(*
+target(#2ñ
 open}
-open(*
+open/*
 
-self(*
-mode (1*
-	buffering (
-*
-encoding (!*
-errors (!*
-newline (!0:typing.overloadXy
-open2*
+self(*
+mode (8*
+	buffering (*
+encoding ($*
+errors ($*
+newline ($0:typing.overloadXy
+open9*
 
-self(*
+self(*
 
-mode(:*
-	buffering(;*
-encoding (*
-errors (*
-newline (0:typing.overloadX{
-open<*
+mode(A*
+	buffering(B*
+encoding (*
+errors (*
+newline (0:typing.overloadX{
+openC*
 
-self(*
+self(*
 
-mode(4*
-	buffering (=*
-encoding (*
-errors (*
-newline (0:typing.overloadX{
-open>*
+mode(;*
+	buffering (D*
+encoding (*
+errors (*
+newline (0:typing.overloadX{
+openE*
 
-self(*
+self(*
 
-mode(8*
-	buffering (=*
-encoding (*
-errors (*
-newline (0:typing.overloadX{
-open@*
+mode(?*
+	buffering (D*
+encoding (*
+errors (*
+newline (0:typing.overloadX{
+openF*
 
-self(*
+self(*
 
-mode(6*
-	buffering (=*
-encoding (*
-errors (*
-newline (0:typing.overloadX{
-openA*
+mode(=*
+	buffering (D*
+encoding (*
+errors (*
+newline (0:typing.overloadX{
+openG*
 
-self(*
+self(*
 
-mode(:*
-	buffering (
-*
-encoding (*
-errors (*
-newline (0:typing.overloadX{
-openB*
+mode(A*
+	buffering (*
+encoding (*
+errors (*
+newline (0:typing.overloadX{
+openH*
 
-self(*
+self(*
 
 mode(*
-	buffering (
-*
-encoding (!*
-errors (!*
-newline (!0:typing.overloadXr
-	__slots__0?
-	PosixPath"pathlib.Path"pathlib.PurePosixPathr
-	__slots__0C
-WindowsPath"pathlib.Path"pathlib.PureWindowsPathr
-	__slots__0*
-__path__0*
-__annotations__0C*
+	buffering (*
+encoding ($*
+errors ($*
+newline ($0:typing.overloadX0
+	PosixPath"pathlib.Path"pathlib.PurePosixPath4
+WindowsPath"pathlib.Path"pathlib.PureWindowsPath*
+__annotations__0I*
 __all__02"builtins.str2"builtins.tuple22"pathlib.PurePath2"builtins.list220
-pathlib.PurePath.Self"pathlib.PurePath(22"type22"os.PathLike2222"_typeshed.StrPath22"builtins.int2"builtins.bool2"builtins.bytes2"typing.Sequence22"types.GenericAlias2"type222222"pathlib.Path2(
-pathlib.Path.Self"pathlib.Path(22"type22"builtins.object2"builtins.float22
-
-
-
-
-
-
-
-2"os.stat_result222"builtins.BaseException2"type222222"types.TracebackType22222"typing.Generator22"os.PathLike222#2"_typeshed.StrOrBytesPath2$2"typing_extensions.Buffer2"_io._WrappedBuffer2"_io.TextIOWrapper2'2	22$2 ))))))))))))))))))))))))))))))))2%"_typeshed.OpenTextModeUpdating2*22	)))))))))2$"_typeshed.OpenTextModeWriting2,22))))))))))))2$"_typeshed.OpenTextModeReading2.22+-/2"_typeshed.OpenTextMode202"
-_io.FileIO22))))))))))))))))))))))))2'" _typeshed.OpenBinaryModeUpdating2322))))))))2&"_typeshed.OpenBinaryModeReading252
-2))))))2&"_typeshed.OpenBinaryModeWriting27224682"_typeshed.OpenBinaryMode292	2
-2"_io.BufferedRandom22;;2"_io.BufferedWriter2"_io._BufferedReaderStream2"_io.BufferedReader2?2"typing.BinaryIO2"	typing.IO22"builtins.dict2
+pathlib.PurePath.Self"pathlib.PurePath(22"type22"os.PathLike2222"_typeshed.StrPath22"builtins.bool2"builtins.object2"builtins.bytes2"typing.Sequence22"types.GenericAlias2"type222"pathlib.Path2(
+pathlib.Path.Self"pathlib.Path(22"type222"builtins.BaseException2"type222222"types.TracebackType222"builtins.int2"builtins.float22
+2"os.stat_result22"typing.Generator2222"os.PathLike222!2"_typeshed.StrOrBytesPath2"222"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2%&'()*2 "_typeshed.WriteableBuffer2+22,2"_typeshed.ReadableBuffer2-2"io.TextIOWrapper2	22$2 000000000000000000000000000000002%"_typeshed.OpenTextModeUpdating2122	0000000002$"_typeshed.OpenTextModeWriting23220000000000002$"_typeshed.OpenTextModeReading25222462"_typeshed.OpenTextMode272"	io.FileIO220000000000000000000000002'" _typeshed.OpenBinaryModeUpdating2:22000000002&"_typeshed.OpenBinaryModeReading2<2
+20000002&"_typeshed.OpenBinaryModeWriting2>22;=?2"_typeshed.OpenBinaryMode2@2	22"io.BufferedRandom22BB2"io.BufferedWriter2"io.BufferedReader2"typing.BinaryIO2"	typing.IO22"builtins.dict2

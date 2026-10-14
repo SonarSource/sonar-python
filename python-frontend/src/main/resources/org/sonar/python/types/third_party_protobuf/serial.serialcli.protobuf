@@ -25,7 +25,7 @@
 is_infinite0r
 is_non_blocking0r
 duration0r
-target_time0Þ
+target_time0Û
 
 SerialBaseserial.serialutil.SerialBase"io.RawIOBase*ô
 __init__*
@@ -46,32 +46,26 @@ SerialBaseserial.serialutil.SerialBase"io.RawIOBase*ô
 	exclusive (*2
 read*
 
-self(* (0:abc.abstractmethod@*;
+self(* (0:abc.abstractmethod@*1
 write*
 
-self(*(0:abc.abstractmethod@z310z311*@
-write*
-
-self(*(0:abc.abstractmethod@z312z313z314*
-get_settings*
+self(*(0:abc.abstractmethod@*
+get_settings*
 
 self(*'
 apply_settings*
 
 self(*
-d(*&
+d(*
 readinto*
 
-self(*(z310z311*+
-readinto*
-
-self(*(z312z313z314*,
+self(*(*,
 
 send_break*
 
 self(*
 duration (*
-read_all*
+read_all*
 
 self(*:
 
@@ -80,7 +74,7 @@ read_until*
 self(*
 expected (*
 size (*;
-iread_until*
+iread_until*
 
 self(*
 expected (*
@@ -113,13 +107,13 @@ read_until*
 self(*
 bytesize(0:.setter2v
 	exclusive2
-	exclusive*
+	exclusive*
 
 self(0:builtins.propertyX`5
 	exclusive*
 
 self(*
-	exclusive(0:.setter2j
+	exclusive(0:.setter2j
 parity/
 parity	*
 
@@ -184,7 +178,7 @@ ic_timeout(0:.setter2n
 dsrdtr*
 
 self(*
-dsrdtr (0:.setter2`
+dsrdtr (0:.setter2`
 rts,
 rts*
 
@@ -212,62 +206,59 @@ ic_timeout(0:.setter2n
 
 rs485_mode3
 
-rs485_mode*
+rs485_mode*
 
 self(0:builtins.propertyX`;
 
 rs485_mode*
 
 self(*
-rs485_settings(0:.setterr
-	BAUDRATES0r
-	BYTESIZES0r
-PARITIES0r
-STOPBITS0r
+rs485_settings(0:.setterr
+	BAUDRATES0 r
+	BYTESIZES0 r
+PARITIES0!r
+STOPBITS0"r
 is_open0r
 portstr0
 r
 name0
-Ù
+¥
 Serial"serial.serialutil.SerialBase*
 open*
 
-self(*1
+self(#*1
 
 in_waiting*
 
-self(0:builtins.property`*"
+self(#0:builtins.property`*"
 read*
 
-self(*
-size (*#
+self(#*
+size (*
 write*
 
-self(*(z310z311*(
-write*
-
-self(*(z312z313z314*"
+self(#*(*"
 reset_input_buffer*
 
-self(*#
+self(#*#
 reset_output_buffer*
 
-self(**
+self(#**
 cts*
 
-self(0:builtins.property`**
+self(#0:builtins.property`**
 dsr*
 
-self(0:builtins.property`*)
+self(#0:builtins.property`*)
 ri*
 
-self(0:builtins.property`*)
+self(#0:builtins.property`*)
 cd*
 
-self(0:builtins.property`
+self(#0:builtins.property`
 as_byte_array*
 string(*
-__annotations__0*
+__annotations__0*
 XONserial.serialutil.XON0* 
 XOFFserial.serialutil.XOFF0*
 CRserial.serialutil.CR0*
@@ -285,5 +276,6 @@ PARITY_ODDserial.serialutil.PARITY_ODD0	*.
 SIXBITSserial.serialutil.SIXBITS0**
 	SEVENBITSserial.serialutil.SEVENBITS0**
 	EIGHTBITSserial.serialutil.EIGHTBITS0*0
-PARITY_NAMESserial.serialutil.PARITY_NAMES0*
-sab022$""serial.serialutil.PortNotOpenError2"serial.serialutil.Timeout2"builtins.float2"builtins.bool2"builtins.function222"serial.serialutil.SerialBase2"builtins.str22	2"builtins.int222"builtins.bytes222"typing_extensions.Buffer2"_collections_abc.Buffer22"builtins.dict2	222"typing.Generator2222"serial.rs485.RS485Settings222"builtins.tuple22"builtins.tuple2	222"serial.serialcli.Serial2"builtins.dict2		
+PARITY_NAMESserial.serialutil.PARITY_NAMES0$*
+sab022$""serial.serialutil.PortNotOpenError2"serial.serialutil.Timeout2"builtins.float2"builtins.bool2"builtins.function222"serial.serialutil.SerialBase2"builtins.str22	2"builtins.int222"builtins.bytes222"builtins.bytearray2"builtins.memoryview22"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"builtins.dict2	222"typing.Generator2222"serial.rs485.RS485Settings222"builtins.tuple22"builtins.tuple2	222"serial.serialcli.Serial2"builtins.dict2		

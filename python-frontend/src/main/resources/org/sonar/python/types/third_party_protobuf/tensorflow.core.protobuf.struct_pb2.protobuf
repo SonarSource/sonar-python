@@ -1,6 +1,6 @@
 
-#tensorflow.core.protobuf.struct_pb2Ì
-StructuredValue"builtins.object*1
+#tensorflow.core.protobuf.struct_pb2Ü
+StructuredValue"google.protobuf.message.Message*1
 
 none_value*
 
@@ -43,34 +43,34 @@ none_value (*
 
 bool_value (*
 tensor_shape_value (*
-tensor_dtype_value (*
-tensor_spec_value (*
-type_spec_value (*!
-bounded_tensor_spec_value (*
+tensor_dtype_value (*
+tensor_spec_value (*
+type_spec_value (*!
+bounded_tensor_spec_value (*
 
-list_value (*
-tuple_value (*
+list_value (*
+tuple_value (*
 
-dict_value (*
-named_tuple_value (**
+dict_value (*
+named_tuple_value (**
 HasField*
 
 self(*
 
-field_name( *,
+field_name("*,
 
 ClearField*
 
 self(*
 
-field_name( *-
+field_name("*-
 
-WhichOneof!*
+WhichOneof#*
 
 self(*
-oneof_group("8r
+oneof_group($8r
 
-DESCRIPTOR0r
+DESCRIPTOR0%r
 NONE_VALUE_FIELD_NUMBER0r
 FLOAT64_VALUE_FIELD_NUMBER0r
 INT64_VALUE_FIELD_NUMBER0r
@@ -90,92 +90,92 @@ DESCRIPTOR0r
 string_value0r
 
 bool_value0r
-tensor_dtype_value0H
-	NoneValue"builtins.object*
+tensor_dtype_value0X
+	NoneValue"google.protobuf.message.Message*
 __init__*
 
 self(8r
 
-DESCRIPTOR0Î
-	ListValue"builtins.object*-
-values*
+DESCRIPTOR0%Þ
+	ListValue"google.protobuf.message.Message*-
+values&*
 
 self(0:builtins.property`*(
 __init__*
 
 self(*
-values ($*,
+values ((*,
 
 ClearField*
 
 self(*
 
-field_name("8r
+field_name($8r
 
-DESCRIPTOR0r
-VALUES_FIELD_NUMBER0Ï
+DESCRIPTOR0%r
+VALUES_FIELD_NUMBER0ß
 
-TupleValue"builtins.object*-
-values*
+TupleValue"google.protobuf.message.Message*-
+values&*
 
 self(0:builtins.property`*(
 __init__*
 
 self(*
-values ($*,
+values ((*,
 
 ClearField*
 
 self(*
 
-field_name("8r
+field_name($8r
 
-DESCRIPTOR0r
-VALUES_FIELD_NUMBER0Î
-	DictValue"builtins.object*-
-fields*
+DESCRIPTOR0%r
+VALUES_FIELD_NUMBER0Þ
+	DictValue"google.protobuf.message.Message*-
+fields)*
 
 self(	0:builtins.property`*(
 __init__*
 
 self(	*
-fields (&*,
+fields (+*,
 
 ClearField*
 
 self(	*
 
-field_name("8r
+field_name($8r
 
-DESCRIPTOR0r
-FIELDS_FIELD_NUMBER0£
-	PairValue"builtins.object*,
+DESCRIPTOR0%r
+FIELDS_FIELD_NUMBER0³
+	PairValue"google.protobuf.message.Message*,
 value*
 
-self('0:builtins.property`*4
+self(,0:builtins.property`*4
 __init__*
 
-self('*
+self(,*
 key (*
-value ((**
+value (-**
 HasField*
 
-self('*
+self(,*
 
-field_name("*,
+field_name($*,
 
 ClearField*
 
-self('*
+self(,*
 
-field_name()8r
+field_name(.8r
 
-DESCRIPTOR0r
+DESCRIPTOR0%r
 KEY_FIELD_NUMBER0r
 VALUE_FIELD_NUMBER0r
-key0ƒ
-NamedTupleValue"builtins.object*-
-values*
+key0“
+NamedTupleValue"google.protobuf.message.Message*-
+values/*
 
 self(
 0:builtins.property`*6
@@ -184,20 +184,20 @@ DESCRIPTOR0r
 self(
 *
 name (*
-values (+*,
+values (1*,
 
 ClearField*
 
 self(
 *
 
-field_name()8r
+field_name(.8r
 
-DESCRIPTOR0r
+DESCRIPTOR0%r
 NAME_FIELD_NUMBER0r
 VALUES_FIELD_NUMBER0r
-name0Þ
-TensorSpecProto"builtins.object*,
+name0î
+TensorSpecProto"google.protobuf.message.Message*,
 shape*
 
 self(0:builtins.property`*D
@@ -206,33 +206,33 @@ DESCRIPTOR0r
 self(*
 name (*
 shape (*
-dtype (**
+dtype (**
 HasField*
 
 self(*
 
-field_name("*,
+field_name($*,
 
 ClearField*
 
 self(*
 
-field_name(,8r
+field_name(28r
 
-DESCRIPTOR0r
+DESCRIPTOR0%r
 NAME_FIELD_NUMBER0r
 SHAPE_FIELD_NUMBER0r
 DTYPE_FIELD_NUMBER0r
 name0r	
-dtype0›
-BoundedTensorSpecProto"builtins.object*,
+dtype0«
+BoundedTensorSpecProto"google.protobuf.message.Message*,
 shape*
 
 self(0:builtins.property`*.
-minimum*
+minimum3*
 
 self(0:builtins.property`*.
-maximum*
+maximum3*
 
 self(0:builtins.property`*f
 __init__*
@@ -240,30 +240,30 @@ DESCRIPTOR0r
 self(*
 name (*
 shape (*
-dtype (*
-minimum (*
-maximum (**
+dtype (*
+minimum (4*
+maximum (4**
 HasField*
 
 self(*
 
-field_name(,*,
+field_name(2*,
 
 ClearField*
 
 self(*
 
-field_name(-8r
+field_name(58r
 
-DESCRIPTOR0r
+DESCRIPTOR0%r
 NAME_FIELD_NUMBER0r
 SHAPE_FIELD_NUMBER0r
 DTYPE_FIELD_NUMBER0r
 MINIMUM_FIELD_NUMBER0r
 MAXIMUM_FIELD_NUMBER0r
 name0r	
-dtype0¹
-TypeSpecProto"builtins.object*1
+dtype0É
+TypeSpecProto"google.protobuf.message.Message*1
 
 type_state*
 
@@ -271,64 +271,63 @@ type_state*
 __init__*
 
 self(*
-type_spec_class (/*
+type_spec_class (7*
 
-type_state ((*
+type_state (-*
 type_spec_class_name (*
 num_flat_components (**
 HasField*
 
 self(*
 
-field_name("*,
+field_name($*,
 
 ClearField*
 
 self(*
 
-field_name(08r
+field_name(88r
 
-DESCRIPTOR0r
-UNKNOWN0.r
-SPARSE_TENSOR_SPEC0.r
-INDEXED_SLICES_SPEC0.r
-RAGGED_TENSOR_SPEC0.r
-TENSOR_ARRAY_SPEC0.r
-DATA_DATASET_SPEC0.r
-DATA_ITERATOR_SPEC0.r
-OPTIONAL_SPEC0.r
-PER_REPLICA_SPEC0.r
-VARIABLE_SPEC0.r
-ROW_PARTITION_SPEC0.r
-REGISTERED_TYPE_SPEC0.r
-EXTENSION_TYPE_SPEC0.r 
+DESCRIPTOR0%r
+UNKNOWN06r
+SPARSE_TENSOR_SPEC06r
+INDEXED_SLICES_SPEC06r
+RAGGED_TENSOR_SPEC06r
+TENSOR_ARRAY_SPEC06r
+DATA_DATASET_SPEC06r
+DATA_ITERATOR_SPEC06r
+OPTIONAL_SPEC06r
+PER_REPLICA_SPEC06r
+VARIABLE_SPEC06r
+ROW_PARTITION_SPEC06r
+REGISTERED_TYPE_SPEC06r
+EXTENSION_TYPE_SPEC06r 
 TYPE_SPEC_CLASS_FIELD_NUMBER0r
 TYPE_STATE_FIELD_NUMBER0r%
 !TYPE_SPEC_CLASS_NAME_FIELD_NUMBER0r$
  NUM_FLAT_COMPONENTS_FIELD_NUMBER0r
-type_spec_class0.r
+type_spec_class06r
 type_spec_class_name0r
 num_flat_components0*
-__annotations__01*
-collectionscollections *
-
-google0*
+__annotations__0:*
+collectionscollections *
+googlegoogle *
 
 tensorflow
 tensorflow *
 
-DESCRIPTOR0*
+DESCRIPTOR0;*
 global___StructuredValue08*
 global___NoneValue08*
 global___ListValue08*
 global___TupleValue08*
 global___DictValue0	8*
-global___PairValue0'8*
+global___PairValue0,8*
 global___NamedTupleValue0
 8*
 global___TensorSpecProto08*%
 global___BoundedTensorSpecProto08*
-global___TypeSpecProto082/"-tensorflow.core.protobuf.struct_pb2.NoneValue25"3tensorflow.core.protobuf.struct_pb2.StructuredValue225"3tensorflow.core.protobuf.struct_pb2.TensorSpecProto23"1tensorflow.core.protobuf.struct_pb2.TypeSpecProto2<":tensorflow.core.protobuf.struct_pb2.BoundedTensorSpecProto2/"-tensorflow.core.protobuf.struct_pb2.ListValue20".tensorflow.core.protobuf.struct_pb2.TupleValue2/"-tensorflow.core.protobuf.struct_pb2.DictValue25"3tensorflow.core.protobuf.struct_pb2.NamedTupleValue2222"builtins.float222"builtins.int222"builtins.str222"builtins.bool2222222222222222	22
-2	22"builtins.bytes2	22"222222"typing.Iterable222#2"typing.Mapping222%2/"-tensorflow.core.protobuf.struct_pb2.PairValue22222"typing.Iterable2'22*2
-222
-2L"Jtensorflow.core.protobuf.struct_pb2.TypeSpecProto._TypeSpecClass.ValueType22.222"builtins.dict2
+global___TypeSpecProto082/"-tensorflow.core.protobuf.struct_pb2.NoneValue25"3tensorflow.core.protobuf.struct_pb2.StructuredValue2=";tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto25"3tensorflow.core.protobuf.struct_pb2.TensorSpecProto23"1tensorflow.core.protobuf.struct_pb2.TypeSpecProto2<":tensorflow.core.protobuf.struct_pb2.BoundedTensorSpecProto2/"-tensorflow.core.protobuf.struct_pb2.ListValue20".tensorflow.core.protobuf.struct_pb2.TupleValue2/"-tensorflow.core.protobuf.struct_pb2.DictValue25"3tensorflow.core.protobuf.struct_pb2.NamedTupleValue2222"builtins.float222"builtins.int222"builtins.str222"builtins.bool222229"7tensorflow.core.framework.types_pb2._DataType.ValueType22222222222222	22
+2	22"builtins.bytes2	2 2"2!!!!!!!!!!!!!!!2222!2'"%google.protobuf.descriptor.Descriptor2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22"typing.Iterable222'24".google.protobuf.internal.containers.MessageMap22"typing.Mapping222*2/"-tensorflow.core.protobuf.struct_pb2.PairValue2222!!2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer2,2"typing.Iterable2,2202
+2!!!22"0tensorflow.core.framework.tensor_pb2.TensorProto22322
+!!!!!2L"Jtensorflow.core.protobuf.struct_pb2.TypeSpecProto._TypeSpecClass.ValueType22622!!!!22"builtins.dict292+")google.protobuf.descriptor.FileDescriptor

@@ -1,58 +1,58 @@
 
-Xlib.protocol.request
-CreateWindow"builtins.object)
-ChangeWindowAttributes"builtins.object&
-GetWindowAttributes"builtins.object 
-DestroyWindow"builtins.object$
-DestroySubWindows"builtins.object 
-ChangeSaveSet"builtins.object!
-ReparentWindow"builtins.object
-	MapWindow"builtins.object 
-MapSubwindows"builtins.object
-UnmapWindow"builtins.object"
-UnmapSubwindows"builtins.object"
-ConfigureWindow"builtins.object"
-CirculateWindow"builtins.object
-GetGeometry"builtins.object
-	QueryTree"builtins.object
+Xlib.protocol.request(
+CreateWindow"Xlib.protocol.rq.Request2
+ChangeWindowAttributes"Xlib.protocol.rq.Request4
+GetWindowAttributes"Xlib.protocol.rq.ReplyRequest)
+DestroyWindow"Xlib.protocol.rq.Request-
+DestroySubWindows"Xlib.protocol.rq.Request)
+ChangeSaveSet"Xlib.protocol.rq.Request*
+ReparentWindow"Xlib.protocol.rq.Request%
+	MapWindow"Xlib.protocol.rq.Request)
+MapSubwindows"Xlib.protocol.rq.Request'
+UnmapWindow"Xlib.protocol.rq.Request+
+UnmapSubwindows"Xlib.protocol.rq.Request+
+ConfigureWindow"Xlib.protocol.rq.Request+
+CirculateWindow"Xlib.protocol.rq.Request,
+GetGeometry"Xlib.protocol.rq.ReplyRequest*
+	QueryTree"Xlib.protocol.rq.ReplyRequest+
 
-InternAtom"builtins.object
-GetAtomName"builtins.object!
-ChangeProperty"builtins.object!
-DeleteProperty"builtins.object
-GetProperty"builtins.object!
-ListProperties"builtins.object$
-SetSelectionOwner"builtins.object$
-GetSelectionOwner"builtins.object#
-ConvertSelection"builtins.object
-	SendEvent"builtins.object
-GrabPointer"builtins.object 
-UngrabPointer"builtins.object
+InternAtom"Xlib.protocol.rq.ReplyRequest,
+GetAtomName"Xlib.protocol.rq.ReplyRequest*
+ChangeProperty"Xlib.protocol.rq.Request*
+DeleteProperty"Xlib.protocol.rq.Request,
+GetProperty"Xlib.protocol.rq.ReplyRequest/
+ListProperties"Xlib.protocol.rq.ReplyRequest-
+SetSelectionOwner"Xlib.protocol.rq.Request2
+GetSelectionOwner"Xlib.protocol.rq.ReplyRequest,
+ConvertSelection"Xlib.protocol.rq.Request%
+	SendEvent"Xlib.protocol.rq.Request,
+GrabPointer"Xlib.protocol.rq.ReplyRequest)
+UngrabPointer"Xlib.protocol.rq.Request&
 
-GrabButton"builtins.object
-UngrabButton"builtins.object*
-ChangeActivePointerGrab"builtins.object
-GrabKeyboard"builtins.object!
-UngrabKeyboard"builtins.object
-GrabKey"builtins.object
-	UngrabKey"builtins.object
-AllowEvents"builtins.object
+GrabButton"Xlib.protocol.rq.Request(
+UngrabButton"Xlib.protocol.rq.Request3
+ChangeActivePointerGrab"Xlib.protocol.rq.Request-
+GrabKeyboard"Xlib.protocol.rq.ReplyRequest*
+UngrabKeyboard"Xlib.protocol.rq.Request#
+GrabKey"Xlib.protocol.rq.Request%
+	UngrabKey"Xlib.protocol.rq.Request'
+AllowEvents"Xlib.protocol.rq.Request&
 
-GrabServer"builtins.object
-UngrabServer"builtins.object
-QueryPointer"builtins.object"
-GetMotionEvents"builtins.object"
-TranslateCoords"builtins.object
-WarpPointer"builtins.object 
-SetInputFocus"builtins.object 
-GetInputFocus"builtins.object
-QueryKeymap"builtins.object
-OpenFont"builtins.object
-	CloseFont"builtins.object
-	QueryFont"builtins.object#
-QueryTextExtents"builtins.object
-	ListFonts"builtins.object·
-ListFontsWithInfo"builtins.object*N
+GrabServer"Xlib.protocol.rq.Request(
+UngrabServer"Xlib.protocol.rq.Request-
+QueryPointer"Xlib.protocol.rq.ReplyRequest0
+GetMotionEvents"Xlib.protocol.rq.ReplyRequest0
+TranslateCoords"Xlib.protocol.rq.ReplyRequest'
+WarpPointer"Xlib.protocol.rq.Request)
+SetInputFocus"Xlib.protocol.rq.Request.
+GetInputFocus"Xlib.protocol.rq.ReplyRequest,
+QueryKeymap"Xlib.protocol.rq.ReplyRequest$
+OpenFont"Xlib.protocol.rq.Request%
+	CloseFont"Xlib.protocol.rq.Request*
+	QueryFont"Xlib.protocol.rq.ReplyRequest1
+QueryTextExtents"Xlib.protocol.rq.ReplyRequest*
+	ListFonts"Xlib.protocol.rq.ReplyRequestÅ
+ListFontsWithInfo"Xlib.protocol.rq.ReplyRequest*N
 __init__*
 
 self(*
@@ -64,84 +64,85 @@ GrabServer"builtins.object
 keys(*
 __getattr__*(*(*
 __getitem__*(*(*
-__len__*(
-SetFontPath"builtins.object
-GetFontPath"builtins.object
-CreatePixmap"builtins.object
+__len__*('
+SetFontPath"Xlib.protocol.rq.Request,
+GetFontPath"Xlib.protocol.rq.ReplyRequest(
+CreatePixmap"Xlib.protocol.rq.Request&
 
-FreePixmap"builtins.object
-CreateGC"builtins.object
-ChangeGC"builtins.object
-CopyGC"builtins.object
-	SetDashes"builtins.object$
-SetClipRectangles"builtins.object
-FreeGC"builtins.object
-	ClearArea"builtins.object
-CopyArea"builtins.object
-	CopyPlane"builtins.object
-	PolyPoint"builtins.object
-PolyLine"builtins.object
-PolySegment"builtins.object 
-PolyRectangle"builtins.object
-PolyArc"builtins.object
-FillPoly"builtins.object$
-PolyFillRectangle"builtins.object
-PolyFillArc"builtins.object
-PutImage"builtins.object
-GetImage"builtins.object
-	PolyText8"builtins.object
+FreePixmap"Xlib.protocol.rq.Request$
+CreateGC"Xlib.protocol.rq.Request$
+ChangeGC"Xlib.protocol.rq.Request"
+CopyGC"Xlib.protocol.rq.Request%
+	SetDashes"Xlib.protocol.rq.Request-
+SetClipRectangles"Xlib.protocol.rq.Request"
+FreeGC"Xlib.protocol.rq.Request%
+	ClearArea"Xlib.protocol.rq.Request$
+CopyArea"Xlib.protocol.rq.Request%
+	CopyPlane"Xlib.protocol.rq.Request%
+	PolyPoint"Xlib.protocol.rq.Request$
+PolyLine"Xlib.protocol.rq.Request'
+PolySegment"Xlib.protocol.rq.Request)
+PolyRectangle"Xlib.protocol.rq.Request#
+PolyArc"Xlib.protocol.rq.Request$
+FillPoly"Xlib.protocol.rq.Request-
+PolyFillRectangle"Xlib.protocol.rq.Request'
+PolyFillArc"Xlib.protocol.rq.Request$
+PutImage"Xlib.protocol.rq.Request)
+GetImage"Xlib.protocol.rq.ReplyRequest%
+	PolyText8"Xlib.protocol.rq.Request&
 
-PolyText16"builtins.object
+PolyText16"Xlib.protocol.rq.Request&
 
-ImageText8"builtins.object
-ImageText16"builtins.object!
-CreateColormap"builtins.object
-FreeColormap"builtins.object&
-CopyColormapAndFree"builtins.object"
-InstallColormap"builtins.object$
-UninstallColormap"builtins.object)
-ListInstalledColormaps"builtins.object
+ImageText8"Xlib.protocol.rq.Request'
+ImageText16"Xlib.protocol.rq.Request*
+CreateColormap"Xlib.protocol.rq.Request(
+FreeColormap"Xlib.protocol.rq.Request/
+CopyColormapAndFree"Xlib.protocol.rq.Request+
+InstallColormap"Xlib.protocol.rq.Request-
+UninstallColormap"Xlib.protocol.rq.Request7
+ListInstalledColormaps"Xlib.protocol.rq.ReplyRequest+
 
-AllocColor"builtins.object"
-AllocNamedColor"builtins.object"
-AllocColorCells"builtins.object#
-AllocColorPlanes"builtins.object
+AllocColor"Xlib.protocol.rq.ReplyRequest0
+AllocNamedColor"Xlib.protocol.rq.ReplyRequest0
+AllocColorCells"Xlib.protocol.rq.ReplyRequest1
+AllocColorPlanes"Xlib.protocol.rq.ReplyRequest&
 
-FreeColors"builtins.object
-StoreColors"builtins.object"
-StoreNamedColor"builtins.object
-QueryColors"builtins.object
-LookupColor"builtins.object
-CreateCursor"builtins.object$
-CreateGlyphCursor"builtins.object
+FreeColors"Xlib.protocol.rq.Request'
+StoreColors"Xlib.protocol.rq.Request+
+StoreNamedColor"Xlib.protocol.rq.Request,
+QueryColors"Xlib.protocol.rq.ReplyRequest,
+LookupColor"Xlib.protocol.rq.ReplyRequest(
+CreateCursor"Xlib.protocol.rq.Request-
+CreateGlyphCursor"Xlib.protocol.rq.Request&
 
-FreeCursor"builtins.object 
-RecolorCursor"builtins.object 
-QueryBestSize"builtins.object!
-QueryExtension"builtins.object!
-ListExtensions"builtins.object(
-ChangeKeyboardMapping"builtins.object%
-GetKeyboardMapping"builtins.object(
-ChangeKeyboardControl"builtins.object%
-GetKeyboardControl"builtins.object
-Bell"builtins.object'
-ChangePointerControl"builtins.object$
-GetPointerControl"builtins.object!
-SetScreenSaver"builtins.object!
-GetScreenSaver"builtins.object
-ChangeHosts"builtins.object
-	ListHosts"builtins.object#
-SetAccessControl"builtins.object#
-SetCloseDownMode"builtins.object
+FreeCursor"Xlib.protocol.rq.Request)
+RecolorCursor"Xlib.protocol.rq.Request.
+QueryBestSize"Xlib.protocol.rq.ReplyRequest/
+QueryExtension"Xlib.protocol.rq.ReplyRequest/
+ListExtensions"Xlib.protocol.rq.ReplyRequest1
+ChangeKeyboardMapping"Xlib.protocol.rq.Request3
+GetKeyboardMapping"Xlib.protocol.rq.ReplyRequest1
+ChangeKeyboardControl"Xlib.protocol.rq.Request3
+GetKeyboardControl"Xlib.protocol.rq.ReplyRequest 
+Bell"Xlib.protocol.rq.Request0
+ChangePointerControl"Xlib.protocol.rq.Request2
+GetPointerControl"Xlib.protocol.rq.ReplyRequest*
+SetScreenSaver"Xlib.protocol.rq.Request/
+GetScreenSaver"Xlib.protocol.rq.ReplyRequest'
+ChangeHosts"Xlib.protocol.rq.Request*
+	ListHosts"Xlib.protocol.rq.ReplyRequest,
+SetAccessControl"Xlib.protocol.rq.Request,
+SetCloseDownMode"Xlib.protocol.rq.Request&
 
-KillClient"builtins.object#
-RotateProperties"builtins.object#
-ForceScreenSaver"builtins.object$
-SetPointerMapping"builtins.object$
-GetPointerMapping"builtins.object%
-SetModifierMapping"builtins.object%
-GetModifierMapping"builtins.object
-NoOperation"builtins.object*
-__annotations__0	*
-major_codes022)"'Xlib.protocol.request.ListFontsWithInfo22"builtins.bool2"builtins.object2
-2"builtins.str2"builtins.int2"builtins.dict22"type22"builtins.dict2
+KillClient"Xlib.protocol.rq.Request,
+RotateProperties"Xlib.protocol.rq.Request,
+ForceScreenSaver"Xlib.protocol.rq.Request2
+SetPointerMapping"Xlib.protocol.rq.ReplyRequest2
+GetPointerMapping"Xlib.protocol.rq.ReplyRequest3
+SetModifierMapping"Xlib.protocol.rq.ReplyRequest3
+GetModifierMapping"Xlib.protocol.rq.ReplyRequest'
+NoOperation"Xlib.protocol.rq.Request*
+__annotations__0
+*
+major_codes022)"'Xlib.protocol.request.ListFontsWithInfo2"Xlib.display.Display2"builtins.bool2"builtins.object2
+2"builtins.str2"builtins.int22"builtins.dict2	2"Xlib.protocol.rq.Request2"type22"builtins.dict2

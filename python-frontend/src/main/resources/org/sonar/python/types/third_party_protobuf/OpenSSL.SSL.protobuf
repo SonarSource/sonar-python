@@ -6,7 +6,7 @@
 WantX509LookupError"OpenSSL.SSL.Error$
 ZeroReturnError"OpenSSL.SSL.Error!
 SysCallError"OpenSSL.SSL.Error
-Session"builtins.objectÓ
+Session"builtins.objectý
 
 Connection"builtins.object*
 __getattr__*(*(*7
@@ -33,95 +33,74 @@ Connection"builtins.object*
 pending
 *
 
-self(*8
+self(*.
 send
 *
 
 self(*	
-buf(*
+buf(*
 flags (
-z310z311*=
-send
-*
-
-self(*	
-buf(*
-flags (
-z312z313z314*;
+*1
 sendall
 *
 
 self(*	
-buf(*
+buf(*
 flags (
-z310z311*@
-sendall
-*
-
-self(*	
-buf(*
-flags (
-z312z313z314*1
+*1
 recv*
 
 self(*
 bufsiz(
 *
-flags (*F
+flags (*F
 	recv_into
 *
 
 self(*
-buffer(*
-nbytes (*
-flags (*#
+buffer(*
+nbytes (*
+flags (*#
 connect*
 
 self(*
 
-addr(*0
+addr(*&
 
 connect_ex
 *
 
 self(*
 
-addr(z310z311*5
-
-connect_ex
-*
-
-self(*
-
-addr(z312z313z314*
-accept*
+addr(*
+accept *
 
 self(*
 DTLSv1_listen*
 
 self(*"
-DTLSv1_get_timeout*
+DTLSv1_get_timeout"*
 
 self(*%
-DTLSv1_handle_timeout*
+DTLSv1_handle_timeout#*
 
 self(*
-shutdown*
+shutdown#*
 
 self(*
 do_handshake*
 
 self(*
-get_certificate!*
+get_certificate%*
 
 self(*$
-get_peer_certificate!*
+get_peer_certificate%*
 
 self(*#
-get_peer_cert_chain#*
+get_peer_cert_chain'*
 
 self(*"
-get_verified_chain#*
+get_verified_chain'*
 
 self(*&
 bio_read*
@@ -137,10 +116,10 @@ connect_ex
 bio_shutdown*
 
 self(*
-renegotiate*
+renegotiate#*
 
 self(*#
-renegotiate_pending*
+renegotiate_pending#*
 
 self(*$
 total_renegotiations
@@ -153,19 +132,19 @@ connect_ex
 set_connect_state*
 
 self(*"
-get_client_ca_list%*
+get_client_ca_list)*
 
 self(*
-get_cipher_list&*
+get_cipher_list**
 
 self(*
-get_cipher_name'*
+get_cipher_name+*
 
 self(*
-get_cipher_bits*
+get_cipher_bits*
 
 self(*"
-get_cipher_version'*
+get_cipher_version+*
 
 self(*)
 get_protocol_version_name*
@@ -197,13 +176,13 @@ connect_ex
 master_key	*
 
 self(*P
-export_keying_material(*
+export_keying_material,*
 
 self(*
-label((*
+label(,*
 
-olen((*
-context ((*
+olen(,*
+context (,*
 get_app_data*
 
 self(*(
@@ -216,20 +195,20 @@ master_key	*
 
 self(*(
 *
-	want_read*
+	want_read#*
 
 self(*
 
-want_write*
+want_write#*
 
 self(*
-get_session**
+get_session.*
 
 self(**
 set_session*
 
 self(*
-session()*
+session(-*
 get_finished	*
 
 self(*!
@@ -239,17 +218,17 @@ want_write*
 set_alpn_protos*
 
 self(*
-protos(+*)
+protos(/*)
 get_alpn_proto_negotiated*
 
 self(*
 request_ocsp*
 
 self(r	
-write0-r
-read0-¬
+write01r
+read01¬
 Context"builtins.object*
-__getattr__(*(*(*&
+__getattr__,*(*(*&
 __init__*
 
 self(*
@@ -258,8 +237,8 @@ want_write*
 load_verify_locations*
 
 self(*
-cafile('*
-capath ('**
+cafile(+*
+capath (+**
 set_options*
 
 self(*
@@ -272,7 +251,7 @@ set_verify*
 
 mode(
 *
-callback (.*4
+callback (2*4
 set_min_proto_version*
 
 self(*
@@ -286,32 +265,32 @@ set_verify*
 use_certificate_chain_file*
 
 self(*
-certfile(/*F
+certfile(3*F
 use_certificate_file*
 
 self(*
-certfile(/*
+certfile(3*
 filetype (
 *+
 use_certificate*
 
 self(*
 
-cert( *D
+cert($*D
 use_privatekey_file*
 
 self(*
-keyfile(/*
-filetype (**
+keyfile(3*
+filetype (**
 use_privatekey*
 
 self(*
 
-pkey(0*3
+pkey(4*3
 add_extra_chain_cert*
 
 self(*
-certobj( *2
+certobj($*2
 set_cipher_list*
 
 self(*
@@ -319,30 +298,30 @@ set_verify*
 set_keylog_callback*
 
 self(*
-callback(-*-
+callback(1*-
 set_alpn_protos*
 
 self(*
-protos(+*8
+protos(/*8
 set_alpn_select_callback*
 
 self(*
-callback(-*F
+callback(1*F
 set_ocsp_server_callback*
 
 self(*
-callback(-*
-data (3*F
+callback(1*
+data (7*F
 set_ocsp_client_callback*
 
 self(*
-callback(-*
-data (3
+callback(1*
+data (7
 SSLeay_version*
 
 type(
 *
-__annotations__04*
+__annotations__08*
 OPENSSL_VERSION_NUMBER0
 *
 SSLEAY_VERSION0
@@ -504,7 +483,8 @@ TLS_METHOD0
 *
 SSL_CB_HANDSHAKE_DONE0
 *
-NO_OVERLAPPING_PROTOCOLS0122"OpenSSL.SSL.Connection2"builtins.str22"OpenSSL.SSL.Context2"socket.socket222"builtins.bytes222"builtins.int2"typing_extensions.Buffer222"_collections_abc.Buffer2222
+NO_OVERLAPPING_PROTOCOLS0522"OpenSSL.SSL.Connection2"builtins.str22"OpenSSL.SSL.Context2"socket.socket222"builtins.bytes222"builtins.int2"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22222
 2"typing.MutableSequence2
 22
-2"typing.Sequence2222"builtins.tuple2222"_socket._Address222222"_socket._Address2222"_socket._RetAddress2222"builtins.float222"builtins.bool2"OpenSSL.crypto.X50922 2"builtins.list2 22"2"OpenSSL.crypto.X509Name2"builtins.list2$2"builtins.list2222"_typeshed.Incomplete22"OpenSSL.SSL.Session22)2"typing.Sequence22"builtins.function22,22-222"OpenSSL.crypto.PKey2"builtins.object2"builtins.object212222"builtins.dict2
+2"typing.Sequence2222"builtins.tuple2222"_socket._Address2222"_socket._RetAddress2222"builtins.float22!2"builtins.bool2"OpenSSL.crypto.X50922$2"builtins.list2$22&2"OpenSSL.crypto.X509Name2"builtins.list2(2"builtins.list2222"_typeshed.Incomplete22"OpenSSL.SSL.Session22-2"typing.Sequence22"builtins.function220221222"OpenSSL.crypto.PKey2"builtins.object2"builtins.object252262"builtins.dict2

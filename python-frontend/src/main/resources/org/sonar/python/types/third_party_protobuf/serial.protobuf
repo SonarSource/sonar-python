@@ -25,7 +25,7 @@
 is_infinite0r
 is_non_blocking0r
 duration0r
-target_time0Þ
+target_time0Û
 
 SerialBaseserial.serialutil.SerialBase"io.RawIOBase*ô
 __init__*
@@ -46,32 +46,26 @@ SerialBaseserial.serialutil.SerialBase"io.RawIOBase*ô
 	exclusive (*2
 read*
 
-self(* (0:abc.abstractmethod@*;
+self(* (0:abc.abstractmethod@*1
 write*
 
-self(*(0:abc.abstractmethod@z310z311*@
-write*
-
-self(*(0:abc.abstractmethod@z312z313z314*
-get_settings*
+self(*(0:abc.abstractmethod@*
+get_settings*
 
 self(*'
 apply_settings*
 
 self(*
-d(*&
+d(*
 readinto*
 
-self(*(z310z311*+
-readinto*
-
-self(*(z312z313z314*,
+self(*(*,
 
 send_break*
 
 self(*
 duration (*
-read_all*
+read_all*
 
 self(*:
 
@@ -80,7 +74,7 @@ read_until*
 self(*
 expected (*
 size (*;
-iread_until*
+iread_until*
 
 self(*
 expected (*
@@ -113,13 +107,13 @@ read_until*
 self(*
 bytesize(0:.setter2v
 	exclusive2
-	exclusive*
+	exclusive*
 
 self(0:builtins.propertyX`5
 	exclusive*
 
 self(*
-	exclusive(0:.setter2j
+	exclusive(0:.setter2j
 parity/
 parity	*
 
@@ -184,7 +178,7 @@ ic_timeout(0:.setter2n
 dsrdtr*
 
 self(*
-dsrdtr (0:.setter2`
+dsrdtr (0:.setter2`
 rts,
 rts*
 
@@ -212,95 +206,92 @@ ic_timeout(0:.setter2n
 
 rs485_mode3
 
-rs485_mode*
+rs485_mode*
 
 self(0:builtins.propertyX`;
 
 rs485_mode*
 
 self(*
-rs485_settings(0:.setterr
-	BAUDRATES0r
-	BYTESIZES0r
-PARITIES0r
-STOPBITS0r
+rs485_settings(0:.setterr
+	BAUDRATES0 r
+	BYTESIZES0 r
+PARITIES0!r
+STOPBITS0"r
 is_open0r
 portstr0
 r
 name0
 P
-PosixPollSerial"serial.serialposix.PosixPollSerial"serial.serialposix.Serialª
+PosixPollSerial"serial.serialposix.PosixPollSerial"serial.serialposix.Serialö
 Serialserial.serialposix.Serial"serial.serialutil.SerialBase"#serial.serialposix.PlatformSpecific*
 open*
 
-self(*1
+self(#*1
 
 in_waiting*
 
-self(0:builtins.property`*"
+self(#0:builtins.property`*"
 read*
 
-self(*
+self(#*
 size (*
 cancel_read*
 
-self(*
+self(#*
 cancel_write*
 
-self(*#
+self(#*
 write*
 
-self(*(z310z311*(
-write*
-
-self(*(z312z313z314*"
+self(#*(*"
 reset_input_buffer*
 
-self(*#
+self(#*#
 reset_output_buffer*
 
-self(*,
+self(#*,
 
 send_break*
 
-self(*
+self(#*
 duration (**
 cts*
 
-self(0:builtins.property`**
+self(#0:builtins.property`**
 dsr*
 
-self(0:builtins.property`*)
+self(#0:builtins.property`*)
 ri*
 
-self(0:builtins.property`*)
+self(#0:builtins.property`*)
 cd*
 
-self(0:builtins.property`*2
+self(#0:builtins.property`*2
 out_waiting*
 
-self(0:builtins.property`*6
+self(#0:builtins.property`*6
 set_input_flow_control*
 
-self(*
+self(#*
 enable (*7
 set_output_flow_control*
 
-self(*
+self(#*
 enable (*
 nonblocking*
 
-self(r
+self(#r
 fd0r
 pipe_abort_read_w0r
 pipe_abort_read_r0r
 pipe_abort_write_w0r
 pipe_abort_write_r0|
 VTIMESerialserial.serialposix.VTIMESerial"serial.serialposix.Serial*2
-cancel_read*
+cancel_read$*
 
-self(0:builtins.property`€
-serial_for_url*	
+self(%0:builtins.property`€
+serial_for_url#*	
 url(
 *
 baudrate (*
@@ -315,8 +306,8 @@ send_break*
 inter_byte_timeout (*
 	exclusive (*
 do_not_open (*
-__path__0*
-__annotations__0*
+__path__0&*
+__annotations__0*
 XONserial.serialutil.XON0* 
 XOFFserial.serialutil.XOFF0*
 CRserial.serialutil.CR0*
@@ -334,8 +325,9 @@ PARITY_ODDserial.serialutil.PARITY_ODD0	*.
 SIXBITSserial.serialutil.SIXBITS0**
 	SEVENBITSserial.serialutil.SEVENBITS0**
 	EIGHTBITSserial.serialutil.EIGHTBITS0*0
-PARITY_NAMESserial.serialutil.PARITY_NAMES0*
+PARITY_NAMESserial.serialutil.PARITY_NAMES0'*
 __version__0	*
 VERSION0	*
-protocol_handler_packages022$""serial.serialutil.PortNotOpenError2"serial.serialutil.Timeout2"builtins.float2"builtins.bool2"builtins.function222"serial.serialutil.SerialBase2"builtins.str22	2"builtins.int222"builtins.bytes222"typing_extensions.Buffer2"_collections_abc.Buffer22"builtins.dict2	222"typing.Generator2222"serial.rs485.RS485Settings222"builtins.tuple22"builtins.tuple2	222"serial.serialposix.Serial2
+protocol_handler_packages0&22$""serial.serialutil.PortNotOpenError2"serial.serialutil.Timeout2"builtins.float2"builtins.bool2"builtins.function222"serial.serialutil.SerialBase2"builtins.str22	2"builtins.int222"builtins.bytes222"builtins.bytearray2"builtins.memoryview22"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer22"builtins.dict2	222"typing.Generator2222"serial.rs485.RS485Settings222"builtins.tuple22"builtins.tuple2	222"serial.serialposix.Serial2
 2 "serial.serialposix.VTIMESerial2"builtins.list2	2"builtins.dict2		

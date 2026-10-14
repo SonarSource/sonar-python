@@ -1,24 +1,22 @@
 
-six.moves.socketserverü
+six.moves.socketserver‚
 
-BaseServersocketserver.BaseServer"builtins.object*S
+BaseServersocketserver.BaseServer"builtins.object*I
 __init__*
 
 self(*
-server_address(	*
-RequestHandlerClass(z310z311*X
-__init__*
+server_address(*
+RequestHandlerClass(*
+fileno*
 
-self(*
-server_address(*
-RequestHandlerClass(z312z313z314*
+self(*
 handle_request*
 
 self(*4
 serve_forever*
 
 self(*
-poll_interval (*
+poll_interval (*
 shutdown*
 
 self(*
@@ -28,113 +26,95 @@ BaseServersocketserver.BaseServer"builtins.object*S
 finish_request*
 
 self(*
-request(*
-client_address(*
-get_request*
+request(*
+client_address(*
+get_request*
 
 self(*A
 handle_error*
 
 self(*
-request(*
-client_address(*
+request(*
+client_address(*
 handle_timeout*
 
 self(*D
 process_request*
 
 self(*
-request(*
-client_address(*
+request(*
+client_address(*
 server_activate*
 
+self(*
+server_bind*
+
 self(*C
-verify_request*
+verify_request*
 
 self(*
-request(*
-client_address(*
+request(*
+client_address(*
 	__enter__*(*
-__exit__*(*(*(*(*
+__exit__*(*(!*("*($*
 service_actions*
 
 self(*/
 shutdown_request*
 
 self(*
-request(*,
+request(*,
 close_request*
 
 self(*
-request(r
-server_address*310*3110	r!
-server_address*312*313*3140r
-timeout0r
-RequestHandlerClass0”
+request(r
+address_family0r
+server_address0r
+
+socket0r
+allow_reuse_address0r
+request_queue_size0r
+socket_type0r
+timeout0%r
+RequestHandlerClass0ý
 	TCPServersocketserver.TCPServer"socketserver.BaseServer*d
 __init__*
 
-self( *
-server_address((*
-RequestHandlerClass(*
-bind_and_activate (*
-fileno#*
+self('*
+server_address(**
+RequestHandlerClass(*
+bind_and_activate (*
+get_request+*
 
-self(*
-get_request)*
-
-self(*
-server_bind*
-
-self(r
-address_family0#r
-
-socket0r
-allow_reuse_address0r
-request_queue_size0#r
-socket_type0#r
-server_address0(r(
-allow_reuse_port*311*312*313*3140m
+self(&r
+server_address0*r(
+allow_reuse_port*311*312*313*3140m
 	UDPServersocketserver.UDPServer"socketserver.TCPServer*
-get_request**
+get_request,*
 
-self(+r
-max_packet_size0#ï
-UnixStreamServersocketserver.UnixStreamServer"socketserver.TCPServer*n
+self(-r
+max_packet_size0Ä
+UnixStreamServersocketserver.UnixStreamServer"socketserver.BaseServer*d
 __init__*
 
-self(-*
-server_address(/*
-RequestHandlerClass(*
-bind_and_activate (z310z311*s
-__init__*
-
-self(-*
+self(/*
 server_address(1*
-RequestHandlerClass(*
-bind_and_activate (z312z313z314r
-server_address*310*3110/r!
-server_address*312*313*31401ó
-UnixDatagramServersocketserver.UnixDatagramServer"socketserver.UDPServer*n
-__init__*
-
-self(3*
-server_address(/*
-RequestHandlerClass(*
-bind_and_activate (z310z311*s
+RequestHandlerClass(*
+bind_and_activate (r
+server_address01È
+UnixDatagramServersocketserver.UnixDatagramServer"socketserver.BaseServer*d
 __init__*
 
 self(3*
 server_address(1*
-RequestHandlerClass(*
-bind_and_activate (z312z313z314r
-server_address*310*3110/r!
-server_address*312*313*31401Û
+RequestHandlerClass(*
+bind_and_activate (r
+server_address01Û
 ForkingMixInsocketserver.ForkingMixIn"builtins.object*2
 collect_children*
 
 self(4*
-blocking (*
+blocking (*
 handle_timeout*
 
 self(4*
@@ -144,31 +124,31 @@ BaseServersocketserver.BaseServer"builtins.object*S
 process_request*
 
 self(4*
-request(*
-client_address(*
+request(*
+client_address(*
 server_close*
 
 self(4r
-timeout0r
+timeout0%r
 active_children06r
-max_children0#r
-block_on_close0—
+max_children0r
+block_on_close0—
 ThreadingMixInsocketserver.ThreadingMixIn"builtins.object*K
 process_request_thread*
 
 self(7*
-request(*
-client_address(*D
+request(*
+client_address(*D
 process_request*
 
 self(7*
-request(*
-client_address(*
+request(*
+client_address(*
 server_close*
 
 self(7r
-daemon_threads0r
-block_on_close0d
+daemon_threads0r
+block_on_close0d
 ForkingTCPServersocketserver.ForkingTCPServer"socketserver.ForkingMixIn"socketserver.TCPServerd
 ForkingUDPServersocketserver.ForkingUDPServer"socketserver.ForkingMixIn"socketserver.UDPServerj
 ThreadingTCPServersocketserver.ThreadingTCPServer"socketserver.ThreadingMixIn"socketserver.TCPServerj
@@ -179,8 +159,8 @@ BaseServersocketserver.BaseServer"builtins.object*S
 __init__*
 
 self(8*
-request(*
-client_address(*
+request(*
+client_address(*
 server(*
 setup*
 
@@ -192,30 +172,29 @@ BaseServersocketserver.BaseServer"builtins.object*S
 
 self(8r
 request0r
-client_address0r
+client_address0r
 
 server0Æ
 StreamRequestHandler!socketserver.StreamRequestHandler"socketserver.BaseRequestHandlerr
-rbufsize0#r
-wbufsize0#r
-timeout0r
-disable_nagle_algorithm0r
+rbufsize0r
+wbufsize0r
+timeout0%r
+disable_nagle_algorithm0r
 
 connection0r	
 rfile09r	
 wfile09Œ
 DatagramRequestHandler#socketserver.DatagramRequestHandler"socketserver.BaseRequestHandlerr
 
-packet0r
+packet0r
 
-socket0r	
+socket0r	
 rfile09r	
-wfile09ˆ
-ForkingUnixStreamServer$socketserver.ForkingUnixStreamServer"socketserver.ForkingMixIn"socketserver.UnixStreamServerj312j313j314Ž
-ForkingUnixDatagramServer&socketserver.ForkingUnixDatagramServer"socketserver.ForkingMixIn"socketserver.UnixDatagramServerj312j313j314*
+wfile09*
 __annotations__0:22"socketserver.BaseServer2>
-socketserver.BaseServer.Self"socketserver.BaseServer(222"builtins.tuple22"builtins.str2"typing_extensions.Buffer222"_socket._Address22"builtins.function22
-2"_collections_abc.Buffer222"_socket._Address22"builtins.float2"socket.socket2"builtins.bytes22222 "socketserver._RequestType22"_socket._RetAddress2222"builtins.bool2"builtins.BaseException2"type222222"types.TracebackType22222"socketserver.TCPServer2<
-socketserver.TCPServer.Self"socketserver.TCPServer(22"builtins.bytearray22!2"builtins.int22"#2""socketserver._AfInetAddress2$22"###2#"socketserver._AfInet6Address2&22%'22222"socketserver.UDPServer2"socketserver.UnixStreamServer2J
-"socketserver.UnixStreamServer.Self"socketserver.UnixStreamServer(2,222""socketserver._AfUnixAddress2.222""socketserver._AfUnixAddress202!"socketserver.UnixDatagramServer2N
-$socketserver.UnixDatagramServer.Self"socketserver.UnixDatagramServer(222"socketserver.ForkingMixIn2"builtins.set2#2252"socketserver.ThreadingMixIn2!"socketserver.BaseRequestHandler2"io.BufferedIOBase2"builtins.dict2
+socketserver.BaseServer.Self"socketserver.BaseServer(222"builtins.tuple22"builtins.str2"builtins.bytes2"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2	
+2 "_typeshed.WriteableBuffer2222"_typeshed.ReadableBuffer2222"_socket._Address22"builtins.function222"builtins.int2"builtins.float2"socket.socket22222 "socketserver._RequestType22"_socket._RetAddress2222"builtins.bool2"builtins.BaseException2"type222 222"types.TracebackType22#222"socketserver.TCPServer2<
+socketserver.TCPServer.Self"socketserver.TCPServer(2&2222(2""socketserver._AfInetAddress2)22222"socketserver.UDPServer2"socketserver.UnixStreamServer2J
+"socketserver.UnixStreamServer.Self"socketserver.UnixStreamServer(2.222""socketserver._AfUnixAddress202!"socketserver.UnixDatagramServer2N
+$socketserver.UnixDatagramServer.Self"socketserver.UnixDatagramServer(222"socketserver.ForkingMixIn2"builtins.set22252"socketserver.ThreadingMixIn2!"socketserver.BaseRequestHandler2"typing.BinaryIO2"builtins.dict2

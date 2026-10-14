@@ -157,7 +157,7 @@ remotepath (*
 
 self(*
 command(*&
-cd *
+cd*
 
 self(*
 
@@ -183,8 +183,8 @@ remotepath(*
 self(*
 
 remotepath(*
-uid (!*
-gid (!*
+uid ( *
+gid ( *
 getcwd*
 
 self(*+
@@ -193,7 +193,7 @@ remotepath(*
 self(*
 
 remotepath (*0
-listdir_attr"*
+listdir_attr!*
 
 self(*
 
@@ -263,7 +263,7 @@ remotepath(*
 close*
 
 self(*F
-open#*
+open"*
 
 self(*
 remote_file(*
@@ -297,23 +297,23 @@ remotepath(*
 self(*
 
 remotepath(*
-	fcallback($*
-	dcallback($*
-	ucallback($*
+	fcallback(#*
+	dcallback(#*
+	ucallback(#*
 recurse (*2
-sftp_client%*
+sftp_client$*
 
 self(0:builtins.property`*5
-active_ciphers&*
+active_ciphers%*
 
 self(0:builtins.property`*9
-active_compression&*
+active_compression%*
 
 self(0:builtins.property`*7
-security_options'*
+security_options&*
 
 self(0:builtins.property`*.
-logfile)*
+logfile(*
 
 self(0:builtins.property`*8
 remote_server_key
@@ -321,24 +321,26 @@ remotepath(*
 
 self(0:builtins.property`*
 __del__*(*
-	__enter__**(**
-__exit__*(*(-*(.*(02j
+	__enter__)*()*
+__exit__*(*(,*(-*(/2j
 timeout0
-timeout2*
+timeout1*
 
 self(0:builtins.propertyX`-
 timeout*
 
 self(*	
-val(20:.setter
-S_IMODE_stat.S_IMODE*(,
-cdpysftp.helpers.cd *
+val(10:.setter&
+S_IMODE_stat.S_IMODE*
+
+mode(,
+cdpysftp.helpers.cd*
 	localpath (	+
 known_hostspysftp.helpers.known_hostsI
-path_advancepysftp.helpers.path_advance3*
+path_advancepysftp.helpers.path_advance2*
 thepath(*
 sep (I
-path_retreatpysftp.helpers.path_retreat3*
+path_retreatpysftp.helpers.path_retreat2*
 thepath(*
 sep (E
 reparentpysftp.helpers.reparent*
@@ -348,10 +350,10 @@ remotepath(*
 val(z
 walktreepysftp.helpers.walktree*
 	localpath(*
-	fcallback($*
-	dcallback($*
-	ucallback($*
+	fcallback(#*
+	dcallback(#*
+	ucallback(#*
 recurse (*
 __path__0*
-__annotations__0522'"%pysftp.exceptions.ConnectionException2"builtins.str2"builtins.int2'"%pysftp.exceptions.CredentialException2"pysftp.helpers.WTCallbacks2"builtins.list22"pysftp.CnOpts222"paramiko.pkey.PKey2"builtins.bool2"typing.Sequence2222"paramiko.hostkeys.HostKeys222"pysftp.Connection2"paramiko.rsakey.RSAKey2"paramiko.agent.AgentKey22222"builtins.bytes222"pysftp._Path2222"builtins.function222"pysftp._Callback2222"	typing.IO22#"!paramiko.sftp_attr.SFTPAttributes222'"!contextlib.AbstractContextManager2222"builtins.list22"paramiko.sftp_file.SFTPFile2#"pysftp.helpers._PathCallback22!"paramiko.sftp_client.SFTPClient222$""paramiko.transport.SecurityOptions2	222(22
-pysftp.Connection.Self"pysftp.Connection(22"builtins.BaseException2"type2+22,22+2"types.TracebackType22/2"builtins.float2212"typing.Iterator222"builtins.dict24
+__annotations__0422'"%pysftp.exceptions.ConnectionException2"builtins.str2"builtins.int2'"%pysftp.exceptions.CredentialException2"pysftp.helpers.WTCallbacks2"builtins.list22"pysftp.CnOpts222"paramiko.pkey.PKey2"builtins.bool2"typing.Sequence2222"paramiko.hostkeys.HostKeys222"pysftp.Connection2"paramiko.rsakey.RSAKey2"paramiko.agent.AgentKey22222"builtins.bytes222"pysftp._Path2222"builtins.function222"pysftp._Callback2222"	typing.IO22#"!paramiko.sftp_attr.SFTPAttributes2&"!contextlib.AbstractContextManager2222"builtins.list22"paramiko.sftp_file.SFTPFile2#"pysftp.helpers._PathCallback22!"paramiko.sftp_client.SFTPClient222$""paramiko.transport.SecurityOptions2	222'22
+pysftp.Connection.Self"pysftp.Connection(22"builtins.BaseException2"type2*22+22*2"types.TracebackType22.2"builtins.float2202"typing.Iterator222"builtins.dict23

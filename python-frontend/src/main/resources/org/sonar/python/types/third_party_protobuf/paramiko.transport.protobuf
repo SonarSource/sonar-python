@@ -10,7 +10,7 @@ parse_next*
 
 self(*
 ptype(*
-m(XÚ
+m(X†
 	Transport"threading.Thread"#paramiko.util.ClosingContextManager*Â
 __init__*
 
@@ -280,22 +280,20 @@ kex_engine05r
 initial_kex_done0r
 
 in_kex0r
-authenticated0r
-lock*310*311*31206r
-lock*313*31407r
-channel_events08r
-channels_seen09r
+authenticated0r
+lock06r
+channel_events07r
+channels_seen08r
 default_max_packet_size0r
 default_window_size0r
 saved_exception0)r
-clear_to_send0r%
-clear_to_send_lock*310*311*31206r 
-clear_to_send_lock*313*31407r
+clear_to_send0r
+clear_to_send_lock06r
 clear_to_send_timeout0r
 log_name0r
 
-logger0:r
-auth_handler0<r
+logger09r
+auth_handler0;r
 global_response0#r
 completion_event0r
 banner_timeout0r
@@ -304,11 +302,11 @@ kex_engine05r
 disabled_algorithms0r
 server_mode0r
 server_object0r
-server_key_dict0=r
-server_accepts0>r
-server_accept_cv0?r
-subsystem_table0Cr
-sys0Då
+server_key_dict0<r
+server_accepts0=r
+server_accept_cv0>r
+subsystem_table0Br
+sys0Cå
 SecurityOptions"builtins.object*)
 __init__*
 
@@ -358,10 +356,10 @@ kex_engine05r
 ChannelMap"builtins.object*
 __init__*
 
-self(E*-
+self(D*-
 put*
 
-self(E*
+self(D*
 chanid(*
 
 chan(
@@ -369,18 +367,18 @@ ChannelMap"builtins.object*
 get
 *
 
-self(E*
+self(D*
 chanid(*$
 delete*
 
-self(E*
+self(D*
 chanid(*
-values>*
+values=*
 
-self(E*
-__len__*(E*
-__annotations__0A22"paramiko.transport._KexEngine2"builtins.int2"paramiko.message.Message2"paramiko.transport.Transport2"builtins.str222"paramiko.transport._Addr22"socket.socket2"paramiko.channel.Channel22	
+self(D*
+__len__*(D*
+__annotations__0@22"paramiko.transport._KexEngine2"builtins.int2"paramiko.message.Message2"paramiko.transport.Transport2"builtins.str222"paramiko.transport._Addr22"socket.socket2"paramiko.channel.Channel22	
 2%"paramiko.transport._SocketLike22"builtins.bool2"typing.Iterable22"typing.Mapping2222"typing.Sequence22$""paramiko.transport.SecurityOptions222"threading.Event222"builtins.float222!"paramiko.server.ServerInterface222"paramiko.pkey.PKey2222222"builtins.function22222!"paramiko.sftp_client.SFTPClient22!2222"typing.Iterable2$22%22
 2"builtins.Exception22(2"" paramiko.server.SubsystemHandler2"type2*2"builtins.bytes22,2"builtins.list221"*paramiko.auth_handler._InteractiveCallback222/22	
-2"paramiko.packet.Packetizer2"paramiko.ssh_gss._SSH_GSSAuth223222"_thread.LockType2"_thread.lock2"builtins.dict22"builtins.dict22"logging.Logger2#"!paramiko.auth_handler.AuthHandler22;2"builtins.dict22"builtins.list2
-2"threading.Condition2"builtins.tuple2$2"builtins.dict2$22+@A2"builtins.dict2B2"types.ModuleType2"paramiko.transport.ChannelMap
+2"paramiko.packet.Packetizer2"paramiko.ssh_gss._SSH_GSSAuth223222"threading.Lock2"builtins.dict22"builtins.dict22"logging.Logger2#"!paramiko.auth_handler.AuthHandler22:2"builtins.dict22"builtins.list2
+2"threading.Condition2"builtins.tuple2$2"builtins.dict2$22+?@2"builtins.dict2A2"types.ModuleType2"paramiko.transport.ChannelMap

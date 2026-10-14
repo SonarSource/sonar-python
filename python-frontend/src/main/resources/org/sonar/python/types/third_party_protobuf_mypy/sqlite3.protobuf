@@ -1,352 +1,315 @@
 
-sqlite3¨
-_AnyParamWindowAggregateClass"builtins.object* 
-step*
+sqlite3”
 
-self(*
+Connectionsqlite3.dbapi2.Connection"builtins.object*0
+	DataError*
 
-args(*#
-inverse*
+self(0:builtins.property`*4
+DatabaseError*
 
-self(*
+self(0:builtins.property`*,
+Error*
 
-args(*
-value
-*
+self(0:builtins.property`*5
+IntegrityError	*
 
-self(*
-finalize
-*
+self(0:builtins.property`*5
+InterfaceError*
 
-self(8Xt
-_WindowAggregateClass"builtins.object*
-value
-*
+self(0:builtins.property`*4
+InternalError*
 
-self(*
-finalize
-*
+self(0:builtins.property`*8
+NotSupportedError*
 
-self(8Xr
-step0r
-inverse0U
-_AggregateProtocol"builtins.object*
-step*(*(*
-finalize*
+self(0:builtins.property`*7
+OperationalError*
 
-self(8Xè
- _SingleParamWindowAggregateClass"builtins.object*
-step*(*(*
-inverse*(*(*
-value
-*
+self(0:builtins.property`*7
+ProgrammingError*
 
-self(*
-finalize
-*
+self(0:builtins.property`*.
+Warning*
 
-self(8X
-Error"builtins.Exception
-DatabaseError"sqlite3.Error"
-	DataError"sqlite3.DatabaseError'
-IntegrityError"sqlite3.DatabaseError
-InterfaceError"sqlite3.Error&
-InternalError"sqlite3.DatabaseError*
-NotSupportedError"sqlite3.DatabaseError)
-OperationalError"sqlite3.DatabaseError)
-ProgrammingError"sqlite3.DatabaseError
-Warning"builtins.ExceptionÂ
+self(0:builtins.property`*5
+in_transaction*
 
-Connection"builtins.object*0
-	DataError*
+self(0:builtins.property`*4
+total_changes*
 
-self(0:builtins.property`*4
-DatabaseError*
+self(0:builtins.property`*º
+__init__*
 
-self(0:builtins.property`*,
-Error*
+self(*
+database(*
+timeout (*
+detect_types (*
+isolation_level ( *
+check_same_thread (*
+factory ("*
+cached_statements (*
+uri (*
+close*
 
-self(0:builtins.property`*5
-IntegrityError*
+self(*
+commit*
 
-self(0:builtins.property`*5
-InterfaceError*
+self(*P
+create_aggregate*
 
-self(0:builtins.property`*4
-InternalError*
+self(*
 
-self(0:builtins.property`*8
-NotSupportedError*
+name(*
+n_arg(*
+aggregate_class($*(
+create_collation*
 
-self(0:builtins.property`*7
-OperationalError *
+self(*(*(%*Z
+create_function*
 
-self(0:builtins.property`*7
-ProgrammingError"*
+self(*
 
-self(0:builtins.property`*.
-Warning$*
+name(*
 
-self(0:builtins.property`*5
-in_transaction%*
+narg(*
 
-self(0:builtins.property`*4
-total_changes*
+func(%*
+deterministic (*6
+execute&*
 
-self(0:builtins.property`*º
-__init__*
+self(*	
+sql(*
 
-self(*
-database(**
-timeout (*
-detect_types (*
-isolation_level (-*
-check_same_thread (%*
-factory (/*
-cached_statements (*
-uri (%*
-close*
+parameters (:*#
+executemany&*
 
-self(*
-commit*
+self(*(*(;*!
+executescript&*
 
-self(*P
-create_aggregate*
+self(*(*
+	interrupt*
 
-self(*
+self(*
+iterdump<*
 
-name(*
-n_arg(*
-aggregate_class(* 
-create_collation*(*(*(0*Z
-create_function*
+self(*
+rollback*
 
-self(*
+self(*9
+set_authorizer*
 
-name(*
+self(*
+authorizer_callback(%*E
+set_progress_handler*
 
-narg(*
+self(*
+progress_handler(%*
+n(*8
+set_trace_callback*
 
-func(0*
-deterministic (%*
-execute1*(*(* (8*
-executemany1*(*(*(9*
-executescript1*(*(*
-	interrupt*
+self(*
+trace_callback(%*)
+enable_load_extension*
 
-self(*
-iterdump:*
+self(*(*"
+load_extension*
 
-self(*
-rollback*
+self(*(*b
+backup*
 
-self(*9
-set_authorizer*
+self(*
+target(*
+pages (*
+progress (%*
+name (*
+sleep (*
+__call__=*
 
-self(*
-authorizer_callback(0*E
-set_progress_handler*
+self(*(*
+	__enter__>*(>*
+__exit__?*(*(B*(C*(E2ä
+cursor@
+cursor&*
 
-self(*
-progress_handler(0*
-n(*8
-set_trace_callback*
+self(*
+cursorClass (0:typing.overloadX>
+cursorF*
 
-self(*
-trace_callback(0*!
-enable_load_extension*(*(%*
-load_extension*(*(*b
-backup*
+self(*
+cursorClass($0:typing.overloadXr
+isolation_level0 r
+row_factory0)r
+text_factory0)è
+Cursorsqlite3.dbapi2.Cursor"typing.Iterator*1
 
-self(*
-target(*
-pages (*
-progress (0*
-name (*
-sleep (*
-__call__;*(*(*
-	__enter__<*(<*
-__exit__=*(*(@*(A*(C2Ç
-cursor<
-cursor1*
+connection*
 
-self(*
-factory (0:typing.overloadX:
-cursorD*
+self(&0:builtins.property`*2
+descriptionI*
 
-self(*
-factory(0:typing.overloadX8r
-isolation_level0-r
-row_factory0r
-text_factory0 
-Cursor"typing.Iterator*1
+self(&0:builtins.property`*0
+	lastrowidJ*
 
-connection*
+self(&0:builtins.property`*/
+rowcount*
 
-self(10:builtins.property`*2
-descriptionH*
+self(&0:builtins.property`*
+__init__*
 
-self(10:builtins.property`*0
-	lastrowidI*
+self(&*(*
+close*
 
-self(10:builtins.property`*/
-rowcount*
+self(&*!
+executeK*
 
-self(10:builtins.property`*
-__init__*(1*(*
-close*
+self(K*(* (:*#
+executemanyK*
 
-self(1*
-executeJ*(J*(* (8*
-executemanyJ*(J*(*(9*
-executescript1*(1*(*
-fetchallK*
+self(K*(*(;*!
+executescript&*
 
-self(1*'
-	fetchmanyK*
+self(&*(*
+fetchallL*
 
-self(1*
-size (I*
-fetchone*
+self(&*'
+	fetchmanyL*
 
-self(1*
-setinputsizes*(1*(*
-setoutputsize*(1*(* (*
-__iter__J*(J*
-__next__*
+self(&*
+size (J*
+fetchone)*
 
-self(18r
-	arraysize0r
-row_factory00X
-PrepareProtocol"builtins.object*2
-__init__*
+self(&*!
+setinputsizes*
 
-self(L*
+self(&*(M*'
+setoutputsize*
 
-args(*
-kwargs(8È
-Row"typing.Sequence*
-__new__N*(O*(1*(Ph*
+self(&*(M* (M*
+__iter__K*(K*
+__next__)*
+
+self(&r
+	arraysize0r
+row_factory0%1
+Errorsqlite3.dbapi2.Error"builtins.ExceptionC
+DatabaseErrorsqlite3.dbapi2.DatabaseError"sqlite3.dbapi2.ErrorC
+	DataErrorsqlite3.dbapi2.DataError"sqlite3.dbapi2.DatabaseErrorM
+IntegrityErrorsqlite3.dbapi2.IntegrityError"sqlite3.dbapi2.DatabaseErrorE
+InterfaceErrorsqlite3.dbapi2.InterfaceError"sqlite3.dbapi2.ErrorK
+InternalErrorsqlite3.dbapi2.InternalError"sqlite3.dbapi2.DatabaseErrorS
+NotSupportedError sqlite3.dbapi2.NotSupportedError"sqlite3.dbapi2.DatabaseErrorQ
+OperationalErrorsqlite3.dbapi2.OperationalError"sqlite3.dbapi2.DatabaseErrorx
+PrepareProtocolsqlite3.dbapi2.PrepareProtocol"builtins.object*2
+__init__*
+
+self(N*
+
+args(M*
+kwargs(M8Q
+ProgrammingErrorsqlite3.dbapi2.ProgrammingError"sqlite3.dbapi2.DatabaseErrorË
+Rowsqlite3.dbapi2.Row"builtins.object* 
+__init__*
+
+self(O*(&*(P*
 keysQ*
 
-self(M*
-__hash__*
-
-self(M*
-__iter__R*(M*
-__len__*(M*
-__eq__%*(M*(*
-__ge__%*(M*(*
-__gt__%*(M*(*
-__le__%*(M*(*
-__lt__%*(M*(*
-__ne__%*(M*(2i
+self(O*
+__iter__R*(O*
+__len__*(O*
+__eq__*(O*(M*
+__ge__*(O*(M*
+__gt__*(O*(M*
+__le__*(O*(M*
+__lt__*(O*(M*
+__ne__*(O*(M2i
 __getitem__,
-__getitem__*(M*(S0:typing.overloadX,
-__getitem__P*(M*(T0:typing.overloadX8
-
-_Statement"builtins.object8<
+__getitem__)*(O*(S0:typing.overloadX,
+__getitem__P*(O*(T0:typing.overloadX5
+Warningsqlite3.dbapi2.Warning"builtins.Exception<
 DateFromTickssqlite3.dbapi2.DateFromTicksU*
-ticks(<
+ticks(<
 TimeFromTickssqlite3.dbapi2.TimeFromTicksV*
-ticks(F
+ticks(F
 TimestampFromTicks!sqlite3.dbapi2.TimestampFromTicksW*
-ticks(D
-complete_statement_sqlite3.complete_statement%*
-	statement(G
-enable_callback_tracebacks#_sqlite3.enable_callback_tracebacks*(%7
-register_adapter_sqlite3.register_adapter*(Y*(Z;
-register_converter_sqlite3.register_converter*(*([K
-enable_shared_cache"sqlite3.dbapi2.enable_shared_cache*
-enable(0"ã
-adapt_sqlite3.adapt6
-adapt_sqlite3.adapt*(*(0:typing.overloadX:
-adapt_sqlite3.adapt\*(*(*(X0:typing.overloadX"â
-connect_sqlite3.connect≈
-connect_sqlite3.connect*
-database(**
-timeout (*
-detect_types (*
-isolation_level (-*
-check_same_thread (%*
-cached_statements (*
-uri (%0:typing.overloadXÃ
-connect_sqlite3.connect]*
-database(**
-timeout(*
-detect_types(*
-isolation_level(-*
-check_same_thread(%*
-factory(^*
-cached_statements (*
-uri (%0:typing.overloadX‘
-connect_sqlite3.connect]*
-database(**
-timeout (*
-detect_types (*
-isolation_level (-*
-check_same_thread (%*
-factory(^*
-cached_statements (*
-uri (%0:typing.overloadX*
+ticks(J
+complete_statement!sqlite3.dbapi2.complete_statement*
+	statement(«
+connectsqlite3.dbapi2.connect*
+database(*
+timeout (*
+detect_types (*
+isolation_level ( *
+check_same_thread (*
+factory ("*
+cached_statements (*
+uri (M
+enable_callback_tracebacks)sqlite3.dbapi2.enable_callback_tracebacks*(I
+enable_shared_cache"sqlite3.dbapi2.enable_shared_cache*
+enable(=
+register_adaptersqlite3.dbapi2.register_adapter*(Y*(ZA
+register_converter!sqlite3.dbapi2.register_converter*(*(["ù
+adaptsqlite3.dbapi2.adapt<
+adaptsqlite3.dbapi2.adapt)*()*()0:typing.overloadX@
+adaptsqlite3.dbapi2.adapt\*()*()*(X0:typing.overloadX*
 __path__0Q*
-__annotations__0_*+
-PARSE_COLNAMES_sqlite3.PARSE_COLNAMES0*-
-PARSE_DECLTYPES_sqlite3.PARSE_DECLTYPES0*3
-SQLITE_ALTER_TABLE_sqlite3.SQLITE_ALTER_TABLE0*+
-SQLITE_ANALYZE_sqlite3.SQLITE_ANALYZE0*)
-SQLITE_ATTACH_sqlite3.SQLITE_ATTACH0*5
-SQLITE_CREATE_INDEX_sqlite3.SQLITE_CREATE_INDEX0*5
-SQLITE_CREATE_TABLE_sqlite3.SQLITE_CREATE_TABLE0*?
-SQLITE_CREATE_TEMP_INDEX!_sqlite3.SQLITE_CREATE_TEMP_INDEX0*?
-SQLITE_CREATE_TEMP_TABLE!_sqlite3.SQLITE_CREATE_TEMP_TABLE0*C
-SQLITE_CREATE_TEMP_TRIGGER#_sqlite3.SQLITE_CREATE_TEMP_TRIGGER0*=
-SQLITE_CREATE_TEMP_VIEW _sqlite3.SQLITE_CREATE_TEMP_VIEW0*9
-SQLITE_CREATE_TRIGGER_sqlite3.SQLITE_CREATE_TRIGGER0*3
-SQLITE_CREATE_VIEW_sqlite3.SQLITE_CREATE_VIEW0*7
-SQLITE_CREATE_VTABLE_sqlite3.SQLITE_CREATE_VTABLE0*)
-SQLITE_DELETE_sqlite3.SQLITE_DELETE0*%
-SQLITE_DENY_sqlite3.SQLITE_DENY0*)
-SQLITE_DETACH_sqlite3.SQLITE_DETACH0*%
-SQLITE_DONE_sqlite3.SQLITE_DONE0*1
-SQLITE_DROP_INDEX_sqlite3.SQLITE_DROP_INDEX0*1
-SQLITE_DROP_TABLE_sqlite3.SQLITE_DROP_TABLE0*;
-SQLITE_DROP_TEMP_INDEX_sqlite3.SQLITE_DROP_TEMP_INDEX0*;
-SQLITE_DROP_TEMP_TABLE_sqlite3.SQLITE_DROP_TEMP_TABLE0*?
-SQLITE_DROP_TEMP_TRIGGER!_sqlite3.SQLITE_DROP_TEMP_TRIGGER0*9
-SQLITE_DROP_TEMP_VIEW_sqlite3.SQLITE_DROP_TEMP_VIEW0*5
-SQLITE_DROP_TRIGGER_sqlite3.SQLITE_DROP_TRIGGER0*/
-SQLITE_DROP_VIEW_sqlite3.SQLITE_DROP_VIEW0*3
-SQLITE_DROP_VTABLE_sqlite3.SQLITE_DROP_VTABLE0*-
-SQLITE_FUNCTION_sqlite3.SQLITE_FUNCTION0*)
-SQLITE_IGNORE_sqlite3.SQLITE_IGNORE0*)
-SQLITE_INSERT_sqlite3.SQLITE_INSERT0*!
-	SQLITE_OK_sqlite3.SQLITE_OK0*)
-SQLITE_PRAGMA_sqlite3.SQLITE_PRAGMA0*%
-SQLITE_READ_sqlite3.SQLITE_READ0*/
-SQLITE_RECURSIVE_sqlite3.SQLITE_RECURSIVE0*+
-SQLITE_REINDEX_sqlite3.SQLITE_REINDEX0*/
-SQLITE_SAVEPOINT_sqlite3.SQLITE_SAVEPOINT0*)
-SQLITE_SELECT_sqlite3.SQLITE_SELECT0*3
-SQLITE_TRANSACTION_sqlite3.SQLITE_TRANSACTION0*)
-SQLITE_UPDATE_sqlite3.SQLITE_UPDATE0*
-Binary0`8*
+__annotations__0]*)
+
+paramstylesqlite3.dbapi2.paramstyle0*-
+threadsafetysqlite3.dbapi2.threadsafety0*%
+apilevelsqlite3.dbapi2.apilevel0*
 
 Date0U8*
 
-Time0V8*
-adapters_sqlite3.adapters0c*%
-apilevelsqlite3.dbapi2.apilevel0*#
+Time0V8*
+	Timestamp0W8*-
+version_infosqlite3.dbapi2.version_info0^*;
+sqlite_version_info"sqlite3.dbapi2.sqlite_version_info0^*
+Binary0(8*1
+PARSE_COLNAMESsqlite3.dbapi2.PARSE_COLNAMES0*3
+PARSE_DECLTYPESsqlite3.dbapi2.PARSE_DECLTYPES0*9
+SQLITE_ALTER_TABLE!sqlite3.dbapi2.SQLITE_ALTER_TABLE0*1
+SQLITE_ANALYZEsqlite3.dbapi2.SQLITE_ANALYZE0*/
+SQLITE_ATTACHsqlite3.dbapi2.SQLITE_ATTACH0*;
+SQLITE_CREATE_INDEX"sqlite3.dbapi2.SQLITE_CREATE_INDEX0*;
+SQLITE_CREATE_TABLE"sqlite3.dbapi2.SQLITE_CREATE_TABLE0*E
+SQLITE_CREATE_TEMP_INDEX'sqlite3.dbapi2.SQLITE_CREATE_TEMP_INDEX0*E
+SQLITE_CREATE_TEMP_TABLE'sqlite3.dbapi2.SQLITE_CREATE_TEMP_TABLE0*I
+SQLITE_CREATE_TEMP_TRIGGER)sqlite3.dbapi2.SQLITE_CREATE_TEMP_TRIGGER0*C
+SQLITE_CREATE_TEMP_VIEW&sqlite3.dbapi2.SQLITE_CREATE_TEMP_VIEW0*?
+SQLITE_CREATE_TRIGGER$sqlite3.dbapi2.SQLITE_CREATE_TRIGGER0*9
+SQLITE_CREATE_VIEW!sqlite3.dbapi2.SQLITE_CREATE_VIEW0*=
+SQLITE_CREATE_VTABLE#sqlite3.dbapi2.SQLITE_CREATE_VTABLE0*/
+SQLITE_DELETEsqlite3.dbapi2.SQLITE_DELETE0*+
+SQLITE_DENYsqlite3.dbapi2.SQLITE_DENY0*/
+SQLITE_DETACHsqlite3.dbapi2.SQLITE_DETACH0*+
+SQLITE_DONEsqlite3.dbapi2.SQLITE_DONE0*7
+SQLITE_DROP_INDEX sqlite3.dbapi2.SQLITE_DROP_INDEX0*7
+SQLITE_DROP_TABLE sqlite3.dbapi2.SQLITE_DROP_TABLE0*A
+SQLITE_DROP_TEMP_INDEX%sqlite3.dbapi2.SQLITE_DROP_TEMP_INDEX0*A
+SQLITE_DROP_TEMP_TABLE%sqlite3.dbapi2.SQLITE_DROP_TEMP_TABLE0*E
+SQLITE_DROP_TEMP_TRIGGER'sqlite3.dbapi2.SQLITE_DROP_TEMP_TRIGGER0*?
+SQLITE_DROP_TEMP_VIEW$sqlite3.dbapi2.SQLITE_DROP_TEMP_VIEW0*;
+SQLITE_DROP_TRIGGER"sqlite3.dbapi2.SQLITE_DROP_TRIGGER0*5
+SQLITE_DROP_VIEWsqlite3.dbapi2.SQLITE_DROP_VIEW0*9
+SQLITE_DROP_VTABLE!sqlite3.dbapi2.SQLITE_DROP_VTABLE0*3
+SQLITE_FUNCTIONsqlite3.dbapi2.SQLITE_FUNCTION0*/
+SQLITE_IGNOREsqlite3.dbapi2.SQLITE_IGNORE0*/
+SQLITE_INSERTsqlite3.dbapi2.SQLITE_INSERT0*'
+	SQLITE_OKsqlite3.dbapi2.SQLITE_OK0*/
+SQLITE_PRAGMAsqlite3.dbapi2.SQLITE_PRAGMA0*+
+SQLITE_READsqlite3.dbapi2.SQLITE_READ0*1
+SQLITE_REINDEXsqlite3.dbapi2.SQLITE_REINDEX0*5
+SQLITE_RECURSIVEsqlite3.dbapi2.SQLITE_RECURSIVE0*5
+SQLITE_SAVEPOINTsqlite3.dbapi2.SQLITE_SAVEPOINT0*/
+SQLITE_SELECTsqlite3.dbapi2.SQLITE_SELECT0*9
+SQLITE_TRANSACTION!sqlite3.dbapi2.SQLITE_TRANSACTION0*/
+SQLITE_UPDATEsqlite3.dbapi2.SQLITE_UPDATE0*%
+adapterssqlite3.dbapi2.adapters0a*)
 
-converters_sqlite3.converters0d*)
-
-paramstylesqlite3.dbapi2.paramstyle0*+
-sqlite_version_sqlite3.sqlite_version0*;
-sqlite_version_info"sqlite3.dbapi2.sqlite_version_info0e*-
-threadsafetysqlite3.dbapi2.threadsafety0g*-
-version_infosqlite3.dbapi2.version_info0e*#
-versionsqlite3.dbapi2.version02"builtins.object2'"%sqlite3._AnyParamWindowAggregateClass22"builtins.str2"typing_extensions.Buffer2"builtins.int2"builtins.float22	22"sqlite3._SqliteData2	2"sqlite3._WindowAggregateClass2"builtins.function222"sqlite3._AggregateProtocol2*"(sqlite3._SingleParamWindowAggregateClass2"sqlite3.DataError2"type22"sqlite3.Connection2"sqlite3.DatabaseError2"type22"sqlite3.Error2"type22"sqlite3.IntegrityError2"type22"sqlite3.InterfaceError2"type22"sqlite3.InternalError2"type22"sqlite3.NotSupportedError2"type22"sqlite3.OperationalError2"type22"sqlite3.ProgrammingError2"type2!2"sqlite3.Warning2"type2#2"builtins.bool2"builtins.bytes2"os.PathLike22"os.PathLike2&22&'(2"_typeshed.StrOrBytesPath2)2	222+++2"sqlite3._IsolationLevel2,2"type222.222"sqlite3.Cursor22
-2 "sqlite3._AdaptedInputData222$"_typeshed.SupportsLenAndGetItem232 2"typing.Mapping2522462"sqlite3._Parameters272"typing.Iterable282"typing.Generator22"sqlite3._Statement24
-sqlite3.Connection.Self"sqlite3.Connection(22	2%2"builtins.BaseException2"type2>22?22>2"types.TracebackType22B2"sqlite3.Cursor21222"builtins.tuple2E2"_typeshed.MaybeNone222FG222,
-sqlite3.Cursor.Self"sqlite3.Cursor(212"builtins.list22"sqlite3.PrepareProtocol2"sqlite3.Row2&
-sqlite3.Row.Self"sqlite3.Row(2M2"type2N2"builtins.tuple22"builtins.list22"typing.Iterator2222"builtins.slice22"datetime.date2"datetime.time2"datetime.datetime2"builtins.object22"type2X2"_sqlite3._Adapter22"_sqlite3._Converter222X2"sqlite3.Connection22"type2]2"builtins.dict22"builtins.memoryview22"type222aa2"builtins.dict2bZ2"builtins.dict2[222	222fff
+converterssqlite3.dbapi2.converters0b*1
+sqlite_versionsqlite3.dbapi2.sqlite_version0*#
+versionsqlite3.dbapi2.version02"sqlite3.dbapi2.DataError2"type22"sqlite3.dbapi2.Connection2"sqlite3.dbapi2.DatabaseError2"type22"sqlite3.dbapi2.Error2"type22"sqlite3.dbapi2.IntegrityError2"type22"sqlite3.dbapi2.InterfaceError2"type2
+2"sqlite3.dbapi2.InternalError2"type22"" sqlite3.dbapi2.NotSupportedError2"type22!"sqlite3.dbapi2.OperationalError2"type22!"sqlite3.dbapi2.ProgrammingError2"type22"sqlite3.dbapi2.Warning2"type22"builtins.bool2"builtins.int22"builtins.str2"builtins.bytes2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath22"builtins.float222"type222!2"builtins.function22#22$2"sqlite3.dbapi2.Cursor2"builtins.bytearray2"builtins.memoryview22"array.array2)2"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+2'(*+,-2 "_typeshed.WriteableBuffer2.22/2"_typeshed.ReadableBuffer202	212!"sqlite3.dbapi2._SqliteData22223)2'" sqlite3.dbapi2._AdaptedInputData242$"_typeshed.SupportsLenAndGetItem252 2"typing.Mapping2722682!"sqlite3.dbapi2._Parameters292"typing.Iterable2:2"typing.Generator22"sqlite3.dbapi2._Statement2B
+sqlite3.dbapi2.Connection.Self"sqlite3.dbapi2.Connection(22	22"builtins.BaseException2"type2@22A22@2"types.TracebackType22D2"sqlite3.dbapi2.Cursor2&222"builtins.tuple2G22H)222:
+sqlite3.dbapi2.Cursor.Self"sqlite3.dbapi2.Cursor(2&2"builtins.list2)2"builtins.object2 "sqlite3.dbapi2.PrepareProtocol2"sqlite3.dbapi2.Row2"builtins.tuple2)2"builtins.list22"typing.Iterator2)222"builtins.slice2"datetime.date2"datetime.time2"datetime.datetime2"builtins.object2M2"type2X2"sqlite3.dbapi2._Adapter2$2 "sqlite3.dbapi2._Converter2$22)X2"builtins.dict2)222"type2)22__2"builtins.dict2`Z2"builtins.dict2[

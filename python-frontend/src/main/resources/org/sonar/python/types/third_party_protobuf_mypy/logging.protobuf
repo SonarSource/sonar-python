@@ -1,784 +1,779 @@
 
-logging:
-_SupportsFilter"builtins.object*
-filter*(*(8X£
+logging£
 Filterer"builtins.object*'
-	addFilter*
+	addFilter*
 
-self(*
-filter(
-**
-removeFilter*
+self(*
+filter(**
+removeFilter*
 
-self(*
-filter(
-*$
-filter*
+self(*
+filter(*$
+filter*
 
-self(*
-record(r
-filters0∑
+self(*
+record(	r
+filters0
+∑
 Manager"builtins.object*(
-__init__*
+__init__*
 
-self(*
-rootnode(*%
-	getLogger*
+self(*
+rootnode(*%
+	getLogger*
 
-self(*
+self(*
 
-name(*+
-setLoggerClass*
+name(*+
+setLoggerClass*
 
-self(*
-klass(*2
-setLogRecordFactory*
+self(*
+klass(*2
+setLogRecordFactory*
 
-self(*
-factory(r
-root0r
-disable0r
-emittedNoHandlerWarning0r
+self(*
+factory(r
+root0r
+disable0r
+emittedNoHandlerWarning0r
 
-loggerDict0r
-loggerClass0r
-logRecordFactory0œ
+loggerDict0r
+loggerClass0r
+logRecordFactory0Õ
 Logger"logging.Filterer*3
-__init__*
+__init__*
 
-self(*
+self(*
 
-name(*
-level (*%
-setLevel*
-
-self(*
-level(*)
-isEnabledFor*
-
-self(*
-level(*!
-getEffectiveLevel*
-
-self(*&
-getChild*
-
-self(*
-suffix(*u
-debug*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*t
-info*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*w
-warning*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*v
-warn*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&0*u
-error*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*y
-	exception*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*x
-critical*
-
-self(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*Ä
-log*
-
-self(*
-level(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*Å
-_log*
-
-self(*
-level(*	
-msg(*
-
-args()*
-exc_info (**
-extra (&*
-
-stack_info (*
-
-stacklevel (*&
-
-addHandler*
-
-self(*
-
-hdlr(+*)
-removeHandler*
-
-self(*
-
-hdlr(+*B
-
-findCaller-*
-
-self(*
-
-stack_info (*
-
-stacklevel (*$
-handle*
-
-self(*
-record(*õ
-
-makeRecord*
-
-self(*
-
-name(*
-level(*
-fn(*	
-lno(*	
-msg(*
-
-args()*
-exc_info(.*
-func (,*
-extra (&*
-sinfo (,*
-hasHandlers*
-
-self(**
-callHandlers*
-
-self(*
-record(r
-name0r	
-level0r
-
-parent0/r
-	propagate0r
-handlers00r
-disabled0r
-root0r
-manager0r	
-fatal0ô
-Handler"logging.Filterer*'
-__init__*
-
-self(+*
-level (*
-get_name*
-
-self(+*$
-set_name*
-
-self(+*
-
-name(*
-
-createLock*
-
-self(+*
-acquire*
-
-self(+*
-release*
-
-self(+*%
-setLevel*
-
-self(+*
-level(*'
-setFormatter*
-
-self(+*	
-fmt(2*
-flush*
-
-self(+*
-close*
-
-self(+*$
-handle*
-
-self(+*
-record(*)
-handleError*
-
-self(+*
-record(*$
-format*
-
-self(+*
-record(*"
-emit*
-
-self(+*
-record(r	
-level0r
-	formatter02r
-lock04r
-name0,Ì
-	Formatter"builtins.object*i
-__init__*
-
-self(1*
-fmt (,*
-datefmt (,*
-style (7*
-validate (*
-defaults (:*$
-format*
-
-self(1*
-record(*9
-
-formatTime*
-
-self(1*
-record(*
-datefmt (,*)
-formatException*
-
-self(1*
-ei("*+
-formatMessage*
-
-self(1*
-record(*-
-formatStack*
-
-self(1*
-
-stack_info(*
-usesTime*
-
-self(1r
-	converter0r
-_fmt0,r
-datefmt0,r
-
-_style0;r
-default_time_format0r
-default_msec_format0,ﬁ
-BufferingFormatter"builtins.object*)
-__init__*
-
-self(<*
-linefmt (2*+
-formatHeader*
-
-self(<*
-records(=*+
-formatFooter*
-
-self(<*
-records(=*%
-format*
-
-self(<*
-records(=r
-linefmt01{
-Filter"builtins.object*&
-__init__*
-
-self(*
-name (*$
-filter*
-
-self(*
-record(r
-name0r
-nlen0ì
-	LogRecord"builtins.object*ì
-__init__*
-
-self(*
-
-name(*
-level(*
-pathname(*
-lineno(*	
-msg(*
-
-args(>*
-exc_info(.*
-func (,*
-sinfo (,*
-
-getMessage*
-
-self(*
-__setattr__*(*(*(8r
-args0>r
-asctime0r
-created0?r
-exc_info0.r
-exc_text0,r
-filename0r
-funcName0r
-	levelname0r
-levelno0r
-
-lineno0r
-
-module0r	
-msecs0?r
-message0r
-msg0@r
-name0r
-pathname0r
-process0Ar
-processName0,r
-relativeCreated0?r
-
-stack_info0,r
-
-thread0Ar
-
-threadName0,°
-LoggerAdapter"builtins.object*5
-__init__*
-
-self(E*
-logger(D*
-extra (&*0
-processG*
-
-self(E*	
-msg(8*
-kwargs(F*É
-debug*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*Ç
-info*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*Ö
-warning*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*Ñ
-warn*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(0*É
-error*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*á
-	exception*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*Ü
-critical*
-
-self(E*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*é
-log*
-
-self(E*
-level(*	
-msg(*
-
-args(*
-exc_info ($*
-
-stack_info (*
-
-stacklevel (*
-extra (&*
-kwargs(*)
-isEnabledFor*
-
-self(E*
-level(*!
-getEffectiveLevel*
-
-self(E*%
-setLevel*
-
-self(E*
-level(*
-hasHandlers*
-
-self(E*m
-_log*
-
-self(E*
-level(*	
-msg(*
-
-args()*
-exc_info (**
-extra (&*
-
-stack_info (*+
-name*
-
-self(E0:builtins.property`Pr
-
-logger0Dr
-manager0r	
-extra0&
-StreamHandler"logging.Handler*'
-	setStreamJ*
-
-self(K*
-stream(I2Ü
-__init__=
-__init__*
-
-self(M*
-stream (0:typing.overloadX;
-__init__*
-
-self(K*
-stream(I0:typing.overloadXPr
-
-stream0Ir
-
-terminator0Â
-FileHandler"logging.StreamHandler*g
-__init__*
-
-self(N*
-filename(Q*
-mode (*
-encoding (,*
-delay (*
-errors (,*
-_openS*
-
-self(Nr
-baseFilename0r
-mode0r
-encoding0,r	
-delay0r
-
-errors0,
-NullHandler"logging.Handler}
-PlaceHolder"builtins.object*'
-__init__*
-
-self(*
-alogger(*%
-append*
-
-self(*
-alogger(r
-	loggerMap0TC
-
-RootLogger"logging.Logger*%
-__init__*
+name(*
+level (*%
+setLevel*
 
 self(*
-level(é
+level(*)
+isEnabledFor*
+
+self(*
+level(*!
+getEffectiveLevel*
+
+self(*&
+getChild*
+
+self(*
+suffix(*u
+debug*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*t
+info*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*w
+warning*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*t
+warn*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*u
+error*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*y
+	exception*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*x
+critical*
+
+self(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*Ä
+log*
+
+self(*
+level(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*Å
+_log*
+
+self(*
+level(*	
+msg(*
+
+args((*
+exc_info ()*
+extra (%*
+
+stack_info (*
+
+stacklevel (*&
+
+addHandler*
+
+self(*
+
+hdlr(**)
+removeHandler*
+
+self(*
+
+hdlr(**B
+
+findCaller,*
+
+self(*
+
+stack_info (*
+
+stacklevel (*$
+handle*
+
+self(*
+record(	*õ
+
+makeRecord	*
+
+self(*
+
+name(*
+level(*
+fn(*	
+lno(*	
+msg(*
+
+args((*
+exc_info(-*
+func (+*
+extra (%*
+sinfo (+*
+hasHandlers*
+
+self(**
+callHandlers*
+
+self(*
+record(	r
+name0r	
+level0r
+
+parent0.r
+	propagate0r
+handlers0/r
+disabled0r
+root0r
+manager0r	
+fatal0ô
+Handler"logging.Filterer*'
+__init__*
+
+self(**
+level (*
+get_name*
+
+self(**$
+set_name*
+
+self(**
+
+name(*
+
+createLock*
+
+self(**
+acquire*
+
+self(**
+release*
+
+self(**%
+setLevel*
+
+self(**
+level(*'
+setFormatter*
+
+self(**	
+fmt(1*
+flush*
+
+self(**
+close*
+
+self(**$
+handle*
+
+self(**
+record(	*)
+handleError*
+
+self(**
+record(	*$
+format*
+
+self(**
+record(	*"
+emit*
+
+self(**
+record(	r	
+level0r
+	formatter01r
+lock03r
+name0+Ì
+	Formatter"builtins.object*i
+__init__*
+
+self(0*
+fmt (+*
+datefmt (+*
+style (6*
+validate (*
+defaults (9*$
+format*
+
+self(0*
+record(	*9
+
+formatTime*
+
+self(0*
+record(	*
+datefmt (+*)
+formatException*
+
+self(0*
+ei(!*+
+formatMessage*
+
+self(0*
+record(	*-
+formatStack*
+
+self(0*
+
+stack_info(*
+usesTime*
+
+self(0r
+	converter0r
+_fmt0+r
+datefmt0+r
+
+_style0:r
+default_time_format0r
+default_msec_format0+ﬁ
+BufferingFormatter"builtins.object*)
+__init__*
+
+self(;*
+linefmt (1*+
+formatHeader*
+
+self(;*
+records(<*+
+formatFooter*
+
+self(;*
+records(<*%
+format*
+
+self(;*
+records(<r
+linefmt00{
+Filter"builtins.object*&
+__init__*
+
+self(*
+name (*$
+filter*
+
+self(*
+record(	r
+name0r
+nlen0õ
+	LogRecord"builtins.object*ì
+__init__*
+
+self(	*
+
+name(*
+level(*
+pathname(*
+lineno(*	
+msg(*
+
+args(=*
+exc_info(-*
+func (+*
+sinfo (+*
+
+getMessage*
+
+self(	*#
+__setattr__*
+
+self(	*(*(7r
+args0=r
+asctime0r
+created0>r
+exc_info0-r
+exc_text0+r
+filename0r
+funcName0r
+	levelname0r
+levelno0r
+
+lineno0r
+
+module0r	
+msecs0>r
+message0r
+msg0?r
+name0r
+pathname0r
+process0@r
+processName0+r
+relativeCreated0>r
+
+stack_info0+r
+
+thread0@r
+
+threadName0+ü
+LoggerAdapter"builtins.object*5
+__init__*
+
+self(D*
+logger(C*
+extra (%*0
+processF*
+
+self(D*	
+msg(7*
+kwargs(E*É
+debug*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*Ç
+info*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*Ö
+warning*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*Ç
+warn*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*É
+error*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*á
+	exception*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*Ü
+critical*
+
+self(D*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*é
+log*
+
+self(D*
+level(*	
+msg(*
+
+args(*
+exc_info (#*
+
+stack_info (*
+
+stacklevel (*
+extra (%*
+kwargs(*)
+isEnabledFor*
+
+self(D*
+level(*!
+getEffectiveLevel*
+
+self(D*%
+setLevel*
+
+self(D*
+level(*
+hasHandlers*
+
+self(D*m
+_log*
+
+self(D*
+level(*	
+msg(*
+
+args((*
+exc_info ()*
+extra (%*
+
+stack_info (*+
+name*
+
+self(D0:builtins.property`Pr
+
+logger0Cr
+manager0r	
+extra0%
+StreamHandler"logging.Handler*'
+	setStreamI*
+
+self(J*
+stream(H2Ü
+__init__=
+__init__*
+
+self(L*
+stream (0:typing.overloadX;
+__init__*
+
+self(J*
+stream(H0:typing.overloadXPr
+
+stream0Hr
+
+terminator0Â
+FileHandler"logging.StreamHandler*g
+__init__*
+
+self(M*
+filename(P*
+mode (*
+encoding (+*
+delay (*
+errors (+*
+_openQ*
+
+self(Mr
+baseFilename0r
+mode0r
+encoding0+r	
+delay0r
+
+errors0+
+NullHandler"logging.Handler}
+PlaceHolder"builtins.object*'
+__init__*
+
+self(*
+alogger(*%
+append*
+
+self(*
+alogger(r
+	loggerMap0RC
+
+RootLogger"logging.Logger*%
+__init__*
+
+self(*
+level(é
 PercentStyle"builtins.object*5
-__init__*
+__init__*
 
-self(;*	
-fmt(*
-defaults (:*
-usesTime*
+self(:*	
+fmt(*
+defaults (9*
+usesTime*
 
-self(;*
-validate*
+self(:*
+validate*
 
-self(;*$
-format*
+self(:*$
+format*
 
-self(;*
-record(8r
-default_format0r
-asctime_format0r
-asctime_search0r
-validation_pattern0Ur
-_fmt0D
+self(:*
+record(7r
+default_format0r
+asctime_format0r
+asctime_search0r
+validation_pattern0Sr
+_fmt0D
 StrFormatStyle"logging.PercentStyler
-fmt_spec0Ur
+fmt_spec0Sr
 
-field_spec0U5
+field_spec0S5
 StringTemplateStyle"logging.PercentStyler
-_tpl0V
-currentframeW
-	getLogger*
-name (,
-getLoggerClass
-getLogRecordFactoryi
-debug*	
-msg(*
+_tpl0T
+currentframeU
+	getLogger*
+name (+
+getLoggerClass
+getLogRecordFactoryi
+debug*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&h
-info*	
-msg(*
+stacklevel (*
+extra (%h
+info*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&k
-warning*	
-msg(*
+stacklevel (*
+extra (%k
+warning*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&j
-warn*	
-msg(*
+stacklevel (*
+extra (%h
+warn*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&0i
-error*	
-msg(*
+stacklevel (*
+extra (%i
+error*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&l
-critical*	
-msg(*
+stacklevel (*
+extra (%l
+critical*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&m
-	exception*	
-msg(*
+stacklevel (*
+extra (%m
+	exception*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&t
-log*
-level(*	
-msg(*
+stacklevel (*
+extra (%t
+log*
+level(*	
+msg(*
 
-args(*
-exc_info ($*
+args(*
+exc_info (#*
 
-stack_info (*
+stack_info (*
 
-stacklevel (*
-extra (&
-disable*
-level (.
-addLevelName*
-level(*
-	levelName(
-makeLogRecord*
+stacklevel (*
+extra (%
+disable*
+level (.
+addLevelName*
+level(*
+	levelName(
+getLevelName7*
+level(
+makeLogRecord	*
 
-dict(%≈
-basicConfig*
-filename (X*
-filemode (*
-format (*
-datefmt (,*
-style (7*
-level (Y*
-stream (Z*
-handlers (\*
-force (]*
-encoding (,*
-errors (,!
-shutdown*
-handlerList (^
-setLoggerClass*
-klass("
-captureWarnings*
-capture(&
-setLogRecordFactory*
-factory("v
-getLevelName2
-getLevelName*
-level(0:typing.overloadX2
-getLevelName8*
-level(0:typing.overloadX*
-__path__0_*
-__annotations__0`*
-__all__0_*
-raiseExceptions0*
+dict($≈
+basicConfig*
+filename (V*
+filemode (*
+format (*
+datefmt (+*
+style (6*
+level (W*
+stream (X*
+handlers (Z*
+force ([*
+encoding (+*
+errors (+!
+shutdown*
+handlerList (\
+setLoggerClass*
+klass("
+captureWarnings*
+capture(&
+setLogRecordFactory*
+factory(*
+__path__0]*
+__annotations__0^*
+__all__0]*
+raiseExceptions0*
 
-logThreads0*
-logMultiprocessing0*
-logProcesses0*
-_srcfile0,*
-_levelToName0a*
-_nameToLevel0b*
-CRITICAL0*	
-FATAL0*	
-ERROR0*
-WARNING0*
-WARN0*
-INFO0*	
-DEBUG0*
+logThreads0*
+logMultiprocessing0*
+logProcesses0*
+_srcfile0+*
+_levelToName0_*
+_nameToLevel0`*
+CRITICAL0*	
+FATAL0*	
+ERROR0*
+WARNING0*
+WARN0*
+INFO0*	
+DEBUG0*
 
-NOTSET0*	
-fatal0*
+NOTSET0*	
+fatal0*
 
-lastResort0c*
-root0*
-_STYLES0e*
-BASIC_FORMAT02"builtins.bool2"logging._SupportsFilter2"logging.LogRecord22"logging.Filterer2"logging.Filter2"builtins.function22222"logging._FilterType2	2"builtins.list2
-2"logging.Manager2"logging.RootLogger2"logging.Logger2"builtins.str2"type22"builtins.int2"logging.PlaceHolder222"builtins.dict22222222"logging._Level22,
-logging.Logger.Self"logging.Logger(22"builtins.object2"builtins.BaseException2"type22"types.TracebackType22222222 2"logging._SysExcInfoType2!22"2"logging._ExcInfoType2#2"typing.Mapping222%2"builtins.tuple222'%2"logging._ArgsType2(22$2"logging.Handler2222,22"222"builtins.list2+2"logging.Formatter2212"_thread.LockType2232	2225552"logging._FormatStyle2622"typing.Mapping282292"logging.PercentStyle2"logging.BufferingFormatter2"typing.Sequence222)2"builtins.float228222"logging.LoggerAdapter2822B22C2"logging.LoggerAdapter2D2"typing.MutableMapping28228F2"_typeshed.SupportsWrite22"_typeshed.SupportsWrite2H22I2"logging.StreamHandler2I2"typing.TextIO2"logging.StreamHandler2L2"logging.FileHandler2"os.PathLike222O2"_typeshed.StrPath2P2"_io._WrappedBuffer2"_io.TextIOWrapper2R2"builtins.dict22"
-re.Pattern22"string.Template2"types.FrameType22Q2222H2"typing.Iterable2+22[222"typing.Sequence282"builtins.list22"builtins.dict282"builtins.dict22"builtins.dict222+22;2"builtins.dict2d
+lastResort0b*
+root0*
+_STYLES0d*
+BASIC_FORMAT022"logging.Filterer2"logging.Filter2"builtins.function22222"logging._FilterType22"builtins.bool2"logging.LogRecord2"builtins.list22"logging.Manager2"logging.RootLogger2"logging.Logger2"builtins.str2"type22"builtins.int2"logging.PlaceHolder222"builtins.dict22222222"logging._Level22,
+logging.Logger.Self"logging.Logger(22"builtins.object2"builtins.BaseException2"type22"types.TracebackType222222222"logging._SysExcInfoType2 22!2"logging._ExcInfoType2"2"typing.Mapping222$2"builtins.tuple222&$2"logging._ArgsType2'22#2"logging.Handler2222+22!222"builtins.list2*2"logging.Formatter2202"threading.Lock2222	2224442"logging._FormatStyle2522"typing.Mapping272282"logging.PercentStyle2"logging.BufferingFormatter2"typing.Sequence2	22(2"builtins.float227222"logging.LoggerAdapter2722A22B2"logging.LoggerAdapter2C2"typing.MutableMapping27227E2"_typeshed.SupportsWrite22"_typeshed.SupportsWrite2G22H2"logging.StreamHandler2H2"typing.TextIO2"logging.StreamHandler2K2"logging.FileHandler2"os.PathLike222N2"_typeshed.StrPath2O2"io.TextIOWrapper2"builtins.dict22"
+re.Pattern22"string.Template2"types.FrameType22P2222G2"typing.Iterable2*22Y222"typing.Sequence272"builtins.list22"builtins.dict272"builtins.dict22"builtins.dict22"logging.StreamHandler2722a22:2"builtins.dict2c

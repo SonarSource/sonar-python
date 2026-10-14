@@ -1,20 +1,32 @@
 
-queue)
-Empty_queue.Empty"builtins.ExceptionÙ
-SimpleQueue_queue.SimpleQueue"builtins.object*
+queue
+Empty"builtins.Exception
+Full"builtins.Exception„
+Queue"builtins.object*)
 __init__*
 
-self(*
-empty*
+self(*
+maxsize (*$
+_init*
+
+self(*
+maxsize(*
+empty*
+
+self(*
+full*
 
 self(*3
 get*
 
 self(*
-block (*
-timeout (*
+block (*
+timeout (*
 
 get_nowait*
+
+self(*
+_get*
 
 self(*?
 put*
@@ -22,88 +34,82 @@ get_nowait*
 self(*
 
 item(*
-block (*
-timeout (*&
+block (*
+timeout (*&
 
 put_nowait*
 
 self(*
 
-item(*
-qsize*
-
-self(*
-__class_getitem__	*(
-*(p8P
-Full"builtins.Exceptionõ
-Queue"builtins.object*)
-__init__*
-
-self(*
-maxsize (*$
-_init*
-
-self(*
-maxsize(*
-empty*
-
-self(*
-full*
-
-self(*3
-get*
-
-self(*
-block (*
-timeout (*
-
-get_nowait*
-
-self(*
-_get*
-
-self(*?
-put*
-
-self(*
-
-item(*
-block (*
-timeout (*&
-
-put_nowait*
-
-self(*
-
 item(* 
 _put*
 
-self(*
+self(*
 
 item(*
 join*
 
-self(*
-qsize*
+self(*
+qsize*
 
-self(*
-_qsize*
+self(*
+_qsize*
 
-self(*
+self(*
 	task_done*
 
-self(*
-__class_getitem__	*(*(pPr
-maxsize0r	
-mutex0r
-	not_empty0r
-not_full0r
-all_tasks_done0r
-unfinished_tasks0r	
+self(*.
+__class_getitem__	*	
+cls(
+*
+
+item(pPr
+maxsize0r	
+mutex0r
+	not_empty0r
+not_full0r
+all_tasks_done0r
+unfinished_tasks0r	
 queue0)
 PriorityQueue"queue.QueuePr	
-queue0%
+queue0%
 	LifoQueue"queue.QueuePr	
-queue0*
-__annotations__0*
-__all__022"builtins.object2"builtins.object22"_queue.SimpleQueue22"builtins.bool2"builtins.float222"builtins.int2"types.GenericAlias2"type222"queue.Queue22"type22"_thread.LockType2"threading.Condition2"_typeshed.SupportsDunderLT22"_typeshed.SupportsDunderGT222222"builtins.list22"builtins.list22"builtins.str2"builtins.dict22"builtins.list2
+queue0Ò
+SimpleQueue"builtins.object*
+__init__*
+
+self(*
+empty*
+
+self(*3
+get*
+
+self(*
+block (*
+timeout (*
+
+get_nowait*
+
+self(*?
+put*
+
+self(*
+
+item(*
+block (*
+timeout (*&
+
+put_nowait*
+
+self(*
+
+item(*
+qsize*
+
+self(*.
+__class_getitem__	*	
+cls(*
+
+item(pP*
+__annotations__0*
+__all__022"builtins.object2"builtins.object22"queue.Queue22"builtins.int2"builtins.bool2"builtins.float222"types.GenericAlias2"type222"threading.Lock2"threading.Condition2"builtins.list22"queue.SimpleQueue22"type22"builtins.str2"builtins.dict22"builtins.list2

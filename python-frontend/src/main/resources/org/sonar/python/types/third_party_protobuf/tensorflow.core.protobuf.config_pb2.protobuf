@@ -1,7 +1,7 @@
 
-#tensorflow.core.protobuf.config_pb2≠
+#tensorflow.core.protobuf.config_pb2Ω
 
-GPUOptions"builtins.object*3
+GPUOptions"google.protobuf.message.Message*3
 experimental*
 
 self(0:builtins.property`*´
@@ -58,8 +58,8 @@ r
 r 
 polling_inactive_delay_msecs0
 r
-force_gpu_compatible0‘
-OptimizerOptions"builtins.object*Î
+force_gpu_compatible0‰
+OptimizerOptions"google.protobuf.message.Message*Î
 __init__*
 
 self(*+
@@ -105,31 +105,31 @@ r
 do_function_inlining0r
 	opt_level0r
 global_jit_level0r
-cpu_global_jit0Ñ
-GraphOptions"builtins.object*8
+cpu_global_jit0î
+GraphOptions"google.protobuf.message.Message*8
 optimizer_options*
 
 self(0:builtins.property`*6
-rewrite_options*
+rewrite_options*
 
 self(0:builtins.property`*ë
 __init__*
 
 self(*
 enable_recv_scheduling (*
-optimizer_options (*
+optimizer_options (*
 build_cost_model (*
 build_cost_model_after (*
 infer_shapes (*
 place_pruned_graph (* 
 enable_bfloat16_sendrecv (*
 timeline_step (*
-rewrite_options (**
+rewrite_options (**
 HasField*
 
 self(*
 
-field_name(*,
+field_name(*,
 
 ClearField*
 
@@ -165,19 +165,19 @@ r
 place_pruned_graph0r
 enable_bfloat16_sendrecv0r
 timeline_step0
-ä
-ThreadPoolOptionProto"builtins.object*B
+ö
+ThreadPoolOptionProto"google.protobuf.message.Message*B
 __init__*
 
-self(*
+self(*
 num_threads (*
 global_name (	*,
 
 ClearField*
 
-self(*
+self(*
 
-field_name(8r
+field_name(8r
 
 DESCRIPTOR0r
 NUM_THREADS_FIELD_NUMBER0
@@ -186,12 +186,12 @@ r
 r
 num_threads0
 r
-global_name0Ò
+global_name0Å
 
-RPCOptions"builtins.object*·
+RPCOptions"google.protobuf.message.Message*·
 __init__*
 
-self(*$
+self(*$
 use_rpc_for_inprocess_master (*
 compression_algorithm (	*
 compression_level (*
@@ -201,9 +201,9 @@ RPCOptions"builtins.object*·
 
 ClearField*
 
-self(*
+self(*
 
-field_name(8r
+field_name( 8r
 
 DESCRIPTOR0r-
 )USE_RPC_FOR_INPROCESS_MASTER_FIELD_NUMBER0
@@ -225,19 +225,19 @@ r
 cache_rpc_response0r&
 "disable_session_connection_sharing0r
 num_channels_per_target0
-„
-SessionMetadata"builtins.object*7
+Û
+SessionMetadata"google.protobuf.message.Message*7
 __init__*
 
-self( *
+self(!*
 name (	*
 version (*,
 
 ClearField*
 
-self( *
+self(!*
 
-field_name(8r
+field_name(8r
 
 DESCRIPTOR0r
 NAME_FIELD_NUMBER0
@@ -246,63 +246,63 @@ r
 r
 name0r
 version0
-Ÿ
-ConfigProto"builtins.object*3
-device_count*
+È
+ConfigProto"google.protobuf.message.Message*3
+device_count"*
 
-self(!0:builtins.property`*C
-session_inter_op_thread_pool*
+self(#0:builtins.property`*C
+session_inter_op_thread_pool$*
 
-self(!0:builtins.property`*5
-device_filters*
+self(#0:builtins.property`*5
+device_filters%*
 
-self(!0:builtins.property`*2
+self(#0:builtins.property`*2
 gpu_options*
 
-self(!0:builtins.property`*4
+self(#0:builtins.property`*4
 graph_options*
 
-self(!0:builtins.property`*2
-rpc_options*
+self(#0:builtins.property`*2
+rpc_options*
 
-self(!0:builtins.property`*2
-cluster_def*
+self(#0:builtins.property`*2
+cluster_def&*
 
-self(!0:builtins.property`*3
-experimental"*
+self(#0:builtins.property`*3
+experimental'*
 
-self(!0:builtins.property`*Ö
+self(#0:builtins.property`*Ö
 __init__*
 
-self(!*
-device_count ($*$
+self(#*
+device_count ()*$
 intra_op_parallelism_threads (*$
 inter_op_parallelism_threads (*
 use_per_session_threads (*$
-session_inter_op_thread_pool (&*
+session_inter_op_thread_pool (+*
 placement_period (*
-device_filters ((*
-gpu_options ()*
+device_filters (-*
+gpu_options (.*
 allow_soft_placement (*
 log_device_placement (*
-graph_options (**
+graph_options (/*
 operation_timeout_in_ms (*
-rpc_options (+*
-cluster_def (*
+rpc_options (0*
+cluster_def (1*
 isolate_session_state (*(
  share_cluster_devices_in_session (*
-experimental (,**
+experimental (2**
 HasField*
 
-self(!*
+self(#*
 
-field_name(-*,
+field_name(3*,
 
 ClearField*
 
-self(!*
+self(#*
 
-field_name(.8r
+field_name(48r
 
 DESCRIPTOR0r
 DEVICE_COUNT_FIELD_NUMBER0
@@ -351,43 +351,43 @@ r
 operation_timeout_in_ms0
 r
 isolate_session_state0r$
- share_cluster_devices_in_session0ü
+ share_cluster_devices_in_session0Ø
 
-RunOptions"builtins.object*4
-debug_options*
+RunOptions"google.protobuf.message.Message*4
+debug_options5*
 
-self(/0:builtins.property`*3
-experimental0*
+self(60:builtins.property`*3
+experimental7*
 
-self(/0:builtins.property`*‹
+self(60:builtins.property`*‹
 __init__*
 
-self(/*
-trace_level (2*
+self(6*
+trace_level (9*
 timeout_in_ms (*
 inter_op_thread_pool (*
 output_partition_graphs (*
-debug_options (**
+debug_options (:**
 "report_tensor_allocations_upon_oom (*
-experimental (3**
+experimental (;**
 HasField*
 
-self(/*
+self(6*
 
-field_name(*,
+field_name(*,
 
 ClearField*
 
-self(/*
+self(6*
 
 field_name(8r
 
 DESCRIPTOR0r
-NO_TRACE01r
-SOFTWARE_TRACE01r
-HARDWARE_TRACE01r
+NO_TRACE08r
+SOFTWARE_TRACE08r
+HARDWARE_TRACE08r
 
-FULL_TRACE01r
+FULL_TRACE08r
 TRACE_LEVEL_FIELD_NUMBER0
 r
 TIMEOUT_IN_MS_FIELD_NUMBER0
@@ -402,52 +402,52 @@ r3
 r
 EXPERIMENTAL_FIELD_NUMBER0
 r
-trace_level01r
+trace_level08r
 timeout_in_ms0
 r
 inter_op_thread_pool0
 r
 output_partition_graphs0r&
-"report_tensor_allocations_upon_oom0Ã
-RunMetadata"builtins.object*1
+"report_tensor_allocations_upon_oom0‹
+RunMetadata"google.protobuf.message.Message*1
 
-step_stats*
+step_stats<*
 
-self(40:builtins.property`*1
+self(=0:builtins.property`*1
 
-cost_graph*
+cost_graph>*
 
-self(40:builtins.property`*7
-partition_graphs*
+self(=0:builtins.property`*7
+partition_graphs@*
 
-self(40:builtins.property`*6
-function_graphs*
+self(=0:builtins.property`*6
+function_graphsB*
 
-self(40:builtins.property`*7
-session_metadata *
+self(=0:builtins.property`*7
+session_metadata!*
 
-self(40:builtins.property`*ç
+self(=0:builtins.property`*ç
 __init__*
 
-self(4*
+self(=*
 
-step_stats (*
+step_stats (C*
 
-cost_graph (*
-partition_graphs (6*
-function_graphs (9*
-session_metadata (:**
+cost_graph (D*
+partition_graphs (F*
+function_graphs (H*
+session_metadata (I**
 HasField*
 
-self(4*
+self(=*
 
-field_name(;*,
+field_name(J*,
 
 ClearField*
 
-self(4*
+self(=*
 
-field_name(-8r
+field_name(38r
 
 DESCRIPTOR0r
 STEP_STATS_FIELD_NUMBER0
@@ -459,19 +459,19 @@ r
 FUNCTION_GRAPHS_FIELD_NUMBER0
 r!
 SESSION_METADATA_FIELD_NUMBER0
-ˇ
-TensorConnection"builtins.object*@
+è
+TensorConnection"google.protobuf.message.Message*@
 __init__*
 
-self(<*
+self(K*
 from_tensor (	*
 	to_tensor (	*,
 
 ClearField*
 
-self(<*
+self(K*
 
-field_name(8r
+field_name(8r
 
 DESCRIPTOR0r
 FROM_TENSOR_FIELD_NUMBER0
@@ -479,51 +479,51 @@ r
 TO_TENSOR_FIELD_NUMBER0
 r
 from_tensor0r
-	to_tensor0Ø
-CallableOptions"builtins.object*+
-feed*
+	to_tensor0ø
+CallableOptions"google.protobuf.message.Message*+
+feed%*
 
-self(=0:builtins.property`*,
-fetch*
+self(L0:builtins.property`*,
+fetch%*
 
-self(=0:builtins.property`*-
-target*
+self(L0:builtins.property`*-
+target%*
 
-self(=0:builtins.property`*2
-run_options/*
+self(L0:builtins.property`*2
+run_options6*
 
-self(=0:builtins.property`*8
-tensor_connection*
+self(L0:builtins.property`*8
+tensor_connectionM*
 
-self(=0:builtins.property`*3
-feed_devices*
+self(L0:builtins.property`*3
+feed_devicesN*
 
-self(=0:builtins.property`*4
-fetch_devices*
+self(L0:builtins.property`*4
+fetch_devicesN*
 
-self(=0:builtins.property`*ª
+self(L0:builtins.property`*ª
 __init__*
 
-self(=*
-feed ((*
-fetch ((*
-target ((*
-run_options (>*
-tensor_connection (@*
-feed_devices (B*
-fetch_devices (B*
+self(L*
+feed (-*
+fetch (-*
+target (-*
+run_options (O*
+tensor_connection (Q*
+feed_devices (S*
+fetch_devices (S*
 fetch_skip_sync (**
 HasField*
 
-self(=*
+self(L*
 
 field_name(*,
 
 ClearField*
 
-self(=*
+self(L*
 
-field_name(C8r
+field_name(T8r
 
 DESCRIPTOR0r
 FEED_FIELD_NUMBER0
@@ -543,27 +543,27 @@ r
 FETCH_SKIP_SYNC_FIELD_NUMBER0
 r
 fetch_skip_sync0*
-__annotations__0D*
-collectionscollections *
-
-google0*
+__annotations__0V*
+collectionscollections *
+googlegoogle *
 
 tensorflow
 tensorflow *
 
-DESCRIPTOR0*
+DESCRIPTOR0W*
 global___GPUOptions08*
 global___OptimizerOptions08*
 global___GraphOptions08*$
-global___ThreadPoolOptionProto08*
-global___RPCOptions08*
-global___SessionMetadata0 8*
-global___ConfigProto0!8*
-global___RunOptions0/8*
-global___RunMetadata048*
-global___TensorConnection0<8*
-global___CallableOptions0=82=";tensorflow.core.protobuf.config_pb2.GPUOptions.Experimental20".tensorflow.core.protobuf.config_pb2.GPUOptions22"builtins.float222"builtins.bool222"builtins.str222"builtins.int22
-222	22"builtins.bytes2	22222226"4tensorflow.core.protobuf.config_pb2.OptimizerOptions2G"Etensorflow.core.protobuf.config_pb2.OptimizerOptions._Level.ValueType222P"Ntensorflow.core.protobuf.config_pb2.OptimizerOptions._GlobalJitLevel.ValueType222222"0tensorflow.core.protobuf.config_pb2.GraphOptions2222222;"9tensorflow.core.protobuf.config_pb2.ThreadPoolOptionProto20".tensorflow.core.protobuf.config_pb2.RPCOptions2225"3tensorflow.core.protobuf.config_pb2.SessionMetadata21"/tensorflow.core.protobuf.config_pb2.ConfigProto2>"<tensorflow.core.protobuf.config_pb2.ConfigProto.Experimental2"typing.Mapping2
-22#2"typing.Iterable222%2"typing.Iterable222'22222222"22
-2&2"20".tensorflow.core.protobuf.config_pb2.RunOptions2=";tensorflow.core.protobuf.config_pb2.RunOptions.Experimental2F"Dtensorflow.core.protobuf.config_pb2.RunOptions._TraceLevel.ValueType22122021"/tensorflow.core.protobuf.config_pb2.RunMetadata2"typing.Iterable22252@">tensorflow.core.protobuf.config_pb2.RunMetadata.FunctionGraphs2"typing.Iterable2722822 2
-226"4tensorflow.core.protobuf.config_pb2.TensorConnection25"3tensorflow.core.protobuf.config_pb2.CallableOptions22/2"typing.Iterable2<22?2"typing.Mapping222A222"builtins.dict2
+global___ThreadPoolOptionProto08*
+global___RPCOptions08*
+global___SessionMetadata0!8*
+global___ConfigProto0#8*
+global___RunOptions068*
+global___RunMetadata0=8*
+global___TensorConnection0K8*
+global___CallableOptions0L82=";tensorflow.core.protobuf.config_pb2.GPUOptions.Experimental20".tensorflow.core.protobuf.config_pb2.GPUOptions22"builtins.float222"builtins.bool222"builtins.str222"builtins.int22
+222	22"builtins.bytes2	222222'"%google.protobuf.descriptor.Descriptor26"4tensorflow.core.protobuf.config_pb2.OptimizerOptions2G"Etensorflow.core.protobuf.config_pb2.OptimizerOptions._Level.ValueType222P"Ntensorflow.core.protobuf.config_pb2.OptimizerOptions._GlobalJitLevel.ValueType222222"0tensorflow.core.protobuf.config_pb2.GraphOptions2=";tensorflow.core.protobuf.rewriter_config_pb2.RewriterConfig2222222;"9tensorflow.core.protobuf.config_pb2.ThreadPoolOptionProto20".tensorflow.core.protobuf.config_pb2.RPCOptions2225"3tensorflow.core.protobuf.config_pb2.SessionMetadata23"-google.protobuf.internal.containers.ScalarMap2
+21"/tensorflow.core.protobuf.config_pb2.ConfigProto2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer22E"@google.protobuf.internal.containers.RepeatedScalarFieldContainer221"/tensorflow.core.protobuf.cluster_pb2.ClusterDef2>"<tensorflow.core.protobuf.config_pb2.ConfigProto.Experimental2"typing.Mapping2
+22(2"typing.Iterable222*2"typing.Iterable222,22222222&22'22
+2&2"21"/tensorflow.core.protobuf.debug_pb2.DebugOptions20".tensorflow.core.protobuf.config_pb2.RunOptions2=";tensorflow.core.protobuf.config_pb2.RunOptions.Experimental2F"Dtensorflow.core.protobuf.config_pb2.RunOptions._TraceLevel.ValueType22822522724"2tensorflow.core.framework.step_stats_pb2.StepStats21"/tensorflow.core.protobuf.config_pb2.RunMetadata27"5tensorflow.core.framework.cost_graph_pb2.CostGraphDef2.",tensorflow.core.framework.graph_pb2.GraphDef2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer2?2@">tensorflow.core.protobuf.config_pb2.RunMetadata.FunctionGraphs2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer2A22<22>2"typing.Iterable2?22E2"typing.Iterable2A22G22!2
+226"4tensorflow.core.protobuf.config_pb2.TensorConnection25"3tensorflow.core.protobuf.config_pb2.CallableOptions2H"Cgoogle.protobuf.internal.containers.RepeatedCompositeFieldContainer2K23"-google.protobuf.internal.containers.ScalarMap22262"typing.Iterable2K22P2"typing.Mapping222R2222"builtins.dict2U2+")google.protobuf.descriptor.FileDescriptor

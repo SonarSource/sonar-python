@@ -239,7 +239,7 @@ UnwindInfo"builtins.object**
 self(,*
 pending_frame(r
 name0r
-enabled0˝
+enabled0µ
 Inferior"builtins.object*
 is_valid*
 
@@ -254,31 +254,19 @@ UnwindInfo"builtins.object**
 
 self(-*
 address(*
-length(*S
+length(*I
 write_memory0*
 
 self(-*
 address(*
-buffer(1*
-length (z310z311*X
-write_memory0*
-
-self(-*
-address(*
-buffer(2*
-length (z312z313z314*S
+buffer(<*
+length (*I
 search_memory"*
 
 self(-*
 address(*
 length(*
-pattern(1z310z311*X
-search_memory"*
-
-self(-*
-address(*
-length(*
-pattern(2z312z313z314*0
+pattern(<*0
 thread_from_handle.*
 
 self(-*
@@ -287,7 +275,7 @@ UnwindInfo"builtins.object**
 connection_num0r
 pid0r
 was_attached0r
-	progspace03˘
+	progspace0=˘
 InferiorThread"builtins.object*
 is_valid*
 
@@ -306,28 +294,28 @@ is_running*
 	is_exited*
 
 self(.*
-handle4*
+handle1*
 
 self(.r
 name0r
 num0r
 
 global_num0r
-ptid05r
+ptid0>r
 inferior0-®
 Record"builtins.object*
 goto*
 
-self(6*(7r
+self(?*(@r
 
 method0r
 
 format0r	
-begin07r
-end07r
-replay_position08r
-instruction_history09r
-function_call_history0;G
+begin0@r
+end0@r
+replay_position0Ar
+instruction_history0Br
+function_call_history0DG
 Instruction"builtins.objectr
 pc0r
 data00r
@@ -336,7 +324,7 @@ global_num0r
 RecordInstruction"gdb.Instructionr
 
 number0r
-sal0=r
+sal0Fr
 is_speculative0J
 	RecordGap"gdb.Instructionr
 
@@ -348,16 +336,16 @@ error_code0r
 
 number0r
 
-symbol0>r	
+symbol0Gr	
 level0"r
-instructions0Br
-up0Cr
-prev0Cr
-next0CÖ
+instructions0Kr
+up0Lr
+prev0Lr
+next0LÖ
 Command"builtins.object*b
 __init__*
 
-self(D*
+self(M*
 
 name(*
 command_class(*
@@ -365,15 +353,15 @@ error_code0r
 prefix (*
 dont_repeat*
 
-self(D*6
+self(M*6
 invoke*
 
-self(D*
+self(M*
 argument(*
 from_tty(*0
 complete)*
 
-self(D*
+self(M*
 
 text(*
 
@@ -381,30 +369,30 @@ error_code0r
 	MICommand"builtins.object*$
 __init__*
 
-self(E*
+self(N*
 
 name(*'
-invokeG*
+invokeP*
 
-self(E*
-	arguments(Hr
+self(N*
+	arguments(Qr
 name0r
 	installed0˙
 	Parameter"builtins.object*g
 __init__*
 
-self(I*
+self(R*
 
 name(*
 command_class(*
 parameter_class(*
-enum_sequence (J*
+enum_sequence (S*
 get_set_string*
 
-self(I*-
+self(R*-
 get_show_string*
 
-self(I*
+self(R*
 svalue(r
 set_doc0r
 show_doc0r	
@@ -412,35 +400,35 @@ error_code0r
 Function"builtins.object*$
 __init__*
 
-self(K*
+self(T*
 
 name(*"
 invoke*
 
-self(K*
+self(T*
 
 args(˝
 	Progspace"builtins.object* 
-block_for_pcL*
+block_for_pcU*
 
-self(3*(* 
-find_pc_line<*
+self(=*(* 
+find_pc_lineE*
 
-self(3*(*
+self(=*(*
 is_valid*
 
-self(3*
-objfilesM*
+self(=*
+objfilesV*
 
-self(3*
+self(=*
 
 solib_name*
 
-self(3*(r
+self(=*(r
 filename0r
-pretty_printers0Qr
-type_printers0Sr
-frame_filters0TÏ
+pretty_printers0Zr
+type_printers0\r
+frame_filters0]Ï
 Objfile"builtins.object*
 is_valid*
 
@@ -450,13 +438,13 @@ solib_name*
 self(*
 
 file(*@
-lookup_global_symbol>*
+lookup_global_symbolG*
 
 self(*
 
 name(*
 domain (*@
-lookup_static_method>*
+lookup_static_methodG*
 
 self(*
 
@@ -466,10 +454,10 @@ solib_name*
 username0r	
 owner0r
 build_id0r
-	progspace03r
-pretty_printers0Qr
-type_printers0Sr
-frame_filters0T¨
+	progspace0=r
+pretty_printers0Zr
+type_printers0\r
+frame_filters0]¨
 Frame"builtins.object*
 is_valid*
 
@@ -495,13 +483,13 @@ solib_name*
 function*
 
 self(*
-olderU*
+older^*
 
 self(*
-newerU*
+newer^*
 
 self(*
-find_sal<*
+find_salE*
 
 self(*!
 read_register*
@@ -509,8 +497,8 @@ solib_name*
 self(*('*+
 read_var*
 
-self(*(V*
-block (L*
+self(*(_*
+block (U*
 select*
 
 self(*
@@ -521,24 +509,24 @@ solib_name*
 is_valid*
 
 self(*
-__iter__W*(r	
+__iter__`*(r	
 start0r
 end0r
-function0>r
+function0Gr
 
-superblock0Lr
+superblock0Ur
 global_block0r
-static_block0Lr
+static_block0Ur
 	is_global0r
 	is_static0f
 BlockIterator"builtins.object*
 is_valid*
 
-self(W*
-__iter__X*(X*
+self(`*
+__iter__a*(a*
 __next__*
 
-self(WÅ
+self(`Å
 Symbol"builtins.object*
 is_valid*
 
@@ -546,9 +534,9 @@ superblock0Lr
 value*
 
 self(* (r
-type0Yr
+type0br
 
-symtab0Zr
+symtab0cr
 line0r
 name0r
 linkage_name0r
@@ -564,28 +552,28 @@ addr_class0r
 Symtab_and_line"builtins.object*
 is_valid*
 
-self(<r
+self(Er
 
-symtab0Zr
+symtab0cr
 pc0r
 last0r
 line0Õ
 Symtab"builtins.object*
 is_valid*
 
-self(Z*
+self(c*
 fullname*
 
-self(Z*
+self(c*
 global_block*
 
-self(Z*
+self(c*
 static_block*
 
-self(Z*
-	linetable[*
+self(c*
+	linetabled*
 
-self(Zr
+self(cr
 filename0r
 objfile0r
 producer03
@@ -593,34 +581,34 @@ addr_class0r
 line0r
 pc0ù
 	LineTable"typing.Iterator*
-__iter__X*(X*
-__next__\*
+__iter__a*(a*
+__next__e*
 
-self([*
-line]*
+self(d*
+linef*
 
-self([*(*
+self(d*(*
 has_line*
 
-self([*(*
-source_lnes^*
+self(d*(*
+source_lnesg*
 
-self([˜
+self(d˜
 
 Breakpoint"builtins.object*
 stop*
 
-self(_*
+self(h*
 is_valid*
 
-self(_*
+self(h*
 delete*
 
-self(_2≈
+self(h2≈
 __init__ë
 __init__*
 
-self(_*
+self(h*
 
 spec(*
 type (*
@@ -630,7 +618,7 @@ Breakpoint"builtins.object*
 	qualified (0:typing.overloadX§
 __init__*
 
-self(_*
+self(h*
 source (*
 function (*
 label (*
@@ -660,13 +648,13 @@ expression0r
 FinishBreakpoint"gdb.Breakpoint*9
 __init__*
 
-self(`*
+self(i*
 frame (*
 internal (*
 out_of_scope*
 
-self(`r
-return_value0ae
+self(ir
+return_value0je
 
 LazyString"builtins.object*
 value*
@@ -681,7 +669,7 @@ LazyString"builtins.object*
 name*
 
 self(**J
-disassembleb*
+disassemblek*
 
 self(**
 start_pc(*
@@ -693,11 +681,11 @@ LazyString"builtins.object*
 
 size(*
 signed (*+
-	registersc*
+	registersl*
 
 self(**
 reggroup (*
-register_groupsd*
+register_groupsm*
 
 self(*/
 RegisterDescriptor"builtins.objectr
@@ -705,41 +693,41 @@ LazyString"builtins.object*
 RegisterDescriptorIterator"typing.Iterator*
 __next__&*
 
-self(c* 
-finde*
+self(l* 
+findn*
 
-self(c*
+self(l*
 
 name(*
 RegisterGroup"builtins.objectr
 name0C
 RegisterGroupsIterator"typing.Iterator*
-__next__f*
+__next__o*
 
-self(dn
+self(mn
 TargetConnection"builtins.object*
 is_valid*
 
-self(gr
+self(pr
 num0r
 type0r
 description0r
 details0Y
 RemoteTargetConnection"gdb.TargetConnection*)
-send_packet4*
+send_packet1*
 
-self(h*
-packet(iê
+self(q*
+packet(rê
 	TuiWindow"builtins.object*
 is_valid*
 
-self(j*
+self(s*
 erase*
 
-self(j*
+self(s*
 write*
 
-self(j*(* (r	
+self(s*(* (r	
 width0r
 
 height0r	
@@ -747,21 +735,21 @@ LazyString"builtins.object*
 _Window"builtins.object*
 close*
 
-self(k*
+self(t*
 render*
 
-self(k*"
+self(t*"
 hscroll*
 
-self(k*	
+self(t*	
 num(*"
 vscroll*
 
-self(k*	
+self(t*	
 num(*5
 click*
 
-self(k*
+self(t*
 x(*
 y(*
 button(X?
@@ -769,31 +757,31 @@ LazyString"builtins.object*
 command(*
 from_tty (*
 	to_string (
-breakpointslK
-rbreakm*
+breakpointsuK
+rbreakv*
 regex(*
 minsyms (*
 throttle (*
-symtabs (n
-	parametero*(*
+symtabs (w
+	parameterx*(*
 set_parameter*
 
 name(*
-value(o+
-with_parameterq*
+value(x+
+with_parametery*
 
 name(*
-value(o
+value(x
 history*(
 add_history*(
 history_count
-convenience_variablea*($
+convenience_variablej*($
 set_convenience_variable*(*(
 parse_and_eval*(
-find_pc_line<*
+find_pc_lineE*
 pc(
 
-post_event*(O'
+post_event*(X'
 write*
 string(*
 stream (
@@ -805,28 +793,28 @@ post_event*(O'
 
 solib_name*
 address(
-decode_linet* (%
+decode_line|* (%
 prompt_hook*
 current_prompt(
-architecture_namesH
-connectionsu*
+architecture_namesQ
+connections}*
 lookup_type*
 
 name(*
 block (
-default_visualizerv*(
-	inferiorsw
+default_visualizer~*(
+	inferiors
 selected_inferior-
 selected_thread.
-start_recording6* (* (
-current_recordingx
+start_recording?* (* (
+current_recordingÄ
 stop_recording
-string_to_argvH*(
-current_progspacey
+string_to_argvQ*(
+current_progspaceÅ
 
-progspacesz
-current_objfile
-objfiles{3
+progspacesÇ
+current_objfile
+objfilesÉ3
 lookup_objfile*
 
 name(*
@@ -835,31 +823,31 @@ progspacesz
 newest_frame 
 frame_stop_reason_string*(
 invalidate_cached_frames
-block_for_pcL*
-pc(<
-lookup_symbol|*
+block_for_pcU*
+pc(=
+lookup_symbolÑ*
 
 name(*
-block (L*
+block (U*
 domain (4
-lookup_global_symbol>*
+lookup_global_symbolG*
 
 name(*
 domain (4
-lookup_static_symbol>*
+lookup_static_symbolG*
 
 name(*
-domain (5
-lookup_static_symbols}*
+domain (6
+lookup_static_symbolsÖ*
 
 name(*
 domain (3
 register_window_type*
 
 name(*
-factory(O*
-__path__0H*
-__annotations__0*
+factory(X*
+__path__0Q*
+__annotations__0Ü*
 gdbgdb *
 events
 gdb.events *
@@ -901,9 +889,7 @@ gdb.prompt *
 TYPE_CODE_NAMESPACE0*
 TYPE_CODE_DECFLOAT0*
 TYPE_CODE_INTERNAL_FUNCTION0*
-pretty_printers0Q*
-_BufferType*310*311018* 
-_BufferType*312*313*314028*
+pretty_printers0Z*
 COMMAND_NONE0*
 COMMAND_RUNNING0*
 COMMAND_DATA0*
@@ -986,7 +972,8 @@ ARCH_FRAME0*
 	WP_ACCESS02"builtins.int2"	gdb.Value2"builtins.float222"gdb._ValueOrInt22"builtins.bool2"builtins.str2"	gdb.Field22222"gdb._ValueOrNative2
 22
 "gdb.Type2"gdb.LazyString2"builtins.list222222"	gdb.Block222"gdb.Objfile22222"gdb._PrettyPrinter2"gdb._FrameDecorator2"typing.Iterator22"gdb._FrameFilter2"
-gdb.Symbol222"gdb._SymValueWrapper222"	gdb.Frame2"typing.Iterator222 222"typing.Iterator222#2"gdb.PendingFrame2"gdb.RegisterDescriptor22&2"gdb.UnwindInfo2"builtins.object2"gdb.Architecture22(2"gdb.Unwinder2"gdb.Inferior2"gdb.InferiorThread2"builtins.tuple2.2"builtins.memoryview22"typing_extensions.Buffer2"_collections_abc.Buffer2"gdb.Progspace2"builtins.bytes222"
-gdb.Record2"gdb.Instruction2272"builtins.list272"gdb.RecordFunctionSegment2"builtins.list2:2"gdb.Symtab_and_line22<222"gdb.RecordInstruction2"gdb.RecordGap22?@2"builtins.list2A22:2"gdb.Command2"gdb.MICommand2"builtins.dict2)22F2"builtins.list22"gdb.Parameter2"typing.Sequence22"gdb.Function222"typing.Sequence22"builtins.function22N2'" gdb._PrettyPrinterLookupFunction2O2"builtins.list2P2"gdb.types._TypePrinter2"builtins.list2R2"builtins.list222222"gdb.BlockIterator2&
+gdb.Symbol222"gdb._SymValueWrapper222"	gdb.Frame2"typing.Iterator222 222"typing.Iterator222#2"gdb.PendingFrame2"gdb.RegisterDescriptor22&2"gdb.UnwindInfo2"builtins.object2"gdb.Architecture22(2"gdb.Unwinder2"gdb.Inferior2"gdb.InferiorThread2"builtins.tuple2.2"builtins.memoryview2"builtins.bytes2"builtins.bytearray22"array.array232"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
+22045672 "_typeshed.WriteableBuffer2822192"_typeshed.ReadableBuffer2:2"gdb._BufferType2;2"gdb.Progspace222"
+gdb.Record2"gdb.Instruction22@2"builtins.list2@2"gdb.RecordFunctionSegment2"builtins.list2C2"gdb.Symtab_and_line22E222"gdb.RecordInstruction2"gdb.RecordGap22HI2"builtins.list2J22C2"gdb.Command2"gdb.MICommand2"builtins.dict2)22O2"builtins.list22"gdb.Parameter2"typing.Sequence22"gdb.Function222"typing.Sequence22"builtins.function22W2'" gdb._PrettyPrinterLookupFunction2X2"builtins.list2Y2"gdb.types._TypePrinter2"builtins.list2[2"builtins.list222222"gdb.BlockIterator2&
 _typeshed.Self"builtins.object2)222"
-gdb.Symtab2"gdb.LineTable2"gdb.LineTableEntry2"builtins.tuple2\2"builtins.list22"gdb.Breakpoint2"gdb.FinishBreakpoint222"builtins.list2F2 "gdb.RegisterDescriptorIterator2"gdb.RegisterGroupsIterator22&2"gdb.RegisterGroup2"gdb.TargetConnection2"gdb.RemoteTargetConnection2242"gdb.TuiWindow2"gdb._Window2"typing.Sequence2_2"builtins.list2_2"typing.Iterator2Z22222'"!contextlib.AbstractContextManager2p2"builtins.tuple2<22r22s2"builtins.list2g222"builtins.tuple2-2262232"typing.Sequence232"builtins.list222>2"builtins.list222"builtins.dict2~
+gdb.Symtab2"gdb.LineTable2"gdb.LineTableEntry2"builtins.tuple2e2"builtins.list22"gdb.Breakpoint2"gdb.FinishBreakpoint222"builtins.list2O2 "gdb.RegisterDescriptorIterator2"gdb.RegisterGroupsIterator22&2"gdb.RegisterGroup2"gdb.TargetConnection2"gdb.RemoteTargetConnection2212"gdb.TuiWindow2"gdb._Window2"typing.Sequence2h2"builtins.list2h2"typing.Iterator2c222&"!contextlib.AbstractContextManager22"builtins.tuple2E22z22{2"builtins.list2p222"builtins.tuple2-22?22=2"typing.Sequence2=2"builtins.list222G2"builtins.list22"builtins.dict23

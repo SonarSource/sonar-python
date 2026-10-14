@@ -1,1687 +1,1158 @@
 
-ast”
-_TypeVartyping.TypeVar"builtins.object*/
-__name__*
-
-self(0:builtins.property`*0
-	__bound__*
-
-self(0:builtins.property`*6
-__constraints__*
-
-self(0:builtins.property`*4
-__covariant__*
-
-self(0:builtins.property`*8
-__contravariant__*
-
-self(0:builtins.property`*p
-__init__*
+astÿ
+AST_ast.AST"builtins.object*2
+__init__*
 
 self(*
 
-name(*
-constraints(*
-bound (*
-	covariant (*
-contravariant (*
-__or__*(*(*
-__ror__*(*(8$
-_Attributes"typing._TypedDict8PH
-AST"builtins.objectr
-__match_args__0	r
-_attributes0
+args(*
+kwargs(r
+__match_args__0r
+_attributes0r
+_fields0r
+
+lineno0r
+
+col_offset0r
+
+end_lineno0r
+end_col_offset0r
+type_comment0	
+mod_ast.mod"_ast.AST)
+type_ignore_ast.type_ignore"_ast.ASTL
+
+TypeIgnore_ast.TypeIgnore"_ast.type_ignorer
+__match_args__0
+r
+tag0Z
+FunctionType_ast.FunctionType"_ast.modr
+__match_args__0
+r
+argtypes0r
+returns0O
+Module_ast.Module"_ast.modr
+__match_args__0
+r
+body0r
+type_ignores0G
+Interactive_ast.Interactive"_ast.modr
+__match_args__0r
+body0E
+
+Expression_ast.Expression"_ast.modr
+__match_args__0r
+body0
+stmt	_ast.stmt"_ast.AST}
+FunctionDef_ast.FunctionDef"	_ast.stmtr
+__match_args__0r
+name0r
+args0r
+body0r
+decorator_list0r
+returns0á
+AsyncFunctionDef_ast.AsyncFunctionDef"	_ast.stmtr
+__match_args__0r
+name0r
+args0r
+body0r
+decorator_list0r
+returns0y
+ClassDef_ast.ClassDef"	_ast.stmtr
+__match_args__0r
+name0r	
+bases0r
+keywords0r
+body0r
+decorator_list0?
+Return_ast.Return"	_ast.stmtr
+__match_args__0r	
+value0A
+Delete_ast.Delete"	_ast.stmtr
+__match_args__0r
+targets0L
+Assign_ast.Assign"	_ast.stmtr
+__match_args__0r
+targets0r	
+value0Y
+	AugAssign_ast.AugAssign"	_ast.stmtr
+__match_args__0r
+
+target0r
+op0r	
+value0m
+	AnnAssign_ast.AnnAssign"	_ast.stmtr
+__match_args__0r
+
+target0r
+
+annotation0r	
+value0r
+
+simple0Z
+For_ast.For"	_ast.stmtr
+__match_args__0r
+
+target0r
+iter0r
+body0r
+
+orelse0d
+AsyncFor_ast.AsyncFor"	_ast.stmtr
+__match_args__0r
+
+target0r
+iter0r
+body0r
+
+orelse0R
+While
+_ast.While"	_ast.stmtr
+__match_args__0r
+test0r
+body0r
+
+orelse0L
+If_ast.If"	_ast.stmtr
+__match_args__0r
+test0r
+body0r
+
+orelse0E
+With	_ast.With"	_ast.stmtr
+__match_args__0r	
+items0 r
+body0O
+	AsyncWith_ast.AsyncWith"	_ast.stmtr
+__match_args__0r	
+items0 r
+body0F
+Raise
+_ast.Raise"	_ast.stmtr
+__match_args__0
+r
+exc0r	
+cause0a
+Try_ast.Try"	_ast.stmtr
+__match_args__0r
+body0r
+handlers0"r
+
+orelse0r
+	finalbody0G
+Assert_ast.Assert"	_ast.stmtr
+__match_args__0
+r
+test0r
+msg0?
+Import_ast.Import"	_ast.stmtr
+__match_args__0r	
+names0$^
+
+ImportFrom_ast.ImportFrom"	_ast.stmtr
+__match_args__0r
+
+module0	r	
+names0$r	
+level0?
+Global_ast.Global"	_ast.stmtr
+__match_args__0r	
+names0%C
+Nonlocal_ast.Nonlocal"	_ast.stmtr
+__match_args__0r	
+names0%;
+Expr	_ast.Expr"	_ast.stmtr
+__match_args__0r	
+value0
+Pass	_ast.Pass"	_ast.stmt
+Break
+_ast.Break"	_ast.stmt$
+Continue_ast.Continue"	_ast.stmt
+expr	_ast.expr"_ast.ASTH
+BoolOp_ast.BoolOp"	_ast.exprr
+__match_args__0
+r
+op0&r
+
+values0O
+BinOp
+_ast.BinOp"	_ast.exprr
+__match_args__0r
+left0r
+op0r	
+right0K
+UnaryOp_ast.UnaryOp"	_ast.exprr
+__match_args__0
+r
+op0'r
+operand0H
+Lambda_ast.Lambda"	_ast.exprr
+__match_args__0
+r
+args0r
+body0R
+IfExp
+_ast.IfExp"	_ast.exprr
+__match_args__0r
+test0r
+body0r
+
+orelse0F
+Dict	_ast.Dict"	_ast.exprr
+__match_args__0
+r
+keys0(r
+
+values08
+Set_ast.Set"	_ast.exprr
+__match_args__0r
+elts0Q
+ListComp_ast.ListComp"	_ast.exprr
+__match_args__0
+r
+elt0r
+
+generators0*O
+SetComp_ast.SetComp"	_ast.exprr
+__match_args__0
+r
+elt0r
+
+generators0*\
+DictComp_ast.DictComp"	_ast.exprr
+__match_args__0r
+key0r	
+value0r
+
+generators0*Y
+GeneratorExp_ast.GeneratorExp"	_ast.exprr
+__match_args__0
+r
+elt0r
+
+generators0*=
+Await
+_ast.Await"	_ast.exprr
+__match_args__0r	
+value0=
+Yield
+_ast.Yield"	_ast.exprr
+__match_args__0r	
+value0E
+	YieldFrom_ast.YieldFrom"	_ast.exprr
+__match_args__0r	
+value0Z
+Compare_ast.Compare"	_ast.exprr
+__match_args__0r
+left0r
+ops0,r
+comparators0R
+Call	_ast.Call"	_ast.exprr
+__match_args__0r
+func0r
+args0r
+keywords0p
+FormattedValue_ast.FormattedValue"	_ast.exprr
+__match_args__0r	
+value0r
+
+conversion0r
+format_spec0F
+	JoinedStr_ast.JoinedStr"	_ast.exprr
+__match_args__0r
+
+values0[
+Constant_ast.Constant"	_ast.exprr
+__match_args__0
+r	
+value0r
+kind0	r
+s0r
+n0/Q
+	NamedExpr_ast.NamedExpr"	_ast.exprr
+__match_args__0
+r
+
+target0r	
+value0X
+	Attribute_ast.Attribute"	_ast.exprr
+__match_args__0r	
+value0r
+attr0r
+ctx00R
+Slice
+_ast.Slice"	_ast.exprr
+__match_args__0r	
+lower0r	
+upper0r
+step0Y
+	Subscript_ast.Subscript"	_ast.exprr
+__match_args__0r	
+value0r	
+slice0r
+ctx00J
+Starred_ast.Starred"	_ast.exprr
+__match_args__0
+r	
+value0r
+ctx00A
+Name	_ast.Name"	_ast.exprr
+__match_args__0
+r
+id0r
+ctx00C
+List	_ast.List"	_ast.exprr
+__match_args__0
+r
+elts0r
+ctx00O
+Tuple
+_ast.Tuple"	_ast.exprr
+__match_args__0
+r
+elts0r
+ctx00r
+dims0+
+expr_context_ast.expr_context"_ast.AST"
+Del_ast.Del"_ast.expr_context$
+Load	_ast.Load"_ast.expr_context&
+Store
+_ast.Store"_ast.expr_context
+boolop_ast.boolop"_ast.AST
+And_ast.And"_ast.boolop
+Or_ast.Or"_ast.boolop#
+operator_ast.operator"_ast.AST
+Add_ast.Add"_ast.operator$
+BitAnd_ast.BitAnd"_ast.operator"
+BitOr
+_ast.BitOr"_ast.operator$
+BitXor_ast.BitXor"_ast.operator
+Div_ast.Div"_ast.operator(
+FloorDiv_ast.FloorDiv"_ast.operator$
+LShift_ast.LShift"_ast.operator
+Mod_ast.Mod"_ast.operator 
+Mult	_ast.Mult"_ast.operator&
+MatMult_ast.MatMult"_ast.operator
+Pow_ast.Pow"_ast.operator$
+RShift_ast.RShift"_ast.operator
+Sub_ast.Sub"_ast.operator!
+unaryop_ast.unaryop"_ast.AST#
+Invert_ast.Invert"_ast.unaryop
+Not_ast.Not"_ast.unaryop
+UAdd	_ast.UAdd"_ast.unaryop
+USub	_ast.USub"_ast.unaryop
+cmpop
+_ast.cmpop"_ast.AST
+Eq_ast.Eq"
+_ast.cmpop
+Gt_ast.Gt"
+_ast.cmpop
+GtE_ast.GtE"
+_ast.cmpop
+In_ast.In"
+_ast.cmpop
+Is_ast.Is"
+_ast.cmpop
+IsNot
+_ast.IsNot"
+_ast.cmpop
+Lt_ast.Lt"
+_ast.cmpop
+LtE_ast.LtE"
+_ast.cmpop
+NotEq
+_ast.NotEq"
+_ast.cmpop
+NotIn
+_ast.NotIn"
+_ast.cmpopn
+comprehension_ast.comprehension"_ast.ASTr
+__match_args__0r
+
+target0r
+iter0r
+ifs0r
+is_async0-
+excepthandler_ast.excepthandler"_ast.ASTi
+ExceptHandler_ast.ExceptHandler"_ast.excepthandlerr
+__match_args__0r
+type0r
+name0	r
+body0ö
+	arguments_ast.arguments"_ast.ASTr
+__match_args__01r
+posonlyargs03r
+args03r
+
+vararg04r
+
+kwonlyargs03r
+kw_defaults0(r	
+kwarg04r
+defaults0F
+arg_ast.arg"_ast.ASTr
+__match_args__0r
+arg0r
+
+annotation0I
+keyword_ast.keyword"_ast.ASTr
+__match_args__0
+r
+arg0	r	
+value0G
+alias
+_ast.alias"_ast.ASTr
+__match_args__0
+r
+name0r
+
+asname0	\
+withitem_ast.withitem"_ast.ASTr
+__match_args__0
+r
+context_expr0r
+optional_vars0J
+Match
+_ast.Match"	_ast.stmtr
+__match_args__0
 r
-_fields0
-
-mod"ast.AST{
-Module"ast.mod*8
-__init__*
-
-self(*
-
-body(*
-type_ignores(r
-__match_args__0r
-body0r
-type_ignores0Z
-Interactive"ast.mod*$
-__init__*
-
-self(*
-
-body(r
-__match_args__0r
-body0Y
-
-Expression"ast.mod*$
-__init__*
-
-self(*
-
-body(r
-__match_args__0r
-body0
-FunctionType"ast.mod*7
-__init__*
-
-self(*
-argtypes(*
-returns(r
-__match_args__0r
-argtypes0r
-returns0w
-stmt"ast.AST*&
-__init__*
-
-self(*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0Ü
-FunctionDef"ast.stmt*á
-__init__*
-
-self(*
-
-name(*
-
-args(*
-
-body(*
-decorator_list(*
-returns (*
-type_comment (*
-kwargs(r
-__match_args__0r
-name0r
-args0r
-body0r
-decorator_list0r
-returns0r
-type_comment0ã
-AsyncFunctionDef"ast.stmt*á
-__init__*
-
-self(*
-
-name(*
-
-args(*
-
-body(*
-decorator_list(*
-returns (*
-type_comment (*
-kwargs(r
-__match_args__0r
-name0r
-args0r
-body0r
-decorator_list0r
-returns0r
-type_comment0‹
-ClassDef"ast.stmt*q
-__init__*
-
-self( *
-
-name(*
-bases(*
-keywords("*
-
-body(*
-decorator_list(*
-kwargs(r
-__match_args__0#r
-name0r	
-bases0r
-keywords0"r
-body0r
-decorator_list0h
-Return"ast.stmt*5
-__init__*
-
-self($*
-value (*
-kwargs(r
-__match_args__0r	
-value0j
-Delete"ast.stmt*5
-__init__*
-
-self(%*
-targets(*
-kwargs(r
-__match_args__0r
-targets0™
-Assign"ast.stmt*X
-__init__*
-
-self(&*
-targets(*
-value(*
-type_comment (*
-kwargs(r
-__match_args__0'r
-targets0r	
-value0r
-type_comment0ï
-	AugAssign"ast.stmt*K
-__init__*
-
-self((*
-target(,*
-op(-*
-value(*
-kwargs(r
-__match_args__0'r
-
-target0,r
-op0-r	
-value0€
-	AnnAssign"ast.stmt2¸
-__init__v
-__init__*
-
-self(.*
-target(,*
-
-annotation(*
-value(*
-simple(*
-kwargs(0:typing.overloadXx
-__init__*
-
-self(.*
-target(,*
-
-annotation(*
-value (*
-simple(*
-kwargs(0:typing.overloadXr
-__match_args__0/r
-
-target0,r
-
-annotation0r	
-value0r
-
-simple0”
-For"ast.stmt*p
-__init__*
-
-self(0*
-target(*
-
-iter(*
-
-body(*
-orelse(*
-type_comment (*
-kwargs(r
-__match_args__0#r
-
-target0r
-iter0r
-body0r
-
-orelse0r
-type_comment0ÿ
-AsyncFor"ast.stmt*p
-__init__*
-
-self(1*
-target(*
-
-iter(*
-
-body(*
-orelse(*
-type_comment (*
-kwargs(r
-__match_args__0#r
-
-target0r
-iter0r
-body0r
-
-orelse0r
-type_comment0ì
-While"ast.stmt*L
-__init__*
-
-self(2*
-
-test(*
-
-body(*
-orelse(*
-kwargs(r
-__match_args__0'r
-test0r
-body0r
-
-orelse0ê
-If"ast.stmt*L
-__init__*
-
-self(3*
-
-test(*
-
-body(*
-orelse(*
-kwargs(r
-__match_args__0'r
-test0r
-body0r
-
-orelse0¢
-With"ast.stmt*U
-__init__*
-
-self(4*
-items(6*
-
-body(*
-type_comment (*
-kwargs(r
-__match_args__0'r	
-items06r
-body0r
-type_comment0ß
-	AsyncWith"ast.stmt*U
-__init__*
-
-self(7*
-items(6*
-
-body(*
-type_comment (*
-kwargs(r
-__match_args__0'r	
-items06r
-body0r
-type_comment0}
-Raise"ast.stmt*B
-__init__*
-
-self(8*
-exc (*
-cause (*
-kwargs(r
-__match_args__0r
-exc0r	
-cause0π
-Try"ast.stmt*a
-__init__*
-
-self(9*
-
-body(*
-handlers(;*
-orelse(*
-	finalbody(*
-kwargs(r
-__match_args__0/r
-body0r
-handlers0;r
-
-orelse0r
-	finalbody0z
-Assert"ast.stmt*?
-__init__*
-
-self(<*
-
-test(*
-msg (*
-kwargs(r
-__match_args__0r
-test0r
-msg0f
-Import"ast.stmt*3
-__init__*
-
-self(=*
-names(?*
-kwargs(r
-__match_args__0r	
-names0?•
-
-ImportFrom"ast.stmt2÷
-__init__c
-__init__*
-
-self(@*
-module(*
-names(?*
-level(*
-kwargs(0:typing.overloadXe
-__init__*
-
-self(@*
-module (*
-names(?*
-level(*
-kwargs(0:typing.overloadXr
-__match_args__0'r
-
-module0r	
-names0?r	
-level0f
-Global"ast.stmt*3
-__init__*
-
-self(A*
-names(B*
-kwargs(r
-__match_args__0r	
-names0Bh
-Nonlocal"ast.stmt*3
-__init__*
-
-self(C*
-names(B*
-kwargs(r
-__match_args__0r	
-names0Bd
-Expr"ast.stmt*3
-__init__*
-
-self(D*
-value(*
-kwargs(r
-__match_args__0r	
-value0
-Pass"ast.stmt
-Break"ast.stmt
-Continue"ast.stmtw
-expr"ast.AST*&
-__init__*
-
-self(*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0z
-BoolOp"ast.expr*>
-__init__*
-
-self(E*
-op(F*
-values(*
-kwargs(r
-__match_args__0r
-op0Fr
-
-values0É
-	NamedExpr"ast.expr*A
-__init__*
-
-self(G*
-target()*
-value(*
-kwargs(r
-__match_args__0r
-
-target0)r	
-value0ç
-BinOp"ast.expr*I
-__init__*
-
-self(H*
-
-left(*
-op(-*
-right(*
-kwargs(r
-__match_args__0'r
-left0r
-op0-r	
-right0}
-UnaryOp"ast.expr*?
-__init__*
-
-self(I*
-op(J*
-operand(*
-kwargs(r
-__match_args__0r
-op0Jr
-operand0z
-Lambda"ast.expr*>
-__init__*
-
-self(K*
-
-args(*
-
-body(*
-kwargs(r
-__match_args__0r
-args0r
-body0ì
-IfExp"ast.expr*L
-__init__*
-
-self(L*
-
-test(*
-
-body(*
-orelse(*
-kwargs(r
-__match_args__0'r
-test0r
-body0r
-
-orelse0|
-Dict"ast.expr*@
-__init__*
-
-self(M*
-
-keys(N*
-values(*
-kwargs(r
-__match_args__0r
-keys0Nr
-
-values0a
-Set"ast.expr*2
-__init__*
-
-self(O*
-
-elts(*
-kwargs(r
-__match_args__0r
-elts0Ü
-ListComp"ast.expr*C
-__init__*
-
-self(P*	
-elt(*
-
-generators(R*
-kwargs(r
-__match_args__0r
-elt0r
-
-generators0RÖ
-SetComp"ast.expr*C
-__init__*
-
-self(S*	
-elt(*
-
-generators(R*
-kwargs(r
-__match_args__0r
-elt0r
-
-generators0Rû
-DictComp"ast.expr*P
-__init__*
-
-self(T*	
-key(*
-value(*
-
-generators(R*
-kwargs(r
-__match_args__0'r
-key0r	
-value0r
-
-generators0Rä
-GeneratorExp"ast.expr*C
-__init__*
-
-self(U*	
-elt(*
-
-generators(R*
-kwargs(r
-__match_args__0r
-elt0r
-
-generators0Re
-Await"ast.expr*3
-__init__*
-
-self(V*
-value(*
-kwargs(r
-__match_args__0r	
-value0g
-Yield"ast.expr*5
-__init__*
-
-self(W*
-value (*
-kwargs(r
-__match_args__0r	
-value0i
-	YieldFrom"ast.expr*3
-__init__*
-
-self(X*
-value(*
-kwargs(r
-__match_args__0r	
-value0ù
-Compare"ast.expr*P
-__init__*
-
-self(Y*
-
-left(*	
-ops([*
-comparators(*
-kwargs(r
-__match_args__0'r
-left0r
-ops0[r
-comparators0ñ
-Call"ast.expr*N
-__init__*
-
-self(\*
-
-func(*
-
-args(*
-keywords("*
-kwargs(r
-__match_args__0'r
-func0r
-args0r
-keywords0"∂
-FormattedValue"ast.expr*Z
-__init__*
-
-self(]*
-value(*
-
-conversion(*
-format_spec (*
-kwargs(r
-__match_args__0'r	
-value0r
-
-conversion0r
-format_spec0k
-	JoinedStr"ast.expr*4
-__init__*
-
-self(^*
-values(*
-kwargs(r
-__match_args__0r
-
-values0∏
-Constant"ast.expr*A
-__init__*
-
-self(_*
-value(e*
-kind (*
-kwargs(2Z
-n*
-ne*
-
-self(_0:builtins.propertyX`)
-n*
-
-self(_*
-value(e0:.setter2Z
-s*
-se*
-
-self(_0:builtins.propertyX`)
-s*
-
-self(_*
-value(e0:.setterr
-__match_args__0r	
-value0er
-kind0ï
-	Attribute"ast.expr*L
-__init__*
-
-self(**
-value(*
-
-attr(*
-ctx (f*
-kwargs(r
-__match_args__0'r	
-value0r
-attr0r
-ctx0fó
-	Subscript"ast.expr*M
-__init__*
-
-self(+*
-value(*
-slice(*
-ctx (f*
-kwargs(r
-__match_args__0'r	
-value0r	
-slice0r
-ctx0f}
-Starred"ast.expr*@
-__init__*
-
-self(g*
-value(*
-ctx (f*
-kwargs(r
-__match_args__0r	
-value0r
-ctx0ft
-Name"ast.expr*=
-__init__*
-
-self()*
-id(*
-ctx (f*
-kwargs(r
-__match_args__0r
-id0r
-ctx0fx
-List"ast.expr*?
-__init__*
-
-self(h*
-
-elts(*
-ctx (f*
-kwargs(r
-__match_args__0r
-elts0r
-ctx0fÉ
-Tuple"ast.expr*?
-__init__*
-
-self(i*
-
-elts(*
-ctx (f*
-kwargs(r
-__match_args__0r
-elts0r
-ctx0fr
-dims0
-slice"ast.AST8ô
-Slice"ast.expr*R
-__init__*
-
-self(j*
-lower (*
-upper (*
-step (*
-kwargs(r
-__match_args__0'r	
-lower0r	
-upper0r
-step0M
-ExtSlice"	ast.slice*4
-__new__i*	
-cls(l*
-dims (n*
-kwargs(h8I
-Index"	ast.slice*3
-__new__*	
-cls(p*
-value(*
-kwargs(h8
-expr_context"ast.AST
-AugLoad"ast.expr_context8
-AugStore"ast.expr_context8
-Param"ast.expr_context8
-Suite"ast.mod8
-Load"ast.expr_context
-Store"ast.expr_context
-Del"ast.expr_context
-boolop"ast.AST
-And"
-ast.boolop
-Or"
-ast.boolop
-operator"ast.AST
-Add"ast.operator
-Sub"ast.operator
-Mult"ast.operator
-MatMult"ast.operator
-Div"ast.operator
-Mod"ast.operator
-Pow"ast.operator
-LShift"ast.operator
-RShift"ast.operator
-BitOr"ast.operator
-BitXor"ast.operator
-BitAnd"ast.operator
-FloorDiv"ast.operator
-unaryop"ast.AST
-Invert"ast.unaryop
-Not"ast.unaryop
-UAdd"ast.unaryop
-USub"ast.unaryop
-cmpop"ast.AST
-Eq"	ast.cmpop
-NotEq"	ast.cmpop
-Lt"	ast.cmpop
-LtE"	ast.cmpop
-Gt"	ast.cmpop
-GtE"	ast.cmpop
-Is"	ast.cmpop
-IsNot"	ast.cmpop
-In"	ast.cmpop
-NotIn"	ast.cmpop®
-comprehension"ast.AST*M
-__init__*
-
-self(Q*
-target(*
-
-iter(*	
-ifs(*
-is_async(r
-__match_args__0/r
-
-target0r
-iter0r
-ifs0r
-is_async0Ä
-excepthandler"ast.AST*&
-__init__*
-
-self(q*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0ß
-ExceptHandler"ast.excepthandler2–
-__init___
-__init__*
-
-self(:*
-
-type(*
-
-name(*
-
-body(*
-kwargs(0:typing.overloadXc
-__init__*
-
-self(:*
-type (*
-name (*
-
-body(*
-kwargs(0:typing.overloadXr
-__match_args__0'r
-type0r
-name0r
-body0˘
-	arguments"ast.AST2Ì
-__init__ú
-__init__*
-
-self(*
-posonlyargs(s*
-
-args(s*
-vararg(t*
-
-kwonlyargs(s*
-kw_defaults(N*
-kwarg(t*
-defaults(0:typing.overloadXû
-__init__*
-
-self(*
-posonlyargs(s*
-
-args(s*
-vararg(t*
-
-kwonlyargs(s*
-kw_defaults(N*
-kwarg (t*
-defaults(0:typing.overloadX†
-__init__*
-
-self(*
-posonlyargs(s*
-
-args(s*
-vararg (t*
-
-kwonlyargs(s*
-kw_defaults(N*
-kwarg (t*
-defaults(0:typing.overloadXr
-__match_args__0ur
-posonlyargs0sr
-args0sr
-
-vararg0tr
-
-kwonlyargs0sr
-kw_defaults0Nr	
-kwarg0tr
-defaults0Í
-arg"ast.AST*[
-__init__*
-
-self(r*	
-arg(*
-
-annotation (*
-type_comment (*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0r
-__match_args__0'r
-arg0r
-
-annotation0r
-type_comment0≥
-keyword"ast.AST2∂
-__init__S
-__init__*
-
-self(!*	
-arg(*
-value(*
-kwargs(0:typing.overloadXU
-__init__*
-
-self(!*
-arg (*
-value(*
-kwargs(0:typing.overloadXr
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0r
-__match_args__0r
-arg0r	
-value0æ
-alias"ast.AST*B
-__init__*
-
-self(>*
-
-name(*
-asname (*
-kwargs(r
-name0r
-
-asname0r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0r
-__match_args__0ë
-withitem"ast.AST*C
-__init__*
-
-self(5*
-context_expr(*
-optional_vars (r
-__match_args__0r
-context_expr0r
-optional_vars0z
-pattern"ast.AST*&
-__init__*
-
-self(v*
-kwargs(r
-
-lineno0r
-
-col_offset0r
-
-end_lineno0r
-end_col_offset0à
-
-match_case"ast.AST2∫
-__init__U
-__init__*
-
-self(w*
-pattern(v*
-guard(*
-
-body(0:typing.overloadXW
-__init__*
-
-self(w*
-pattern(v*
-guard (*
-
-body(0:typing.overloadXr
-__match_args__0'r
-pattern0vr	
-guard0r
-body0Å
-Match"ast.stmt*B
-__init__*
-
-self(x*
-subject(*
-cases(y*
-kwargs(r
-__match_args__0r
-subject0r	
-cases0ym
-
-MatchValue"ast.pattern*3
-__init__*
-
-self(z*
-value(*
-kwargs(r
-__match_args__0r	
-value0q
-MatchSingleton"ast.pattern*3
-__init__*
-
-self({*
-value(|*
-kwargs(r
-__match_args__0r	
-value0|v
-MatchSequence"ast.pattern*6
-__init__*
-
-self(}*
-patterns(~*
-kwargs(r
-__match_args__0r
-patterns0~£
-MatchMapping"ast.pattern*P
-__init__*
-
-self(*
-
-keys(*
-patterns(~*
-rest (*
-kwargs(r
-__match_args__0'r
-keys0r
-patterns0~r
-rest0Œ
-
-MatchClass"ast.pattern*g
-__init__*
-self(Ä*	
-cls(*
-patterns(~*
-	kwd_attrs(B*
-kwd_patterns(~*
-kwargs(r
-__match_args__0/r
-cls0r
-patterns0~r
-	kwd_attrs0Br
-kwd_patterns0~m
-	MatchStar"ast.pattern*5
-__init__*
-self(Å*
-name (*
-kwargs(r
-__match_args__0r
-name0ã
-MatchAs"ast.pattern*G
-__init__*
-self(Ç*
-pattern (É*
-name (*
-kwargs(r
-__match_args__0r
-pattern0Ér
-name0q
-MatchOr"ast.pattern*7
-__init__*
-self(Ñ*
-patterns(~*
-kwargs(r
-__match_args__0r
-patterns0~
-type_ignore"ast.ASTy
-
-TypeIgnore"ast.type_ignore*1
-__init__*
-
-self(*
-lineno(*	
-tag(r
-__match_args__0r
-
-lineno0r
-tag0<
-_ABC"builtins.type*%
-__init__*
-
-cls(Ö*
-args(ÜS
-Num"ast.Constant*0
-__new___*
-
-cls(à*
-n(b*
-kwargs(h8@bast._ABCS
-Str"ast.Constant*0
-__new___*
-
-cls(ä*
-s(*
-kwargs(h8@bast._ABCU
-Bytes"ast.Constant*0
-__new___*
-
-cls(å*
-s(`*
-kwargs(h8@bast._ABCl
-NameConstant"ast.Constant*@
-__new___*
-
-cls(é*
-value(e*
-
-kind(*
-kwargs(h8@bast._ABCO
-Ellipsis"ast.Constant*'
-__new___*
-
-cls(ê*
-kwargs(h8@bast._ABC“(
-NodeVisitor"builtins.object*#
-visit*
-self(ë*
-node(í*+
-generic_visit*
-self(ë*
-node(í*)
-visit_Module*
-self(ë*
-
-node(*.
-visit_Interactive*
-self(ë*
-
-node(*-
-visit_Expression*
-self(ë*
-
-node(*.
-visit_FunctionDef*
-self(ë*
-
-node(*3
-visit_AsyncFunctionDef*
-self(ë*
-
-node(*+
-visit_ClassDef*
-self(ë*
-
-node( *)
-visit_Return*
-self(ë*
-
-node($*)
-visit_Delete*
-self(ë*
-
-node(%*)
-visit_Assign*
-self(ë*
-
-node(&*,
-visit_AugAssign*
-self(ë*
-
-node((*,
-visit_AnnAssign*
-self(ë*
-
-node(.*&
-	visit_For*
-self(ë*
-
-node(0*+
-visit_AsyncFor*
-self(ë*
-
-node(1*(
-visit_While*
-self(ë*
-
-node(2*%
-visit_If*
-self(ë*
-
-node(3*'
-
-visit_With*
-self(ë*
-
-node(4*,
-visit_AsyncWith*
-self(ë*
-
-node(7*(
-visit_Raise*
-self(ë*
-
-node(8*&
-	visit_Try*
-self(ë*
-
-node(9*)
-visit_Assert*
-self(ë*
-
-node(<*)
-visit_Import*
-self(ë*
-
-node(=*-
-visit_ImportFrom*
-self(ë*
-
-node(@*)
-visit_Global*
-self(ë*
-
-node(A*+
-visit_Nonlocal*
-self(ë*
-
-node(C*'
-
-visit_Expr*
-self(ë*
-
-node(D*(
-
-visit_Pass*
-self(ë*
-node(ì*)
-visit_Break*
-self(ë*
-node(î*,
-visit_Continue*
-self(ë*
-node(ï*(
-visit_Slice*
-self(ë*
-
-node(j*)
-visit_BoolOp*
-self(ë*
-
-node(E*(
-visit_BinOp*
-self(ë*
-
-node(H**
-visit_UnaryOp*
-self(ë*
-
-node(I*)
-visit_Lambda*
-self(ë*
-
-node(K*(
-visit_IfExp*
-self(ë*
-
-node(L*'
-
-visit_Dict*
-self(ë*
-
-node(M*&
-	visit_Set*
-self(ë*
-
-node(O*+
-visit_ListComp*
-self(ë*
-
-node(P**
-visit_SetComp*
-self(ë*
-
-node(S*+
-visit_DictComp*
-self(ë*
-
-node(T*/
-visit_GeneratorExp*
-self(ë*
-
-node(U*(
-visit_Await*
-self(ë*
+subject0r	
+cases06!
+pattern_ast.pattern"_ast.AST]
+
+match_case_ast.match_case"_ast.ASTr
+__match_args__0r
+pattern07r	
+guard0r
+body0J
+
+MatchValue_ast.MatchValue"_ast.patternr
+__match_args__0r	
+value0R
+MatchSingleton_ast.MatchSingleton"_ast.patternr
+__match_args__0r	
+value0:S
+MatchSequence_ast.MatchSequence"_ast.patternr
+__match_args__0r
+patterns0;G
+	MatchStar_ast.MatchStar"_ast.patternr
+__match_args__0r
+name0	e
+MatchMapping_ast.MatchMapping"_ast.patternr
+__match_args__0r
+keys0r
+patterns0;r
+rest0	w
+
+MatchClass_ast.MatchClass"_ast.patternr
+__match_args__0r
+cls0r
+patterns0;r
+	kwd_attrs0%r
+kwd_patterns0;P
+MatchAs_ast.MatchAs"_ast.patternr
+__match_args__0
+r
+pattern0<r
+name0	G
+MatchOr_ast.MatchOr"_ast.patternr
+__match_args__0r
+patterns0;:
+_ABC"builtins.type*#
+__init__*	
+cls(=*
+
+args(>+
+Num"_ast.Constant@bast._ABCr	
+value0/2
+Str"_ast.Constant@bast._ABCr	
+value0r
+s04
+Bytes"_ast.Constant@bast._ABCr	
+value0?r
+s0?)
+NameConstant"_ast.Constant@bast._ABC%
+Ellipsis"_ast.Constant@bast._ABC
+slice"_ast.AST
+ExtSlice"	ast.slice
+Index"	ast.slice
+Suite"_ast.mod
+AugLoad"_ast.expr_context
+AugStore"_ast.expr_context
+Param"_ast.expr_contextË&
+NodeVisitor"builtins.object*!
+visit*
+
+self(@*
+
+node(*)
+generic_visit*
+
+self(@*
+
+node(*(
+visit_Module*
+
+self(@*
+
+node(A*-
+visit_Interactive*
+
+self(@*
+
+node(B*,
+visit_Expression*
+
+self(@*
+
+node(C*-
+visit_FunctionDef*
+
+self(@*
+
+node(D*2
+visit_AsyncFunctionDef*
+
+self(@*
+
+node(E**
+visit_ClassDef*
+
+self(@*
+
+node(F*(
+visit_Return*
+
+self(@*
+
+node(G*(
+visit_Delete*
+
+self(@*
+
+node(H*(
+visit_Assign*
+
+self(@*
+
+node(I*+
+visit_AugAssign*
+
+self(@*
+
+node(J*+
+visit_AnnAssign*
+
+self(@*
+
+node(K*%
+	visit_For*
+
+self(@*
+
+node(L**
+visit_AsyncFor*
+
+self(@*
+
+node(M*'
+visit_While*
+
+self(@*
+
+node(N*$
+visit_If*
+
+self(@*
+
+node(O*&
+
+visit_With*
+
+self(@*
+
+node(P*+
+visit_AsyncWith*
+
+self(@*
+
+node(Q*'
+visit_Raise*
+
+self(@*
+
+node(R*%
+	visit_Try*
+
+self(@*
+
+node(S*(
+visit_Assert*
+
+self(@*
+
+node(T*(
+visit_Import*
+
+self(@*
+
+node(U*,
+visit_ImportFrom*
+
+self(@*
 
 node(V*(
-visit_Yield*
-self(ë*
+visit_Global*
 
-node(W*,
-visit_YieldFrom*
-self(ë*
+self(@*
 
-node(X**
-visit_Compare*
-self(ë*
+node(W**
+visit_Nonlocal*
 
-node(Y*'
+self(@*
 
-visit_Call*
-self(ë*
+node(X*&
 
-node(\*1
-visit_FormattedValue*
-self(ë*
+visit_Expr*
 
-node(]*,
-visit_JoinedStr*
-self(ë*
+self(@*
 
-node(^*+
-visit_Constant*
-self(ë*
+node(Y*&
 
-node(_*,
-visit_NamedExpr*
-self(ë*
+visit_Pass*
 
-node(G*-
-visit_TypeIgnore*
-self(ë*
+self(@*
 
-node(*,
-visit_Attribute*
-self(ë*
+node(Z*'
+visit_Break*
 
-node(**,
-visit_Subscript*
-self(ë*
+self(@*
 
-node(+**
-visit_Starred*
-self(ë*
+node([**
+visit_Continue*
 
-node(g*'
+self(@*
 
-visit_Name*
-self(ë*
+node(\*'
+visit_Slice*
 
-node()*'
+self(@*
 
-visit_List*
-self(ë*
+node(]*(
+visit_BoolOp*
 
-node(h*(
-visit_Tuple*
-self(ë*
+self(@*
+
+node(^*'
+visit_BinOp*
+
+self(@*
+
+node(_*)
+visit_UnaryOp*
+
+self(@*
+
+node(`*(
+visit_Lambda*
+
+self(@*
+
+node(a*'
+visit_IfExp*
+
+self(@*
+
+node(b*&
+
+visit_Dict*
+
+self(@*
+
+node(c*%
+	visit_Set*
+
+self(@*
+
+node(d**
+visit_ListComp*
+
+self(@*
+
+node(e*)
+visit_SetComp*
+
+self(@*
+
+node(f**
+visit_DictComp*
+
+self(@*
+
+node(g*.
+visit_GeneratorExp*
+
+self(@*
+
+node(h*'
+visit_Await*
+
+self(@*
 
 node(i*'
-	visit_Del*
-self(ë*
-node(ñ*(
+visit_Yield*
 
-visit_Load*
-self(ë*
-node(ó*)
-visit_Store*
-self(ë*
-node(ò*'
-	visit_And*
-self(ë*
-node(ô*&
-visit_Or*
-self(ë*
-node(ö*'
-	visit_Add*
-self(ë*
+self(@*
+
+node(j*+
+visit_YieldFrom*
+
+self(@*
+
+node(k*)
+visit_Compare*
+
+self(@*
+
+node(l*&
+
+visit_Call*
+
+self(@*
+
+node(m*0
+visit_FormattedValue*
+
+self(@*
+
+node(n*+
+visit_JoinedStr*
+
+self(@*
+
+node(o**
+visit_Constant*
+
+self(@*
+
+node(p*+
+visit_NamedExpr*
+
+self(@*
+
+node(q*,
+visit_TypeIgnore*
+
+self(@*
+
+node(*+
+visit_Attribute*
+
+self(@*
+
+node(*+
+visit_Subscript*
+
+self(@*
+
+node(*)
+visit_Starred*
+
+self(@*
+
+node(r*&
+
+visit_Name*
+
+self(@*
+
+node(*&
+
+visit_List*
+
+self(@*
+
+node(s*'
+visit_Tuple*
+
+self(@*
+
+node(t*%
+	visit_Del*
+
+self(@*
+
+node(u*&
+
+visit_Load*
+
+self(@*
+
+node(v*'
+visit_Store*
+
+self(@*
+
+node(w*%
+	visit_And*
+
+self(@*
+
+node(x*$
+visit_Or*
+
+self(@*
+
+node(y*%
+	visit_Add*
+
+self(@*
+
+node(z*(
+visit_BitAnd*
+
+self(@*
+
+node({*'
+visit_BitOr*
+
+self(@*
+
+node(|*(
+visit_BitXor*
+
+self(@*
+
+node(}*%
+	visit_Div*
+
+self(@*
+
+node(~**
+visit_FloorDiv*
+
+self(@*
+
+node(*)
+visit_LShift*
+
+self(@*
+node(Ä*&
+	visit_Mod*
+
+self(@*
+node(Å*'
+
+visit_Mult*
+
+self(@*
+node(Ç**
+visit_MatMult*
+
+self(@*
+node(É*&
+	visit_Pow*
+
+self(@*
+node(Ñ*)
+visit_RShift*
+
+self(@*
+node(Ö*&
+	visit_Sub*
+
+self(@*
+node(Ü*)
+visit_Invert*
+
+self(@*
+node(á*&
+	visit_Not*
+
+self(@*
+node(à*'
+
+visit_UAdd*
+
+self(@*
+node(â*'
+
+visit_USub*
+
+self(@*
+node(ä*%
+visit_Eq*
+
+self(@*
+node(ã*%
+visit_Gt*
+
+self(@*
+node(å*&
+	visit_GtE*
+
+self(@*
+node(ç*%
+visit_In*
+
+self(@*
+node(é*%
+visit_Is*
+
+self(@*
+node(è*(
+visit_IsNot*
+
+self(@*
+node(ê*%
+visit_Lt*
+
+self(@*
+node(ë*&
+	visit_LtE*
+
+self(@*
+node(í*(
+visit_NotEq*
+
+self(@*
+node(ì*(
+visit_NotIn*
+
+self(@*
+node(î*/
+visit_comprehension*
+
+self(@*
+
+node()*/
+visit_ExceptHandler*
+
+self(@*
+
+node(!*+
+visit_arguments*
+
+self(@*
+
+node(*%
+	visit_arg*
+
+self(@*
+
+node(2*)
+visit_keyword*
+
+self(@*
+
+node(*'
+visit_alias*
+
+self(@*
+
+node(#**
+visit_withitem*
+
+self(@*
+
+node(*(
+visit_Match*
+
+self(@*
+node(ï*-
+visit_MatchValue*
+
+self(@*
+node(ñ*0
+visit_MatchSequence*
+
+self(@*
+node(ó*,
+visit_MatchStar*
+
+self(@*
+node(ò*/
+visit_MatchMapping*
+
+self(@*
+node(ô*-
+visit_MatchClass*
+
+self(@*
+node(ö**
+visit_MatchAs*
+
+self(@*
 node(õ**
-visit_BitAnd*
-self(ë*
-node(ú*)
-visit_BitOr*
-self(ë*
-node(ù**
-visit_BitXor*
-self(ë*
-node(û*'
-	visit_Div*
-self(ë*
-node(ü*,
-visit_FloorDiv*
-self(ë*
-node(†**
-visit_LShift*
-self(ë*
-node(°*'
-	visit_Mod*
-self(ë*
-node(¢*(
+visit_MatchOr*
 
-visit_Mult*
-self(ë*
-node(£*+
-visit_MatMult*
-self(ë*
-node(§*'
-	visit_Pow*
-self(ë*
-node(•**
-visit_RShift*
-self(ë*
-node(¶*'
-	visit_Sub*
-self(ë*
-node(ß**
-visit_Invert*
-self(ë*
-node(®*'
-	visit_Not*
-self(ë*
-node(©*(
+self(@*
+node(ú*+
+visit_ExtSlice*
 
-visit_UAdd*
-self(ë*
-node(™*(
+self(@*
+node(ù*(
+visit_Index*
 
-visit_USub*
-self(ë*
-node(´*&
-visit_Eq*
-self(ë*
-node(¨*&
-visit_Gt*
-self(ë*
-node(≠*'
-	visit_GtE*
-self(ë*
-node(Æ*&
-visit_In*
-self(ë*
-node(Ø*&
-visit_Is*
-self(ë*
-node(∞*)
-visit_IsNot*
-self(ë*
-node(±*&
-visit_Lt*
-self(ë*
-node(≤*'
-	visit_LtE*
-self(ë*
-node(≥*)
-visit_NotEq*
-self(ë*
-node(¥*)
-visit_NotIn*
-self(ë*
-node(µ*0
-visit_comprehension*
-self(ë*
+self(@*
+node(û*(
+visit_Suite*
 
-node(Q*0
-visit_ExceptHandler*
-self(ë*
+self(@*
+node(ü**
+visit_AugLoad*
 
-node(:*,
-visit_arguments*
-self(ë*
+self(@*
+node(†*+
+visit_AugStore*
 
-node(*&
-	visit_arg*
-self(ë*
+self(@*
+node(°*(
+visit_Param*
 
-node(r**
-visit_keyword*
-self(ë*
+self(@*
+node(¢*&
+	visit_Num*
 
-node(!*(
-visit_alias*
-self(ë*
+self(@*
+node(£*&
+	visit_Str*
 
-node(>*+
-visit_withitem*
-self(ë*
+self(@*
+node(§*(
+visit_Bytes*
 
-node(5*(
-visit_Match*
-self(ë*
+self(@*
+node(•*/
+visit_NameConstant*
 
-node(x*-
-visit_match_case*
-self(ë*
+self(@*
+node(¶*+
+visit_Ellipsis*
 
-node(w*-
-visit_MatchValue*
-self(ë*
+self(@*
+node(ßN
+NodeTransformer"ast.NodeVisitor**
+generic_visit*
+self(®*
 
-node(z*0
-visit_MatchSequence*
-self(ë*
+node(
+unparse*
+ast_obj(3
+copy_location©*
+new_node(©*
+old_node(Z
+dump*
 
-node(}*1
-visit_MatchSingleton*
-self(ë*
+node(*
+annotate_fields (8*
+include_attributes (8*
+indent (™'
+fix_missing_locations©*
+node(©-
+get_docstring	*
+node(´*
+clean (8-
+increment_lineno©*
+node(©*	
+n (!
+iter_child_nodes¨*
 
-node({*-
-visit_MatchStar*
-self(ë*
-node(Å*/
-visit_MatchMapping*
-self(ë*
+node(
+iter_fieldsÆ*
 
-node(*.
-visit_MatchClass*
-self(ë*
-node(Ä*+
-visit_MatchAs*
-self(ë*
-node(Ç*+
-visit_MatchOr*
-self(ë*
-node(Ñ*+
-visit_ExtSlice*
-self(ë*
-
-node(k*(
-visit_Index*
-self(ë*
-
-node(o*)
-visit_Suite*
-self(ë*
-node(∂*+
-visit_AugLoad*
-self(ë*
-node(∑*,
-visit_AugStore*
-self(ë*
-node(∏*)
-visit_Param*
-self(ë*
-node(π*)
-	visit_Num*
-self(ë*
-node(á0*)
-	visit_Str*
-self(ë*
-node(â0*+
-visit_Bytes*
-self(ë*
-node(ã0*2
-visit_NameConstant*
-self(ë*
-node(ç0*.
-visit_Ellipsis*
-self(ë*
-node(è0P
-NodeTransformer"ast.NodeVisitor*,
-generic_visití*
-self(∫*
-node(í'
+node('
 literal_eval*
-node_or_string(ª[
-dump*
-node(í*
-annotate_fields (*
-include_attributes (*
-indent (º4
-copy_locationΩ*
-new_node(Ω*
-old_node(í'
-fix_missing_locationsΩ*
-node(Ω-
-increment_linenoΩ*
-node(Ω*	
-n (
-iter_fieldsø*
-node(í"
-iter_child_nodes¿*
-node(í-
-get_docstring*
-node(¡*
-clean (A
-get_source_segment*
-source(*
-node(í*
-padded (
-walk¿*
-node(í
-unparse*
-ast_obj(í
-main"“
-parseÅ
-parseΩ*
-source(Ω*
-filename (√*
-mode (≈*
-type_comments (*
-feature_version («0:typing.overloadXÄ
-parse*
-source(…*
-filename (√*
-mode (ƒ*
-type_comments (*
-feature_version («0:typing.overloadX|
-parse*
-source(…*
-filename(√*
-mode(ƒ*
-type_comments (*
-feature_version («0:typing.overloadX|
-parse*
-source(…*
-filename(√*
-mode(ƒ*
-type_comments (*
-feature_version («0:typing.overloadX|
-parse*
-source(…*
-filename(√*
-mode(ƒ*
-type_comments (*
-feature_version («0:typing.overloadXk
-parse*
-source(…*
-mode(ƒ*
-type_comments (*
-feature_version («0:typing.overloadXk
-parse*
-source(…*
-mode(ƒ*
-type_comments (*
-feature_version («0:typing.overloadXk
-parse*
-source(…*
-mode(ƒ*
-type_comments (*
-feature_version («0:typing.overloadXÄ
-parse *
-source(…*
-filename (√*
-mode (*
-type_comments (*
-feature_version («0:typing.overloadX*
-__annotations__0À*
-astast *?
-PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT0*%
-PyCF_ONLY_AST_ast.PyCF_ONLY_AST0*/
-PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS02"builtins.str2"typing.TypeVar22222"builtins.tuple22"builtins.bool2"typing._SpecialForm22"builtins.tuple22"
-ast.Module2
-"ast.stmt2"builtins.list22"ast.TypeIgnore2"builtins.list2222"ast.Interactive222"ast.Expression2
-"ast.expr2"ast.FunctionType2"builtins.list222"builtins.int222"ast.FunctionDef2"ast.arguments22222
-22"ast.AsyncFunctionDef2"ast.ClassDef2"ast.keyword2"builtins.list2!2	22"
-ast.Return2"
-ast.Delete2"
-ast.Assign222"ast.AugAssign2
-"ast.Name2"ast.Attribute2"ast.Subscript22)*+2"ast.operator2"ast.AnnAssign222	"ast.For2"ast.AsyncFor2"	ast.While2"ast.If2
-"ast.With2"ast.withitem2"builtins.list252"ast.AsyncWith2"	ast.Raise2	"ast.Try2"ast.ExceptHandler2"builtins.list2:2"
-ast.Assert2"
-ast.Import2"	ast.alias2"builtins.list2>2"ast.ImportFrom2"
-ast.Global2"builtins.list22"ast.Nonlocal2
-"ast.Expr2"
-ast.BoolOp2"
-ast.boolop2"ast.NamedExpr2"	ast.BinOp2"ast.UnaryOp2"ast.unaryop2"
-ast.Lambda2"	ast.IfExp2
-"ast.Dict2"builtins.list22	"ast.Set2"ast.ListComp2"ast.comprehension2"builtins.list2Q2"ast.SetComp2"ast.DictComp2"ast.GeneratorExp2"	ast.Await2"	ast.Yield2"ast.YieldFrom2"ast.Compare2"	ast.cmpop2"builtins.list2Z2
-"ast.Call2"ast.FormattedValue2"ast.JoinedStr2"ast.Constant2"builtins.bytes2"builtins.float2"builtins.complex2"types.EllipsisType22`abc2"ast._ConstantValue2d2"ast.expr_context2"ast.Starred2
-"ast.List2"	ast.Tuple2"	ast.Slice2"ast.ExtSlice2"type2k2"	ast.slice2"typing.Iterable2m2"	ast.Index2"type2o2"ast.excepthandler2	"ast.arg2"builtins.list2r22r222"ast.pattern2"ast.match_case2"	ast.Match2"builtins.list2w2"ast.MatchValue2"ast.MatchSingleton222"ast.MatchSequence2"builtins.list2v2"ast.MatchMapping2"ast.MatchClass2"ast.MatchStar2"ast.MatchAs22v2"ast.MatchOr2
-"ast._ABC2"builtins.object2	"ast.Num2"type2á2	"ast.Str2"type2â2"	ast.Bytes2"type2ã2"ast.NameConstant2"type2ç2"ast.Ellipsis2"type2è2"ast.NodeVisitor2	"ast.AST2
-"ast.Pass2"	ast.Break2"ast.Continue2	"ast.Del2
-"ast.Load2"	ast.Store2	"ast.And2"ast.Or2	"ast.Add2"
-ast.BitAnd2"	ast.BitOr2"
-ast.BitXor2	"ast.Div2"ast.FloorDiv2"
-ast.LShift2	"ast.Mod2
-"ast.Mult2"ast.MatMult2	"ast.Pow2"
-ast.RShift2	"ast.Sub2"
-ast.Invert2	"ast.Not2
-"ast.UAdd2
-"ast.USub2"ast.Eq2"ast.Gt2	"ast.GtE2"ast.In2"ast.Is2"	ast.IsNot2"ast.Lt2	"ast.LtE2"	ast.NotEq2"	ast.NotIn2"	ast.Suite2"ast.AugLoad2"ast.AugStore2"	ast.Param2"ast.NodeTransformer22í222"ast.AST2í222"typing.Iterator2æ2"typing.Iterator2í22 2"os.PathLike222`¬2	222ƒƒƒƒ2222∆2"typing_extensions.Buffer22»2	"ast.mod2"builtins.dict2
+node_or_string(Ø@
+get_source_segment	*
+source(*
+
+node(*
+padded (8
+walk¨*
+
+node(
+main"Œ
+parseÄ
+parseA*
+source(∫*
+filename (º*
+mode (Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadX|
+parseC*
+source(∫*
+filename(º*
+mode(Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadX}
+parse¿*
+source(∫*
+filename(º*
+mode(Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadX|
+parseB*
+source(∫*
+filename(º*
+mode(Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadXk
+parseC*
+source(∫*
+mode(Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadXl
+parse¿*
+source(∫*
+mode(Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadXk
+parseB*
+source(∫*
+mode(Ω*
+type_comments (8*
+feature_version (ø0:typing.overloadX
+parse*
+source(∫*
+filename (º*
+mode (*
+type_comments (8*
+feature_version (ø0:typing.overloadX*
+__annotations__0¡*&
+PyCF_ONLY_AST_ast.PyCF_ONLY_AST0¬*0
+PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS0¬*@
+PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT0¬22
+"_ast.AST222"builtins.str2"builtins.tuple22"builtins.int2222222"	_ast.expr2"builtins.list22"	_ast.stmt2"builtins.list22"_ast.TypeIgnore2"builtins.list2222
+22"_ast.arguments222	22"_ast.keyword2"builtins.list2222"	_ast.Name2"_ast.Attribute2"_ast.Subscript222"_ast.operator222"_ast.withitem2"builtins.list22"_ast.ExceptHandler2"builtins.list2!2"
+_ast.alias2"builtins.list2#2"builtins.list22"_ast.boolop2"_ast.unaryop2"builtins.list22"_ast.comprehension2"builtins.list2)2"
+_ast.cmpop2"builtins.list2+2"builtins.float2"builtins.complex22-.2"_ast.expr_context222
+"_ast.arg2"builtins.list222222"_ast.match_case2"builtins.list252"_ast.pattern2"builtins.bool2	2822992"builtins.list272272
+"ast._ABC2"builtins.object2"builtins.bytes2"ast.NodeVisitor2"_ast.Module2"_ast.Interactive2"_ast.Expression2"_ast.FunctionDef2"_ast.AsyncFunctionDef2"_ast.ClassDef2"_ast.Return2"_ast.Delete2"_ast.Assign2"_ast.AugAssign2"_ast.AnnAssign2
+"_ast.For2"_ast.AsyncFor2"
+_ast.While2	"_ast.If2"	_ast.With2"_ast.AsyncWith2"
+_ast.Raise2
+"_ast.Try2"_ast.Assert2"_ast.Import2"_ast.ImportFrom2"_ast.Global2"_ast.Nonlocal2"	_ast.Expr2"	_ast.Pass2"
+_ast.Break2"_ast.Continue2"
+_ast.Slice2"_ast.BoolOp2"
+_ast.BinOp2"_ast.UnaryOp2"_ast.Lambda2"
+_ast.IfExp2"	_ast.Dict2
+"_ast.Set2"_ast.ListComp2"_ast.SetComp2"_ast.DictComp2"_ast.GeneratorExp2"
+_ast.Await2"
+_ast.Yield2"_ast.YieldFrom2"_ast.Compare2"	_ast.Call2"_ast.FormattedValue2"_ast.JoinedStr2"_ast.Constant2"_ast.NamedExpr2"_ast.Starred2"	_ast.List2"
+_ast.Tuple2
+"_ast.Del2"	_ast.Load2"
+_ast.Store2
+"_ast.And2	"_ast.Or2
+"_ast.Add2"_ast.BitAnd2"
+_ast.BitOr2"_ast.BitXor2
+"_ast.Div2"_ast.FloorDiv2"_ast.LShift2
+"_ast.Mod2"	_ast.Mult2"_ast.MatMult2
+"_ast.Pow2"_ast.RShift2
+"_ast.Sub2"_ast.Invert2
+"_ast.Not2"	_ast.UAdd2"	_ast.USub2	"_ast.Eq2	"_ast.Gt2
+"_ast.GtE2	"_ast.In2	"_ast.Is2"
+_ast.IsNot2	"_ast.Lt2
+"_ast.LtE2"
+_ast.NotEq2"
+_ast.NotIn2"
+_ast.Match2"_ast.MatchValue2"_ast.MatchSequence2"_ast.MatchStar2"_ast.MatchMapping2"_ast.MatchClass2"_ast.MatchAs2"_ast.MatchOr2"ast.ExtSlice2"	ast.Index2"	ast.Suite2"ast.AugLoad2"ast.AugStore2"	ast.Param2	"ast.Num2	"ast.Str2"	ast.Bytes2"ast.NameConstant2"ast.Ellipsis2"ast.NodeTransformer2"_ast.AST22222EDFA2"typing.Iterator2222"typing.Iterator2≠222"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer22∞±≤≥¥µ2!"_typeshed.WriteableBuffer2∂22?∑2 "_typeshed.ReadableBuffer2∏22π2"os.PathLike22	2πª2	22222æ2"_ast.FunctionType2"builtins.dict22	2

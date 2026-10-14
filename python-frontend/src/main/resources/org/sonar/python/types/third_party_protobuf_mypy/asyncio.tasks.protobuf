@@ -1,132 +1,124 @@
 
-asyncio.tasks»
-Task_asyncio.Task"_asyncio.Future*@
+asyncio.tasksÈ
+Task"asyncio.futures.Future*@
 __init__*
 
 self(*
 
-coro(*
-loop (*
-name (*
-get_coro*
+coro(*
+loop (*
+name (*
+get_coro*
 
 self(*
-get_name*
+get_name*
 
-self(*
-set_name*(*(*(
-	get_stack*
+self(*
+set_name*
+
+self(*(*(
+	get_stack*
 
 self(*
-limit (*8
+limit (*8
 print_stack*
 
 self(*
-limit (*
-file (*
-__class_getitem__*(*(	p8P=
-_enter_task_asyncio._enter_task*
+limit (*
+file (*.
+__class_getitem__*	
+cls(*
 
-loop(*
+item(pP+
+as_completed*
+fs(*
+timeout (4
+run_coroutine_threadsafe *
 
-task(=
-_leave_task_asyncio._leave_task*
+coro(*
 
-loop(*
-
-task(7
-_register_task_asyncio._register_task*
-
-task(;
-_unregister_task_asyncio._unregister_task*
-
-task(+
-as_completed*
-fs( *
-timeout ("4
-run_coroutine_threadsafe#*
-
-coro(
-*
-
-loop(
-shield*	
-arg((
-wait_for
-*	
-fut(*
-timeout("H
-	all_tasks$*
-loop ()
+loop(
+shield*	
+arg((
+wait_for!*	
+fut(*
+timeout(H
+	all_tasks#*
+loop ($)
 create_task*
 
 coro(&*
-name (
+name (
 current_task'*
-loop ("§
+loop ($'
+_enter_task*
+
+loop(*
+
+task("'
+_leave_task*
+
+loop(*
+
+task("
+_register_task*
+
+task(" 
+_unregister_task*
+
+task(""§
 ensure_futureJ
 ensure_future)*
 coro_or_future()*
-loop (0:typing.overloadXJ
+loop ($0:typing.overloadXJ
 ensure_future*
-coro_or_future(*
-loop (0:typing.overloadX"š
+coro_or_future(	*
+loop ($0:typing.overloadX"¢
 gather>
-gather+*(*
+gather+*(*
 return_exceptions (-0:typing.overloadXB
-gather/*(*(*
+gather/*(*(*
 return_exceptions (-0:typing.overloadXF
-gather1*(*(*(*
+gather1*(*(*(*
 return_exceptions (-0:typing.overloadXJ
-gather3*(*(*(*(*
+gather3*(*(*(*(*
 return_exceptions (-0:typing.overloadXN
-gather5*(*(*(*(*(*
-return_exceptions (-0:typing.overloadXR
-gather7*(*(*(*(*(*(*
-return_exceptions (-0:typing.overloadXR
-gather9*
-coros_or_futures(*
+gather5*(*(*(*(*(*
 return_exceptions (-0:typing.overloadX<
-gather=*(*
+gather9*(*
 return_exceptions(,0:typing.overloadX@
-gather?*(*(*
+gather;*(*(*
 return_exceptions(,0:typing.overloadXD
-gatherA*(*(*(*
+gather=*(*(*(*
 return_exceptions(,0:typing.overloadXH
-gatherC*(*(*(*(*
+gather?*(*(*(*(*
 return_exceptions(,0:typing.overloadXL
-gatherE*(*(*(*(*(*
-return_exceptions(,0:typing.overloadXP
-gatherG*(*(*(*(*(*(*
-return_exceptions(,0:typing.overloadXP
-gatherI*
-coros_or_futures(*
-return_exceptions(,0:typing.overloadX"s
+gatherA*(*(*(*(*(*
+return_exceptions(,0:typing.overloadXR
+gatherC*
+coros_or_futures(*
+return_exceptions (,0:typing.overloadX"s
 sleep-
-sleepJ*
-delay(!0:typing.overloadHX;
-sleep
-*
-delay(!*
+sleepD*
+delay(0:typing.overloadHX;
+sleep!*
+delay(*
 result(0:typing.overloadHX"¨
 waitO
-waitM*
-fs(N*
-timeout ("*
-return_when (0:typing.overloadHXO
-waitQ*
-fs(R*
-timeout ("*
-return_when (0:typing.overloadHX*
-__annotations__0S*
+waitG*
+fs(H*
+timeout (*
+return_when (0:typing.overloadHXO
+waitK*
+fs(L*
+timeout (*
+return_when (0:typing.overloadHX*
+__annotations__0M*
 
 concurrent
 concurrent *
-__all__0T*
-FIRST_COMPLETED0*
-FIRST_EXCEPTION0*
-ALL_COMPLETED022"builtins.object2"builtins.object22"_asyncio.Task22"_asyncio.Future2222"_asyncio._TaskYieldType22"typing.Generator222"typing.Coroutine2		22
-2#"_asyncio._TaskCompatibleCoro22"" asyncio.events.AbstractEventLoop222"builtins.str222"types.FrameType2"builtins.list22"builtins.int222"typing.TextIO222"types.GenericAlias2"type22"_asyncio.Task2	2"_asyncio.Future22"typing.Iterator22"typing.Generator2	2"typing.Awaitable2222 "asyncio.tasks._FutureLike22"typing.Iterable22"builtins.float22!2$"concurrent.futures._base.Future22"builtins.set222
-2"asyncio._CoroutineLike2%222"_asyncio.Future2	2"_asyncio.Future2(222"_asyncio.Future2*2"builtins.bool2	2,222"_asyncio.Future2.222"_asyncio.Future20222"_asyncio.Future222	22"_asyncio.Future242
-22"_asyncio.Future262"builtins.list22"_asyncio.Future282"builtins.BaseException22:22;2"_asyncio.Future2<22;;2"_asyncio.Future2>22;;;2"_asyncio.Future2@22;;;;2"_asyncio.Future2B2	2;;;;;2"_asyncio.Future2D2
-2;;;;;;2"_asyncio.Future2F2"builtins.list2;2"_asyncio.Future2H2"typing.Coroutine2		2"builtins.set2)22KK2"typing.Coroutine2		L2"typing.Iterable2)2"builtins.set222OO2"typing.Coroutine2		P2"typing.Iterable22"builtins.dict2	22
+__all__0N*
+FIRST_COMPLETED0O*
+FIRST_EXCEPTION0O*
+ALL_COMPLETED0O22"builtins.object2"builtins.object22"asyncio.tasks.Task22"asyncio.futures.Future2222#"asyncio.tasks._TaskYieldType22"typing.Generator22"typing.Awaitable222	2("!asyncio.tasks._TaskCompatibleCoro2
+2"" asyncio.events.AbstractEventLoop2"builtins.str222"types.FrameType2"builtins.list22"builtins.int222"typing.TextIO222"types.GenericAlias2"type222"asyncio.futures.Future22"typing.Iterator22"typing.Generator222	2 "asyncio.tasks._FutureLike22"typing.Iterable22"builtins.float222$"concurrent.futures._base.Future22"typing.Coroutine22"asyncio.tasks.Task22"builtins.set2"2222!2"asyncio._CoroutineLike2%22"2"asyncio.futures.Future22"asyncio.futures.Future2(222"asyncio.futures.Future2*2"builtins.bool2	2,222"asyncio.futures.Future2.222"asyncio.futures.Future20222"asyncio.futures.Future222	22"asyncio.futures.Future242"builtins.BaseException2262272"asyncio.futures.Future2822772"asyncio.futures.Future2:227772"asyncio.futures.Future2<2277772"asyncio.futures.Future2>2	2777772"asyncio.futures.Future2@2"builtins.list22"asyncio.futures.Future2B2"typing.Coroutine22"builtins.set2)22EE2"typing.Coroutine2F2"typing.Iterable2)2"builtins.set222II2"typing.Coroutine2J2"typing.Iterable2	2"builtins.dict2222	2
