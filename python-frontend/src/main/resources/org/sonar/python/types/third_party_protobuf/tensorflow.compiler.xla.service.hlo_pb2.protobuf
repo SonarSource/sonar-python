@@ -25,7 +25,7 @@ DESCRIPTOR0r
 	MAY_ALIAS0r
 
 MUST_ALIAS0u
-Kind"-tensorflow.compiler.xla.service.hlo_pb2._Kind@b<tensorflow.compiler.xla.service.hlo_pb2._KindEnumTypeWrapper¼4
+Kind"-tensorflow.compiler.xla.service.hlo_pb2._Kind@b<tensorflow.compiler.xla.service.hlo_pb2._KindEnumTypeWrapperÏ4
 HloInstructionProto"google.protobuf.message.Message*,
 shape*
 
@@ -318,7 +318,9 @@ channel_id0	r
 padding_type0Lr
 custom_call_api_version0r
 async_group_id0	r
-async_execution_thread0!Ù
+async_execution_thread0!‚
+
+typing.finalì
 HloComputationProto"google.protobuf.message.Message*3
 instructionsT*
 
@@ -361,7 +363,9 @@ DESCRIPTOR0Sr
 id0	r
 root_id0	r
 is_fusion_computation0;r
-execution_thread0!î
+execution_thread0!‚
+
+typing.final
 HloScheduleProto"google.protobuf.message.Message*0
 	sequences]*
 
@@ -378,7 +382,9 @@ ClearField *
 field_name(Z8r
 
 DESCRIPTOR0Sr
-SEQUENCES_FIELD_NUMBER0	ð
+SEQUENCES_FIELD_NUMBER0	‚
+
+typing.finalƒ
 HloInputOutputAliasProto"google.protobuf.message.Message*.
 entriesb*
 
@@ -395,7 +401,9 @@ ClearField *
 field_name(Z8r
 
 DESCRIPTOR0Sr
-ENTRIES_FIELD_NUMBER0	ô
+ENTRIES_FIELD_NUMBER0	‚
+
+typing.final‡
 DynamicParameterBindingProto"google.protobuf.message.Message*.
 entriesg*
 
@@ -412,7 +420,9 @@ ClearField *
 field_name(Z8r
 
 DESCRIPTOR0Sr
-ENTRIES_FIELD_NUMBER0	¤
+ENTRIES_FIELD_NUMBER0	‚
+
+typing.final·
 CrossProgramPrefetch"google.protobuf.message.Message*,
 index
 *
@@ -433,7 +443,9 @@ field_name(l8r
 DESCRIPTOR0Sr
 PARAMETER_FIELD_NUMBER0	r
 INDEX_FIELD_NUMBER0	r
-	parameter0	š
+	parameter0	‚
+
+typing.final­
 HloModuleProto"google.protobuf.message.Message*3
 computationsm*
 
@@ -526,7 +538,9 @@ DESCRIPTOR0Sr
 id0	r
 
 is_dynamic0;r
-use_auto_spmd_partitioning0;°
+use_auto_spmd_partitioning0;‚
+
+typing.finalÃ
 LogicalBufferProto"google.protobuf.message.Message*3
 
 defined_atƒ*
@@ -556,7 +570,9 @@ DESCRIPTOR0Sr
 COLOR_FIELD_NUMBER0	r
 id0	r
 size0	r	
-color0	ü
+color0	‚
+
+typing.final
 BufferAllocationProto"google.protobuf.message.Message*=
 parameter_shape_index
 *
@@ -602,7 +618,9 @@ DESCRIPTOR0Sr
 is_constant0;r
 parameter_number0	r
 maybe_live_out0;r	
-color0	½
+color0	‚
+
+typing.finalÐ
 HeapSimulatorTrace"google.protobuf.message.Message*/
 eventsŽ*
 self(0:builtins.property`*l
@@ -622,7 +640,9 @@ DESCRIPTOR0Sr
 $WHOLE_MODULE_SIMULATION_FIELD_NUMBER0	r(
 $BUFFER_ALLOCATION_INDEX_FIELD_NUMBER0	r
 whole_module_simulation0;r
-buffer_allocation_index0	«
+buffer_allocation_index0	‚
+
+typing.final¾
 HloModuleGroupProto"google.protobuf.message.Message*4
 hlo_modules“*
 self(”0:builtins.property`*=
@@ -639,7 +659,9 @@ field_name(l8r
 DESCRIPTOR0Sr
 NAME_FIELD_NUMBER0	r
 HLO_MODULES_FIELD_NUMBER0	r
-name0!†
+name0!‚
+
+typing.final™
 BufferAssignmentProto"google.protobuf.message.Message*8
 logical_buffers—*
 self(˜0:builtins.property`*7
@@ -665,7 +687,9 @@ DESCRIPTOR0Sr
 LOGICAL_BUFFERS_FIELD_NUMBER0	r
 BUFFER_ALIASES_FIELD_NUMBER0	r#
 BUFFER_ALLOCATIONS_FIELD_NUMBER0	r&
-"HEAP_SIMULATOR_TRACES_FIELD_NUMBER0	–
+"HEAP_SIMULATOR_TRACES_FIELD_NUMBER0	‚
+
+typing.final©
 HloProto"google.protobuf.message.Message*2
 
 hlo_modulen*
@@ -689,7 +713,9 @@ field_name(l8r
 
 DESCRIPTOR0Sr
 HLO_MODULE_FIELD_NUMBER0	r"
-BUFFER_ASSIGNMENT_FIELD_NUMBER0	 
+BUFFER_ASSIGNMENT_FIELD_NUMBER0	‚
+
+typing.final³
 HloSnapshot"google.protobuf.message.Message*,
 hlo¥*
 self(¨0:builtins.property`*2
@@ -718,7 +744,9 @@ DESCRIPTOR0Sr
 ARGUMENTS_FIELD_NUMBER0	r
 RESULT_FIELD_NUMBER0	r#
 EXECUTION_PLATFORM_FIELD_NUMBER0	r
-execution_platform0!›
+execution_platform0!‚
+
+typing.final®
 HloModuleMetadataProto"google.protobuf.message.Message*>
 partitioned_module_ids
 *
@@ -746,7 +774,9 @@ DESCRIPTOR0Sr$
 PASS_METADATA_FIELD_NUMBER0	r
 canonical_module_id0	r
 module_group_name0!r
-original_module_id0	’
+original_module_id0	‚
+
+typing.final¥
 HloPassMetadata"google.protobuf.message.Message*7
 dump_filenames³*
 self(®0:builtins.property`*?
@@ -786,7 +816,9 @@ $MODULE_GROUP_MODULE_IDS_FIELD_NUMBER0	r%
 module_changed0;r
 	module_id0	r
 start_timestamp_usec0	r
-end_timestamp_usec0	Ç
+end_timestamp_usec0	‚
+
+typing.finalÚ
 EntryFunctionAttributes"google.protobuf.message.Message*0
 buffers¸*
 self(¹0:builtins.property`*E
@@ -803,7 +835,9 @@ field_name(l8r
 DESCRIPTOR0Sr
 BUFFERS_FIELD_NUMBER0	r!
 RESULT_XLA_SHAPE_FIELD_NUMBER0	r
-result_xla_shape0!¶
+result_xla_shape0!‚
+
+typing.finalÉ
 XlaRuntimeExecutableProto"google.protobuf.message.Message*8
 hlo_module_proton*
 self(¼0:builtins.property`*9
@@ -831,7 +865,9 @@ DESCRIPTOR0Sr!
 OBJ_FILE_FIELD_NUMBER0	r
 MLIR_MODULE_FIELD_NUMBER0	r
 obj_file0.r
-mlir_module0!*
+mlir_module0!‚
+
+typing.final*
 __annotations__0¿*
 collectionscollections *
 googlegoogle *

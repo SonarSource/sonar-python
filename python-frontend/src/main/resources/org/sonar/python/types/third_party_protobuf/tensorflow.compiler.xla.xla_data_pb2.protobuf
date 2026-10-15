@@ -95,7 +95,7 @@ r
 
 RNG_PHILOX0
 ê
-RandomAlgorithm"5tensorflow.compiler.xla.xla_data_pb2._RandomAlgorithm@bDtensorflow.compiler.xla.xla_data_pb2._RandomAlgorithmEnumTypeWrapperÓ
+RandomAlgorithm"5tensorflow.compiler.xla.xla_data_pb2._RandomAlgorithm@bDtensorflow.compiler.xla.xla_data_pb2._RandomAlgorithmEnumTypeWrapperÅ
 PaddingConfig"google.protobuf.message.Message*1
 
 dimensions*
@@ -114,7 +114,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r
-DIMENSIONS_FIELD_NUMBER0Í
+DIMENSIONS_FIELD_NUMBER0Ç
+
+typing.final˝
 	TileProto"google.protobuf.message.Message*1
 
 dimensions*
@@ -133,7 +135,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r
-DIMENSIONS_FIELD_NUMBER0É
+DIMENSIONS_FIELD_NUMBER0Ç
+
+typing.finalñ
 LayoutProto"google.protobuf.message.Message*6
 dim_level_types*
 
@@ -176,7 +180,9 @@ DESCRIPTOR0r
 MEMORY_SPACE_FIELD_NUMBER0r
 PHYSICAL_SHAPE_FIELD_NUMBER0r
 element_size_in_bits0r
-memory_space0£
+memory_space0Ç
+
+typing.final∂
 
 ShapeProto"google.protobuf.message.Message*1
 
@@ -219,7 +225,9 @@ DESCRIPTOR0r
 TUPLE_SHAPES_FIELD_NUMBER0r
 LAYOUT_FIELD_NUMBER0r%
 !IS_DYNAMIC_DIMENSION_FIELD_NUMBER0r
-element_type0È
+element_type0Ç
+
+typing.final¸
 ProgramShapeProto"google.protobuf.message.Message*1
 
 parameters(*
@@ -253,7 +261,9 @@ field_name(58r
 DESCRIPTOR0r
 PARAMETERS_FIELD_NUMBER0r
 RESULT_FIELD_NUMBER0r 
-PARAMETER_NAMES_FIELD_NUMBER0≠
+PARAMETER_NAMES_FIELD_NUMBER0Ç
+
+typing.final¿
 ComputationStats"google.protobuf.message.Message*J
 __init__*
 
@@ -273,7 +283,9 @@ DESCRIPTOR0r
 !TRANSCENDENTAL_COUNT_FIELD_NUMBER0r
 
 flop_count07r
-transcendental_count07 
+transcendental_count07Ç
+
+typing.final›
 
 OpMetadata"google.protobuf.message.Message*3
 profile_type:*
@@ -325,7 +337,9 @@ DESCRIPTOR0r
 creation_pass_id0r
 logical_creation_pass_id0r#
 size_of_generated_code_in_bytes0r'
-#size_of_memory_working_set_in_bytes0§
+#size_of_memory_working_set_in_bytes0Ç
+
+typing.final∑
 ExecutionProfile"google.protobuf.message.Message*È
 __init__*
 
@@ -358,7 +372,9 @@ DESCRIPTOR0r&
 compute_time_ns0r 
 compute_and_transfer_time_ns0r
 executable_size_in_bytes0r
-profile_cache_hit0&¡
+profile_cache_hit0&Ç
+
+typing.final‘
 ExecutionHandle"google.protobuf.message.Message*(
 __init__*
 
@@ -374,7 +390,9 @@ field_name(8r
 DESCRIPTOR0r
 HANDLE_FIELD_NUMBER0r
 
-handle0¬
+handle0Ç
+
+typing.final’
 GlobalDataHandle"google.protobuf.message.Message*(
 __init__*
 
@@ -390,7 +408,9 @@ field_name(8r
 DESCRIPTOR0r
 HANDLE_FIELD_NUMBER0r
 
-handle0Ö
+handle0Ç
+
+typing.finalò
 DeviceHandle"google.protobuf.message.Message*>
 __init__*
 
@@ -409,7 +429,9 @@ DESCRIPTOR0r
 DEVICE_COUNT_FIELD_NUMBER0r
 
 handle0r
-device_count0∆
+device_count0Ç
+
+typing.finalŸ
 ChannelHandle"google.protobuf.message.Message*6
 __init__*
 
@@ -432,7 +454,9 @@ DESCRIPTOR0r
 TYPE_FIELD_NUMBER0r
 
 handle0r
-type0I±
+type0IÇ
+
+typing.finalƒ
 DeviceAssignmentProto"google.protobuf.message.Message*:
 computation_devicesL*
 
@@ -455,7 +479,9 @@ DESCRIPTOR0r
 COMPUTATION_COUNT_FIELD_NUMBER0r$
  COMPUTATION_DEVICES_FIELD_NUMBER0r
 replica_count0r
-computation_count0Í
+computation_count0Ç
+
+typing.final˝
 LiteralProto"google.protobuf.message.Message*,
 shape*
 
@@ -550,7 +576,9 @@ DESCRIPTOR0r
 f16s0r	
 bf16s0r
 u16s0r
-s16s0Ê
+s16s0Ç
+
+typing.final˘
 WindowDimension"google.protobuf.message.Message*™
 __init__*
 
@@ -584,7 +612,9 @@ DESCRIPTOR0r
 padding_high0r
 window_dilation0r
 base_dilation0r
-window_reversal0&Á
+window_reversal0&Ç
+
+typing.final˙
 Window"google.protobuf.message.Message*1
 
 dimensionsZ*
@@ -603,7 +633,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r
-DIMENSIONS_FIELD_NUMBER0¬
+DIMENSIONS_FIELD_NUMBER0Ç
+
+typing.final’
 GatherDimensionNumbers"google.protobuf.message.Message*2
 offset_dims*
 
@@ -633,7 +665,9 @@ DESCRIPTOR0r
 !COLLAPSED_SLICE_DIMS_FIELD_NUMBER0r 
 START_INDEX_MAP_FIELD_NUMBER0r!
 INDEX_VECTOR_DIM_FIELD_NUMBER0r
-index_vector_dim0Ä
+index_vector_dim0Ç
+
+typing.finalì
 ScatterDimensionNumbers"google.protobuf.message.Message*9
 update_window_dims*
 
@@ -663,7 +697,9 @@ DESCRIPTOR0r#
 !INSERTED_WINDOW_DIMS_FIELD_NUMBER0r-
 )SCATTER_DIMS_TO_OPERAND_DIMS_FIELD_NUMBER0r!
 INDEX_VECTOR_DIM_FIELD_NUMBER0r
-index_vector_dim0‡	
+index_vector_dim0Ç
+
+typing.finalÛ	
 ConvolutionDimensionNumbers"google.protobuf.message.Message*?
 input_spatial_dimensions*
 
@@ -708,7 +744,9 @@ $INPUT_FEATURE_DIMENSION_FIELD_NUMBER0r)
 kernel_input_feature_dimension0r#
 kernel_output_feature_dimension0r
 output_batch_dimension0r
-output_feature_dimension0Ω
+output_feature_dimension0Ç
+
+typing.final–
 DotDimensionNumbers"google.protobuf.message.Message*A
 lhs_contracting_dimensions*
 
@@ -740,7 +778,9 @@ DESCRIPTOR0r+
 'LHS_CONTRACTING_DIMENSIONS_FIELD_NUMBER0r+
 'RHS_CONTRACTING_DIMENSIONS_FIELD_NUMBER0r%
 !LHS_BATCH_DIMENSIONS_FIELD_NUMBER0r%
-!RHS_BATCH_DIMENSIONS_FIELD_NUMBER0÷
+!RHS_BATCH_DIMENSIONS_FIELD_NUMBER0Ç
+
+typing.finalÈ
 TriangularSolveOptions"google.protobuf.message.Message*f
 __init__*
 
@@ -768,7 +808,9 @@ DESCRIPTOR0r
 	left_side0&r	
 lower0&r
 unit_diagonal0&r
-transpose_a0eæ
+transpose_a0eÇ
+
+typing.final—
 CholeskyOptions"google.protobuf.message.Message*'
 __init__*
 
@@ -783,7 +825,9 @@ field_name(8r
 
 DESCRIPTOR0r
 LOWER_FIELD_NUMBER0r	
-lower0&ﬁ
+lower0&Ç
+
+typing.finalÒ
 FrontendAttributes"google.protobuf.message.Message**
 maph*
 
@@ -800,7 +844,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r
-MAP_FIELD_NUMBER0◊
+MAP_FIELD_NUMBER0Ç
+
+typing.finalÍ
 
 OpSharding"google.protobuf.message.Message*1
 
@@ -863,7 +909,9 @@ $TILE_ASSIGNMENT_DEVICES_FIELD_NUMBER0r
 METADATA_FIELD_NUMBER0r
 LAST_TILE_DIMS_FIELD_NUMBER0r
 type0or
-replicate_on_last_tile_dim0&
+replicate_on_last_tile_dim0&Ç
+
+typing.finalÉ
 ReplicaGroup"google.protobuf.message.Message*2
 replica_ids*
 
@@ -880,7 +928,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r
-REPLICA_IDS_FIELD_NUMBER0Û
+REPLICA_IDS_FIELD_NUMBER0Ç
+
+typing.finalÜ
 SourceTarget"google.protobuf.message.Message*8
 __init__*
 
@@ -900,7 +950,9 @@ DESCRIPTOR0r
 
 source0r
 
-target0º
+target0Ç
+
+typing.finalœ
 PrecisionConfig"google.protobuf.message.Message*8
 operand_precision|*
 
@@ -921,7 +973,9 @@ DESCRIPTOR0r
 HIGH0{r
 HIGHEST0{r
 PACKED_NIBBLE0{r"
-OPERAND_PRECISION_FIELD_NUMBER0®
+OPERAND_PRECISION_FIELD_NUMBER0Ç
+
+typing.finalª
 ParameterReplication"google.protobuf.message.Message*B
 replicated_at_leaf_buffers)*
 self(Ä0:builtins.property`*=
@@ -935,7 +989,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r+
-'REPLICATED_AT_LEAF_BUFFERS_FIELD_NUMBER0ª
+'REPLICATED_AT_LEAF_BUFFERS_FIELD_NUMBER0Ç
+
+typing.finalŒ
 WhileLoopBackendConfig"google.protobuf.message.Message*9
 known_trip_countÅ*
 self(Ç0:builtins.property`*4
@@ -953,7 +1009,9 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r!
-KNOWN_TRIP_COUNT_FIELD_NUMBER0Â
+KNOWN_TRIP_COUNT_FIELD_NUMBER0Ç
+
+typing.final¯
 CustomCallOutputOperandAliasing"google.protobuf.message.Message*:
 output_shape_index*
 self(Ñ0:builtins.property`*;
@@ -974,7 +1032,9 @@ DESCRIPTOR0r#
 OUTPUT_SHAPE_INDEX_FIELD_NUMBER0r
 OPERAND_INDEX_FIELD_NUMBER0r$
  OPERAND_SHAPE_INDEX_FIELD_NUMBER0r
-operand_index0*
+operand_index0Ç
+
+typing.final*
 __annotations__0Ü*
 collectionscollections *
 googlegoogle *

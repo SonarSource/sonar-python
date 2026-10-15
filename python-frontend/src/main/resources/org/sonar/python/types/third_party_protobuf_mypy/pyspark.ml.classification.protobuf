@@ -1,12 +1,14 @@
 
 pyspark.ml.classificationb
-_ClassifierParams"+pyspark.ml.param.shared.HasRawPredictionCol" pyspark.ml.base._PredictorParamsõ
+_ClassifierParams"+pyspark.ml.param.shared.HasRawPredictionCol" pyspark.ml.base._PredictorParamsø
 
 Classifier"pyspark.ml.base.Predictor"+pyspark.ml.classification._ClassifierParams*2
 setRawPredictionCol*
 
 self(*
-value(08@Pbabc.ABCMeta≤
+value(08@Pbabc.ABCMetaÇ!
+
+pyspark.ml.common.inherit_doc÷
 ClassificationModel"pyspark.ml.base.PredictionModel"+pyspark.ml.classification._ClassifierParams*2
 setRawPredictionCol*
 
@@ -20,8 +22,10 @@ numClasses*
 predictRaw*
 
 self(*
-value(0:abc.abstractmethod@8@babc.ABCMetaü
-_ProbabilisticClassifierParams")pyspark.ml.param.shared.HasProbabilityCol"%pyspark.ml.param.shared.HasThresholds"+pyspark.ml.classification._ClassifierParamsÍ
+value(0:abc.abstractmethod@8@babc.ABCMetaÇ!
+
+pyspark.ml.common.inherit_docü
+_ProbabilisticClassifierParams")pyspark.ml.param.shared.HasProbabilityCol"%pyspark.ml.param.shared.HasThresholds"+pyspark.ml.classification._ClassifierParamsé
 ProbabilisticClassifier"$pyspark.ml.classification.Classifier"8pyspark.ml.classification._ProbabilisticClassifierParams*0
 setProbabilityCol*
 
@@ -30,7 +34,9 @@ predictRaw*
 setThresholds*
 
 self(*
-value(08@babc.ABCMeta≈
+value(08@babc.ABCMetaÇ!
+
+pyspark.ml.common.inherit_docÈ
  ProbabilisticClassificationModel"-pyspark.ml.classification.ClassificationModel"8pyspark.ml.classification._ProbabilisticClassifierParams*0
 setProbabilityCol	*
 
@@ -44,12 +50,16 @@ predictRaw*
 
 self(
 *
-value(0:abc.abstractmethod@8@babc.ABCMeta†
+value(0:abc.abstractmethod@8@babc.ABCMetaÇ!
+
+pyspark.ml.common.inherit_docƒ
 _JavaClassifier"$pyspark.ml.classification.Classifier" pyspark.ml.wrapper.JavaPredictor*2
 setRawPredictionCol*
 
 self(*
-value(08@Pbabc.ABCMeta”
+value(08@Pbabc.ABCMetaÇ!
+
+pyspark.ml.common.inherit_doc˜
 _JavaClassificationModel"-pyspark.ml.classification.ClassificationModel"&pyspark.ml.wrapper.JavaPredictionModel*1
 
 numClasses*
@@ -59,13 +69,19 @@ numClasses*
 predictRaw*
 
 self(*
-value(08Pè
-_JavaProbabilisticClassifier"1pyspark.ml.classification.ProbabilisticClassifier")pyspark.ml.classification._JavaClassifier8@Pbabc.ABCMetaŒ
+value(08PÇ!
+
+pyspark.ml.common.inherit_doc≥
+_JavaProbabilisticClassifier"1pyspark.ml.classification.ProbabilisticClassifier")pyspark.ml.classification._JavaClassifier8@Pbabc.ABCMetaÇ!
+
+pyspark.ml.common.inherit_docÚ
 %_JavaProbabilisticClassificationModel":pyspark.ml.classification.ProbabilisticClassificationModel"2pyspark.ml.classification._JavaClassificationModel*1
 predictProbability*
 
 self(*
-value(08PÆ
+value(08PÇ!
+
+pyspark.ml.common.inherit_doc“
 _ClassificationSummary"pyspark.ml.wrapper.JavaWrapper*2
 predictions*
 
@@ -116,14 +132,18 @@ predictRaw*
 weightedFMeasure*
 
 self(*
-beta (08•
+beta (08Ç!
+
+pyspark.ml.common.inherit_doc…
 _TrainingSummary"pyspark.ml.wrapper.JavaWrapper*7
 objectiveHistory*
 
 self(0:builtins.property`*6
 totalIterations*
 
-self(0:builtins.property`8¬
+self(0:builtins.property`8Ç!
+
+pyspark.ml.common.inherit_docÊ
 _BinaryClassificationSummary"0pyspark.ml.classification._ClassificationSummary*/
 scoreCol*
 
@@ -145,14 +165,16 @@ predictRaw*
 self(0:builtins.property`*8
 recallByThreshold*
 
-self(0:builtins.property`8ÿ
+self(0:builtins.property`8Ç!
+
+pyspark.ml.common.inherit_docÿ
 _LinearSVCParams"+pyspark.ml.classification._ClassifierParams"#pyspark.ml.param.shared.HasRegParam""pyspark.ml.param.shared.HasMaxIter"'pyspark.ml.param.shared.HasFitIntercept"pyspark.ml.param.shared.HasTol"*pyspark.ml.param.shared.HasStandardization"$pyspark.ml.param.shared.HasWeightCol"+pyspark.ml.param.shared.HasAggregationDepth"$pyspark.ml.param.shared.HasThreshold"+pyspark.ml.param.shared.HasMaxBlockSizeInMB*$
 __init__*
 
 self(*
 
 args(r
-	threshold0î
+	threshold0∏
 
 	LinearSVC")pyspark.ml.classification._JavaClassifier"*pyspark.ml.classification._LinearSVCParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*¡
 __init__*
@@ -229,7 +251,9 @@ setMaxIter*
 
 self(*
 value(08r
-_input_kwargs0¨
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc¨
 LinearSVCModel"2pyspark.ml.classification._JavaClassificationModel"*pyspark.ml.classification._LinearSVCParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable""pyspark.ml.util.HasTrainingSummary*+
 setThreshold*
 
@@ -248,8 +272,10 @@ setMaxIter*
 
 self(*
 dataset(J
-LinearSVCSummary"6pyspark.ml.classification._BinaryClassificationSummaryt
-LinearSVCTrainingSummary"*pyspark.ml.classification.LinearSVCSummary"*pyspark.ml.classification._TrainingSummary8ø
+LinearSVCSummary"6pyspark.ml.classification._BinaryClassificationSummaryò
+LinearSVCTrainingSummary"*pyspark.ml.classification.LinearSVCSummary"*pyspark.ml.classification._TrainingSummary8Ç!
+
+pyspark.ml.common.inherit_docø
 _LogisticRegressionParams"8pyspark.ml.classification._ProbabilisticClassifierParams"#pyspark.ml.param.shared.HasRegParam"*pyspark.ml.param.shared.HasElasticNetParam""pyspark.ml.param.shared.HasMaxIter"'pyspark.ml.param.shared.HasFitIntercept"pyspark.ml.param.shared.HasTol"*pyspark.ml.param.shared.HasStandardization"$pyspark.ml.param.shared.HasWeightCol"+pyspark.ml.param.shared.HasAggregationDepth"$pyspark.ml.param.shared.HasThreshold"+pyspark.ml.param.shared.HasMaxBlockSizeInMB*$
 __init__*
 
@@ -294,7 +320,7 @@ setMaxIter*
 lowerBoundsOnCoefficients0"r
 upperBoundsOnCoefficients0"r
 lowerBoundsOnIntercepts0#r
-upperBoundsOnIntercepts0#Å
+upperBoundsOnIntercepts0#•
 LogisticRegression"6pyspark.ml.classification._JavaProbabilisticClassifier"3pyspark.ml.classification._LogisticRegressionParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*/
 _create_model$*
 
@@ -454,7 +480,9 @@ thresholds ((*
 lowerBoundsOnIntercepts ('*
 upperBoundsOnIntercepts ('*
 maxBlockSizeInMB (0:typing.overloadX8r
-_input_kwargs0•
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc•
 LogisticRegressionModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel"3pyspark.ml.classification._LogisticRegressionParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable""pyspark.ml.util.HasTrainingSummary*3
 coefficients*
 
@@ -481,16 +509,24 @@ thresholds ((*
 self(*0:builtins.property`*2
 featuresCol*
 
-self(*0:builtins.property`Ü
-!LogisticRegressionTrainingSummary"3pyspark.ml.classification.LogisticRegressionSummary"*pyspark.ml.classification._TrainingSummary8ê
-BinaryLogisticRegressionSummary"6pyspark.ml.classification._BinaryClassificationSummary"3pyspark.ml.classification.LogisticRegressionSummary8£
-'BinaryLogisticRegressionTrainingSummary"9pyspark.ml.classification.BinaryLogisticRegressionSummary";pyspark.ml.classification.LogisticRegressionTrainingSummary8ì
+self(*0:builtins.property`™
+!LogisticRegressionTrainingSummary"3pyspark.ml.classification.LogisticRegressionSummary"*pyspark.ml.classification._TrainingSummary8Ç!
+
+pyspark.ml.common.inherit_doc¥
+BinaryLogisticRegressionSummary"6pyspark.ml.classification._BinaryClassificationSummary"3pyspark.ml.classification.LogisticRegressionSummary8Ç!
+
+pyspark.ml.common.inherit_doc«
+'BinaryLogisticRegressionTrainingSummary"9pyspark.ml.classification.BinaryLogisticRegressionSummary";pyspark.ml.classification.LogisticRegressionTrainingSummary8Ç!
+
+pyspark.ml.common.inherit_doc∑
 _DecisionTreeClassifierParams"#pyspark.ml.tree._DecisionTreeParams"%pyspark.ml.tree._TreeClassifierParams*$
 __init__*
 
 self(+*
 
-args(8·
+args(8Ç!
+
+pyspark.ml.common.inherit_docÖ
 DecisionTreeClassifier"6pyspark.ml.classification._JavaProbabilisticClassifier"7pyspark.ml.classification._DecisionTreeClassifierParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*§
 __init__*
 
@@ -582,17 +618,23 @@ setMaxBins,*
 
 self(,*
 value(08r
-_input_kwargs0º
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc‡
 DecisionTreeClassificationModel""pyspark.ml.tree._DecisionTreeModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel"7pyspark.ml.classification._DecisionTreeClassifierParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*9
 featureImportances*
 
-self(.0:builtins.property`8ì
+self(.0:builtins.property`8Ç!
+
+pyspark.ml.common.inherit_doc∑
 _RandomForestClassifierParams"#pyspark.ml.tree._RandomForestParams"%pyspark.ml.tree._TreeClassifierParams*$
 __init__*
 
 self(/*
 
-args(8ﬁ
+args(8Ç!
+
+pyspark.ml.common.inherit_docÇ
 RandomForestClassifier"6pyspark.ml.classification._JavaProbabilisticClassifier"7pyspark.ml.classification._RandomForestClassifierParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*Å
 __init__*
 
@@ -708,7 +750,9 @@ setMaxBins0*
 
 self(0*
 value(08r
-_input_kwargs0Â
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docÂ
 RandomForestClassificationModel""pyspark.ml.tree._TreeEnsembleModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel"7pyspark.ml.classification._RandomForestClassifierParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable""pyspark.ml.util.HasTrainingSummary*9
 featureImportances*
 
@@ -723,10 +767,16 @@ setMaxBins0*
 
 self(2*
 dataset(U
-!RandomForestClassificationSummary"0pyspark.ml.classification._ClassificationSummaryñ
-)RandomForestClassificationTrainingSummary";pyspark.ml.classification.RandomForestClassificationSummary"*pyspark.ml.classification._TrainingSummary8c
-'BinaryRandomForestClassificationSummary"6pyspark.ml.classification._BinaryClassificationSummary8ª
-/BinaryRandomForestClassificationTrainingSummary"Apyspark.ml.classification.BinaryRandomForestClassificationSummary"Cpyspark.ml.classification.RandomForestClassificationTrainingSummary8√
+!RandomForestClassificationSummary"0pyspark.ml.classification._ClassificationSummary∫
+)RandomForestClassificationTrainingSummary";pyspark.ml.classification.RandomForestClassificationSummary"*pyspark.ml.classification._TrainingSummary8Ç!
+
+pyspark.ml.common.inherit_docá
+'BinaryRandomForestClassificationSummary"6pyspark.ml.classification._BinaryClassificationSummary8Ç!
+
+pyspark.ml.common.inherit_docﬂ
+/BinaryRandomForestClassificationTrainingSummary"Apyspark.ml.classification.BinaryRandomForestClassificationSummary"Cpyspark.ml.classification.RandomForestClassificationTrainingSummary8Ç!
+
+pyspark.ml.common.inherit_doc√
 _GBTClassifierParams"pyspark.ml.tree._GBTParams"$pyspark.ml.tree._HasVarianceImpurity*$
 __init__*
 
@@ -737,7 +787,7 @@ setMaxBins0*
 
 self(80r
 supportedLossTypes0r
-lossType0!ﬁ
+lossType0!Ç
 GBTClassifier"6pyspark.ml.classification._JavaProbabilisticClassifier".pyspark.ml.classification._GBTClassifierParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*ñ
 __init__*
 
@@ -864,7 +914,9 @@ setMaxIter9*
 
 self(9*
 value(08r
-_input_kwargs0å
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docå
 GBTClassificationModel""pyspark.ml.tree._TreeEnsembleModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel".pyspark.ml.classification._GBTClassifierParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*9
 featureImportances*
 
@@ -889,7 +941,7 @@ setMaxIter9*
 
 self(=0r
 	smoothing0r
-	modelType0!™
+	modelType0!Œ
 
 NaiveBayes"6pyspark.ml.classification._JavaProbabilisticClassifier"+pyspark.ml.classification._NaiveBayesParams"%pyspark.ml.param.shared.HasThresholds"$pyspark.ml.param.shared.HasWeightCol"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*Ì
 __init__*
@@ -935,7 +987,9 @@ java_model(*+
 
 self(>*
 value(8r
-_input_kwargs0∆
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc∆
 NaiveBayesModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel"+pyspark.ml.classification._NaiveBayesParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*)
 pi*
 
@@ -962,7 +1016,7 @@ java_model(*+
 layers0Br
 
 solver0!r
-initialWeights0#ø	
+initialWeights0#„	
 MultilayerPerceptronClassifier"6pyspark.ml.classification._JavaProbabilisticClassifier"5pyspark.ml.classification._MultilayerPerceptronParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*©
 __init__*
 
@@ -1034,7 +1088,9 @@ setMaxIterC*
 
 self(C*
 value(8r
-_input_kwargs0˘
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc˘
 'MultilayerPerceptronClassificationModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel"5pyspark.ml.classification._MultilayerPerceptronParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable""pyspark.ml.util.HasTrainingSummary*.
 weights*
 
@@ -1046,14 +1102,16 @@ setMaxIterC*
 
 self(E*
 dataset(]
-)MultilayerPerceptronClassificationSummary"0pyspark.ml.classification._ClassificationSummary¶
-1MultilayerPerceptronClassificationTrainingSummary"Cpyspark.ml.classification.MultilayerPerceptronClassificationSummary"*pyspark.ml.classification._TrainingSummary8ñ
+)MultilayerPerceptronClassificationSummary"0pyspark.ml.classification._ClassificationSummary 
+1MultilayerPerceptronClassificationTrainingSummary"Cpyspark.ml.classification.MultilayerPerceptronClassificationSummary"*pyspark.ml.classification._TrainingSummary8Ç!
+
+pyspark.ml.common.inherit_docñ
 _OneVsRestParams"+pyspark.ml.classification._ClassifierParams"$pyspark.ml.param.shared.HasWeightCol*
 getClassifierH*
 
 self(I0r
 
-classifier0Já	
+classifier0J´	
 	OneVsRest"pyspark.ml.base.Estimator"*pyspark.ml.classification._OneVsRestParams"&pyspark.ml.param.shared.HasParallelism"pyspark.ml.util.MLReadable"pyspark.ml.util.MLWritable*ƒ
 __init__*
 
@@ -1126,7 +1184,9 @@ java_stage(0:builtins.classmethodp*
 writeV*
 
 self(K8Pr
-_input_kwargs0ñ
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docñ
 _OneVsRestSharedReadWrite"builtins.object*d
 saveImpl*
 instance(W*
@@ -1139,7 +1199,7 @@ java_stage(0:builtins.classmethodp*
 path(*
 sc(X0:builtins.staticmethodh*=
 validateParams*
-instance(W0:builtins.staticmethodh}
+instance(W0:builtins.staticmethodh°
 OneVsRestReader"pyspark.ml.util.MLReader*#
 __init__*
 
@@ -1150,7 +1210,9 @@ java_stage(0:builtins.classmethodp*
 self(U*
 
 path(8r
-cls0Zã
+cls0ZÇ!
+
+pyspark.ml.common.inherit_docØ
 OneVsRestWriter"pyspark.ml.util.MLWriter*(
 __init__*
 
@@ -1161,7 +1223,9 @@ java_stage(0:builtins.classmethodp*
 self([*
 
 path(8r
-instance0N”
+instance0NÇ!
+
+pyspark.ml.common.inherit_doc”
 OneVsRestModel"pyspark.ml.base.Model"*pyspark.ml.classification._OneVsRestParams"pyspark.ml.util.MLReadable"pyspark.ml.util.MLWritable*+
 setFeaturesColO*
 
@@ -1203,7 +1267,7 @@ java_stage(0:builtins.classmethodp*
 self(Or
 
 models0\r
-	_java_obj0Ç
+	_java_obj0¶
 OneVsRestModelReader"pyspark.ml.util.MLReader*#
 __init__*
 
@@ -1214,7 +1278,9 @@ java_stage(0:builtins.classmethodp*
 self(^*
 
 path(8r
-cls0]ê
+cls0]Ç!
+
+pyspark.ml.common.inherit_doc¥
 OneVsRestModelWriter"pyspark.ml.util.MLWriter*(
 __init__*
 
@@ -1225,7 +1291,9 @@ java_stage(0:builtins.classmethodp*
 self(_*
 
 path(8r
-instance0OË
+instance0OÇ!
+
+pyspark.ml.common.inherit_docå
 FMClassifier"6pyspark.ml.classification._JavaProbabilisticClassifier"2pyspark.ml.regression._FactorizationMachinesParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*˝
 __init__*
 
@@ -1322,7 +1390,9 @@ setMaxIter`*
 
 self(`*
 value(08r
-_input_kwargs0≈
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc≈
 FMClassificationModel"?pyspark.ml.classification._JavaProbabilisticClassificationModel"2pyspark.ml.regression._FactorizationMachinesParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable""pyspark.ml.util.HasTrainingSummary*0
 	intercept*
 
@@ -1340,8 +1410,10 @@ setMaxIter`*
 
 self(a*
 dataset(Q
-FMClassificationSummary"6pyspark.ml.classification._BinaryClassificationSummaryÇ
-FMClassificationTrainingSummary"1pyspark.ml.classification.FMClassificationSummary"*pyspark.ml.classification._TrainingSummary8*
+FMClassificationSummary"6pyspark.ml.classification._BinaryClassificationSummary¶
+FMClassificationTrainingSummary"1pyspark.ml.classification.FMClassificationSummary"*pyspark.ml.classification._TrainingSummary8Ç!
+
+pyspark.ml.common.inherit_doc*
 __annotations__0*
 
 JavaObject0*

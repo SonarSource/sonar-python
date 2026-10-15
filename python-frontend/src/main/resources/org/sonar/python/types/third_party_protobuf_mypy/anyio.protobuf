@@ -415,7 +415,7 @@ write_text,*
 	__slots__0dr
 __weakref__0r	
 _path0er
-_limiter0$É
+_limiter0$ü
 TCPConnectable#anyio._core._sockets.TCPConnectable"(anyio.abc._streams.ByteStreamConnectable*
 __post_init__*
 
@@ -439,7 +439,9 @@ write_text,*
 host0kr
 port0r
 __match_args__0lr
-__dataclass_fields__0n†
+__dataclass_fields__0nÇ
+
+dataclasses.dataclassº
 UNIXConnectable$anyio._core._sockets.UNIXConnectable"(anyio.abc._streams.ByteStreamConnectable*7
 connectp*
 
@@ -453,7 +455,9 @@ write_text,*
 path (J0h8r
 path0Jr
 __match_args__0rr
-__dataclass_fields__0nß
+__dataclass_fields__0nÇ
+
+dataclasses.dataclassß
 create_memory_object_stream0anyio._core._streams.create_memory_object_stream"builtins.tuple*D
 __new__u*	
 cls(v*
@@ -512,7 +516,7 @@ statisticsx*
 
 self(#*
 value(K0:.setterr
-	__slots__0yπ
+	__slots__0yŸ
 CapacityLimiterStatistics6anyio._core._synchronization.CapacityLimiterStatistics"builtins.object*i
 __init__*
 
@@ -531,7 +535,9 @@ statisticsx*
 	borrowers0zr
 tasks_waiting0r
 __match_args__0{r
-__dataclass_fields__0nø
+__dataclass_fields__0nÇ
+ 
+dataclasses.dataclassø
 	Condition&anyio._core._synchronization.Condition"builtins.object*&
 __init__*
 
@@ -584,7 +590,7 @@ statisticsÅ*
 	__slots__0Çr
 _owner_task0Ñr	
 _lock0}r
-_waiters0Ü¬
+_waiters0Ü‚
 ConditionStatistics0anyio._core._synchronization.ConditionStatistics"builtins.object*F
 __init__*
 self(Å*
@@ -596,7 +602,9 @@ statisticsÅ*
 tasks_waiting0r
 lock_statistics0ár
 __match_args__0lr
-__dataclass_fields__0nÕ
+__dataclass_fields__0nÇ
+ 
+dataclasses.dataclassÕ
 Event"anyio._core._synchronization.Event"builtins.object*
 __new__Ö*
 
@@ -610,7 +618,7 @@ statisticsÅ*
 
 statisticsâ*
 self(Ör
-	__slots__0yÚ
+	__slots__0yí
 EventStatistics,anyio._core._synchronization.EventStatistics"builtins.object*.
 __init__*
 self(â*
@@ -619,7 +627,9 @@ statisticsâ*
 tasks_waiting (0h8r
 tasks_waiting0r
 __match_args__0rr
-__dataclass_fields__0nÎ
+__dataclass_fields__0nÇ
+ 
+dataclasses.dataclassÎ
 Lock!anyio._core._synchronization.Lock"builtins.object*/
 __new__}*
 
@@ -651,7 +661,7 @@ __aenter__&*
 statisticsá*
 
 self(}r
-	__slots__0y≈
+	__slots__0yÂ
 LockStatistics+anyio._core._synchronization.LockStatistics"builtins.object*J
 __init__*
 self(á*
@@ -668,7 +678,9 @@ statisticsá*
 owner0Ñr
 tasks_waiting0r
 __match_args__0ãr
-__dataclass_fields__0n”
+__dataclass_fields__0nÇ
+ 
+dataclasses.dataclass”
 ResourceGuard*anyio._core._synchronization.ResourceGuard"builtins.object*)
 __init__*
 self(å*
@@ -713,7 +725,7 @@ __aenter__è*
 statisticsê*
 self(çr
 	__slots__0ër
-_fast_acquire0˙
+_fast_acquire0ö
 SemaphoreStatistics0anyio._core._synchronization.SemaphoreStatistics"builtins.object*.
 __init__*
 self(ê*
@@ -722,7 +734,9 @@ statisticsê*
 tasks_waiting (0h8r
 tasks_waiting0r
 __match_args__0rr
-__dataclass_fields__0nπ
+__dataclass_fields__0nÇ
+ 
+dataclasses.dataclassπ
 CancelScopeanyio._core._tasks.CancelScope"builtins.object*<
 __new__í*
 
@@ -750,7 +764,7 @@ statisticsê*
 shield*
 self(í*
 value(0:.setterr
-	__slots__0yÖ
+	__slots__0yò
 
 TaskHandleanyio._core._tasks.TaskHandle"builtins.object*1
 __init__*
@@ -795,7 +809,9 @@ _exception0r
 
 CANCELLING0ór
 	CANCELLED0ór
-FAILED0ó°
+FAILED0óÇ
+
+typing.final°
 NamedTemporaryFile(anyio._core._tempfile.NamedTemporaryFile"builtins.object*
 
 __aenter__ô*

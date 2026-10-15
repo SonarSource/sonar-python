@@ -1,5 +1,5 @@
 
-pyspark.ml.feature“
+pyspark.ml.featureˆ
 	Binarizer""pyspark.ml.wrapper.JavaTransformer"$pyspark.ml.param.shared.HasThreshold"%pyspark.ml.param.shared.HasThresholds"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"$pyspark.ml.param.shared.HasInputCols"%pyspark.ml.param.shared.HasOutputCols"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*+
 setThreshold*
 
@@ -58,7 +58,9 @@ outputCols (	0:typing.overloadX8r
 _input_kwargs0r
 	threshold0r
 
-thresholds0≤
+thresholds0Ç!
+
+pyspark.ml.common.inherit_doc≤
 
 _LSHParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol*$
 __init__*
@@ -111,7 +113,7 @@ _LSHParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutp
 getBucketLength*
 
 self(0r
-bucketLength0∞
+bucketLength0‘
 BucketedRandomProjectionLSH"pyspark.ml.feature._LSH"pyspark.ml.feature._LSHParams"5pyspark.ml.feature._BucketedRandomProjectionLSHParams"pyspark.ml.param.shared.HasSeed"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*ê
 __init__*
 
@@ -143,8 +145,10 @@ _LSHParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutp
 
 java_model(
 8r
-_input_kwargs0∑
- BucketedRandomProjectionLSHModel"pyspark.ml.feature._LSHModel"5pyspark.ml.feature._BucketedRandomProjectionLSHParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritableá
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc∑
+ BucketedRandomProjectionLSHModel"pyspark.ml.feature._LSHModel"5pyspark.ml.feature._BucketedRandomProjectionLSHParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable´
 
 
 Bucketizer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"$pyspark.ml.param.shared.HasInputCols"%pyspark.ml.param.shared.HasOutputCols"(pyspark.ml.param.shared.HasHandleInvalid"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*(
@@ -218,7 +222,9 @@ outputCols (	0:typing.overloadX8r
 
 splits0r
 handleInvalid0r
-splitsArray0ı
+splitsArray0Ç!
+
+pyspark.ml.common.inherit_docı
 _CountVectorizerParams"pyspark.ml.wrapper.JavaParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol*$
 __init__*
 
@@ -246,7 +252,7 @@ outputCols (	0:typing.overloadX8r
 maxDF0r
 	vocabSize0r
 
-binary0"‹
+binary0"Ä
 CountVectorizer" pyspark.ml.wrapper.JavaEstimator")pyspark.ml.feature._CountVectorizerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*•
 __init__*
 
@@ -302,7 +308,9 @@ outputCols (	0:typing.overloadX8r
 
 java_model(
 8r
-_input_kwargs0è
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc≥
 CountVectorizerModel"pyspark.ml.wrapper.JavaModel")pyspark.ml.feature._CountVectorizerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputCol$*
 
@@ -331,7 +339,9 @@ vocabulary*
 	setBinary$*
 
 self($*
-value(!08≈
+value(!08Ç!
+
+pyspark.ml.common.inherit_docÈ
 DCT""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*f
 __init__*
 
@@ -363,7 +373,9 @@ getInverse!*
 self('*
 value(8r
 _input_kwargs0r
-inverse0"„
+inverse0"Ç!
+
+pyspark.ml.common.inherit_docá
 ElementwiseProduct""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*i
 __init__*
 
@@ -396,7 +408,9 @@ scalingVec ()*
 value(8r
 _input_kwargs0r
 
-scalingVec0*¸
+scalingVec0*Ç!
+
+pyspark.ml.common.inherit_doc†
 FeatureHasher""pyspark.ml.wrapper.JavaTransformer"$pyspark.ml.param.shared.HasInputCols"$pyspark.ml.param.shared.HasOutputCol"&pyspark.ml.param.shared.HasNumFeatures"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*Ñ
 __init__*
 
@@ -432,7 +446,9 @@ scalingVec0*¸
 self(+*
 value(8r
 _input_kwargs0r
-categoricalCols0,Ï
+categoricalCols0,Ç!
+
+pyspark.ml.common.inherit_docê
 	HashingTF""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"&pyspark.ml.param.shared.HasNumFeatures"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*z
 __init__*
 
@@ -475,7 +491,9 @@ scalingVec0*¸
 08r
 _input_kwargs0r
 
-binary0"Æ
+binary0"Ç!
+
+pyspark.ml.common.inherit_docÆ
 
 _IDFParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol*
 getMinDocFreq*
@@ -488,7 +506,7 @@ _IDFParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutp
 args(
 r
 
-minDocFreq0¶
+minDocFreq0 
 IDF" pyspark.ml.wrapper.JavaEstimator"pyspark.ml.feature._IDFParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*i
 __init__*
 
@@ -522,7 +540,9 @@ minDocFreq (*
 
 java_model(
 8r
-_input_kwargs0Ï
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docÏ
 IDFModel"pyspark.ml.wrapper.JavaModel"pyspark.ml.feature._IDFParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputCol0*
 
@@ -555,7 +575,7 @@ java_model(
 
 self(20r
 strategy0r
-missingValue0Ü	
+missingValue0™	
 Imputer" pyspark.ml.wrapper.JavaEstimator"!pyspark.ml.feature._ImputerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setStrategy3*
 
@@ -627,7 +647,9 @@ outputCols (	*
 inputCol (*
 	outputCol (*
 relativeError (0:typing.overloadX8r
-_input_kwargs0˜
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc˜
 ImputerModel"pyspark.ml.wrapper.JavaModel"!pyspark.ml.feature._ImputerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*+
 setInputCols4*
 
@@ -647,7 +669,7 @@ outputCols (	*
 value(0*2
 surrogateDF*
 
-self(40:builtins.property`›
+self(40:builtins.property`Å
 Interaction""pyspark.ml.wrapper.JavaTransformer"$pyspark.ml.param.shared.HasInputCols"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*V
 __init__*
 
@@ -667,8 +689,10 @@ outputCols (	*
 
 self(5*
 value(08r
-_input_kwargs0`
-_MaxAbsScalerParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol‚
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc`
+_MaxAbsScalerParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputColÜ
 MaxAbsScaler" pyspark.ml.wrapper.JavaEstimator"&pyspark.ml.feature._MaxAbsScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*U
 __init__*
 
@@ -694,7 +718,9 @@ outputCols (	*
 
 java_model(
 8r
-_input_kwargs0°
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc°
 MaxAbsScalerModel"pyspark.ml.wrapper.JavaModel"&pyspark.ml.feature._MaxAbsScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputCol7*
 
@@ -706,7 +732,7 @@ java_model(
 value(0*-
 maxAbs*
 
-self(70:builtins.property`∂
+self(70:builtins.property`⁄
 
 MinHashLSH"pyspark.ml.feature._LSH"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.param.shared.HasSeed"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*z
 __init__*
@@ -733,7 +759,9 @@ MinHashLSH"pyspark.ml.feature._LSH"#pyspark.ml.param.shared.HasInputCol"$pyspar
 
 java_model(
 8r
-_input_kwargs0o
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doco
 MinHashLSHModel"pyspark.ml.feature._LSHModel"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritableÃ
 _MinMaxScalerParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol*$
 __init__*
@@ -749,7 +777,7 @@ java_model(
 
 self(:0r
 min0r
-max0‰
+max0à
 MinMaxScaler" pyspark.ml.wrapper.JavaEstimator"&pyspark.ml.feature._MinMaxScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*o
 __init__*
 
@@ -787,7 +815,9 @@ java_model(
 
 java_model(
 8r
-_input_kwargs0®
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc®
 MinMaxScalerModel"pyspark.ml.wrapper.JavaModel"&pyspark.ml.feature._MinMaxScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputCol<*
 
@@ -810,7 +840,7 @@ java_model(
 self(<0:builtins.property`*2
 originalMax*
 
-self(<0:builtins.property`©
+self(<0:builtins.property`Õ
 NGram""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*`
 __init__*
 
@@ -840,7 +870,9 @@ java_model(
 self(=*
 value(8r
 _input_kwargs0r
-n0Æ
+n0Ç!
+
+pyspark.ml.common.inherit_doc“
 
 Normalizer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*`
 __init__*
@@ -871,7 +903,9 @@ Normalizer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInput
 self(>*
 value(8r
 _input_kwargs0r
-p0æ
+p0Ç!
+
+pyspark.ml.common.inherit_docæ
 _OneHotEncoderParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasInputCols"$pyspark.ml.param.shared.HasOutputCol"%pyspark.ml.param.shared.HasOutputCols"(pyspark.ml.param.shared.HasHandleInvalid*$
 __init__*
 
@@ -883,7 +917,7 @@ Normalizer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInput
 
 self(?0r
 handleInvalid0r
-dropLast0"Ü
+dropLast0"™
 OneHotEncoder" pyspark.ml.wrapper.JavaEstimator"'pyspark.ml.feature._OneHotEncoderParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setDropLast@*
 
@@ -947,7 +981,9 @@ outputCols (	*
 dropLast (!*
 inputCol (*
 	outputCol (0:typing.overloadX8r
-_input_kwargs0‚
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc‚
 OneHotEncoderModel"pyspark.ml.wrapper.JavaModel"'pyspark.ml.feature._OneHotEncoderParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setDropLastA*
 
@@ -975,7 +1011,7 @@ outputCols (	*
 value(0*4
 categorySizes1*
 
-self(A0:builtins.property`–
+self(A0:builtins.property`Ù
 PolynomialExpansion""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*e
 __init__*
 
@@ -1006,7 +1042,9 @@ outputCols (	*
 value(8r
 _input_kwargs0r
 
-degree0†
+degree0Ç!
+
+pyspark.ml.common.inherit_docƒ
 QuantileDiscretizer" pyspark.ml.wrapper.JavaEstimator"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"$pyspark.ml.param.shared.HasInputCols"%pyspark.ml.param.shared.HasOutputCols"(pyspark.ml.param.shared.HasHandleInvalid"(pyspark.ml.param.shared.HasRelativeError"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*,
 setNumBucketsC*
 
@@ -1094,7 +1132,9 @@ outputCols (	0:typing.overloadX8r
 
 numBuckets0r
 handleInvalid0r
-numBucketsArray0EË
+numBucketsArray0EÇ!
+
+pyspark.ml.common.inherit_docË
 _RobustScalerParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"(pyspark.ml.param.shared.HasRelativeError*$
 __init__*
 
@@ -1117,7 +1157,7 @@ numBuckets0r
 lower0r	
 upper0r
 withCentering0"r
-withScaling0"ç
+withScaling0"±
 RobustScaler" pyspark.ml.wrapper.JavaEstimator"&pyspark.ml.feature._RobustScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*∂
 __init__*
 
@@ -1173,7 +1213,9 @@ numBuckets0r
 
 java_model(
 8r
-_input_kwargs0œ
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docœ
 RobustScalerModel"pyspark.ml.wrapper.JavaModel"&pyspark.ml.feature._RobustScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputColH*
 
@@ -1188,7 +1230,7 @@ java_model(
 self(H0:builtins.property`*,
 range*
 
-self(H0:builtins.property`‚
+self(H0:builtins.property`Ü
 RegexTokenizer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*°
 __init__*
 
@@ -1250,7 +1292,9 @@ getPattern*
 minTokenLength0r
 gaps0"r
 pattern0r
-toLowercase0"
+toLowercase0"Ç!
+
+pyspark.ml.common.inherit_docî
 SQLTransformer""pyspark.ml.wrapper.JavaTransformer"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*C
 __init__*
 
@@ -1268,7 +1312,9 @@ getPattern*
 
 self(J08r
 _input_kwargs0r
-	statement0‡
+	statement0Ç!
+
+pyspark.ml.common.inherit_doc‡
 _StandardScalerParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol*$
 __init__*
 
@@ -1284,7 +1330,7 @@ getWithStd!*
 
 self(K0r
 withMean0"r
-withStd0"É
+withStd0"ß
 StandardScaler" pyspark.ml.wrapper.JavaEstimator"(pyspark.ml.feature._StandardScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*x
 __init__*
 
@@ -1323,7 +1369,9 @@ setWithStdL*
 
 java_model(
 8r
-_input_kwargs0À
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docÀ
 StandardScalerModel"pyspark.ml.wrapper.JavaModel"(pyspark.ml.feature._StandardScalerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*(
 setInputColM*
 
@@ -1350,7 +1398,7 @@ java_model(
 
 self(N0r
 stringOrderType0r
-handleInvalid0ß
+handleInvalid0À
 StringIndexer" pyspark.ml.wrapper.JavaEstimator"'pyspark.ml.feature._StringIndexerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*/
 _create_modelO*
 
@@ -1414,7 +1462,9 @@ outputCols (	*
 outputCols (	*
 handleInvalid (*
 stringOrderType (0:typing.overloadX8r
-_input_kwargs0Ô
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docÔ
 StringIndexerModel"pyspark.ml.wrapper.JavaModel"'pyspark.ml.feature._StringIndexerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*(
 setInputColO*
 
@@ -1454,7 +1504,7 @@ outputCols (	*
 self(O0:builtins.property`*2
 labelsArray*
 
-self(O0:builtins.property` 
+self(O0:builtins.property`Ó
 IndexToString""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*e
 __init__*
 
@@ -1485,7 +1535,9 @@ outputCols (	*
 value(8r
 _input_kwargs0r
 
-labels0,ä
+labels0,Ç!
+
+pyspark.ml.common.inherit_docä
 StopWordsRemover""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"$pyspark.ml.param.shared.HasInputCols"%pyspark.ml.param.shared.HasOutputCols"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*+
 setStopWordsT*
 
@@ -1566,7 +1618,7 @@ outputCols (	0:typing.overloadXr
 	stopWords0,r
 caseSensitive0"r
 
-locale0”
+locale0˜
 	Tokenizer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*U
 __init__*
 
@@ -1586,7 +1638,9 @@ outputCols (	0:typing.overloadXr
 
 self(U*
 value(8r
-_input_kwargs0˜
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docõ
 VectorAssembler""pyspark.ml.wrapper.JavaTransformer"$pyspark.ml.param.shared.HasInputCols"$pyspark.ml.param.shared.HasOutputCol"(pyspark.ml.param.shared.HasHandleInvalid"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*m
 __init__*
 
@@ -1613,7 +1667,9 @@ outputCols (	0:typing.overloadXr
 self(V*
 value(8r
 _input_kwargs0r
-handleInvalid0˚
+handleInvalid0Ç!
+
+pyspark.ml.common.inherit_doc˚
 _VectorIndexerParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"(pyspark.ml.param.shared.HasHandleInvalid*$
 __init__*
 
@@ -1625,7 +1681,7 @@ outputCols (	0:typing.overloadXr
 
 self(W0r
 maxCategories0r
-handleInvalid0Ã
+handleInvalid0
 VectorIndexer" pyspark.ml.wrapper.JavaEstimator"'pyspark.ml.feature._VectorIndexerParams"(pyspark.ml.param.shared.HasHandleInvalid"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*É
 __init__*
 
@@ -1663,7 +1719,9 @@ outputCols (	0:typing.overloadXr
 
 java_model(
 8r
-_input_kwargs0›
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc›
 VectorIndexerModel"pyspark.ml.wrapper.JavaModel"'pyspark.ml.feature._VectorIndexerParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputColY*
 
@@ -1678,7 +1736,7 @@ java_model(
 self(Y0:builtins.property`*3
 categoryMaps[*
 
-self(Y0:builtins.property`º
+self(Y0:builtins.property`‡
 VectorSlicer""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*u
 __init__*
 
@@ -1720,7 +1778,9 @@ getIndices1*
 value(8r
 _input_kwargs0r
 indices0Er	
-names0,Ò
+names0,Ç!
+
+pyspark.ml.common.inherit_docÒ
 _Word2VecParams"#pyspark.ml.param.shared.HasStepSize""pyspark.ml.param.shared.HasMaxIter"pyspark.ml.param.shared.HasSeed"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutputCol*$
 __init__*
 
@@ -1749,7 +1809,7 @@ vectorSize0r
 minCount0r
 
 windowSize0r
-maxSentenceLength0ˇ
+maxSentenceLength0£	
 Word2Vec" pyspark.ml.wrapper.JavaEstimator""pyspark.ml.feature._Word2VecParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*Ú
 __init__*
 
@@ -1828,7 +1888,9 @@ setMaxIter^*
 
 java_model(
 8r
-_input_kwargs0˜
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc˜
 Word2VecModel"pyspark.ml.wrapper.JavaModel""pyspark.ml.feature._Word2VecParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*
 
 getVectors*
@@ -1859,7 +1921,7 @@ _PCAParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutp
 getK*
 
 self(d0r
-k0ã
+k0Ø
 PCA" pyspark.ml.wrapper.JavaEstimator"pyspark.ml.feature._PCAParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*`
 __init__*
 
@@ -1891,7 +1953,9 @@ _PCAParams"#pyspark.ml.param.shared.HasInputCol"$pyspark.ml.param.shared.HasOutp
 
 java_model(
 8r
-_input_kwargs0≈
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc≈
 PCAModel"pyspark.ml.wrapper.JavaModel"pyspark.ml.feature._PCAParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable**
 setInputColf*
 
@@ -1927,7 +1991,7 @@ getFormula*
 formula0r
 forceIndexLabel0"r
 stringIndexerOrderType0r
-handleInvalid0¸
+handleInvalid0†
 RFormula" pyspark.ml.wrapper.JavaEstimator""pyspark.ml.feature._RFormulaParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*∏
 __init__*
 
@@ -1979,7 +2043,9 @@ setFormulaj*
 java_model(
 *
 __str__*(j8r
-_input_kwargs0¢
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc¢
 RFormulaModel"pyspark.ml.wrapper.JavaModel""pyspark.ml.feature._RFormulaParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*
 __str__*(k≤
 _SelectorParams"&pyspark.ml.param.shared.HasFeaturesCol"$pyspark.ml.param.shared.HasOutputCol"#pyspark.ml.param.shared.HasLabelCol*$
@@ -2062,7 +2128,7 @@ percentile0r
 value(0*7
 selectedFeatures1*
 
-self(m0:builtins.property`‡
+self(m0:builtins.property`Ñ
 ChiSqSelector"pyspark.ml.feature._Selector"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*”
 __init__*
 
@@ -2096,8 +2162,10 @@ percentile (*
 
 java_model(
 8r
-_input_kwargs0w
-ChiSqSelectorModel"!pyspark.ml.feature._SelectorModel"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable‰
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_docw
+ChiSqSelectorModel"!pyspark.ml.feature._SelectorModel"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritableà
 VectorSizeHint""pyspark.ml.wrapper.JavaTransformer"#pyspark.ml.param.shared.HasInputCol"(pyspark.ml.param.shared.HasHandleInvalid"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*g
 __init__*
 
@@ -2128,12 +2196,14 @@ java_model(
 value(8r
 _input_kwargs0r
 size0r
-handleInvalid0Ø
+handleInvalid0Ç!
+
+pyspark.ml.common.inherit_docØ
  _VarianceThresholdSelectorParams"&pyspark.ml.param.shared.HasFeaturesCol"$pyspark.ml.param.shared.HasOutputCol*&
 getVarianceThreshold*
 
 self(q0r
-varianceThreshold0Ù
+varianceThreshold0ò
 VarianceThresholdSelector" pyspark.ml.wrapper.JavaEstimator"3pyspark.ml.feature._VarianceThresholdSelectorParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*s
 __init__*
 
@@ -2165,7 +2235,9 @@ java_model(
 
 java_model(
 8r
-_input_kwargs0»
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc»
 VarianceThresholdSelectorModel"pyspark.ml.wrapper.JavaModel"3pyspark.ml.feature._VarianceThresholdSelectorParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*-
 setFeaturesCols*
 
@@ -2200,7 +2272,7 @@ java_model(
 featureType0r
 	labelType0r
 selectionMode0r
-selectionThreshold0∆
+selectionThreshold0Í
 UnivariateFeatureSelector" pyspark.ml.wrapper.JavaEstimator"3pyspark.ml.feature._UnivariateFeatureSelectorParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*Å
 __init__*
 
@@ -2250,7 +2322,9 @@ java_model(
 
 java_model(
 8r
-_input_kwargs0»
+_input_kwargs0Ç!
+
+pyspark.ml.common.inherit_doc»
 UnivariateFeatureSelectorModel"pyspark.ml.wrapper.JavaModel"3pyspark.ml.feature._UnivariateFeatureSelectorParams"pyspark.ml.util.JavaMLReadable"pyspark.ml.util.JavaMLWritable*-
 setFeaturesColv*
 

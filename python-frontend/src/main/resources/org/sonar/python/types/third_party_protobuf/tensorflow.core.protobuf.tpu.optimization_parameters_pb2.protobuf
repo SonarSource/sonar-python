@@ -1,5 +1,5 @@
 
-8tensorflow.core.protobuf.tpu.optimization_parameters_pb2·
+8tensorflow.core.protobuf.tpu.optimization_parameters_pb2Ù
 ClippingLimits"google.protobuf.message.Message*,
 lower*
 
@@ -28,7 +28,9 @@ field_name(
 
 DESCRIPTOR0r
 LOWER_FIELD_NUMBER0r
-UPPER_FIELD_NUMBER0≠
+UPPER_FIELD_NUMBER0Ç
+
+typing.final¿
 SimulatedQuantization"google.protobuf.message.Message*6
 clipping_limits*
 
@@ -56,7 +58,9 @@ DESCRIPTOR0r
 CLIPPING_LIMITS_FIELD_NUMBER0r
 NUM_BUCKETS_FIELD_NUMBER0r
 enabled0r
-num_buckets0º
+num_buckets0Ç
+
+typing.finalœ
 DynamicLearningRate"google.protobuf.message.Message*%
 __init__*
 
@@ -71,7 +75,9 @@ field_name(8r
 
 DESCRIPTOR0r
 TAG_FIELD_NUMBER0r
-tag0˙
+tag0Ç
+
+typing.finalç
 LearningRate"google.protobuf.message.Message*.
 dynamic*
 
@@ -101,13 +107,17 @@ WhichOneof*
 DESCRIPTOR0r
 CONSTANT_FIELD_NUMBER0r
 DYNAMIC_FIELD_NUMBER0r
-constant0`
+constant0Ç
+
+typing.finals
 AdagradParameters"google.protobuf.message.Message*
 __init__*
 
 self(8r
 
-DESCRIPTOR0Ω
+DESCRIPTOR0Ç
+
+typing.final–
 AdagradMomentumParameters"google.protobuf.message.Message*r
 __init__*
 
@@ -134,7 +144,9 @@ DESCRIPTOR0r
 use_nesterov0r
 exponent0r	
 beta20r
-epsilon0ù
+epsilon0Ç
+
+typing.final∞
 BoundedAdagradParameters"google.protobuf.message.Message*k
 __init__*
 
@@ -155,13 +167,17 @@ DESCRIPTOR0r)
 MAX_ACCUMULATOR_FIELD_NUMBER0r
 update_accumulator_first0r
 max_var_update0r
-max_accumulator0r
+max_accumulator0Ç
+
+typing.finalÖ
 #StochasticGradientDescentParameters"google.protobuf.message.Message*
 __init__*
 
 self(8r
 
-DESCRIPTOR0è
+DESCRIPTOR0Ç
+
+typing.final¢
 FtrlParameters"google.protobuf.message.Message*è
 __init__*
 
@@ -193,7 +209,9 @@ DESCRIPTOR0r
 lr_power0r
 beta0r
 multiply_linear_by_lr0r
-allow_zero_accumulator0Ÿ
+allow_zero_accumulator0Ç
+
+typing.finalÏ
 AdamParameters"google.protobuf.message.Message*
 __init__*
 
@@ -220,7 +238,9 @@ DESCRIPTOR0r
 beta20r
 epsilon0r
 use_non_lazy_adam0r
-use_sum_inside_sqrt0ë
+use_sum_inside_sqrt0Ç
+
+typing.final§
 MomentumParameters"google.protobuf.message.Message*@
 __init__*
 
@@ -239,7 +259,9 @@ DESCRIPTOR0r
 MOMENTUM_FIELD_NUMBER0r
 USE_NESTEROV_FIELD_NUMBER0r
 momentum0r
-use_nesterov0≠
+use_nesterov0Ç
+
+typing.final¿
 RmsPropParameters"google.protobuf.message.Message*H
 __init__*
 
@@ -260,7 +282,9 @@ DESCRIPTOR0r
 EPSILON_FIELD_NUMBER0r
 rho0r
 momentum0r
-epsilon0µ
+epsilon0Ç
+
+typing.final»
 CenteredRmsPropParameters"google.protobuf.message.Message*H
 __init__*
 
@@ -281,7 +305,9 @@ DESCRIPTOR0r
 EPSILON_FIELD_NUMBER0r
 rho0r
 momentum0r
-epsilon0Å	
+epsilon0Ç
+
+typing.finalî	
 MdlAdagradLightParameters"google.protobuf.message.Message*“
 __init__*
 
@@ -330,7 +356,9 @@ DESCRIPTOR0r
 max_total_benefit0r
 mdl_hard_limit0r
 hard_limit_min_benefit0r
-mdl_regularize0Û
+mdl_regularize0Ç
+
+typing.finalÜ
 AdadeltaParameters"google.protobuf.message.Message*6
 __init__*
 
@@ -349,7 +377,9 @@ DESCRIPTOR0r
 RHO_FIELD_NUMBER0r
 EPSILON_FIELD_NUMBER0r
 rho0r
-epsilon0Ë
+epsilon0Ç
+
+typing.final˚
 ProximalAdagradParameters"google.protobuf.message.Message*0
 __init__*
 
@@ -370,7 +400,9 @@ DESCRIPTOR0r
 L1_FIELD_NUMBER0r
 L2_FIELD_NUMBER0r
 l10r
-l20ï
+l20Ç
+
+typing.final®
 OnlineYogiParameters"google.protobuf.message.Message*?
 __init__*
 
@@ -393,7 +425,9 @@ DESCRIPTOR0r
 BETA2_FIELD_NUMBER0r
 l10r
 l20r	
-beta20Å
+beta20Ç
+
+typing.finalî
 ProximalYogiParameters"google.protobuf.message.Message*_
 __init__*
 
@@ -422,7 +456,9 @@ DESCRIPTOR0r
 l20r	
 beta10r	
 beta20r
-epsilon0©
+epsilon0Ç
+
+typing.finalº
 FrequencyEstimatorParameters"google.protobuf.message.Message*l
 __init__*
 
@@ -446,7 +482,9 @@ DESCRIPTOR0r
 tau0r
 	max_delta0r
 outlier_threshold0r
-weight_exponent0†
+weight_exponent0Ç
+
+typing.final≥
 UserDefinedProgramParameters"google.protobuf.message.Message*.
 program,*
 
@@ -468,13 +506,17 @@ ClearField*
 field_name(8r
 
 DESCRIPTOR0r
-PROGRAM_FIELD_NUMBER0_
+PROGRAM_FIELD_NUMBER0Ç
+
+typing.finalr
 AssignParameters"google.protobuf.message.Message*
 __init__*
 
 self(/8r
 
-DESCRIPTOR0ï
+DESCRIPTOR0Ç
+
+typing.final®
 GradientAccumulationStatus"google.protobuf.message.Message*
 __init__*
 
@@ -483,7 +525,9 @@ DESCRIPTOR0ï
 DESCRIPTOR0r
 UNSPECIFIED01r
 ENABLED01r
-DISABLED01ñ
+DISABLED01Ç
+
+typing.final©
 LowDimensionalPackingStatus"google.protobuf.message.Message*
 __init__*
 
@@ -492,7 +536,9 @@ DESCRIPTOR0r
 DESCRIPTOR0r
 UNSPECIFIED03r
 ENABLED03r
-DISABLED03˚
+DISABLED03Ç
+
+typing.finalé
 HotIdReplicationConfiguration"google.protobuf.message.Message*(
 __init__*
 
@@ -511,7 +557,9 @@ DESCRIPTOR0r
 DISABLED05r
 STATUS_FIELD_NUMBER0r
 
-status05≥
+status05Ç
+
+typing.final∆
 OptimizationParameters"google.protobuf.message.Message*4
 learning_rate*
 
@@ -655,7 +703,9 @@ DESCRIPTOR0r
 weight_decay_factor0r1
 -multiply_weight_decay_factor_by_learning_rate0r 
 gradient_accumulation_status01r"
-low_dimensional_packing_status03á
+low_dimensional_packing_status03Ç
+
+typing.finalö
 StateVariableSpecification"google.protobuf.message.Message*3
 user_definedQ*
 
@@ -690,7 +740,9 @@ DESCRIPTOR0r
 NAME_FIELD_NUMBER0r
 USER_DEFINED_FIELD_NUMBER0r#
 FILL_WITH_CONSTANT_FIELD_NUMBER0r
-name0*
+name0Ç
+
+typing.final*
 __annotations__0X*
 googlegoogle *
 
