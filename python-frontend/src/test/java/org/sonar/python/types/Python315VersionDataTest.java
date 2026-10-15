@@ -23,6 +23,10 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVersionUtils.Version;
+import org.sonar.python.index.AliasDescriptor;
+import org.sonar.python.index.ClassDescriptor;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 
@@ -47,5 +51,21 @@ class Python315VersionDataTest {
     assertThat(provider.descriptorsForModule("datetime").containsKey("UTC")).isEqualTo(hasUtc);
     assertThat(TypeShed.symbolsForModule("datetime")).containsKey("datetime");
     assertThat(provider.descriptorsForModule("datetime")).containsKey("datetime");
+  }
+
+  @ParameterizedTest
+  @EnumSource(value = Version.class, names = {"V_310", "V_311", "V_312", "V_313", "V_314", "V_315"})
+  void regenerated_third_party_descriptors_preserve_concrete_types(Version version) {
+    var provider = new TypeShedDescriptorsProvider(Set.of(), Set.of(version));
+    var numericColumn = (FunctionDescriptor) originalDescriptor(provider.descriptorsForModule("tensorflow.feature_column").get("numeric_column"));
+    assertThat(numericColumn.annotatedReturnTypeName()).isEqualTo("tensorflow.python.feature_column.feature_column_v2.NumericColumn");
+    var pixmap = (FunctionDescriptor) originalDescriptor(provider.descriptorsForModule("Xlib.ext.composite").get("name_window_pixmap"));
+    assertThat(pixmap.annotatedReturnTypeName()).isEqualTo("Xlib.xobject.drawable.Pixmap");
+    var integer = (ClassDescriptor) originalDescriptor(provider.descriptorsForModule("pyasn1.type.univ").get("Integer"));
+    assertThat(integer.superClasses()).containsExactly("pyasn1.type.base.SimpleAsn1Type");
+  }
+
+  private static Descriptor originalDescriptor(Descriptor descriptor) {
+    return descriptor instanceof AliasDescriptor alias ? alias.originalDescriptor() : descriptor;
   }
 }
