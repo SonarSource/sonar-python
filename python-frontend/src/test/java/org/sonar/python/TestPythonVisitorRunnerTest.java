@@ -24,14 +24,68 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.project.configuration.AwsLambdaHandlerInfo;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockConstruction;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class TestPythonVisitorRunnerTest {
+
+  @Test
+  void both_context_overloads_build_v1_symbols_before_inference() throws IOException {
+    var file = new File("src/test/resources/semantic/visitor_context.py");
+    var mockFile = new TestPythonVisitorRunner.MockPythonFile("", file.getName(), Files.readString(file.toPath()));
+    try (var inferences = mockConstruction(TypeInferenceV2.class, (inference, construction) ->
+      when(inference.inferModuleType(any())).thenAnswer(invocation -> {
+        FileInput root = invocation.getArgument(0);
+        List<ClassDef> definitions = PythonTestUtils.getAllDescendant(root, tree -> tree.is(Tree.Kind.CLASSDEF));
+        assertThat(definitions).hasSize(2).allSatisfy(definition -> assertThat(definition.name().symbol()).isNotNull());
+        return mock(ModuleType.class);
+      }))) {
+      TestPythonVisitorRunner.createContext(file);
+      TestPythonVisitorRunner.createContext(mockFile, null, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
+      assertThat(inferences.constructed()).hasSize(2).allSatisfy(inference -> verify(inference).inferModuleType(any()));
+    }
+  }
+
+  @Test
+  void file_and_mock_contexts_preserve_cfgs_and_configuration() throws IOException {
+    var file = new File("src/test/resources/semantic/visitor_context.py");
+    var mockFile = new TestPythonVisitorRunner.MockPythonFile("", file.getName(), Files.readString(file.toPath()));
+    var contexts = List.of(TestPythonVisitorRunner.createContext(file),
+      TestPythonVisitorRunner.createContext(mockFile, null, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache()));
+
+    for (var context : contexts) {
+      assertThat(context.moduleType()).isNotNull();
+      assertThat(context.cfg(context.rootTree())).isNotNull();
+      List<ClassDef> definitions = PythonTestUtils.getAllDescendant(context.rootTree(), tree -> tree.is(Tree.Kind.CLASSDEF));
+      assertThat(definitions).hasSize(2).allSatisfy(definition -> assertThat(definition.name().symbol()).isNotNull());
+      FunctionDef handler = PythonTestUtils.getLastDescendant(context.rootTree(), tree -> tree.is(Tree.Kind.FUNCDEF));
+      assertThat(context.cfg(handler)).isNotNull();
+      assertThat(context.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers())
+        .containsExactly(new AwsLambdaHandlerInfo("visitor_context.lambda_handler"));
+    }
+
+    var suppliedConfiguration = new ProjectConfiguration();
+    var context = TestPythonVisitorRunner.createContext(file, null, suppliedConfiguration);
+    assertThat(context.projectConfiguration()).isSameAs(suppliedConfiguration);
+    assertThat(suppliedConfiguration.awsProjectConfiguration().awsLambdaHandlers()).isEmpty();
+  }
 
   @Test
   void unknownFile() {

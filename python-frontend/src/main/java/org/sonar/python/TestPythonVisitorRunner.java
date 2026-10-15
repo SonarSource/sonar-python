@@ -36,9 +36,6 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.project.config.SignatureBasedAwsLambdaHandlersCollector;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
-import org.sonar.python.semantic.v2.TypeInferenceV2;
-import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -84,42 +81,34 @@ public class TestPythonVisitorRunner {
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, @Nullable ProjectConfiguration projectConfiguration) {
-    TestPythonFile pythonFile = new TestPythonFile(file);
-    FileInput rootTree = parseFile(pythonFile);
-
-    var typeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-    var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
-    var symbolTableV2 = symbolTableBuilderV2.build();
-    var typeInference = new TypeInferenceV2(typeTable, pythonFile, symbolTableV2, packageName);
-    var moduleType = typeInference.inferModuleType(rootTree);
-
-    if (projectConfiguration == null) {
-      var projectConfigurationBuilder = new ProjectConfigurationBuilder();
-      new SignatureBasedAwsLambdaHandlersCollector().collect(projectConfigurationBuilder, rootTree, packageName);
-      projectConfiguration = projectConfigurationBuilder.build();
-    }
-
-    return new PythonVisitorContext.Builder(rootTree, pythonFile)
-      .workingDirectory(workingDirectory)
-      .packageName(packageName)
-      .projectLevelSymbolTable(projectLevelSymbolTable)
-      .cacheContext(cacheContext)
-      .projectConfiguration(projectConfiguration)
-      .typeTable(typeTable)
-      .moduleType(moduleType)
-      .cfgMap(typeInference.getCfgMap())
-      .build();
+    return createContext(new TestPythonFile(file), workingDirectory, packageName, projectLevelSymbolTable, cacheContext, projectConfiguration);
   }
 
   public static PythonVisitorContext createContext(MockPythonFile file, @Nullable File workingDirectory, String packageName,
-                                                   ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    return createContext(file, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, null);
+  }
+
+  private static PythonVisitorContext createContext(TestablePythonFile file, @Nullable File workingDirectory, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, @Nullable ProjectConfiguration projectConfiguration) {
     FileInput rootTree = parseFile(file);
-    return new PythonVisitorContext.Builder(rootTree, file)
+    var context = new PythonVisitorContext.Builder(rootTree, file)
       .workingDirectory(workingDirectory)
       .packageName(packageName)
       .projectLevelSymbolTable(projectLevelSymbolTable)
       .cacheContext(cacheContext)
+      .projectConfiguration(projectConfiguration != null ? projectConfiguration : new ProjectConfiguration())
       .build();
+
+    if (projectConfiguration == null) {
+      // Handler discovery needs inferred function types. Build both semantic models through
+      // the production context builder before filling the test's default configuration.
+      var configurationBuilder = new ProjectConfigurationBuilder();
+      new SignatureBasedAwsLambdaHandlersCollector().collect(configurationBuilder, rootTree, packageName);
+      context.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers()
+        .addAll(configurationBuilder.build().awsProjectConfiguration().awsLambdaHandlers());
+    }
+    return context;
   }
 
   public static PythonVisitorContext createNotebookContext(File file, Map<Integer, IPythonLocation> locations, String content, String packageName,
