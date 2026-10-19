@@ -1,10 +1,5 @@
-<p>This rule raises an issue when <code>pytest</code> is imported with <code>from pytest import …​</code> or under an alias such as <code>import
-pytest as …​</code>, instead of a plain <code>import pytest</code>.</p>
-<p>In Python, this refers to imports such as:</p>
-<ul>
-  <li><code>from pytest import mark, raises</code> (and other <code>from pytest import …​</code> forms, including subpackages)</li>
-  <li><code>import pytest as pt</code> (and other aliases that rename <code>pytest</code>)</li>
-</ul>
+<p>This rule raises an issue when <code>pytest</code> or one of its subpackages is imported with <code>from pytest import …​</code>, instead of a
+plain <code>import pytest</code>.</p>
 <h2>Why is this an issue?</h2>
 <p>Pytest is conventionally imported as a module: <code>import pytest</code>. Members are then accessed as <code>pytest.raises</code>,
 <code>pytest.mark</code>, <code>pytest.fixture</code>, and so on.</p>
@@ -20,16 +15,6 @@ def test_invalid_input():
 </pre>
 <p>Readers must check the import list to know that <code>mark</code> and <code>raises</code> come from pytest. Mixing <code>import pytest</code> in
 some files with <code>from pytest import …​</code> in others makes the suite harder to skim and to search.</p>
-<h3>Aliased imports</h3>
-<p>Renaming the module hides the standard name:</p>
-<pre>
-import pytest as pt
-
-def test_invalid_input():
-    with pt.raises(ValueError):
-        process_data('hello')
-</pre>
-<p><code>import pytest</code> keeps every call site consistent across the project.</p>
 <h3>Preferred form</h3>
 <pre>
 import pytest
@@ -43,7 +28,7 @@ def test_invalid_input():
 <p>Inconsistent pytest imports force maintainers to resolve where helpers come from and slow down reviews. A single <code>import pytest</code> style
 keeps test APIs recognizable and easier to search across the suite.</p>
 <h2>How to fix it</h2>
-<p>Replace <code>from pytest import …​</code> and aliased imports with <code>import pytest</code>, then qualify members as <code>pytest…​.</code>.</p>
+<p>Replace <code>from pytest import …​</code> with <code>import pytest</code>, then qualify members as <code>pytest…​.</code>.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -59,22 +44,6 @@ def test_invalid_input():
 import pytest
 
 @pytest.mark.skip
-def test_invalid_input():
-    with pytest.raises(ValueError):
-        process_data('hello')
-</pre>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="2" data-diff-type="noncompliant">
-import pytest as pt  # Noncompliant
-
-def test_invalid_input():
-    with pt.raises(ValueError):
-        process_data('hello')
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="2" data-diff-type="compliant">
-import pytest
-
 def test_invalid_input():
     with pytest.raises(ValueError):
         process_data('hello')

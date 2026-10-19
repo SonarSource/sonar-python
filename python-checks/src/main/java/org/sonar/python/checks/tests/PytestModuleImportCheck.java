@@ -20,10 +20,8 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ImportFrom;
-import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -32,7 +30,6 @@ public class PytestModuleImportCheck extends PythonSubscriptionCheck {
 
   private static final String PYTEST = "pytest";
   private static final String MESSAGE_FROM_IMPORT = "Import \"pytest\" as a module.";
-  private static final String MESSAGE_ALIASED_IMPORT = "Do not alias the \"pytest\" module.";
 
   @Override
   public CheckScope scope() {
@@ -42,7 +39,6 @@ public class PytestModuleImportCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, PytestModuleImportCheck::checkImportFrom);
-    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME, PytestModuleImportCheck::checkImportName);
   }
 
   private static void checkImportFrom(SubscriptionContext ctx) {
@@ -52,17 +48,6 @@ public class PytestModuleImportCheck extends PythonSubscriptionCheck {
       ctx.addIssue(importFrom, MESSAGE_FROM_IMPORT);
     }
   }
-
-  private static void checkImportName(SubscriptionContext ctx) {
-    ImportName importName = (ImportName) ctx.syntaxNode();
-    for (AliasedName module : importName.modules()) {
-      Name alias = module.alias();
-      if (alias != null && !PYTEST.equals(alias.name()) && isPytestModule(module.dottedName())) {
-        ctx.addIssue(module, MESSAGE_ALIASED_IMPORT);
-      }
-    }
-  }
-
   private static boolean isPytestModule(DottedName dottedName) {
     List<Name> names = dottedName.names();
     return !names.isEmpty() && PYTEST.equals(names.get(0).name());
