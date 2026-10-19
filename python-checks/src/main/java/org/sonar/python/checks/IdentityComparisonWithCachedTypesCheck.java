@@ -17,10 +17,10 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
@@ -29,14 +29,11 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeCheckBuilder;
-import org.sonar.python.types.v2.TypeChecker;
 
-import static java.util.Arrays.asList;
 
 // https://jira.sonarsource.com/browse/RSPEC-5795
 @Rule(key = "S5795")
@@ -46,36 +43,18 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
   public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\"";
   public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\"";
 
-  /**
-   * Fully qualified names of constructors and functions that are guaranteed to create fresh objects with
-   * references not shared anywhere else.
-   * <p>
-   * If a reference arises from a call to one of these functions, and it does not escape anywhere else, then an
-   * <code>is</code>-comparison with such a reference will always return <code>False</code>.
-   * <p>
-   * Note that these are fully qualified names of (value-level) expressions, not types.
-   */
-  private static final List<String> FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF =
-    asList("frozenset", "bytes", "int", "float", "str", "tuple", "hash");
-
-  /**
-   * Names of types that usually should not be compared with <code>is</code>.
-   * <p>
-   * Note that these are names of types, not `fqn`s of expressions.
-   */
-  private static final List<String> NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON =
-    asList("frozenset", "bytes", "int", "float", "tuple");
-
-  private TypeChecker typeChecker;
-  private TypeCheckBuilder isNoneTypeChecker;
+  private static final TypeMatcher BUILTIN_FACTORY = TypeMatchers.any(
+    Stream.of("frozenset", "bytes", "int", "float", "str", "tuple", "hash")
+      .map(name -> TypeMatchers.isType("builtins." + name)));
+  private static final TypeMatcher UNSUITABLE_TYPE = TypeMatchers.any(
+    Stream.of("frozenset", "bytes", "int", "float", "tuple")
+      .map(name -> TypeMatchers.isObjectOfType("builtins." + name)));
+  // NoneType is a synthetic builtin exposed at the root of the V2 type table.
+  private static final TypeMatcher NONE_TYPE = TypeMatchers.any(
+    TypeMatchers.isType("NoneType"), TypeMatchers.isObjectOfType("NoneType"));
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      typeChecker = ctx.typeChecker();
-      isNoneTypeChecker = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BuiltinTypes.NONE_TYPE);
-    });
-
     context.registerSyntaxNodeConsumer(Tree.Kind.IS, this::checkIsComparison);
   }
 
@@ -83,11 +62,11 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     IsExpression isExpr = (IsExpression) ctx.syntaxNode();
 
     // Comparison to none is checked by S5727
-    if (isComparisonToNone(isExpr)) {
+    if (isComparisonToNone(isExpr, ctx)) {
       return;
     }
 
-    if (isUnsuitableOperand(isExpr.leftOperand()) || isUnsuitableOperand(isExpr.rightOperand())) {
+    if (isUnsuitableOperand(isExpr.leftOperand(), ctx) || isUnsuitableOperand(isExpr.rightOperand(), ctx)) {
       var notToken = isExpr.notToken();
       if (notToken == null) {
         var quickFix = PythonQuickFix.newQuickFix(IS_QUICK_FIX_MESSAGE)
@@ -108,12 +87,8 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     }
   }
 
-  private boolean isComparisonToNone(IsExpression isExpr) {
-    return isNone(isExpr.leftOperand().typeV2()) || isNone(isExpr.rightOperand().typeV2());
-  }
-
-  private boolean isNone(PythonType type) {
-    return isNoneTypeChecker.check(type) == TriBool.TRUE;
+  private static boolean isComparisonToNone(IsExpression isExpr, SubscriptionContext ctx) {
+    return NONE_TYPE.isTrueFor(isExpr.leftOperand(), ctx) || NONE_TYPE.isTrueFor(isExpr.rightOperand(), ctx);
   }
 
   /**
@@ -121,9 +96,8 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
    * whether it holds a non-escaping reference that stems from a function that guarantees that the
    * returned reference is not shared anywhere.
    */
-  private boolean isUnsuitableOperand(Expression expr) {
-    PythonType type = expr.typeV2();
-    if (isUnsuitableType(type)) {
+  private static boolean isUnsuitableOperand(Expression expr, SubscriptionContext ctx) {
+    if (UNSUITABLE_TYPE.isTrueFor(expr, ctx)) {
       if (expr instanceof Name name) {
         SymbolV2 symbol = name.symbolV2();
         return symbol != null && !isVariableThatCanEscape(symbol);
@@ -134,28 +108,7 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     if (expr.is(Tree.Kind.STRING_LITERAL)) {
       return true;
     } else if (expr instanceof CallExpression callExpr) {
-      PythonType calleeType = callExpr.callee().typeV2();
-      return isConstructorReturningUniqueRef(calleeType);
-    }
-    return false;
-  }
-
-  private boolean isUnsuitableType(PythonType type) {
-    for (String builtinName : NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON) {
-      TypeCheckBuilder builtinWithNameChecker = typeChecker.typeCheckBuilder().isInstance().isBuiltinWithName(builtinName);
-      if (builtinWithNameChecker.check(type) == TriBool.TRUE) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private boolean isConstructorReturningUniqueRef(PythonType type) {
-    for (String constructorName : FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF) {
-      TypeCheckBuilder constructorChecker = typeChecker.typeCheckBuilder().isTypeWithName(constructorName);
-      if (constructorChecker.check(type) == TriBool.TRUE) {
-        return true;
-      }
+      return BUILTIN_FACTORY.isTrueFor(callExpr.callee(), ctx);
     }
     return false;
   }

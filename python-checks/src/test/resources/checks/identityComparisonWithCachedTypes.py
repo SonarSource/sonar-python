@@ -167,3 +167,28 @@ def resolved_integer_variables(arg):
 
     arg is logging.INFO # Noncompliant
     arg is subprocess.STDOUT # Noncompliant
+
+
+def builtin_aliases_and_unions(condition, other, unknown):
+    from builtins import int as integer
+    integer(42) is other  # Noncompliant
+    value = 1 if condition else 1.5
+    value is other  # Noncompliant
+    escaping = 1 if condition else 1.5
+    consume(escaping)
+    escaping is other
+    mixed = 1 if condition else object()
+    mixed is other
+    uncertain = 1 if condition else unknown
+    uncertain is other
+    constructor = int if condition else float
+    constructor(42) is other  # Noncompliant
+
+
+def shadowed_builtin_names(other):
+    def int():
+        return other
+    class bytes:
+        pass
+    int() is other
+    bytes() is other
