@@ -21,19 +21,21 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 
 public abstract class NonCallableCalled extends PythonSubscriptionCheck {
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       var callExpression = (CallExpression) ctx.syntaxNode();
       var callee = callExpression.callee();
       var calleeType = callee.typeV2();
-      if (!isException(ctx, calleeType) && isCallMemberMissing(ctx, calleeType)) {
+      if (!isException(ctx, callee) && isCallMemberMissing(calleeType)) {
         String name = nameFromExpression(callee);
         var preciseIssue = ctx.addIssue(callee, message(calleeType, name));
         calleeType.definitionLocation()
@@ -42,15 +44,13 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
     });
   }
 
-  protected boolean isCallMemberMissing(SubscriptionContext ctx, PythonType calleeType) {
-    return ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE;
+  private static boolean isCallMemberMissing(PythonType calleeType) {
+    // hasMember on a union returns FALSE only if every alternative lacks the member.
+    // TypeMatchers.hasMember returns FALSE also for a mix of callable and non-callable alternatives.
+    return calleeType.hasMember("__call__") == TriBool.FALSE;
   }
 
-  protected boolean isException(SubscriptionContext ctx, PythonType calleeType) {
-    return !isExpectedTypeSource(ctx, calleeType);
-  }
-
-  protected abstract boolean isExpectedTypeSource(SubscriptionContext ctx, PythonType calleeType);
+  protected abstract boolean isException(SubscriptionContext ctx, Expression callee);
 
   protected static String addTypeName(PythonType type) {
     return type.displayName()

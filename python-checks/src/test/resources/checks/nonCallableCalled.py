@@ -420,3 +420,15 @@ def fp_loop_of_class_list():
 
     for clazz in list_of_classes:
         clazz() # Noncompliant
+
+
+def union_callability(condition, unknown):
+    number = 1 if condition else 1.5
+    number()  # Noncompliant
+    class Callable:
+        def __call__(self):
+            pass
+    maybe_callable = 1 if condition else Callable()
+    maybe_callable()
+    uncertain = 1 if condition else unknown
+    uncertain()

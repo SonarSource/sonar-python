@@ -19,15 +19,20 @@ package org.sonar.python.checks;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S5756")
 public class NonCallableCalledCheck extends NonCallableCalled {
 
+  private static final TypeMatcher EXACT_TYPE_SOURCE = TypeMatchers.hasTypeSource(TypeSource.EXACT);
+
   @Override
-  protected boolean isExpectedTypeSource(SubscriptionContext ctx, PythonType calleeType) {
-    return ctx.typeChecker().typeCheckBuilder().isExactTypeSource().check(calleeType) == TriBool.TRUE;
+  protected boolean isException(SubscriptionContext ctx, Expression callee) {
+    return !EXACT_TYPE_SOURCE.isTrueFor(callee, ctx);
   }
 
   @Override

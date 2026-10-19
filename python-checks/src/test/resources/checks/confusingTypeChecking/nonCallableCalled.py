@@ -67,3 +67,12 @@ def calling_type_var(function: T):
 T2 = TypeVar("T2", bound=int)
 def calling_type_var(function: T2):
   function() # FN: We don't preserve the bound type of the TypeVar
+
+
+def mixed_type_sources(condition, hinted: int):
+    mixed = hinted if condition else 1.5
+    mixed()  # Noncompliant
+
+
+def inherited_callability(value: CallableBase):
+    value()

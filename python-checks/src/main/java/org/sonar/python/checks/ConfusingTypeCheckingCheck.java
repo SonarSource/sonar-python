@@ -24,7 +24,6 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -34,7 +33,9 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
@@ -202,17 +203,14 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
   }
 
   private static class NonCallableCalledCheck extends NonCallableCalled {
+    private static final TypeMatcher TYPE_HINT_SOURCE = TypeMatchers.hasTypeSource(TypeSource.TYPE_HINT);
+    private static final TypeMatcher EXCLUDED_CALLABLE = TypeMatchers.any(
+      TypeMatchers.isObjectInstanceOf("typing.Coroutine"), TypeMatchers.isObjectInstanceOf("typing.TypeVar"));
 
     @Override
-    protected boolean isExpectedTypeSource(SubscriptionContext ctx, PythonType calleeType) {
-      return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) == TriBool.TRUE;
-    }
-
-    @Override
-    protected boolean isException(SubscriptionContext ctx, PythonType calleeType) {
-      var isCoroutine = ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.TRUE;
-      var isTypeVar = ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.TypeVar").check(calleeType) == TriBool.TRUE;
-      return super.isException(ctx, calleeType) || isCoroutine || isTypeVar;
+    protected boolean isException(SubscriptionContext ctx, Expression callee) {
+      // Use the aggregate source: a union with any hinted alternative belongs to this rule.
+      return !TYPE_HINT_SOURCE.isTrueFor(callee, ctx) || EXCLUDED_CALLABLE.isTrueFor(callee, ctx);
     }
   }
 
