@@ -302,3 +302,19 @@ def test_secret_classifier():
     password = "${SECRET_KEY}"                               # Compliant, variable interpolation
     password = "op://vault/secret"                           # Compliant, external secret store reference
     password = "{cipher}1e3faa2cdab2deae117dca102e52922a"    # Compliant, encrypted marker
+
+
+def environment_identity(unknown):
+    import os as operating_system
+    from os import environ as environment
+    password = operating_system.environ.get("PASSWORD", "Azerty123")  # Noncompliant
+    password = environment.get("PASSWORD", default="Azerty123")  # Noncompliant
+    alias = environment
+    password = alias.get("PASSWORD", "Azerty123")  # Noncompliant
+    password = environment.get("PASSWORD")
+    password = environment.get("PASSWORD", "")
+    password = environment.get("PASSWORD", "PAYMENTS_SECRET_NAME")
+    password = environment.pop("PASSWORD", "Azerty123")
+    password = {}.get("PASSWORD", "Azerty123")
+    password = unknown.get("PASSWORD", "Azerty123")
+    password = operating_system.environb.get(b"PASSWORD", b"Azerty123")  # Noncompliant

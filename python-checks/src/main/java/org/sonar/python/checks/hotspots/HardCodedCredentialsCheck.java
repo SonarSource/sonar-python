@@ -88,7 +88,6 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private static final TypeMatcher GETENV_MATCHER = TypeMatchers.isType("os.getenv");
   private static final TypeMatcher ENVIRON_MATCHER = TypeMatchers.isType("os.environ");
-  private static final TypeMatcher GET_ENVIRON_MATCHER = TypeMatchers.isType("typing.Mapping.get");
 
   private static final TypeMatcher SENSITIVE_ARG_2_MATCHER = TypeMatchers.any(
     TypeMatchers.isType("mysql.connector.connect"),
@@ -428,7 +427,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     CallExpression call = (CallExpression) expression;
     Expression callee =  call.callee();
     if (!GETENV_MATCHER.isTrueFor(call.callee(), ctx)
-      && !(callee instanceof QualifiedExpression qExpr && GET_ENVIRON_MATCHER.isTrueFor(callee, ctx) && ENVIRON_MATCHER.isTrueFor(qExpr.qualifier(), ctx))
+      && !(callee instanceof QualifiedExpression qExpr && "get".equals(qExpr.name().name()) && ENVIRON_MATCHER.isTrueFor(qExpr.qualifier(), ctx))
     ) {
       return false;
     }
