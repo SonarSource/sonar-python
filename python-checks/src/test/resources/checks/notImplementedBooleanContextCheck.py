@@ -95,3 +95,54 @@ def coverage():
 
     if foo() is foo(): 
         pass
+
+# Public identity must also work through imports and qualified access.
+def public_identity(flag, unknown):
+    import builtins
+    from builtins import NotImplemented as sentinel, bool as boolean
+    if builtins.NotImplemented:  # Noncompliant
+        pass
+    boolean(sentinel)  # Noncompliant
+    alias = sentinel
+    if alias:  # Noncompliant
+        pass
+    mixed = sentinel if flag else False
+    if mixed:  # Unknown alternative: do not report.
+        pass
+    if unknown:
+        pass
+
+def shadowed_builtin(bool, NotImplemented):
+    bool(NotImplemented)
+    if NotImplemented:
+        pass
+
+# Boolean operands are reported individually, without another issue on the compound expression.
+def compound_conditions():
+    import builtins
+    from builtins import NotImplemented as sentinel
+
+    if NotImplemented or NotImplemented:  # Noncompliant 2
+        pass
+    if (NotImplemented and NotImplemented):  # Noncompliant 2
+        pass
+    if ((
+        builtins.NotImplemented  # Noncompliant
+       #^^^^^^^^^^^^^^^^^^^^^^^
+        or sentinel  # Noncompliant
+        #  ^^^^^^^^
+    )):
+        pass
+    if NotImplemented or (NotImplemented and NotImplemented):  # Noncompliant 3
+        pass
+    while NotImplemented and NotImplemented:  # Noncompliant 2
+        break
+    bool(NotImplemented or NotImplemented)  # Noncompliant 2
+    not (NotImplemented and NotImplemented)  # Noncompliant 2
+    [x for x in [] if NotImplemented or NotImplemented]  # Noncompliant 2
+    1 if NotImplemented and NotImplemented else 0  # Noncompliant 2
+    (NotImplemented or NotImplemented) is True  # Noncompliant 2
+
+    # A conditional expression has no operand visitor: keep reporting its result.
+    if (NotImplemented if True else NotImplemented):  # Noncompliant
+        pass

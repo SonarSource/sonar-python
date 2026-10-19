@@ -27,13 +27,14 @@ import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.IsExpression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S7931")
 public class NotImplementedBooleanContextCheck extends PythonSubscriptionCheck {
@@ -41,8 +42,8 @@ public class NotImplementedBooleanContextCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "NotImplemented should not be used in boolean contexts.";
 
   private boolean isPython314OrGreater = false;
-  private TypeCheckBuilder isBoolCallCheck;
-  private TypeCheckBuilder isNotImplementedCheck;
+  private static final TypeMatcher BOOL_CALL = TypeMatchers.isType("builtins.bool");
+  private static final TypeMatcher NOT_IMPLEMENTED = TypeMatchers.isType("builtins.NotImplemented");
 
   @Override
   public void initialize(Context context) {
@@ -59,8 +60,6 @@ public class NotImplementedBooleanContextCheck extends PythonSubscriptionCheck {
   }
 
   private void initializeState(SubscriptionContext ctx) {
-    isBoolCallCheck = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("bool");
-    isNotImplementedCheck = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("_NotImplementedType");
     isPython314OrGreater = PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(ctx.sourcePythonVersions(), PythonVersionUtils.Version.V_314);
   }
 
@@ -73,7 +72,8 @@ public class NotImplementedBooleanContextCheck extends PythonSubscriptionCheck {
   }
 
   private void raiseIfIsNotImplemented(SubscriptionContext ctx, Expression expression) {
-    if (isPython314OrGreater && expression instanceof Name && isNotImplementedCheck.check(expression.typeV2()).isTrue()) {
+    // Boolean operations already report their operands through checkBooleanOperation.
+    if (isPython314OrGreater && !Expressions.removeParentheses(expression).is(Kind.AND, Kind.OR) && NOT_IMPLEMENTED.isTrueFor(expression, ctx)) {
       ctx.addIssue(expression, MESSAGE);
     }
   }
@@ -90,7 +90,7 @@ public class NotImplementedBooleanContextCheck extends PythonSubscriptionCheck {
 
   private void checkBoolCall(SubscriptionContext ctx) {
     CallExpression callExpr = (CallExpression) ctx.syntaxNode();
-    if (isBoolCallCheck.check(callExpr.callee().typeV2()).isTrue() && callExpr.arguments().size() == 1 && callExpr.arguments().get(0) instanceof RegularArgument regularArgument) {
+    if (BOOL_CALL.isTrueFor(callExpr.callee(), ctx) && callExpr.arguments().size() == 1 && callExpr.arguments().get(0) instanceof RegularArgument regularArgument) {
       raiseIfIsNotImplemented(ctx, regularArgument.expression());
     }
   }
