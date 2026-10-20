@@ -18,7 +18,7 @@ runs:
         # Get current month for cache rotation
         CURRENT_MONTH=$(date +"%B")
 
-        CACHE_KEY="orchestrator-${{ github.workflow }}-${SQ_VERSION}-${CURRENT_MONTH}"
+        CACHE_KEY="orchestrator-production-${{ github.workflow }}-${SQ_VERSION}-${CURRENT_MONTH}"
         echo "cache-key=${CACHE_KEY}" >> $GITHUB_OUTPUT
 
     - name: Setup orchestrator cache
