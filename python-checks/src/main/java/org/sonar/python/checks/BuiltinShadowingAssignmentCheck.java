@@ -16,36 +16,27 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
-import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FunctionLike;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Parameter;
-import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TupleParameter;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.TypeShed;
 
 @Rule(key = "S5806")
 public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
@@ -54,7 +45,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   public static final String REPEATED_VAR_MESSAGE = "Variable also assigned here.";
   public static final String RENAME_PREFIX = "_";
   public static final String QUICK_FIX_MESSAGE_FORMAT = "Rename to " + RENAME_PREFIX+ " %s";
-  private final Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
+  private final Map<SymbolV2, PreciseIssue> variableIssuesRaised = new HashMap<>();
   private static final Set<String> notBuiltins = Set.of("ellipsis", "function");
 
   @Override
@@ -68,7 +59,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   private void checkAssignmentExpression(SubscriptionContext ctx) {
     AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
     Name lhsName = assignmentExpression.lhsName();
-    if (shouldReportIssue(lhsName)) {
+    if (shouldReportIssue(lhsName, ctx)) {
       raiseIssueForNonGlobalVariable(ctx, lhsName);
     }
   }
@@ -79,7 +70,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
     if (ancestor == null || ancestor.is(Tree.Kind.FUNCDEF)) {
       for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
         for (Expression expression : assignment.lhsExpressions().get(i).expressions()) {
-          if (shouldReportIssue(expression)) {
+          if (shouldReportIssue(expression, ctx)) {
             raiseIssueForNonGlobalVariable(ctx, (Name) expression);
           }
         }
@@ -93,60 +84,28 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
     if (ancestor == null || ancestor.is(Tree.Kind.FUNCDEF)) {
       Expression variable = assignment.variable();
       Token equalToken = assignment.equalToken();
-      if (equalToken != null && shouldReportIssue(variable)) {
+      if (equalToken != null && shouldReportIssue(variable, ctx)) {
         raiseIssueForNonGlobalVariable(ctx, (Name) variable);
       }
     }
   }
 
-  private static Set<String> collectUsedNames(Tree tree) {
-    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF))
-      .map(FunctionLike.class::cast)
-      .map(BuiltinShadowingAssignmentCheck::collectFunctionVariableNames)
-      .stream()
-      .flatMap(Function.identity())
-      .collect(Collectors.toSet());
-  }
-
-  private static Stream<String> collectFunctionVariableNames(FunctionLike funcDef) {
-    return Stream.concat(
-      funcDef.localVariables().stream()
-        .map(Symbol::name),
-      Optional.of(funcDef)
-        .map(FunctionLike::parameters)
-        .map(ParameterList::all)
-        .stream()
-        .flatMap(Collection::stream)
-        .map(BuiltinShadowingAssignmentCheck::collectParameterNames)
-        .flatMap(Collection::stream)
-    );
-  }
-
-  private static Set<String> collectParameterNames(AnyParameter parameter) {
-    var result = new HashSet<String>();
-
-    Optional.of(parameter)
-      .filter(Parameter.class::isInstance)
-      .map(Parameter.class::cast)
-      .map(Parameter::name)
-      .map(Name::name)
-      .ifPresent(result::add);
-
-    Optional.of(parameter)
-      .filter(TupleParameter.class::isInstance)
-      .map(TupleParameter.class::cast)
-      .map(TupleParameter::parameters)
-      .stream()
-      .flatMap(Collection::stream)
-      .map(BuiltinShadowingAssignmentCheck::collectParameterNames)
-      .forEach(result::addAll);
-
-    return result;
+  private static boolean hasRenameCollision(SymbolV2 symbol) {
+    String replacement = RENAME_PREFIX + symbol.name();
+    // Include referenced names and nested scopes: renaming a closure reference must not capture another binding.
+    return symbol.usages().stream()
+      .map(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF))
+      .filter(Objects::nonNull)
+      .distinct()
+      .anyMatch(function -> TreeUtils.hasDescendant(function, tree -> tree instanceof Name name && replacement.equals(name.name())));
   }
 
   private void raiseIssueForNonGlobalVariable(SubscriptionContext ctx, Name variable) {
-    Optional.ofNullable(variable.symbol())
-      .filter(symbol -> symbol.usages().stream().map(Usage::kind).noneMatch(Usage.Kind.GLOBAL_DECLARATION::equals))
+    Tree scope = TreeUtils.firstAncestorOfKind(variable, Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.LAMBDA);
+    Optional.ofNullable(variable.symbolV2())
+      .filter(symbol -> symbol.usages().stream()
+        .filter(usage -> usage.kind() == UsageV2.Kind.GLOBAL_DECLARATION)
+        .noneMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.LAMBDA) == scope))
       .ifPresent(symbol -> {
         var existingIssue = variableIssuesRaised.get(symbol);
         if (existingIssue != null) {
@@ -155,8 +114,10 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
           var issue = ctx.addIssue(variable, MESSAGE);
           variableIssuesRaised.put(symbol, issue);
 
-          var names = collectUsedNames(variable);
-          if (!names.contains(RENAME_PREFIX + variable.name())) {
+          // V2 can associate a nested global declaration with this local symbol.
+          // Keep the local finding, but do not rename the conflated global usages.
+          boolean hasGlobalUsage = symbol.usages().stream().anyMatch(usage -> usage.kind() == UsageV2.Kind.GLOBAL_DECLARATION);
+          if (!hasGlobalUsage && !hasRenameCollision(symbol) && !hasComprehensionWalrus(symbol)) {
             var quickFix = createQuickFix(symbol);
             issue.addQuickFix(quickFix);
           }
@@ -164,10 +125,27 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       });
   }
 
-  private static PythonQuickFix createQuickFix(Symbol symbol) {
+  private static boolean hasComprehensionWalrus(SymbolV2 symbol) {
+    // V2 splits comprehension walrus targets from enclosing-scope references. Inspect
+    // the function as well as the symbol so neither side can offer an incomplete rename.
+    return symbol.usages().stream()
+      .map(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF))
+      .filter(Objects::nonNull)
+      .distinct()
+      .anyMatch(function -> TreeUtils.hasDescendant(function, tree -> tree instanceof AssignmentExpression assignment
+        && symbol.name().equals(assignment.lhsName().name()) && isInComprehension(assignment)));
+  }
+
+  private static boolean isInComprehension(AssignmentExpression assignment) {
+    var scope = TreeUtils.firstAncestorOfKind(assignment, Tree.Kind.LIST_COMPREHENSION, Tree.Kind.SET_COMPREHENSION,
+      Tree.Kind.DICT_COMPREHENSION, Tree.Kind.GENERATOR_EXPR, Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA);
+    return scope != null && !scope.is(Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA);
+  }
+
+  private static PythonQuickFix createQuickFix(SymbolV2 symbol) {
     var edits = symbol.usages()
       .stream()
-      .map(Usage::tree)
+      .map(UsageV2::tree)
       .map(Tree::firstToken)
       .map(token -> TextEditUtils.insertBefore(token, RENAME_PREFIX))
       .toList();
@@ -177,14 +155,14 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       .build();
   }
 
-  private boolean shouldReportIssue(Tree tree) {
-    return tree.is(Tree.Kind.NAME) && isBuiltInName((Name) tree) && TreeUtils.firstAncestorOfKind(tree.parent(), Tree.Kind.FUNCDEF) != null;
+  private static boolean shouldReportIssue(Tree tree, SubscriptionContext ctx) {
+    return tree.is(Tree.Kind.NAME) && isBuiltInName((Name) tree, ctx) && TreeUtils.firstAncestorOfKind(tree.parent(), Tree.Kind.FUNCDEF) != null;
   }
 
-  private boolean isBuiltInName(Name name) {
+  private static boolean isBuiltInName(Name name, SubscriptionContext ctx) {
     if (notBuiltins.contains(name.name())) {
       return false;
     }
-    return TypeShed.builtinSymbols().containsKey(name.name());
+    return ctx.typeTable().getBuiltinsModule() instanceof ModuleType builtins && builtins.members().containsKey(name.name());
   }
 }

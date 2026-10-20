@@ -41,3 +41,51 @@ def ellipsis_test():
 
 def function_test():
     function = "" # OK
+
+
+def global_builtin():
+    global int
+    int = 42
+
+
+def nested_bindings():
+    len = 1  # Noncompliant
+    def inner():
+        len = 2  # Noncompliant
+        return len
+    return len
+
+
+def nonlocal_binding():
+    sum = 1  # Noncompliant
+   #^^^
+    def inner():
+        nonlocal sum
+        sum = 2
+       #^^^<
+        return sum
+    return sum
+
+
+def imported_module_is_not_a_builtin():
+    import os
+    os = None
+
+
+def nested_global_does_not_hide_local():
+    int = 1  # Noncompliant
+   #^^^
+    def inner():
+        global int
+        int = 2
+    int = 3
+   #^^^<
+    return int
+
+
+def nested_class_global_does_not_hide_local():
+    int = 1  # Noncompliant
+    class Nested:
+        global int
+        int = 2
+    return int
