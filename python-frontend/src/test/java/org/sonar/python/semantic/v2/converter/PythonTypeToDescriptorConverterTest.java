@@ -887,4 +887,22 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(restored.isGeneric()).isTrue();
     assertThat(restored.hasMetaClass()).isTrue();
   }
+  @Test
+  void overloadedDecoratorIdentitySurvivesDescriptorConversion() {
+    var function = (FunctionType) TypesTestUtils.lastName(
+      "from functools import lru_cache as cache", "@cache", "def scope():", "  return 1", "scope").typeV2();
+    assertThat(function.decorators()).hasSize(1);
+    assertThat(function.decorators().get(0).type()).isInstanceOfSatisfying(UnionType.class, overloads ->
+      assertThat(overloads.candidates()).hasSizeGreaterThan(1).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(FunctionType.class)));
+    var descriptor = (FunctionDescriptor) converter.convert("mod", new SymbolV2Impl("scope"), Set.of(function));
+    assertThat(descriptor.decorators()).containsExactly("functools.lru_cache");
+    assertDescriptorToProtobuf(descriptor);
+
+    var table = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+    var context = new ConversionContext("mod", new LazyTypesContext(table), (c, d) -> PythonType.UNKNOWN, null);
+    var restored = (FunctionType) new FunctionDescriptorToPythonTypeConverter().convert(context, descriptor);
+    assertThat(restored.decorators()).hasSize(1);
+    assertThat(restored.decorators().get(0).type()).isEqualTo(table.getType("functools.lru_cache"));
+  }
+
 }

@@ -53,4 +53,19 @@ class FullyQualifiedNameHelperTest {
     var selfType = SelfType.of(class1);
     assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(selfType)).contains("foo.bar.class1");
   }
+  @Test
+  void overloadsHaveAnIdentityOnlyWhenEveryCandidateSharesIt() {
+    var first = mock(FunctionType.class);
+    var second = mock(FunctionType.class);
+    var different = mock(FunctionType.class);
+    var unknown = mock(UnknownTypeImpl.class);
+    when(first.fullyQualifiedName()).thenReturn("api.decorator");
+    when(second.fullyQualifiedName()).thenReturn("api.decorator");
+    when(different.fullyQualifiedName()).thenReturn("api.other");
+
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(UnionType.or(first, second))).contains("api.decorator");
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(UnionType.or(first, different))).isEmpty();
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(UnionType.or(first, unknown))).isEmpty();
+  }
+
 }

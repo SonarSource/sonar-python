@@ -30,6 +30,7 @@ public class FullyQualifiedNameHelper {
   public static Optional<String> getFullyQualifiedName(PythonType type) {
     return switch (type) {
       case SelfType selfType -> getFullyQualifiedName(selfType.innerType());
+      case UnionType unionType -> sharedFullyQualifiedName(unionType);
       case FunctionType functionType -> Optional.ofNullable(functionType.fullyQualifiedName());
       case ClassType classType -> Optional.ofNullable(classType.fullyQualifiedName());
       case ModuleType moduleType -> Optional.ofNullable(moduleType.fullyQualifiedName());
@@ -38,4 +39,11 @@ public class FullyQualifiedNameHelper {
       default -> Optional.empty();
     };
   }
+
+  private static Optional<String> sharedFullyQualifiedName(UnionType type) {
+    // Overloaded functions share one API identity even though their signatures differ.
+    var names = type.candidates().stream().map(FullyQualifiedNameHelper::getFullyQualifiedName).distinct().toList();
+    return names.size() == 1 ? names.get(0) : Optional.empty();
+  }
+
 }
