@@ -195,3 +195,29 @@ def pyssl_compliant(unknown_cipher):
 
   ctx3 = ssl.create_default_context()
   ctx3.set_ciphers("DEFAULT:!eNULL:!aNULL:!MD5")  # Compliant
+
+
+def reaching_ciphers():
+    import ssl
+    ctx = ssl.create_default_context()
+    ciphers = "HIGH"
+    ciphers = "RC4"
+    ctx.set_ciphers(ciphers)  # Noncompliant
+    ciphers = "HIGH"
+    ctx.set_ciphers(ciphers)
+
+
+def public_identity(key):
+    from cryptography.hazmat.primitives.ciphers.algorithms import TripleDES as Legacy, AES as Modern
+    Legacy(key)  # Noncompliant
+    Modern(key)
+    class Legacy:
+        pass
+    Legacy()
+
+
+def cyclic_value():
+    import ssl
+    ctx = ssl.create_default_context()
+    ciphers = ciphers
+    ctx.set_ciphers(ciphers)

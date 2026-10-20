@@ -26,4 +26,9 @@ class RobustCipherAlgorithmCheckTest {
       "src/test/resources/checks/robustCipherAlgorithm.py",
       new RobustCipherAlgorithmCheck());
   }
+  @Test
+  void module_try_preserves_single_assignment_detection() {
+    PythonCheckVerifier.verify("src/test/resources/checks/robustCipherAlgorithmModuleTry.py", new RobustCipherAlgorithmCheck());
+  }
+
 }

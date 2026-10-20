@@ -16,8 +16,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -28,19 +28,16 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.checks.utils.Expressions;
-import org.sonar.python.tree.StringLiteralImpl;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.ReachingValues;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.TypeCheckBuilder;
 
 // https://jira.sonarsource.com/browse/RSPEC-5547 (general)
 // https://jira.sonarsource.com/browse/RSPEC-5552 (python-specific)
@@ -102,39 +99,29 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     "pyDes.triple_des"
   );
 
-  private List<TypeCheckBuilder> sensitiveCalleesTypeCheckers;
-  private List<TypeCheckBuilder> sslSetCipherTypeCheckers;
-  private TypeCheckBuilder urllibSslContextTypeChecker;
-
+  // The decrepit namespace is intentionally rejected as a whole, including APIs without stubs.
+  private static final TypeMatcher INSECURE_CALLEE = TypeMatchers.any(
+    TypeMatchers.withFQNPrefix(INSECURE_CIPHERS_PREFIX),
+    TypeMatchers.any(SENSITIVE_CALLEE_FQNS.stream().map(fqn -> fqn.startsWith("cryptography.")
+      ? TypeMatchers.isType(fqn) : TypeMatchers.withFQN(fqn))));
+  private static final TypeMatcher SSL_SET_CIPHERS = TypeMatchers.any(SSL_SET_CIPHERS_FQN.stream().map(TypeMatchers::isType));
+  private static final TypeMatcher URLLIB_SSL_CONTEXT = TypeMatchers.isType("urllib3.util.ssl_.create_urllib3_context");
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      sslSetCipherTypeCheckers = SSL_SET_CIPHERS_FQN.stream()
-        .map(fqn -> ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn))
-        .toList();
-      sensitiveCalleesTypeCheckers = SENSITIVE_CALLEE_FQNS.stream()
-        .map(fqn -> ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn))
-        .toList();
-      urllibSslContextTypeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("urllib3.util.ssl_.create_urllib3_context");
-    });
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, RobustCipherAlgorithmCheck::checkCallExpression);
   }
 
-  private void checkCallExpression(SubscriptionContext subscriptionContext) {
-    CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    PythonType calleeType = callExpr.callee().typeV2();
-    String fullyQualifiedName = Optional.ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName).orElse("");
-    if (fullyQualifiedName.startsWith(INSECURE_CIPHERS_PREFIX)) {
-      subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
-    } else if (sensitiveCalleesTypeCheckers.stream().anyMatch(checker -> checker.check(calleeType) == TriBool.TRUE)) {
-      subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
-    } else if (sslSetCipherTypeCheckers.stream().anyMatch(checker -> checker.check(calleeType) == TriBool.TRUE)) {
-      checkForInsecureCiphers(subscriptionContext, callExpr);
-    } else if (urllibSslContextTypeChecker.check(calleeType) == TriBool.TRUE) {
-      Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(4, "ciphers", callExpr.arguments()))
+  private static void checkCallExpression(SubscriptionContext ctx) {
+    var call = (CallExpression) ctx.syntaxNode();
+    if (INSECURE_CALLEE.isTrueFor(call.callee(), ctx)) {
+      ctx.addIssue(call.callee(), MESSAGE);
+    } else if (SSL_SET_CIPHERS.isTrueFor(call.callee(), ctx)) {
+      checkForInsecureCiphers(ctx, call);
+    } else if (URLLIB_SSL_CONTEXT.isTrueFor(call.callee(), ctx)) {
+      Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(4, "ciphers", call.arguments()))
         .map(RegularArgument::expression)
-        .ifPresent(expression -> processCiphersArgument(subscriptionContext, callExpr, expression));
+        .ifPresent(expression -> processCiphersArgument(ctx, call, expression));
     }
   }
 
@@ -148,7 +135,7 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
   }
 
   private static void processCiphersArgument(SubscriptionContext ctx, CallExpression callExpression, Expression expression) {
-    StringLiteral stringLiteral = unpackArgument(expression);
+    StringLiteral stringLiteral = unpackArgument(expression, ctx);
     Optional.ofNullable(stringLiteral)
       .map(StringLiteral::trimmedQuotesValue)
       .map(RobustCipherAlgorithmCheck::findInsecureCiphers)
@@ -163,16 +150,12 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
   }
 
   @CheckForNull
-  private static StringLiteral unpackArgument(@Nullable Expression expression) {
-    if (expression == null) {
-      return null;
-    } else if (expression.is(Tree.Kind.STRING_LITERAL)) {
-      return ((StringLiteralImpl) expression);
-    } else if (expression.is(Tree.Kind.NAME)) {
-      return unpackArgument(Expressions.singleAssignedValue((Name) expression));
-    } else {
-      return null;
+  private static StringLiteral unpackArgument(@Nullable Expression expression, SubscriptionContext ctx) {
+    var visited = new HashSet<Expression>();
+    while (expression instanceof Name name && visited.add(expression)) {
+      expression = ReachingValues.singleValue(name, ctx);
     }
+    return expression instanceof StringLiteral literal ? literal : null;
   }
 
   private static Set<String> findInsecureCiphers(String ciphers) {
