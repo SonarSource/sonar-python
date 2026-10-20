@@ -26,4 +26,9 @@ class PredictableSaltCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/predictableSalt.py", new PredictableSaltCheck());
   }
 
+  @Test
+  void module_try_preserves_single_assignment_detection() {
+    PythonCheckVerifier.verify("src/test/resources/checks/predictableSaltModuleTry.py", new PredictableSaltCheck());
+  }
+
 }

@@ -236,3 +236,28 @@ password = b'my super secret'
 derive_password(password, salt)
 
 unknown.openUnknown(open(__file__).read())
+
+
+def reaching_salts(password, random_salt):
+    salt = random_salt
+    salt = b"fixed"
+    hashlib.pbkdf2_hmac("sha256", password, salt, 1000)  # Noncompliant
+    salt = random_salt
+    hashlib.pbkdf2_hmac("sha256", password, salt, 1000)
+
+
+def public_identity(password, salt):
+    from hashlib import scrypt as derive
+    derive(password, salt=b"fixed", n=16384, r=8, p=1)  # Noncompliant
+    derive(password, salt=salt, n=16384, r=8, p=1)
+    def scrypt(password, salt):
+        return password
+    scrypt(password, salt=b"fixed")
+
+
+def unresolved_and_cyclic_values(password):
+    import base64
+    salt = salt
+    hashlib.pbkdf2_hmac("sha256", password, salt, 1000)
+    hashlib.pbkdf2_hmac("sha256", password, base64.b64decode(), 1000)
+    hashlib.pbkdf2_hmac("sha256", password, 42, 1000)

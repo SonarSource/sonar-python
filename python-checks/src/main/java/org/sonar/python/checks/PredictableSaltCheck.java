@@ -17,27 +17,26 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
-import org.sonar.python.checks.utils.Expressions;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.ReachingValues;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.TypeCheckBuilder;
-import org.sonar.python.types.v2.TypeCheckMap;
 
 @Rule(key = "S2053")
 public class PredictableSaltCheck extends PythonSubscriptionCheck {
@@ -62,9 +61,9 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     Map.entry("Crypto.Protocol.KDF.scrypt", new ArgumentInfo(1, SALT_ARGUMENT_NAME, new ArgumentInfo(0, PASSWORD_ARGUMENT_NAME))),
     Map.entry("Crypto.Protocol.KDF.bcrypt", new ArgumentInfo(2, SALT_ARGUMENT_NAME, false, new ArgumentInfo(0, PASSWORD_ARGUMENT_NAME))));
 
-  private static final List<String> SENSITIVE_DERIVE_FUNCTIONS_FQN = List.of(
-    "cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC.derive",
-    "cryptography.hazmat.primitives.kdf.scrypt.Scrypt.derive");
+  private static final TypeMatcher DERIVE_FUNCTIONS = TypeMatchers.any(
+    TypeMatchers.isType("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC.derive"),
+    TypeMatchers.isType("cryptography.hazmat.primitives.kdf.scrypt.Scrypt.derive"));
 
   private static final Map<String, ArgumentInfo> SALT_FUNCTION_ARGUMENTS_TO_CHECK = Map.of(
     "bytes.fromhex", new ArgumentInfo(0, "__string"),
@@ -76,63 +75,52 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     "base64.b16encode", new ArgumentInfo(0, "s"),
     "base64.b16decode", new ArgumentInfo(0, "s"));
 
-  private TypeCheckMap<ArgumentInfo> sensitiveArgumentByFqnCheck;
-  private TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck;
-  private List<TypeCheckBuilder> deriveFunctionsToCheck;
+  private static final List<ArgumentCheck> SENSITIVE_ARGUMENTS = argumentChecks(SENSITIVE_ARGUMENT_BY_FQN);
+  private static final List<ArgumentCheck> SALT_FUNCTION_ARGUMENTS = argumentChecks(SALT_FUNCTION_ARGUMENTS_TO_CHECK);
+
+  private static List<ArgumentCheck> argumentChecks(Map<String, ArgumentInfo> arguments) {
+    return arguments.entrySet().stream()
+      .sorted(Map.Entry.comparingByKey())
+      .map(entry -> new ArgumentCheck(apiMatcher(entry.getKey()), entry.getValue()))
+      .toList();
+  }
+
+  private static TypeMatcher apiMatcher(String fqn) {
+    // PBKDF2HMAC is absent from older descriptors; prefer identity when it becomes available.
+    if ("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC".equals(fqn)) {
+      return TypeMatchers.any(TypeMatchers.isType(fqn), TypeMatchers.withFQN(fqn));
+    }
+    // These libraries have no descriptors; their unresolved imports retain the public API name.
+    return fqn.startsWith("Crypto.") || fqn.startsWith("Cryptodome.")
+      ? TypeMatchers.withFQN(fqn)
+      : TypeMatchers.isType(fqn);
+  }
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      sensitiveArgumentByFqnCheck = new TypeCheckMap<>();
-      saltFunctionArgumentsToCheck = new TypeCheckMap<>();
-      deriveFunctionsToCheck = new ArrayList<>();
-      initializeTypeChecks(ctx, sensitiveArgumentByFqnCheck,
-        saltFunctionArgumentsToCheck, deriveFunctionsToCheck);
-    });
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> handleCallExpression((CallExpression) ctx.syntaxNode(),
-      ctx,
-      sensitiveArgumentByFqnCheck,
-      saltFunctionArgumentsToCheck,
-      deriveFunctionsToCheck));
-  }
-
-  private static void initializeTypeChecks(SubscriptionContext ctx,
-    TypeCheckMap<ArgumentInfo> sensitiveArgumentByFqnCheck,
-    TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck, List<TypeCheckBuilder> deriveFunctionsToCheck) {
-    SENSITIVE_ARGUMENT_BY_FQN.forEach((fqn, argumentNumber) -> {
-      var checker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
-      sensitiveArgumentByFqnCheck.put(checker, argumentNumber);
-    });
-    SALT_FUNCTION_ARGUMENTS_TO_CHECK.forEach((fqn, argumentInfo) -> {
-      var checker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
-      saltFunctionArgumentsToCheck.put(checker, argumentInfo);
-    });
-    SENSITIVE_DERIVE_FUNCTIONS_FQN.forEach(fqn -> {
-      var checker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
-      deriveFunctionsToCheck.add(checker);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      var call = (CallExpression) ctx.syntaxNode();
+      argumentInfo(SENSITIVE_ARGUMENTS, call, ctx).ifPresent(info -> checkArguments(call, info, ctx));
     });
   }
 
-  private static void handleCallExpression(CallExpression callExpression, SubscriptionContext ctx,
-    TypeCheckMap<ArgumentInfo> sensitiveArgumentByFqnCheck, TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck, List<TypeCheckBuilder> deriveFunctionsToCheck) {
-    Optional.of(callExpression)
-      .map(CallExpression::callee)
-      .map(Expression::typeV2)
-      .map(sensitiveArgumentByFqnCheck::getForType)
-      .ifPresent(argumentInfo -> checkArguments(callExpression, argumentInfo, ctx, saltFunctionArgumentsToCheck, deriveFunctionsToCheck));
+  private static Optional<ArgumentInfo> argumentInfo(List<ArgumentCheck> checks, CallExpression call, SubscriptionContext ctx) {
+    return checks.stream()
+      .filter(check -> check.matcher().isTrueFor(call.callee(), ctx))
+      .map(ArgumentCheck::argument)
+      .findFirst();
   }
 
-  private static void checkArguments(CallExpression callExpression, ArgumentInfo argumentInfo, SubscriptionContext ctx,
-    TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck, List<TypeCheckBuilder> deriveFunctionsToCheck) {
+  private static void checkArguments(CallExpression callExpression, ArgumentInfo argumentInfo, SubscriptionContext ctx) {
     var argument = TreeUtils.nthArgumentOrKeyword(argumentInfo.position(), argumentInfo.name(), callExpression.arguments());
     if (argument != null) {
-      if (hasRaisedOnSensitiveArgument(argument, ctx, saltFunctionArgumentsToCheck)) {
+      if (hasRaisedOnSensitiveArgument(argument, ctx)) {
         return;
       }
       if (hasRaisedOnSameArgument(argument, argumentInfo, callExpression, ctx)) {
         return;
       }
-      if (hasRaisedOnSameSaltAndDerivedKeyMaterial(argument, deriveFunctionsToCheck, ctx)) {
+      if (hasRaisedOnSameSaltAndDerivedKeyMaterial(argument, ctx)) {
         return;
       }
 
@@ -141,7 +129,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean hasRaisedOnSameSaltAndDerivedKeyMaterial(RegularArgument argument, List<TypeCheckBuilder> deriveFunctionsToCheck, SubscriptionContext ctx) {
+  private static boolean hasRaisedOnSameSaltAndDerivedKeyMaterial(RegularArgument argument, SubscriptionContext ctx) {
     if (!argument.expression().is(Tree.Kind.NAME)) {
       return false;
     }
@@ -153,7 +141,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
       .map(usage -> usage.tree().parent())
       .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
       .filter(regArg -> !regArg.equals(argument))
-      .filter(regArg -> isUsedInDeriveCall(regArg, deriveFunctionsToCheck))
+      .filter(regArg -> isUsedInDeriveCall(regArg, ctx))
       .map(RegularArgument::expression)
       .toList();
 
@@ -165,15 +153,13 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     return true;
   }
 
-  private static boolean isUsedInDeriveCall(RegularArgument regularArgument, List<TypeCheckBuilder> deriveFunctionsToCheck) {
+  private static boolean isUsedInDeriveCall(RegularArgument regularArgument, SubscriptionContext ctx) {
     return Optional.ofNullable(regularArgument.parent())
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(ArgList.class))
       .map(ArgList::parent)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
       .map(CallExpression::callee)
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
-      .map(qualifiedExpr -> deriveFunctionsToCheck.stream()
-        .anyMatch(deriveFunction -> deriveFunction.check(qualifiedExpr.name().typeV2()) == TriBool.TRUE))
+      .map(callee -> DERIVE_FUNCTIONS.isTrueFor(callee, ctx))
       .orElse(false);
 
   }
@@ -199,14 +185,15 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean hasRaisedOnSensitiveArgument(RegularArgument regularArgument,
-    SubscriptionContext ctx, TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck) {
+    SubscriptionContext ctx) {
     var secondaries = new ArrayList<Tree>();
     var expression = regularArgument.expression();
-    while (expression != null) {
+    var visited = new HashSet<Expression>();
+    while (expression != null && visited.add(expression)) {
       if (expression instanceof Name name) {
-        expression = getNameAssignedValueToCheck(name, secondaries);
+        expression = getNameAssignedValueToCheck(name, secondaries, ctx);
       } else if (expression instanceof CallExpression callExpression) {
-        expression = getCallExpressionArgumentValueToCheck(saltFunctionArgumentsToCheck, callExpression, expression);
+        expression = getCallExpressionArgumentValueToCheck(callExpression, ctx);
       } else if (expression instanceof StringLiteral) {
         var issue = ctx.addIssue(regularArgument, PREDICTABLE_SALT_MESSAGE);
         secondaries.forEach(t -> issue.secondary(t, ""));
@@ -218,26 +205,28 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static Expression getNameAssignedValueToCheck(Name name, ArrayList<Tree> secondaries) {
-    var expression = Expressions.singleAssignedValue(name);
-    if (expression != null) {
-      var assignmentStatement = TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
-      secondaries.add(assignmentStatement);
+  @Nullable
+  private static Expression getNameAssignedValueToCheck(Name name, List<Tree> secondaries, SubscriptionContext ctx) {
+    var expression = ReachingValues.singleValue(name, ctx);
+    if (expression == null) {
+      return null;
+    }
+    var assignment = TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT);
+    if (assignment != null) {
+      secondaries.add(assignment);
     }
     return expression;
   }
 
-  private static Expression getCallExpressionArgumentValueToCheck(TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck,
-    CallExpression callExpression, Expression expression) {
-    return Optional.of(callExpression)
-      .map(CallExpression::callee)
-      .map(Expression::typeV2)
-      .map(saltFunctionArgumentsToCheck::getForType)
-      .map(argumentInfo -> Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argumentInfo.position(), argumentInfo.name(),
-        callExpression.arguments()))
-        .map(RegularArgument::expression)
-        .orElse(expression))
+  @Nullable
+  private static Expression getCallExpressionArgumentValueToCheck(CallExpression call, SubscriptionContext ctx) {
+    return argumentInfo(SALT_FUNCTION_ARGUMENTS, call, ctx)
+      .map(info -> TreeUtils.nthArgumentOrKeyword(info.position(), info.name(), call.arguments()))
+      .map(RegularArgument::expression)
       .orElse(null);
+  }
+
+  private record ArgumentCheck(TypeMatcher matcher, ArgumentInfo argument) {
   }
 
   private record ArgumentInfo(int position, String name, boolean required, @Nullable ArgumentInfo shouldNotBeSameAsArgument) {
