@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 
 public class ReadWriteVisitor extends BaseTreeVisitor {
-  private Map<Symbol, SymbolReadWrite> symbolToUsages = new HashMap<>();
+  private final Map<Symbol, SymbolReadWrite> symbolToUsages = new HashMap<>();
 
   public Map<Symbol, SymbolReadWrite> symbolToUsages() {
     return symbolToUsages;
@@ -70,7 +70,7 @@ public class ReadWriteVisitor extends BaseTreeVisitor {
   public static final class SymbolReadWrite {
     private boolean isRead = false;
     private boolean isWrite = false;
-    private List<Usage> usages = new ArrayList<>();
+    private final List<Usage> usages = new ArrayList<>();
 
     public boolean isWrite() {
       return isWrite;

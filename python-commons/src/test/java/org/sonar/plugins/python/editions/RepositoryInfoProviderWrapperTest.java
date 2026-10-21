@@ -31,7 +31,7 @@ class RepositoryInfoProviderWrapperTest {
 
   @Test
   void testConstructorWithParameter() {
-    RepositoryInfoProvider[] editionMetadataProviders = new RepositoryInfoProvider[] {new OpenSourceRepositoryInfoProvider(), new OpenSourceRepositoryInfoProvider()};
+    RepositoryInfoProvider[] editionMetadataProviders = {new OpenSourceRepositoryInfoProvider(), new OpenSourceRepositoryInfoProvider()};
     RepositoryInfoProviderWrapper repositoryInfoProviderWrapper = new RepositoryInfoProviderWrapper(editionMetadataProviders);
     assertThat(repositoryInfoProviderWrapper.infoProviders()).hasSize(2);
     assertThat(repositoryInfoProviderWrapper.infoProviders()[0]).isInstanceOf(OpenSourceRepositoryInfoProvider.class);

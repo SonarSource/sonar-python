@@ -48,7 +48,7 @@ public class SymbolImpl implements Symbol {
   @Nullable
   String fullyQualifiedName;
   private final List<Usage> usages = new ArrayList<>();
-  private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
+  private final Map<String, Symbol> childrenSymbolByName = new HashMap<>();
   private Kind kind;
   private InferredType inferredType = InferredTypes.anyType();
   private String annotatedTypeName = null;

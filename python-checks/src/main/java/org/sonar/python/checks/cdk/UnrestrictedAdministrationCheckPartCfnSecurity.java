@@ -52,7 +52,7 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
   private static final String ANY_PROTOCOL = "-1";
   private static final String EMPTY_IPV4 = "0.0.0.0/0";
   private static final String EMPTY_IPV6 = "::/0";
-  private static final long[] ADMIN_PORTS = new long[]{22, 3389};
+  private static final long[] ADMIN_PORTS = {22, 3389};
 
   @Override
   protected void registerFqnConsumer() {

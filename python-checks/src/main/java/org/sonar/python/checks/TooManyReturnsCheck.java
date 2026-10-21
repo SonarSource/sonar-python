@@ -57,7 +57,7 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
 
   private static class ReturnCountVisitor extends BaseTreeVisitor {
 
-    private List<Statement> returnStatements = new ArrayList<>();
+    private final List<Statement> returnStatements = new ArrayList<>();
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {

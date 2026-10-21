@@ -27,7 +27,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class StatementListImpl extends PyTree implements StatementList {
 
-  private List<Statement> statements;
+  private final List<Statement> statements;
 
   public StatementListImpl(List<Statement> statements) {
     this.statements = statements;

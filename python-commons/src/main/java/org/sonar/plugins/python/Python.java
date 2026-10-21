@@ -29,7 +29,7 @@ public class Python extends AbstractLanguage {
 
   private static final String[] DEFAULT_FILE_SUFFIXES = { "py" };
 
-  private Configuration configuration;
+  private final Configuration configuration;
 
   public Python(Configuration configuration) {
     super(KEY, "Python");

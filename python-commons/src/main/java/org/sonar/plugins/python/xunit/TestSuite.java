@@ -24,8 +24,8 @@ import java.util.List;
  */
 public class TestSuite {
 
-  private String key;
-  private List<TestCase> testCases;
+  private final String key;
+  private final List<TestCase> testCases;
 
   /**
    * Creates a testsuite instance uniquely identified by the given key

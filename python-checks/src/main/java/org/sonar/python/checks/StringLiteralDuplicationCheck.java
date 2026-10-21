@@ -64,7 +64,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
     defaultValue = "")
   public String customExclusionRegex = DEFAULT_CUSTOM_EXCLUSION_PATTERN;
 
-  private Map<String, List<StringLiteral>> literalsByValue = new HashMap<>();
+  private final Map<String, List<StringLiteral>> literalsByValue = new HashMap<>();
 
   private boolean isCustomPatternInitialized = false;
 

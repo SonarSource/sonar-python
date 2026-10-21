@@ -33,7 +33,7 @@ public final class FunctionType implements PythonType {
   private final List<PythonType> attributes;
   private final List<ParameterV2> parameters;
   private final List<TypeWrapper> decorators;
-  private TypeWrapper returnType;
+  private final TypeWrapper returnType;
   private final TypeOrigin typeOrigin;
   private final boolean isAsynchronous;
   private final boolean hasDecorators;

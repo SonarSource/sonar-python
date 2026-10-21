@@ -43,7 +43,7 @@ public class NestedControlFlowDepthCheck extends PythonVisitorCheck {
     defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 
-  private Deque<Token> depthNodes = new ArrayDeque<>();
+  private final Deque<Token> depthNodes = new ArrayDeque<>();
 
   @Override
   public void scanFile(PythonVisitorContext visitorContext) {

@@ -40,7 +40,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   private final DictionaryLiteralElement resultElement;
   private final ComprehensionFor comprehensionFor;
   private final Token closingBrace;
-  private Set<Symbol> symbols = new HashSet<>();
+  private final Set<Symbol> symbols = new HashSet<>();
   private PythonType pythonType = PythonType.UNKNOWN;
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
@@ -68,6 +68,9 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
     return resultElement;
   }
 
+  /**
+   * @deprecated Use {@link #resultElement()} and {@link KeyValuePair#key()}.
+   */
   @Override
   @Deprecated(since = "5.33")
   @CheckForNull
@@ -75,6 +78,9 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
     return resultElement instanceof KeyValuePair pair ? pair.key() : null;
   }
 
+  /**
+   * @deprecated Use {@link #resultElement()} and {@link KeyValuePair#colon()}.
+   */
   @Override
   @Deprecated(since = "5.33")
   @CheckForNull
@@ -82,6 +88,9 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
     return resultElement instanceof KeyValuePair pair ? pair.colon() : null;
   }
 
+  /**
+   * @deprecated Use {@link #resultElement()} and {@link KeyValuePair#value()}.
+   */
   @Override
   @Deprecated(since = "5.33")
   @CheckForNull

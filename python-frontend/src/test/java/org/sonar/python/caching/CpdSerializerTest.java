@@ -53,8 +53,8 @@ class CpdSerializerTest {
   @Test
   void corrupted_string_table_format() {
     // A string table with zero elements and an invalid terminator
-    byte[] stringTable = new byte[] {0, 1, 2, 3};
-    byte[] data = new byte[] {0};
+    byte[] stringTable = {0, 1, 2, 3};
+    byte[] data = {0};
 
     assertThatCode(() -> CpdSerializer.deserialize(data, stringTable))
       .isInstanceOf(IOException.class)
@@ -64,8 +64,8 @@ class CpdSerializerTest {
   @Test
   void corrupted_data_format() {
     // A string table with zero elements and a valid terminator string
-    byte[] stringTable = new byte[] {0, 3, 'E', 'N', 'D'};
-    byte[] data = new byte[] {0, 1, 2, 3};
+    byte[] stringTable = {0, 3, 'E', 'N', 'D'};
+    byte[] data = {0, 1, 2, 3};
 
     assertThatCode(() -> CpdSerializer.deserialize(data, stringTable))
       .isInstanceOf(IOException.class)

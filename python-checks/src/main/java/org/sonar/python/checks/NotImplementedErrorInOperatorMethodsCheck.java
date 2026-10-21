@@ -95,7 +95,7 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
 
   private static class RaiseNotImplementedErrorVisitor extends BaseTreeVisitor {
     private final SubscriptionContext context;
-    private List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
+    private final List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
 
     private RaiseNotImplementedErrorVisitor(SubscriptionContext context) {
       this.context = context;

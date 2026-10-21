@@ -41,7 +41,7 @@ import org.sonar.python.api.IPythonGrammar;
 
 public class IPythonTreeMaker extends PythonTreeMaker {
 
-  private Map<Integer, IPythonLocation> offsetMap;
+  private final Map<Integer, IPythonLocation> offsetMap;
 
   public IPythonTreeMaker() {
     this(Map.of());

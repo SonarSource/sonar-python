@@ -25,12 +25,12 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 public class FileMetrics {
 
-  private int numberOfStatements;
-  private int numberOfClasses;
+  private final int numberOfStatements;
+  private final int numberOfClasses;
   private final ComplexityVisitor complexityVisitor = new ComplexityVisitor();
   private final CognitiveComplexityVisitor cognitiveComplexityVisitor = new CognitiveComplexityVisitor(null);
   private final FileLinesVisitor fileLinesVisitor;
-  private List<Integer> functionComplexities = new ArrayList<>();
+  private final List<Integer> functionComplexities = new ArrayList<>();
 
   public FileMetrics(PythonVisitorContext context, boolean isNotebook) {
     FileInput fileInput = context.rootTree();

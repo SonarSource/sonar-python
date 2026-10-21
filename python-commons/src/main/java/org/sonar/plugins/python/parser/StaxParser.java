@@ -33,9 +33,9 @@ import org.sonarsource.analyzer.commons.xml.SafeStaxParserFactory;
  */
 public class StaxParser {
 
-  private SMInputFactory inf;
+  private final SMInputFactory inf;
 
-  private XmlStreamHandler streamHandler;
+  private final XmlStreamHandler streamHandler;
 
   public StaxParser(XmlStreamHandler streamHandler) {
     this.streamHandler = streamHandler;

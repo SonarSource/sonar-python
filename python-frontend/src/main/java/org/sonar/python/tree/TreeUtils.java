@@ -303,7 +303,7 @@ public class TreeUtils {
   }
 
   private static class CollectFunctionDefsVisitor extends BaseTreeVisitor {
-    private List<FunctionDef> functionDefs = new ArrayList<>();
+    private final List<FunctionDef> functionDefs = new ArrayList<>();
 
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {

@@ -26,8 +26,8 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class FormatSpecifierImpl extends PyTree implements FormatSpecifier {
 
-  private Token columnToken;
-  private List<Tree> fStringMiddles;
+  private final Token columnToken;
+  private final List<Tree> fStringMiddles;
 
   public FormatSpecifierImpl(Token columnToken, List<Tree> fStringMiddles) {
     this.columnToken = columnToken;

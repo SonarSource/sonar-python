@@ -26,7 +26,7 @@ import org.sonar.python.tree.PythonTreeMaker;
  */
 public class Parser {
 
-  private PythonParser astParser = PythonParser.create();
+  private final PythonParser astParser = PythonParser.create();
 
   public FileInput parse(String code)  {
     AstNode astNode = astParser.parse(code);

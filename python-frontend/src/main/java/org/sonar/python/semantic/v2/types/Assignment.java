@@ -23,7 +23,7 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class Assignment extends Propagation {
 
-  private Expression rhs;
+  private final Expression rhs;
 
   public Assignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs) {
     super(lhsSymbol, lhsName);

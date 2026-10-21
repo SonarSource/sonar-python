@@ -55,10 +55,10 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.IS, this::checkIsComparison);
+    context.registerSyntaxNodeConsumer(Tree.Kind.IS, IdentityComparisonWithCachedTypesCheck::checkIsComparison);
   }
 
-  private void checkIsComparison(SubscriptionContext ctx) {
+  private static void checkIsComparison(SubscriptionContext ctx) {
     IsExpression isExpr = (IsExpression) ctx.syntaxNode();
 
     // Comparison to none is checked by S5727

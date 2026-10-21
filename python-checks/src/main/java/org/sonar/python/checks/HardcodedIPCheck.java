@@ -37,7 +37,8 @@ import org.sonar.python.checks.utils.Expressions;
 @Rule(key = "S1313")
 public class HardcodedIPCheck extends PythonSubscriptionCheck {
 
-  private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
+  private static final String IPV4_PATTERN = "(?:\\d{1,3}\\.){3}\\d{1,3}";
+  private static final String IPV4_ALONE = "(?<ipv4>" + IPV4_PATTERN + ")";
   private static final Pattern LOCAL_IPV4_MAPPED_TO_IPV6 = Pattern.compile("::[f,F]{4}(:0)?:127\\.(\\d{1,3}\\.){2}\\d{1,3}");
 
   private static final String IPV6_NO_PREFIX_COMPRESSION = "(\\p{XDigit}{1,4}::?){1,7}\\p{XDigit}{1,4}(::)?";
@@ -45,7 +46,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   private static final String IPV6_ALONE = ("(?<ipv6>(" + IPV6_NO_PREFIX_COMPRESSION + "|" + IPV6_PREFIX_COMPRESSION + ")??(:?" + IPV4_ALONE + ")?" + ")");
   private static final String IPV6_URL = "([^\\d.]*/)?\\[" + IPV6_ALONE + "]((:\\d{1,5})?(?!\\d|\\.))(/.*)?";
 
-  private static final Pattern IPV4_ALONE_REGEX = Pattern.compile(IPV4_ALONE);
+  private static final Pattern IPV4_ALONE_REGEX = Pattern.compile(IPV4_PATTERN);
   private static final Pattern IPV4_URL_REGEX = Pattern.compile("([^\\d.]*/)?" + IPV4_ALONE + "((:\\d{1,5})?(?!\\d|\\.))(/.*)?");
   private static final List<Pattern> IPV6_REGEX_LIST = Arrays.asList(
     Pattern.compile(IPV6_ALONE),

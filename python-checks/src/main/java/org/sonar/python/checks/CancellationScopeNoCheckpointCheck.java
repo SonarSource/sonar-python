@@ -115,7 +115,7 @@ public class CancellationScopeNoCheckpointCheck extends PythonSubscriptionCheck 
   private static class CheckpointVisitor extends BaseTreeVisitor {
     private final TypeCheckBuilder checkpointTypeChecker;
     private boolean checkpointFound = false;
-    private List<Tree> checkpointedTrees = new ArrayList<>();
+    private final List<Tree> checkpointedTrees = new ArrayList<>();
 
     CheckpointVisitor(TypeCheckBuilder checkpointTypeChecker) {
       this.checkpointTypeChecker = checkpointTypeChecker;

@@ -28,8 +28,8 @@ import org.sonar.plugins.python.api.tree.Trivia;
 
 public class TokenImpl extends PyTree implements Token {
 
-  private com.sonar.sslr.api.Token token;
-  private List<Trivia> trivia;
+  private final com.sonar.sslr.api.Token token;
+  private final List<Trivia> trivia;
 
   private Integer line;
   private Integer column;

@@ -20,7 +20,7 @@ import java.nio.charset.Charset;
 
 public class PythonConfiguration {
 
-  private Charset charset;
+  private final Charset charset;
 
   public PythonConfiguration(Charset charset) {
     this.charset = charset;

@@ -45,8 +45,8 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 public class CognitiveComplexityVisitor extends BaseTreeVisitor {
 
   private int complexity = 0;
-  private Deque<NestingLevel> nestingLevelStack = new LinkedList<>();
-  private Set<Token> alreadyConsideredOperators = new HashSet<>();
+  private final Deque<NestingLevel> nestingLevelStack = new LinkedList<>();
+  private final Set<Token> alreadyConsideredOperators = new HashSet<>();
 
   @Nullable
   private final SecondaryLocationConsumer secondaryLocationConsumer;

@@ -55,7 +55,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
    * Checks that a given expression is re-raised or eventually handled.
    */
   private static class ExceptionReRaiseCheckVisitor extends BaseTreeVisitor {
-    private Symbol exceptionInstance;
+    private final Symbol exceptionInstance;
     private boolean isReRaised;
 
     public ExceptionReRaiseCheckVisitor(@Nullable Symbol exceptionInstance) {

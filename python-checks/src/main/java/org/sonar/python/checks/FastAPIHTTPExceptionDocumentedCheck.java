@@ -108,8 +108,8 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
   }
 
   private static class DecoratorAnalysis {
-    private SubscriptionContext ctx;
-    private FunctionDef functionDef;
+    private final SubscriptionContext ctx;
+    private final FunctionDef functionDef;
 
     private boolean canAnalyzeResponses = true;
 

@@ -42,7 +42,7 @@ public class TemplateStringStructuralPatternMatchingCheck extends PythonSubscrip
 
   private static final String MESSAGE = "Use structural pattern matching (match/case) instead of isinstance() checks for template string processing.";
   private static final String SECONDARY_MESSAGE = "Replace this isinstance with the appropriate pattern matching case.";
-  private TypeCheckMap<Object> templateType = new TypeCheckMap<>();
+  private final TypeCheckMap<Object> templateType = new TypeCheckMap<>();
   private TypeCheckBuilder isInstanceCheck;
   private boolean isPython314OrGreater;
 

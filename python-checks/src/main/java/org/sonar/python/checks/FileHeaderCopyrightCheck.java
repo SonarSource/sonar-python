@@ -48,7 +48,7 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
     defaultValue = "false")
   public boolean isRegularExpression = false;
   private Pattern searchPattern = null;
-  private Pattern shebangPattern = Pattern.compile("^#![^\\n]+\\n", Pattern.MULTILINE);
+  private final Pattern shebangPattern = Pattern.compile("^#![^\\n]+\\n", Pattern.MULTILINE);
 
   @Override
   public void initialize(Context context) {

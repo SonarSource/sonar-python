@@ -173,7 +173,7 @@ public class AstBasedTypeInference {
         .map(UsageV2::tree);
     }
 
-    private boolean isInSameScope(Propagation propagation, Name n, Tree scopeTree) {
+    private static boolean isInSameScope(Propagation propagation, Name n, Tree scopeTree) {
       return scopeTree.equals(propagation.scopeTree(n));
     }
   }

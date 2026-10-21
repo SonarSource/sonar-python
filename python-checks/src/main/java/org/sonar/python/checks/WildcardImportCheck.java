@@ -42,7 +42,7 @@ public class WildcardImportCheck extends PythonSubscriptionCheck {
 
   private static class WildcardImportVisitor extends BaseTreeVisitor {
     private boolean shouldRaiseIssues = false;
-    private List<ImportFrom> wildcardImports = new ArrayList<>();
+    private final List<ImportFrom> wildcardImports = new ArrayList<>();
 
     @Override
     public void visitImportFrom(ImportFrom pyImportFromTree) {

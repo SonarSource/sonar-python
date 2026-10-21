@@ -62,7 +62,7 @@ public class StringFormat {
    * Represents a named or positional replacement field inside a format string.
    */
   public abstract static class ReplacementField {
-    private BiConsumer<SubscriptionContext, Expression> validator;
+    private final BiConsumer<SubscriptionContext, Expression> validator;
 
     private ReplacementField(BiConsumer<SubscriptionContext, Expression> validator) {
       this.validator = validator;
@@ -82,7 +82,7 @@ public class StringFormat {
   }
 
   public static class NamedField extends ReplacementField {
-    private String name;
+    private final String name;
 
     public NamedField(BiConsumer<SubscriptionContext, Expression> validator, String name) {
       super(validator);
@@ -111,7 +111,7 @@ public class StringFormat {
   }
 
   public static class PositionalField extends ReplacementField {
-    private int position;
+    private final int position;
 
     public PositionalField(BiConsumer<SubscriptionContext, Expression> validator, int position) {
       super(validator);
@@ -139,7 +139,7 @@ public class StringFormat {
     }
   }
 
-  private List<ReplacementField> replacementFields;
+  private final List<ReplacementField> replacementFields;
 
   private StringFormat(List<ReplacementField> replacementFields) {
     this.replacementFields = replacementFields;
@@ -184,11 +184,10 @@ public class StringFormat {
     private int autoNumberingPos = 0;
 
     private ParseState state = ParseState.INIT;
-    private int nesting = 0;
     private List<ReplacementField> result;
 
-    private Consumer<String> issueReporter;
-    private String value;
+    private final Consumer<String> issueReporter;
+    private final String value;
     private int pos = 0;
 
     public StrFormatParser(Consumer<String> issueReporter, String value) {
@@ -227,7 +226,7 @@ public class StringFormat {
     }
 
     private boolean checkParserState() {
-      if (nesting != 0 || state != ParseState.INIT) {
+      if (state != ParseState.INIT) {
         issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return false;
       }
@@ -291,15 +290,15 @@ public class StringFormat {
     LCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FINISHED
   }
   private static class FieldParser {
-    private StrFormatParser parent;
+    private final StrFormatParser parent;
 
     private String currentFieldName = null;
     private FieldParseState state = FieldParseState.LCURLY;
-    private int nesting;
+    private final int nesting;
 
-    private String value;
+    private final String value;
     private int pos;
-    private Matcher fieldContentMatcher;
+    private final Matcher fieldContentMatcher;
 
     public FieldParser(StrFormatParser parent, String value, int nesting) {
       this.parent = parent;

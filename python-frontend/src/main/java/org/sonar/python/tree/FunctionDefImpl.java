@@ -58,7 +58,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
 
   private final boolean isMethodDefinition;
   private final StringLiteral docstring;
-  private Set<Symbol> symbols = new HashSet<>();
+  private final Set<Symbol> symbols = new HashSet<>();
   private FunctionSymbol functionSymbol;
 
   public FunctionDefImpl(List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name, TypeParams typeParams,

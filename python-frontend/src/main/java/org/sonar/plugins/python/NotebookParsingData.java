@@ -25,9 +25,9 @@ import org.sonar.python.IPythonLocation;
 
 public class NotebookParsingData {
 
-  private StringBuilder aggregatedSource;
+  private final StringBuilder aggregatedSource;
 
-  private Map<Integer, IPythonLocation> locationMap;
+  private final Map<Integer, IPythonLocation> locationMap;
 
   private Integer aggregatedSourceLine;
 

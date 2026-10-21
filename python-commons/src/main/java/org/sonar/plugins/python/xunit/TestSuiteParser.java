@@ -30,7 +30,7 @@ import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 
 public class TestSuiteParser implements XmlStreamHandler {
 
-  private List<TestSuite> testSuites = new ArrayList<>();
+  private final List<TestSuite> testSuites = new ArrayList<>();
 
   @Override
   public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {

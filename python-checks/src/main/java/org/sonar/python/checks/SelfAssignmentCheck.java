@@ -45,7 +45,7 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Remove or correct this useless self-assignment.";
 
-  private Set<String> importedNames = new HashSet<>();
+  private final Set<String> importedNames = new HashSet<>();
 
   @Override
   public void initialize(Context context) {

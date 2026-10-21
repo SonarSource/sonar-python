@@ -51,8 +51,8 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
   }
 
   private static class CollectPropertiesVisitor extends BaseTreeVisitor {
-    private Map<String, PropertyAccessorTriple> decoratorStyleProperties = new HashMap<>();
-    private List<PropertyAccessorTriple> propertyCallStyleProperties = new ArrayList<>();
+    private final Map<String, PropertyAccessorTriple> decoratorStyleProperties = new HashMap<>();
+    private final List<PropertyAccessorTriple> propertyCallStyleProperties = new ArrayList<>();
 
     private static Optional<FunctionDef> findFunctionDefFromArgument(List<RegularArgument> arguments, int position) {
       if (arguments.size() <= position) {

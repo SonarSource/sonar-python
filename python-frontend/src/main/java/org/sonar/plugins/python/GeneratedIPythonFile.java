@@ -27,9 +27,9 @@ public class GeneratedIPythonFile implements PythonInputFile {
 
   InputFile wrappedFile;
 
-  private String pythonContent;
+  private final String pythonContent;
 
-  private Map<Integer, IPythonLocation> locationMap;
+  private final Map<Integer, IPythonLocation> locationMap;
 
   private final NotebookDialect dialect;
 

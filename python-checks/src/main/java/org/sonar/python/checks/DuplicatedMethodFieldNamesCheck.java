@@ -60,7 +60,7 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
   }
 
   private static class MethodVisitor extends BaseTreeVisitor {
-    private List<Tree> methodNames = new ArrayList<>();
+    private final List<Tree> methodNames = new ArrayList<>();
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {

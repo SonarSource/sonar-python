@@ -30,7 +30,7 @@ public class FStringState {
     FORMAT_SPECIFIER_MODE
   }
 
-  private Mode tokenizerMode;
+  private final Mode tokenizerMode;
 
   public FStringState(Mode mode, int brackets, boolean isRawString) {
     this.tokenizerMode = mode;

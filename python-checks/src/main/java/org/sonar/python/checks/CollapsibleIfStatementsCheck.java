@@ -39,7 +39,7 @@ public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
   // consider 'and' plus 2 surrounding spaces
   private static final int AND_LENGTH = 5;
 
-  private Set<Tree> ignored = new HashSet<>();
+  private final Set<Tree> ignored = new HashSet<>();
 
   @Override
   public void scanFile(PythonVisitorContext visitorContext) {

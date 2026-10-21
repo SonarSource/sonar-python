@@ -38,10 +38,10 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
 
   private static class RaiseVisitor extends BaseTreeVisitor {
-    private Symbol caughtException;
-    private Symbol packedParameter;
+    private final Symbol caughtException;
+    private final Symbol packedParameter;
 
-    private List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
+    private final List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
 
     public RaiseVisitor(Symbol caughtException, Symbol packedParameter) {
       this.caughtException = caughtException;
