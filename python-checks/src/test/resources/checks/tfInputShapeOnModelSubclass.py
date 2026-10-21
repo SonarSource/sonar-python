@@ -58,3 +58,27 @@ some_other_function()
 class UnrelatedClass3():
     def __init__(self):
         some_other_function().__init__(input_shape=(32, 24, 24, 3))
+
+
+from tensorflow.keras.models import Model as CanonicalModel
+
+class CanonicalModelSubclass(CanonicalModel):
+    def __init__(self):
+        super().__init__(input_shape=(32, 24, 24, 3))  # Noncompliant
+
+class LocalModel:
+    pass
+
+class UnrelatedModelSubclass(LocalModel):
+    def __init__(self):
+        super().__init__(input_shape=(32, 24, 24, 3))
+
+class PlainBase:
+    def __init_subclass__(cls, model_factory=None):
+        pass
+    def __init__(self, **kwargs):
+        pass
+
+class PlainChild(PlainBase, model_factory=CanonicalModel):
+    def __init__(self):
+        super().__init__(input_shape=(32, 24, 24, 3))
