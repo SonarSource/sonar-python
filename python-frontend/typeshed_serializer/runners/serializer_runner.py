@@ -142,6 +142,17 @@ def normalize_text_files(file_name: str) -> bytes:
     return bytes(normalized_file, 'utf-8')
 
 
+def normalize_serializer_sources(file_name: str) -> bytes:
+    content = normalize_text_files(file_name)
+    if Path(file_name).name in {'pyproject.toml', 'uv.lock'}:
+        # Registry location does not change the generated stubs for identical packages.
+        content = content.replace(
+            b'https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/',
+            b'https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/',
+        )
+    return content
+
+
 def read_file(file_name: str) -> bytes:
     return Path(file_name).read_bytes()
 
@@ -189,7 +200,7 @@ def write_folder_checksum(folder_name: str, source_checksum: str, binary_checksu
 def update_all_checksums():
     with open(SERIALIZER_SOURCE_CHECKSUM_FILE, 'w') as file:
         source_file_names = fetch_source_file_names(SERIALIZER_PATH)
-        serializer_source_checksum = compute_checksum(source_file_names, normalize_text_files)
+        serializer_source_checksum = compute_checksum(source_file_names, normalize_serializer_sources)
         file.write(serializer_source_checksum)
 
     # Update ressource & binary checksums for each resources subfolder
@@ -308,9 +319,9 @@ def _run_tests(dry_run: bool) -> None:
 
 def main(skip_tests=False, fail_fast=False, dry_run=False):
     source_files = fetch_source_file_names(SERIALIZER_PATH)
-    current_sources_checksum = compute_checksum(source_files, normalize_text_files)
+    current_sources_checksum = compute_checksum(source_files, normalize_serializer_sources)
     previous_sources_checksum = read_previous_checksum(SERIALIZER_SOURCE_CHECKSUM_FILE)
-    compute_and_compare_checksums("SERIALIZER_SOURCE", SERIALIZER_PATH, source_files, normalize_text_files, previous_sources_checksum)
+    compute_and_compare_checksums("SERIALIZER_SOURCE", SERIALIZER_PATH, source_files, normalize_serializer_sources, previous_sources_checksum)
 
     if previous_sources_checksum != current_sources_checksum and fail_fast:
         raise RuntimeError('INCONSISTENT SOURCES CHECKSUMS')

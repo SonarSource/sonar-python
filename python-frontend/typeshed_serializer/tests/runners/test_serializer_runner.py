@@ -179,6 +179,38 @@ class RunnerTest(unittest.TestCase):
             text = runner.normalize_text_files("test")
             assert text == self.FILE_CONTENT
 
+    def test_serializer_registry_location_preserves_checksum(self):
+        saas = 'https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple'
+        edge = 'https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple'
+        for filename in ['pyproject.toml', 'uv.lock']:
+            with self.subTest(filename=filename), mock.patch(f'{self.MODULE_NAME}.Path.read_text') as read_text:
+                read_text.return_value = f'url = "{saas}"'
+                baseline = runner.compute_checksum([filename], runner.normalize_serializer_sources)
+                read_text.return_value = f'url = "{edge}"'
+                self.assertEqual(baseline, runner.compute_checksum([filename], runner.normalize_serializer_sources))
+
+    def test_serializer_dependency_changes_still_change_checksum(self):
+        content = 'version = "1.0"\nhash = "sha256:original"'
+        with mock.patch(f'{self.MODULE_NAME}.Path.read_text') as read_text:
+            read_text.return_value = content
+            baseline = runner.compute_checksum(['uv.lock'], runner.normalize_serializer_sources)
+            for changed in [content.replace('1.0', '2.0'), content.replace('original', 'changed')]:
+                with self.subTest(content=changed):
+                    read_text.return_value = changed
+                    self.assertNotEqual(baseline, runner.compute_checksum(['uv.lock'], runner.normalize_serializer_sources))
+
+    def test_serializer_unknown_registry_still_changes_checksum(self):
+        with mock.patch(f'{self.MODULE_NAME}.Path.read_text') as read_text:
+            read_text.return_value = 'url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple"'
+            baseline = runner.compute_checksum(['uv.lock'], runner.normalize_serializer_sources)
+            read_text.return_value = 'url = "https://example.org/simple"'
+            self.assertNotEqual(baseline, runner.compute_checksum(['uv.lock'], runner.normalize_serializer_sources))
+
+    def test_serializer_source_code_urls_are_not_normalized(self):
+        content = b'https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple'
+        with mock.patch(f'{self.MODULE_NAME}.normalize_text_files', return_value=content):
+            self.assertEqual(content, runner.normalize_serializer_sources('serializer.py'))
+
     def test_read_file(self):
         file_bytes = bytes("\ntest end\n", 'utf-8')
         with mock.patch(f'{self.MODULE_NAME}.Path.read_bytes') as mock_read_bytes:
@@ -208,7 +240,7 @@ class RunnerTest(unittest.TestCase):
 
             mocks.files.assert_called_once()
             mocks.prev_checksum.assert_any_call(runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
-            mocks.checksum.assert_any_call(self.FILE_NAMES, runner.normalize_text_files)
+            mocks.checksum.assert_any_call(self.FILE_NAMES, runner.normalize_serializer_sources)
             mocks.subprocess.run.assert_called_with(
                 ['uv', 'run', 'python', '-m', 'pytest', 'tests/'],
                 check=True
@@ -225,7 +257,7 @@ class RunnerTest(unittest.TestCase):
             runner.main()
 
             mocks.prev_checksum.assert_called_with(runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
-            mocks.checksum.assert_called_with(self.FILE_NAMES, runner.normalize_text_files)
+            mocks.checksum.assert_called_with(self.FILE_NAMES, runner.normalize_serializer_sources)
             expected_calls = [
                 mock.call(['uv', 'run', 'python', '-m', 'utils.folder_manager'], check=True),
                 mock.call(['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer'], check=True),
@@ -248,7 +280,7 @@ class RunnerTest(unittest.TestCase):
             mocks.files.assert_called_once()
             mocks.prev_checksum.assert_any_call(runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
             mocks.checksum.assert_any_call(
-                self.FILE_NAMES, runner.normalize_text_files
+                self.FILE_NAMES, runner.normalize_serializer_sources
             )
             mocks.subprocess.run.assert_not_called()
 
