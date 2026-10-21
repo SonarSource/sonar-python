@@ -17,6 +17,7 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,7 +44,6 @@ import org.sonar.python.checks.hotspots.CommonValidationUtils.ArgumentValidator;
 import org.sonar.python.checks.hotspots.CommonValidationUtils.CallValidator;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
-import org.sonar.python.types.v2.TypeCheckMap;
 
 import static org.sonar.python.checks.hotspots.CommonValidationUtils.isEqualTo;
 import static org.sonar.python.checks.hotspots.CommonValidationUtils.isLessThan;
@@ -206,11 +206,11 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     Map.entry("cryptography.hazmat.primitives.kdf.scrypt.Scrypt", List.of(CRYPTOGRAPHY_R, CRYPTOGRAPHY_N, CRYPTOGRAPHY_LENGTH)),
     Map.entry("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC", List.of(CRYPTOGRAPHY_PBKDF2)),
     Map.entry("passlib.handlers.scrypt.scrypt.using", List.of(PASSLIB_BLOCK_SIZE, PASSLIB_ROUNDS)),
+    Map.entry("passlib.hash.scrypt.using", List.of(PASSLIB_BLOCK_SIZE, PASSLIB_ROUNDS)),
     Map.entry("argon2.PasswordHasher", List.of(new Argon2PasswordHasherValidator(0, 1, 2))),
     Map.entry("argon2.Parameters", List.of(new Argon2PasswordHasherValidator(4, 5, 6), argon2Type, argon2Version)),
     Map.entry("argon2.low_level.hash_secret", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
     Map.entry("argon2.low_level.hash_secret_raw", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
-    Map.entry("passlib.handlers.argon2._Argon2Common.using", List.of(new Argon2PasswordHasherValidator(3, 4, 5))),
     Map.entry("bcrypt.gensalt", List.of(BCRYPT_GENSALT)),
     Map.entry("bcrypt.kdf", List.of(BCRYPT_KDF)),
     Map.entry("flask_bcrypt.generate_password_hash", List.of(FLASK_BCRYPT)));
@@ -229,7 +229,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
 
   private TypeCheckBuilder argon2CheapestProfileTypeChecker = null;
   private TypeCheckBuilder flaskConfigTypeChecker = null;
-  private TypeCheckMap<Collection<CallValidator>> typeCheckMap = null;
+  private Map<TypeMatcher, Collection<CallValidator>> typeCheckMap = null;
 
   @Override
   public void initialize(Context context) {
@@ -274,10 +274,13 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     argon2IDTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.low_level.Type.ID");
     argon2VersionTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.low_level.ARGON2_VERSION");
 
-    typeCheckMap = new TypeCheckMap<>();
+    typeCheckMap = new HashMap<>();
+    // Passlib accepts memory_cost positionally; parallelism is forwarded through **kwds.
+    typeCheckMap.put(TypeMatchers.isType("passlib.handlers.argon2.argon2.using"), List.of(new Argon2PasswordHasherValidator(3, 1, -1)));
+    // Resolve reexports by type identity, retaining FQN matching for libraries without stubs.
     callExpressionValidators.forEach((key, value) -> {
-      var typeCheckBuilder = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn(key);
-      typeCheckMap.put(typeCheckBuilder, value);
+      var matcher = TypeMatchers.any(TypeMatchers.isType(key), TypeMatchers.withFQN(key));
+      typeCheckMap.put(matcher, value);
     });
   }
 
@@ -342,8 +345,11 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   private void checkCallExpr(SubscriptionContext subscriptionContext) {
     CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
     var qualifiedName = qualifiedNameOrEmpty(callExpression);
-    var configsV2 = typeCheckMap.getOptionalForType(callExpression.callee().typeV2()).orElse(List.of());
-    configsV2.forEach(config -> config.validate(subscriptionContext, callExpression));
+    typeCheckMap.entrySet().stream()
+      .filter(entry -> entry.getKey().isTrueFor(callExpression.callee(), subscriptionContext))
+      .findFirst()
+      .map(Map.Entry::getValue).orElse(List.of())
+      .forEach(config -> config.validate(subscriptionContext, callExpression));
     // We need to keep some V1 checks because of SONARPY-2268.
     // When resolving members, we can get an UnknownType for the callee. This looses all type information and makes typechecking impossible
     // We could use the qualified expression mechanism to bypass this limitation, however handling it at the type inference level is better

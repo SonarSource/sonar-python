@@ -38,6 +38,18 @@ class FastHashingOrPlainTextCheckTest {
   }
 
   @Test
+  void passlibArgon2Imports() {
+    PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/passlibArgon2Imports.py",
+      new FastHashingOrPlainTextCheck());
+  }
+
+  @Test
+  void passlibArgon2ImplementationWithoutPublicImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/passlibArgon2Implementation.py",
+      new FastHashingOrPlainTextCheck());
+  }
+
+  @Test
   void djangoSettings() {
     PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/settings.py", new FastHashingOrPlainTextCheck());
   }

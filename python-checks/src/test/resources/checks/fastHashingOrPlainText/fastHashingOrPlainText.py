@@ -133,6 +133,20 @@ def passlib():
     scrypt.using(salt, 16, 12, 7)  # Noncompliant
 
 
+def passlib_aliases():
+    from passlib.hash import scrypt as imported_scrypt, argon2 as imported_argon2
+    imported_scrypt.using(salt, rounds=11)  # Noncompliant
+    imported_scrypt.using(salt, rounds=12)
+    imported_argon2.using(time_cost=4, memory_cost=7167, parallelism=1)  # Noncompliant
+    imported_argon2.using(time_cost=5, memory_cost=7168, parallelism=1)
+
+    class LocalScrypt:
+        @classmethod
+        def using(cls, **kwargs):
+            return cls
+    LocalScrypt.using(rounds=1)
+
+
 ## PBKDF
 def hashlib():
     from hashlib import pbkdf2_hmac
