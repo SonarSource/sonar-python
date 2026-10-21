@@ -207,3 +207,15 @@ def _(API_KEY, DB_CONFIG):
 @app.function
 def helper(INPUT_DATA):
     return INPUT_DATA
+
+
+def unresolved_class_factory():
+    from unmodeled_library import class_factory
+
+    Base = class_factory()  # Compliant: used as a class alias
+    class Model(Base):
+        pass
+
+    OtherValue = class_factory()  # Noncompliant
+    class Unrelated(Model, factory=OtherValue):
+        pass

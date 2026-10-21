@@ -35,10 +35,12 @@ import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -120,7 +122,15 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   }
 
   private static boolean isAssignedFromType(SymbolV2 symbolV2) {
-    return isAssignedFromTyping(symbolV2) || isAssignedFromBuiltinType(symbolV2);
+    return isAssignedFromTyping(symbolV2) || isAssignedFromBuiltinType(symbolV2) || isUsedAsClassBase(symbolV2);
+  }
+
+  private static boolean isUsedAsClassBase(SymbolV2 symbol) {
+    // A factory-produced class remains a class alias even if its library stubs
+    // are unavailable (for example SQLAlchemy's declarative_base).
+    return symbol.usages().stream().anyMatch(usage ->
+      usage.tree().parent() instanceof RegularArgument argument && argument.keywordArgument() == null
+        && argument.parent().parent() instanceof ClassDef);
   }
 
   private static boolean isExtendingType(Symbol symbol) {
