@@ -1,8 +1,10 @@
+import builtins
 import dataclasses
 import datetime
 import re
+import decimal
 from decimal import Decimal
-from io import StringIO
+from io import StringIO, BytesIO
 import json
 
 # Custom class for testing
@@ -75,10 +77,15 @@ def mixed_types_lambda_handler(event, context):
         "complex": complex(3, 5),  # Noncompliant
         "fun": foo,  # Noncompliant
         "file_like": StringIO("test"),  # Noncompliant
+        "binary_stream": BytesIO(b"test"),  # Noncompliant
+        "stream_value": StringIO("test").getvalue(),
         "decimal": Decimal(1),  # Noncompliant
         "regex": re.compile(r"\w"),  # Noncompliant
         "user": User("Bob", 25),  # Noncompliant
         "bytes": bytes("test", "utf-8"),  # Noncompliant
+        "bytes_type": builtins.bytes,  # Noncompliant
+        "pattern_type": re.Pattern,  # Noncompliant
+        "decimal_type": decimal.Decimal,  # Noncompliant
         "byte_array": bytearray([1, 2]),  # Noncompliant
         "frozen_set": frozenset({1, 3}),  # Noncompliant
         datetime.datetime.now(): [  # Noncompliant

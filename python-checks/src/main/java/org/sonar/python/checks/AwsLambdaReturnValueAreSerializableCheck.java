@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -38,11 +37,11 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.AwsLambdaChecksUtils;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.TypeCheckBuilder;
-import org.sonar.python.types.v2.TypeCheckMap;
 
 @Rule(key = "S7613")
 public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscriptionCheck {
@@ -70,11 +69,18 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
     "serialize",
     "json");
 
-  private TypeCheckBuilder listType;
-  private TypeCheckBuilder setType;
-
-  private TypeCheckMap<Object> serializationFunctions;
-  private TypeCheckMap<Object> nonSerializableTypes;
+  private static final TypeMatcher LIST_TYPE = TypeMatchers.isType("builtins.list");
+  private static final TypeMatcher SET_TYPE = TypeMatchers.any(TypeMatchers.isType("builtins.set"), TypeMatchers.isObjectOfType("builtins.set"));
+  private static final TypeMatcher NON_SERIALIZABLE_TYPES = TypeMatchers.any(
+    SET_TYPE,
+    TypeMatchers.any(TypeMatchers.isType("re.Pattern"), TypeMatchers.isObjectOfType("re.Pattern")),
+    TypeMatchers.any(TypeMatchers.isType("decimal.Decimal"), TypeMatchers.isObjectOfType("decimal.Decimal")),
+    TypeMatchers.isObjectInstanceOf("typing.IO"),
+    TypeMatchers.isObjectInstanceOf("io.IOBase"),
+    TypeMatchers.any(TypeMatchers.isType("builtins.complex"), TypeMatchers.isObjectOfType("builtins.complex")),
+    TypeMatchers.any(TypeMatchers.isType("builtins.bytes"), TypeMatchers.isObjectOfType("builtins.bytes")),
+    TypeMatchers.any(TypeMatchers.isType("builtins.bytearray"), TypeMatchers.isObjectOfType("builtins.bytearray")),
+    TypeMatchers.any(TypeMatchers.isType("builtins.frozenset"), TypeMatchers.isObjectOfType("builtins.frozenset")));
 
   record IssueLocation(Tree mainLocation, Optional<Tree> secondaryLocation) {
     public IssueLocation(Tree mainLocation) {
@@ -84,31 +90,7 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initializeTypeChecker);
     context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, this::checkReturnStatement);
-  }
-
-  private void initializeTypeChecker(SubscriptionContext ctx) {
-    listType = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("list");
-
-    setType = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("set");
-
-    var object = new Object();
-    serializationFunctions = new TypeCheckMap<>();
-    serializationFunctions.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("dataclasses.asdict"), object);
-    serializationFunctions.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("json.dumps"), object);
-    serializationFunctions.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("json.loads"), object);
-
-    nonSerializableTypes = new TypeCheckMap<>();
-    nonSerializableTypes.put(setType, object);
-    nonSerializableTypes.put(ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName("re.Pattern"), object);
-    nonSerializableTypes.put(ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName("decimal.Decimal"), object);
-    // Covers all io hierachy: StringIO, BytesIO etc...
-    nonSerializableTypes.put(ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.IO"), object);
-    nonSerializableTypes.put(ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("complex"), object);
-    nonSerializableTypes.put( ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("bytes"), object);
-    nonSerializableTypes.put( ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("bytearray"), object);
-    nonSerializableTypes.put( ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("frozenset"), object);
   }
 
   private void checkReturnStatement(SubscriptionContext ctx) {
@@ -129,31 +111,31 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
     }
 
     Expression returnExpr = returnStmt.expressions().get(0);
-    getNonSerializableExpr(returnExpr)
+    getNonSerializableExpr(returnExpr, ctx)
       .forEach(location -> {
         PreciseIssue issue = ctx.addIssue(location.mainLocation, MESSAGE);
         location.secondaryLocation.ifPresent(secondaryLocation -> issue.secondary(secondaryLocation, SECONDARY_LOCATION_MESSAGE));
       });
   }
 
-  private Stream<IssueLocation> getNonSerializableExpr(Expression expr) {
+  private Stream<IssueLocation> getNonSerializableExpr(Expression expr, SubscriptionContext ctx) {
     switch (expr.getKind()) {
       case CALL_EXPR:
-        return getNonSerializableCallExpr((CallExpression) expr);
+        return getNonSerializableCallExpr((CallExpression) expr, ctx);
       case DICTIONARY_LITERAL:
-        return getNonSerializableInDictionaryLiteral((DictionaryLiteral) expr);
+        return getNonSerializableInDictionaryLiteral((DictionaryLiteral) expr, ctx);
       case LIST_LITERAL:
-        return getNonSerializableInListLiteral((ListLiteral) expr);
+        return getNonSerializableInListLiteral((ListLiteral) expr, ctx);
       case TUPLE:
-        return getNonSerializableInTuple((Tuple) expr);
+        return getNonSerializableInTuple((Tuple) expr, ctx);
       case NAME:
-        return getNonSerializableFromName((Name) expr);
+        return getNonSerializableFromName((Name) expr, ctx);
       default:
-        return getNonSerializableFromTypeOrFqn(expr);
+        return getNonSerializableFromTypeOrFqn(expr, ctx);
     }
   }
 
-  private Stream<IssueLocation> getNonSerializableCallExpr(CallExpression callExpr) {
+  private Stream<IssueLocation> getNonSerializableCallExpr(CallExpression callExpr, SubscriptionContext ctx) {
     // First check if this is a serialization method call like user.to_dict()
     if (isSerializationMethodCall(callExpr)) {
       return Stream.of();
@@ -165,19 +147,15 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
       return Stream.of();
     }
     // Check if this is a list call converting non-serializable types to serializable ones
-    if (listType.check(callExpr.callee().typeV2()).equals(TriBool.TRUE)) {
+    if (LIST_TYPE.isTrueFor(callExpr.callee(), ctx)) {
       return callExpr.arguments().stream()
         .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
         .map(RegularArgument::expression)
-        .filter(argExpr -> !isSet(argExpr))
-        .flatMap(this::getNonSerializableExpr);
+        .filter(argExpr -> !isSet(argExpr, ctx))
+        .flatMap(expression -> getNonSerializableExpr(expression, ctx));
     }
 
-    if (serializationFunctions.getOptionalForType(callExpr.callee().typeV2()).isPresent()) {
-      Stream.of();
-    }
-
-    if (nonSerializableTypes.getOptionalForType(callExpr.typeV2()).isPresent() ||
+    if (NON_SERIALIZABLE_TYPES.isTrueFor(callExpr, ctx) ||
       NON_SERIALIZABLE_FQNS.contains(fullyQualifiedName) ||
       isUserDefinedClassWithoutSerializationMethods(calleeSymbol)) {
       return Stream.of(new IssueLocation(callExpr));
@@ -206,29 +184,29 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
       .orElse(false);
   }
 
-  private Stream<IssueLocation> getNonSerializableInDictionaryLiteral(DictionaryLiteral dictLiteral) {
+  private Stream<IssueLocation> getNonSerializableInDictionaryLiteral(DictionaryLiteral dictLiteral, SubscriptionContext ctx) {
     // Check dictionary keys and values recursively
     return dictLiteral.elements().stream()
       .flatMap(TreeUtils.toStreamInstanceOfMapper(KeyValuePair.class))
-      .flatMap(kvPair -> Stream.concat(getNonSerializableExpr(kvPair.key()), getNonSerializableExpr(kvPair.value())));
+      .flatMap(kvPair -> Stream.concat(getNonSerializableExpr(kvPair.key(), ctx), getNonSerializableExpr(kvPair.value(), ctx)));
   }
 
-  private Stream<IssueLocation> getNonSerializableInListLiteral(ListLiteral listLiteral) {
+  private Stream<IssueLocation> getNonSerializableInListLiteral(ListLiteral listLiteral, SubscriptionContext ctx) {
     return listLiteral.elements().expressions().stream()
-      .flatMap(this::getNonSerializableExpr);
+      .flatMap(expression -> getNonSerializableExpr(expression, ctx));
   }
 
-  private Stream<IssueLocation> getNonSerializableInTuple(Tuple tuple) {
+  private Stream<IssueLocation> getNonSerializableInTuple(Tuple tuple, SubscriptionContext ctx) {
     return tuple.elements().stream()
-      .flatMap(this::getNonSerializableExpr);
+      .flatMap(expression -> getNonSerializableExpr(expression, ctx));
   }
 
-  private Stream<IssueLocation> getNonSerializableFromName(Name name) {
+  private Stream<IssueLocation> getNonSerializableFromName(Name name, SubscriptionContext ctx) {
     var assignedValue = Expressions.singleAssignedValue(name);
     if (assignedValue == null) {
       return getNonSerializableFromFuncDef(name);
     }
-    return getNonSerializableExpr(assignedValue)
+    return getNonSerializableExpr(assignedValue, ctx)
       .map(assignedValueLocation -> new IssueLocation(name, Optional.of(assignedValueLocation.mainLocation)));
   }
 
@@ -240,12 +218,12 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
       .map(usage -> new IssueLocation(name)).stream();
   }
 
-  private boolean isSet(Expression expr) {
-    return setType.check(expr.typeV2()) == TriBool.TRUE;
+  private static boolean isSet(Expression expr, SubscriptionContext ctx) {
+    return SET_TYPE.isTrueFor(expr, ctx);
   }
 
-  private Stream<IssueLocation> getNonSerializableFromTypeOrFqn(Expression expr) {
-    if (nonSerializableTypes.getOptionalForType(expr.typeV2()).isPresent()) {
+  private static Stream<IssueLocation> getNonSerializableFromTypeOrFqn(Expression expr, SubscriptionContext ctx) {
+    if (NON_SERIALIZABLE_TYPES.isTrueFor(expr, ctx)) {
       return Stream.of(new IssueLocation(expr));
     }
 
