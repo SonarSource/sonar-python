@@ -54,7 +54,6 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private final List<Symbol> superClasses = Collections.synchronizedList(new ArrayList<>());
   private List<String> superClassesFqns = Collections.synchronizedList(new ArrayList<>());
-  private List<String> inlinedSuperClassFqn = new ArrayList<>();
   private volatile Set<Symbol> allSuperClasses = null;
   private volatile Set<Symbol> allSuperClassesIncludingAmbiguousSymbols = null;
   private boolean hasSuperClassWithoutSymbol = false;
@@ -166,7 +165,6 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     }
     addMembers(classMembers);
     superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).toList());
-    superClassesFqns.removeAll(inlinedSuperClassFqn);
     validForSemanticPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
   }
 
@@ -176,23 +174,27 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private void inlineInheritedMethodsFromPrivateClass(List<String> superClassesFqns, Map<String, Set<Object>> descriptorsByFqn) {
     for (String superClassFqn : superClassesFqns) {
-      if (isPrivateName(superClassFqn)) {
-        TypeShed.ClassDescriptorWithTypeTable superClassWithTypes = TypeShed.classDescriptorWithTypeTableWithFQN(superClassFqn);
-        if (superClassWithTypes == null) return;
-        SymbolsProtos.ClassSymbol superClass = superClassWithTypes.descriptor();
-        inlinedSuperClassFqn.add(superClassFqn);
-        for (SymbolsProtos.FunctionSymbol functionSymbol : superClass.getMethodsList()) {
-          String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
-          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>())
-            .add(new TypeShed.TypedProtobufDescriptor(functionSymbol, superClassWithTypes.typeTable()));
-        }
-        for (SymbolsProtos.OverloadedFunctionSymbol functionSymbol : superClass.getOverloadedMethodsList()) {
-          String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
-          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>())
-            .add(new TypeShed.TypedProtobufDescriptor(functionSymbol, superClassWithTypes.typeTable()));
-        }
-        this.superClassesFqns.addAll(superClass.getSuperClassesList());
+      if (!isPrivateName(superClassFqn)) continue;
+      TypeShed.ClassDescriptorWithTypeTable superClassWithTypes = TypeShed.classDescriptorWithTypeTableWithFQN(superClassFqn);
+      if (superClassWithTypes != null) {
+        inlineInheritedMethods(superClassWithTypes, descriptorsByFqn);
       }
+    }
+  }
+
+  private void inlineInheritedMethods(TypeShed.ClassDescriptorWithTypeTable superClassWithTypes, Map<String, Set<Object>> descriptorsByFqn) {
+    SymbolsProtos.ClassSymbol superClass = superClassWithTypes.descriptor();
+    for (SymbolsProtos.FunctionSymbol functionSymbol : superClass.getMethodsList()) {
+      if (!isValidForProjectSemanticPythonVersion(functionSymbol.getValidForList())) continue;
+      String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
+      descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>())
+        .add(new TypeShed.TypedProtobufDescriptor(functionSymbol, superClassWithTypes.typeTable()));
+    }
+    for (SymbolsProtos.OverloadedFunctionSymbol functionSymbol : superClass.getOverloadedMethodsList()) {
+      if (!isValidForProjectSemanticPythonVersion(functionSymbol.getValidForList())) continue;
+      String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
+      descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>())
+        .add(new TypeShed.TypedProtobufDescriptor(functionSymbol, superClassWithTypes.typeTable()));
     }
   }
 

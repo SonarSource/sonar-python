@@ -695,7 +695,8 @@ class TypeShedTest {
     Map<String, Symbol> socketModule = symbolsForModule("socket");
     ClassSymbol socket = (ClassSymbol) socketModule.get("socket");
     assertThat(socket.declaredMembers()).extracting(Symbol::name, Symbol::fullyQualifiedName).contains(tuple("connect", "socket.socket.connect"));
-    assertThat(socket.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("object");
+    assertThat(socket.superClasses()).extracting(Symbol::fullyQualifiedName).containsExactly("_socket.socket");
+    assertThat(socket.isOrExtends("_socket.socket")).isTrue();
   }
 
   @Test

@@ -286,3 +286,13 @@ def http_status():
     pass
 
   set_status(HTTPStatus.OK)
+
+
+def ctypes_private_base_arguments():
+    import ctypes
+    class Address(ctypes.Structure):
+        _fields_ = [("family", ctypes.c_int)]
+    ctypes.byref(ctypes.create_string_buffer(512))
+    ctypes.byref(Address())
+    ctypes.byref(ctypes.c_int(16))
+    ctypes.byref("not a ctypes instance")  # Noncompliant
