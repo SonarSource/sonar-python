@@ -25,7 +25,6 @@ import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
-import org.sonar.python.types.v2.TypeUtils;
 
 public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
@@ -45,7 +44,6 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
 
     PythonType returnType = Optional.ofNullable(from.typeAnnotationDescriptor())
       .map(typeAnnotation -> typeAnnotationConverter.convert(ctx, typeAnnotation))
-      .map(TypeUtils::ensureWrappedObjectType)
       .orElse(PythonType.UNKNOWN);
 
     var decorators = from.decorators()

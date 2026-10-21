@@ -30,6 +30,8 @@ import org.sonar.python.types.v2.LazyUnionType;
 
 public class TypeAnnotationToPythonTypeConverter {
 
+  // Annotations describe runtime values, including when nested in generic arguments.
+  // Keep class resolution lazy; unions resolve their value wrappers before hashing them.
   public PythonType convert(ConversionContext context, TypeAnnotationDescriptor type) {
     switch (type.kind()) {
       case INSTANCE:
@@ -56,34 +58,39 @@ public class TypeAnnotationToPythonTypeConverter {
           .withAttributes(attributes)
           .build();
       case TYPE:
-        return context.lazyTypesContext().getOrCreateLazyType("type");
+        return ObjectType.fromType(context.lazyTypesContext().getOrCreateLazyType("type"));
       case TYPE_ALIAS:
         return convert(context, type.args().get(0));
       case CALLABLE:
         // this should be handled as a function type - see SONARPY-953
-        return context.lazyTypesContext().getOrCreateLazyType("function");
+        return ObjectType.fromType(context.lazyTypesContext().getOrCreateLazyType("function"));
       case UNION:
         return LazyUnionType.or(type.args().stream().map(t -> convert(context, t)).collect(Collectors.toSet()));
       case TUPLE:
-        return context.lazyTypesContext().getOrCreateLazyType("tuple");
+        return ObjectType.fromType(context.lazyTypesContext().getOrCreateLazyType("tuple"));
       case NONE:
-        return context.lazyTypesContext().getOrCreateLazyType("NoneType");
+        return ObjectType.fromType(context.lazyTypesContext().getOrCreateLazyType("NoneType"));
       case TYPED_DICT:
         // SONARPY-2179: This case only makes sense for parameter types, which are not supported yet
-        return context.lazyTypesContext().getOrCreateLazyType("dict");
+        return ObjectType.fromType(context.lazyTypesContext().getOrCreateLazyType("dict"));
       case TYPE_VAR:
         if (Boolean.TRUE.equals(type.isSelf())) {
           if (type.args().size() != 1) {
             return PythonType.UNKNOWN;
           }
           PythonType innerType = convert(context, type.args().get(0));
-          return SelfType.fromTypeWrapper(TypeWrapper.of(innerType));
+          if (innerType instanceof ObjectType objectType) {
+            return ObjectType.Builder.fromType(objectType)
+              .withType(SelfType.fromTypeWrapper(objectType.typeWrapper()))
+              .build();
+          }
+          return PythonType.UNKNOWN;
         }
         return Optional.of(type)
           .filter(TypeAnnotationToPythonTypeConverter::filterTypeVar)
           .map(TypeAnnotationDescriptor::fullyQualifiedName)
           .map(context.lazyTypesContext()::getOrCreateLazyType)
-          .map(PythonType.class::cast)
+          .<PythonType>map(ObjectType::fromType)
           .orElse(PythonType.UNKNOWN);
       default:
         return PythonType.UNKNOWN;

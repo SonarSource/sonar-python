@@ -50,8 +50,25 @@ def returns_a_string():
     return "spam"
 
 def mixed_union_index(index: int | str):
-    [1][index] # Noncompliant
+    [1][index]  # A union with a valid alternative is not definitely invalid.
+
+def invalid_union_index(index: str | float):
+    [1][index]  # Noncompliant
        #^^^^^
+    [1][index:index:index]  # Noncompliant 3
+
+def custom_or_invalid_union_index(index: Index | str):
+    [1][index]
+
+def unknown_union_index(index: Any | str):
+    [1][index]
+
+def nullable_descriptor_slice_bound():
+    import re
+    items = [1, 2, 3]
+    index = re.search("missing", "text")
+    if index is None:
+        items[index:index:index]
 
 def mixed_valid_union_index(index: int | slice):
     [1][index]
@@ -87,3 +104,39 @@ def unknown_type(data, data2: UnknownType):
 def tuple_unpacking_does_not_type_extracted_value(precomputed_cholesky):
     params, = tuple(precomputed_cholesky.values())
     params["chol_tril"]
+
+
+def conservative_nullable_index(index: str | None):
+    [1][index]  # FN: None indices remain permitted for sequences with custom indexing.
+    [1][index:index:index]  # None remains a possible valid slice bound.
+
+def conservative_slice_bound(bound: str | slice):
+    [1][:bound]  # FN: Slice bounds remain permitted for sequences with custom slicing.
+    [1][bound:bound:bound]
+    [1][bound]  # slice remains a possible valid subscription.
+
+def definite_none_index_and_slice_bound():
+    [1][None]  # FN: The rule does not distinguish built-in indexing from custom indexing.
+    [1][None:None:None]
+    bound = slice(1)
+    [1][:bound]  # FN: The same conservative policy applies to slice bounds.
+    [1][bound]
+
+def possibly_valid_slice_bounds(valid: int | slice, custom: Index | str, unknown: Any | slice):
+    [1][valid:valid:valid]
+    [1][custom:custom:custom]
+    [1][unknown:unknown:unknown]
+
+
+class CustomIndexList(list):
+    def __getitem__(self, index):
+        if index is None or isinstance(index, slice):
+            return self
+        return super().__getitem__(index)
+
+
+def custom_indexing_accepts_none_and_slice_bounds():
+    items = CustomIndexList([1, 2, 3])
+    assert items[None] is items
+    bound = slice(1)
+    assert items[bound:bound:bound] is items

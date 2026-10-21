@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatcher;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatchers;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public final class CallReturnTypeCalculator {
@@ -64,11 +65,9 @@ public final class CallReturnTypeCalculator {
     TypeSource typeSource = computeTypeSource(calleeType, callExpr);
     PythonType returnType = returnTypeOfCall(calleeType);
 
-    if (returnType instanceof ObjectType objectType) {
-      returnType = ObjectType.Builder.fromType(objectType)
-        .withTypeSource(typeSource)
-        .build();
-    }
+    returnType = TypeUtils.map(returnType, candidate -> candidate instanceof ObjectType objectType
+      ? ObjectType.Builder.fromType(objectType).withTypeSource(typeSource).build()
+      : candidate);
 
     return collapseSelfTypeIfNeeded(callExpr, returnType, typePredicateContext);
   }

@@ -3646,7 +3646,8 @@ public class TypeInferenceV2Test {
     assertThat(functionType.fullyQualifiedName()).isEqualTo("sys.gettrace");
     PythonType returnType = functionType.returnType();
     UnionType unionType = (UnionType) returnType.unwrappedType();
-    assertThat(unionType.candidates()).extracting(PythonType::name).containsExactlyInAnyOrder("function", "NoneType");
+    assertThat(unionType.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class))
+      .extracting(candidate -> candidate.unwrappedType().name()).containsExactlyInAnyOrder("function", "NoneType");
   }
 
   @Test
@@ -4525,7 +4526,7 @@ public class TypeInferenceV2Test {
     ObjectType objectType = (ObjectType) xType;
     assertThat(objectType.attributes())
       .element(0)
-      .isEqualTo(pathType);
+      .is(TypesTestUtils.objectTypeOf(pathType));
   }
 
   @Test

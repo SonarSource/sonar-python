@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.CallExpressionImpl;
@@ -79,6 +80,29 @@ class CallReturnTypeCalculatorTest {
     PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
     assertThat(result).isInstanceOf(ObjectType.class);
     assertThat(((ObjectType) result).unwrappedType()).isEqualTo(TypesTestUtils.INT_TYPE);
+  }
+
+  @Test
+  void union_return_values_retain_type_hint_provenance() {
+    for (var code : List.of(
+      "def value() -> int | None: ...\nvalue()",
+      "from re import Pattern\ndef inspect(pattern: Pattern):\n  pattern.search('text')")) {
+      var fileInput = parseAndInferTypes(code);
+      var call = (CallExpression) getLastDescendant(fileInput, CallExpression.class::isInstance);
+      var result = CallReturnTypeCalculator.computeCallExpressionType(call, typePredicateContext);
+      var candidates = result instanceof UnionType union ? union.candidates() : Set.of(result);
+      assertThat(candidates).isNotEmpty().allSatisfy(candidate -> assertThat(candidate.typeSource()).isEqualTo(TypeSource.TYPE_HINT));
+    }
+  }
+
+  @Test
+  void union_return_values_from_known_library_functions_retain_exact_provenance() {
+    var fileInput = parseAndInferTypes("from re import search\nsearch('pattern', 'text')");
+    var call = (CallExpression) getLastDescendant(fileInput, CallExpression.class::isInstance);
+    var result = CallReturnTypeCalculator.computeCallExpressionType(call, typePredicateContext);
+    assertThat(result).isInstanceOfSatisfying(UnionType.class, union ->
+      assertThat(union.candidates()).isNotEmpty().allSatisfy(candidate ->
+        assertThat(candidate.typeSource()).isEqualTo(TypeSource.EXACT)));
   }
 
   @Test
@@ -391,7 +415,7 @@ class CallReturnTypeCalculatorTest {
     ObjectType objectType = (ObjectType) globGeneratorType;
     assertThat(objectType.attributes())
       .element(0)
-      .isEqualTo(pathType);
+      .is(TypesTestUtils.objectTypeOf(pathType));
   }
 
   @Test

@@ -141,6 +141,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       TypeInferenceMatchers.withFQN("typing.Self"),
       TypeInferenceMatchers.withFQN("typing_extensions.Self")));
 
+  private static final TypeInferenceMatcher IS_TUPLE = TypeInferenceMatcher.of(TypeInferenceMatchers.isType("tuple"));
+
   private static final String PYTEST_MODULE = "pytest";
   private static final String PYTEST_REQUEST_PARAMETER = "request";
   private static final Set<String> TYPING_ANNOTATED = Set.of("typing.Annotated", "typing_extensions.Annotated");
@@ -936,9 +938,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       PythonType resolvedType = resolveSelfType(expression.typeV2(), enclosingClassType);
       return ObjectType.Builder.fromType(resolvedType).withTypeSource(TypeSource.TYPE_HINT).build();
     } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
-      List<PythonType> attributes = subscriptionExpression.subscripts()
-        .expressions()
-        .stream()
+      List<Expression> attributeExpressions = subscriptionExpression.subscripts().expressions();
+      if (IS_TUPLE.evaluate(subscriptionExpression.object().typeV2(), typePredicateContext).isTrue()
+        && attributeExpressions.size() == 2 && attributeExpressions.get(1).is(Tree.Kind.ELLIPSIS)) {
+        // In tuple[T, ...], the ellipsis denotes repetition; it is not an additional element type.
+        attributeExpressions = attributeExpressions.subList(0, 1);
+      }
+      List<PythonType> attributes = attributeExpressions.stream()
         .map(Expression::typeV2)
         .map(type -> resolveSelfType(type, enclosingClassType))
         .map(type -> ObjectType.Builder.fromType(type).withTypeSource(TypeSource.TYPE_HINT).build())

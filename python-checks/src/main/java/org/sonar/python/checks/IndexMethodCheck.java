@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SLICE_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SLICE_ITEM;
@@ -37,10 +38,14 @@ public class IndexMethodCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Make sure this object defines an `__index__` method.";
   private static final TypeMatcher SEQUENCE_MATCHER = TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("typing.Sequence"));
   private static final TypeMatcher MAPPING_MATCHER = TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("typing.Mapping"));
+  // Keep None and slice permissive for both indices and bounds: sequence subclasses can customize indexing.
   private static final TypeMatcher VALID_INDEX_MATCHER = TypeMatchers.any(
     TypeMatchers.isObjectOfType("NoneType"),
     TypeMatchers.isObjectOfType("slice"),
     TypeMatchers.hasMember("__index__"));
+  // Without branch narrowing, a union is definitely invalid only if every alternative is invalid.
+  private static final TypeMatcher POSSIBLY_VALID_INDEX_MATCHER = TypeMatchers.any(
+    VALID_INDEX_MATCHER, InternalTypeMatchers.isAnyTypeInUnionSatisfying(VALID_INDEX_MATCHER));
 
   @Override
   public void initialize(Context context) {
@@ -76,9 +81,8 @@ public class IndexMethodCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isValidIndex(@Nullable Expression expressionIndex, SubscriptionContext ctx) {
-    return expressionIndex == null
-      || !VALID_INDEX_MATCHER.evaluateFor(expressionIndex, ctx).isFalse();
+  private static boolean isValidIndex(@Nullable Expression expression, SubscriptionContext ctx) {
+    return expression == null || !POSSIBLY_VALID_INDEX_MATCHER.evaluateFor(expression, ctx).isFalse();
   }
 
   private static boolean isSequence(Expression expression, SubscriptionContext ctx) {

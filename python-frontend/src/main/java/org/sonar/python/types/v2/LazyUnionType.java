@@ -16,15 +16,16 @@
  */
 package org.sonar.python.types.v2;
 
-import com.google.common.annotations.VisibleForTesting;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 
 public class LazyUnionType implements PythonType, ResolvableType {
@@ -37,14 +38,27 @@ public class LazyUnionType implements PythonType, ResolvableType {
 
   @Override
   public PythonType resolve() {
-    Set<PythonType> resolvedCandidates = new HashSet<>();
-    for (PythonType candidate : candidates) {
-      if (candidate instanceof LazyType lazyType) {
-        candidate = lazyType.resolve();
-      }
-      resolvedCandidates.add(candidate);
+    return UnionType.or(candidates.stream().map(LazyUnionType::resolveCandidate).toList());
+  }
+
+  private static PythonType resolveCandidate(PythonType candidate) {
+    candidate = TypeUtils.resolved(candidate);
+    // ObjectType and SelfType include their wrappers in equals/hashCode. Resolve
+    // the complete value structure, including generic arguments, before hashing it.
+    // Class members and hierarchies remain lazy; they do not participate in equality.
+    if (candidate instanceof ObjectType objectType) {
+      return ObjectType.Builder.fromType(objectType)
+        .withType(resolveCandidate(objectType.unwrappedType()))
+        .withAttributes(objectType.attributes().stream().map(LazyUnionType::resolveCandidate).toList())
+        .build();
     }
-    return UnionType.or(resolvedCandidates);
+    if (candidate instanceof SelfType selfType) {
+      return SelfType.fromTypeWrapper(TypeWrapper.of(resolveCandidate(selfType.typeWrapper().type())));
+    }
+    if (candidate instanceof UnionType unionType) {
+      return UnionType.or(unionType.candidates().stream().map(LazyUnionType::resolveCandidate).toList());
+    }
+    return candidate;
   }
 
   private static Stream<PythonType> flattenLazyUnionTypes(PythonType type) {
@@ -54,8 +68,7 @@ public class LazyUnionType implements PythonType, ResolvableType {
     return Stream.of(type);
   }
 
-  @VisibleForTesting
-  protected Set<PythonType> candidates() {
+  Set<PythonType> candidates() {
     return Collections.unmodifiableSet(candidates);
   }
 

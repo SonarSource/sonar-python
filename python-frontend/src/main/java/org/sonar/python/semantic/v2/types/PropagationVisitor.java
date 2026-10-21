@@ -38,13 +38,16 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class PropagationVisitor extends BaseTreeVisitor {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
   private final Map<Statement, Set<Definition>> definitionsByDefinitionStatement;
+  private final TypePredicateContext typePredicateContext;
 
-  public PropagationVisitor() {
+  public PropagationVisitor(TypePredicateContext typePredicateContext) {
+    this.typePredicateContext = typePredicateContext;
     propagationsByLhs = new HashMap<>();
     assignmentsByAssignmentStatement = new HashMap<>();
     definitionsByDefinitionStatement = new HashMap<>();
@@ -176,7 +179,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
             .map(NameImpl.class::cast)
             .ifPresent(name -> {
               var symbol = name.symbolV2();
-              var assignment = new LoopAssignment(symbol, name, rhsExpression);
+              var assignment = new LoopAssignment(symbol, name, rhsExpression, typePredicateContext);
               assignmentsByAssignmentStatement.put(forStatement, assignment);
               propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
             })

@@ -52,6 +52,7 @@ import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class TypeInferenceV2 {
 
@@ -155,7 +156,7 @@ public class TypeInferenceV2 {
     Set<Name> annotatedParameterNames,
     Supplier<ControlFlowGraph> controlFlowGraphSupplier
   ) {
-    PropagationVisitor propagationVisitor = new PropagationVisitor();
+    PropagationVisitor propagationVisitor = new PropagationVisitor(TypePredicateContext.of(projectLevelTypeTable));
     scopeTree.accept(propagationVisitor);
     Set<Name> assignedNames = propagationVisitor.propagationsByLhs().values().stream()
       .flatMap(Collection::stream)

@@ -23,7 +23,6 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
@@ -36,13 +35,6 @@ public class TypeUtils {
   public static PythonType resolved(PythonType pythonType) {
     if (pythonType instanceof ResolvableType resolvableType) {
       return resolvableType.resolve();
-    }
-    return pythonType;
-  }
-
-  public static PythonType ensureWrappedObjectType(PythonType pythonType) {
-    if (!(pythonType instanceof ObjectType)) {
-      return ObjectType.fromType(pythonType);
     }
     return pythonType;
   }

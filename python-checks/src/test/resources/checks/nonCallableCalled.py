@@ -413,13 +413,13 @@ def uncallable_inside_lambda_are_non_compliant():
     uncallable_inside_lambda = lambda:(print("something"))() # Noncompliant
 
 
-def fp_loop_of_class_list():
+def loop_of_class_list():
     class MyClass: ... 
 
     list_of_classes = [MyClass]
 
     for clazz in list_of_classes:
-        clazz() # Noncompliant
+        clazz() # Class objects remain callable when stored in a list.
 
 
 def union_callability(condition, unknown):
@@ -432,3 +432,38 @@ def union_callability(condition, unknown):
     maybe_callable()
     uncertain = 1 if condition else unknown
     uncertain()
+
+
+def regular_expression_search_results(text):
+    import re
+    match = re.search(r"(pattern)", text)
+    if match:
+        match(1)  # Noncompliant
+        match.group(1)
+
+
+def nullable_callable_return():
+    import sys
+    callback = sys.gettrace()
+    callback()  # Callable | None remains uncertain; do not report a definitely invalid call.
+
+
+def constructor_collection_iteration(condition):
+    for factory in ([int] if condition else [str]):
+        factory()
+    for factory in ((int,) if condition else (str,)):
+        factory()
+    for factory in [int, str]:
+        factory()
+
+
+def descriptor_collection_iteration():
+    from email.utils import getaddresses
+    import mailbox
+
+    for address in getaddresses(["Alice <alice@example.com>"]):
+        address()  # Noncompliant
+
+    # Mailbox.values() returns list[_MessageT], where _MessageT is bounded by Message.
+    for message in mailbox.mbox("mailbox").values():
+        message()  # Noncompliant
