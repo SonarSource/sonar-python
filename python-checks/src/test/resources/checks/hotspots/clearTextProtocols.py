@@ -292,6 +292,18 @@ def python_web_server_noncompliant():
             HTTPServer.server_bind(self) # Noncompliant
 
 
+def python_web_server_unknown_base(base):
+    from http.server import HTTPServer
+
+    class UnknownServer(base):
+        def server_bind(self):
+            super().server_bind()  # Compliant: the base has no known qualified name
+
+    class MixedServer(base, HTTPServer):
+        def server_bind(self):
+            super().server_bind()  # Noncompliant
+
+
 def python_web_server_compliant(ok_server):
 
     from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer

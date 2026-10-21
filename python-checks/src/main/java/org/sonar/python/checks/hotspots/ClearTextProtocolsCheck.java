@@ -54,7 +54,7 @@ import org.sonarsource.analyzer.commons.appsec.CleartextProtocolFilter;
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final Set<String> CLEARTEXT_PROTOCOLS = CleartextProtocolFilter.getCleartextProtocols();
   private static final String SENSITIVE_HTTP_SERVER_START_FQN = "socketserver.BaseServer.serve_forever";
-  private static final String SENSITIVE_HTTP_SERVER_BIND_FQN = "socketserver.BaseServer.server_bind";
+  private static final TypeMatcher HTTP_SERVER_BIND_MATCHER = TypeMatchers.isType("http.server.HTTPServer.server_bind");
   private static final Set<String> SENSITIVE_HTTP_SERVER_METHOD_NAMES = Set.of("serve_forever", "server_bind");
   private static final Set<String> SENSITIVE_HTTP_SERVER_CLASSES = Set.of("http.server.HTTPServer", "http.server.ThreadingHTTPServer");
   private static final TypeMatcher STR_METHOD_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(TypeMatchers.isOrExtendsType("builtins.str"));
@@ -110,11 +110,12 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
 
   private static void checkServerBindCalls(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(SENSITIVE_HTTP_SERVER_BIND_FQN::equals)
-      .filter(fqn -> isParentClassExtendingSensitiveClass(callExpression))
-      .ifPresent(fqn -> ctx.addIssue(callExpression, message("http")));
+    if (callExpression.callee() instanceof QualifiedExpression qualifiedExpression && isCallToSensitiveSuperClass(qualifiedExpression)) {
+      return;
+    }
+    if (HTTP_SERVER_BIND_MATCHER.isTrueFor(callExpression.callee(), ctx) && isParentClassExtendingSensitiveClass(callExpression)) {
+      ctx.addIssue(callExpression, message("http"));
+    }
   }
 
   private static boolean isCallToSensitiveSuperClass(QualifiedExpression expression) {
@@ -147,7 +148,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .map(HasSymbol.class::cast)
       .map(HasSymbol::symbol)
       .filter(Objects::nonNull)
-      .map(Symbol::fullyQualifiedName);
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull);
   }
 
   /**
