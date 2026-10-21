@@ -68,6 +68,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   @Nullable
   private String metaclassFQN = null;
   private boolean supportsGenerics = false;
+  private boolean isProtocol = false;
 
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(classDef.name().name(), fullyQualifiedName);
@@ -120,6 +121,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasMetaClass = ((ClassSymbolImpl) classSymbol).hasMetaClass();
     metaclassFQN = ((ClassSymbolImpl) classSymbol).metaclassFQN;
     supportsGenerics = ((ClassSymbolImpl) classSymbol).supportsGenerics;
+    isProtocol = ((ClassSymbolImpl) classSymbol).isProtocol;
     validForSemanticPythonVersions = ((ClassSymbolImpl) classSymbol).validForSemanticPythonVersions;
     superClassesFqns = ((ClassSymbolImpl) classSymbol).superClassesFqns;
     setKind(Kind.CLASS);
@@ -143,6 +145,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasMetaClass = classSymbolProto.getHasMetaclass();
     metaclassFQN = classSymbolProto.getMetaclassName();
     supportsGenerics = classSymbolProto.getIsGeneric();
+    isProtocol = classSymbolProto.getIsProtocol();
     Set<Symbol> classMembers = new HashSet<>();
     Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
     classSymbolProto.getMethodsList().stream()
@@ -429,6 +432,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   public boolean hasSuperClassWithoutSymbol() {
     return hasSuperClassWithoutSymbol;
+  }
+
+  public boolean isProtocol() {
+    return isProtocol;
   }
 
   public boolean supportsGenerics() {

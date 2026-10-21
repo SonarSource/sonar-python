@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -51,6 +52,18 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 
 public class InferredTypes {
+
+  // CPython typing._get_protocol_attrs excludes class and typing metadata from
+  // structural requirements: these describe the protocol class, not its instances.
+  private static final Set<String> EXCLUDED_PROTOCOL_MEMBERS = Set.of(
+    "__parameters__", "__orig_bases__", "__orig_class__", "_is_protocol", "_is_runtime_protocol",
+    "__protocol_attrs__", "__non_callable_proto_members__", "__type_params__", "__abstractmethods__",
+    "__annotations__", "__dict__", "__doc__", "__init__", "__module__", "__new__", "__slots__",
+    "__subclasshook__", "__weakref__", "__class_getitem__", "__match_args__", "__static_attributes__",
+    "__firstlineno__", "__annotate__", "__annotate_func__", "__annotations_cache__", "_MutableMapping__marker");
+
+  private static final Set<String> PROTOCOL_INFRASTRUCTURE_BASES = Set.of(
+    BuiltinTypes.OBJECT_TYPE, "typing.Protocol", "typing_extensions.Protocol", "typing.Generic", "typing_extensions.Generic");
 
   private static final Map<String, String> ALIASED_ANNOTATIONS = new HashMap<>();
 
@@ -443,12 +456,34 @@ public class InferredTypes {
     ClassSymbol expectedTypeClass = (ClassSymbol) expected;
     String otherFullyQualifiedName = expectedTypeClass.fullyQualifiedName();
     boolean areHardcodedCompatible = areHardcodedCompatible(actualTypeClass, expectedTypeClass);
-    boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
-      expectedTypeClass.declaredMembers().stream().allMatch(m -> actualTypeClass.resolveMember(m.name()).isPresent());
+    boolean isProtocol = (expectedTypeClass instanceof ClassSymbolImpl classSymbol && classSymbol.isProtocol())
+      || expectedTypeClass.superClasses().stream().anyMatch(base ->
+        "typing.Protocol".equals(base.fullyQualifiedName()) || "typing_extensions.Protocol".equals(base.fullyQualifiedName()));
+    boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) && (isProtocol
+      ? hasRequiredProtocolMembers(actualTypeClass, expectedTypeClass, new HashSet<>())
+      : expectedTypeClass.declaredMembers().stream().allMatch(m -> actualTypeClass.resolveMember(m.name()).isPresent()));
     boolean canBeOrExtend = otherFullyQualifiedName == null || actualTypeClass.canBeOrExtend(otherFullyQualifiedName);
     boolean areHardcodedIncompatible = areHardCodedIncompatible(actualTypeClass, expectedTypeClass);
     boolean areTupleClasses = actualTypeClass.isOrExtends(BuiltinTypes.TUPLE) && expectedTypeClass.isOrExtends(BuiltinTypes.TUPLE);
     return (areHardcodedCompatible || isDuckTypeCompatible || canBeOrExtend || areTupleClasses) && !areHardcodedIncompatible;
+  }
+
+  private static boolean isExcludedProtocolMember(String name) {
+    return name.startsWith("_abc_") || EXCLUDED_PROTOCOL_MEMBERS.contains(name);
+  }
+
+  private static boolean hasRequiredProtocolMembers(ClassSymbol actual, ClassSymbol expected, Set<ClassSymbol> visited) {
+    // Protocol and Generic provide typing machinery, and object contributes no protocol requirements.
+    if (!visited.add(expected) || (expected.fullyQualifiedName() != null && PROTOCOL_INFRASTRUCTURE_BASES.contains(expected.fullyQualifiedName()))) {
+      return true;
+    }
+    return expected.declaredMembers().stream()
+      .filter(member -> !isExcludedProtocolMember(member.name()))
+      .allMatch(member -> actual.resolveMember(member.name()).isPresent())
+      && expected.superClasses().stream()
+        .filter(base -> base.is(CLASS))
+        .map(ClassSymbol.class::cast)
+        .allMatch(base -> hasRequiredProtocolMembers(actual, base, visited));
   }
 
   private static boolean areHardcodedCompatible(ClassSymbol actual, ClassSymbol expected) {

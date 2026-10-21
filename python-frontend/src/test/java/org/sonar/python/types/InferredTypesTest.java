@@ -21,9 +21,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -545,4 +548,97 @@ class InferredTypesTest {
   private DeclaredType declaredType(Symbol symbol) {
     return new DeclaredType(symbol);
   }
+
+  @Test
+  void protocolCompatibilityIgnoresClassMetadataButRequiresDeclaredMembers() {
+    var protocolProto = SymbolsProtos.ClassSymbol.newBuilder().setName("Protocol").setFullyQualifiedName("mod.Protocol")
+      .setIsProtocol(true)
+      .addAttributes(SymbolsProtos.VarSymbol.newBuilder().setName("__slots__"))
+      .addAttributes(SymbolsProtos.VarSymbol.newBuilder().setName("__annotations__"))
+      .addAttributes(SymbolsProtos.VarSymbol.newBuilder().setName("_abc_impl"))
+      .addAttributes(SymbolsProtos.VarSymbol.newBuilder().setName("__float__"))
+      .build();
+    var protocol = new ClassSymbolImpl(protocolProto, "mod");
+    var actual = new ClassSymbolImpl("Implementation", "mod.Implementation");
+    actual.addMembers(List.of(new SymbolImpl("__float__", "mod.Implementation.__float__")));
+    var incomplete = new ClassSymbolImpl("Incomplete", "mod.Incomplete");
+
+    assertThat(InferredTypes.areSymbolsCompatible(actual, protocol)).isTrue();
+    assertThat(((ClassSymbolImpl) ClassSymbolImpl.copyFrom("Alias", protocol)).isProtocol()).isTrue();
+    var copiedProtocol = protocol.copyWithoutUsages();
+    assertThat(copiedProtocol.isProtocol()).isTrue();
+    assertThat(InferredTypes.areSymbolsCompatible(actual, copiedProtocol)).isTrue();
+    assertThat(InferredTypes.areSymbolsCompatible(incomplete, copiedProtocol)).isFalse();
+    assertThat(InferredTypes.areSymbolsCompatible(incomplete, protocol)).isFalse();
+    var ordinaryClass = new ClassSymbolImpl(protocolProto.toBuilder().setIsProtocol(false).build(), "mod");
+    assertThat(InferredTypes.areSymbolsCompatible(actual, ordinaryClass)).isFalse();
+  }
+
+  @Test
+  void supportsFloatAcceptsIntDespiteProtocolSlots() {
+    var protocol = TypeShed.symbolsForModule("typing").get("SupportsFloat");
+    assertThat(InferredTypes.areSymbolsCompatible(typeShedClass("int"), protocol)).isTrue();
+    assertThat(InferredTypes.areSymbolsCompatible(typeShedClass("str"), protocol)).isFalse();
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"typing", "typing_extensions"})
+  void protocolCompatibilityRequiresInheritedMembers(String module) {
+    var protocol = ((Name) lastExpression("""
+      from %s import Protocol as ProtocolBase
+      class Base(ProtocolBase):
+          __slots__ = ()
+          def required(self) -> int: ...
+      class Left(Base, ProtocolBase):
+          pass
+      class Right(Base, ProtocolBase):
+          def other(self) -> int: ...
+      class P(Left, Right, ProtocolBase):
+          __slots__ = ()
+      P
+      """.formatted(module))).symbol();
+    var actualBase = new ClassSymbolImpl("ImplementationBase", "mod.ImplementationBase");
+    actualBase.addMembers(List.of(new SymbolImpl("required", "mod.ImplementationBase.required")));
+    var actual = new ClassSymbolImpl("Implementation", "mod.Implementation");
+    actual.addSuperClass(actualBase);
+    actual.addMembers(List.of(new SymbolImpl("other", "mod.Implementation.other")));
+    var incomplete = new ClassSymbolImpl("Incomplete", "mod.Incomplete");
+
+    assertThat(InferredTypes.areSymbolsCompatible(incomplete, protocol)).isFalse();
+    assertThat(InferredTypes.areSymbolsCompatible(actualBase, protocol)).isFalse();
+    assertThat(InferredTypes.areSymbolsCompatible(actual, protocol)).isTrue();
+  }
+
+  @Test
+  void protocolCompatibilityHandlesCyclicHierarchy() {
+    var protocol = new ClassSymbolImpl("P", "mod.P");
+    var base = new ClassSymbolImpl("Base", "mod.Base");
+    protocol.addSuperClass(new ClassSymbolImpl("Protocol", "typing.Protocol"));
+    protocol.addSuperClass(base);
+    base.addSuperClass(protocol);
+    base.addMembers(List.of(new SymbolImpl("required", "mod.Base.required")));
+    var actual = new ClassSymbolImpl("Implementation", "mod.Implementation");
+    actual.addMembers(List.of(new SymbolImpl("required", "mod.Implementation.required")));
+    var incomplete = new ClassSymbolImpl("Incomplete", "mod.Incomplete");
+
+    assertThat(InferredTypes.areSymbolsCompatible(incomplete, protocol)).isFalse();
+    assertThat(InferredTypes.areSymbolsCompatible(actual, protocol)).isTrue();
+  }
+
+  @Test
+  void concreteProtocolSubclassKeepsOrdinaryClassRequirements() {
+    var protocolBase = new ClassSymbolImpl("Protocol", "typing.Protocol");
+    var protocol = new ClassSymbolImpl("SourceProtocol", "mod.SourceProtocol");
+    protocol.addSuperClass(protocolBase);
+    protocol.addMembers(List.of(new SymbolImpl("__slots__", "mod.SourceProtocol.__slots__")));
+    var concrete = new ClassSymbolImpl("Concrete", "mod.Concrete");
+    concrete.addSuperClass(protocol);
+    concrete.addMembers(List.of(new SymbolImpl("__slots__", "mod.Concrete.__slots__")));
+    var actual = new ClassSymbolImpl("Implementation", "mod.Implementation");
+
+    assertThat(InferredTypes.areSymbolsCompatible(actual, protocol)).isTrue();
+    // Inheriting a protocol does not itself declare a protocol: Protocol must be an explicit base.
+    assertThat(InferredTypes.areSymbolsCompatible(actual, concrete)).isFalse();
+  }
+
 }
