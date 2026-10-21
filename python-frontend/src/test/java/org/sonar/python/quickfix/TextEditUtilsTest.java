@@ -32,6 +32,7 @@ import org.sonar.python.PythonTestUtils;
 import org.sonarsource.analyzer.commons.collections.ListUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -46,6 +47,22 @@ class TextEditUtilsTest {
     PythonTextEdit textEdit = TextEditUtils.insertBefore(token, textToInsert);
     assertThat(textEdit.replacementText()).isEqualTo(textToInsert);
     assertTextEditLocation(textEdit, 1, 7, 1, 7);
+  }
+
+  @Test
+  void rejectsTreeWithoutFirstToken() {
+    Tree tree = mock(Tree.class);
+    Statement statement = mock(Statement.class);
+
+    assertThatThrownBy(() -> TextEditUtils.insertBefore(tree, "text"))
+      .isInstanceOf(NullPointerException.class)
+      .hasMessage("Tree has no first token");
+    assertThatThrownBy(() -> TextEditUtils.replace(tree, "text"))
+      .isInstanceOf(NullPointerException.class)
+      .hasMessage("Tree has no first token");
+    assertThatThrownBy(() -> TextEditUtils.removeStatement(statement))
+      .isInstanceOf(NullPointerException.class)
+      .hasMessage("Tree has no first token");
   }
 
   @Test

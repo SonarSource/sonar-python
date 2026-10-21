@@ -187,7 +187,8 @@ public class MultiFileProgressReport implements Runnable {
   }
 
   private void logFinishTime() {
-    log("Finished step " + thread.getName() + " in " + (Instant.now().toEpochMilli() - startInstant.toEpochMilli()) + "ms", false);
+    String duration = startInstant == null ? "null" : ((Instant.now().toEpochMilli() - startInstant.toEpochMilli()) + "ms");
+    log("Finished step " + thread.getName() + " in " + duration, false);
   }
 
   private void log(String message, boolean debug) {

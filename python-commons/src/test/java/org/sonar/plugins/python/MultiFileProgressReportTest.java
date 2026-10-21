@@ -46,6 +46,15 @@ class MultiFileProgressReportTest {
   LogTesterJUnit5 logTester = new LogTesterJUnit5();
 
   @Test
+  void shouldLogFinishWhenStartTimeIsUnavailable() {
+    var report = new MultiFileProgressReport("default");
+
+    report.stop();
+
+    assertThat(logTester.logs()).containsExactly("Finished step default in null");
+  }
+
+  @Test
   @Timeout(5)
   void shouldDisplayMessagePluralized() throws InterruptedException {
     var logConsumer = new LogConsumer();

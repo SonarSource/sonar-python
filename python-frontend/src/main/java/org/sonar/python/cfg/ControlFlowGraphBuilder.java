@@ -330,6 +330,9 @@ public class ControlFlowGraphBuilder {
     Loop loop = loops.peek();
     if (loop == null) {
       Token token = tree.firstToken();
+      if (token == null) {
+        throw new IllegalStateException("Invalid tree outside loop at unknown position");
+      }
       throw new IllegalStateException("Invalid \"" + token.value() + "\" outside loop at line " + token.line());
     }
     return loop;

@@ -19,6 +19,7 @@ package org.sonar.python.quickfix;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -56,16 +57,20 @@ public class TextEditUtils {
   }
 
   private static String offset(Tree referenceTree) {
-    return " ".repeat(referenceTree.firstToken().pythonColumn());
+    return " ".repeat(firstTokenOrThrow(referenceTree).pythonColumn());
+  }
+
+  private static Token firstTokenOrThrow(Tree tree) {
+    return Objects.requireNonNull(tree.firstToken(), "Tree has no first token");
   }
 
   public static PythonTextEdit insertBefore(Tree tree, String textToInsert) {
-    Token token = tree.firstToken();
+    Token token = firstTokenOrThrow(tree);
     return insertAtPosition(token.pythonLine(), token.pythonColumn(), textToInsert);
   }
 
   public static PythonTextEdit insertAfter(Tree tree, String textToInsert) {
-    Token token = tree.firstToken();
+    Token token = firstTokenOrThrow(tree);
     int lengthToken = token.value().length();
     return insertAtPosition(token.pythonLine(), token.pythonColumn() + lengthToken, textToInsert);
   }
@@ -79,7 +84,7 @@ public class TextEditUtils {
   }
 
   public static PythonTextEdit replaceRange(Tree start, Tree end, String replacementText) {
-    Token first = start.firstToken();
+    Token first = firstTokenOrThrow(start);
     Token last = end.lastToken();
     return new PythonTextEdit(replacementText, first.line(), first.column(), last.line(), last.column() + last.value().length());
   }
@@ -89,7 +94,7 @@ public class TextEditUtils {
    * Filter out text edits which apply on the same line which could show up with multiple statements on the same line
    */
   public static List<PythonTextEdit> shiftLeft(StatementList statementList) {
-    int offset = statementList.firstToken().column() - statementList.parent().firstToken().column();
+    int offset = firstTokenOrThrow(statementList).column() - firstTokenOrThrow(statementList.parent()).column();
     return statementList.statements().stream()
       .map(statement -> shiftLeft(statement, offset))
       .flatMap(List::stream)
@@ -119,11 +124,13 @@ public class TextEditUtils {
    * This is useful to remove and shift multiple statement over multiple lines.
    */
   public static PythonTextEdit removeUntil(Tree start, Tree until) {
-    return removeRange(start.firstToken().pythonLine(), start.firstToken().column(), until.firstToken().pythonLine(), until.firstToken().column());
+    Token startToken = firstTokenOrThrow(start);
+    Token untilToken = firstTokenOrThrow(until);
+    return removeRange(startToken.pythonLine(), startToken.column(), untilToken.pythonLine(), untilToken.column());
   }
 
   public static PythonTextEdit removeStatement(Statement statement) {
-    Token firstTokenOfStmt = statement.firstToken();
+    Token firstTokenOfStmt = firstTokenOrThrow(statement);
     Token lastTokenOfStmt = TreeUtils.getTreeSeparatorOrLastToken(statement);
 
     List<Tree> siblings = statement.parent().children();
@@ -138,12 +145,12 @@ public class TextEditUtils {
     }
 
     boolean hasPreviousSiblingOnLine = previous != null && firstTokenOfStmt.line() == TreeUtils.getTreeSeparatorOrLastToken(previous.lastToken()).line();
-    boolean hasNextSiblingOnLine = next != null && lastTokenOfStmt.line() == next.firstToken().line();
+    boolean hasNextSiblingOnLine = next != null && lastTokenOfStmt.line() == firstTokenOrThrow(next).line();
 
     if (hasNextSiblingOnLine) {
       // Statement is first on the line or between at least two statements
       // Remove from first token to last toke of statement
-      Token firstNextToken = next.firstToken();
+      Token firstNextToken = firstTokenOrThrow(next);
       return removeRange(firstTokenOfStmt.pythonLine(), firstTokenOfStmt.column(), firstNextToken.pythonLine(), firstNextToken.column());
     } else if (hasPreviousSiblingOnLine) {
       // Statement is last on the line and has one or more previous statement on the line

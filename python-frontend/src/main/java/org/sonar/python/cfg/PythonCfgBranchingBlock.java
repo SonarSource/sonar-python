@@ -78,7 +78,7 @@ public class PythonCfgBranchingBlock extends PythonCfgBlock implements CfgBranch
   @Override
   protected String toStringDisplayPosition() {
     Token token = branchingTree.firstToken();
-    return token.line() + ":" + token.column() + ":";
+    return token == null ? "unknown:" : (token.line() + ":" + token.column() + ":");
   }
 
 }

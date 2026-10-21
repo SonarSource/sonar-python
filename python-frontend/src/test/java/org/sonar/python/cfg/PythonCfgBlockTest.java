@@ -19,8 +19,10 @@ package org.sonar.python.cfg;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class PythonCfgBlockTest {
 
@@ -34,5 +36,16 @@ class PythonCfgBlockTest {
     replacements.put(end, block);
     succ.replaceSuccessors(replacements);
     assertThat(start.firstNonEmptySuccessor()).isEqualTo(succ);
+  }
+
+  @Test
+  void displaysUnknownPositionWhenFirstTokenIsMissing() {
+    Tree tree = mock(Tree.class);
+    PythonCfgSimpleBlock block = new PythonCfgSimpleBlock(new PythonCfgEndBlock());
+    block.addElement(tree);
+    PythonCfgBranchingBlock branchingBlock = new PythonCfgBranchingBlock(tree, null, new PythonCfgEndBlock());
+
+    assertThat(block.toStringDisplayPosition()).isEqualTo("unknown:");
+    assertThat(branchingBlock.toStringDisplayPosition()).isEqualTo("unknown:");
   }
 }

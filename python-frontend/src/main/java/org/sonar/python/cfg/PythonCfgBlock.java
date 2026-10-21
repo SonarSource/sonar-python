@@ -81,7 +81,7 @@ public abstract class PythonCfgBlock implements CfgBlock {
       return "empty";
     }
     Token token = elements.get(0).firstToken();
-    return token.line() + ":" + token.column() + ":";
+    return token == null ? "unknown:" : (token.line() + ":" + token.column() + ":");
   }
 
   void addPredecessor(PythonCfgBlock block) {
