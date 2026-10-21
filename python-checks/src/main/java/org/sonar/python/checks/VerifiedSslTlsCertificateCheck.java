@@ -56,6 +56,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
@@ -68,6 +70,12 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Enable server certificate validation on this SSL/TLS connection.";
   private static final String VERIFY_NONE = "OpenSSL.SSL.VERIFY_NONE";
 
+  // Preserve unresolved imports with older stub bundles; use type identity for resolved re-exports.
+  private static final TypeMatcher AIOHTTP_CLIENT_SESSION = TypeMatchers.any(
+    TypeMatchers.isType("aiohttp.ClientSession"),
+    TypeMatchers.withFQN("aiohttp.ClientSession"), TypeMatchers.withFQN("aiohttp.client.ClientSession"));
+
+  private final Set<Symbol> checkedAioHttpSessions = new HashSet<>();
   private TypeCheckBuilder requestsSessionTypeCheck;
   private TypeCheckBuilder isOpenSslContextCheck;
   private TypeCheckBuilder isOpenSslContextSetVerifyCheck;
@@ -76,7 +84,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initTypeChecks);
-    context.registerSyntaxNodeConsumer(Tree.Kind.WITH_STMT, VerifiedSslTlsCertificateCheck::verifyAioHttpWithSession);
+    context.registerSyntaxNodeConsumer(Tree.Kind.WITH_STMT, this::verifyAioHttpWithSession);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::openSslContextCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::requestsCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, VerifiedSslTlsCertificateCheck::standardSslCheckForRegularArgument);
@@ -85,6 +93,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   }
 
   private void initTypeChecks(SubscriptionContext ctx) {
+    checkedAioHttpSessions.clear();
     requestsSessionTypeCheck = ctx.typeChecker().typeCheckBuilder().isInstanceOf(REQUESTS_SESSIONS_FQN);
     isOpenSslContextCheck = ctx.typeChecker().typeCheckBuilder().isInstanceOf(OPENSSL_CONTEXT_FQN);
     isOpenSslContextSetVerifyCheck = ctx.typeChecker().typeCheckBuilder().isTypeWithName(OPENSSL_CONTEXT_SET_VERIFY_FQN);
@@ -95,25 +104,26 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static void verifyAioHttpWithSession(SubscriptionContext ctx) {
+  private void verifyAioHttpWithSession(SubscriptionContext ctx) {
     var withStatement = (WithStatement) ctx.syntaxNode();
     withStatement.withItems()
       .stream()
-      .filter(VerifiedSslTlsCertificateCheck::isAioHttpClientSessionCall)
+      .filter(item -> isAioHttpClientSessionCall(item, ctx))
       .map(WithItem::expression)
       .map(TreeUtils::getSymbolFromTree)
       .filter(Optional::isPresent)
       .map(Optional::get)
+      // A name reused by multiple with statements shares one symbol and usage list.
+      .filter(checkedAioHttpSessions::add)
       .forEach(symbol -> verifyAioHttpSessionSymbolUsages(ctx, symbol));
   }
 
-  private static boolean isAioHttpClientSessionCall(WithItem item) {
+  private static boolean isAioHttpClientSessionCall(WithItem item, SubscriptionContext ctx) {
     return Optional.of(item)
       .map(WithItem::test)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-      .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter("aiohttp.ClientSession"::equals)
+      .map(CallExpression::callee)
+      .filter(callee -> AIOHTTP_CLIENT_SESSION.isTrueFor(callee, ctx))
       .isPresent();
   }
 

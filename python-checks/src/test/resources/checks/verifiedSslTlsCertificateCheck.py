@@ -372,3 +372,26 @@ async def aiohttp_test():
         session.head("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
         session.options("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
         session.ws_connect("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+
+
+async def aiohttp_imported_aliases():
+    from aiohttp import ClientSession as PublicClient
+    from aiohttp.client import ClientSession as CanonicalClient
+    async with PublicClient() as session:
+        session.get("https://example.com", ssl=False)  # Noncompliant
+        session.get("https://example.com", ssl=True)
+    async with CanonicalClient() as session:
+        session.get("https://example.com", ssl=False)  # Noncompliant
+        session.get("https://example.com", ssl=True)
+
+
+async def unrelated_session(ClientSession):
+    async with ClientSession() as session:
+        session.get("https://example.com", ssl=False)
+
+
+async def aiohttp_canonical_import():
+    from aiohttp.client import ClientSession
+    async with ClientSession() as session:
+        session.get("https://example.com", ssl=False)  # Noncompliant
+        session.get("https://example.com", ssl=True)
