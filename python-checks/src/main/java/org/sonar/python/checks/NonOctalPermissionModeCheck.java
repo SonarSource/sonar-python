@@ -36,7 +36,7 @@ import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
-@Rule(key = "S9160")
+@Rule(key = "S7448")
 public class NonOctalPermissionModeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Replace this decimal file mode with an octal literal.";

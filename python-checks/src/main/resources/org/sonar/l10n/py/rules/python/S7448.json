@@ -1,0 +1,24 @@
+{
+  "title": "Unix file permissions should be set with octal values",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7448",
+  "sqKey": "S7448",
+  "scope": "All",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM",
+      "SECURITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
+  "quickfix": "targeted"
+}

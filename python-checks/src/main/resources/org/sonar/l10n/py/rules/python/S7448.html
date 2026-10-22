@@ -1,16 +1,10 @@
 <p>This rule raises an issue when a file permission <code>mode</code> is passed as a non-octal integer literal to APIs such as
 <code>os.chmod</code>.</p>
 <h2>Why is this an issue?</h2>
-<p>Unix-style permission modes are conventionally written as octal values, for example <code>0o755</code> or <code>0o644</code>. Those digits describe
-user, group, and other permissions in base 8.</p>
-<p>When the same digits are written without the <code>0o</code> prefix, Python treats them as decimal. The resulting mode is therefore not the
-permission set the author usually intends.</p>
-<p>For example, <code>os.chmod(path, 755)</code> applies decimal <code>755</code>, which is octal <code>0o1363</code>, not the common executable mode
-<code>0o755</code>. Similarly, <code>644</code> is not <code>0o644</code>.</p>
-<p>This is a frequent footgun for developers coming from shell <code>chmod 755 file</code> usage, where <code>755</code> is interpreted as octal.</p>
-<p>The same risk applies to other standard-library calls that take a numeric <code>mode</code>, including <code>os.fchmod</code>,
-<code>os.lchmod</code>, <code>os.mkdir</code>, <code>os.makedirs</code>, <code>os.open</code>, <code>os.umask</code>, and <code>pathlib.Path</code>
-methods such as <code>chmod</code>, <code>mkdir</code>, and <code>touch</code>.</p>
+<p>Using non-octal values to set Unix file permissions is problematic because they are converted to octal internally, which can lead to unexpected
+file permissions and potential security issues.</p>
+<p>Naming the value does not change this. A constant or an immutable local binding initialized with a decimal literal is converted the same way, and
+the missing <code>0o</code> prefix is easier to overlook when the value is declared away from the call.</p>
 <h3>What is the potential impact?</h3>
 <ul>
   <li><strong>wrong permissions</strong>: files or directories may be more or less accessible than intended</li>
@@ -57,5 +51,7 @@ Path("config.ini").chmod(0o644)
 <h3>External coding guidelines</h3>
 <ul>
   <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/non-octal-permissions/">RUF064 - Non-octal mode</a></li>
+  <li>Clippy Lints - <a
+  href="https://rust-lang.github.io/rust-clippy/master/index.html#non_octal_unix_permissions">https://rust-lang.github.io/rust-clippy/master/index.html#non_octal_unix_permissions</a></li>
 </ul>
 
