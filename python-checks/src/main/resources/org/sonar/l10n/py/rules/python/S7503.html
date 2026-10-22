@@ -61,6 +61,9 @@ async def my_function():  # Compliant
     <ul>
       <li><code>httpx.AsyncClient</code> event hooks registered under the <code>"request"</code> or <code>"response"</code> keys of the
       <code>event_hooks</code> parameter.</li>
+      <li>Request or response hooks assigned directly to <code>client.event_hooks</code> for an <code>httpx.AsyncClient</code> created in the same
+      function, as shown below. This exception applies only when the analyzer can verify that the client stays local and the hook remains registered.
+      It does not cover clients passed into the function or stored on a class or module.</li>
       <li><code>confluent_kafka.aio.AIOConsumer.subscribe</code> callbacks passed as <code>on_assign</code>, <code>on_revoke</code>, or
       <code>on_lost</code> keyword arguments.</li>
     </ul></li>
@@ -72,6 +75,18 @@ async def log_request(request: httpx.Request) -&gt; None:  # Compliant - require
     print(f"Request: {request.method} {request.url}")
 
 client = httpx.AsyncClient(event_hooks={"request": [log_request]})
+</pre>
+<pre>
+import httpx
+
+async def log_response(response: httpx.Response) -&gt; None:  # Compliant - required coroutine callback
+    print(response.status_code)
+
+async def send_request() -&gt; None:
+    client = httpx.AsyncClient()
+    client.event_hooks = {"response": [log_response]}
+    await client.get("https://example.org")
+    await client.aclose()
 </pre>
 <pre>
 from confluent_kafka.aio import AIOConsumer

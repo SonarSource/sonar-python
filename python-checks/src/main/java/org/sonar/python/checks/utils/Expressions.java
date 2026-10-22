@@ -63,6 +63,22 @@ public class Expressions {
   private Expressions() {
   }
 
+  /** Returns the sole assignment target, including tuple targets. Rejects chained and comma-separated targets. */
+  @Nullable
+  public static Expression singleAssignmentTarget(AssignmentStatement assignment) {
+    if (assignment.lhsExpressions().size() != 1) {
+      return null;
+    }
+    List<Expression> targets = assignment.lhsExpressions().get(0).expressions();
+    return targets.size() == 1 ? targets.get(0) : null;
+  }
+
+  /** Requires string tokens with literal text and no escapes, bytes, interpolation, or templates. */
+  public static boolean isPlainStringLiteral(StringLiteral key) {
+    return key.stringElements().stream().allMatch(element -> !element.isInterpolated() && !element.isTemplate() &&
+      element.prefix().indexOf('b') < 0 && element.prefix().indexOf('B') < 0 && element.trimmedQuotesValue().indexOf('\\') < 0);
+  }
+
   // https://docs.python.org/3/library/stdtypes.html#truth-value-testing
   private static boolean isFalsyInternal(@Nullable Expression expression) {
     if (expression == null) {

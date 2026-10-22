@@ -26,10 +26,12 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -38,6 +40,7 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
@@ -52,12 +55,15 @@ import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.CheckUtils;
+import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.HttpxUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S7503")
 public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use asynchronous features in this function or remove the `async` keyword.";
+  private static final String EVENT_HOOKS = "event_hooks";
   private static final Set<String> AIO_CONSUMER_SUBSCRIBE_CALLBACK_KWARGS = Set.of("on_assign", "on_revoke", "on_lost");
 
   private static final TypeMatcher NOT_IMPLEMENTED_MATCHER = TypeMatchers.isType("builtins.NotImplemented");
@@ -104,7 +110,58 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isCoroutineCallbackUsage(Tree usageTree, SubscriptionContext ctx) {
-    return isHttpxAsyncClientEventHookCallback(usageTree, ctx) || isAioConsumerSubscribeCallback(usageTree, ctx);
+    return isHttpxAsyncClientEventHookCallback(usageTree, ctx) ||
+      isHttpxAsyncClientPropertyHookCallback(usageTree, ctx) ||
+      isAioConsumerSubscribeCallback(usageTree, ctx);
+  }
+
+  /**
+   * Recognizes a callback registered directly on a stable AsyncClient receiver:
+   * <pre>{@code
+   * async def hook(response): ...
+   * client = httpx.AsyncClient()
+   * client.event_hooks = {"response": [hook]}
+   * }</pre>
+   * The callback must have one binding. Both the dictionary and receiver checks must pass.
+   */
+  private static boolean isHttpxAsyncClientPropertyHookCallback(Tree usageTree, SubscriptionContext ctx) {
+    if (!(usageTree instanceof Name callback) || callback.symbolV2() == null ||
+      callback.symbolV2().getSingleBindingUsage().filter(binding -> binding.tree().parent() instanceof FunctionDef).isEmpty()) {
+      return false;
+    }
+    AssignmentStatement assignment = TreeUtils.firstAncestorOfClass(usageTree, AssignmentStatement.class);
+    if (assignment == null || !(assignment.assignedValue() instanceof DictionaryLiteral dict) ||
+      !(Expressions.singleAssignmentTarget(assignment) instanceof QualifiedExpression property) ||
+      !EVENT_HOOKS.equals(property.name().name()) || !(property.qualifier() instanceof Name receiver)) {
+      return false;
+    }
+    return isEffectivePropertyHook(dict, usageTree) && HttpxUtils.isStableAsyncClientReceiver(receiver, property, assignment, ctx);
+  }
+
+  /**
+   * Checks that the callback is a direct list element under a plain request or response key.
+   * Later entries must not replace that key:
+   * <pre>{@code
+   * {"response": [], "response": [hook]}  # Accepted for hook in the last entry.
+   * {"response": [hook], "response": []}  # Rejected: the later entry replaces the list.
+   * {"response": [hook], **other_hooks}  # Rejected: the expansion can replace the list.
+   * {"response": [hook], key: []}        # Rejected: the key can be "response".
+   * }</pre>
+   * This checks only the dictionary. The caller checks the client and assignment.
+   */
+  private static boolean isEffectivePropertyHook(DictionaryLiteral dict, Tree usageTree) {
+    String hookKey = null;
+    for (DictionaryLiteralElement element : dict.elements()) {
+      if (hookKey != null && (!(element instanceof KeyValuePair kv) || !(kv.key() instanceof StringLiteral key) || !Expressions.isPlainStringLiteral(key) ||
+        hookKey.equals(key.trimmedQuotesValue()))) {
+        return false;
+      }
+      if (element instanceof KeyValuePair kv && kv.key() instanceof StringLiteral key && Expressions.isPlainStringLiteral(key) && isRequestOrResponseKey(key) &&
+        kv.value() instanceof ListLiteral list && list.elements().expressions().stream().anyMatch(expr -> expr == usageTree)) {
+        hookKey = ((StringLiteral) kv.key()).trimmedQuotesValue();
+      }
+    }
+    return hookKey != null;
   }
 
   private static boolean isHttpxAsyncClientEventHookCallback(Tree usageTree, SubscriptionContext ctx) {
@@ -112,7 +169,7 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
     if (call == null || !HTTPX_ASYNC_CLIENT_MATCHER.isTrueFor(call.callee(), ctx)) {
       return false;
     }
-    RegularArgument eventHooksArg = TreeUtils.argumentByKeyword("event_hooks", call.arguments());
+    RegularArgument eventHooksArg = TreeUtils.argumentByKeyword(EVENT_HOOKS, call.arguments());
     if (eventHooksArg == null || !(eventHooksArg.expression() instanceof DictionaryLiteral dict)) {
       return false;
     }

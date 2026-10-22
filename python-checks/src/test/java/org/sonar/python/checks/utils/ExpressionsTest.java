@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -30,6 +31,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -49,6 +51,35 @@ import static org.sonar.python.checks.utils.Expressions.unescapeString;
 class ExpressionsTest {
 
   private PythonParser parser = PythonParser.create();
+
+  @Test
+  void single_assignment_target() {
+    assertThat(Expressions.singleAssignmentTarget(assignment("client = create()")))
+      .isInstanceOf(Name.class).extracting(target -> ((Name) target).name()).isEqualTo("client");
+    assertThat(Expressions.singleAssignmentTarget(assignment("client.event_hooks = {}"))).isNotNull();
+    assertThat(Expressions.singleAssignmentTarget(assignment("first = second = create()"))).isNull();
+    assertThat(Expressions.singleAssignmentTarget(assignment("first, second = create()"))).isNull();
+    assertThat(Expressions.singleAssignmentTarget(assignment("(first, second) = create()"))).isInstanceOf(Tuple.class);
+  }
+
+  @Test
+  void plain_string_literal() {
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("'response'"))).isTrue();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("'res' 'ponse'"))).isTrue();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("r'response'"))).isTrue();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("u'response'"))).isTrue();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("f'response'"))).isFalse();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("f'{key}'"))).isFalse();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("t'{key}'"))).isFalse();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("b'response'"))).isFalse();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("B'response'"))).isFalse();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("'\\x72esponse'"))).isFalse();
+    assertThat(Expressions.isPlainStringLiteral(stringLiteral("r'\\x72esponse'"))).isFalse();
+  }
+
+  private AssignmentStatement assignment(String code) {
+    return (AssignmentStatement) parse(code).statements().statements().get(0);
+  }
 
   @Test
   void falsy() {
