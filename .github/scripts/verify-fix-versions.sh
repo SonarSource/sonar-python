@@ -20,6 +20,7 @@ set -euo pipefail
 JIRA_PROJECT_KEY="${JIRA_PROJECT_KEY:-SONARPY}"
 JIRA_BASE_URL="${JIRA_BASE_URL:-https://sonarsource.atlassian.net}"
 JIRA_API_URL="${JIRA_BASE_URL}/rest/api/3/search/jql"
+readonly REPORT_HEADING="# Jira Fix Version Verification Report"
 
 echo "Using Jira instance: ${JIRA_BASE_URL}"
 
@@ -126,7 +127,7 @@ generate_summary() {
   fi
   
   {
-    echo "# Jira Fix Version Verification Report"
+    echo "$REPORT_HEADING"
     echo ""
     echo "## Summary"
     echo ""
@@ -185,7 +186,7 @@ generate_summary() {
 
 handle_no_tags() {
   {
-    echo "# Jira Fix Version Verification Report"
+    echo "$REPORT_HEADING"
     echo ""
     echo "## ⚠️ No Release Tags Found"
     echo ""
@@ -206,7 +207,7 @@ handle_no_commits() {
   local last_tag="$1"
   
   {
-    echo "# Jira Fix Version Verification Report"
+    echo "$REPORT_HEADING"
     echo ""
     echo "## ⚠️ No Commits Found"
     echo ""
@@ -235,7 +236,7 @@ handle_no_tickets() {
   local commit_count="$2"
   
   {
-    echo "# Jira Fix Version Verification Report"
+    echo "$REPORT_HEADING"
     echo ""
     echo "## Summary"
     echo ""
