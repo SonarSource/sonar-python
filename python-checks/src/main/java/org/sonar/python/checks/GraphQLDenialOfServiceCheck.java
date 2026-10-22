@@ -24,7 +24,6 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -34,6 +33,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.GraphQLUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -42,6 +43,11 @@ import org.sonar.python.tree.TreeUtils;
 public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> SAFE_VALIDATION_RULE_FQNS = Set.of("graphene.validation.DepthLimitValidator");
+  private static final TypeMatcher SQLALCHEMY = TypeMatchers.any(
+    TypeMatchers.isType("flask_sqlalchemy.SQLAlchemy"),
+    // Keep FQN fallbacks for descriptor bundles that do not resolve the implementation import.
+    TypeMatchers.withFQN("flask_sqlalchemy.SQLAlchemy"),
+    TypeMatchers.withFQN("flask_sqlalchemy.extension.SQLAlchemy"));
 
   private static final List<String> VALID_MIDDLEWARE_NAMES = List.of("DEPTH", "COST");
   private static final String MESSAGE_DEPTH = "Change this code to limit the depth of GraphQL queries.";
@@ -57,7 +63,7 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
 
   private void searchForCircularReferences(SubscriptionContext ctx) {
     circularReferences.clear();
-    CircularRelationshipVisitor classVisitor = new CircularRelationshipVisitor(circularReferences);
+    CircularRelationshipVisitor classVisitor = new CircularRelationshipVisitor(circularReferences, ctx);
     ctx.syntaxNode().accept(classVisitor);
   }
 
@@ -119,9 +125,11 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
   static class CircularRelationshipVisitor extends BaseTreeVisitor {
 
     final Set<Tree> circularReferences;
+    private final SubscriptionContext ctx;
 
-    public CircularRelationshipVisitor(Set<Tree> circularReferences) {
+    public CircularRelationshipVisitor(Set<Tree> circularReferences, SubscriptionContext ctx) {
       this.circularReferences = circularReferences;
+      this.ctx = ctx;
     }
 
     @Override
@@ -133,11 +141,7 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
         .flatMap(Expressions::singleAssignedNonNameValue)
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
         .map(CallExpression::callee)
-        .filter(HasSymbol.class::isInstance)
-        .map(HasSymbol.class::cast)
-        .map(HasSymbol::symbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter("flask_sqlalchemy.SQLAlchemy"::equals)
+        .filter(callee -> SQLALCHEMY.isTrueFor(callee, ctx))
         .ifPresent(s -> circularReferences.add(callExpression));
       super.visitCallExpression(callExpression);
     }

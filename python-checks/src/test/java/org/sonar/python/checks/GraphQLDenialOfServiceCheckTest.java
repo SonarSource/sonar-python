@@ -43,4 +43,8 @@ class GraphQLDenialOfServiceCheckTest {
       new GraphQLDenialOfServiceCheck());
   }
 
+  @Test
+  void flask_sqlalchemy_extension_alias() {
+    PythonCheckVerifier.verify("src/test/resources/checks/graphqlDenialOfServiceSqlalchemy.py", new GraphQLDenialOfServiceCheck());
+  }
 }
