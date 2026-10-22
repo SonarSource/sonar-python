@@ -20,16 +20,23 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S8514")
 public class DataclassFieldDefinitionCheck extends PythonSubscriptionCheck {
@@ -66,9 +73,64 @@ public class DataclassFieldDefinitionCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkStatement(SubscriptionContext ctx, Tree statement) {
-    if (statement instanceof AssignmentStatement assignmentStatement && !isLikelyIntentionalClassVar(assignmentStatement)) {
+    if (statement instanceof AssignmentStatement assignmentStatement && !isLikelyIntentionalClassVar(assignmentStatement)
+      && !isMethodAssignment(assignmentStatement.assignedValue(), ctx)) {
       ctx.addIssue(assignmentStatement, MESSAGE_MISSING_ANNOTATION);
     }
+  }
+
+  private static boolean isMethodAssignment(Expression expression, SubscriptionContext ctx) {
+    Expression value = Expressions.removeParentheses(expression);
+    if (isFunction(value)) {
+      return true;
+    }
+    // Source function return types are not always inferred. Recognize local factories
+    // returning a function without exempting ordinary data-producing factory calls.
+    if (value instanceof CallExpression call && call.callee() instanceof Name name && name.symbolV2() != null) {
+      List<UsageV2> bindings = name.symbolV2().usages().stream().filter(UsageV2::isBindingUsage).toList();
+      return bindings.size() == 1
+        && bindings.get(0).kind() == UsageV2.Kind.FUNC_DECLARATION
+        && bindings.get(0).tree().parent() instanceof FunctionDef function
+        && isMethodFactory(function, ctx);
+    }
+    return false;
+  }
+
+  private static boolean isMethodFactory(FunctionDef function, SubscriptionContext ctx) {
+    if (function.asyncKeyword() != null || !function.decorators().isEmpty() || hasDataReturnOrYield(function.body())) {
+      return false;
+    }
+    // Checking explicit returns alone would miss paths that implicitly return None.
+    ControlFlowGraph cfg = ctx.cfg(function);
+    return cfg != null && !cfg.end().predecessors().isEmpty()
+      && cfg.end().predecessors().stream().allMatch(block -> {
+        List<Tree> elements = block.elements();
+        return !elements.isEmpty() && returnsFunction(elements.get(elements.size() - 1));
+      });
+  }
+
+  private static boolean returnsFunction(Tree tree) {
+    return tree instanceof ReturnStatement statement && statement.expressions().size() == 1
+      && isFunction(statement.expressions().get(0));
+  }
+
+  private static boolean hasDataReturnOrYield(Tree tree) {
+    if (tree.is(Tree.Kind.YIELD_EXPR, Tree.Kind.YIELD_STMT) || (tree instanceof ReturnStatement && !returnsFunction(tree))) {
+      return true;
+    }
+    Tree nestedBody = switch (tree) {
+      case FunctionDef nested -> nested.body();
+      case ClassDef nested -> nested.body();
+      case LambdaExpression lambda -> lambda.expression();
+      default -> null;
+    };
+    // Traverse arguments, return expressions and defaults, but not nested bodies.
+    return tree.children().stream().filter(child -> child != nestedBody).anyMatch(DataclassFieldDefinitionCheck::hasDataReturnOrYield);
+  }
+
+  private static boolean isFunction(Expression expression) {
+    Expression value = Expressions.removeParentheses(expression);
+    return value.is(Tree.Kind.LAMBDA) || value.typeV2() instanceof FunctionType;
   }
 
   private static boolean isLikelyIntentionalClassVar(AssignmentStatement assignment) {

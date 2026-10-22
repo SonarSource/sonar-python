@@ -211,3 +211,190 @@ class UnderscorePrefixedAttributes:
     __tablename__ = "users"
     __abstract__ = True
     _PRIVATE_CONST = 42
+
+
+def make_method(operation):
+    def method(self, *args):
+        return operation(*args)
+    return method
+
+
+def method(self):
+    return 42
+
+
+@dataclass
+class GeneratedMethods:
+    direct = method
+    generated = make_method(sum)
+    anonymous = lambda self: 42
+    count = 42  # Noncompliant
+    items = list()  # Noncompliant
+
+
+def nested_generated_methods():
+    @dataclass
+    class Operations:
+        bitwise_and = make_method(sum)
+        bitwise_or = make_method(sum)
+        count = 42  # Noncompliant
+
+
+def make_data():
+    def method(self):
+        return 42
+    return 42
+
+
+def make_pair():
+    return method, 42
+
+
+async def make_coroutine():
+    return method
+
+
+def make_generator():
+    yield 42
+    return method
+
+
+class CallableData:
+    def __call__(self):
+        return 42
+
+
+@dataclass
+class FactoryDataStillRequiresAnnotations:
+    data = make_data()  # Noncompliant
+    pair = make_pair()  # Noncompliant
+    coroutine = make_coroutine()  # Noncompliant
+    generator = make_generator()  # Noncompliant
+    callable_data = CallableData()  # Noncompliant
+    field_default = field(default=42)  # Noncompliant
+
+
+def make_lambda():
+    return lambda self: 42
+
+
+@dataclass
+class LambdaFactory:
+    generated = make_lambda()
+    parenthesized = (lambda self: 42)
+
+
+def make_mixed_value(as_method=False):
+    if as_method:
+        return lambda self: 42
+    return 42
+
+
+def make_rebound_value():
+    return lambda self: 42
+
+
+make_rebound_value = int
+
+
+def make_generator_in_call():
+    print((yield 42))
+    return lambda self: 42
+
+
+@dataclass
+class ReviewRegressionControls:
+    mixed = make_mixed_value()  # Noncompliant
+    rebound = make_rebound_value()  # Noncompliant
+    generator = make_generator_in_call()  # Noncompliant
+
+
+def make_optional_method(as_method=False):
+    if as_method:
+        return method
+
+
+def make_method_or_none(as_method=False):
+    if as_method:
+        return method
+    return
+
+
+def make_no_value():
+    pass
+
+
+def make_redefined_value():
+    return method
+
+
+def make_redefined_value():
+    return 0
+
+
+def make_generator_with_yield_from():
+    print((yield from [42]))
+    return method
+
+
+def make_generator_in_default():
+    def nested(value=(yield 42)):
+        return value
+    return nested
+
+
+def make_generator_in_lambda_default():
+    return lambda self, value=(yield 42): value
+
+
+def replace_factory(factory):
+    return int
+
+
+@replace_factory
+def make_decorated_value():
+    return method
+
+
+@dataclass
+class AmbiguousFactoryResults:
+    implicit_none = make_optional_method()  # Noncompliant
+    bare_return = make_method_or_none()  # Noncompliant
+    no_return = make_no_value()  # Noncompliant
+    redefined = make_redefined_value()  # Noncompliant
+    delegated_generator = make_generator_with_yield_from()  # Noncompliant
+    generator_default = make_generator_in_default()  # Noncompliant
+    generator_lambda_default = make_generator_in_lambda_default()  # Noncompliant
+    decorated = make_decorated_value()  # Noncompliant
+
+
+def make_alternative_methods(first=True):
+    if first:
+        return method
+    else:
+        return lambda self: 42
+
+
+def make_generator_method():
+    def generated(self):
+        yield 42
+    return generated
+
+
+def make_lambda_generator_method():
+    return lambda self: (yield 42)
+
+
+def make_method_with_nested_class():
+    class Nested:
+        def generated(self):
+            yield 42
+    return method
+
+
+@dataclass
+class MoreGeneratedMethods:
+    alternatives = make_alternative_methods()
+    generator_method = make_generator_method()
+    lambda_generator_method = make_lambda_generator_method()
+    nested_class = make_method_with_nested_class()
