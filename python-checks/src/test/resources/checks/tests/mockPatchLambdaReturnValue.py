@@ -12,7 +12,7 @@ def helper(*args, **kwargs):
 
 
 def test_patch_positional_lambda():
-    with patch("app.api.fetch", lambda: {"ok": True}):  # Noncompliant {{Replace this lambda with a "return_value" argument.}}
+    with patch("app.api.fetch", lambda: ("ok", True)):  # Noncompliant {{Replace this lambda with a "return_value" argument.}}
 #                               ^^^^^^^^^^^^^^^^^^^^
         helper()
 
@@ -164,10 +164,10 @@ def test_patch_lambda_with_unused_keyword_only_parameter():
 
 
 def test_multiline_lambda_body():
-    patch("app.api.fetch", lambda: {  # Noncompliant
+    patch("app.api.fetch", lambda: (  # Noncompliant
 #                          ^[el=+3;ec=5]
-        "ok": True,
-    })
+        "ok", True,
+    ))
 
 
 def test_compliant_return_value():
@@ -264,3 +264,22 @@ def test_compliant_locally_defined_patch():
 
 def test_compliant_lambda_as_first_argument():
     helper(lambda: 42)
+
+
+# These expressions allocate fresh state on every invocation.
+@patch("termios.tcgetattr", lambda _: [0, 0, [b"a", b"b"]])
+class PatchedConsole:
+    pass
+
+
+def fresh_mutable_results(mocker):
+    patch("module.target", lambda: [])
+    patch.object(Target, "attribute", lambda: {1, 2})
+    mocker.patch("module.target", lambda: ({"ok": True},))
+    patch("module.target", lambda: [x for x in range(3)])
+    patch("module.target", lambda: {x: x for x in range(3)})
+    patch("module.target", lambda: {x for x in range(3)})
+    patch("module.target", lambda: (x for x in range(3)))
+    shared = []
+    patch("module.target", lambda: shared)  # Noncompliant
+    patch("module.target", lambda: (1, "ok", None))  # Noncompliant

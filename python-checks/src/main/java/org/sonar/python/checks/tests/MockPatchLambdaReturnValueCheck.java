@@ -72,7 +72,7 @@ public class MockPatchLambdaReturnValueCheck extends PythonSubscriptionCheck {
 
     RegularArgument newArgument = TreeUtils.nthArgumentOrKeyword(newPosition, NEW_KEYWORD, arguments);
     if (newArgument == null || !(Expressions.removeParentheses(newArgument.expression()) instanceof LambdaExpression lambda)
-      || usesItsParameters(lambda)) {
+      || usesItsParameters(lambda) || containsFreshCollection(lambda.expression())) {
       return;
     }
     // Decorators evaluate return_value= at definition time; skip lambdas whose body calls something,
@@ -131,6 +131,17 @@ public class MockPatchLambdaReturnValueCheck extends PythonSubscriptionCheck {
     Predicate<Tree> isParameterUsage = tree -> tree instanceof Name name && isDeclaredIn(name.symbolV2(), parameterList);
     Expression body = lambda.expression();
     return isParameterUsage.test(body) || TreeUtils.hasDescendant(body, isParameterUsage);
+  }
+
+  private static boolean containsFreshCollection(Expression expression) {
+    // return_value would share one collection/iterator between calls instead of
+    // constructing a fresh result, including collections nested inside tuples.
+    return isFreshCollection(expression) || TreeUtils.hasDescendant(expression, MockPatchLambdaReturnValueCheck::isFreshCollection);
+  }
+
+  private static boolean isFreshCollection(Tree tree) {
+    return tree.is(Tree.Kind.LIST_LITERAL, Tree.Kind.DICTIONARY_LITERAL, Tree.Kind.SET_LITERAL,
+      Tree.Kind.LIST_COMPREHENSION, Tree.Kind.DICT_COMPREHENSION, Tree.Kind.SET_COMPREHENSION, Tree.Kind.GENERATOR_EXPR);
   }
 
   private static boolean containsCallExpression(Expression expression) {

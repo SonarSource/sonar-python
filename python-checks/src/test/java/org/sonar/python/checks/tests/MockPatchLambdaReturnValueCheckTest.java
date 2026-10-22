@@ -40,11 +40,11 @@ class MockPatchLambdaReturnValueCheckTest {
     PythonQuickFixVerifier.verify(new MockPatchLambdaReturnValueCheck(),
       """
         from unittest.mock import patch
-        patch("app.api.fetch", lambda: {"ok": True})
+        patch("app.api.fetch", lambda: ("ok", True))
         """,
       """
         from unittest.mock import patch
-        patch("app.api.fetch", return_value={"ok": True})
+        patch("app.api.fetch", return_value=("ok", True))
         """);
   }
 
@@ -147,9 +147,9 @@ class MockPatchLambdaReturnValueCheckTest {
     PythonQuickFixVerifier.verifyNoQuickFixes(new MockPatchLambdaReturnValueCheck(),
       """
         from unittest.mock import patch
-        patch("app.api.fetch", lambda: {
-            "ok": True,
-        })
+        patch("app.api.fetch", lambda: (
+            "ok", True,
+        ))
         """);
   }
 }
