@@ -6,4 +6,7 @@ class A():
 
 
 reassigned_unbound_meth = A.meth
-reassigned_bound_meth = a().meth
+reassigned_bound_meth = A().meth
+
+
+def alternative(p): pass

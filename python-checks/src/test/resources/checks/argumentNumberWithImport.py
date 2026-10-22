@@ -37,3 +37,10 @@ def calling_reassigned_imported_noncompliant():
     aliased_bound() # FN SONARPY-2285
     aliased_bound(42, 43) # FN SONARPY-2285
 
+
+def imported_alternatives(condition):
+    chosen = argumentNumberImported.fn if condition else argumentNumberImported.alternative
+    chosen(1)
+    chosen()  # Noncompliant {{Add 1 missing arguments; this callable expects 1 positional arguments.}}
+    chosen(1, 2)  # Noncompliant {{Remove 1 unexpected arguments; this callable expects 1 positional arguments.}}
+    chosen(1, unexpected=True)  # Noncompliant {{Remove this unexpected named argument 'unexpected'.}}

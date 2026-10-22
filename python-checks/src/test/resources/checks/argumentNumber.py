@@ -345,3 +345,135 @@ def pandas():
     pd.testing.assert_index_equal(left_index, right_index, check_names=False)
     df = pd.DataFrame()
     df.stack("MASTER_FND_CODE", future_stack=True)
+
+
+def aliased_super_reassignment():
+    class Base(type):
+        def __new__(cls, name, bases, attrs):
+            factory = None
+            factory = super().__new__
+            return factory(cls, name, bases, attrs)
+
+
+def aliased_new_without_reaching_definitions():
+    class Meta(type):
+        def __new__(cls, name, bases, attrs):
+            factory = super().__new__
+            try:
+                attrs = dict(attrs)
+            except ValueError:
+                pass
+            return factory(cls, name, bases, attrs)
+
+    class Ordinary:
+        def __new__(cls):
+            return object.__new__(cls)
+    factory = Ordinary.__new__
+    try:
+        factory(Ordinary, 42)  # Noncompliant
+    except ValueError:
+        pass
+
+
+def callable_alternatives(condition, unknown):
+    def left(value, *, left=False):
+#       ^^^^> {{Function definition.}}
+        pass
+    def right(value, *, right=False):
+#       ^^^^^> {{Function definition.}}
+        pass
+    either = left if condition else right
+    either(1, left=True)
+    either(1, right=True)
+    either(1, nonexistent=True)  # Noncompliant {{Remove this unexpected named argument 'nonexistent'.}}
+    #         ^^^^^^^^^^^^^^^^
+    either()  # Noncompliant {{Add 1 missing arguments; this callable expects 1 positional arguments.}}
+    either(1, 2)  # Noncompliant {{Remove 1 unexpected arguments; this callable expects 1 positional arguments.}}
+
+    def optional_left(value, optional=0):
+        pass
+    def optional_right(value, optional=0, extra=0):
+        pass
+    same = optional_left if condition else optional_right
+    same()  # Noncompliant {{Add 1 missing arguments; this callable expects at least 1 positional arguments.}}
+   #^^^^
+    same(1, 2, 3)  # Valid for one alternative.
+    same(1, nonexistent=True)  # Noncompliant
+    same(*unknown)
+    same(**unknown)
+
+    def exact(value):
+        pass
+    shared_minimum = exact if condition else optional_left
+    shared_minimum()  # Noncompliant {{Add 1 missing arguments; this callable expects at least 1 positional arguments.}}
+   #^^^^^^^^^^^^^^
+    shared_minimum(1)
+
+    def required(value, optional):
+        pass
+    shared_maximum = required if condition else optional_left
+    shared_maximum(1, 2, 3)  # Noncompliant {{Remove 1 unexpected arguments; this callable expects at most 2 positional arguments.}}
+   #^^^^^^^^^^^^^^
+    shared_maximum(1, 2)
+
+    def variadic(*args, **kwargs):
+        pass
+    flexible = left if condition else variadic
+    flexible(1, nonexistent=True)
+    uncertain = left if condition else unknown
+    uncertain(1, nonexistent=True)
+
+    class Callable:
+        def method(self, value):
+            pass
+    maybe_class = left if condition else Callable
+    maybe_class(1, nonexistent=True)
+    maybe_bound = left if condition else Callable().method
+    maybe_bound(1, nonexistent=True)
+
+    @unknown
+    def decorated(value):
+        pass
+    maybe_decorated = left if condition else decorated
+    maybe_decorated(1, nonexistent=True)
+
+    def required_left(*, shared, left):
+        pass
+    def required_right(*, shared, right):
+        pass
+    keywords = required_left if condition else required_right
+    keywords()  # Noncompliant {{Add the missing keyword arguments: 'shared'}}
+    keywords(left=1, right=1)  # Noncompliant {{Add the missing keyword arguments: 'shared'}}
+
+    def reordered_left(*, second, first):
+        pass
+    def reordered_right(*, first, second):
+        pass
+    reordered = reordered_left if condition else reordered_right
+    reordered()  # Noncompliant {{Add the missing keyword arguments: 'first' 'second'}}
+    reordered(first=1, second=2)
+
+    def no_arguments():
+        pass
+    def two_arguments(first, second):
+        pass
+    conflicting = no_arguments if condition else two_arguments
+    conflicting(1)  # One alternative needs an argument added, the other needs it removed.
+    conflicting(1, 2, 3)  # Different numbers of excess arguments.
+    conflicting()  # Valid for one alternative.
+
+
+def library_signatures(condition):
+    import subprocess
+    # Old descriptors omit these forwarded keywords. Library overloads remain outside this change.
+    subprocess.check_call(["echo", "ok"], encoding="utf-8", errors="replace")
+    subprocess.call(["echo", "ok"], encoding="utf-8", errors="replace")
+
+    def local(args):
+        pass
+    mixed = local if condition else subprocess.check_call
+    mixed([], encoding="utf-8")
+
+    import math
+    # Single library signatures remain checked.
+    math.sqrt()  # Noncompliant
