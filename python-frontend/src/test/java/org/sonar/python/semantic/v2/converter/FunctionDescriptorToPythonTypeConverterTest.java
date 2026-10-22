@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,6 +33,7 @@ import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
+import org.sonar.python.semantic.v2.SymbolV2Impl;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,6 +42,27 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 class FunctionDescriptorToPythonTypeConverterTest {
+  @Test
+  void unresolvedDecoratorsAreNotDroppedOrLookedUpAsNames() {
+    var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder().withName("overloaded")
+      .withFullyQualifiedName("mod.overloaded").withHasDecorators(true)
+      .withDecorators(Arrays.asList("typing.overload", "", null)).build();
+    var table = spy(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var context = new ConversionContext("mod", new LazyTypesContext(table), (c, d) -> PythonType.UNKNOWN, null);
+    var function = (FunctionType) new FunctionDescriptorToPythonTypeConverter().convert(context, descriptor);
+    assertThat(function.decorators()).hasSize(3);
+    assertThat(function.decorators().get(1).type()).isSameAs(PythonType.UNKNOWN);
+    assertThat(function.decorators().get(2).type()).isSameAs(PythonType.UNKNOWN);
+    verifyNoInteractions(table);
+    assertThat(function.decorators().getFirst().type()).isSameAs(table.getType("typing.overload"));
+    var roundTrip = (FunctionDescriptor) new PythonTypeToDescriptorConverter().convert("mod", new SymbolV2Impl("overloaded"), Set.of(function));
+    assertThat(roundTrip.decorators()).containsExactly("typing.overload", "", "");
+    var restored = (FunctionType) new FunctionDescriptorToPythonTypeConverter().convert(context, roundTrip);
+    assertThat(restored.decorators()).hasSize(3);
+    assertThat(restored.decorators().get(1).type()).isSameAs(PythonType.UNKNOWN);
+    assertThat(restored.decorators().get(2).type()).isSameAs(PythonType.UNKNOWN);
+  }
+
   @Test
   void unsupportedClassTest() {
     var ctx = mock(ConversionContext.class);

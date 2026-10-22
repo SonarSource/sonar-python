@@ -17,7 +17,6 @@
 package org.sonar.python.semantic.v2.converter;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -48,9 +47,9 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
 
     var decorators = from.decorators()
       .stream()
-      .filter(Objects::nonNull) // SONARPY-2813 needs to be done to fix the null decorators
-      .map(ctx.lazyTypesContext()::getOrCreateLazyType)
-      .map(TypeWrapper::of)
+      .map(decorator -> decorator == null || decorator.isEmpty()
+        ? TypeWrapper.UNKNOWN_TYPE_WRAPPER
+        : TypeWrapper.of(ctx.lazyTypesContext().getOrCreateLazyType(decorator)))
       .toList();
 
     var typeOrigin = ctx.typeOrigin();

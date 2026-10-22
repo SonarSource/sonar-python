@@ -62,7 +62,8 @@ public class FunctionSymbolToDescriptorConverter {
       .map(SymbolsProtos.FunctionSymbol::getResolvedDecoratorNamesList)
       .stream()
       .flatMap(Collection::stream)
-      .map(TypeShedUtils::normalizedFqn)
+      // Empty entries represent unknown decorators and must remain serializable in descriptor caches.
+      .map(name -> name.isEmpty() ? "" : TypeShedUtils.normalizedFqn(name))
       .toList();
     var parameters = functionSymbol.getParametersList().stream()
       .map(parameterConverter::convert)

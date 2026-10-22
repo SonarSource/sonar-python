@@ -17,6 +17,7 @@
 package org.sonar.python.semantic;
 
 import com.google.protobuf.TextFormat;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -30,6 +31,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -39,6 +41,23 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 class FunctionSymbolTest {
+
+  @Test
+  void legacySymbolsExposeOnlyResolvedDecoratorNames() {
+    var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder().withName("function")
+      .withHasDecorators(true).withDecorators(Arrays.asList("typing.overload", "", null)).build();
+    var fromDescriptor = new FunctionSymbolImpl(descriptor, "function");
+    assertThat(fromDescriptor.hasDecorators()).isTrue();
+    assertThat(fromDescriptor.decorators()).containsExactly("typing.overload");
+    assertThat(descriptor.decorators()).containsExactly("typing.overload", "", null);
+
+    var protobuf = SymbolsProtos.FunctionSymbol.newBuilder().setName("function").setHasDecorators(true)
+      .addResolvedDecoratorNames("typing.overload").addResolvedDecoratorNames("").build();
+    var fromProtobuf = new FunctionSymbolImpl(protobuf, null, List.of(), "library");
+    assertThat(fromProtobuf.hasDecorators()).isTrue();
+    assertThat(fromProtobuf.decorators()).containsExactly("typing.overload");
+    assertThat(protobuf.getResolvedDecoratorNamesList()).containsExactly("typing.overload", "");
+  }
 
   @Test
   void arity() {

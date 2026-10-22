@@ -134,8 +134,7 @@ public class PythonTypeToDescriptorConverter {
     var decorators = type.decorators()
       .stream()
       .map(TypeWrapper::type)
-      .map(decorator -> FullyQualifiedNameHelper.getFullyQualifiedName(decorator).orElse(null))
-      .filter(Objects::nonNull)
+      .map(decorator -> FullyQualifiedNameHelper.getFullyQualifiedName(decorator).orElse(""))
       .toList();
 
     var returnType = type.returnType();

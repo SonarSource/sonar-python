@@ -20,7 +20,19 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
+import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
+
 class FunctionSymbolToDescriptorConverterTest {
+
+  @Test
+  void unknownDecoratorPlaceholdersSurviveDescriptorCaching() {
+    var symbol = SymbolsProtos.FunctionSymbol.newBuilder().setName("overloaded").setFullyQualifiedName("library.overloaded")
+      .setHasDecorators(true).addResolvedDecoratorNames("typing.overload").addResolvedDecoratorNames("").build();
+    var descriptor = new FunctionSymbolToDescriptorConverter().convert(symbol);
+    Assertions.assertThat(descriptor.decorators()).containsExactly("typing.overload", "");
+    assertDescriptorToProtobuf(descriptor);
+  }
+
 
   @Test
   void test() {

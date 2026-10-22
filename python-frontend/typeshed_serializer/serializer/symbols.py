@@ -320,8 +320,9 @@ class FunctionSymbol:
         if self.has_decorators and decorators is not None:
             for dec in decorators:
                 decorator_name = get_decorator_name(dec)
-                if decorator_name is not None:
-                    self.resolved_decorator_names.append(decorator_name)
+                # Preserve one entry per decorator: dropping calls or unknown expressions
+                # could make a mixed decorator stack look like a bare @overload.
+                self.resolved_decorator_names.append(decorator_name or "")
 
     def __eq__(self, other):
         return isinstance(other, FunctionSymbol) and self.to_proto() == other.to_proto()

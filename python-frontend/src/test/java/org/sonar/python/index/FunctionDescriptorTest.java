@@ -121,13 +121,13 @@ class FunctionDescriptorTest {
   }
 
   @Test
-  void unknown_decorators_have_no_name() {
+  void unknown_decorators_preserve_an_empty_name() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
       "@bar",
       "def foo(x): ...");
     assertThat(functionDescriptor.hasDecorators()).isTrue();
-    // Empty decorator name due to it not being resolved
-    assertThat(functionDescriptor.decorators()).isEmpty();
+    // Keep an explicit unknown entry so it cannot disappear from mixed decorator stacks.
+    assertThat(functionDescriptor.decorators()).containsExactly("");
     assertDescriptorToProtobuf(functionDescriptor);
   }
 

@@ -104,7 +104,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isInstanceMethod = containerClassFqn != null && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
     isAsynchronous = functionSymbolProto.getIsAsynchronous();
     hasDecorators = functionSymbolProto.getHasDecorators();
-    decorators = functionSymbolProto.getResolvedDecoratorNamesList();
+    decorators = resolvedDecoratorNames(functionSymbolProto.getResolvedDecoratorNamesList());
     SymbolsProtos.Type returnAnnotation = typeTable.resolve(
       functionSymbolProto.getReturnAnnotationId(), functionSymbolProto.hasReturnAnnotation(), functionSymbolProto.getReturnAnnotation());
     String returnTypeName = returnAnnotation == null ? "" : returnAnnotation.getFullyQualifiedName();
@@ -145,11 +145,16 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isInstanceMethod = functionDescriptor.isInstanceMethod();
     isAsynchronous = functionDescriptor.isAsynchronous();
     hasDecorators = functionDescriptor.hasDecorators();
-    decorators = functionDescriptor.decorators();
+    decorators = resolvedDecoratorNames(functionDescriptor.decorators());
     annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
     functionDefinitionLocation = functionDescriptor.definitionLocation();
     // TODO: Will no longer be true once SONARPY-647 is fixed
     isStub = false;
+  }
+
+  private static List<String> resolvedDecoratorNames(List<String> names) {
+    // V1 exposes resolved names only. Keep unknown placeholders in descriptors for V2 consumers.
+    return names.stream().filter(name -> name != null && !name.isEmpty()).toList();
   }
 
   public void setParametersWithType(ParameterList parametersList) {
