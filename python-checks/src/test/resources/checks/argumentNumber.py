@@ -238,7 +238,7 @@ def builtin_method():
 def builtin_method_different_for_python_2_and_3():
     myList = list(42, 43)
     myList.sort()
-    myList.sort(lambda x: x)
+    myList.sort(lambda x: x)  # Noncompliant
 
 def typeshed_third_party_methods():
   copy_context(42) # Noncompliant

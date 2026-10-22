@@ -41,6 +41,23 @@ public final class InternalTypeMatchers {
     return new TypeMatcherImpl(new HasKnownClassDecoratorEffectsInHierarchyPredicate());
   }
 
+  /**
+   * Matches library function signatures with STUB origin and no source definition.
+   * Unknown inputs return UNKNOWN; all alternatives of a union must match.
+   */
+  public static TypeMatcher isStubFunction() {
+    return new TypeMatcherImpl(new IsStubFunctionPredicate());
+  }
+
+  /**
+   * Matches functions with a nonempty decorator list whose entries all satisfy the matcher.
+   * Combines decorator matcher results with logical AND: FALSE takes precedence over UNKNOWN.
+   * All alternatives of a union must match. No restriction is placed on the function's origin.
+   */
+  public static TypeMatcher hasOnlyFunctionDecoratorsSatisfying(TypeMatcher matcher) {
+    return new TypeMatcherImpl(new HasOnlyFunctionDecoratorsSatisfyingPredicate(getTypePredicate(matcher)));
+  }
+
   private static TypePredicate getTypePredicate(TypeMatcher matcher) {
     if (matcher instanceof TypeMatcherImpl(TypePredicate predicate)) {
       return predicate;

@@ -23,6 +23,11 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class ArgumentNumberCheckTest {
 
   @Test
+  void library_overloads() {
+    PythonCheckVerifier.verify("src/test/resources/checks/argumentNumberLibraryOverloads.py", new ArgumentNumberCheck());
+  }
+
+  @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentNumber.py", new ArgumentNumberCheck());
   }

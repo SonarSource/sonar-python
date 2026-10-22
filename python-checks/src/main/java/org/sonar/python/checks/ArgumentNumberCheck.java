@@ -40,10 +40,20 @@ import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.types.v2.matchers.AllTypePredicate;
+import org.sonar.python.types.v2.matchers.HasOnlyFunctionDecoratorsSatisfyingPredicate;
+import org.sonar.python.types.v2.matchers.IsStubFunctionPredicate;
+import org.sonar.python.types.v2.matchers.IsTypePredicate;
+import org.sonar.python.types.v2.matchers.TypePredicate;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
+  // Evaluate individual alternatives without changing the handling of mixed source/library unions.
+  private static final TypePredicate STUB_OVERLOAD = new AllTypePredicate(List.of(
+    new IsStubFunctionPredicate(),
+    new HasOnlyFunctionDecoratorsSatisfyingPredicate(new IsTypePredicate("typing.overload"))));
   private static final String FUNCTION_DEFINITION = "Function definition.";
   private static final String NEW_METHOD_NAME = "__new__";
   private static final TypeMatcher SUPER_INSTANCE_MATCHER = TypeMatchers.isObjectOfType("super");
@@ -63,11 +73,11 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
     var calleeType = callExpression.callee().typeV2();
     var alternatives = calleeType instanceof UnionType union ? union.candidates() : Set.of(calleeType);
-    // Library unions also encode overloads and version-specific descriptors. Keep this extension
-    // limited to source-defined alternatives until those signatures can be checked reliably.
+    // Explicit stub overloads can be checked by consensus. Unmarked library unions may instead
+    // represent version-specific signatures, so they retain their conservative treatment.
     List<FunctionType> functions = new ArrayList<>();
     for (var alternative : alternatives) {
-      if (!(alternative instanceof FunctionType function) || isException(callExpression, function, calleeType instanceof UnionType)) {
+      if (!(alternative instanceof FunctionType function) || isException(ctx, callExpression, function, calleeType instanceof UnionType)) {
         return;
       }
       functions.add(function);
@@ -208,12 +218,17 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     return result;
   }
 
-  private static boolean isException(CallExpression callExpression, FunctionType functionType, boolean isUnion) {
+  private static boolean isException(SubscriptionContext ctx, CallExpression callExpression, FunctionType functionType, boolean isUnion) {
     // Unannotated local functions can still have STUB origin; their source location identifies them reliably.
-    return (isUnion && functionType.definitionLocation().isEmpty())
-      || functionType.hasDecorators()
+    boolean requiresKnownOverload = (isUnion && functionType.definitionLocation().isEmpty()) || functionType.hasDecorators();
+    return (requiresKnownOverload && !isStubOverload(functionType, ctx))
       || functionType.hasVariadicParameter()
       || isCalledAsBoundInstanceMethod(callExpression, functionType);
+  }
+
+  private static boolean isStubOverload(FunctionType functionType, SubscriptionContext ctx) {
+    return ctx.typeTable().getType("typing.overload") instanceof FunctionType
+      && STUB_OVERLOAD.check(functionType, TypePredicateContext.of(ctx.typeTable())).isTrue();
   }
 
   private static boolean isCallException(SubscriptionContext ctx, CallExpression callExpression, List<FunctionType> functions) {
