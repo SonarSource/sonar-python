@@ -16,6 +16,9 @@
  */
 package org.sonar.python.semantic.v2.typetable;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.HashSet;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
@@ -29,10 +32,12 @@ import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.TypeChecker;
+import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -41,6 +46,23 @@ import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 class ProjectLevelTypeTableTest {
   
+  @Test
+  void genericRemainsASpecialFormWhenDeclaredAsAClassValuedVariable() {
+    // Newer Typeshed declares Generic as type[_Generic], which otherwise becomes an instance of type.
+    var descriptor = new VariableDescriptor("Generic", "typing.Generic", "builtins.type");
+    var descriptors = new HashMap<>(ProjectLevelSymbolTable.empty().typeShedDescriptorsProvider().descriptorsForModule("typing"));
+    descriptors.put("Generic", descriptor);
+    var table = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(Map.of("typing", new HashSet<>(descriptors.values()))));
+    assertThat(table.getType("typing.Generic")).isEqualTo(new SpecialFormType("typing.Generic"));
+    var expression = org.sonar.python.semantic.v2.TypeInferenceV2Test.lastExpression("""
+      from typing import Generic as Base, TypeVar
+      T = TypeVar("T")
+      class Box(Base[T]): pass
+      Box
+      """, table);
+    assertThat(expression.typeV2()).isInstanceOfSatisfying(ClassType.class, type -> assertThat(type.isGeneric()).isTrue());
+  }
+
   @Test
   void getBuiltinTypeTest() {
     var symbolTable = ProjectLevelSymbolTable.empty();

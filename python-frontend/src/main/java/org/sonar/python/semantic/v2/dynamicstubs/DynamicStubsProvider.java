@@ -45,7 +45,10 @@ public class DynamicStubsProvider {
   private static Map<String, TypeWrapper> typingDynamicStubs() {
     return Map.of(
       // Every type is compatible with Any, and Any is compatible with every type. This is represented as UNKNOWN in PythonType
-      "Any", TypeWrapper.of(PythonType.UNKNOWN));
+      "Any", TypeWrapper.of(PythonType.UNKNOWN),
+      // Generic is described as type[_Generic] by newer Typeshed versions. Its
+      // subscription still has special typing semantics rather than instance semantics.
+      "Generic", TypeWrapper.of(new SpecialFormType("typing.Generic")));
   }
 
   private static Map<String, TypeWrapper> typingExtensionsDynamicStubs() {
