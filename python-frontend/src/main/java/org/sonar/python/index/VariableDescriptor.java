@@ -24,6 +24,7 @@ public class VariableDescriptor implements Descriptor {
   private final String name;
   private final String fullyQualifiedName;
   private final String annotatedType;
+  private final TypeAnnotationDescriptor typeAnnotationDescriptor;
   private final boolean isImportedModule;
   private final boolean isTypeAlias;
   private final List<Descriptor> attributes;
@@ -36,7 +37,14 @@ public class VariableDescriptor implements Descriptor {
 
   public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType,
                             boolean isImportedModule, boolean isTypeAlias, List<Descriptor> attributes, List<Descriptor> members) {
+    this(name, fullyQualifiedName, annotatedType, isImportedModule, isTypeAlias, attributes, members, null);
+  }
+
+  public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType,
+                            boolean isImportedModule, boolean isTypeAlias, List<Descriptor> attributes, List<Descriptor> members,
+                            @Nullable TypeAnnotationDescriptor typeAnnotationDescriptor) {
     this.name = name;
+    this.typeAnnotationDescriptor = typeAnnotationDescriptor;
     this.fullyQualifiedName = fullyQualifiedName;
     this.annotatedType = annotatedType;
     this.isImportedModule = isImportedModule;
@@ -67,6 +75,11 @@ public class VariableDescriptor implements Descriptor {
   @CheckForNull
   public String annotatedType() {
     return annotatedType;
+  }
+
+  @CheckForNull
+  public TypeAnnotationDescriptor typeAnnotationDescriptor() {
+    return typeAnnotationDescriptor;
   }
 
   public boolean isImportedModule() {

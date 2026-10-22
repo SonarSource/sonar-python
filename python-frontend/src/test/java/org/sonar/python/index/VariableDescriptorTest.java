@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
@@ -129,4 +130,31 @@ class VariableDescriptorTest {
     assertThat(variableDescriptor.attributes()).isEmpty();
     assertThat(variableDescriptor.members()).isEmpty();
   }
+  @Test
+  void protobufSerializationPreservesVariableIdentityFlags() {
+    assertDescriptorToProtobuf(new VariableDescriptor("os", "os", null, true, false, List.of(), List.of()));
+    assertDescriptorToProtobuf(new VariableDescriptor("Text", "typing.Text", "str", false, true, List.of(), List.of()));
+  }
+
+  @Test
+  void protobufSerializationPreservesFullUnionAnnotation() {
+    var intAnnotation = new TypeAnnotationDescriptor("int", TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), "int", false);
+    var noneAnnotation = new TypeAnnotationDescriptor("None", TypeAnnotationDescriptor.TypeKind.NONE, List.of(), null, false);
+    var unionAnnotation = new TypeAnnotationDescriptor("int | None", TypeAnnotationDescriptor.TypeKind.UNION,
+      List.of(intAnnotation, noneAnnotation), null, false);
+    assertDescriptorToProtobuf(new VariableDescriptor("errno", "OSError.errno", null, false, false,
+      List.of(), List.of(), unionAnnotation));
+  }
+
+  @Test
+  void legacyProtobufKeepsDefaultIdentityAndAnnotation() {
+    var legacy = DescriptorsProtos.VarDescriptor.newBuilder()
+      .setName("value").setAnnotatedType("str").build();
+    var descriptor = fromProtobuf(legacy);
+    assertThat(descriptor.annotatedType()).isEqualTo("str");
+    assertThat(descriptor.isImportedModule()).isFalse();
+    assertThat(descriptor.isTypeAlias()).isFalse();
+    assertThat(descriptor.typeAnnotationDescriptor()).isNull();
+  }
+
 }

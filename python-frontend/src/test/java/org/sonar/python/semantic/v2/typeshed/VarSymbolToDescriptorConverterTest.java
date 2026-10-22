@@ -18,8 +18,14 @@ package org.sonar.python.semantic.v2.typeshed;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.index.TypeAnnotationDescriptor;
+import org.sonar.python.types.TypeShedTypeTable;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+
+import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
 
 class VarSymbolToDescriptorConverterTest {
 
@@ -132,6 +138,53 @@ class VarSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.name()).isEqualTo("TypedDict");
     Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("unrelated.TypedDict");
     Assertions.assertThat(descriptor.annotatedType()).isEqualTo("something");
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {0, 1, 2})
+  void preservesIndexedUnionAnnotationThroughAliases(int aliasDepth) {
+    var intType = SymbolsProtos.Type.newBuilder().setKind(SymbolsProtos.TypeKind.INSTANCE).setFullyQualifiedName("builtins.int").build();
+    var noneType = SymbolsProtos.Type.newBuilder().setKind(SymbolsProtos.TypeKind.NONE).build();
+    var unionType = SymbolsProtos.Type.newBuilder().setKind(SymbolsProtos.TypeKind.UNION).addArgTypeIds(1).addArgTypeIds(2).build();
+    var module = SymbolsProtos.ModuleSymbol.newBuilder().addTypeTable(intType).addTypeTable(noneType).addTypeTable(unionType);
+    for (int i = 0; i < aliasDepth; i++) {
+      module.addTypeTable(SymbolsProtos.Type.newBuilder().setKind(SymbolsProtos.TypeKind.TYPE_ALIAS)
+        .addArgTypeIds(module.getTypeTableCount()));
+    }
+    var symbol = SymbolsProtos.VarSymbol.newBuilder().setName("errno").setTypeAnnotationId(module.getTypeTableCount()).build();
+    var converter = new VarSymbolToDescriptorConverter(TypeShedTypeTable.from(module.build()));
+
+    var descriptor = (VariableDescriptor) converter.convert(symbol, "builtins.OSError");
+    Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("OSError.errno");
+    Assertions.assertThat(descriptor.annotatedType()).isNull();
+    var annotation = descriptor.typeAnnotationDescriptor();
+    for (int i = 0; i < aliasDepth; i++) {
+      Assertions.assertThat(annotation).isNotNull();
+      Assertions.assertThat(annotation.kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.TYPE_ALIAS);
+      annotation = annotation.args().get(0);
+    }
+    Assertions.assertThat(annotation.kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.UNION);
+    Assertions.assertThat(annotation.args()).extracting(TypeAnnotationDescriptor::kind)
+      .containsExactly(TypeAnnotationDescriptor.TypeKind.INSTANCE, TypeAnnotationDescriptor.TypeKind.NONE);
+    Assertions.assertThat(annotation.args().get(0).fullyQualifiedName()).isEqualTo("int");
+    assertDescriptorToProtobuf(descriptor);
+
+    Assertions.assertThat(((VariableDescriptor) converter.convert(symbol.toBuilder().setIsTypeAlias(true).build()))
+      .typeAnnotationDescriptor()).isNull();
+    Assertions.assertThat(((VariableDescriptor) converter.convert(symbol.toBuilder().setIsImportedModule(true).build()))
+      .typeAnnotationDescriptor()).isNull();
+  }
+
+  @Test
+  void keepsSingleTypeAnnotationsOnTheQualifiedNamePath() {
+    var intType = SymbolsProtos.Type.newBuilder().setFullyQualifiedName("builtins.int").build();
+    var alias = SymbolsProtos.Type.newBuilder().setKind(SymbolsProtos.TypeKind.TYPE_ALIAS).addArgs(intType).build();
+    var symbol = SymbolsProtos.VarSymbol.newBuilder().setName("value").setTypeAnnotation(alias).build();
+
+    var descriptor = (VariableDescriptor) new VarSymbolToDescriptorConverter().convert(symbol);
+
+    Assertions.assertThat(descriptor.annotatedType()).isEqualTo("int");
+    Assertions.assertThat(descriptor.typeAnnotationDescriptor()).isNull();
   }
 
 }

@@ -17,11 +17,14 @@
 package org.sonar.python.semantic.v2.types.typecalculator;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
@@ -144,6 +147,42 @@ class QualifiedExpressionCalculatorTest {
     assertThat(result).isInstanceOf(UnknownType.UnresolvedImportType.class);
     var unresolvedType = (UnknownType.UnresolvedImportType) result;
     assertThat(unresolvedType.importPath()).isEqualTo("os.nonexistent_member");
+  }
+
+  @Test
+  void unionAnnotatedMemberIsResolvedDuringInference() {
+    var fileInput = parseAndInferTypes("""
+      import ast
+      node = ast.ImportFrom(module="os", names=[], level=0)
+      node.module()
+      """);
+
+    var result = getQualifiedExpressionFromStatement(fileInput).typeV2();
+
+    assertThat(result).isInstanceOfSatisfying(UnionType.class, union -> {
+      assertThat(union.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class));
+      assertThat(union.candidates()).extracting(candidate -> candidate.unwrappedType().name())
+        .containsExactlyInAnyOrder("str", "NoneType");
+    });
+    assertThat(result.hasMember("__call__")).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void aliasAnnotatedMemberPreservesItsUnionValues() {
+    var fileInput = parseAndInferTypes("""
+      import urllib.request
+      request = urllib.request.Request("https://example.com")
+      request.data
+      """);
+
+    var result = getQualifiedExpressionFromStatement(fileInput).typeV2();
+
+    assertThat(result).isInstanceOfSatisfying(UnionType.class, union -> {
+      assertThat(union.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class));
+      assertThat(union.candidates()).extracting(candidate -> candidate.unwrappedType().name())
+        .contains("bytes", "NoneType");
+    });
+    assertThat(result.hasMember("__call__")).isEqualTo(TriBool.FALSE);
   }
 
   private static QualifiedExpression getQualifiedExpressionFromStatement(FileInput fileInput) {

@@ -154,10 +154,16 @@ public class DescriptorsToProtobuf {
     DescriptorsProtos.VarDescriptor.Builder builder = DescriptorsProtos.VarDescriptor.newBuilder()
       .setName(variableDescriptor.name())
       .setAttributes(toProtobufDescriptorList(variableDescriptor.attributes()))
-      .setMembers(toProtobufDescriptorList(variableDescriptor.members()));
+      .setMembers(toProtobufDescriptorList(variableDescriptor.members()))
+      .setIsImportedModule(variableDescriptor.isImportedModule())
+      .setIsTypeAlias(variableDescriptor.isTypeAlias());
     String fullyQualifiedName = variableDescriptor.fullyQualifiedName();
     if (fullyQualifiedName != null) {
       builder.setFullyQualifiedName(fullyQualifiedName);
+    }
+    TypeAnnotationDescriptor typeAnnotation = variableDescriptor.typeAnnotationDescriptor();
+    if (typeAnnotation != null) {
+      builder.setTypeAnnotation(toProtobuf(typeAnnotation));
     }
     String annotatedType = variableDescriptor.annotatedType();
     if (annotatedType != null) {
@@ -297,9 +303,11 @@ public class DescriptorsToProtobuf {
       varDescriptorProto.getName(),
       fullyQualifiedName,
       annotatedType,
-      false,
+      varDescriptorProto.getIsImportedModule(),
+      varDescriptorProto.getIsTypeAlias(),
       attributes,
-      members);
+      members,
+      varDescriptorProto.hasTypeAnnotation() ? fromProtobuf(varDescriptorProto.getTypeAnnotation()) : null);
   }
 
   private static LocationInFile fromProtobuf(DescriptorsProtos.LocationInFile locationInFileProto) {

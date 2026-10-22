@@ -50,7 +50,19 @@ public class VarSymbolToDescriptorConverter {
     if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
       return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule, isTypeAlias, List.of(), List.of());
     }
-    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule, isTypeAlias, List.of(), List.of());
+    // A single FQN cannot describe a union, including one referenced through an alias.
+    // Preserve the annotation for lazy value conversion; alias declarations and imports keep their identity policy.
+    var descriptor = !isImportedModule && !isTypeAlias && protoTypeAnnotation != null
+      && isUnionAnnotation(protoTypeAnnotation)
+      ? new TypeSymbolToDescriptorConverter(typeTable).convert(protoTypeAnnotation) : null;
+    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule, isTypeAlias, List.of(), List.of(), descriptor);
+  }
+
+  private boolean isUnionAnnotation(SymbolsProtos.Type annotation) {
+    while (annotation.getKind() == SymbolsProtos.TypeKind.TYPE_ALIAS) {
+      annotation = typeTable.argument(annotation, 0);
+    }
+    return annotation.getKind() == SymbolsProtos.TypeKind.UNION;
   }
 
   private static boolean isTypeAnnotationKnownToBeIncorrect(@Nullable String fullyQualifiedName) {

@@ -20,7 +20,12 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.python.index.TypeAnnotationDescriptor;
+import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -28,9 +33,12 @@ import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.SpecialFormType;
+import org.sonar.python.types.v2.LazyUnionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.sonar.python.types.v2.TypesTestUtils.lastName;
 
 class VariableDescriptorToPythonTypeConverterTest {
   @Test
@@ -178,4 +186,69 @@ class VariableDescriptorToPythonTypeConverterTest {
     assertThat(objType.members()).hasSize(1);
     assertThat(objType.members().get(0).name()).isEqualTo("value");
   }
+  @Test
+  void unionAnnotationsRemainLazyDuringConversion() {
+    var typeTable = mock(ProjectLevelTypeTable.class);
+    var context = new ConversionContext("mod", new LazyTypesContext(typeTable), (c, d) -> PythonType.UNKNOWN, null);
+    var annotation = unionAnnotation(instanceAnnotation("int"), instanceAnnotation("str"));
+    var descriptor = new VariableDescriptor("value", "mod.value", null, false, false, List.of(), List.of(), annotation);
+
+    assertThat(new VariableDescriptorToPythonTypeConverter().convert(context, descriptor)).isInstanceOf(LazyUnionType.class);
+    verifyNoInteractions(typeTable);
+  }
+
+  @Test
+  void unionAnnotationsPreserveInstanceAndCallableCandidates() {
+    var typeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+    var context = new ConversionContext("mod", new LazyTypesContext(typeTable), (c, d) -> PythonType.UNKNOWN, null);
+    var none = new TypeAnnotationDescriptor("None", TypeAnnotationDescriptor.TypeKind.NONE, List.of(), null, false);
+    var callable = new TypeAnnotationDescriptor("Callable", TypeAnnotationDescriptor.TypeKind.CALLABLE, List.of(), null, false);
+    var converter = new VariableDescriptorToPythonTypeConverter();
+
+    var annotations = List.of(unionAnnotation(instanceAnnotation("int"), instanceAnnotation("str")),
+      unionAnnotation(instanceAnnotation("int"), none), unionAnnotation(instanceAnnotation("int"), callable));
+    var expectedNames = List.of("str", "NoneType", "function");
+    for (int i = 0; i < annotations.size(); i++) {
+      var annotation = annotations.get(i);
+      var expectedName = expectedNames.get(i);
+      var descriptor = new VariableDescriptor("value", "mod.value", null, false, false, List.of(), List.of(), annotation);
+      var result = TypeUtils.resolved(converter.convert(context, descriptor));
+      assertThat(result).isInstanceOfSatisfying(UnionType.class, union -> {
+        assertThat(union.candidates()).extracting(candidate -> ((ClassType) candidate.unwrappedType()).name())
+          .containsExactlyInAnyOrder("int", expectedName);
+        assertThat(union.candidates()).anySatisfy(candidate -> {
+          assertThat(candidate).isInstanceOf(ObjectType.class);
+          assertThat(((ClassType) candidate.unwrappedType()).name()).isEqualTo("int");
+        });
+        assertThat(union.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class));
+        assertThat(union.hasMember("__call__")).isEqualTo("function".equals(expectedName) ? TriBool.UNKNOWN : TriBool.FALSE);
+      });
+    }
+  }
+
+  @Test
+  void osErrorErrnoRemainsNonCallableAcrossStubVersions() {
+    var errno = lastName("e = OSError()", "e.errno()").typeV2();
+    // The previous stdlib encoded errno as int; current typeshed uses int | None.
+    assertThat(errno).isNotSameAs(PythonType.UNKNOWN);
+    assertThat(errno.hasMember("__call__")).isEqualTo(TriBool.FALSE);
+    var type = TypeUtils.resolved(errno);
+    if (type instanceof UnionType union) {
+      assertThat(union.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class));
+      assertThat(union.candidates()).extracting(candidate -> ((ClassType) candidate.unwrappedType()).name())
+        .containsExactlyInAnyOrder("int", "NoneType");
+    } else {
+      assertThat(type).isInstanceOf(ObjectType.class);
+      assertThat(((ClassType) type.unwrappedType()).name()).isEqualTo("int");
+    }
+  }
+
+  private static TypeAnnotationDescriptor instanceAnnotation(String fqn) {
+    return new TypeAnnotationDescriptor(fqn, TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), fqn, false);
+  }
+
+  private static TypeAnnotationDescriptor unionAnnotation(TypeAnnotationDescriptor... candidates) {
+    return new TypeAnnotationDescriptor("union", TypeAnnotationDescriptor.TypeKind.UNION, List.of(candidates), null, false);
+  }
+
 }

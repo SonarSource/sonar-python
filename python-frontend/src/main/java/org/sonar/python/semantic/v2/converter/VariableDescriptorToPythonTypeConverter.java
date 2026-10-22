@@ -42,6 +42,10 @@ public class VariableDescriptorToPythonTypeConverter implements DescriptorToPyth
       // ObjectType (an instance of the class, which would be non-callable).
       return ctx.lazyTypesContext().getOrCreateLazyType(annotatedType);
     }
+    var typeAnnotation = from.typeAnnotationDescriptor();
+    if (!from.isTypeAlias() && typeAnnotation != null) {
+      return new TypeAnnotationToPythonTypeConverter().convert(ctx, typeAnnotation);
+    }
     if (annotatedType != null) {
       if (SPECIAL_FORM_FQNS.contains(annotatedType) && fullyQualifiedName != null) {
         // Defensive null check on fullyQualifiedName: it should never be null for SpecialForm

@@ -83,4 +83,7 @@ message VarDescriptor {
   optional string annotatedType = 3;
   DescriptorList attributes = 4;
   DescriptorList members = 5;
+  bool is_imported_module = 6;
+  bool is_type_alias = 7;
+  optional Type type_annotation = 8;
 }

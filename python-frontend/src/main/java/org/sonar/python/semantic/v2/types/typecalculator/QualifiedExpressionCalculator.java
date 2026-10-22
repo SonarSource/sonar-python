@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatcher;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatchers;
+import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class QualifiedExpressionCalculator {
@@ -42,6 +43,7 @@ public class QualifiedExpressionCalculator {
     PythonType qualifierType = qualifiedExpression.qualifier().typeV2();
     return Optional.of(qualifierType)
       .flatMap(t -> t.resolveMember(name.name()))
+      .map(TypeUtils::resolved)
       .map(this::handlePropertyFunction)
       .orElseGet(() -> unresolvedMemberType(qualifierType, name.name()));
   }
