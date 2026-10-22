@@ -38,6 +38,7 @@ public class HasKnownClassDecoratorEffectsPredicate implements TypePredicate {
   private static final List<String> CLASS_PRESERVING_DECORATORS = List.of(
     "typing.final", "typing_extensions.final", "typing.disjoint_base", "typing_extensions.disjoint_base",
     "typing.runtime_checkable", "typing_extensions.runtime_checkable");
+  private static final List<String> STUB_ONLY_DECORATORS = List.of("typing.type_check_only");
 
   @Override
   public TriBool check(PythonType type, TypePredicateContext ctx) {
@@ -58,7 +59,10 @@ public class HasKnownClassDecoratorEffectsPredicate implements TypePredicate {
       return TriBool.FALSE;
     }
     TypePredicate knownDecorator = (decoratorType, context) -> {
-      if (matchesKnownCallable(decoratorType, context, CLASS_PRESERVING_DECORATORS)) {
+      // Like ClassType's member queries, use the source definition to distinguish user classes from stubs.
+      // Typeshed uses type-only protocol bases in runtime class hierarchies, such as numbers.Real.
+      if (matchesKnownCallable(decoratorType, context, CLASS_PRESERVING_DECORATORS)
+        || (type.definitionLocation().isEmpty() && matchesKnownCallable(decoratorType, context, STUB_ONLY_DECORATORS))) {
         return TriBool.TRUE;
       }
       return TriBool.UNKNOWN;

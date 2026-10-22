@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -205,6 +206,27 @@ class ClassDecoratorPredicatesTest {
       when(expression.typeV2()).thenReturn(type);
       assertThat(matcher.evaluateFor(expression, context)).isEqualTo(TriBool.FALSE);
     }
+  }
+
+  @Test
+  void type_check_only_has_known_effects_only_without_a_source_definition() {
+    var marker = ctx.typeTable().getType("typing.type_check_only");
+    var decorators = List.of(new DecoratorInfo(TypeWrapper.of(marker)));
+    var stub = new ClassTypeBuilder("Stub", "mod.Stub").withDecorators(decorators).build();
+    var source = new ClassTypeBuilder("Source", "mod.Source").withDecorators(decorators)
+      .withDefinitionLocation(mock(LocationInFile.class)).build();
+    var impostor = new FunctionTypeBuilder("type_check_only").withFullyQualifiedName("typing.type_check_only").build();
+    var child = new ClassTypeBuilder("Child", "mod.Child").withSuperClasses(stub).build();
+    assertThat(direct.check(stub, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(hierarchy.check(child, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(direct.check(source, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(direct.check(decorated(impostor), ctx)).isEqualTo(TriBool.FALSE);
+    var mixed = new ClassTypeBuilder("Mixed", "mod.Mixed").withDecorators(List.of(
+      new DecoratorInfo(TypeWrapper.of(marker)), new DecoratorInfo(TypeWrapper.UNKNOWN_TYPE_WRAPPER))).build();
+    assertThat(direct.check(mixed, ctx)).isEqualTo(TriBool.FALSE);
+    var called = new ClassTypeBuilder("Called", "mod.Called").withDecorators(List.of(
+      new DecoratorInfo(TypeWrapper.of(marker), TypeWrapper.of(marker)))).build();
+    assertThat(direct.check(called, ctx)).isEqualTo(TriBool.FALSE);
   }
 
   @Test
