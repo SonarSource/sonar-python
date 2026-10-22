@@ -16,11 +16,43 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils.Version;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.types.TypeShed;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ItemOperationsTypeCheckTest {
+
+  @AfterEach
+  void resetPythonVersion() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+  }
+
+  @ParameterizedTest
+  @EnumSource(value = Version.class, names = {"V_310", "V_311", "V_312", "V_313", "V_314", "V_315"})
+  void unionTypeSubscriptionRespectsPythonVersion(Version version) {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(version));
+    TypeShed.resetBuiltinSymbols();
+    var issues = PythonCheckVerifier.issues("src/test/resources/checks/itemOperationsTypeCheck/unionTypeSubscription.py", new ItemOperationsTypeCheck());
+    assertThat(issues).hasSize(version.compare(3, 14) >= 0 ? 0 : 3);
+  }
+
+  @Test
+  void unionTypeSubscriptionWithMixedVersions() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(Version.V_313, Version.V_314));
+    TypeShed.resetBuiltinSymbols();
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/itemOperationsTypeCheck/unionTypeSubscription.py", new ItemOperationsTypeCheck());
+  }
 
   @Test
   void test_delitem() {

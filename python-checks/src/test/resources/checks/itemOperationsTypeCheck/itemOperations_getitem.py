@@ -429,3 +429,31 @@ Factory[0]
 def decorated_union(condition):
     value = Aliased if condition else MixedUnion
     value[0]
+
+
+# UnionType gained class subscription in Python 3.14.
+from types import UnionType
+from types import UnionType as UnionAlias
+import types
+
+def union_type_subscription(left, right):
+    types.UnionType[left, right]
+    UnionType[int, str]
+    UnionAlias[int, str]
+
+from typing import final
+
+@final
+class UnrelatedUnionType:
+    pass
+
+UnrelatedUnionType[int, str]  # Noncompliant
+UnionType[int, str] = int  # Noncompliant
+del UnionType[int, str]  # Noncompliant
+
+
+def unrelated_union_type():
+    @final
+    class UnionType:
+        pass
+    UnionType[int, str]  # Noncompliant

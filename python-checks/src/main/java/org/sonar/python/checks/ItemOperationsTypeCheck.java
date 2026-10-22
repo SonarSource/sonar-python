@@ -46,6 +46,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
@@ -59,6 +60,8 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
 
   private static final TypeMatcher KNOWN_DECORATOR_EFFECTS = InternalTypeMatchers.hasKnownClassDecoratorEffectsInHierarchy();
 
+  private static final TypeMatcher UNION_TYPE = TypeMatchers.isType("types.UnionType");
+
   private static final Set<String> TYPING_LITERAL = Set.of("typing.Literal", "typing_extensions.Literal");
   private static final Set<String> TYPING_ANNOTATED = Set.of("typing.Annotated", "typing_extensions.Annotated");
 
@@ -71,6 +74,14 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     }
     if (isInvalidSubscriptionCallExpr(subscriptionObject, secondaries)) {
       return false;
+    }
+
+    // Python 3.14 makes types.UnionType an alias of typing.Union. Older bundled
+    // stubs may omit its class subscription; do not suppress item writes/deletions.
+    if ("__getitem__".equals(requiredMethod)
+      && context.sourcePythonVersions().stream().anyMatch(version -> version.compare(3, 14) >= 0)
+      && UNION_TYPE.isTrueFor(subscriptionObject, context)) {
+      return true;
     }
 
     var symbolOptional = TreeUtils.getSymbolFromTree(subscriptionObject);
