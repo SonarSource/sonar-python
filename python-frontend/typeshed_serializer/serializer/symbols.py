@@ -614,13 +614,14 @@ class MergedVarSymbol:
 
 
 class MergedModuleSymbol:
-    def __init__(self, fullname, classes, functions, overloaded_functions, variables, all_versions=None):
+    def __init__(self, fullname, classes, functions, overloaded_functions, variables, all_versions=None, valid_for=None):
         self.fullname = fullname
         self.classes = classes
         self.functions = functions
         self.overloaded_functions = overloaded_functions
         self.vars = variables
         self.all_versions = all_versions
+        self.valid_for = valid_for
 
     def to_proto(self):
         pb_module = symbols_pb2.ModuleSymbol()
@@ -639,6 +640,8 @@ class MergedModuleSymbol:
             for elem in self.vars[var]:
                 pb_module.vars.append(elem.to_proto(type_table, self.all_versions, self.fullname))
         type_table.write_to(pb_module)
+        if self.valid_for is not None:
+            write_valid_for(pb_module.valid_for, self.valid_for, self.all_versions)
         return pb_module
 
 

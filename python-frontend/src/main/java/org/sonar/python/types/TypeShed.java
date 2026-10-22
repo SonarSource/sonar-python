@@ -330,9 +330,9 @@ public class TypeShed {
     InputStream resource = TypeShed.class.getResourceAsStream(PROTOBUF + moduleName + ".protobuf");
     if (resource == null) return null;
     ModuleSymbol moduleSymbol = deserializedModule(moduleName, resource);
-    if (moduleSymbol == null) return null;
+    if (moduleSymbol == null || !isValidForProjectSemanticPythonVersion(moduleSymbol.getValidForList())) return null;
     for (SymbolsProtos.ClassSymbol classSymbol : moduleSymbol.getClassesList()) {
-      if (classSymbol.getName().equals(symbolLocalNameFromFqn)) {
+      if (classSymbol.getName().equals(symbolLocalNameFromFqn) && isValidForProjectSemanticPythonVersion(classSymbol.getValidForList())) {
         return new ClassDescriptorWithTypeTable(classSymbol, TypeShedTypeTable.from(moduleSymbol));
       }
     }
@@ -453,7 +453,7 @@ public class TypeShed {
   }
 
   private static Map<String, Symbol> getSymbolsFromProtobufModule(@Nullable ModuleSymbol moduleSymbol, Set<String> modulesInProgress) {
-    if (moduleSymbol == null) {
+    if (moduleSymbol == null || !isValidForProjectSemanticPythonVersion(moduleSymbol.getValidForList())) {
       return Collections.emptyMap();
     }
 

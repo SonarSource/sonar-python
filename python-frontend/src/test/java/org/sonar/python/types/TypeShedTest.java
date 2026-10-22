@@ -739,4 +739,32 @@ class TypeShedTest {
     assertThat(TypeShed.typeShedClass("object").canHaveMember("__getstate__")).isTrue();
   }
 
+  @Test
+  void moduleAvailabilityFiltersUnconditionalMembers() {
+    var module = SymbolsProtos.ModuleSymbol.newBuilder()
+      .setFullyQualifiedName("new_module")
+      .addValidFor("315")
+      .addFunctions(SymbolsProtos.FunctionSymbol.newBuilder().setName("available"))
+      .build();
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_314));
+    assertThat(TypeShed.getSymbolsFromProtobufModule(module)).isEmpty();
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_315));
+    assertThat(TypeShed.getSymbolsFromProtobufModule(module)).containsKey("available");
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_314));
+    assertThat(TypeShed.getSymbolsFromProtobufModule(module.toBuilder().clearValidFor().build())).containsKey("available");
+  }
+
+  @Test
+  void version_ranges_apply_to_direct_class_lookup() {
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_310));
+    assertThat(TypeShed.classDescriptorWithFQN("contextlib.chdir")).isNull();
+    assertThat(TypeShed.classDescriptorWithFQN("asyncio.taskgroups.TaskGroup")).isNull();
+    assertThat(symbolsForModule("asyncio.taskgroups")).isEmpty();
+
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_311));
+    assertThat(TypeShed.classDescriptorWithFQN("contextlib.chdir")).isNotNull();
+    assertThat(TypeShed.classDescriptorWithFQN("asyncio.taskgroups.TaskGroup")).isNotNull();
+    assertThat(symbolsForModule("asyncio.taskgroups")).containsKey("TaskGroup");
+  }
+
 }

@@ -40,7 +40,7 @@ public class ModuleSymbolToDescriptorConverter {
 
   @CheckForNull
   public ModuleDescriptor convert(@Nullable SymbolsProtos.ModuleSymbol moduleSymbol) {
-    if (moduleSymbol == null) {
+    if (moduleSymbol == null || !ProtoUtils.isValidForSemanticPythonVersion(moduleSymbol.getValidForList(), projectSemanticPythonVersions)) {
       return null;
     }
 

@@ -28,6 +28,7 @@ from serializer.serializers import (
     ImporterSerializer,
     SUPPORTED_PYTHON_VERSIONS,
     get_sources,
+    walk_typeshed_stdlib,
 )
 from tests import conftest
 from tests.conftest import MOCK_THIRD_PARTY_STUBS_LIST
@@ -185,3 +186,44 @@ def test_get_sources():
             "module1", "module2", "subpackage", "subpackage.submodule"
         }
         assert set(filtered_module_names) == expected_filtered_modules
+
+
+def test_stdlib_module_availability_respects_package_and_module_ranges():
+    versions = {"profiling": ((3, 15), None), "math": ((3, 0), None),
+                "math.integer": ((3, 15), None), "lib2to3": ((3, 0), (3, 12))}
+    available = serializers.is_stdlib_module_available
+    assert available("math", (3, 14), versions)
+    assert not available("math.integer", (3, 14), versions)
+    assert available("math.integer", (3, 15), versions)
+    assert not available("profiling.sampling", (3, 14), versions)
+    assert available("profiling.sampling", (3, 15), versions)
+    assert available("lib2to3.refactor", (3, 12), versions)
+    assert not available("lib2to3.refactor", (3, 13), versions)
+
+
+def test_merged_module_records_availability_even_if_all_members_are_unconditional(tmp_path):
+    from serializer.symbols_merger import merge_modules
+
+    for name in ("stable", "new"):
+        (tmp_path / f"{name}.pyi").write_text("def available() -> int: ...\n", encoding="utf-8")
+    versions = {"stable": ((3, 10), None), "new": ((3, 15), None)}
+    models = {}
+    with patch.object(serializers, "STDLIB_PATH", str(tmp_path)), \
+         patch.object(serializers, "load_stdlib_py_versions", return_value=versions):
+        for version in ((3, 14), (3, 15)):
+            result, source_paths = walk_typeshed_stdlib(serializers.get_options(version))
+            models[f"{version[0]}{version[1]}"] = {
+                name: symbols.ModuleSymbol(module)
+                for name, module in result.files.items()
+                if module.path in source_paths
+            }
+
+    assert set(models["314"]) == {"stable"}
+    assert set(models["315"]) == {"stable", "new"}
+    merged = merge_modules({"stable", "new"}, models)
+    new_module = merged["new"].to_proto()
+    stable_module = merged["stable"].to_proto()
+    assert list(new_module.valid_for) == ["315"]
+    assert [(function.name, list(function.valid_for)) for function in new_module.functions] == [("available", ["315"])]
+    assert not stable_module.valid_for
+    assert [(function.name, list(function.valid_for)) for function in stable_module.functions] == [("available", [])]

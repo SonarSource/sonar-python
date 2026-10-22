@@ -112,6 +112,8 @@ message ModuleSymbol {
   repeated OverloadedFunctionSymbol overloaded_functions = 4;
   repeated VarSymbol vars = 5;
   repeated Type type_table = 6;
+  // Empty means available to every supported semantic version (legacy format).
+  repeated string valid_for = 7;
 }
 
 message VarSymbol {

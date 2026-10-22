@@ -142,4 +142,18 @@ class ModuleSymbolToDescriptorConverterTest {
         Assertions.tuple("field", "module.Outer.field"),
         Assertions.tuple("Nested", "module.Outer.Nested"));
   }
+  @Test
+  void moduleAvailabilityFiltersUnconditionalMembers() {
+    var module = SymbolsProtos.ModuleSymbol.newBuilder()
+      .setFullyQualifiedName("new_module")
+      .addValidFor("315")
+      .addFunctions(SymbolsProtos.FunctionSymbol.newBuilder().setName("available"))
+      .build();
+    var previous = new ModuleSymbolToDescriptorConverter(java.util.Set.of(PythonVersionUtils.SemanticVersion.V_314));
+    var current = new ModuleSymbolToDescriptorConverter(java.util.Set.of(PythonVersionUtils.SemanticVersion.V_315));
+    Assertions.assertThat(previous.convert(module)).isNull();
+    Assertions.assertThat(current.convert(module).members()).containsKey("available");
+    Assertions.assertThat(previous.convert(module.toBuilder().clearValidFor().build())).isNotNull();
+  }
+
 }

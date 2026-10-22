@@ -24,6 +24,7 @@ from pathlib import Path
 
 
 from mypy import options, build
+from mypy.modulefinder import load_stdlib_py_versions
 
 from serializer import symbols
 from serializer.symbols import ModuleSymbol
@@ -66,9 +67,23 @@ def get_options(python_version=DEFAULT_PYTHON_VERSION):
 
 def walk_typeshed_stdlib(opt: options.Options = None):
     opt = opt or get_options()
-    source_list, source_paths = get_sources(STDLIB_PATH)
+    versions = load_stdlib_py_versions(TYPESHED_PATH)
+    source_list, source_paths = get_sources(
+        STDLIB_PATH,
+        lambda root, file, path, module: is_stdlib_module_available(module, opt.python_version, versions),
+    )
     build_result = build.build(source_list, opt)
     return build_result, source_paths
+
+
+def is_stdlib_module_available(module, python_version, versions):
+    # Submodules inherit their package range unless VERSIONS overrides it.
+    while module and module not in versions:
+        module = module.rpartition(".")[0]
+    if not module:
+        return True
+    minimum, maximum = versions[module]
+    return minimum <= python_version and (maximum is None or python_version <= maximum)
 
 
 def walk_typeshed_third_parties(opt: options.Options = None):

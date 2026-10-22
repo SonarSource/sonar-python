@@ -35,6 +35,7 @@ def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict
             handled_overloaded_functions,
             handled_vars,
             all_versions=model_by_version.keys(),
+            valid_for=[version for version, model in model_by_version.items() if python_mod in model],
         )
         for version in model_by_version:
             model = model_by_version[version]
