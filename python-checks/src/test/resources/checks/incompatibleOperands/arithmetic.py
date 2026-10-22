@@ -227,3 +227,32 @@ def binary_operations_without_v2_information():
     Child() + state
     state + UnknownBaseChild()
     UnknownBaseChild() + state
+
+
+class Directory:
+    def __dir__(self):
+        return object.__dir__(self) + ["extra"]
+
+
+def directory_operations(value):
+    object.__dir__(value) + ["extra"]
+    ["extra"] + object.__dir__(value)
+    object.__dir__(value) - 1  # Noncompliant
+    object.__dir__(value) + "extra"  # Noncompliant
+
+
+def directory_alias_operations(value):
+    builtin_dir = object.__dir__
+    builtin_dir(value) + ["extra"]
+    (object.__dir__(value)) + ["extra"]
+    -object.__dir__(value)  # Noncompliant
+    object.__dir__(value) * 2
+
+
+class CustomDirectory:
+    def __dir__(self) -> tuple:
+        return ("custom",)
+
+
+def custom_directory_operations():
+    CustomDirectory().__dir__() + ("extra",)

@@ -105,8 +105,8 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
 
     @Override
     public void visitBinaryExpression(BinaryExpression binaryExpression) {
-      InferredType leftType = binaryExpression.leftOperand().type();
-      InferredType rightType = binaryExpression.rightOperand().type();
+      InferredType leftType = operandType(binaryExpression.leftOperand(), context);
+      InferredType rightType = operandType(binaryExpression.rightOperand(), context);
       if (leftType.canOnlyBe("type") || rightType.canOnlyBe("type")) {
         // SONARPY-1666 We should only exclude types that represent ctypes
         return;
@@ -128,7 +128,7 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
 
     @Override
     public void visitUnaryExpression(UnaryExpression unaryExpression) {
-      InferredType type = unaryExpression.expression().type();
+      InferredType type = operandType(unaryExpression.expression(), context);
       Token operator = unaryExpression.operator();
       String memberName = UNARY_SPECIAL_METHODS_BY_OPERATOR.get(operator.value());
       if (memberName != null
@@ -179,6 +179,15 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
       return ((AmbiguousSymbol) resolvedMethod).alternatives().stream().allMatch(s -> hasIncompatibleTypeOrAbsentSpecialMethod(s, type));
     }
     return false;
+  }
+
+  /**
+   * Returns the operand type used for operator checks.
+   *
+   * @param context analysis context available to overrides for type matching
+   */
+  protected InferredType operandType(Expression operand, SubscriptionContext context) {
+    return operand.type();
   }
 
   public abstract SpecialMethod resolveMethod(InferredType type, String method);
