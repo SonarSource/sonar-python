@@ -19,6 +19,7 @@ package org.sonar.python.semantic;
 import com.google.protobuf.TextFormat;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -28,7 +29,10 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.GenericInfo.BareTypeArgumentStatus;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.GenericInfoProtobuf;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
@@ -353,4 +357,23 @@ class ClassSymbolImplTest {
     TextFormat.merge(protobuf, builder);
     return builder.build();
   }
+  @Test
+  void generic_information_survives_symbol_copies() {
+    var states = List.of(GenericInfo.UNKNOWN, GenericInfo.NON_GENERIC,
+      new GenericInfo.Generic(BareTypeArgumentStatus.UNKNOWN),
+      new GenericInfo.Generic(BareTypeArgumentStatus.CONTAINS_ANY),
+      new GenericInfo.Generic(BareTypeArgumentStatus.NO_ANY));
+    for (var state : states) {
+      var proto = SymbolsProtos.ClassSymbol.newBuilder().setName("Generic")
+        .setFullyQualifiedName("mod.Generic").setGenericInfo(GenericInfoProtobuf.toProtobuf(state)).build();
+      var symbol = new ClassSymbolImpl(proto, "mod");
+      assertThat(symbol.supportsGenerics()).isEqualTo(state.isGeneric());
+      assertThat(symbol.genericInfo()).isEqualTo(state);
+      assertThat(symbol.copyWithoutUsages().genericInfo()).isEqualTo(state);
+      assertThat(((ClassSymbolImpl) ClassSymbolImpl.copyFrom("Alias", symbol)).genericInfo()).isEqualTo(state);
+    }
+    var legacy = new ClassSymbolImpl(SymbolsProtos.ClassSymbol.newBuilder().setName("Legacy").setIsGeneric(true).build(), "mod");
+    assertThat(legacy.genericInfo()).isEqualTo(new GenericInfo.Generic(BareTypeArgumentStatus.UNKNOWN));
+  }
+
 }

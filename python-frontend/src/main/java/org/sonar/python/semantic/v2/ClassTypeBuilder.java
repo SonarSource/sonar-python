@@ -25,9 +25,10 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.DecoratorInfo;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
 import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 
@@ -39,12 +40,13 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   List<PythonType> metaClasses = new ArrayList<>();
   boolean hasDecorators = false;
   List<DecoratorInfo> decorators = List.of();
-  boolean isGeneric = false;
+  private GenericInfo genericInfo = GenericInfo.UNKNOWN;
   LocationInFile definitionLocation;
 
   @Override
   public ClassType build() {
-    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, isGeneric, definitionLocation, decorators);
+    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, genericInfo,
+      definitionLocation, decorators);
   }
 
   public ClassTypeBuilder(String name, String fullyQualifiedName) {
@@ -62,8 +64,13 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
     return this;
   }
 
+  public ClassTypeBuilder withGenericInfo(GenericInfo genericInfo) {
+    this.genericInfo = genericInfo;
+    return this;
+  }
+
   public ClassTypeBuilder withIsGeneric(boolean isGeneric) {
-    this.isGeneric = isGeneric;
+    this.genericInfo = GenericInfo.fromLegacy(isGeneric);
     return this;
   }
 

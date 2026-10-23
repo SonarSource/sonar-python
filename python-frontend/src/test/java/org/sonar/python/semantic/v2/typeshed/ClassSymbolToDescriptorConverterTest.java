@@ -16,18 +16,68 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
-import java.util.function.Function;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.types.v2.GenericInfo.BareTypeArgumentStatus;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.index.AliasDescriptor;
 import org.sonar.python.index.AmbiguousDescriptor;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.DescriptorUtils;
+import org.sonar.python.index.DescriptorsToProtobuf;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.GenericInfoProtobuf;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.LazyTypesContext;
+import org.sonar.python.semantic.v2.SymbolV2Impl;
+import org.sonar.python.semantic.v2.converter.ClassDescriptorToPythonTypeConverter;
+import org.sonar.python.semantic.v2.converter.ConversionContext;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 class ClassSymbolToDescriptorConverterTest {
+
+  @Test
+  void genericInformationSurvivesDescriptorReconstruction() {
+    var functionConverter = new FunctionSymbolToDescriptorConverter();
+    var converter = new ClassSymbolToDescriptorConverter(new VarSymbolToDescriptorConverter(), functionConverter,
+      new OverloadedFunctionSymbolToDescriptorConverter(functionConverter), Set.of("310"));
+    var states = List.of(GenericInfo.UNKNOWN, GenericInfo.NON_GENERIC,
+      new GenericInfo.Generic(BareTypeArgumentStatus.UNKNOWN),
+      new GenericInfo.Generic(BareTypeArgumentStatus.CONTAINS_ANY),
+      new GenericInfo.Generic(BareTypeArgumentStatus.NO_ANY));
+    for (var state : states) {
+      var symbol = SymbolsProtos.ClassSymbol.newBuilder().setName("Generic").setFullyQualifiedName("module.Generic")
+        .setIsGeneric(state.isGeneric()).setGenericInfo(GenericInfoProtobuf.toProtobuf(state)).build();
+      var descriptor = converter.convert(symbol);
+      var restored = new ClassSymbolImpl(descriptor, "Reexported");
+      Assertions.assertThat(restored.supportsGenerics()).isEqualTo(state.isGeneric());
+      Assertions.assertThat(restored.genericInfo()).isEqualTo(state);
+
+      var context = new ConversionContext("module", new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())),
+        (ctx, value) -> PythonType.UNKNOWN, null);
+      var type = new ClassDescriptorToPythonTypeConverter().convert(context, descriptor);
+      var exported = new PythonTypeToDescriptorConverter().convert("reexport", new SymbolV2Impl("Exported"), Set.of(type));
+      var protobuf = DescriptorsToProtobuf.toProtobufModuleDescriptor(Set.of(exported));
+      var cached = (ClassDescriptor) DescriptorsToProtobuf.fromProtobuf(protobuf).iterator().next();
+      Assertions.assertThat(cached.genericInfo()).isEqualTo(state);
+
+      var alias = new AliasDescriptor("Alias", "other.Alias", cached);
+      var aliasedSymbol = (ClassSymbolImpl) DescriptorUtils.symbolFromDescriptor(alias, ProjectLevelSymbolTable.empty(), null,
+        new HashMap<>(), new HashMap<>());
+      Assertions.assertThat(aliasedSymbol.genericInfo()).isEqualTo(state);
+    }
+  }
 
   @Test
   void test() {

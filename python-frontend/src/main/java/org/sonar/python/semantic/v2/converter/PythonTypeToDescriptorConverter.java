@@ -210,7 +210,7 @@ public class PythonTypeToDescriptorConverter {
       .withHasMetaClass(type.hasMetaClass())
       .withMetaclassFQN(metaclassFQN)
       .withMetaClasses(metaClassDescriptors)
-      .withSupportsGenerics(type.isGeneric())
+      .withGenericInfo(type.genericInfo())
       .withIsSelf(isSelf)
       .build();
   }

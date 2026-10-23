@@ -22,8 +22,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.index.TypeAnnotationDescriptor.TypeKind;
@@ -118,7 +118,7 @@ public class DescriptorUtils {
       .withMetaclassFQN(originalDescriptor.metaclassFQN())
       .withHasDecorators(originalDescriptor.hasDecorators())
       .withDecorators(originalDescriptor.decorators())
-      .withSupportsGenerics(originalDescriptor.supportsGenerics())
+      .withGenericInfo(originalDescriptor.genericInfo())
       .build();
   }
 

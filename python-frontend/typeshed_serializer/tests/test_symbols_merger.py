@@ -332,7 +332,7 @@ def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes, co
         assert merged_class_proto.has_decorators == original_class_symbol.class_symbol.has_decorators
         assert merged_class_proto.has_metaclass == original_class_symbol.class_symbol.has_metaclass
         assert merged_class_proto.is_enum == original_class_symbol.class_symbol.is_enum
-        assert merged_class_proto.is_generic == original_class_symbol.class_symbol.is_generic
+        assert merged_class_proto.is_generic == original_class_symbol.class_symbol.generic_info.is_generic
         assert merged_class_proto.is_protocol == original_class_symbol.class_symbol.is_protocol
         assert len(merged_class_proto.methods) == len(original_class_symbol.methods)
         if len(merged_class_proto.methods) > 0:

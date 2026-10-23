@@ -39,10 +39,12 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
 import org.sonar.python.index.ClassDescriptor;
+import org.sonar.python.index.GenericInfoProtobuf;
 import org.sonar.python.types.TypeShed;
-import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.TypeShedTypeTable;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.isPrivateName;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
@@ -66,7 +68,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private final LocationInFile classDefinitionLocation;
   @Nullable
   private String metaclassFQN = null;
-  private boolean supportsGenerics = false;
+  private GenericInfo genericInfo = GenericInfo.UNKNOWN;
   private boolean isProtocol = false;
 
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
@@ -84,7 +86,6 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasDecorators = false;
     hasMetaClass = false;
     metaclassFQN = null;
-    supportsGenerics = false;
     setKind(Kind.CLASS);
   }
 
@@ -94,7 +95,6 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasDecorators = false;
     hasMetaClass = false;
     metaclassFQN = null;
-    supportsGenerics = false;
     setKind(Kind.CLASS);
   }
 
@@ -105,7 +105,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasDecorators = classDescriptor.hasDecorators();
     hasMetaClass = classDescriptor.hasMetaClass();
     metaclassFQN = classDescriptor.metaclassFQN();
-    supportsGenerics = classDescriptor.supportsGenerics();
+    genericInfo = classDescriptor.genericInfo();
     hasSuperClassWithoutSymbol = classDescriptor.hasSuperClassWithoutDescriptor();
   }
 
@@ -119,7 +119,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasDecorators = classSymbol.hasDecorators();
     hasMetaClass = ((ClassSymbolImpl) classSymbol).hasMetaClass();
     metaclassFQN = ((ClassSymbolImpl) classSymbol).metaclassFQN;
-    supportsGenerics = ((ClassSymbolImpl) classSymbol).supportsGenerics;
+    genericInfo = ((ClassSymbolImpl) classSymbol).genericInfo;
     isProtocol = ((ClassSymbolImpl) classSymbol).isProtocol;
     validForSemanticPythonVersions = ((ClassSymbolImpl) classSymbol).validForSemanticPythonVersions;
     superClassesFqns = ((ClassSymbolImpl) classSymbol).superClassesFqns;
@@ -143,7 +143,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasDecorators = classSymbolProto.getHasDecorators();
     hasMetaClass = classSymbolProto.getHasMetaclass();
     metaclassFQN = classSymbolProto.getMetaclassName();
-    supportsGenerics = classSymbolProto.getIsGeneric();
+    genericInfo = GenericInfoProtobuf.fromProtobuf(classSymbolProto);
     isProtocol = classSymbolProto.getIsProtocol();
     Set<Symbol> classMembers = new HashSet<>();
     Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
@@ -440,12 +440,16 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return isProtocol;
   }
 
+  public GenericInfo genericInfo() {
+    return genericInfo;
+  }
+
   public boolean supportsGenerics() {
-    return supportsGenerics;
+    return genericInfo.isGeneric();
   }
 
   public void setSupportsGenerics(boolean supportsGenerics) {
-    this.supportsGenerics = supportsGenerics;
+    this.genericInfo = GenericInfo.fromLegacy(supportsGenerics);
   }
 
   /**

@@ -85,6 +85,21 @@ message DecoratorInfo {
   repeated DecoratorTypeReference callee_types = 3;
 }
 
+// Declaration-level generic information. An unset classification means unknown genericity.
+message GenericInfo {
+  message NonGeneric {}
+  enum BareTypeArgumentStatus {
+    UNKNOWN = 0;
+    CONTAINS_ANY = 1;
+    NO_ANY = 2;
+  }
+  oneof classification {
+    NonGeneric non_generic = 1;
+    // Status of effective arguments when no explicit arguments are supplied.
+    BareTypeArgumentStatus generic = 2;
+  }
+}
+
 message ClassSymbol {
   string name = 1;
   string fully_qualified_name = 2;
@@ -94,6 +109,7 @@ message ClassSymbol {
   bool has_decorators = 7;
   bool has_metaclass = 8;
   bool is_enum = 9;
+  // Compatibility field, derived from generic_info for older readers.
   bool is_generic = 10;
   bool is_protocol = 11;
   optional string metaclass_name = 12;
@@ -103,6 +119,7 @@ message ClassSymbol {
   // One entry per decorator, including unresolved expressions and calls.
   // Empty list with has_decorators=true also covers legacy serialized data.
   repeated DecoratorInfo decorators = 16;
+  GenericInfo generic_info = 17;
 }
 
 message ModuleSymbol {

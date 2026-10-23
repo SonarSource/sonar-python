@@ -49,6 +49,7 @@ message ClassDescriptor {
     // One entry per decorator, including unresolved expressions and calls.
     // Empty list with hasDecorators=true also covers legacy serialized data.
     repeated DecoratorInfo decorators = 17;
+    GenericInfo generic_info = 18;
 }
 
 message ParameterDescriptor {

@@ -87,7 +87,8 @@ public class DescriptorsToProtobuf {
       .setHasSuperClassWithoutDescriptor(classDescriptor.hasSuperClassWithoutDescriptor())
       .setHasMetaClass(classDescriptor.hasMetaClass())
       .setMetaClasses(toProtobufDescriptorList(classDescriptor.metaClasses()))
-      .setSupportsGenerics(classDescriptor.supportsGenerics());
+      .setSupportsGenerics(classDescriptor.supportsGenerics())
+      .setGenericInfo(GenericInfoProtobuf.toProtobuf(classDescriptor.genericInfo()));
     LocationInFile definitionLocation = classDescriptor.definitionLocation();
     if (definitionLocation != null) {
       builder.setDefinitionLocation(toProtobuf(definitionLocation));
@@ -246,7 +247,7 @@ public class DescriptorsToProtobuf {
       .withHasMetaClass(classDescriptorProto.getHasMetaClass())
       .withMetaclassFQN(metaclassFQN)
       .withMetaClasses(metaClasses)
-      .withSupportsGenerics(classDescriptorProto.getSupportsGenerics())
+      .withGenericInfo(GenericInfoProtobuf.fromProtobuf(classDescriptorProto))
       .build();
   }
 

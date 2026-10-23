@@ -24,6 +24,7 @@ import mypy.types as mpt
 import mypy.nodes as mpn
 
 from serializer.proto_out import symbols_pb2
+from serializer.generic_info import GenericInfo
 
 CURRENT_PATH = os.path.dirname(__file__)
 
@@ -388,7 +389,7 @@ class ClassSymbol:
         self.nested_classes = []
         self.vars = []
         self.is_enum = type_info.is_enum
-        self.is_generic = type_info.is_generic()
+        self.generic_info = GenericInfo.from_type_info(type_info)
         self.is_protocol = type_info.is_protocol
         self.metaclass_name = None
         for base in type_info.bases:
@@ -424,7 +425,7 @@ class ClassSymbol:
                 and self.fullname == other.fullname
                 and self.super_classes == other.super_classes
                 and self.is_enum == other.is_enum
-                and self.is_generic == other.is_generic
+                and self.generic_info == other.generic_info
                 and self.is_protocol == other.is_protocol
                 and self.metaclass_name == other.metaclass_name
                 and self.has_decorators == other.has_decorators
@@ -441,7 +442,8 @@ class ClassSymbol:
         pb_class.decorators.extend(self.decorators)
         pb_class.has_metaclass = self.has_metaclass
         pb_class.is_enum = self.is_enum
-        pb_class.is_generic = self.is_generic
+        pb_class.is_generic = self.generic_info.is_generic
+        pb_class.generic_info.CopyFrom(self.generic_info.to_proto())
         pb_class.is_protocol = self.is_protocol
         if self.metaclass_name is not None:
             pb_class.metaclass_name = self.metaclass_name
@@ -618,7 +620,8 @@ class MergedClassSymbol:
         pb_class.decorators.extend(self.class_symbol.decorators)
         pb_class.has_metaclass = self.class_symbol.has_metaclass
         pb_class.is_enum = self.class_symbol.is_enum
-        pb_class.is_generic = self.class_symbol.is_generic
+        pb_class.is_generic = self.class_symbol.generic_info.is_generic
+        pb_class.generic_info.CopyFrom(self.class_symbol.generic_info.to_proto())
         pb_class.is_protocol = self.class_symbol.is_protocol
         if self.class_symbol.metaclass_name is not None:
             pb_class.metaclass_name = self.class_symbol.metaclass_name

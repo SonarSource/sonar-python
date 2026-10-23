@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.DecoratorProtobuf;
 import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.GenericInfoProtobuf;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class ClassSymbolToDescriptorConverter {
@@ -82,7 +83,7 @@ public class ClassSymbolToDescriptorConverter {
       .withHasMetaClass(classSymbol.getHasMetaclass())
       .withHasDecorators(classSymbol.getHasDecorators())
       .withDecorators(DecoratorProtobuf.fromProtobuf(classSymbol))
-      .withSupportsGenerics(classSymbol.getIsGeneric())
+      .withGenericInfo(GenericInfoProtobuf.fromProtobuf(classSymbol))
       .withMembers(members)
       .build();
   }

@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.tree.NameImpl;
 
@@ -58,7 +59,7 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (typeSupportsGenericsOrIsACollection(expression) || qualifiedExpressionIsACollection(expression)) {
+    if (shouldReportMissingTypeArguments(expression) || qualifiedExpressionIsACollection(expression)) {
       subscriptionContext.addIssue(expression, MESSAGE);
     }
   }
@@ -68,13 +69,18 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
     expressions.forEach(nestedTypeExpression -> checkForGenericTypeWithoutArgument(subscriptionContext, nestedTypeExpression));
   }
 
-  private static boolean typeSupportsGenericsOrIsACollection(Expression expression) {
+  private static boolean shouldReportMissingTypeArguments(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       NameImpl name = (NameImpl) expression;
-      if (name.symbol() instanceof ClassSymbolImpl maybeSymbol) {
-        return Optional.of(maybeSymbol)
-          .map(ClassSymbolImpl::supportsGenerics)
-          .orElse(false);
+      if (name.symbol() instanceof ClassSymbolImpl classSymbol) {
+        if (classSymbol.genericInfo() instanceof GenericInfo.Generic(var bareTypeArguments)) {
+          // Preserve the rule's existing reporting policy when default information is unavailable.
+          return switch (bareTypeArguments) {
+            case NO_ANY -> false;
+            case CONTAINS_ANY, UNKNOWN -> true;
+          };
+        }
+        return false;
       } else {
         return isACollection(name.symbol());
       }

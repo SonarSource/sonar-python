@@ -25,6 +25,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
 
 public class ClassDescriptor implements Descriptor {
 
@@ -40,12 +41,13 @@ public class ClassDescriptor implements Descriptor {
   private final boolean hasMetaClass;
   private final String metaclassFQN;
   private final List<Descriptor> metaClasses;
-  private final boolean supportsGenerics;
+  private final GenericInfo genericInfo;
   private final boolean isSelf;
 
   private ClassDescriptor(String name, String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
     List<Descriptor> attributes, boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor,
-    boolean hasMetaClass, @Nullable String metaclassFQN, List<Descriptor> metaClasses, boolean supportsGenerics, boolean isSelf, List<DecoratorDescriptor> decorators) {
+    boolean hasMetaClass, @Nullable String metaclassFQN, List<Descriptor> metaClasses, GenericInfo genericInfo, boolean isSelf,
+    List<DecoratorDescriptor> decorators) {
 
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
@@ -59,7 +61,7 @@ public class ClassDescriptor implements Descriptor {
     this.hasMetaClass = hasMetaClass;
     this.metaclassFQN = metaclassFQN;
     this.metaClasses = metaClasses;
-    this.supportsGenerics = supportsGenerics;
+    this.genericInfo = genericInfo;
     this.isSelf = isSelf;
   }
 
@@ -123,7 +125,11 @@ public class ClassDescriptor implements Descriptor {
   }
 
   public boolean supportsGenerics() {
-    return supportsGenerics;
+    return genericInfo.isGeneric();
+  }
+
+  public GenericInfo genericInfo() {
+    return genericInfo;
   }
 
   public boolean isSelf() {
@@ -144,7 +150,7 @@ public class ClassDescriptor implements Descriptor {
     private boolean hasMetaClass = false;
     private String metaclassFQN = null;
     private List<Descriptor> metaClasses = new ArrayList<>();
-    private boolean supportsGenerics = false;
+    private GenericInfo genericInfo = GenericInfo.UNKNOWN;
     private boolean isSelf = false;
 
     public ClassDescriptorBuilder withName(String name) {
@@ -207,8 +213,8 @@ public class ClassDescriptor implements Descriptor {
       return this;
     }
 
-    public ClassDescriptorBuilder withSupportsGenerics(boolean supportsGenerics) {
-      this.supportsGenerics = supportsGenerics;
+    public ClassDescriptorBuilder withGenericInfo(GenericInfo genericInfo) {
+      this.genericInfo = genericInfo;
       return this;
     }
 
@@ -219,7 +225,7 @@ public class ClassDescriptor implements Descriptor {
 
     public ClassDescriptor build() {
       return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, attributes, hasDecorators, definitionLocation,
-        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, metaClasses, supportsGenerics, isSelf, decorators);
+        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, metaClasses, genericInfo, isSelf, decorators);
     }
   }
 }

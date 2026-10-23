@@ -29,7 +29,7 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
 
   private static PythonType convert(ConversionContext ctx, ClassDescriptor from) {
     var typeBuilder = new ClassTypeBuilder(from.name(), from.fullyQualifiedName())
-      .withIsGeneric(from.supportsGenerics())
+      .withGenericInfo(from.genericInfo())
       .withHasDecorators(from.hasDecorators())
       .withDecorators(from.decorators().stream().map(decorator -> DecoratorDescriptorConverter.toType(ctx, decorator)).toList())
       .withDefinitionLocation(from.definitionLocation());

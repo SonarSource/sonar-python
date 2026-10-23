@@ -44,7 +44,7 @@ public final class ClassType implements PythonType {
   private final List<PythonType> metaClasses;
   private final boolean hasDecorators;
   private final List<DecoratorInfo> decorators;
-  private final boolean isGeneric;
+  private final GenericInfo genericInfo;
   private final LocationInFile locationInFile;
 
   public ClassType(
@@ -71,6 +71,22 @@ public final class ClassType implements PythonType {
     boolean isGeneric,
     @Nullable LocationInFile locationInFile,
     List<DecoratorInfo> decorators) {
+    this(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators,
+      GenericInfo.fromLegacy(isGeneric), locationInFile, decorators);
+  }
+
+  public ClassType(
+    String name,
+    String fullyQualifiedName,
+    Set<Member> members,
+    List<PythonType> attributes,
+    List<TypeWrapper> superClasses,
+    List<PythonType> metaClasses,
+    boolean hasDecorators,
+    GenericInfo genericInfo,
+    @Nullable LocationInFile locationInFile,
+    List<DecoratorInfo> decorators) {
+    this.genericInfo = genericInfo;
     this.decorators = List.copyOf(decorators);
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
@@ -79,7 +95,6 @@ public final class ClassType implements PythonType {
     this.superClasses = superClasses;
     this.metaClasses = metaClasses;
     this.hasDecorators = hasDecorators || !decorators.isEmpty();
-    this.isGeneric = isGeneric;
     this.locationInFile = locationInFile;
   }
 
@@ -364,7 +379,11 @@ public final class ClassType implements PythonType {
     return hasDecorators;
   }
 
+  public GenericInfo genericInfo() {
+    return genericInfo;
+  }
+
   public boolean isGeneric() {
-    return isGeneric;
+    return genericInfo.isGeneric();
   }
 }

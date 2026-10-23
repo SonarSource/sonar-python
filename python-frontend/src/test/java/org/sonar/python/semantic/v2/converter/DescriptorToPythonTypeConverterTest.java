@@ -31,6 +31,7 @@ import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.GenericInfo;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.Member;
@@ -124,6 +125,7 @@ class DescriptorToPythonTypeConverterTest {
     var lazyTypesContext = mock(LazyTypesContext.class);
     var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
     var descriptor = mock(ClassDescriptor.class);
+    when(descriptor.genericInfo()).thenReturn(GenericInfo.UNKNOWN);
 
     var parentClassName = "Parent";
     String parentClassFqn = "parent.Parent";
