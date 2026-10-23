@@ -24,8 +24,8 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5603")
@@ -57,12 +57,12 @@ public class UnusedNestedDefinitionCheck extends PythonSubscriptionCheck {
     if (parent == null || !parent.is(Tree.Kind.FUNCDEF)) {
       return;
     }
-    Optional.ofNullable(name.symbol()).ifPresent(s -> checkSymbolUsages(s, ctx));
+    Optional.ofNullable(name.symbolV2()).ifPresent(s -> checkSymbolUsages(s, ctx));
   }
 
-  private static void checkSymbolUsages(Symbol symbol, SubscriptionContext ctx) {
+  private static void checkSymbolUsages(SymbolV2 symbol, SubscriptionContext ctx) {
     if (symbol.usages().size() == 1) {
-      boolean isFunction = symbol.usages().get(0).kind().equals(Usage.Kind.FUNC_DECLARATION);
+      boolean isFunction = symbol.usages().get(0).kind().equals(UsageV2.Kind.FUNC_DECLARATION);
       ctx.addIssue(symbol.usages().get(0).tree(), String.format(MESSAGE, isFunction ? "function" : "class"));
     }
   }
