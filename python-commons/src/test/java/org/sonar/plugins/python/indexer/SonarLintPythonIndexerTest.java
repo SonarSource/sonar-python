@@ -24,6 +24,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,9 @@ import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.PythonInputFileImpl;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils.Version;
+import org.sonar.python.types.TypeShed;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
@@ -89,6 +93,78 @@ class SonarLintPythonIndexerTest {
     pythonIndexer = new SonarLintPythonIndexer(moduleFileSystem, new ProjectConfigurationBuilder());
     pythonIndexer.buildOnce(context);
     projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
+  }
+
+  @Test
+  void reused_indexer_refreshes_builtins_when_python_version_changes() {
+    var previousVersions = ProjectPythonVersion.currentVersions();
+    try {
+      for (var version : List.of(Version.V_310, Version.V_311, Version.V_310)) {
+        ProjectPythonVersion.setCurrentVersions(Set.of(version));
+        TypeShed.resetBuiltinSymbols();
+        pythonIndexer.buildOnce(context);
+        var table = pythonIndexer.projectLevelTypeTable();
+        assertThat(((ModuleType) table.getBuiltinsModule()).members().containsKey("ExceptionGroup"))
+          .isEqualTo(version == Version.V_311);
+        assertThat(projectLevelSymbolTable.getSymbol("mod.add")).isNotNull();
+        pythonIndexer.buildOnce(context);
+        assertThat(pythonIndexer.projectLevelTypeTable()).isSameAs(table);
+      }
+    } finally {
+      ProjectPythonVersion.setCurrentVersions(previousVersions);
+      TypeShed.resetBuiltinSymbols();
+    }
+  }
+
+  @Test
+  void file_event_before_first_analysis_does_not_capture_old_versions() {
+    var previousVersions = ProjectPythonVersion.currentVersions();
+    try {
+      ProjectPythonVersion.setCurrentVersions(Set.of(Version.V_311));
+      TypeShed.resetBuiltinSymbols();
+      var freshIndexer = spy(new SonarLintPythonIndexer(moduleFileSystem, new ProjectConfigurationBuilder()));
+      freshIndexer.process(event(ModuleFileEvent.Type.MODIFIED, file2));
+      verify(freshIndexer).recreateProjectLevelTypeTable();
+      assertThat(((ModuleType) freshIndexer.projectLevelTypeTable().getBuiltinsModule()).members())
+        .containsKey("ExceptionGroup");
+
+      ProjectPythonVersion.setCurrentVersions(Set.of(Version.V_310));
+      TypeShed.resetBuiltinSymbols();
+      freshIndexer.buildOnce(context);
+      assertThat(((ModuleType) freshIndexer.projectLevelTypeTable().getBuiltinsModule()).members())
+        .doesNotContainKey("ExceptionGroup");
+    } finally {
+      ProjectPythonVersion.setCurrentVersions(previousVersions);
+      TypeShed.resetBuiltinSymbols();
+    }
+  }
+
+  @Test
+  void version_changes_preserve_project_packages_when_indexing_disabled(@TempDir Path projectDir) throws IOException {
+    var previousVersions = ProjectPythonVersion.currentVersions();
+    try {
+      PythonInputFile packageInit = inputFile(projectDir, "requests/__init__.py", "# local package\n");
+      PythonInputFile main = inputFile(projectDir, "main.py", "import requests\n");
+      var localContext = SensorContextTester.create(projectDir.toFile());
+      localContext.setSettings(new MapSettings().setProperty("sonar.python.sonarlint.indexing.maxlines", 1));
+      localContext.fileSystem().add(packageInit.wrappedFile());
+      localContext.fileSystem().add(main.wrappedFile());
+      var freshIndexer = new SonarLintPythonIndexer(
+        new TestModuleFileSystem(new ArrayList<>(List.of(packageInit, main))), new ProjectConfigurationBuilder());
+      for (var version : List.of(Version.V_310, Version.V_311, Version.V_310)) {
+        ProjectPythonVersion.setCurrentVersions(Set.of(version));
+        TypeShed.resetBuiltinSymbols();
+        freshIndexer.buildOnce(localContext);
+        assertThat(((ModuleType) freshIndexer.projectLevelTypeTable().getBuiltinsModule()).members().containsKey("ExceptionGroup"))
+          .isEqualTo(version == Version.V_311);
+        assertThat(freshIndexer.projectLevelSymbolTable().projectBasePackages()).contains("requests");
+        assertThat(freshIndexer.projectLevelSymbolTable().typeShedDescriptorsProvider().descriptorsForModule("requests")).isEmpty();
+        assertThat(freshIndexer.getFileWithId(main.wrappedFile().absolutePath())).isNull();
+      }
+    } finally {
+      ProjectPythonVersion.setCurrentVersions(previousVersions);
+      TypeShed.resetBuiltinSymbols();
+    }
   }
 
   @Test

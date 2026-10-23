@@ -22,8 +22,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -35,14 +37,16 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.api.SonarLintCache;
-import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.PythonInputFileImpl;
-import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils.Version;
+import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.caching.PythonReadCacheImpl;
 import org.sonar.python.caching.PythonWriteCacheImpl;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener;
@@ -63,6 +67,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   private final Map<String, InputFile> indexedFiles = new ConcurrentHashMap<>();
   private static final Logger LOG = LoggerFactory.getLogger(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
+  private final Set<Version> indexedPythonVersions = EnumSet.noneOf(Version.class);
   private boolean indexingEnabled = true;
   private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 300_000;
   private static final String MAX_LINES_PROPERTY = "sonar.python.sonarlint.indexing.maxlines";
@@ -75,8 +80,21 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   @Override
   public void buildOnce(SensorContext context) {
     if (!shouldBuildProjectSymbolTable) {
+      if (!indexedPythonVersions.equals(ProjectPythonVersion.currentVersions())) {
+        // Clear the descriptor provider as well as the type table: both capture
+        // the configured versions, and this indexer survives IDE analyses.
+        rebuildProjectIndex();
+        indexedPythonVersions.clear();
+        indexedPythonVersions.addAll(ProjectPythonVersion.currentVersions());
+      }
       return;
     }
+    // File events can populate the index before the scanner sets this project's versions.
+    // Discard that state, including the version-capturing descriptor provider.
+    clearProjectIndex();
+    knownMainFiles.clear();
+    indexedPythonVersions.clear();
+    indexedPythonVersions.addAll(ProjectPythonVersion.currentVersions());
     this.fileSystem = context.fileSystem();
     this.configuration = context.config();
     List<InputFile> rootContributorFiles = getPackageRootContributorFiles(moduleFileSystem);
@@ -84,6 +102,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     shouldBuildProjectSymbolTable = false;
     List<PythonInputFile> files = getInputFiles(moduleFileSystem);
     collectPackageNames(files);
+    recreateProjectLevelTypeTable();
     long nLines = files.stream().map(PythonInputFile::wrappedFile).map(InputFile::lines).mapToLong(Integer::longValue).sum();
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
     if (nLines > maxLinesForIndexing) {
@@ -171,16 +190,19 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   private void rebuildProjectIndex() {
     clearProjectIndex();
-    List<PythonInputFile> filesToRebuild = knownMainFiles.values().stream()
-      .<PythonInputFile>map(PythonInputFileImpl::new)
-      .toList();
+    List<PythonInputFile> filesToRebuild = indexingEnabled
+      ? knownMainFiles.values().stream().<PythonInputFile>map(PythonInputFileImpl::new).toList()
+      : getInputFiles(moduleFileSystem);
+    // Even without global symbols, local packages must shadow bundled library stubs.
     collectPackageNames(filesToRebuild);
-    for (PythonInputFile inputFile : filesToRebuild) {
-      try {
-        super.addFile(inputFile);
-        indexedFiles.put(inputFile.wrappedFile().absolutePath(), inputFile.wrappedFile());
-      } catch (Exception e) {
-        LOG.debug("Failed to re-index file \"{}\" during project index rebuild", inputFile.wrappedFile().filename(), e);
+    if (indexingEnabled) {
+      for (PythonInputFile inputFile : filesToRebuild) {
+        try {
+          super.addFile(inputFile);
+          indexedFiles.put(inputFile.wrappedFile().absolutePath(), inputFile.wrappedFile());
+        } catch (Exception e) {
+          LOG.debug("Failed to re-index file \"{}\" during project index rebuild", inputFile.wrappedFile().filename(), e);
+        }
       }
     }
     recreateProjectLevelTypeTable();

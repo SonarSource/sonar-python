@@ -64,7 +64,7 @@ public abstract class PythonIndexer {
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
 
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-  private TypeTable projectLevelTypeTable;
+  private @Nullable TypeTable projectLevelTypeTable;
 
   private final SignatureBasedAwsLambdaHandlersCollector signatureBasedAwsLambdaHandlersCollector = new SignatureBasedAwsLambdaHandlersCollector();
   private final ProjectConfigurationBuilder projectConfigurationBuilder;
@@ -72,7 +72,6 @@ public abstract class PythonIndexer {
 
   protected PythonIndexer(ProjectConfigurationBuilder projectConfigurationBuilder) {
     this.projectConfigurationBuilder = projectConfigurationBuilder;
-    recreateProjectLevelTypeTable();
   }
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
@@ -83,11 +82,16 @@ public abstract class PythonIndexer {
     return projectConfigurationBuilder.build();
   }
 
-  public TypeTable projectLevelTypeTable() {
+  public synchronized TypeTable projectLevelTypeTable() {
+    // The scanner applies the configured Python versions after creating the indexer.
+    // Loading builtins in the constructor would capture the previous analysis's versions.
+    if (projectLevelTypeTable == null) {
+      recreateProjectLevelTypeTable();
+    }
     return projectLevelTypeTable;
   }
 
-  protected void recreateProjectLevelTypeTable() {
+  protected synchronized void recreateProjectLevelTypeTable() {
     projectLevelTypeTable = new CachedTypeTable(new ProjectLevelTypeTable(projectLevelSymbolTable));
   }
 

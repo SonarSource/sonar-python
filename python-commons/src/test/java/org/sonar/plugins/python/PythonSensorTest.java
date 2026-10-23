@@ -984,6 +984,41 @@ class PythonSensorTest {
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
 
+  @ParameterizedTest
+  @CsvSource({"3.10, 0", "3.11, 1", "'3.10,3.11', 1", "3.12, 1"})
+  void builtin_shadowing_uses_configured_python_version(String version, int expectedIssues) {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S5806"))
+        .build())
+      .build();
+    inputFile("python-version/builtin_shadowing.py");
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", version));
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(expectedIssues);
+  }
+
+  @Test
+  void builtin_shadowing_resets_versions_between_analyses() throws IOException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S5806"))
+        .build())
+      .build();
+    inputFile("python-version/builtin_shadowing.py");
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.10"));
+    sensor().execute(context);
+    assertThat(context.allIssues()).isEmpty();
+
+    context = SensorContextTester.create(baseDir);
+    context.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    inputFile("python-version/builtin_shadowing.py");
+    sensor().execute(context);
+    assertThat(context.allIssues()).hasSize(1);
+  }
+
   @Test
   void test_python_version_range_parameter() {
     context.fileSystem().add(inputFile(FILE_1).wrappedFile());
