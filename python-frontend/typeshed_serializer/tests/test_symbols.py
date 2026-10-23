@@ -266,7 +266,7 @@ def test_fallback_unanalyzed_items_when_items_are_missing():
 
     with mock.patch('serializer.symbols.OverloadedFunctionSymbol.add_overloaded_func_definition', mock_add_definition), \
             mock.patch('logging.Logger.warning') as log_mock:
-        overloaded_func_symbol = symbols.OverloadedFunctionSymbol(overloaded_func_mock)
+        overloaded_func_symbol = symbols.OverloadedFunctionSymbol.from_definition(overloaded_func_mock)
         assert len(overloaded_func_symbol.definitions) == 2
         log_mock.assert_called_with('Overloaded function definitions of "overloaded_func_mock_fullname" are missing: '
                                     'falling back on unanalyzed items.')
@@ -279,7 +279,7 @@ def test_error_when_overloaded_definitions_are_missing():
 
     with mock.patch('serializer.symbols.OverloadedFunctionSymbol.add_overloaded_func_definition', mock_add_definition):
         with pytest.raises(RuntimeError) as raised:
-            symbols.OverloadedFunctionSymbol(overloaded_func_mock)
+            symbols.OverloadedFunctionSymbol.from_definition(overloaded_func_mock)
         assert raised.value.args[0] == 'Overloaded function symbol should contain at least 2 definitions.'
 
 

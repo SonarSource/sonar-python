@@ -394,8 +394,16 @@ ListParser"gflags.BaseListParser*
 	Serialize*
 
 self(,
-get_help_widtha
+get_help_width
+GetHelpWidtha
 	text_wrap*
+
+text(*
+length (*
+indent (*
+firstline_indent (*
+tabs (`
+TextWrap*
 
 text(*
 length (*
@@ -403,20 +411,39 @@ ListParser"gflags.BaseListParser*
 firstline_indent (*
 tabs (
 doc_to_help*	
+doc(
+	DocToHelp*	
 doc(\
 register_validator*
+	flag_name(*
+checker(*
+message (*
+flag_values ([
+RegisterValidator*
 	flag_name(*
 checker(*
 message (*
 flag_values (?
 mark_flag_as_required*
 	flag_name(*
+flag_values (<
+MarkFlagAsRequired*
+	flag_name(*
 flag_values (A
 mark_flags_as_required*
 
 flag_names(-*
+flag_values (>
+MarkFlagsAsRequired*
+
+flag_names(-*
 flag_values ([
 mark_flags_as_mutual_exclusive*
+
+flag_names(-*
+required (*
+flag_values (W
+MarkFlagsAsMutualExclusive*
 
 flag_names(-*
 required (*
@@ -439,8 +466,14 @@ serializer (*
 flag_values (:
 declare_key_flag*
 	flag_name(*
+flag_values (:
+DECLARE_key_flag*
+	flag_name(*
 flag_values (=
 adopt_module_key_flags*
+module(*
+flag_values (=
+ADOPT_module_key_flags*
 module(*
 flag_values (Y
 DEFINE_string*
@@ -453,6 +486,15 @@ serializer (*
 
 args(Z
 DEFINE_boolean*
+
+name(*
+default(*
+
+help(*
+flag_values (*
+
+args(W
+DEFINE_bool*
 
 name(*
 default(*
@@ -519,8 +561,28 @@ serializer (*
 help(*
 flag_values (*
 
+args(^
+DEFINE_multistring*
+
+name(*
+default(1*
+
+help(*
+flag_values (*
+
 args(Š
 DEFINE_multi_integer*
+
+name(*
+default(3*
+
+help(*
+lower_bound (*
+upper_bound (*
+flag_values (*
+
+args(†
+DEFINE_multi_int*
 
 name(*
 default(3*
@@ -556,19 +618,7 @@ serializer (*
 __annotations__0*
 
 FlagsError088*
-IllegalFlagValue098*
-GetHelpWidth0*
-TextWrap0*
-	DocToHelp0*	
-FLAGS0*
-RegisterValidator0*
-MarkFlagAsRequired0*
-MarkFlagsAsRequired0*
-MarkFlagsAsMutualExclusive0*
-DECLARE_key_flag0*
-ADOPT_module_key_flags0*
-DEFINE_bool0*
-DEFINE_multistring0*
-DEFINE_multi_int022"gflags.DuplicateFlagError2"builtins.str2"gflags.FlagValues2"gflags.UnrecognizedFlagError2"builtins.bool22"builtins.dict22"gflags.Flag2"builtins.list2	2"builtins.dict2
+IllegalFlagValue098*	
+FLAGS022"gflags.DuplicateFlagError2"builtins.str2"gflags.FlagValues2"gflags.UnrecognizedFlagError2"builtins.bool22"builtins.dict22"gflags.Flag2"builtins.list2	2"builtins.dict2
 2"builtins.int2"builtins.dict2
 2"typing.Iterator22"builtins.list22"builtins.dict22"types.ModuleType222"builtins.dict22"builtins.dict2	2"	typing.IO22"builtins.function222"gflags.ArgumentParser2"gflags.ArgumentSerializer222"gflags.ListSerializer2"builtins.list22"gflags.BooleanParser2"gflags.BooleanFlag222"gflags.HelpFlag2"gflags.HelpXMLFlag2"gflags.HelpshortFlag2"gflags.NumericParser2"builtins.float2"gflags.FloatParser2"gflags.IntegerParser2"gflags.EnumParser2"gflags.EnumFlag2"gflags.BaseListParser2"gflags.ListParser2&"$gflags.WhitespaceSeparatedListParser2"gflags.MultiFlag2"typing.Iterable222$2222222"builtins.list22222"builtins.list2$22$42"typing.Sequence22262"gflags.Error2"gflags.IllegalFlagValueError

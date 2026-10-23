@@ -628,7 +628,8 @@ on_publish*
 OPCODE_CONNCLOSE0r
 OPCODE_PING0r
 OPCODE_PONG0r
-	connected0"
+	connected0
+	time_func"
 error_string*
 
 mqtt_errno(&
@@ -645,8 +646,7 @@ mqtt_errno(&
 _socketsocket *
 _sslssl *
 ssl0b*	
-socks0b*
-	time_func0&*
+socks0b*
 HAVE_DNS0*
 
 EAGAIN0c*

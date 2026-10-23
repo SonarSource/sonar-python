@@ -758,11 +758,25 @@ turtlesize0)ê
 ontimer*	
 fun(!*	
 t (
-&
+6
+onscreenclick*	
+fun(!*
+btn (
+*
+add (#
+resetscreen
+clearscreen'
+addshape*
+
+name(*
+shape (&
 
 onkeypress*	
 fun(!*
-key (H
+key (&
+onkeyrelease*	
+fun(!*	
+key(H
 setup*
 width (*
 height (*
@@ -801,7 +815,20 @@ setheading*
 circle*
 radius(*
 extent (*
-steps (	
+steps (
+fd*
+distance(
+bk*
+distance(
+backward*
+distance(
+rt*
+angle(
+lt*
+angle(
+position
+seth*
+to_angle(	
 penup
 pendown
 
@@ -810,7 +837,13 @@ setheading*
 showturtle
 
 hideturtle
-	isvisible+
+	isvisible+
+up
+pu
+pd
+down
+st
+ht
 setundobuffer*
 
 size(
@@ -844,7 +877,9 @@ begin_poly
 end_poly
 get_poly5
 	getscreen
-	getturtle2
+	getturtle
+
+getpen2
 	onrelease*	
 fun(!*
 btn (
@@ -856,7 +891,8 @@ begin_poly
 *
 add (#
 undo	
-clone"^
+clone
+done"^
 mode+
 mode*
 mode (0:typing.overloadX)
@@ -934,6 +970,20 @@ canvheight(
 y (0:typing.overloadX2
 towards*
 x(*
+y(0:typing.overloadX"p
+setpos3
+setpos*
+x(*	
+y (0:typing.overloadX1
+setpos*
+x(*
+y(0:typing.overloadX"
+setposition8
+setposition*
+x(*	
+y (0:typing.overloadX6
+setposition*
+x(*
 y(0:typing.overloadX"r
 
 resizemode2
@@ -1000,7 +1050,14 @@ resizemode (*
 stretchfactor (*
 outline (
 *
-tilt (0:typing.overloadX"a
+tilt (0:typing.overloadX"c
+width-
+width
+*
+width (0:typing.overloadX+
+width*
+width(
+0:typing.overloadX"a
 shape,
 shape*
 name (0:typing.overloadX*
@@ -1029,40 +1086,22 @@ resizemode (*
 	tiltangle*
 angle (0:typing.overloadX/
 	tiltangle*
-angle(0:typing.overloadX*
+angle(0:typing.overloadX"‘
+
+turtlesize#
+
+turtlesize0:typing.overloadX^
+
+turtlesize*
+stretch_wid (*
+stretch_len (*
+outline (0:typing.overloadX*
 __annotations__0/*
 __all__0*
 	_PenState0/8*
 _PolygonCoords08*
 RawPen028*	
-Pen08*
-onscreenclick0!*
-resetscreen0!*
-clearscreen0!*
-addshape0!*
-onkeyrelease0!*
-fd0!*
-bk0!*
-backward0!*
-rt0!*
-lt0!*
-position0!*
-
-setpos0)*
-setposition0)*
-seth0!*	
-width0)*
-up0!*
-pu0!*
-pd0!*
-down0!*
-st0!*
-ht0!*
-
-getpen0!*
-
-turtlesize0)*
-done0!2"builtins.float222
+Pen082"builtins.float222
 turtle.Vec2D.Self(22"type22"turtle.Vec2D222"turtle.ScrolledCanvas2"tkinter.Misc222"builtins.int22
 2"builtins.str222"tkinter.Scrollbar2"turtle.TurtleScreenBase2"tkinter.Canvas222"turtle.Shape2"typing.Sequence22"turtle._PolygonCoords22"tkinter.PhotoImage2222222"turtle._Color2222"turtle.TurtleScreen222"turtle.Turtle2"builtins.list22"builtins.list22"builtins.function22 222"2"turtle._AnyColor2"22
 

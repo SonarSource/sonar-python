@@ -19,7 +19,7 @@ from unittest.mock import Mock
 
 from serializer import symbols, symbols_merger, serializers
 from serializer.serializers import TypeshedSerializer
-from serializer.symbols import MergedModuleSymbol, TypeKind
+from serializer.symbols import MergedModuleSymbol
 
 EXPECTED_MERGED_MODULES = {
     "_ast",
@@ -240,7 +240,10 @@ def test_actual_module_merge(fake_module_36_38):
     assert common_function_multiple_defs[1].valid_for == ["38"]
 
     overloaded_functions_dict = merged_fakemodule_module.overloaded_functions
-    assert len(overloaded_functions_dict) == 4
+    assert len(overloaded_functions_dict) == 5
+    alias = overloaded_functions_dict['fakemodule.alias']
+    assert len(alias) == 1
+    assert len(alias[0].overloaded_function_symbol.definitions) == 2
     common_overloaded_function_symbols = overloaded_functions_dict['fakemodule.common_overloaded_function']
     assert len(common_overloaded_function_symbols) == 1
     assert common_overloaded_function_symbols[0].valid_for == ["36", "38"]
@@ -264,7 +267,6 @@ def test_actual_module_merge(fake_module_36_38):
         "fakemodule.unique_var_36",
         "fakemodule.unique_var_38",
         "fakemodule.var_multiple_defs",
-        "fakemodule.alias",
         "fakemodule.__annotations__",
         "math",
         "sys.flags",
@@ -294,13 +296,6 @@ def test_actual_module_merge(fake_module_36_38):
     assert definition_36.var_symbol.type.fully_qualified_name == "builtins.int"
     assert definition_38.valid_for == ["38"]
     assert definition_38.var_symbol.type.fully_qualified_name == "builtins.str"
-
-    alias = all_vars['fakemodule.alias']
-    assert len(alias) == 1
-    alias_symbol = alias[0].var_symbol
-    assert alias_symbol.type.fully_qualified_name == "builtins.function"
-    assert alias_symbol.type.kind == TypeKind.CALLABLE
-    assert alias_symbol.type.pretty_printed_name == "CallableType[builtins.function]"
 
     imported_math = all_vars['math']
     assert len(imported_math) == 1

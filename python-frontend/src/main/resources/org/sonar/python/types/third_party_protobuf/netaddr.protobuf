@@ -542,7 +542,23 @@ valid_globnetaddr.ip.glob.valid_glob*
 __ipv6_valid_strnetaddr.strategy.ipv6.valid_str*
 
 addr(*
-flags (*
+flags ()
+
+valid_ipv4*
+
+addr(*
+flags ()
+
+valid_ipv6*
+
+addr(*
+flags (
+	valid_mac*
+
+addr(
+valid_eui64*
+
+addr(*
 __path__0N*
 __annotations__0P*%
 	INET_PTONnetaddr.core.INET_PTON0*
@@ -550,13 +566,7 @@ valid_globnetaddr.ip.glob.valid_glob*
 ZEROFILLnetaddr.core.ZEROFILL0*
 Nnetaddr.core.N0*
 Pnetaddr.core.P0*
-Znetaddr.core.Z0*
-
-valid_ipv402*
-
-valid_ipv602*
-	valid_mac02*
-valid_eui6402*
+Znetaddr.core.Z0*
 __version__0*
 VERSION0*
 

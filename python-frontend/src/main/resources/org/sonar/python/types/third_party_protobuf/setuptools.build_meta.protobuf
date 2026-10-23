@@ -72,17 +72,40 @@ specifiers(*.
 	run_setup*
 
 self(*
-setup_script (*
+setup_script (9
+get_requires_for_build_wheel*
+config_settings (
+9
+get_requires_for_build_sdist*
+config_settings (
+W
+ prepare_metadata_for_build_wheel*
+metadata_directory(*
+config_settings (
+[
+build_wheel*
+wheel_directory(*
+config_settings (
+*
+metadata_directory (?
+build_sdist*
+sdist_directory(*
+config_settings (
+<
+get_requires_for_build_editable*
+config_settings (
+Z
+#prepare_metadata_for_build_editable*
+metadata_directory(*
+config_settings (
+^
+build_editable*
+wheel_directory(*
+config_settings (
+*
+metadata_directory (*
 __annotations__0*
 __all__0*
-_BACKEND0* 
-get_requires_for_build_wheel0* 
-get_requires_for_build_sdist0*$
- prepare_metadata_for_build_wheel0*
-build_wheel0*
-build_sdist0*#
-get_requires_for_build_editable0*'
-#prepare_metadata_for_build_editable0*
-build_editable0*
+_BACKEND0*
 
-__legacy__022.",setuptools.build_meta.SetupRequirementsError22$""setuptools.build_meta.Distribution2"type22)"'setuptools.build_meta._BuildMetaBackend2"builtins.str2"builtins.list22"typing.Mapping222	222/"-setuptools.build_meta._BuildMetaLegacyBackend2"builtins.dict22"builtins.function22
+__legacy__022.",setuptools.build_meta.SetupRequirementsError22$""setuptools.build_meta.Distribution2"type22)"'setuptools.build_meta._BuildMetaBackend2"builtins.str2"builtins.list22"typing.Mapping222	222/"-setuptools.build_meta._BuildMetaLegacyBackend2"builtins.dict2

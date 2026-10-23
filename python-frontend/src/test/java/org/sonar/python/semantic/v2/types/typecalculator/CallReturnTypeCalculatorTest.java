@@ -83,6 +83,19 @@ class CallReturnTypeCalculatorTest {
   }
 
   @Test
+  void inferred_library_callable_aliases_preserve_return_types() {
+    for (var code : List.of(
+      "import random\nrandom.randint(1, 10)",
+      "from bisect import bisect\nbisect([1, 2], 1)")) {
+      var fileInput = parseAndInferTypes(code);
+      var call = (CallExpression) getLastDescendant(fileInput, CallExpression.class::isInstance);
+      var result = CallReturnTypeCalculator.computeCallExpressionType(call, typePredicateContext);
+      assertThat(result).as(code).isInstanceOfSatisfying(ObjectType.class,
+        objectType -> assertThat(objectType.unwrappedType()).isEqualTo(INT_TYPE));
+    }
+  }
+
+  @Test
   void union_return_values_retain_type_hint_provenance() {
     for (var code : List.of(
       "def value() -> int | None: ...\nvalue()",

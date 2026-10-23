@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -700,12 +701,25 @@ class TypeShedTest {
   }
 
   @Test
-  void overloaded_function_alias_has_function_annotated_type() {
+  void overloaded_function_alias_preserves_signatures() {
     Map<String, Symbol> gettextModule = symbolsForModule("gettext");
     Symbol translation = gettextModule.get("translation");
     Symbol catalog = gettextModule.get("Catalog");
     assertThat(translation.kind()).isEqualTo(Kind.AMBIGUOUS);
-    assertThat(catalog.annotatedTypeName()).isEqualTo("function");
+    assertThat(catalog.kind()).isEqualTo(Kind.AMBIGUOUS);
+    assertThat(((AmbiguousSymbol) catalog).alternatives())
+      .extracting(TypeShedTest::functionSignature)
+      .containsExactlyInAnyOrderElementsOf(((AmbiguousSymbol) translation).alternatives().stream()
+        .map(TypeShedTest::functionSignature).toList());
+  }
+
+  private static Tuple functionSignature(Symbol symbol) {
+    assertThat(symbol).isInstanceOf(FunctionSymbol.class);
+    FunctionSymbol function = (FunctionSymbol) symbol;
+    return tuple(function.annotatedReturnTypeName(), function.parameters().stream()
+      .map(parameter -> tuple(parameter.name(), parameter.declaredType(), parameter.hasDefaultValue(),
+        parameter.isPositionalOnly(), parameter.isKeywordOnly(), parameter.isPositionalVariadic(), parameter.isKeywordVariadic()))
+      .toList());
   }
 
   @Test

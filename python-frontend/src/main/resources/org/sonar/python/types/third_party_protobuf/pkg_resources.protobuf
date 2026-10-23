@@ -558,7 +558,22 @@ precedence0HJ
 packageName(=
 fixup_namespace_packages*
 	path_item(*
-parent ("
+parent (
+require*
+requirements(1
+
+run_script*
+requires(*
+script_name(/
+run_main*
+requires(*
+script_name(0
+iter_entry_points*
+group(*
+name (=
+add_activation_listener*
+callback(*
+existing ("
 parse_requirements[*
 
 strs((9
@@ -669,13 +684,7 @@ safe_extra*
 __path__0 *
 __annotations__0<*
 	importlib	importlib *
-working_set0*
-require0*
-
-run_script0*
-run_main0*
-iter_entry_points0*
-add_activation_listener0*
+working_set0*
 EGG_DIST0H*
 BINARY_DIST0H*
 SOURCE_DIST0H*

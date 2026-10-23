@@ -265,21 +265,26 @@ class ParameterSymbol:
 
 
 class OverloadedFunctionSymbol:
-    def __init__(self, overloaded_func_def: mpn.OverloadedFuncDef, name: str = None):
-        self.name = overloaded_func_def.name if name is None else name
-        self.fullname = overloaded_func_def.fullname
-        self.definitions = []
+    def __init__(self, name: str, fullname: str, definitions: list["FunctionSymbol"]):
+        self.name = name
+        self.fullname = fullname
+        self.definitions = definitions
+
+    @classmethod
+    def from_definition(cls, overloaded_func_def: mpn.OverloadedFuncDef, name: str = None):
+        result = cls(overloaded_func_def.name if name is None else name, overloaded_func_def.fullname, [])
         for item in overloaded_func_def.items:
-            self.add_overloaded_func_definition(item)
-        if len(self.definitions) < 2:
+            result.add_overloaded_func_definition(item)
+        if len(result.definitions) < 2:
             # Consider unanalyzed items if analyzed definitions are missing
             if len(overloaded_func_def.unanalyzed_items) > 0:
                 logger.warning(f'Overloaded function definitions of '
                                f'"{overloaded_func_def.fullname}" are missing: falling back on unanalyzed items.')
             for item in overloaded_func_def.unanalyzed_items:
-                self.add_overloaded_func_definition(item)
-        if len(self.definitions) < 2:
+                result.add_overloaded_func_definition(item)
+        if len(result.definitions) < 2:
             raise RuntimeError("Overloaded function symbol should contain at least 2 definitions.")
+        return result
 
     def add_overloaded_func_definition(self, item):
         if isinstance(item, mpn.FuncDef):
@@ -301,21 +306,29 @@ class OverloadedFunctionSymbol:
             pb_overloaded_func.definitions.append(definition.to_proto(type_table, container_fqn))
         return pb_overloaded_func
 
+    @classmethod
+    def from_callable_alias(cls, var: mpn.Var, name: str):
+        definitions = [FunctionSymbol.from_callable_alias(var, item, name) for item in var.type.items]
+        return cls(name, var.fullname, definitions)
+
 
 class FunctionSymbol:
-    def __init__(self, func_def: mpn.FuncDef, decorators=None, name: str = None):
+    def __init__(self, func_def: mpn.FuncDef, decorators=None, name: str = None, *,
+                 callable_type: mpt.CallableType | None = None, fullname: str | None = None):
+        is_alias = callable_type is not None
         self.name = func_def.name if name is None else name
-        self.fullname = func_def.fullname
-        self.return_type = extract_return_type(func_def)
-        self.parameters = extract_parameters(func_def)
-        self.has_decorators = func_def.is_decorated
+        self.fullname = func_def.fullname if fullname is None else fullname
+        self.return_type = TypeDescriptor(callable_type.ret_type) if is_alias else extract_return_type(func_def)
+        self.parameters = extract_parameters(func_def, callable_type)
+        self.has_decorators = bool(decorators) if is_alias and decorators is not None else func_def.is_decorated
         self.is_abstract = False if func_def.abstract_status == mpn.NOT_ABSTRACT else True
-        self.is_asynchronous = func_def.is_async_generator or func_def.is_awaitable_coroutine or func_def.is_coroutine
+        definition_is_async = func_def.is_async_generator or func_def.is_awaitable_coroutine or func_def.is_coroutine
+        self.is_asynchronous = definition_is_async and (not is_alias or supports_async_use(callable_type.ret_type))
         self.is_final = func_def.is_final
         self.is_overload = func_def.is_overload
         self.is_property = func_def.is_property
-        self.is_static = func_def.is_static
-        self.is_class_method = func_def.is_class
+        self.is_static = func_def.is_static and not is_alias
+        self.is_class_method = func_def.is_class and not is_alias
         self.resolved_decorator_names = []
         if self.has_decorators and decorators is not None:
             for dec in decorators:
@@ -351,6 +364,19 @@ class FunctionSymbol:
             pb_func.parameters.append(parameter.to_proto(type_table))
         return pb_func
 
+    @classmethod
+    def from_callable_alias(cls, var: mpn.Var, callable_type: mpt.CallableType, name: str):
+        definition = callable_type.definition
+        decorators = None
+        if isinstance(definition, mpn.Decorator):
+            # Binding has already been applied to the inferred signature. Keep all
+            # other decorators, including unknown expressions, for Java consumers.
+            decorators = [decorator for decorator in definition.original_decorators
+                          if get_decorator_name(decorator) not in ("builtins.classmethod", "builtins.staticmethod")]
+            definition = definition.func
+        return cls(definition, decorators=decorators, name=name, fullname=var.fullname, callable_type=callable_type)
+
+
 
 class ClassSymbol:
     def __init__(self, type_info: mpn.TypeInfo, name: str = None):
@@ -376,7 +402,7 @@ class ClassSymbol:
             elif isinstance(node, mpn.Decorator):
                 self.methods.append(FunctionSymbol(node.func, decorators=node.original_decorators))
             elif isinstance(node, mpn.OverloadedFuncDef):
-                self.overloaded_methods.append(OverloadedFunctionSymbol(node))
+                self.overloaded_methods.append(OverloadedFunctionSymbol.from_definition(node))
             elif isinstance(node, mpn.TypeInfo) and not node.is_intersection:
                 self.nested_classes.append(ClassSymbol(node))
             elif isinstance(node, mpn.Var) and node.name not in DEFAULT_EXPORTED_VARS:
@@ -503,11 +529,17 @@ class ModuleSymbol:
             if isinstance(symbol_table_node, mpn.Decorator):
                 self.functions.append(FunctionSymbol(symbol_table_node.func, decorators=symbol_table_node.original_decorators))
             if isinstance(symbol_table_node, mpn.OverloadedFuncDef):
-                self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node, name=key))
+                self.overloaded_functions.append(OverloadedFunctionSymbol.from_definition(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.TypeInfo) and not symbol_table_node.is_intersection:
                 self.classes.append(ClassSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in MODULE_IMPLICIT_VARS:
-                self.vars.append(VarSymbol.from_var(symbol_table_node, name=key))
+                if is_callable_alias(symbol_table_node):
+                    if isinstance(symbol_table_node.type, mpt.Overloaded):
+                        self.overloaded_functions.append(OverloadedFunctionSymbol.from_callable_alias(symbol_table_node, key))
+                    else:
+                        self.functions.append(FunctionSymbol.from_callable_alias(symbol_table_node, symbol_table_node.type, key))
+                else:
+                    self.vars.append(VarSymbol.from_var(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.TypeAlias) and isinstance(symbol_table_node.target, mpt.Instance):
                 # Type aliases like `Text = str` or `List = list[_T]` — serialize as a VarSymbol
                 # using the alias's own FQN (e.g. `typing.Text`) and carry the target class through
@@ -726,9 +758,11 @@ def get_decorator_name(dec: mpn.Node):
     return None
 
 
-def extract_parameters(func_def: mpn.FuncDef):
+def extract_parameters(func_def: mpn.FuncDef, callable_type: mpt.CallableType | None = None):
     arguments = []
-    func_type = func_def.type
+    # Aliases use mypy's effective signature, with receiver binding, generic
+    # substitution and decorator transformations already applied.
+    func_type = func_def.type if callable_type is None else callable_type
     if not isinstance(func_type, mpt.CallableType):
         # Missing type info: only basic information available
         for kind, name in zip(func_def.arg_kinds, func_def.arg_names):
@@ -739,11 +773,35 @@ def extract_parameters(func_def: mpn.FuncDef):
     arg_types = func_type.arg_types
     # param names are actual names of the parameters
     # arg names can be None for positional only arguments
-    param_names = func_def.arg_names
+    param_names = func_def.arg_names if callable_type is None else callable_alias_parameter_names(func_def, callable_type)
     for kind, name, _type, param in zip(arg_kinds, arg_names, arg_types, param_names):
         # Assumption to validate: all lists have always the same length == to the number of params
         arguments.append(ParameterSymbol(kind, name, _type, param))
     return arguments
+
+
+def callable_alias_parameter_names(definition: mpn.FuncDef, callable_type: mpt.CallableType) -> list[str | None]:
+    # Positional-only names are hidden in CallableType. Recover them only when
+    # the declaration still aligns; decorators and ParamSpec can change its shape.
+    receiver_count = 1 if callable_type.is_bound else 0
+    arguments = definition.arguments[receiver_count:]
+    definition_type = definition.type
+    can_recover_names = (isinstance(definition_type, mpt.CallableType)
+                         and definition_type.arg_kinds[receiver_count:] == callable_type.arg_kinds
+                         and definition_type.arg_names[receiver_count:] == callable_type.arg_names
+                         and len(arguments) == len(callable_type.arg_names))
+    return [arguments[i].variable.name if name is None and can_recover_names else name
+            for i, name in enumerate(callable_type.arg_names)]
+
+
+def supports_async_use(return_type: mpt.Type) -> bool:
+    # Defensive filter for metadata inherited from an async definition: a
+    # decorator may have made the effective callable synchronous. This does not
+    # infer async status for synchronous definitions returning awaitables.
+    return_type = mpt.get_proper_type(return_type)
+    return (isinstance(return_type, mpt.Instance)
+            and (return_type.type.has_base("typing.Awaitable")
+                 or return_type.type.has_base("typing.AsyncIterable")))
 
 
 def extract_return_type(func_def: mpn.FuncDef):
@@ -777,3 +835,17 @@ def is_python_2_only_exception(ms) -> bool:
             or ms.fullname not in ['ConfigParser', 'Queue', 'SocketServer']):
         return False
     return True
+
+
+def is_callable_alias(var: mpn.Var):
+    # Only inferred aliases of known functions have a signature we can export.
+    # Annotated callbacks and aliases of constructors remain variables/classes.
+    if not var.is_inferred:
+        return False
+    candidates = var.type.items if isinstance(var.type, mpt.Overloaded) else [var.type]
+    return bool(candidates) and all(
+        isinstance(candidate, mpt.CallableType)
+        and not candidate.is_type_obj()
+        and isinstance(candidate.definition, (mpn.FuncDef, mpn.Decorator))
+        for candidate in candidates
+    )
