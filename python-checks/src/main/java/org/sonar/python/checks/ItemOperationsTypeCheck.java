@@ -77,11 +77,11 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     }
 
     // Python 3.14 makes types.UnionType an alias of typing.Union. Older bundled
-    // stubs may omit its class subscription; do not suppress item writes/deletions.
+    // stubs may omit its class subscription, while newer stubs expose instance __getitem__.
+    // Decide class subscription by version; do not suppress item writes/deletions.
     if ("__getitem__".equals(requiredMethod)
-      && context.sourcePythonVersions().stream().anyMatch(version -> version.compare(3, 14) >= 0)
       && UNION_TYPE.isTrueFor(subscriptionObject, context)) {
-      return true;
+      return context.sourcePythonVersions().stream().anyMatch(version -> version.compare(3, 14) >= 0);
     }
 
     var symbolOptional = TreeUtils.getSymbolFromTree(subscriptionObject);
