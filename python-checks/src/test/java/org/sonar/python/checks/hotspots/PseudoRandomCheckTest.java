@@ -26,4 +26,19 @@ class PseudoRandomCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandom.py", new PseudoRandomCheck());
   }
 
+  @Test
+  void scopes() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandomScopes.py", new PseudoRandomCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandomLambdaTarget.py", new PseudoRandomCheck());
+  }
+
+  @Test
+  void crypto_imports() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandomCryptoImport.py", new PseudoRandomCheck());
+    for (int i = 2; i <= 5; i++) {
+      PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandomImport" + i + ".py", new PseudoRandomCheck());
+    }
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/pseudoRandomImport6.py", new PseudoRandomCheck());
+  }
+
 }
