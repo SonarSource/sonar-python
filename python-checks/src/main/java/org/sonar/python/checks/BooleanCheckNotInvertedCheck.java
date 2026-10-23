@@ -16,7 +16,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -32,8 +31,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -43,6 +42,9 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Use the opposite operator (\"%s\") instead.";
 
   private static final Set<String> EQUALITY_COMPARATORS = Set.of("==", "!=");
+  private static final TypeMatcher IS_SET_OR_FROZENSET = TypeMatchers.any(
+    TypeMatchers.isObjectInstanceOf("builtins.set"),
+    TypeMatchers.isObjectInstanceOf("builtins.frozenset"));
 
   @Override
   public void initialize(Context context) {
@@ -58,7 +60,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
       // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
       if (!binaryExp.leftOperand().is(Kind.COMPARISON)) {
-        if (isSetComparison(binaryExp) && !EQUALITY_COMPARATORS.contains(binaryExp.operator().value())) {
+        if (isSetComparison(ctx, binaryExp) && !EQUALITY_COMPARATORS.contains(binaryExp.operator().value())) {
           return;
         }
         String oppositeOperator = oppositeOperator(binaryExp.operator());
@@ -152,12 +154,8 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
     return valueBuilder.toString();
   }
 
-  private static boolean isSetComparison(BinaryExpression binaryExpression) {
-    List<InferredType> inferredTypeSet = List.of(
-      binaryExpression.leftOperand().type(),
-      binaryExpression.rightOperand().type()
-    );
-    return inferredTypeSet.stream().anyMatch(inferredType ->
-      inferredType.mustBeOrExtend(BuiltinTypes.SET) || inferredType.mustBeOrExtend(BuiltinTypes.FROZENSET));
+  private static boolean isSetComparison(SubscriptionContext ctx, BinaryExpression binaryExpression) {
+    return IS_SET_OR_FROZENSET.isTrueFor(binaryExpression.leftOperand(), ctx)
+      || IS_SET_OR_FROZENSET.isTrueFor(binaryExpression.rightOperand(), ctx);
   }
 }
