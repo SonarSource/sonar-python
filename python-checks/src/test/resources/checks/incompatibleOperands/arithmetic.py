@@ -215,6 +215,7 @@ class Plain:
 
 def binary_operations_without_v2_information():
     # V1 knows this is object, but V2 has no type for __getstate__'s result.
+    # Keep reporting these operations when refreshed stubs decorate object with typing.disjoint_base.
     state = Plain.__getstate__(Plain())
     state + 1  # Noncompliant
     1 + state  # Noncompliant

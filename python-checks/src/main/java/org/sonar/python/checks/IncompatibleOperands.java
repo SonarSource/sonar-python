@@ -35,9 +35,12 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
+import org.sonar.python.types.v2.matchers.HasKnownClassDecoratorEffectsInHierarchyPredicate;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.AMBIGUOUS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -120,10 +123,25 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
 
     private boolean canCheckBinaryOperand(Expression operand, InferredType type) {
       if (operand.typeV2() instanceof UnknownType) {
-        // Preserve the V1 check, including its decorator guard, when V2 has no type information.
-        return typeSymbols(type).stream().noneMatch(ClassSymbol::hasDecorators);
+        return typeSymbols(type).stream().allMatch(this::hasKnownLegacyDecoratorEffects);
       }
       return KNOWN_DECORATOR_EFFECTS.isTrueFor(operand, context);
+    }
+
+    private boolean hasKnownLegacyDecoratorEffects(ClassSymbol symbol) {
+      if (!symbol.hasDecorators()) {
+        return true;
+      }
+      // V1 retains only a decorator flag. For stubs, consult the canonical V2
+      // class metadata even when the expression itself has no V2 type.
+      String fullyQualifiedName = symbol.fullyQualifiedName();
+      if (symbol.definitionLocation() != null || fullyQualifiedName == null) {
+        return false;
+      }
+      return context.typeTable().getType(fullyQualifiedName) instanceof ClassType classType
+        && classType.definitionLocation().isEmpty()
+        && new HasKnownClassDecoratorEffectsInHierarchyPredicate()
+          .check(classType, TypePredicateContext.of(context.typeTable())).isTrue();
     }
 
     @Override
