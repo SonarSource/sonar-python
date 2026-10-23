@@ -154,7 +154,7 @@ public final class ClassType implements PythonType {
 
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
-    return resolveMember(memberName, new HashSet<>());
+    return localMember(memberName).or(() -> inheritedMember(memberName));
   }
 
   private Optional<PythonType> resolveMember(String memberName, Set<PythonType> visited) {
@@ -171,6 +171,14 @@ public final class ClassType implements PythonType {
   }
 
   public Optional<PythonType> inheritedMember(String memberName) {
+    var linearization = mro();
+    if (linearization.isPresent()) {
+      // A sibling override must precede a shared ancestor's member in a diamond.
+      return linearization.get().stream().skip(1)
+        .map(type -> type.localMember(memberName))
+        .flatMap(Optional::stream)
+        .findFirst();
+    }
     return inheritedMember(memberName, new HashSet<>());
   }
 

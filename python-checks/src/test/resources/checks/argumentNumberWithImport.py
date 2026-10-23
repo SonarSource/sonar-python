@@ -1,4 +1,5 @@
 from argumentNumberImported import fn, A
+from posix import *
 import argumentNumberImported
 from argumentNumberImported import reassigned_unbound_meth as aliased_unbound
 from argumentNumberImported import reassigned_bound_meth as aliased_bound
@@ -44,3 +45,10 @@ def imported_alternatives(condition):
     chosen()  # Noncompliant {{Add 1 missing arguments; this callable expects 1 positional arguments.}}
     chosen(1, 2)  # Noncompliant {{Remove 1 unexpected arguments; this callable expects 1 positional arguments.}}
     chosen(1, unexpected=True)  # Noncompliant {{Remove this unexpected named argument 'unexpected'.}}
+
+
+def wildcard_imported_open():
+    open("file", O_RDONLY, dir_fd=3)
+    open("file", O_RDONLY, dir_fdd=3)  # Noncompliant {{Remove this unexpected named argument 'dir_fdd'.}}
+    import builtins
+    builtins.open("file", dir_fd=3)  # Noncompliant {{Remove this unexpected named argument 'dir_fd'.}}

@@ -42,3 +42,36 @@ def mixed_source_and_library_overloads(condition):
     def accepts_keywords(key, **kwargs): ...
     candidate = accepts_keywords if condition else os.getenv
     candidate("HOME", unexpected=True)
+
+
+def library_keyword_variadics():
+    from flask import url_for
+    url_for("index", page=1)
+    url_for()  # Noncompliant
+    url_for(page=1)  # Noncompliant
+    url_for("index", "extra")  # Noncompliant
+
+
+def traceback_runtime_keywords(exc):
+    import traceback
+    # FP: CPython 3.13+ accepts **kwargs, omitted from Typeshed.
+    traceback.format_exception(exc, colorize=True)  # Noncompliant {{Remove this unexpected named argument 'colorize'.}}
+    # FP: same runtime/stub discrepancy.
+    traceback.print_exception(exc, colorize=True)  # Noncompliant {{Remove this unexpected named argument 'colorize'.}}
+    # FP: same runtime/stub discrepancy.
+    traceback.format_exception_only(exc, colorize=True)  # Noncompliant {{Remove this unexpected named argument 'colorize'.}}
+
+
+def concrete_mapping_keywords():
+    from collections import UserDict
+    mapping = UserDict()
+    mapping.setdefault("key", 0)
+    # FP: UserDict's Python implementation accepts keywords; Typeshed inherits a positional-only signature.
+    mapping.setdefault("key", default=0)  # Noncompliant {{Remove this unexpected named argument 'default'.}}
+    {}.setdefault("key", default=0)  # Noncompliant {{Remove this unexpected named argument 'default'.}}
+
+
+def inherited_library_method():
+    from flask import request
+    request.form.get("forum", type=int)
+    request.form.get("forum", typee=int)  # Noncompliant {{Remove this unexpected named argument 'typee'.}}

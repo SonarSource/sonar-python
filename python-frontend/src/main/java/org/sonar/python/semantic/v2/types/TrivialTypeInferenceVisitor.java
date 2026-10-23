@@ -701,7 +701,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private void collectWildcardImportedSymbols(List<String> moduleFqn) {
     PythonType resolvedModuleType = projectLevelTypeTable.getModuleType(moduleFqn);
     if (resolvedModuleType instanceof ModuleType moduleType) {
-      wildcardImportedTypes.putAll(moduleType.members());
+      // The indexed model does not preserve __all__ values. Such names may or
+      // may not be exported, so they must not become definite bindings.
+      boolean hasExplicitExports = moduleType.members().containsKey("__all__");
+      moduleType.members().forEach((name, type) -> {
+        if (hasExplicitExports || !name.startsWith("_")) {
+          wildcardImportedTypes.put(name, hasExplicitExports ? TypeWrapper.of(PythonType.UNKNOWN) : type);
+        }
+      });
     }
   }
 
@@ -1018,14 +1025,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     SymbolV2 symbolV2 = name.symbolV2();
     if (symbolV2 == null) {
       //    This part could be affected by SONARPY-1802
-      var builtInType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name.name());
-      if (builtInType.isPresent()) {
-        setTypeToName(name, builtInType.get());
+      TypeWrapper wildcardImportedType = wildcardImportedTypes.get(name.name());
+      if (wildcardImportedType != null) {
+        setTypeToName(name, wildcardImportedType.type());
       } else {
-        TypeWrapper wildcardImportedType = wildcardImportedTypes.get(name.name());
-        if (wildcardImportedType != null) {
-          setTypeToName(name, wildcardImportedType.type());
-        }
+        projectLevelTypeTable.getBuiltinsModule().resolveMember(name.name())
+          .ifPresent(type -> setTypeToName(name, type));
       }
       return;
     }

@@ -51,8 +51,9 @@ import org.sonar.python.types.v2.matchers.TypePredicateContext;
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   // Evaluate individual alternatives without changing the handling of mixed source/library unions.
+  private static final TypePredicate STUB_FUNCTION = new IsStubFunctionPredicate();
   private static final TypePredicate STUB_OVERLOAD = new AllTypePredicate(List.of(
-    new IsStubFunctionPredicate(),
+    STUB_FUNCTION,
     new HasOnlyFunctionDecoratorsSatisfyingPredicate(new IsTypePredicate("typing.overload"))));
   private static final String FUNCTION_DEFINITION = "Function definition.";
   private static final String NEW_METHOD_NAME = "__new__";
@@ -168,7 +169,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     }
     Map<String, ParameterV2> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionType);
     long nbPositionalParamsWithDefault = functionType.parameters().stream()
-      .filter(parameterName -> !parameterName.isKeywordOnly() && parameterName.hasDefaultValue())
+      .filter(parameterName -> !parameterName.isKeywordOnly() && !parameterName.isVariadic() && parameterName.hasDefaultValue())
       .count();
 
     List<RegularArgument> arguments = callExpression.arguments().stream()
@@ -205,7 +206,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     int unnamedIndex = 0;
     Map<String, ParameterV2> result = new HashMap<>();
     for (ParameterV2 parameter : functionType.parameters()) {
-      if (!parameter.isKeywordOnly() && !parameter.hasDefaultValue()) {
+      if (!parameter.isKeywordOnly() && !parameter.isVariadic() && !parameter.hasDefaultValue()) {
         String name = parameter.name();
         if (name == null || name.isEmpty()) {
           result.put("!unnamed" + unnamedIndex, parameter);
@@ -222,7 +223,10 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     // Unannotated local functions can still have STUB origin; their source location identifies them reliably.
     boolean requiresKnownOverload = (isUnion && functionType.definitionLocation().isEmpty()) || functionType.hasDecorators();
     return (requiresKnownOverload && !isStubOverload(functionType, ctx))
-      || functionType.hasVariadicParameter()
+      // **kwargs does not absorb missing or excess positional arguments. Keep
+      // source and *args signatures conservative, as before.
+      || (functionType.hasVariadicParameter() && (!STUB_FUNCTION.check(functionType, TypePredicateContext.of(ctx.typeTable())).isTrue()
+        || functionType.parameters().stream().anyMatch(ParameterV2::isPositionalVariadic)))
       || isCalledAsBoundInstanceMethod(callExpression, functionType);
   }
 
@@ -291,6 +295,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static void checkKeywordArguments(ArgumentIssues issues, CallExpression callExpression, FunctionType functionType) {
     List<ParameterV2> parameters = functionType.parameters();
+    boolean acceptsArbitraryKeywords = parameters.stream().anyMatch(ParameterV2::isKeywordVariadic);
     parameters.stream()
       .filter(parameter -> parameter.isKeywordOnly() && !parameter.hasDefaultValue())
       .map(ParameterV2::name)
@@ -300,7 +305,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       RegularArgument arg = (RegularArgument) argument;
       Name keyword = arg.keywordArgument();
       if (keyword != null) {
-        if (parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()) && !parameter.isPositionalOnly())) {
+        if (!acceptsArbitraryKeywords && parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()) && !parameter.isPositionalOnly())) {
           issues.unexpectedKeywords.add(arg);
         } else {
           issues.missingKeywords.remove(keyword.name());

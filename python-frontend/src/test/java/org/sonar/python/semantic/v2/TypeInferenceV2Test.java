@@ -4156,6 +4156,51 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void wildcard_imports_shadow_builtins() {
+    TupleImpl tuple = new TestProject()
+      .addModule("mod.py", "def open(path, flags, *, dir_fd=None): ...")
+      .lastExpressionAsTuple("""
+        from mod import *
+        import mod
+        import builtins
+        (open, mod.open, builtins.open, len)
+        """);
+    var expressions = tuple.elements();
+    assertThat(expressions.get(0).typeV2()).isEqualTo(expressions.get(1).typeV2())
+      .isNotEqualTo(expressions.get(2).typeV2());
+    assertThat(expressions.get(3).typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"['exported']", "['open']", "compute_exports()"})
+  void wildcard_imports_with_explicit_exports_remain_conservative(String exports) {
+    var tuple = new TestProject()
+      .addModule("mod.py", "__all__ = " + exports + "\ndef open(): ...\nexported = 1")
+      .lastExpressionAsTuple("""
+        from mod import *
+        import mod
+        import builtins
+        (open, mod.open, builtins.open)
+        """);
+    assertThat(tuple.elements().get(0).typeV2()).isInstanceOf(UnknownType.class);
+    assertThat(tuple.elements().get(1).typeV2()).isInstanceOf(FunctionType.class);
+    assertThat(tuple.elements().get(2).typeV2()).isNotInstanceOf(UnknownType.class)
+      .isNotEqualTo(tuple.elements().get(1).typeV2());
+  }
+
+  @Test
+  void wildcard_imports_do_not_import_private_names() {
+    var tuple = new TestProject()
+      .addModule("mod.py", "def __import__(): ...")
+      .lastExpressionAsTuple("""
+        from mod import *
+        import builtins
+        (__import__, builtins.__import__)
+        """);
+    assertThat(tuple.elements().get(0).typeV2()).isEqualTo(tuple.elements().get(1).typeV2());
+  }
+
+  @Test
   void conflictingWildCardImportsMultiFile() {
     TupleImpl tupleExpr = (TupleImpl) new TestProject()
       .addModule("mod1.py", "def foo(): pass")

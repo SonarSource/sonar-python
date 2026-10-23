@@ -562,6 +562,22 @@ public class ClassTypeTest {
   }
 
   @Test
+  void inherited_members_follow_c3_order_in_a_diamond() {
+    List<ClassType> types = classTypes("""
+      class Root:
+        def get(self, key): ...
+      class Left(Root): ...
+      class Right(Root):
+        def get(self, key, *, convert=None): ...
+      class Child(Left, Right): ...
+      """);
+    var rightMethod = types.get(2).resolveMember("get").orElseThrow();
+    assertThat(types.get(3).resolveMember("get")).containsSame(rightMethod);
+    assertThat(types.get(3).inheritedMember("get")).containsSame(rightMethod);
+    assertThat(types.get(1).resolveMember("get")).containsSame(types.get(0).resolveMember("get").orElseThrow());
+  }
+
+  @Test
   void class_type_member_with_same_name() {
     ClassType classType = classType("""
       class MyClass:
