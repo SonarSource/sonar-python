@@ -69,9 +69,6 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
   private static final String RANDOM_PACKAGE_PREFIX = "random.";
   private static final String RANDOM_CLASS_PREFIX = "random.Random.";
   private static final Set<String> QUALIFIERS_TO_SKIP = Set.of("random.SystemRandom");
-  private static final Set<String> COOKIE_RESPONSE_TYPES = Set.of(
-    "flask.wrappers.Response", "werkzeug.wrappers.BaseResponse", "werkzeug.sansio.response.Response",
-    "django.http.response.HttpResponseBase", "starlette.responses.Response");
   private static final Set<String> FUNCTIONS_TO_CHECK = getFunctionsFullyQualifiedNames();
   private static final Set<String> CRYPTO_MODULES = Set.of(
     "cryptography", "Crypto", "Cryptodome", "OpenSSL", "nacl", "pysodium", "tink", "rsa", "ecdsa",
@@ -143,8 +140,8 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isSecurityCookieCall(CallExpression call) {
-    if (!(call.callee() instanceof QualifiedExpression callee) || !"set_cookie".equals(callee.name().name())
-      || COOKIE_RESPONSE_TYPES.stream().noneMatch(callee.qualifier().type()::mustBeOrExtend)) {
+    if (!(call.callee() instanceof QualifiedExpression callee) || !CookieApi.SET_COOKIE_METHOD_NAME.equals(callee.name().name())
+      || CookieApi.RESPONSE_BASE_TYPES.stream().noneMatch(callee.qualifier().type()::mustBeOrExtend)) {
       return false;
     }
     RegularArgument key = TreeUtils.nthArgumentOrKeyword(0, "key", call.arguments());

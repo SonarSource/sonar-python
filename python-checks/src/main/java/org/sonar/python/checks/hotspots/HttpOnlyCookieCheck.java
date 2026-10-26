@@ -16,6 +16,8 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -38,47 +40,22 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
 
   public static final String HTTPONLY_ARGUMENT_NAME = "httponly";
   public static final String HEADERS_ARGUMENT_NAME = "headers";
-  public static final String SET_COOKIE_METHOD_NAME = "set_cookie";
 
-  private final MethodArgumentsToCheckRegistry methodArgumentsToCheckRegistry = new MethodArgumentsToCheckRegistry(
-    new MethodArgumentsToCheck("django.http.response.HttpResponseBase", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
-    new MethodArgumentsToCheck("django.http.response.HttpResponseBase", "set_signed_cookie", HTTPONLY_ARGUMENT_NAME, 8),
-    new MethodArgumentsToCheck("flask.wrappers.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
-    new MethodArgumentsToCheck("werkzeug.wrappers.BaseResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
-    new MethodArgumentsToCheck("werkzeug.sansio.response.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
-    // check for set_cookie method httponly param
-    new MethodArgumentsToCheck("fastapi.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("starlette.responses.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.HTMLResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("starlette.responses.HTMLResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.JSONResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("starlette.responses.JSONResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.ORJSONResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.PlainTextResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("starlette.responses.PlainTextResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.StreamingResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("starlette.responses.StreamingResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.UJSONResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("fastapi.responses.FileResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    new MethodArgumentsToCheck("starlette.responses.FileResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1),
-    // check for set-cookie header constructor param
-    new MethodArgumentsToCheck("fastapi.Response", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.Response", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.Response", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.HTMLResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.HTMLResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.JSONResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.JSONResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.ORJSONResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.PlainTextResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.PlainTextResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.StreamingResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.StreamingResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.UJSONResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.FileResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.FileResponse", HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument)
-  );
+  private final MethodArgumentsToCheckRegistry methodArgumentsToCheckRegistry = createMethodArgumentsToCheckRegistry();
+
+  private MethodArgumentsToCheckRegistry createMethodArgumentsToCheckRegistry() {
+    var methods = new ArrayList<>(List.of(
+      new MethodArgumentsToCheck(CookieApi.DJANGO_RESPONSE, CookieApi.SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
+      new MethodArgumentsToCheck(CookieApi.DJANGO_RESPONSE, CookieApi.SET_SIGNED_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 8),
+      new MethodArgumentsToCheck(CookieApi.FLASK_RESPONSE, CookieApi.SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
+      new MethodArgumentsToCheck(CookieApi.WERKZEUG_BASE_RESPONSE, CookieApi.SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
+      new MethodArgumentsToCheck(CookieApi.WERKZEUG_RESPONSE, CookieApi.SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7)));
+    for (String responseType : CookieApi.ASGI_RESPONSE_TYPES) {
+      methods.add(new MethodArgumentsToCheck(responseType, CookieApi.SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, -1));
+      methods.add(new MethodArgumentsToCheck(responseType, HEADERS_ARGUMENT_NAME, -1, this::isInvalidHeaderArgument));
+    }
+    return new MethodArgumentsToCheckRegistry(methods.toArray(MethodArgumentsToCheck[]::new));
+  }
 
   @Override
   String flagName() {
