@@ -21,5 +21,11 @@
   "ruleSpecification": "RSPEC-2187",
   "sqKey": "S2187",
   "scope": "Tests",
-  "quickfix": "unknown"
+  "quickfix": "unknown",
+  "sonarWayRemoval": {
+    "candidateProfiles": [
+      "strict-tests"
+    ],
+    "rationale": "The rule is not performing (SNIF). It raises many false positives on helper classes that extend unittest.TestCase, contain helpers rather than tests, and are used as parents for project tests."
+  }
 }
