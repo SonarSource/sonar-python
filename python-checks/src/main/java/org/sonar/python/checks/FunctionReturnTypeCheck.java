@@ -28,16 +28,27 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
@@ -45,6 +56,12 @@ import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 
 @Rule(key = "S5886")
 public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
+
+  private static final TypeMatcher UNION_ANNOTATION = TypeMatchers.any(
+    TypeMatchers.isType("typing.Optional"), TypeMatchers.isType("typing.Union"));
+  private static final TypeMatcher SUBCLASS_FACTORY = TypeMatchers.any(
+    TypeMatchers.isType("logging.getLogger"), TypeMatchers.isType("logging.Logger.getChild"),
+    TypeMatchers.isType("sqlalchemy.and_"), TypeMatchers.isType("sqlalchemy.or_"));
 
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
   private static final Set<String> ITERABLE_TYPES = Set.of("typing.Generator", "typing.Iterator", "typing.Iterable",
@@ -71,7 +88,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       if (declaredReturnType == InferredTypes.anyType()) {
         return;
       }
-      ReturnTypeVisitor returnTypeVisitor = new ReturnTypeVisitor(declaredReturnType);
+      ReturnTypeVisitor returnTypeVisitor = new ReturnTypeVisitor(declaredReturnType, ctx);
       functionDef.body().accept(returnTypeVisitor);
       raiseIssues(ctx, functionDef, declaredReturnType, returnTypeVisitor);
     });
@@ -160,11 +177,13 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
   private static class ReturnTypeVisitor extends BaseTreeVisitor {
 
     InferredType returnType;
+    private final SubscriptionContext context;
     List<YieldExpression> yieldExpressions = new ArrayList<>();
     List<ReturnStatement> invalidReturnStatements = new ArrayList<>();
 
-    ReturnTypeVisitor(InferredType returnType) {
+    ReturnTypeVisitor(InferredType returnType, SubscriptionContext context) {
       this.returnType = returnType;
+      this.context = context;
     }
 
     @Override
@@ -193,11 +212,47 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
           return;
         }
 
-        if (!containsDeclaredType(inferredType) && !inferredType.isCompatibleWith(returnType)) {
+        if (!containsDeclaredType(inferredType) && !inferredType.isCompatibleWith(returnType)
+          && !canReturnAnnotatedSubclass(expression, returnStatement)) {
           invalidReturnStatements.add(returnStatement);
         }
       }
       super.visitReturnStatement(returnStatement);
+    }
+
+    private boolean canReturnAnnotatedSubclass(Expression expression, ReturnStatement statement) {
+      Expression returned = Expressions.removeParentheses(expression);
+      if (!(returned instanceof CallExpression call)
+        || !(call.callee().typeV2() instanceof FunctionType function)
+        || function.typeOrigin() != TypeOrigin.STUB
+        || !(returned.typeV2() instanceof ObjectType object)
+        || !(object.unwrappedType() instanceof ClassType returnedClass)) {
+        return false;
+      }
+      // Logger configuration can live elsewhere. SQL boolean factories can produce a
+      // BooleanClauseList or preserve a supplied expression, including a custom subclass.
+      // Stub origin alone is not evidence of this behavior (e.g. os.urandom returns bytes).
+      if (!SUBCLASS_FACTORY.isTrueFor(call.callee(), context)) {
+        return false;
+      }
+      FunctionDef enclosingFunction = TreeUtils.firstAncestorOfClass(statement, FunctionDef.class);
+      TypeAnnotation annotation = enclosingFunction == null ? null : enclosingFunction.returnTypeAnnotation();
+      return annotation != null && annotationAllowsSubclass(annotation.expression(), returnedClass);
+    }
+
+    private boolean annotationAllowsSubclass(Expression annotation, ClassType returnedClass) {
+      Expression unwrapped = Expressions.removeParentheses(annotation);
+      if (unwrapped instanceof SubscriptionExpression subscription
+        && UNION_ANNOTATION.isTrueFor(subscription.object(), context)) {
+        return subscription.subscripts().expressions().stream().anyMatch(candidate -> annotationAllowsSubclass(candidate, returnedClass));
+      }
+      if (unwrapped instanceof BinaryExpression union && union.is(Tree.Kind.BITWISE_OR)) {
+        return annotationAllowsSubclass(union.leftOperand(), returnedClass) || annotationAllowsSubclass(union.rightOperand(), returnedClass);
+      }
+      // Require an actual inheritance relation, not structural or numeric compatibility.
+      // Constructors and generic return classes are deliberately excluded.
+      return unwrapped.typeV2() instanceof ClassType annotatedClass && !annotatedClass.isGeneric()
+        && annotatedClass.mro().filter(mro -> mro.contains(returnedClass)).isPresent();
     }
 
     @Override
