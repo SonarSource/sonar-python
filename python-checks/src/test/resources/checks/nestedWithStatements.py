@@ -244,21 +244,23 @@ def noncompliant_comment_before_outer():
             process(a, b)
 
 
-def compliant_comment_between():
-    with open("a.txt") as a:
-        # Add a comment explaining why these with statements are not merged. For example:
-        # These contexts can't be merged as Python 3.0 has no multi-item with
+def noncompliant_comment_between():
+    with open("a.txt") as a:  # Noncompliant
+#   ^^^^
+        # A comment between nested with statements does not silence the rule.
         with open("b.txt") as b:
+#       ^^^^< {{Nested "with" statement}}
             process(a, b)
 
 
-def noncompliant_comment_breaks_outer_pair_only():
-    with open("a.txt") as a:
-        # These contexts can't be merged as Python 3.0 has no multi-item with
-        with open("b.txt") as b:  # Noncompliant
+def noncompliant_comment_does_not_break_chain():
+    with open("a.txt") as a:  # Noncompliant
+#   ^^^^
+        # A comment between nested with statements does not silence the rule.
+        with open("b.txt") as b:
+#       ^^^^< {{Nested "with" statement}}
             with open("c.txt") as c:
-#       ^^^^@-1
-#           ^^^^@-1< {{Nested "with" statement}}
+#           ^^^^< {{Nested "with" statement}}
                 process(a, b, c)
 
 

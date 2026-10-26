@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.python.checks.utils.CheckUtils;
 
 @Rule(key = "S9154")
 public class NestedWithStatementsCheck extends PythonSubscriptionCheck {
@@ -57,7 +56,7 @@ public class NestedWithStatementsCheck extends PythonSubscriptionCheck {
     return inner.parent() instanceof StatementList statementList
       && statementList.statements().size() == 1
       && statementList.parent() instanceof WithStatement outer
-      && isCombinableNesting(outer, inner);
+      && outer.isAsync() == inner.isAsync();
   }
 
   private static List<WithStatement> collectSoleNestedSameAsyncChain(WithStatement outermost) {
@@ -76,16 +75,9 @@ public class NestedWithStatementsCheck extends PythonSubscriptionCheck {
       return Optional.empty();
     }
     Statement only = statements.get(0);
-    if (only instanceof WithStatement inner && isCombinableNesting(outer, inner)) {
+    if (only instanceof WithStatement inner && outer.isAsync() == inner.isAsync()) {
       return Optional.of(inner);
     }
     return Optional.empty();
-  }
-
-  private static boolean isCombinableNesting(WithStatement outer, WithStatement inner) {
-    int colonLine = outer.colon().line();
-    int innerLine = inner.firstToken().line();
-    return outer.isAsync() == inner.isAsync()
-      && !CheckUtils.hasCommentOnLineMatching(outer, line -> line > colonLine && line < innerLine);
   }
 }

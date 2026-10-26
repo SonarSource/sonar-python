@@ -15,12 +15,8 @@ is the idiomatic style: it keeps related resource setup on one line and makes th
 </ul>
 <h3>Exceptions</h3>
 <p>Nested <code>with</code> statements are acceptable when the inner <code>with</code> is not the only statement in the outer body.</p>
-<p>They are also acceptable when a comment between the nested <code>with</code> statements explains why they were not combined, for example because
-Python 3.0 has no multi-item <code>with</code>.</p>
 <h2>How to fix it</h2>
 <p>Rewrite the nested <code>with</code> statements as one <code>with</code> that lists every context manager, separated by commas.</p>
-<p>On Python 3.0, multi-item <code>with</code> is not available. Leave the statements nested and add a comment between them explaining why they were
-not merged.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -32,14 +28,6 @@ with open("a.txt") as a:
 <pre data-diff-id="1" data-diff-type="compliant">
 with open("a.txt") as a, open("b.txt") as b:
     process(a, b)
-</pre>
-<h4>Compliant solution</h4>
-<pre>
-with open("a.txt") as a:
-    # Add a comment explaining why these with statements are not merged. For example:
-    # These contexts can't be merged as Python 3.0 has no multi-item with
-    with open("b.txt") as b:
-        process(a, b)
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
