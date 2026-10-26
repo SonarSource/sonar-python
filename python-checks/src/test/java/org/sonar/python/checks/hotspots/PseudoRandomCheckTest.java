@@ -33,6 +33,11 @@ class PseudoRandomCheckTest {
   }
 
   @Test
+  void security_contexts() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandomSecurityContexts.py", new PseudoRandomCheck());
+  }
+
+  @Test
   void crypto_imports() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/pseudoRandomCryptoImport.py", new PseudoRandomCheck());
     for (int i = 2; i <= 5; i++) {

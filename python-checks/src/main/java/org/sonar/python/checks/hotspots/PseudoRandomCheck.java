@@ -51,6 +51,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2245")
 public class PseudoRandomCheck extends PythonSubscriptionCheck {
@@ -68,6 +69,9 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
   private static final String RANDOM_PACKAGE_PREFIX = "random.";
   private static final String RANDOM_CLASS_PREFIX = "random.Random.";
   private static final Set<String> QUALIFIERS_TO_SKIP = Set.of("random.SystemRandom");
+  private static final Set<String> COOKIE_RESPONSE_TYPES = Set.of(
+    "flask.wrappers.Response", "werkzeug.wrappers.BaseResponse", "werkzeug.sansio.response.Response",
+    "django.http.response.HttpResponseBase", "starlette.responses.Response");
   private static final Set<String> FUNCTIONS_TO_CHECK = getFunctionsFullyQualifiedNames();
   private static final Set<String> CRYPTO_MODULES = Set.of(
     "cryptography", "Crypto", "Cryptodome", "OpenSSL", "nacl", "pysodium", "tink", "rsa", "ecdsa",
@@ -75,9 +79,9 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
     "jwt", "jose", "jwcrypto", "authlib", "oauthlib", "requests_oauthlib", "itsdangerous", "pyotp", "pyseto", "paseto",
     "hmac", "ssl", "flask_login", "flask_jwt_extended", "django.contrib.auth");
   private static final Set<String> SECURITY_KEYWORDS = Set.of(
-    "aes", "asymmetric", "auth", "certificate", "chacha20", "cipher", "crypto", "cryptography", "decrypt", "ecc", "encrypt",
+    "aes", "asymmetric", "auth", "captcha", "certificate", "chacha20", "challenge", "cipher", "crypto", "cryptography", "decrypt", "ecc", "encrypt",
     "encryption", "hmac", "iv", "nonce", "password", "pbkdf2", "poly1305", "randombytes", "rsa", "salt", "scrypt", "secret",
-    "secure", "security", "sessionid", "signature", "token", "verify");
+    "secure", "security", "sessionid", "sid", "signature", "token", "verify");
   private static final Pattern DIGITS = Pattern.compile("\\d+");
   private static final Pattern WORD_SPLIT = Pattern.compile("_+|(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])");
   public static final String MESSAGE = "Make sure that using this pseudorandom number generator is safe here.";
@@ -97,7 +101,7 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
 
-      if (skip(callExpression) || !(hasCryptoImport || hasSecurityKeywordInScope(callExpression))) {
+      if (skip(callExpression) || !(hasCryptoImport || hasSecurityKeywordInScope(callExpression) || isSecurityCookieValue(callExpression))) {
         return;
       }
 
@@ -124,6 +128,27 @@ public class PseudoRandomCheck extends PythonSubscriptionCheck {
       .map(Expression::type)
       .filter(type -> QUALIFIERS_TO_SKIP.stream().anyMatch(type::mustBeOrExtend))
       .isPresent();
+  }
+
+  // Only the value expression gains context: a security-named cookie must not
+  // make unrelated jitter, expiry arguments or other cookie values report.
+  private static boolean isSecurityCookieValue(CallExpression randomCall) {
+    for (Tree tree = randomCall.parent(); tree != null && !(tree instanceof Statement) && !(tree instanceof FunctionLike); tree = tree.parent()) {
+      if (tree instanceof RegularArgument argument && tree.parent().parent() instanceof CallExpression call
+        && argument == TreeUtils.nthArgumentOrKeyword(1, "value", call.arguments()) && isSecurityCookieCall(call)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static boolean isSecurityCookieCall(CallExpression call) {
+    if (!(call.callee() instanceof QualifiedExpression callee) || !"set_cookie".equals(callee.name().name())
+      || COOKIE_RESPONSE_TYPES.stream().noneMatch(callee.qualifier().type()::mustBeOrExtend)) {
+      return false;
+    }
+    RegularArgument key = TreeUtils.nthArgumentOrKeyword(0, "key", call.arguments());
+    return key != null && unwrap(key.expression()) instanceof StringLiteral literal && isSecurityName(literal.trimmedQuotesValue());
   }
 
   private static class CryptoImportFinder extends BaseTreeVisitor {
