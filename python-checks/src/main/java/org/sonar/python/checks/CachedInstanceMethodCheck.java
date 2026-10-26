@@ -20,11 +20,13 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
@@ -65,12 +67,29 @@ public class CachedInstanceMethodCheck extends PythonSubscriptionCheck {
     if (isEnumMethod(functionDef, ctx)) {
       return;
     }
+    if (takesOnlyReceiver(functionDef)) {
+      return;
+    }
 
     for (Decorator decorator : functionDef.decorators()) {
       if (CACHE_DECORATOR_MATCHER.isTrueFor(decoratorFunctionExpression(decorator), ctx)) {
         ctx.addIssue(decorator, MESSAGE);
       }
     }
+  }
+
+  private static boolean takesOnlyReceiver(FunctionDef functionDef) {
+    if (functionDef.parameters() == null) {
+      return true;
+    }
+    int parametersInTheCacheKey = 0;
+    for (AnyParameter anyParameter : functionDef.parameters().all()) {
+      if (anyParameter instanceof Parameter parameter && parameter.name() == null) {
+        continue;
+      }
+      parametersInTheCacheKey++;
+    }
+    return parametersInTheCacheKey <= 1;
   }
 
   private static boolean isEnumMethod(FunctionDef functionDef, SubscriptionContext ctx) {

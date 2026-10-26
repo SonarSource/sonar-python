@@ -51,10 +51,15 @@ class WithFunctoolsQualified:
 
 class WithOtherDecorators:
     @property
-    @lru_cache  # Noncompliant
-   #^^^^^^^^^^
+    @lru_cache
     def cached_property_like(self):
         return 42
+
+    @property
+    @lru_cache  # Noncompliant
+   #^^^^^^^^^^
+    def cached_with_arg(self, value):
+        return value
 
 
 @lru_cache
@@ -158,3 +163,59 @@ class CompliantInstanceMethods:
         def helper(value):
             return value
         return helper(1)
+
+
+class OnlySelfIsCompliant:
+    @lru_cache
+    def once(self):
+        return 1
+
+    @cache
+    def once_cache(self) -> int:
+        return 1
+
+    @functools.lru_cache(maxsize=None)
+    def qualified(self):
+        return self
+
+    @lru_cache()
+    def positional_only(self, /):
+        return 1
+
+    @lru_cache  # Noncompliant
+   #^^^^^^^^^^
+    def still_cached(self, n):
+        return n
+
+    @lru_cache  # Noncompliant
+   #^^^^^^^^^^
+    def varargs(self, *args):
+        return args
+
+    @cache  # Noncompliant
+   #^^^^^^
+    def kwargs(self, **kwargs):
+        return kwargs
+
+    @lru_cache  # Noncompliant
+   #^^^^^^^^^^
+    def keyword_only(self, *, n):
+        return n
+
+    @lru_cache  # Noncompliant
+   #^^^^^^^^^^
+    def with_default(self, n=1):
+        return n
+
+
+class EmptyParameterList:
+    def safe_property(func):
+        return func
+
+    @safe_property
+    def info():
+        return {}
+
+    @lru_cache
+    def cached_without_params():
+        return 1

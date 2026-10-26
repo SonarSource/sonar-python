@@ -1,51 +1,63 @@
-<p>This rule raises an issue when an instance method is decorated with <code>functools.lru_cache</code> or <code>functools.cache</code>.</p>
+<p>This rule raises an issue when an instance method is decorated with <code>functools.lru_cache</code> or <code>functools.cache</code> and the method
+takes parameters besides the instance.</p>
 <h2>Why is this an issue?</h2>
-<p><code>functools.lru_cache</code> and <code>functools.cache</code> store call results in a process-wide cache keyed by the function arguments. On an
-instance method, <code>self</code> is part of that key.</p>
-<p>The cache therefore keeps a strong reference to every instance that was used as a receiver. Those instances and anything they reference cannot be
-garbage-collected for as long as the cache entry lives. The instances lifetimes are coupled to a global memoization table. With an unbounded
-<code>@cache</code>, or a large <code>@lru_cache(maxsize=…​)</code>, memory use grows with the number of distinct instances.</p>
-<p>Caching couples the lifetime of business objects to a global memoization table.</p>
+<p><code>functools.lru_cache</code> and <code>functools.cache</code> store results on the function. The cache key includes every argument. On an
+instance method, that key includes <code>self</code>.</p>
+<p>The decorated function is stored on the class, and the class stays loaded for the whole process. Each cache entry holds a strong reference to
+<code>self</code>, so the instance and the objects it references stay in memory until the cache drops the entry.</p>
+<p><code>@cache</code> and <code>@lru_cache(maxsize=None)</code> never drop entries, so each cached instance leaks until the process exits. A bounded
+<code>@lru_cache</code> drops an entry only after newer calls fill the cache. Once the entry is dropped, nothing else keeps the instance alive, and
+reference counting frees it immediately.</p>
+<p>Keeping the same function at module level does not help if it still receives the instance. The fix is to keep <code>self</code> out of the cache
+key. A cached function that receives only plain values, such as <code>scale</code> and <code>n</code>, does not keep the instance alive.</p>
 <h3>What is the potential impact?</h3>
 <ul>
-  <li><strong>Memory leaks</strong>: instances stay alive after callers drop them.</li>
-  <li><strong>Stale results</strong>: mutated instance state may not be reflected when a cached entry is reused.</li>
-  <li><strong>Hard-to-diagnose memory growth</strong>: Resident Set Size climbs over time in long-running services.</li>
+  <li>While an entry exists, its instance stays reachable from the class. A bounded <code>@lru_cache</code> drops that entry once newer calls fill the
+  cache.</li>
+  <li><code>@cache</code> and <code>@lru_cache(maxsize=None)</code> never drop entries, so memory grows with the number of cached instances.</li>
+  <li>Stale results when a later call reuses an entry after the instance state has changed.</li>
 </ul>
 <h3>Exceptions</h3>
-<p>Do not raise on <code>@staticmethod</code> or <code>@classmethod</code> methods: there is no per-instance <code>self</code> retained by the
-cache.</p>
-<p>Do not raise on methods of <code>enum.Enum</code> subclasses: enum members are singletons, so retaining them is intentional and bounded.</p>
+<p>Do not raise when the method takes no parameter besides the instance, on every Python version. On Python 3.12 and later, {rule:python:S9453}
+recommends <code>functools.cached_property</code> for that case. On earlier versions this rule stays silent for that case.</p>
+<p>Do not raise on <code>@staticmethod</code> or <code>@classmethod</code> methods. The cache does not retain a per-instance <code>self</code>.</p>
+<p>Do not raise on methods of <code>enum.Enum</code> subclasses. Enum members are singletons, so retaining them is bounded.</p>
 <h2>How to fix it</h2>
-<p>Move the cache to a free function that takes only the values needed for the computation, then call that function from the method. Alternatively,
-cache on a pure helper that does not close over <code>self</code>, or use an instance-local memo if the lifetime must match the object.</p>
+<p>Move the cache to a free function that takes the values required for the computation, then call that function from the method. <code>self</code> is
+not an argument of the cached function, so the cache does not keep the instance alive.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 from functools import lru_cache
 
-class Number:
-    def __init__(self, value: int) -&gt; None:
-        self.value = value
+class Series:
+    def __init__(self, scale: int) -&gt; None:
+        self.scale = scale
 
-    @lru_cache  # Noncompliant: cache retains "self"
-    def squared(self) -&gt; int:
-        return self.value * self.value
+    @lru_cache  # Noncompliant: the cache retains "self"
+    def fib(self, n: int) -&gt; int:
+        # long computation
+        if n &lt; 2:
+            return n
+        return self.scale * (self.fib(n - 1) + self.fib(n - 2))
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 from functools import lru_cache
 
 @lru_cache
-def square(value: int) -&gt; int:
-    return value * value
+def fib(scale: int, n: int) -&gt; int:
+    # long computation
+    if n &lt; 2:
+        return n
+    return scale * (fib(scale, n - 1) + fib(scale, n - 2))
 
-class Number:
-    def __init__(self, value: int) -&gt; None:
-        self.value = value
+class Series:
+    def __init__(self, scale: int) -&gt; None:
+        self.scale = scale
 
-    def squared(self) -&gt; int:
-        return square(self.value)
+    def fib(self, n: int) -&gt; int:
+        return fib(self.scale, n)
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
@@ -62,5 +74,10 @@ class Number:
 <h3>External coding guidelines</h3>
 <ul>
   <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/cached-instance-method/">B019 - cached-instance-method</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S9453} - Methods that only take the instance should use "functools.cached_property" instead of "functools.cache" or
+  "functools.lru_cache"</li>
 </ul>
 
