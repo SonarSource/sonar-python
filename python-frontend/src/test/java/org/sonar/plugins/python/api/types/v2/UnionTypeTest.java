@@ -44,6 +44,28 @@ import static org.mockito.Mockito.mock;
 class UnionTypeTest {
 
   @Test
+  void neverContributesNoUnionValues() {
+    assertThat(UnionType.or(PythonType.NEVER, INT_TYPE)).isSameAs(INT_TYPE);
+    assertThat(UnionType.or(INT_TYPE, PythonType.NEVER)).isSameAs(INT_TYPE);
+    assertThat(UnionType.or(PythonType.NEVER, PythonType.NEVER)).isSameAs(PythonType.NEVER);
+    assertThat(UnionType.or(PythonType.NEVER, null)).isSameAs(PythonType.NEVER);
+    assertThat(UnionType.or(PythonType.NEVER, PythonType.UNKNOWN, INT_TYPE)).isSameAs(PythonType.UNKNOWN);
+    var unresolved = new UnresolvedImportType("unknown");
+    assertThat(UnionType.or(PythonType.NEVER, unresolved)).isSameAs(unresolved);
+
+    var union = UnionType.or(INT_TYPE, STR_TYPE);
+    assertThat(UnionType.or(union, PythonType.NEVER, INT_TYPE)).isEqualTo(union);
+  }
+
+  @Test
+  void neverInsideGenericArgumentsDoesNotEliminateTheContainer() {
+    var emptyList = ObjectType.Builder.fromType(BUILTINS.resolveMember("list").orElseThrow())
+      .withAttributes(List.of(PythonType.NEVER)).build();
+    assertThat(UnionType.or(PythonType.NEVER, emptyList)).isSameAs(emptyList);
+    assertThat(emptyList.attributes()).containsExactly(PythonType.NEVER);
+  }
+
+  @Test
   void basicUnion() {
     FileInput fileInput = parseAndInferTypes("42;\"hello\"");
     PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();

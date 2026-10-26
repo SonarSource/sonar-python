@@ -63,7 +63,7 @@ public final class CallReturnTypeCalculator {
 
     PythonType calleeType = callExpr.callee().typeV2();
     TypeSource typeSource = computeTypeSource(calleeType, callExpr);
-    PythonType returnType = returnTypeOfCall(calleeType);
+    PythonType returnType = TypeUtils.widenNeverToUnknown(returnTypeOfCall(calleeType));
 
     returnType = TypeUtils.map(returnType, candidate -> candidate instanceof ObjectType objectType
       ? ObjectType.Builder.fromType(objectType).withTypeSource(typeSource).build()

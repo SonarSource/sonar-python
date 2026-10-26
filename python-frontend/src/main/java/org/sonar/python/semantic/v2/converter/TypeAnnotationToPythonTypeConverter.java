@@ -97,6 +97,17 @@ public class TypeAnnotationToPythonTypeConverter {
     }
   }
 
+  PythonType convertReturnType(ConversionContext context, TypeAnnotationDescriptor type) {
+    // Preserve bottom in return annotations, consumed by call and property inference.
+    // Non-return annotations and generic arguments retain their usual conversion.
+    return switch (type.kind()) {
+      case UNINHABITED -> PythonType.NEVER;
+      case UNION -> LazyUnionType.or(type.args().stream().map(t -> convertReturnType(context, t)).collect(Collectors.toSet()));
+      case TYPE_ALIAS -> convertReturnType(context, type.args().get(0));
+      default -> convert(context, type);
+    };
+  }
+
   private static PythonType typeFromFQN(String fullyQualifiedName, ConversionContext context) {
     return fullyQualifiedName.isEmpty() ? PythonType.UNKNOWN : context.lazyTypesContext().getOrCreateLazyType(fullyQualifiedName);
   }

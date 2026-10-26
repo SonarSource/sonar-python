@@ -28,6 +28,13 @@ import org.sonar.plugins.python.api.TriBool;
 public interface PythonType {
   PythonType UNKNOWN = new UnknownTypeImpl();
 
+  /**
+   * The bottom type, with no possible values. Unlike UNKNOWN, it contributes no
+   * alternatives to a union. Currently preserved in descriptor return annotations;
+   * call and property inference widen a final NEVER result to UNKNOWN.
+   */
+  PythonType NEVER = new NeverType();
+
   @Beta
   default String name() {
     return this.toString();

@@ -122,3 +122,29 @@ def compliant(xx):
     _ = xx.eval("C = str(A) + B")
 
     _ = xx.query('A > B')
+
+
+def concatenated_series(y_true, lower, upper):
+    import pandas as pd
+
+    combined = pd.concat([y_true, lower, upper], axis=1)
+    combined.dropna(subset=["y_true"], inplace=True)  # Noncompliant
+
+
+def loop_reassigned_dataframe(df):
+    import pandas as pd
+
+    df = pd.DataFrame(df)
+    for column_name in df.columns:
+        expanded = pd.DataFrame(df[column_name].tolist())
+        df.drop(columns=[column_name], inplace=True)  # Noncompliant
+        df = pd.concat([df, expanded], axis=1)
+
+
+def uncertain_reassignment(df, unknown_factory):
+    import pandas as pd
+
+    df = pd.DataFrame(df)
+    for column_name in df.columns:
+        df.drop(columns=[column_name], inplace=True)
+        df = unknown_factory()

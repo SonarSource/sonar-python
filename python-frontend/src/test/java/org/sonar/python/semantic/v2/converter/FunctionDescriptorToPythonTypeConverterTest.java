@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.DescriptorsToProtobuf;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
@@ -42,6 +43,48 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 class FunctionDescriptorToPythonTypeConverterTest {
+  @Test
+  void nonReturningUnionNormalizesBeforeCacheRoundTrip() {
+    var never = new TypeAnnotationDescriptor("Never", TypeAnnotationDescriptor.TypeKind.UNINHABITED, List.of(), null, false);
+    var integer = new TypeAnnotationDescriptor("int", TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), "int", false);
+    var union = new TypeAnnotationDescriptor("Never | int", TypeAnnotationDescriptor.TypeKind.UNION, List.of(never, integer), null, false);
+    var alias = new TypeAnnotationDescriptor("Alias", TypeAnnotationDescriptor.TypeKind.TYPE_ALIAS, List.of(union), null, false);
+    var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder().withName("value")
+      .withFullyQualifiedName("mod.value").withTypeAnnotationDescriptor(alias).build();
+    var table = spy(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var context = new ConversionContext("mod", new LazyTypesContext(table), (c, d) -> PythonType.UNKNOWN, null);
+    var converter = new FunctionDescriptorToPythonTypeConverter();
+    var function = (FunctionType) converter.convert(context, descriptor);
+    verifyNoInteractions(table);
+
+    assertThat(function.returnType()).isInstanceOf(ObjectType.class);
+    assertThat(function.returnType().unwrappedType()).isSameAs(table.getType("int"));
+    var converted = new PythonTypeToDescriptorConverter().convert("mod", new SymbolV2Impl("value"), Set.of(function));
+    var cached = DescriptorsToProtobuf.fromProtobuf(DescriptorsToProtobuf.toProtobufModuleDescriptor(Set.of(converted))).iterator().next();
+    assertThat(((FunctionDescriptor) cached).typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    var restored = (FunctionType) converter.convert(context, cached);
+    assertThat(restored.returnType().unwrappedType()).isSameAs(table.getType("int"));
+    assertThat(restored.returnType()).isEqualTo(function.returnType());
+  }
+
+  @Test
+  void nonReturningAnnotationSurvivesSemanticAndCacheRoundTrips() {
+    var annotation = new TypeAnnotationDescriptor("Never", TypeAnnotationDescriptor.TypeKind.UNINHABITED, List.of(), null, false);
+    var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder().withName("fail")
+      .withFullyQualifiedName("mod.fail").withTypeAnnotationDescriptor(annotation).build();
+    var context = new ConversionContext("mod", new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())),
+      (c, d) -> PythonType.UNKNOWN, null);
+    var converter = new FunctionDescriptorToPythonTypeConverter();
+    var function = (FunctionType) converter.convert(context, descriptor);
+    assertThat(function.returnType()).isSameAs(PythonType.NEVER);
+
+    var converted = new PythonTypeToDescriptorConverter().convert("mod", new SymbolV2Impl("fail"), Set.of(function));
+    var cached = DescriptorsToProtobuf.fromProtobuf(DescriptorsToProtobuf.toProtobufModuleDescriptor(Set.of(converted))).iterator().next();
+    assertThat(((FunctionDescriptor) cached).typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.UNINHABITED);
+    var restored = (FunctionType) converter.convert(context, cached);
+    assertThat(restored.returnType()).isSameAs(PythonType.NEVER);
+  }
+
   @Test
   void unresolvedDecoratorsAreNotDroppedOrLookedUpAsNames() {
     var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder().withName("overloaded")
@@ -61,6 +104,18 @@ class FunctionDescriptorToPythonTypeConverterTest {
     assertThat(restored.decorators()).hasSize(3);
     assertThat(restored.decorators().get(1).type()).isSameAs(PythonType.UNKNOWN);
     assertThat(restored.decorators().get(2).type()).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void anyInUnionWithNoReturnRemainsUnknown() {
+    var noReturn = new TypeAnnotationDescriptor("Never", TypeAnnotationDescriptor.TypeKind.UNINHABITED, List.of(), null, false);
+    var any = new TypeAnnotationDescriptor("Any", TypeAnnotationDescriptor.TypeKind.ANY, List.of(), null, false);
+    var union = new TypeAnnotationDescriptor("Never | Any", TypeAnnotationDescriptor.TypeKind.UNION, List.of(noReturn, any), null, false);
+    var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder().withName("value")
+      .withTypeAnnotationDescriptor(union).build();
+    var context = mock(ConversionContext.class);
+    var function = (FunctionType) new FunctionDescriptorToPythonTypeConverter().convert(context, descriptor);
+    assertThat(function.returnType()).isSameAs(PythonType.UNKNOWN);
   }
 
   @Test

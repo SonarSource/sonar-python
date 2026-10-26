@@ -65,6 +65,9 @@ public class LazyUnionType implements PythonType, ResolvableType {
     if (type instanceof LazyUnionType lazyUnionType) {
       return lazyUnionType.candidates.stream();
     }
+    if (type instanceof UnionType unionType) {
+      return unionType.candidates().stream();
+    }
     return Stream.of(type);
   }
 
@@ -84,6 +87,13 @@ public class LazyUnionType implements PythonType, ResolvableType {
     Set<PythonType> flatTypes = types.stream().flatMap(LazyUnionType::flattenLazyUnionTypes).collect(Collectors.toSet());
     if (flatTypes.stream().anyMatch(type -> type == PythonType.UNKNOWN)) {
       return PythonType.UNKNOWN;
+    }
+    flatTypes.remove(PythonType.NEVER);
+    if (flatTypes.isEmpty()) {
+      return PythonType.NEVER;
+    }
+    if (flatTypes.size() == 1) {
+      return flatTypes.iterator().next();
     }
     return new LazyUnionType(flatTypes);
   }

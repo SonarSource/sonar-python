@@ -16,6 +16,7 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -29,11 +30,48 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 
 class LazyUnionTypeTest {
+
+  @Test
+  void neverIsNormalizedWithoutResolvingLazyCandidates() {
+    var context = mock(LazyTypesContext.class);
+    var lazy = new LazyType("value", context);
+    assertThat(LazyUnionType.or(Set.of(PythonType.NEVER, lazy))).isSameAs(lazy);
+    assertThat(LazyUnionType.or(List.of(PythonType.NEVER, PythonType.NEVER))).isSameAs(PythonType.NEVER);
+    assertThat(LazyUnionType.or(Set.of(PythonType.NEVER, PythonType.UNKNOWN, lazy))).isSameAs(PythonType.UNKNOWN);
+    verifyNoInteractions(context);
+  }
+
+  @Test
+  void neverIsNormalizedAcrossNestedLazyAndResolvedUnions() {
+    var resolvedUnion = UnionType.or(INT_TYPE, FLOAT_TYPE);
+    var lazyUnion = LazyUnionType.or(Set.of(INT_TYPE, FLOAT_TYPE));
+    var combined = LazyUnionType.or(Set.of(resolvedUnion, lazyUnion, PythonType.NEVER));
+    assertThat(((LazyUnionType) combined).candidates()).containsExactlyInAnyOrder(INT_TYPE, FLOAT_TYPE);
+    assertThat(TypeUtils.resolved(combined)).isEqualTo(resolvedUnion);
+  }
+
+  @Test
+  void neverIsNormalizedAfterLazyResolution() {
+    var context = mock(LazyTypesContext.class);
+    var never = new LazyType("never", context);
+    var otherNever = new LazyType("otherNever", context);
+    var integer = new LazyType("integer", context);
+    var unknown = new LazyType("unknown", context);
+    when(context.resolveLazyType(never)).thenReturn(PythonType.NEVER);
+    when(context.resolveLazyType(otherNever)).thenReturn(PythonType.NEVER);
+    when(context.resolveLazyType(integer)).thenReturn(INT_TYPE);
+    when(context.resolveLazyType(unknown)).thenReturn(PythonType.UNKNOWN);
+
+    assertThat(TypeUtils.resolved(LazyUnionType.or(Set.of(never, integer)))).isSameAs(INT_TYPE);
+    assertThat(TypeUtils.resolved(LazyUnionType.or(Set.of(never, otherNever)))).isSameAs(PythonType.NEVER);
+    assertThat(TypeUtils.resolved(LazyUnionType.or(Set.of(never, integer, unknown)))).isSameAs(PythonType.UNKNOWN);
+  }
 
   @Test
   void lazyUnionTypeResolvesNestedLazyTypesWhenAccessed() {

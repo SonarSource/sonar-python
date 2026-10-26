@@ -262,6 +262,9 @@ public class PythonTypeToDescriptorConverter {
 
   @CheckForNull
   private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type, boolean isSelf, List<TypeAnnotationDescriptor> args) {
+    if (type == PythonType.NEVER) {
+      return new TypeAnnotationDescriptor("Never", TypeAnnotationDescriptor.TypeKind.UNINHABITED, List.of(), null, false);
+    }
     if (type instanceof ObjectType objectType) {
       List<TypeAnnotationDescriptor> objArgs = objectType.attributes().stream()
         .map(PythonTypeToDescriptorConverter::createTypeAnnotationDescriptor)

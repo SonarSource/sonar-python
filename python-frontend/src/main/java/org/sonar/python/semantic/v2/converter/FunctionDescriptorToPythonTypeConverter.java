@@ -42,7 +42,7 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
       .toList();
 
     PythonType returnType = Optional.ofNullable(from.typeAnnotationDescriptor())
-      .map(typeAnnotation -> typeAnnotationConverter.convert(ctx, typeAnnotation))
+      .map(typeAnnotation -> typeAnnotationConverter.convertReturnType(ctx, typeAnnotation))
       .orElse(PythonType.UNKNOWN);
 
     var decorators = from.decorators()

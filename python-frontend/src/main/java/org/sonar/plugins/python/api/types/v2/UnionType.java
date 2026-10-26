@@ -126,6 +126,13 @@ public class UnionType implements PythonType {
     if(flatTypes.stream().anyMatch(type -> type == PythonType.UNKNOWN)) {
       return PythonType.UNKNOWN;
     }
+    flatTypes.remove(PythonType.NEVER);
+    if (flatTypes.isEmpty()) {
+      return PythonType.NEVER;
+    }
+    if (flatTypes.size() == 1) {
+      return flatTypes.iterator().next();
+    }
     ensureCandidatesAreNotLazyTypes(flatTypes);
     return new UnionType(flatTypes);
   }

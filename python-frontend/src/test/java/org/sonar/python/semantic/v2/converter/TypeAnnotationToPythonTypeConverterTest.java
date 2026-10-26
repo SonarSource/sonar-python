@@ -26,6 +26,8 @@ import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.python.index.TypeAnnotationDescriptor;
+import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.TypesTestUtils;
 
@@ -34,6 +36,29 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class TypeAnnotationToPythonTypeConverterTest {
+
+  @Test
+  void nonReturningMarkerIsConfinedToReturnAnnotations() {
+    var ctx = mock(ConversionContext.class);
+    when(ctx.lazyTypesContext()).thenReturn(new LazyTypesContext(TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE));
+    var never = new TypeAnnotationDescriptor("Never", TypeAnnotationDescriptor.TypeKind.UNINHABITED, List.of(), null, false);
+    var alias = new TypeAnnotationDescriptor("Alias", TypeAnnotationDescriptor.TypeKind.TYPE_ALIAS, List.of(never), null, false);
+    var generic = new TypeAnnotationDescriptor("list[Never]", TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(never), "list", false);
+    var converter = new TypeAnnotationToPythonTypeConverter();
+
+    var parameter = new FunctionDescriptor.Parameter("arg", null, never, false, false, false, false, false, null);
+    assertThat(new ParameterConverter().convert(ctx, parameter).declaredType().type()).isSameAs(PythonType.UNKNOWN);
+    var variable = new VariableDescriptor("value", "mod.value", null, false, false, List.of(), List.of(), never);
+    assertThat(new VariableDescriptorToPythonTypeConverter().convert(ctx, variable)).isSameAs(PythonType.UNKNOWN);
+    assertThat(converter.convert(ctx, never)).isSameAs(PythonType.UNKNOWN);
+    assertThat(converter.convert(ctx, alias)).isSameAs(PythonType.UNKNOWN);
+    assertThat(converter.convertReturnType(ctx, never)).isSameAs(PythonType.NEVER);
+    assertThat(converter.convertReturnType(ctx, alias)).isSameAs(PythonType.NEVER);
+    assertThat(((ObjectType) converter.convertReturnType(ctx, generic)).attributes()).containsExactly(PythonType.UNKNOWN);
+    assertThat(PythonType.NEVER.name()).isEqualTo("Never");
+    assertThat(PythonType.NEVER.key()).isEqualTo("Never");
+  }
+
 
   @ParameterizedTest
   @CsvSource({"TUPLE, tuple, FALSE", "TYPE_VAR, int, FALSE", "TYPED_DICT, dict, FALSE", "TYPE, type, TRUE", "CALLABLE, function, TRUE"})

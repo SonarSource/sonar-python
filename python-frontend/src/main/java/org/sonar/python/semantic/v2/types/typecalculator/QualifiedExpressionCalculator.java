@@ -57,7 +57,7 @@ public class QualifiedExpressionCalculator {
   private PythonType handlePropertyFunction(PythonType type) {
     // If a member access is a method with a "property" annotation, we consider the resulting type to be the return type of the method
     if (type instanceof FunctionType functionType && hasFunctionPropertyDecorator(functionType)) {
-      return functionType.returnType();
+      return TypeUtils.widenNeverToUnknown(functionType.returnType());
     }
     return type;
   }

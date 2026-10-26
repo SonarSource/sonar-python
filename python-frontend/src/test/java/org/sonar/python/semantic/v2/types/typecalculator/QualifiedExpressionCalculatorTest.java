@@ -16,20 +16,28 @@
  */
 package org.sonar.python.semantic.v2.types.typecalculator;
 
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
@@ -38,6 +46,39 @@ class QualifiedExpressionCalculatorTest {
 
   private final TypePredicateContext typePredicateContext = TypePredicateContext.of(PROJECT_LEVEL_TYPE_TABLE);
   private final QualifiedExpressionCalculator calculator = new QualifiedExpressionCalculator(typePredicateContext);
+
+  @Test
+  void nonReturningPropertyDoesNotExposeNeverAsAnExpressionType() {
+    assertThat(propertyResult(PythonType.NEVER)).isSameAs(PythonType.UNKNOWN);
+    var integer = ObjectType.fromType(INT_TYPE);
+    assertThat(propertyResult(UnionType.or(PythonType.NEVER, integer))).isEqualTo(integer);
+    assertThat(propertyResult(UnionType.or(PythonType.NEVER, PythonType.UNKNOWN))).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void nonReturningStubPropertyRemainsUnknown() {
+    var fileInput = parseAndInferTypes("""
+      import serial
+      port = serial.VTIMESerial()
+      port.cancel_read
+      """);
+    assertThat(getQualifiedExpressionFromStatement(fileInput).typeV2()).isSameAs(PythonType.UNKNOWN);
+  }
+
+  private PythonType propertyResult(PythonType returnType) {
+    var function = new FunctionTypeBuilder("value").withReturnType(returnType)
+      .withDecorators(List.of(TypeWrapper.of(PROJECT_LEVEL_TYPE_TABLE.getType("property")))).build();
+    var owner = mock(PythonType.class);
+    when(owner.resolveMember("value")).thenReturn(Optional.of(function));
+    var qualifier = mock(Expression.class);
+    when(qualifier.typeV2()).thenReturn(owner);
+    var name = mock(Name.class);
+    when(name.name()).thenReturn("value");
+    var expression = mock(QualifiedExpression.class);
+    when(expression.qualifier()).thenReturn(qualifier);
+    when(expression.name()).thenReturn(name);
+    return calculator.calculate(expression);
+  }
 
   @Test
   void calculate_basicMemberAccess_returnsMethodType() {

@@ -23,6 +23,7 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.types.v2.ClassType;
@@ -31,13 +32,17 @@ import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.types.v2.TypesTestUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.assertj.core.api.InstanceOfAssertFactories.type;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
@@ -49,6 +54,57 @@ import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 class CallReturnTypeCalculatorTest {
 
   private final TypePredicateContext typePredicateContext = TypePredicateContext.of(PROJECT_LEVEL_TYPE_TABLE);
+
+  @Test
+  void noReturnOverloadsDoNotErasePossibleReturnValues() {
+    var integer = ObjectType.fromType(INT_TYPE);
+    var nonReturning = returning(PythonType.NEVER);
+    var integerReturning = returning(integer);
+    assertThat(callResult(UnionType.or(nonReturning, integerReturning))).isEqualTo(integer);
+    assertThat(callResult(returning(UnionType.or(integer, PythonType.NEVER)))).isEqualTo(integer);
+  }
+
+  @Test
+  void unknownAndOnlyNonReturningAlternativesRemainUnknown() {
+    var nonReturning = returning(PythonType.NEVER);
+    assertThat(callResult(nonReturning)).isSameAs(PythonType.UNKNOWN);
+    assertThat(callResult(UnionType.or(nonReturning, returning(PythonType.NEVER)))).isSameAs(PythonType.UNKNOWN);
+    assertThat(callResult(UnionType.or(nonReturning, returning(PythonType.UNKNOWN)))).isSameAs(PythonType.UNKNOWN);
+    assertThat(callResult(UnionType.or(nonReturning, returning(PythonType.UNKNOWN), returning(ObjectType.fromType(INT_TYPE)))))
+      .isSameAs(PythonType.UNKNOWN);
+    var localUnknown = new FunctionTypeBuilder("local").withTypeOrigin(TypeOrigin.LOCAL).build();
+    assertThat(callResult(UnionType.or(nonReturning, localUnknown, returning(ObjectType.fromType(INT_TYPE)))))
+      .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void noReturnDoesNotEraseNullableReturnAlternatives() {
+    var nullableInteger = UnionType.or(ObjectType.fromType(INT_TYPE), ObjectType.fromType(PROJECT_LEVEL_TYPE_TABLE.getType("NoneType")));
+    assertThat(callResult(UnionType.or(returning(PythonType.NEVER), returning(nullableInteger)))).isEqualTo(nullableInteger);
+  }
+
+  @Test
+  void pandasConcatRetainsBothSeriesAndDataFrameReturnAlternatives() {
+    var fileInput = parseAndInferTypes("import pandas as pd\npd.concat([])");
+    var call = (CallExpression) getLastDescendant(fileInput, CallExpression.class::isInstance);
+    var result = CallReturnTypeCalculator.computeCallExpressionType(call, typePredicateContext);
+    assertThat(result).isInstanceOfSatisfying(UnionType.class, union ->
+      assertThat(union.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class))
+        .extracting(candidate -> ((ObjectType) candidate).unwrappedType().name()).containsExactlyInAnyOrder("Series", "DataFrame"));
+  }
+
+  private static FunctionType returning(PythonType type) {
+    return new FunctionTypeBuilder("function").withReturnType(type).build();
+  }
+
+  private PythonType callResult(PythonType calleeType) {
+    var expression = mock(Expression.class);
+    when(expression.typeV2()).thenReturn(calleeType);
+    var call = mock(CallExpression.class);
+    when(call.callee()).thenReturn(expression);
+    when(call.arguments()).thenReturn(List.of());
+    return CallReturnTypeCalculator.computeCallExpressionType(call, typePredicateContext);
+  }
 
   @Test
   void computeCallExpressionType_classInstantiation() {

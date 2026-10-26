@@ -32,6 +32,14 @@ public class TypeUtils {
   private TypeUtils() {
   }
 
+  /**
+   * Expression inference does not model unreachable code. Apply this widening only
+   * after combining return alternatives, so NEVER cannot erase returning values.
+   */
+  public static PythonType widenNeverToUnknown(PythonType type) {
+    return type == PythonType.NEVER ? PythonType.UNKNOWN : type;
+  }
+
   public static PythonType resolved(PythonType pythonType) {
     if (pythonType instanceof ResolvableType resolvableType) {
       return resolvableType.resolve();
