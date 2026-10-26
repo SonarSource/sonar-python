@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   analyze:
-    runs-on: github-ubuntu-latest-s
+    runs-on: sonar-s
     name: Build
     permissions:
       id-token: write
@@ -57,6 +57,11 @@ jobs:
 
       - name: Remove private directory
         run: rm -rf private
+
+      - name: Setup UV
+        uses: SonarSource/ci-github-actions/config-uv@v2
+      - name: Point uv at Repox
+        run: echo "UV_DEFAULT_INDEX=repox=https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple" >> "$GITHUB_ENV"
 
       - name: Analyze
         uses: ./.github-commons/actions/analyze
