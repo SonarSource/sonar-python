@@ -143,6 +143,11 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static final TypeInferenceMatcher IS_TUPLE = TypeInferenceMatcher.of(TypeInferenceMatchers.isType("tuple"));
 
+  private static final TypeInferenceMatcher IS_OVERLOAD = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.any(
+      TypeInferenceMatchers.isType("typing.overload"),
+      TypeInferenceMatchers.isType("typing_extensions.overload")));
+
   private static final String PYTEST_MODULE = "pytest";
   private static final String PYTEST_REQUEST_PARAMETER = "request";
   private static final Set<String> TYPING_ANNOTATED = Set.of("typing.Annotated", "typing_extensions.Annotated");
@@ -163,6 +168,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private final List<String> typeVarNames = new ArrayList<>();
 
   private final Map<String, TypeWrapper> wildcardImportedTypes = new HashMap<>();
+
+  private final Map<ClassType, Set<String>> overloadsAwaitingImplementation = new HashMap<>();
 
   private final TypePredicateContext typePredicateContext;
 
@@ -859,15 +866,45 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     ownerClass.members().add(new Member(memberName, memberType));
   }
 
-  private static void addFunctionMemberToClass(ClassType ownerClass, FunctionType functionType) {
+  private void addFunctionMemberToClass(ClassType ownerClass, FunctionType functionType) {
+    String name = functionType.name();
+    var previous = ownerClass.members().stream().filter(member -> name.equals(member.name())).map(Member::type).findFirst();
+    if (isOverload(functionType) && previous.filter(this::hasDecoratorInvolvement).isEmpty()) {
+      var pending = overloadsAwaitingImplementation.computeIfAbsent(ownerClass, key -> new HashSet<>());
+      PythonType alternatives = previous.filter(type -> pending.contains(name) && isOverloadSet(type))
+        .map(type -> UnionType.or(type, functionType))
+        .orElse(functionType);
+      pending.add(name);
+      addMemberToClass(ownerClass, name, alternatives);
+      return;
+    }
+    // The implementation supplies runtime behavior; the overloads describe the
+    // public call signatures. Consume it once so later reassignments still win.
+    var pending = overloadsAwaitingImplementation.get(ownerClass);
+    if (pending != null && pending.remove(name) && !functionType.hasDecorators() && previous.filter(this::isOverloadSet).isPresent()) {
+      return;
+    }
     addMemberWithDecoratorCheck(ownerClass, functionType.name(), functionType);
   }
 
-  private static void addStaticFieldToClass(ClassType ownerClass, String memberName, PythonType fieldType) {
+  private boolean isOverloadSet(PythonType type) {
+    return type instanceof UnionType union ? union.candidates().stream().allMatch(this::isOverload) : isOverload(type);
+  }
+
+  private boolean isOverload(PythonType type) {
+    return type instanceof FunctionType function && function.decorators().size() == 1
+      && IS_OVERLOAD.evaluate(function.decorators().getFirst().type(), typePredicateContext).isTrue();
+  }
+
+  private void addStaticFieldToClass(ClassType ownerClass, String memberName, PythonType fieldType) {
+    var pending = overloadsAwaitingImplementation.get(ownerClass);
+    if (pending != null) {
+      pending.remove(memberName);
+    }
     addMemberWithDecoratorCheck(ownerClass, memberName, fieldType);
   }
 
-  private static void addMemberWithDecoratorCheck(ClassType ownerClass, String memberName, PythonType memberType) {
+  private void addMemberWithDecoratorCheck(ClassType ownerClass, String memberName, PythonType memberType) {
     var hasDecoratorInvolvement = ownerClass.members().stream()
       .filter(member -> memberName.equals(member.name()))
       .anyMatch(member -> hasDecoratorInvolvement(memberType) || hasDecoratorInvolvement(member.type()));
@@ -876,9 +913,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     addMemberToClass(ownerClass, memberName, typeToAdd);
   }
 
-  private static boolean hasDecoratorInvolvement(PythonType type) {
+  private boolean hasDecoratorInvolvement(PythonType type) {
     if (type instanceof FunctionType ft) {
-      return ft.hasDecorators();
+      return ft.hasDecorators() && !isOverload(ft);
+    }
+    if (type instanceof UnionType union) {
+      return union.candidates().stream().anyMatch(this::hasDecoratorInvolvement);
     }
     // If the existing type is UNKNOWN, a previous conflict occurred - keep it as UNKNOWN
     return type instanceof UnknownType;

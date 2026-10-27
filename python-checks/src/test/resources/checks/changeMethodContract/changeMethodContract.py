@@ -123,9 +123,11 @@ class ChildClassPosOnlyMovedBad1(ParentClass):
     def positional_only(self, param1, param2, /, *, param3): ... # Noncompliant {{Make parameter param2 keyword-or-positional.}}
 #                                     ^^^^^^
 
-class ChildClassPosOnlyMovedBad2(ParentClass):
-    def positional_only(self, param1, /, param2, param3): ... # Noncompliant {{Make parameter param3 keyword only.}}
-#                                                ^^^^^^
+class ChildClassKeywordOnlyToKworPos(ParentClass):
+    def positional_only(self, param1, /, param2, param3): ... # OK. Keyword arguments are still accepted.
+
+class ChildClassKeywordOnlyToPosOnly(ParentClass):
+    def positional_only(self, param1, param2, param3, /): ... # Noncompliant {{Make parameter param2 keyword-or-positional.}} {{Make parameter param3 keyword only.}}
 class ChildClassPosOnlyToKworPos(ParentClass):
     def positional_only(self, param1, param2,*, param3): ... # OK The substitution is correct
 

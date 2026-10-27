@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
@@ -631,6 +632,99 @@ public class ClassTypeTest {
 
     assertThat(classType.resolveMember("foo"))
       .hasValue(PythonType.UNKNOWN);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"typing", "typing_extensions"})
+  void source_overloads_preserve_alternatives_after_implementation(String module) {
+    ClassType owner = classType("from " + module + " import overload as signature\n" + """
+      class A:
+        @signature
+        def foo(self, value: int) -> int: ...
+        @signature
+        def foo(self, value: str) -> str: ...
+        def foo(self, *args, **kwargs): ...
+      """);
+
+    assertThat(owner.resolveMember("foo")).hasValueSatisfying(member ->
+      assertThat(member).isInstanceOfSatisfying(UnionType.class, union -> {
+        assertThat(union.candidates()).hasSize(2).allSatisfy(candidate ->
+          assertThat(candidate).isInstanceOfSatisfying(FunctionType.class, function -> {
+            assertThat(function.parameters()).hasSize(2);
+            assertThat(function.hasVariadicParameter()).isFalse();
+          }));
+        assertThat(union.candidates()).map(FunctionType.class::cast)
+          .extracting(function -> function.returnType().unwrappedType().name()).containsExactlyInAnyOrder("int", "str");
+      }));
+  }
+
+  @Test
+  void source_overloads_without_implementation_preserve_alternatives() {
+    ClassType owner = classType("""
+      from typing import overload
+      class A:
+        @overload
+        def foo(self, value: int): ...
+        @overload
+        def foo(self, value: str): ...
+      """);
+
+    assertThat(owner.resolveMember("foo")).hasValueSatisfying(member ->
+      assertThat(member).isInstanceOfSatisfying(UnionType.class, union -> assertThat(union.candidates()).hasSize(2)));
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"def foo(self, other): ...", "foo: int = 42"})
+  void source_overload_implementation_does_not_hide_later_reassignment(String reassignment) {
+    ClassType owner = classType("""
+      from typing import overload
+      class A:
+        @overload
+        def foo(self, value: int): ...
+        @overload
+        def foo(self, value: str): ...
+        def foo(self, value): ...
+      """ + "  " + reassignment + "\n");
+
+    assertThat(owner.resolveMember("foo")).hasValueSatisfying(member -> {
+      assertThat(member).isNotInstanceOf(UnionType.class).isNotEqualTo(PythonType.UNKNOWN);
+      if (member instanceof FunctionType function) {
+        assertThat(function.parameters().getLast().name()).isEqualTo("other");
+      } else {
+        assertThat(member.unwrappedType().name()).isEqualTo("int");
+      }
+    });
+  }
+
+  @Test
+  void source_overloads_with_unknown_decorators_remain_unknown() {
+    ClassType owner = classType("""
+      from typing import overload
+      class A:
+        @overload
+        @custom
+        def foo(self, value: int): ...
+        @overload
+        @custom
+        def foo(self, value: str): ...
+        def foo(self, value): ...
+      """);
+
+    assertThat(owner.resolveMember("foo")).contains(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void shadowed_overload_is_not_treated_as_a_typing_marker() {
+    ClassType owner = classType("""
+      def overload(function): ...
+      class A:
+        @overload
+        def foo(self, value: int): ...
+        @overload
+        def foo(self, value: str): ...
+      """);
+
+    assertThat(owner.resolveMember("foo")).contains(PythonType.UNKNOWN);
   }
 
   private static Stream<Arguments> decoratorConflictTestCases() {
