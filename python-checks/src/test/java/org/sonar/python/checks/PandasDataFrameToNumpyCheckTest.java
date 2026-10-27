@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -27,6 +28,15 @@ class PandasDataFrameToNumpyCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/pandasDataFrameToNumpy.py", check);
+  }
+
+  @Test
+  void does_not_raise_on_the_dataframe_implementation_itself() {
+    PythonCheckVerifier.verifyNoIssue(List.of(
+      "src/test/resources/checks/s6741/package_root.py",
+      "src/test/resources/checks/s6741/pandas/__init__.py",
+      "src/test/resources/checks/s6741/pandas/core/__init__.py",
+      "src/test/resources/checks/s6741/pandas/core/frame.py"), check);
   }
 
   @Test

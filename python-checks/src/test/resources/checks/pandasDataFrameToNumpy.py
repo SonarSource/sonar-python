@@ -83,6 +83,13 @@ def dataframe_from_read_csv():
     my_df.values # Noncompliant
 
 
+def dataframe_from_pandas_core():
+    from pandas.core.frame import DataFrame
+
+    DataFrame({"column": [1]}).values # Noncompliant
+    #                          ^^^^^^
+
+
 def fn_on_parameter_type_hint():
     import pandas as pd
 
