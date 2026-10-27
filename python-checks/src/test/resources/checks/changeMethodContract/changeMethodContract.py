@@ -142,7 +142,7 @@ class ChildClassReorderingAndExtra(ParentClass):
 class ChildClassOneExtraDefault(ParentClass):
     def my_method(self, foo, other=42): ... # OK
 
-from io import BytesIO, TextIOWrapper
+from io import BufferedIOBase, BytesIO, TextIOWrapper
 
 class StreamingBuffer(BytesIO):
   def read(self): ... # Noncompliant {{Add 1 missing parameter. This method overrides io.BufferedIOBase.read.}}
@@ -179,3 +179,76 @@ class InheritedFromAbstractSuperclass(AbstractSuperclass):
 
   def bar(self): # Noncompliant
     ...
+
+
+class PositionalOnlyContract:
+    def positional(self, first, second, /): ...
+    def optional(self, value=0, /): ...
+    def required(self, value, /): ...
+    def mixed(self, x, /, y): ...
+
+class RenamedPositionalContract(PositionalOnlyContract):
+    def positional(self, second, first, /): ...
+    def optional(self, renamed): ...  # Noncompliant {{Add a default value to parameter renamed.}}
+    def required(self, renamed, value): ...  # Noncompliant {{Remove parameter value or provide default value.}}
+    def mixed(self, y, x): ...  # Noncompliant {{Move parameter y to position 2.}}
+
+class ExtendedPositionalContract(PositionalOnlyContract):
+    def positional(self, second, first, extra=None): ...
+    def optional(self, renamed, extra): ...  # Noncompliant {{Add a default value to parameter renamed.}} {{Remove parameter extra or provide default value.}}
+    def required(self, renamed, *, value): ...  # Noncompliant {{Remove parameter value or provide default value.}}
+    def mixed(self, renamed, y): ...
+
+class WidenedPositionalContract(PositionalOnlyContract):
+    def positional(self, second, first): ...
+    def optional(self, renamed=0, extra=None): ...
+    def required(self, renamed, value=0): ...
+
+class NarrowedPositionalContract(PositionalOnlyContract):
+    def optional(self, *, renamed): ...  # Noncompliant {{Add a default value to parameter renamed.}} {{Make parameter renamed accept positional arguments.}}
+#                         ^^^^^^^
+    def required(self, *, renamed, extra): ...  # Noncompliant {{Make parameter renamed accept positional arguments.}} {{Remove parameter extra or provide default value.}}
+
+# Stub receivers may lack the positional-only flag carried by later parameters.
+
+class OptionalExtraOnStubContract(BufferedIOBase):
+    def read1(self, n, extra=None): ...  # Noncompliant {{Add a default value to parameter n. This method overrides io.BufferedIOBase.read1.}}
+
+class RequiredExtraOnStubContract(BufferedIOBase):
+    def read1(self, n, extra): ...  # Noncompliant {{Add a default value to parameter n. This method overrides io.BufferedIOBase.read1.}} {{Remove parameter extra or provide default value. This method overrides io.BufferedIOBase.read1.}}
+
+
+import tensorflow as tf
+from tensorflow.keras import Model
+from tensorflow.keras.models import Model as ModelAlias
+from tensorflow.keras.layers import Layer
+
+# Keras inspects custom signatures; its library call hooks accept *args/**kwargs.
+class CustomModel(Model):
+    def call(self, inputs): ...
+
+class MultiInputModel(ModelAlias):
+    def call(self, left, right, *, training=False, mask=None): ...
+
+class CustomLayer(Layer):
+    def call(self, inputs): ...
+    def build(self): ...  # Noncompliant {{Add 1 missing parameter. This method overrides tensorflow.keras.layers.Layer.build.}}
+
+class MultiInputLayer(tf.keras.layers.Layer):
+    def call(self, left, right): ...
+
+class RequiredTrainingModel(tf.keras.Model):
+    def call(self, inputs, training, extra=None): ...
+
+# Source-defined contracts on Keras subclasses remain checked.
+class ChangedUserModel(CustomModel):
+    def call(self): ...  # Noncompliant {{Add missing parameters inputs.}}
+
+class ChangedUserLayer(MultiInputLayer):
+    def call(self, left): ...  # Noncompliant {{Add missing parameters right.}}
+
+class OrdinaryCallParent:
+    def call(self, inputs, training=False, mask=None): ...
+
+class OrdinaryCallChild(OrdinaryCallParent):
+    def call(self, inputs): ...  # Noncompliant {{Add missing parameters training mask.}}

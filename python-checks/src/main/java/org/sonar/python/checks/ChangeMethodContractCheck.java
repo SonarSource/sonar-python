@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.matchers.AnyTypePredicate;
 import org.sonar.python.types.v2.matchers.HasOnlyFunctionDecoratorsSatisfyingPredicate;
+import org.sonar.python.types.v2.matchers.IsFunctionOwnerSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
@@ -47,6 +48,8 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
 
   private static final TypePredicate SUPPORTED_DECORATORS = new HasOnlyFunctionDecoratorsSatisfyingPredicate(
     new AnyTypePredicate(List.of(new IsTypePredicate("abc.abstractmethod"), new IsTypePredicate("typing.overload"))));
+  private static final TypePredicate KERAS_CALL_OWNER = new IsFunctionOwnerSatisfyingPredicate(
+    new AnyTypePredicate(List.of(new IsTypePredicate("tensorflow.keras.models.Model"), new IsTypePredicate("tensorflow.keras.layers.Layer"))));
 
   @Override
   public void initialize(Context context) {
@@ -71,8 +74,8 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   private static void checkMethodContract(SubscriptionContext ctx, FunctionType method) {
     overriddenMethod(method)
       .ifPresent(overriddenMethod -> {
-        if (overriddenMethod.hasVariadicParameter() || hasUnsupportedDecorators(ctx, overriddenMethod)) {
-          // ignore function declarations with packed params
+        if (overriddenMethod.hasVariadicParameter() || hasUnsupportedDecorators(ctx, overriddenMethod) || isKerasCallHook(ctx, overriddenMethod)) {
+          // Ignore dynamic signatures and unsupported decorators.
           return;
         }
 
@@ -97,6 +100,12 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
           checkDefaultValuesAndParamNames(ctx, parameters, overriddenMethod);
         }
       });
+  }
+
+  private static boolean isKerasCallHook(SubscriptionContext ctx, FunctionType method) {
+    // Keras Model/Layer.call accept *args/**kwargs at runtime, unlike their fixed stub signatures.
+    return "call".equals(method.name()) && method.definitionLocation().isEmpty()
+      && KERAS_CALL_OWNER.check(method, TypePredicateContext.of(ctx.typeTable())).isTrue();
   }
 
   private static Optional<FunctionType> overriddenMethod(FunctionType method) {
@@ -175,12 +184,24 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void reportOnExtraParameters(SubscriptionContext ctx, FunctionType method, FunctionType overriddenMethod) {
-    List<String> parameterNames = method.parameters().stream().map(ParameterV2::name).toList();
-    List<String> overriddenParameterNames = overriddenMethod.parameters().stream().map(ParameterV2::name).toList();
-    long renamedPositionalParameters = overriddenMethod.parameters().stream()
+    List<ParameterV2> overriddenParameters = overriddenMethod.parameters();
+    int firstNamedParameter = 0;
+    for (int i = 0; i < overriddenParameters.size(); i++) {
+      if (overriddenParameters.get(i).isPositionalOnly()) {
+        checkDefaultValueAndKeywordOnly(ctx, overriddenMethod, overriddenParameters.get(i), method.parameters().get(i));
+        firstNamedParameter = i + 1;
+      }
+    }
+    // Pair positional-only slots before comparing names. Stub receivers need not
+    // carry the positional-only flag of the following parameters.
+    List<ParameterV2> remainingParameters = method.parameters().subList(firstNamedParameter, method.parameters().size());
+    List<ParameterV2> remainingOverriddenParameters = overriddenParameters.subList(firstNamedParameter, overriddenParameters.size());
+    List<String> parameterNames = remainingParameters.stream().map(ParameterV2::name).toList();
+    List<String> overriddenParameterNames = remainingOverriddenParameters.stream().map(ParameterV2::name).toList();
+    long renamedPositionalParameters = remainingOverriddenParameters.stream()
       .filter(parameter -> !parameter.isKeywordOnly() && !parameterNames.contains(parameter.name()))
       .count();
-    for (ParameterV2 parameter : method.parameters()) {
+    for (ParameterV2 parameter : remainingParameters) {
       if (overriddenParameterNames.contains(parameter.name())) {
         continue;
       }
@@ -202,10 +223,14 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     for (int i = 0; i < overriddenMethod.parameters().size(); i++) {
       ParameterV2 overriddenParam = overriddenMethod.parameters().get(i);
       ParameterV2 parameter = parameters.get(i);
-      if (!Objects.equals(overriddenParam.name(), parameter.name())) {
-        mismatchedOverriddenParamPosition.put(overriddenParam.name(), i);
+      boolean sameName = Objects.equals(overriddenParam.name(), parameter.name());
+      if (!sameName) {
         mismatchedParamPosition.put(parameter.name(), i);
-      } else {
+        if (!overriddenParam.isPositionalOnly()) {
+          mismatchedOverriddenParamPosition.put(overriddenParam.name(), i);
+        }
+      }
+      if (overriddenParam.isPositionalOnly() || sameName) {
         checkDefaultValueAndKeywordOnly(ctx, overriddenMethod, overriddenParam, parameter);
       }
     }
@@ -225,6 +250,9 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     String prefix = "Make parameter " + parameter.name();
     if (overriddenParam.hasDefaultValue() && !parameter.hasDefaultValue()) {
       reportIssue(ctx, "Add a default value to parameter " + parameter.name() + ".", parameter.location(), overriddenMethod);
+    }
+    if (overriddenParam.isPositionalOnly() && parameter.isKeywordOnly()) {
+      reportIssue(ctx, prefix + " accept positional arguments.", parameter.location(), overriddenMethod);
     }
     if ((!overriddenParam.isKeywordOnly() && !overriddenParam.isPositionalOnly()) && (parameter.isKeywordOnly() || parameter.isPositionalOnly())) {
       reportIssue(ctx, prefix + " keyword-or-positional.", parameter.location(), overriddenMethod);
