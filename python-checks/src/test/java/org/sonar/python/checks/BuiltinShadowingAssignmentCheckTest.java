@@ -137,10 +137,9 @@ class BuiltinShadowingAssignmentCheckTest {
   }
 
   @Test
-  void noQuickFixForOuterBindingSplitFromComprehensionWalrus() {
+  void noQuickFixForOuterBindingWithComprehensionWalrus() {
     var issues = PythonCheckVerifier.issues("src/test/resources/checks/builtinShadowingComprehension.py", new BuiltinShadowingAssignmentCheck());
-    // V2 splits these bindings into two symbols; neither finding may offer a partial rename.
-    assertThat(issues).hasSize(2).allSatisfy(issue -> assertThat(issue.quickFixes()).isEmpty());
+    assertThat(issues).hasSize(1).allSatisfy(issue -> assertThat(issue.quickFixes()).isEmpty());
   }
 
 }

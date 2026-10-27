@@ -25,4 +25,14 @@ class DjangoNonDictSerializationCheckTest {
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/djangoNonDictSerialization.py", new DjangoNonDictSerializationCheck());
   }
+
+  @Test
+  void unionContainingDictionary() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/djangoNonDictSerializationUnion.py", new DjangoNonDictSerializationCheck());
+  }
+
+  @Test
+  void walrusAssignmentInComprehension() {
+    PythonCheckVerifier.verify("src/test/resources/checks/djangoNonDictSerializationWalrusComprehension.py", new DjangoNonDictSerializationCheck());
+  }
 }

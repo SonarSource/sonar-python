@@ -20,7 +20,12 @@ from pathlib import Path
 
 from mypy import build
 
-from serializer.serializers import TYPESHED_PATH, get_options, get_sources
+from serializer.serializers import (
+    CUSTOM_STUBS_PATH,
+    TYPESHED_PATH,
+    get_options,
+    get_sources,
+)
 from serializer.symbols import ModuleSymbol
 
 
@@ -40,7 +45,9 @@ def test_stdlib_dependencies_use_pinned_typeshed():
         "struct": "Struct",
     }
     probe = build.BuildSource(
-        None, "stdlib_probe", "\n".join(f"import {module}" for module in classes_by_module)
+        None,
+        "stdlib_probe",
+        "\n".join(f"import {module}" for module in classes_by_module),
     )
     result = build.build([probe], get_options())
     stdlib = Path(TYPESHED_PATH) / "stdlib"
@@ -56,6 +63,24 @@ def test_stdlib_dependencies_use_pinned_typeshed():
             assert Path(source.path).is_relative_to(stdlib), (module, source.path)
 
 
+def test_custom_django_http_exports_json_response():
+    custom_stubs, _ = get_sources(CUSTOM_STUBS_PATH)
+    probe = build.BuildSource(
+        None,
+        "django_json_response_probe",
+        "from django.http import JsonResponse\nresponse = JsonResponse({})",
+    )
+
+    result = build.build([*custom_stubs, probe], get_options())
+
+    assert not any(
+        'Module "django.http" has no attribute "JsonResponse"' in error
+        for error in result.errors
+    )
+    django_http_response = ModuleSymbol(result.files["django.http.response"]).to_proto()
+    assert "JsonResponse" in {cls.name for cls in django_http_response.classes}
+
+
 def test_circular_imports_preserve_types_in_every_source_order(tmp_path):
     package = tmp_path / "probe"
     package.mkdir()
@@ -66,8 +91,7 @@ def test_circular_imports_preserve_types_in_every_source_order(tmp_path):
         "    def child(self) -> child.Child: ...\n"
     )
     (package / "child.pyi").write_text(
-        "from probe import base\n"
-        "class Child(base.Base): ...\n"
+        "from probe import base\nclass Child(base.Base): ...\n"
     )
     sources, _ = get_sources(str(tmp_path))
     serialized_models = []
@@ -78,6 +102,9 @@ def test_circular_imports_preserve_types_in_every_source_order(tmp_path):
         child = ModuleSymbol(result.files["probe.child"]).to_proto()
         assert list(child.classes[0].super_classes) == ["probe.base.Base"]
         method = base.classes[0].methods[0]
-        assert base.type_table[method.return_annotation_id - 1].fully_qualified_name == "probe.child.Child"
+        assert (
+            base.type_table[method.return_annotation_id - 1].fully_qualified_name
+            == "probe.child.Child"
+        )
         serialized_models.append((base.SerializeToString(), child.SerializeToString()))
     assert len(set(serialized_models)) == 1

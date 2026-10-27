@@ -290,6 +290,26 @@ class SymbolTableBuilderV2Test {
       .contains(UsageV2.Kind.TYPE_PARAM_DECLARATION);
   }
 
+  @Test
+  void walrusInComprehensionBindsToEnclosingScope() {
+    FileInput fileInput = PythonTestUtils.parse("""
+      values = [(data := []) for x in range(1)]
+      data
+      """);
+    new SymbolTableBuilderV2(fileInput).build();
+
+    List<Name> dataNames = PythonTestUtils.<Name>getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.NAME))
+      .stream()
+      .filter(name -> "data".equals(name.name()))
+      .toList();
+
+    Assertions.assertThat(dataNames).hasSize(2);
+    Assertions.assertThat(dataNames.get(0).symbolV2()).isSameAs(dataNames.get(1).symbolV2());
+    Assertions.assertThat(dataNames.get(0).symbolV2().usages())
+      .filteredOn(usage -> usage.kind() == UsageV2.Kind.ASSIGNMENT_LHS)
+      .hasSize(1);
+  }
+
   private static void assertNameSymbol(Name name, String expectedSymbolName, int expectedUsagesCount) {
     var symbol = name.symbolV2();
     Assertions.assertThat(symbol).isNotNull();

@@ -274,8 +274,16 @@ public class WriteUsagesVisitor extends ScopeVisitor {
 
   @Override
   public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
-    addBindingUsage(assignmentExpression.lhsName(), UsageV2.Kind.ASSIGNMENT_LHS);
+    ScopeV2 assignmentScope = currentScope();
+    while (isComprehensionScope(assignmentScope) && assignmentScope.parent() != null) {
+      assignmentScope = assignmentScope.parent();
+    }
+    assignmentScope.addBindingUsage(assignmentExpression.lhsName(), UsageV2.Kind.ASSIGNMENT_LHS);
     super.visitAssignmentExpression(assignmentExpression);
+  }
+
+  private static boolean isComprehensionScope(ScopeV2 scope) {
+    return scope.root().is(Tree.Kind.LIST_COMPREHENSION, Tree.Kind.SET_COMPREHENSION, Tree.Kind.GENERATOR_EXPR, Tree.Kind.DICT_COMPREHENSION);
   }
 
   @Override

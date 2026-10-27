@@ -10,6 +10,7 @@ from .response import (
     HttpResponseBadRequest as HttpResponseBadRequest,
     HttpResponseForbidden as HttpResponseForbidden,
     HttpResponseGone as HttpResponseGone,
+    JsonResponse as JsonResponse,
     HttpResponseNotAllowed as HttpResponseNotAllowed,
     HttpResponseNotFound as HttpResponseNotFound,
     HttpResponseNotModified as HttpResponseNotModified,
