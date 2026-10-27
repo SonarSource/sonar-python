@@ -22,6 +22,7 @@ import java.util.Optional;
  * A proxy type returned by zero-argument {@code super()} calls inside a method.
  * Member lookup delegates to the enclosing class's C3 MRO tail — i.e. the MRO
  * starting from the first parent (skipping the class itself).
+ * Known class-base alternatives are checked through every valid C3 order.
  * With unresolved distant ancestry, only a sole known direct parent's local members
  * can be resolved. As with complete MRO lookup, this models the enclosing class;
  * runtime changes caused by subclassing or class decorators are not modeled.
@@ -39,6 +40,7 @@ public record SuperProxyType(ClassType ownerClassType) implements PythonType {
 
   public boolean canResolveMembers() {
     return ownerClassType.mro().filter(mro -> mro.size() > 1).isPresent()
+      || ClassTypeMroUtils.computeAlternatives(ownerClassType).isPresent()
       || directBaseInIncompleteHierarchy().isPresent();
   }
 
@@ -61,6 +63,8 @@ public record SuperProxyType(ClassType ownerClassType) implements PythonType {
         .filter(Optional::isPresent)
         .map(Optional::get)
         .findFirst())
-      .orElseGet(() -> directBaseInIncompleteHierarchy().flatMap(base -> base.localMember(memberName)));
+      .orElseGet(() -> ClassTypeMroUtils.computeAlternatives(ownerClassType)
+        .map(orders -> ClassTypeMroUtils.inheritedMember(orders, memberName))
+        .orElseGet(() -> directBaseInIncompleteHierarchy().flatMap(base -> base.localMember(memberName))));
   }
 }

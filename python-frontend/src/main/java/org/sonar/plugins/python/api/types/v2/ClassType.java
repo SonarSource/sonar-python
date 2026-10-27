@@ -194,7 +194,9 @@ public final class ClassType implements PythonType {
         .flatMap(Optional::stream)
         .findFirst();
     }
-    return inheritedMember(memberName, new HashSet<>());
+    return ClassTypeMroUtils.computeAlternatives(this)
+      .map(orders -> ClassTypeMroUtils.inheritedMember(orders, memberName))
+      .orElseGet(() -> inheritedMember(memberName, new HashSet<>()));
   }
 
   private Optional<PythonType> inheritedMember(String memberName, Set<PythonType> visited) {

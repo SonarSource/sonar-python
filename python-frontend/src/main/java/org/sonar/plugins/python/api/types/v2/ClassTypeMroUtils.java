@@ -17,13 +17,16 @@
 package org.sonar.plugins.python.api.types.v2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.python.types.v2.TypeUtils;
 
 /**
  * C3 linearization (Method Resolution Order) for {@link ClassType}.
@@ -41,11 +44,83 @@ final class ClassTypeMroUtils {
     "dict", "list", "tuple", "set", "frozenset", "str", "bytes", "bytearray", "collections.deque"
   );
 
+  private static final int MAX_MRO_ALTERNATIVES = 32;
+
   private ClassTypeMroUtils() {
   }
 
   static Optional<List<ClassType>> compute(ClassType cls) {
-    return compute(cls, new HashMap<>(), new HashSet<>(), false);
+    return compute(cls, new HashMap<>(), new HashSet<>(), false, Map.of());
+  }
+
+  /**
+   * Keep every complete C3 order when a base is a union of class declarations.
+   * A repeated union denotes the same choice throughout a diamond. Unsupported
+   * bases, an invalid order, or too many combinations leave lookup conservative.
+   */
+  static Optional<List<List<ClassType>>> computeAlternatives(ClassType cls) {
+    List<UnionType> unions = new ArrayList<>();
+    Map<TypeWrapper, PythonType> resolvedBases = new IdentityHashMap<>();
+    if (!collectBaseAlternatives(cls, Collections.newSetFromMap(new IdentityHashMap<>()),
+      Collections.newSetFromMap(new IdentityHashMap<>()), unions, resolvedBases) || unions.isEmpty()) {
+      return Optional.empty();
+    }
+    List<Map<UnionType, ClassType>> selections = List.of(new IdentityHashMap<>());
+    for (UnionType union : unions) {
+      if (selections.size() > MAX_MRO_ALTERNATIVES / union.candidates().size()) {
+        return Optional.empty();
+      }
+      List<Map<UnionType, ClassType>> expanded = new ArrayList<>();
+      for (Map<UnionType, ClassType> selection : selections) {
+        for (PythonType candidate : union.candidates()) {
+          Map<UnionType, ClassType> alternative = new IdentityHashMap<>(selection);
+          alternative.put(union, (ClassType) candidate);
+          expanded.add(alternative);
+        }
+      }
+      selections = expanded;
+    }
+    List<List<ClassType>> results = new ArrayList<>();
+    for (Map<UnionType, ClassType> selection : selections) {
+      // Deferred wrappers may create a fresh union on every read. Use the exact
+      // base values collected above throughout each complete linearization.
+      Map<TypeWrapper, PythonType> bases = new IdentityHashMap<>();
+      resolvedBases.forEach((wrapper, type) -> bases.put(wrapper, type instanceof UnionType union ? selection.get(union) : type));
+      var order = compute(cls, new HashMap<>(), new HashSet<>(), false, bases);
+      if (order.isEmpty()) {
+        return Optional.empty();
+      }
+      results.add(order.get());
+    }
+    return Optional.of(results);
+  }
+
+  private static boolean collectBaseAlternatives(
+    PythonType type, Set<ClassType> classes, Set<UnionType> visited, List<UnionType> unions, Map<TypeWrapper, PythonType> resolvedBases) {
+    if (type instanceof ClassType cls) {
+      return !classes.add(cls) || cls.superClasses().stream()
+        .allMatch(wrapper -> collectBaseAlternatives(resolvedBases.computeIfAbsent(wrapper, TypeWrapper::type), classes, visited, unions, resolvedBases));
+    }
+    if (type instanceof UnionType union && !union.candidates().isEmpty()
+      && union.candidates().stream().allMatch(ClassType.class::isInstance)) {
+      if (!visited.add(union)) {
+        return true;
+      }
+      unions.add(union);
+      return union.candidates().stream().allMatch(base -> collectBaseAlternatives(base, classes, visited, unions, resolvedBases));
+    }
+    return false;
+  }
+
+  static Optional<PythonType> inheritedMember(List<List<ClassType>> orders, String memberName) {
+    var members = orders.stream().map(order -> order.stream().skip(1)
+      .map(cls -> cls.localMember(memberName)).flatMap(Optional::stream).findFirst()).toList();
+    if (members.stream().allMatch(Optional::isEmpty)) {
+      return Optional.empty();
+    }
+    // A member missing from one possible hierarchy must not become definite.
+    return Optional.of(UnionType.or(members.stream().map(member -> member.orElse(PythonType.UNKNOWN))
+      .map(type -> TypeUtils.map(type, TypeUtils::resolved)).toList()));
   }
 
   /**
@@ -56,7 +131,7 @@ final class ClassTypeMroUtils {
     Map<ClassType, Optional<List<ClassType>>> cache = new HashMap<>();
     List<List<ClassType>> lists = new ArrayList<>();
     for (ClassType base : bases) {
-      Optional<List<ClassType>> mro = compute(base, cache, new HashSet<>(), true);
+      Optional<List<ClassType>> mro = compute(base, cache, new HashSet<>(), true, Map.of());
       if (mro.isEmpty()) {
         return true;
       }
@@ -79,7 +154,8 @@ final class ClassTypeMroUtils {
     ClassType cls,
     Map<ClassType, Optional<List<ClassType>>> cache,
     Set<ClassType> visiting,
-    boolean stripVirtualAbcInheritance
+    boolean stripVirtualAbcInheritance,
+    Map<TypeWrapper, PythonType> selection
   ) {
     if (cache.containsKey(cls)) {
       return cache.get(cls);
@@ -88,7 +164,7 @@ final class ClassTypeMroUtils {
       // Runtime view: ignore the typeshed-declared parents but still keep {@code object} as the tail,
       // so C3 rejects orderings like {@code class X(object, dict)} (object must come after dict).
       // {@code object} is, by construction, the last element of {@code cls}'s non-stripped MRO.
-      Optional<List<ClassType>> fullMro = compute(cls, new HashMap<>(), new HashSet<>(), false);
+      Optional<List<ClassType>> fullMro = compute(cls, new HashMap<>(), new HashSet<>(), false, selection);
       List<ClassType> mro = fullMro.map(m -> List.of(cls, m.get(m.size() - 1))).orElseGet(() -> List.of(cls));
       Optional<List<ClassType>> result = Optional.of(mro);
       cache.put(cls, result);
@@ -103,14 +179,14 @@ final class ClassTypeMroUtils {
     // SuperProxyType also uses the known edges alone to reject invalid ancestry;
     // the resulting partial order must not be used as a complete MRO.
     List<ClassType> parentTypes = cls.superClasses().stream()
-      .map(TypeWrapper::type)
+      .map(wrapper -> selection.containsKey(wrapper) ? selection.get(wrapper) : wrapper.type())
       .filter(ClassType.class::isInstance)
       .map(ClassType.class::cast)
       .toList();
 
     List<List<ClassType>> lists = new ArrayList<>();
     for (ClassType parent : parentTypes) {
-      Optional<List<ClassType>> parentMro = compute(parent, cache, visiting, stripVirtualAbcInheritance);
+      Optional<List<ClassType>> parentMro = compute(parent, cache, visiting, stripVirtualAbcInheritance, selection);
       if (parentMro.isEmpty()) {
         // A parent's MRO is invalid — Python would have raised TypeError there, not here.
         visiting.remove(cls);
