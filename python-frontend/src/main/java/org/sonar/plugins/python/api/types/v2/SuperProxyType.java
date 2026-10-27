@@ -22,6 +22,9 @@ import java.util.Optional;
  * A proxy type returned by zero-argument {@code super()} calls inside a method.
  * Member lookup delegates to the enclosing class's C3 MRO tail — i.e. the MRO
  * starting from the first parent (skipping the class itself).
+ * With unresolved distant ancestry, only a sole known direct parent's local members
+ * can be resolved. As with complete MRO lookup, this models the enclosing class;
+ * runtime changes caused by subclassing or class decorators are not modeled.
  */
 public record SuperProxyType(ClassType ownerClassType) implements PythonType {
 
@@ -34,6 +37,21 @@ public record SuperProxyType(ClassType ownerClassType) implements PythonType {
     return SUPER_FQN;
   }
 
+  public boolean canResolveMembers() {
+    return ownerClassType.mro().filter(mro -> mro.size() > 1).isPresent()
+      || directBaseInIncompleteHierarchy().isPresent();
+  }
+
+  private Optional<ClassType> directBaseInIncompleteHierarchy() {
+    var bases = ownerClassType.superClasses();
+    if (bases.size() == 1 && bases.getFirst().type() instanceof ClassType base && ownerClassType.hasUnresolvedHierarchy()
+      // Validate known ancestry without using its partial linearization for member lookup.
+      && ClassTypeMroUtils.compute(ownerClassType).isPresent()) {
+      return Optional.of(base);
+    }
+    return Optional.empty();
+  }
+
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
     return ownerClassType.mro()
@@ -43,6 +61,6 @@ public record SuperProxyType(ClassType ownerClassType) implements PythonType {
         .filter(Optional::isPresent)
         .map(Optional::get)
         .findFirst())
-      .orElse(Optional.empty());
+      .orElseGet(() -> directBaseInIncompleteHierarchy().flatMap(base -> base.localMember(memberName)));
   }
 }

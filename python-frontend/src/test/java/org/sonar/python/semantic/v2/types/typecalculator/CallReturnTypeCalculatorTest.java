@@ -19,6 +19,8 @@ package org.sonar.python.semantic.v2.types.typecalculator;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -31,8 +33,9 @@ import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
-import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.SuperProxyType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
@@ -216,6 +219,84 @@ class CallReturnTypeCalculatorTest {
     // ObjectType.hasMember only dispatches to ClassType.instancesHaveMember; SuperProxyType is not
     // a ClassType so the fallthrough always returns UNKNOWN for unresolved members.
     assertThat(objectType.hasMember("missing")).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"", "@typing.final", "@typing_extensions.final", "@identity", "@metadata()"})
+  void super_resolves_only_direct_members_when_distant_ancestry_is_unknown(String decorator) {
+    FileInput fileInput = parseAndInferTypes("""
+      import typing
+      import typing_extensions
+      def identity(cls): return cls
+      def metadata(): return identity
+      @identity
+      @metadata()
+      class Parent(UnknownBase):
+        def target(self, value): pass
+      %s
+      class Child(Parent):
+        def run(self):
+          super()
+      """.formatted(decorator));
+    var result = CallReturnTypeCalculator.computeCallExpressionType(getSuperCall(fileInput), typePredicateContext);
+    assertThat(result).isInstanceOfSatisfying(ObjectType.class, objectType -> {
+      assertThat(objectType.resolveMember("target")).hasValueSatisfying(member ->
+        assertThat(((FunctionType) member).fullyQualifiedName()).isEqualTo("my_package.mod.Parent.target"));
+      assertThat(objectType.resolveMember("missing")).isEmpty();
+      assertThat(objectType.hasMember("missing")).isEqualTo(TriBool.UNKNOWN);
+    });
+  }
+
+  @Test
+  void incomplete_super_lookup_does_not_search_beyond_the_direct_base() {
+    FileInput fileInput = parseAndInferTypes("""
+      class Grandparent(UnknownBase):
+        def target(self, value): pass
+      class Parent(Grandparent): pass
+      class Child(Parent):
+        def run(self):
+          super()
+      """);
+    var result = CallReturnTypeCalculator.computeCallExpressionType(getSuperCall(fileInput), typePredicateContext);
+    assertThat(result).isInstanceOfSatisfying(ObjectType.class, objectType ->
+      assertThat(objectType.resolveMember("target")).isEmpty());
+  }
+
+  @Test
+  void incomplete_super_lookup_does_not_choose_between_multiple_bases() {
+    FileInput fileInput = parseAndInferTypes("""
+      class Parent(UnknownBase):
+        def target(self, value): pass
+      class Other:
+        def target(self, first, second): pass
+      class Child(Parent, Other):
+        def run(self):
+          super()
+      """);
+    var result = CallReturnTypeCalculator.computeCallExpressionType(getSuperCall(fileInput), typePredicateContext);
+    assertThat(result).isInstanceOfSatisfying(ObjectType.class, objectType ->
+      assertThat(objectType.type()).isInstanceOfSatisfying(ClassType.class,
+        classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("super")));
+  }
+
+  @Test
+  void incomplete_super_lookup_in_nested_classes_does_not_require_completed_decorator_metadata() {
+    FileInput fileInput = parseAndInferTypes("""
+      def identity(cls): return cls
+      def enclosing():
+        @identity
+        class Parent(UnknownBase):
+          def target(self, value): pass
+        @identity
+        class Child(Parent):
+          def run(self):
+            super()
+      """);
+    var result = CallReturnTypeCalculator.computeCallExpressionType(getSuperCall(fileInput), typePredicateContext);
+    assertThat(result).isInstanceOfSatisfying(ObjectType.class, objectType -> {
+      assertThat(objectType.type()).isInstanceOf(SuperProxyType.class);
+      assertThat(objectType.resolveMember("target")).hasValueSatisfying(member -> assertThat(member).isInstanceOf(FunctionType.class));
+    });
   }
 
   @Test

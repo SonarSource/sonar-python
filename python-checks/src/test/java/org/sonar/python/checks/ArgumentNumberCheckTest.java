@@ -38,4 +38,12 @@ class ArgumentNumberCheckTest {
       Arrays.asList("src/test/resources/checks/argumentNumberWithImport.py", "src/test/resources/checks/argumentNumberImported.py"),
       new ArgumentNumberCheck());
   }
+
+  @Test
+  void decorated_super_calls_with_incomplete_ancestry_across_files() {
+    PythonCheckVerifier.verify(Arrays.asList(
+      "src/test/resources/checks/argumentNumberIncompleteSuper/usage.py",
+      "src/test/resources/checks/argumentNumberIncompleteSuper/base.py",
+      "src/test/resources/checks/argumentNumberIncompleteSuper/decorators.py"), new ArgumentNumberCheck());
+  }
 }

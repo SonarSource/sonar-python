@@ -93,10 +93,11 @@ public final class CallReturnTypeCalculator {
     }
 
     ClassType ownerClassType = findEnclosingMethodOwner(callExpr);
-    if (ownerClassType == null || ownerClassType.mro().filter(mro -> mro.size() > 1).isEmpty()) {
+    if (ownerClassType == null) {
       return null;
     }
-    return ObjectType.fromType(new SuperProxyType(ownerClassType));
+    var proxy = new SuperProxyType(ownerClassType);
+    return proxy.canResolveMembers() ? ObjectType.fromType(proxy) : null;
   }
 
   @CheckForNull

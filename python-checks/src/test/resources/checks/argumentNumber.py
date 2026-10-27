@@ -477,3 +477,148 @@ def library_signatures(condition):
     import math
     # Single library signatures remain checked.
     math.sqrt()  # Noncompliant
+
+
+# super() with incomplete ancestry: resolve local members of the sole direct parent.
+from unknown import UnknownBase, unknown_decorator
+
+
+class Parent(UnknownBase):
+    def __init__(self, mod, symmetric=True):
+        pass
+
+    def method(self, value):
+        pass
+
+    def __new__(cls, value):
+        return object.__new__(cls)
+
+
+class Child(Parent):
+    def __init__(self, mod, symmetric=True):
+        super().__init__(mod, object(), symmetric)  # Noncompliant {{Remove 1 unexpected arguments; '__init__' expects at most 2 positional arguments.}}
+        super().__init__(mod, symmetric)
+        super().__init__(mod, symmetric=symmetric)
+        super().__init__()  # Noncompliant {{Add 1 missing arguments; '__init__' expects at least 1 positional arguments.}}
+        super().method()  # Noncompliant
+        super().method(mod)
+        super().method(mod, unknown=True)  # Noncompliant
+        super().missing(mod, object(), symmetric)  # Unknown member stays unknown.
+        super(Child, self).__init__(mod, object(), symmetric)  # Explicit super remains conservative.
+
+    def __new__(cls, value):
+        return super().__new__(cls, value)  # __new__ is implicitly static; cls is explicit.
+
+
+class Intermediate(Parent):
+    pass
+
+
+class Grandchild(Intermediate):
+    def __init__(self):
+        super().__init__(1, 2, 3)  # Do not search past a direct base without a local member.
+
+
+class Other:
+    def __init__(self, first, second, third):
+        pass
+
+
+class MultipleBases(Parent, Other):
+    def __init__(self):
+        super().__init__(1, 2, 3)  # Incomplete multiple-inheritance MRO remains unknown.
+
+
+class UnknownFirstBase(UnknownBase, Other):
+    def __init__(self):
+        super().__init__(1, 2, 3, 4)  # Do not skip an unknown leading base.
+
+
+class DecoratedMethod(UnknownBase):
+    @unknown_decorator
+    def method(self, value):
+        pass
+
+
+class DecoratedChild(DecoratedMethod):
+    def run(self):
+        super().method()  # Arbitrary decorators may change the signature.
+
+
+class VariadicParent(UnknownBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)  # Cooperative forwarding stays conservative.
+
+
+class VariadicChild(VariadicParent):
+    def __init__(self):
+        super().__init__(1, 2, 3, extra=4)
+
+
+class Root:
+    def method(self, value):
+        pass
+
+
+class Left(Root):
+    pass
+
+
+class Right(Root):
+    def method(self, first, second):
+        pass
+
+
+class CompleteDiamond(Left, Right):
+    def run(self):
+        super().method(1, 2)  # Preserve C3 lookup of the sibling override.
+        super().method(1)  # Noncompliant
+
+
+class InvalidMro(Root, Left):
+    def run(self):
+        super().method(1, 2, 3)  # Fully resolved but inconsistent MRO remains unknown.
+
+
+
+def nominal_super_calls_with_incomplete_ancestry():
+    from unknown import UnknownBase
+
+    class Parent(UnknownBase):
+        def __init__(self, mod, symmetric=True):
+            pass
+
+        def method(self, value):
+            pass
+
+    class NonFinalConstructor(Parent):
+        def __init__(self, mod, symmetric=True):
+            super().__init__(mod, object(), symmetric)  # Noncompliant
+
+    class Child(Parent):
+        def run(self):
+            # FP: inference uses Child's MRO, although Sibling precedes Parent on Concrete.
+            super().method(1, 2)  # Noncompliant
+
+    class Sibling(Parent):
+        def method(self, first, second):
+            pass
+
+    class Concrete(Child, Sibling):
+        pass
+
+    Concrete(1).run()
+
+
+def super_with_nested_final_decorator():
+    from typing import final
+    from unknown import UnknownBase
+
+    class Parent(UnknownBase):
+        def method(self, value):
+            pass
+
+    @final
+    class Child(Parent):
+        def run(self):
+            super().method(1, 2)  # Noncompliant

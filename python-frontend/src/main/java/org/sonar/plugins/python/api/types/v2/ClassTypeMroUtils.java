@@ -99,7 +99,9 @@ final class ClassTypeMroUtils {
       return Optional.empty();
     }
 
-    // Non-ClassType superclasses are already filtered out by hasUnresolvedHierarchy()
+    // ClassType.mro() rejects unresolved ancestry before calling this helper.
+    // SuperProxyType also uses the known edges alone to reject invalid ancestry;
+    // the resulting partial order must not be used as a complete MRO.
     List<ClassType> parentTypes = cls.superClasses().stream()
       .map(TypeWrapper::type)
       .filter(ClassType.class::isInstance)
