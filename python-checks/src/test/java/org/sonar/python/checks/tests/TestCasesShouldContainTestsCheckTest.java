@@ -58,4 +58,16 @@ class TestCasesShouldContainTestsCheckTest {
   void file_with_class_tests_but_no_candidate_class() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/tests/test_fileWithClassTestsButNoCandidateClass.py", new TestCasesShouldContainTestsCheck());
   }
+
+  @Test
+  void class_with_test_grandchild() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/tests/test_classWithTestGrandchild.py", new TestCasesShouldContainTestsCheck());
+  }
+
+  @Test
+  void test_class_inheriting_a_metaclass() {
+    assertThat(PythonCheckVerifier.issues("src/test/resources/checks/tests/test_classInheritingMetaClass.py", new TestCasesShouldContainTestsCheck()))
+      .singleElement()
+      .satisfies(issue -> assertThat(issue.primaryLocation().startLine()).isEqualTo(21));
+  }
 }

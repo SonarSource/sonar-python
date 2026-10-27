@@ -24,8 +24,6 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -35,12 +33,15 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.UnittestUtils;
 
 import static java.util.function.Predicate.not;
-import static org.sonar.python.tree.TreeUtils.getClassSymbolFromDef;
 
 @Rule(key = "S2187")
 public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
@@ -93,8 +94,8 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
       .stream().filter(ClassDef.class::isInstance)
       .map(ClassDef.class::cast)
       .map(classDef -> {
-        ClassSymbol classSymbol = getClassSymbolFromDef(classDef);
-        return new ClassInfo(classDef, classSymbol, hasCollectedTests(classDef), isCandidateTestClass(ctx, classDef, pytestStyleFile));
+        ClassType classType = classType(classDef);
+        return new ClassInfo(classDef, classType, hasCollectedTests(classDef), isCandidateTestClass(ctx, classDef, pytestStyleFile));
       })
       .toList();
   }
@@ -130,37 +131,49 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean hasInheritedTestMethod(ClassDef classDef) {
-    ClassSymbol classSymbol = getClassSymbolFromDef(classDef);
-    return classSymbol != null && superClassesDeclareTests(classSymbol, new LinkedHashSet<>());
+    ClassType classType = classType(classDef);
+    return classType != null && superClassesDeclareTests(classType, new LinkedHashSet<>());
   }
 
-  private static boolean superClassesDeclareTests(ClassSymbol classSymbol, Set<ClassSymbol> visitedSymbols) {
-    if (!visitedSymbols.add(classSymbol)) {
+  private static boolean superClassesDeclareTests(ClassType classType, Set<ClassType> visitedTypes) {
+    if (!visitedTypes.add(classType)) {
       return false;
     }
-    return classSymbol.superClasses().stream()
-            .filter(ClassSymbol.class::isInstance)
-            .map(ClassSymbol.class::cast)
-            .anyMatch(superClassSymbol ->
-                    superClassesDeclareTests(superClassSymbol, visitedSymbols) ||
-                    superClassSymbol.declaredMembers().stream()
-                        .filter(symbol -> symbol.is(Symbol.Kind.FUNCTION))
-                        .map(Symbol::name)
-                        .anyMatch(TestCasesShouldContainTestsCheck::isTestMethodName)
-            );
+    return classType.superClasses().stream()
+      .map(TypeWrapper::type)
+      .filter(ClassType.class::isInstance)
+      .map(ClassType.class::cast)
+      .anyMatch(superClassType ->
+        superClassesDeclareTests(superClassType, visitedTypes)
+          || superClassType.members().stream()
+            .filter(member -> member.type() instanceof FunctionType)
+            .map(Member::name)
+            .anyMatch(TestCasesShouldContainTestsCheck::isTestMethodName));
   }
 
   private static boolean hasDescendantWithTests(ClassInfo candidateClass, List<ClassInfo> classes) {
-    ClassSymbol classSymbol = candidateClass.classSymbol();
-    if (classSymbol == null) {
+    ClassType classType = candidateClass.classType();
+    if (classType == null) {
       return false;
     }
     return classes.stream()
       .filter(other -> other != candidateClass)
       .filter(ClassInfo::hasCollectedTests)
-      .map(ClassInfo::classSymbol)
+      .map(ClassInfo::classType)
       .filter(Objects::nonNull)
-      .anyMatch(otherClassSymbol -> otherClassSymbol.isOrExtends(classSymbol));
+      .anyMatch(otherClassType -> isDescendantOf(otherClassType, classType, new LinkedHashSet<>()));
+  }
+
+  private static boolean isDescendantOf(ClassType classType, ClassType ancestor, Set<ClassType> visitedTypes) {
+    if (!visitedTypes.add(classType)) {
+      return false;
+    }
+    return classType.superClasses().stream()
+      .map(TypeWrapper::type)
+      .filter(ClassType.class::isInstance)
+      .map(ClassType.class::cast)
+      .anyMatch(superClass -> superClass.fullyQualifiedName().equals(ancestor.fullyQualifiedName())
+        || isDescendantOf(superClass, ancestor, visitedTypes));
   }
 
   private static boolean isLikelySharedBaseClass(ClassInfo candidateClass, SubscriptionContext ctx) {
@@ -168,13 +181,19 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     String className = classDef.name().name();
     return className.startsWith("Base")
       || className.endsWith("Mixin")
-      || isAbstractBaseClass(classDef, candidateClass.classSymbol(), ctx)
+      || isAbstractBaseClass(classDef, candidateClass.classType(), ctx)
       || onlyContainsPlaceholderMethods(classDef, ctx);
   }
 
-  private static boolean isAbstractBaseClass(ClassDef classDef, @Nullable ClassSymbol classSymbol, SubscriptionContext ctx) {
-    return classSymbol != null && (classSymbol.hasMetaClass()
+  private static boolean isAbstractBaseClass(ClassDef classDef, @Nullable ClassType classType, SubscriptionContext ctx) {
+    return classType != null && (!classType.metaClasses().isEmpty()
+      || classType.members().stream().anyMatch(member -> "__metaclass__".equals(member.name()))
       || hasAncestorMatching(classDef, ABSTRACT_BASE_CLASS_MATCHER, ctx));
+  }
+
+  @Nullable
+  private static ClassType classType(ClassDef classDef) {
+    return classDef.name().typeV2() instanceof ClassType classType ? classType : null;
   }
 
   private static boolean hasAncestorMatching(ClassDef classDef, TypeMatcher matcher, SubscriptionContext ctx) {
@@ -230,6 +249,6 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     return UnittestUtils.isTestMethodName(name);
   }
 
-  private record ClassInfo(ClassDef classDef, @Nullable ClassSymbol classSymbol, boolean hasCollectedTests, boolean isCandidate) {
+  private record ClassInfo(ClassDef classDef, @Nullable ClassType classType, boolean hasCollectedTests, boolean isCandidate) {
   }
 }
