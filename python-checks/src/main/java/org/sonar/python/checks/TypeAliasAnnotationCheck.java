@@ -16,20 +16,20 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S6794")
 public class TypeAliasAnnotationCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a \"type\" statement instead of this \"TypeAlias\".";
+  private static final TypeMatcher TYPE_ALIAS = TypeMatchers.isType("typing.TypeAlias");
 
   @Override
   public void initialize(Context context) {
@@ -41,13 +41,9 @@ public class TypeAliasAnnotationCheck extends PythonSubscriptionCheck {
       return;
     }
     TypeAnnotation typeAnnotation = (TypeAnnotation) ctx.syntaxNode();
-    Optional.of(typeAnnotation.expression())
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .map(HasSymbol::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter("typing.TypeAlias"::equals)
-      .ifPresent(fqn -> ctx.addIssue(typeAnnotation.parent(), MESSAGE));
+    if (TYPE_ALIAS.isTrueFor(typeAnnotation.expression(), ctx)) {
+      ctx.addIssue(typeAnnotation.parent(), MESSAGE);
+    }
   }
 
   private static boolean supportsTypeParameterSyntax(SubscriptionContext ctx) {
