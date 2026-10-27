@@ -20,6 +20,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class NonContextManagerCheckTest {
 
   @Test
@@ -32,6 +34,21 @@ class NonContextManagerCheckTest {
     PythonCheckVerifier.verify(
       List.of("src/test/resources/checks/nonContextManagerImporter.py", "src/test/resources/checks/nonContextManagerImported.py"),
       new NonContextManagerCheck());
+  }
+
+  @Test
+  void projectLocalContextlibDecorator() {
+    PythonCheckVerifier.verifyNoIssue(
+      List.of("src/test/resources/checks/nonContextManagerShadowedContextlib/consumer.py",
+        "src/test/resources/checks/nonContextManagerShadowedContextlib/contextlib.py"),
+      new NonContextManagerCheck());
+  }
+
+  @Test
+  void asyncFactoryInsideAsyncFunctionIsReportedOnce() {
+    String path = "src/test/resources/checks/nonContextManagerAsyncFactory.py";
+    PythonCheckVerifier.verify(path, new NonContextManagerCheck());
+    assertThat(PythonCheckVerifier.issues(path, new AsyncWithContextManagerCheck())).isEmpty();
   }
 
   @Test

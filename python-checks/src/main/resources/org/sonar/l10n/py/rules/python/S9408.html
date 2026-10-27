@@ -13,8 +13,7 @@ inherited from a base class; assigning them as instance attributes does not sati
   <li>using an object that lacks <code>__enter__</code> or <code>__exit__</code> in a <code>with</code> statement</li>
   <li>using an object that lacks <code>__aenter__</code> or <code>__aexit__</code> in an <code>async with</code> statement</li>
 </ul>
-<p>A common mistake is to implement only half of the protocol, for example <code>__enter__</code> without <code>__exit__</code>, or to mix the
-synchronous and asynchronous variants.</p>
+<p>A context manager must implement the complete protocol that its statement requires.</p>
 <h2>How to fix it</h2>
 <p>Make sure the object used in the statement implements the protocol matching the statement:</p>
 <ul>
@@ -22,8 +21,14 @@ synchronous and asynchronous variants.</p>
   <li>For <code>async with</code>, implement both <code>__aenter__</code> and <code>__aexit__</code>, or use an existing asynchronous context
   manager.</li>
 </ul>
-<p>The <code>contextlib</code> module also provides helpers, such as the <code>@contextmanager</code> and <code>@asynccontextmanager</code>
-decorators, to build context managers from generator functions.</p>
+<p>For a generator-based context manager, choose the design that matches the resource operation:</p>
+<ul>
+  <li>For a synchronous operation, use <code>@contextmanager</code> on a regular generator function and enter it with <code>with</code>.</li>
+  <li>For an asynchronous operation, use <code>@asynccontextmanager</code> on an <code>async def</code> generator function and enter it with
+  <code>async with</code>.</li>
+</ul>
+<p>If the factory already has the intended behavior, use the matching statement. If the statement reflects the intended behavior, change the factory’s
+decorator and make the function synchronous or asynchronous accordingly.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -72,6 +77,38 @@ async def handle():
     async with Connection() as c:
         print(c)
 </pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+from contextlib import contextmanager
+
+@contextmanager
+def session():
+    yield "session"
+
+async def handle():
+    async with session() as value:  # Noncompliant: "session" is synchronous; use "with" or define it as an async generator with "@asynccontextmanager"
+        print(value)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+from contextlib import asynccontextmanager, contextmanager
+
+@contextmanager
+def session():
+    yield "session"
+
+@asynccontextmanager
+async def async_session():
+    yield "session"
+
+async def handle_sync_session():
+    with session() as value:
+        print(value)
+
+async def handle_async_session():
+    async with async_session() as value:
+        print(value)
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
@@ -82,6 +119,8 @@ async def handle():
   Managers</a></li>
   <li>Python Documentation - <a
   href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>contextlib.contextmanager</code></a></li>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/library/contextlib.html#contextlib.asynccontextmanager"><code>contextlib.asynccontextmanager</code></a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>

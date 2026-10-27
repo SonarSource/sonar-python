@@ -1,5 +1,7 @@
 import contextlib
 from contextlib import asynccontextmanager, contextmanager
+from contextlib import asynccontextmanager as alias_asynccontextmanager
+from contextlib import contextmanager as alias_contextmanager
 from typing import AsyncGenerator, Generator, Iterator
 import some_unknown_module
 
@@ -278,8 +280,8 @@ def instance_attribute_dunders():
 
 
 # ----- @contextmanager / @asynccontextmanager functions are inferred as their underlying generator -----
-# The decorator is not modeled by type inference, so the value is a Generator/Iterator/Coroutine. These are the
-# common real-world shape (e.g. Airflow's "create_session") and must not be flagged.
+# Type inference does not model the decorator, so the inferred result is a Generator/Iterator/Coroutine.
+# The matching with/async with statement is valid. The opposite statement is invalid for a sole known decorator.
 @contextmanager
 def annotated_session() -> Generator[int, None, None]:
     yield 1
@@ -287,6 +289,11 @@ def annotated_session() -> Generator[int, None, None]:
 
 @contextmanager
 def annotated_session_iter() -> Iterator[int]:
+    yield 1
+
+
+@alias_contextmanager
+def aliased_session() -> Generator[int, None, None]:
     yield 1
 
 
@@ -300,11 +307,50 @@ async def unannotated_async_session():
     yield 1
 
 
+@contextlib.asynccontextmanager
+async def qualified_async_session():
+    yield 1
+
+
+@alias_asynccontextmanager
+async def aliased_async_session():
+    yield 1
+
+
 def contextmanager_factories():
     with annotated_session() as value:  # Compliant
         print(value)
     with annotated_session_iter() as value:  # Compliant
         print(value)
+    with annotated_async_session():  # Noncompliant {{Use "async with" for this asynchronous context manager created by "@asynccontextmanager".}}
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^
+        pass
+    with unannotated_async_session():  # Noncompliant
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pass
+    with qualified_async_session():  # Noncompliant
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^
+        pass
+    with aliased_async_session():  # Noncompliant
+#        ^^^^^^^^^^^^^^^^^^^^^^^
+        pass
+
+
+with annotated_async_session():  # Noncompliant
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    pass
+
+
+def locally_imported_async_session():
+    from contextlib import asynccontextmanager
+
+    @asynccontextmanager
+    async def session():
+        yield 1
+
+    with session():  # Noncompliant
+#        ^^^^^^^^^
+        pass
 
 
 async def asynccontextmanager_factories():
@@ -312,6 +358,19 @@ async def asynccontextmanager_factories():
         print(value)
     async with unannotated_async_session() as value:  # Compliant
         print(value)
+    async with qualified_async_session() as value:  # Compliant
+        print(value)
+    async with aliased_async_session() as value:  # Compliant
+        print(value)
+
+
+async def sync_contextmanager_factories_used_as_async():
+    async with annotated_session():  # Noncompliant {{Use "with" for this context manager created by "@contextmanager".}}
+#              ^^^^^^^^^^^^^^^^^^^
+        pass
+    async with aliased_session():  # Noncompliant
+#              ^^^^^^^^^^^^^^^^^
+        pass
 
 
 def contextmanager_result_stored_or_conditional(flag):
@@ -354,11 +413,9 @@ class DatabaseHelper:
 
 
 # ----- Functions decorated with an unrecognized decorator are trusted on direct calls -----
-# A decorator we cannot recognize as signature-preserving (e.g. @contextmanager, @asynccontextmanager, OpenTelemetry's
-# "@_agnosticcontextmanager", or any custom wrapper) may turn the function into a (possibly async) context manager. Because the
-# decorator can change the return type and even the sync/async-ness, we cannot infer anything from the wrapped function and do
-# not report it. Signature-preserving decorators (@staticmethod, @classmethod, ...) and undecorated functions (see
-# "annotated_gen" above) are still reported.
+# Unknown decorators can change the return type or context manager variant, so their calls remain trusted.
+# Signature-preserving decorators and undecorated functions can still be reported.
+# A sole standard-library contextlib decorator has a known sync or async result.
 def agnosticcontextmanager(func):
     def helper(*args, **kwargs):
         ...
@@ -428,4 +485,47 @@ async def custom_decorator_async_factories():
     async with helper.start_span_async("mod", "name"):  # Compliant: custom async decorator on a method
         pass
     async with fetch():  # Compliant: unknown decorator may turn the async function into a context manager
+        pass
+
+
+# Unknown wrappers can change the context manager variant.
+@some_unknown_module.wrapper
+@contextlib.asynccontextmanager
+async def wrapped_async_session():
+    yield 1
+
+
+@contextlib.asynccontextmanager
+@some_unknown_module.wrapper
+async def inner_wrapped_async_session():
+    yield 1
+
+
+def unknown_wrappers_remain_conservative():
+    with wrapped_async_session():  # Compliant: outer wrapper can change the result
+        pass
+    with inner_wrapped_async_session():  # Compliant (FN): stacked decorators remain outside this focused check
+        pass
+
+
+@some_unknown_module.wrapper
+@contextlib.contextmanager
+def wrapped_sync_session():
+    yield 1
+
+
+async def unknown_sync_wrapper_remains_conservative():
+    async with wrapped_sync_session():  # Compliant: the outer wrapper may produce an async context manager
+        pass
+
+
+def unrelated_decorator_with_same_name():
+    def asynccontextmanager(func):
+        return some_unknown_module.make_sync_context_manager(func)
+
+    @asynccontextmanager
+    async def session() -> AsyncGenerator[int, None]:
+        yield 1
+
+    with session():  # Compliant: the decorator is not contextlib.asynccontextmanager
         pass

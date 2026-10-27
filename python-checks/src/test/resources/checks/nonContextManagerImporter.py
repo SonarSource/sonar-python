@@ -5,6 +5,8 @@ def use_imported_contextmanager():
     # Cross-module: the @contextmanager decorator must be detected on the imported function.
     with create_session() as session:  # Compliant
         print(session)
+    with create_session_async():  # Noncompliant
+        pass
     with raw_generator():  # Noncompliant
         pass
 
