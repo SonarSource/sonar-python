@@ -30,6 +30,9 @@ def collection():
     dict({'a': 1, 'b': 2}) # Noncompliant
     d1 = dict({'a': 1, 'b': 2})
     d1.copy() # Noncompliant
+    dict.fromkeys(['a', 'b']) # Noncompliant {{The return value of "dict.fromkeys" must be used.}}
+    d1.fromkeys(['a', 'b'], 0) # Noncompliant
+    d4 = dict.fromkeys(['a', 'b'], 0)
 
     d1['a'] # Noncompliant {{The return value of "__getitem__" must be used.}}
    #^^^^^^^

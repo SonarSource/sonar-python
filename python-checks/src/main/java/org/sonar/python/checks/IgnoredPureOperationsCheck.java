@@ -255,7 +255,7 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     "frozenset.symmetric_difference",
     "frozenset.union",
     "dict.copy",
-    "dict.dicfromkeys",
+    "dict.fromkeys",
     "dict.get",
     "dict.items",
     "dict.keys",
