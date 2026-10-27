@@ -16,24 +16,30 @@
  */
 package org.sonar.python.checks.tests;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -69,12 +75,14 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression call = (CallExpression) ctx.syntaxNode();
-      Symbol symbol = call.calleeSymbol();
-      if (symbol == null) {
+      if (!isAssertionCall(call.callee())) {
+        return;
+      }
+      String name = calleeName(call.callee());
+      if (name == null) {
         return;
       }
 
-      String name = symbol.name();
       List<Argument> arguments = call.arguments();
 
       if (BOOLEAN_ASSERTIONS.contains(name)) {
@@ -87,6 +95,74 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
         checkAssertion(arg -> checkIsAssertion(ctx, call, arg, message),1, "second", arguments);
       }
     });
+  }
+
+  private static @Nullable String calleeName(Expression callee) {
+    return switch (callee) {
+      case Name name -> name.name();
+      case QualifiedExpression qualifiedExpression -> qualifiedExpression.name().name();
+      default -> null;
+    };
+  }
+
+  private static boolean isAssertionCall(Expression callee) {
+    if (!isSupportedAssertion(calleeName(callee))) {
+      return false;
+    }
+    if (callee.typeV2() instanceof FunctionType) {
+      return true;
+    }
+    return callee instanceof QualifiedExpression qualifiedExpression
+      && CheckUtils.isSelf(qualifiedExpression.qualifier())
+      && isInTestCase(qualifiedExpression);
+  }
+
+  private static boolean isSupportedAssertion(@Nullable String name) {
+    return name != null && (BOOLEAN_ASSERTIONS.contains(name) || NONE_ASSERTIONS.contains(name) || IS_ASSERTIONS.contains(name));
+  }
+
+  private static boolean isInTestCase(QualifiedExpression qualifiedExpression) {
+    ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(qualifiedExpression, Tree.Kind.CLASSDEF);
+    return classDef != null && (isTestClass(classDef) || hasTestCaseBase(classDef, new HashSet<>()));
+  }
+
+  private static boolean isTestClass(ClassDef classDef) {
+    String className = classDef.name().name();
+    return className.endsWith("Test") || className.endsWith("Tests");
+  }
+
+  private static boolean hasTestCaseBase(ClassDef classDef, Set<ClassDef> visitedClasses) {
+    if (!visitedClasses.add(classDef) || classDef.args() == null) {
+      return false;
+    }
+    return classDef.args().arguments().stream()
+      .filter(RegularArgument.class::isInstance)
+      .map(RegularArgument.class::cast)
+      .filter(argument -> argument.keywordArgument() == null)
+      .map(RegularArgument::expression)
+      .anyMatch(baseClass -> isTestCaseBase(baseClass)
+        || findClassDef(baseClass).map(parentClass -> hasTestCaseBase(parentClass, visitedClasses)).orElse(false));
+  }
+
+  private static boolean isTestCaseBase(Expression expression) {
+    return switch (expression) {
+      case Name name -> name.name().endsWith("TestCase");
+      case QualifiedExpression qualifiedExpression -> qualifiedExpression.name().name().endsWith("TestCase");
+      default -> false;
+    };
+  }
+
+  private static Optional<ClassDef> findClassDef(Expression expression) {
+    if (!(expression instanceof Name name) || name.symbolV2() == null) {
+      return Optional.empty();
+    }
+    return name.symbolV2().usages().stream()
+      .filter(usage -> usage.kind() == UsageV2.Kind.CLASS_DECLARATION)
+      .map(UsageV2::tree)
+      .map(tree -> TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CLASSDEF))
+      .filter(ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .findFirst();
   }
 
   private static void checkAssertion(Consumer<RegularArgument> checkConsumer, int argPosition, String keyword, List<Argument> arguments) {
@@ -137,14 +213,11 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
 
     if (expression.is(NAME) || expression.is(QUALIFIED_EXPR)) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
-      if (symbol != null) {
-        if (isClassOrFunction(symbol)) {
-          return true;
-        }
-        if (hasAnyNonlocalStatement(symbol)) {
-          return false;
-        }
+      if (isClassOrFunction(expression)) {
+        return true;
+      }
+      if (expression instanceof Name name && hasAnyNonlocalStatement(name)) {
+        return false;
       }
     }
 
@@ -158,18 +231,22 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static boolean hasAnyNonlocalStatement(Symbol symbol) {
-    return symbol.usages().stream()
+  private static boolean hasAnyNonlocalStatement(Name name) {
+    return name.symbolV2() != null && name.symbolV2().usages().stream()
       .anyMatch(usage -> usage.tree().parent().is(Tree.Kind.NONLOCAL_STMT));
   }
 
-  private static boolean isClassOrFunction(Symbol symbol) {
-    if (symbol.is(Symbol.Kind.CLASS)) {
+  private static boolean isClassOrFunction(Expression expression) {
+    PythonType type = expression.typeV2();
+    if (type instanceof ClassType) {
       return true;
     }
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
+    if (type instanceof FunctionType functionType) {
       // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
-      return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
+      return functionType.decorators().stream()
+        .map(TypeWrapper::type)
+        .map(PythonType::name)
+        .allMatch(ACCEPTED_DECORATORS::contains);
     }
     return false;
   }

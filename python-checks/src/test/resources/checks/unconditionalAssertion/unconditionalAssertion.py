@@ -188,3 +188,66 @@ class NonLocalTest(unittest.TestCase):
 class EdgeCase(unittest.TestCase):
     def test_nonlocal_variables(self):
         self.assertTrue(undefined_variable)
+
+
+def unresolved_assertion():
+    assertTrue(True)  # Compliant
+
+
+def unresolved_method_assertion(obj):
+    obj.assertIs([], [])  # Compliant
+
+
+class Helper:
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Compliant
+
+
+class UnknownBase(unknown_base):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Compliant
+
+
+class QualifiedTestCase(unknown_module.TestCase):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Noncompliant
+
+
+class DynamicBase(factory()):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Compliant
+
+
+class KeywordBase(base=FrameworkTestCase):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Compliant
+
+
+class FrameworkTestCase:
+    pass
+
+
+class IntermediateTestBase(FrameworkTestCase):
+    pass
+
+
+@unknown_decorator
+class IndirectTestCase(IntermediateTestBase):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Noncompliant
+
+    def helper_call(self):
+        self.helper()  # Compliant
+
+
+class ExternalBaseTest(unknown_module.CommonTest):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Noncompliant
+
+
+class ExternalBaseTests(unknown_module.CommonTest):
+    def unresolved_assertion(self):
+        self.assertTrue(True)  # Noncompliant
+
+
+(lambda: None)()  # Compliant
