@@ -1,4 +1,6 @@
+import ast
 import unittest
+from zipfile import ZipInfo
 
 class A:
     pass
@@ -227,3 +229,155 @@ class ComparingTypeAndDerivedEnumWithoutMembers(unittest.TestCase):
         # DerivedEnumTypeFromDict is a proper "type" object because `DerivedEnumWithoutMembers(str, list)` will create a new enum,
         # just like `Enum(str, list)`
         self.assertIs(type(derived_enum_member_from_dict), DerivedEnumTypeFromDict)
+
+
+class Record(ZipInfo):
+    pass
+
+
+class Container:
+    record: Record
+
+
+class TestWrittenAttributes(unittest.TestCase):
+    def test_builtin_attribute(self):
+        node = ast.Num()
+        node._fields = 666
+        self.assertEqual(node._fields, 666)
+        self.assertEqual(666, node._fields)
+
+    def test_inherited_attribute(self):
+        record = Record()
+        record.filename = 42
+        self.assertEqual(record.filename, 42)
+        self.assertIs(record.filename, 42)
+
+    def test_parentheses(self):
+        record = Record()
+        (record).filename = 42
+        self.assertEqual(((record).filename), 42)
+
+    def test_annotated_write(self):
+        record = Record()
+        record.filename: int = 42
+        self.assertEqual(record.filename, 42)
+
+    def test_unpacking_write(self):
+        record = Record()
+        record.filename, other = 42, 0
+        self.assertEqual(record.filename, 42)
+
+    def test_conditional_write(self, condition):
+        record = Record()
+        if condition:
+            record.filename = 42
+        self.assertEqual(record.filename, 42)
+
+    def test_loop_write(self):
+        record = Record()
+        for i in range(2):
+            self.assertEqual(record.filename, 42)
+            record.filename = 42
+
+    def test_nested_attribute(self):
+        container = Container()
+        container.record.filename = 42
+        self.assertEqual(container.record.filename, 42)
+
+    def test_replaced_receiver(self, replacement):
+        container = Container()
+        container.record = replacement
+        self.assertEqual(container.record.filename, 42)
+
+    def test_augmented_write(self, replacement):
+        record = Record()
+        record.filename += replacement
+        self.assertEqual(record.filename, 42)
+
+    def test_loop_target(self):
+        record = Record()
+        for record.filename in [42]:
+            self.assertEqual(record.filename, 42)
+
+    def test_list_comprehension_target(self):
+        record = Record()
+        [None for record.filename in [42]]
+        self.assertEqual(record.filename, 42)
+
+    def test_set_comprehension_target(self):
+        record = Record()
+        {None for record.filename in [42]}
+        self.assertEqual(record.filename, 42)
+
+    def test_dict_comprehension_target(self):
+        record = Record()
+        {0: None for record.filename in [42]}
+        self.assertEqual(record.filename, 42)
+
+    def test_generator_target(self):
+        record = Record()
+        list(None for record.filename in [42])
+        self.assertEqual(record.filename, 42)
+
+    def test_nested_comprehension_target(self):
+        record = Record()
+        [None for values in [[(42, 0)]] for record.filename, other in values]
+        self.assertEqual(record.filename, 42)
+
+    async def test_async_comprehension_target(self, values):
+        record = Record()
+        [None async for record.filename in values]
+        self.assertEqual(record.filename, 42)
+
+    def test_comprehension_reads(self):
+        record = Record()
+        [record.filename for value in [42]]
+        [value for value in record.filename]
+        [value for value in [42] if record.filename]
+        self.assertEqual(record.filename, 42)  # Noncompliant
+
+    def test_comprehension_shadowed_receiver(self):
+        record = Record()
+        [None for record in [] for record.filename in [42]]
+        self.assertEqual(record.filename, 42)  # Noncompliant
+
+    def test_with_target(self, manager):
+        record = Record()
+        with manager as record.filename:
+            self.assertEqual(record.filename, 42)
+
+    def test_list_unpacking(self):
+        record = Record()
+        [record.filename, *rest] = [42, 0]
+        self.assertEqual(record.filename, 42)
+
+    def test_closure_write(self):
+        record = Record()
+        def replace():
+            record.filename = 42
+        replace()
+        self.assertEqual(record.filename, 42)
+
+    def test_unmodified_attributes(self):
+        record = Record()
+        other_record = Record()
+        record.filename = 42
+        self.assertEqual(record.orig_filename, 42)  # Noncompliant
+        self.assertEqual(other_record.filename, 42)  # Noncompliant
+
+    def test_read_only_attribute(self):
+        record = Record()
+        record.filename: str
+        copy = [record.filename]
+        self.assertEqual(record.filename, 42)  # Noncompliant
+        self.assertEqual(record.filename, "name")
+
+    def test_unrelated_local_name(self):
+        record = Record()
+        def nested(record):
+            record.filename = 42
+        self.assertEqual(record.filename, 42)  # Noncompliant
+
+    def test_local_value(self):
+        value = ()
+        self.assertEqual(value, 42)  # Noncompliant

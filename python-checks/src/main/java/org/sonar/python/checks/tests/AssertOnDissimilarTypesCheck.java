@@ -16,7 +16,9 @@
  */
 package org.sonar.python.checks.tests;
 
+import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -25,16 +27,22 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
+import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
@@ -91,7 +99,7 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
     Expression left = firstArg.expression();
     Expression right = secondArg.expression();
 
-    if (canArgumentsBeIdentical(left, right)) {
+    if (hasWrittenAttribute(left) || hasWrittenAttribute(right) || canArgumentsBeIdentical(left, right)) {
       return;
     }
 
@@ -100,6 +108,57 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
       getLastAssignment(left).ifPresent(assign -> issue.secondary(assign, String.format(MESSAGE_SECONDARY, ((Name)left).name())));
       getLastAssignment(right).ifPresent(assign -> issue.secondary(assign, String.format(MESSAGE_SECONDARY, ((Name)right).name())));
     }
+  }
+
+  private static boolean hasWrittenAttribute(Expression expression) {
+    Deque<String> memberPath = new ArrayDeque<>();
+    Expression receiver = Expressions.removeParentheses(expression);
+    while (receiver instanceof QualifiedExpression member) {
+      memberPath.addFirst(member.name().name());
+      receiver = Expressions.removeParentheses(member.qualifier());
+    }
+    if (memberPath.isEmpty() || !(receiver instanceof Name name) || name.symbolV2() == null) {
+      return false;
+    }
+    // Member types still describe the class declaration after instance writes.
+    // Do not infer incompatibility from that stale type. Include writes later in
+    // the source, since a loop or closure may execute them before this read.
+    return name.symbolV2().usages().stream().anyMatch(usage -> writesMemberPath(usage.tree(), memberPath));
+  }
+
+  private static boolean writesMemberPath(Tree receiver, Deque<String> memberPath) {
+    for (String memberName : memberPath) {
+      while (receiver.parent().is(Tree.Kind.PARENTHESIZED)) {
+        receiver = receiver.parent();
+      }
+      if (!(receiver.parent() instanceof QualifiedExpression member)
+        || member.qualifier() != receiver || !memberName.equals(member.name().name())) {
+        return false;
+      }
+      // Replacing an intermediate receiver also invalidates its members' types.
+      if (isAssignmentTarget(member)) {
+        return true;
+      }
+      receiver = member;
+    }
+    return false;
+  }
+
+  private static boolean isAssignmentTarget(Tree tree) {
+    Tree parent = tree.parent();
+    while (parent.is(Tree.Kind.PARENTHESIZED, Tree.Kind.TUPLE, Tree.Kind.LIST_LITERAL, Tree.Kind.EXPRESSION_LIST, Tree.Kind.UNPACKING_EXPR)) {
+      tree = parent;
+      parent = parent.parent();
+    }
+    return switch (parent) {
+      case AssignmentStatement assignment -> assignment.lhsExpressions().contains(tree);
+      case AnnotatedAssignment assignment -> assignment.variable() == tree && assignment.assignedValue() != null;
+      case CompoundAssignmentStatement assignment -> assignment.lhsExpression() == tree;
+      case ForStatement loop -> loop.expressions().contains(tree);
+      case ComprehensionFor loop -> loop.loopExpression() == tree;
+      case WithItem item -> item.expression() == tree;
+      default -> false;
+    };
   }
 
   private static String message(Expression left, Expression right) {
