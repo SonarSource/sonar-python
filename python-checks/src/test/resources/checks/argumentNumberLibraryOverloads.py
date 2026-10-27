@@ -75,3 +75,44 @@ def inherited_library_method():
     from flask import request
     request.form.get("forum", type=int)
     request.form.get("forum", typee=int)  # Noncompliant {{Remove this unexpected named argument 'typee'.}}
+
+
+def selected_sqlalchemy_signatures():
+    from sqlalchemy import create_engine, MetaData, Table, Column, Integer
+    from flask_sqlalchemy import SQLAlchemy
+
+    engine = create_engine("sqlite://")
+    metadata = MetaData()
+    metadata.bind = engine
+    table = Table("example", metadata, Column("id", Integer))
+    # Accepted FP on SQLAlchemy 1.x: bound metadata supported an implicit engine.
+    # The selected 2.x model requires an explicit bind, while preserving name resolution.
+    table.create()  # Noncompliant
+    table.create(bind=engine)
+
+    database = SQLAlchemy()
+    # Accepted FP on Flask-SQLAlchemy 2.x: 3.x renamed bind to bind_key.
+    database.create_all(bind="__all__")  # Noncompliant
+    database.create_all(bind_key="__all__")
+
+
+def deprecated_library_method():
+    from OpenSSL.crypto import PKey, TYPE_RSA
+
+    key = PKey()
+    key.generate_key()  # Noncompliant
+    key.generate_key(TYPE_RSA, 2048, "extra")  # Noncompliant
+    key.generate_key(TYPE_RSA, 2048)
+    key.generate_key(type=TYPE_RSA, bits=2048)
+
+
+def chardet_public_imports():
+    from chardet import UniversalDetector
+    from chardet.universaldetector import UniversalDetector as CompatibilityDetector
+
+    UniversalDetector().feed()  # Noncompliant
+    UniversalDetector().feed(b"text", "extra")  # Noncompliant
+    UniversalDetector().feed(b"text")
+    CompatibilityDetector().feed()  # Noncompliant
+    CompatibilityDetector().feed(b"text", "extra")  # Noncompliant
+    CompatibilityDetector().feed(b"text")

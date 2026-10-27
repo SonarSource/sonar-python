@@ -334,7 +334,7 @@ class FunctionSymbol:
         if self.has_decorators and decorators is not None:
             for dec in decorators:
                 decorator_name = get_decorator_name(dec)
-                # Preserve one entry per decorator: dropping calls or unknown expressions
+                # Preserve one entry per decorator: dropping unknown expressions
                 # could make a mixed decorator stack look like a bare @overload.
                 self.resolved_decorator_names.append(decorator_name or "")
 
@@ -747,6 +747,10 @@ def class_decorator_info(expression):
 
 
 def get_decorator_name(dec: mpn.Node):
+    if isinstance(dec, mpn.CallExpr):
+        # Retain the factory's name, without assuming that it preserves signatures.
+        # In particular, unknown factories in a mixed stack must not be dropped.
+        return get_decorator_name(dec.callee)
     if isinstance(dec, mpn.NameExpr):
         # TODO: handle "None" case and check for fallbacks
         # decorator full name might not be the actual fully qualified name if it could not be resolved

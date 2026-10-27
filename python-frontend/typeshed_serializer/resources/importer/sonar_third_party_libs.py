@@ -60,3 +60,60 @@ import WerkZeug
 import xxhash
 import yaml
 
+
+# Replacement typing sources: import public submodules explicitly.
+from PIL import (
+    Image, ImageOps, ImageDraw, ImageFont, ImageChops, ImageEnhance,
+    ImageCms, ImageColor, ImageGrab, ImageMorph, ImageStat, ImageTk, ImageTransform,
+)
+import sqlalchemy
+import sqlalchemy.engine.url
+import sqlalchemy.orm
+import babel
+import babel.core
+import passlib.hash
+import passlib.context
+import passlib.handlers.sha2_crypt
+import passlib.handlers.pbkdf2
+
+# Flask-SQLAlchemy 3.x uses SQLAlchemy 2.0 inline typing.
+import flask_sqlalchemy
+import sqlalchemy.ext.asyncio
+import sqlalchemy.dialects.postgresql
+import sqlalchemy.dialects.mysql
+import sqlalchemy.dialects.sqlite
+import sqlalchemy.inspection
+import babel.dates
+import babel.numbers
+import babel.support
+import babel.messages.catalog
+
+# Typed pyOpenSSL replaces the removed Typeshed package.
+from OpenSSL import SSL, crypto
+
+# These public modules are no longer transitively imported by cryptography 50.
+import cryptography.hazmat.primitives.kdf.scrypt
+import cryptography.hazmat.primitives.serialization.pkcs12
+import cryptography.hazmat.primitives.serialization.pkcs7
+
+# Libraries that now publish their own typing instead of Typeshed distributions.
+import influxdb_client
+import paho.mqtt.client
+import chardet
+import chardet.universaldetector
+import dj_database_url
+import invoke
+import slugify
+import tzlocal
+import ujson
+
+import annoy
+import exifread
+import flake8_plugin_utils
+import fpdf
+import pyrfc3339
+import datemath
+import pyVmomi
+import pyVim.connect
+import stdlib_list
+import tree_sitter

@@ -383,13 +383,12 @@ class TypeShedTest {
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(
-        tuple(Kind.CLASS, "annoy.annoylib.Annoy"),
-        // AnnoyIndex is a TypeAlias for annoy.annoylib.Annoy and is now correctly serialized
-        tuple(Kind.OTHER, "annoy.AnnoyIndex"),
+        tuple(Kind.CLASS, "annoy.AnnoyIndex"),
+        tuple(Kind.CLASS, "annoy._Vector"),
         tuple(Kind.OTHER, "annoy.__annotations__"),
         tuple(Kind.OTHER, "annoy.__path__"));
 
-    ClassSymbol annoyIndex = (ClassSymbol) deserializedAnnoySymbols.get("annoy.annoylib.Annoy");
+    ClassSymbol annoyIndex = (ClassSymbol) deserializedAnnoySymbols.get("annoy.AnnoyIndex");
     assertThat(annoyIndex.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"));
     assertThat(annoyIndex.declaredMembers()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(

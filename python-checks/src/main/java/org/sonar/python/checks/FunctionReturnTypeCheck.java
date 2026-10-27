@@ -43,7 +43,9 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
@@ -223,8 +225,8 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
     private boolean canReturnAnnotatedSubclass(Expression expression, ReturnStatement statement) {
       Expression returned = Expressions.removeParentheses(expression);
       if (!(returned instanceof CallExpression call)
-        || !(call.callee().typeV2() instanceof FunctionType function)
-        || function.typeOrigin() != TypeOrigin.STUB
+        || !hasStubReturnAnnotation(call.callee().typeV2())
+        || !SUBCLASS_FACTORY.isTrueFor(call.callee(), context)
         || !(returned.typeV2() instanceof ObjectType object)
         || !(object.unwrappedType() instanceof ClassType returnedClass)) {
         return false;
@@ -232,12 +234,17 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       // Logger configuration can live elsewhere. SQL boolean factories can produce a
       // BooleanClauseList or preserve a supplied expression, including a custom subclass.
       // Stub origin alone is not evidence of this behavior (e.g. os.urandom returns bytes).
-      if (!SUBCLASS_FACTORY.isTrueFor(call.callee(), context)) {
-        return false;
-      }
       FunctionDef enclosingFunction = TreeUtils.firstAncestorOfClass(statement, FunctionDef.class);
       TypeAnnotation annotation = enclosingFunction == null ? null : enclosingFunction.returnTypeAnnotation();
       return annotation != null && annotationAllowsSubclass(annotation.expression(), returnedClass);
+    }
+
+    private static boolean hasStubReturnAnnotation(PythonType callee) {
+      if (callee instanceof UnionType union) {
+        return union.candidates().stream().allMatch(ReturnTypeVisitor::hasStubReturnAnnotation);
+      }
+      return callee instanceof FunctionType function && function.typeOrigin() == TypeOrigin.STUB
+        && function.definitionLocation().isEmpty() && function.returnType() instanceof ObjectType;
     }
 
     private boolean annotationAllowsSubclass(Expression annotation, ClassType returnedClass) {

@@ -121,3 +121,6 @@ def pyOpenSSL():
     key_rsa1024.generate_key(TYPE_DSA, 1024) # Noncompliant
     key_rsa1024.generate_key(TYPE_DSA, 2048)
     key_rsa1024.generate_key(TYPE_DH, 1024)
+    from OpenSSL.crypto import PKey as PrivateKey
+    PrivateKey().generate_key(TYPE_RSA, 1024)  # Noncompliant
+    PrivateKey().generate_key(TYPE_RSA, 2048)

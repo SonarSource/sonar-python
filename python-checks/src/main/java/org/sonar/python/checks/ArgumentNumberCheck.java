@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.types.v2.matchers.AllTypePredicate;
+import org.sonar.python.types.v2.matchers.AnyTypePredicate;
 import org.sonar.python.types.v2.matchers.HasOnlyFunctionDecoratorsSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsStubFunctionPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
@@ -52,9 +53,13 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   // Evaluate individual alternatives without changing the handling of mixed source/library unions.
   private static final TypePredicate STUB_FUNCTION = new IsStubFunctionPredicate();
-  private static final TypePredicate STUB_OVERLOAD = new AllTypePredicate(List.of(
+  private static final TypePredicate OVERLOAD_DECORATOR = new IsTypePredicate("typing.overload");
+  private static final TypePredicate STUB_SIGNATURE_PRESERVING_DECORATORS = new AllTypePredicate(List.of(
     STUB_FUNCTION,
-    new HasOnlyFunctionDecoratorsSatisfyingPredicate(new IsTypePredicate("typing.overload"))));
+    new HasOnlyFunctionDecoratorsSatisfyingPredicate(new AnyTypePredicate(List.of(
+      OVERLOAD_DECORATOR,
+      new IsTypePredicate("warnings.deprecated"),
+      new IsTypePredicate("typing_extensions.deprecated"))))));
   private static final String FUNCTION_DEFINITION = "Function definition.";
   private static final String NEW_METHOD_NAME = "__new__";
   private static final TypeMatcher SUPER_INSTANCE_MATCHER = TypeMatchers.isObjectOfType("super");
@@ -221,8 +226,10 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static boolean isException(SubscriptionContext ctx, CallExpression callExpression, FunctionType functionType, boolean isUnion) {
     // Unannotated local functions can still have STUB origin; their source location identifies them reliably.
-    boolean requiresKnownOverload = (isUnion && functionType.definitionLocation().isEmpty()) || functionType.hasDecorators();
-    return (requiresKnownOverload && !isStubOverload(functionType, ctx))
+    boolean unknownLibraryUnion = isUnion && functionType.definitionLocation().isEmpty() && !isStubOverload(functionType, ctx);
+    boolean unknownDecorators = functionType.hasDecorators()
+      && !STUB_SIGNATURE_PRESERVING_DECORATORS.check(functionType, TypePredicateContext.of(ctx.typeTable())).isTrue();
+    return unknownLibraryUnion || unknownDecorators
       // **kwargs does not absorb missing or excess positional arguments. Keep
       // source and *args signatures conservative, as before.
       || (functionType.hasVariadicParameter() && (!STUB_FUNCTION.check(functionType, TypePredicateContext.of(ctx.typeTable())).isTrue()
@@ -232,7 +239,9 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static boolean isStubOverload(FunctionType functionType, SubscriptionContext ctx) {
     return ctx.typeTable().getType("typing.overload") instanceof FunctionType
-      && STUB_OVERLOAD.check(functionType, TypePredicateContext.of(ctx.typeTable())).isTrue();
+      && STUB_SIGNATURE_PRESERVING_DECORATORS.check(functionType, TypePredicateContext.of(ctx.typeTable())).isTrue()
+      && functionType.decorators().stream().anyMatch(decorator ->
+        OVERLOAD_DECORATOR.check(decorator.type(), TypePredicateContext.of(ctx.typeTable())).isTrue());
   }
 
   private static boolean isCallException(SubscriptionContext ctx, CallExpression callExpression, List<FunctionType> functions) {

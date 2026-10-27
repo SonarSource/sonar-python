@@ -48,7 +48,7 @@ class FunctionReturnTypeCheckTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"stub", "local-callee", "unknown-return", "unknown-return-class"})
+  @ValueSource(strings = {"stub", "local-callee", "unannotated-callee", "unknown-return", "unknown-return-class"})
   void subclass_exception_requires_resolved_stub_types(String scenario) {
     var context = TestPythonVisitorRunner.createContext(new File("src/test/resources/checks/functionReturnTypeStubDisagreement.py"));
     // Preserve the inferred legacy mismatch and vary only the V2 evidence used by the exception.
@@ -58,6 +58,7 @@ class FunctionReturnTypeCheckTest {
       public void visitCallExpression(CallExpression call) {
         switch (scenario) {
           case "local-callee" -> ((NameImpl) call.callee()).typeV2(new FunctionTypeBuilder("getLogger").withTypeOrigin(TypeOrigin.LOCAL).build());
+          case "unannotated-callee" -> ((NameImpl) call.callee()).typeV2(new FunctionTypeBuilder("factory").build());
           case "unknown-return" -> ((CallExpressionImpl) call).typeV2(PythonType.UNKNOWN);
           case "unknown-return-class" -> ((CallExpressionImpl) call).typeV2(ObjectType.fromType(PythonType.UNKNOWN));
           default -> { /* Keep the resolved stub as a positive control. */ }

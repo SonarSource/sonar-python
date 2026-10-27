@@ -19,3 +19,10 @@ class ChildFromDuplicated(ParentWithDuplicatedParent):
 class MyChild(MyClassWithAnnotatedMember):
     def my_member(self, param, other_param): # OK, respecting contract defined in parent
         return compute()
+from unusedFunctionParameterImported import NetworkType
+
+
+def render_dynamic_type(context, type_name):
+    callback = getattr(NetworkType(), "alembic_render_" + type_name, None)
+    if callback is not None:
+        return callback(context, context.opts["toplevel_code"])

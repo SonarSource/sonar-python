@@ -1,7 +1,10 @@
 import logging
 import os
 import socket
+import stripe
+from stripe.stripe_object import StripeObject
 from os import urandom as random_bytes
+from pathlib import Path
 from logging import getLogger
 from sqlalchemy import and_, or_
 from sqlalchemy.sql.elements import BooleanClauseList, ColumnElement
@@ -124,12 +127,38 @@ def aliased_exact_stub_result() -> Optional[SecureBytes]:
     return (random_bytes(8))  # Noncompliant
 
 
+def file_contents() -> SecureBytes:
+    return Path("input").read_bytes()  # Noncompliant
+
+
+class UserId(int):
+    def validate_id(self):
+        pass
+
+
+def user_id() -> UserId:
+    return len("hello")  # Noncompliant
+
+
+class UserName(str):
+    def validate_name(self):
+        pass
+
+
+def user_name() -> UserName:
+    return "HELLO".lower()  # Noncompliant
+
+
 class CustomSocket(socket.socket):
     def custom_method(self):
         pass
 
 
 def exact_library_result() -> CustomSocket:
+    return socket.create_connection(("localhost", 80))  # Noncompliant
+
+
+def incompatible_library_result() -> SecureBytes:
     return socket.create_connection(("localhost", 80))  # Noncompliant
 
 
@@ -143,8 +172,7 @@ def child_logger(logger: logging.Logger) -> CustomLogger:
     return logger.getChild("child")
 
 
-# These calls currently have unknown return types. After the descriptor refresh in #1797,
-# their ColumnElement[bool] return annotations will exercise the subclass exception.
+# The upstream ColumnElement[bool] return annotations permit these subclasses.
 def conjunction(left, right) -> BooleanClauseList:
     return and_(left, right)
 
@@ -169,3 +197,18 @@ def preserved_conjunction(expression: CustomExpression) -> CustomExpression:
 
 def preserved_disjunction(expression: CustomExpression) -> CustomExpression | None:
     return or_(expression)
+
+
+# Stripe keeps its existing Typeshed model in this refresh.
+
+
+def subscribe_webhook() -> Optional[StripeObject]:
+    return stripe.WebhookEndpoint.create(url="https://example.com/webhook")
+
+
+def retrieve_customer() -> Optional[StripeObject]:
+    return stripe.Customer.retrieve("cus_test")
+
+
+def create_customer() -> Optional[StripeObject]:
+    return stripe.Customer.create(email="test@example.com")

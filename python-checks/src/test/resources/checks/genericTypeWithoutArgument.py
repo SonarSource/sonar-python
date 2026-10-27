@@ -136,3 +136,15 @@ def returning_my_child_2() -> MyChild2: # OK
 class MyChild3(MyGenericParent[str]): ...
 def returning_my_child_3() -> MyChild2: # OK
     ...
+from sqlalchemy.orm import Query
+
+
+# The selected SQLAlchemy 2.x model supports generic Query annotations.
+# On SQLAlchemy 1.4, Query[int] raises TypeError at runtime; this older-version
+# incompatibility is accepted rather than maintaining two library models.
+def legacy_sqlalchemy_query(query: Query):  # Noncompliant
+    return query
+
+
+def current_sqlalchemy_query(query: Query[int]):
+    return query

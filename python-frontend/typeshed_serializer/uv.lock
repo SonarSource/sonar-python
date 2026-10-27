@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.14"
 
 [[package]]
@@ -82,6 +82,12 @@ wheels = [
 ]
 
 [[package]]
+name = "annoy"
+version = "1.17.3"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/07/38/e321b0e05d8cc068a594279fb7c097efb1df66231c295d482d7ad51b6473/annoy-1.17.3.tar.gz", hash = "sha256:9cbfebefe0a5f843eba29c6be4c84d601f4f41ad4ded0486f1b88c3b07739c15" }
+
+[[package]]
 name = "anyio"
 version = "4.14.2"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -91,6 +97,28 @@ dependencies = [
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/61/cc/a381afa6efea9f496eff839d4a6a1aed3bfafc7b3ab4b0d1b243a12573dd/anyio-4.14.2.tar.gz", hash = "sha256:cfa139f3ed1a23ee8f88a145ddb5ac7605b8bbfd8592baacd7ce3d8bb4313c7f" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/da/35/f2287558c17e29fafc8ef3daf819bb9834061cfa43bff8014f7df7f63bdc/anyio-4.14.2-py3-none-any.whl", hash = "sha256:9f505dda5ac9f0c8309b5e8bd445a8c2bf7246f3ce950121e45ea15bc41d1494" },
+]
+
+[[package]]
+name = "arrow"
+version = "1.4.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "python-dateutil" },
+    { name = "tzdata" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b9/33/032cdc44182491aa708d06a68b62434140d8c50820a087fac7af37703357/arrow-1.4.0.tar.gz", hash = "sha256:ed0cc050e98001b8779e84d461b0098c4ac597e88704a655582b21d116e526d7" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ed/c9/d7977eaacb9df673210491da99e6a247e93df98c715fc43fd136ce1d3d33/arrow-1.4.0-py3-none-any.whl", hash = "sha256:749f0769958ebdc79c173ff0b0670d59051a535fa26e8eba02953dc19eb43205" },
+]
+
+[[package]]
+name = "asgiref"
+version = "3.12.1"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e6/26/3b59f2bdae5f640389becb1f673cded775287f5fc4f816309d9ca9a3f93d/asgiref-3.12.1.tar.gz", hash = "sha256:59dcb51c272ad209d59bed5708a64a333083e86017d7fcdd67498eeab7784340" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c0/1b/54f4ad77cd8a584fa70746c47df988e002cf1ee1eba43364d46f87803647/asgiref-3.12.1-py3-none-any.whl", hash = "sha256:fe386d1c2bff7259ea95929266d12a8cf9a8b5a1c2598402967d8792e7a7c094" },
 ]
 
 [[package]]
@@ -106,6 +134,15 @@ source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-p
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/9a/8e/82a0fe20a541c03148528be8cac2408564a6c9a0cc7e9171802bc1d26985/attrs-26.1.0.tar.gz", hash = "sha256:d03ceb89cb322a8fd706d4fb91940737b6642aa36998fe130a9bc96c985eff32" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/64/b4/17d4b0b2a2dc85a6df63d1157e028ed19f90d4cd97c36717afef2bc2f395/attrs-26.1.0-py3-none-any.whl", hash = "sha256:c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309" },
+]
+
+[[package]]
+name = "babel"
+version = "2.18.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/7d/b2/51899539b6ceeeb420d40ed3cd4b7a40519404f9baf3d4ac99dc413a834b/babel-2.18.0.tar.gz", hash = "sha256:b80b99a14bd085fcacfa15c9165f651fbb3406e66cc603abf11c5750937c992d" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/77/f5/21d2de20e8b8b0408f0681956ca2c69f1320a3848ac50e6e7f39c6159675/babel-2.18.0-py3-none-any.whl", hash = "sha256:e2b422b277c2b9a9630c1d7903c2a00d0830c409c59ac8cae9081c92f1aeba35" },
 ]
 
 [[package]]
@@ -201,6 +238,35 @@ source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-p
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/dc/66/54b7a4758ea44fbc93895c7745060005272560fb2c356f2a6f7448ef9a80/characteristic-14.3.0.tar.gz", hash = "sha256:ded68d4e424115ed44e5c83c2a901a0b6157a959079d7591d92106ffd3ada380" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fa/0d/7fa43a50feaa8896e9acbb91d2256dc1341e8f9a0be629138490ee1f849e/characteristic-14.3.0-py2.py3-none-any.whl", hash = "sha256:5324ca333fc9705bf0f1a38d36021baa37888590ccfe8c3738c68adfa609bbbb" },
+]
+
+[[package]]
+name = "chardet"
+version = "7.7.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/47/92/3d893ac5d338b9a9af34c5b517d77492dcea8a10254254eead4215a96f3f/chardet-7.7.0.tar.gz", hash = "sha256:0ba38a05201b0abf7570c12d8af45c30b2af835bd5cc52bfc7105082eda82c1e" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1a/61/800a9442f352912c86f2a00de84fd6914dd9353d29091b1e223e7c08850e/chardet-7.7.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:ad286a0654ae7477bc454a1dee4f396cb28adffeacc6bc7d4412f607c73de0c3" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fb/92/3c6ce24dd68c626cc6aa0b5953c2aebb1d853c7b07d3535f0300b7428288/chardet-7.7.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:4f67f20c9ad3f3024bf71d4aae1d25722b12da921ca9586f3cce7a4639695aa0" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4d/32/5a952b376c00dda01465b396958a8985916d9a9293a772d6bda2c37f2cc5/chardet-7.7.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a05667635c0496dab47eca8c845c044d1da6d74d34a9bf687199c9c53a38119d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/04/f7/09296ca1d4621c9c2766d074822035eee6aebb79eff80c0af3bd96283d05/chardet-7.7.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:79eec5af9d7715334695254234c8d7c29165841526c11083951d9b9f6458e372" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cb/08/80571baad57db2962d6931b3ee1828c82e3e14e9b3464f80532f536e23ac/chardet-7.7.0-cp314-cp314-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:4167165812219e70f311083a8e06e3b627ed5b27aa8c15c3fdd56f350fd3213e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/18/82/3c07070fdcf3c4263e16680c90e9af7c2cd2e5e59cfb1d372efa60fde8cc/chardet-7.7.0-cp314-cp314-win_amd64.whl", hash = "sha256:546180f6170da39778069d16130449a9cff49a8fe144535947d1ef26f5330b96" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1b/b0/d703d408c7f8931b1564110078fc3dcff9825a159990fa69b80da52be160/chardet-7.7.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:a4c2e83b09a540a4d33279d2bee8ed3bfd57ac6645b359ae8b8afd5b4578c3c2" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d8/3e/0eafeebd53eb096400f75138ab18614ab5be12b8794b76dd4b35ef1a8e05/chardet-7.7.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:259dd55b1ba05a66868151a42663483763046a3e6579bde6b0aa65d834635b5a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b8/8d/3c200098027def56be1b6443a10c72efe013a42eb76444d889c809890ca5/chardet-7.7.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:56e5a5c782548b301b44371de327115d13a08de391ddaf9db4ac420d8511c5d7" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/08/81/02f98389fa72345f40d23d69c2d857511d11a0911779a7cf8ed1cecb5037/chardet-7.7.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d227d2aa329fcf848f4640ed9a4d99e1753840c1cfa19f7ca5a48f30c03982ad" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5e/24/0ae866b759a148d0f6087ffb30920a2b956653d0d455b4be93026edbee95/chardet-7.7.0-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:c4a591b2dbfc0a047f8d60331c2fbfb4c3589911000406666a3085fa7d5da69f" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e0/a6/5e0a1f56aca6c44b562d05d9e360f31b5a8f4b311d940a324fa337d277ba/chardet-7.7.0-cp315-cp315-macosx_11_0_arm64.whl", hash = "sha256:eb625c3ab2386ca7f3be9ac2b9b822f4c5b792595c8bb8100b3b6ea68120e92c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/89/05/868f52672cde7e188a7333f3f65deaa62f5acbfcf0f81f3582013776e8ad/chardet-7.7.0-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ddedfb252d05c86c2d6e9a3090f8bd574876bbd39679e7c588ed57d21595c097" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f9/12/2b3a006ae31a7ab4ccac11a00abb27af23b4a5d57ddb00e937375e747a2a/chardet-7.7.0-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:42c4d8a2dc8abcc067417adc13c2f64f48482e48ce48e3af769b5a44214e5a5c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b6/f0/f995a2873a78aa3ec8308f02e61f0717deb4b01c8f1a74c2da329f325925/chardet-7.7.0-cp315-cp315-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:78db6186c1e73d38a2106cdcbbc8f43612eaed9ef8bc4adaf0fe67b6e8a2049d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4a/7b/22b916b52c7bc4eb076ba1736ea9b99cf1065ebb7b56d356409144887c73/chardet-7.7.0-cp315-cp315-win_amd64.whl", hash = "sha256:8f1d611f15530e1642856d91b7aa259851466d7e961f27b888921e7e29718edb" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/02/2f/ccaf5ffa0c8adca280e2687d75524cc07113a0df70cbf542da3445f2b300/chardet-7.7.0-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:1db39957379a801cf1798a5e50cdb3d3fc32683e23c4166ecfa157b980d1931e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/0d/7e/32f45f7ddeb27d94feb529a1a23e5a38a6d3614d12e23f0c89a9eb89098b/chardet-7.7.0-cp315-cp315t-macosx_11_0_arm64.whl", hash = "sha256:7f3b2ca3bac2bdbe42c4dfe7a2888c4b98e2e86a83ddb631960b229d1980979e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/26/40/8c1ab360c39a0bb823786e8934984cbc3e83076dfce2a7f3760086ef778c/chardet-7.7.0-cp315-cp315t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:80db1c109e6e3c102ac589897449437ea2edf26dda1042a3ff669368e21d90e5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1b/3e/bd5c25f525ff2466e6365cbfb098f928761357331b884eebc92ac50f8878/chardet-7.7.0-cp315-cp315t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:091f50d3567b1a066f797835ee5367dbcf3cb77c5e56993b3f61b28264b8e6f8" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cc/75/88a3eb36264375ff951bd2f9397c409727ab6aa6a18e1bd933851571d421/chardet-7.7.0-py3-none-any.whl", hash = "sha256:11cf9b719ea3675a2a7d8a3071bbe4d7ea24b26bfe39a51588d515ddd05cacad" },
 ]
 
 [[package]]
@@ -389,24 +455,65 @@ wheels = [
 
 [[package]]
 name = "cryptography"
-version = "36.0.1"
+version = "50.0.2"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
 dependencies = [
-    { name = "cffi" },
+    { name = "cffi", marker = "platform_python_implementation != 'PyPy'" },
 ]
-sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f9/4b/1cf8e281f7ae4046a59e5e39dd7471d46db9f61bb564fddbff9084c4334f/cryptography-36.0.1.tar.gz", hash = "sha256:53e5c1dc3d7a953de055d77bef2ff607ceef7a2aac0353b5d630ab67f7423638" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/9d/af/182eb91b0df3fe75c4d9f26fe70684569566745f6ba7e5c9c73a862c5252/cryptography-50.0.2.tar.gz", hash = "sha256:7b46165bb56eb4704e2eaaf86f3c940d19154535d9b0ca7d6d590b04060e00d5" }
 wheels = [
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/30/88/9966c898dce71045059c315fe4c542a168c47222fc974f191b3e608a94ef/cryptography-36.0.1-cp36-abi3-macosx_10_10_universal2.whl", hash = "sha256:73bc2d3f2444bcfeac67dd130ff2ea598ea5f20b40e36d19821b4df8c9c5037b" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fe/c0/f2527015e03da5ed6c8eeeccb8b135eb833d59aa21d37214a69f9a620950/cryptography-36.0.1-cp36-abi3-macosx_10_10_x86_64.whl", hash = "sha256:2d87cdcb378d3cfed944dac30596da1968f88fb96d7fc34fdae30a99054b2e31" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/0c/12/a55cf1ed39c2fa9a22448b82c984152fdeb7b30a66e3544eee3bd52b08fc/cryptography-36.0.1-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:74d6c7e80609c0f4c2434b97b80c7f8fdfaa072ca4baab7e239a15d6d70ed73a" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cc/67/459b61831549f4a11c7e5f6430084be0a8c09fcc8463ccf3c41e823d3778/cryptography-36.0.1-cp36-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.manylinux_2_24_aarch64.whl", hash = "sha256:6c0c021f35b421ebf5976abf2daacc47e235f8b6082d3396a2fe3ccd537ab173" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f0/75/f75f35ae3f6bd34475e15a3f06933d0aae15800a86c3b0e7acaa2b36f416/cryptography-36.0.1-cp36-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5d59a9d55027a8b88fd9fd2826c4392bd487d74bf628bb9d39beecc62a644c12" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a7/9f/a725c8f434d24ae656b61539b3c3d22325e8b65331c3f8f943c4cf8858d4/cryptography-36.0.1-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0a817b961b46894c5ca8a66b599c745b9a3d9f822725221f0e0fe49dc043a3a3" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d8/0c/c0f8790bdeff9813722811500fd735c40a6c50fe0b4f8f6f4444f7a49cc0/cryptography-36.0.1-cp36-abi3-manylinux_2_24_x86_64.whl", hash = "sha256:94ae132f0e40fe48f310bba63f477f14a43116f05ddb69d6fa31e93f05848ae2" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c5/8c/a6af8542a22c6212b782465ec1ef5e3dd881eaef4b47d660a3404a4cc5ae/cryptography-36.0.1-cp36-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:7be0eec337359c155df191d6ae00a5e8bbb63933883f4f5dffc439dac5348c3f" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/23/81/ec8af4ddfc7467faee71c606b8398b4a7f89d0bfd3c0d8922805a6b6de03/cryptography-36.0.1-cp36-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:e0344c14c9cb89e76eb6a060e67980c9e35b3f36691e15e1b7a9e58a0a6c6dc3" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/da/3b/d7d9cb1320fdf9d10abeff590674f00506d16a4d850a8b696986026baba0/cryptography-36.0.1-cp36-abi3-win32.whl", hash = "sha256:4caa4b893d8fad33cf1964d3e51842cd78ba87401ab1d2e44556826df849a8ca" },
-    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/46/39/3c255cc81d7a804bb92d129bc36a0d8b1e169a654c2a5e869066b0a6a67d/cryptography-36.0.1-cp36-abi3-win_amd64.whl", hash = "sha256:391432971a66cfaf94b21c24ab465a4cc3e8bf4a939c1ca5c3e3a6e0abebdbcf" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e5/56/d194340cc4a57535e82e1bee9e89667ac4b7c13b5d3f59686deae3094dd5/cryptography-50.0.2-cp311-abi3-macosx_11_0_arm64.whl", hash = "sha256:fa8f5efb344d6908a1ce62f4a24e2e5780f825d6f53f5f50ec5ffacac72936cb" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d9/69/c9bd862c3bf43d6399c433caf002df16e2dffd4be49bdf515cda38038711/cryptography-50.0.2-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:79def8d059362e7831389ed3be0ecdf58a89386e1271e35dd9f5af84e81bffd0" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/21/69/64cef1f702bf6657e0cc186ed1a2891d50d29fb41586b254e1c07adea261/cryptography-50.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:630ebfea3bf689d075f82316324ff7433dc447fe6bc1bfc76524b74b4a9567d2" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/38/6b/61a3f8d8c5e1e49a6cddccafc4015cc1c0021360ab0acb4080e7a423644a/cryptography-50.0.2-cp311-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:f9f6143a8c75945eb960d9eb98905a441394abfa24afaae239d514ffb2586480" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/7b/2e/7212ca32fd43dc91f2f41db20160b268098874b4c9a0e7be94d6835f5b2e/cryptography-50.0.2-cp311-abi3-manylinux_2_28_ppc64le.whl", hash = "sha256:a582ab2ae1d34f67112cadc86702774c9ea4374df6bca6afe672817203c99134" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1a/f1/b474e930c4d910328780e3940da76f5aa5cbc48ce1fc14e44d239d9ea9db/cryptography-50.0.2-cp311-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:4061c0079120205fb760c58acab6443e217307dcf05e3702cf970e0689972856" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/7c/52/9af10e80ac16b0fcc2123f9cbd5e7afbd0fd5075bb7a607c592258a39cda/cryptography-50.0.2-cp311-abi3-manylinux_2_31_armv7l.whl", hash = "sha256:ac9ed99d81760c62fe89d5f0815cdfa1ba9a35141cf30f1c2d044f04b4803d2e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/71/37/6202e488cc1eb625ea110c292c6bda92823176e023f427d8d5660ce8d632/cryptography-50.0.2-cp311-abi3-manylinux_2_34_aarch64.whl", hash = "sha256:87e9ce85beb6b328ba370cc6e6aea483c92617b4c95b1d33a49297eb662bfb04" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8f/30/e86d7d518489b0ae2497091a35287abcb1a2ce4037837a34afbe9b1d6964/cryptography-50.0.2-cp311-abi3-manylinux_2_34_ppc64le.whl", hash = "sha256:f265528741e048bce55c3463ed721fb0aa45a5888d8add8cfeccb3035451bbdc" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d3/69/2c833a049475e0a3444e94c7d0aca0aa51d166374a449b09e92ac98138de/cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl", hash = "sha256:9dab55f57c74c3cad24c323bacbbd04be4705ba6eb0d92e920b1fc4837ed5079" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/6c/5d/906970b83bbfc1f5bbfb677a143c181f2801f23b6a7204a3b47c42c97e65/cryptography-50.0.2-cp311-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:25784ce8b9621c90c643efb9e1e2162ab3b0224cae446ad5e70e7fcb1ce18b51" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/68/e3/f2298d3bb55e0c4a91841ec4d01b3f020ba8c5fbf15ccdcc6dcf03f97025/cryptography-50.0.2-cp311-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:85d0d9a31b9098e98534226d5686b47264b95e62ce459dc2e62fdfc809f9fe93" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/9a/4f/adfc442765721292fff86d314ce385d3249d22db42295c0dd057727b60f3/cryptography-50.0.2-cp311-abi3-win_amd64.whl", hash = "sha256:7afa5a6602a9f29af1f3a2965f831bae7c9d5d597b7cbb716d41ab3b7d89879c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ce/cb/52eb3770c0d0be2702a98c6e96065ddc0a2877cf0845aa9c23397c142cd4/cryptography-50.0.2-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:f785f6161f202ab04d8ca194158968798e480ca058943907972da5f12e2881e8" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/19/8e/aa1fc533d4546b127b45de8aa024eb5933d23eff9debfe25931e56861095/cryptography-50.0.2-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:0ecbc5652bdb6fc9eaf89a7d196e20941adfe812f43bc4ca05d9150496821047" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/6a/64/72bc3f75176e7e406b748a3e3830432b8c51297b38368713df04dc04898a/cryptography-50.0.2-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ab50ee449bf968271e820086f10a33d101dd060370abc10bcd22279be2656539" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4e/c6/62c77550edfa5ca3f14bf44a1e6739b9fa09d6e998a11d97ed8213bccc98/cryptography-50.0.2-cp314-cp314t-manylinux_2_28_aarch64.whl", hash = "sha256:a9f7355e6fab51f6c369b86fb7571cffa05edee2c2121e0380a37fb9ac1cd5c1" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f4/37/cce70f150c432914460157a6ecc161752e053aa5ec0ef3b3f7dc6e31039a/cryptography-50.0.2-cp314-cp314t-manylinux_2_28_ppc64le.whl", hash = "sha256:94e5e9f108ee10471288214d3d233fbfbb492840a8457eb85178d643ddeb32c7" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/aa/9a/6f2f0304d634ceafdeaf23e84537336664ac419b5d07611675c2ad3f6b7a/cryptography-50.0.2-cp314-cp314t-manylinux_2_28_x86_64.whl", hash = "sha256:241449bf940a5d27309bd317e6f9a2af6932113818bb2b8f5c59ddc7ef16da18" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1d/de/66bcf9244d118663b2e1aaded8990f4640e3d7b7411870a5765f252074d2/cryptography-50.0.2-cp314-cp314t-manylinux_2_31_armv7l.whl", hash = "sha256:d8947001be83df1394050758ce0e745dd74fb134eef0a4b5124208dfc3a68c37" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/bd/e6/db28a28c7b6c676addce89136de3d8db49ea825a8c863472e36e42ead4ad/cryptography-50.0.2-cp314-cp314t-manylinux_2_34_aarch64.whl", hash = "sha256:4a20ce1e5cb4284a86692fdcba7cb8754185c6b2e5c56fcef3751cf451d3cdc2" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/30/96/01546c7f69ea0e2ab790a2e4f0934a4052fb9b388147fbf83c2fd72f1e57/cryptography-50.0.2-cp314-cp314t-manylinux_2_34_ppc64le.whl", hash = "sha256:84f964e537f916e2cc85199e5a88742e964939b575ac8598b3f9d6cc416cdaf1" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/6c/01/03263395f74d50b071e9e66daace3f8bef80493e5d410726f2ba8554736b/cryptography-50.0.2-cp314-cp314t-manylinux_2_34_x86_64.whl", hash = "sha256:828d49b0ff5a0e3975865571c5d91dbbdd0d38d8289b249a163e9425413a5e05" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/eb/94/2bfe8f29ec0cc9c0d99359c4161adf32858e4934b72c6d100d2ac0bbe962/cryptography-50.0.2-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:deb9fde5c60e437ee4821bc9bc39ff31b42135c27e1dc61ef0a629389c1de62e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/54/44/e80651ecbf0e42b62e2bb5f5768916e07eea72e1297338956a61df361f88/cryptography-50.0.2-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:8c71ba2cd31fc93748c38e1b613200ff1c2665cbfd5341fe3a61cfde35a1430e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f8/cc/1d33befb3cd7ea7e77d2d73f43f2066471da1b21f24a6156efcaabf6d2e8/cryptography-50.0.2-cp314-cp314t-win_amd64.whl", hash = "sha256:78198641e5be9521beea5aa782bb551a58068d10e6eb04c9c680c1b69f2e7d45" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/2d/49/93f6a6e7a87c9aa68d44d3e1cdb5fe8f60c90d5d2f46acae9a56892816b8/cryptography-50.0.2-cp315-abi3.abi3t-macosx_11_0_arm64.whl", hash = "sha256:edc3342adf8f697fc5f59c887a304356f147b397809440ed64e2fa6af2f50f37" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8c/75/32ac2a56243d778805c16ca6a32b8f74fb757df7e28d7ecb560afafb59cf/cryptography-50.0.2-cp315-abi3.abi3t-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d370b8d1dfcdf7130178137f6fbee6140774a1acc6cacefc4b42643ec11d0a3a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/aa/a4/2c8d734e43d97f0842ee9f1b7b4bfb3d0cf5e19edebf43c2afe6675c2320/cryptography-50.0.2-cp315-abi3.abi3t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:f2f9bd7f90c64fe89253f0a2c05e3c4856072660429ce8831b4235bf29403a67" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c2/58/ee288c829a6f41f6235ae9dd33d82fd19b45442b65b4c8a3da36963d9f7a/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_28_aarch64.whl", hash = "sha256:e275096ea1e60cc595cda2836fd4a6c725d1125108b868be17f53684d164e2cc" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/92/20/9ded6d51ddd9897f6b6e81fb9ebea7951d7cc5d6c890b0ed8abf77a51a80/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_28_ppc64le.whl", hash = "sha256:b13478603dcd0a2479ff8e87e2c19a7d525734686fe3c49542472293a204212d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/02/a8/8df951850d6b31d2a00218f19e2b3f999523437ed7a819df7fa427942fca/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_28_x86_64.whl", hash = "sha256:58a0c478eeca76fe5e07993c5a0703def34a6dc6a0cda4f5564639b33112ffe7" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8b/f9/36b3022218ce75b7cdf068fb95f809f9bd0d820e4955ef43b90c255cc7ac/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_31_armv7l.whl", hash = "sha256:d38cdff612d06fa6a32840d5e1b1f7a27cee4a349aa9085d94a67789d6bfd408" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8c/72/20f99a219f6af47cdd1cbd978c243b92d71496e168a746138af44ded4f29/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_34_aarch64.whl", hash = "sha256:fdd28f912fccfec1846a94e2e1e8f9b0012f557f0c46fe4f3eb0d7a87afcf90b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f2/20/196f112617fb08eb4d608a2a6c422373d46f9cc2857f38fc0667033c0899/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_34_ppc64le.whl", hash = "sha256:cbc8738fd8526d80f35cb3a40d41f41a2e7030bb3b18b09a6778ef63d291c2fd" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/24/95/83378121ef3eaaaf71d4b781577ff794acb39b9e1b87a3f156898c8497ed/cryptography-50.0.2-cp315-abi3.abi3t-manylinux_2_34_x86_64.whl", hash = "sha256:e105ab60406787da31fccc883fc0f733af1efd78f0136a4599692c4083a73d0c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/22/f7/70fd7ae4d1dbfa7ba29b02e1b9068771519a86027756510b700ce81086a8/cryptography-50.0.2-cp315-abi3.abi3t-musllinux_1_2_aarch64.whl", hash = "sha256:6f8700550aa1474a91e5dc07049c46f98b423b5b1ddd0483e0b51362eeeaf5be" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d4/be/688367b74de86984bd58d8efacfc7c9e68b89a6a22ced0fb4f38db50254a/cryptography-50.0.2-cp315-abi3.abi3t-musllinux_1_2_x86_64.whl", hash = "sha256:c71be1cbfa5cd9a41ee452acf1eccd82b2c05950358b106ec8ceb83411d1a020" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/39/d1/55f8a3f2ef5d1529e16835ef10cf0fe3d559ce237b46dddc440c0bba3649/cryptography-50.0.2-cp315-abi3.abi3t-win_amd64.whl", hash = "sha256:c423ab384a46c4dff7217b2ea5ba2e11cffdeab6441acd04cf65a369caf0366c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/23/ad/ac987755d00e1e64273760228d2635ae38dae2be83e3c6e0d3289d91dec3/cryptography-50.0.2-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:0ec5f09541743261e66e291b4a0cbf0fb2997aeaab6d9e9c740b9dba1b58d1c2" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d5/8d/6d585339bedf85d45044c85d8412dac53f2bb6f918e8b7777efba1787844/cryptography-50.0.2-cp39-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:c5e67125c7dca78d199ec4e116aa93dbb83494808ecbb8211a2cb09b1bf41dbd" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/bf/f1/1c1f6874e8550cfddd4b688ceb38cefb6ed15ceed224d56f133f3d88c214/cryptography-50.0.2-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ee247f5c245c9a2fe7c8e2214e295918838e44e00a45a6718451e4004219e767" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c1/63/61b15dc1a8de03fe0adbe3fd7608b3ad5c73bf50993bbcb1faaa930afe33/cryptography-50.0.2-cp39-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:dfe9763530994147d9af1def057a5b9658b00e8f8fe8743d144d1e0911c2e454" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fc/35/b345bdfa40c9126df1a9d33236aa98418367931b8725f84fc3ae2b98dc59/cryptography-50.0.2-cp39-abi3-manylinux_2_28_ppc64le.whl", hash = "sha256:58ddb5a8e3179d12f19e4ea34d2d32e9d63a4baa142c875c1eb59f41b7243acd" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4f/87/ef344a9e616871f2519c22d6afcda79ddd5d35e9592d95eb6e677608d055/cryptography-50.0.2-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:f21e8a22c8605750c7af886bab299a363721264061b4ac0a30efb73cfd58efc5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/90/5b/f2fdb13cd0b96f6f932c8627bb292a45f11c64d21620a8e120aee9a3b848/cryptography-50.0.2-cp39-abi3-manylinux_2_31_armv7l.whl", hash = "sha256:9c8402a82ea0dc4ceeab793db05f0fafa8ca139ca34fcde5df0f596103c74107" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/bc/ce/7e4f662b1e3c393513569e402cfc85ac7da0bd3d5435e122a3140219eb2d/cryptography-50.0.2-cp39-abi3-manylinux_2_34_aarch64.whl", hash = "sha256:0ddc924c04591c2811ca024d62ecad4f7f6f08af8939c211438f48a16bd23602" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3c/3f/86ff33ce34cc0de6847fb96e035a1a760d81652e38643f617c02ad32ef7a/cryptography-50.0.2-cp39-abi3-manylinux_2_34_ppc64le.whl", hash = "sha256:a6557e5f38e065ca9fbdaf7cfc7435ecb1d113aa81a022d1b51921ee7432e227" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/40/cf/6b5c8e2fd9202d98988ab7cb5cc5c991704c4ad55f492ff408e4969f83f1/cryptography-50.0.2-cp39-abi3-manylinux_2_34_x86_64.whl", hash = "sha256:1981f1db4630889b9ef7803fadef12b056f428cb6b85c27ba57b774793b6093c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/10/bf/8d6ebc7dded797bd0f0160d52188021211f011a2b164ef0ae1dac4587465/cryptography-50.0.2-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:7a8701d6b584d76e909e3d305b7d126b41439876a5aaf76cddc67fc230eafa2e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d4/aa/f3f6e0de7e6253b8baa8b2d8fb9d50924fa75cee3d4624bd4bc1208ee923/cryptography-50.0.2-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:ce47f66801c20ec6c6632453bb5960fe38939e9306970b48b3a5a26de7745d94" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f6/b6/a1faf3a27ae9405fb34b1713cc73b2d8a26b04d5c561578fa2e6ef3e5bb9/cryptography-50.0.2-cp39-abi3-win_amd64.whl", hash = "sha256:4e81d95e5bafc2d6e34e4bed780e53e4d5b9a2f928573428aa4d35fbec1eb0de" },
 ]
 
 [[package]]
@@ -416,6 +523,41 @@ source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-p
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/59/e4/2f921edfdf1493bdc07b914cbea43bc334996df4841a34523baf73d1fb4f/dataclasses-0.6.tar.gz", hash = "sha256:6988bd2b895eef432d562370bb707d540f32f7360ab13da45340101bc2307d84" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/26/2f/1095cdc2868052dd1e64520f7c0d5c8c550ad297e944e641dbf1ffbb9a5d/dataclasses-0.6-py3-none-any.whl", hash = "sha256:454a69d788c7fda44efd71e259be79577822f5e3f53f029a22d08004e951dc9f" },
+]
+
+[[package]]
+name = "defusedxml"
+version = "0.7.1"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/0f/d5/c66da9b79e5bdb124974bfe172b4daf3c984ebd9c2a06e2b8a4dc7331c72/defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61" },
+]
+
+[[package]]
+name = "dj-database-url"
+version = "3.1.2"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/03/f6/00b625e9d371b980aa261011d0dc906a16444cb688f94215e0dc86996eb5/dj_database_url-3.1.2.tar.gz", hash = "sha256:63c20e4bbaa51690dfd4c8d189521f6bf6bc9da9fcdb23d95d2ee8ee87f9ec62" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cf/a9/57c66006373381f1d3e5bd94216f1d371228a89f443d3030e010f73dd198/dj_database_url-3.1.2-py3-none-any.whl", hash = "sha256:544e015fee3efa5127a1eb1cca465f4ace578265b3671fe61d0ed7dbafb5ec8a" },
+]
+
+[[package]]
+name = "django"
+version = "6.1.2"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "sqlparse" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/89/24/20d187a22ac821288b53c53b8f696019dcb0c7b4f973f052ade19392c74d/django-6.1.2.tar.gz", hash = "sha256:a1e92451ccb8b514e91bbb3b6d186d20b4030558f116b5d9de6535455ff210b7" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c9/83/90ff2dbfac7b519ed77620bdbb827cd2d1a83faf00d076bf95056428bce7/django-6.1.2-py3-none-any.whl", hash = "sha256:141efee6ec64d1db6db90683bf734c550102450f444fb099063b0be1bd27d991" },
 ]
 
 [[package]]
@@ -431,6 +573,15 @@ source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-p
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/11/c4/2da1f4952ba476677a42f25cd32ab8aaf0e1c0d0e00b89822b835c7e654c/enum34-1.1.10.tar.gz", hash = "sha256:cce6a7477ed816bd2542d03d53db9f0db935dd013b70f336a95c73979289f248" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/63/f6/ccb1c83687756aeabbf3ca0f213508fcfb03883ff200d201b3a4c60cedcc/enum34-1.1.10-py3-none-any.whl", hash = "sha256:c3858660960c984d6ab0ebad691265180da2b43f07e061c0f8dca9ef3cffd328" },
+]
+
+[[package]]
+name = "exifread"
+version = "3.5.1"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e2/4e/d8fce8810d819db47f5b159e75223511c5ccd7ad07c2feca64cf7fab2477/exifread-3.5.1.tar.gz", hash = "sha256:9f998f80d3062741c976dfc4fd033424bc40932937994e4d2181eb70c4b6aedd" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e2/a3/20e34a55c7b225110d3822d07c3cab9e8653d9c179e36783f2ed632a96a7/exifread-3.5.1-py3-none-any.whl", hash = "sha256:e5426ce2857423ad401e575ea9d159dc97449dc041fb6e61b35109caea72c311" },
 ]
 
 [[package]]
@@ -465,6 +616,15 @@ wheels = [
 ]
 
 [[package]]
+name = "flake8-plugin-utils"
+version = "1.3.3"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/51/14/53727a2bc5bbda1e1f7e266e0e2d2718e5eb6c943a1e8cc2b33e5af002e0/flake8-plugin-utils-1.3.3.tar.gz", hash = "sha256:39f6f338d038b301c6fd344b06f2e81e382b68fa03c0560dff0d9b1791a11a2c" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/da/a7/23c012c9becaacb24e9ba8e359e48db5f96982d505e38a3e7003902c5b9f/flake8_plugin_utils-1.3.3-py3-none-any.whl", hash = "sha256:e4848c57d9d50f19100c2d75fa794b72df068666a9041b4b0409be923356a3ed" },
+]
+
+[[package]]
 name = "flask"
 version = "2.3.2"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -491,6 +651,74 @@ dependencies = [
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cf/25/e3b2553d22ed542be807739556c69621ad2ab276ae8d5d2560f4ed20f652/Flask-Cors-3.0.10.tar.gz", hash = "sha256:b60839393f3b84a0f3746f6cdca56c1ad7426aa738b70d6c61375857823181de" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/db/84/901e700de86604b1c4ef4b57110d4e947c218b9997adf5d38fa7da493bce/Flask_Cors-3.0.10-py2.py3-none-any.whl", hash = "sha256:74efc975af1194fc7891ff5cd85b0f7478be4f7f59fe158102e91abb72bb4438" },
+]
+
+[[package]]
+name = "flask-sqlalchemy"
+version = "3.1.1"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "flask" },
+    { name = "sqlalchemy" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/91/53/b0a9fcc1b1297f51e68b69ed3b7c3c40d8c45be1391d77ae198712914392/flask_sqlalchemy-3.1.1.tar.gz", hash = "sha256:e4b68bb881802dda1a7d878b2fc84c06d1ee57fb40b874d3dc97dabfa36b8312" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1d/6a/89963a5c6ecf166e8be29e0d1bf6806051ee8fe6c82e232842e3aeac9204/flask_sqlalchemy-3.1.1-py3-none-any.whl", hash = "sha256:4ba4be7f419dc72f4efd8802d69974803c37259dd42f3913b0dcf75c9447e0a0" },
+]
+
+[[package]]
+name = "fonttools"
+version = "4.67.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/94/36/102e180f8f5dbaee88b26595b01ca8aa80bf4e62128d9aa94265b3996c96/fonttools-4.67.0.tar.gz", hash = "sha256:3cb57e6600ca77c0b1729cf8adc23bc0652633a37f18cfa934d9c7bc3de25519" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/25/5b/c418f48918e40ef8c3f0f555567fe013c0c8058a8afa8040d6baeec80683/fonttools-4.67.0-cp314-cp314-macosx_10_15_universal2.whl", hash = "sha256:846982e89b1861d6c9d7fcd6567aec3fa5a10ad313e7f2076045fcd339cfbd8e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/30/18/49013c643c3d56fce1b7e909ef7c01c36a5bd906dfb58571c9dcdaa4dc38/fonttools-4.67.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:952eb091689545d86d16e40f719ed7bb086dd810a07dcc9ea2ca0a81004810a3" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1f/2c/b7f33fa3bd1e4afdf9bf93b760f22486350eda487ce76c47f5931f868957/fonttools-4.67.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e2b5d511ea012dce7bd6df12b279b7d7a5b01b019865717d03ae679f4b944fa5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/79/fe/fef04b2cc2930edba11095f9e9b5c2797f8594fc54316195cc39d3c3bc63/fonttools-4.67.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:916836845e4b1c1447bb61390ffb3cb5f2940fd9f5d6de4685539a81806c7764" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/2e/c6/41cd4f6137f61dd059cc0609b73d9556091ecfcc8cb4d3cc543129c8ec24/fonttools-4.67.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:775364ac079e2ea7a2eedb5f9172c57b059d638ff79e2bf8d4257e5805713f32" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/53/5c/08abd0a6d5c36624411e1b934745b4689d4309b03e98d8cf49f9469c63b6/fonttools-4.67.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:b3ddf350e74508102b33dc6b32984b6dd751359a7c57732bcd39f9d7cb37d71e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b5/0f/59e835023817fe3932653067fde74960a0800fb95535375d8206aa9ecd68/fonttools-4.67.0-cp314-cp314-win32.whl", hash = "sha256:72d6d316dffc92eadb771f697f289ea7b60f689580931328905a267bd170f93b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b3/d3/5230265a5ff16aead01ce1a432a6b5bbdabe086f433988f41a1395e6dff8/fonttools-4.67.0-cp314-cp314-win_amd64.whl", hash = "sha256:4e2c1586b5b6588a47d02e2588170eefdc996b708f2659c44dbe169bd6fcacb5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b3/38/d899d7bbbe04d27dd509ac6b8f58f73fc240bb1dfe0ada9a9d33ad3bf9f2/fonttools-4.67.0-cp314-cp314t-macosx_10_15_universal2.whl", hash = "sha256:84a3aed005de106fb1794372dace82eca50859d52ae26da4bb6c602480a41250" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c3/f6/4f465a62972e383b3d82205841b93f625a4e5ece6e5693c5be2a691ffe6d/fonttools-4.67.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:64e56d0d6a39780fee86955c758674538387b18f911ea904a4aae8f8e30fa26f" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d7/91/ce1ae8f8baa75feb2320caf6f74d2c228eba210a13b3e0895c0403e5e987/fonttools-4.67.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:8c21073cfe7129aaa070d94f575c1e2a880ae4aae1dcffd5352f174b96d27d16" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fe/1c/495fe0a6bb8625e693c1417e178aeac42a11aa47e79efd7611c7bc5fb81e/fonttools-4.67.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:720bcf27727193b0fe1883c2e036dc88e37047916e977f5c3daf6ee4316e9656" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/19/9c/d9730d3dd32e39583d6db929d0867df02042539bb0ebc3ad3d92a52a6aaf/fonttools-4.67.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:6c19a770a8d273371a37969003c143eaa629ab893c3db028af8b91d04c6f9a6d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f0/c6/d41c1163431828b0fa2172e867798e0c4517ac6606e774b9175e048fb666/fonttools-4.67.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:13d7507252c5a5d7941a5fa1be27d335c378ef07983ea2bb24988bf600eadd5e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/95/af/14885b78b1c1ff7219f890b79a5a6f76608d907c171b40e43839de995f54/fonttools-4.67.0-cp314-cp314t-win32.whl", hash = "sha256:07a2f36b3263faadf5b7b548f62fd3cac401e490189c82b16f7139ac0df91cd4" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cf/33/3d660eb850d24a81b4097ed46a1352c4ac0e4c10025526fa115e1871fc64/fonttools-4.67.0-cp314-cp314t-win_amd64.whl", hash = "sha256:fd79e36c2968e9fc3e1b082f2ba7dc63ae88a161a3d8ceaa0746b906455f3617" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b2/74/ebff33b3c6dfe77d86a1b67b470c3d817f044910203880a1f4e92a08bec2/fonttools-4.67.0-cp315-cp315-macosx_10_15_universal2.whl", hash = "sha256:89ad62d116f45bb45873bb92fd69c14a720ba591cba488044731954a5565e194" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e0/f5/7b3b786447cdda91f8cd06e44bf3b906e71825118f5cbb9b69c099415152/fonttools-4.67.0-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:1671e5f368b0c136ed9fb62fef26c7e425b4ebb0bb669a1cb7ba453f5bba580b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/eb/c8/c0c08d8a76b2ed460bf8b63642d98445aa18179a14005cae617bfe9ec732/fonttools-4.67.0-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:451077d2fc61a2a03f5dca54d84fbb01051ad781f48ea137eff35c775a4cb025" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3c/db/66b5ef9985c7d69f7b3521ee965c3093b1802322fb6c16e8c3da608b747e/fonttools-4.67.0-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:1f200cd2cf046a5a0b03babe84ebf8bbc12187d5d57f50bc03f24be89e7c1605" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8e/b0/77d22a73d5cfce9651909583ea3011c7ab26daf155b0eb21f7a3f02ac78a/fonttools-4.67.0-cp315-cp315-musllinux_1_2_aarch64.whl", hash = "sha256:bd3239e5709fd4c3343db67245ede46aece610d7f7ef61afb174718122479282" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/97/b8/d3e7b799186fc3213a31d0cfa2c553c5d8eed0a7c7960dc3cf7c0d0497fa/fonttools-4.67.0-cp315-cp315-musllinux_1_2_x86_64.whl", hash = "sha256:b274ed3106b8086f237b7dbb1529c28142ba10ae40b9d285be0ae6a44b2946d0" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b7/89/c9799e81e6de16196d4781dbb81136d354eaef07136607917275a5fe958f/fonttools-4.67.0-cp315-cp315-win32.whl", hash = "sha256:fc6b6b03aa44f504c8734e62ccc3e4dcda9f4b8213a85aa80742e4d1cc9d96ef" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/79/48/40f5591bd0e198d34ee3e25710e730c824750b3c822fc0a65b08e193de80/fonttools-4.67.0-cp315-cp315-win_amd64.whl", hash = "sha256:592d8f72024dea0408739a92599e4f839b960e1e887b25adc76dc87271fdac76" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fc/5c/f98ee788f76ffad100427c20abab3a6213b37c97575dc82e4ccfaaafbc55/fonttools-4.67.0-cp315-cp315t-macosx_10_15_universal2.whl", hash = "sha256:9c38fece8156cbda31b42d49c4a187858056a35932b88233b6fb31eaca5cf67f" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e3/b1/af3016813fd44c0ed32d37f3a12cb707efd99edd8205bd8b73aea1f0f542/fonttools-4.67.0-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:3b34324deb3e09ad648039a0a86d945b83f23a44fe3da74a84e6ada71fe0b650" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b5/bc/13b45dec208145da2c49c063b6ce73ddb2e6e3bd137ba3613562d686a013/fonttools-4.67.0-cp315-cp315t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3a19f6d5e1a373f2e4a5bdb9452c8ba212dd9f1e43df2fff042b896e28084e4a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c2/8c/01f2f16066c802ad2cd6f3321c226240475b30ada91d69d493f7a40445a7/fonttools-4.67.0-cp315-cp315t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:5ccaa87b312219d02cf72a79f1eb2f3ce028882d6fd1b79336141005db83b84e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/84/e6/d6dff534e9cb8688ec7ecddc353609bca580efef9967334e2289f56bd9da/fonttools-4.67.0-cp315-cp315t-musllinux_1_2_aarch64.whl", hash = "sha256:38fc772182ebff3e2ebba7886460476eb65842b601ca0b9221a6a5826136396e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/39/c8/4de02224adea134666e6705b0137cd3df2df60a03ce100797b2b221a73dd/fonttools-4.67.0-cp315-cp315t-musllinux_1_2_x86_64.whl", hash = "sha256:f672398385849ff79e7dd50c0a06efe110c8ba23d8890f9b45fbb922bc2f55f6" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8a/e1/3a32904bac7c3460e23a86e9e1529b40d0969a69bd4edefa31e2d2f1bae7/fonttools-4.67.0-cp315-cp315t-win32.whl", hash = "sha256:77e0d4096a2ac60aebe43928b5382766df2d148577db8e8ff79b6a50879a6c06" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fa/c5/8834cfb95383059addca24f591379d152f137689ff63766736c26b0f9b25/fonttools-4.67.0-cp315-cp315t-win_amd64.whl", hash = "sha256:8c58a8a9ad447bead6f91e5f50b23c0e4988538cdbd9bf2f68952b39f5900a84" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3d/61/4161946319472aaa9b897bd18ad5108a5b10f5ebaa503d921a001ac4fff9/fonttools-4.67.0-py3-none-any.whl", hash = "sha256:4304f03ed7f4ba000a8dcc941ad854bfa52e2f3b6112b8f099b6f431cf98e701" },
+]
+
+[[package]]
+name = "fpdf2"
+version = "2.8.9"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "defusedxml" },
+    { name = "fonttools" },
+    { name = "pillow" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/12/23/84dbe637708c2690972eff5df233a7c9f8d4bde809f714839dc1b08f5e5e/fpdf2-2.8.9.tar.gz", hash = "sha256:5b0b3786f5236a2b3cc83c1fee567df17ddd314f8c4e13d820d8f09b617ab4f0" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/41/16/42cc18bba1561692a235fd232b38947e54f059150065d43d631b57a0085a/fpdf2-2.8.9-py3-none-any.whl", hash = "sha256:6e1d94af6d6311950a23dec7fb5fc84b000203eb59aee8e76c1e701b12a14976" },
 ]
 
 [[package]]
@@ -529,6 +757,45 @@ wheels = [
 ]
 
 [[package]]
+name = "greenlet"
+version = "3.5.6"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3e/6e/0091f175ccd02b02bc8811bbcbcc6ac2e980be116e3b2f7a736ca322bf84/greenlet-3.5.6.tar.gz", hash = "sha256:8e67c43bdfc88d5fee6db0d3e40175b362fc95fb85f0412d233b9b203c53a575" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/66/c0/d254544ae2b8bdd311aef000fafc02828c2771b17d994b3075620ea7cc6e/greenlet-3.5.6-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:8cddea1b8339451c2fb3388e138347b6126744f33b611bdb55b7357361cfef46" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/18/18/eb54be16b9cc3971e09ca5b73334e1b8c804a4630d9addaaf218a4fe300f/greenlet-3.5.6-cp314-cp314-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c59acfa8eb73a1e0d484392dc002bdf001fd4ce73394e0132df3d1ab6093d7cb" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8f/b4/e193efe65671dcf294bc51fcc59efb52d154adf8612c4ea016da0d2c486c/greenlet-3.5.6-cp314-cp314-manylinux_2_24_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:a3b4a01c6da07ef9f80d4fe8933b994bc99747bcea3eab0330a9c34d3c12655b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/45/ac/28fa7a9e50f2859466214c4ac584d776db52c1604ad4dd158960a5af2a1f/greenlet-3.5.6-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9a09d59bef1db94f384b5bcc2d523694d338f3df6b757aeeaf7baca5d0c0be88" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c3/cd/fb7d6cdd86ff3427c1494854f0e35437eba05142be91f530f6da75e09e19/greenlet-3.5.6-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:8b7c73d1cef3d9ae963e9ff03f6222df43efbb9054ffd2f1969c935b7fc84c02" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f6/40/143bdbb20a516628cb15074ae52ed17d850b450292609c7a6fccac6dbece/greenlet-3.5.6-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:8b27df301f56e3b3d2298095c8f7d6b68f2521f6b1693e901fa039bdbae34424" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c9/9e/019642432e6ae283301df1361227d47610709d2dc69a38f95edef266d713/greenlet-3.5.6-cp314-cp314-win_amd64.whl", hash = "sha256:f8f0bd690e1a41294ac87905e8121c81a3761ec2583c768f13467428606c8c7a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e9/7f/8aafc7bf70c948786dba7221d0dc0838e5329bebc6d434ef2208b4f0e760/greenlet-3.5.6-cp314-cp314-win_arm64.whl", hash = "sha256:8cda13494d86a4f12429641117cb6ac4bbbc9c30a33f711f7d3a2e5fbe4b0b7e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/14/7e/7a205688a5b3074933b18a906608d46d106e9a79d776bdab5a4abf4b4feb/greenlet-3.5.6-cp314-cp314t-macosx_11_0_universal2.whl", hash = "sha256:97c5a53e8c1754df58e73f047a99e287d4da1bdfe64b0072fb25c87000897951" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/78/cb/9c4a57a9d9dd0256e20b8f7f4f06554c2c92badebf0ab73ce344321b78b9/greenlet-3.5.6-cp314-cp314t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:fea4427d1ffdb3b523d7daa6712038428a4c16c450b9777bdd1221cfee0eab49" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/97/52/c6729681ebbd298f4decd28746815acc8a0b0a0fde21d2df33776fd4d042/greenlet-3.5.6-cp314-cp314t-manylinux_2_24_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:73a29b5ba642e35433166a03a3e02935e7238c4b3467fbd77523b99edea23e5b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/58/c5/2b6c721ba8b8963da42d5a0f57f25b8aaeb1fe9bdd156875e57f3be648a2/greenlet-3.5.6-cp314-cp314t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:460e70b033aba8ed47e2ac9b5d0d2157b05a34fbfa30a241400aef4118902cdc" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b2/04/0d018e0d05bcdde19a0fcb907834155f1fc853a9bedd3f3f5e6acadcae19/greenlet-3.5.6-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:ca80a49b53ed1d22f7282da7255f7bb2fd1935fd0f623d8613fda38745f18961" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/59/bb/f02ef9073919158f6403fe3701d4ed4403d646720e7201dfc6e9d264bac3/greenlet-3.5.6-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:916f92f2a8db10508f739d0b5e00b83defe5d1115a997c54532a6d7cf8c95404" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/08/a5/1f48fe647473a2dcccfd1839b2ff2c78eb57009be776b4da071e901c9bff/greenlet-3.5.6-cp314-cp314t-win_amd64.whl", hash = "sha256:886bcf1870af74c32bc310fd00a6b803445e17e51b7d5a107c7b35c0f362cc16" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cd/72/3882855a75838faeb54a58aeef4fd77d20b2a86d4bad570c70d41b565dcf/greenlet-3.5.6-cp315-cp315-macosx_11_0_universal2.whl", hash = "sha256:3ac3494c381dab876cad7d0b22f3a722f3e0c8deb3a65b9e7f35ad7f58b8fcb3" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/10/1f/be4d957d8a9b90bcbe8db206548a42134d96222d43e5ed3fc4708fb6e24b/greenlet-3.5.6-cp315-cp315-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:602024dae6d77e161f4b89491b62ca1d4f19949d79d47b2db057e476d21179d6" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a1/af/60d62571a7d6de961e4ce7625d6c2faf359345659fc782d2cdf517c34577/greenlet-3.5.6-cp315-cp315-manylinux_2_24_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:f8e63209c3e1e828ee6a457529b4a6d8b05d050fe0ae03a7ae49e967c5d312e0" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fb/16/ac9e547b611539aaed1870eb1d6ddc57abdd5924b3a99bb9b5f0b44176b8/greenlet-3.5.6-cp315-cp315-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ccadce0130fd813ec86ebfe969a6c58b42acc1d0fe55a47525375b740e07b605" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c4/b1/b7ba08d6431121741f1d30be0d5d292e76873325179a63586cd9217b62f6/greenlet-3.5.6-cp315-cp315-musllinux_1_2_aarch64.whl", hash = "sha256:9297fb9c39b9a2c039dbcd306c410bd6906b95244dec3bba4318d36c718c164c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/af/c5/3b1cbc68f0c082022fc8717f7fe4b8b13b8d583c52352be37f4e9f55bcd2/greenlet-3.5.6-cp315-cp315-musllinux_1_2_x86_64.whl", hash = "sha256:b374e79ffa7511afc11773aef40a4ccea6191fba1c856ea2f9c56738dca69d7a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/de/56/12941ed2711400451c89d544e10f831800a2770f19dd55eac8f0f7f2003b/greenlet-3.5.6-cp315-cp315-win_amd64.whl", hash = "sha256:7969bffa322c097bd46ae595ada6a931cefda613f18ba64587e9cff4cb320756" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c5/3b/576b9ed5ac929252e340cf60b4bcb6a8515350dc20797064b1922dc4ea75/greenlet-3.5.6-cp315-cp315-win_arm64.whl", hash = "sha256:8dba0129b93e7091dfefaf4cf7000172741bff7f47bf6326fcf17f32fbb54d6b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/16/c2/86cfc5555a98e12b86966ddbd24fd39af32f71f2f785c6595b7feb2db156/greenlet-3.5.6-cp315-cp315t-macosx_11_0_universal2.whl", hash = "sha256:de3de000d459402cda015068fd135aa50c0bf6f2477a80d4da1e646f123b4e78" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/14/6d/83ffc9d05a75a80ab3a7595dbb1d9604e5d4fc2996d73a8ae2dbd1284900/greenlet-3.5.6-cp315-cp315t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:45663c01a4de48b9a64a2ee1509d92d1dfd3afb02b2ccfc9333029d11aef996a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5d/d6/c2cf684810e5caded075970aaadea654ecb58b8382b9aecf1d231b936894/greenlet-3.5.6-cp315-cp315t-manylinux_2_24_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:3deccbb57a481e3a408fe61cdfd5c13e0678fc0a30fdd09597917ca87b4be877" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/62/19/00e1bee5d2af890dc8f400b54d0b0f9b489965f92bc12b407ff72cc6f469/greenlet-3.5.6-cp315-cp315t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:311018b46472fb26ee85870847fb89eb64cc8aaddb617400789d87076f7cfeec" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/89/58/c9275fd0ca195d1d3402931bcce8cfcc74726ff76efb1883d229e6e1a3d7/greenlet-3.5.6-cp315-cp315t-musllinux_1_2_aarch64.whl", hash = "sha256:7f924a5a9d5890649566f2f6682e0d8ad8ca23028bacffbbac36dbd7fd680176" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e0/36/b35747582fa4f1a5453f8f3002405dbac788e450cec7674dc2d204b6ccb5/greenlet-3.5.6-cp315-cp315t-musllinux_1_2_x86_64.whl", hash = "sha256:de9923832f2d8c1a5ecd8d7260465a6ca5a86888a0d129e3bd5cf0406d2fc5bf" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ed/69/6ec22ac9351e474d2a134d0ff9400dc80362d1c20f0721088ffffdfc205b/greenlet-3.5.6-cp315-cp315t-win_amd64.whl", hash = "sha256:2ab5f42ac6c238eb71770715e6e909ad9a1a92b6c681ccb64cd5a0f07edb953f" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/30/cf/697c051fd534e223461fb8b523890e21a24eeca229cd50624cff6f02fabd/greenlet-3.5.6-cp315-cp315t-win_arm64.whl", hash = "sha256:f9fe868463ec7e1363733af77e38a5fda3e9b63940337048c945d69e0c80ff24" },
+]
+
+[[package]]
 name = "idna"
 version = "3.19"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -538,12 +805,36 @@ wheels = [
 ]
 
 [[package]]
+name = "influxdb-client"
+version = "1.50.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "python-dateutil" },
+    { name = "reactivex" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/07/23/77a945465a556a8067917ba84bac04e312cee2a4fe03d41198fe79ed9c84/influxdb_client-1.50.0.tar.gz", hash = "sha256:c2a4906573097103fa6f9a2ab08efe2eb48c2fed60b8129a3e320affde445743" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/7f/ec/6b120b4a86f6fadc7ddb1d7c7cdcb15bcfb332deb022ab60df51bcd4494c/influxdb_client-1.50.0-py3-none-any.whl", hash = "sha256:f172975cf7f0c95bfe74f288b31273393b164d2c58a948de55497d9956ab49be" },
+]
+
+[[package]]
 name = "iniconfig"
 version = "2.3.0"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/72/34/14ca021ce8e5dfedc35312d08ba8bf51fdd999c576889fc2c24cb97f4f10/iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cb/b1/3846dd7f199d53cb17f49cba7e651e9ce294d8497c8c150530ed11865bb8/iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12" },
+]
+
+[[package]]
+name = "invoke"
+version = "3.0.3"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/33/f6/227c48c5fe47fa178ccf1fda8f047d16c97ba926567b661e9ce2045c600c/invoke-3.0.3.tar.gz", hash = "sha256:437b6a622223824380bfb4e64f612711a6b648c795f565efc8625af66fb57f0c" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5a/de/bbc12563bbf979618d17625a4e753ff7a078523e28d870d3626daa97261a/invoke-3.0.3-py3-none-any.whl", hash = "sha256:f11327165e5cbb89b2ad1d88d3292b5113332c43b8553b494da435d6ec6f5053" },
 ]
 
 [[package]]
@@ -814,6 +1105,15 @@ wheels = [
 ]
 
 [[package]]
+name = "paho-mqtt"
+version = "2.1.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/39/15/0a6214e76d4d32e7f663b109cf71fb22561c2be0f701d67f93950cd40542/paho_mqtt-2.1.0.tar.gz", hash = "sha256:12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c4/cb/00451c3cf31790287768bb12c6bec834f5d292eaf3022afc88e14b8afc94/paho_mqtt-2.1.0-py3-none-any.whl", hash = "sha256:6db9ba9b34ed5bc6b6e3812718c7e06e2fd7444540df2455d2c51bd58808feee" },
+]
+
+[[package]]
 name = "pandas"
 version = "2.3.3"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -869,6 +1169,56 @@ source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-p
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5a/82/42f767fc1c1143d6fd36efb827202a2d997a375e160a71eb2888a925aac1/pathspec-1.1.1.tar.gz", hash = "sha256:17db5ecd524104a120e173814c90367a96a98d07c45b2e10c2f3919fff91bf5a" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f1/d9/7fb5aa316bc299258e68c73ba3bddbc499654a07f151cba08f6153988714/pathspec-1.1.1-py3-none-any.whl", hash = "sha256:a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189" },
+]
+
+[[package]]
+name = "pillow"
+version = "12.3.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1c/3d/bb7fca845737cf9d7dbde16ed1843984665ff2e0a518f5db43e77ec540b9/pillow-12.3.0.tar.gz", hash = "sha256:3b8182a766685eaa002637e28b4ec8d6b18819a0c71f579bf0dbaa5830297cce" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/dc/01/001f65b68192f0228cc1dbbc8d2530ab5d58b61037ba0587f946fea607cd/pillow-12.3.0-cp314-cp314-ios_13_0_arm64_iphoneos.whl", hash = "sha256:9cf95fe4d0f84c82d282745d9bb08ad9f926efa00be4697e767b814ce40d4330" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1a/d2/0219746d0fd16fc8a84498e79452375be3797d3ce4044596ce565164b84f/pillow-12.3.0-cp314-cp314-ios_13_0_arm64_iphonesimulator.whl", hash = "sha256:8728f216dcdb6e6d555cf971cb34076139ad74b31fc2c14da4fafc741c5f6217" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c8/02/8d0bc62ef0302318c46ff2a512822d2610e81c7aa46c9b3abe6cbaca5ad0/pillow-12.3.0-cp314-cp314-ios_13_0_x86_64_iphonesimulator.whl", hash = "sha256:a45650e8ce7fafffd731db8550230db6b0d306d181a90b67d3e6bca2f1990930" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/85/e2/73c77d218410b14f5f2d565e8a998d5317b7b9c75368d29985139f7a46f0/pillow-12.3.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:ba54cfebe86920a559a7c4d6b9050791c20513650a1952ebe3368c7dc70306f8" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c7/da/32c752228ae345f489e3a42499d817b6c3996da7e8a3bc7a04fc806b243b/pillow-12.3.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:e158cb00350dc278f3b91551101aa7d12415a66ebf2c91d8d5ac14e56ddd3ad0" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b1/9d/8b2c807dbef61a5197c047afe99823787eb66f63daf9fb2432f91d6f0462/pillow-12.3.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e9aeb04d6aef139de265b29683e119b638208f88cf73cdd1658aa07221165321" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5c/44/c85361f65dbe00eea8576ee467c768d25129989efb76e94f205e9ca9bb46/pillow-12.3.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:251bf95b67017e27b13d82f5b326234ca62d70f9cf4c2b9032de2358a3b12c7b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/18/7e/e483414b35800b86b6f08dbbc7803fb5cd52c4d6f897f47d53ea2c7e6f65/pillow-12.3.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:fe3cca2e4e8a592be0f269a1ca4835c25199d9f3ce815c8491048f785b0a0198" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f0/f4/68c491844841ede6bed70189546b3ee9731cf9f2cbad396faff5e1ccba45/pillow-12.3.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:23aceaa007d6172b02c277f0cd359c79492bbb14f7072b4ede9fbcaf20648130" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a3/34/77f3f793fed8efc7d243f21b33c5a3f0d1c97ee70346d3db855587e155ff/pillow-12.3.0-cp314-cp314-win32.whl", hash = "sha256:af8d94b0db561cf68b88a267c5c44b49e134f525d0dc2cb7ed413a66bc23559a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f1/e0/492879f69d94f91f60fc8cd05ba03650e9520afebb2fb7aa12777d7c7f38/pillow-12.3.0-cp314-cp314-win_amd64.whl", hash = "sha256:fdafc9cce40277e0f7a0feabce0ee50dd2fa1800f3b38015e51296b5e814048d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c9/ac/6b11f2875f1c2ac040d84e1bbf9cf22a88038f901ca1037898b280b38365/pillow-12.3.0-cp314-cp314-win_arm64.whl", hash = "sha256:e91206ee562682b51b98ef4b26a6ef48fd84e15fd4c4bc5ec768eb641d206838" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/52/69/c2208e56af9bfc1913afb24020297a691eb1d4ef688474c8a04913f65e04/pillow-12.3.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:164b31cd1a0490ab6efae01aa5df49da7061be0af1b30e035b6e9a1bfe34ee6e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/07/70/e5686d753e898a45d778ff1718dba8516ead6ab6b95d85fc8c4b70650cf2/pillow-12.3.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:5afb51d599ea772b8365ae807ae557f18bccfe46ab261fd1c2a9ed700fc6eb17" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d5/37/25c6692f06927ee973ff18c8d9ee98ad0b4d84ee67a09610c2dd1447958e/pillow-12.3.0-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3edce1d53195db527e0191f84b71d02022de0540bf43a16ed734ed7537b07385" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cc/91/420637fcb8f1bc11029e403b4538e6694744428d8246118e45719f944556/pillow-12.3.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:bf16ba1b4d0b6b7c8e534936632270cf70eb00dbe09005bc345b2677b726855c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/10/08/b94d7811281ccf0d143a1cf768d1c49e1e54af63e7b708ab2ee3eb87face/pillow-12.3.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:24870b09b224f7ae3c39ed07d10e819d06f8720bc551847b1d623832b5b0e28d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d2/87/24233f785f55474dc02ce3e739c5528a77e3a862e9333d1dd7a25cc31f70/pillow-12.3.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:30f2aa603c41533cc25c05acd0da21636e84a315768feb631c937177db558931" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/23/26/fcb2f6e37175b04f53570b59937867e2b80ee1685e744023153028fc14f9/pillow-12.3.0-cp314-cp314t-win32.whl", hash = "sha256:4b0a7fe987b14c31ebda6083f74f22b561fd3739bc0ac51e019622e3d72668c7" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/90/de/3634abee5f1c9e13c56787b7d5517b0ba8d6de51700b95578cf338349c9f/pillow-12.3.0-cp314-cp314t-win_amd64.whl", hash = "sha256:962864dc93511324d51ddbb5b9f8731bf71675b93ca612a07441896f4688fb8c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ce/2a/fd13f8eb24de5714a6eb444a3d67e2842c6c576e159a43793adf23051351/pillow-12.3.0-cp314-cp314t-win_arm64.whl", hash = "sha256:0740a512dc522224c77d9aa5a8d70d8b7d73fb91f2c21125d8d025d3b8990e45" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5d/dc/8fdce34ec725a33c81c6ba122b904d6b9024e50ea9ac7bede62fab54506c/pillow-12.3.0-cp315-cp315-ios_13_0_arm64_iphoneos.whl", hash = "sha256:0feb2e9d6ad6c9e3c06effe9d00f3f1e618a6643273576b016f591e9315a7139" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/76/66/2044b9a63d3b84ff048228dfcb7cd9bf0df983e8470971bf7d4c57b693de/pillow-12.3.0-cp315-cp315-ios_13_0_arm64_iphonesimulator.whl", hash = "sha256:9e881fca225083806662a5c43d627d215f258ff43c890f831966c7d7ba9c7402" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/52/7e/1f67e6f4ece6b582ee4b539decbcc9f848dc245a93ed8cd7338bafef72f1/pillow-12.3.0-cp315-cp315-ios_13_0_x86_64_iphonesimulator.whl", hash = "sha256:4998562bf62a445225f22e07c896bb04b35b1b1f2eb6d760584c9c51d7a5f78c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/12/40/d306fc2c8e4d45d7f175c77edca7063be7b86fe7fe6e68f4353bf71d808c/pillow-12.3.0-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:dc624f6bc473dacdf7ef7eb8678d0d08edf15cd94fad6ae5c7d6cc67a4e4902f" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/dd/44/668fb1437e8ce420f62d6106eb66e44a5971602a4d794615bdf79315d82d/pillow-12.3.0-cp315-cp315-macosx_11_0_arm64.whl", hash = "sha256:71d6097b330eea8fd15097780c8e89cb1a8ce7838669f48c5bacd6f663dd4701" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/0c/08/93fa2e70e30a2d81547e481b6ee2bb9522117221fb1e0ce4b5df70967677/pillow-12.3.0-cp315-cp315-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:28ce87c5ab450a9dd970b52e5aca5fe63ed432d18a2eaddd1979a00a1ba24ace" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f8/6d/043e96ff814fc31a33077e4cba86082167db520c93632afdf2042febbb0c/pillow-12.3.0-cp315-cp315-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:6b02afb9b97f65fbca5f31db6a2a3ba21aa93030225f150fa3f249717e938fb4" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/af/92/ba71d2ee2ac0edf3fa33bd9d5ee9ee080da70b1766f3ca3934f9938ddac9/pillow-12.3.0-cp315-cp315-musllinux_1_2_aarch64.whl", hash = "sha256:1182d52bc2d5e5d7d0949503aa7e36d12f42205dc287e4883f407b1988820d39" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/0f/ce/e63064e2122923ff687c8ad792d0d736a7b3920a56a46982e81a7fdd25d6/pillow-12.3.0-cp315-cp315-musllinux_1_2_x86_64.whl", hash = "sha256:e795b7eb908249c4e43c7c99fac7c2c75dab0c43566e37db472a355f63693d71" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/54/76/a09cc3ccc8d773a7283d34c38bec1708f9e3cc932093cbc4c5e71ac4060b/pillow-12.3.0-cp315-cp315-win32.whl", hash = "sha256:57b3d78c95ba9059768b10e28b813002261d3f3dfc55cc48b0c988f625175827" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3e/03/1846c49ba3b1d5550392a4bbd06d6fb4578e1cd91a803198b5c90f5f7d53/pillow-12.3.0-cp315-cp315-win_amd64.whl", hash = "sha256:fa4ecea169a355be7a3ade2c783e2ed12f0e40d2c5621cda8b3297faf7fbb9f5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fb/bb/89f35dcc79610423f9f195504d7def7f0d1416a711541b42867e25fe3412/pillow-12.3.0-cp315-cp315-win_arm64.whl", hash = "sha256:877c3f311ff35410f690861c4409e7ccbf0cd2f878e50628a28e5a0bb689e658" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/30/88/707027ba09942dfa2c28759b5c222d769290a41c6d20ea60ec250801941f/pillow-12.3.0-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:e9871b1ffbfa9656b60aeee92ed5136a5742696006fa322b29ea3d8da0ecc9cf" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b0/6d/00352fa25332c2569cd387851f568cc5a4b75a9adbfb37ac4fbce4c02eec/pillow-12.3.0-cp315-cp315t-macosx_11_0_arm64.whl", hash = "sha256:53aa02d20d10c3d814d536aa4e5ac9b84ca0ff5a88377963b085ad6822f93e64" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/13/4f/9e049dfa21af7c22427275720e2490267ba8138120add5c4c574deb69782/pillow-12.3.0-cp315-cp315t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:446c34dcc4324b084a53b705127dc15717b22c5e140ae0a3c38349d4efec071e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/36/16/cf6eeaae8d0fce8dd390a33437cf68c5d5bd73834a2bc6e2f14efda0ab45/pillow-12.3.0-cp315-cp315t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:cf1845d02ad822a369a49f2bb9345b1614744267682e7a03527dc3bf6eea1777" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1e/69/dbf769bdd55f48bf5733cac28edc6364ffaa072ec9ba336266e4fe66be55/pillow-12.3.0-cp315-cp315t-musllinux_1_2_aarch64.whl", hash = "sha256:186941b6aef820ad110fb01fb06eb925374dc3a21b17e37ec9a53b250c6fe2d1" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a0/e1/ffc9cfc2eea0d178da8018e18e959301ad9d6bc9f3edb7181e748a474b97/pillow-12.3.0-cp315-cp315t-musllinux_1_2_x86_64.whl", hash = "sha256:f13c32a3abd6079a66d9526e18dad9b6d280384d49d7c54040cd57b6424041d9" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/18/f0/a5595c1e8c3ae44b9828cb2f0fa8155e5095ef04d6327b8f61cf44a3df85/pillow-12.3.0-cp315-cp315t-win32.whl", hash = "sha256:1657923d2d45afb66526e5b933e5b3052e6bdea196c90d3abb2424e18c77dae8" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e4/04/62bcd9f844984c5938d3b05264a61d797a29d3e0812341a8204af70bbdee/pillow-12.3.0-cp315-cp315t-win_amd64.whl", hash = "sha256:8cd2f7bdda092d99c9fc2fb7391354f306d01443d22785d0cbfafa2e2c8bb418" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3d/68/1f3066acedf37673694a7141381d8f811ae97f30d34413d236abe7d489f1/pillow-12.3.0-cp315-cp315t-win_arm64.whl", hash = "sha256:06ff022112bc9cbf83b60f8e028d94ad87b60621706487e65f673de61610ab59" },
 ]
 
 [[package]]
@@ -991,6 +1341,27 @@ wheels = [
 ]
 
 [[package]]
+name = "pyopenssl"
+version = "26.4.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "cryptography" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3f/e8/7325d258199b159eb2c03fe32107533e2832e70e63f4fb88a6aa00023201/pyopenssl-26.4.0.tar.gz", hash = "sha256:28dfcce0162b9211413e26dfbfdf1d24317fbeba18fc93c12400a1856b2a0bc7" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/51/ad/2cf6d3fa2fae5c79e1ed9960c0d42badd0f94d81dd12b50604cdc839e648/pyopenssl-26.4.0-py3-none-any.whl", hash = "sha256:f0eb0cb2d581d3ad2b9c489468485e7f2ab6727d08401bcf9d824c3caddf3c1c" },
+]
+
+[[package]]
+name = "pyrfc3339"
+version = "2.1.1"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/80/7a/0e5227aa1c831fdaf579073a0ebb5ca11fc352a43fce8d2639e3ff87ff74/pyrfc3339-2.1.1.tar.gz", hash = "sha256:b144d63819bd4c1ebf9cb57e12f4cba567fcf23d6e8f2f829ba9c7810ea4b951" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fb/79/2746c2066389dd88ede14491bea64cd9d7dd12e4bda63c5960017913af0d/pyrfc3339-2.1.1-py3-none-any.whl", hash = "sha256:4973172cb8b29c14caca7f76e6a52890d9e59ec2722dd5eb29b7fdd9fda2232f" },
+]
+
+[[package]]
 name = "pyspark"
 version = "3.5.4"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -1030,6 +1401,18 @@ wheels = [
 ]
 
 [[package]]
+name = "python-datemath"
+version = "3.0.3"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "arrow" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/91/8a/37bff885c4d8e56c80a04c05cccf9c9e2a0d0426a616a4db44c88a9308bd/python_datemath-3.0.3.tar.gz", hash = "sha256:a6b9cdab6d62f987098f5ff49a4856a7d56c4238ce46613409422d1bc44c5a9a" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/23/af/e70318bfa6691fada58c69c89dcdd4ae11109e7cba2c870d41221596a843/python_datemath-3.0.3-py2.py3-none-any.whl", hash = "sha256:2e4a2a31e0d92946d905101e6a3864c387b6e2e2d627ec99baa17ab98839e102" },
+]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -1042,6 +1425,18 @@ wheels = [
 ]
 
 [[package]]
+name = "python-slugify"
+version = "8.0.4"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "text-unidecode" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/87/c7/5e1547c44e31da50a460df93af11a535ace568ef89d7a811069ead340c4a/python-slugify-8.0.4.tar.gz", hash = "sha256:59202371d1d05b54a9e7720c5e038f928f45daaffe41dd10822f3907b937c856" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a4/62/02da182e544a51a5c3ccf4b03ab79df279f9c60c5e82d5e8bec7ca26ac11/python_slugify-8.0.4-py2.py3-none-any.whl", hash = "sha256:276540b79961052b66b7d116620b36518847f52d5fd9e3a70164fc8c50faa6b8" },
+]
+
+[[package]]
 name = "pytz"
 version = "2026.3.post1"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -1051,10 +1446,30 @@ wheels = [
 ]
 
 [[package]]
+name = "pyvmomi"
+version = "9.1.1.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e0/18/044c8a0c8f6ac16642e65f4fac19653291c7f6c5ab61a3734c9f6066a87b/pyvmomi-9.1.1.0-py3-none-any.whl", hash = "sha256:76af3cba85573769daf4e6760aace32e7af34e1bbf343895b8c4798b6bc0e2d2" },
+]
+
+[[package]]
 name = "pyyaml"
 version = "6.0.1"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/cd/e5/af35f7ea75cf72f2cd079c95ee16797de7cd71f29ea7c68ae5ce7be1eda0/PyYAML-6.0.1.tar.gz", hash = "sha256:bfdf460b1736c775f2ba9f6a92bca30bc2095067b8a9d77876d1fad6cc3b4a43" }
+
+[[package]]
+name = "reactivex"
+version = "6.0.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/08/d3/d01637179bef4967bdf0d8f310a4fe37c4f2bc73c0e139ee597d42cf4041/reactivex-6.0.0.tar.gz", hash = "sha256:843ce6a7d8aa82bf369915e1e2c9e19154dbd30c7974ee981fd90edd88bd9fcf" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a1/a5/5e8ed0b60196eabc1c486ff541e72cdb5e9ada45838f71e57360bf994777/reactivex-6.0.0-py3-none-any.whl", hash = "sha256:ae3c021aa7b29b502cf932f5f15c35d7753f74fabc8256232ff0883a1fd911d6" },
+]
 
 [[package]]
 name = "repoze-lru"
@@ -1103,6 +1518,42 @@ wheels = [
 ]
 
 [[package]]
+name = "sqlalchemy"
+version = "2.0.55"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "greenlet", marker = "platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64'" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a5/bd/08864ddfffbb8914ee13b0c887d84b4b13bc8dd8da3077c0dace5a87699c/sqlalchemy-2.0.55.tar.gz", hash = "sha256:ae40c563bc10a8d56f1fd1f39f069aeb5eb85ca26913b2314dd8d190139258fa" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3e/c0/c8e0079078d70e4d8a917e8903d547534f32f5e3d1be01b93ac8202c64b2/sqlalchemy-2.0.55-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:94b206f4e65f00cc5b4c72ddb29dfc864d19a1a1b059a83d8d30253df93768c5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ee/47/1f5fac19d335bc6639d9d2f7bd58d32dc3c6198167115d372fb935c54ced/sqlalchemy-2.0.55-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5e426a7f326c3291a9669e577af54eecaa9585406fb4de9828ef258cd9c3cad7" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4e/55/332d70b9321e2acd01ee9f669a6577321d889b697fd582384e54547c1f52/sqlalchemy-2.0.55-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:637c7da1c75626a398196bfe82ea93dcf8f3ab8a6613a07727fe48496d4c8562" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/39/28/f642cd58a1c35d883640cdb1e0117996c44ad1aff6f875616d44d6922011/sqlalchemy-2.0.55-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:52851f3cad94cb527d17d9e0aa6b58262218c0227aef25722269d2e8784a871c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/df/f9/cb7540670a2ded5100cfeac4f6c28fd88668bef5ff742b52ec3760bc7c10/sqlalchemy-2.0.55-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:01c1a72f1f2f5c107eb8f1c12a08d56527a393b191b2195edbbaaa028bcde04b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ae/15/062537d6f1e83ace4cd88f52fc54cf076e23dcb132e1bdc13052978b056b/sqlalchemy-2.0.55-cp314-cp314-win32.whl", hash = "sha256:7693adde7eb888bba2ef76cca7b2b3768134562db7c261a5933968059aa56785" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/53/f7/06b0b915351a3fe6d36ef1a0f9ab65980c3879187b48b9cdeea74b5d2d36/sqlalchemy-2.0.55-cp314-cp314-win_amd64.whl", hash = "sha256:6f19c4032bb8419b93d82c823e9e540060d1fc1ed1e1909ec4676004fec78a51" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ad/4f/548733a09d320a997ec93c07307c4f3122da3e9ad705fec0f92b3044d954/sqlalchemy-2.0.55-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:3b6453a730ac76d2a9c1c4294537a9e9d2faad1e88c34ae5f8b89b369e4bb09e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/17/58/ec6ccd1f3c530969b7e29757a8d91742b8823540df35f37509f68b37af37/sqlalchemy-2.0.55-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:96fa91e0d94295159b7e505b39f8d98343846845958f63c72a194787943ce2ea" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/08/a1/bd126860c09a161409332c25767381863cf6315a16bbede769d3a0ad98ca/sqlalchemy-2.0.55-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7b6a2f202291695b28253ca1ed8fdc0aca71e976ca785696b3b16f9fd048d383" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ca/da/f06a8c6ea6285ba7d6c0bc9c6105e3f37c3dbbcd6296f6713bb0e58af2e6/sqlalchemy-2.0.55-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:f79ff4e8f27ac5be95eedc43c252a4415816fa906081bba36a3b637ab6b77fea" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/7f/8a/96cb99f9667f6cb6fc487048abe92715b13f6e67c746db99d57e73dab993/sqlalchemy-2.0.55-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:b6db1b880fd74df6cef10b31e414f40e2593bfd80034d3249ee14a02a6ea5b37" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4e/e0/96eb9de49c8d7a3fde0ec696b35d487935257e0351db1912914ba7a16e55/sqlalchemy-2.0.55-cp314-cp314t-win32.whl", hash = "sha256:701a8f416fa99ce20c6f5909f95c2e557e16078bc50b844c094f1ada1e0b0fc5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/77/5d/3625248e8532a4c8c16859671b6a0b5909200b91869a3053b72d79f9ebba/sqlalchemy-2.0.55-cp314-cp314t-win_amd64.whl", hash = "sha256:2cd239df22ea1f233d1d3a88551879dc8d35a7ed9466b4884c3b51c120f595bf" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/fd/91/de9283ed03f777daaf2a65823dfa9900bd0859dc0b1d3d314898536cfc08/sqlalchemy-2.0.55-py3-none-any.whl", hash = "sha256:d2954796165c08e2f70082e4577a4c3ce6f141c77e2e4b378b3b528653b54311" },
+]
+
+[[package]]
+name = "sqlparse"
+version = "0.6.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5f/d3/3f06a1006f2261d1342aefb3c71eed02f5d4ca5bdbecd86ebc12ad38306e/sqlparse-0.6.0.tar.gz", hash = "sha256:113c35c75365ab9cc9c7231d68c6428fb11c085fc8e9eb1ad659b7ddbf6cd2b9" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/d9/50/f00935da0ec7cbf325f8dc4f772ae46fbc7b672dd62876e73f0a94adda57/sqlparse-0.6.0-py3-none-any.whl", hash = "sha256:b861c0288ce2fa56209a9a6412d2e066ac664b3873b89c26c9d8415e8e32996f" },
+]
+
+[[package]]
 name = "starlette"
 version = "0.27.0"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -1115,12 +1566,30 @@ wheels = [
 ]
 
 [[package]]
+name = "stdlib-list"
+version = "0.12.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/8c/25/f1540879c8815387980e56f973e54605bd924612399ace31487f7444171c/stdlib_list-0.12.0.tar.gz", hash = "sha256:517824f27ee89e591d8ae7c1dd9ff34f672eae50ee886ea31bb8816d77535675" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3b/3d/2970b27a11ae17fb2d353e7a179763a2fe6f37d6d2a9f4d40104a2f132e9/stdlib_list-0.12.0-py3-none-any.whl", hash = "sha256:df2d11e97f53812a1756fb5510393a11e3b389ebd9239dc831c7f349957f62f2" },
+]
+
+[[package]]
 name = "termcolor"
 version = "2.3.0"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b8/85/147a0529b4e80b6b9d021ca8db3a820fcac53ec7374b87073d004aaf444c/termcolor-2.3.0.tar.gz", hash = "sha256:b5b08f68937f138fe92f6c089b99f1e2da0ae56c52b78bf7075fd95420fd9a5a" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/67/e1/434566ffce04448192369c1a282931cf4ae593e91907558eaecd2e9f2801/termcolor-2.3.0-py3-none-any.whl", hash = "sha256:3afb05607b89aed0ffe25202399ee0867ad4d3cb4180d98aaf8eefa6a5f7d475" },
+]
+
+[[package]]
+name = "text-unidecode"
+version = "1.3"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ab/e2/e9a00f0ccb71718418230718b3d900e71a5d16e701a3dae079a21e9cd8f8/text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a6/a5/c0b6468d3824fe3fde30dbb5e1f687b291608f9473681bbf7dabbf5a87d7/text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8" },
 ]
 
 [[package]]
@@ -1151,6 +1620,22 @@ wheels = [
 ]
 
 [[package]]
+name = "tree-sitter"
+version = "0.26.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f7/03/5600b84aff2e6c4fe80cfebb4063fe2f50299521befe5f6092ab8c082f4a/tree_sitter-0.26.0.tar.gz", hash = "sha256:b40c219edccc4564530c96f8f1556f6202b37cda964d1cbd7bd2b7e68b40a245" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c5/7a/4d84e6f6ae2c3e757490dd84de251712c31e293dfe31f28da1ec019cefa2/tree_sitter-0.26.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:5a3c93a352b7e6f70f73e121bbfa2d0117ba7478bd51114ed35c91b0b78814fa" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b0/d9/efe62ec65dc9d096e834d27b8c058127e2146e42ff3380b822a233f016a6/tree_sitter-0.26.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:5fc2f41bf246ff2f70a9cc3690be35ec7580a4923151873d898c8bcb1a4503d3" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c4/2c/c82326b7b97e3c485c18679883b16f89e5e913c639d3b219d3da70c9e67e/tree_sitter-0.26.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b8ea92a255c91671a7ec4625aba3ab7bb5220c423630ffbf83c45d7312abe084" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e2/7a/f56e7d8282859452611024c7cbc623bfba5b24b8cb9b8f8bc88c5219fe9a/tree_sitter-0.26.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f665510f0fcf4636fb9696f1f7853bed7a3bd764b7bb0cb8494e619c14ed5a0c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/91/51/240ee81b9d5e9ca0a6cb1528e8605ffa70ab58c89ce126631be96d3e4bae/tree_sitter-0.26.0-cp314-cp314-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:253df7ab82cc0a9d311cd65f06e9f99fb3eac55996ae9fc94da22f123a861b90" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/6a/54/760035cefedf9eb44f0f84c4ac22f1322e73155853e272576ee876336312/tree_sitter-0.26.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:ff80d4833d330a73184a3ac5132abe93c575d2dea31975c6f15c0d21fef238aa" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c9/1b/0b36fe2a984ecedc4ce6aefd5d56447a6626a8e9b595c4e48658510ce8f8/tree_sitter-0.26.0-cp314-cp314-win_amd64.whl", hash = "sha256:a4033fecc8f606c7f2e8b8014d0057b74668a7f0152763606f7bc25c5f9ec64c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/4d/74/ebc041a13fbf40144afdb0d4b447e48e0b4012ca866c63de8b48f801f0c1/tree_sitter-0.26.0-cp314-cp314-win_arm64.whl", hash = "sha256:823251c4b6725a7c03ed497a339135ede7ae4bdde75bb8be7ef5e305aeb4ff52" },
+]
+
+[[package]]
 name = "types-emoji"
 version = "2.1.0.3"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -1169,6 +1654,15 @@ dependencies = [
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c1/d9/e317620e0f53f6dca5d81de7f51798e933151c122568f2645bc09f205d88/types-Flask-Cors-3.0.10.5.tar.gz", hash = "sha256:6c8f1e62a3dd8001f08cfe39258101e879eccafb8c0a8342b617f11a7884e3db" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/9e/1d/17304a5aef693326601de9c64a642a8ed7bb5cc0d8ffc76c5727f8f28019/types_Flask_Cors-3.0.10.5-py3-none-any.whl", hash = "sha256:ccfabd36bde7df3f5465c42d776d7bebc3f2ba5f2bf2d2b055850869755b78b2" },
+]
+
+[[package]]
+name = "types-passlib"
+version = "1.7.7.20260211"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b5/f4/718ff8cbef9366e597aefd58929321702d3e183998cea89949ab5423281f/types_passlib-1.7.7.20260211.tar.gz", hash = "sha256:af73afffe1ce94c95c7f6072bd261572c29845de74fdffa3a265fc7634bca056" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/14/6a/e9fc6a5b8f9a380a4a56b9f1e4dba5c6899561868017b17f6de382808b6f/types_passlib-1.7.7.20260211-py3-none-any.whl", hash = "sha256:c0f1ad440c513a6c07f333b28249530686056fd54a7b3ac6128ae31fd46305d3" },
 ]
 
 [[package]]
@@ -1215,23 +1709,33 @@ name = "typeshed-serializer"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "annoy" },
     { name = "atomicwrites" },
+    { name = "babel" },
     { name = "backports-abc" },
     { name = "certifi" },
     { name = "characteristic" },
+    { name = "chardet" },
     { name = "click" },
     { name = "cryptography" },
     { name = "dataclasses" },
+    { name = "dj-database-url" },
     { name = "emoji" },
     { name = "enum34" },
+    { name = "exifread" },
     { name = "fastapi" },
     { name = "filelock" },
     { name = "first" },
+    { name = "flake8-plugin-utils" },
     { name = "flask" },
     { name = "flask-cors" },
+    { name = "flask-sqlalchemy" },
+    { name = "fpdf2" },
     { name = "freezegun" },
     { name = "frozenlist" },
     { name = "geoip2" },
+    { name = "influxdb-client" },
+    { name = "invoke" },
     { name = "ipaddress" },
     { name = "itsdangerous" },
     { name = "jinja2" },
@@ -1242,51 +1746,74 @@ dependencies = [
     { name = "mypy-extensions" },
     { name = "numpy" },
     { name = "orjson" },
+    { name = "paho-mqtt" },
     { name = "pandas" },
     { name = "pandas-stubs" },
     { name = "pathlib" },
+    { name = "pillow" },
     { name = "protobuf" },
     { name = "pydantic" },
     { name = "pyjwt" },
+    { name = "pyopenssl" },
+    { name = "pyrfc3339" },
     { name = "pyspark" },
     { name = "pytest" },
     { name = "pytest-cov" },
+    { name = "python-datemath" },
+    { name = "python-slugify" },
+    { name = "pyvmomi" },
     { name = "pyyaml" },
     { name = "requests" },
     { name = "routes" },
     { name = "six" },
+    { name = "sqlalchemy" },
     { name = "starlette" },
+    { name = "stdlib-list" },
     { name = "termcolor" },
     { name = "toml" },
     { name = "tornado" },
+    { name = "tree-sitter" },
     { name = "types-emoji" },
     { name = "types-flask-cors" },
+    { name = "types-passlib" },
     { name = "types-pyyaml" },
     { name = "types-requests" },
     { name = "typing-extensions" },
+    { name = "tzlocal" },
+    { name = "ujson" },
     { name = "werkzeug" },
     { name = "xxhash" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "annoy", specifier = "==1.17.3" },
     { name = "atomicwrites", specifier = "==1.4.1" },
+    { name = "babel", specifier = "==2.18.0" },
     { name = "backports-abc", specifier = "==0.5" },
     { name = "certifi", specifier = "==2023.5.7" },
     { name = "characteristic", specifier = "==14.3.0" },
+    { name = "chardet", specifier = "==7.7.0" },
     { name = "click", specifier = "==8.1.3" },
-    { name = "cryptography", specifier = "==36.0.1" },
+    { name = "cryptography", specifier = "==50.0.2" },
     { name = "dataclasses", specifier = "==0.6" },
+    { name = "dj-database-url", specifier = "==3.1.2" },
     { name = "emoji", specifier = "==2.1.0" },
     { name = "enum34", specifier = "==1.1.10" },
+    { name = "exifread", specifier = "==3.5.1" },
     { name = "fastapi", specifier = "==0.98.0" },
     { name = "filelock", specifier = "==3.4.0" },
     { name = "first", specifier = "==2.0.2" },
+    { name = "flake8-plugin-utils", specifier = "==1.3.3" },
     { name = "flask", specifier = "==2.3.2" },
     { name = "flask-cors", specifier = "==3.0.10" },
+    { name = "flask-sqlalchemy", specifier = "==3.1.1" },
+    { name = "fpdf2", specifier = "==2.8.9" },
     { name = "freezegun", specifier = "==1.2.2" },
     { name = "frozenlist", specifier = "==1.4.1" },
     { name = "geoip2", specifier = "==4.7.0" },
+    { name = "influxdb-client", specifier = "==1.50.0" },
+    { name = "invoke", specifier = "==3.0.3" },
     { name = "ipaddress", specifier = "==1.0.23" },
     { name = "itsdangerous", specifier = "==2.1.2" },
     { name = "jinja2", specifier = "==3.1.2" },
@@ -1297,28 +1824,41 @@ requires-dist = [
     { name = "mypy-extensions", specifier = "==1.1.0" },
     { name = "numpy", specifier = "==2.4.2" },
     { name = "orjson", specifier = "==3.12.0" },
+    { name = "paho-mqtt", specifier = "==2.1.0" },
     { name = "pandas", specifier = "==2.3.3" },
     { name = "pandas-stubs", specifier = "==2.2.3.241009" },
     { name = "pathlib", specifier = "==1.0.1" },
+    { name = "pillow", specifier = "==12.3.0" },
     { name = "protobuf", specifier = "==5.29.3" },
     { name = "pydantic", specifier = "==1.10.26" },
     { name = "pyjwt", specifier = "==2.7.0" },
+    { name = "pyopenssl", specifier = "==26.4.0" },
+    { name = "pyrfc3339", specifier = "==2.1.1" },
     { name = "pyspark", specifier = "==3.5.4" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-cov", specifier = "==7.1.0" },
+    { name = "python-datemath", specifier = "==3.0.3" },
+    { name = "python-slugify", specifier = "==8.0.4" },
+    { name = "pyvmomi", specifier = "==9.1.1.0" },
     { name = "pyyaml", specifier = "==6.0.1" },
     { name = "requests", specifier = "==2.30.0" },
     { name = "routes", specifier = "==2.5.1" },
     { name = "six", specifier = "==1.16.0" },
+    { name = "sqlalchemy", specifier = "==2.0.55" },
     { name = "starlette", specifier = "==0.27.0" },
+    { name = "stdlib-list", specifier = "==0.12.0" },
     { name = "termcolor", specifier = "==2.3.0" },
     { name = "toml", specifier = "==0.10.2" },
     { name = "tornado", specifier = "==6.3.1" },
+    { name = "tree-sitter", specifier = "==0.26.0" },
     { name = "types-emoji", specifier = "==2.1.0.3" },
     { name = "types-flask-cors", specifier = "==3.0.10.5" },
+    { name = "types-passlib", specifier = "==1.7.7.20260211" },
     { name = "types-pyyaml", specifier = "==6.0.12.20240311" },
     { name = "types-requests", specifier = "==2.30.0.0" },
     { name = "typing-extensions", specifier = "==4.16.0" },
+    { name = "tzlocal", specifier = "==5.4.4" },
+    { name = "ujson", specifier = "==5.13.0" },
     { name = "werkzeug", specifier = "==2.3.4" },
     { name = "xxhash", specifier = "==3.2.0" },
 ]
@@ -1339,6 +1879,52 @@ source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-p
 sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/92/ff/5a28bdfd8c3ebec42564ac7d0e54ca3db65044a9314a97f9564fa7a1e926/tzdata-2026.3.tar.gz", hash = "sha256:4a1518b8993086a7982523e071643f3c0e5f213e75b21318e78bcabfff9d1415" }
 wheels = [
     { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e5/6d/b53b99a9f2766d095985947a5782f1702cabb129a34f7a802d7197af832f/tzdata-2026.3-py2.py3-none-any.whl", hash = "sha256:dc096730c87af6cab1b171c9d532be840741ff5d459015e7f6947bd7d7e54931" },
+]
+
+[[package]]
+name = "tzlocal"
+version = "5.4.4"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/81/5b/879b2f932adfa7a053c360d50bc896c977fa6426109185f7c12ebdd0cb9d/tzlocal-5.4.4.tar.gz", hash = "sha256:8dbb8660838688a7b6ba4fed31d18dedf842afb4d47ca050d6d891c2c15f3be4" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/9e/a4/017a7a6cbe387d961a688ec31364ae60a5c4e22c96ae9921b79a947c855d/tzlocal-5.4.4-py3-none-any.whl", hash = "sha256:aae09f0126a8a86fa736be266eb4a471380d26a0de3bc14844e7821fee3e2a15" },
+]
+
+[[package]]
+name = "ujson"
+version = "5.13.0"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/89/7a/c8bb37c8f6f3623d60c33d15d18cd6d6655d0f9c3eb31a9969f76361b199/ujson-5.13.0.tar.gz", hash = "sha256:d62e3d7625384c08082abad81a077af587fdef2761bb14c3822f4234b8d07d75" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1c/9a/b5139d696f5328f3cab70b9ec046f15e3f49497a4de6280974640602f539/ujson-5.13.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:cc9dfd41fed397ab03bb9d9fe1cbd83301211c772a17536033ce7d68877ac82b" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/53/55/477183aeddfdf0f88ae039ffee0ed866cfb993da0c0c9aa915807554aef8/ujson-5.13.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:ca7ef2fa6c408a7c0f558e4d33d93b32ddc35ed6d3cfc505747931a64b7465d5" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ea/63/55e5f23e156b4c8bca095d828b4cd3180c0b42aa3501ef88836d79606fea/ujson-5.13.0-cp314-cp314-manylinux1_i686.manylinux2014_i686.manylinux_2_17_i686.manylinux_2_5_i686.whl", hash = "sha256:a554b2e5bee85030369514cef8b0b913cebe1a4c2c0c13541966d50bcba22b1a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/26/b6/08c6cf5548bd6f4bb557c9fa7e8edf87324bb04c17249d1966028d61dde0/ujson-5.13.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:ea939ff629ab03ae970d03eca6d1febd8ed55ba38ca44aec64ce997537cd3fa0" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/6e/b3/0ac9a03551467784067f505df1bb875c639ba32f1da79ce467ab15911ada/ujson-5.13.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:b98bf2faa5e37ecfe752226ea08290031e375a0c43d425a0b955fb3e702a2a71" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/ba/be/ec91029aec067174473d022fa0f6c3c1431a173f888d7599739f05c668eb/ujson-5.13.0-cp314-cp314-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9a4b92344b16e414aeb609e57f62c466500e53c94f1698f5b149dc0b7223ec3e" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/29/33/a948f329252ece3f9c93d177243de6e677927ebc6ac44256742dbbef3c39/ujson-5.13.0-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7df805aad707507a1fa165fb716218ca3a89f142125dc4b23c9fcc08fa402d97" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f1/0c/c33655218b8e0a8adbf066de0b999cae5c324061f3eaa4dda17423145d9e/ujson-5.13.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:7576bdbef327c3528f011002a2d74486f6fe4e33289bdb7a042b7f1a6e9d8285" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/2c/bd/d286947525ea7ce3f2d8dc55c15b9ffbe425bc455c96af7b8f8a402599a9/ujson-5.13.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:6eee5d7cce3f32a468905f9ff61807a60287a90258d849460f6fa826e810870d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3c/3c/9eb916377050b0785f048a34588c1c390ddd41ae00b78db68ee1ad022356/ujson-5.13.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:144e9d8a454cfa727e0f755e1863738ed68068583bda5463052cb446835bd56c" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/dd/5f/242fd97a2628b842d4bfaa9b18e1f68187f934d67503291ebbaab1254637/ujson-5.13.0-cp314-cp314-win32.whl", hash = "sha256:576f35c35b918d67d41b933878062ec0a5c9f4d1e9e14e04aeef35384963feae" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/23/f3/7f2bd9ca0c507142d0c22347b3d6f8803be1d8851c31707e57f5923fdbea/ujson-5.13.0-cp314-cp314-win_amd64.whl", hash = "sha256:d5e206e9f849ead27e51ef8da44e52b38da7c6dbd929a7340ab44533edcda8d7" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/b0/29/3e9a8fba321c031315f6d263510969a5d01f41fc471b5be107e413c1b2f8/ujson-5.13.0-cp314-cp314-win_arm64.whl", hash = "sha256:dc470179775468f9a007d3a6a2734624248c94bf47c6645e808c7e50a5070d1a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/12/e9/1c543837c6a3c6672361882a0fa269bd02daf9cc4c0ca88a9dccd9df98d9/ujson-5.13.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:69b4e36bb7d5f413ba8c00c8006b2ec627cc5ace97301462f6aadb66ec9d2979" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/99/e4/39862f0f7174ff07cfd1e2d0c9065ded34aeebdb7db8daf2f0e5bf89b46f/ujson-5.13.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:8b644d50f66de5490c1823c7176618cead5e8e8a88cba9f40a6308ca52e79267" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/02/66/f53d3b32c3f177f846ca6b624e832f29000d8a213a2d8768e254bd470ced/ujson-5.13.0-cp314-cp314t-manylinux1_i686.manylinux2014_i686.manylinux_2_17_i686.manylinux_2_5_i686.whl", hash = "sha256:15107aaa4f559d55201165ec32abb35c283a861be1fa67229578cb7d93fcd93a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e6/d4/dddc4646d2633c85c938c2ded7d5a9711cdad5be1e13b31b7dad76f61c83/ujson-5.13.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:6e343c5f0c058523f1edbf6ae4eceb4e0d934205a53bbdd8d9a945c83324662a" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/5f/c0/d8608c3f4d3f05e6441364b63fde1d279700135c1a6577a773662c07fbcc/ujson-5.13.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:02200035bc80e830f076ffc1b329a94c295aee6d9de8c9043647cb9a7bd4f76f" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/22/8e/dd12b735aaba0806c3d70c18184d50e1f9712e0757c7c0a4f376450cfe28/ujson-5.13.0-cp314-cp314t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d7f19b81b73ff28f5c5022ee794f94122bfcda07a76423078e349465d71223a1" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/48/43/ad41e8752d5ec3a590a5e7b426a54e36b7aab911d9b5a4f7384dc62507ab/ujson-5.13.0-cp314-cp314t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:82e1393e6dbe3c95fdfc95c6c528890e191351a1f024ef51126cf1f22543af52" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/e1/8e/b44a6afb77b94118655c029081b7932d64bb4c5b1c8ba2b7f5808b5d0bc2/ujson-5.13.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:38afcf994b28ed85ea2420e2a8d79a37d0a77348b3daf53850c16edda66f942d" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/7e/93/fab1d786174c8780eb3e386c73f1925a435e97fbf77c957fea4fca83994d/ujson-5.13.0-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:1bdf2518971586f2b413156c49d9dd8b56cc990a8647081e1bd00af60564d469" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/f3/bc/2f073bb708f9d128f5d1cb39063a5f6421b1ce94c61be8661c55a189f407/ujson-5.13.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:751ad01042472f1c7c02f5c597c7aee79834e82a6cc384ca302173bbc8e8deb8" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/c4/67/cdaa50bba29d7dc9eb19212755b09bb96f56596e75957c3717c6b85454de/ujson-5.13.0-cp314-cp314t-win32.whl", hash = "sha256:74f3dd61aeb01b7b2a6754e400224e819279041b3867935a55ccf57fb86a43b2" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/bd/66/a6e669e90083febdf6c0600d3807f6017fd4d3962d5bd6ddc605c73a06e5/ujson-5.13.0-cp314-cp314t-win_amd64.whl", hash = "sha256:5c31317d5e4504dae8f98795358b6082fc0ef96e7394806db0a76a4a8717f446" },
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/3d/5f/fcc6c6a9d711fd8b020ca8ff65148212f0a712c809d173cd949e58de68c6/ujson-5.13.0-cp314-cp314t-win_arm64.whl", hash = "sha256:aefd3c9c95f9b62348956396ff7b31818476f8f54dc4a4e64cbd4f0491db6fca" },
 ]
 
 [[package]]

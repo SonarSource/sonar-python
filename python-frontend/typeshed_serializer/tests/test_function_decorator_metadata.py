@@ -44,6 +44,38 @@ def decorated(value: str) -> str: ...
         assert len(functions["decorated"].definitions) == 2
         for definition in functions["plain"].definitions:
             assert definition.resolved_decorator_names == ["typing.overload"]
-        for definition in functions["decorated"].definitions:
+        for definition, factory in zip(functions["decorated"].definitions, ["decorated.factory", ""]):
             assert definition.has_decorators
-            assert definition.resolved_decorator_names == ["typing.overload", ""]
+            assert definition.resolved_decorator_names == ["typing.overload", factory]
+
+
+def test_deprecation_decorator_factories_preserve_identity_and_unknown_stacks(tmp_path):
+    stub = tmp_path / "deprecated_api.pyi"
+    stub.write_text('''from typing_extensions import deprecated as obsolete
+from typing import Any, Callable, overload
+
+def unknown_factory() -> Callable[..., Any]: ...
+
+@obsolete("use the replacement")
+def old(value: int) -> None: ...
+
+@obsolete("use the replacement")
+@unknown_factory()
+def wrapped(value: int) -> None: ...
+
+@overload
+@obsolete("use the replacement")
+def overloaded(value: int) -> int: ...
+@overload
+@obsolete("use the replacement")
+def overloaded(value: str) -> str: ...
+''')
+    model = symbols.ModuleSymbol(build_modules({"deprecated_api": str(stub)}, python_version=(3, 10))["deprecated_api"])
+    merged = merge_modules({"deprecated_api"}, {"313": {"deprecated_api": model}, "314": {"deprecated_api": model}})
+    for serialized in [model.to_proto(), merged["deprecated_api"].to_proto()]:
+        functions = {function.name: function for function in serialized.functions}
+        assert functions["old"].has_decorators
+        assert list(functions["old"].resolved_decorator_names) == ["typing_extensions.deprecated"]
+        assert list(functions["wrapped"].resolved_decorator_names) == ["typing_extensions.deprecated", "deprecated_api.unknown_factory"]
+        for definition in serialized.overloaded_functions[0].definitions:
+            assert list(definition.resolved_decorator_names) == ["typing.overload", "typing_extensions.deprecated"]
