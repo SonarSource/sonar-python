@@ -57,6 +57,34 @@ class CaughtExceptionsCheckTest {
   }
 
   @Test
+  void qualifiedExceptionQuickFixTest() {
+    var check = new CaughtExceptionsCheck();
+    var before = """
+      class Namespace:
+        class CustomException:
+          ...
+
+      def foo():
+        try:
+          a = bar()
+        except Namespace.CustomException:
+          print("Exception")""";
+
+    var after = """
+      class Namespace:
+        class CustomException(Exception):
+          ...
+
+      def foo():
+        try:
+          a = bar()
+        except Namespace.CustomException:
+          print("Exception")""";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+  }
+
+  @Test
   void quickFixIPythonTest() {
     var check = new CaughtExceptionsCheck();
     var before = """

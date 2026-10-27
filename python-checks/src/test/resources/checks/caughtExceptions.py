@@ -1,3 +1,6 @@
+from typing import Tuple, Type, Union
+
+
 class CustomException:
   ...
 
@@ -50,6 +53,10 @@ def foo():
   except x: # Noncompliant
     ...
 
+  except int: # Noncompliant
+  #      ^^^
+    ...
+
   exceptions = (ZeroDivisionError, OverflowError)
   try:
     foo = 1/0
@@ -67,6 +74,46 @@ def foo():
     ...
   except incorrect_exception_alias:  # FN SONARPY-1666
     ...
+
+def exception_type_parameter(exception_type: Union[Type[Exception], Tuple[Type[Exception], ...]]):
+  try:
+    ...
+  except exception_type:
+    ...
+
+
+def non_exception_parameter(e: int):
+  try:
+    ...
+  except e: # Noncompliant
+    ...
+
+
+def valid_mixed_union_handler(flag):
+  errors = ValueError if flag else (TypeError,)
+  try:
+    ...
+  except errors:
+    ...
+
+
+def invalid_union_parameter(errors: int | str):
+  try:
+    ...
+  except errors: # Noncompliant
+    ...
+
+
+def invalid_multi_binding_union(flag):
+  if flag:
+    errors = 42
+  else:
+    errors = "invalid"
+  try:
+    ...
+  except errors: # Noncompliant
+    ...
+
 
 def except_star():
   try:
