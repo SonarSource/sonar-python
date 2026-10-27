@@ -18,6 +18,7 @@ package org.sonar.python.semantic.v2.types.typecalculator;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -26,20 +27,26 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
+import org.sonar.python.tree.NameImpl;
+import org.sonar.python.types.v2.LazyUnionType;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 class QualifiedExpressionCalculatorTest {
@@ -223,6 +230,29 @@ class QualifiedExpressionCalculatorTest {
       assertThat(union.candidates()).extracting(candidate -> candidate.unwrappedType().name())
         .contains("bytes", "NoneType");
     });
+    assertThat(result.hasMember("__call__")).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void versionSpecificMemberAlternativesResolveTheirLazyUnionValues() {
+    var integer = ObjectType.fromType(INT_TYPE);
+    var string = ObjectType.fromType(STR_TYPE);
+    var none = ObjectType.fromType(NONE_TYPE);
+    // A versioned member descriptor combines alternatives before resolving their
+    // annotations. Each version can still carry its own lazy nullable union.
+    var earlier = LazyUnionType.or(Set.of(integer, none));
+    var later = LazyUnionType.or(Set.of(string, none));
+    var receiver = new ClassTypeBuilder("Receiver", "example.Receiver").build();
+    receiver.members().add(new Member("value", UnionType.or(earlier, later)));
+
+    var fileInput = parseAndInferTypes("receiver.value");
+    var qualifiedExpression = getQualifiedExpressionFromStatement(fileInput);
+    ((NameImpl) qualifiedExpression.qualifier()).typeV2(ObjectType.fromType(receiver));
+
+    var result = calculator.calculate(qualifiedExpression);
+
+    assertThat(result).isInstanceOfSatisfying(UnionType.class,
+      union -> assertThat(union.candidates()).containsExactlyInAnyOrder(integer, string, none));
     assertThat(result.hasMember("__call__")).isEqualTo(TriBool.FALSE);
   }
 

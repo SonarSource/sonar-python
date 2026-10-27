@@ -43,7 +43,8 @@ public class QualifiedExpressionCalculator {
     PythonType qualifierType = qualifiedExpression.qualifier().typeV2();
     return Optional.of(qualifierType)
       .flatMap(t -> t.resolveMember(name.name()))
-      .map(TypeUtils::resolved)
+      // Version-specific member alternatives can each contain a lazy union annotation.
+      .map(type -> TypeUtils.map(type, TypeUtils::resolved))
       .map(this::handlePropertyFunction)
       .orElseGet(() -> unresolvedMemberType(qualifierType, name.name()));
   }
