@@ -21,12 +21,13 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -36,6 +37,7 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Don't perform an equality/inequality check against \"numpy.nan\".";
   private static final String QUICK_FIX_MESSAGE_EQUALITY = "Replace this equality check with \"numpy.isnan()\".";
   private static final String QUICK_FIX_MESSAGE_INEQUALITY = "Replace this inequality check with \"not numpy.isnan()\".";
+  private static final TypeMatcher NUMPY_NAN_MATCHER = TypeMatchers.withFQN("numpy.nan");
 
   @Override
   public void initialize(Context context) {
@@ -53,13 +55,10 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkOperand(SubscriptionContext ctx, Expression operand, Expression otherOperand, BinaryExpression be) {
-    TreeUtils.getSymbolFromTree(operand)
-      .map(Symbol::fullyQualifiedName)
-      .filter("numpy.nan"::equals)
-      .ifPresent(fqn -> {
-        PreciseIssue issue = ctx.addIssue(be, MESSAGE);
-        addQuickFix(issue, operand, otherOperand, be);
-      });
+    if (NUMPY_NAN_MATCHER.isTrueFor(operand, ctx)) {
+      PreciseIssue issue = ctx.addIssue(be, MESSAGE);
+      addQuickFix(issue, operand, otherOperand, be);
+    }
   }
 
   private static void addQuickFix(PreciseIssue issue, Expression nanOperand, Expression otherOperand, BinaryExpression be) {
