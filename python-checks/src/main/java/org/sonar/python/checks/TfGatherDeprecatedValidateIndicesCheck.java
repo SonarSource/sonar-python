@@ -16,18 +16,20 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6925")
 public class TfGatherDeprecatedValidateIndicesCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Don't set the `validate_indices` argument, it is deprecated.";
-  private static final String FQN = "tensorflow.gather";
+  private static final TypeMatcher TF_GATHER = TypeMatchers.withFQN("tensorflow.gather");
 
   @Override
   public void initialize(Context context) {
@@ -35,9 +37,13 @@ public class TfGatherDeprecatedValidateIndicesCheck extends PythonSubscriptionCh
   }
 
   private static void checkCallExpr(SubscriptionContext context) {
-    Optional.ofNullable(((CallExpression) context.syntaxNode()).calleeSymbol())
-      .filter(symbol -> FQN.equals(symbol.fullyQualifiedName()))
-      .map(callExpression -> TreeUtils.nthArgumentOrKeyword(2, "validate_indices", ((CallExpression) context.syntaxNode()).arguments()))
-      .ifPresent(argument -> context.addIssue(argument, MESSAGE));
+    CallExpression callExpression = (CallExpression) context.syntaxNode();
+    if (!TF_GATHER.isTrueFor(callExpression.callee(), context)) {
+      return;
+    }
+    RegularArgument argument = TreeUtils.nthArgumentOrKeyword(2, "validate_indices", callExpression.arguments());
+    if (argument != null) {
+      context.addIssue(argument, MESSAGE);
+    }
   }
 }
