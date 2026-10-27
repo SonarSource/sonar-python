@@ -1,7 +1,37 @@
-<p>This rule raises an issue when a <code>@contextmanager</code> generator performs cleanup after <code>yield</code> without guaranteeing that cleanup
-still runs if the generator exits early.</p>
+<p>This rule raises an issue when a <code>@contextmanager</code> or <code>@asynccontextmanager</code> generator performs cleanup after
+<code>yield</code> without guaranteeing that cleanup still runs if the generator exits early.</p>
+<p>This rule raises no issue in test code.</p>
+<p>This rule raises no issue when every <code>except</code> re-raises, and either the enclosing <code>with</code> binds a name used after
+<code>yield</code> or an <code>except BaseException</code> cleans up before re-raising.</p>
+<p>A catch-all <code>except</code> that does not re-raise is an issue too. Other context managers then skip the cleanup they run on failure.</p>
+<pre>
+from contextlib import contextmanager
+
+@contextmanager
+def transactional(connection):
+    transaction = connection.begin()
+    try:
+        yield connection
+        transaction.commit()
+    except BaseException:  # Compliant: rollback runs, then the error is re-raised
+        transaction.rollback()
+        raise
+</pre>
+<pre>
+from contextlib import contextmanager
+
+@contextmanager
+def traced(tracer, name):
+    with tracer.start_as_current_span(name) as span:
+        try:
+            yield span
+            span.set_status("OK")
+        except Exception:  # Compliant: the enclosing with releases span
+            raise
+</pre>
 <h2>Why is this an issue?</h2>
-<p><a href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>@contextmanager</code></a> turns a generator into a
+<p><a href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>@contextmanager</code></a> and <a
+href="https://docs.python.org/3/library/contextlib.html#contextlib.asynccontextmanager"><code>@asynccontextmanager</code></a> turn a generator into a
 context manager. The code before <code>yield</code> runs on enter, the <code>with</code> body runs at the <code>yield</code>, and the code after
 <code>yield</code> is meant to clean up on exit.</p>
 <p>If cleanup sits after <code>yield</code> without a <code>try</code>/<code>finally</code> (or a nested <code>with</code>), it does not run when:</p>
@@ -10,14 +40,15 @@ context manager. The code before <code>yield</code> runs on enter, the <code>wit
   <li>the generator is closed early, for example when a consumer stops iterating before the generator is exhausted</li>
 </ul>
 <p>In those cases, resources such as files, locks, or connections can stay open.</p>
+<p>A transaction is not a context manager, so it cannot be acquired with <code>with</code>.</p>
 <pre>
 from contextlib import contextmanager
 
 @contextmanager
-def temporary_file(path):
-    handle = open(path, "w")
-    yield handle
-    handle.close()  # Noncompliant: skipped if the with-block raises
+def transactional(connection):
+    transaction = connection.begin()
+    yield connection
+    transaction.commit()  # Noncompliant: cleanup after "yield" may be skipped
 </pre>
 <p>If statements after <code>yield</code> are not cleanup (for example optional logging that is safe to skip), or cleanup is already guaranteed by a
 nested <code>with</code> or an enclosing <code>try</code>/<code>finally</code> the analyzer failed to see, treat that as a false positive. Marking a
@@ -26,30 +57,32 @@ real resource release as won’t-fix is wrong: exceptions and early generator cl
 <p>Missed cleanup can leak resources, leave locks held, or leave shared state inconsistent. These failures often show up only under exceptions or
 early generator shutdown, which makes them harder to reproduce.</p>
 <h2>How to fix it</h2>
-<p>Wrap the <code>yield</code> in <code>try</code>/<code>finally</code> so cleanup always runs, or nest resource acquisition in a <code>with</code>
-statement so the inner context manager owns the cleanup.</p>
+<p>Wrap the <code>yield</code> so cleanup runs on every exit. Use <code>try</code>/<code>finally</code>, or <code>except BaseException</code> when
+success and failure need different actions. Nest a <code>with</code> only when the acquired object is itself a context manager.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 from contextlib import contextmanager
 
 @contextmanager
-def temporary_file(path):
-    handle = open(path, "w")
-    yield handle
-    handle.close()  # Noncompliant: cleanup after "yield" may be skipped
+def transactional(connection):
+    transaction = connection.begin()
+    yield connection
+    transaction.commit()  # Noncompliant: cleanup after "yield" may be skipped
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 from contextlib import contextmanager
 
 @contextmanager
-def temporary_file(path):
-    handle = open(path, "w")
+def transactional(connection):
+    transaction = connection.begin()
     try:
-        yield handle
-    finally:
-        handle.close()
+        yield connection
+        transaction.commit()
+    except BaseException:
+        transaction.rollback()
+        raise
 </pre>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
@@ -79,6 +112,8 @@ def locked_section(lock):
 <ul>
   <li>Python Documentation - <a
   href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>contextlib.contextmanager</code></a></li>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/library/contextlib.html#contextlib.asynccontextmanager"><code>contextlib.asynccontextmanager</code></a></li>
   <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#context-managers">Context managers</a></li>
 </ul>
 <h3>External coding guidelines</h3>

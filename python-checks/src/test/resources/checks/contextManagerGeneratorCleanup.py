@@ -1,4 +1,4 @@
-from contextlib import contextmanager
+from contextlib import asynccontextmanager, contextmanager
 import contextlib
 
 
@@ -147,13 +147,29 @@ def compliant_examples():
             with self.lock:
                 yield self
 
-    from contextlib import asynccontextmanager
+    @asynccontextmanager
+    async def async_manager(resource):
+        yield resource  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#       ^^^^^^^^^^^^^^
+        resource.close()
+#       ^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
 
     @asynccontextmanager
-    def async_manager(resource):
-        # asynccontextmanager is out of scope for this rule
-        yield resource
+    async def async_transaction(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            transaction.rollback()
+            raise
+
+    @contextlib.asynccontextmanager
+    async def qualified_async_manager(resource):
+        yield resource  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#       ^^^^^^^^^^^^^^
         resource.close()
+#       ^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
 
 
 def edge_cases():
@@ -281,7 +297,9 @@ def logging_examples():
 #       ^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
 
 
-import unittest
+# Nested so this fixture stays main code. A top-level unittest import would mark the file as a test.
+if True:
+    import unittest
 
 
 class SubclassAssertions(unittest.TestCase):
@@ -347,6 +365,359 @@ def success_path_and_nested_with_examples():
             raise
         finally:
             session.close()
+
+    @contextmanager
+    def commit_on_success_no_finally(connection):
+        # except BaseException catches every error, including generator close, then re-raises.
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            transaction.rollback()
+            raise
+
+    @contextmanager
+    def bare_except_reraises(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except:
+            transaction.rollback()
+            raise
+
+    @contextmanager
+    def tuple_base_exception_reraises(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except (BaseException,):
+            transaction.rollback()
+            raise
+
+    @contextmanager
+    def rollback_inside_with_before_raise(lock, connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            with lock:
+                transaction.rollback()
+                raise
+
+    @contextmanager
+    def rollback_in_each_branch_before_raise(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            if connection is None:
+                transaction.rollback()
+                raise
+            elif isinstance(connection, int):
+                transaction.rollback()
+                raise
+            else:
+                transaction.rollback()
+                raise
+
+    @contextmanager
+    def rollback_before_finally_raise(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            try:
+                transaction.rollback()
+            finally:
+                raise
+
+    @contextmanager
+    def rollback_in_finally_before_raise(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            try:
+                pass
+            finally:
+                transaction.rollback()
+                raise
+
+    @contextmanager
+    def rollback_in_try_body_before_raise(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            try:
+                transaction.rollback()
+                raise
+            finally:
+                print("done")
+
+    @contextmanager
+    def raise_inside_with_without_cleanup(lock, connection):
+        transaction = connection.begin()
+        try:
+            yield connection  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#           ^^^^^^^^^^^^^^^^
+            transaction.commit()
+#           ^^^^^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except BaseException:
+            with lock:
+                raise
+
+    @contextmanager
+    def one_branch_skips_rollback(connection):
+        transaction = connection.begin()
+        try:
+            yield connection  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#           ^^^^^^^^^^^^^^^^
+            transaction.commit()
+#           ^^^^^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except BaseException:
+            if connection is None:
+                transaction.rollback()
+                raise
+            else:
+                raise
+
+    @contextmanager
+    def nested_except_skips_rollback(connection):
+        transaction = connection.begin()
+        try:
+            yield connection  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#           ^^^^^^^^^^^^^^^^
+            transaction.commit()
+#           ^^^^^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except BaseException:
+            try:
+                transaction.rollback()
+                raise
+            except BaseException:
+                raise
+
+    @contextmanager
+    def nested_try_both_handlers_roll_back(connection):
+        transaction = connection.begin()
+        try:
+            yield connection
+            transaction.commit()
+        except BaseException:
+            try:
+                transaction.rollback()
+                raise
+            except BaseException:
+                transaction.rollback()
+                raise
+
+    @contextmanager
+    def nested_try_body_raises_without_cleanup(connection):
+        transaction = connection.begin()
+        try:
+            yield connection  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#           ^^^^^^^^^^^^^^^^
+            transaction.commit()
+#           ^^^^^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except BaseException:
+            try:
+                raise
+            except BaseException:
+                transaction.rollback()
+                raise
+
+    @contextmanager
+    def finally_raise_without_cleanup(connection):
+        transaction = connection.begin()
+        try:
+            yield connection  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#           ^^^^^^^^^^^^^^^^
+            transaction.commit()
+#           ^^^^^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except BaseException:
+            try:
+                pass
+            finally:
+                raise
+
+    @contextmanager
+    def close_after_yield_with_reraising_except(path):
+        # except Exception does not catch generator close, and nothing else releases the file.
+        handle = open(path, "w")
+        try:
+            yield handle  # Noncompliant
+#           ^^^^^^^^^^^^
+            handle.close()
+#           ^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except Exception:
+            log.error("failed")
+            raise
+
+    @contextmanager
+    def close_skipped_when_except_only_logs(path):
+        # Logging then re-raising does not release the file.
+        handle = open(path, "w")
+        try:
+            yield handle  # Noncompliant
+#           ^^^^^^^^^^^^
+            handle.close()
+#           ^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except BaseException:
+            print("failed")
+            raise
+
+    @contextmanager
+    def close_inside_unrelated_with(lock, path):
+        # The with does not bind the file, so it does not own this cleanup.
+        handle = open(path, "w")
+        with lock:
+            try:
+                yield handle  # Noncompliant
+#               ^^^^^^^^^^^^
+                handle.close()
+#               ^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+            except Exception:
+                raise
+
+    @contextmanager
+    def status_on_success_inside_nested_with(tracer, name):
+        # Real cleanup (span end, context detach) is owned by the nested with;
+        # setting the status is success-path-only work guarded by the re-raising except.
+        with tracer.start_as_current_span(name) as span:
+            try:
+                yield span
+                span.set_status("OK")
+            except Exception as exc:
+                span.set_status("ERROR", str(exc))
+                span.record_exception(exc)
+                raise
+
+    @contextmanager
+    def swallowed_exception_still_flagged(resource):
+        # Except does not re-raise, so the heuristic above does not apply: still unprotected.
+        try:
+            yield resource  # Noncompliant
+#           ^^^^^^^^^^^^^^
+            resource.commit()
+#           ^^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except Exception:
+            resource.rollback()
+
+    @contextmanager
+    def swallowed_base_exception(other):
+        # Swallowing BaseException makes enclosing context managers exit as if nothing failed.
+        with other():
+            try:
+                yield
+            except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#           ^^^^^^
+                pass
+#               ^^^^< {{Re-raise this exception.}}
+
+    @contextmanager
+    def bare_except_reraised_from_finally(resource):
+        # The handler stores the error. finally re-raises, so this is not swallowed.
+        exc = None
+        try:
+            yield resource
+        except BaseException:
+            exc = "failed"
+        finally:
+            resource.close()
+            if exc is not None:
+                raise
+
+    @contextmanager
+    def reraise_in_every_branch(resource):
+        try:
+            yield resource
+        except BaseException as exc:
+            if isinstance(exc, ValueError):
+                raise RuntimeError() from exc
+            else:
+                raise
+
+    @contextmanager
+    def reraise_inside_with(lock, resource):
+        try:
+            yield resource
+        except BaseException:
+            with lock:
+                raise
+
+    @contextmanager
+    def reraise_from_handler_finally(resource):
+        try:
+            yield resource
+        except BaseException:
+            try:
+                resource.rollback()
+            finally:
+                raise
+
+    @contextmanager
+    def nested_try_reraises_without_finally(resource):
+        try:
+            yield resource
+        except BaseException:
+            try:
+                raise
+            except BaseException:
+                raise
+
+    @contextmanager
+    def nested_try_except_does_not_reraise(resource):
+        try:
+            yield
+        except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#       ^^^^^^
+            try:
+#           ^[el=+6;ec=4]< {{Re-raise this exception.}}
+                raise
+            except BaseException:
+                resource.rollback()
+
+    @contextmanager
+    def nested_try_finally_does_not_reraise(resource):
+        try:
+            yield
+        except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#       ^^^^^^
+            try:
+#           ^[el=+6;ec=4]< {{Re-raise this exception.}}
+                resource.rollback()
+            finally:
+                resource.close()
+
+    @contextmanager
+    def reraise_only_on_one_branch(resource):
+        try:
+            yield
+        except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#       ^^^^^^
+            if isinstance(resource, int):
+#           ^[el=+4;ec=4]< {{Re-raise this exception.}}
+                raise
+
+    @contextmanager
+    def swallowed_bare_except_and_own_cleanup(resource):
+        try:
+            yield resource  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#           ^^^^^^^^^^^^^^
+            resource.close()
+#           ^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+        except:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#       ^^^^^^
+            resource.rollback()
+#           ^^^^^^^^^^^^^^^^^^^< {{Re-raise this exception.}}
 
     @contextmanager
     def success_work_inside_nested_with(tmp_factory, upload):

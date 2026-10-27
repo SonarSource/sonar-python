@@ -26,4 +26,9 @@ class ContextManagerGeneratorCleanupCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/contextManagerGeneratorCleanup.py", new ContextManagerGeneratorCleanupCheck());
   }
 
+  @Test
+  void skips_likely_test_files() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/contextManagerGeneratorCleanupTestFile.py", new ContextManagerGeneratorCleanupCheck());
+  }
+
 }

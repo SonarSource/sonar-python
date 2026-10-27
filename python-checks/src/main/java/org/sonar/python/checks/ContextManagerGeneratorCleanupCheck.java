@@ -17,12 +17,16 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Objects;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -30,6 +34,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.CaseBlock;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ElseClause;
+import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -37,12 +42,15 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.MatchStatement;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
@@ -56,13 +64,19 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
 
   private static final String MESSAGE = "Cleanup after this \"yield\" may be skipped on early exit.";
   private static final String SECONDARY_MESSAGE = "Move this into \"try\"/\"finally\".";
+  private static final String SWALLOWED_MESSAGE = "Swallowing this exception may skip cleanup of other context managers.";
+  private static final String RERAISE_MESSAGE = "Re-raise this exception.";
 
   private static final Tree.Kind[] JUMPS = {Tree.Kind.PASS_STMT, Tree.Kind.BREAK_STMT, Tree.Kind.CONTINUE_STMT};
   private static final Tree.Kind[] ASSIGNMENTS = {Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.COMPOUND_ASSIGNMENT};
   private static final Tree.Kind[] SELECTIONS = {Tree.Kind.IF_STMT, Tree.Kind.MATCH_STMT};
   private static final Tree.Kind[] LOOPS = {Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT};
 
-  private static final TypeMatcher CONTEXT_MANAGER = TypeMatchers.isType("contextlib.contextmanager");
+  private static final TypeMatcher CONTEXT_MANAGER = TypeMatchers.any(
+    TypeMatchers.isType("contextlib.contextmanager"),
+    TypeMatchers.isType("contextlib.asynccontextmanager"));
+
+  private static final TypeMatcher BASE_EXCEPTION = TypeMatchers.isType("BaseException");
 
   private static final TypeMatcher REPORTING_CALL = TypeMatchers.any(Stream.concat(
     Stream.of(
@@ -82,6 +96,9 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
   }
 
   private static void checkFunctionDef(SubscriptionContext ctx) {
+    if (ctx.isLikelyTestFile()) {
+      return;
+    }
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
     if (!isContextManager(functionDef, ctx)) {
       return;
@@ -99,6 +116,49 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
         cleanup.forEach(statement -> issue.secondary(statement, SECONDARY_MESSAGE));
       }
     }
+    checkSwallowedBaseException(collector.found, ctx);
+  }
+
+  /**
+   * A catch-all handler that does not re-raise swallows the error thrown back in at {@code yield}.
+   * Enclosing context managers then exit normally and skip the cleanup they run on failure.
+   */
+  private static void checkSwallowedBaseException(List<YieldExpression> yields, SubscriptionContext ctx) {
+    Set<ExceptClause> reported = new HashSet<>();
+    yields.forEach(yieldExpression -> reportSwallowedAround(yieldExpression, reported, ctx));
+  }
+
+  /**
+   * Reports a catch-all handler around {@code yieldExpression} that does not re-raise.
+   * A {@code finally} still runs after that handler, so it is left to re-raise or clean up.
+   */
+  private static void reportSwallowedAround(YieldExpression yieldExpression, Set<ExceptClause> reported, SubscriptionContext ctx) {
+    Tree current = yieldExpression.parent();
+    while (current != null && !current.is(Tree.Kind.FUNCDEF)) {
+      if (current instanceof TryStatement tryStatement && tryStatement.finallyClause() == null && isInside(yieldExpression, tryStatement.body())) {
+        tryStatement.exceptClauses().forEach(exceptClause -> reportSwallowed(exceptClause, reported, ctx));
+      }
+      current = current.parent();
+    }
+  }
+
+  private static void reportSwallowed(ExceptClause exceptClause, Set<ExceptClause> reported, SubscriptionContext ctx) {
+    if (!catchesBaseException(exceptClause, ctx) || endsWithRaise(exceptClause) || !reported.add(exceptClause)) {
+      return;
+    }
+    List<Statement> statements = exceptClause.body().statements();
+    PreciseIssue issue = ctx.addIssue(exceptClause.exceptKeyword(), SWALLOWED_MESSAGE);
+    if (!statements.isEmpty()) {
+      issue.secondary(statements.get(statements.size() - 1), RERAISE_MESSAGE);
+    }
+  }
+
+  private static boolean isInside(Tree node, Tree ancestor) {
+    Tree current = node;
+    while (current != null && current != ancestor) {
+      current = current.parent();
+    }
+    return current == ancestor;
   }
 
   private static boolean isContextManager(FunctionDef functionDef, SubscriptionContext ctx) {
@@ -136,7 +196,7 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
    * Picks out the statements of one block that run after {@code current} and that nothing else already protects.
    */
   private static List<Statement> cleanupAfter(StatementList block, Tree current, SubscriptionContext ctx) {
-    if (runsOnSuccessPathOnly(block)) {
+    if (runsOnSuccessPathOnly(block, ctx)) {
       return List.of();
     }
     // A loop right after a protected try consumes what that try produced, so it is result handling rather than cleanup.
@@ -156,12 +216,163 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
 
   /**
    * True when the enclosing construct already releases the resource, which makes trailing statements success-path work.
+   * A try whose body holds the yield is success-path-only when a {@code finally} runs, or when every {@code except}
+   * re-raises and either the enclosing {@code with} binds a name used in that body, or a catch-all {@code except}
+   * cleans up before it re-raises. A handler that only logs, or an unrelated {@code with}, does not release anything.
    */
-  private static boolean runsOnSuccessPathOnly(StatementList block) {
-    if (block.parent() instanceof TryStatement tryStatement) {
-      return tryStatement.finallyClause() != null && tryStatement.body() == block;
+  private static boolean runsOnSuccessPathOnly(StatementList block, SubscriptionContext ctx) {
+    if (block.parent() instanceof TryStatement tryStatement && tryStatement.body() == block) {
+      return tryStatement.finallyClause() != null
+        || (alwaysReraises(tryStatement) && (withTargetUsedIn(tryStatement) || catchAllReleases(tryStatement, ctx)));
     }
     return block.parent() instanceof WithStatement;
+  }
+
+  /**
+   * True when a {@code with} between this try and the enclosing function binds a name that the try body uses.
+   * A {@code with} that does not name that resource, such as {@code with lock:}, does not count.
+   */
+  private static boolean withTargetUsedIn(TryStatement tryStatement) {
+    Tree ancestor = TreeUtils.firstAncestorOfKind(tryStatement, Tree.Kind.WITH_STMT, Tree.Kind.FUNCDEF);
+    if (!(ancestor instanceof WithStatement withStatement)) {
+      return false;
+    }
+    return withStatement.withItems().stream()
+      .map(WithItem::expression)
+      .filter(Name.class::isInstance)
+      .map(Name.class::cast)
+      .map(Name::symbol)
+      .filter(Objects::nonNull)
+      .anyMatch(symbol -> usesSymbol(tryStatement.body(), symbol));
+  }
+
+  private static boolean usesSymbol(Tree tree, Symbol symbol) {
+    return TreeUtils.hasDescendant(tree, descendant -> descendant instanceof Name name && symbol.equals(name.symbol()));
+  }
+
+  /**
+   * True when a bare {@code except} or an {@code except BaseException} does real cleanup before re-raising.
+   * Logging or a bare {@code raise} does not release the resource.
+   */
+  private static boolean catchAllReleases(TryStatement tryStatement, SubscriptionContext ctx) {
+    return tryStatement.exceptClauses().stream().anyMatch(clause -> catchesBaseException(clause, ctx) && releasesBeforeRaise(clause, ctx));
+  }
+
+  private static boolean catchesBaseException(ExceptClause exceptClause, SubscriptionContext ctx) {
+    Expression exception = exceptClause.exception();
+    if (exception == null) {
+      return true;
+    }
+    if (exception instanceof Tuple tuple) {
+      return tuple.elements().stream().anyMatch(element -> BASE_EXCEPTION.isTrueFor(element, ctx));
+    }
+    return BASE_EXCEPTION.isTrueFor(exception, ctx);
+  }
+
+  /**
+   * True when every path that re-raises has already performed cleanup, including cleanup nested in the {@code with},
+   * {@code if}, or {@code try} that holds the {@code raise}.
+   */
+  private static boolean releasesBeforeRaise(ExceptClause exceptClause, SubscriptionContext ctx) {
+    return releasesBeforeRaise(exceptClause.body().statements(), ctx);
+  }
+
+  private static boolean releasesBeforeRaise(List<Statement> statements, SubscriptionContext ctx) {
+    if (!alwaysRaises(statements)) {
+      return false;
+    }
+    boolean cleanedBefore = statements.subList(0, statements.size() - 1).stream()
+      .anyMatch(statement -> roleOf(statement, ctx) == Role.CLEANUP);
+    return cleanedBefore || releasesInside(statements.get(statements.size() - 1), ctx);
+  }
+
+  private static boolean releasesInside(Statement statement, SubscriptionContext ctx) {
+    if (statement instanceof WithStatement withStatement) {
+      return releasesBeforeRaise(withStatement.statements().statements(), ctx);
+    }
+    if (statement instanceof IfStatement ifStatement) {
+      return ifReleases(ifStatement, ctx);
+    }
+    if (statement instanceof TryStatement tryStatement) {
+      return tryReleases(tryStatement, ctx);
+    }
+    return false;
+  }
+
+  private static boolean ifReleases(IfStatement ifStatement, SubscriptionContext ctx) {
+    ElseClause elseBranch = ifStatement.elseBranch();
+    if (!releasesBeforeRaise(ifStatement.body().statements(), ctx) || !releasesBeforeRaise(elseBranch.body().statements(), ctx)) {
+      return false;
+    }
+    return ifStatement.elifBranches().stream().allMatch(elif -> releasesBeforeRaise(elif.body().statements(), ctx));
+  }
+
+  private static boolean tryReleases(TryStatement tryStatement, SubscriptionContext ctx) {
+    var finallyClause = tryStatement.finallyClause();
+    if (finallyClause != null && alwaysRaises(finallyClause.body().statements())) {
+      return hasCleanup(tryStatement.body().statements(), ctx)
+        || releasesBeforeRaise(finallyClause.body().statements(), ctx);
+    }
+    return releasesBeforeRaise(tryStatement.body().statements(), ctx)
+      && tryStatement.exceptClauses().stream().allMatch(clause -> releasesBeforeRaise(clause.body().statements(), ctx));
+  }
+
+  private static boolean hasCleanup(List<Statement> statements, SubscriptionContext ctx) {
+    return statements.stream().anyMatch(statement -> roleOf(statement, ctx) == Role.CLEANUP);
+  }
+
+  /**
+   * True when the try has at least one {@code except} clause and every one of them ends with a {@code raise},
+   * guaranteeing that any exception keeps propagating instead of being swallowed.
+   */
+  private static boolean alwaysReraises(TryStatement tryStatement) {
+    List<ExceptClause> exceptClauses = tryStatement.exceptClauses();
+    return !exceptClauses.isEmpty() && exceptClauses.stream().allMatch(ContextManagerGeneratorCleanupCheck::endsWithRaise);
+  }
+
+  private static boolean endsWithRaise(ExceptClause exceptClause) {
+    return alwaysRaises(exceptClause.body().statements());
+  }
+
+  /**
+   * True when every way through these statements ends in {@code raise}, including a raise nested in {@code if},
+   * {@code with}, or {@code try}.
+   */
+  private static boolean alwaysRaises(List<Statement> statements) {
+    return !statements.isEmpty() && alwaysRaises(statements.get(statements.size() - 1));
+  }
+
+  private static boolean alwaysRaises(Statement statement) {
+    if (statement.is(Tree.Kind.RAISE_STMT)) {
+      return true;
+    }
+    if (statement instanceof IfStatement ifStatement) {
+      return ifAlwaysRaises(ifStatement);
+    }
+    if (statement instanceof WithStatement withStatement) {
+      return alwaysRaises(withStatement.statements().statements());
+    }
+    if (statement instanceof TryStatement tryStatement) {
+      return tryAlwaysRaises(tryStatement);
+    }
+    return false;
+  }
+
+  private static boolean ifAlwaysRaises(IfStatement ifStatement) {
+    ElseClause elseBranch = ifStatement.elseBranch();
+    if (elseBranch == null || !alwaysRaises(ifStatement.body().statements()) || !alwaysRaises(elseBranch.body().statements())) {
+      return false;
+    }
+    return ifStatement.elifBranches().stream().allMatch(elif -> alwaysRaises(elif.body().statements()));
+  }
+
+  private static boolean tryAlwaysRaises(TryStatement tryStatement) {
+    var finallyClause = tryStatement.finallyClause();
+    if (finallyClause != null && alwaysRaises(finallyClause.body().statements())) {
+      return true;
+    }
+    return alwaysRaises(tryStatement.body().statements())
+      && tryStatement.exceptClauses().stream().allMatch(ContextManagerGeneratorCleanupCheck::endsWithRaise);
   }
 
   /**
