@@ -145,10 +145,10 @@ class ChildClassOneExtraDefault(ParentClass):
 from io import BufferedIOBase, BytesIO, TextIOWrapper
 
 class StreamingBuffer(BytesIO):
-  def read(self): ... # Noncompliant {{Add 1 missing parameter. This method overrides io.BufferedIOBase.read.}}
+  def read(self): ... # Noncompliant {{Add 1 missing parameter. This method overrides _io._BufferedIOBase.read.}}
 
 class MyTextIOWrapper(TextIOWrapper):
-  def seek(self): ... # Noncompliant {{Add 2 missing parameters. This method overrides io.TextIOWrapper.seek.}}
+  def seek(self): ... # Noncompliant {{Add 2 missing parameters. This method overrides _io.TextIOWrapper.seek.}}
 
 import datetime
 
@@ -212,10 +212,10 @@ class NarrowedPositionalContract(PositionalOnlyContract):
 # Stub receivers may lack the positional-only flag carried by later parameters.
 
 class OptionalExtraOnStubContract(BufferedIOBase):
-    def read1(self, n, extra=None): ...  # Noncompliant {{Add a default value to parameter n. This method overrides io.BufferedIOBase.read1.}}
+    def read1(self, n, extra=None): ...  # Noncompliant {{Add a default value to parameter n. This method overrides _io._BufferedIOBase.read1.}}
 
 class RequiredExtraOnStubContract(BufferedIOBase):
-    def read1(self, n, extra): ...  # Noncompliant {{Add a default value to parameter n. This method overrides io.BufferedIOBase.read1.}} {{Remove parameter extra or provide default value. This method overrides io.BufferedIOBase.read1.}}
+    def read1(self, n, extra): ...  # Noncompliant {{Add a default value to parameter n. This method overrides _io._BufferedIOBase.read1.}} {{Remove parameter extra or provide default value. This method overrides _io._BufferedIOBase.read1.}}
 
 
 import tensorflow as tf

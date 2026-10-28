@@ -70,9 +70,10 @@ class SymbolImplTest {
       "e = OSError()",
       "e.errno"
     )).symbol();
-    assertThat(symbol.inferredType()).isEqualTo(InferredTypes.INT);
+    assertThat(symbol.inferredType().canBeOrExtend("int")).isTrue();
     SymbolImpl copiedSymbol = symbol.copyWithoutUsages();
-    assertThat(copiedSymbol.inferredType()).isEqualTo(InferredTypes.INT);
+    // errno is optional in newer Typeshed; copying must retain the complete inferred type.
+    assertThat(copiedSymbol.inferredType()).isEqualTo(symbol.inferredType());
   }
 
   @Test

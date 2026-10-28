@@ -261,3 +261,9 @@ def unresolved_and_cyclic_values(password):
     hashlib.pbkdf2_hmac("sha256", password, salt, 1000)
     hashlib.pbkdf2_hmac("sha256", password, base64.b64decode(), 1000)
     hashlib.pbkdf2_hmac("sha256", password, 42, 1000)
+
+
+def reexported_hashlib_implementation(password, salt):
+    from _hashlib import scrypt as implementation_scrypt
+    implementation_scrypt(password, salt=b"fixed", n=16384, r=8, p=1)  # Noncompliant
+    implementation_scrypt(password, salt=salt, n=16384, r=8, p=1)

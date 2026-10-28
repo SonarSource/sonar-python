@@ -1,17 +1,14 @@
 
-syslog
-LOG_MASK*
-a(
-LOG_UPTO*
-a(
+syslog
+LOG_MASK*(
+LOG_UPTO*(
 closelog?
 openlog*
 ident (*
 	logoption (*
-facility (
+facility (
 
-setlogmask*
-x("x
+setlogmask*("x
 syslog>
 syslog*
 priority(*
@@ -19,51 +16,52 @@ setlogmask*
 syslog*
 message(0:typing.overloadX*
 __annotations__0*
-	LOG_ALERT0*
-LOG_AUTH0*
-LOG_AUTHPRIV0*
-LOG_CONS0*
-LOG_CRIT0*
-LOG_CRON0*
+	LOG_ALERT0*
+LOG_AUTH0*
+LOG_AUTHPRIV0*
+LOG_CONS0*
+LOG_CRIT0*
+LOG_CRON0*
 
-LOG_DAEMON0*
-	LOG_DEBUG0*
-	LOG_EMERG0*
-LOG_ERR0*
-LOG_INFO0*
-LOG_KERN0*
+LOG_DAEMON0*
+	LOG_DEBUG0*
+	LOG_EMERG0*
+LOG_ERR0*
+LOG_INFO0*
+LOG_KERN0*
 
-LOG_LOCAL00*
+LOG_LOCAL00*
 
-LOG_LOCAL10*
+LOG_LOCAL10*
 
-LOG_LOCAL20*
+LOG_LOCAL20*
 
-LOG_LOCAL30*
+LOG_LOCAL30*
 
-LOG_LOCAL40*
+LOG_LOCAL40*
 
-LOG_LOCAL50*
+LOG_LOCAL50*
 
-LOG_LOCAL60*
+LOG_LOCAL60*
 
-LOG_LOCAL70*
-LOG_LPR0*
-LOG_MAIL0*
+LOG_LOCAL70*
+LOG_LPR0*
+LOG_MAIL0*
 
-LOG_NDELAY0*
-LOG_NEWS0*
+LOG_NDELAY0*
+LOG_NEWS0*
 
-LOG_NOTICE0*
+LOG_NOTICE0*
 
-LOG_NOWAIT0*
+LOG_NOWAIT0*
 
-LOG_ODELAY0*
+LOG_ODELAY0*
 
-LOG_PERROR0*
-LOG_PID0*
+LOG_PERROR0*
+LOG_PID0*
 
-LOG_SYSLOG0*
-LOG_USER0*
-LOG_UUCP0*
-LOG_WARNING02"builtins.int22"builtins.str22"builtins.dict22	2
+LOG_SYSLOG0*
+LOG_USER0*
+LOG_UUCP0*
+LOG_WARNING0*
+LOG_FTP*313*314*31502"builtins.int22"builtins.str22"builtins.dict2

@@ -122,6 +122,7 @@ class ThirdPartyReturnTypeInferenceTest {
 
   static Stream<Arguments> libraryReturnTypes() {
     var examples = List.of(
+      new ReturnTypeCase("from stripe import Customer as Alias\nAlias.retrieve(\"cus_test\").to_dict()\n", "builtins.dict"),
       new ReturnTypeCase("from passlib.context import CryptContext as Alias\nAlias().verify('secret', 'hash')\n", "builtins.bool"),
       new ReturnTypeCase("from PIL.Image import open as alias\nalias('image.png').resize((10, 10))\n", "PIL.Image.Image"),
       new ReturnTypeCase("from babel import Locale as Alias\nAlias.parse('en')\n", "babel.core.Locale"),

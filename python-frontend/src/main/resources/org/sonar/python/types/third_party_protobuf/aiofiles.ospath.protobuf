@@ -4,41 +4,51 @@
 
 path(*
 loop (*
-executor (H8
+executor (H8
 isfile*
 
 path(*
 loop (*
-executor (H4
+executor (H4
 isdir*
 s(*
 loop (*
-executor (H=
-getsize*
+executor (H
+islink*
+
+path(H
+ismount*
+
+path(H=
+getsize*
 filename(*
 loop (*
-executor (H>
-getmtime*
+executor (H>
+getmtime*
 filename(*
 loop (*
-executor (H>
-getatime*
+executor (H>
+getatime*
 filename(*
 loop (*
-executor (H>
-getctime*
+executor (H>
+getctime*
 filename(*
 loop (*
-executor (HB
+executor (HB
 samefile*
 f1(*
 f2(*
 loop (*
-executor (HH
+executor (HH
 sameopenfile*	
 fp1(*	
 fp2(*
 loop (*
-executor (H*
-__annotations__022"builtins.bool2"typing.Coroutine22"builtins.int2"builtins.str2"builtins.bytes2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath2	22
-2%"_typeshed.FileDescriptorOrPath22"" asyncio.events.AbstractEventLoop2222"typing.Coroutine22"builtins.float2"typing.Coroutine22"builtins.dict2
+executor (H
+abspath*
+
+path(H*
+__annotations__0*
+__all__022"builtins.bool2"typing.Coroutine22"builtins.int2"builtins.str2"builtins.bytes2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath2	22
+2%"_typeshed.FileDescriptorOrPath22"" asyncio.events.AbstractEventLoop2222#"!concurrent.futures._base.Executor222"typing.Coroutine22"builtins.float2"typing.Coroutine22"builtins.object2"builtins.object22"typing.Coroutine22"os.PathLike2222"builtins.dict22"builtins.list2

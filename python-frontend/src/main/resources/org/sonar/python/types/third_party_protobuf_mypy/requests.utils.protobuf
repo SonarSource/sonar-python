@@ -15,8 +15,8 @@
 obj 
 extract_zipped_paths*
 path
-atomic_open*
-filename(
+atomic_open*
+filename(
 from_key_val_list*	
 value
 to_key_val_list*	
@@ -40,9 +40,9 @@
 stream_decode_response_unicode*
 iterator*
 r1
-iter_slices*
+iter_slices*
 string(*
-slice_length("
+slice_length("
 get_unicode_from_response*
 r!
 unquote_unreserved*	
@@ -54,31 +54,31 @@
 net(
 dotted_netmask*
 
-mask($
+mask($
 is_ipv4_address	*
 	string_ip('
 is_valid_cidr	*
 string_network(,
-set_environ*
+set_environ*
 env_name(*
 value(4
 should_bypass_proxies	*	
 url(*
-no_proxy(4
-get_environ_proxies*	
+no_proxy(4
+get_environ_proxies*	
 url(*
-no_proxy (*
+no_proxy (*
 select_proxy*	
 url(*
-proxies(D
+proxies(D
 resolve_proxies*
-request(*
-proxies(*
+request(*
+proxies(*
 	trust_env (	$
 default_user_agent*
 name (
-default_headers#
-parse_header_links *
+default_headers#
+parse_header_links!*
 value(
 guess_json_utf*
 data3
@@ -95,17 +95,17 @@ new_scheme
 urldefragauth*	
 url('
 rewind_body*
-prepared_request('
+prepared_request('
 check_header_validity*
-header(#*
-__annotations__0$*
-OrderedDict0%8*
-CaseInsensitiveDict0&8*
+header($*
+__annotations__0%*
+OrderedDict0&8*
+CaseInsensitiveDict0'8*
 
-InvalidURL0'8*
+InvalidURL0(8*
 NETRC_FILES0*
 DEFAULT_CA_BUNDLE_PATH0*
-DEFAULT_PORTS0(*
+DEFAULT_PORTS0)*
 DEFAULT_ACCEPT_ENCODING0*
-UNRESERVED_SET0)22"builtins.str222222"builtins.bytes222"requests.utils._Uri22"builtins.bool2"io.BufferedWriter2("#contextlib._GeneratorContextManager2
-2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath22"typing.Generator22"builtins.int222("#contextlib._GeneratorContextManager22"typing.Iterable2222"builtins.dict22"typing.Mapping2222"requests.models.Request2!"requests.models.PreparedRequest222"typing.Mapping2222,"'requests.structures.CaseInsensitiveDict22"builtins.dict22"builtins.list22"builtins.object2"builtins.object2!22""2"builtins.dict22"collections.OrderedDict22,"'requests.structures.CaseInsensitiveDict22 "requests.exceptions.InvalidURL2"builtins.dict22"builtins.frozenset2
+UNRESERVED_SET0*22"builtins.str222222"builtins.bytes222"requests.utils._Uri22"builtins.bool2"_io._BufferedWriterStream2"_io.BufferedWriter2
+2*"#contextlib._GeneratorContextManager22"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath22"typing.Generator22"builtins.int222*"#contextlib._GeneratorContextManager22"typing.Iterable2222"builtins.dict22"typing.Mapping2222"requests.models.Request2!"requests.models.PreparedRequest222"typing.Mapping2222,"'requests.structures.CaseInsensitiveDict22"builtins.dict22"builtins.list2 2"builtins.object2"builtins.object2"22##2"builtins.dict22"collections.OrderedDict22,"'requests.structures.CaseInsensitiveDict22 "requests.exceptions.InvalidURL2"builtins.dict22"builtins.frozenset2

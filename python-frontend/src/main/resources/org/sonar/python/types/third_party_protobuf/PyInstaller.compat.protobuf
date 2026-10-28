@@ -17,12 +17,8 @@
 kwargs(0
 exec_command_rc*
 cmdargs(*
-kwargs(K
-exec_command_stdout*
-command_args(*
-encoding (*
-kwargs(C
-exec_command_all*
+kwargs(C
+exec_command_all*
 cmdargs(*
 encoding (*
 kwargs()
@@ -33,13 +29,10 @@
 exec_python_rc*
 
 args(*
-kwargs(
-expand_path*
-
-path(%
-getsitepackages*
-prefixes (5
-importlib_load_source*
+kwargs(%
+getsitepackages*
+prefixes (5
+importlib_load_source*
 
 name(*
 pathname(
@@ -53,7 +46,7 @@
 
 name(*
 default (0:typing.overloadX*
-__annotations__0*
+__annotations__0*
 strict_collect_mode0*
 	is_64bits0*
 is_py350*
@@ -62,13 +55,20 @@
 is_py380*
 is_py390*
 is_py3100*
-is_py3110*
+is_py3110*
+is_py3120*
+is_py3130*
+is_py3140*
+is_py3150*
 
 is_win0*
-	is_win_100*
+	is_win_100*
+	is_win_110*
 is_win_wine0*
 	is_cygwin0*
-	is_darwin0*
+	is_darwin0*
+
+is_android0*
 is_linux0*
 is_solar0*
 
@@ -76,14 +76,16 @@
 
 is_freebsd0*
 
-is_openbsd0*
+is_openbsd0*
+	is_netbsd0*
 is_hpux0*
 is_unix0*
-is_musl0*
+is_musl0*
+	is_termux0*
 is_macos_11_compat0*
 is_macos_11_native0*
-is_macos_110*
-PYDYLIB_NAMES0*
+is_macos_110*
+is_nogil0*
 base_prefix0*
 is_venv0*
 is_virtualenv0*
@@ -92,19 +94,17 @@ is_openbsd0*
 python_executable0*
 is_ms_app_store0*
 BYTECODE_MAGIC0*
-EXTENSION_SUFFIXES0*
-ALL_SUFFIXES0*
-architecture0!*
+EXTENSION_SUFFIXES0*
+ALL_SUFFIXES0*
+architecture0*
 
-system0"*
-machine0#*
-PY3_BASE_MODULES0*
-PURE_PYTHON_MODULE_TYPES0*
-SPECIAL_MODULE_TYPES0*
-BINARY_MODULE_TYPES0*
-VALID_MODULE_TYPES0*
-BAD_MODULE_TYPES0*
-ALL_MODULE_TYPES0*
-MODULE_TYPES_TO_TOC_DICT0$2"builtins.bool2"builtins.int2"builtins.str2"builtins.bytes2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath2222%"_typeshed.FileDescriptorOrPath2	222222"typing.Iterable2222"builtins.float222
-2222"builtins.object2"builtins.object22"os.PathLike2222"_typeshed.GenericPath22"builtins.list22"typing.Iterable2222"types.ModuleType22"builtins.dict22"builtins.set22	222   2	2     22
-         2"builtins.dict2
+system0*
+machine0*
+PY3_BASE_MODULES0*
+PURE_PYTHON_MODULE_TYPES0*
+SPECIAL_MODULE_TYPES0*
+BINARY_MODULE_TYPES0*
+VALID_MODULE_TYPES0*
+BAD_MODULE_TYPES0*
+ALL_MODULE_TYPES0*
+MODULE_TYPES_TO_TOC_DICT02"builtins.bool2"builtins.int2"builtins.str2"builtins.bytes2"os.PathLike22"os.PathLike2222"_typeshed.StrOrBytesPath2222%"_typeshed.FileDescriptorOrPath2	222222"typing.Iterable2222"builtins.float22222"builtins.list22"typing.Iterable2222"types.ModuleType22"builtins.dict22	2222	2222"builtins.set22"builtins.dict2

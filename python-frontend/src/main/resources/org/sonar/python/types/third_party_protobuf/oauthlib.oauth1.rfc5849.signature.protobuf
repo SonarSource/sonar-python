@@ -1,84 +1,84 @@
 
 !oauthlib.oauth1.rfc5849.signaturem
 signature_base_string*
-http_method(*
+http_method(*
 base_str_uri(*+
 %normalized_encoded_request_parameters(,
 base_string_uri*	
 uri(*
-host (}
-collect_parameters*
+host (}
+collect_parameters*
 	uri_query (*
-body (*
-headers (*
-exclude_oauth_signature (*
+body (*
+headers (*
+exclude_oauth_signature (*
 
-with_realm (&
+with_realm (&
 normalize_parameters*
-params(:
-sign_hmac_sha1_with_client*
-sig_base_str*
-
-clientY
-verify_hmac_sha1*
-request(*
-client_secret (*
-resource_owner_secret (O
-sign_hmac_sha1*
-base_string*
-client_secret*
-resource_owner_secret<
+params(
+@
+sign_hmac_sha1_with_client*
+sig_base_str(*
+client(Y
+verify_hmac_sha1*
+request(*
+client_secret (*
+resource_owner_secret (W
+sign_hmac_sha1*
+base_string(*
+client_secret(*
+resource_owner_secret(<
 sign_hmac_sha256_with_client*
 sig_base_str*
 
 client[
-verify_hmac_sha256*
-request(*
-client_secret (*
-resource_owner_secret (Q
-sign_hmac_sha256*
-base_string*
-client_secret*
-resource_owner_secretB
-sign_hmac_sha512_with_client*
+verify_hmac_sha256*
+request(*
+client_secret (*
+resource_owner_secret (Y
+sign_hmac_sha256*
+base_string(*
+client_secret(*
+resource_owner_secret(B
+sign_hmac_sha512_with_client*
 sig_base_str(*
-client([
-verify_hmac_sha512*
-request(*
-client_secret (*
-resource_owner_secret (9
-sign_rsa_sha1_with_client*
-sig_base_str*
-
-client8
-verify_rsa_sha1*
-request(*
+client([
+verify_hmac_sha512*
+request(*
+client_secret (*
+resource_owner_secret (?
+sign_rsa_sha1_with_client*
+sig_base_str(*
+client(8
+verify_rsa_sha1*
+request(*
 rsa_public_key(5
 sign_rsa_sha1*
 base_string*
 rsa_private_keyA
-sign_rsa_sha256_with_client*
+sign_rsa_sha256_with_client*
 sig_base_str(*
-client(:
-verify_rsa_sha256*
-request(*
+client(:
+verify_rsa_sha256*
+request(*
 rsa_public_key(A
-sign_rsa_sha512_with_client*
+sign_rsa_sha512_with_client*
 sig_base_str(*
-client(:
-verify_rsa_sha512*
-request(*
-rsa_public_key(D
-sign_plaintext_with_client*
-_signature_base_string*
-
-client>
-sign_plaintext*
-client_secret*
-resource_owner_secretY
-verify_plaintext*
-request(*
+client(:
+verify_rsa_sha512*
+request(*
+rsa_public_key(J
+sign_plaintext_with_client*
+_signature_base_string(*
+client(D
+sign_plaintext*
+client_secret(*
+resource_owner_secret(Y
+verify_plaintext*
+request(*
 client_secret (*
 resource_owner_secret (*
-__annotations__0*
-log02"builtins.str22222"_typeshed.Incomplete2222"builtins.bool2"builtins.dict2
+__annotations__0*
+log02"builtins.str2	222	2""oauthlib.common._HTTPMethod2222222"builtins.list22"builtins.bytes2"builtins.dict22"typing.Iterable22	2	
+22
+2"builtins.bool22"oauthlib.common.Request22	2"builtins.object2"builtins.dict22"logging.Logger

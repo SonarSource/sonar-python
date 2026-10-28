@@ -51,6 +51,10 @@ public class LazyTypeWrapper implements TypeWrapper {
     return this.importPath != null && this.importPath.equals(importPath);
   }
 
+  public boolean hasImportPathWithin(String modulePath) {
+    return importPath != null && (importPath.equals(modulePath) || importPath.startsWith(modulePath + "."));
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

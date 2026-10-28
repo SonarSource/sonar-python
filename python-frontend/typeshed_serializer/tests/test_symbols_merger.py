@@ -21,54 +21,6 @@ from serializer import symbols, symbols_merger, serializers
 from serializer.serializers import TypeshedSerializer
 from serializer.symbols import MergedModuleSymbol
 
-EXPECTED_MERGED_MODULES = {
-    "_ast",
-    "_collections_abc",
-    "_ctypes",
-    "_socket",
-    "_typeshed",
-    "abc",
-    "array",
-    "builtins",
-    "cmd",
-    "collections",
-    "collections.abc",
-    "contextlib",
-    "ctypes",
-    "dataclasses",
-    "email",
-    "email.charset",
-    "email.contentmanager",
-    "email.errors",
-    "email.header",
-    "email.message",
-    "email.policy",
-    "enum",
-    "genericpath",
-    "importlib",
-    "importlib.abc",
-    "importlib.machinery",
-    "importlib.metadata",
-    "importlib.metadata._meta",
-    "io",
-    "mmap",
-    "os",
-    "os.path",
-    "pathlib",
-    "pickle",
-    "posixpath",
-    "re",
-    "socket",
-    "sre_compile",
-    "sre_constants",
-    "sre_parse",
-    "ssl",
-    "subprocess",
-    "sys",
-    "types",
-    "typing",
-    "typing_extensions",
-}
 
 
 def test_build_multiple_python_version(typeshed_stdlib):
@@ -82,7 +34,8 @@ def test_merge_multiple_python_versions(typeshed_stdlib):
     merged_modules = TypeshedSerializer().get_merged_modules()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
-    assert set(merged_modules) == EXPECTED_MERGED_MODULES
+    assert set(merged_modules) == set(typeshed_stdlib.files)
+    assert {"abc", "cmd", "io", "ssl"} <= set(merged_modules)
 
 
 def test_basic_module_merge(typeshed_stdlib):

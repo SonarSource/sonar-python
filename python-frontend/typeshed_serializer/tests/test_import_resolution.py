@@ -30,13 +30,13 @@ from serializer.symbols import ModuleSymbol
 
 
 def test_stdlib_dependencies_use_pinned_typeshed():
-    # These public APIs are defined in the pin itself. Newer bundled Typeshed
-    # moves their definitions into internal modules absent from this checkout.
+    # Exercise public classes, including re-exports from private stdlib modules.
+    # Both direct imports and transitive dependencies must use the checked-out pin.
     classes_by_module = {
         "io": "BytesIO",
         "email.policy": "Policy",
         "ssl": "SSLContext",
-        "hashlib": "_Hash",
+        "hashlib": "blake2b",
         "ctypes": "BigEndianStructure",
         "asyncio": "Task",
         "contextvars": "Context",

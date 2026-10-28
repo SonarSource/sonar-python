@@ -287,6 +287,16 @@ class ResolvedClassDecoratorsTest {
   }
 
   @ParameterizedTest
+  @ValueSource(strings = {"int", "str", "list"})
+  void bundled_builtin_markers_are_recognized_without_changing_legacy_member_checks(String name) {
+    var type = (ClassType) TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE.getBuiltinsModule().resolveMember(name).orElseThrow();
+    assertThat(names(type)).containsExactly("typing_extensions.disjoint_base");
+    assertThat(check(type)).isEqualTo(TriBool.TRUE);
+    // Builtins retain their existing special treatment in the legacy member API.
+    assertThat(type.instancesHaveMember("missing")).isEqualTo(TriBool.FALSE);
+  }
+
+  @ParameterizedTest
   @ValueSource(strings = {"typing.final", "typing.disjoint_base"})
   void project_reexports_resolve_canonically(String marker) {
     int split = marker.lastIndexOf('.');

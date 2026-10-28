@@ -31,164 +31,164 @@
 
 dataclasses.dataclassŠ
 all*
-	predicate(	
+	predicate(
 amb*
-right_source(
+right_source(
 as_observable
 average*
 
-key_mapper (
+key_mapper (
 buffer*
 
-boundaries(%
+boundaries(%
 buffer_when*
 closing_mapper(7
 buffer_toggle*
-openings(*
+openings(*
 closing_mapper(0
 buffer_with_count*
-count(*
-skip (J
+count(*
+skip (J
 buffer_with_time*
-timespan(*
-	timeshift (*
-	scheduler (M
+timespan(*
+	timeshift (*
+	scheduler (!M
 buffer_with_time_or_count*
-timespan(*
-count(*
-	scheduler (
+timespan(*
+count(*
+	scheduler (!
 catch*
-handler( 
+handler(" 
 combine_latest*
-others(
+others(
 concat*
-sources(
+sources(
 
 concat_all
 
 concat_map*
-project(	+
+project(+
 contains*
 value(*
-comparer (
+comparer ($
 count*
-	predicate (.
+	predicate (%.
 debounce*
-duetime(*
-	scheduler (;
-throttle_with_timeout*
-duetime(*
-	scheduler (8
-delay_subscription*
 duetime(*
-	scheduler (P
+	scheduler (!;
+throttle_with_timeout*
+duetime(*
+	scheduler (!8
+delay_subscription*
+duetime('*
+	scheduler (!P
 delay_with_mapper*
-subscription_delay (*
-delay_duration_mapper (
+subscription_delay ((*
+delay_duration_mapper (
 dematerialize+
 delay*
-duetime(*
-	scheduler (2
+duetime('*
+	scheduler (!2
 distinct*
 
-key_mapper (*
-comparer (@
+key_mapper (*
+comparer ($@
 distinct_until_changed*
 
-key_mapper (*
-comparer (
+key_mapper (*
+comparer ($
 do*
-observer( F
+observer()F
 	do_action*
-on_next ("*
-on_error ($*
-on_completed (&
+on_next (+*
+on_error (-*
+on_completed (/
 do_while*
-	condition(	
+	condition(
 
 element_at*
-index(=
+index(=
 element_at_or_default*
-index(*
-default_value ('
+index(*
+default_value (0
 	exclusive
 expand*
-mapper(	
+mapper(
 filter*
-	predicate(	-
+	predicate(-
 filter_indexed*
-predicate_indexed ( 
+predicate_indexed (2 
 finally_action*
-action((
+action(3
 find*
 	predicate(
 
 find_index*
 	predicate(
 first*
-	predicate (>
+	predicate (%>
 first_or_default*
-	predicate (*
-default_value ('!
+	predicate (%*
+default_value (0!
 flat_map_latest*
-mapper(	
+mapper(
 	fork_join*
-others(N
+others(N
 group_by*
 
-key_mapper(	*
-element_mapper (*
-subject_mapper ()i
+key_mapper(*
+element_mapper (*
+subject_mapper (4i
 group_by_until*
 
-key_mapper(	*
-element_mapper(*
+key_mapper(*
+element_mapper(*
 duration_mapper(*
-subject_mapper ()T
+subject_mapper (4T
 
 group_join*
-right(*
+right(*
 left_duration_mapper(*
 right_duration_mapper(
 ignore_elements
 is_emptyN
 join*
-right(*
+right(*
 left_duration_mapper(*
 right_duration_mapper(
 last*
-	predicate (
+	predicate (%
 map*
-mapper ('
+mapper ('
 map_indexed*
-mapper_indexed (
+mapper_indexed (6
 materialize
 max*
-comparer (.
+comparer ($.
 max_by*
 
-key_mapper(	*
-comparer (0
+key_mapper(*
+comparer ($0
 merge*
-sources(*
-max_concurrent (
+sources(*
+max_concurrent (
 	merge_all
 min*
-comparer (.
+comparer ($.
 min_by*
 
-key_mapper(	*
-comparer (
+key_mapper(*
+comparer ($
 
 observe_on*
-	scheduler(&
+	scheduler( &
 on_error_resume_next*
-second(
+second(
 pairwise
 	partition*
-	predicate(	.
+	predicate(.
 partition_indexed*
-predicate_indexed(	
+predicate_indexed(1
 pluck*	
 key(
 
@@ -197,52 +197,52 @@ pluck_attr*
 prop(
 	ref_count 
 repeat*
-repeat_count (
+repeat_count (
 retry*
-retry_count (,
+retry_count (,
 sample*
-sampler(**
-	scheduler (2
+sampler(7*
+	scheduler (!2
 sequence_equal*
-second(,*
-comparer (	
+second(9*
+comparer ($	
 share
 single*
-	predicate (?
+	predicate (%?
 single_or_default*
-	predicate (*
+	predicate (%*
 default_value (	G
 single_or_default_async*
-has_default (-*
+has_default (:*
 default_value (
 skip*
-count(
+count(
 	skip_last*
-count(:
+count(:
 skip_last_with_time*
-duration(*
-	scheduler (
+duration(*
+	scheduler (!
 
 skip_until*
-other(.=
+other(;=
 skip_until_with_time*
 
-start_time(*
-	scheduler (
+start_time('*
+	scheduler (!
 
 skip_while*
-	predicate(	'
+	predicate('
 skip_while_indexed*
-	predicate(	5
+	predicate(15
 skip_with_time*
-duration(*
-	scheduler (4
+duration(*
+	scheduler (!4
 slice*
-start (*
-stop (*
-step (
+start (*
+stop (*
+step (
 some*
-	predicate (!
+	predicate (%!
 starmap_indexed*
 mapper(
 
@@ -250,177 +250,177 @@ start_with*
 
 args(!
 subscribe_on*
-	scheduler(
+	scheduler( 
 switch_latest
 
 switch_map*
-project ('
+project ('
 switch_map_indexed*
-project (
+project (6
 take*
-count(
+count(
 	take_last*
-count(!
+count(!
 take_last_buffer*
-count(:
+count(:
 take_last_with_time*
-duration(*
-	scheduler (
+duration(*
+	scheduler (!
 
 take_until*
-other(.;
+other(;;
 take_until_with_time*
-end_time(*
-	scheduler (2
+end_time('*
+	scheduler (!2
 
 take_while*
-	predicate(	*
-	inclusive (-:
+	predicate(*
+	inclusive (::
 take_while_indexed*
-	predicate(	*
-	inclusive (-5
+	predicate(1*
+	inclusive (:5
 take_with_time*
-duration(*
-	scheduler (@
+duration(*
+	scheduler (!@
 tap*
-on_next ("*
-on_error ($*
-on_completed (&<
+on_next (+*
+on_error (-*
+on_completed (/<
 throttle_first*
-window_duration(*
-	scheduler (8
+window_duration(*
+	scheduler (!8
 throttle_with_mapper*
 throttle_duration_mapper( 
 	timestamp*
-	scheduler (<
+	scheduler (!<
 timeout*
-duetime(*
-other (/*
-	scheduler (^
+duetime('*
+other (<*
+	scheduler (!^
 timeout_with_mapper*
-first_timeout (0*
-timeout_duration_mapper ()*
-other (1$
+first_timeout (=*
+timeout_duration_mapper (4*
+other (>$
 time_interval*
-	scheduler (5
+	scheduler (!5
 to_dict*
 
-key_mapper(	*
-element_mapper ("
+key_mapper(*
+element_mapper ("
 	to_future*
-future_ctor ()
+future_ctor (4
 to_iterable
 to_list3
 
 to_marbles*
-timespan (*
-	scheduler (
+timespan (*
+	scheduler (!
 
 to_set
 while_do*
-	condition(	
+	condition(
 window*
 
-boundaries(%
+boundaries(%
 window_when*
 closing_mapper(7
 window_toggle*
-openings(*
+openings(*
 closing_mapper(0
 window_with_count*
-count(*
-skip (J
+count(*
+skip (J
 window_with_time*
-timespan(*
-	timeshift (*
-	scheduler (M
+timespan(*
+	timeshift (*
+	scheduler (!M
 window_with_time_or_count*
-timespan(*
-count(*
-	scheduler (#
+timespan(*
+count(*
+	scheduler (!#
 with_latest_from*
-sources(
+sources(
 zip*
 
-args(#
+args(#
 zip_with_iterable*
-second(+
+second(8
 zip_with_list*
-second(+"}
+second(8"}
 default_if_empty>
 default_if_empty*
 default_value(0:typing.overloadX)
 default_if_empty0:typing.overloadX"¼
 flat_map1
 flat_map*
-mapper (20:typing.overloadX1
+mapper (?0:typing.overloadX1
 flat_map*
-mapper (10:typing.overloadX1
+mapper (>0:typing.overloadX1
 flat_map*
-mapper (0:typing.overloadX1
+mapper (0:typing.overloadX1
 flat_map*
-mapper (0:typing.overloadX1
+mapper (0:typing.overloadX1
 flat_map*
-mapper (0:typing.overloadX1
+mapper (@0:typing.overloadX1
 flat_map*
-mapper (0:typing.overloadX"ž
+mapper (0:typing.overloadX"ž
 flat_map_indexedA
 flat_map_indexed*
-mapper_indexed (20:typing.overloadXA
+mapper_indexed (?0:typing.overloadXA
 flat_map_indexed*
-mapper_indexed (10:typing.overloadXA
+mapper_indexed (>0:typing.overloadXA
 flat_map_indexed*
-mapper_indexed (0:typing.overloadXA
+mapper_indexed (60:typing.overloadXA
 flat_map_indexed*
-mapper_indexed (0:typing.overloadX"Ê
+mapper_indexed (60:typing.overloadX"Ê
 last_or_default(
 last_or_default0:typing.overloadX=
 last_or_default*
 default_value(0:typing.overloadXN
 last_or_default*
 default_value(*
-	predicate(	0:typing.overloadX"­
+	predicate(0:typing.overloadX"­
 	multicast"
 	multicast0:typing.overloadX1
 	multicast*
-subject(30:typing.overloadXI
+subject(A0:typing.overloadXI
 	multicast*
 subject_factory(*
-mapper ()0:typing.overloadX"[
+mapper (40:typing.overloadX"[
 publish 
 publish0:typing.overloadX.
 publish*
-mapper(	0:typing.overloadX"—
+mapper(0:typing.overloadX"—
 publish_value;
 publish_value*
 initial_value(0:typing.overloadXI
 publish_value*
 initial_value(*
-mapper(	0:typing.overloadX"|
+mapper(0:typing.overloadX"|
 reduce2
 reduce*
-accumulator(	0:typing.overloadX>
+accumulator(B0:typing.overloadX>
 reduce*
-accumulator(	*
+accumulator(B*
 
 seed(0:typing.overloadX"È
 replayW
 replay*
-buffer_size (*
-window (*
-	scheduler (0:typing.overloadXe
+buffer_size (*
+window (*
+	scheduler (!0:typing.overloadXe
 replay*
-buffer_size (*
-window (*
-mapper(*
-	scheduler (0:typing.overloadX"v
+buffer_size (*
+window (*
+mapper(*
+	scheduler (!0:typing.overloadX"v
 scan0
 scan*
-accumulator(	0:typing.overloadX<
+accumulator(B0:typing.overloadX<
 scan*
-accumulator(	*
+accumulator(B*
 
-seed(60:typing.overloadX"[
+seed(E0:typing.overloadX"[
 starmap 
 starmap0:typing.overloadX.
 starmap*
@@ -429,8 +429,8 @@ boundaries(%
 sum0:typing.overloadX.
 sum*
 
-key_mapper(	0:typing.overloadX*
-__path__07*
-__annotations__08*
-__all__0722"builtins.object2"builtins.object22-"(reactivex.operators._timestamp.Timestamp22"datetime.datetime2"builtins.str2	22222"dataclasses.Field2	2"builtins.dict2
-23".reactivex.operators._timeinterval.TimeInterval22"datetime.timedelta2"builtins.function222/"*reactivex.observable.observable.Observable222	22	2/"*reactivex.observable.observable.Observable2	2"builtins.int222"builtins.float222+"$reactivex.abc.scheduler.RelativeTime2222'"%reactivex.abc.scheduler.SchedulerBase22222225".reactivex.abc.scheduler.AbsoluteOrRelativeTime222	2("#reactivex.abc.observer.ObserverBase22$"reactivex.abc.observer.OnNext222!2%"reactivex.abc.observer.OnError222#2)""reactivex.abc.observer.OnCompleted222%222"reactivex.typing.Action222222"typing.Iterable222+2"builtins.bool22	22	222222+2&"!reactivex.abc.subject.SubjectBase22!"reactivex.internal.utils.NotSet2"type242252"builtins.list22"builtins.dict2	
+key_mapper(0:typing.overloadX*
+__path__0F*
+__annotations__0G*
+__all__0F22"builtins.object2"builtins.object22-"(reactivex.operators._timestamp.Timestamp22"datetime.datetime2"builtins.str2	22222"dataclasses.Field2	2"builtins.dict2
+23".reactivex.operators._timeinterval.TimeInterval22"datetime.timedelta2"builtins.function222!"reactivex.typing.Predicate22/"*reactivex.observable.observable.Observable22"_asyncio.Future22$"concurrent.futures._base.Future2222!"reactivex.typing.AnyFuture2222"reactivex.typing.Mapper2222/"*reactivex.observable.observable.Observable2	2"builtins.int222"builtins.float222+"$reactivex.abc.scheduler.RelativeTime2222'"%reactivex.abc.scheduler.SchedulerBase22 222 "reactivex.typing.Comparer222#222225".reactivex.abc.scheduler.AbsoluteOrRelativeTime2&222("#reactivex.abc.observer.ObserverBase22$"reactivex.abc.observer.OnNext222*2%"reactivex.abc.observer.OnError222,2)""reactivex.abc.observer.OnCompleted222.222("!reactivex.typing.PredicateIndexed22212"reactivex.typing.Action2222%"reactivex.typing.MapperIndexed2225222"typing.Iterable22282"builtins.bool22222222228222&"!reactivex.abc.subject.SubjectBase22#"reactivex.typing.Accumulator22!"reactivex.internal.utils.NotSet2"type2C22D2"builtins.list22"builtins.dict2	

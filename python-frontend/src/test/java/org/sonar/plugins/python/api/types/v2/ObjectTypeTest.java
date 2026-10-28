@@ -16,6 +16,9 @@
  */
 package org.sonar.plugins.python.api.types.v2;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -43,6 +46,45 @@ import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 
 class ObjectTypeTest {
+
+  @Test
+  void objectEqualityUsesOrderedMemberNamesAndGenericArguments() {
+    var type = new ClassType("Container", "module.Container");
+    var original = ObjectType.Builder.fromType(type)
+      .withAttributes(List.of(PythonType.UNKNOWN, PythonType.NEVER))
+      .withMembers(List.of(new Member("first", PythonType.UNKNOWN), new Member("second", PythonType.NEVER)))
+      .build();
+    var equivalent = ObjectType.Builder.fromType(original)
+      .withMembers(List.of(new Member("first", PythonType.NEVER), new Member("second", PythonType.UNKNOWN)))
+      .withTypeSource(TypeSource.TYPE_HINT)
+      .build();
+    assertThat(equivalent).isEqualTo(original).hasSameHashCodeAs(original);
+    var values = new HashSet<>(List.of(original, equivalent));
+    assertThat(values).hasSize(1).contains(equivalent);
+
+    var reversedMembers = ObjectType.Builder.fromType(original)
+      .withMembers(List.of(new Member("second", PythonType.NEVER), new Member("first", PythonType.UNKNOWN)))
+      .build();
+    var reversedArguments = ObjectType.Builder.fromType(original)
+      .withAttributes(List.of(PythonType.NEVER, PythonType.UNKNOWN))
+      .build();
+    assertThat(values).doesNotContain(reversedMembers, reversedArguments);
+  }
+
+  @Test
+  void objectHashTracksCurrentMembers() {
+    var members = new ArrayList<Member>();
+    var original = ObjectType.Builder.fromType(PythonType.UNKNOWN).withMembers(members).build();
+    var empty = ObjectType.fromType(PythonType.UNKNOWN);
+    assertThat(original).isEqualTo(empty).hasSameHashCodeAs(empty);
+
+    members.add(new Member("added", PythonType.NEVER));
+    var equivalent = ObjectType.Builder.fromType(PythonType.UNKNOWN)
+      .withMembers(List.of(new Member("added", PythonType.UNKNOWN)))
+      .build();
+    assertThat(original).isNotEqualTo(empty).isEqualTo(equivalent).hasSameHashCodeAs(equivalent);
+    assertThat(new HashSet<>(List.of(original))).contains(equivalent);
+  }
 
   @Test
   void simpleObject() {

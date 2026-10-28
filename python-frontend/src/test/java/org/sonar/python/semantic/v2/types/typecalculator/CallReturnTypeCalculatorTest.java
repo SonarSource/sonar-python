@@ -561,11 +561,13 @@ class CallReturnTypeCalculatorTest {
     Name globGeneratorName = PythonTestUtils.getLastDescendant(fileInput, tree -> tree instanceof Name name && "globGenerator".equals(name.name()));
     PythonType globGeneratorType = globGeneratorName.typeV2();
 
-    assertThat(globGeneratorType).is(TypesTestUtils.objectTypeOf(generatorType));
-    ObjectType objectType = (ObjectType) globGeneratorType;
-    assertThat(objectType.attributes())
-      .element(0)
-      .is(TypesTestUtils.objectTypeOf(pathType));
+    // Newer Python versions return Iterator[Self] rather than Generator[Self, None, None].
+    var candidates = globGeneratorType instanceof UnionType union ? union.candidates() : Set.of(globGeneratorType);
+    assertThat(candidates).isNotEmpty().allSatisfy(candidate -> assertThat(candidate)
+      .isInstanceOfSatisfying(ObjectType.class, object -> {
+        assertThat(object.type()).isIn(generatorType, PROJECT_LEVEL_TYPE_TABLE.getType("typing.Iterator"));
+        assertThat(object.attributes()).element(0).is(TypesTestUtils.objectTypeOf(pathType));
+      }));
   }
 
   @Test

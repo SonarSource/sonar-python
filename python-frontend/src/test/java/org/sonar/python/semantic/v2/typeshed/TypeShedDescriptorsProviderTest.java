@@ -26,10 +26,12 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.python.index.AliasDescriptor;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.types.protobuf.SymbolsProtos.ModuleSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -147,20 +149,23 @@ class TypeShedDescriptorsProviderTest {
       "io", "io.BytesIO",
       "email.policy", "email.policy.Policy",
       "ssl", "ssl.SSLContext",
-      "hashlib", "hashlib._Hash",
-      "ctypes", "ctypes.BigEndianStructure",
-      "asyncio", "asyncio.tasks.Task",
+      "hashlib", "hashlib.blake2b",
+      "ctypes", "ctypes._endian.BigEndianStructure",
+      "asyncio", "asyncio.Task",
       "contextvars", "contextvars.Context",
       "queue", "queue.SimpleQueue",
-      "sqlite3", "sqlite3.dbapi2.Connection",
+      "sqlite3", "sqlite3.Connection",
       "struct", "struct.Struct");
     for (var versions : List.of(Set.of(PythonVersionUtils.Version.V_310), PythonVersionUtils.allVersions())) {
       var provider = new TypeShedDescriptorsProvider(Set.of(), versions);
       publicClasses.forEach((moduleName, classFqn) -> {
         String className = classFqn.substring(classFqn.lastIndexOf('.') + 1);
         var descriptor = provider.descriptorsForModule(moduleName).get(className);
-        assertThat(descriptor).as(classFqn).isInstanceOf(ClassDescriptor.class);
+        assertThat(descriptor).as(classFqn).isNotNull();
         assertThat(descriptor.fullyQualifiedName()).isEqualTo(classFqn);
+        // Public re-exports such as asyncio.Task can retain their original class identity.
+        var original = descriptor instanceof AliasDescriptor alias ? alias.originalDescriptor() : descriptor;
+        assertThat(original).as(classFqn).isInstanceOf(ClassDescriptor.class);
       });
     }
   }
@@ -208,6 +213,16 @@ class TypeShedDescriptorsProviderTest {
     var provider = typeshedDescriptorsProvider();
     var unknownModule = provider.descriptorsForModule("unknown_module");
     assertThat(unknownModule).isEmpty();
+  }
+
+  @Test
+  void moduleResourceNameMustMatchRequestedModule() {
+    var module = ModuleSymbol.newBuilder().setFullyQualifiedName("library.base").build();
+
+    assertThat(TypeShedDescriptorsProvider.deserializedModule("library.base", new ByteArrayInputStream(module.toByteArray())))
+      .isEqualTo(module);
+    assertThat(TypeShedDescriptorsProvider.deserializedModule("library.Base", new ByteArrayInputStream(module.toByteArray())))
+      .isNull();
   }
 
   @Test

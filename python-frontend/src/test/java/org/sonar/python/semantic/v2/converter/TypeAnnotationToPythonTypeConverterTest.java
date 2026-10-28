@@ -37,6 +37,17 @@ import static org.mockito.Mockito.when;
 
 class TypeAnnotationToPythonTypeConverterTest {
 
+  @ParameterizedTest
+  @CsvSource(value = {
+    "null, false", "'', false", "object, false", "builtins.object, false", "_ctypes._CanCastTo, false",
+    "Object, true", "module.object, true", "builtinsXobject, true", "builtins.object.Child, true",
+    "_ctypesX_CanCastTo, true", "_ctypes._CanCastToChild, true", "int, true"
+  }, nullValues = "null")
+  void typeVariableBoundsExcludeOnlyExactSpecialNames(String fqn, boolean expected) {
+    var descriptor = new TypeAnnotationDescriptor("T", TypeAnnotationDescriptor.TypeKind.TYPE_VAR, List.of(), fqn, false);
+    assertThat(TypeAnnotationToPythonTypeConverter.filterTypeVar(descriptor)).isEqualTo(expected);
+  }
+
   @Test
   void nonReturningMarkerIsConfinedToReturnAnnotations() {
     var ctx = mock(ConversionContext.class);

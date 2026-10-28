@@ -228,9 +228,11 @@ class QualifiedExpressionCalculatorTest {
     assertThat(result).isInstanceOfSatisfying(UnionType.class, union -> {
       assertThat(union.candidates()).allSatisfy(candidate -> assertThat(candidate).isInstanceOf(ObjectType.class));
       assertThat(union.candidates()).extracting(candidate -> candidate.unwrappedType().name())
-        .contains("bytes", "NoneType");
+        // New Typeshed describes readable data through the Buffer protocol.
+        .contains("Buffer", "NoneType");
     });
-    assertThat(result.hasMember("__call__")).isEqualTo(TriBool.FALSE);
+    // The broader protocol-based annotation no longer proves that every value is non-callable.
+    assertThat(result.hasMember("__call__")).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test

@@ -7,55 +7,58 @@
 filter*
 
 self(*
-	predicate(*!
+	predicate(	*!
 take*
 
 self(*
-count(*!
+count(
+*!
 skip*
 
 self(*
-count(*(
+count(
+*(
 first*
 
 self(*
-	predicate (	*'
+	predicate (*'
 last*
 
 self(*
-	predicate (	*&
+	predicate (*&
 	take_last*
 
 self(*
-count(*&
+count(
+*&
 	skip_last*
 
 self(*
-count(*>
+count(
+*>
 distinct*
 
 self(*
 
-key_mapper (	*
-comparer (	*L
+key_mapper (*
+comparer (*L
 distinct_until_changed*
 
 self(*
 
-key_mapper (	*
-comparer (	*>
+key_mapper (*
+comparer (*>
 
 take_while*
 
 self(*
-	predicate(*
-	inclusive (
-*+
+	predicate(	*
+	inclusive (*+
 
 skip_while*
 
 self(*
-	predicate(*'
+	predicate(	*'
 
 take_until*
 
@@ -70,90 +73,92 @@ skip_until*
 element_at*
 
 self(*
-index(*7
+index(
+*7
 filter_indexed*
 
 self(*
-predicate_indexed(*N
+predicate_indexed(*N
 take_while_indexed*
 
 self(*
-predicate_indexed(*
-	inclusive (
-*;
+predicate_indexed(*
+	inclusive (*;
 skip_while_indexed*
 
 self(*
-predicate_indexed(*)
+predicate_indexed(*)
 single*
 
 self(*
-	predicate (	*K
+	predicate (*K
 single_or_default*
 
 self(*
-	predicate (	*
+	predicate (*
 default_value (*S
 single_or_default_async*
 
 self(*
-has_default (
-*
+has_default (*
 default_value (*I
 element_at_or_default*
 
 self(*
-index(*
-default_value (*J
+index(
+*
+default_value (*J
 first_or_default*
 
 self(*
-	predicate (	*
-default_value (*I
+	predicate (*
+default_value (*I
 last_or_default*
 
 self(*
 default_value (*
-	predicate (	*@
+	predicate (*@
 slice*
 
 self(*
-start (*
-stop (*
-step (*-
-take_last_buffer*
+start (*
+stop (*
+step (*-
+take_last_buffer*
 
 self(*
-count(*A
+count(
+*A
 skip_with_time*
 
 self(*
-duration(*
-	scheduler (*A
+duration(*
+	scheduler (*A
 take_with_time*
 
 self(*
-duration(*
-	scheduler (*F
+duration(*
+	scheduler (*F
 skip_last_with_time*
 
 self(*
-duration(*
-	scheduler (*F
+duration(*
+	scheduler (*F
 take_last_with_time*
 
 self(*
-duration(*
-	scheduler (*I
+duration(*
+	scheduler (*I
 skip_until_with_time*
 
 self(*
 
-start_time(*
-	scheduler (*G
+start_time(*
+	scheduler (*G
 take_until_with_time*
 
 self(*
-end_time(*
-	scheduler (PŠ*
-__annotations__02"builtins.object2"builtins.object22/"*reactivex.observable.observable.Observable229"4reactivex.observable.mixins.filtering.FilteringMixin222/"*reactivex.observable.observable.Observable22"builtins.int2222"builtins.bool22222"builtins.list22/"*reactivex.observable.observable.Observable22"datetime.timedelta2"builtins.float222+"$reactivex.abc.scheduler.RelativeTime22'"%reactivex.abc.scheduler.SchedulerBase222"datetime.datetime2225".reactivex.abc.scheduler.AbsoluteOrRelativeTime22"builtins.str2"builtins.dict2
+end_time(*
+	scheduler (PŠ*
+__annotations__0!2"builtins.object2"builtins.object22/"*reactivex.observable.observable.Observable229"4reactivex.observable.mixins.filtering.FilteringMixin222/"*reactivex.observable.observable.Observable22"builtins.function222!"reactivex.typing.Predicate22"builtins.int222	2"reactivex.typing.Mapper2222 "reactivex.typing.Comparer2222"builtins.bool2("!reactivex.typing.PredicateIndexed22222
+2"builtins.list22/"*reactivex.observable.observable.Observable22"datetime.timedelta2"builtins.float222+"$reactivex.abc.scheduler.RelativeTime22'"%reactivex.abc.scheduler.SchedulerBase222"datetime.datetime2225".reactivex.abc.scheduler.AbsoluteOrRelativeTime22"builtins.str2"builtins.dict2 

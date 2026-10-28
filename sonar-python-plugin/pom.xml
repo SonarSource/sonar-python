@@ -286,7 +286,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>20000000</maxsize>
+                  <!-- Inline third-party typing adds descriptors for Stripe, InfluxDB and other libraries. -->
+                  <maxsize>22000000</maxsize>
                   <minsize>14000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>

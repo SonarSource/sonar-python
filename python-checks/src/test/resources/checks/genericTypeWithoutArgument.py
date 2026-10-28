@@ -1,7 +1,16 @@
 import typing
+from contextlib import ExitStack, AsyncExitStack
 from typing import List, Tuple
 from typing import Set as TypingSet
 from typing import Dict as MyDict
+
+
+def defaulted_context_managers(sync: ExitStack, async_: AsyncExitStack):  # Compliant: bool | None defaults
+    pass
+
+
+def generic_slice(param: slice):  # Noncompliant
+    pass
 
 
 def foo(param: list): # Noncompliant {{Add a type argument to this generic type.}}
@@ -148,3 +157,15 @@ def legacy_sqlalchemy_query(query: Query):  # Noncompliant
 
 def current_sqlalchemy_query(query: Query[int]):
     return query
+
+
+from contextlib import ExitStack as StackAlias, AbstractContextManager
+from pandas._typing import Shape
+
+LocalShape = tuple[int, ...]
+
+def concrete_aliases(stack: StackAlias, shape: Shape, local_shape: LocalShape):
+    pass
+
+def required_context_result(manager: AbstractContextManager):  # Noncompliant
+    pass

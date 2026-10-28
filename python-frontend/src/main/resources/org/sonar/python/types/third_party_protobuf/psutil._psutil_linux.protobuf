@@ -1,43 +1,48 @@
 
-psutil._psutil_linux-
-disk_partitions*
+psutil._psutil_linux
+getpagesize
+net_if_addrs
+net_if_flags*(
+net_if_is_running*(
 
-args(*
-kwargs(+
-linux_sysinfo*
+net_if_mtu*(
+proc_priority_get*(
+proc_priority_set*(*(	
+users
+proc_ioprio_get*(
+proc_ioprio_set*(*(*(
+proc_cpu_affinity_get*(!
+proc_cpu_affinity_set*(*(
+disk_partitions*(
+net_if_duplex_speed*(
+	heap_info
+	heap_trim
+linux_sysinfo
+check_pid_range*(
+	set_debug*(*
+__annotations__0*
+	RLIMIT_AS0*
+RLIMIT_CORE0*
 
-args(*
-kwargs(1
-net_if_duplex_speed*
+RLIMIT_CPU0*
+RLIMIT_DATA0*
+RLIMIT_FSIZE0*
+RLIMIT_MEMLOCK0*
+RLIMIT_NOFILE0*
+RLIMIT_NPROC0*
 
-args(*
-kwargs(3
-proc_cpu_affinity_get*
-
-args(*
-kwargs(3
-proc_cpu_affinity_set*
-
-args(*
-kwargs(-
-proc_ioprio_get*
-
-args(*
-kwargs(-
-proc_ioprio_set*
-
-args(*
-kwargs('
-	set_debug*
-
-args(*
-kwargs(#
-users*
-
-args(*
-kwargs(*
-__annotations__0*
-DUPLEX_FULL0*
-DUPLEX_HALF0*
-DUPLEX_UNKNOWN0*
-version022"builtins.str2"builtins.dict22"builtins.int
+RLIMIT_RSS0*
+RLIMIT_STACK0*
+RLIMIT_LOCKS0*
+RLIMIT_MSGQUEUE0*
+RLIMIT_NICE0*
+RLIMIT_RTPRIO0*
+RLIMIT_RTTIME0*
+RLIMIT_SIGPENDING0*
+RLIM_INFINITY0*
+version0*
+DUPLEX_FULL0*
+DUPLEX_HALF0*
+DUPLEX_UNKNOWN02"builtins.int2"builtins.str2222
+22"builtins.list22"builtins.list22"builtins.bool2"builtins.float2	2	2"builtins.list2
+222"builtins.list22"typing.Sequence2222"builtins.list22222"builtins.dict2

@@ -1,0 +1,47 @@
+
+ authlib.oauth1.rfc5849.signatureN
+construct_base_string*
+method(*	
+uri(*
+params(*
+host (0
+normalize_base_string_uri*
+uri*
+
+host &
+normalize_parameters*
+params(1
+generate_signature_base_string*
+request(S
+hmac_sha1_signature*
+base_string(*
+client_secret(*
+token_secret(@
+rsa_sha1_signature*
+base_string(*
+rsa_private_key(@
+plaintext_signature*
+client_secret(*
+token_secret(/
+sign_hmac_sha1*
+client(*
+request(.
+sign_rsa_sha1*
+client(*
+request(/
+sign_plaintext*
+client(*
+request(#
+verify_hmac_sha1*
+request("
+verify_rsa_sha1*
+request(#
+verify_plaintext*
+request(*
+__annotations__0*
+SIGNATURE_HMAC_SHA10*
+SIGNATURE_RSA_SHA10*
+SIGNATURE_PLAINTEXT0*
+SIGNATURE_TYPE_HEADER0*
+SIGNATURE_TYPE_QUERY0*
+SIGNATURE_TYPE_BODY02"builtins.str22"builtins.bool2"builtins.dict2

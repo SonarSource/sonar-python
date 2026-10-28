@@ -1,65 +1,197 @@
 
-base64(
+base642
 	b64encode*
-s(*
-altchars (:
+s(*
+altchars (z310z3117
+	b64encode*
+s(*
+altchars (z312z313z314N
+	b64encode*
+s(*
+altchars (*
+padded (*
+wrapcol (z315D
 	b64decode*
-s(*
-altchars (*
-validate (
+s(
+*
+altchars (*
+validate (z310z311I
+	b64decode*
+s(*
+altchars (*
+validate (z312z313z314w
+	b64decode*
+s(*
+altchars (*
+validate (*
+padded (*
+ignorechars (*
+	canonical (z315)
 standard_b64encode*
-s(
+s(z310z3113
+standard_b64encode*
+s(z312z313z314z315)
 standard_b64decode*
-s(
+s(
+z310z3113
+standard_b64decode*
+s(z312z313z314z315(
 urlsafe_b64encode*
-s(
+s(z310z311-
+urlsafe_b64encode*
+s(z312z313z3143
+urlsafe_b64encode*
+s(*
+padded (z315(
 urlsafe_b64decode*
-s(
+s(
+z310z311-
+urlsafe_b64decode*
+s(z312z313z3143
+urlsafe_b64decode*
+s(*
+padded (z315 
 	b32encode*
-s(7
+s(z310z311%
+	b32encode*
+s(z312z313z314<
+	b32encode*
+s(*
+padded (*
+wrapcol (z315A
 	b32decode*
-s(*
-casefold (*
-map01 (
+s(
+*
+casefold (*
+map01 (z310z311F
+	b32decode*
+s(*
+casefold (*
+map01 (z312z313z314t
+	b32decode*
+s(*
+casefold (*
+map01 (*
+padded (*
+ignorechars (*
+	canonical (z315 
 	b16encode*
-s((
+s(z310z311%
+	b16encode*
+s(z312z313z314,
+	b16encode*
+s(*
+wrapcol (z3152
 	b16decode*
-s(*
-casefold (
+s(
+*
+casefold (z310z3117
+	b16decode*
+s(*
+casefold (z312z313z314B
+	b16decode*
+s(*
+casefold (*
+ignorechars (z315#
 b32hexencode*
-s(+
+s(z310z311(
+b32hexencode*
+s(z312z313z314?
+b32hexencode*
+s(*
+padded (*
+wrapcol (z3155
 b32hexdecode*
-s(*
-casefold (W
+s(
+*
+casefold (z310z311:
+b32hexdecode*
+s(*
+casefold (z312z313z314h
+b32hexdecode*
+s(*
+casefold (*
+padded (*
+ignorechars (*
+	canonical (z315a
 	a85encode*
+b(*
+
+foldspaces (*
+wrapcol (*
+pad (*
+adobe (z310z311k
+	a85encode*
+b(*
+
+foldspaces (*
+wrapcol (*
+pad (*
+adobe (z312z313z314z315X
+	a85decode*
+b(
+*
+
+foldspaces (*
+adobe (*
+ignorechars (z310z311]
+	a85decode*
 b(*
 
-foldspaces (*
-wrapcol (*
-pad (*
-adobe (N
+foldspaces (*
+adobe (*
+ignorechars (z312z313z314f
 	a85decode*
-b(*
+b(*
 
-foldspaces (*
-adobe (*
-ignorechars (#
+foldspaces (*
+adobe (*
+ignorechars (*
+	canonical (z315-
 	b85encode*
-b(*
-pad (
+b(*
+pad (z310z3112
+	b85encode*
+b(*
+pad (z312z313z3149
+	b85encode*
+b(*
+pad (*
+wrapcol (z315 
 	b85decode*
-b(%
-decode*
-input(*
-output(%
-encode*
-input(*
-output(
+b(
+z310z311%
+	b85decode*
+b(z312z313z314C
+	b85decode*
+b(*
+ignorechars (*
+	canonical (z315%
+decode*
+input(*
+output(%
+encode*
+input(*
+output("
 encodebytes*
-s(
+s(z310z311,
+encodebytes*
+s(z312z313z314z315"
 decodebytes*
+s(z310z311,
+decodebytes*
+s(z312z313z314z315 
+	z85encode*
+s(z313z3149
+	z85encode*
+s(*
+pad (*
+wrapcol (z315 
+	z85decode*
+s(z313z314C
+	z85decode*
 s(*
-__annotations__0*
-__all__02"builtins.bytes2"builtins.bytearray2"builtins.memoryview22"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
-22 "_typeshed.WriteableBuffer2	22
-2"_typeshed.ReadableBuffer22222"builtins.str222"builtins.bool222"builtins.int222"	typing.IO22"builtins.dict22"builtins.list2
+ignorechars (*
+	canonical (z315*
+__annotations__0*
+__all__02"builtins.bytes2"typing_extensions.Buffer2222"_collections_abc.Buffer222"builtins.bool2"builtins.int2"builtins.str22	22	22	22	2"builtins.bytearray222$"_typeshed.SupportsNoArgReadline22"_typeshed.SupportsWrite22"_typeshed.SupportsRead222"builtins.dict2	2"builtins.list2	

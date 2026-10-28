@@ -148,17 +148,116 @@ class ProjectLevelTypeTableTest {
     ModuleType parserModuleType = (ModuleType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     PythonType isoParserMember = parserModuleType.resolveMember("isoparser").get();
     assertThat(isoParserMember).isInstanceOf(ClassType.class);
-    // Should be True
-    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("dateutil.parser.isoparser.isoparser").check(isoParserMember)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("dateutil.parser.isoparser.isoparser").check(isoParserMember)).isEqualTo(TriBool.TRUE);
 
     fileInput = parseAndInferTypes(projectLevelTypeTable, pythonFile("main.py"), """
       from dateutil.parser.isoparser import isoparser
       isoparser
       """);
     PythonType isoparserClass2 = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    // We no longer resolve the class, now that the LazyType is resolved
-    // SONARPY-2176: We should properly resolve either submodules or names from __init__.py depending on how the import is performed
+    // Resolving the reexport must preserve subsequent lookups through its defining module.
     assertThat(isoparserClass2).isSameAs(isoparserClass);
+  }
+
+  @Test
+  void resolvedReexportDoesNotHideSameNamedModuleInTypePaths() {
+    var project = new TestProject();
+    project.addModule("library/Base.py", """
+      class Parent:
+        def inherited(self): ...
+      class Base(Parent):
+        class Nested: ...
+      """);
+    project.addModule("library/__init__.py", "");
+    var table = project.projectLevelTypeTable();
+
+    // Stub packages retain lazy reexports; source indexing excludes imported names.
+    var library = (ModuleType) table.getType("library");
+    library.members().put("Base", table.lazyTypesContext().getOrCreateLazyTypeWrapper("library.Base.Base"));
+    var base = (ClassType) table.getType("library.Base");
+    assertThat(base.fullyQualifiedName()).isEqualTo("library.Base.Base");
+    // Resolving Parent must traverse the module, even after its same-named reexport resolves.
+    assertThat(base.hasUnresolvedHierarchy()).isFalse();
+    assertThat(base.resolveMember("inherited")).isPresent();
+    assertThat(base.mro()).isPresent();
+    assertThat(table.getType("library.Base.Parent")).isSameAs(base.superClasses().get(0).type());
+    assertThat(table.getType("library.Base.Base.Nested")).isInstanceOfSatisfying(ClassType.class,
+      nested -> assertThat(nested.fullyQualifiedName()).isEqualTo("library.Base.Base.Nested"));
+    assertThat(table.getType("library.Base")).isSameAs(base);
+  }
+
+  @Test
+  void antlrWildcardImportDoesNotRecurseWhenResolvingLexerParent() {
+    var project = new TestProject();
+    var expression = project.lastExpression("""
+      from antlr4 import *
+      class GeneratedLexer(Lexer):
+        def __init__(self):
+          self._interp = LexerATNSimulator(self, self.atn, [], PredictionContextCache())
+      GeneratedLexer
+      """);
+    assertThat(expression.typeV2()).isInstanceOf(ClassType.class);
+  }
+
+  @Test
+  void nestedClassInReexportWithoutSameNamedModule() {
+    var project = new TestProject();
+    project.addModule("library/impl.py", """
+      class Outer:
+        class Nested: ...
+      """);
+    project.addModule("library/__init__.py", "");
+    var table = project.projectLevelTypeTable();
+
+    var library = (ModuleType) table.getType("library");
+    library.members().put("Outer", table.lazyTypesContext().getOrCreateLazyTypeWrapper("library.impl.Outer"));
+    var nested = table.getType("library.Outer.Nested");
+    assertThat(nested).isInstanceOfSatisfying(ClassType.class,
+      type -> assertThat(type.fullyQualifiedName()).isEqualTo("library.impl.Outer.Nested"));
+    assertThat(table.getType("library.Outer.Nested")).isSameAs(nested);
+    assertThat(table.getType("library.Outer.missing")).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void nestedClassInReexportFromModuleWithSharedNamePrefix() {
+    var project = new TestProject();
+    project.addModule("library/OuterImpl.py", """
+      class Outer:
+        class Nested: ...
+      """);
+    project.addModule("library/__init__.py", "");
+    var table = project.projectLevelTypeTable();
+    var library = (ModuleType) table.getType("library");
+    library.members().put("Outer", table.lazyTypesContext().getOrCreateLazyTypeWrapper("library.OuterImpl.Outer"));
+
+    var nested = table.getType("library.Outer.Nested");
+    assertThat(nested).isInstanceOfSatisfying(ClassType.class,
+      type -> assertThat(type.fullyQualifiedName()).isEqualTo("library.OuterImpl.Outer.Nested"));
+    assertThat(table.getType("library.Outer.Nested")).isSameAs(nested);
+  }
+
+  @Test
+  void missingSubmoduleWithSelfReferencingReexport() {
+    var project = new TestProject();
+    project.addModule("library/__init__.py", "");
+    var table = project.projectLevelTypeTable();
+    var library = (ModuleType) table.getType("library");
+    library.members().put("missing", table.lazyTypesContext().getOrCreateLazyTypeWrapper("library.missing"));
+
+    assertThat(table.getType("library.missing")).isSameAs(PythonType.UNKNOWN);
+    assertThat(table.getType("library.missing.Nested")).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void missingSubmoduleWithReexportFromInsideThatModule() {
+    var project = new TestProject();
+    project.addModule("library/__init__.py", "");
+    var table = project.projectLevelTypeTable();
+    var library = (ModuleType) table.getType("library");
+    library.members().put("missing", table.lazyTypesContext().getOrCreateLazyTypeWrapper("library.missing.Thing"));
+
+    assertThat(table.getType("library.missing.Thing")).isSameAs(PythonType.UNKNOWN);
+    assertThat(table.getType("library.missing")).isSameAs(PythonType.UNKNOWN);
   }
 
   @Test
@@ -481,7 +580,7 @@ class ProjectLevelTypeTableTest {
       assertThat(classType.name()).isEqualTo("isoparser"));
 
     var resolvedThird = projectLevelTypeTable.getType("dateutil.parser.isoparser.isoparser");
-    assertThat(resolvedThird).isEqualTo(PythonType.UNKNOWN);
+    assertThat(resolvedThird).isSameAs(resolvedFirst);
   }
 
   @Test

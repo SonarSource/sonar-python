@@ -1,0 +1,16 @@
+
+gdb.dap.events
+send_process_event_once 
+expect_process*
+reason(+
+thread_event*
+event(*
+reason(
+expect_stop*
+reason(;
+exec_and_expect_stop*	
+cmd(*
+expected_pause (*
+__annotations__0*
+inferior_running0*
+stop_reason_map022"builtins.str2"gdb.ThreadEvent2"builtins.bool22"builtins.dict22"builtins.dict2

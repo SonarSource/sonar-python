@@ -308,7 +308,7 @@ def test_type_alias_serialization(fake_module_type_aliases):
     assert len(alias_vars["MyList"].type.args) == 1
 
     assert alias_vars["EllipsisAlias"].type is not None
-    assert alias_vars["EllipsisAlias"].type.fully_qualified_name == "builtins.ellipsis"
+    assert alias_vars["EllipsisAlias"].type.fully_qualified_name == "types.EllipsisType"
 
     # Verify the protobuf output: type_annotation_id must be set (not 0), and
     # fully_qualified_name must not be overridden (it equals container + "." + name)
@@ -341,10 +341,10 @@ def test_type_alias_serialization(fake_module_type_aliases):
     assert len(list_type.arg_type_ids) > 0
 
     ellipsis_alias_type = type_table[pb_vars["EllipsisAlias"].type_annotation_id - 1]
-    assert ellipsis_alias_type.fully_qualified_name == "builtins.ellipsis"
+    assert ellipsis_alias_type.fully_qualified_name == "types.EllipsisType"
 
     explicit_ellipsis_type = type_table[pb_vars["explicit_ellipsis"].type_annotation_id - 1]
-    assert explicit_ellipsis_type.fully_qualified_name == "builtins.ellipsis"
+    assert explicit_ellipsis_type.fully_qualified_name == "types.EllipsisType"
 
     placeholder = next(var for var in pb_module.vars if var.name == "placeholder")
     assert not placeholder.HasField("type_annotation")
@@ -417,5 +417,3 @@ def test_module_with_decorators(fake_module_with_decorators):
     assert common_class_methods[4].fullname == "fakemodule_with_decorators.CommonClass.common_method5"
     assert common_class_methods[4].has_decorators is True
     assert common_class_methods[4].resolved_decorator_names == ['fakemodule_with_decorators_imported.alias_imported_decorator']
-    
-        

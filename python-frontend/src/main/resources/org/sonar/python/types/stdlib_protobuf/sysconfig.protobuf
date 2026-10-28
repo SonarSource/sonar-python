@@ -1,42 +1,72 @@
 
-	sysconfig
-get_config_var*
+	sysconfig
+get_scheme_names
+get_default_scheme#
+get_preferred_scheme*	
+key(
+_get_preferred_schemes
+get_path_namesF
+get_path*
 
-name(
-get_scheme_names
-get_default_scheme#
-get_preferred_scheme*	
-key(
-get_path_namesF
-get_path*
-
-name(*
-scheme (*
-vars (*
-expand (	;
-	get_paths
-*
-scheme (*
-vars (*
-expand (	
-get_python_version
-get_platform,
-is_python_build	*
-
-check_home (	z310@
-is_python_build	*
-
-check_home (z311z312z313z314z315*
-parse_config_h*
+name(*
+scheme (*
+vars (	*
+expand (
+;
+	get_paths*
+scheme (*
+vars (	*
+expand (
+
+get_python_version
+get_platform*
+parse_config_h*
 fp(*
-vars (
-get_config_h_filename
-get_makefile_filename"|
-get_config_vars(
-get_config_vars0:typing.overloadX?
-get_config_vars*	
-arg(*
+vars (	
+get_config_h_filename
+get_makefile_filename
+is_python_build
+z315"§
+get_config_varQ
+get_config_var*
 
-args(0:typing.overloadX*
-__annotations__0*
-__all__022"builtins.str2"builtins.tuple22	2222"builtins.dict22222"builtins.bool2"builtins.dict22"builtins.object2"	typing.IO22"builtins.list22"builtins.list2
+name(0:typing.overload:typing_extensions.deprecatedX3
+get_config_var*
+
+name(0:typing.overloadX"310"311"312"ž
+get_config_varH
+get_config_var*
+
+name(0:typing.overload:warnings.deprecatedX3
+get_config_var*
+
+name(0:typing.overloadX"313"314"315"u
+get_config_vars(
+get_config_vars0:typing.overloadX8
+get_config_vars*(*
+
+args(0:typing.overloadX"œ
+is_python_build(
+is_python_build
+0:typing.overloadXZ
+is_python_build
+*
+
+check_home (
+0:typing.overload:typing_extensions.deprecatedX"310"¡
+is_python_build(
+is_python_build
+0:typing.overloadXZ
+is_python_build
+*
+
+check_home (0:typing.overload:typing_extensions.deprecatedX"311"312"˜
+is_python_build(
+is_python_build
+0:typing.overloadXQ
+is_python_build
+*
+
+check_home (0:typing.overload:warnings.deprecatedX"313"314*
+__annotations__0*
+__all__02"builtins.str2"builtins.tuple22	2222"builtins.dict222"builtins.dict22222"builtins.bool2"builtins.dict22"	typing.IO22"builtins.list22"builtins.object2"builtins.list2

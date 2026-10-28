@@ -94,8 +94,10 @@ def fake_module_type_aliases():
 
 @pytest.fixture(scope="session")
 def typeshed_third_parties():
-    serializers.THIRD_PARTIES_STUBS = MOCK_THIRD_PARTY_STUBS_LIST
-    return TypeshedSerializer(is_third_parties=True).get_merged_modules()
+    with mock.patch.multiple(serializers, CURRENT_PATH=CURRENT_PATH,
+                             STUBS_PATH=MOCK_THIRD_PARTY_STUBS_LOCATION,
+                             THIRD_PARTIES_STUBS=MOCK_THIRD_PARTY_STUBS_LIST):
+        return TypeshedSerializer(is_third_parties=True).get_merged_modules()
 
 @pytest.fixture(scope="session")
 def save_location_folder():

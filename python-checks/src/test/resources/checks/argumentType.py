@@ -225,8 +225,8 @@ def special_form_types():
 
 def fp_email_utils_getaddresses(val):
     from email.utils import getaddresses
-    # FP: stub says list is expected, but tuple works as well
-    getaddresses((val,))  # Noncompliant
+    # The updated stub accepts any iterable of strings, including tuples.
+    getaddresses((val,))
 
 
 def win32_no_support(machine, object, instance, inum, counter):
@@ -296,3 +296,27 @@ def ctypes_private_base_arguments():
     ctypes.byref(Address())
     ctypes.byref(ctypes.c_int(16))
     ctypes.byref("not a ctypes instance")  # Noncompliant
+
+
+def ctypes_arguments():
+    import ctypes
+
+    class Address(ctypes.Structure):
+        _fields_ = [("family", ctypes.c_int)]
+
+    address = Address()
+    ctypes.pointer(address)
+    ctypes.pointer(ctypes.c_int(0))
+    ctypes.byref(address)
+    ctypes.sizeof(address)
+
+
+def protobuf_6_positional_precision(message):
+    from google.protobuf.json_format import MessageToJson
+
+    # FP: only Protobuf 7.x is modeled. In 6.x, the seventh positional argument
+    # is float_precision (int | None); 7.x removed it, so this None is interpreted
+    # as ensure_ascii (bool). This valid 6.x call is an accepted S5655 limitation.
+    MessageToJson(message, False, 2, False, False, None, None, True)  # Noncompliant {{Change this argument; Function "MessageToJson" expects a different type}}
+    MessageToJson(message, False, 2, False, False, None, True, True)
+    MessageToJson(message, ensure_ascii=True, always_print_fields_with_no_presence=True)

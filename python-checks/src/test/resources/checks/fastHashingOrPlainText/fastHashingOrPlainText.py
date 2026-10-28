@@ -423,3 +423,15 @@ def django_user_create():
 
     # Compliant - using create() without password argument
     user = User.objects.create(username='john')
+
+
+def reexported_hashlib_functions(password, salt):
+    from hashlib import pbkdf2_hmac as public_pbkdf2
+    from _hashlib import pbkdf2_hmac as implementation_pbkdf2
+    public_pbkdf2("sha256", password, salt, 1)  # Noncompliant
+    implementation_pbkdf2("sha256", password, salt, 1)  # Noncompliant
+    implementation_pbkdf2("sha256", password, salt, 600000)
+
+    def pbkdf2_hmac(hash_name, password, salt, iterations):
+        return password
+    pbkdf2_hmac("sha256", password, salt, 1)

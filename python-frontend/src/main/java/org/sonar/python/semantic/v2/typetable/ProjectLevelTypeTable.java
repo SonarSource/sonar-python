@@ -74,17 +74,21 @@ public class ProjectLevelTypeTable implements TypeTable {
       Optional<PythonType> resolvedMember;
       if (parent instanceof ModuleType moduleType) {
         TypeWrapper typeWrapper = moduleType.members().get(part);
-        if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper && !lazyTypeWrapper.isResolved()) {
+        if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper) {
           if (shouldResolveImmediately(lazyTypeWrapper, typeFqnParts, i)) {
             // We try to resolve the type of the member if it points to a different module.
             // If it points to the same module, we try to resolve the submodule of the same name
             return typeWrapper.type();
           }
 
-          // The member of the module is a LazyType, which means it's a re-exported type from a submodule
-          // We try to resolve the submodule instead
-          parent = createOrResolveSubModule(moduleFqnParts, moduleType);
-          continue;
+          // A reexport must not hide a same-named submodule after its lazy type resolves.
+          var subModule = createOrResolveSubModule(moduleFqnParts, moduleType);
+          // Resolving a reexport into a missing submodule would re-enter this lookup indefinitely.
+          if (subModule != PythonType.UNKNOWN || lazyTypeWrapper.hasImportPathWithin(String.join(".", moduleFqnParts))) {
+            parent = subModule;
+            continue;
+          }
+          // Without a submodule, the remaining path may refer to a nested class in the reexport.
         }
       }
       resolvedMember = parent.resolveMember(part);

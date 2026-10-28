@@ -1,41 +1,43 @@
 
-pymysql.converters:
+pymysql.converters<
 escape_item*	
-val(*
-charset(*
-mapping (	:
-escape_dict
+val(*
+charset (*
+mapping (	E
+escape_not_supported
 *	
-val(*
-charset(*
-mapping (	>
+val(*
+charset (*
+mapping (	@
 escape_sequence*	
-val(*
-charset(*
-mapping (	9
+val(*
+charset (*
+mapping (	j
 
 escape_set*	
-val(*
-charset(*
-mapping (	-
+val(*
+charset (*
+mapping (	0:typing_extensions.deprecatedz310z311z312a
+
+escape_set*	
+val(*
+charset (*
+mapping (	0:warnings.deprecatedz313z314z315-
 escape_bool*
-value(*
+value(*
 mapping (	,
 
 escape_int*
-value(*
+value(*
 mapping (	.
 escape_float*
-value(*
+value(*
 mapping (	/
 escape_string*
 value(*
-mapping (	7
-escape_bytes_prefixed*
-value(*
 mapping (	.
 escape_bytes*
-value(*
+value(*
 mapping (	,
 
 escape_str*
@@ -45,39 +47,44 @@ escape_str*
 value(*
 mapping (	0
 escape_timedelta*	
-obj(*
+obj(*
 mapping (	+
 escape_time*	
-obj(*
+obj(*
 mapping (	/
 escape_datetime*	
-obj(*
+obj(*
 mapping (	+
 escape_date*	
-obj(*
+obj(*
 mapping (	2
 escape_struct_time*	
-obj(*
+obj(*
 mapping (	%
 Decimal2Literal*
-o(*
+o(*
 d(
-convert_datetime*	
-obj( 
-convert_timedelta*	
-obj(
-convert_time*	
-obj(
-convert_date*	
-obj(
-through*
-x(
-convert_bit*
-x(/
+convert_datetime*	
+obj( 
+convert_timedelta*	
+obj(
+convert_time*	
+obj(
+convert_date*	
+obj(
+through*
+x(
+convert_bit*
+x(/
 Thing2Literal*
 value(*
 mapping (	*
-__annotations__0 *
+__annotations__0*
+DATETIME_RE0 *
+TIMEDELTA_RE0 *
+TIME_RE0 *
 encoders0!*
 decoders0"*
-conversions0$2"builtins.str2"builtins.object2"type22"builtins.function222"typing.Mapping22222)""pymysql.converters._EscaperMapping22"builtins.dict22"typing.Mapping22"typing.Sequence22"builtins.set22"builtins.bool2"builtins.int2"builtins.float2"builtins.bytes2"datetime.timedelta2"datetime.time2"datetime.datetime2"datetime.date22	2"time.struct_time22"_decimal.Decimal22222222222"builtins.object222"builtins.dict22"builtins.dict22"builtins.dict2222"builtins.dict2#
+conversions0$2"builtins.str2"builtins.object2"type22"builtins.function222"typing.Mapping22222)""pymysql.converters._EscaperMapping22
+2"typing.Sequence22"builtins.set22"builtins.bool2"builtins.int2"builtins.float2"builtins.bytes2"datetime.timedelta2"datetime.time2"datetime.datetime2"datetime.date22	2"time.struct_time22"decimal.Decimal22222222222"builtins.object222"builtins.dict22"
+re.Pattern22"builtins.dict22"builtins.dict2222"builtins.dict2#

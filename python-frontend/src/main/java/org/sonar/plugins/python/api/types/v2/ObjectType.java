@@ -79,6 +79,12 @@ public final class ObjectType implements PythonType {
     return typeWrapper.type().definitionLocation();
   }
 
+  // Limitation: ObjectType mixes object information with generic instance types. Equality and hashing
+  // repeatedly traverse nested generic arguments to distinguish e.g. list[int] from list[str], which can
+  // cause performance issues. Member values are ignored; only member names participate. Mutable wrappers
+  // and member lists make caching the current hash unsafe. We should consider separating mutable object
+  // information from immutable instance types, enabling cached hashes and memoized comparisons to preserve
+  // correct generic comparisons while avoiding redundant traversal.
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -91,8 +97,14 @@ public final class ObjectType implements PythonType {
 
   @Override
   public int hashCode() {
-    List<String> membersNames = members.stream().map(Member::name).toList();
-    return Objects.hash(typeWrapper, attributes, membersNames);
+    // Preserve the list and Objects.hash contract without allocating a member-name list or varargs array.
+    int memberNamesHash = 1;
+    for (int i = 0; i < members.size(); i++) {
+      memberNamesHash = 31 * memberNamesHash + Objects.hashCode(members.get(i).name());
+    }
+    int result = 31 + Objects.hashCode(typeWrapper);
+    result = 31 * result + Objects.hashCode(attributes);
+    return 31 * result + memberNamesHash;
   }
 
   public PythonType type() {

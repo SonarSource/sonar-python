@@ -38,6 +38,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FunctionReturnTypeCheckTest {
 
   @Test
+  void sqlalchemy_declared_return_types() {
+    PythonCheckVerifier.verify("src/test/resources/checks/functionReturnTypeSqlalchemy.py", new FunctionReturnTypeCheck());
+  }
+
+  @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/functionReturnType.py", new FunctionReturnTypeCheck());
   }

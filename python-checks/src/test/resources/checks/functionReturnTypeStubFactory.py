@@ -2,7 +2,7 @@ import logging
 import os
 import socket
 import stripe
-from stripe.stripe_object import StripeObject
+from stripe import StripeObject
 from os import urandom as random_bytes
 from pathlib import Path
 from logging import getLogger
@@ -199,7 +199,7 @@ def preserved_disjunction(expression: CustomExpression) -> CustomExpression | No
     return or_(expression)
 
 
-# Stripe keeps its existing Typeshed model in this refresh.
+# Stripe uses its current inline typing after the Typeshed upgrade.
 
 
 def subscribe_webhook() -> Optional[StripeObject]:

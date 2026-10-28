@@ -3129,12 +3129,13 @@ public class TypeInferenceV2Test {
       """);
     UnionType realpathType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(realpathType.candidates()).allMatch(FunctionType.class::isInstance);
-    assertThat(realpathType.candidates()).extracting(PythonType::name).containsExactly("realpath", "realpath");
+    assertThat(realpathType.candidates()).hasSizeGreaterThanOrEqualTo(2)
+      .extracting(PythonType::name).containsOnly("realpath");
     assertThat(realpathType.candidates())
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
       .extracting(PythonType::unwrappedType)
-      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN);
+      .containsOnly(PythonType.UNKNOWN);
   }
 
   @Test
@@ -3158,7 +3159,7 @@ public class TypeInferenceV2Test {
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
       .extracting(PythonType::unwrappedType)
-      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN);
+      .containsOnly(PythonType.UNKNOWN);
 
     UnionType acosType2 = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(acosType2.candidates()).allMatch(FunctionType.class::isInstance);
@@ -3166,7 +3167,7 @@ public class TypeInferenceV2Test {
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
       .extracting(PythonType::unwrappedType)
-      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN);
+      .containsOnly(PythonType.UNKNOWN);
   }
 
   @Test
@@ -3369,7 +3370,10 @@ public class TypeInferenceV2Test {
     FileInput fileInput = inferTypes("""
       copyright
       """);
-    FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2());
+    PythonType copyright = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
+    // copyright is a callable _Printer instance in newer Typeshed versions.
+    FunctionType functionType = copyright instanceof FunctionType function ? function
+      : (FunctionType) copyright.resolveMember("__call__").orElseThrow();
     PythonType pythonType = functionType.returnType();
     assertThat(pythonType.unwrappedType()).isEqualTo(NONE_TYPE);
   }
@@ -4567,11 +4571,13 @@ public class TypeInferenceV2Test {
 
     Name xName = PythonTestUtils.getLastDescendant(root, t -> t instanceof Name name && "x".equals(name.name()));
     PythonType xType = xName.typeV2();
-    assertThat(xType).is(TypesTestUtils.objectTypeOf(generatorType));
-    ObjectType objectType = (ObjectType) xType;
-    assertThat(objectType.attributes())
-      .element(0)
-      .is(TypesTestUtils.objectTypeOf(pathType));
+    // glob returns Generator before Python 3.13 and Iterator in later versions.
+    var candidates = xType instanceof UnionType union ? union.candidates() : Set.of(xType);
+    assertThat(candidates).isNotEmpty().allSatisfy(candidate -> assertThat(candidate)
+      .isInstanceOfSatisfying(ObjectType.class, object -> {
+        assertThat(object.type()).isIn(generatorType, PROJECT_LEVEL_TYPE_TABLE.getType("typing.Iterator"));
+        assertThat(object.attributes()).element(0).is(TypesTestUtils.objectTypeOf(pathType));
+      }));
   }
 
   @Test

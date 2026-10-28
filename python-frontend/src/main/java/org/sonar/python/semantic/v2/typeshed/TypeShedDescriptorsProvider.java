@@ -146,7 +146,9 @@ public class TypeShedDescriptorsProvider {
   @CheckForNull
   static ModuleSymbol deserializedModule(String moduleName, InputStream resource) {
     try {
-      return ModuleSymbol.parseFrom(resource);
+      var moduleSymbol = ModuleSymbol.parseFrom(resource);
+      // Resource lookup can ignore case on some filesystems; Python module names cannot.
+      return moduleName.equals(moduleSymbol.getFullyQualifiedName()) ? moduleSymbol : null;
     } catch (IOException e) {
       LOG.debug("Error while deserializing protobuf for module {}", moduleName, e);
       return null;

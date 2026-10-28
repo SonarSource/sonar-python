@@ -57,4 +57,9 @@ class NonContextManagerCheckTest {
       List.of("src/test/resources/checks/nonContextManagerBackportImporter.py", "src/test/resources/checks/nonContextManagerBackport.py"),
       new NonContextManagerCheck());
   }
+  @Test
+  void aliasedContextManagerDecorators() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/nonContextManagerDecoratorAliases.py", new NonContextManagerCheck());
+  }
+
 }

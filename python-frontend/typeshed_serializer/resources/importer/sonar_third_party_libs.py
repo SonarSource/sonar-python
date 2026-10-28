@@ -97,6 +97,7 @@ import cryptography.hazmat.primitives.serialization.pkcs12
 import cryptography.hazmat.primitives.serialization.pkcs7
 
 # Libraries that now publish their own typing instead of Typeshed distributions.
+import stripe
 import influxdb_client
 import paho.mqtt.client
 import chardet

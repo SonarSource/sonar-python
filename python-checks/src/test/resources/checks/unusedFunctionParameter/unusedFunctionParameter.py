@@ -235,3 +235,14 @@ from django.views import generic
 class TestDjango(generic.DetailView):
     def get_object(self, queryset=None):
         print("Should not raise")
+
+
+from sqlalchemy import TypeDecorator
+
+
+class IndicoCallback(TypeDecorator):
+    # Known FP from Indico ruling: migrations/env.py retrieves this callback
+    # dynamically and always passes both arguments. It is not a base override.
+    def alembic_render_type(self, autogen_context, toplevel_code):  # Noncompliant
+        autogen_context.imports.add("from example import IndicoCallback")
+        return "IndicoCallback()"

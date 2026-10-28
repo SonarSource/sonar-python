@@ -1575,6 +1575,19 @@ wheels = [
 ]
 
 [[package]]
+name = "stripe"
+version = "15.6.1"
+source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
+dependencies = [
+    { name = "requests" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/1e/a6/02ea2b4e1b57913ae2e68801bf2168120bec97206782a781599339abfd64/stripe-15.6.1.tar.gz", hash = "sha256:9f3986aa960419041aba9c76191746bdf2c342c95892acfbf6edb500ab006d31" }
+wheels = [
+    { url = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/packages/packages/a9/4b/cd2d7ad83a3f49300cb3cc69ae102de68de792035bf31b0383e1c6563ec3/stripe-15.6.1-py3-none-any.whl", hash = "sha256:b33e1ea76462d7289e5fe755a1132b82099151bfb31e961021655471e6d216bf" },
+]
+
+[[package]]
 name = "termcolor"
 version = "2.3.0"
 source = { registry = "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple" }
@@ -1769,6 +1782,7 @@ dependencies = [
     { name = "sqlalchemy" },
     { name = "starlette" },
     { name = "stdlib-list" },
+    { name = "stripe" },
     { name = "termcolor" },
     { name = "toml" },
     { name = "tornado" },
@@ -1847,6 +1861,7 @@ requires-dist = [
     { name = "sqlalchemy", specifier = "==2.0.55" },
     { name = "starlette", specifier = "==0.27.0" },
     { name = "stdlib-list", specifier = "==0.12.0" },
+    { name = "stripe", specifier = "==15.6.1" },
     { name = "termcolor", specifier = "==2.3.0" },
     { name = "toml", specifier = "==0.10.2" },
     { name = "tornado", specifier = "==6.3.1" },

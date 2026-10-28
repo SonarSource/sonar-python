@@ -51,6 +51,39 @@ class LazyTypeWrapperTest {
   }
 
   @Test
+  void importPathWithinMatchesWholePathSegments() {
+    var wrapper = new LazyTypeWrapper(new LazyType("library.module.Thing", mock(LazyTypesContext.class)));
+
+    assertThat(wrapper.hasImportPathWithin("library.module")).isTrue();
+    assertThat(wrapper.hasImportPathWithin("library.module.Thing")).isTrue();
+    assertThat(wrapper.hasImportPathWithin("library.mod")).isFalse();
+    assertThat(wrapper.hasImportPathWithin("library.other")).isFalse();
+    assertThat(wrapper.hasImportPath("library.module")).isFalse();
+    assertThat(wrapper.hasImportPath("library.module.Thing")).isTrue();
+  }
+
+  @Test
+  void importPathWithinIsPreservedAfterResolution() {
+    var context = mock(LazyTypesContext.class);
+    when(context.resolveLazyType(any())).thenReturn(INT_TYPE);
+    var wrapper = new LazyTypeWrapper(new LazyType("library.module.Thing", context));
+
+    assertThat(wrapper.type()).isEqualTo(INT_TYPE);
+    assertThat(wrapper.isResolved()).isTrue();
+    assertThat(wrapper.hasImportPathWithin("library.module")).isTrue();
+    assertThat(wrapper.hasImportPathWithin("library.mod")).isFalse();
+    assertThat(wrapper.hasImportPath("library.module.Thing")).isTrue();
+  }
+
+  @Test
+  void nonLazyTypeHasNoImportPath() {
+    var wrapper = new LazyTypeWrapper(INT_TYPE);
+
+    assertThat(wrapper.hasImportPathWithin("library.module")).isFalse();
+    assertThat(wrapper.hasImportPath("library.module")).isFalse();
+  }
+
+  @Test
   void testEquals() {
     var lazyTypeWrapper = new LazyTypeWrapper(new LazyType("random", mock(LazyTypesContext.class)));
     assertThat(lazyTypeWrapper.equals(lazyTypeWrapper)).isTrue();

@@ -33,6 +33,16 @@ class ArgumentNumberCheckTest {
   }
 
   @Test
+  void dependency_versions() {
+    PythonCheckVerifier.verify("src/test/resources/checks/argumentNumberDependencyVersions.py", new ArgumentNumberCheck());
+  }
+
+  @Test
+  void bound_callable_alias() {
+    PythonCheckVerifier.verify("src/test/resources/checks/argumentNumberCallableAlias.py", new ArgumentNumberCheck());
+  }
+
+  @Test
   void test_multiple_files() {
     PythonCheckVerifier.verify(
       Arrays.asList("src/test/resources/checks/argumentNumberWithImport.py", "src/test/resources/checks/argumentNumberImported.py"),

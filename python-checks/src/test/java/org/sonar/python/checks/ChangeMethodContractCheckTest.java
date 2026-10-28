@@ -17,11 +17,14 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -29,11 +32,30 @@ import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class ChangeMethodContractCheckTest {
+
+  @Test
+  void inherited_ssl_methods_are_versioned() {
+    try {
+      for (var version : List.of(PythonVersionUtils.Version.V_310, PythonVersionUtils.Version.V_314)) {
+        ProjectPythonVersion.setCurrentVersions(Set.of(version));
+        TypeShed.resetBuiltinSymbols();
+        PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/changeMethodContract/sslVersioned.py", new ChangeMethodContractCheck());
+      }
+      ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_315));
+      TypeShed.resetBuiltinSymbols();
+      assertThat(PythonCheckVerifier.issues(
+        "src/test/resources/checks/changeMethodContract/sslVersioned.py", new ChangeMethodContractCheck())).hasSize(1);
+    } finally {
+      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+      TypeShed.resetBuiltinSymbols();
+    }
+  }
 
   @Test
   void test() {

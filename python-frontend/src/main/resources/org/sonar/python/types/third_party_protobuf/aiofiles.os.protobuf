@@ -1,98 +1,184 @@
 
-aiofiles.os_
-stat*
+aiofiles.os(
+wrapaiofiles.base.wrap*
+
+func(_
+stat*
+
+path(*
+dir_fd (*
+follow_symlinks (*
+loop (*
+executor (Hj
+rename*	
+src(*	
+dst(*
+
+src_dir_fd (*
+
+dst_dir_fd (*
+loop (*
+executor (HC
+renames*	
+old(*	
+new(*
+loop (*
+executor (Hk
+replace*	
+src(*	
+dst(*
+
+src_dir_fd (*
+
+dst_dir_fd (*
+loop (*
+executor (HH
+remove*
 
 path(*
-dir_fd (*
-follow_symlinks (*
-loop (*
-executor (Hj
-rename*	
-src(*	
-dst(*
+dir_fd (*
+loop (*
+executor (HH
+unlink*
 
-src_dir_fd (*
+path(*
+dir_fd (*
+loop (*
+executor (HU
+mkdir*
 
-dst_dir_fd (*
-loop (*
-executor (Hk
-replace*	
-src(*	
-dst(*
+path(*
+mode (*
+dir_fd (*
+loop (*
+executor (HZ
+makedirs*
 
-src_dir_fd (*
+name(*
+mode (*
+exist_ok (*
+loop (*
+executor (HÅ
+link*	
+src(*	
+dst(*
 
-dst_dir_fd (*
-loop (*
-executor (HH
-remove*
+src_dir_fd (*
 
-path(*
-dir_fd (*
-loop (*
-executor (HU
-mkdir*
+dst_dir_fd (*
+follow_symlinks (*
+loop (*
+executor (Hp
+symlink*	
+src(*	
+dst(*
+target_is_directory (*
+dir_fd (*
+loop (*
+executor (HJ
+readlink*
 
-path(*
-mode (*
-dir_fd (*
-loop (*
-executor (HZ
-makedirs*
+path(*
+dir_fd (*
+loop (*
+executor (HG
+rmdir*
 
-name(*
-mode (*
-exist_ok (*
-loop (*
-executor (HG
-rmdir*
+path(*
+dir_fd (*
+loop (*
+executor (H<
 
-path(*
-dir_fd (*
-loop (*
-executor (H<
+removedirs*
 
-removedirs*
+name(*
+loop (*
+executor (Hd
+access*
 
-name(*
-loop (*
-executor (H"˚
+path(*
+
+mode(*
+dir_fd (*
+effective_ids (*
+follow_symlinks (H
+getcwdH
+statvfs *
+
+path(H"˚
 scandirP
-scandir*
-path (*
-loop (*
-executor (0:typing.overloadHXN
-scandir*
+scandir"*
+path (*
+loop (*
+executor (0:typing.overloadHXN
+scandir"*
 
-path(*
-loop (*
-executor (0:typing.overloadHXN
-scandir*
+path(*
+loop (*
+executor (0:typing.overloadHXN
+scandir$*
 
-path(*
-loop (*
-executor (0:typing.overloadHX"≥
+path('*
+loop (*
+executor (0:typing.overloadHX"˘
+listdirN
+listdir)*
+
+path(,*
+loop (*
+executor (0:typing.overloadHXN
+listdir.*
+
+path(0*
+loop (*
+executor (0:typing.overloadHXN
+listdir)*
+
+path(*
+loop (*
+executor (0:typing.overloadHX"Ω
 sendfiley
-sendfile*
-out_fd(*
-in_fd(*
-offset(*
-count(*
-loop (*
-executor (0:typing.overloadHX´
-sendfile*
-out_fd(*
-in_fd(*
-offset(*
-count(*
-headers ()*
-trailers ()*
-flags (*
-loop (*
-executor (0:typing.overloadHX*
-__annotations__0**
+sendfile1*
+out_fd(*
+in_fd(*
+offset(*
+count(*
+loop (*
+executor (0:typing.overloadHX´
+sendfile1*
+out_fd(*
+in_fd(*
+offset(*
+count(*
+headers (3*
+trailers (3*
+flags (*
+loop (*
+executor (0:typing.overloadHX"310"311"«
+sendfiley
+sendfile1*
+out_fd(*
+in_fd(*
+offset(*
+count(*
+loop (*
+executor (0:typing.overloadHX´
+sendfile1*
+out_fd(*
+in_fd(*
+offset(*
+count(*
+headers (5*
+trailers (5*
+flags (*
+loop (*
+executor (0:typing.overloadHX"312"313"314"315*
+__annotations__06*
 ospathaiofiles.ospath *
-pathaiofiles.ospath 22"builtins.int2"builtins.float22
-2"os.stat_result22"typing.Coroutine22"builtins.str2"builtins.bytes2"os.PathLike22"os.PathLike222	
-2"_typeshed.StrOrBytesPath2222%"_typeshed.FileDescriptorOrPath22222"builtins.bool2"" asyncio.events.AbstractEventLoop222"typing.Coroutine22"os._ScandirIterator22"typing.Coroutine22"builtins.object2"builtins.object22"os._ScandirIterator22"typing.Coroutine22"os.PathLike2222"_typeshed.GenericPath22"typing.Coroutine22"builtins.bytearray2"builtins.memoryview2"array.array22"	mmap.mmap2"_ctypes._CData2"pickle.PickleBuffer2
-2 !"#$2 "_typeshed.WriteableBuffer2%22&2"_typeshed.ReadableBuffer2'2"typing.Sequence2(2"builtins.dict2
+pathaiofiles.ospath *
+__all__0(2"builtins.function2222"builtins.int2"builtins.float22
+2"os.stat_result22"typing.Coroutine22"builtins.str2"builtins.bytes2"os.PathLike2	2"os.PathLike2
+22	
+2"_typeshed.StrOrBytesPath2222%"_typeshed.FileDescriptorOrPath22222"builtins.bool2"" asyncio.events.AbstractEventLoop222#"!concurrent.futures._base.Executor222"typing.Coroutine22"builtins.object2"builtins.object22"typing.Coroutine22"typing.Coroutine22"typing.Coroutine2	222"os.statvfs_result22"typing.Coroutine22"os._ScandirIterator2	2"typing.Coroutine2!2"os._ScandirIterator22"typing.Coroutine2#2"os.PathLike222%2"_typeshed.GenericPath2&2"builtins.list2	2"typing.Coroutine2(22	2"_typeshed.StrPath2*22+2"builtins.list2
+2"typing.Coroutine2-22
+2"_typeshed.BytesPath2/2"typing.Coroutine22"typing_extensions.Buffer2"typing.Sequence222"_collections_abc.Buffer2"typing.Sequence242"builtins.dict2	

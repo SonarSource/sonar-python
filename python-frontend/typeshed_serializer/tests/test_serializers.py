@@ -129,7 +129,8 @@ def test_third_parties_are_serialized_without_excluded_packages(typeshed_third_p
         assert third_party_stub in typeshed_third_parties
     for third_party_stub_name in typeshed_third_parties:
         assert "win32" not in third_party_stub_name
-    assert len(typeshed_third_parties) == 12
+    # The isolated fixture contains six aiofiles modules and annoy.
+    assert len(typeshed_third_parties) == 7
 
 
 def test_save_merged_symbols():
@@ -227,3 +228,9 @@ def test_merged_module_records_availability_even_if_all_members_are_unconditiona
     assert [(function.name, list(function.valid_for)) for function in new_module.functions] == [("available", ["315"])]
     assert not stable_module.valid_for
     assert [(function.name, list(function.valid_for)) for function in stable_module.functions] == [("available", [])]
+
+
+def test_mypy_uses_reviewed_typeshed_for_transitive_stdlib_imports():
+    opt = serializers.get_options((3, 15))
+    assert opt.custom_typeshed_dir == serializers.TYPESHED_PATH
+    assert opt.abs_custom_typeshed_dir == serializers.TYPESHED_PATH

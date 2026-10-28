@@ -3,38 +3,49 @@
 prepare_grant_uri*	
 uri(*
 	client_id(*
-response_type(*
-redirect_uri (*
-scope (*
-state (*
-code_challenge (*
-code_challenge_method (*
-kwargs(y
+response_type(*
+redirect_uri (*
+scope (
+*
+state (*
+code_challenge (*
+code_challenge_method (*
+kwargs(Ö
 prepare_token_request*
 
 grant_type(*
-body (*
-include_client_id (*
-code_verifier (*
-kwargs(ƒ
- prepare_token_revocation_request*	
+body (*
+include_client_id (*
+code_verifier (*
+scope (
+*
+	client_id (*
+client_secret (*
+code (*
+redirect_uri (*
+kwargs(ƒ
+ prepare_token_revocation_request*	
 url(*
 token(*
-token_type_hint (*
-callback (*
-body (*
-kwargs(?
-!parse_authorization_code_response*	
+token_type_hint (*
+callback (*
+body (*
+kwargs(?
+!parse_authorization_code_response*	
 uri(*
-state (D
-parse_implicit_response*	
+state (D
+parse_implicit_response*	
 uri(*
-state (*
-scope (3
-parse_token_response*
+state (*
+scope (
+3
+parse_token_response*
 
-body(*
-scope (+
-validate_token_parameters*
-params(*
-__annotations__022"_typeshed.Incomplete22222"builtins.str222"builtins.bool2"builtins.dict2
+body(*
+scope (
++
+validate_token_parameters*
+params(
+parse_expires*
+params(*
+__annotations__02"builtins.str2	2222222"builtins.object2"builtins.set2222"builtins.list22	2	22"builtins.bool2"builtins.dict222222"builtins.function22222,"*oauthlib.oauth2.rfc6749.tokens.OAuth2Token2"builtins.bytes2"builtins.bytearray222"_typeshed.Incomplete22"builtins.dict22"builtins.int222"builtins.float22222"builtins.dict2

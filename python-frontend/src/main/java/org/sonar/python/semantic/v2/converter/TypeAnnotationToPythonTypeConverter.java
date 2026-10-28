@@ -19,7 +19,6 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -112,19 +111,15 @@ public class TypeAnnotationToPythonTypeConverter {
     return fullyQualifiedName.isEmpty() ? PythonType.UNKNOWN : context.lazyTypesContext().getOrCreateLazyType(fullyQualifiedName);
   }
 
-  private static final Set<String> EXCLUDING_TYPE_VAR_FQN_PATTERNS = Set.of(
+  private static final Set<String> EXCLUDED_TYPE_VAR_FQNS = Set.of(
     "object",
-    "^builtins\\.object$",
+    "builtins.object",
     // ref: SONARPY-1477
-    "^_ctypes\\._CanCastTo$");
+    "_ctypes._CanCastTo");
 
   public static boolean filterTypeVar(TypeAnnotationDescriptor type) {
-    return Optional.of(type)
-      // Filtering self returning methods until the SONARPY-1472 will be solved
-      .map(TypeAnnotationDescriptor::fullyQualifiedName)
-      .filter(Predicate.not(String::isEmpty))
-      // We ignore TypeVar referencing "builtins.object" or "object" to avoid false positives
-      .filter(fqn -> EXCLUDING_TYPE_VAR_FQN_PATTERNS.stream().noneMatch(fqn::matches))
-      .isPresent();
+    // Ignore these exact bounds to avoid false positives (SONARPY-1472, SONARPY-1477).
+    var fqn = type.fullyQualifiedName();
+    return fqn != null && !fqn.isEmpty() && !EXCLUDED_TYPE_VAR_FQNS.contains(fqn);
   }
 }

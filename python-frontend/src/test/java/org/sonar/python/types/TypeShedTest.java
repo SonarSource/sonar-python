@@ -150,12 +150,12 @@ class TypeShedTest {
       "io", "io.BytesIO",
       "email.policy", "email.policy.Policy",
       "ssl", "ssl.SSLContext",
-      "hashlib", "hashlib._Hash",
-      "ctypes", "ctypes.BigEndianStructure",
-      "asyncio", "asyncio.tasks.Task",
+      "hashlib", "hashlib.blake2b",
+      "ctypes", "ctypes._endian.BigEndianStructure",
+      "asyncio", "asyncio.Task",
       "contextvars", "contextvars.Context",
       "queue", "queue.SimpleQueue",
-      "sqlite3", "sqlite3.dbapi2.Connection",
+      "sqlite3", "sqlite3.Connection",
       "struct", "struct.Struct");
     for (var versions : List.of(Set.of(PythonVersionUtils.Version.V_310), PythonVersionUtils.allVersions())) {
       setPythonVersions(versions);
@@ -166,6 +166,21 @@ class TypeShedTest {
         assertThat(symbol.fullyQualifiedName()).isEqualTo(classFqn);
       });
     }
+  }
+
+  @Test
+  void inherited_private_methods_respect_python_version() {
+    for (var version : List.of(PythonVersionUtils.Version.V_310, PythonVersionUtils.Version.V_314)) {
+      setPythonVersions(Set.of(version));
+      var sslContext = (ClassSymbol) symbolsForModule("ssl").get("SSLContext");
+      assertThat(sslContext.resolveMember("set_ciphersuites")).as(version.toString()).isEmpty();
+      assertThat(sslContext.resolveMember("get_groups")).as(version.toString()).isEmpty();
+      assertThat(sslContext.resolveMember("set_ciphers")).isPresent();
+    }
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_315));
+    var sslContext = (ClassSymbol) symbolsForModule("ssl").get("SSLContext");
+    assertThat(sslContext.resolveMember("set_ciphersuites")).isPresent();
+    assertThat(sslContext.resolveMember("get_groups")).isPresent();
   }
 
   @Test
@@ -262,11 +277,11 @@ class TypeShedTest {
     Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
     Symbol completeStatementFunction = sqlite3Symbols.get("complete_statement");
     assertThat(completeStatementFunction.kind()).isEqualTo(Kind.FUNCTION);
-    assertThat(completeStatementFunction.fullyQualifiedName()).isEqualTo("sqlite3.dbapi2.complete_statement");
-    Set<String> sqlite3Dbapi2Symbols = symbolsForModule("sqlite3.dbapi2").keySet();
-    // Python names with a leading underscore are not imported when using wildcard imports
-    sqlite3Dbapi2Symbols.removeIf(s -> s.startsWith("_"));
-    assertThat(sqlite3Symbols.keySet()).containsAll(sqlite3Dbapi2Symbols);
+    // Typeshed now defines sqlite3's public API in the package and re-exports it from dbapi2.
+    assertThat(completeStatementFunction.fullyQualifiedName()).isIn("sqlite3.complete_statement", "sqlite3.dbapi2.complete_statement");
+    // The current package stub explicitly re-exports selected dbapi2 names rather than importing every public name.
+    assertThat(sqlite3Symbols).containsKeys("connect", "complete_statement", "Date", "Time", "TimestampFromTicks");
+    assertThat(symbolsForModule("sqlite3.dbapi2")).containsKeys("connect", "complete_statement");
 
     Map<String, Symbol> requestsSymbols = symbolsForModule("requests");
     Symbol requestSymbol = requestsSymbols.get("request");
@@ -363,7 +378,7 @@ class TypeShedTest {
     Set<Symbol> alternatives = cursorFunction.alternatives();
     assertThat(alternatives)
       .hasSize(2)
-      .allMatch(s -> "sqlite3.dbapi2.Cursor".equals(((FunctionSymbol) s).annotatedReturnTypeName()));
+      .allMatch(s -> Set.of("sqlite3.Cursor", "sqlite3.dbapi2.Cursor").contains(((FunctionSymbol) s).annotatedReturnTypeName()));
   }
 
   @Test
@@ -378,40 +393,25 @@ class TypeShedTest {
   }
 
   @Test
-  void deserialize_annoy_protobuf() {
-    Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
-      .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
-    assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder(
-        tuple(Kind.CLASS, "annoy.AnnoyIndex"),
-        tuple(Kind.CLASS, "annoy._Vector"),
-        tuple(Kind.OTHER, "annoy.__annotations__"),
-        tuple(Kind.OTHER, "annoy.__path__"));
-
-    ClassSymbol annoyIndex = (ClassSymbol) deserializedAnnoySymbols.get("annoy.AnnoyIndex");
-    assertThat(annoyIndex.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
+  void deserialize_third_party_class_protobuf() {
+    // Annoy stubs are no longer part of the pinned Typeshed revision.
+    Map<String, Symbol> symbols = symbolsForModule("hnswlib");
+    ClassSymbol index = (ClassSymbol) symbols.get("Index");
+    assertThat(index.fullyQualifiedName()).isEqualTo("hnswlib.Index");
+    assertThat(index.superClasses()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"));
-    assertThat(annoyIndex.declaredMembers()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(
-      tuple(Kind.FUNCTION, "__init__"),
-      tuple(Kind.FUNCTION, "load"),
-      tuple(Kind.FUNCTION, "save"),
-      tuple(Kind.AMBIGUOUS, "get_nns_by_item"),
-      tuple(Kind.AMBIGUOUS, "get_nns_by_vector"),
-      tuple(Kind.FUNCTION, "get_item_vector"),
-      tuple(Kind.FUNCTION, "add_item"),
-      tuple(Kind.FUNCTION, "on_disk_build"),
-      tuple(Kind.FUNCTION, "build"),
-      tuple(Kind.FUNCTION, "unbuild"),
-      tuple(Kind.FUNCTION, "unload"),
-      tuple(Kind.FUNCTION, "get_distance"),
-      tuple(Kind.FUNCTION, "get_n_items"),
-      tuple(Kind.FUNCTION, "get_n_trees"),
-      tuple(Kind.FUNCTION, "verbose"),
-      tuple(Kind.FUNCTION, "set_seed"),
-      tuple(Kind.OTHER, "f")
+    assertThat(index.declaredMembers()).extracting(Symbol::kind, Symbol::name).contains(
+      tuple(Kind.AMBIGUOUS, "__init__"),
+      tuple(Kind.AMBIGUOUS, "get_items"),
+      tuple(Kind.AMBIGUOUS, "add_items"),
+      tuple(Kind.FUNCTION, "load_index"),
+      tuple(Kind.FUNCTION, "save_index"),
+      tuple(Kind.FUNCTION, "get_current_count"),
+      tuple(Kind.OTHER, "ef"),
+      tuple(Kind.OTHER, "num_threads")
     );
-    assertThat(annoyIndex.hasDecorators()).isFalse();
-    assertThat(annoyIndex.definitionLocation()).isNull();
+    assertThat(index.hasDecorators()).isFalse();
+    assertThat(index.definitionLocation()).isNull();
   }
 
   @Test

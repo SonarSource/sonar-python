@@ -1,0 +1,196 @@
+
+pyogrioE
+detect_write_driver pyogrio.core.detect_write_driver*
+
+path(K
+get_gdal_config_option#pyogrio.core.get_gdal_config_option*
+
+name(7
+get_gdal_data_pathpyogrio.core.get_gdal_data_pathX
+list_driverspyogrio.core.list_drivers*
+read (*
+write (*
+append (;
+list_drivers_details!pyogrio.core.list_drivers_details-
+list_layerspyogrio.core.list_layers*(”
+read_boundspyogrio.core.read_bounds*(*
+layer (*
+skip_features (*
+max_features (*
+where (*
+bbox (!*
+mask (#‘
+	read_infopyogrio.core.read_info$*(*
+layer (*
+encoding (*
+force_feature_count (*
+force_total_bounds (*
+kwargs(P
+set_gdal_config_options$pyogrio.core.set_gdal_config_options*
+options(%K
+vsi_curl_clear_cache!pyogrio.core.vsi_curl_clear_cache*
+prefix (H
+vsi_listtreepyogrio.core.vsi_listtree&*
+
+path(*
+pattern (3
+
+vsi_rmtreepyogrio.core.vsi_rmtree*
+
+path(3
+
+vsi_unlinkpyogrio.core.vsi_unlink*
+
+path(è
+write_dataframe!pyogrio.geopandas.write_dataframe*
+df('*
+
+path(**
+layer (*
+driver (*
+encoding (*
+geometry_type (*
+promote_to_multi (+*
+nan_as_null (*
+append (*
+	use_arrow (+*
+dataset_metadata (,*
+layer_metadata (,*
+metadata (,*
+dataset_options (,*
+layer_options (,*
+kwargs(à
+
+read_arrowpyogrio.raw.read_arrow.*(*
+layer (*
+encoding (*
+columns (0*
+read_geometry (*
+force_2d (*
+skip_features (*
+max_features (*
+where (*
+bbox (!*
+mask (#*
+fids (8*
+sql (*
+sql_dialect (*
+return_fids (*
+datetime_as_string (*
+
+batch_size (*
+kwargs(Ã
+write_arrowpyogrio.raw.write_arrow*
+	arrow_obj(9*
+
+path(**
+layer (*
+driver (*
+geometry_name (*
+geometry_type (*
+crs (*
+encoding (*
+append (*
+dataset_metadata (;*
+layer_metadata (;*
+metadata (;*
+dataset_options (,*
+layer_options (,*
+kwargs("à
+read_dataframe pyogrio.geopandas.read_dataframeÕ
+read_dataframe pyogrio.geopandas.read_dataframe<*(>*
+layer (*
+encoding (*
+columns (0*
+read_geometry (?*
+force_2d (*
+skip_features (*
+max_features (*
+where (*
+bbox (!*
+mask (#*
+fids (8*
+sql (*
+sql_dialect (*
+fid_as_index (*
+	use_arrow (+*
+
+on_invalid (@*
+arrow_to_pandas_kwargs (B*
+datetime_as_string (*
+mixed_offsets_as_utc (*
+kwargs(0:typing.overloadXÓ
+read_dataframe pyogrio.geopandas.read_dataframe'*(>*
+layer (*
+encoding (*
+columns (0*
+read_geometry(?*
+force_2d (*
+skip_features (*
+max_features (*
+where (*
+bbox (!*
+mask (#*
+fids (8*
+sql (*
+sql_dialect (*
+fid_as_index (*
+	use_arrow (+*
+
+on_invalid (@*
+arrow_to_pandas_kwargs (B*
+datetime_as_string (*
+mixed_offsets_as_utc (*
+kwargs(0:typing.overloadX"¼
+
+open_arrowpyogrio.raw.open_arrowŠ
+
+open_arrowpyogrio.raw.open_arrowD*(*
+layer (*
+encoding (*
+columns (0*
+read_geometry (*
+force_2d (*
+skip_features (*
+max_features (*
+where (*
+bbox (!*
+mask (#*
+fids (8*
+sql (*
+sql_dialect (*
+return_fids (*
+
+batch_size (*
+use_pyarrow (?*
+datetime_as_string (*
+kwargs(0:typing.overloadXˆ
+
+open_arrowpyogrio.raw.open_arrowE*(*
+layer (*
+encoding (*
+columns (0*
+read_geometry (*
+force_2d (*
+skip_features (*
+max_features (*
+where (*
+bbox (!*
+mask (#*
+fids (8*
+sql (*
+sql_dialect (*
+return_fids (*
+
+batch_size (*
+use_pyarrow(?*
+datetime_as_string (*
+kwargs(0:typing.overloadX*
+__path__0&*
+__annotations__0%*=
+__gdal_geos_version__"pyogrio.core.__gdal_geos_version__0G*3
+__gdal_version__pyogrio.core.__gdal_version__0F*A
+__gdal_version_string__$pyogrio.core.__gdal_version_string__0*
+__all__0&*
+__version__02"builtins.str2"pathlib.Path2222	2222"builtins.dict22"builtins.bool22""pyogrio.core._DriverDetails2	2"builtins.dict2
+2"builtins.int222"numpy.generic22"numpy.generic22"numpy.dtype22"numpy.ndarray22"pyogrio._typing.Array2D22"builtins.bytes2"_typeshed.SupportsRead2222'" pyogrio._typing.ReadPathOrBuffer2222"numpy.ndarray22"pyogrio._typing.Array1D22222222222"builtins.float2222 2"shapely.lib.Geometry22"2"pyogrio.core._LayerInfo2	2"builtins.dict22"builtins.list22"pandas.core.frame.DataFrame2"_io.BytesIO22(2("!pyogrio._typing.WritePathOrBuffer2)2222%2"pyogrio.raw._Meta2	22-2"typing.Collection222/2""pyogrio._typing.SupportsArray22"builtins.object2"builtins.object222"typing.Collection23221432$"pyogrio._typing.DualArrayLike252#"pyogrio._typing.ArrayLikeInt262272&"$pyogrio._typing.SupportsArrowCStream2"builtins.dict222:2%"#geopandas.geodataframe.GeoDataFrame2"os.PathLike222=2	2222"typing.Mapping222A22-92'"!contextlib.AbstractContextManager2C+2'"!contextlib.AbstractContextManager2.+2222F

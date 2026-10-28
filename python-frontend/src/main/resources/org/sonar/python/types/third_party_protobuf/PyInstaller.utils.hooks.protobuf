@@ -1,16 +1,14 @@
 
-PyInstaller.utils.hooksy
-!get_pywin32_module_file_attribute?PyInstaller.utils.hooks.win32.get_pywin32_module_file_attribute*
-module_name(#
-exec_statement*
+PyInstaller.utils.hooks#
+exec_statement*
 	statement(&
-exec_statement_rc*
+exec_statement_rc*
 	statement(#
-eval_statement*
+eval_statement*
 	statement(.
-get_pyextension_imports	*
+get_pyextension_imports*
 module_name(&
-get_homebrew_path*
+get_homebrew_path	*
 formula (-
 remove_prefix*
 string(*
@@ -23,91 +21,94 @@
 can_import_module
 *
 module_name(<
-get_module_attribute*
+get_module_attribute*
 module_name(*
 	attr_name(,
-get_module_file_attribute*
-package(R
+get_module_file_attribute	*
+package(8
+!get_pywin32_module_file_attribute	*
+module_name((
+check_requirement
+*
+requirement(R
 is_module_satisfies
 *
-requirements(*
-version (*
-version_attr (!
+requirements(*
+version (*
+version_attr (!
 
 is_package
 *
 module_name((
-get_all_package_paths	*
+get_all_package_paths*
 package(8
 package_base_path*
 package_path(*
 package($
-get_package_paths*
+get_package_paths*
 package(G
-collect_submodules	*
+collect_submodules*
 package(*
-filter (*
-on_error (;
+filter (*
+on_error (;
 is_module_or_submodule
 *
 
 name(*
 mod_or_submod(Q
-collect_dynamic_libs*
+collect_dynamic_libs*
 package(*
-destdir (*
-search_patterns (s
-collect_data_files*
+destdir (*
+search_patterns (s
+collect_data_files*
 package(*
 include_py_files (
 *
-subdir (*
-excludes (*
-includes (T
-collect_system_data_files*
+subdir (*
+excludes (*
+includes (T
+collect_system_data_files*
 
 path(*
-destdir (*
+destdir (*
 include_py_files (
 8
-copy_metadata*
+copy_metadata*
 package_name(*
 	recursive (
-
-get_installer*
-module(0
-requirements_for_package	*
-package_name(˜
-collect_all*
+"
+get_installer	*
+	dist_name(˜
+collect_all*
 package_name(*
 include_py_files (
 *
-filter_submodules (*
-exclude_datas (*
-include_datas (*
-on_error (#
-collect_entry_point*
+filter_submodules (*
+exclude_datas (*
+include_datas (*
+on_error (#
+collect_entry_point*
 
 name(A
-get_hook_config*
-hook_api(*
+get_hook_config*
+hook_api(*
 module_name(*	
 key(W
 include_or_exclude_file
 *
-filename("*
-include_list ($*
-exclude_list ($o
-!collect_delvewheel_libs_directory%*
+filename(*
+include_list (*
+exclude_list (o
+!collect_delvewheel_libs_directory *
 package_name(*
-libdir_name (*
-datas (&*
-binaries (&*
-__path__0	*
-__annotations__0'*"
+libdir_name (*
+datas (!*
+binaries (!*
+__path__0*
+__annotations__0"*"
 HOMEPATHPyInstaller.HOMEPATH0*(
 condaPyInstaller.utils.hooks.conda *0
 conda_supportPyInstaller.utils.hooks.conda *
-PY_IGNORE_EXTENSIONS0(*
-hook_variables0)*
-PY_DYLIB_PATTERNS0	2"builtins.str2222"builtins.int2222	2222"builtins.list22"builtins.bool2"typing.Iterable22"pkg_resources.Requirement222"pkg_resources.Distribution22222"builtins.function22222"builtins.list22"builtins.object2"os.PathLike2222"_typeshed.StrPath2222222	2222	2,"*PyInstaller.depend.imphookapi.PostGraphAPI2"builtins.bytes2"os.PathLike222 2"_typeshed.StrOrBytesPath2!2"typing.Iterable2"22#22222"builtins.dict22"builtins.set22"builtins.dict2
+PY_IGNORE_EXTENSIONS0#*
+hook_variables0$*
+PY_DYLIB_PATTERNS02"builtins.str2"builtins.int2222	2222"builtins.list22222"builtins.bool222"builtins.function22222"builtins.list22"builtins.object2"typing.Iterable22"os.PathLike2222"_typeshed.StrPath2222222222,"*PyInstaller.depend.imphookapi.PostGraphAPI2"builtins.bytes2"os.PathLike2222"_typeshed.StrOrBytesPath22"typing.Iterable22222222"builtins.dict22"builtins.set22"builtins.dict2
