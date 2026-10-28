@@ -543,6 +543,7 @@ public class OpenSourceCheckList {
       RegexLookaheadCheck.class,
       RewriteCollectionConstructorAsComprehensionCheck.class,
       UnconditionalAssertionCheck.class,
+      UseCachedPropertyCheck.class,
       UseMonkeypatchFixtureCheck.class,
       UseTmpPathInsteadOfFactoryCheck.class,
       UselessPytestMarksCheck.class,

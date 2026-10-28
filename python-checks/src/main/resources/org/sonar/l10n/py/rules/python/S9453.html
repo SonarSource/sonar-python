@@ -1,0 +1,66 @@
+<p>This rule raises an issue when an instance method takes no parameter besides the instance and is decorated with <code>functools.lru_cache</code> or
+<code>functools.cache</code>.</p>
+<p>It raises an issue only when the Python version of the analyzed project is 3.12 or later.</p>
+<h2>Why is this an issue?</h2>
+<p><code>functools.lru_cache</code> and <code>functools.cache</code> store results on the function, and the key includes <code>self</code>. The
+instance references its class, the class references the cached function, and the cache references the instance. That cycle is anchored on the class.
+Reference counting does not free it, and the cyclic garbage collector does not either, because the class can still reach the instance.</p>
+<p>A method with no other parameter has one result per instance. <code>functools.cached_property</code> stores that result on the instance itself.
+When the caller drops the instance, the cached value is dropped with it.</p>
+<p><code>cached_property</code> has existed since Python 3.8. Python 3.12 removed its undocumented lock. This rule applies only when the project
+targets Python 3.12 or later.</p>
+<h3>Exceptions</h3>
+<p>Do not raise when the project targets a Python version older than 3.12.</p>
+<p>Do not raise when the method takes any parameter besides the instance, including defaults, keyword-only parameters, <code>*args or **kwargs</code>.
+{rule:python:S9156} covers that case.</p>
+<p>Do not raise on <code>async</code> methods. <code>cached_property</code> does not await a coroutine.</p>
+<p>Do not raise on <code>@staticmethod</code> or <code>@classmethod</code> methods, or on methods of <code>enum.Enum</code> subclasses.</p>
+<h2>How to fix it</h2>
+<p>Replace <code>@lru_cache</code> or <code>@cache</code> with <code>@cached_property</code>, and read the value as an attribute
+(<code>obj.total</code> instead of <code>obj.total()</code>).</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from functools import lru_cache
+
+class Series:
+    def __init__(self, n: int) -&gt; None:
+        self.n = n
+
+    @lru_cache  # Noncompliant: the cache retains "self"
+    def fib(self) -&gt; int:
+        # long computation
+        a, b = 0, 1
+        for _ in range(self.n):
+            a, b = b, a + b
+        return a
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from functools import cached_property
+
+class Series:
+    def __init__(self, n: int) -&gt; None:
+        self.n = n
+
+    @cached_property
+    def fib(self) -&gt; int:
+        # long computation
+        a, b = 0, 1
+        for _ in range(self.n):
+            a, b = b, a + b
+        return a
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a
+  href="https://docs.python.org/3/library/functools.html#functools.cached_property"><code>functools.cached_property</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>functools.lru_cache</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functools.html#functools.cache"><code>functools.cache</code></a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S9156} - Instance methods should not be decorated with "functools.lru_cache" or "functools.cache"</li>
+</ul>
+
