@@ -52,7 +52,8 @@ public class PluginLocator {
 
   public static boolean isEnterpriseTest() {
     var currentWorkingDirectory = new File(System.getProperty("user.dir"));
-    return currentWorkingDirectory.getParentFile().getName().equals("its-enterprise");
+    var itsDirectory = currentWorkingDirectory.getParentFile();
+    return itsDirectory.getName().equals("its") && itsDirectory.getParentFile().getName().equals("private");
   }
 
   private PluginLocator() {

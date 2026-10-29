@@ -46,18 +46,18 @@ class FakeRulingDiffIO:
 
 class ParsePathTest(unittest.TestCase):
     def test_parse_ruling_path(self) -> None:
-        path = "private/its-enterprise/ruling/src/test/resources/expected/airflow/python-S1066.json"
+        path = "private/its/ruling/src/test/resources/expected/airflow/python-S1066.json"
         self.assertEqual(("airflow", "python", "S1066"), core.parse_ruling_path(path))
 
     def test_parse_ruling_path_with_pythonenterprise(self) -> None:
-        path = "private/its-enterprise/ruling/src/test/resources/expected/specific-rules/pythonenterprise-S7471.json"
+        path = "private/its/ruling/src/test/resources/expected/specific-rules/pythonenterprise-S7471.json"
         self.assertEqual(
             ("specific-rules", "pythonenterprise", "S7471"),
             core.parse_ruling_path(path),
         )
 
     def test_parse_ruling_path_with_legacy_key(self) -> None:
-        path = "private/its-enterprise/ruling/src/test/resources/expected/scikit-learn/python-LineLength.json"
+        path = "private/its/ruling/src/test/resources/expected/scikit-learn/python-LineLength.json"
         self.assertEqual(
             ("scikit-learn", "python", "LineLength"),
             core.parse_ruling_path(path),
@@ -266,7 +266,7 @@ class SnippetRenderingTest(unittest.TestCase):
 class BuildRuleDiffsWithIOTest(unittest.TestCase):
     def test_build_rule_diffs_uses_io_object_and_respects_refs(self) -> None:
         changed_file = (
-            "private/its-enterprise/ruling/src/test/resources/expected/"
+            "private/its/ruling/src/test/resources/expected/"
             "airflow/python-S107.json"
         )
         io_impl = FakeRulingDiffIO(
@@ -296,7 +296,7 @@ class BuildRuleDiffsWithIOTest(unittest.TestCase):
 
     def test_build_rule_diffs_caches_source_loads_per_ref_and_path(self) -> None:
         changed_file = (
-            "private/its-enterprise/ruling/src/test/resources/expected/"
+            "private/its/ruling/src/test/resources/expected/"
             "airflow/python-S107.json"
         )
         io_impl = FakeRulingDiffIO(
@@ -317,7 +317,7 @@ class BuildRuleDiffsWithIOTest(unittest.TestCase):
 
     def test_build_rule_diffs_missing_source_produces_placeholder_snippet(self) -> None:
         changed_file = (
-            "private/its-enterprise/ruling/src/test/resources/expected/"
+            "private/its/ruling/src/test/resources/expected/"
             "airflow/python-S107.json"
         )
         io_impl = FakeRulingDiffIO(
@@ -356,7 +356,7 @@ class SourceLoadingTest(unittest.TestCase):
         ]
 
         content = io.load_text_at_ref(
-            "private/its-enterprise/sources_ruling/project/foo.py", "deadbeef"
+            "private/its/sources_ruling/project/foo.py", "deadbeef"
         )
 
         self.assertEqual("print('from submodule')\n", content)
@@ -369,7 +369,7 @@ class SourceLoadingTest(unittest.TestCase):
             args=["git"],
             returncode=128,
             stdout="",
-            stderr="fatal: path 'private/its-enterprise/sources_ruling/foo.py' exists on disk, but not in 'deadbeef'",
+            stderr="fatal: path 'private/its/sources_ruling/foo.py' exists on disk, but not in 'deadbeef'",
         )
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as tmp:
             tmp.write("print('from workspace')\n")
@@ -419,14 +419,14 @@ class GitHubActionIOTest(unittest.TestCase):
     def test_resolve_source_path_for_project_rulings_uses_path_directly(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its-enterprise/sources_ruling/biopython/Bio/Nexus/Nexus.py",
+            "private/its/sources_ruling/biopython/Bio/Nexus/Nexus.py",
             io_impl.resolve_source_path("project", "biopython/Bio/Nexus/Nexus.py"),
         )
 
     def test_resolve_source_path_for_project_rulings_falls_back_to_sources_child(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its-enterprise/sources_ruling/specific-rules/S1716.py",
+            "private/its/sources_ruling/specific-rules/S1716.py",
             io_impl.resolve_source_path("project", "S1716.py"),
         )
 
@@ -499,14 +499,14 @@ class GitHubActionIOTest(unittest.TestCase):
     def test_resolve_source_path_uses_project_overrides(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its-enterprise/sources_ruling/mypy-0.782/pkg/file.py",
+            "private/its/sources_ruling/mypy-0.782/pkg/file.py",
             io_impl.resolve_source_path("mypy", "pkg/file.py"),
         )
 
     def test_resolve_source_path_uses_default_project_root(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its-enterprise/sources_ruling/custom-project/pkg/file.py",
+            "private/its/sources_ruling/custom-project/pkg/file.py",
             io_impl.resolve_source_path("custom-project", "/pkg/file.py"),
         )
 

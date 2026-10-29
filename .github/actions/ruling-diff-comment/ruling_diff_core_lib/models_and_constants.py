@@ -21,7 +21,7 @@ class RulingDiffIO(Protocol):
         ...
 
 EXPECTED_RULING_ROOT = (
-    "private/its-enterprise/ruling/src/test/resources/expected"
+    "private/its/ruling/src/test/resources/expected"
 )
 COMMENT_MARKER = "<!-- ruling-diff-comment -->"
 COMMENT_SOFT_LIMIT = 60000
@@ -30,29 +30,29 @@ MAX_SNIPPETS_PER_FILE = 3
 MAX_SNIPPETS_PER_RULE = 15
 
 PROJECT_SOURCE_OVERRIDES = {
-    "buildbot": "private/its-enterprise/sources_ruling/buildbot-0.8.6p1",
-    "buildbot-slave": "private/its-enterprise/sources_ruling/buildbot-slave-0.8.6p1",
-    "django": "private/its-enterprise/sources_ruling/django-2.2.3",
-    "django-cms": "private/its-enterprise/sources_ruling/django-cms-3.7.1",
-    "docker-compose": "private/its-enterprise/sources_ruling/docker-compose-1.24.1",
-    "mypy": "private/its-enterprise/sources_ruling/mypy-0.782",
-    "numpy": "private/its-enterprise/sources_ruling/numpy-1.16.4",
-    "tornado": "private/its-enterprise/sources_ruling/tornado-2.3",
-    "twisted": "private/its-enterprise/sources_ruling/twisted-12.1.0",
-    "sources_internal_ruling": "private/its-enterprise/sources_internal_ruling",
-    "namespace_basic": "private/its-enterprise/sources_internal_namespace_ruling/basic_namespace",
-    "namespace_mixed": "private/its-enterprise/sources_internal_namespace_ruling/mixed_namespace",
-    "addInitPy_base": "private/its-enterprise/sources_pr_analysis/addInitPy_base",
-    "addInitPy_pr": "private/its-enterprise/sources_pr_analysis/addInitPy_pr",
-    "baseCommit": "private/its-enterprise/sources_pr_analysis/baseCommit",
-    "changeInImportedModule": "private/its-enterprise/sources_pr_analysis/changeInImportedModule",
-    "changeInPackageInit": "private/its-enterprise/sources_pr_analysis/changeInPackageInit",
-    "changeInParent": "private/its-enterprise/sources_pr_analysis/changeInParent",
-    "changeInRelativeImport": "private/its-enterprise/sources_pr_analysis/changeInRelativeImport",
-    "deletedFile": "private/its-enterprise/sources_pr_analysis/deletedFile",
-    "djangoViewsScenario": "private/its-enterprise/sources_pr_analysis/djangoViewsScenario",
-    "duplication": "private/its-enterprise/sources_pr_analysis/duplication",
-    "newFile": "private/its-enterprise/sources_pr_analysis/newFile",
+    "buildbot": "private/its/sources_ruling/buildbot-0.8.6p1",
+    "buildbot-slave": "private/its/sources_ruling/buildbot-slave-0.8.6p1",
+    "django": "private/its/sources_ruling/django-2.2.3",
+    "django-cms": "private/its/sources_ruling/django-cms-3.7.1",
+    "docker-compose": "private/its/sources_ruling/docker-compose-1.24.1",
+    "mypy": "private/its/sources_ruling/mypy-0.782",
+    "numpy": "private/its/sources_ruling/numpy-1.16.4",
+    "tornado": "private/its/sources_ruling/tornado-2.3",
+    "twisted": "private/its/sources_ruling/twisted-12.1.0",
+    "sources_internal_ruling": "private/its/sources_internal_ruling",
+    "namespace_basic": "private/its/sources_internal_namespace_ruling/basic_namespace",
+    "namespace_mixed": "private/its/sources_internal_namespace_ruling/mixed_namespace",
+    "addInitPy_base": "private/its/sources_pr_analysis/addInitPy_base",
+    "addInitPy_pr": "private/its/sources_pr_analysis/addInitPy_pr",
+    "baseCommit": "private/its/sources_pr_analysis/baseCommit",
+    "changeInImportedModule": "private/its/sources_pr_analysis/changeInImportedModule",
+    "changeInPackageInit": "private/its/sources_pr_analysis/changeInPackageInit",
+    "changeInParent": "private/its/sources_pr_analysis/changeInParent",
+    "changeInRelativeImport": "private/its/sources_pr_analysis/changeInRelativeImport",
+    "deletedFile": "private/its/sources_pr_analysis/deletedFile",
+    "djangoViewsScenario": "private/its/sources_pr_analysis/djangoViewsScenario",
+    "duplication": "private/its/sources_pr_analysis/duplication",
+    "newFile": "private/its/sources_pr_analysis/newFile",
 }
 
 
