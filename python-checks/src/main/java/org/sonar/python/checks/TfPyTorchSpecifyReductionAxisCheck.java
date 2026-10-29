@@ -21,13 +21,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -58,20 +59,11 @@ public class TfPyTorchSpecifyReductionAxisCheck extends PythonSubscriptionCheck 
    * Contains a list of reduction functions with a {@code dim} parameter and the position of the dim argument in that function.
    */
   private static final Map<String, Integer> PY_TORCH_REDUCTION_FUNCTIONS_DIM_POS = Map.ofEntries(
-    Map.entry("torch.argmin", 1),
-    Map.entry("torch.aminmax", NO_POSITIONAL_ARG),
-    Map.entry("torch.nanmean", 1),
-    Map.entry("torch.mode", 1),
-    Map.entry("torch.norm", 2),
-    Map.entry("torch.quantile", 2),
-    Map.entry("torch.nanquantile", 2),
-    Map.entry("torch.std", 1),
-    Map.entry("torch.std_mean", 1),
-    Map.entry("torch.unique", 4),
-    Map.entry("torch.unique_consecutive", 3),
-    Map.entry("torch.var", 1),
-    Map.entry("torch.var_mean", 1),
-    Map.entry("torch.count_nonzero", 1)
+    Map.entry("torch.argmin", 1), Map.entry("torch.aminmax", NO_POSITIONAL_ARG), Map.entry("torch.nanmean", 1),
+    Map.entry("torch.mode", 1), Map.entry("torch.norm", 2), Map.entry("torch.quantile", 2),
+    Map.entry("torch.nanquantile", 2), Map.entry("torch.std", 1), Map.entry("torch.std_mean", 1),
+    Map.entry("torch.unique", 4), Map.entry("torch.unique_consecutive", 3), Map.entry("torch.var", 1),
+    Map.entry("torch.var_mean", 1), Map.entry("torch.count_nonzero", 1)
   );
 
   @Override
@@ -81,14 +73,14 @@ public class TfPyTorchSpecifyReductionAxisCheck extends PythonSubscriptionCheck 
 
   private static void checkCallExpr(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
-    Symbol symbol = callExpression.calleeSymbol();
-    if (symbol != null && !Expressions.containsSpreadOperator(callExpression.arguments())) {
-      if (isTfReductionMissingAxisArg(symbol, callExpression)) {
+    if (!Expressions.containsSpreadOperator(callExpression.arguments())) {
+      String fqn = FullyQualifiedNameHelper.getFullyQualifiedName(callExpression.callee().typeV2()).orElse(null);
+      if (isTfReductionMissingAxisArg(fqn, callExpression)) {
         PreciseIssue issue = context.addIssue(callExpression.callee(), TF_MESSAGE);
         createTfQuickFix(callExpression).ifPresent(issue::addQuickFix);
       }
 
-      if (isPyTorchReductionMissingDimArg(symbol, callExpression)) {
+      if (isPyTorchReductionMissingDimArg(fqn, callExpression)) {
         context.addIssue(callExpression.callee(), PY_TORCH_MESSAGE);
       }
     }
@@ -101,14 +93,16 @@ public class TfPyTorchSpecifyReductionAxisCheck extends PythonSubscriptionCheck 
     return Optional.of(PythonQuickFix.newQuickFix("Add axis parameter", TextEditUtils.insertBefore(callExpression.rightPar(), ", axis=None")));
   }
 
-  private static boolean isTfReductionMissingAxisArg(Symbol symbol, CallExpression callExpression) {
-    return TF_REDUCTION_FUNCTIONS_FQN.contains(symbol.fullyQualifiedName())
+  private static boolean isTfReductionMissingAxisArg(@Nullable String fqn, CallExpression callExpression) {
+    return TF_REDUCTION_FUNCTIONS_FQN.contains(fqn)
       && TreeUtils.nthArgumentOrKeyword(AXIS_PARAMETER_POSITION, AXIS_PARAMETER, callExpression.arguments()) == null;
   }
 
-  private static boolean isPyTorchReductionMissingDimArg(Symbol symbol, CallExpression callExpression) {
-    String fqn = symbol.fullyQualifiedName();
-    return fqn != null && PY_TORCH_REDUCTION_FUNCTIONS_DIM_POS.containsKey(fqn)
-      && TreeUtils.nthArgumentOrKeyword(PY_TORCH_REDUCTION_FUNCTIONS_DIM_POS.get(fqn), DIM_PARAMETER, callExpression.arguments()) == null;
+  private static boolean isPyTorchReductionMissingDimArg(@Nullable String fqn, CallExpression callExpression) {
+    if (fqn == null) {
+      return false;
+    }
+    Integer position = PY_TORCH_REDUCTION_FUNCTIONS_DIM_POS.get(fqn);
+    return position != null && TreeUtils.nthArgumentOrKeyword(position, DIM_PARAMETER, callExpression.arguments()) == null;
   }
 }
