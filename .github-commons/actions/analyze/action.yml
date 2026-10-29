@@ -23,5 +23,5 @@ runs:
           -Dsonar.analysisCache.enabled=true -Dsonar.sca.recursiveManifestSearch=true -DgenerateTypeshedStubs -DfailStubGenerationFast=true -Dskip.its=true
         deploy: false
         sonar-platform: ${{ inputs.sonarqube-instance }}
-        scanner-java-opts: '-Xmx1G'
+        scanner-java-opts: '-Xmx2G'
         disable-caching: ${{ inputs.disable-caching }}
