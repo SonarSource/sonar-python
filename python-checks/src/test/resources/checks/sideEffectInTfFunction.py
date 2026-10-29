@@ -70,8 +70,10 @@ def appending_to_list(my_list):  # FN
 
 
 @tf.function
-def appending_to_list(my_list: list[str]):  # FN
+def appending_to_list(my_list: list[str]):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^
     my_list.append("42")
+#   ^^^^^^^^^^^^^^<
 
 
 def some_normal_function(my_list):

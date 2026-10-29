@@ -18,22 +18,21 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DelStatement;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S6928")
 public class SideEffectInTfFunctionCheck extends PythonSubscriptionCheck {
@@ -56,6 +55,9 @@ public class SideEffectInTfFunctionCheck extends PythonSubscriptionCheck {
     "typing.MutableMapping.pop",
     "typing.MutableMapping.clear"
   );
+  private static final TypeMatcher TF_FUNCTION = TypeMatchers.withFQN("tensorflow.function");
+  private static final TypeMatcher SIDE_EFFECT_FUNCTION = TypeMatchers.withFQNSatisfying(
+    fqn -> SIDE_EFFECT_FUNCTIONS.contains(fqn) ? TriBool.TRUE : TriBool.FALSE);
 
   @Override
   public void initialize(Context context) {
@@ -64,11 +66,11 @@ public class SideEffectInTfFunctionCheck extends PythonSubscriptionCheck {
 
   public void checkFunction(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-    boolean isTfFunction = functionDef.decorators().stream().anyMatch(SideEffectInTfFunctionCheck::isTfFunctionDecorator);
+    boolean isTfFunction = functionDef.decorators().stream().anyMatch(decorator -> isTfFunctionDecorator(decorator, ctx));
     if (!isTfFunction) {
       return;
     }
-    SideEffectsVisitor sideEffectsVisitor = new SideEffectsVisitor();
+    SideEffectsVisitor sideEffectsVisitor = new SideEffectsVisitor(ctx);
     functionDef.accept(sideEffectsVisitor);
     if (!sideEffectsVisitor.forbiddenConstructs.isEmpty()) {
       PreciseIssue preciseIssue = ctx.addIssue(functionDef.name(), "Make sure this Tensorflow function doesn't have Python side effects.");
@@ -76,25 +78,24 @@ public class SideEffectInTfFunctionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isTfFunctionDecorator(Decorator decorator) {
-    Expression expression = decorator.expression();
-    if (expression instanceof HasSymbol hasSymbol) {
-      Symbol symbol = hasSymbol.symbol();
-      return symbol != null && "tensorflow.function".equals(symbol.fullyQualifiedName());
-    }
-    return false;
+  private static boolean isTfFunctionDecorator(Decorator decorator, SubscriptionContext ctx) {
+    return TF_FUNCTION.isTrueFor(decorator.expression(), ctx);
   }
 
   static class SideEffectsVisitor extends BaseTreeVisitor {
 
     final List<Tree> forbiddenConstructs = new ArrayList<>();
+    private final SubscriptionContext context;
+
+    SideEffectsVisitor(SubscriptionContext context) {
+      this.context = context;
+    }
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      Optional.ofNullable(callExpression.calleeSymbol())
-        .map(Symbol::fullyQualifiedName)
-        .filter(SIDE_EFFECT_FUNCTIONS::contains)
-        .ifPresent(s -> forbiddenConstructs.add(callExpression.callee()));
+      if (SIDE_EFFECT_FUNCTION.isTrueFor(callExpression.callee(), context)) {
+        forbiddenConstructs.add(callExpression.callee());
+      }
       super.visitCallExpression(callExpression);
     }
 
