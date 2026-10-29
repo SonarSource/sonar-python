@@ -34,7 +34,6 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
@@ -42,7 +41,8 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.utils.Expressions;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
+import org.sonar.python.checks.utils.ReachingValues;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.appsec.SecretClassifier;
 
@@ -65,12 +65,12 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     Optional.of(ctx.syntaxNode())
       .filter(CallExpression.class::isInstance)
       .map(CallExpression.class::cast)
-      .filter(this::callHasToBeChecked)
+      .filter(call -> callHasToBeChecked(call, ctx))
       .ifPresent(call -> checkCallArguments(ctx, call));
   }
 
   private void checkCallArguments(SubscriptionContext ctx, CallExpression call) {
-    getMethod(call).ifPresent(method ->
+    getMethod(call, ctx).ifPresent(method ->
       getArgumentsToCheck(call, method)
         .forEach(argument -> checkArgument(ctx, argument))
     );
@@ -95,7 +95,7 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
         .filter(HardcodedCredentialsCallCheck::isNotKnownNonSecret)
         .ifPresent(string -> ctx.addIssue(argument, MESSAGE));
     } else if (argExp.is(Tree.Kind.NAME)) {
-      findAssignment((Name) argExp, 0)
+      findAssignment((Name) argExp, 0, ctx)
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
         .filter(Predicate.not(HardcodedCredentialsCallCheck::containsFormattedExpressions))
@@ -121,18 +121,18 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
       .anyMatch(element -> !element.formattedExpressions().isEmpty());
   }
 
-  private static Optional<Tree> findAssignment(Name name, int depth) {
+  private static Optional<Tree> findAssignment(Name name, int depth, SubscriptionContext ctx) {
     if (depth > 99) {
       return Optional.empty();
     }
     return Optional.of(name)
-      .map(Expressions::singleAssignedValue)
-      .map(v -> findValue(v, depth));
+      .map(value -> ReachingValues.singleValue(value, ctx))
+      .map(v -> findValue(v, depth, ctx));
   }
 
-  private static Tree findValue(Expression assignedValue, int depth) {
+  private static Tree findValue(Expression assignedValue, int depth, SubscriptionContext ctx) {
     if (assignedValue.is(Tree.Kind.NAME)) {
-      return findAssignment((Name) assignedValue, depth + 1).orElse(null);
+      return findAssignment((Name) assignedValue, depth + 1, ctx).orElse(null);
     } else if (assignedValue.is(Tree.Kind.CALL_EXPR)) {
       return Optional.of(assignedValue)
         .filter(CallExpression.class::isInstance)
@@ -141,26 +141,48 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
         .filter(QualifiedExpression.class::isInstance)
         .map(QualifiedExpression.class::cast)
         .map(QualifiedExpression::qualifier)
-        .map(v -> findValue(v, depth + 1))
+        .map(v -> findValue(v, depth + 1, ctx))
         .orElse(assignedValue);
     }
     return assignedValue;
   }
 
-  private Boolean callHasToBeChecked(CallExpression call) {
-    return getMethodFqn(call)
+  private Boolean callHasToBeChecked(CallExpression call, SubscriptionContext ctx) {
+    return getMethodFqn(call, ctx)
       .map(methods::containsKey)
       .orElse(false);
   }
 
-  private static Optional<String> getMethodFqn(CallExpression call) {
-    return Optional.of(call)
-      .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName);
+  private static Optional<String> getMethodFqn(CallExpression call, SubscriptionContext ctx) {
+    return getFullyQualifiedName(call.callee(), ctx, 0);
   }
 
-  private Optional<CredentialMethod> getMethod(CallExpression call) {
-    return getMethodFqn(call)
+  private static Optional<String> getFullyQualifiedName(Expression expression, SubscriptionContext ctx, int depth) {
+    if (depth > 99) {
+      return Optional.empty();
+    }
+    var fullyQualifiedName = FullyQualifiedNameHelper.getFullyQualifiedName(expression.typeV2());
+    if (fullyQualifiedName.isPresent()) {
+      return fullyQualifiedName;
+    }
+    if (expression instanceof QualifiedExpression qualifiedExpression) {
+      return getFullyQualifiedName(qualifiedExpression.qualifier(), ctx, depth + 1)
+        .map(qualifierFqn -> qualifierFqn + "." + qualifiedExpression.name().name());
+    }
+    if (expression instanceof Name name) {
+      return Optional.ofNullable(ReachingValues.singleValue(name, ctx))
+        .map(HardcodedCredentialsCallCheck::calledExpression)
+        .flatMap(assignedCallee -> getFullyQualifiedName(assignedCallee, ctx, depth + 1));
+    }
+    return Optional.empty();
+  }
+
+  private static Expression calledExpression(Expression expression) {
+    return expression instanceof CallExpression call ? call.callee() : expression;
+  }
+
+  private Optional<CredentialMethod> getMethod(CallExpression call, SubscriptionContext ctx) {
+    return getMethodFqn(call, ctx)
       .map(methods::get);
   }
 

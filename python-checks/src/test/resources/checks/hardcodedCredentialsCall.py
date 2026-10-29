@@ -153,3 +153,9 @@ def oauth2_session():
     oauth.fetch_token(
         'https://api.example.com/o/oauth2/token',
         client_secret='Azerty123') # Noncompliant
+
+
+def cyclic_callee_aliases_do_not_crash():
+    first = second
+    second = first
+    first(password="Azerty123")
