@@ -30,4 +30,9 @@ class ClearTextProtocolsCheckTest {
       "src/test/resources/checks/hotspots/clearTextProtocols_httpServerModuleScope.py"), new ClearTextProtocolsCheck());
   }
 
+  @Test
+  void skips_likely_test_files() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/clearTextProtocolsTestFile.py", new ClearTextProtocolsCheck());
+  }
+
 }

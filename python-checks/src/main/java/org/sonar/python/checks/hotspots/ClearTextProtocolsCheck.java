@@ -70,7 +70,13 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final Set<String> PROTOCOL_IDENTIFICATION_METHODS = Set.of("startswith", "replace", "removeprefix", "removesuffix");
 
   @Override
-  public void initialize(Context context) {
+  public void initialize(Context originalContext) {
+    // Skip every consumer on likely test files
+    Context context = (kind, consumer) -> originalContext.registerSyntaxNodeConsumer(kind, ctx -> {
+      if (!ctx.isLikelyTestFile()) {
+        consumer.accept(ctx);
+      }
+    });
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       Tree node = ctx.syntaxNode();
       String value = Expressions.unescape((StringElement) node);
