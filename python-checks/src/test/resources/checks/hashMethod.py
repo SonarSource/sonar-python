@@ -48,3 +48,8 @@ def comprehension_keys(items):
     result = {[]: item for item in items}  # FN: this rule only checks dictionary and set displays
     # Nested dictionary displays are still checked.
     result = {item: {[]: item} for item in items}  # Noncompliant
+
+
+def collection_classes_are_hashable():
+    {list, set, dict}
+    {list: 1, set: 2, dict: 3}

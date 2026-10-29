@@ -22,18 +22,19 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.SetLiteral;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.DICTIONARY_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.KEY_VALUE_PAIR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SET_LITERAL;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 @Rule(key = "S6662")
 public class HashMethodCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Make sure this expression is hashable.";
+  private static final TypeMatcher HASH_IS_MANUALLY_SET_TO_NONE = TypeMatchers.isObjectSatisfying(
+    TypeMatchers.hasMemberSatisfying("__hash__", TypeMatchers.isObjectOfType("NoneType")));
 
   @Override
   public void initialize(Context context) {
@@ -58,11 +59,7 @@ public class HashMethodCheck extends PythonSubscriptionCheck {
    The implementation will only focus on 2., because 1. is causing too many FPs for typeshed symbols (e.g. int)
    */
   private static void checkHashMethod(Expression expression, SubscriptionContext ctx) {
-    InferredType type = expression.type();
-    boolean hashIsManuallySetToNone = type.resolveMember("__hash__")
-      .filter(symbol -> ((SymbolImpl) symbol).inferredType().canOnlyBe(NONE_TYPE))
-      .isPresent();
-    if (hashIsManuallySetToNone) {
+    if (HASH_IS_MANUALLY_SET_TO_NONE.isTrueFor(expression, ctx)) {
       ctx.addIssue(expression, MESSAGE);
     }
   }
