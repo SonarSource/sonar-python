@@ -50,4 +50,11 @@ class PytzUsageCheckTest {
     ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39));
     PythonCheckVerifier.verify("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck());
   }
+
+  @Test
+  void test_multiple_imports_raise_an_issue_for_each_imported_name() {
+    assertThat(PythonCheckVerifier.issues("src/test/resources/checks/pytzUsageMultipleImports.py", new PytzUsageCheck()))
+      .hasSize(2)
+      .allSatisfy(issue -> assertThat(issue.primaryLocation().startLine()).isEqualTo(1));
+  }
 }

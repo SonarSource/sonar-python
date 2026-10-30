@@ -23,17 +23,19 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6890")
 public class PytzUsageCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Don't use `pytz` module with Python 3.9 and later.";
+  private static final TypeMatcher PYTZ_PREFIX_MATCHER = TypeMatchers.withFQNPrefix("pytz.");
 
   @Override
   public void initialize(Context context) {
@@ -50,10 +52,19 @@ public class PytzUsageCheck extends PythonSubscriptionCheck {
       return;
     }
 
+    if (context.syntaxNode() instanceof ImportFrom importFrom) {
+      if (importFrom.dottedPrefixForModule().isEmpty()) {
+        Optional.ofNullable(importFrom.module())
+          // V1 associated the imported symbol with the alias rather than the imported name.
+          // Preserve that behavior: an aliased "from pytz import ..." import is not reported.
+          .ifPresent(module -> importFrom.importedNames().stream()
+            .filter(name -> name.alias() == null && (isPytzModule(module) || isPytzImportedName(name)))
+            .forEach(name -> context.addIssue(module, MESSAGE)));
+      }
+      return;
+    }
+
     Stream.of(
-      Optional.of(context.syntaxNode())
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(ImportFrom.class))
-        .map(ImportFrom::importedNames),
       Optional.of(context.syntaxNode())
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(ImportName.class))
         .map(ImportName::modules))
@@ -65,18 +76,17 @@ public class PytzUsageCheck extends PythonSubscriptionCheck {
       .filter(list -> !list.isEmpty())
       .map(names -> names.get(0))
       .filter(name -> "pytz".equals(name.name())
-        || Optional.ofNullable(name.symbol())
-          .map(Symbol::fullyQualifiedName)
-          .filter(fqn -> fqn.startsWith("pytz")).isPresent())
-      .forEach(name -> raiseIssue(context, name));
+        || PYTZ_PREFIX_MATCHER.isTrueFor(name, context))
+      .forEach(name -> context.addIssue(name, MESSAGE));
   }
 
-  private static void raiseIssue(SubscriptionContext context, Tree tree) {
-    if (context.syntaxNode().is(Tree.Kind.IMPORT_FROM)) {
-      ImportFrom importFrom = (ImportFrom) context.syntaxNode();
-      Optional.ofNullable(importFrom.module()).ifPresent(module -> context.addIssue(module, MESSAGE));
-    } else {
-      context.addIssue(tree, MESSAGE);
-    }
+  private static boolean isPytzModule(DottedName module) {
+    return !module.names().isEmpty()
+      && "pytz".equals(module.names().get(0).name());
+  }
+
+  private static boolean isPytzImportedName(AliasedName name) {
+    return !name.dottedName().names().isEmpty()
+      && "pytz".equals(name.dottedName().names().get(0).name());
   }
 }
