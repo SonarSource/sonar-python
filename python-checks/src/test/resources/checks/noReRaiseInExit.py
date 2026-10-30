@@ -18,6 +18,11 @@ class MyContextManager:
             print("exception")
             raise  # No issue when raising another exception. The __exit__ method can fail and raise an exception
         raise MemoryError("No more memory")  # This is ok too.
+        raise NotImplementedError
+
+class ExitWithoutPackedParameter:
+    def __exit__(self, exc_type, exc_value, traceback):
+        raise NotImplementedError[0]
 
 # Edge cases
 

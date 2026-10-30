@@ -18,15 +18,13 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
@@ -38,12 +36,12 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
 
   private static class RaiseVisitor extends BaseTreeVisitor {
-    private final Symbol caughtException;
-    private final Symbol packedParameter;
+    private final SymbolV2 caughtException;
+    private final SymbolV2 packedParameter;
 
     private final List<RaiseStatement> nonCompliantRaises = new ArrayList<>();
 
-    public RaiseVisitor(Symbol caughtException, Symbol packedParameter) {
+    public RaiseVisitor(SymbolV2 caughtException, SymbolV2 packedParameter) {
       this.caughtException = caughtException;
       this.packedParameter = packedParameter;
     }
@@ -61,7 +59,7 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
       }
 
       Expression raisedException = pyRaiseStatementTree.expressions().get(0);
-      if (raisedException instanceof HasSymbol hasSymbol && Objects.equals(hasSymbol.symbol(), caughtException)) {
+      if (caughtException != null && raisedException instanceof Name name && caughtException.equals(name.symbolV2())) {
         nonCompliantRaises.add(pyRaiseStatementTree);
       }
 
@@ -69,14 +67,14 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
         SubscriptionExpression subscriptionExpression = (SubscriptionExpression) raisedException;
         Expression objectExpression = subscriptionExpression.object();
 
-        if (objectExpression instanceof HasSymbol hasSymbol && Objects.equals(hasSymbol.symbol(), packedParameter)) {
+        if (packedParameter != null && objectExpression instanceof Name name && packedParameter.equals(name.symbolV2())) {
           nonCompliantRaises.add(pyRaiseStatementTree);
         }
       }
     }
   }
 
-  private static Symbol extractPackedParameter(ParameterList parameterList) {
+  private static SymbolV2 extractPackedParameter(ParameterList parameterList) {
     if (parameterList.nonTuple().size() != 2) {
       return null;
     }
@@ -90,10 +88,10 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     if (name == null) {
       return null;
     }
-    return name.symbol();
+    return name.symbolV2();
   }
 
-  private static Symbol extractCaughtExceptionParameter(ParameterList parameterList) {
+  private static SymbolV2 extractCaughtExceptionParameter(ParameterList parameterList) {
     List<Parameter> regularParams = parameterList.nonTuple();
     if (regularParams.size() != 4 || !regularParams.equals(parameterList.all())) {
       // A valid signature has 4 parameters here: self, exc_type, exc_value, trace_back.
@@ -106,7 +104,7 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     if (name == null) {
       return null;
     }
-    return name.symbol();
+    return name.symbolV2();
   }
 
   @Override
@@ -118,8 +116,8 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
         return;
       }
 
-      Symbol caughtException = extractCaughtExceptionParameter(parameterList);
-      Symbol packedParameter = extractPackedParameter(parameterList);
+      SymbolV2 caughtException = extractCaughtExceptionParameter(parameterList);
+      SymbolV2 packedParameter = extractPackedParameter(parameterList);
 
       RaiseVisitor visitor = new RaiseVisitor(caughtException, packedParameter);
       functionDef.accept(visitor);
