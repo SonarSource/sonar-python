@@ -22,8 +22,8 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6556")
@@ -42,6 +44,8 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
   private static final String RENDER_FUNCTION = "django.shortcuts.render";
   private static final String LOCALS = "locals";
   private static final String CONTEXT_KEYWORD = "context";
+  private static final TypeMatcher RENDER_FUNCTION_MATCHER = TypeMatchers.withFQN(RENDER_FUNCTION);
+  private static final TypeMatcher LOCALS_FUNCTION_MATCHER = TypeMatchers.withFQN(LOCALS);
 
   private static final int MAX_RECURSION_COUNT = 5;
 
@@ -52,8 +56,7 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
 
   private static void checkForDjangoRender(SubscriptionContext ctx) {
     CallExpression expression = ((CallExpression) ctx.syntaxNode());
-    Symbol symbol = expression.calleeSymbol();
-    if (symbol != null && RENDER_FUNCTION.equals(symbol.fullyQualifiedName())) {
+    if (RENDER_FUNCTION_MATCHER.isTrueFor(expression.callee(), ctx)) {
       checkForContextArgument(ctx, expression);
     }
   }
@@ -63,7 +66,7 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
     if (contextArg != null) {
       if (contextArg.expression().is(Tree.Kind.CALL_EXPR)) {
         CallExpression maybeLocalsCall = (CallExpression) contextArg.expression();
-        if (isLocalsCall(maybeLocalsCall)) {
+        if (isLocalsCall(maybeLocalsCall, ctx)) {
           ctx.addIssue(maybeLocalsCall, MESSAGE);
         }
       } else if (contextArg.expression().is(Tree.Kind.NAME)) {
@@ -74,11 +77,11 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
 
   private static void checkIfLocalsIsAssignedToContextParameter(SubscriptionContext ctx, RegularArgument contextArg, Name maybeLocalsCall, int recursionCount) {
     if (recursionCount <= MAX_RECURSION_COUNT) {
-      Symbol contextSymbol = maybeLocalsCall.symbol();
+      SymbolV2 contextSymbol = maybeLocalsCall.symbolV2();
       if (contextSymbol != null) {
         List<Tree> assignmentStmts = contextSymbol.usages().stream()
-          .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
-          .map(Usage::tree)
+          .filter(usage -> usage.kind() == UsageV2.Kind.ASSIGNMENT_LHS)
+          .map(UsageV2::tree)
           .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_EXPRESSION, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT))
           .filter(Objects::nonNull)
           .toList();
@@ -108,7 +111,7 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
     int recursionCount) {
     if (assignedValue.is(Tree.Kind.CALL_EXPR)) {
       CallExpression localsAssignment = (CallExpression) assignedValue;
-      if (isLocalsCall(localsAssignment)) {
+      if (isLocalsCall(localsAssignment, ctx)) {
         raiseIssueLocalsIsAssigned(ctx, contextArg, assignment, localsAssignment);
       }
     } else if (assignedValue.is(Tree.Kind.NAME)) {
@@ -134,8 +137,7 @@ public class DjangoRenderContextCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isLocalsCall(CallExpression callExpression) {
-    Symbol localsSymbol = callExpression.calleeSymbol();
-    return localsSymbol != null && LOCALS.equals(localsSymbol.fullyQualifiedName());
+  private static boolean isLocalsCall(CallExpression callExpression, SubscriptionContext ctx) {
+    return LOCALS_FUNCTION_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }
 }
