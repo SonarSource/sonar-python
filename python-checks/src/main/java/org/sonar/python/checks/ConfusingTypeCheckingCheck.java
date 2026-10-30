@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -36,9 +37,11 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
@@ -48,6 +51,8 @@ import static org.sonar.python.types.InferredTypes.typeSymbols;
 
 @Rule(key = "S5864")
 public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
+  private static final String GET_ITEM_METHOD = "__getitem__";
+
   @Override
   public void initialize(Context context) {
     new NonCallableCalledCheck().initialize(context);
@@ -86,6 +91,18 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
 
   private static class ItemOperationsTypeCheck extends ItemOperationsType {
 
+    private static final TypeMatcher INSTANCE = TypeMatchers.isObjectSatisfying(TypeMatchers.all());
+    private static final TypeMatcher DESCRIPTOR = TypeMatchers.hasMember("__get__");
+    private static final Map<String, TypeMatcher> DESCRIPTOR_RETURN_SUPPORTS = Map.of(
+      GET_ITEM_METHOD, descriptorReturnSupports(GET_ITEM_METHOD),
+      "__setitem__", descriptorReturnSupports("__setitem__"),
+      "__delitem__", descriptorReturnSupports("__delitem__"));
+
+    private static TypeMatcher descriptorReturnSupports(String method) {
+      return TypeMatchers.hasMemberSatisfying("__get__",
+        InternalTypeMatchers.canReturnTypeSatisfying(TypeMatchers.hasMember(method)));
+    }
+
     @Override
     public boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
                                        Map<LocationInFile, String> secondaries, SubscriptionContext context) {
@@ -98,7 +115,17 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
         // handled by S5644
         return true;
       }
-      return isUsedInsideInExpression(subscriptionObject) || type.declaresMember(requiredMethod);
+      if (isUsedInsideInExpression(subscriptionObject)) {
+        return true;
+      }
+      // Use the V2 descriptor's return type for instance reads, not the
+      // descriptor object itself. Unknown callable effects remain conservative.
+      if (Expressions.removeParentheses(subscriptionObject) instanceof QualifiedExpression attribute
+        && INSTANCE.isTrueFor(attribute.qualifier(), context)
+        && DESCRIPTOR.isTrueFor(attribute, context)) {
+        return !DESCRIPTOR_RETURN_SUPPORTS.get(requiredMethod).evaluateFor(attribute, context).isFalse();
+      }
+      return type.declaresMember(requiredMethod);
     }
 
     private static boolean isUsedInsideInExpression(Expression subscriptionObject) {
@@ -132,7 +159,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
       String typeName = InferredTypes.typeName(type);
       String secondaryMessage = typeName != null ? String.format(SECONDARY_MESSAGE, typeName) : DEFAULT_SECONDARY_MESSAGE;
       secondaries.put(InferredTypes.typeClassLocation(type), secondaryMessage);
-      return !containsDeclaredType(type) || type.declaresMember("__iter__") || type.declaresMember("__getitem__");
+      return !containsDeclaredType(type) || type.declaresMember("__iter__") || type.declaresMember(GET_ITEM_METHOD);
     }
 
     @Override

@@ -58,6 +58,15 @@ public final class InternalTypeMatchers {
     return new TypeMatcherImpl(new HasOnlyFunctionDecoratorsSatisfyingPredicate(getTypePredicate(matcher)));
   }
 
+  /**
+   * Matches when an undecorated synchronous function can return a type satisfying the matcher.
+   * Callable and return unions match if any alternative matches, and fail only if all fail.
+   * Other callable shapes, decorators, asynchronous functions and unresolved types return UNKNOWN.
+   */
+  public static TypeMatcher canReturnTypeSatisfying(TypeMatcher matcher) {
+    return new TypeMatcherImpl(new CanReturnTypeSatisfyingPredicate(getTypePredicate(matcher)));
+  }
+
   private static TypePredicate getTypePredicate(TypeMatcher matcher) {
     if (matcher instanceof TypeMatcherImpl(TypePredicate predicate)) {
       return predicate;

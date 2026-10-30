@@ -64,3 +64,95 @@ def torch_datasets(d1:Dataset, d2:IterableDataset, d3:TensorDataset, d4:StackDat
   d5[42]
   d6[42]
   d7[42]
+
+
+class DictionaryDescriptor:
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+        return {}
+
+class DescriptorOwner:
+    items: DictionaryDescriptor = DictionaryDescriptor()
+    ordinary: int = 1
+
+    def update(self):
+        self.items["key"] = 1
+        _ = self.items["key"]
+        del self.items["key"]
+        (self.items)["key"] = 1
+        self.ordinary["key"] = 1  # Noncompliant
+
+
+def descriptor_object_itself(value: DictionaryDescriptor):
+    value["key"] = 1  # Noncompliant
+
+
+def class_descriptor_read():
+    DescriptorOwner.items["key"] = 1  # Noncompliant
+
+def unknown_descriptor_receiver(value):
+    value.items["key"] = 1
+
+class IntegerDescriptor:
+    def __get__(self, instance, owner) -> int:
+        return 1
+
+class KnownDescriptorOwner:
+    number: IntegerDescriptor = IntegerDescriptor()
+
+    def update(self):
+        self.number["key"] = 1  # Noncompliant
+
+
+def decorate_getter(function):
+    return lambda *args: {}
+
+class DecoratedDescriptor:
+    @decorate_getter
+    def __get__(self, instance, owner) -> int:
+        return 1
+
+class AsyncDescriptor:
+    async def __get__(self, instance, owner) -> int:
+        return 1
+
+class DictionaryReturnDescriptor:
+    def __get__(self, instance, owner) -> dict:
+        return {}
+
+class MixedReturnDescriptor:
+    def __get__(self, instance, owner) -> int | dict:
+        ...
+
+class IncompatibleReturnDescriptor:
+    def __get__(self, instance, owner) -> int | float:
+        ...
+
+class DescriptorReturnTypes:
+    decorated: DecoratedDescriptor = DecoratedDescriptor()
+    asynchronous: AsyncDescriptor = AsyncDescriptor()
+    dictionary: DictionaryReturnDescriptor = DictionaryReturnDescriptor()
+    mixed: MixedReturnDescriptor = MixedReturnDescriptor()
+    incompatible: IncompatibleReturnDescriptor = IncompatibleReturnDescriptor()
+
+    def update(self):
+        self.decorated["key"] = 1
+        self.asynchronous["key"] = 1  # Callable effects remain unknown.
+        self.dictionary["key"] = 1
+        self.mixed["key"] = 1
+        self.incompatible["key"] = 1  # Noncompliant
+
+
+from sqlalchemy import JSON
+from sqlalchemy.orm import Mapped, mapped_column
+
+class MappedDictionary:
+    data: Mapped[dict] = mapped_column(JSON)
+
+    def update(self, **kwargs):
+        self.data = kwargs
+        self.data["prefix"] = "value"
+
+    def update_later(self):
+        self.data["key"] = "value"
