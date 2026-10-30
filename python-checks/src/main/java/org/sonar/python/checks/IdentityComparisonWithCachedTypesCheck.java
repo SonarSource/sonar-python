@@ -16,7 +16,9 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -28,9 +30,12 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.ReachingValues;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -42,6 +47,8 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
   private static final String MESSAGE_IS_NOT = "Replace this \"is not\" operator with \"!=\"; identity operator is not reliable here.";
   public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\"";
   public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\"";
+
+  private static final TypeMatcher ENUM_CLASS = TypeMatchers.isOrExtendsType("enum.Enum");
 
   private static final TypeMatcher BUILTIN_FACTORY = TypeMatchers.any(
     Stream.of("frozenset", "bytes", "int", "float", "str", "tuple", "hash")
@@ -97,6 +104,9 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
    * returned reference is not shared anywhere.
    */
   private static boolean isUnsuitableOperand(Expression expr, SubscriptionContext ctx) {
+    if (isEnumMember(expr, ctx)) {
+      return false;
+    }
     if (UNSUITABLE_TYPE.isTrueFor(expr, ctx)) {
       if (expr instanceof Name name) {
         SymbolV2 symbol = name.symbolV2();
@@ -111,6 +121,21 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
       return BUILTIN_FACTORY.isTrueFor(callExpr.callee(), ctx);
     }
     return false;
+  }
+
+  private static boolean isEnumMember(Expression expression, SubscriptionContext ctx) {
+    Set<Expression> visited = new HashSet<>();
+    Expression value = Expressions.removeParentheses(expression);
+    while (value instanceof Name name && visited.add(value)) {
+      value = ReachingValues.singleValue(name, ctx);
+      if (value == null) {
+        return false;
+      }
+      value = Expressions.removeParentheses(value);
+    }
+    // Enum class members may retain their scalar initializer type in stubs.
+    // Their runtime values are Enum singletons, not those scalar initializers.
+    return value instanceof QualifiedExpression member && ENUM_CLASS.isTrueFor(member.qualifier(), ctx);
   }
 
   /**

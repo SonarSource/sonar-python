@@ -192,3 +192,38 @@ def shadowed_builtin_names(other):
         pass
     int() is other
     bytes() is other
+
+
+from cryptography.hazmat.primitives.serialization.ssh import SSHCertificateType
+from enum import Enum, IntEnum
+
+class Color(Enum):
+    RED = 1
+
+class Number(IntEnum):
+    ONE = 1
+
+def enum_members(value):
+    value is SSHCertificateType.USER
+    value is not SSHCertificateType.HOST
+    value is (SSHCertificateType.USER)
+    Alias = SSHCertificateType
+    value is Alias.USER
+    member = SSHCertificateType.USER
+    alias = member
+    value is member
+    value is alias
+    value is Color.RED
+    value is Number.ONE
+
+
+def enum_value_is_not_a_member(value, member: Number):
+    value is member.value  # Existing unresolved Enum.value inference is unchanged.
+    value is Number.ONE.value
+    value is 1000  # Noncompliant
+
+def ordinary_constants(value):
+    import subprocess
+    value is subprocess.STDOUT  # Noncompliant
+    member = subprocess.STDOUT
+    value is member  # Noncompliant
