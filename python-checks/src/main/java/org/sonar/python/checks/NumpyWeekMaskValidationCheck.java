@@ -18,14 +18,12 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -35,6 +33,8 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -47,11 +47,11 @@ public class NumpyWeekMaskValidationCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_ARRAY = "Array must have 7 elements, all of which are 0 or 1.";
   private static final String MESSAGE_STRING = "String must be either 7 characters long and contain only 0 and 1, or contain abbreviated weekdays.";
   private static final String MESSAGE_SECONDARY_LOCATION = "Invalid mask is created here.";
-  private static final Map<String, Integer> FUNCTIONS_PARAMETER_POSITION = Map.of(
-    "numpy.busday_offset", 3,
-    "numpy.busday_count", 2,
-    "numpy.is_busday", 1,
-    "numpy.busdaycalendar", 0);
+  private static final Map<TypeMatcher, Integer> FUNCTIONS_PARAMETER_POSITION = Map.of(
+    TypeMatchers.withFQN("numpy.busday_offset"), 3,
+    TypeMatchers.withFQN("numpy.busday_count"), 2,
+    TypeMatchers.withFQN("numpy.is_busday"), 1,
+    TypeMatchers.withFQN("numpy.busdaycalendar"), 0);
 
   @Override
   public void initialize(Context context) {
@@ -60,10 +60,10 @@ public class NumpyWeekMaskValidationCheck extends PythonSubscriptionCheck {
 
   private static void checkCallExpr(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
-    var weekmaskArgumentOptional = Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(FUNCTIONS_PARAMETER_POSITION::containsKey)
-      .map(FUNCTIONS_PARAMETER_POSITION::get)
+    var weekmaskArgumentOptional = FUNCTIONS_PARAMETER_POSITION.entrySet().stream()
+      .filter(entry -> entry.getKey().isTrueFor(callExpression.callee(), context))
+      .map(Map.Entry::getValue)
+      .findFirst()
       .map(position -> TreeUtils.nthArgumentOrKeyword(position, "weekmask", callExpression.arguments()));
     if (weekmaskArgumentOptional.isEmpty()) {
       return;
