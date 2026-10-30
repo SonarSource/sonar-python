@@ -21,8 +21,11 @@ import static org.sonar.python.semantic.SymbolUtils.resolvedPath;
 import com.google.common.annotations.VisibleForTesting;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -31,6 +34,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
@@ -347,17 +351,38 @@ public class PackageRootResolver {
   private static BuildConfigFiles findBuildConfigFiles(FileSystem fileSystem) {
     List<File> pyprojectFiles = new ArrayList<>();
     List<File> setupPyFiles = new ArrayList<>();
-    try (Stream<Path> stream = Files.walk(fileSystem.baseDir().toPath())) {
-      stream
-        .filter(Files::isRegularFile)
-        .forEach(path -> {
+    Path baseDir = fileSystem.baseDir().toPath();
+    try {
+      Files.walkFileTree(baseDir, new SimpleFileVisitor<>() {
+        @Override
+        public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+          if (!Files.isRegularFile(path)) {
+            return FileVisitResult.CONTINUE;
+          }
           String filename = path.getFileName().toString();
           if ("pyproject.toml".equals(filename)) {
             pyprojectFiles.add(path.toFile());
           } else if ("setup.py".equals(filename)) {
             setupPyFiles.add(path.toFile());
           }
-        });
+          return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+        public FileVisitResult visitFileFailed(Path path, IOException exception) throws IOException {
+          if (!path.equals(baseDir)) {
+            LOG.warn("Skipping inaccessible path '{}' while searching for Python build configuration files.", path);
+            LOG.debug("Unable to access path '{}'.", path, exception);
+            return FileVisitResult.CONTINUE;
+          }
+          throw exception;
+        }
+
+        @Override
+        public FileVisitResult postVisitDirectory(Path dir, @Nullable IOException exception) throws IOException {
+          return exception == null ? FileVisitResult.CONTINUE : visitFileFailed(dir, exception);
+        }
+      });
     } catch (IOException e) {
       return new BuildConfigFiles(List.of(), List.of());
     }
