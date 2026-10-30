@@ -22,9 +22,9 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 
 @Rule(key = "S6711")
 public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
@@ -93,11 +93,11 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
 
   private static void checkNumpyRandomState(SubscriptionContext ctx) {
     CallExpression call = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(call.calleeSymbol())
-        .map(Symbol::fullyQualifiedName)
-        .filter(fqn -> !LEGACY_FUNCTION_EXCEPTIONS.contains(fqn) &&
-            (fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn)))
-        .ifPresent(fqn -> ctx.addIssue(call.callee(), MESSAGE));
+    Optional.of(call.callee())
+      .flatMap(callee -> FullyQualifiedNameHelper.getFullyQualifiedName(callee.typeV2()))
+      .filter(fqn -> !LEGACY_FUNCTION_EXCEPTIONS.contains(fqn) &&
+        (fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn)))
+      .ifPresent(fqn -> ctx.addIssue(call.callee(), MESSAGE));
   }
 
 }
