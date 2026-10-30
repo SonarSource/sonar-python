@@ -92,6 +92,32 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void wildcard_import_of_redefined_stub_symbol_has_one_import_usage() {
+    FileInput tree = parse("from pyspark.sql.functions import *", "print('Test')");
+
+    Symbol log = getSymbolByName(tree).get("log");
+    assertThat(log.usages()).singleElement().satisfies(usage -> {
+      assertThat(usage.kind()).isEqualTo(Usage.Kind.IMPORT);
+      assertThat(usage.tree()).isSameAs(tree.statements().statements().get(0));
+    });
+  }
+
+  @Test
+  void repeated_wildcard_imports_preserve_distinct_usages_of_existing_symbol() {
+    FileInput tree = parse(
+      "log = 42",
+      "from pyspark.sql.functions import *",
+      "from pyspark.sql.functions import *",
+      "log('value')");
+
+    Symbol log = getSymbolByName(tree).get("log");
+    assertThat(log.usages()).extracting(Usage::kind)
+      .containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    assertThat(log.usages()).extracting(usage -> usage.tree().firstToken().line()).containsExactly(1, 2, 3, 4);
+    assertThat(log.fullyQualifiedName()).isNull();
+  }
+
+  @Test
   void unresolved_wildcard_import() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), empty()),

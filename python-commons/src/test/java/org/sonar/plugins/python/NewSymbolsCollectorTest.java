@@ -18,10 +18,15 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.concurrent.locks.ReentrantLock;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.scanner.plugin.api.impl.fs.DefaultInputFile;
 import org.sonar.scanner.plugin.api.impl.fs.DefaultTextPointer;
@@ -76,6 +81,22 @@ class NewSymbolsCollectorTest {
     verifyUsages(40, 61, reference(40, 54, 40, 55));
     verifyUsages(42, 0, reference(43, 31, 43, 32), reference(43, 42, 43, 43),
       reference(44, 21, 44, 22));
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2})
+  void pyspark_wildcard_imports(int importCount, @TempDir Path baseDir) throws Exception {
+    String code = "from pyspark.sql.functions import *\n".repeat(importCount) + "value = log(col('value'))\nprint(value)\n";
+    Path file = Files.writeString(baseDir.resolve("sample.py"), code);
+    var inputFile = TestInputFileBuilder.create("moduleKey", file.getFileName().toString()).initMetadata(code).build();
+    var sensorContext = SensorContextTester.create(baseDir.toFile());
+    sensorContext.fileSystem().add(inputFile);
+    var tree = TestPythonVisitorRunner.createContext(file.toFile()).rootTree();
+
+    new NewSymbolsCollector(new ReentrantLock()).collect(sensorContext.newSymbolTable().onFile(inputFile), tree);
+
+    assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), importCount + 1, 0))
+      .containsExactly(reference(importCount + 2, 6, importCount + 2, 11));
   }
 
   private void verifyUsages(int line, int offset, TextRange... trs) {

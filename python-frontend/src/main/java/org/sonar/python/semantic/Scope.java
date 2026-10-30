@@ -81,7 +81,9 @@ class Scope {
   }
 
   void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols, ImportFrom importFrom) {
+    Set<String> importedNames = new HashSet<>();
     importedSymbols.forEach(symbol -> {
+      boolean firstImportOfName = importedNames.add(symbol.name());
       if (!isExistingSymbol(symbol.name())) {
         symbols.add(symbol);
         symbolsByName.put(symbol.name(), symbol);
@@ -90,7 +92,10 @@ class Scope {
         SymbolImpl originalSymbol = resolve(symbol.name());
         if (originalSymbol != null) {
           resetSymbolInfo(symbol.fullyQualifiedName(), originalSymbol);
-          originalSymbol.addUsage(importFrom, Usage.Kind.IMPORT);
+          // Several stub definitions can map to the same local symbol.
+          if (firstImportOfName) {
+            originalSymbol.addUsage(importFrom, Usage.Kind.IMPORT);
+          }
         }
       }
     });
