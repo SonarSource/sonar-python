@@ -53,13 +53,79 @@ class SuperProxyTypeTest {
   }
 
   @Test
-  void does_not_guess_between_multiple_bases_in_an_incomplete_hierarchy() {
+  void resolves_a_first_direct_base_local_member_with_unresolved_ancestry() {
     var classes = classTypes("""
       class Base(unknown.Ancestor):
         target = 42
       class Other: ...
       class Child(Base, Other): ...
       """);
+    assertThat(new SuperProxyType(classes.getLast()).resolveMember("target")).isEqualTo(classes.getFirst().resolveMember("target"));
+  }
+
+  @Test
+  void skips_complete_mixins_without_the_member_before_a_direct_local_member() {
+    var classes = classTypes("""
+      class Root: ...
+      class Mixin(Root): ...
+      class OtherMixin(Root): ...
+      class Base(unknown.Ancestor):
+        target = 42
+      class Child(Mixin, OtherMixin, Base): ...
+      """);
+    var owner = classes.getLast();
+    assertThat(owner.mro()).isEmpty();
+    assertThat(new SuperProxyType(owner).canResolveMembers()).isTrue();
+    assertThat(new SuperProxyType(owner).resolveMember("target")).isEqualTo(classes.get(3).resolveMember("target"));
+  }
+
+  @Test
+  void incomplete_preceding_base_can_hide_the_member() {
+    var classes = classTypes("""
+      class Mixin(unknown.Ancestor): ...
+      class Base:
+        target = 42
+      class Child(Mixin, Base): ...
+      """);
+    assertThat(new SuperProxyType(classes.getLast()).resolveMember("target")).isEmpty();
+  }
+
+  @Test
+  void unknown_direct_base_keeps_lookup_conservative() {
+    var classes = classTypes("""
+      class Base:
+        target = 42
+      class Child(unknown.Mixin, Base): ...
+      """);
+    var proxy = new SuperProxyType(classes.getLast());
+    assertThat(proxy.canResolveMembers()).isFalse();
+    assertThat(proxy.resolveMember("target")).isEmpty();
+  }
+
+  @Test
+  void inherited_member_on_an_earlier_base_may_be_interleaved_by_c3() {
+    var classes = classTypes("""
+      class Root:
+        target = 42
+      class Mixin(Root): ...
+      class Base(unknown.Ancestor):
+        target = 43
+      class Child(Mixin, Base): ...
+      """);
+    assertThat(new SuperProxyType(classes.getLast()).resolveMember("target")).isEmpty();
+  }
+
+  @Test
+  void rejects_repeated_bases_and_known_c3_conflicts_before_local_lookup() {
+    var classes = classTypes("""
+      class Root: ...
+      class Mixin(Root): ...
+      class Base(unknown.Ancestor):
+        target = 42
+      class Repeated(Base, Base): ...
+      class Conflict(Root, Mixin, Base): ...
+      """);
+    assertThat(new SuperProxyType(classes.get(3)).resolveMember("target")).isEmpty();
     assertThat(new SuperProxyType(classes.getLast()).resolveMember("target")).isEmpty();
   }
 

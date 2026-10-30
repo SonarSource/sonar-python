@@ -263,7 +263,7 @@ class CallReturnTypeCalculatorTest {
   }
 
   @Test
-  void incomplete_super_lookup_does_not_choose_between_multiple_bases() {
+  void incomplete_super_lookup_resolves_the_first_direct_bases_local_member() {
     FileInput fileInput = parseAndInferTypes("""
       class Parent(UnknownBase):
         def target(self, value): pass
@@ -274,9 +274,11 @@ class CallReturnTypeCalculatorTest {
           super()
       """);
     var result = CallReturnTypeCalculator.computeCallExpressionType(getSuperCall(fileInput), typePredicateContext);
-    assertThat(result).isInstanceOfSatisfying(ObjectType.class, objectType ->
-      assertThat(objectType.type()).isInstanceOfSatisfying(ClassType.class,
-        classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("super")));
+    assertThat(result).isInstanceOfSatisfying(ObjectType.class, objectType -> {
+      assertThat(objectType.type()).isInstanceOf(SuperProxyType.class);
+      assertThat(objectType.resolveMember("target")).hasValueSatisfying(member ->
+        assertThat(((FunctionType) member).fullyQualifiedName()).isEqualTo("my_package.mod.Parent.target"));
+    });
   }
 
   @Test

@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python.api.types.v2;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,8 +24,9 @@ import java.util.Optional;
  * Member lookup delegates to the enclosing class's C3 MRO tail — i.e. the MRO
  * starting from the first parent (skipping the class itself).
  * Known class-base alternatives are checked through every valid C3 order.
- * With unresolved distant ancestry, only a sole known direct parent's local members
- * can be resolved. As with complete MRO lookup, this models the enclosing class;
+ * With unresolved distant ancestry, a direct parent's local member can be resolved
+ * when every preceding base has a complete hierarchy without that member.
+ * As with complete MRO lookup, this models the enclosing class;
  * runtime changes caused by subclassing or class decorators are not modeled.
  */
 public record SuperProxyType(ClassType ownerClassType) implements PythonType {
@@ -41,15 +43,32 @@ public record SuperProxyType(ClassType ownerClassType) implements PythonType {
   public boolean canResolveMembers() {
     return ownerClassType.mro().filter(mro -> mro.size() > 1).isPresent()
       || ClassTypeMroUtils.computeAlternatives(ownerClassType).isPresent()
-      || directBaseInIncompleteHierarchy().isPresent();
+      || directBasesInIncompleteHierarchy().isPresent();
   }
 
-  private Optional<ClassType> directBaseInIncompleteHierarchy() {
-    var bases = ownerClassType.superClasses();
-    if (bases.size() == 1 && bases.getFirst().type() instanceof ClassType base && ownerClassType.hasUnresolvedHierarchy()
+  private Optional<List<ClassType>> directBasesInIncompleteHierarchy() {
+    var bases = ownerClassType.superClasses().stream().map(TypeWrapper::type).toList();
+    if (!bases.isEmpty() && bases.stream().allMatch(ClassType.class::isInstance) && ownerClassType.hasUnresolvedHierarchy()
       // Validate known ancestry without using its partial linearization for member lookup.
       && ClassTypeMroUtils.compute(ownerClassType).isPresent()) {
-      return Optional.of(base);
+      return Optional.of(bases.stream().map(ClassType.class::cast).toList());
+    }
+    return Optional.empty();
+  }
+
+  private Optional<PythonType> directMemberInIncompleteHierarchy(String memberName) {
+    for (var base : directBasesInIncompleteHierarchy().orElse(List.of())) {
+      var localMember = base.localMember(memberName);
+      if (localMember.isPresent()) {
+        return localMember;
+      }
+      var order = base.mro();
+      // Only skip a base when its entire hierarchy is known not to define this
+      // member. An inherited member may move behind a sibling override in C3;
+      // an unresolved ancestor may define a member before the next direct base.
+      if (order.isEmpty() || order.get().stream().anyMatch(cls -> cls.localMember(memberName).isPresent())) {
+        return Optional.empty();
+      }
     }
     return Optional.empty();
   }
@@ -65,6 +84,6 @@ public record SuperProxyType(ClassType ownerClassType) implements PythonType {
         .findFirst())
       .orElseGet(() -> ClassTypeMroUtils.computeAlternatives(ownerClassType)
         .map(orders -> ClassTypeMroUtils.inheritedMember(orders, memberName))
-        .orElseGet(() -> directBaseInIncompleteHierarchy().flatMap(base -> base.localMember(memberName))));
+        .orElseGet(() -> directMemberInIncompleteHierarchy(memberName)));
   }
 }

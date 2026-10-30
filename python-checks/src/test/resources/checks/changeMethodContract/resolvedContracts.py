@@ -78,3 +78,23 @@ class Replacement(Root):
 
 class NonMethodOverride(Replacement):
     def run(self): ...
+# A complete mixin without this method cannot hide the next direct parent's
+# contract, even if that parent's more distant ancestry is unresolved.
+class ContractMixin:
+    pass
+
+
+class DirectContract(unknown.Ancestor):
+    def run(self, value=None): ...
+
+
+class ContractAfterMixin(ContractMixin, DirectContract):
+    def run(self, value): ...  # Noncompliant {{Add a default value to parameter value.}}
+
+
+class UnknownContractMixin(unknown.Mixin):
+    pass
+
+
+class HiddenContract(UnknownContractMixin, DirectContract):
+    def run(self, value): ...  # The first base may supply a different contract.

@@ -95,7 +95,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
         if (paramsDiff > 0) {
           reportOnExtraParameters(ctx, method, overriddenMethod);
         } else if (paramsDiff < 0) {
-          reportOnMissingParameters(ctx, method, overriddenMethod, parameters.size());
+          reportOnMissingParameters(ctx, method, overriddenMethod, parameters);
         } else {
           checkDefaultValuesAndParamNames(ctx, parameters, overriddenMethod);
         }
@@ -152,14 +152,30 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     return function.hasDecorators() && !SUPPORTED_DECORATORS.check(function, TypePredicateContext.of(ctx.typeTable())).isTrue();
   }
 
-  private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionType method, FunctionType overriddenMethod, int indexFirstMissingParam) {
+  private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionType method, FunctionType overriddenMethod, List<ParameterV2> parameters) {
     List<ParameterV2> overriddenParams = overriddenMethod.parameters();
-    var missingParameters = overriddenParams.subList(indexFirstMissingParam, overriddenParams.size())
-      .stream()
+    int firstNamedParameter = 0;
+    for (int i = 0; i < overriddenParams.size(); i++) {
+      if (overriddenParams.get(i).isPositionalOnly()) {
+        firstNamedParameter = i + 1;
+      }
+    }
+    // Positional-only names do not identify slots. For named slots, reserve
+    // matching names before pairing positional renames, as for extra parameters.
+    var remainingParameters = parameters.subList(Math.min(firstNamedParameter, parameters.size()), parameters.size());
+    var remainingOverridden = overriddenParams.subList(Math.min(firstNamedParameter, parameters.size()), overriddenParams.size());
+    var parameterNames = remainingParameters.stream().map(ParameterV2::name).toList();
+    var overriddenNames = remainingOverridden.stream().map(ParameterV2::name).toList();
+    long renamedPositionalParameters = remainingParameters.stream()
+      .filter(parameter -> !parameter.isKeywordOnly() && !overriddenNames.contains(parameter.name()))
+      .count();
+    var missingParameters = remainingOverridden.stream()
+      .filter(parameter -> parameter.isPositionalOnly() || !parameterNames.contains(parameter.name()))
+      .skip(renamedPositionalParameters)
       .map(ParameterV2::name)
       .toList();
     if (!missingParameters.isEmpty()) {
-//      If at least one parameter missing name - set message as "Add missing N parameters" where N is amount of missing parameters
+      // Unnamed descriptor parameters are reported by count.
       reportIssue(ctx, getMissingParametersMessage(missingParameters), method.definitionLocation().orElse(null), overriddenMethod);
     }
   }

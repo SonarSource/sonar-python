@@ -92,3 +92,47 @@ class PositionalOnlyContract:
 class RenamedPositionalOnly(PositionalOnlyContract):
     def run(self, renamed, extra, /): ...  # Noncompliant {{Remove parameter extra or provide default value.}}
 #                          ^^^^^
+
+
+class ThreeParameterContract:
+    def run(self, input_ids, remove_from_pkv=0, num_added_tokens=1): ...
+
+
+class MissingMiddleParameter(ThreeParameterContract):
+    def run(self, input_ids, num_added_tokens=1): ...  # Noncompliant {{Add missing parameters remove_from_pkv.}}
+
+
+class MissingFirstParameter(ThreeParameterContract):
+    def run(self, remove_from_pkv=0, num_added_tokens=1): ...  # Noncompliant {{Add missing parameters input_ids.}}
+
+
+class MissingMiddleWithRename(ThreeParameterContract):
+    def run(self, assistant_input_ids, num_added_tokens=1): ...  # Noncompliant {{Add missing parameters remove_from_pkv.}}
+
+
+class MissingTwoParameters(ThreeParameterContract):
+    def run(self, num_added_tokens=1): ...  # Noncompliant {{Add missing parameters input_ids remove_from_pkv.}}
+
+
+class MissingMiddleWithOptionalKeyword(ThreeParameterContract):
+    def run(self, assistant_input_ids, num_added_tokens=1, *, extra=None): ...  # Noncompliant {{Add missing parameters remove_from_pkv.}}
+
+
+class MissingMiddleWithAllRenames(ThreeParameterContract):
+    def run(self, first, second): ...  # Noncompliant {{Add missing parameters num_added_tokens.}}
+
+
+class ThreePositionalOnlyContract:
+    def run(self, first, second, third, /): ...
+
+
+class MissingPositionalOnlyParameters(ThreePositionalOnlyContract):
+    def run(self, third, /): ...  # Noncompliant {{Add missing parameters second third.}}
+
+
+class PositionalOnlyThenNamedContract:
+    def run(self, first, /, second=None, third=None): ...
+
+
+class MissingAfterPositionalOnly(PositionalOnlyThenNamedContract):
+    def run(self, second, /, third=None): ...  # Noncompliant {{Add missing parameters second.}}

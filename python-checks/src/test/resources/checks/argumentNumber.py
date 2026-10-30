@@ -479,7 +479,7 @@ def library_signatures(condition):
     math.sqrt()  # Noncompliant
 
 
-# super() with incomplete ancestry: resolve local members of the sole direct parent.
+# super() with incomplete ancestry: resolve direct local members with known precedence.
 from unknown import UnknownBase, unknown_decorator
 
 
@@ -526,7 +526,27 @@ class Other:
 
 class MultipleBases(Parent, Other):
     def __init__(self):
-        super().__init__(1, 2, 3)  # Incomplete multiple-inheritance MRO remains unknown.
+        super().__init__(1, 2, 3)  # Noncompliant {{Remove 1 unexpected arguments; '__init__' expects at most 2 positional arguments.}}
+        super().__init__(1, 2)
+
+
+class EmptyMixin:
+    pass
+
+
+class ParentAfterEmptyMixin(EmptyMixin, Parent):
+    def run(self):
+        super().method()  # Noncompliant {{Add 1 missing arguments; 'method' expects 1 positional arguments.}}
+        super().method(1)
+
+
+class UnresolvedMixin(UnknownBase):
+    pass
+
+
+class ParentAfterUnresolvedMixin(UnresolvedMixin, Parent):
+    def run(self):
+        super().method()  # Unknown earlier ancestry may supply a different signature.
 
 
 class UnknownFirstBase(UnknownBase, Other):
