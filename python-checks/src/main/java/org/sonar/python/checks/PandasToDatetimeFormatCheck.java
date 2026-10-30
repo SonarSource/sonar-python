@@ -30,7 +30,6 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
@@ -38,6 +37,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -45,6 +46,7 @@ import org.sonar.python.tree.TreeUtils;
 public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
 
   static final String PANDAS_TO_DATETIME_FQN = "pandas.core.tools.datetimes.to_datetime";
+  private static final TypeMatcher PANDAS_TO_DATETIME_MATCHER = TypeMatchers.withFQN(PANDAS_TO_DATETIME_FQN);
   static final String MESSAGE = "Remove this `%s=%s` parameter or make sure the provided date(s) can be parsed accordingly.";
   static final String SECONDARY_MESSAGE = "Invalid date.";
   static final String DAYFIRST = "dayfirst";
@@ -91,8 +93,7 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
 
   void checkCallExpression(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-    Symbol symbol = callExpression.calleeSymbol();
-    if (symbol == null || !PANDAS_TO_DATETIME_FQN.equals(symbol.fullyQualifiedName())) {
+    if (!PANDAS_TO_DATETIME_MATCHER.isTrueFor(callExpression.callee(), ctx)) {
       return;
     }
     RegularArgument argument = TreeUtils.nthArgumentOrKeyword(0, "arg", callExpression.arguments());
