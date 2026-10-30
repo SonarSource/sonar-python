@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -129,17 +129,24 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
   }
 
   /**
-   * Reports a catch-all handler around {@code yieldExpression} that does not re-raise.
+   * Reports a catch-all handler around {@code yieldExpression} that hides an exception from an enclosing context manager.
+   * Without an enclosing manager in this function, suppression or deferred propagation may be the generator's contract;
+   * the rule cannot infer the cleanup policy of callers.
    * A {@code finally} still runs after that handler, so it is left to re-raise or clean up.
    */
   private static void reportSwallowedAround(YieldExpression yieldExpression, Set<ExceptClause> reported, SubscriptionContext ctx) {
     Tree current = yieldExpression.parent();
     while (current != null && !current.is(Tree.Kind.FUNCDEF)) {
-      if (current instanceof TryStatement tryStatement && tryStatement.finallyClause() == null && isInside(yieldExpression, tryStatement.body())) {
+      if (current instanceof TryStatement tryStatement && tryStatement.finallyClause() == null
+        && isInside(yieldExpression, tryStatement.body()) && hasEnclosingContextManager(tryStatement)) {
         tryStatement.exceptClauses().forEach(exceptClause -> reportSwallowed(exceptClause, reported, ctx));
       }
       current = current.parent();
     }
+  }
+
+  private static boolean hasEnclosingContextManager(TryStatement tryStatement) {
+    return TreeUtils.firstAncestorOfKind(tryStatement, Tree.Kind.WITH_STMT, Tree.Kind.FUNCDEF) instanceof WithStatement;
   }
 
   private static void reportSwallowed(ExceptClause exceptClause, Set<ExceptClause> reported, SubscriptionContext ctx) {
@@ -241,13 +248,13 @@ public class ContextManagerGeneratorCleanupCheck extends PythonSubscriptionCheck
       .map(WithItem::expression)
       .filter(Name.class::isInstance)
       .map(Name.class::cast)
-      .map(Name::symbol)
+      .map(Name::symbolV2)
       .filter(Objects::nonNull)
       .anyMatch(symbol -> usesSymbol(tryStatement.body(), symbol));
   }
 
-  private static boolean usesSymbol(Tree tree, Symbol symbol) {
-    return TreeUtils.hasDescendant(tree, descendant -> descendant instanceof Name name && symbol.equals(name.symbol()));
+  private static boolean usesSymbol(Tree tree, SymbolV2 symbol) {
+    return TreeUtils.hasDescendant(tree, descendant -> descendant instanceof Name name && symbol.equals(name.symbolV2()));
   }
 
   /**

@@ -675,49 +675,53 @@ def success_path_and_nested_with_examples():
 
     @contextmanager
     def nested_try_except_does_not_reraise(resource):
-        try:
-            yield
-        except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
-#       ^^^^^^
+        with managed_scope():
             try:
-#           ^[el=+6;ec=4]< {{Re-raise this exception.}}
-                raise
-            except BaseException:
-                resource.rollback()
+                yield
+            except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#           ^^^^^^
+                try:
+#               ^[el=+6;ec=4]< {{Re-raise this exception.}}
+                    raise
+                except BaseException:
+                    resource.rollback()
 
     @contextmanager
     def nested_try_finally_does_not_reraise(resource):
-        try:
-            yield
-        except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
-#       ^^^^^^
+        with managed_scope():
             try:
-#           ^[el=+6;ec=4]< {{Re-raise this exception.}}
-                resource.rollback()
-            finally:
-                resource.close()
+                yield
+            except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#           ^^^^^^
+                try:
+#               ^[el=+6;ec=4]< {{Re-raise this exception.}}
+                    resource.rollback()
+                finally:
+                    resource.close()
 
     @contextmanager
     def reraise_only_on_one_branch(resource):
-        try:
-            yield
-        except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
-#       ^^^^^^
-            if isinstance(resource, int):
-#           ^[el=+4;ec=4]< {{Re-raise this exception.}}
-                raise
+        with managed_scope():
+            try:
+                yield
+            except BaseException:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#           ^^^^^^
+                if isinstance(resource, int):
+#               ^[el=+4;ec=4]< {{Re-raise this exception.}}
+                    raise
 
     @contextmanager
     def swallowed_bare_except_and_own_cleanup(resource):
-        try:
-            yield resource  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
-#           ^^^^^^^^^^^^^^
-            resource.close()
-#           ^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
-        except:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
-#       ^^^^^^
-            resource.rollback()
-#           ^^^^^^^^^^^^^^^^^^^< {{Re-raise this exception.}}
+        with managed_scope():
+            try:
+                yield resource  # Noncompliant {{Cleanup after this "yield" may be skipped on early exit.}}
+#               ^^^^^^^^^^^^^^
+                resource.close()
+#               ^^^^^^^^^^^^^^^^< {{Move this into "try"/"finally".}}
+            except:  # Noncompliant {{Swallowing this exception may skip cleanup of other context managers.}}
+#           ^^^^^^
+                resource.rollback()
+#               ^^^^^^^^^^^^^^^^^^^< {{Re-raise this exception.}}
 
     @contextmanager
     def success_work_inside_nested_with(tmp_factory, upload):

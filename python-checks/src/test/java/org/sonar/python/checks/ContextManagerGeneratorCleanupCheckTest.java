@@ -31,4 +31,9 @@ class ContextManagerGeneratorCleanupCheckTest {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/contextManagerGeneratorCleanupTestFile.py", new ContextManagerGeneratorCleanupCheck());
   }
 
+  @Test
+  void exception_suppression_requires_an_enclosing_context_manager() {
+    PythonCheckVerifier.verify("src/test/resources/checks/contextManagerGeneratorCleanupExceptionScope.py", new ContextManagerGeneratorCleanupCheck());
+  }
+
 }
