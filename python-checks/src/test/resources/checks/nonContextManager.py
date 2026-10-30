@@ -2,7 +2,9 @@ import contextlib
 from contextlib import asynccontextmanager, contextmanager
 from contextlib import asynccontextmanager as alias_asynccontextmanager
 from contextlib import contextmanager as alias_contextmanager
-from typing import AsyncGenerator, Generator, Iterator
+from abc import abstractmethod
+from functools import cache
+from typing import Any, AsyncGenerator, Generator, Iterator, final
 import some_unknown_module
 
 
@@ -281,7 +283,7 @@ def instance_attribute_dunders():
 
 # ----- @contextmanager / @asynccontextmanager functions are inferred as their underlying generator -----
 # Type inference does not model the decorator, so the inferred result is a Generator/Iterator/Coroutine.
-# The matching with/async with statement is valid. The opposite statement is invalid for a sole known decorator.
+# The matching with/async with statement is valid. The opposite statement is invalid when a known decorator determines the result.
 @contextmanager
 def annotated_session() -> Generator[int, None, None]:
     yield 1
@@ -374,8 +376,7 @@ async def sync_contextmanager_factories_used_as_async():
 
 
 def contextmanager_result_stored_or_conditional(flag):
-    # The result of a @contextmanager is inferred as a plain generator. When it does not come straight from a call
-    # we can inspect (stored in a variable, produced by a conditional), we trust the generator type to avoid a FP.
+    # Stored and conditional results retain their known contextmanager factory semantics.
     session = annotated_session()
     with session as value:  # Compliant
         print(value)
@@ -415,7 +416,7 @@ class DatabaseHelper:
 # ----- Functions decorated with an unrecognized decorator are trusted on direct calls -----
 # Unknown decorators can change the return type or context manager variant, so their calls remain trusted.
 # Signature-preserving decorators and undecorated functions can still be reported.
-# A sole standard-library contextlib decorator has a known sync or async result.
+# A standard-library contextlib decorator beneath only transparent wrappers has a known sync or async result.
 def agnosticcontextmanager(func):
     def helper(*args, **kwargs):
         ...
@@ -504,7 +505,7 @@ async def inner_wrapped_async_session():
 def unknown_wrappers_remain_conservative():
     with wrapped_async_session():  # Compliant: outer wrapper can change the result
         pass
-    with inner_wrapped_async_session():  # Compliant (FN): stacked decorators remain outside this focused check
+    with inner_wrapped_async_session():  # Noncompliant
         pass
 
 
@@ -528,4 +529,252 @@ def unrelated_decorator_with_same_name():
         yield 1
 
     with session():  # Compliant: the decorator is not contextlib.asynccontextmanager
+        pass
+
+
+# ----- Decorator order, stored results, and uncertain factory alternatives -----
+@contextmanager
+def sync_factory():
+    return some_unknown_module.iterator()
+
+
+@asynccontextmanager
+def async_factory() -> Any:
+    return some_unknown_module.async_iterator()
+
+
+@final
+@contextmanager
+@some_unknown_module.wrapper
+def transparent_outer():
+    yield 1
+
+
+@cache
+@asynccontextmanager
+async def cached_async():
+    yield 1
+
+
+@contextmanager
+@asynccontextmanager
+async def outer_sync():
+    yield 1
+
+
+@asynccontextmanager
+@contextmanager
+def outer_async():
+    yield 1
+
+
+async def stacks():
+    with sync_factory():
+        pass
+    async with sync_factory():  # Noncompliant
+        pass
+    async with async_factory():
+        pass
+    with async_factory():  # Noncompliant
+        pass
+    with transparent_outer():
+        pass
+    async with transparent_outer():  # Noncompliant
+        pass
+    async with cached_async():
+        pass
+    with cached_async():  # Noncompliant
+        pass
+    with outer_sync():  # The statement matches; the invalid generator design is outside this rule.
+        pass
+    async with outer_sync():  # Noncompliant
+        pass
+    async with outer_async():
+        pass
+    with outer_async():  # Noncompliant
+        pass
+
+
+class Managers:
+    @staticmethod
+    @contextmanager
+    def sync():
+        yield 1
+
+    @classmethod
+    @asynccontextmanager
+    async def asynchronous(cls):
+        yield 1
+
+    @contextmanager
+    @abstractmethod
+    def abstract(self):
+        yield 1
+
+    @property
+    @contextmanager
+    def property_factory(self):
+        yield 1
+
+
+async def methods():
+    with Managers.sync():
+        pass
+    async with Managers.sync():  # Noncompliant
+        pass
+    async with Managers.asynchronous():
+        pass
+    with Managers.asynchronous():  # Noncompliant
+        pass
+    async with Managers().abstract():  # Noncompliant
+        pass
+    async with Managers().property_factory():  # Property access is not a transparent callable wrapper.
+        pass
+
+
+async def stored_results():
+    value = sync_factory()
+    alias = (value)
+    with alias:
+        pass
+    async with alias:  # Noncompliant
+        pass
+    asynchronous = async_factory()
+    async with asynchronous:
+        pass
+    with asynchronous:  # Noncompliant
+        pass
+
+    # Resolve the reaching assignment, not a stale factory result.
+    value = async_factory()
+    async with value:
+        pass
+    with value:  # Noncompliant
+        pass
+
+
+async def factory_aliases(flag):
+    alias = annotated_session
+    async with alias():  # Noncompliant
+        pass
+    same_kind = annotated_session if flag else annotated_session_iter
+    async with same_kind():  # Noncompliant
+        pass
+    mixed = annotated_session if flag else annotated_async_session
+    with mixed():
+        pass
+    async with mixed():
+        pass
+    unresolved = annotated_session if flag else some_unknown_module.factory
+    async with unresolved():
+        pass
+
+
+async def cyclic_aliases():
+    first = second
+    second = first
+    with first:
+        pass
+
+
+@asynccontextmanager
+def misleading_annotation() -> SyncCM:
+    return some_unknown_module.async_iterator()
+
+
+async def decorator_overrides_annotation():
+    with misleading_annotation():  # Noncompliant
+        pass
+    async with misleading_annotation():
+        pass
+
+
+def local_same_name_wrapper():
+    def final(function):
+        return some_unknown_module.async_factory(function)
+
+    @final
+    @contextmanager
+    def factory():
+        yield 1
+
+    @final
+    def raw() -> Iterator[int]:
+        yield 1
+
+    async def use():
+        async with factory():
+            pass
+        async with raw():
+            pass
+
+
+async def uncertain_wrapper(flag):
+    factory = annotated_session if flag else not_a_generator
+    with factory():  # Compliant: a known synchronous alternative
+        pass
+    async with factory():  # Compliant: the unknown wrapper may create an async manager
+        pass
+
+
+async def reassigned_result(flag):
+    manager = annotated_session()
+    if flag:
+        manager = annotated_async_session()
+    with manager:  # Compliant: either kind can reach this site
+        pass
+    async with manager:  # Compliant: either kind can reach this site
+        pass
+
+
+async def unknown_stored_wrapper():
+    manager = not_a_generator()
+    with manager:  # Compliant: the wrapper determines the actual result
+        pass
+    async with manager:  # Compliant: the wrapper determines the actual result
+        pass
+
+
+async def parenthesized_wrapper():
+    with (not_a_generator()):  # Compliant: parentheses do not expose the undecorated return type
+        pass
+    async with (not_a_generator()):
+        pass
+
+
+async def converging_sync_aliases(flag):
+    value = annotated_session()
+    alias = value
+    if flag:
+        chosen = alias
+    else:
+        chosen = alias
+    with chosen:
+        pass
+    async with chosen:  # Noncompliant {{Use "with" for this context manager created by "@contextmanager".}}
+#              ^^^^^^
+        pass
+    with (alias if flag else alias):
+        pass
+    async with (alias if flag else alias):  # Noncompliant
+#               ^^^^^^^^^^^^^^^^^^^^^^^^
+        pass
+
+
+async def converging_async_aliases(flag):
+    value = annotated_async_session()
+    alias = value
+    if flag:
+        chosen = alias
+    else:
+        chosen = alias
+    async with chosen:
+        pass
+    with chosen:  # Noncompliant {{Use "async with" for this asynchronous context manager created by "@asynccontextmanager".}}
+#        ^^^^^^
+        pass
+    async with (alias if flag else alias):
+        pass
+    with (alias if flag else alias):  # Noncompliant
+#         ^^^^^^^^^^^^^^^^^^^^^^^^
         pass

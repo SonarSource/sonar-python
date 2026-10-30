@@ -45,10 +45,12 @@ class NonContextManagerCheckTest {
   }
 
   @Test
-  void asyncFactoryInsideAsyncFunctionIsReportedOnce() {
+  void asyncFactoriesAreReportedByOnlyOneRule() {
     String path = "src/test/resources/checks/nonContextManagerAsyncFactory.py";
     PythonCheckVerifier.verify(path, new NonContextManagerCheck());
-    assertThat(PythonCheckVerifier.issues(path, new AsyncWithContextManagerCheck())).isEmpty();
+    assertThat(PythonCheckVerifier.issues(path, new AsyncWithContextManagerCheck()))
+      .extracting(issue -> issue.primaryLocation().startLine())
+      .containsExactly(32);
   }
 
   @Test

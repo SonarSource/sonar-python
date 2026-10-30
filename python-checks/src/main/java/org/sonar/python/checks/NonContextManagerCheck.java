@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -26,12 +27,17 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.ReachingValues;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.matchers.HasOnlyFunctionDecoratorsSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 import org.sonar.python.types.v2.matchers.IsStubFunctionPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
@@ -60,10 +66,14 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
   private static final TypePredicate STUB_FUNCTION = new IsStubFunctionPredicate();
   private static final TypePredicate SYNC_CONTEXT_MANAGER_DECORATOR = new IsTypePredicate("contextlib.contextmanager");
   private static final TypePredicate ASYNC_CONTEXT_MANAGER_DECORATOR = new IsTypePredicate("contextlib.asynccontextmanager");
-
-  // Builtin decorators that keep the wrapped function's return type and therefore cannot turn a generator into a context manager.
-  private static final Set<String> SIGNATURE_PRESERVING_DECORATORS = Set.of(
-    "staticmethod", "classmethod", "abstractmethod", "property", "overload", "cache", "final", "override");
+  private static final List<TypePredicate> TRANSPARENT_FUNCTION_DECORATORS = List.of(
+    new IsTypePredicate("typing.final"), new IsTypePredicate("typing.override"),
+    new IsTypePredicate("typing_extensions.final"), new IsTypePredicate("typing_extensions.override"),
+    new IsTypePredicate("abc.abstractmethod"), new IsTypePredicate("functools.cache"));
+  private static final List<TypePredicate> METHOD_DECORATORS = List.of(
+    new IsTypePredicate("staticmethod"), new IsTypePredicate("classmethod"));
+  private static final TypePredicate ONLY_TRANSPARENT_DECORATORS =
+    new HasOnlyFunctionDecoratorsSatisfyingPredicate(NonContextManagerCheck::isTransparentDecorator);
 
   @Override
   public void initialize(Context context) {
@@ -100,27 +110,43 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkContextManager(SubscriptionContext ctx, WithItem item, Expression contextManager, boolean isAsync) {
+    Set<Expression> values = ReachingValues.resolvedValues(contextManager, ctx);
+    // A verified decorator determines the result even when the undecorated return type is unknown or misleading.
+    if (allCallsMatch(values, isAsync, ctx)) {
+      return;
+    }
+    if (allCallsMatch(values, !isAsync, ctx)) {
+      if (isAsync || !isReportedByAsyncWithCheck(item, contextManager, ctx)) {
+        ctx.addIssue(contextManager, isAsync ? USE_WITH_MESSAGE : USE_ASYNC_WITH_MESSAGE);
+      }
+      return;
+    }
+
     TypeMatcher matcher = isAsync ? IS_ASYNC_CONTEXT_MANAGER : IS_CONTEXT_MANAGER;
     if (!isDefinitelyNot(matcher, contextManager, ctx)) {
       return;
     }
 
-    boolean hasMismatchedDecorator = hasMismatchedContextManagerDecorator(contextManager, isAsync, ctx);
-    if (isUnmodeledContextManager(contextManager, isAsync, hasMismatchedDecorator, ctx)) {
+    if (isUnmodeledContextManager(contextManager, values, isAsync, ctx)) {
       return;
     }
     if (!isAsync && isReportedByAsyncWithCheck(item, contextManager, ctx)) {
       return;
     }
 
-    ctx.addIssue(contextManager, contextManagerMessage(isAsync, hasMismatchedDecorator));
+    ctx.addIssue(contextManager, isAsync ? ASYNC_MESSAGE : MESSAGE);
   }
 
-  private static String contextManagerMessage(boolean isAsync, boolean hasMismatchedDecorator) {
-    if (hasMismatchedDecorator) {
-      return isAsync ? USE_WITH_MESSAGE : USE_ASYNC_WITH_MESSAGE;
-    }
-    return isAsync ? ASYNC_MESSAGE : MESSAGE;
+  private static boolean allCallsMatch(Set<Expression> values, boolean isAsync, SubscriptionContext ctx) {
+    var predicateContext = TypePredicateContext.of(ctx.typeTable());
+    return !values.isEmpty() && values.stream().allMatch(value -> value instanceof CallExpression call
+      && calleeAlternatives(call).stream().allMatch(type -> type instanceof FunctionType function
+        && hasContextManagerDecorator(function, isAsync, predicateContext)));
+  }
+
+  private static Set<PythonType> calleeAlternatives(CallExpression call) {
+    PythonType type = call.callee().typeV2();
+    return type instanceof UnionType union ? union.candidates() : Set.of(type);
   }
 
   private static boolean isDefinitelyNot(TypeMatcher matcher, Expression expression, SubscriptionContext ctx) {
@@ -128,37 +154,51 @@ public class NonContextManagerCheck extends PythonSubscriptionCheck {
   }
 
   // Decorator effects are not modeled by inference. A known context manager decorator only supports its matching statement.
-  private static boolean isUnmodeledContextManager(Expression expression, boolean isAsync, boolean hasMismatchedDecorator, SubscriptionContext ctx) {
-    if (expression instanceof CallExpression call && call.callee().typeV2() instanceof FunctionType functionType) {
-      return !hasMismatchedDecorator && hasUnknownDecorator(functionType);
+  private static boolean isUnmodeledContextManager(Expression expression, Set<Expression> values, boolean isAsync, SubscriptionContext ctx) {
+    var predicateContext = TypePredicateContext.of(ctx.typeTable());
+    if (values.stream().anyMatch(value -> value instanceof CallExpression call
+      && calleeAlternatives(call).stream().anyMatch(type -> hasUnmodeledDecorators(type, predicateContext)))) {
+      return true;
+    }
+    if (expression instanceof CallExpression) {
+      return false;
     }
     TypeMatcher generatorMatcher = isAsync ? IS_ASYNC_GENERATOR : IS_GENERATOR;
     return generatorMatcher.evaluateFor(expression, ctx) == TriBool.TRUE;
   }
 
-  private static boolean hasMismatchedContextManagerDecorator(Expression expression, boolean isAsync, SubscriptionContext ctx) {
-    return expression instanceof CallExpression call
-      && call.callee().typeV2() instanceof FunctionType functionType
-      && hasOnlyMismatchedContextManagerDecorator(functionType, isAsync, ctx);
+  private static boolean hasUnmodeledDecorators(PythonType type, TypePredicateContext ctx) {
+    return type instanceof UnknownType || (type instanceof FunctionType function && function.hasDecorators()
+      && !ONLY_TRANSPARENT_DECORATORS.check(function, ctx).isTrue());
   }
 
-  private static boolean hasOnlyMismatchedContextManagerDecorator(FunctionType functionType, boolean isAsync, SubscriptionContext ctx) {
-    if (functionType.decorators().size() != 1) {
-      return false;
+  private static boolean hasContextManagerDecorator(FunctionType function, boolean isAsync, TypePredicateContext ctx) {
+    TypePredicate expected = isAsync ? ASYNC_CONTEXT_MANAGER_DECORATOR : SYNC_CONTEXT_MANAGER_DECORATOR;
+    // Decorators are stored outermost first. Inner wrappers cannot change the kind chosen by contextlib.
+    for (TypeWrapper wrapper : function.decorators()) {
+      PythonType decorator = wrapper.type();
+      if (isContextManagerDecorator(decorator, ctx)) {
+        return expected.check(decorator, ctx).isTrue();
+      }
+      if (!isTransparentDecorator(decorator, ctx).isTrue()) {
+        return false;
+      }
     }
-    PythonType decorator = functionType.decorators().get(0).type();
-    var predicateContext = TypePredicateContext.of(ctx.typeTable());
-    // Library identity may be overloaded; project-local contextlib replacements remain unknown decorators.
-    TypePredicate incompatibleDecorator = isAsync ? SYNC_CONTEXT_MANAGER_DECORATOR : ASYNC_CONTEXT_MANAGER_DECORATOR;
-    return incompatibleDecorator.check(decorator, predicateContext).isTrue()
-      && TypePredicateUtils.evaluate(STUB_FUNCTION, decorator, predicateContext).isTrue();
+    return false;
   }
 
-  private static boolean hasUnknownDecorator(FunctionType functionType) {
-    return functionType.decorators().stream()
-      .map(TypeWrapper::type)
-      .map(PythonType::name)
-      .anyMatch(name -> !SIGNATURE_PRESERVING_DECORATORS.contains(name));
+  private static boolean isContextManagerDecorator(PythonType type, TypePredicateContext ctx) {
+    return (SYNC_CONTEXT_MANAGER_DECORATOR.check(type, ctx).isTrue() || ASYNC_CONTEXT_MANAGER_DECORATOR.check(type, ctx).isTrue())
+      && TypePredicateUtils.evaluate(STUB_FUNCTION, type, ctx).isTrue();
+  }
+
+  private static TriBool isTransparentDecorator(PythonType type, TypePredicateContext ctx) {
+    // Check canonical identity before distributing stub-origin checks over overload alternatives.
+    boolean knownFunction = TRANSPARENT_FUNCTION_DECORATORS.stream().anyMatch(predicate -> predicate.check(type, ctx).isTrue())
+      && TypePredicateUtils.evaluate(STUB_FUNCTION, type, ctx).isTrue();
+    boolean knownMethod = type instanceof ClassType cls && cls.definitionLocation().isEmpty()
+      && METHOD_DECORATORS.stream().anyMatch(predicate -> predicate.check(type, ctx).isTrue());
+    return knownFunction || knownMethod ? TriBool.TRUE : TriBool.UNKNOWN;
   }
 
   // S7515 reports a known async context manager used with "with" inside an async function.

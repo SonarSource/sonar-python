@@ -12,3 +12,24 @@ async def run():
         pass
     async with session():
         pass
+
+
+class AsyncManager:
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, *args):
+        pass
+
+
+@asynccontextmanager
+def factory() -> AsyncManager:
+    # The annotation already makes S7515 recognize the async protocol.
+    return unknown_iterator()
+
+
+async def asynchronous_scope():
+    with factory():  # Reported only by S7515.
+        pass
+    async with factory():
+        pass
