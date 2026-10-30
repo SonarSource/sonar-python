@@ -23,6 +23,22 @@ def class_with_generic_from_variable():
         # ^^^^^^ ^^^^^^^<                  {{"Generic" parent.}}
         ...
 
+def class_with_generic_from_annotated_variable():
+    from typing import Generic, TypeVar
+    _T_co = TypeVar("_T_co", covariant=True, bound=str)
+    generic: object = Generic[_T_co]
+    #                 ^^^^^^^^^^^^^^>              {{"Generic" is assigned here.}}
+    class ClassA(generic):  # Noncompliant {{Use the "type" parameter syntax to declare this generic class.}}
+        # ^^^^^^ ^^^^^^^<                  {{"Generic" parent.}}
+        ...
+
+def class_with_generic_from_multiple_assignment():
+    from typing import Generic, TypeVar
+    _T_co = TypeVar("_T_co", covariant=True, bound=str)
+    generic, _ = Generic[_T_co], None
+    class ClassA(generic):
+        ...
+
 def class_with_generic_without_subscription():
     from typing import Generic
     class ClassA(Generic):  # Noncompliant {{Use the "type" parameter syntax to declare this generic class.}}
@@ -62,3 +78,6 @@ def compliants(xx):
     class ClassWithDifferentGenericParent(Generic):
         ...
 
+    for generic_iteration_variable in []:
+        class ClassWithGenericIterationVariable(generic_iteration_variable):
+            ...

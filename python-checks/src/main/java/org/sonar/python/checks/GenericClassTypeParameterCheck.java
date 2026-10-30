@@ -24,17 +24,21 @@ import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.utils.Expressions;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S6792")
 public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
@@ -42,6 +46,7 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Use the \"type\" parameter syntax to declare this generic class.";
   private static final String SECONDARY_MESSAGE_PARENT = "\"Generic\" parent.";
   private static final String SECONDARY_MESSAGE_ASSIGNMENT = "\"Generic\" is assigned here.";
+  private static final TypeMatcher TYPING_GENERIC_MATCHER = TypeMatchers.isType("typing.Generic");
 
   @Override
   public void initialize(Context context) {
@@ -58,7 +63,7 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
       .map(ArgList::arguments)
       .stream()
       .flatMap(List::stream)
-      .map(GenericClassTypeParameterCheck::checkGenericValue)
+      .map(argument -> checkGenericValue(argument, ctx))
       .filter(lst -> !lst.isEmpty())
       .findFirst()
       .ifPresent(locations -> {
@@ -67,39 +72,54 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
       });
   }
 
-  private static List<IssueLocation> checkGenericValue(Argument argument) {
+  private static List<IssueLocation> checkGenericValue(Argument argument, SubscriptionContext ctx) {
     if (!argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
       return Collections.emptyList();
     }
     Expression expression = ((RegularArgument) argument).expression();
 
-    if (isTypingGeneric(expression)) {
-      return List.of(IssueLocation.preciseLocation(argument, SECONDARY_MESSAGE_PARENT));
-    }
     if (expression.is(Tree.Kind.NAME)) {
       Name name = (Name) expression;
-      Expression assignedValue = Expressions.singleAssignedValue(name);
-      if (assignedValue != null && isTypingGeneric(assignedValue)) {
+      Expression assignedValue = singleAssignedValue(name);
+      if (assignedValue != null && isTypingGeneric(assignedValue, ctx)) {
         return List.of(
           IssueLocation.preciseLocation(argument, SECONDARY_MESSAGE_PARENT),
           IssueLocation.preciseLocation(assignedValue, SECONDARY_MESSAGE_ASSIGNMENT));
       }
     }
+    if (isTypingGeneric(expression, ctx)) {
+      return List.of(IssueLocation.preciseLocation(argument, SECONDARY_MESSAGE_PARENT));
+    }
     return Collections.emptyList();
   }
 
-  private static boolean isTypingGeneric(Expression expression) {
+  private static boolean isTypingGeneric(Expression expression, SubscriptionContext ctx) {
     if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       expression = ((SubscriptionExpression) expression).object();
     }
-    return Optional.of(expression)
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .map(HasSymbol::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter("typing.Generic"::equals)
-      .isPresent();
+    return TYPING_GENERIC_MATCHER.isTrueFor(expression, ctx);
+  }
 
+  private static Expression singleAssignedValue(Name name) {
+    return Optional.ofNullable(name.symbolV2())
+      .flatMap(SymbolV2::getSingleBindingUsage)
+      .filter(usage -> usage.kind() == UsageV2.Kind.ASSIGNMENT_LHS)
+      .map(UsageV2::tree)
+      .map(Tree::parent)
+      .map(GenericClassTypeParameterCheck::assignedValue)
+      .orElse(null);
+  }
+
+  private static Expression assignedValue(Tree parent) {
+    if (parent instanceof AnnotatedAssignment annotatedAssignment) {
+      return annotatedAssignment.assignedValue();
+    }
+    if (parent instanceof ExpressionList expressionList
+      && expressionList.expressions().size() == 1
+      && parent.parent() instanceof AssignmentStatement assignment) {
+      return assignment.assignedValue();
+    }
+    return null;
   }
 
   private static boolean supportsTypeParameterSyntax(SubscriptionContext ctx) {
