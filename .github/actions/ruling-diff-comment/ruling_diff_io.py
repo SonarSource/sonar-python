@@ -11,7 +11,7 @@ from ruling_diff_core_lib.models_and_constants import (
     PROJECT_SOURCE_OVERRIDES,
 )
 
-RULING_SOURCES_SUBMODULE = "private/its/sources_ruling"
+RULING_SOURCES_SUBMODULE = "private/its/sources"
 SOURCES_INTERNAL_RULING_ROOT = "private/its/sources_internal_ruling"
 SOURCES_INTERNAL_NAMESPACE_RULING_ROOT = (
     "private/its/sources_internal_namespace_ruling"

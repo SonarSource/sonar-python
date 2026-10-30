@@ -356,7 +356,7 @@ class SourceLoadingTest(unittest.TestCase):
         ]
 
         content = io.load_text_at_ref(
-            "private/its/sources_ruling/project/foo.py", "deadbeef"
+            "private/its/sources/project/foo.py", "deadbeef"
         )
 
         self.assertEqual("print('from submodule')\n", content)
@@ -369,7 +369,7 @@ class SourceLoadingTest(unittest.TestCase):
             args=["git"],
             returncode=128,
             stdout="",
-            stderr="fatal: path 'private/its/sources_ruling/foo.py' exists on disk, but not in 'deadbeef'",
+            stderr="fatal: path 'private/its/sources/foo.py' exists on disk, but not in 'deadbeef'",
         )
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as tmp:
             tmp.write("print('from workspace')\n")
@@ -419,30 +419,30 @@ class GitHubActionIOTest(unittest.TestCase):
     def test_resolve_source_path_for_project_rulings_uses_path_directly(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its/sources_ruling/biopython/Bio/Nexus/Nexus.py",
+            "private/its/sources/biopython/Bio/Nexus/Nexus.py",
             io_impl.resolve_source_path("project", "biopython/Bio/Nexus/Nexus.py"),
         )
 
     def test_resolve_source_path_for_project_rulings_falls_back_to_sources_child(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its/sources_ruling/specific-rules/S1716.py",
+            "private/its/sources/specific-rules/S1716.py",
             io_impl.resolve_source_path("project", "S1716.py"),
         )
 
     def test_resolve_source_path_for_project_rulings_falls_back_to_sources_internal(self) -> None:
         io_impl = io.GitHubActionIO()
         with tempfile.TemporaryDirectory() as tmp_dir:
-            sources_ruling = f"{tmp_dir}/sources_ruling"
+            sources = f"{tmp_dir}/sources"
             sources_internal = f"{tmp_dir}/sources_internal_ruling"
             sources_namespace = f"{tmp_dir}/sources_internal_namespace_ruling"
-            pathlib.Path(sources_ruling).mkdir(parents=True, exist_ok=True)
+            pathlib.Path(sources).mkdir(parents=True, exist_ok=True)
             pathlib.Path(sources_internal).mkdir(parents=True, exist_ok=True)
             pathlib.Path(sources_namespace).mkdir(parents=True, exist_ok=True)
             target = f"{sources_internal}/foo.py"
             pathlib.Path(target).write_text("x\n", encoding="utf-8")
             with (
-                patch.object(io, "RULING_SOURCES_SUBMODULE", sources_ruling),
+                patch.object(io, "RULING_SOURCES_SUBMODULE", sources),
                 patch.object(io, "SOURCES_INTERNAL_RULING_ROOT", sources_internal),
                 patch.object(
                     io,
@@ -455,17 +455,17 @@ class GitHubActionIOTest(unittest.TestCase):
     def test_resolve_source_path_for_project_rulings_falls_back_to_namespace_child(self) -> None:
         io_impl = io.GitHubActionIO()
         with tempfile.TemporaryDirectory() as tmp_dir:
-            sources_ruling = f"{tmp_dir}/sources_ruling"
+            sources = f"{tmp_dir}/sources"
             sources_internal = f"{tmp_dir}/sources_internal_ruling"
             sources_namespace = f"{tmp_dir}/sources_internal_namespace_ruling"
             namespace_child = f"{sources_namespace}/basic_namespace"
-            pathlib.Path(sources_ruling).mkdir(parents=True, exist_ok=True)
+            pathlib.Path(sources).mkdir(parents=True, exist_ok=True)
             pathlib.Path(sources_internal).mkdir(parents=True, exist_ok=True)
             pathlib.Path(namespace_child).mkdir(parents=True, exist_ok=True)
             target = f"{namespace_child}/foo.py"
             pathlib.Path(target).write_text("x\n", encoding="utf-8")
             with (
-                patch.object(io, "RULING_SOURCES_SUBMODULE", sources_ruling),
+                patch.object(io, "RULING_SOURCES_SUBMODULE", sources),
                 patch.object(io, "SOURCES_INTERNAL_RULING_ROOT", sources_internal),
                 patch.object(
                     io,
@@ -478,15 +478,15 @@ class GitHubActionIOTest(unittest.TestCase):
     def test_resolve_source_path_for_project_rulings_returns_primary_on_miss(self) -> None:
         io_impl = io.GitHubActionIO()
         with tempfile.TemporaryDirectory() as tmp_dir:
-            sources_ruling = f"{tmp_dir}/sources_ruling"
+            sources = f"{tmp_dir}/sources"
             sources_internal = f"{tmp_dir}/sources_internal_ruling"
             sources_namespace = f"{tmp_dir}/sources_internal_namespace_ruling"
-            pathlib.Path(sources_ruling).mkdir(parents=True, exist_ok=True)
+            pathlib.Path(sources).mkdir(parents=True, exist_ok=True)
             pathlib.Path(sources_internal).mkdir(parents=True, exist_ok=True)
             pathlib.Path(sources_namespace).mkdir(parents=True, exist_ok=True)
-            primary = f"{sources_ruling}/missing.py"
+            primary = f"{sources}/missing.py"
             with (
-                patch.object(io, "RULING_SOURCES_SUBMODULE", sources_ruling),
+                patch.object(io, "RULING_SOURCES_SUBMODULE", sources),
                 patch.object(io, "SOURCES_INTERNAL_RULING_ROOT", sources_internal),
                 patch.object(
                     io,
@@ -499,14 +499,14 @@ class GitHubActionIOTest(unittest.TestCase):
     def test_resolve_source_path_uses_project_overrides(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its/sources_ruling/mypy-0.782/pkg/file.py",
+            "private/its/sources/mypy-0.782/pkg/file.py",
             io_impl.resolve_source_path("mypy", "pkg/file.py"),
         )
 
     def test_resolve_source_path_uses_default_project_root(self) -> None:
         io_impl = io.GitHubActionIO()
         self.assertEqual(
-            "private/its/sources_ruling/custom-project/pkg/file.py",
+            "private/its/sources/custom-project/pkg/file.py",
             io_impl.resolve_source_path("custom-project", "/pkg/file.py"),
         )
 
