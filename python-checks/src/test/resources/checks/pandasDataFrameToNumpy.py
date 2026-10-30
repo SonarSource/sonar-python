@@ -95,3 +95,43 @@ def fn_on_parameter_type_hint():
 
     def dataframe_param(df : pd.DataFrame):
         df.values # FN
+
+
+def direct_read_csv():
+    from io import StringIO
+    import pandas as pd
+    from pandas import read_csv as load_csv
+
+    pd.read_csv(StringIO("1"), dtype=int, header=None).values[0][0]  # Noncompliant
+    load_csv("some_csv.csv").values  # Noncompliant
+    (pd.read_csv("some_csv.csv")).values  # Noncompliant
+
+
+def unrelated_read_csv():
+    def read_csv(path):
+        return object()
+
+    read_csv("some_csv.csv").values
+
+
+def shadowed_pandas(pd):
+    pd.read_csv("some_csv.csv").values
+
+
+def aliased_dataframe():
+    import pandas as pd
+
+    dataframe = pd.read_csv("some_csv.csv")
+    alias = dataframe
+    alias.values  # Noncompliant
+
+
+def cyclic_aliases():
+    first = second
+    second = first
+    first.values
+
+
+def self_alias():
+    value = value
+    value.values

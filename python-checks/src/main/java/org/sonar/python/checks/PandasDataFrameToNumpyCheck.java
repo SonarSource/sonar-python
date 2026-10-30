@@ -16,6 +16,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -28,6 +30,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.ReachingValues;
 import org.sonar.python.quickfix.TextEditUtils;
 
@@ -61,17 +64,21 @@ public class PandasDataFrameToNumpyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isDataFrameValues(QualifiedExpression expr, SubscriptionContext ctx) {
-    if (expr.qualifier() instanceof Name name) {
-      Expression reachingValue = reachingValue(name, ctx);
-      return reachingValue instanceof CallExpression call
-        && (DATAFRAME_MATCHER.isTrueFor(call, ctx) || PANDAS_READ_CSV_MATCHER.isTrueFor(call.callee(), ctx));
+    Expression value = Expressions.removeParentheses(expr.qualifier());
+    if (value instanceof Name name) {
+      value = reachingValue(name, ctx);
+      if (!(value instanceof CallExpression)) {
+        return false;
+      }
     }
-    return DATAFRAME_MATCHER.isTrueFor(expr.qualifier(), ctx);
+    return DATAFRAME_MATCHER.isTrueFor(value, ctx)
+      || (value instanceof CallExpression call && PANDAS_READ_CSV_MATCHER.isTrueFor(call.callee(), ctx));
   }
 
   private static Expression reachingValue(Name name, SubscriptionContext ctx) {
     Expression value = ReachingValues.singleValue(name, ctx);
-    while (value instanceof Name reachingName) {
+    Set<Name> visited = new HashSet<>();
+    while (value instanceof Name reachingName && visited.add(reachingName)) {
       value = ReachingValues.singleValue(reachingName, ctx);
     }
     return value;
