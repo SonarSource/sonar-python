@@ -38,6 +38,49 @@ class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
+  void checkWildcardTypingImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/builtinGenericsFromWildcardTypingImport.py",
+      new BuiltinGenericsOverTypingModuleCheck());
+  }
+
+  @Test
+  void checkDirectTypingImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/builtinGenericsFromDirectTypingImport.py",
+      new BuiltinGenericsOverTypingModuleCheck());
+  }
+
+  @Test
+  void checkRepeatedDirectTypingImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/builtinGenericsFromRepeatedDirectTypingImport.py",
+      new BuiltinGenericsOverTypingModuleCheck());
+  }
+
+  @Test
+  void directTypingImportDoesNotOverrideExplicitBinding() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/builtinGenericsFromDirectTypingImportShadowed.py",
+      new BuiltinGenericsOverTypingModuleCheck());
+  }
+
+  @Test
+  void wildcardTypingImportStateIsPerFile() {
+    BuiltinGenericsOverTypingModuleCheck check = new BuiltinGenericsOverTypingModuleCheck();
+    PythonCheckVerifier.verify("src/test/resources/checks/builtinGenericsFromWildcardTypingImport.py", check);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/builtinGenericsWithoutTypingImport.py", check);
+  }
+
+  @Test
+  void wildcardTypingImportDoesNotOverrideExplicitBindings() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/builtinGenericsFromWildcardTypingImportShadowed.py",
+      new BuiltinGenericsOverTypingModuleCheck());
+  }
+
+  @Test
+  void checkOnlyAbsoluteTypingImports() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/builtinGenericsFromNonStandardTypingImports.py",
+      new BuiltinGenericsOverTypingModuleCheck());
+  }
+
+  @Test
   void quick_fix_generics_in_param() {
     String codeWithIssue = code(
       "from typing import List",
