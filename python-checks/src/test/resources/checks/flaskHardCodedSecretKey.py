@@ -1,4 +1,17 @@
 from flask import Flask, current_app
+
+
+class MyApp(Flask):
+    pass
+
+
+def test_non_compliant_flask_subclass_assignment():
+    app = MyApp(__name__)
+    app.secret_key = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
+#   ^^^^^^^^^^^^^^>                                    {{Assignment to sensitive property.}}
+#                    ^^^^^^^^^^^@-1
+
+
 def test_non_compliant_assignment_expressions(x):
     app = Flask(__name__)
     assigned_secret = 'Azerty123'

@@ -17,6 +17,8 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.Expression;
 
 @Rule(key = "S6781")
 public class FlaskHardCodedJWTSecretKeyCheck extends FlaskHardCodedSecret {
@@ -32,6 +34,11 @@ public class FlaskHardCodedJWTSecretKeyCheck extends FlaskHardCodedSecret {
   @Override
   protected String getSecretKeyType() {
     return SECRET_KEY_TYPE;
+  }
+
+  @Override
+  protected boolean isSensitiveProperty(Expression expression, SubscriptionContext ctx) {
+    return isFlaskConfigSecret(expression);
   }
 
 }

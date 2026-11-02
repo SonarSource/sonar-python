@@ -16,23 +16,20 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Optional;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S6779")
 public class FlaskHardCodedSecretKeyCheck extends FlaskHardCodedSecret {
 
   private static final String SECRET_KEY_KEYWORD = "SECRET_KEY";
   private static final String SECRET_KEY_TYPE = "\"Flask\"";
-  private static final Set<String> FLASK_SECRET_KEY_FQNS = Set.of(
-    "flask.app.Flask.secret_key",
-    "flask.globals.current_app.secret_key"
-  );
+  private static final TypeMatcher FLASK_APP_MATCHER = TypeMatchers.isObjectInstanceOf("flask.app.Flask");
 
   @Override
   protected String getSecretKeyKeyword() {
@@ -45,15 +42,13 @@ public class FlaskHardCodedSecretKeyCheck extends FlaskHardCodedSecret {
   }
 
   @Override
-  protected boolean isSensitiveProperty(Expression expression) {
+  protected boolean isSensitiveProperty(Expression expression, SubscriptionContext ctx) {
     if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
-      return Optional.of((QualifiedExpression) expression)
-        .map(QualifiedExpression::symbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter(FLASK_SECRET_KEY_FQNS::contains)
-        .isPresent();
+      QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
+      return "secret_key".equals(qualifiedExpression.name().name())
+        && FLASK_APP_MATCHER.isTrueFor(qualifiedExpression.qualifier(), ctx);
     }
-    return super.isSensitiveProperty(expression);
+    return isFlaskConfigSecret(expression);
   }
 
 }

@@ -153,7 +153,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     List<Expression> expressionList = assignmentStatementTree.lhsExpressions().stream()
       .map(ExpressionList::expressions)
       .flatMap(List::stream)
-      .filter(this::isSensitiveProperty)
+      .filter(expression -> isSensitiveProperty(expression, ctx))
       .toList();
     if (!expressionList.isEmpty()) {
       PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), getMessage());
@@ -161,7 +161,9 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     }
   }
 
-  protected boolean isSensitiveProperty(Expression expression) {
+  protected abstract boolean isSensitiveProperty(Expression expression, SubscriptionContext ctx);
+
+  protected boolean isFlaskConfigSecret(Expression expression) {
     if (!expression.is(Tree.Kind.SUBSCRIPTION)) {
       return false;
     }
