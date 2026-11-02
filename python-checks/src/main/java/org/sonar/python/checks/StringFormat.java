@@ -372,30 +372,32 @@ public class StringFormat {
     }
 
     private boolean tryParseFlagCharacter(char current) {
-      if (current == ':') {
-        state = FieldParseState.FORMAT;
-      } else if (current == '}') {
-        addCurrentField();
-        state = FieldParseState.FINISHED;
-      } else {
-        parent.reportIssue(SYNTAX_ERROR_MESSAGE);
-        return false;
+      switch (current) {
+        case ':' -> state = FieldParseState.FORMAT;
+        case '}' -> {
+          addCurrentField();
+          state = FieldParseState.FINISHED;
+        }
+        default -> {
+          parent.reportIssue(SYNTAX_ERROR_MESSAGE);
+          return false;
+        }
       }
-
       return true;
     }
 
     private boolean tryParseField(char current) {
-      if (current == '!') {
-        state = FieldParseState.FLAG;
-      } else if (current == ':') {
-        state = FieldParseState.FORMAT;
-      } else if (current == '}') {
-        addCurrentField();
-        state = FieldParseState.FINISHED;
-      } else {
-        parent.reportIssue(SYNTAX_ERROR_MESSAGE);
-        return false;
+      switch (current) {
+        case '!' -> state = FieldParseState.FLAG;
+        case ':' -> state = FieldParseState.FORMAT;
+        case '}' -> {
+          addCurrentField();
+          state = FieldParseState.FINISHED;
+        }
+        default -> {
+          parent.reportIssue(SYNTAX_ERROR_MESSAGE);
+          return false;
+        }
       }
       return true;
     }
