@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.ImportFrom;
+import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
@@ -75,17 +76,29 @@ public class UnusedImportCheck extends PythonVisitorCheck {
     DottedName module = importFrom.module();
     if (module != null && module.names().size() == 1 && ALLOWED_MODULES.contains(module.names().get(0).name())) return;
     for (AliasedName aliasedName : importFrom.importedNames()) {
-      Name alias = aliasedName.alias();
-      var importedName = alias != null ? alias : aliasedName.dottedName().names().get(0);
-      Optional.ofNullable(importedName.symbol())
-        .filter(symbol -> symbol.usages().stream().filter(u -> !u.isBindingUsage()).findFirst().isEmpty())
-        .filter(symbol ->
-          Optional.ofNullable(symbol.fullyQualifiedName())
-            .map(fqn -> ALLOWED_FQN_PREFIX.stream().noneMatch(fqn::startsWith))
-            .orElse(true)
-        )
-        .ifPresent(symbol -> unusedImports.put(importedName.name(), importedName));
+      checkImportedName(aliasedName, importFrom.lazyKeyword() == null);
     }
     super.visitImportFrom(importFrom);
+  }
+
+  @Override
+  public void visitImportName(ImportName importName) {
+    if (importName.lazyKeyword() != null) {
+      importName.modules().forEach(aliasedName -> checkImportedName(aliasedName, false));
+    }
+    super.visitImportName(importName);
+  }
+
+  private void checkImportedName(AliasedName aliasedName, boolean applyAllowedFqnPrefix) {
+    Name alias = aliasedName.alias();
+    var importedName = alias != null ? alias : aliasedName.dottedName().names().get(0);
+    Optional.ofNullable(importedName.symbol())
+      .filter(symbol -> symbol.usages().stream().filter(u -> !u.isBindingUsage()).findFirst().isEmpty())
+      .filter(symbol -> !applyAllowedFqnPrefix ||
+        Optional.ofNullable(symbol.fullyQualifiedName())
+          .map(fqn -> ALLOWED_FQN_PREFIX.stream().noneMatch(fqn::startsWith))
+          .orElse(true)
+      )
+      .ifPresent(symbol -> unusedImports.put(importedName.name(), importedName));
   }
 }

@@ -42,3 +42,35 @@ if_import()
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.experimental import pjdfgpojdgf as something
 from sklearn.impute import IterativeImputer # Noncompliant
+
+lazy import unused_plugin  # Noncompliant {{Remove this unused import.}}
+#           ^^^^^^^^^^^^^
+
+lazy import used_plugin
+used_plugin.register()
+
+lazy import package.submodule  # Noncompliant {{Remove this unused import.}}
+#           ^^^^^^^
+
+lazy import unused_alias as alias  # Noncompliant {{Remove this unused import.}}
+#                           ^^^^^
+
+lazy import used_alias as active
+active.register()
+
+lazy from package import unused_from  # Noncompliant {{Remove this unused import.}}
+#                        ^^^^^^^^^^^
+lazy from package import used_from
+used_from.register()
+
+lazy import named_in_a_comment  # OK: existing comment suppression
+# named_in_a_comment
+
+lazy import sklearn.experimental.enable_iterative_imputer as lazy_enabler  # Noncompliant
+from sklearn.impute import IterativeImputer as IterativeImputerUsed
+IterativeImputerUsed()
+
+
+lazy from sklearn.experimental import enable_iterative_imputer as lazy_from_enabler  # Noncompliant
+from sklearn.impute import IterativeImputer as LazyFromIterativeImputer
+LazyFromIterativeImputer()
