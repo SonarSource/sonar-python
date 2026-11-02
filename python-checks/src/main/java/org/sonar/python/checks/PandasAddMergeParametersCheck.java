@@ -25,18 +25,22 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 
 @Rule(key = "S6735")
 public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
@@ -102,12 +106,15 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   private static final String DATAFRAME_JOIN_FQN = "pandas.core.frame.DataFrame.join";
   private static final String DATAFRAME_MERGE_FQN = "pandas.core.frame.DataFrame.merge";
   private static final String PANDAS_MERGE_FQN = "pandas.core.reshape.merge.merge";
+  private static final TypeMatcher DATAFRAME_METHOD = TypeMatchers.isFunctionOwnerSatisfying(
+    TypeMatchers.isType("pandas.core.frame.DataFrame"));
+  private static final TypeMatcher DATAFRAME = TypeMatchers.isObjectOfType("pandas.core.frame.DataFrame");
+  private static final TypeMatcher DATAFRAME_OR_UNION = TypeMatchers.any(
+    DATAFRAME,
+    InternalTypeMatchers.isAnyTypeInUnionSatisfying(DATAFRAME));
+  private static final TypeMatcher PANDAS_MERGE = TypeMatchers.withFQN(PANDAS_MERGE_FQN);
 
   private static final Set<Keywords> ON_KEYWORDS = EnumSet.of(Keywords.ON, Keywords.LEFT_ON, Keywords.RIGHT_ON);
-  private static final Set<String> METHODS = Set.of(
-    DATAFRAME_JOIN_FQN,
-    DATAFRAME_MERGE_FQN,
-    PANDAS_MERGE_FQN);
 
   private static final Map<Integer, String> MESSAGES = Map.of(
     1, "Specify the \"%s\" parameter of this %s.",
@@ -123,10 +130,27 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
   private static void verifyMergeCallParameters(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(METHODS::contains)
-      .ifPresent(fqn -> missingArguments(fqn, ctx, callExpression));
+    String fqn = mergeFunctionFqn(callExpression, ctx);
+    if (fqn != null) {
+      missingArguments(fqn, ctx, callExpression);
+    }
+  }
+
+  @Nullable
+  private static String mergeFunctionFqn(CallExpression callExpression, SubscriptionContext ctx) {
+    if (callExpression.callee() instanceof QualifiedExpression qualifiedExpression
+      && (DATAFRAME_METHOD.isTrueFor(callExpression.callee(), ctx)
+        || DATAFRAME_OR_UNION.isTrueFor(qualifiedExpression.qualifier(), ctx))) {
+      return switch (qualifiedExpression.name().name()) {
+        case "join" -> DATAFRAME_JOIN_FQN;
+        case "merge" -> DATAFRAME_MERGE_FQN;
+        default -> null;
+      };
+    }
+    if (PANDAS_MERGE.isTrueFor(callExpression.callee(), ctx)) {
+      return PANDAS_MERGE_FQN;
+    }
+    return null;
   }
 
   private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
