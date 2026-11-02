@@ -186,3 +186,21 @@ def class_preserving_decorator_operations():
         pass
 
     FinalClass[0] = 1  # Noncompliant
+
+
+def typed_dict_instances(customer, days_until_due):
+    # TypedDict instances are dictionaries at runtime: typing._TypedDict omits the __setitem__ synthesized by type checkers
+    import stripe
+    from typing import TypedDict
+
+    list_params = stripe.params.InvoiceListParams(customer=customer, limit=1)
+    list_params["total"] = 0
+    invoice_params = stripe.params.InvoiceCreateParams(customer=customer)
+    invoice_params["days_until_due"] = days_until_due
+    del invoice_params["days_until_due"]
+
+    class LocalParams(TypedDict):
+        total: int
+
+    local_params = LocalParams(total=1)
+    local_params["total"] = 2

@@ -62,6 +62,9 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
 
   private static final TypeMatcher UNION_TYPE = TypeMatchers.isType("types.UnionType");
 
+  // TypedDict instances are dicts at runtime; typing._TypedDict omits the item assignment synthesized by type checkers
+  private static final TypeMatcher TYPED_DICT_INSTANCE = TypeMatchers.isObjectInstanceOf("typing._TypedDict");
+
   private static final Set<String> TYPING_LITERAL = Set.of("typing.Literal", "typing_extensions.Literal");
   private static final Set<String> TYPING_ANNOTATED = Set.of("typing.Annotated", "typing_extensions.Annotated");
 
@@ -94,6 +97,10 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
       if (symbol.is(FUNCTION, CLASS)) {
         return isValidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod, context);
       }
+    }
+
+    if (TYPED_DICT_INSTANCE.isTrueFor(subscriptionObject, context)) {
+      return true;
     }
 
     // Preserve the existing V1 check when V2 has no type information at all.
