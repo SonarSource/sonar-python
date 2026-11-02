@@ -14,7 +14,7 @@ def noncompliant_multiline_iterable():
         2,
         3,
     ]:
-        my_set.add(element)  # Noncompliant
+        my_set.add(element)  # Noncompliant {{Use "set.update()" to add all elements of the iterated collection instead of a for-loop with "add()".}}
     #   ^^^^^^^^^^
 
 
@@ -26,55 +26,48 @@ def noncompliant_multiline_receiver():
          ).add(item)
 
 
-def noncompliant_consecutive_adds(first, second):
+def noncompliant_named_iterable_message(new_results):
+    results = set()
+    for result in new_results:
+        results.add(result)  # Noncompliant {{Use "set.update()" to add all elements of "new_results" instead of a for-loop with "add()".}}
+    #   ^^^^^^^^^^^
+
+
+def noncompliant_parenthesized_iterable_message(new_results):
+    results = set()
+    for result in (new_results):
+        results.add(result)  # Noncompliant {{Use "set.update()" to add all elements of "new_results" instead of a for-loop with "add()".}}
+    #   ^^^^^^^^^^^
+
+
+def noncompliant_call_iterable_message():
     my_set = set()
-    my_set.add(first)  # Noncompliant {{Use "set.update()" instead of consecutive "add()" calls.}}
-#   ^^^^^^^^^^
+    for i in range(10):
+        my_set.add(i)  # Noncompliant {{Use "set.update()" to add all elements of the iterated collection instead of a for-loop with "add()".}}
+    #   ^^^^^^^^^^
+
+
+def noncompliant_attribute_iterable_message(config):
+    my_set = set()
+    for path in config.paths:
+        my_set.add(path)  # Noncompliant {{Use "set.update()" to add all elements of the iterated collection instead of a for-loop with "add()".}}
+    #   ^^^^^^^^^^
+
+
+def noncompliant_subscription_iterable_message(groups):
+    my_set = set()
+    for item in groups[0]:
+        my_set.add(item)  # Noncompliant {{Use "set.update()" to add all elements of the iterated collection instead of a for-loop with "add()".}}
+    #   ^^^^^^^^^^
+
+
+def compliant_consecutive_adds(first, second):
+    # Consecutive calls are covered by S9455
+    my_set = set()
+    my_set.add(first)
     my_set.add(second)
-#   ^^^^^^^^^^< {{This call is part of the same sequence.}}
     my_set.add("third")
-#   ^^^^^^^^^^< {{This call is part of the same sequence.}}
     return my_set
-
-
-def noncompliant_consecutive_adds_after_other_statements():
-    my_set = set()
-    print("start")
-    my_set.add(1)  # Noncompliant
-    my_set.add(2)
-    my_set.add(3)
-
-
-def compliant_two_consecutive_adds():
-    my_set = set()
-    my_set.add(1)
-    my_set.add(2)
-
-
-def compliant_adds_interleaved_with_other_statements():
-    my_set = set()
-    my_set.add(1)
-    print("in between")
-    my_set.add(2)
-    print("in between")
-    my_set.add(3)
-
-
-def compliant_adds_on_different_sets():
-    first = set()
-    second = set()
-    third = set()
-    first.add(1)
-    second.add(2)
-    third.add(3)
-
-
-def compliant_adds_referencing_the_set():
-    # Grouping these calls would change the result: each argument observes the previous add
-    my_set = set()
-    my_set.add(len(my_set))
-    my_set.add(len(my_set))
-    my_set.add(len(my_set))
 
 
 async def compliant_async_for_loop(async_iterable):

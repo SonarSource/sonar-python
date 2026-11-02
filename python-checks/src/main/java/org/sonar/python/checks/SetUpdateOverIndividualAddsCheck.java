@@ -36,6 +36,5 @@ public class SetUpdateOverIndividualAddsCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> CollectionBulkAdditionUtils.checkForStatement(ctx, SET_UPDATE));
-    context.registerSyntaxNodeConsumer(Tree.Kind.STATEMENT_LIST, ctx -> CollectionBulkAdditionUtils.checkStatementList(ctx, SET_UPDATE));
   }
 }
