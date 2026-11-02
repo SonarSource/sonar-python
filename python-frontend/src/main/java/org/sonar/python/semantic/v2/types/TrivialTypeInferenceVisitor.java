@@ -127,6 +127,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private static final TypeInferenceMatcher IS_NONE_OBJECT_TYPE = TypeInferenceMatcher.of(
     TypeInferenceMatchers.isObjectSatisfying(TypeInferenceMatchers.withFQN(BuiltinTypes.NONE_TYPE)));
 
+  private static final TypeInferenceMatcher IS_SENTINEL_OBJECT_TYPE = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.isObjectOfType("sentinel"));
+
   private static final TypeInferenceMatcher IS_PRIMITIVE_TYPE = TypeInferenceMatcher.of(
     TypeInferenceMatchers.any(
       TypeInferenceMatchers.isObjectOfType("int"),
@@ -335,9 +338,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     if (type instanceof UnionType unionType) {
       return unionType.candidates().stream().allMatch(this::isTypeExpression);
     }
-    // None literals have type ObjectType[NoneType], not ClassType, so we need to handle them explicitly
-    // to support type expressions like `int | None`
-    return IS_NONE_OBJECT_TYPE.evaluate(type, typePredicateContext).isTrue();
+    // None literals and sentinels are ObjectTypes which are valid in type expressions.
+    return IS_NONE_OBJECT_TYPE.evaluate(type, typePredicateContext).isTrue()
+      || IS_SENTINEL_OBJECT_TYPE.evaluate(type, typePredicateContext).isTrue();
   }
 
   @Override

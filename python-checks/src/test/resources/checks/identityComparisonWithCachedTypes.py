@@ -227,3 +227,13 @@ def ordinary_constants(value):
     value is subprocess.STDOUT  # Noncompliant
     member = subprocess.STDOUT
     value is member  # Noncompliant
+
+
+MISSING = sentinel("MISSING")
+
+
+def sentinel_identity_comparisons(value):
+    value is MISSING
+    MISSING is value
+    value is not MISSING
+    MISSING is not value

@@ -159,3 +159,13 @@ def locations_and_messages(param):
     param is mylist  # Noncompliant {{Replace this "is" operator with "==".}}
 #         ^^
 
+
+
+MISSING = sentinel("MISSING")
+
+
+def sentinel_identity_comparisons(value):
+    value is MISSING
+    MISSING is value
+    value is not MISSING
+    MISSING is not value

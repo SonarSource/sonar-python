@@ -5225,6 +5225,46 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void sentinelTypeExpressions() {
+    FileInput root = inferTypes("""
+      MISSING = sentinel("MISSING")
+      left = MISSING | None
+      right = None | MISSING
+      nested = int | MISSING | None
+      """);
+
+    var statements = root.statements().statements();
+    var sentinelType = ((AssignmentStatement) statements.get(0)).assignedValue().typeV2();
+    assertThat(sentinelType).isInstanceOfSatisfying(ObjectType.class,
+      objectType -> assertThat(objectType.unwrappedType()).isInstanceOfSatisfying(ClassType.class,
+        classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("sentinel")));
+
+    for (int statementIndex : List.of(1, 2)) {
+      var type = ((AssignmentStatement) statements.get(statementIndex)).assignedValue().typeV2();
+      assertThat(type).isInstanceOfSatisfying(UnionType.class,
+        union -> assertThat(union.candidates().stream().map(PythonType::unwrappedType).map(FullyQualifiedNameHelper::getFullyQualifiedName))
+          .containsExactlyInAnyOrder(Optional.of("sentinel"), Optional.of("NoneType")));
+    }
+
+    var nestedType = ((AssignmentStatement) statements.get(3)).assignedValue().typeV2();
+    assertThat(nestedType).isInstanceOfSatisfying(UnionType.class,
+      union -> assertThat(union.candidates().stream().map(PythonType::unwrappedType).map(FullyQualifiedNameHelper::getFullyQualifiedName))
+        .containsExactlyInAnyOrder(Optional.of("int"), Optional.of("sentinel"), Optional.of("NoneType")));
+  }
+
+  @Test
+  void userDefinedSentinelIsNotATypeExpression() {
+    FileInput root = inferTypes("""
+      class sentinel:
+        pass
+      result = sentinel() | None
+      """);
+
+    var assignment = (AssignmentStatement) root.statements().statements().get(1);
+    assertThat(assignment.assignedValue().typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
   void bitwiseOrOnValuesDoesNotCreateUnionType() {
     FileInput root = inferTypes("""
       a = True

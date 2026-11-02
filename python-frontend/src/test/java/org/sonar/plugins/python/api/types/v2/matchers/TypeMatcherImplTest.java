@@ -163,6 +163,21 @@ class TypeMatcherImplTest {
   }
 
   @Test
+  void testCheckForBuiltinSentinelObjectType() {
+    var project = new TestProject();
+    Expression sentinelExpression = project.lastExpression("""
+      MISSING = sentinel("MISSING")
+      MISSING
+      """);
+
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(TypeMatchers.isObjectOfType("builtins.sentinel").evaluateFor(sentinelExpression, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(sentinelExpression.typeV2()).isNotInstanceOf(UnknownType.class);
+  }
+
+  @Test
   void testCheckForFunctionType() {
     var project = new TestProject();
     project.addModule("my_file.py", """
