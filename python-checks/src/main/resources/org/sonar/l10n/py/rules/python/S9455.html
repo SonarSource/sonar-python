@@ -1,0 +1,65 @@
+<p>This rule raises an issue when several elements are added to the same set through consecutive <code>add()</code> calls.</p>
+<h2>Why is this an issue?</h2>
+<p>Adding elements to a set one statement at a time is unnecessary when the <code>update()</code> method exists:</p>
+<pre>
+my_set.add(first)
+my_set.add(second)
+my_set.add(third)
+</pre>
+<p>The <code>update()</code> method combines all additions into a single call and avoids the overhead of repeated <code>add()</code> invocations:</p>
+<pre>
+my_set.update({first, second, third})
+</pre>
+<h3>What is the potential impact?</h3>
+<p>Grouping the additions makes the intent explicit: the reader sees one operation that grows the set instead of a series of independent statements.
+It also removes redundant call overhead, since the attribute lookup and the method call are resolved once instead of once per element.</p>
+<h3>Exceptions</h3>
+<p>No issue is raised when fewer than three consecutive calls target the set, or when other statements are interleaved between the <code>add()</code>
+calls:</p>
+<pre>
+my_set.add(first)
+log.debug("first added")
+my_set.add(second)
+my_set.add(third)
+</pre>
+<p>No issue is raised either when an added element reads the set, such as <code>my_set.add(len(my_set))</code>, because grouping the calls would
+change the result.</p>
+<h2>How to fix it</h2>
+<p>Group the added elements into a single <code>update()</code> call, passing them as a set literal.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def collect_tags(base_tags, name):
+    tags = set(base_tags)
+    tags.add("archived")  # Noncompliant
+    tags.add("verified")
+    tags.add(name)
+    return tags
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def collect_tags(base_tags, name):
+    tags = set(base_tags)
+    tags.update({"archived", "verified", name})
+    return tags
+</pre>
+<h3>How does this work?</h3>
+<p><code>update()</code> iterates over its argument and adds every element to the set, so the result is exactly the same as the individual calls. The
+augmented assignment <code>my_set |= {first, second, third}</code> is equivalent to <code>update()</code> with another set and can be used instead
+when it is more readable.</p>
+<h3>Pitfalls</h3>
+<p>Do not confuse <code>update()</code> with <code>add()</code>: <code>my_set.add(other_collection)</code> adds the collection itself as a single
+element, and fails when that collection is not hashable, while <code>update()</code> adds its elements.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#frozenset.update"><code>set.update()</code> method</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset">Set Types — <code>set</code>,
+  <code>frozenset</code></a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S8502} - "set.update()" should be used instead of a for-loop with "add()"</li>
+  <li>{rule:python:S9454} - "list.extend()" should be used instead of consecutive "append()" calls</li>
+</ul>
+

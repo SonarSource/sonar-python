@@ -471,6 +471,7 @@ public class OpenSourceCheckList {
       SelfAssignmentCheck.class,
       SetDiscardOverRemoveCheck.class,
       SetDuplicateKeyCheck.class,
+      SetUpdateOverConsecutiveAddsCheck.class,
       SetUpdateOverIndividualAddsCheck.class,
       ShallowCopyEnvironCheck.class,
       SideEffectInTfFunctionCheck.class,

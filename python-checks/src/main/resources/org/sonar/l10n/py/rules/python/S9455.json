@@ -1,0 +1,25 @@
+{
+  "title": "\"set.update()\" should be used instead of consecutive \"add()\" calls",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "pythonic",
+    "performance",
+    "idiom"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-9455",
+  "sqKey": "S9455",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  }
+}
