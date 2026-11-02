@@ -3,7 +3,7 @@ def noncompliant_basic():
     my_set = {1, 2, 3}
     other_collection = [4, 5, 6]
     for element in other_collection:
-        my_set.add(element)  # Noncompliant {{Use "set.update()" instead of a for-loop with "add()".}}
+        my_set.add(element)  # Noncompliant {{Use "set.update()" to add all elements of "other_collection" instead of a for-loop with "add()".}}
     #   ^^^^^^^^^^
 
 

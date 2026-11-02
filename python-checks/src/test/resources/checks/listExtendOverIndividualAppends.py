@@ -3,7 +3,7 @@ def noncompliant_for_loop():
     my_list = [1, 2, 3]
     other_collection = [4, 5, 6]
     for element in other_collection:
-        my_list.append(element)  # Noncompliant {{Use "list.extend()" instead of a for-loop with "append()".}}
+        my_list.append(element)  # Noncompliant {{Use "list.extend()" to add all elements of "other_collection" instead of a for-loop with "append()".}}
     #   ^^^^^^^^^^^^^^
 
 
@@ -14,7 +14,7 @@ def noncompliant_for_loop_multiline_iterable():
         2,
         3,
     ]:
-        my_list.append(element)  # Noncompliant
+        my_list.append(element)  # Noncompliant {{Use "list.extend()" to add all elements of the iterated collection instead of a for-loop with "append()".}}
     #   ^^^^^^^^^^^^^^
 
 
@@ -26,57 +26,46 @@ def noncompliant_for_loop_multiline_receiver():
          ).append(item)
 
 
-def noncompliant_consecutive_appends(base_command, path):
-    command = list(base_command)
-    command.append("--archive")  # Noncompliant {{Use "list.extend()" instead of consecutive "append()" calls.}}
-#   ^^^^^^^^^^^^^^
-    command.append("--verbose")
-#   ^^^^^^^^^^^^^^< {{This call is part of the same sequence.}}
-    command.append(path)
-#   ^^^^^^^^^^^^^^< {{This call is part of the same sequence.}}
-    return command
+def noncompliant_for_loop_named_iterable_message(new_results):
+    results = []
+    for result in new_results:
+        results.append(result)  # Noncompliant {{Use "list.extend()" to add all elements of "new_results" instead of a for-loop with "append()".}}
+    #   ^^^^^^^^^^^^^^
 
 
-def noncompliant_consecutive_appends_four_calls():
+def noncompliant_for_loop_parenthesized_iterable_message(new_results):
+    results = []
+    for result in (new_results):
+        results.append(result)  # Noncompliant {{Use "list.extend()" to add all elements of "new_results" instead of a for-loop with "append()".}}
+    #   ^^^^^^^^^^^^^^
+
+
+def noncompliant_for_loop_call_iterable_message():
     my_list = []
-    my_list.append(1)  # Noncompliant
-    my_list.append(2)
-    my_list.append(3)
-    my_list.append(4)
+    for i in range(10):
+        my_list.append(i)  # Noncompliant {{Use "list.extend()" to add all elements of the iterated collection instead of a for-loop with "append()".}}
+    #   ^^^^^^^^^^^^^^
 
 
-def noncompliant_consecutive_appends_complex_arguments(items, flag):
+def noncompliant_for_loop_attribute_iterable_message(config):
     my_list = []
-    my_list.append(items[0])  # Noncompliant
-    my_list.append(items[1] if flag else None)
-    my_list.append(len(items))
+    for path in config.paths:
+        my_list.append(path)  # Noncompliant {{Use "list.extend()" to add all elements of the iterated collection instead of a for-loop with "append()".}}
+    #   ^^^^^^^^^^^^^^
 
 
-def noncompliant_consecutive_appends_after_other_statements():
+def noncompliant_for_loop_subscription_iterable_message(groups):
     my_list = []
-    print("start")
-    my_list.append(1)  # Noncompliant
-    my_list.append(2)
-    my_list.append(3)
-
-
-def noncompliant_consecutive_appends_two_runs(other_list):
-    my_list = []
-    my_list.append(1)  # Noncompliant
-    my_list.append(2)
-    my_list.append(3)
-    print("separator")
-    my_list.append(4)  # Noncompliant
-    my_list.append(5)
-    my_list.append(6)
+    for item in groups[0]:
+        my_list.append(item)  # Noncompliant {{Use "list.extend()" to add all elements of the iterated collection instead of a for-loop with "append()".}}
+    #   ^^^^^^^^^^^^^^
 
 
 class MyClass:
-    def build(self, path):
+    def build(self, items):
         my_list = []
-        my_list.append("first")  # Noncompliant
-        my_list.append("second")
-        my_list.append(path)
+        for item in items:
+            my_list.append(item)  # Noncompliant
         return my_list
 
 
@@ -87,89 +76,17 @@ def compliant_extend_call():
     my_list.extend(["a", "b", "c"])
 
 
-def compliant_two_consecutive_appends():
-    my_list = []
-    my_list.append(1)
-    my_list.append(2)
-
-
-def compliant_appends_interleaved_with_other_statements():
-    my_list = []
-    my_list.append(1)
-    print("in between")
-    my_list.append(2)
-    print("in between")
-    my_list.append(3)
-
-
-def compliant_appends_on_different_lists():
-    first = []
-    second = []
-    third = []
-    first.append(1)
-    second.append(2)
-    third.append(3)
-
-
-def compliant_appends_referencing_the_list(items):
-    # Grouping these calls would change the result: each argument observes the previous append
-    my_list = []
-    my_list.append(len(my_list))
-    my_list.append(len(my_list))
-    my_list.append(len(my_list))
-
-
-def compliant_appends_in_different_blocks(flag):
-    my_list = []
-    if flag:
-        my_list.append(1)
-    else:
-        my_list.append(2)
-    my_list.append(3)
-
-
-def compliant_appends_on_unknown_receiver(unknown_receiver):
-    unknown_receiver.append(1)
-    unknown_receiver.append(2)
-    unknown_receiver.append(3)
+def compliant_consecutive_appends(base_command, path):
+    # Consecutive calls are covered by S9454
+    command = list(base_command)
+    command.append("--archive")
+    command.append("--verbose")
+    command.append(path)
+    return command
 
 
 def get_list():
     return []
-
-
-def compliant_appends_on_transient_receiver():
-    get_list().append(1)
-    get_list().append(2)
-    get_list().append(3)
-
-
-def compliant_appends_on_a_set():
-    my_set = {1}
-    my_set.add(1)
-    my_set.add(2)
-    my_set.add(3)
-
-
-def compliant_appends_with_wrong_arity():
-    my_list = []
-    my_list.append()
-    my_list.append(1, 2)
-    my_list.append(3)
-
-
-def compliant_appends_with_keyword_argument():
-    my_list = []
-    my_list.append(item=1)
-    my_list.append(item=2)
-    my_list.append(item=3)
-
-
-def compliant_appends_with_starred_argument(args):
-    my_list = []
-    my_list.append(*args)
-    my_list.append(*args)
-    my_list.append(*args)
 
 
 def compliant_for_loop_tuple_unpacking_loop_var():

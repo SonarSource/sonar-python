@@ -46,7 +46,8 @@ public final class CollectionBulkAdditionUtils {
 
   private static final int MIN_CONSECUTIVE_ADDITIONS = 3;
 
-  private static final String FOR_LOOP_MESSAGE = "Use \"%s.%s()\" instead of a for-loop with \"%s()\".";
+  private static final String FOR_LOOP_NAMED_MESSAGE = "Use \"%s.%s()\" to add all elements of \"%s\" instead of a for-loop with \"%s()\".";
+  private static final String FOR_LOOP_MESSAGE = "Use \"%s.%s()\" to add all elements of the iterated collection instead of a for-loop with \"%s()\".";
   private static final String CONSECUTIVE_MESSAGE = "Use \"%s.%s()\" instead of consecutive \"%s()\" calls.";
   private static final String SECONDARY_MESSAGE = "This call is part of the same sequence.";
 
@@ -77,6 +78,7 @@ public final class CollectionBulkAdditionUtils {
       return;
     }
     Expression iterable = forStatement.testExpressions().get(0);
+    Name iterableName = Expressions.removeParentheses(iterable) instanceof Name name ? name : null;
 
     CallExpression call = singleBodyCall(forStatement);
     if (call == null || !(call.callee() instanceof QualifiedExpression callee)) {
@@ -99,7 +101,7 @@ public final class CollectionBulkAdditionUtils {
       return;
     }
 
-    ctx.addIssue(callee, message(FOR_LOOP_MESSAGE, bulkAddition));
+    ctx.addIssue(callee, forLoopMessage(bulkAddition, iterableName));
   }
 
   public static void checkStatementList(SubscriptionContext ctx, BulkAddition bulkAddition) {
@@ -151,6 +153,13 @@ public final class CollectionBulkAdditionUtils {
     }
     PreciseIssue issue = ctx.addIssue(run.get(0).call(), message(CONSECUTIVE_MESSAGE, bulkAddition));
     run.stream().skip(1).forEach(addition -> issue.secondary(addition.call(), SECONDARY_MESSAGE));
+  }
+
+  private static String forLoopMessage(BulkAddition bulkAddition, @Nullable Name collection) {
+    if (collection != null) {
+      return String.format(FOR_LOOP_NAMED_MESSAGE, bulkAddition.typeName(), bulkAddition.bulkMethod(), collection.name(), bulkAddition.elementMethod());
+    }
+    return message(FOR_LOOP_MESSAGE, bulkAddition);
   }
 
   private static String message(String template, BulkAddition bulkAddition) {
