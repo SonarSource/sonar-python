@@ -383,7 +383,8 @@ public class SymbolUtils {
     if (owner == null || owner.kind() != CLASS) return false;
     ClassSymbol classSymbol = (ClassSymbol) owner;
     if (classSymbol.hasUnresolvedTypeHierarchy()) return true;
-    for (Symbol superClass : classSymbol.superClasses()) {
+    // Version-specific stub classes and aliases are ambiguous: any alternative can declare the overridden member
+    for (Symbol superClass : flattenAmbiguousSymbols(new HashSet<>(classSymbol.superClasses()))) {
       if (superClass.is(CLASS)) {
         boolean canHaveMember = ((ClassSymbol) superClass).canHaveMember(functionSymbol.name());
         if (canHaveMember) return true;

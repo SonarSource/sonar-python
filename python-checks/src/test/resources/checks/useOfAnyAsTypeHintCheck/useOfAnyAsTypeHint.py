@@ -149,3 +149,25 @@ class ClassWithVariadicMethods:
 
     def method_with_both(self, param: Any, *args: Any, **kwargs: Any) -> Any:  # Noncompliant 2
         pass
+
+
+# Stub super classes defined differently across Python versions are ambiguous symbols: their members can still be overridden
+from types import SimpleNamespace
+from typing import ContextManager
+
+class SharedContext(SimpleNamespace):
+    def __setattr__(self, name: str, value: Any) -> None:  # Compliant, overrides SimpleNamespace.__setattr__
+        ...
+
+    def not_an_override(self, value: Any) -> None:  # Noncompliant
+        ...
+
+class CompilerContextManager(ContextManager[int]):
+    def __init__(self, mode: Any) -> None:  # Compliant, overrides object.__init__
+        ...
+
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:  # Compliant, overrides ContextManager.__exit__
+        ...
+
+    def not_an_override(self, value: Any) -> None:  # Noncompliant
+        ...
