@@ -1,0 +1,25 @@
+{
+  "title": "\"list.extend()\" should be used instead of consecutive \"append()\" calls",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "pythonic",
+    "performance",
+    "idiom"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-9454",
+  "sqKey": "S9454",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  }
+}
