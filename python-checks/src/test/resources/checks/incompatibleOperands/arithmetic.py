@@ -257,3 +257,12 @@ class CustomDirectory:
 
 def custom_directory_operations():
     CustomDirectory().__dir__() + ("extra",)
+
+
+
+
+def adjacent_bytes_literals():
+    # Implicitly concatenated bytes literals form a single bytes literal
+    bytearray(b"prefix") + b"GET / HTTP/1.1\r\n" b"Host: example.com\r\n"
+    bytearray(b"prefix") + b"\x00\x01" rb"\x02"
+    bytearray(b"prefix") + "GET" "/"  # Noncompliant

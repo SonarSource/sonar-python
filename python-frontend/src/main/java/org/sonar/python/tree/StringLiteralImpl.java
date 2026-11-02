@@ -70,8 +70,8 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
   // https://docs.python.org/3/reference/lexical_analysis.html#string-and-bytes-literals
   @Override
   public InferredType type() {
-    if ((stringElements.size() == 1 && BYTES_PREFIXES.contains(stringElements.get(0).prefix())) ||
-      stringElements.stream().anyMatch(StringElement::isTemplate)) {
+    // Adjacent bytes literals (e.g. b"a" b"b") are concatenated into a single bytes literal
+    if (isBytes() || isTemplate()) {
       // Python 3: bytes, Python 2: str
       return InferredTypes.anyType();
     }

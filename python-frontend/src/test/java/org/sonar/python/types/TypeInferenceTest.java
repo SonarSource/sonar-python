@@ -430,6 +430,8 @@ class TypeInferenceTest {
 
     assertThat(lastExpression("b'hello'").type()).isEqualTo(anyType());
     assertThat(lastExpression("rb'hello'").type()).isEqualTo(anyType());
+    assertThat(lastExpression("b'hello' b'world'").type()).isEqualTo(anyType());
+    assertThat(lastExpression("b'hello' Rb'world'").type()).isEqualTo(anyType());
 
     // this throws a 'SyntaxError: cannot mix bytes and nonbytes literals'
     assertThat(lastExpression("b'hello' 'world'").type()).isEqualTo(STR);
