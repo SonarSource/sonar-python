@@ -74,3 +74,16 @@ def other_names():
 
     @unknown_decorator
     def some_function(): ...
+
+class RecursiveMethods:
+    @tf.function
+    def via_self(self, n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
+       #^^^^^^^^
+        return self.via_self(n - 1)
+              #^^^^^^^^^^^^^< {{Recursive call is here.}}
+
+    @tf.function
+    def via_class(self, n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
+       #^^^^^^^^^
+        return RecursiveMethods.via_class(self, n - 1)
+              #^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Recursive call is here.}}

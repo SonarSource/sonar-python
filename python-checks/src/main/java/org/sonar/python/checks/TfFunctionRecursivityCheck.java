@@ -21,20 +21,24 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6908")
 public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Make sure to avoid recursive calls in this function.";
   private static final String SECONDARY_MESSAGE = "Recursive call is here.";
+  private static final TypeMatcher TENSORFLOW_FUNCTION_MATCHER = TypeMatchers.withFQN("tensorflow.function");
 
   @Override
   public void initialize(Context context) {
@@ -43,14 +47,15 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
   private static void checkFunctionDef(SubscriptionContext context) {
     FunctionDef functionDef = (FunctionDef) context.syntaxNode();
-    if (!TreeUtils.isFunctionWithGivenDecoratorFQN(functionDef, "tensorflow.function")) {
+    if (!hasTensorflowFunctionDecorator(functionDef, context)) {
       return;
     }
-    FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
-    if (functionSymbol == null) {
+    SymbolV2 functionSymbol = functionDef.name().symbolV2();
+    if (functionSymbol == null || functionSymbol.getSingleBindingUsage().isEmpty()
+      || !(functionDef.name().typeV2() instanceof FunctionType functionType)) {
       return;
     }
-    CallCollector collector = new CallCollector(functionSymbol);
+    CallCollector collector = new CallCollector(functionSymbol, functionType);
     functionDef.accept(collector);
     if (collector.expressionList.isEmpty()) {
       return;
@@ -59,19 +64,28 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
     collector.expressionList.forEach(call -> issue.secondary(call, SECONDARY_MESSAGE));
   }
 
+  private static boolean hasTensorflowFunctionDecorator(FunctionDef functionDef, SubscriptionContext context) {
+    return functionDef.decorators().stream()
+      .anyMatch(decorator -> TENSORFLOW_FUNCTION_MATCHER.isTrueFor(decorator.expression(), context));
+  }
+
   private static class CallCollector extends BaseTreeVisitor {
-    private final Symbol originalSymbol;
+    private final SymbolV2 originalSymbol;
+    private final FunctionType originalType;
     List<Expression> expressionList = new ArrayList<>();
 
-    private CallCollector(Symbol originalSymbol) {
+    private CallCollector(SymbolV2 originalSymbol, FunctionType originalType) {
       this.originalSymbol = originalSymbol;
+      this.originalType = originalType;
     }
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      TreeUtils.getSymbolFromTree(callExpression.callee())
-        .filter(symbol -> symbol.equals(originalSymbol))
-        .ifPresent(symbol -> expressionList.add(callExpression.callee()));
+      Expression callee = callExpression.callee();
+      if ((callee instanceof Name name && originalSymbol.equals(name.symbolV2()))
+        || (callee instanceof QualifiedExpression && originalType.equals(callee.typeV2()))) {
+        expressionList.add(callExpression.callee());
+      }
       super.visitCallExpression(callExpression);
     }
   }

@@ -24,4 +24,9 @@ class TfFunctionRecursivityCheckTest {
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tfFunctionRecursivity.py", new TfFunctionRecursivityCheck());
   }
+
+  @Test
+  void methodRecursion() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tfFunctionRecursivityMethod.py", new TfFunctionRecursivityCheck());
+  }
 }
