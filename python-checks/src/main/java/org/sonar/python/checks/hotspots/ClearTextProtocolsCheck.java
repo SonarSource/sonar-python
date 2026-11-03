@@ -291,7 +291,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .filter(p -> {
         String rest = literalValue.substring(p.length());
         if (rest.isEmpty()) {
-          if (isConcatenated(stringElement)) {
+          if (isConcatenated(stringElement) || isJoinedUrlPart(stringElement)) {
             return true;
           }
           // Keep direct replace arguments reportable; the identification filter exempts the old value.
@@ -308,6 +308,45 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
         return !CleartextProtocolFilter.isSafeWithoutTls(literalValue);
       })
       .findFirst();
+  }
+
+  /**
+   * Recognizes a scheme at the start of a collection used in {@code "".join(parts)}.
+   * For variables, only checks for a join usage; mutations and usage order are not tracked.
+   */
+  private static boolean isJoinedUrlPart(Tree stringElement) {
+    if (!(stringElement.parent() instanceof StringLiteral literal)) {
+      return false;
+    }
+    Tree parent = literal.parent();
+    if (parent.is(Tree.Kind.EXPRESSION_LIST)) {
+      parent = parent.parent();
+    }
+    if (!(parent instanceof Expression collection)
+      || !collection.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)
+      || Expressions.expressionsFromListOrTuple(collection).getFirst() != literal) {
+      return false;
+    }
+    if (isEmptyStringJoinArgument(collection)) {
+      return true;
+    }
+    if (!(collection.parent() instanceof AssignmentStatement assignment)
+      || !(assignment.lhsExpressions().getFirst().expressions().getFirst() instanceof Name name)) {
+      return false;
+    }
+    SymbolV2 symbol = name.symbolV2();
+    return symbol != null && symbol.usages().stream()
+      .map(UsageV2::tree)
+      .anyMatch(ClearTextProtocolsCheck::isEmptyStringJoinArgument);
+  }
+
+  private static boolean isEmptyStringJoinArgument(Tree expression) {
+    return expression.parent() instanceof RegularArgument argument
+      && TreeUtils.firstAncestorOfKind(argument, Tree.Kind.CALL_EXPR) instanceof CallExpression call
+      && call.callee() instanceof QualifiedExpression callee
+      && "join".equals(callee.name().name())
+      && callee.qualifier() instanceof StringLiteral separator
+      && Expressions.unescape(separator).isEmpty();
   }
 
   private static boolean isProtocolIdentificationArgument(Tree stringElement, SubscriptionContext context) {

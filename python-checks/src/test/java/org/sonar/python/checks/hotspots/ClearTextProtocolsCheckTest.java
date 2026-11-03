@@ -40,4 +40,9 @@ class ClearTextProtocolsCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/clearTextProtocols_concatenation.py", new ClearTextProtocolsCheck());
   }
 
+  @Test
+  void joined_urls() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/clearTextProtocols_join.py", new ClearTextProtocolsCheck());
+  }
+
 }
