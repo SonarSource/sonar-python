@@ -42,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
@@ -273,12 +274,26 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private static boolean isConcatenated(Tree stringElement) {
+    if (!(stringElement.parent() instanceof StringLiteral literal)) {
+      return false;
+    }
+    Tree parent = literal.parent();
+    while (parent.is(Tree.Kind.PARENTHESIZED)) {
+      parent = parent.parent();
+    }
+    return literal.stringElements().size() > 1 || parent.is(Tree.Kind.PLUS);
+  }
+
   private static Optional<String> unsafeProtocol(String literalValue, Tree stringElement) {
     return CLEARTEXT_PROTOCOLS.stream()
       .filter(literalValue::startsWith)
       .filter(p -> {
         String rest = literalValue.substring(p.length());
         if (rest.isEmpty()) {
+          if (isConcatenated(stringElement)) {
+            return true;
+          }
           // Keep direct replace arguments reportable; the identification filter exempts the old value.
           return stringElement.parent().parent() instanceof RegularArgument argument
             && TreeUtils.firstAncestorOfKind(argument, Tree.Kind.CALL_EXPR) instanceof CallExpression call
@@ -297,7 +312,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
 
   private static boolean isProtocolIdentificationArgument(Tree stringElement, SubscriptionContext context) {
     Tree argumentParent = stringElement.parent().parent();
-    while (argumentParent.is(Tree.Kind.TUPLE, Tree.Kind.PARENTHESIZED)) {
+    while (argumentParent.is(Tree.Kind.TUPLE, Tree.Kind.PARENTHESIZED, Tree.Kind.PLUS)) {
       argumentParent = argumentParent.parent();
     }
     if (!(argumentParent instanceof RegularArgument argument) || argument.keywordArgument() != null) {

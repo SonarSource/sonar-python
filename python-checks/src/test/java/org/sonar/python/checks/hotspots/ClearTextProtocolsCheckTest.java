@@ -35,4 +35,9 @@ class ClearTextProtocolsCheckTest {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/clearTextProtocolsTestFile.py", new ClearTextProtocolsCheck());
   }
 
+  @Test
+  void concatenation() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/clearTextProtocols_concatenation.py", new ClearTextProtocolsCheck());
+  }
+
 }
