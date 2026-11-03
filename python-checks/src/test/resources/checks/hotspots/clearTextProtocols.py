@@ -7,8 +7,7 @@ import ssl
 import urllib.request
 
 def clear_text_protocol():
-  url = "http://" # Noncompliant {{Using HTTP protocol is insecure. Use HTTPS instead.}}
-  #     ^^^^^^^^^
+  url = "http://" # Compliant
   url = "http://exemple.com" # Noncompliant
   url = "http://0001::1" # Noncompliant
   url = "http://dead:beef::1" # Noncompliant
@@ -18,9 +17,9 @@ def clear_text_protocol():
   url = "http://subdomain.exemple.com" # Noncompliant
   #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  url = "ftp://" # Noncompliant {{Using FTP protocol is insecure. Use SFTP, SCP or FTPS instead.}}
+  url = "ftp://" # Compliant
   url = "ftp://anonymous@exemple.com" # Noncompliant
-  url = "telnet://" # Noncompliant
+  url = "telnet://" # Compliant
   url = "telnet://anonymous@exemple.com" # Noncompliant {{Using Telnet protocol is insecure. Use SSH instead.}}
 
   # Argument default value
@@ -178,6 +177,7 @@ def clear_text_protocol_used_as_prefix_grouped(url: str):
 
 def clear_text_protocol_used_outside_startswith_prefix(url: str):
   check_protocol("http://insecure.com") # Noncompliant
+  check_protocol("http://") # Compliant
   url.endswith("http://insecure.com") # Noncompliant
   url.startswith(prefix="http://insecure.com") # Noncompliant
   str.startswith("http://insecure.com") # Noncompliant

@@ -80,7 +80,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       Tree node = ctx.syntaxNode();
       String value = Expressions.unescape((StringElement) node);
-      unsafeProtocol(value)
+      unsafeProtocol(value, node)
         .filter(protocol -> !isProtocolIdentificationArgument(node, ctx))
         // cleanup slashes
         .map(protocol -> protocol.substring(0, protocol.length() - 3))
@@ -273,14 +273,17 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static Optional<String> unsafeProtocol(String literalValue) {
+  private static Optional<String> unsafeProtocol(String literalValue, Tree stringElement) {
     return CLEARTEXT_PROTOCOLS.stream()
       .filter(literalValue::startsWith)
       .filter(p -> {
         String rest = literalValue.substring(p.length());
         if (rest.isEmpty()) {
-          // Bare scheme string (e.g. "http://") — always flag
-          return true;
+          // Keep direct replace arguments reportable; the identification filter exempts the old value.
+          return stringElement.parent().parent() instanceof RegularArgument argument
+            && TreeUtils.firstAncestorOfKind(argument, Tree.Kind.CALL_EXPR) instanceof CallExpression call
+            && call.callee() instanceof QualifiedExpression callee
+            && "replace".equals(callee.name().name());
         }
         char first = rest.charAt(0);
         if (first == '/' || first == '?' || first == '#') {
