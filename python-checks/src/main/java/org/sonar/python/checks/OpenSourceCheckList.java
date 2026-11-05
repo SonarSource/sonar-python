@@ -363,6 +363,7 @@ public class OpenSourceCheckList {
       LoopOverDictKeyValuesCheck.class,
       MandatoryFunctionParameterTypeHintCheck.class,
       MandatoryFunctionReturnTypeHintCheck.class,
+      MappingInsteadOfDictCheck.class,
       MembershipTestSupportCheck.class,
       MethodNameCheck.class,
       MethodShouldBeStaticCheck.class,

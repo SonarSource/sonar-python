@@ -1,0 +1,49 @@
+<p>This rule raises an issue when isinstance(value, dict) guards a branch that only reads from value.</p>
+<h2>Why is this an issue?</h2>
+<p>An <code>isinstance</code> check against a concrete mutable mapping type accepts only instances of that type. However, a mapping interface provides
+the read-only operations that code commonly needs, such as item access and lookup methods.</p>
+<p>When code only reads from the guarded value, requiring the concrete mutable type rejects other values that provide all the required mapping
+operations. This makes the code less flexible and prevents callers from using compatible mapping values without providing additional safety.</p>
+<p>For example, a mapping proxy exposes a read-only mapping API but is not a <code>dict</code>:</p>
+<pre>
+from collections.abc import Mapping
+from types import MappingProxyType
+
+settings = MappingProxyType({"timeout": 30})
+
+isinstance(settings, dict)     # False
+isinstance(settings, Mapping)  # True
+</pre>
+<p>Use the mapping interface when the code only needs mapping reads. Keep a concrete mutable-mapping check when the code mutates the value or relies
+on behavior that the interface does not guarantee.</p>
+<h3>What is the potential impact?</h3>
+<p>An unnecessarily narrow concrete dictionary-type check can reject valid read-only mapping values, including immutable mapping instances. This
+reduces API compatibility and can cause avoidable failures when callers provide another mapping implementation.</p>
+<h2>How to fix it</h2>
+<p>Replace the concrete <code>dict</code> type check with <code>collections.abc.Mapping</code>. This accepts both dictionaries and read-only mappings
+while preserving the item-read behavior.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def name_of(value):
+    if isinstance(value, dict):  # Noncompliant
+        return value["name"]
+    return None
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from collections.abc import Mapping
+
+def name_of(value):
+    if isinstance(value, Mapping):
+        return value["name"]
+    return None
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python documentation - <a href="https://docs.python.org/3.15/library/collections.abc.html#collections.abc.Mapping">collections.abc — Abstract
+  Base Classes for Containers</a></li>
+  <li>Python documentation - <a href="https://docs.python.org/3.15/library/stdtypes.html#frozendict">Built-in Types — frozendict</a></li>
+</ul>
+
