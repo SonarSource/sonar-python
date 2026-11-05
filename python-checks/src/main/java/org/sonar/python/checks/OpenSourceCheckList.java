@@ -523,6 +523,7 @@ public class OpenSourceCheckList {
       SynchronousHttpOperationsInAsyncCheck.class,
       SynchronousSubprocessOperationsInAsyncCheck.class,
       SynchronousOsCallsInAsyncCheck.class,
+      SentinelValuesIdentityComparisonCheck.class,
       TaskGroupNurseryUsedOnlyOnceCheck.class,
       TempFileCreationCheck.class,
       TemplateAndStrConcatenationCheck.class,
