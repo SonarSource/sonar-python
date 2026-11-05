@@ -62,6 +62,9 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   private static final Set<String> DJANGO_MIDDLEWARE_METHODS = Set.of(
     "process_request", "process_exception", "process_view", "process_template_response");
 
+  // Finder and loader methods called by the import system with a fixed signature (importlib finder/loader protocols)
+  private static final Set<String> IMPORT_PROTOCOL_METHODS = Set.of("find_spec", "find_module", "find_loader", "create_module");
+
   private static final TypeMatcher MIDDLEWARE_MIXIN_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(
     TypeMatchers.isOrExtendsType("django.utils.deprecation.MiddlewareMixin"));
 
@@ -128,7 +131,12 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       isTestFunction(ctx, functionDef) ||
       isDjangoView(functionDef) ||
       isDjangoMiddlewareFunction(ctx, functionDef) ||
+      isImportProtocolMethod(functionDef) ||
       isAbstractClass(functionDef);
+  }
+
+  private static boolean isImportProtocolMethod(FunctionDef functionDef) {
+    return functionDef.isMethodDefinition() && IMPORT_PROTOCOL_METHODS.contains(functionDef.name().name());
   }
 
   private static boolean isAbstractClass(FunctionDef functionDef) {

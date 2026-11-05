@@ -246,3 +246,29 @@ class IndicoCallback(TypeDecorator):
     def alembic_render_type(self, autogen_context, toplevel_code):  # Noncompliant
         autogen_context.imports.add("from example import IndicoCallback")
         return "IndicoCallback()"
+
+
+import _frozen_importlib_external as _bootstrap_external
+
+class ZipImporterLike(_bootstrap_external._LoaderBasics):
+    # The import system calls finder/loader protocol methods with a fixed signature
+    def find_spec(self, fullname, target=None):
+        return self._spec_for(fullname)
+
+    def other_method(self, fullname, target=None):  # Noncompliant
+        return self._spec_for(fullname)
+
+
+class MetaPathFinder:
+    def find_spec(self, fullname, path, target=None):
+        return None if fullname else 42
+
+    def find_module(self, fullname, path=None):
+        return self
+
+    def create_module(self, spec):
+        print("default module creation")
+
+
+def find_spec(fullname, target=None):  # Noncompliant
+    return fullname
