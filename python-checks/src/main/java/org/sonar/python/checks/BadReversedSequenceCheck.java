@@ -39,6 +39,9 @@ public class BadReversedSequenceCheck extends PythonSubscriptionCheck {
 
   private static final TypeMatcher IS_REVERSED = TypeMatchers.isType("builtins.reversed");
 
+  // Abstract views (KeysView, ValuesView, ItemsView) declared by library annotations are often reversible dict views at runtime
+  private static final TypeMatcher IS_ABSTRACT_MAPPING_VIEW = TypeMatchers.isObjectInstanceOf("typing.MappingView");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, BadReversedSequenceCheck::check);
@@ -51,7 +54,8 @@ public class BadReversedSequenceCheck extends PythonSubscriptionCheck {
     }
     TreeUtils.nthArgumentOrKeywordOptional(0, "", callExpression.arguments())
       .map(RegularArgument::expression)
-      .filter(argument -> argument.is(Tree.Kind.GENERATOR_EXPR) || isNotReversible(argument.typeV2()))
+      .filter(argument -> argument.is(Tree.Kind.GENERATOR_EXPR)
+        || (isNotReversible(argument.typeV2()) && !IS_ABSTRACT_MAPPING_VIEW.isTrueFor(argument, ctx)))
       .ifPresent(argument -> ctx.addIssue(argument, MESSAGE));
   }
 

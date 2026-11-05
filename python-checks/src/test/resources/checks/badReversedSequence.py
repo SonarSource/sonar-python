@@ -108,3 +108,16 @@ def optional_list_default(frames: list | None = None):
 
 def no_argument():
     reversed()  # Compliant
+
+
+def abstract_mapping_views(fn):
+    # Library annotations declare abstract views (e.g. MappingProxyType.values() -> ValuesView),
+    # while the runtime object is often a reversible dict view
+    import inspect
+    from types import MappingProxyType
+    signature = inspect.signature(fn)
+    next(reversed(signature.parameters.values()))
+    reversed(signature.parameters.keys())
+    reversed(MappingProxyType({"a": 1}).items())
+    reversed({"a": 1}.values())
+    reversed(frozenset({"a"}))  # Noncompliant
