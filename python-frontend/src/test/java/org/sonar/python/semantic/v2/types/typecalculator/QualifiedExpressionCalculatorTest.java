@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -256,6 +258,84 @@ class QualifiedExpressionCalculatorTest {
     assertThat(result).isInstanceOfSatisfying(UnionType.class,
       union -> assertThat(union.candidates()).containsExactlyInAnyOrder(integer, string, none));
     assertThat(result.hasMember("__call__")).isEqualTo(TriBool.FALSE);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {
+    // Read through an instance: webob declares "Response.headers" as "AsymmetricPropertyWithDelete[...]"
+    """
+      import webob
+      resp = webob.Response()
+      resp.headers
+      """,
+    // Read through a class: peewee declares "Model.delete" as "classmethod_only[...]"
+    """
+      import peewee
+      class KeyValue(peewee.Model): ...
+      KeyValue.delete
+      """
+  })
+  void stubDescriptorReadIsUnknown(String code) {
+    var fileInput = parseAndInferTypes(code);
+    assertThat(getQualifiedExpressionFromStatement(fileInput).typeV2()).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void userDefinedDescriptorKeepsItsType() {
+    var fileInput = parseAndInferTypes("""
+      class DictionaryDescriptor:
+        def __get__(self, instance, owner):
+          return {}
+      class DescriptorOwner:
+        items: DictionaryDescriptor = DictionaryDescriptor()
+      DescriptorOwner().items
+      """);
+    var result = getQualifiedExpressionFromStatement(fileInput).typeV2();
+    assertThat(result).isInstanceOf(ObjectType.class);
+    assertThat(result.unwrappedType().name()).isEqualTo("DictionaryDescriptor");
+  }
+
+  @Test
+  void stubAttributeWithoutGetKeepsItsType() {
+    var fileInput = parseAndInferTypes("""
+      class A:
+        x: int = 1
+      A.x
+      """);
+    assertThat(getQualifiedExpressionFromStatement(fileInput).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void propertyReturningDescriptorInstanceIsNotUnwrappedAgain() {
+    // "types.FunctionType" defines "__get__": reading the property returns the function object itself
+    var fileInput = parseAndInferTypes("""
+      import types
+      class A:
+        @property
+        def fn(self) -> types.FunctionType: ...
+      A().fn
+      """);
+    var result = getQualifiedExpressionFromStatement(fileInput).typeV2();
+    assertThat(result).isInstanceOf(ObjectType.class);
+    assertThat(result.unwrappedType().name()).isEqualTo("FunctionType");
+  }
+
+  @Test
+  void stubDescriptorSetOnTheInstanceKeepsItsType() {
+    // An attribute set on the object itself is an instance attribute: the descriptor protocol does not apply
+    var stubDescriptor = ObjectType.fromType(PROJECT_LEVEL_TYPE_TABLE.getType("types.FunctionType"));
+    var owner = ObjectType.Builder.fromType(new ClassTypeBuilder("Owner", "mod.Owner").build())
+      .withMembers(List.of(new Member("attr", stubDescriptor)))
+      .build();
+    var qualifier = mock(Expression.class);
+    when(qualifier.typeV2()).thenReturn(owner);
+    var name = mock(Name.class);
+    when(name.name()).thenReturn("attr");
+    var expression = mock(QualifiedExpression.class);
+    when(expression.qualifier()).thenReturn(qualifier);
+    when(expression.name()).thenReturn(name);
+
+    assertThat(calculator.calculate(expression)).isEqualTo(stubDescriptor);
   }
 
   private static QualifiedExpression getQualifiedExpressionFromStatement(FileInput fileInput) {

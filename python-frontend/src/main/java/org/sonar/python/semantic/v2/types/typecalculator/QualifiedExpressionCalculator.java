@@ -16,11 +16,15 @@
  */
 package org.sonar.python.semantic.v2.types.typecalculator;
 
+import java.util.Objects;
 import java.util.Optional;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatcher;
@@ -45,6 +49,8 @@ public class QualifiedExpressionCalculator {
       .flatMap(t -> t.resolveMember(name.name()))
       // Version-specific member alternatives can each contain a lazy union annotation.
       .map(type -> TypeUtils.map(type, TypeUtils::resolved))
+      // Applied to the raw class member: a property's return type is the result of its "__get__" and must not be unwrapped again
+      .map(type -> handleClassLevelDescriptor(qualifierType, name.name(), type))
       .map(this::handlePropertyFunction)
       .orElseGet(() -> unresolvedMemberType(qualifierType, name.name()));
   }
@@ -61,6 +67,34 @@ public class QualifiedExpressionCalculator {
       return TypeUtils.widenNeverToUnknown(functionType.returnType());
     }
     return type;
+  }
+
+  /**
+   * Reading a class attribute holding a descriptor (an object whose class defines "__get__", e.g. a stub attribute
+   * declared as "AsymmetricProperty[...]") returns the result of "__get__", not the descriptor itself.
+   * As "__get__" results are not computed, the resulting type is unknown.
+   * Only descriptor classes coming from stubs are handled, as V1 does: user-defined descriptors keep their type so that
+   * checks can inspect their "__get__" method themselves.
+   */
+  private static PythonType handleClassLevelDescriptor(PythonType qualifierType, String memberName, PythonType memberType) {
+    if (isReadThroughClass(qualifierType, memberName)
+      && memberType instanceof ObjectType descriptor
+      && descriptor.unwrappedType() instanceof ClassType descriptorClass
+      && descriptorClass.definitionLocation().isEmpty()
+      && descriptorClass.instancesHaveMember("__get__") == TriBool.TRUE) {
+      return PythonType.UNKNOWN;
+    }
+    return memberType;
+  }
+
+  private static boolean isReadThroughClass(PythonType qualifierType, String memberName) {
+    if (qualifierType instanceof ClassType) {
+      return true;
+    }
+    // Members set on the object itself are instance attributes: the descriptor protocol does not apply to them
+    return qualifierType instanceof ObjectType objectType
+      && objectType.unwrappedType() instanceof ClassType
+      && objectType.members().stream().noneMatch(member -> Objects.equals(member.name(), memberName));
   }
 
   private boolean hasFunctionPropertyDecorator(FunctionType functionType) {

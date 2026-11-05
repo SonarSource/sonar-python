@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
@@ -73,6 +74,23 @@ class SymbolImplTest {
     SymbolImpl copiedSymbol = symbol.copyWithoutUsages();
     // errno is optional in newer Typeshed; copying must retain the complete inferred type.
     assertThat(copiedSymbol.inferredType()).isEqualTo(symbol.inferredType());
+  }
+
+  @Test
+  void typeshed_descriptor_attribute_is_typed_as_get_result() {
+    // webob declares "Response.headers" as "AsymmetricPropertyWithDelete[...]": reading it returns the result of its "__get__"
+    SymbolImpl descriptorAttribute = (SymbolImpl) ((HasSymbol) lastExpressionInFunction(
+      "import webob",
+      "resp = webob.Response()",
+      "resp.headers"
+    )).symbol();
+    assertThat(descriptorAttribute.inferredType()).isEqualTo(InferredTypes.anyType());
+
+    SymbolImpl plainAttribute = (SymbolImpl) ((HasSymbol) lastExpressionInFunction(
+      "e = OSError()",
+      "e.strerror"
+    )).symbol();
+    assertThat(plainAttribute.inferredType()).isNotEqualTo(InferredTypes.anyType());
   }
 
   @Test

@@ -84,6 +84,14 @@ class DescriptorOwner:
         self.ordinary["key"] = 1  # Noncompliant
 
 
+def descriptor_read_through_instance():
+    owner = DescriptorOwner()
+    owner.items["key"] = 1
+    _ = owner.items["key"]
+    del owner.items["key"]
+    owner.ordinary["key"] = 1  # Noncompliant
+
+
 def descriptor_object_itself(value: DictionaryDescriptor):
     value["key"] = 1  # Noncompliant
 

@@ -175,7 +175,9 @@ public class SymbolImpl implements Symbol {
    */
   public InferredType inferredType() {
     if (!hasReadDeserializedType && deserializedType != null) {
-      inferredType = InferredTypes.fromTypeshedProtobuf(deserializedType, deserializedTypeTable);
+      InferredType declaredType = InferredTypes.fromTypeshedProtobuf(deserializedType, deserializedTypeTable);
+      // Reading a class attribute declared as a descriptor returns the unknown result of its "__get__" method
+      inferredType = declaredType.resolveMember("__get__").isPresent() ? InferredTypes.anyType() : declaredType;
       hasReadDeserializedType = true;
     }
     return inferredType;

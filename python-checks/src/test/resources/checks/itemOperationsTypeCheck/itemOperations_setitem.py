@@ -204,3 +204,12 @@ def typed_dict_instances(customer, days_until_due):
 
     local_params = LocalParams(total=1)
     local_params["total"] = 2
+
+
+def class_level_descriptor_attributes(image_ref):
+    # Response.headers is declared as "AsymmetricPropertyWithDelete[...]": reading it returns the result of its __get__
+    import webob
+
+    resp = webob.Response(status_int=202)
+    resp.headers['Location'] = image_ref
+    webob.Request.blank("/").headers['X-Test'] = "a"
