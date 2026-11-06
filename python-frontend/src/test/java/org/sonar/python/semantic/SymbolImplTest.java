@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
@@ -91,6 +92,16 @@ class SymbolImplTest {
       "e.strerror"
     )).symbol();
     assertThat(plainAttribute.inferredType()).isNotEqualTo(InferredTypes.anyType());
+  }
+
+  @Test
+  void stub_enum_member_has_enum_type() {
+    SymbolImpl symbol = (SymbolImpl) ((HasSymbol) lastExpressionInFunction(
+      "from socket import SocketKind",
+      "SocketKind.SOCK_RAW"
+    )).symbol();
+    assertThat(symbol.inferredType()).isEqualTo(InferredTypes.runtimeType(TypeShed.symbolWithFQN("socket.SocketKind")));
+    assertThat(symbol.copyWithoutUsages().inferredType()).isEqualTo(symbol.inferredType());
   }
 
   @Test

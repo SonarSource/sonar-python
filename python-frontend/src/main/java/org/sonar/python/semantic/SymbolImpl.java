@@ -61,6 +61,8 @@ public class SymbolImpl implements Symbol {
   private TypeShedTypeTable deserializedTypeTable = TypeShedTypeTable.EMPTY;
 
   private boolean hasReadDeserializedType = false;
+  @Nullable
+  private String enumClassFqn = null;
 
   protected Set<String> validForSemanticPythonVersions = Collections.emptySet();
 
@@ -175,12 +177,24 @@ public class SymbolImpl implements Symbol {
    */
   public InferredType inferredType() {
     if (!hasReadDeserializedType && deserializedType != null) {
-      InferredType declaredType = InferredTypes.fromTypeshedProtobuf(deserializedType, deserializedTypeTable);
-      // Reading a class attribute declared as a descriptor returns the unknown result of its "__get__" method
-      inferredType = declaredType.resolveMember("__get__").isPresent() ? InferredTypes.anyType() : declaredType;
+      if (enumClassFqn != null) {
+        inferredType = InferredTypes.runtimeType(TypeShed.symbolWithFQN(enumClassFqn));
+      } else {
+        InferredType declaredType = InferredTypes.fromTypeshedProtobuf(deserializedType, deserializedTypeTable);
+        // Reading a class attribute declared as a descriptor returns the unknown result of its "__get__" method
+        inferredType = declaredType.resolveMember("__get__").isPresent() ? InferredTypes.anyType() : declaredType;
+      }
       hasReadDeserializedType = true;
     }
     return inferredType;
+  }
+
+  /**
+   * Stubs declare enum members with the type of their value (e.g. "OK: int" or "OK = 1000"),
+   * while at runtime they are instances of the enum class.
+   */
+  void setEnumMemberOf(String enumClassFqn) {
+    this.enumClassFqn = enumClassFqn;
   }
 
   public void setInferredType(InferredType inferredType) {
@@ -215,6 +229,7 @@ public class SymbolImpl implements Symbol {
     copiedSymbol.annotatedTypeName = annotatedTypeName;
     copiedSymbol.deserializedType = deserializedType;
     copiedSymbol.deserializedTypeTable = deserializedTypeTable;
+    copiedSymbol.enumClassFqn = enumClassFqn;
     return copiedSymbol;
   }
 

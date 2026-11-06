@@ -320,3 +320,17 @@ def protobuf_6_positional_precision(message):
     MessageToJson(message, False, 2, False, False, None, None, True)  # Noncompliant {{Change this argument; Function "MessageToJson" expects a different type}}
     MessageToJson(message, False, 2, False, False, None, True, True)
     MessageToJson(message, ensure_ascii=True, always_print_fields_with_no_presence=True)
+
+
+def imported_stub_enum_members():
+    # Members of enums defined in stubs are instances of the enum class, not of their value type
+    from aiohttp import WSCloseCode
+    from socket import SocketKind
+
+    def close(code: WSCloseCode = WSCloseCode.OK): ...
+    def use_kind(kind: SocketKind): ...
+    def use_str(value: str): ...
+
+    close(WSCloseCode.PROTOCOL_ERROR)
+    use_kind(SocketKind.SOCK_RAW)
+    use_str(WSCloseCode.PROTOCOL_ERROR)  # Noncompliant

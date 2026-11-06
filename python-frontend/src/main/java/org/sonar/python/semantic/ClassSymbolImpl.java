@@ -163,9 +163,21 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName, true, typeTable);
       classMembers.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
+    if (classSymbolProto.getIsEnum()) {
+      classMembers.forEach(this::setEnumMemberType);
+    }
     addMembers(classMembers);
     superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).toList());
     validForSemanticPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
+  }
+
+  private void setEnumMemberType(Symbol member) {
+    if (member instanceof AmbiguousSymbol ambiguousSymbol) {
+      ambiguousSymbol.alternatives().forEach(this::setEnumMemberType);
+    } else if (member.kind() == Kind.OTHER && !member.name().startsWith("_") && fullyQualifiedName != null) {
+      // Private and special names (e.g. "_value_", "__order__") are not enum members
+      ((SymbolImpl) member).setEnumMemberOf(fullyQualifiedName);
+    }
   }
 
   private String effectiveMemberFqn(String serializedFqn, String localName) {
