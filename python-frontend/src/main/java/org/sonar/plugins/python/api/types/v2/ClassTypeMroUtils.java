@@ -70,15 +70,7 @@ final class ClassTypeMroUtils {
       if (selections.size() > MAX_MRO_ALTERNATIVES / union.candidates().size()) {
         return Optional.empty();
       }
-      List<Map<UnionType, ClassType>> expanded = new ArrayList<>();
-      for (Map<UnionType, ClassType> selection : selections) {
-        for (PythonType candidate : union.candidates()) {
-          Map<UnionType, ClassType> alternative = new IdentityHashMap<>(selection);
-          alternative.put(union, (ClassType) candidate);
-          expanded.add(alternative);
-        }
-      }
-      selections = expanded;
+      selections = expandSelections(selections, union);
     }
     List<List<ClassType>> results = new ArrayList<>();
     for (Map<UnionType, ClassType> selection : selections) {
@@ -93,6 +85,18 @@ final class ClassTypeMroUtils {
       results.add(order.get());
     }
     return Optional.of(results);
+  }
+
+  private static List<Map<UnionType, ClassType>> expandSelections(List<Map<UnionType, ClassType>> selections, UnionType union) {
+    List<Map<UnionType, ClassType>> expanded = new ArrayList<>();
+    for (Map<UnionType, ClassType> selection : selections) {
+      for (PythonType candidate : union.candidates()) {
+        Map<UnionType, ClassType> alternative = new IdentityHashMap<>(selection);
+        alternative.put(union, (ClassType) candidate);
+        expanded.add(alternative);
+      }
+    }
+    return expanded;
   }
 
   private static boolean collectBaseAlternatives(
@@ -176,7 +180,6 @@ final class ClassTypeMroUtils {
     }
 
     // ClassType.mro() rejects unresolved ancestry before calling this helper.
-    // SuperProxyType also uses the known edges alone to reject invalid ancestry;
     // the resulting partial order must not be used as a complete MRO.
     List<ClassType> parentTypes = cls.superClasses().stream()
       .map(wrapper -> selection.containsKey(wrapper) ? selection.get(wrapper) : wrapper.type())
