@@ -1,0 +1,77 @@
+<p>This rule raises an issue on an <code>import</code> or <code>from …​ import</code> statement in the body of a function or method, including nested
+and <code>async</code> functions, when all the Python versions targeted by the project are 3.15 or later, unless one of the exceptions below applies.
+<code>lazy import</code> is a syntax error in earlier versions.</p>
+<h2>Why is this an issue?</h2>
+<p>Importing a module inside a function is a common workaround to avoid paying for an expensive import when a module is loaded, or to break an import
+cycle. The module is only loaded when the function first runs.</p>
+<p>This workaround has drawbacks:</p>
+<ul>
+  <li>The dependencies of the module are hidden. A reader has to go through every function body to know what the module imports, and tools that report
+  the dependencies of a module miss them.</li>
+  <li>The same import is often repeated in several functions, and the <code>import</code> statement runs again on every call.</li>
+  <li>The deferral is spread over every function that needs the module, instead of being declared once, together with the import.</li>
+</ul>
+<p>Since Python 3.15 (PEP 810), a <code>lazy import</code> at module level defers loading in a similar way. The name is bound to a lightweight proxy,
+and the module is loaded on its first use. The import stays at the top of the file, together with the other dependencies of the module.</p>
+<h3>Exceptions</h3>
+<p>No issue is raised when moving the import to a module-level <code>lazy import</code> would change the behavior of the code:</p>
+<ul>
+  <li>The import is inside a <code>try</code> statement, in any of its clauses, or inside a <code>with</code> statement. A <code>lazy import</code>
+  runs the import when the name is first used, so the exception handling or the context set up by these statements, such as suppressed exceptions or
+  warnings, a modified <code>sys.path</code>, or patched modules, would no longer apply to it.</li>
+  <li>The imported name is never used in the function. Such an import usually runs for its side effects, like registering plugins or patching another
+  module, and a <code>lazy import</code> would never load the module, because the name is never used.</li>
+  <li>The same name is already bound at module level, is the name of a built-in, like <code>open</code> in <code>from gzip import open</code>, or is
+  bound to a different module in another function, for example <code>import numpy as xp</code> in one function and <code>import cupy as xp</code> in
+  another.</li>
+  <li>The function is serialized by value and run in another process: a function decorated with <code>@ray.remote</code>, <code>@dask.delayed</code>,
+  PySpark <code>udf</code> or <code>pandas_udf</code>, or Airflow <code>@task.virtualenv</code> or <code>@task.external_python</code>, or a method of
+  a class decorated with <code>@ray.remote</code>. A module-level <code>lazy import</code> is not available in that process, and it cannot be
+  serialized with the function.</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Move the import to the module level and prefix it with the <code>lazy</code> keyword.</p>
+<p>Keep in mind that this changes when and how the import happens:</p>
+<ul>
+  <li>Import errors and the side effects of the imported module occur when the name is first used, using the import configuration (for example,
+  <code>sys.path</code>) at that time.</li>
+  <li>The module is imported once. Code that relies on the import being repeated on each call, for example to pick up a module patched in
+  <code>sys.modules</code>, no longer sees the change.</li>
+  <li>The imported name becomes a global of the module. It is visible as a module attribute, and <code>from module import *</code> includes it unless
+  <code>__all__</code> is defined.</li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def to_json(data):
+    import json  # Noncompliant
+    return json.dumps(data)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+lazy import json
+
+def to_json(data):
+    return json.dumps(data)
+</pre>
+<p>The same applies to imports used to break an import cycle:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+def find_owner(item):
+    from .users import User  # Noncompliant
+    return User.get(item.owner_id)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+lazy from .users import User
+
+def find_owner(item):
+    return User.get(item.owner_id)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>PEP 810 - <a href="https://peps.python.org/pep-0810/">Explicit lazy imports</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3.15/reference/simple_stmts.html#the-import-statement">The import statement</a></li>
+</ul>
+

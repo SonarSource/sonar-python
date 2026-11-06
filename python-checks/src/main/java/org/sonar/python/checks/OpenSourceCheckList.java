@@ -296,6 +296,7 @@ public class OpenSourceCheckList {
       FloatingPointEqualityCheck.class,
       FStringNestingLevelCheck.class,
       FunctionComplexityCheck.class,
+      FunctionLevelImportCheck.class,
       FunctionNameCheck.class,
       FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
