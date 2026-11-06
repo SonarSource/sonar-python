@@ -1,0 +1,25 @@
+{
+  "title": "\"frozendict\" instances should not have items or attributes assigned",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "python3",
+    "runtime-error"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-9459",
+  "sqKey": "S9459",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW",
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  }
+}

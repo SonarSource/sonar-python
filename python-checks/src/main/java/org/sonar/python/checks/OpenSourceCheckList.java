@@ -294,6 +294,7 @@ public class OpenSourceCheckList {
       FlaskSendFileMimeTypeCheck.class,
       FlaskViewDecoratorCheck.class,
       FloatingPointEqualityCheck.class,
+      FrozendictAssignmentCheck.class,
       FStringNestingLevelCheck.class,
       FunctionComplexityCheck.class,
       FunctionLevelImportCheck.class,

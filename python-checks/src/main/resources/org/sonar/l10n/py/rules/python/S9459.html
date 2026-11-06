@@ -1,0 +1,29 @@
+<p>This rule raises an issue when an assignment is made on a item or an attribute to a receiver that resolves to an immutable
+<code>frozendict</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>A <code>frozendict</code> is immutable. Its items cannot change after it is created. Assigning an item or attribute to it will fail at runtime or
+does not represent a valid update to the mapping.</p>
+<h3>What is the potential impact?</h3>
+<p>The assignment can raise an exception at runtime and prevent the application from completing the intended operation.</p>
+<h2>How to fix it</h2>
+<p>Do not modify the immutable mapping. Read the existing value, or create a new mapping that contains the required change.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+data: frozendict
+data["key"] = "value"  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+data: frozendict
+value = data["key"]
+
+updated_data = frozendict({**data, "key": "value"})
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python Documentation - <a href="https://docs.python.org/3.15/library/stdtypes.html#frozendict">Built-in Types — frozendict</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#mapping-types-dict">Mapping Types — dict</a></li>
+</ul>
+
