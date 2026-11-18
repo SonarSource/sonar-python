@@ -181,7 +181,7 @@ class RunnerTest(unittest.TestCase):
 
     def test_serializer_registry_location_preserves_checksum(self):
         saas = 'https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/simple'
-        edge = 'https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple'
+        edge = 'https://repox.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple'
         for filename in ['pyproject.toml', 'uv.lock']:
             with self.subTest(filename=filename), mock.patch(f'{self.MODULE_NAME}.Path.read_text') as read_text:
                 read_text.return_value = f'url = "{saas}"'
@@ -207,7 +207,7 @@ class RunnerTest(unittest.TestCase):
             self.assertNotEqual(baseline, runner.compute_checksum(['uv.lock'], runner.normalize_serializer_sources))
 
     def test_serializer_source_code_urls_are_not_normalized(self):
-        content = b'https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple'
+        content = b'https://repox.sonar.build/artifactory/api/pypi/sonarsource-pypi/simple'
         with mock.patch(f'{self.MODULE_NAME}.normalize_text_files', return_value=content):
             self.assertEqual(content, runner.normalize_serializer_sources('serializer.py'))
 

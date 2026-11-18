@@ -147,7 +147,7 @@ def normalize_serializer_sources(file_name: str) -> bytes:
     if Path(file_name).name in {'pyproject.toml', 'uv.lock'}:
         # Registry location does not change the generated stubs for identical packages.
         content = content.replace(
-            b'https://repox-internal.sonar.build/artifactory/api/pypi/sonarsource-pypi/',
+            b'https://repox.sonar.build/artifactory/api/pypi/sonarsource-pypi/',
             b'https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/',
         )
     return content
